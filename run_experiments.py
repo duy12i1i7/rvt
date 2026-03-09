@@ -7,6 +7,7 @@ from pathlib import Path
 from rvt_swarm.config import Config
 from rvt_swarm.evaluate import evaluate_method, summarize
 from rvt_swarm.train import train_model
+from rvt_swarm.visualize import visualize_methods
 
 
 LEARNED = ["gnn_only", "instant_cert", "rvt_swarm"]
@@ -21,7 +22,7 @@ def save_json(obj, path: Path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", type=str, default="train_all", choices=["train_all", "eval_all", "ablations"])
+    parser.add_argument("--mode", type=str, default="train_all", choices=["train_all", "eval_all", "ablations", "visualize", "all"])
     parser.add_argument("--device", type=str, default="auto", help="cpu, cuda, mps, or auto")
     parser.add_argument("--results-dir", type=str, default="results")
     args = parser.parse_args()
@@ -31,14 +32,13 @@ def main():
     results_dir = Path(args.results_dir)
     results_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.mode == "train_all":
+    def do_train():
         for m in LEARNED:
             print(f"Training {m}...")
             train_model(m, cfg, str(results_dir))
-        print("Done.")
-        return
+        print("Training done.")
 
-    if args.mode == "eval_all":
+    def do_eval():
         summary = {}
         for m in LEARNED + BASELINES:
             print(f"Evaluating {m}...")
@@ -47,9 +47,9 @@ def main():
             summary[m] = summarize(rows)
         save_json(summary, results_dir / "summary.json")
         print(json.dumps(summary, indent=2))
-        return
 
-    if args.mode == "ablations":
+    def do_ablations():
+        abl_dir = Path(str(results_dir) + "_ablation")
         ablations = {
             "full": Config(),
             "no_counterfactual": Config(),
@@ -63,11 +63,62 @@ def main():
         for name, acfg in ablations.items():
             acfg.train.device = args.device
             print(f"Ablation train/eval: {name}")
-            train_model("rvt_swarm", acfg, str(results_dir / name))
-            rows = evaluate_method("rvt_swarm", acfg, str(results_dir / name))
+            train_model("rvt_swarm", acfg, str(abl_dir / name))
+            rows = evaluate_method("rvt_swarm", acfg, str(abl_dir / name))
             all_rows[name] = summarize(rows)
-        save_json(all_rows, results_dir / "ablations.json")
+        save_json(all_rows, abl_dir / "ablations.json")
         print(json.dumps(all_rows, indent=2))
+
+    def do_visualize():
+        from rvt_swarm.visualize import visualize_comparisons
+        gif_dir = str(results_dir / "gifs")
+        methods = LEARNED + BASELINES
+        print("Generating per-method GIFs...")
+        paths = visualize_methods(
+            methods, cfg,
+            ckpt_dir=str(results_dir),
+            out_dir=gif_dir,
+            scenarios=["open_field", "narrow_passage"],
+            team_sizes=[4, 8],
+            seed=42, fps=8,
+        )
+        print(f"{len(paths)} per-method GIFs saved.")
+        print("Generating comparison GIFs...")
+        cpaths = visualize_comparisons(
+            method_groups=[
+                ["gnn_only", "instant_cert", "rvt_swarm"],
+                ["rvt_swarm", "adaptive_formation", "cbf_qp_like", "orca_like"],
+            ],
+            cfg=cfg,
+            ckpt_dir=str(results_dir),
+            out_dir=gif_dir,
+            scenarios=["open_field", "narrow_passage"],
+            team_sizes=[4, 8],
+            seed=42, fps=8,
+        )
+        print(f"{len(cpaths)} comparison GIFs saved.")
+        print(f"All GIFs in {gif_dir}/")
+
+    if args.mode == "all":
+        do_train()
+        do_eval()
+        do_ablations()
+        do_visualize()
+        print("All done.")
+        return
+
+    if args.mode == "train_all":
+        do_train()
+        return
+    if args.mode == "eval_all":
+        do_eval()
+        return
+    if args.mode == "ablations":
+        do_ablations()
+        return
+    if args.mode == "visualize":
+        do_visualize()
+        return
 
 
 if __name__ == "__main__":
