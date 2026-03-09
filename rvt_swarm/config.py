@@ -55,7 +55,7 @@ class TrainConfig:
     save_best_only: bool = True
     curriculum_warmup_epochs: int = 12
     aux_gradient_scale: float = 0.0
-    n_workers: int = 0  # 0 = auto (cpu_count - 1)
+    n_workers: int = 4  # 0 = auto (cpu_count - 1)
 
 
 @dataclass
