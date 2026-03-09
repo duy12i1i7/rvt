@@ -220,8 +220,7 @@ def save_gif(
             trails[i].append(frame["positions"][i].copy())
         render_frame(frame, trails, ax, cfg, method, n_agents)
         fig.canvas.draw()
-        w, h = fig.canvas.get_width_height()
-        buf = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8).reshape(h, w, 3)
+        buf = np.asarray(fig.canvas.buffer_rgba())[:, :, :3].copy()
         images.append(Image.fromarray(buf))
 
     plt.close(fig)
@@ -330,8 +329,7 @@ def save_comparison_gif(
         )
         fig.tight_layout(rect=[0, 0, 1, 0.97])
         fig.canvas.draw()
-        w, h = fig.canvas.get_width_height()
-        buf = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8).reshape(h, w, 3)
+        buf = np.asarray(fig.canvas.buffer_rgba())[:, :, :3].copy()
         images.append(Image.fromarray(buf))
 
     plt.close(fig)
