@@ -174,8 +174,8 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
     seeds = base_rng.integers(0, 2**31, size=episodes)
     args_list = [(ep, cfg, int(seeds[ep])) for ep in range(episodes)]
 
-    # Cap workers to avoid "Too many open files" on high-core-count machines
-    n_workers = min(episodes, max(1, os.cpu_count() - 1), 8)
+    auto = max(1, os.cpu_count() - 1)
+    n_workers = min(episodes, cfg.train.n_workers or auto)
     print(f"  Generating {episodes} episodes with {n_workers} workers...")
 
     if n_workers > 1:

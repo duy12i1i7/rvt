@@ -25,10 +25,12 @@ def main():
     parser.add_argument("--mode", type=str, default="train_all", choices=["train_all", "eval_all", "ablations", "visualize", "all"])
     parser.add_argument("--device", type=str, default="auto", help="cpu, cuda, mps, or auto")
     parser.add_argument("--results-dir", type=str, default="results")
+    parser.add_argument("--workers", type=int, default=0, help="Max parallel workers (0 = auto = cpu_count-1)")
     args = parser.parse_args()
 
     cfg = Config()
     cfg.train.device = args.device
+    cfg.train.n_workers = args.workers
     results_dir = Path(args.results_dir)
     results_dir.mkdir(parents=True, exist_ok=True)
 
