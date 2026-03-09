@@ -116,45 +116,70 @@ def build_graph(obs: Dict, cfg: Config):
     return node_x, edge_index, edge_attr
 
 
-def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
-    episodes = episodes or cfg.train.expert_episodes
+def _generate_episode(args):
+    """Generate samples for a single episode (worker function for multiprocessing)."""
+    ep, cfg, seed = args
+    rng = np.random.default_rng(seed)
     env = SwarmFormationEnv(cfg)
-    samples: List[GraphSample] = []
-    rng = np.random.default_rng(cfg.train.seed)
-    for ep in range(episodes):
-        n = int(rng.choice(cfg.env.team_sizes))
-        scenario = str(rng.choice(cfg.env.scenarios, p=np.array([0.18, 0.28, 0.30, 0.24])))
-        obs = env.reset(n, scenario)
-        done = False
-        while not done:
-            recover_margin, best_topology, score_vec = recoverability_targets(env, cfg)
-            action = expert_action(obs, cfg, best_topology)
-            node_x, edge_index, edge_attr = build_graph(obs, cfg)
-            aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
-            samples.append(GraphSample(
-                node_x=node_x,
-                edge_index=edge_index,
-                edge_attr=edge_attr,
-                action_target=torch.tensor(action, dtype=torch.float32),
+    n = int(rng.choice(cfg.env.team_sizes))
+    scenario = str(rng.choice(cfg.env.scenarios, p=np.array([0.18, 0.28, 0.30, 0.24])))
+    obs = env.reset(n, scenario)
+    done = False
+    episode_samples = []
+    while not done:
+        recover_margin, best_topology, score_vec = recoverability_targets(env, cfg)
+        action = expert_action(obs, cfg, best_topology)
+        node_x, edge_index, edge_attr = build_graph(obs, cfg)
+        aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
+        episode_samples.append(GraphSample(
+            node_x=node_x,
+            edge_index=edge_index,
+            edge_attr=edge_attr,
+            action_target=torch.tensor(action, dtype=torch.float32),
+            recover_target=torch.tensor([[recover_margin]], dtype=torch.float32),
+            recover_scores_target=torch.tensor(score_vec[None, :], dtype=torch.float32),
+            topology_target=torch.tensor([TOPOLOGY_IDS.index(best_topology)], dtype=torch.long),
+            aux_target=torch.tensor(aux, dtype=torch.float32),
+        ))
+        if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > 0.35:
+            noisy_action = 0.75 * action + 0.25 * rng.normal(size=action.shape).astype(np.float32) * cfg.env.max_accel
+            episode_samples.append(GraphSample(
+                node_x=node_x.clone(),
+                edge_index=edge_index.clone(),
+                edge_attr=edge_attr.clone(),
+                action_target=torch.tensor(noisy_action, dtype=torch.float32),
                 recover_target=torch.tensor([[recover_margin]], dtype=torch.float32),
                 recover_scores_target=torch.tensor(score_vec[None, :], dtype=torch.float32),
                 topology_target=torch.tensor([TOPOLOGY_IDS.index(best_topology)], dtype=torch.long),
                 aux_target=torch.tensor(aux, dtype=torch.float32),
             ))
-            # hard-negative oversampling around boundary states
-            if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > 0.35:
-                noisy_action = 0.75 * action + 0.25 * rng.normal(size=action.shape).astype(np.float32) * cfg.env.max_accel
-                samples.append(GraphSample(
-                    node_x=node_x.clone(),
-                    edge_index=edge_index.clone(),
-                    edge_attr=edge_attr.clone(),
-                    action_target=torch.tensor(noisy_action, dtype=torch.float32),
-                    recover_target=torch.tensor([[recover_margin]], dtype=torch.float32),
-                    recover_scores_target=torch.tensor(score_vec[None, :], dtype=torch.float32),
-                    topology_target=torch.tensor([TOPOLOGY_IDS.index(best_topology)], dtype=torch.long),
-                    aux_target=torch.tensor(aux, dtype=torch.float32),
-                ))
-            obs, _, done, _ = env.step(action, best_topology)
+        obs, _, done, _ = env.step(action, best_topology)
+    return episode_samples
+
+
+def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
+    import multiprocessing as mp
+    import os
+
+    episodes = episodes or cfg.train.expert_episodes
+    # Each episode gets a unique seed derived from base seed
+    base_rng = np.random.default_rng(cfg.train.seed)
+    seeds = base_rng.integers(0, 2**31, size=episodes)
+    args_list = [(ep, cfg, int(seeds[ep])) for ep in range(episodes)]
+
+    n_workers = min(episodes, max(1, os.cpu_count() - 1))
+    print(f"  Generating {episodes} episodes with {n_workers} workers...")
+
+    if n_workers > 1:
+        with mp.Pool(n_workers) as pool:
+            results = pool.map(_generate_episode, args_list)
+    else:
+        results = [_generate_episode(a) for a in args_list]
+
+    samples: List[GraphSample] = []
+    for ep_samples in results:
+        samples.extend(ep_samples)
+    print(f"  Dataset: {len(samples)} samples from {episodes} episodes")
     return SwarmDataset(cfg, samples)
 
 

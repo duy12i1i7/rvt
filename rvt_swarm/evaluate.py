@@ -79,21 +79,40 @@ def run_policy_episode(method: str, cfg: Config, n_agents: int, scenario: str, c
     return last_info
 
 
+def _eval_setting(args):
+    """Worker: run all episodes for one (method, scenario, n_agents) setting."""
+    method, cfg, n_agents, scenario, ckpt_dir, n_episodes = args
+    metrics = []
+    for _ in range(n_episodes):
+        m = run_policy_episode(method, cfg, n_agents, scenario, ckpt_dir)
+        metrics.append(m)
+    agg = {k: float(np.mean([x[k] for x in metrics])) for k in metrics[0].keys()}
+    agg["scenario"] = scenario
+    agg["n_agents"] = n_agents
+    agg["method"] = method
+    return agg
+
+
 def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List[Dict]:
-    rows = []
+    import multiprocessing as mp
+    import os
+
+    settings = []
     for scenario in cfg.env.scenarios:
         for n_agents in cfg.env.team_sizes:
             if method == "centralized_mpc" and n_agents != 4:
                 continue
-            metrics = []
-            for _ in range(cfg.eval.episodes_per_setting):
-                m = run_policy_episode(method, cfg, n_agents, scenario, ckpt_dir)
-                metrics.append(m)
-            agg = {k: float(np.mean([x[k] for x in metrics])) for k in metrics[0].keys()}
-            agg["scenario"] = scenario
-            agg["n_agents"] = n_agents
-            agg["method"] = method
-            rows.append(agg)
+            settings.append((method, cfg, n_agents, scenario, ckpt_dir, cfg.eval.episodes_per_setting))
+
+    # Baselines are CPU-only → parallelize freely
+    # Learned methods use GPU → run sequentially to avoid GPU contention
+    if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
+        n_workers = min(len(settings), max(1, os.cpu_count() - 1))
+        with mp.Pool(n_workers) as pool:
+            rows = pool.map(_eval_setting, settings)
+    else:
+        rows = [_eval_setting(s) for s in settings]
+
     return rows
 
 
