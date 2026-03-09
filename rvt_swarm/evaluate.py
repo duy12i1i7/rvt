@@ -107,7 +107,7 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
     # Baselines are CPU-only → parallelize freely
     # Learned methods use GPU → run sequentially to avoid GPU contention
     if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
-        n_workers = min(len(settings), max(1, os.cpu_count() - 1))
+        n_workers = min(len(settings), max(1, os.cpu_count() - 1), 8)
         with mp.Pool(n_workers) as pool:
             rows = pool.map(_eval_setting, settings)
     else:
