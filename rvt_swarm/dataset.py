@@ -37,7 +37,7 @@ class SwarmDataset(Dataset):
         return self.samples[idx]
 
 
-NODE_DIM = 31
+NODE_DIM = 67  # 31 original + 36 LiDAR rays
 EDGE_DIM = 11
 
 
@@ -52,6 +52,14 @@ def build_graph(obs: Dict, cfg: Config):
     lateral = np.array([corridor[1], -corridor[0]], dtype=np.float32)
     topo_onehot = np.zeros((5,), dtype=np.float32)
     topo_onehot[int(obs["topology_mode"])] = 1.0
+
+    # LiDAR scans: (n, lidar_num_rays), normalised to [0, 1]
+    lidar_raw = obs.get("lidar_scans", None)
+    lidar_range = cfg.env.lidar_range
+    if lidar_raw is None:
+        lidar_norm = np.ones((n, cfg.env.lidar_num_rays), dtype=np.float32)
+    else:
+        lidar_norm = np.clip(lidar_raw / lidar_range, 0.0, 1.0)
 
     node_features = []
     obs_pos = obs["obstacles"]
@@ -86,6 +94,8 @@ def build_graph(obs: Dict, cfg: Config):
             float(obs.get("split_active", 0.0)),
             topo_onehot[0], topo_onehot[1], topo_onehot[2], topo_onehot[3], topo_onehot[4],
         ]
+        # Append 36 normalised LiDAR distances
+        node.extend(lidar_norm[i].tolist())
         node_features.append(node)
     node_x = torch.tensor(np.asarray(node_features, dtype=np.float32))
 

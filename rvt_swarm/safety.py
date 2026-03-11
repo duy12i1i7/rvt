@@ -27,38 +27,143 @@ def progress_direction(obs: Dict) -> np.ndarray:
     return unit(obs["goal"] - centroid)
 
 
-def simple_recover_shield(actions: np.ndarray, obs: Dict, cfg: Config, recoverability: float | None = None, topo: int = 0) -> np.ndarray:
+def simple_recover_shield(
+    actions: np.ndarray,
+    obs: Dict,
+    cfg: Config,
+    recoverability: float | None = None,
+    topo: int = 0,
+    recoverability_scores: np.ndarray | None = None,
+) -> np.ndarray:
+    """Progress-preserving safety shield via per-robot CBF-QP.
+
+    Implements the docs spec:
+      • Shield only intervenes when collision risk is high OR when *all*
+        topology options have negative recoverability (full crisis).
+      • When triggered, solves a small per-robot QP:
+            min_u  ||u - u_learned||²  -  w · (u · progress_dir)
+            s.t.   CBF constraints  ∧  ||u|| ≤ max_accel
+        to minimise constraint violation while preserving progress.
+    """
     if not cfg.method.use_progress_shield:
         return actions
     risk = collision_risk(obs)
+
+    # Recoverability-aware risk modulation
+    all_negative = False
+    if recoverability_scores is not None:
+        all_negative = bool(np.all(recoverability_scores < 0.0))
     if recoverability is not None:
         risk = max(0.0, risk - 0.15 * float(recoverability))
-    # Only intervene above risk threshold — avoid disrupting good actions
+    # Docs: "chỉ can thiệp nếu tất cả lựa chọn có recoverability âm"
+    if all_negative:
+        risk = max(risk, 0.55)
+
     threshold = getattr(cfg.method, 'shield_risk_threshold', 0.35)
     if risk < threshold:
         return actions
-    # Additive correction: keep learned action, ADD small collision avoidance
-    max_blend = getattr(cfg.method, 'max_shield_blend', 0.3)
-    strength = min((risk - threshold) / max(1.0 - threshold, 1e-6), max_blend)
+
+    # --- QP-based intervention ---
+    progress_dir = progress_direction(obs)
+    progress_w = 0.08 if all_negative else 0.03
     safe = actions.copy()
     for i in range(len(safe)):
-        repel = np.zeros(2, dtype=np.float32)
-        for j in range(len(safe)):
-            if i == j:
-                continue
-            diff = obs["positions"][i] - obs["positions"][j]
-            d = np.linalg.norm(diff)
-            if d < 0.48:  # Very tight — only near-collision
-                repel += unit(diff) * (0.48 - d)
-        for o in obs["obstacles"]:
-            diff = obs["positions"][i] - o
-            d = np.linalg.norm(diff)
-            if d < 0.56:
-                repel += unit(diff) * (0.56 - d)
-        # Additive: learned action + small correction (preserves policy quality)
-        correction = strength * repel
-        safe[i] = soft_clip(safe[i] + correction, cfg.env.max_accel)
+        constraints = _build_cbf_constraints(i, obs, cfg)
+        if not constraints:
+            continue
+        safe[i] = _solve_per_robot_qp(
+            safe[i], constraints, progress_dir, cfg.env.max_accel, progress_w,
+        )
     return safe
+
+
+# ── CBF-QP helpers ──────────────────────────────────────────────────
+
+def _build_cbf_constraints(
+    robot_idx: int, obs: Dict, cfg: Config,
+    alpha_rr: float = 1.0, alpha_ro: float = 1.5,
+) -> list:
+    """Build linear CBF half-plane constraints for robot *robot_idx*.
+
+    Each constraint is ``(a, b)`` meaning  ``a^T u >= b``.
+    Derived from first-order CBF:  dh/dt + α h >= 0
+    with barrier  h = ||p_i - p_j||² - d_safe².
+    """
+    pos = obs["positions"]
+    vel = obs["velocities"]
+    dt = cfg.env.dt
+    pi, vi = pos[robot_idx], vel[robot_idx]
+    constraints: list = []
+
+    # Robot-robot
+    d_safe_rr = cfg.env.min_rr_distance + 0.08
+    for j in range(len(pos)):
+        if j == robot_idx:
+            continue
+        diff = pi - pos[j]
+        dist_sq = float(np.dot(diff, diff))
+        h = dist_sq - d_safe_rr ** 2
+        if h > 1.5:              # far enough → no constraint needed
+            continue
+        rel_v = vi - vel[j]
+        a = (2.0 * dt * diff).astype(np.float32)
+        b = float(-alpha_rr * h - 2.0 * np.dot(diff, rel_v))
+        constraints.append((a, b))
+
+    # Robot-obstacle
+    obs_pos = obs["obstacles"]
+    obs_vel = obs.get("obstacle_velocities", np.zeros_like(obs_pos))
+    d_safe_ro = cfg.env.min_ro_distance + 0.05
+    for k in range(len(obs_pos)):
+        diff = pi - obs_pos[k]
+        dist_sq = float(np.dot(diff, diff))
+        h = dist_sq - d_safe_ro ** 2
+        if h > 1.5:
+            continue
+        ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
+        rel_v = vi - ov
+        a = (2.0 * dt * diff).astype(np.float32)
+        b = float(-alpha_ro * h - 2.0 * np.dot(diff, rel_v))
+        constraints.append((a, b))
+
+    return constraints
+
+
+def _solve_per_robot_qp(
+    u_nom: np.ndarray,
+    constraints: list,
+    progress_dir: np.ndarray,
+    max_accel: float,
+    progress_weight: float = 0.05,
+    n_iters: int = 10,
+) -> np.ndarray:
+    """Solve a small QP via iterative half-plane projection (Dykstra).
+
+        min_u  ||u - u*||²
+        s.t.   a_j^T u >= b_j   ∀ j   (CBF half-planes)
+               ||u|| <= max_accel
+
+    where  u* = u_nom + w · progress_dir  biases toward goal progress.
+    Converges for convex feasible sets (all constraints are half-planes + ball).
+    """
+    u_target = u_nom + progress_weight * progress_dir
+    u = u_target.copy().astype(np.float64)
+
+    for _ in range(n_iters):
+        # Project onto each CBF half-plane
+        for a, b_val in constraints:
+            a = a.astype(np.float64)
+            margin = np.dot(a, u) - b_val
+            if margin < 0.0:
+                a_sq = np.dot(a, a)
+                if a_sq > 1e-12:
+                    u += (-margin / a_sq) * a
+        # Project onto acceleration ball
+        norm = np.linalg.norm(u)
+        if norm > max_accel:
+            u *= max_accel / norm
+
+    return u.astype(np.float32)
 
 
 def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:

@@ -67,6 +67,8 @@ class SwarmFormationEnv:
             time_since_switch=0,
         )
         self.state.bottleneck_score = self._compute_bottleneck_score()
+        # Ensure no robot spawns inside an obstacle
+        self._resolve_collisions()
         return self.observe()
 
     def _spawn_agents(self, n_agents: int, scenario: str) -> np.ndarray:
@@ -216,6 +218,7 @@ class SwarmFormationEnv:
         offsets = self.desired_offsets()
         target_positions = centroid + offsets
         formation_err = target_positions - self.state.positions
+        lidar_scans = self._simulate_lidar()
         return {
             "positions": self.state.positions.copy(),
             "velocities": self.state.velocities.copy(),
@@ -223,6 +226,7 @@ class SwarmFormationEnv:
             "goal_vec": goal_vec.copy(),
             "obstacles": self.state.obstacles.copy(),
             "obstacle_velocities": self.state.obstacle_velocities.copy(),
+            "lidar_scans": lidar_scans,
             "scenario": self.state.scenario,
             "topology_mode": self.state.topology_mode,
             "formation_scale": self.state.formation_scale,
@@ -270,6 +274,130 @@ class SwarmFormationEnv:
             self.state.topology_switches += 1
             self.state.time_since_switch = 0
 
+    # ── LiDAR simulation ─────────────────────────────────────────
+    def _simulate_lidar(self) -> np.ndarray:
+        """Cast rays from each robot and return distance readings.
+
+        Returns:
+            lidar_scans: (n_agents, lidar_num_rays) array of distances.
+                         Each value is in [0, lidar_range].  A value equal
+                         to lidar_range means the ray hit nothing.
+        """
+        n = self.n_agents
+        n_rays = self.ec.lidar_num_rays
+        max_r = self.ec.lidar_range
+        half_fov = self.ec.lidar_fov / 2.0
+        pos = self.state.positions
+        vel = self.state.velocities
+        obs = self.state.obstacles
+        r_obs = self.ec.obstacle_radius
+        r_robot = self.ec.robot_radius
+
+        scans = np.full((n, n_rays), max_r, dtype=np.float32)
+        angles_offset = np.linspace(-half_fov, half_fov, n_rays)
+
+        for i in range(n):
+            # Heading from velocity (fallback: toward goal)
+            spd = np.linalg.norm(vel[i])
+            if spd > 0.02:
+                heading = np.arctan2(vel[i, 1], vel[i, 0])
+            else:
+                gdir = self.state.goal - pos[i]
+                heading = np.arctan2(gdir[1], gdir[0])
+            ray_angles = heading + angles_offset
+            cos_a = np.cos(ray_angles)
+            sin_a = np.sin(ray_angles)
+
+            # Check against obstacles (circles)
+            for k in range(len(obs)):
+                dx = obs[k, 0] - pos[i, 0]
+                dy = obs[k, 1] - pos[i, 1]
+                # Project onto each ray direction
+                # For ray origin O, direction D, circle center C, radius R:
+                # t_closest = dot(C-O, D),  dist_perp² = |C-O|² - t²
+                # hit if dist_perp < R  and  t > 0
+                for ray_idx in range(n_rays):
+                    d_x, d_y = cos_a[ray_idx], sin_a[ray_idx]
+                    t = dx * d_x + dy * d_y
+                    if t < 0:
+                        continue
+                    perp_sq = dx * dx + dy * dy - t * t
+                    if perp_sq < r_obs * r_obs:
+                        # Ray enters circle at t - sqrt(R² - perp²)
+                        entry = t - np.sqrt(max(0.0, r_obs * r_obs - perp_sq))
+                        if 0 < entry < scans[i, ray_idx]:
+                            scans[i, ray_idx] = entry
+
+            # Check against other robots (circles)
+            for j in range(n):
+                if j == i:
+                    continue
+                dx = pos[j, 0] - pos[i, 0]
+                dy = pos[j, 1] - pos[i, 1]
+                for ray_idx in range(n_rays):
+                    d_x, d_y = cos_a[ray_idx], sin_a[ray_idx]
+                    t = dx * d_x + dy * d_y
+                    if t < 0:
+                        continue
+                    perp_sq = dx * dx + dy * dy - t * t
+                    if perp_sq < r_robot * r_robot:
+                        entry = t - np.sqrt(max(0.0, r_robot * r_robot - perp_sq))
+                        if 0 < entry < scans[i, ray_idx]:
+                            scans[i, ray_idx] = entry
+
+        return scans
+
+    # ── Collision response helpers ──────────────────────────────────
+    def _resolve_collisions(self) -> None:
+        """Push apart overlapping robots/obstacles (elastic response).
+
+        Runs a few iterations so that resolving one overlap doesn't create
+        another.  This is the standard "position projection" approach used
+        in most multi-robot simulators.
+        """
+        pos = self.state.positions
+        obs = self.state.obstacles
+        r_robot = self.ec.robot_radius
+        r_obs = self.ec.obstacle_radius
+        n = self.n_agents
+
+        for _iteration in range(3):  # 3 iterations is enough for light overlaps
+            # Robot–robot
+            for i in range(n):
+                for j in range(i + 1, n):
+                    diff = pos[i] - pos[j]
+                    d = np.linalg.norm(diff)
+                    min_d = 2 * r_robot  # sum of radii
+                    if d < min_d and d > 1e-8:
+                        overlap = min_d - d
+                        push = (overlap / 2 + 0.01) * diff / d
+                        pos[i] += push
+                        pos[j] -= push
+                        # Kill approach velocity component
+                        n_hat = diff / d
+                        vi_along = np.dot(self.state.velocities[i], n_hat)
+                        vj_along = np.dot(self.state.velocities[j], n_hat)
+                        if vi_along < 0:
+                            self.state.velocities[i] -= vi_along * n_hat
+                        if vj_along > 0:
+                            self.state.velocities[j] -= vj_along * n_hat
+
+            # Robot–obstacle (obstacles are immovable for robots)
+            for i in range(n):
+                for k in range(len(obs)):
+                    diff = pos[i] - obs[k]
+                    d = np.linalg.norm(diff)
+                    min_d = r_robot + r_obs
+                    if d < min_d and d > 1e-8:
+                        overlap = min_d - d
+                        push = (overlap + 0.01) * diff / d
+                        pos[i] += push
+                        # Kill approach velocity toward obstacle
+                        n_hat = diff / d
+                        v_along = np.dot(self.state.velocities[i], n_hat)
+                        if v_along < 0:
+                            self.state.velocities[i] -= v_along * n_hat
+
     def step(self, actions: np.ndarray, topology_action: int = 0) -> Tuple[Dict, float, bool, Dict]:
         assert self.state is not None
         self.apply_topology(topology_action)
@@ -288,6 +416,10 @@ class SwarmFormationEnv:
                 self.state.obstacle_velocities[j, 1] *= -1
             if abs(p[0]) > self.ec.world_size * 0.25:
                 self.state.obstacle_velocities[j, 0] *= -1
+
+        # Resolve any overlaps from this step (hard collision response)
+        self._resolve_collisions()
+
         self.state.step_count += 1
 
         centroid = self.state.positions.mean(axis=0)

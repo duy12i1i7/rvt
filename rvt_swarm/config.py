@@ -15,11 +15,15 @@ class EnvConfig:
     goal_tolerance: float = 0.55
     formation_tolerance: float = 0.55
     nominal_spacing: float = 0.9
-    min_rr_distance: float = 0.45
-    min_ro_distance: float = 0.45
+    min_rr_distance: float = 0.40
+    min_ro_distance: float = 0.55
     obstacle_count: int = 8
     dynamic_obstacle_count: int = 2
     dynamic_obstacle_speed: float = 0.35
+    # LiDAR sensor parameters
+    lidar_num_rays: int = 36
+    lidar_range: float = 3.0
+    lidar_fov: float = 4.712389  # 270° in radians
     team_sizes: List[int] = field(default_factory=lambda: [4, 8, 12, 16])
     scenarios: List[str] = field(default_factory=lambda: [
         "open_field",

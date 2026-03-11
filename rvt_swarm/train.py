@@ -52,11 +52,11 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
     else:
         aux_scale = 1.0
 
-    if outputs["recoverability"] is not None and model_name in ["rvt_swarm", "instant_cert"]:
+    if outputs["recoverability"] is not None and model_name in ["rvt_swarm", "instant_cert"] and cfg.method.use_recoverability:
         losses["recover"] = F.mse_loss(outputs["recoverability"], batch["recover_target"]) * aux_scale
     else:
         losses["recover"] = torch.tensor(0.0, device=batch["node_x"].device)
-    if outputs["topology_logits"] is not None and model_name == "rvt_swarm":
+    if outputs["topology_logits"] is not None and model_name == "rvt_swarm" and cfg.method.use_topology:
         losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"]) * aux_scale
         losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"]) * aux_scale
         losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"]) * aux_scale

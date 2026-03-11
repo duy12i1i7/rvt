@@ -52,13 +52,16 @@ def run_policy_episode(method: str, cfg: Config, n_agents: int, scenario: str, c
             topo = 0
             recover = None
             uncertainty = None
-            if out["topology_logits"] is not None:
+            rec_scores_np = None
+            if out["topology_logits"] is not None and cfg.method.use_topology:
                 topo = choose_counterfactual_topology(obs, out["topology_logits"], out["recoverability_scores"], cfg, prev_topo, out.get("uncertainty"))
-            if out["recoverability"] is not None:
+            if out["recoverability"] is not None and cfg.method.use_recoverability:
                 recover = float(out["recoverability"].squeeze().cpu().item())
                 uncertainty = float(out["uncertainty"].mean().cpu().item()) if out.get("uncertainty") is not None else 0.0
+                if out["recoverability_scores"] is not None:
+                    rec_scores_np = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
             if method in ["rvt_swarm", "instant_cert"]:
-                actions = simple_recover_shield(actions, obs, cfg, recover, topo)
+                actions = simple_recover_shield(actions, obs, cfg, recover, topo, rec_scores_np)
         prev_topo = topo
         obs, _, done, info = env.step(actions, topo)
         if method in ["rvt_swarm", "instant_cert"] and recover is not None:

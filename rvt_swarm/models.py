@@ -8,7 +8,20 @@ from .dataset import EDGE_DIM, NODE_DIM
 from .config import TOPOLOGY_ACTIONS
 
 
+def _edge_softmax(logits: torch.Tensor, dst: torch.Tensor, n_nodes: int) -> torch.Tensor:
+    """Per-destination softmax for graph attention (no torch-geometric dep)."""
+    # Numerically-stable: subtract per-group max (detached — only for stability)
+    with torch.no_grad():
+        group_max = torch.full((n_nodes,), float("-inf"), device=logits.device, dtype=logits.dtype)
+        group_max.scatter_reduce_(0, dst, logits, reduce="amax", include_self=False)
+    shifted = (logits - group_max[dst]).exp()
+    denom = shifted.new_zeros(n_nodes).index_add_(0, dst, shifted)
+    return shifted / denom[dst].clamp_min(1e-8)
+
+
 class GraphLayer(nn.Module):
+    """Graph attention layer — attention-weighted message passing."""
+
     def __init__(self, hidden_dim: int):
         super().__init__()
         self.edge_mlp = nn.Sequential(
@@ -16,6 +29,10 @@ class GraphLayer(nn.Module):
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim),
             nn.ReLU(),
+        )
+        # Attention scoring: learned scalar weight per edge message
+        self.attn_fc = nn.Sequential(
+            nn.Linear(hidden_dim, 1, bias=False),
         )
         self.node_mlp = nn.Sequential(
             nn.Linear(hidden_dim * 2, hidden_dim),
@@ -26,6 +43,12 @@ class GraphLayer(nn.Module):
     def forward(self, h: torch.Tensor, edge_index: torch.Tensor, edge_attr: torch.Tensor) -> torch.Tensor:
         src, dst = edge_index
         m = self.edge_mlp(torch.cat([h[src], h[dst], edge_attr], dim=-1))
+        # Attention-weighted aggregation (graph-transformer style)
+        alpha = _edge_softmax(
+            F.leaky_relu(self.attn_fc(m).squeeze(-1), 0.2),
+            dst, h.shape[0],
+        )
+        m = m * alpha.unsqueeze(-1)
         agg = torch.zeros_like(h)
         agg.index_add_(0, dst, m)
         return h + self.node_mlp(torch.cat([h, agg], dim=-1))
@@ -51,6 +74,55 @@ def pooled_graph_features(h: torch.Tensor, batch_index: torch.Tensor) -> torch.T
     pooled.index_add_(0, batch_index, h)
     counts.index_add_(0, batch_index, torch.ones((h.shape[0], 1), device=h.device, dtype=h.dtype))
     return pooled / counts.clamp_min(1.0)
+
+
+class TopologyConsensus(nn.Module):
+    """Neighbourhood-agreement layer for topological actions.
+
+    Each node first casts a per-node topology vote, then votes are shared
+    among neighbours so that adjacent robots reach agreement before pooling
+    to graph-level logits.  This prevents incoherent split patterns
+    (docs: "consensus layer: neighborhood agreement cho topological action").
+    """
+
+    def __init__(self, hidden_dim: int, n_topologies: int):
+        super().__init__()
+        self.node_vote = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim // 2, n_topologies),
+        )
+        self.agree = nn.Sequential(
+            nn.Linear(n_topologies * 3, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim // 2, n_topologies),
+        )
+
+    def forward(
+        self,
+        h: torch.Tensor,
+        edge_index: torch.Tensor,
+        batch_index: torch.Tensor,
+    ) -> torch.Tensor:
+        # Step 1: per-node topology vote
+        votes = self.node_vote(h)  # (N_total, n_topo)
+
+        # Step 2: aggregate neighbour votes
+        src, dst = edge_index
+        nbr_sum = torch.zeros_like(votes)
+        counts = torch.zeros(votes.shape[0], 1, device=votes.device)
+        nbr_sum.index_add_(0, dst, votes[src])
+        counts.index_add_(0, dst, torch.ones(src.shape[0], 1, device=votes.device))
+        nbr_mean = nbr_sum / counts.clamp_min(1.0)
+
+        # Step 3: consensus — combine self vote, neighbour mean, and spread
+        nbr_var = torch.zeros_like(votes)
+        nbr_var.index_add_(0, dst, (votes[src] - nbr_mean[dst]) ** 2)
+        nbr_std = (nbr_var / counts.clamp_min(1.0) + 1e-6).sqrt()  # eps for grad stability
+        agreed = self.agree(torch.cat([votes, nbr_mean, nbr_std], dim=-1))
+
+        # Step 4: pool to graph level
+        return pooled_graph_features(agreed, batch_index)
 
 
 class GNNOnlyPolicy(nn.Module):
@@ -112,28 +184,25 @@ class RVTSwarmPolicy(nn.Module):
             nn.Linear(hidden_dim // 2, 2),
             nn.Tanh(),
         )
-        # Direct formation-error-to-action residual (skip connection)
-        self.form_residual = nn.Sequential(
-            nn.Linear(2, 32),
-            nn.ReLU(),
-            nn.Linear(32, 2),
-            nn.Tanh(),
-        )
-        self.topology_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, topology_count))
+        # Topology via neighbourhood consensus (not plain pool→MLP)
+        self.topology_consensus = TopologyConsensus(hidden_dim, topology_count)
         self.score_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, topology_count))
         self.aux_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, 4))
         self.uncertainty_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, topology_count))
 
     def forward(self, batch):
         h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
-        # Action head gets full gradient flow — no residual shortcut
+        # Action head gets full gradient flow
         actions = self.action_head(h)
 
         # Auxiliary heads get scaled gradients to protect backbone for actions
         h_aux = grad_scale(h, self.aux_grad_scale)
-        pooled = pooled_graph_features(h_aux, batch["batch_index"])
 
-        topology_logits = self.topology_head(pooled)
+        # Topology logits via neighbourhood consensus layer
+        topology_logits = self.topology_consensus(
+            h_aux, batch["edge_index"], batch["batch_index"]
+        )
+        pooled = pooled_graph_features(h_aux, batch["batch_index"])
         recover_scores = self.score_head(pooled)
         aux = self.aux_head(pooled)
         uncertainty = F.softplus(self.uncertainty_head(pooled))

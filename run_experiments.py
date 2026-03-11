@@ -54,13 +54,18 @@ def main():
         abl_dir = Path(str(results_dir) + "_ablation")
         ablations = {
             "full": Config(),
+            "no_recoverability": Config(),
             "no_counterfactual": Config(),
             "no_progress_shield": Config(),
             "no_topology": Config(),
+            "fixed_formation": Config(),
         }
+        ablations["no_recoverability"].method.use_recoverability = False
         ablations["no_counterfactual"].method.use_counterfactual_topology = False
         ablations["no_progress_shield"].method.use_progress_shield = False
         ablations["no_topology"].method.use_topology = False
+        ablations["fixed_formation"].method.use_topology = False
+        ablations["fixed_formation"].method.use_counterfactual_topology = False
         all_rows = {}
         for name, acfg in ablations.items():
             acfg.train.device = args.device
