@@ -100,8 +100,6 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
     settings = []
     for scenario in cfg.env.scenarios:
         for n_agents in cfg.env.team_sizes:
-            if method == "centralized_mpc" and n_agents != 4:
-                continue
             settings.append((method, cfg, n_agents, scenario, ckpt_dir, cfg.eval.episodes_per_setting))
 
     # Baselines are CPU-only → parallelize freely
