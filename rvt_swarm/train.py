@@ -101,10 +101,10 @@ def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, tr
     return totals
 
 
-def train_model(model_name: str, cfg: Config, out_dir: str = "results") -> str:
+def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset: SwarmDataset | None = None) -> str:
     set_seed(cfg.train.seed)
     device = torch_device(cfg.train.device)
-    ds = generate_dataset(cfg)
+    ds = dataset if dataset is not None else generate_dataset(cfg)
     train_ds, val_ds = split_dataset(ds)
     train_loader = DataLoader(train_ds, batch_size=cfg.train.batch_size, shuffle=True, collate_fn=collate_graphs)
     val_loader = DataLoader(val_ds, batch_size=cfg.train.batch_size, shuffle=False, collate_fn=collate_graphs)

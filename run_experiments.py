@@ -35,9 +35,12 @@ def main():
     results_dir.mkdir(parents=True, exist_ok=True)
 
     def do_train():
+        from rvt_swarm.dataset import generate_dataset
+        print("Generating shared dataset...")
+        ds = generate_dataset(cfg)
         for m in LEARNED:
             print(f"Training {m}...")
-            train_model(m, cfg, str(results_dir))
+            train_model(m, cfg, str(results_dir), dataset=ds)
         print("Training done.")
 
     def do_eval():
@@ -67,10 +70,19 @@ def main():
         ablations["fixed_formation"].method.use_topology = False
         ablations["fixed_formation"].method.use_counterfactual_topology = False
         all_rows = {}
+        # Generate dataset once — all ablations use the same data,
+        # only differ in which loss components / eval flags are active.
+        from rvt_swarm.dataset import generate_dataset
+        base_cfg = Config()
+        base_cfg.train.device = args.device
+        base_cfg.train.n_workers = cfg.train.n_workers
+        print("Generating shared ablation dataset...")
+        abl_ds = generate_dataset(base_cfg)
         for name, acfg in ablations.items():
             acfg.train.device = args.device
+            acfg.train.n_workers = cfg.train.n_workers
             print(f"Ablation train/eval: {name}")
-            train_model("rvt_swarm", acfg, str(abl_dir / name))
+            train_model("rvt_swarm", acfg, str(abl_dir / name), dataset=abl_ds)
             rows = evaluate_method("rvt_swarm", acfg, str(abl_dir / name))
             all_rows[name] = summarize(rows)
         save_json(all_rows, abl_dir / "ablations.json")
