@@ -40,9 +40,9 @@ class TrainConfig:
     expert_episodes: int = 500
     batch_size: int = 32
     epochs: int = 30
-    epochs_gnn_only: int = 60
-    epochs_instant_cert: int = 60
-    epochs_rvt_swarm: int = 100
+    epochs_gnn_only: int = 120
+    epochs_instant_cert: int = 120
+    epochs_rvt_swarm: int = 300
     lr: float = 3e-4
     weight_decay: float = 1e-5
     hidden_dim: int = 128
@@ -51,14 +51,14 @@ class TrainConfig:
     recover_horizon: int = 14
     graph_k: int = 6
     lambda_action: float = 5.0
-    lambda_recover: float = 0.15
-    lambda_topology: float = 0.10
-    lambda_aux: float = 0.05
-    early_stopping_patience: int = 20
+    lambda_recover: float = 0.02
+    lambda_topology: float = 0.015
+    lambda_aux: float = 0.008
+    early_stopping_patience: int = 40
     early_stopping_min_delta: float = 1e-4
     save_best_only: bool = True
-    curriculum_warmup_epochs: int = 12
-    aux_gradient_scale: float = 0.3
+    curriculum_warmup_epochs: int = 50
+    aux_gradient_scale: float = 0.0
     n_workers: int = 0  # 0 = auto (3/4 of cpu_count)
 
 
@@ -76,9 +76,9 @@ class MethodConfig:
     shield_gain: float = 0.25
     progress_weight: float = 0.10
     topology_temperature: float = 1.5
-    switch_hysteresis: float = 0.15
-    shield_risk_threshold: float = 0.50
-    topology_cooldown: int = 8
+    switch_hysteresis: float = 0.55
+    shield_risk_threshold: float = 0.90
+    topology_cooldown: int = 35
     max_shield_blend: float = 0.10
 
 

@@ -146,11 +146,13 @@ def _generate_episode(args):
         node_x, edge_index, edge_attr = build_graph(obs, cfg)
         aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
         # Store as numpy to avoid torch FD issues in multiprocessing
+        # Normalize actions to [-1, 1] so Tanh output matches target scale
+        action_norm = action / cfg.env.max_accel
         sample = {
             'node_x': node_x.numpy(),
             'edge_index': edge_index.numpy(),
             'edge_attr': edge_attr.numpy(),
-            'action_target': np.asarray(action, dtype=np.float32),
+            'action_target': np.asarray(action_norm, dtype=np.float32),
             'recover_target': np.array([[recover_margin]], dtype=np.float32),
             'recover_scores_target': np.asarray(score_vec[None, :], dtype=np.float32),
             'topology_target': np.array([TOPOLOGY_IDS.index(best_topology)], dtype=np.int64),
@@ -159,11 +161,13 @@ def _generate_episode(args):
         episode_samples.append(sample)
         if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > 0.35:
             noisy_action = 0.75 * action + 0.25 * rng.normal(size=action.shape).astype(np.float32) * cfg.env.max_accel
+            noisy_action = np.clip(noisy_action, -cfg.env.max_accel, cfg.env.max_accel)
+            noisy_action_norm = noisy_action / cfg.env.max_accel
             sample_noisy = {
                 'node_x': sample['node_x'].copy(),
                 'edge_index': sample['edge_index'].copy(),
                 'edge_attr': sample['edge_attr'].copy(),
-                'action_target': np.asarray(noisy_action, dtype=np.float32),
+                'action_target': np.asarray(noisy_action_norm, dtype=np.float32),
                 'recover_target': sample['recover_target'].copy(),
                 'recover_scores_target': sample['recover_scores_target'].copy(),
                 'topology_target': sample['topology_target'].copy(),

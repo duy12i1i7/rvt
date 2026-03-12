@@ -12,6 +12,9 @@
 \usepackage{amsthm}
 \usepackage{algorithmic}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
@@ -210,7 +213,7 @@ switching}, which is the gap that RVT-Swarm fills.
 \Cref{tab:comparison} summarizes the positioning of RVT-Swarm
 relative to representative prior work across seven key dimensions.
 
-\begin{table*}[H]
+\begin{table*}[!t]
 \centering
 \caption{Comparison of RVT-Swarm with representative prior work.
 \cmark~= primary contribution;
@@ -306,13 +309,14 @@ formation geometry:
 Given the current state $s_t$ and a candidate topology $\tau \in \cT$,
 the \emph{recoverability margin} is
 \begin{equation}\label{eq:recover_margin}
-    R(s_t, \tau) = \frac{1}{H} \sum_{h=0}^{H-1}
-    \Big[
-        \underbrace{w_c \cdot \mathbb{1}_{\text{collision-free}}}_{\text{safety}}
-      + \underbrace{w_f \cdot f_{\text{tube}}(s_{t+h})}_{\text{formation}}
-      + \underbrace{w_p \cdot p(s_{t+h})}_{\text{progress}}
-    \Big],
+    R(s_t;\tau) = \frac{1}{H}\!\sum_{h=0}^{H-1}\!\bigl[
+      w_c\,\mathbb{1}_{\text{cf}}
+    + w_f\,f_{\text{tube}}(s_{t+h})
+    + w_p\,p(s_{t+h})
+    \bigr],
 \end{equation}
+where the three terms reward collision-free safety,
+formation-tube proximity, and goal progress, respectively.
 where $H$ is the rollout horizon, $f_{\text{tube}}$ measures
 proximity to the formation tube, and $p$ measures goal progress.
 \end{definition}
@@ -424,7 +428,7 @@ operator ($s = 0.3$) before entering the score, uncertainty,
 and consensus heads.  Only the action head receives
 full-magnitude gradients from the backbone.
 
-\begin{figure*}[H]
+\begin{figure*}[!t]
 \centering
 \input{fig_rfn.tex}
 \caption{Detailed architecture of the \textbf{Recoverability
@@ -512,6 +516,25 @@ topological action before graph-level aggregation:
           $\bm{\ell}_\tau = \text{MeanPool}(\hat{\mathbf{v}}_i)$.
 \end{enumerate}
 
+\removelatexerror
+\begin{algorithm}[H]
+\caption{Neighbourhood Topology Consensus}
+\label{alg:consensus}
+\SetAlgoLined
+\KwIn{Node embeddings $\{\mathbf{h}_i\}$, edge index $\mathcal{E}$,
+      batch index $\mathbf{b}$}
+\KwOut{Graph-level topology logits $\bm{\ell}_\tau$}
+$\mathbf{v}_i \leftarrow \text{MLP}_{\text{vote}}(\mathbf{h}_i)
+\quad \forall i$\;
+$\bar{\mathbf{v}}_i \leftarrow \text{MeanAgg}_{j \in \cN(i)}(\mathbf{v}_j)$\;
+$\bm{\sigma}_i \leftarrow \sqrt{\text{VarAgg}_{j \in \cN(i)}(\mathbf{v}_j)
++ \epsilon}$\;
+$\hat{\mathbf{v}}_i \leftarrow \text{MLP}_{\text{agree}}(
+[\mathbf{v}_i \| \bar{\mathbf{v}}_i \| \bm{\sigma}_i])$\;
+$\bm{\ell}_\tau \leftarrow \text{MeanPool}_{\mathbf{b}}(\hat{\mathbf{v}}_i)$\;
+\Return{$\bm{\ell}_\tau$}
+\end{algorithm}
+
 \paragraph{Recoverability score head}
 A separate MLP predicts per-topology recoverability scores
 $\hat{\mathbf{r}} \in \R^{|\cT|}$ from the pooled graph features.
@@ -550,6 +573,46 @@ $\tau^*$ replaces $\tau_{\text{prev}}$ only if
 $C_{\tau^*} > C_{\tau_{\text{prev}}} + \eta$, and a cooldown
 period $T_{\text{cool}}$ suppresses switching immediately after
 a topology change.
+
+\removelatexerror
+\begin{algorithm}[H]
+\caption{Counterfactual Topology Selection with CBF-QP Shield}
+\label{alg:counterfactual}
+\SetAlgoLined
+\KwIn{Observation $o_t$, model outputs $(\bfu, \bm{\ell}_\tau,
+      \tilde{\mathbf{r}}, \hat{\bm{\sigma}}_u)$,
+      previous topology $\tau_{\text{prev}}$}
+\KwOut{Selected topology $\tau^*$, safe actions $\bfu^{\text{safe}}$}
+\If{$t - t_{\text{last\_switch}} < T_{\text{cool}}$}{
+    $\tau^* \leftarrow \tau_{\text{prev}}$\;
+}
+\Else{
+    Compute $C_\tau$ for each $\tau \in \cT$ via \eqref{eq:combined_score}\;
+    $\tau' \leftarrow \argmax_\tau C_\tau$\;
+    \eIf{$C_{\tau'} > C_{\tau_{\text{prev}}} + \eta$}{
+        $\tau^* \leftarrow \tau'$\;
+    }{
+        $\tau^* \leftarrow \tau_{\text{prev}}$\;
+    }
+}
+\tcp{Safety shield}
+$\rho \leftarrow \text{CollisionRisk}(o_t)$\;
+\If{recoverability $\hat{R} \ne \mathtt{null}$}{
+    $\rho \leftarrow \max(0, \rho - 0.15 \hat{R})$\;
+}
+\If{$\tilde{r}_\tau < 0 \;\forall \tau$}{
+    $\rho \leftarrow \max(\rho, 0.55)$ \tcp*{crisis mode}
+}
+\eIf{$\rho \ge \rho_{\text{th}}$}{
+    \ForEach{robot $i$}{
+        Build CBF constraints via \eqref{eq:cbf_constraint}\;
+        $\bfu_i^{\text{safe}} \leftarrow$ solve QP~\eqref{eq:qp}\;
+    }
+}{
+    $\bfu^{\text{safe}} \leftarrow \bfu$\;
+}
+\Return{$\tau^*, \bfu^{\text{safe}}$}
+\end{algorithm}
 
 \subsection{CBF-QP Safety Shield}\label{sec:shield}
 
@@ -619,16 +682,16 @@ of the expert action are added as additional training samples.
 
 \subsection{Loss Function}
 The total loss combines:
-\begin{equation}\label{eq:loss}
+\begin{multline}\label{eq:loss}
     \mathcal{L} =
     \lambda_a \mathcal{L}_{\text{act}}
     + \lambda_r \mathcal{L}_{\text{rec}}
-    + \lambda_\tau \big(\mathcal{L}_{\text{topo}}
+    + \lambda_\tau \bigl(\mathcal{L}_{\text{topo}}
         + 0.8\,\mathcal{L}_{\text{score}}
-        + 0.45\,\mathcal{L}_{\text{rank}}\big)
+        + 0.45\,\mathcal{L}_{\text{rank}}\bigr)\\
     + \lambda_x \mathcal{L}_{\text{aux}}
     + \mathcal{L}_{\text{unc}},
-\end{equation}
+\end{multline}
 where $\mathcal{L}_{\text{act}}$ is MSE on actions,
 $\mathcal{L}_{\text{rec}}$ is MSE on recoverability margin,
 $\mathcal{L}_{\text{topo}}$ is cross-entropy on topology labels,
@@ -715,7 +778,7 @@ Each setting runs 25 episodes $\times$ 4 scenarios $\times$
 Placeholder values are shown; final numbers will be populated
 after full training on CUDA hardware.
 
-\begin{table*}[H]
+\begin{table*}[!t]
 \centering
 \caption{Main comparison results (averaged over all scenarios and team sizes).
 Bold = best; underline = second best.
@@ -938,66 +1001,6 @@ control in constrained environments.
 %  APPENDIX
 % ================================================================
 \appendix
-
-\section{Algorithm Details}\label{app:algorithms}
-
-\begin{algorithm}[H]
-\caption{Neighbourhood Topology Consensus}
-\label{alg:consensus}
-\SetAlgoLined
-\KwIn{Node embeddings $\{\mathbf{h}_i\}$, edge index $\mathcal{E}$,
-      batch index $\mathbf{b}$}
-\KwOut{Graph-level topology logits $\bm{\ell}_\tau$}
-$\mathbf{v}_i \leftarrow \text{MLP}_{\text{vote}}(\mathbf{h}_i)
-\quad \forall i$\;
-$\bar{\mathbf{v}}_i \leftarrow \text{MeanAgg}_{j \in \cN(i)}(\mathbf{v}_j)$\;
-$\bm{\sigma}_i \leftarrow \sqrt{\text{VarAgg}_{j \in \cN(i)}(\mathbf{v}_j)
-+ \epsilon}$\;
-$\hat{\mathbf{v}}_i \leftarrow \text{MLP}_{\text{agree}}(
-[\mathbf{v}_i \| \bar{\mathbf{v}}_i \| \bm{\sigma}_i])$\;
-$\bm{\ell}_\tau \leftarrow \text{MeanPool}_{\mathbf{b}}(\hat{\mathbf{v}}_i)$\;
-\Return{$\bm{\ell}_\tau$}
-\end{algorithm}
-
-\begin{algorithm}[H]
-\caption{Counterfactual Topology Selection with CBF-QP Shield}
-\label{alg:counterfactual}
-\SetAlgoLined
-\KwIn{Observation $o_t$, model outputs $(\bfu, \bm{\ell}_\tau,
-      \tilde{\mathbf{r}}, \hat{\bm{\sigma}}_u)$,
-      previous topology $\tau_{\text{prev}}$}
-\KwOut{Selected topology $\tau^*$, safe actions $\bfu^{\text{safe}}$}
-\If{$t - t_{\text{last\_switch}} < T_{\text{cool}}$}{
-    $\tau^* \leftarrow \tau_{\text{prev}}$\;
-}
-\Else{
-    Compute $C_\tau$ for each $\tau \in \cT$ via \eqref{eq:combined_score}\;
-    $\tau' \leftarrow \argmax_\tau C_\tau$\;
-    \eIf{$C_{\tau'} > C_{\tau_{\text{prev}}} + \eta$}{
-        $\tau^* \leftarrow \tau'$\;
-    }{
-        $\tau^* \leftarrow \tau_{\text{prev}}$\;
-    }
-}
-\tcp{Safety shield}
-$\rho \leftarrow \text{CollisionRisk}(o_t)$\;
-\If{recoverability $\hat{R} \ne \mathtt{null}$}{
-    $\rho \leftarrow \max(0, \rho - 0.15 \hat{R})$\;
-}
-\If{$\tilde{r}_\tau < 0 \;\forall \tau$}{
-    $\rho \leftarrow \max(\rho, 0.55)$ \tcp*{crisis mode}
-}
-\eIf{$\rho \ge \rho_{\text{th}}$}{
-    \ForEach{robot $i$}{
-        Build CBF constraints via \eqref{eq:cbf_constraint}\;
-        $\bfu_i^{\text{safe}} \leftarrow$ solve QP~\eqref{eq:qp}\;
-    }
-}{
-    $\bfu^{\text{safe}} \leftarrow \bfu$\;
-}
-\Return{$\tau^*, \bfu^{\text{safe}}$}
-\end{algorithm}
-
 
 \section{Hyperparameters}\label{app:hyperparams}
 

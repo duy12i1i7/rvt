@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.29)  12 MAR 2026 14:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.29)  12 MAR 2026 15:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -912,24 +912,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 
 -- Lines per column: 58 (exact).
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -954,7 +954,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 44.
+Package hyperref Info: Link coloring OFF on input line 47.
 
 (./main.out) (./main.out)
 \@outlinefile=\write4
@@ -964,18 +964,18 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 136
+LaTeX Font Info:    Trying to load font information for U+msa on input line 139
 .
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 136
+LaTeX Font Info:    Trying to load font information for U+msb on input line 139
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 4686) in paragraph at lines 153--158
+Underfull \hbox (badness 4686) in paragraph at lines 156--161
 []\T1/ptm/m/n/10 We in-tro-duce a \T1/ptm/b/n/10 neighbourhood-consensus topol-
 
  []
@@ -987,25 +987,15 @@ ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-Underfull \hbox (badness 2119) in paragraph at lines 200--209
+Underfull \hbox (badness 2119) in paragraph at lines 203--212
 []\T1/ptm/m/n/10 Learning vi-a-bil-ity bound-aries via op-ti-mal con-trol [[]]
  []
 
-
-LaTeX Warning: Reference `tab:comparison' on page 1 undefined on input line 210
-.
-
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 2
-82.
+85.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Overfull \hbox (42.80627pt too wide) detected at line 315
-[][][][]\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s[]; ^^\\OT1/cmr/m/
-n/10 ) = [] [] [] [] + [] + [] []\OML/cmm/m/it/10 ;
- []
-
-
 
 (./fig_architecture.tex)
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1014,110 +1004,52 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [2]
 
-LaTeX Warning: Reference `fig:rfn' on page 1 undefined on input line 380.
-
-
-
 (./fig_rfn.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 503--507
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 507--511
 []\T1/ptm/m/n/10 Neighbour votes are ag-gre-gated: $[] \OT1/cmr/m/n/10 =
  []
 
 
 
-[3]
-
-
-Overfull \hbox (31.72165pt too wide) detected at line 631
-[][][][]\OMS/cmsy/m/n/10 L \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 ^^U[]\OMS/cmsy/m/
-n/10 L[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 ^^U[]\OMS/cmsy/m/n/10 L[] \OT1/cmr/
-m/n/10 + \OML/cmm/m/it/10 ^^U[][]\OMS/cmsy/m/n/10 L[] \OT1/cmr/m/n/10 + 0\OML/c
-mm/m/it/10 :\OT1/cmr/m/n/10 8 \OMS/cmsy/m/n/10 L[] \OT1/cmr/m/n/10 + 0\OML/cmm/
-m/it/10 :\OT1/cmr/m/n/10 45 \OMS/cmsy/m/n/10 L[][] \OT1/cmr/m/n/10 + \OML/cmm/m
-/it/10 ^^U[]\OMS/cmsy/m/n/10 L[] \OT1/cmr/m/n/10 + \OMS/cmsy/m/n/10 L[]\OML/cmm
-/m/it/10 ;
- []
-
 
 
 [4]
-
-LaTeX Warning: Reference `tab:main_results' on page 1 undefined on input line 7
-14.
-
-
-
-
-
-[5] (./main.bbl)
-** WARNING: Ignoring useless \section in Appendix (line 942).
-
-! LaTeX Error: [H] in two columns mode is not allowed for algorithms.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.944 \begin{algorithm}[H]
-                          
-This error message was generated by an \errmessage
-command, so I can't give any explicit help.
-Pretend that you're Hercule Poirot: Examine all clues,
-and deduce the truth by order and method.
-
-
-! LaTeX Error: [H] in two columns mode is not allowed for algorithms.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.962 \begin{algorithm}[H]
-                          
-(That was another \errmessage.)
-
-
-Underfull \vbox (badness 6032) has occurred while \output is active []
-
-
-
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 98
-2.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 59
+8.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-** WARNING: Ignoring useless \section in Appendix (line 1002).
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[6]
+[5]
 
 
 
-[7
+[6] (./main.bbl
 
-] (./main.aux)
+)
+** WARNING: Ignoring useless \section in Appendix (line 1001).
+
+
+[7] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: A5364CDAEF5923829E385B846C4602F8;4544.
  ) 
 Here is how much of TeX's memory you used:
- 27596 strings out of 473190
- 526604 string characters out of 5715800
- 916287 words of memory out of 5000000
- 50218 multiletter control sequences out of 15000+600000
- 686659 words of font info for 191 fonts, out of 8000000 for 9000
+ 27604 strings out of 473190
+ 526746 string characters out of 5715800
+ 927150 words of memory out of 5000000
+ 50223 multiletter control sequences out of 15000+600000
+ 686827 words of font info for 192 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,87p,568b,886s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,87p,861b,886s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><
 /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></u
@@ -1129,26 +1061,29 @@ al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
 exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/tex
 live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
-ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/
-2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/202
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/
-fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-d
-ist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/font
-s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/ur
-w/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/u
-tmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb
->
-Output written on main.pdf (7 pages, 336769 bytes).
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
+exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
+/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
+25/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/tex
+mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
+1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/tim
+es/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a
+.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on main.pdf (7 pages, 373509 bytes).
 PDF statistics:
- 490 PDF objects out of 1000 (max. 8388607)
- 414 compressed objects within 5 object streams
- 146 named destinations out of 1000 (max. 500000)
+ 516 PDF objects out of 1000 (max. 8388607)
+ 440 compressed objects within 5 object streams
+ 149 named destinations out of 1000 (max. 500000)
  269 words of extra memory for PDF output out of 10000 (max. 10000000)
 

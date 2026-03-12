@@ -65,7 +65,7 @@ def simple_recover_shield(
 
     # --- QP-based intervention ---
     progress_dir = progress_direction(obs)
-    progress_w = 0.15 if all_negative else 0.06
+    progress_w = 0.02 if all_negative else 0.008
     safe = actions.copy()
     for i in range(len(safe)):
         constraints = _build_cbf_constraints(i, obs, cfg)
@@ -96,7 +96,7 @@ def _build_cbf_constraints(
     constraints: list = []
 
     # Robot-robot
-    d_safe_rr = cfg.env.min_rr_distance + 0.08
+    d_safe_rr = cfg.env.min_rr_distance + 0.03
     for j in range(len(pos)):
         if j == robot_idx:
             continue
@@ -113,7 +113,7 @@ def _build_cbf_constraints(
     # Robot-obstacle
     obs_pos = obs["obstacles"]
     obs_vel = obs.get("obstacle_velocities", np.zeros_like(obs_pos))
-    d_safe_ro = cfg.env.min_ro_distance + 0.05
+    d_safe_ro = cfg.env.min_ro_distance + 0.02
     for k in range(len(obs_pos)):
         diff = pi - obs_pos[k]
         dist_sq = float(np.dot(diff, diff))
@@ -135,7 +135,7 @@ def _solve_per_robot_qp(
     progress_dir: np.ndarray,
     max_accel: float,
     progress_weight: float = 0.05,
-    n_iters: int = 10,
+    n_iters: int = 25,
 ) -> np.ndarray:
     """Solve a small QP via iterative half-plane projection (Dykstra).
 
@@ -190,6 +190,11 @@ def choose_counterfactual_topology(
     prior = topo_prior.detach().cpu().numpy().astype(np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
 
+    # Uncertainty gate: if model is very uncertain, don't switch topology
+    mean_uncert = float(np.mean(uncert))
+    if mean_uncert > 0.35:
+        return previous_topology
+
     # Context bonuses for situationally appropriate topologies
     context = np.zeros_like(scores)
     bottleneck = obs["bottleneck"] > 0.50
@@ -201,17 +206,17 @@ def choose_counterfactual_topology(
         context[TOPOLOGY_IDS.index(4)] += 0.14
     # Mild preference for keep in easy situations
     if obs["bottleneck"] < 0.35:
-        context[TOPOLOGY_IDS.index(0)] += 0.06
+        context[TOPOLOGY_IDS.index(0)] += 0.12
 
-    # Moderate switch penalties to preserve formation stability
+    # Heavy switch penalties to preserve formation stability
     switch_penalty = np.zeros_like(scores)
     for idx, topo in enumerate(TOPOLOGY_IDS):
         if topo != previous_topology:
-            switch_penalty[idx] = 0.08
+            switch_penalty[idx] = 0.30
         if topo == 3:  # Split is most disruptive
-            switch_penalty[idx] += 0.06
+            switch_penalty[idx] += 0.20
 
-    combined = 0.65 * scores + 0.18 * prior + context - 0.18 * uncert - switch_penalty
+    combined = 0.35 * scores + 0.35 * prior + context - 0.22 * uncert - switch_penalty
     best_idx = int(np.argmax(combined))
     current_idx = TOPOLOGY_IDS.index(previous_topology)
     if combined[best_idx] < combined[current_idx] + cfg.method.switch_hysteresis:
