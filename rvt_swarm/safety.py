@@ -65,7 +65,7 @@ def simple_recover_shield(
 
     # --- QP-based intervention ---
     progress_dir = progress_direction(obs)
-    progress_w = 0.08 if all_negative else 0.03
+    progress_w = 0.15 if all_negative else 0.06
     safe = actions.copy()
     for i in range(len(safe)):
         constraints = _build_cbf_constraints(i, obs, cfg)
@@ -194,24 +194,24 @@ def choose_counterfactual_topology(
     context = np.zeros_like(scores)
     bottleneck = obs["bottleneck"] > 0.50
     if bottleneck:
-        context[TOPOLOGY_IDS.index(1)] += 0.04
-        context[TOPOLOGY_IDS.index(2)] += 0.10
-        context[TOPOLOGY_IDS.index(3)] += 0.05
+        context[TOPOLOGY_IDS.index(1)] += 0.06
+        context[TOPOLOGY_IDS.index(2)] += 0.14
+        context[TOPOLOGY_IDS.index(3)] += 0.08
     if obs["progress"] > 0.75 and obs["bottleneck"] < 0.30:
-        context[TOPOLOGY_IDS.index(4)] += 0.12
-    # Strongly prefer keep in easy situations
+        context[TOPOLOGY_IDS.index(4)] += 0.14
+    # Mild preference for keep in easy situations
     if obs["bottleneck"] < 0.35:
-        context[TOPOLOGY_IDS.index(0)] += 0.18
+        context[TOPOLOGY_IDS.index(0)] += 0.06
 
-    # Heavy switch penalties to preserve formation stability
+    # Moderate switch penalties to preserve formation stability
     switch_penalty = np.zeros_like(scores)
     for idx, topo in enumerate(TOPOLOGY_IDS):
         if topo != previous_topology:
-            switch_penalty[idx] = 0.22
+            switch_penalty[idx] = 0.08
         if topo == 3:  # Split is most disruptive
-            switch_penalty[idx] += 0.12
+            switch_penalty[idx] += 0.06
 
-    combined = 0.60 * scores + 0.18 * prior + context - 0.18 * uncert - switch_penalty
+    combined = 0.65 * scores + 0.18 * prior + context - 0.18 * uncert - switch_penalty
     best_idx = int(np.argmax(combined))
     current_idx = TOPOLOGY_IDS.index(previous_topology)
     if combined[best_idx] < combined[current_idx] + cfg.method.switch_hysteresis:

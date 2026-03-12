@@ -40,8 +40,8 @@ class TrainConfig:
     expert_episodes: int = 500
     batch_size: int = 32
     epochs: int = 30
-    epochs_gnn_only: int = 30
-    epochs_instant_cert: int = 30
+    epochs_gnn_only: int = 60
+    epochs_instant_cert: int = 60
     epochs_rvt_swarm: int = 100
     lr: float = 3e-4
     weight_decay: float = 1e-5
@@ -58,7 +58,7 @@ class TrainConfig:
     early_stopping_min_delta: float = 1e-4
     save_best_only: bool = True
     curriculum_warmup_epochs: int = 12
-    aux_gradient_scale: float = 0.0
+    aux_gradient_scale: float = 0.3
     n_workers: int = 0  # 0 = auto (3/4 of cpu_count)
 
 
@@ -76,9 +76,9 @@ class MethodConfig:
     shield_gain: float = 0.25
     progress_weight: float = 0.10
     topology_temperature: float = 1.5
-    switch_hysteresis: float = 0.50
+    switch_hysteresis: float = 0.15
     shield_risk_threshold: float = 0.50
-    topology_cooldown: int = 15
+    topology_cooldown: int = 8
     max_shield_blend: float = 0.10
 
 

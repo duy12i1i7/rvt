@@ -1,0 +1,80 @@
+% ============================================================
+%  fig_architecture.tex  –  TikZ architecture diagram
+%  Include via \input{fig_architecture.tex} in main.tex
+% ============================================================
+\begin{tikzpicture}[
+    >=Stealth,
+    block/.style={
+        rectangle, draw=black!70, fill=blue!8,
+        minimum height=1.0cm, minimum width=2.2cm,
+        font=\small, align=center, rounded corners=2pt,
+        thick
+    },
+    head/.style={
+        rectangle, draw=black!70, fill=orange!12,
+        minimum height=0.8cm, minimum width=2.0cm,
+        font=\small, align=center, rounded corners=2pt,
+        thick
+    },
+    shield/.style={
+        rectangle, draw=red!60, fill=red!8,
+        minimum height=0.8cm, minimum width=2.0cm,
+        font=\small, align=center, rounded corners=2pt,
+        thick, dashed
+    },
+    arr/.style={->, thick, black!70},
+    darr/.style={->, thick, red!60, dashed},
+]
+
+% --- Input ---
+\node[block] (obs) at (0,0) {Observation\\$\mathbf{o}_i \in \mathbb{R}^{67}$};
+
+% --- Backbone ---
+\node[block, fill=green!8] (enc) at (0,-1.4) {Linear\\Encoder};
+\node[block, fill=green!8] (gat1) at (0,-2.8) {Graph Attn\\Layer $\times 3$};
+
+% --- Heads ---
+\node[head] (act) at (-3.0,-4.4) {Action\\Head};
+\node[head] (topo) at (0,-4.4) {Consensus\\Topology};
+\node[head] (score) at (3.0,-4.4) {Recover\\Score};
+
+% --- Outputs ---
+\node (uout) at (-3.0,-5.6) {$\mathbf{u}_i$};
+\node (tout) at (0,-5.6) {$\boldsymbol{\ell}_\tau$};
+\node (rout) at (3.0,-5.6) {$\tilde{\mathbf{r}}_\tau$};
+
+% --- Shield ---
+\node[shield] (cfsel) at (1.5,-7.0) {Counterfactual\\Selector};
+\node[shield] (cbf) at (-1.5,-7.0) {CBF-QP\\Shield};
+
+% --- Final ---
+\node[block, fill=yellow!12] (out) at (0,-8.4) {$\tau^*, \;\mathbf{u}^{\text{safe}}$};
+
+% --- Arrows backbone ---
+\draw[arr] (obs) -- (enc);
+\draw[arr] (enc) -- (gat1);
+
+% --- Arrows to heads ---
+\draw[arr] (gat1.south) -- ++(0,-0.4) -| (act.north);
+\draw[arr] (gat1.south) -- (topo.north);
+\draw[arr] (gat1.south) -- ++(0,-0.4) -| (score.north);
+
+% --- Arrows from heads ---
+\draw[arr] (act) -- (uout);
+\draw[arr] (topo) -- (tout);
+\draw[arr] (score) -- (rout);
+
+% --- Arrows to shield/selector ---
+\draw[darr] (uout.south) -- ++(0,-0.3) -| (cbf.north);
+\draw[darr] (tout.south) -- ++(0,-0.3) -| (cfsel.north);
+\draw[darr] (rout.south) -- ++(0,-0.3) -| (cfsel.north);
+
+% --- Arrows to output ---
+\draw[darr] (cbf.south) -- ++(0,-0.3) -| (out.north west);
+\draw[darr] (cfsel.south) -- ++(0,-0.3) -| (out.north east);
+
+% --- Grad scale annotation ---
+\node[font=\tiny\itshape, text=gray] at (1.6,-3.6)
+    {grad\_scale(0.3)};
+
+\end{tikzpicture}

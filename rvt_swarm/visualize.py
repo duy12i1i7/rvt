@@ -84,26 +84,21 @@ def _draw_robot(ax, x, y, theta, color, size=0.2, alpha=1.0):
     ax.add_patch(tri)
 
 
-# ── Simulated LiDAR fan for visualization ─────────────────────────────
-def _draw_lidar_fan(ax, x, y, theta, obstacles, obs_radius, cfg):
-    """Draw a LiDAR-like sensing fan around a robot.
+# ── LiDAR fan from real scan data ──────────────────────────────────────
+def _draw_lidar_fan(ax, x, y, theta, scan_data, cfg):
+    """Draw a LiDAR sensing fan using actual scan distances.
 
-    Casts rays and clips them against circular obstacles so the fan
-    appears to 'stop' at detected surfaces.
+    scan_data: 1D array of *normalized* distances (0–1), one per ray.
+    Each value is range_hit / lidar_range; 1.0 = max range (no hit).
     """
-    half_fov = LIDAR_FOV / 2
-    angles = np.linspace(theta - half_fov, theta + half_fov, LIDAR_NUM_RAYS)
+    num_rays = len(scan_data)
+    half_fov = cfg.env.lidar_fov / 2
+    angles = np.linspace(theta - half_fov, theta + half_fov, num_rays)
     fan_points = [(x, y)]
-    for angle in angles:
-        ray_dir = np.array([np.cos(angle), np.sin(angle)])
-        r = LIDAR_RANGE
-        # Check obstacles
-        for o in obstacles:
-            hit = _ray_circle_hit(x, y, ray_dir, o[0], o[1], obs_radius)
-            if hit is not None and hit < r:
-                r = hit
-        fan_points.append((x + r * ray_dir[0], y + r * ray_dir[1]))
-    fan_points.append((x, y))  # close the polygon
+    for angle, d_norm in zip(angles, scan_data):
+        r = float(d_norm) * cfg.env.lidar_range
+        fan_points.append((x + r * np.cos(angle), y + r * np.sin(angle)))
+    fan_points.append((x, y))
     fan = plt.Polygon(fan_points, closed=True, fc=LIDAR_COLOR,
                       ec='none', alpha=LIDAR_ALPHA, zorder=1)
     ax.add_patch(fan)

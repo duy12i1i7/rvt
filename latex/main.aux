@@ -1,0 +1,176 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{oh2015survey}
+\citation{yan2013survey}
+\citation{gcbf_plus_2024}
+\citation{afor_2025}
+\citation{multi_uav_formation_2024}
+\citation{vboc_2023}
+\citation{certifiable_reach_2024}
+\citation{deadlock_free_cbf_2025}
+\citation{gcbf_plus_2024}
+\citation{deadlock_free_cbf_2025}
+\citation{safety_critical_formation_2024}
+\providecommand \oddpage@label [2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
+\newlabel{sec:intro@cref}{{[section][1][]I}{[1][1][]1}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Contributions}{1}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{1}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{II}{1}{Related Work}{section.2}{}}
+\newlabel{sec:related@cref}{{[section][2][]II}{[1][1][]1}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Safe Multi-Robot Control}{1}{subsection.2.1}\protected@file@percent }
+\citation{afor_2025}
+\citation{multi_uav_formation_2024}
+\citation{confined_formation_2024}
+\citation{vboc_2023}
+\citation{certifiable_reach_2024}
+\citation{rail_2024}
+\citation{gcbf_plus_2024}
+\citation{safety_critical_formation_2024}
+\citation{vboc_2023}
+\citation{certifiable_reach_2024}
+\citation{rail_2024}
+\citation{deadlock_free_cbf_2025}
+\citation{afor_2025}
+\citation{multi_uav_formation_2024}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Adaptive Formation and Reconfiguration}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Viability, Reachability, and Recoverability}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Problem Formulation}{2}{section.3}\protected@file@percent }
+\newlabel{sec:problem}{{III}{2}{Problem Formulation}{section.3}{}}
+\newlabel{sec:problem@cref}{{[section][3][]III}{[1][2][]2}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}System Model}{2}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:dynamics}{{1}{2}{System Model}{equation.1}{}}
+\newlabel{eq:dynamics@cref}{{[equation][1][]1}{[1][2][]2}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Formation and Topology}{2}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Recoverability}{2}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:recover_margin}{{2}{2}{Recoverability Margin}{equation.2}{}}
+\newlabel{eq:recover_margin@cref}{{[equation][2][]2}{[1][2][]2}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Objective}{2}{subsection.3.4}\protected@file@percent }
+\newlabel{eq:objective}{{3}{2}{Objective}{equation.3}{}}
+\newlabel{eq:objective@cref}{{[equation][3][]3}{[1][2][]2}{}{}{}}
+\newlabel{eq:constraint}{{4}{2}{Objective}{equation.4}{}}
+\newlabel{eq:constraint@cref}{{[equation][4][]4}{[1][2][]2}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Method: RVT-Swarm}{2}{section.4}\protected@file@percent }
+\newlabel{sec:method}{{IV}{2}{Method: RVT-Swarm}{section.4}{}}
+\newlabel{sec:method@cref}{{[section][4][]IV}{[1][2][]2}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces High-level RVT-Swarm pipeline. Local observations are encoded into an interaction graph, processed by attention-based message passing, and decoded into three outputs: velocity command~$\mathbf  {u}_i$, topology logits~$\bm  {\ell }_\tau $ via neighbourhood consensus, and per-topology recoverability scores~$\hat  {R}_\tau $. The counterfactual selector and CBF-QP shield (dashed, red) operate at inference time only.}}{3}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{3}{High-level RVT-Swarm pipeline. Local observations are encoded into an interaction graph, processed by attention-based message passing, and decoded into three outputs: velocity command~$\bfu _i$, topology logits~$\bm {\ell }_\tau $ via neighbourhood consensus, and per-topology recoverability scores~$\hat {R}_\tau $. The counterfactual selector and CBF-QP shield (dashed, red) operate at inference time only}{figure.caption.2}{}}
+\newlabel{fig:architecture@cref}{{[figure][1][]1}{[1][2][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Recoverability Field Network (RFN)}{3}{subsection.4.1}\protected@file@percent }
+\newlabel{sec:rfn}{{\mbox  {IV-A}}{3}{Recoverability Field Network (RFN)}{subsection.4.1}{}}
+\newlabel{sec:rfn@cref}{{[subsection][1][4]\mbox  {IV-A}}{[1][3][]3}{}{}{}}
+\newlabel{eq:rfn_adjusted}{{5}{3}{Recoverability Field Network (RFN)}{equation.5}{}}
+\newlabel{eq:rfn_adjusted@cref}{{[equation][5][]5}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Graph Attention Backbone}{3}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:backbone}{{\mbox  {IV-B}}{3}{Graph Attention Backbone}{subsection.4.2}{}}
+\newlabel{sec:backbone@cref}{{[subsection][2][4]\mbox  {IV-B}}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-B}0a}Node features ($d_v = 67$)}{3}{paragraph.4.2.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-B}0b}Edge features ($d_e = 11$)}{3}{paragraph.4.2.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-B}0c}Attention-weighted message passing}{3}{paragraph.4.2.0.3}\protected@file@percent }
+\newlabel{eq:edge_msg}{{6}{3}{Attention-weighted message passing}{equation.6}{}}
+\newlabel{eq:edge_msg@cref}{{[equation][6][]6}{[1][3][]3}{}{}{}}
+\newlabel{eq:attention}{{7}{3}{Attention-weighted message passing}{equation.7}{}}
+\newlabel{eq:attention@cref}{{[equation][7][]7}{[1][3][]3}{}{}{}}
+\newlabel{eq:node_update}{{8}{3}{Attention-weighted message passing}{equation.8}{}}
+\newlabel{eq:node_update@cref}{{[equation][8][]8}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Multi-Head Decoder}{3}{subsection.4.3}\protected@file@percent }
+\newlabel{sec:decoder}{{\mbox  {IV-C}}{3}{Multi-Head Decoder}{subsection.4.3}{}}
+\newlabel{sec:decoder@cref}{{[subsection][3][4]\mbox  {IV-C}}{[1][3][]3}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-C}0a}Action head}{3}{paragraph.4.3.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-C}0b}Topology consensus head}{3}{paragraph.4.3.0.2}\protected@file@percent }
+\citation{grad_scale}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-C}0c}Recoverability score head}{4}{paragraph.4.3.0.3}\protected@file@percent }
+\newlabel{eq:adjusted_scores}{{9}{4}{Recoverability score head}{equation.9}{}}
+\newlabel{eq:adjusted_scores@cref}{{[equation][9][]9}{[1][3][]4}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {IV-C}0d}Gradient protection}{4}{paragraph.4.3.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Counterfactual Topology Selection}{4}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:counterfactual}{{\mbox  {IV-D}}{4}{Counterfactual Topology Selection}{subsection.4.4}{}}
+\newlabel{sec:counterfactual@cref}{{[subsection][4][4]\mbox  {IV-D}}{[1][4][]4}{}{}{}}
+\newlabel{eq:combined_score}{{10}{4}{Counterfactual Topology Selection}{equation.10}{}}
+\newlabel{eq:combined_score@cref}{{[equation][10][]10}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}CBF-QP Safety Shield}{4}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:shield}{{\mbox  {IV-E}}{4}{CBF-QP Safety Shield}{subsection.4.5}{}}
+\newlabel{sec:shield@cref}{{[subsection][5][4]\mbox  {IV-E}}{[1][4][]4}{}{}{}}
+\newlabel{eq:barrier}{{11}{4}{CBF-QP Safety Shield}{equation.11}{}}
+\newlabel{eq:barrier@cref}{{[equation][11][]11}{[1][4][]4}{}{}{}}
+\newlabel{eq:cbf_constraint}{{12}{4}{CBF-QP Safety Shield}{equation.12}{}}
+\newlabel{eq:cbf_constraint@cref}{{[equation][12][]12}{[1][4][]4}{}{}{}}
+\newlabel{eq:qp}{{13}{4}{CBF-QP Safety Shield}{equation.13}{}}
+\newlabel{eq:qp@cref}{{[equation][13][]13}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Training}{4}{section.5}\protected@file@percent }
+\newlabel{sec:training}{{V}{4}{Training}{section.5}{}}
+\newlabel{sec:training@cref}{{[section][5][]V}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Data Generation}{4}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Loss Function}{4}{subsection.5.2}\protected@file@percent }
+\newlabel{eq:loss}{{14}{4}{Loss Function}{equation.14}{}}
+\newlabel{eq:loss@cref}{{[equation][14][]14}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-B}0a}Curriculum warmup}{4}{paragraph.5.2.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {V-B}0b}Early stopping}{4}{paragraph.5.2.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Experiments}{4}{section.6}\protected@file@percent }
+\newlabel{sec:experiments}{{VI}{4}{Experiments}{section.6}{}}
+\newlabel{sec:experiments@cref}{{[section][6][]VI}{[1][4][]4}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Environment}{4}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-A}0a}Scenarios}{4}{paragraph.6.1.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-A}0b}Team sizes}{4}{paragraph.6.1.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-A}0c}Metrics}{4}{paragraph.6.1.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Compared Methods}{4}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-B}0a}Learned methods}{4}{paragraph.6.2.0.1}\protected@file@percent }
+\citation{van2011orca}
+\citation{vboc_2023}
+\citation{gcbf_plus_2024}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-B}0b}Baselines}{5}{paragraph.6.2.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Main Results}{5}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VI-C}0a}Key findings}{5}{paragraph.6.3.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Ablation Study}{5}{subsection.6.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Ablation study on RVT-Swarm components. \emph  {Placeholder values --- populate after training.}}}{5}{table.caption.5}\protected@file@percent }
+\newlabel{tab:ablation}{{III}{5}{Ablation study on RVT-Swarm components. \emph {Placeholder values --- populate after training.}}{table.caption.5}{}}
+\newlabel{tab:ablation@cref}{{[table][3][]III}{[1][5][]5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-E}}Scenario Analysis}{5}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-F}}Scalability}{5}{subsection.6.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Theoretical Analysis}{5}{section.7}\protected@file@percent }
+\newlabel{sec:theory}{{VII}{5}{Theoretical Analysis}{section.7}{}}
+\newlabel{sec:theory@cref}{{[section][7][]VII}{[1][5][]5}{}{}{}}
+\newlabel{thm:safety}{{1}{5}{Local Recoverability $\Rightarrow $ Joint Safety}{theorem.1}{}}
+\newlabel{thm:safety@cref}{{[theorem][1][]1}{[1][5][]5}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Discussion}{5}{section.8}\protected@file@percent }
+\newlabel{sec:discussion}{{VIII}{5}{Discussion}{section.8}{}}
+\newlabel{sec:discussion@cref}{{[section][8][]VIII}{[1][5][]5}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VIII-}0a}Limitations}{5}{paragraph.8.0.0.1}\protected@file@percent }
+\bibstyle{IEEEtran}
+\bibdata{references}
+\bibcite{oh2015survey}{1}
+\bibcite{yan2013survey}{2}
+\bibcite{gcbf_plus_2024}{3}
+\bibcite{afor_2025}{4}
+\bibcite{multi_uav_formation_2024}{5}
+\bibcite{vboc_2023}{6}
+\bibcite{certifiable_reach_2024}{7}
+\bibcite{deadlock_free_cbf_2025}{8}
+\bibcite{safety_critical_formation_2024}{9}
+\bibcite{confined_formation_2024}{10}
+\bibcite{rail_2024}{11}
+\bibcite{grad_scale}{12}
+\bibcite{van2011orca}{13}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {VIII-}0b}Future work}{6}{paragraph.8.0.0.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{6}{section.9}\protected@file@percent }
+\newlabel{sec:conclusion}{{IX}{6}{Conclusion}{section.9}{}}
+\newlabel{sec:conclusion@cref}{{[section][9][]IX}{[1][6][]6}{}{}{}}
+\@writefile{toc}{\contentsline {section}{References}{6}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Appendix}{6}{section*.7}\protected@file@percent }
+\newlabel{app:algorithms}{{A}{6}{\appendixname }{section*.7}{}}
+\newlabel{app:algorithms@cref}{{[section][1][]A}{[1][6][]6}{}{}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Neighbourhood Topology Consensus}}{6}{algocf.1}\protected@file@percent }
+\newlabel{alg:consensus}{{1}{6}{\appendixname }{algocf.1}{}}
+\newlabel{alg:consensus@cref}{{[algorithm][1][]1}{[1][6][]6}{}{}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Counterfactual Topology Selection with CBF-QP Shield}}{6}{algocf.2}\protected@file@percent }
+\newlabel{alg:counterfactual}{{2}{6}{\appendixname }{algocf.2}{}}
+\newlabel{alg:counterfactual@cref}{{[algorithm][2][]2}{[1][6][]6}{}{}{}}
+\newlabel{app:hyperparams}{{28}{6}{\appendixname }{AlgoLine.2.28}{}}
+\newlabel{app:hyperparams@cref}{{[section][1][]A}{[1][6][]6}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Complete hyperparameter settings.}}{7}{table.caption.8}\protected@file@percent }
+\newlabel{tab:hyperparams}{{IV}{7}{Complete hyperparameter settings}{table.caption.8}{}}
+\newlabel{tab:hyperparams@cref}{{[table][4][]IV}{[1][6][]7}{}{}{}}
+\gdef \@abspage@last{7}

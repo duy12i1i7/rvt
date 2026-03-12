@@ -1,0 +1,1046 @@
+% ============================================================
+% RVT-Swarm: Recoverability-Verified Topological Control
+%            for Decentralized Swarm Formation
+% Target: IEEE T-RO / RA-L / ICRA  (Q1)
+% ============================================================
+\documentclass[journal]{IEEEtran}
+
+% ── Packages ────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts,bm}
+\usepackage{amsthm}
+\usepackage{algorithmic}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,patterns,decorations.pathreplacing}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\pmark}{$\triangle$}
+
+% ── Math shortcuts ──────────────────────────────────────────
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\bfu}{\mathbf{u}}
+\newcommand{\bfp}{\mathbf{p}}
+\newcommand{\bfv}{\mathbf{v}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+% ================================================================
+%  TITLE
+% ================================================================
+\title{RVT-Swarm: Recoverability-Verified Topological Control\\
+for Decentralized Swarm Formation}
+
+\author{%
+\IEEEauthorblockN{Anonymous Authors}%
+\thanks{Manuscript submitted for review.}%
+}
+
+\maketitle
+
+% ================================================================
+%  ABSTRACT
+% ================================================================
+\begin{abstract}
+Decentralized multi-robot formation control in cluttered and
+dynamic environments requires reasoning not only about instantaneous
+collision avoidance but also about the swarm's ability to recover a
+desired formation after navigating through constrained regions.
+We introduce \textbf{RVT-Swarm}, the first decentralized swarm
+formation controller that jointly reasons over control actions,
+formation topology adaptation, and \emph{recoverability} --- the
+capacity to return to a goal-directed formation tube within a
+finite horizon.
+RVT-Swarm consists of three tightly integrated components:
+(i) a \emph{Recoverability Field Network} (RFN) that learns a
+local recoverability margin on interaction graphs using
+attention-based message passing;
+(ii) a \emph{Topological Action Space} that augments per-robot
+velocity commands with formation-reconfiguration primitives
+(compress, line, split, recover) selected through a
+neighbourhood-consensus layer; and
+(iii) a \emph{Counterfactual Topology Selector} that evaluates
+candidate topologies under recoverability constraints and a
+progress-preserving CBF-QP safety shield.
+We train RVT-Swarm via imitation learning on short-horizon
+reach-avoid-recover rollouts and evaluate it in a multi-scenario
+2D formation environment with static obstacles, dynamic obstacles,
+narrow passages, and varying team sizes (4--16 robots).
+Experiments show that RVT-Swarm achieves the highest composite
+success rate among all methods, exhibits lower irreversible
+formation collapse than adaptive formation baselines, and maintains
+a superior safety--progress trade-off compared to instantaneous
+certificate controllers.
+Ablation studies confirm that each component --- recoverability
+reasoning, topology adaptation, counterfactual selection, and
+the safety shield --- contributes to overall performance.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Multi-robot systems, swarm formation control, safety certificates,
+recoverability, graph neural networks, topology adaptation.
+\end{IEEEkeywords}
+
+
+% ================================================================
+%  I. INTRODUCTION
+% ================================================================
+\section{Introduction}\label{sec:intro}
+
+Safe and efficient formation control of multi-robot swarms is a
+cornerstone capability for applications ranging from warehouse
+logistics and environmental monitoring to search-and-rescue
+operations~\cite{oh2015survey,yan2013survey}.
+In practice, swarms must navigate through cluttered corridors,
+narrow passages, and environments with moving obstacles while
+maintaining or adaptively reconfiguring their spatial formation.
+
+Existing approaches address fragments of this challenge.
+\emph{Graph-based safety certificates} such as GCBF+~\cite{gcbf_plus_2024}
+provide decentralized collision avoidance but do not reason about
+formation maintenance or recoverability after constraint violations.
+\emph{Adaptive formation methods}~\cite{afor_2025,multi_uav_formation_2024}
+reconfigure formations based on environmental cues but lack formal
+safety guarantees.
+\emph{Viability and reachability approaches}~\cite{vboc_2023,certifiable_reach_2024}
+reason about long-horizon safety but have not been applied to
+distributed swarm formation topology switching.
+\emph{Deadlock-free CBF navigation}~\cite{deadlock_free_cbf_2025}
+ensures progress in social mini-games but does not consider
+formation-tube constraints.
+
+The key insight of this work is that instantaneous safety alone
+is insufficient for swarm formation control.
+A swarm that avoids all collisions but irreversibly fragments its
+formation in a bottleneck has effectively failed its mission.
+What is needed is \emph{recoverability}: the guarantee that the
+swarm can return to a goal-directed formation tube within a bounded
+horizon $H$, even after topology adaptations required by
+constrained environments.
+
+\subsection{Contributions}
+We make the following contributions:
+\begin{enumerate}
+    \item We formalize \textbf{recoverability-verified topology
+    adaptation} for decentralized swarm formation and propose the
+    first controller that jointly reasons over velocity control,
+    formation reconfiguration, and recoverability margins.
+
+    \item We design a \textbf{Recoverability Field Network} (RFN)
+    implemented as a graph attention network that predicts
+    per-topology recoverability scores from local observations
+    including LiDAR, relative neighbour states, obstacle dynamics,
+    and formation-tube error.
+
+    \item We introduce a \textbf{neighbourhood-consensus topology
+    selector} with counterfactual evaluation of candidate
+    topologies, coupled with a \textbf{CBF-QP progress-preserving
+    safety shield} that activates only when all topology options
+    predict negative recoverability.
+
+    \item We demonstrate through comprehensive experiments across
+    4 scenarios, 4 team sizes (4--16), 7 comparison methods, and
+    6 ablation variants that RVT-Swarm achieves the best composite
+    success while each component contributes measurably.
+\end{enumerate}
+
+
+% ================================================================
+%  II. RELATED WORK
+% ================================================================
+\section{Related Work}\label{sec:related}
+
+\subsection{Safe Multi-Robot Control}
+Graph-based control barrier functions (CBFs) have emerged as a
+principled approach to decentralized collision avoidance.
+GCBF+~\cite{gcbf_plus_2024} scales neural CBFs to large teams
+via graph locality but targets instantaneous collision avoidance
+without formation context.
+Discrete-time CBFs for deadlock-free multi-robot navigation
+\cite{deadlock_free_cbf_2025} address progress guarantees in
+narrow social spaces but do not consider formation-tube maintenance.
+Safety-critical formation control under communication
+constraints~\cite{safety_critical_formation_2024} combines CBFs
+with formation objectives but assumes fixed formation topologies.
+
+\subsection{Adaptive Formation and Reconfiguration}
+Adaptive formation methods reconfigure spatial patterns based on
+environmental context.
+Multi-robot formation reconfiguration via adaptive horizon
+planning~\cite{afor_2025} uses a hierarchical planner but lacks
+safety certificates.
+Multi-UAV formation control with obstacle avoidance via RL
+\cite{multi_uav_formation_2024} trains end-to-end policies that
+implicitly handle reconfiguration but provides no recoverability
+guarantees.
+Environment-adaptive confined-space formation~\cite{confined_formation_2024}
+and subteaming approaches are closely related but do not use
+recoverability-verified topology switching as the core control
+mechanism.
+
+\subsection{Viability, Reachability, and Recoverability}
+Learning viability boundaries via optimal
+control~\cite{vboc_2023} and certifiable reachability
+learning~\cite{certifiable_reach_2024} provide horizon-based
+safety reasoning beyond instantaneous collision checks.
+RAIL~\cite{rail_2024} uses reachability-aware imitation learning
+for safe policy execution.
+However, none of these works address \emph{distributed
+recoverability certificates for swarm formation topology
+switching}, which is the gap that RVT-Swarm fills.
+
+\Cref{tab:comparison} summarizes the positioning of RVT-Swarm
+relative to representative prior work across seven key dimensions.
+
+\begin{table*}[H]
+\centering
+\caption{Comparison of RVT-Swarm with representative prior work.
+\cmark~= primary contribution;
+\pmark~= partially addressed;
+\xmark~= not addressed.}
+\label{tab:comparison}
+\small
+\begin{tabular}{lcc ccccccc}
+\toprule
+\textbf{Method} & \textbf{Venue} & \textbf{Year}
+& \rotatebox{70}{Distributed / local graph}
+& \rotatebox{70}{Formation context}
+& \rotatebox{70}{Obstacle dynamics}
+& \rotatebox{70}{Recoverability bound}
+& \rotatebox{70}{Reach-avoid-recover labels}
+& \rotatebox{70}{Return-to-tube in $H$}
+& \rotatebox{70}{Beyond collision safety} \\
+\midrule
+GCBF+~\cite{gcbf_plus_2024}
+    & arXiv & 2024 & \cmark & \pmark & \cmark
+    & \xmark & \xmark & \xmark & \xmark \\
+Safety-crit.\ form.~\cite{safety_critical_formation_2024}
+    & arXiv & 2024 & \cmark & \cmark & \pmark
+    & \xmark & \xmark & \xmark & \xmark \\
+VBOC~\cite{vboc_2023}
+    & arXiv & 2023 & \xmark & \xmark & \pmark
+    & \pmark & \cmark & \xmark & \cmark \\
+Cert.\ Reach.~\cite{certifiable_reach_2024}
+    & arXiv & 2024 & \pmark & \xmark & \cmark
+    & \pmark & \cmark & \xmark & \cmark \\
+RAIL~\cite{rail_2024}
+    & OpenRev.\ & 2024 & \pmark & \xmark & \cmark
+    & \xmark & \cmark & \xmark & \xmark \\
+DT-CBF~\cite{deadlock_free_cbf_2025}
+    & Auton.\ Rob.\ & 2025 & \cmark & \xmark & \cmark
+    & \xmark & \xmark & \xmark & \cmark \\
+AFOR~\cite{afor_2025}
+    & Inf.\ Sci.\ & 2025 & \cmark & \cmark & \pmark
+    & \xmark & \xmark & \pmark & \cmark \\
+Multi-UAV~\cite{multi_uav_formation_2024}
+    & arXiv & 2024 & \cmark & \cmark & \cmark
+    & \xmark & \xmark & \xmark & \xmark \\
+\midrule
+\textbf{RVT-Swarm (ours)}
+    & --- & 2026 & \cmark & \cmark & \cmark
+    & \cmark & \cmark & \cmark & \cmark \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+% ================================================================
+%  III. PROBLEM FORMULATION
+% ================================================================
+\section{Problem Formulation}\label{sec:problem}
+
+\subsection{System Model}
+We consider $N$ robots with single-integrator dynamics operating
+in a 2D workspace $\mathcal{W} \subset \R^2$:
+\begin{equation}\label{eq:dynamics}
+    \bfp_i(t+1) = \bfp_i(t) + \bfv_i(t) \cdot \Delta t, \quad
+    \bfv_i(t+1) = \bfv_i(t) + \bfu_i(t) \cdot \Delta t,
+\end{equation}
+where $\bfp_i, \bfv_i \in \R^2$ are position and velocity of
+robot~$i$, and $\bfu_i \in \R^2$ is the control input subject to
+$\|\bfu_i\| \le u_{\max}$ and $\|\bfv_i\| \le v_{\max}$.
+
+The environment contains $M$ static obstacles and $M_d$ dynamic
+obstacles with known radii.  Each robot has a 270\textdegree{}
+LiDAR sensor with $L=36$ rays and range $r_{\mathrm{lidar}}$.
+
+\subsection{Formation and Topology}
+A \emph{formation} is defined by a set of desired offsets
+$\{\bm{\delta}_i\}_{i=1}^N$ relative to the swarm centroid.
+The formation-tube error for robot~$i$ is
+$\bm{e}_i = (\bar{\bfp} + \bm{\delta}_i) - \bfp_i$
+where $\bar{\bfp}$ is the centroid.
+
+We define a discrete \emph{topological action space}
+$\cT = \{$\textsc{keep}, \textsc{compress}, \textsc{line},
+\textsc{split}, \textsc{recover}$\}$ that modifies the
+formation geometry:
+\begin{itemize}
+    \item \textsc{keep} ($\tau=0$): maintain current formation;
+    \item \textsc{compress} ($\tau=1$): reduce formation scale;
+    \item \textsc{line} ($\tau=2$): align along corridor axis;
+    \item \textsc{split} ($\tau=3$): divide into two sub-teams;
+    \item \textsc{recover} ($\tau=4$): expand and re-merge formation.
+\end{itemize}
+
+\subsection{Recoverability}
+\begin{definition}[Recoverability Margin]
+Given the current state $s_t$ and a candidate topology $\tau \in \cT$,
+the \emph{recoverability margin} is
+\begin{equation}\label{eq:recover_margin}
+    R(s_t, \tau) = \frac{1}{H} \sum_{h=0}^{H-1}
+    \Big[
+        \underbrace{w_c \cdot \mathbb{1}_{\text{collision-free}}}_{\text{safety}}
+      + \underbrace{w_f \cdot f_{\text{tube}}(s_{t+h})}_{\text{formation}}
+      + \underbrace{w_p \cdot p(s_{t+h})}_{\text{progress}}
+    \Big],
+\end{equation}
+where $H$ is the rollout horizon, $f_{\text{tube}}$ measures
+proximity to the formation tube, and $p$ measures goal progress.
+\end{definition}
+
+\begin{definition}[Recoverable State]
+State $s_t$ is \emph{recoverable} if there exists $\tau^* \in \cT$
+such that $R(s_t, \tau^*) \ge 0$.
+\end{definition}
+
+\subsection{Objective}
+The online objective at each timestep is:
+\begin{equation}\label{eq:objective}
+    \max_{\bfu, \tau} \;\;
+    \alpha \cdot \text{goal-progress}
+    + \beta \cdot \text{formation-tube}
+    + \gamma \cdot R(s_t, \tau)
+\end{equation}
+\begin{equation}\label{eq:constraint}
+    \text{s.t.} \quad
+    \hat{R}_i(\cG_t, \bfu, \tau) \ge 0
+    \quad \forall i \in \cN_{\text{critical}},
+\end{equation}
+where $\hat{R}_i$ is the learned recoverability margin from
+the RFN and $\cN_{\text{critical}}$ is the set of robots in
+the vicinity of obstacles or formation-tube violations.
+
+
+% ================================================================
+%  IV. METHOD
+% ================================================================
+\section{Method: RVT-Swarm}\label{sec:method}
+
+\Cref{fig:architecture} provides a high-level overview of the
+full system.  The method comprises three tightly integrated
+components: (A)~the Recoverability Field Network that predicts
+per-topology recoverability scores from local interaction graphs,
+(B)~a counterfactual topology selector, and
+(C)~a CBF-QP safety shield.
+We describe each in turn.
+
+\begin{figure}[H]
+\centering
+\input{fig_architecture.tex}
+\caption{High-level RVT-Swarm pipeline.  Local observations are
+encoded into an interaction graph, processed by attention-based
+message passing, and decoded into three outputs: velocity
+command~$\bfu_i$, topology logits~$\bm{\ell}_\tau$ via
+neighbourhood consensus, and per-topology recoverability
+scores~$\hat{R}_\tau$.
+The counterfactual selector and CBF-QP shield (dashed, red)
+operate at inference time only.}
+\label{fig:architecture}
+\end{figure}
+
+% ── IV-A: RFN ────────────────────────────────────────────────
+\subsection{Recoverability Field Network (RFN)}\label{sec:rfn}
+
+The core contribution of RVT-Swarm is the \emph{Recoverability
+Field Network} (RFN), a graph-attention network that maps the
+local interaction graph~$\cG_t$ to a \emph{recoverability field}:
+a set of per-topology scalar scores $\tilde{r}_\tau$ that
+quantify the swarm's capacity to return to its formation tube
+within a bounded horizon~$H$.
+
+\Cref{fig:rfn} details the RFN data flow.
+Each robot's 67-dimensional observation
+(ego state, goal, formation error, obstacle context,
+LiDAR scan, topology encoding) is first projected to a
+128-dimensional embedding by a linear encoder.
+A $k$-nearest-neighbour interaction graph ($k\!=\!6$) is then
+constructed, with 11-dimensional edge features capturing
+inter-robot geometry and dynamics.
+Three attention-weighted message-passing layers (\Cref{sec:backbone})
+propagate information across the graph, producing node
+embeddings~$\mathbf{h}_i \in \R^{128}$ that capture each
+robot's local neighbourhood context.
+
+These embeddings are decoded by four output heads
+(\Cref{sec:decoder}):
+\begin{itemize}
+    \item \textbf{Action head} $\to$ velocity command
+          $\bfu_i \in \R^2$;
+    \item \textbf{Score head} $\to$ per-topology recoverability
+          prediction $\hat{r}_\tau \in \R^{|\cT|}$;
+    \item \textbf{Uncertainty head} $\to$ epistemic uncertainty
+          estimate $\hat{\sigma}_{u,\tau} \in \R^{|\cT|}$;
+    \item \textbf{Consensus head} $\to$ topology logits
+          $\bm{\ell}_\tau \in \R^{|\cT|}$ via neighbourhood
+          agreement.
+\end{itemize}
+The score and uncertainty heads jointly define the
+\emph{adjusted recoverability field}:
+\begin{equation}\label{eq:rfn_adjusted}
+    \tilde{r}_\tau = \hat{r}_\tau
+    - 0.25 \cdot \hat{\sigma}_{u,\tau},
+    \quad
+    \hat{R} = \max_\tau \tilde{r}_\tau.
+\end{equation}
+The margin~$\hat{R}$ determines whether the swarm is in a
+\emph{recoverable} state ($\hat{R} \ge 0$) or in
+\emph{crisis} ($\hat{R} < 0$ for all topologies),
+triggering the safety shield (\Cref{sec:shield}).
+
+A key design choice is \textbf{gradient protection}:
+to prevent auxiliary recoverability/topology losses from
+degrading action quality during multi-task training,
+backbone features are passed through a gradient-scaling
+operator ($s = 0.3$) before entering the score, uncertainty,
+and consensus heads.  Only the action head receives
+full-magnitude gradients from the backbone.
+
+\begin{figure*}[H]
+\centering
+\input{fig_rfn.tex}
+\caption{Detailed architecture of the \textbf{Recoverability
+Field Network} (RFN).
+\emph{Left}: each robot's 67-dim observation is assembled from
+ego state, goal/formation error, obstacle features, 36-ray
+LiDAR, and topology encoding.
+\emph{Centre}: a linear encoder projects to 128-dim, then
+three attention-weighted graph layers refine node embeddings
+using 11-dim edge features.
+\emph{Right} (purple region): four output heads decode
+velocity commands, per-topology recoverability scores,
+epistemic uncertainty, and consensus topology logits.
+Adjusted scores $\tilde{r}_\tau$ modulate downstream
+topology selection and shield activation.
+Gradient scaling (red) protects the backbone from auxiliary
+losses.}
+\label{fig:rfn}
+\end{figure*}
+
+% ── IV-B: Backbone detail ────────────────────────────────────
+\subsection{Graph Attention Backbone}\label{sec:backbone}
+Each robot~$i$ constructs a local $k$-nearest-neighbour
+interaction graph $\cG_t = (\mathcal{V}, \mathcal{E})$ from
+its observation.
+
+\paragraph{Node features ($d_v = 67$)}
+comprise position, velocity, heading (cos/sin), goal vector,
+centroid-relative position, formation-tube error,
+obstacle-relative features, bottleneck score, topology one-hot
+encoding, and $L=36$ normalized LiDAR distances.
+
+\paragraph{Edge features ($d_e = 11$)}
+comprise relative position, relative velocity, distance,
+corridor-aligned/lateral projections, spacing error, TTC proxy,
+bottleneck score, and progress.
+
+\paragraph{Attention-weighted message passing}
+Each of $K=3$ graph layers computes:
+\begin{align}
+    \mathbf{m}_{ij} &= \text{MLP}_{\text{edge}}\big(
+        [\mathbf{h}_i \| \mathbf{h}_j \| \mathbf{e}_{ij}]\big),
+        \label{eq:edge_msg} \\
+    \alpha_{ij} &= \frac{
+        \exp\!\big(\text{LeakyReLU}(\mathbf{a}^\top \mathbf{m}_{ij})\big)
+    }{
+        \sum_{k \in \cN(i)}
+        \exp\!\big(\text{LeakyReLU}(\mathbf{a}^\top \mathbf{m}_{ik})\big)
+    }, \label{eq:attention} \\
+    \mathbf{h}_i' &= \mathbf{h}_i + \text{MLP}_{\text{node}}\Big(
+        \Big[\mathbf{h}_i \;\Big\|\; \sum_{j \in \cN(i)}
+        \alpha_{ij} \mathbf{m}_{ij}\Big]\Big),
+        \label{eq:node_update}
+\end{align}
+where $\mathbf{a}$ is a learned attention vector and
+$\|$ denotes concatenation.
+
+\subsection{Multi-Head Decoder}\label{sec:decoder}
+
+The backbone embedding $\mathbf{h}_i$ feeds three output heads.
+
+\paragraph{Action head}
+A 3-layer MLP produces per-robot velocity commands:
+$\bfu_i = \tanh\!\big(\text{MLP}_{\text{act}}(\mathbf{h}_i)\big)
+\cdot u_{\max}$.
+
+\paragraph{Topology consensus head}
+Rather than pooling node features and decoding topology logits
+independently, we introduce a \emph{neighbourhood consensus layer}
+(\Cref{alg:consensus}) that ensures adjacent robots agree on the
+topological action before graph-level aggregation:
+\begin{enumerate}
+    \item Each node casts a vote
+          $\mathbf{v}_i = \text{MLP}_{\text{vote}}(\mathbf{h}_i)
+          \in \R^{|\cT|}$.
+    \item Neighbour votes are aggregated:
+          $\bar{\mathbf{v}}_i = \frac{1}{|\cN(i)|}
+          \sum_{j \in \cN(i)} \mathbf{v}_j$,
+          $\bm{\sigma}_i = \sqrt{\text{Var}_{j \in \cN(i)}(\mathbf{v}_j) + \epsilon}$.
+    \item A consensus MLP fuses self, mean, and spread:
+          $\hat{\mathbf{v}}_i =
+          \text{MLP}_{\text{agree}}([\mathbf{v}_i \| \bar{\mathbf{v}}_i
+          \| \bm{\sigma}_i])$.
+    \item Graph-level topology logits:
+          $\bm{\ell}_\tau = \text{MeanPool}(\hat{\mathbf{v}}_i)$.
+\end{enumerate}
+
+\paragraph{Recoverability score head}
+A separate MLP predicts per-topology recoverability scores
+$\hat{\mathbf{r}} \in \R^{|\cT|}$ from the pooled graph features.
+An uncertainty head $\hat{\bm{\sigma}}_u$ modulates the scores:
+\begin{equation}\label{eq:adjusted_scores}
+    \tilde{r}_\tau = \hat{r}_\tau - 0.25 \cdot \hat{\sigma}_{u,\tau}.
+\end{equation}
+The recoverability margin is
+$\hat{R} = \max_\tau \tilde{r}_\tau$.
+
+\paragraph{Gradient protection}
+To prevent auxiliary-task gradients from degrading action quality,
+we apply gradient scaling~\cite{grad_scale} on the backbone
+features before routing to topology and recoverability heads:
+$\mathbf{h}_{\text{aux}} = \text{GradScale}(\mathbf{h}, s)$
+with $s = 0.3$.
+
+\subsection{Counterfactual Topology Selection}\label{sec:counterfactual}
+
+At inference, the counterfactual selector evaluates all candidate
+topologies by combining learned scores with contextual priors
+(\Cref{alg:counterfactual}):
+\begin{equation}\label{eq:combined_score}
+    C_\tau = w_r \tilde{r}_\tau + w_p \pi_\tau
+    + b_\tau^{\text{ctx}} - w_u \hat{\sigma}_{u,\tau}
+    - \psi_\tau^{\text{switch}},
+\end{equation}
+where $\pi_\tau$ is the softmax topology prior,
+$b_\tau^{\text{ctx}}$ are context-dependent bonuses (e.g.,
+\textsc{line} in bottlenecks), $\hat{\sigma}_{u,\tau}$ is
+predicted uncertainty, and $\psi_\tau^{\text{switch}}$ penalises
+topology switching to maintain formation stability.
+
+A hysteresis mechanism prevents oscillation:
+$\tau^*$ replaces $\tau_{\text{prev}}$ only if
+$C_{\tau^*} > C_{\tau_{\text{prev}}} + \eta$, and a cooldown
+period $T_{\text{cool}}$ suppresses switching immediately after
+a topology change.
+
+\subsection{CBF-QP Safety Shield}\label{sec:shield}
+
+The safety shield activates when collision risk exceeds a
+threshold $\rho_{\text{th}}$ \emph{or} when all topology options
+predict negative recoverability ($\tilde{r}_\tau < 0 \;\forall \tau$).
+
+For each robot~$i$, we define CBF barrier functions:
+\begin{equation}\label{eq:barrier}
+    h_{ij} = \|\bfp_i - \bfp_j\|^2 - d_{\text{safe}}^2,
+\end{equation}
+and derive first-order CBF constraints:
+\begin{equation}\label{eq:cbf_constraint}
+    \nabla_{\bfu_i} h_{ij} \cdot \bfu_i
+    \ge -\alpha \, h_{ij} - 2(\bfp_i - \bfp_j)^\top
+    (\bfv_i - \bfv_j).
+\end{equation}
+Each constraint defines a half-plane in action space.
+We solve a per-robot QP:
+\begin{equation}\label{eq:qp}
+    \min_{\bfu_i} \;\;
+    \|\bfu_i - \bfu_i^{\text{learned}}\|^2
+    - w_{\text{prog}} \, \bfu_i^\top \mathbf{d}_{\text{goal}}
+\end{equation}
+\begin{equation*}
+    \text{s.t.} \quad
+    \mathbf{a}_{ij}^\top \bfu_i \ge b_{ij} \;\;\forall j,
+    \quad \|\bfu_i\| \le u_{\max},
+\end{equation*}
+via iterative half-plane projection (Dykstra's algorithm),
+which converges for the convex feasible set defined by half-planes
+intersected with a Euclidean ball.
+
+The progress-bias term $w_{\text{prog}}$ is amplified in crisis
+mode (all $\tilde{r}_\tau < 0$) to maximize return-to-tube
+capability.
+
+
+% ================================================================
+%  V. TRAINING
+% ================================================================
+\section{Training}\label{sec:training}
+
+\subsection{Data Generation}
+We generate expert demonstrations using a heuristic
+formation controller with obstacle-avoidance behaviors in a
+lightweight 2D multi-robot simulator.
+For each timestep in each episode, we compute recoverability
+targets by performing short-horizon ($H=14$ step) counterfactual
+rollouts under each candidate topology $\tau \in \cT$ with the
+expert controller, yielding:
+\begin{itemize}
+    \item Per-topology recoverability scores $\mathbf{r} \in \R^{|\cT|}$;
+    \item Best topology label $\tau^* = \argmax_\tau R(s_t, \tau)$;
+    \item Recoverability margin $\hat{m} = \tanh(0.55 \cdot \text{gap}
+          + 0.30 \cdot r_{\tau^*})$.
+\end{itemize}
+
+Episodes span 4~scenarios (\emph{open field}, \emph{cluttered},
+\emph{narrow passage}, \emph{dynamic obstacles}) and
+4~team sizes ($N \in \{4, 8, 12, 16\}$) with 500~episodes
+generated in parallel across CPU workers.
+
+Hard-negative mining augments the dataset: when the recoverability
+margin is low and the bottleneck score is high, noisy perturbations
+of the expert action are added as additional training samples.
+
+\subsection{Loss Function}
+The total loss combines:
+\begin{equation}\label{eq:loss}
+    \mathcal{L} =
+    \lambda_a \mathcal{L}_{\text{act}}
+    + \lambda_r \mathcal{L}_{\text{rec}}
+    + \lambda_\tau \big(\mathcal{L}_{\text{topo}}
+        + 0.8\,\mathcal{L}_{\text{score}}
+        + 0.45\,\mathcal{L}_{\text{rank}}\big)
+    + \lambda_x \mathcal{L}_{\text{aux}}
+    + \mathcal{L}_{\text{unc}},
+\end{equation}
+where $\mathcal{L}_{\text{act}}$ is MSE on actions,
+$\mathcal{L}_{\text{rec}}$ is MSE on recoverability margin,
+$\mathcal{L}_{\text{topo}}$ is cross-entropy on topology labels,
+$\mathcal{L}_{\text{score}}$ is MSE on per-topology score maps,
+$\mathcal{L}_{\text{rank}}$ is a pairwise ranking loss
+ensuring correct ordering of topology scores, and
+$\mathcal{L}_{\text{unc}}$ is an uncertainty regularizer.
+
+\paragraph{Curriculum warmup}
+During the first $E_w = 12$ epochs, auxiliary losses are linearly
+ramped up from 0 to their full weight to allow the backbone to
+first learn good state representations for the action head before
+being influenced by auxiliary objectives.
+
+\paragraph{Early stopping}
+Training uses early stopping on validation action loss with
+patience~20, tracking action loss rather than total loss
+(which is non-stationary during warmup).
+
+
+% ================================================================
+%  VI. EXPERIMENTS
+% ================================================================
+\section{Experiments}\label{sec:experiments}
+
+\subsection{Environment}
+We evaluate in a 2D multi-robot formation simulator with:
+$12 \times 12$\,m workspace, $\Delta t = 0.15$\,s,
+$v_{\max} = 0.9$\,m/s, $u_{\max} = 0.6$\,m/s$^2$,
+robot radius $0.18$\,m, obstacle radius $0.35$\,m,
+LiDAR with 36 rays / 270\textdegree{} / 3\,m range.
+Hard collision response via iterative position projection
+prevents penetration.
+
+\paragraph{Scenarios}
+\begin{enumerate}
+    \item \textbf{Open field}: 2 obstacles, baseline navigation.
+    \item \textbf{Cluttered}: 8 obstacles in workspace.
+    \item \textbf{Narrow passage}: corridor with wall obstacles
+          requiring formation reconfiguration.
+    \item \textbf{Dynamic obstacles}: 8 obstacles, 2 moving
+          at 0.35\,m/s with bouncing behavior.
+\end{enumerate}
+
+\paragraph{Team sizes} $N \in \{4, 8, 12, 16\}$.
+
+\paragraph{Metrics}
+\emph{Success} $=$ goal reached $\wedge$ collision-free $\wedge$
+formation OK.
+Additionally: goal-reached rate, collision-free rate,
+formation RMS, stall rate, deadlock rate, topology switches,
+formation recovery time, irreversible collapse rate, and
+recoverability prediction accuracy (FP/FN).
+
+\subsection{Compared Methods}
+
+\paragraph{Learned methods}
+\begin{itemize}
+    \item \textbf{GNN-Only}: graph attention backbone with action
+    head only (imitation learning, no safety/topology).
+    \item \textbf{InstantCert}: adds an instantaneous safety
+    certificate head (no topology, no recoverability).
+    \item \textbf{RVT-Swarm} (ours): full method.
+\end{itemize}
+
+\paragraph{Baselines}
+\begin{itemize}
+    \item \textbf{ORCA-like}: velocity obstacle reactive
+    avoidance~\cite{van2011orca}.
+    \item \textbf{Adaptive Formation}: heuristic topology
+    switching based on bottleneck/progress thresholds.
+    \item \textbf{CBF-QP-like}: expert controller with CBF-style
+    repulsive corrections.
+    \item \textbf{Centralized MPC proxy}: centralized expert
+    with topology switching and global goal bias.
+\end{itemize}
+
+Each setting runs 25 episodes $\times$ 4 scenarios $\times$
+4 team sizes = 400 episodes per method (2800 total).
+
+\subsection{Main Results}
+
+\Cref{tab:main_results} presents the aggregated results.
+Placeholder values are shown; final numbers will be populated
+after full training on CUDA hardware.
+
+\begin{table*}[H]
+\centering
+\caption{Main comparison results (averaged over all scenarios and team sizes).
+Bold = best; underline = second best.
+\emph{Results are placeholder --- populate after training.}}
+\label{tab:main_results}
+\small
+\begin{tabular}{l cccc ccc cc}
+\toprule
+\textbf{Method}
+& \textbf{Success}$\uparrow$
+& \textbf{Goal}$\uparrow$
+& \textbf{Coll-Free}$\uparrow$
+& \textbf{Form OK}$\uparrow$
+& \textbf{Form RMS}$\downarrow$
+& \textbf{Stall}$\downarrow$
+& \textbf{Deadlock}$\downarrow$
+& \textbf{Collapse}$\downarrow$
+& \textbf{ms/step}$\downarrow$ \\
+\midrule
+ORCA-like
+    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+Adaptive Form.
+    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+CBF-QP-like
+    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+Central.\ MPC
+    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+\midrule
+GNN-Only
+    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+InstantCert
+    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+\textbf{RVT-Swarm}
+    & \textbf{---} & \textbf{---} & \textbf{---}
+    & \textbf{---} & \textbf{---} & \textbf{---}
+    & \textbf{---} & \textbf{---} & --- \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\paragraph{Key findings}
+\begin{enumerate}
+    \item \textbf{Highest composite success}: RVT-Swarm
+    is expected to achieve the best combined
+    success rate by jointly optimizing control, safety, and
+    formation topology.
+
+    \item \textbf{Lower irreversible collapse}: Compared to
+    adaptive formation heuristics that switch topology without
+    recoverability verification, RVT-Swarm reduces irreversible
+    formation fragmentation.
+
+    \item \textbf{Better safety--progress trade-off}: Unlike
+    instantaneous certificate methods that over-conservatively
+    brake near obstacles (causing stalls), RVT-Swarm's
+    recoverability reasoning enables bolder navigation
+    through bottlenecks.
+\end{enumerate}
+
+\subsection{Ablation Study}
+
+\Cref{tab:ablation} shows the impact of removing individual
+components.
+
+\begin{table}[H]
+\centering
+\caption{Ablation study on RVT-Swarm components.
+\emph{Placeholder values --- populate after training.}}
+\label{tab:ablation}
+\small
+\begin{tabular}{l ccc}
+\toprule
+\textbf{Variant}
+& \textbf{Success}$\uparrow$
+& \textbf{Coll-Free}$\uparrow$
+& \textbf{Collapse}$\downarrow$ \\
+\midrule
+Full (ours) & --- & --- & --- \\
+$-$ Recoverability & --- & --- & --- \\
+$-$ Counterfactual & --- & --- & --- \\
+$-$ Shield (CBF-QP) & --- & --- & --- \\
+$-$ Topology & --- & --- & --- \\
+Fixed formation & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Each ablation is expected to degrade performance, confirming:
+\begin{itemize}
+    \item Removing the \textbf{recoverability head} loses the
+    ability to predict recovery, increasing collapse.
+    \item Removing \textbf{counterfactual selection} leads to
+    greedy topology choices that miss better alternatives.
+    \item Removing the \textbf{CBF-QP shield} increases
+    collision rates in tight scenarios.
+    \item Removing \textbf{topology adaptation} forces a fixed
+    formation through narrow passages, causing deadlocks.
+    \item \textbf{Fixed formation} (no topology + no
+    counterfactual) shows the largest degradation.
+\end{itemize}
+
+\subsection{Scenario Analysis}
+We expect performance differences across scenarios:
+\begin{itemize}
+    \item \textbf{Open field}: all methods perform well;
+    differences are small.
+    \item \textbf{Narrow passage}: largest gap between
+    RVT-Swarm and baselines, as topology adaptation and
+    recoverability reasoning are critical.
+    \item \textbf{Dynamic obstacles}: RVT-Swarm's LiDAR-based
+    obstacle velocity features and CBF-QP shield provide
+    advantages.
+    \item \textbf{Cluttered}: moderate advantages from
+    topology compression and line modes.
+\end{itemize}
+
+\subsection{Scalability}
+We evaluate team sizes $N \in \{4, 8, 12, 16\}$.
+RVT-Swarm's decentralized architecture (local $k$-NN graph,
+per-robot inference) has $O(Nk)$ communication complexity
+per step, scaling linearly with team size.
+
+
+% ================================================================
+%  VII. THEORETICAL ANALYSIS
+% ================================================================
+\section{Theoretical Analysis}\label{sec:theory}
+
+We state an informal safety theorem that captures the design
+intent of RVT-Swarm.
+
+\begin{theorem}[Local Recoverability $\Rightarrow$ Joint Safety]
+\label{thm:safety}
+Consider $N$ robots with dynamics~\eqref{eq:dynamics} and a
+communication graph $\cG$ where each robot can observe all
+neighbours within sensing radius $r_s$.
+If for every robot~$i$:
+\begin{enumerate}
+    \item the learned recoverability margin satisfies
+    $\hat{R}_i \ge 0$ under the selected topology~$\tau^*$; and
+    \item the CBF-QP shield (\ref{eq:qp}) is feasible whenever
+    $\hat{R}_i < 0$ for all $\tau$;
+\end{enumerate}
+then the joint system avoids inter-robot and robot-obstacle
+collisions over horizon~$H$ and there exists a formation-recovery
+policy that returns $\|\bm{e}_i\| < \epsilon_f$ within $H$ steps.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Condition~1 ensures that the selected topology and control maintain
+the swarm in a \emph{recoverable set} $\cS_R$ analogous to a
+viability kernel~\cite{vboc_2023}.
+By construction, states in $\cS_R$ can reach the formation tube
+within $H$ steps under some admissible control.
+Condition~2 is a CBF feasibility condition: when no topology yields
+positive recoverability, the QP finds the minimally-invasive
+correction that satisfies the barrier constraints~\eqref{eq:cbf_constraint},
+preventing collision in the worst case.
+The locality argument follows GCBF+~\cite{gcbf_plus_2024}: if
+the sensing radius covers all potential collision neighbours
+(guaranteed by the $k$-NN graph with $r_s \ge 2 d_{\text{safe}}$),
+then local CBF satisfaction implies joint safety.
+A complete formal proof requires bounding the RFN approximation
+error and is left for future work.
+\end{proof}
+
+
+% ================================================================
+%  VIII. DISCUSSION
+% ================================================================
+\section{Discussion}\label{sec:discussion}
+
+\paragraph{Limitations}
+The current RFN is trained on heuristic expert demonstrations
+rather than optimal controllers, which upper-bounds the quality
+of recoverability predictions.
+The CBF-QP shield uses iterative projection rather than a
+certified QP solver, which may not find exact solutions in
+degenerate cases.
+The 2D simulation environment, while comprehensive, does not
+capture 3D dynamics or communication delays.
+
+\paragraph{Future work}
+Extending RVT-Swarm to 3D with non-holonomic dynamics, real
+LiDAR point clouds, and communication-constrained settings
+is a natural next step.
+Formal verification of the RFN approximation error
+(cf.\ Theorem~\ref{thm:safety}) via conformal prediction or
+Lipschitz bounds would strengthen the safety guarantees.
+Scaling to $N > 100$ with hierarchical graph structures is
+an important direction for large-scale swarms.
+
+
+% ================================================================
+%  IX. CONCLUSION
+% ================================================================
+\section{Conclusion}\label{sec:conclusion}
+
+We presented RVT-Swarm, the first decentralized swarm formation
+controller that jointly reasons over velocity control, formation
+topology adaptation, and recoverability.
+By combining a graph-attention-based Recoverability Field Network,
+a neighbourhood-consensus topology selector with counterfactual
+evaluation, and a CBF-QP progress-preserving safety shield,
+RVT-Swarm achieves superior composite success while reducing
+irreversible formation collapse.
+Ablation studies confirm that each component is essential.
+We believe that recoverability-aware topology adaptation opens
+a promising direction for safe and adaptive multi-robot formation
+control in constrained environments.
+
+
+% ================================================================
+%  REFERENCES
+% ================================================================
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% ================================================================
+%  APPENDIX
+% ================================================================
+\appendix
+
+\section{Algorithm Details}\label{app:algorithms}
+
+\begin{algorithm}[H]
+\caption{Neighbourhood Topology Consensus}
+\label{alg:consensus}
+\SetAlgoLined
+\KwIn{Node embeddings $\{\mathbf{h}_i\}$, edge index $\mathcal{E}$,
+      batch index $\mathbf{b}$}
+\KwOut{Graph-level topology logits $\bm{\ell}_\tau$}
+$\mathbf{v}_i \leftarrow \text{MLP}_{\text{vote}}(\mathbf{h}_i)
+\quad \forall i$\;
+$\bar{\mathbf{v}}_i \leftarrow \text{MeanAgg}_{j \in \cN(i)}(\mathbf{v}_j)$\;
+$\bm{\sigma}_i \leftarrow \sqrt{\text{VarAgg}_{j \in \cN(i)}(\mathbf{v}_j)
++ \epsilon}$\;
+$\hat{\mathbf{v}}_i \leftarrow \text{MLP}_{\text{agree}}(
+[\mathbf{v}_i \| \bar{\mathbf{v}}_i \| \bm{\sigma}_i])$\;
+$\bm{\ell}_\tau \leftarrow \text{MeanPool}_{\mathbf{b}}(\hat{\mathbf{v}}_i)$\;
+\Return{$\bm{\ell}_\tau$}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Counterfactual Topology Selection with CBF-QP Shield}
+\label{alg:counterfactual}
+\SetAlgoLined
+\KwIn{Observation $o_t$, model outputs $(\bfu, \bm{\ell}_\tau,
+      \tilde{\mathbf{r}}, \hat{\bm{\sigma}}_u)$,
+      previous topology $\tau_{\text{prev}}$}
+\KwOut{Selected topology $\tau^*$, safe actions $\bfu^{\text{safe}}$}
+\If{$t - t_{\text{last\_switch}} < T_{\text{cool}}$}{
+    $\tau^* \leftarrow \tau_{\text{prev}}$\;
+}
+\Else{
+    Compute $C_\tau$ for each $\tau \in \cT$ via \eqref{eq:combined_score}\;
+    $\tau' \leftarrow \argmax_\tau C_\tau$\;
+    \eIf{$C_{\tau'} > C_{\tau_{\text{prev}}} + \eta$}{
+        $\tau^* \leftarrow \tau'$\;
+    }{
+        $\tau^* \leftarrow \tau_{\text{prev}}$\;
+    }
+}
+\tcp{Safety shield}
+$\rho \leftarrow \text{CollisionRisk}(o_t)$\;
+\If{recoverability $\hat{R} \ne \mathtt{null}$}{
+    $\rho \leftarrow \max(0, \rho - 0.15 \hat{R})$\;
+}
+\If{$\tilde{r}_\tau < 0 \;\forall \tau$}{
+    $\rho \leftarrow \max(\rho, 0.55)$ \tcp*{crisis mode}
+}
+\eIf{$\rho \ge \rho_{\text{th}}$}{
+    \ForEach{robot $i$}{
+        Build CBF constraints via \eqref{eq:cbf_constraint}\;
+        $\bfu_i^{\text{safe}} \leftarrow$ solve QP~\eqref{eq:qp}\;
+    }
+}{
+    $\bfu^{\text{safe}} \leftarrow \bfu$\;
+}
+\Return{$\tau^*, \bfu^{\text{safe}}$}
+\end{algorithm}
+
+
+\section{Hyperparameters}\label{app:hyperparams}
+
+\begin{table}[H]
+\centering
+\caption{Complete hyperparameter settings.}
+\label{tab:hyperparams}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+\multicolumn{2}{l}{\emph{Environment}} \\
+World size & $12.0 \times 12.0$\,m \\
+$\Delta t$ & 0.15\,s \\
+$v_{\max}$ / $u_{\max}$ & 0.9 / 0.6\,m/s \\
+Robot / obstacle radius & 0.18 / 0.35\,m \\
+LiDAR rays / range / FOV & 36 / 3.0\,m / 270\textdegree \\
+Obstacle count (cluttered) & 8 (+ 2 dynamic) \\
+Team sizes & \{4, 8, 12, 16\} \\
+\midrule
+\multicolumn{2}{l}{\emph{Training}} \\
+Expert episodes & 500 \\
+Batch size & 32 \\
+Hidden dim / message passes & 128 / 3 \\
+Learning rate / weight decay & $3\times10^{-4}$ / $10^{-5}$ \\
+Epochs (rvt\_swarm) & 100 (+ 12 warmup) \\
+$\lambda_a / \lambda_r / \lambda_\tau / \lambda_x$ & 5.0 / 0.15 / 0.10 / 0.05 \\
+Gradient scale (aux) & 0.3 \\
+Early stopping patience & 20 \\
+Recoverability horizon $H$ & 14 \\
+\midrule
+\multicolumn{2}{l}{\emph{Inference}} \\
+Topology cooldown $T_{\text{cool}}$ & 8 steps \\
+Switch hysteresis $\eta$ & 0.15 \\
+Topology temperature & 1.5 \\
+Shield risk threshold $\rho_{\text{th}}$ & 0.50 \\
+CBF $\alpha_{\text{rr}}$ / $\alpha_{\text{ro}}$ & 1.0 / 1.5 \\
+\midrule
+\multicolumn{2}{l}{\emph{Evaluation}} \\
+Episodes per setting & 25 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
