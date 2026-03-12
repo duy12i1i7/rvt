@@ -524,10 +524,30 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
             d = np.linalg.norm(diff)
             if d < 1.0:
                 a += 0.32 * unit(diff) * max(0.0, 1.0 - d)
-        for o in obstacles:
+            # ── Predictive avoidance: dodge BEFORE collision ──
+            if d > 1e-6 and d < 2.5:
+                n_hat = diff / d                    # unit vec away from j
+                dd_dt = np.dot(vel[i] - vel[j], n_hat)  # >0 = separating
+                if dd_dt < -0.05:                    # approaching
+                    ttc_approx = d / (-dd_dt)
+                    if ttc_approx < 2.5:             # collision within 2.5 s
+                        urgency = max(0.0, 1.0 - ttc_approx / 2.5)
+                        a += 0.35 * urgency * unit(diff)
+        obs_vel = obs.get("obstacle_velocities", np.zeros_like(obstacles))
+        for k, o in enumerate(obstacles):
             diff = pos[i] - o
             d = np.linalg.norm(diff)
             if d < 1.3:
                 a += 0.9 * unit(diff) * max(0.0, 1.3 - d)
+            # ── Predictive obstacle avoidance ──
+            if d > 1e-6 and d < 2.5:
+                ov_k = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
+                n_hat = diff / d
+                dd_dt = np.dot(vel[i] - ov_k, n_hat)
+                if dd_dt < -0.05:
+                    ttc_approx = d / (-dd_dt)
+                    if ttc_approx < 2.5:
+                        urgency = max(0.0, 1.0 - ttc_approx / 2.5)
+                        a += 0.5 * urgency * unit(diff)
         actions[i] = soft_clip(a, cfg.env.max_accel)
     return actions

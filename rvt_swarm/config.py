@@ -77,7 +77,7 @@ class MethodConfig:
     progress_weight: float = 0.10
     topology_temperature: float = 1.5
     switch_hysteresis: float = 0.55
-    shield_risk_threshold: float = 0.90
+    shield_risk_threshold: float = 0.45
     topology_cooldown: int = 35
     max_shield_blend: float = 0.10
 

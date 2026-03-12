@@ -37,7 +37,7 @@ class SwarmDataset(Dataset):
         return self.samples[idx]
 
 
-NODE_DIM = 67  # 31 original + 36 LiDAR rays
+NODE_DIM = 68  # 32 original + 36 LiDAR rays (added min_ttc)
 EDGE_DIM = 11
 
 
@@ -64,6 +64,45 @@ def build_graph(obs: Dict, cfg: Config):
     node_features = []
     obs_pos = obs["obstacles"]
     obs_vel = obs.get("obstacle_velocities", np.zeros((0, 2), dtype=np.float32))
+
+    # ── Precompute min time-to-collision per robot (predictive feature) ──
+    r_safe_rr = 2.0 * cfg.env.robot_radius + 0.1
+    r_safe_ro = cfg.env.robot_radius + cfg.env.obstacle_radius + 0.05
+    min_ttc_per_robot = np.full(n, 10.0, dtype=np.float32)
+    for i in range(n):
+        for j in range(n):
+            if j == i:
+                continue
+            dp = pos[j] - pos[i]
+            dv = vel[j] - vel[i]
+            aq = float(np.dot(dv, dv))
+            bq = 2.0 * float(np.dot(dp, dv))
+            cq = float(np.dot(dp, dp)) - r_safe_rr ** 2
+            if cq < 0:
+                min_ttc_per_robot[i] = 0.0
+                break
+            if aq > 1e-12:
+                disc = bq * bq - 4.0 * aq * cq
+                if disc >= 0:
+                    t_hit = (-bq - np.sqrt(disc)) / (2.0 * aq)
+                    if t_hit > 0:
+                        min_ttc_per_robot[i] = min(min_ttc_per_robot[i], t_hit)
+        for k in range(len(obs_pos)):
+            dp = obs_pos[k] - pos[i]
+            ov_k = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
+            dv = ov_k - vel[i]
+            aq = float(np.dot(dv, dv))
+            bq = 2.0 * float(np.dot(dp, dv))
+            cq = float(np.dot(dp, dp)) - r_safe_ro ** 2
+            if cq < 0:
+                min_ttc_per_robot[i] = 0.0
+            elif aq > 1e-12:
+                disc = bq * bq - 4.0 * aq * cq
+                if disc >= 0:
+                    t_hit = (-bq - np.sqrt(disc)) / (2.0 * aq)
+                    if t_hit > 0:
+                        min_ttc_per_robot[i] = min(min_ttc_per_robot[i], t_hit)
+
     for i in range(n):
         c1, s1 = heading_features(vel[i])
         gnorm = np.linalg.norm(goal_vec[i])
@@ -93,6 +132,7 @@ def build_graph(obs: Dict, cfg: Config):
             dyn_obs[0], dyn_obs[1],
             float(obs.get("split_active", 0.0)),
             topo_onehot[0], topo_onehot[1], topo_onehot[2], topo_onehot[3], topo_onehot[4],
+            min(float(min_ttc_per_robot[i]) / 10.0, 1.0),  # normalised min TTC
         ]
         # Append 36 normalised LiDAR distances
         node.extend(lidar_norm[i].tolist())
@@ -111,14 +151,27 @@ def build_graph(obs: Dict, cfg: Config):
             corridor_proj = float(np.dot(rel, corridor))
             lateral_proj = float(np.dot(rel, lateral))
             desired_spacing_error = abs(np.linalg.norm(rel) - cfg.env.nominal_spacing * obs["formation_scale"])
-            ttc_proxy = np.linalg.norm(rel) / max(1e-3, abs(float(np.dot(unit(rel), rv))))
+            # Proper TTC via quadratic formula for circular agents
+            dp_e = rel; dv_e = rv
+            aq_e = float(np.dot(dv_e, dv_e))
+            bq_e = 2.0 * float(np.dot(dp_e, dv_e))
+            cq_e = float(np.dot(dp_e, dp_e)) - r_safe_rr ** 2
+            ttc_edge = 10.0
+            if cq_e < 0:
+                ttc_edge = 0.0
+            elif aq_e > 1e-12:
+                disc_e = bq_e ** 2 - 4.0 * aq_e * cq_e
+                if disc_e >= 0:
+                    t_e = (-bq_e - np.sqrt(disc_e)) / (2.0 * aq_e)
+                    if t_e > 0:
+                        ttc_edge = min(10.0, t_e)
             edge_src.append(i)
             edge_dst.append(j)
             edge_attr.append([
                 rel[0], rel[1], rv[0], rv[1], d[i, j],
                 corridor_proj, lateral_proj,
                 desired_spacing_error,
-                min(ttc_proxy, 10.0),
+                ttc_edge,
                 obs["bottleneck"], obs["progress"],
             ])
     edge_index = torch.tensor(np.asarray([edge_src, edge_dst], dtype=np.int64))

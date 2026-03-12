@@ -9,16 +9,60 @@ from .config import Config, TOPOLOGY_IDS
 from .utils import soft_clip, unit
 
 
-def collision_risk(obs: Dict) -> float:
+def time_to_collision(
+    p1: np.ndarray, v1: np.ndarray,
+    p2: np.ndarray, v2: np.ndarray,
+    r_safe: float,
+) -> float:
+    """Compute time-to-collision for two circular agents.
+
+    Solves the quadratic equation:
+        ||p1 + v1*t - p2 - v2*t|| = r_safe
+    for the smallest positive t.  Returns inf if no collision is predicted
+    on the current linear trajectories.
+    """
+    dp = p2 - p1
+    dv = v2 - v1
+    a = float(np.dot(dv, dv))
+    b = 2.0 * float(np.dot(dp, dv))
+    c = float(np.dot(dp, dp)) - r_safe ** 2
+    if c < 0.0:          # already overlapping
+        return 0.0
+    if a < 1e-12:         # negligible relative motion
+        return float('inf')
+    disc = b * b - 4.0 * a * c
+    if disc < 0.0:        # trajectories never intersect
+        return float('inf')
+    t = (-b - np.sqrt(disc)) / (2.0 * a)
+    return float(t) if t > 0.0 else float('inf')
+
+
+def collision_risk(obs: Dict, horizon: float = 3.0) -> float:
+    """Compute collision risk using both proximity AND predicted TTC.
+
+    Predictive: uses relative velocities to anticipate future collisions,
+    not just current distances.  Risk is high when TTC is short, even if
+    agents are currently far apart.
+    """
     pos = obs["positions"]
+    vel = obs["velocities"]
+    obs_pos = obs["obstacles"]
+    obs_vel = obs.get("obstacle_velocities", np.zeros_like(obs_pos))
     risk = 0.0
     for i in range(len(pos)):
         for j in range(i + 1, len(pos)):
             d = np.linalg.norm(pos[i] - pos[j])
-            risk = max(risk, max(0.0, 0.9 - d))
-        for o in obs["obstacles"]:
+            dist_risk = max(0.0, 0.9 - d)
+            ttc = time_to_collision(pos[i], vel[i], pos[j], vel[j], 0.9)
+            ttc_risk = max(0.0, 1.0 - ttc / horizon) if ttc < horizon else 0.0
+            risk = max(risk, dist_risk, 0.85 * ttc_risk)
+        for k, o in enumerate(obs_pos):
             d = np.linalg.norm(pos[i] - o)
-            risk = max(risk, max(0.0, 0.95 - d))
+            dist_risk = max(0.0, 0.95 - d)
+            ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
+            ttc = time_to_collision(pos[i], vel[i], o, ov, 0.95)
+            ttc_risk = max(0.0, 1.0 - ttc / horizon) if ttc < horizon else 0.0
+            risk = max(risk, dist_risk, 0.85 * ttc_risk)
     return float(risk)
 
 
