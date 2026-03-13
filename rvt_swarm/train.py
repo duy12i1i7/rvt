@@ -101,6 +101,13 @@ def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, tr
     return totals
 
 
+def checkpoint_metric(val_losses: Dict[str, float], model_name: str) -> tuple[str, float]:
+    # For RVT-Swarm, selecting checkpoints on action-only loss hid regressions in
+    # the recoverability/topology branches and made logged "best val" incomparable
+    # with the printed total validation loss.
+    return ("total", val_losses["total"])
+
+
 def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset: SwarmDataset | None = None) -> str:
     set_seed(cfg.train.seed)
     device = torch_device(cfg.train.device)
@@ -140,8 +147,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
             best_val = float("inf")
             patience_counter = 0
 
-        # For rvt_swarm, track action loss only — total loss is polluted by aux
-        tracking = va["action"] if model_name == "rvt_swarm" else va["total"]
+        metric_name, tracking = checkpoint_metric(va, model_name)
         improved = tracking < (best_val - min_delta)
         if improved or in_warmup:
             if tracking < best_val or in_warmup:
@@ -153,6 +159,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
                 "config": cfg,
                 "epoch": epoch,
                 "best_val": best_val,
+                "best_metric": metric_name,
                 "model_name": model_name,
             }
             torch.save(state, best_ckpt)
@@ -166,23 +173,31 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
             "config": cfg,
             "epoch": epoch,
             "best_val": best_val,
+            "best_metric": metric_name,
             "model_name": model_name,
         }, last_ckpt)
 
         warmup_tag = " [warmup]" if in_warmup else ""
         print(
             f"[{model_name}] epoch {epoch:02d} train={tr['total']:.4f} val={va['total']:.4f} "
-            f"rank={va['rank']:.4f} topo={va['topology']:.4f}{warmup_tag}"
+            f"rank={va['rank']:.4f} topo={va['topology']:.4f} "
+            f"track_{metric_name}={tracking:.4f}{warmup_tag}"
         )
 
         if not in_warmup and patience_counter >= patience:
-            print(f"[{model_name}] early stopping at epoch {epoch}; best epoch={best_epoch}, best val={best_val:.4f}")
+            print(
+                f"[{model_name}] early stopping at epoch {epoch}; "
+                f"best epoch={best_epoch}, best {metric_name}={best_val:.4f}"
+            )
             break
 
     if best_ckpt.exists():
         state = torch.load(best_ckpt, map_location=device, weights_only=False)
         model.load_state_dict(state["model"])
-        print(f"[{model_name}] loaded best checkpoint from epoch {state.get('epoch', best_epoch):02d} with val={state.get('best_val', best_val):.4f}")
+        print(
+            f"[{model_name}] loaded best checkpoint from epoch {state.get('epoch', best_epoch):02d} "
+            f"with {state.get('best_metric', 'total')}={state.get('best_val', best_val):.4f}"
+        )
         torch.save(state, legacy_ckpt)
         return str(best_ckpt)
     return str(legacy_ckpt)

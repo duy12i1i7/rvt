@@ -79,7 +79,7 @@ python -c "import torch; print('MPS built:', torch.backends.mps.is_built()); pri
 
 ## Training notes
 
-- `gnn_only`: 30 epochs
-- `instant_cert`: 30 epochs
-- `rvt_swarm`: 60 epochs with early stopping
+- `gnn_only`: up to 120 epochs with patience-based early stopping
+- `instant_cert`: up to 120 epochs with patience-based early stopping
+- `rvt_swarm`: up to 300 epochs, with a 50-epoch auxiliary warmup and patience-based early stopping afterwards
 - Best checkpoints are saved as `*_best.pt`; last checkpoints as `*_last.pt`.

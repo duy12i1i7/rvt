@@ -242,35 +242,47 @@ def choose_counterfactual_topology(
     prior = topo_prior.detach().cpu().numpy().astype(np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
 
-    # Uncertainty gate: if model is very uncertain, don't switch topology
+    # Use uncertainty as a soft penalty. A hard gate froze topology selection
+    # in practice because the uncertainty head often stayed above the old
+    # threshold even when one topology was clearly more recoverable.
     mean_uncert = float(np.mean(uncert))
-    if mean_uncert > 0.35:
-        return previous_topology
 
     # Context bonuses for situationally appropriate topologies
     context = np.zeros_like(scores)
     bottleneck = obs["bottleneck"] > 0.50
     if bottleneck:
-        context[TOPOLOGY_IDS.index(1)] += 0.06
-        context[TOPOLOGY_IDS.index(2)] += 0.14
-        context[TOPOLOGY_IDS.index(3)] += 0.08
+        context[TOPOLOGY_IDS.index(1)] += 0.08
+        context[TOPOLOGY_IDS.index(2)] += 0.18
+        context[TOPOLOGY_IDS.index(3)] += 0.10
     if obs["progress"] > 0.75 and obs["bottleneck"] < 0.30:
-        context[TOPOLOGY_IDS.index(4)] += 0.14
+        context[TOPOLOGY_IDS.index(4)] += 0.18
     # Mild preference for keep in easy situations
     if obs["bottleneck"] < 0.35:
-        context[TOPOLOGY_IDS.index(0)] += 0.12
+        context[TOPOLOGY_IDS.index(0)] += 0.10
 
-    # Heavy switch penalties to preserve formation stability
+    # Preserve inertia, but do not suppress switching entirely.
     switch_penalty = np.zeros_like(scores)
     for idx, topo in enumerate(TOPOLOGY_IDS):
         if topo != previous_topology:
-            switch_penalty[idx] = 0.30
+            switch_penalty[idx] = 0.08
         if topo == 3:  # Split is most disruptive
-            switch_penalty[idx] += 0.20
+            switch_penalty[idx] += 0.12
+        if topo == 4 and obs["bottleneck"] > 0.45:
+            switch_penalty[idx] += 0.05
+        if topo == 0 and bottleneck:
+            switch_penalty[idx] += 0.04
 
-    combined = 0.35 * scores + 0.35 * prior + context - 0.22 * uncert - switch_penalty
+    combined = 0.62 * scores + 0.22 * prior + context - 0.08 * uncert - switch_penalty
     best_idx = int(np.argmax(combined))
     current_idx = TOPOLOGY_IDS.index(previous_topology)
-    if combined[best_idx] < combined[current_idx] + cfg.method.switch_hysteresis:
+    if best_idx == current_idx:
+        return previous_topology
+
+    recover_gap = float(scores[best_idx] - scores[current_idx])
+    if recover_gap > 0.35 and combined[best_idx] >= combined[current_idx] - 0.02:
+        return TOPOLOGY_IDS[best_idx]
+
+    required_margin = cfg.method.switch_hysteresis + 0.05 * max(0.0, mean_uncert - 0.45)
+    if combined[best_idx] < combined[current_idx] + required_margin:
         return previous_topology
     return TOPOLOGY_IDS[best_idx]

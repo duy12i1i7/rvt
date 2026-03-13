@@ -58,7 +58,7 @@ class TrainConfig:
     early_stopping_min_delta: float = 1e-4
     save_best_only: bool = True
     curriculum_warmup_epochs: int = 50
-    aux_gradient_scale: float = 0.0
+    aux_gradient_scale: float = 0.3
     n_workers: int = 0  # 0 = auto (3/4 of cpu_count)
 
 
@@ -76,9 +76,9 @@ class MethodConfig:
     shield_gain: float = 0.25
     progress_weight: float = 0.10
     topology_temperature: float = 1.5
-    switch_hysteresis: float = 0.55
+    switch_hysteresis: float = 0.08
     shield_risk_threshold: float = 0.85
-    topology_cooldown: int = 35
+    topology_cooldown: int = 12
     max_shield_blend: float = 0.06
 
 
