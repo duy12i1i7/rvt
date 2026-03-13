@@ -37,7 +37,7 @@ def time_to_collision(
     return float(t) if t > 0.0 else float('inf')
 
 
-def collision_risk(obs: Dict, horizon: float = 3.0) -> float:
+def collision_risk(obs: Dict, horizon: float = 2.0) -> float:
     """Compute collision risk using both proximity AND predicted TTC.
 
     Predictive: uses relative velocities to anticipate future collisions,
@@ -55,14 +55,14 @@ def collision_risk(obs: Dict, horizon: float = 3.0) -> float:
             dist_risk = max(0.0, 0.9 - d)
             ttc = time_to_collision(pos[i], vel[i], pos[j], vel[j], 0.9)
             ttc_risk = max(0.0, 1.0 - ttc / horizon) if ttc < horizon else 0.0
-            risk = max(risk, dist_risk, 0.85 * ttc_risk)
+            risk = max(risk, dist_risk, 0.45 * ttc_risk)
         for k, o in enumerate(obs_pos):
             d = np.linalg.norm(pos[i] - o)
             dist_risk = max(0.0, 0.95 - d)
             ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
             ttc = time_to_collision(pos[i], vel[i], o, ov, 0.95)
             ttc_risk = max(0.0, 1.0 - ttc / horizon) if ttc < horizon else 0.0
-            risk = max(risk, dist_risk, 0.85 * ttc_risk)
+            risk = max(risk, dist_risk, 0.45 * ttc_risk)
     return float(risk)
 
 
@@ -103,7 +103,7 @@ def simple_recover_shield(
     if all_negative:
         risk = max(risk, 0.55)
 
-    threshold = getattr(cfg.method, 'shield_risk_threshold', 0.35)
+    threshold = getattr(cfg.method, 'shield_risk_threshold', 0.85)
     if risk < threshold:
         return actions
 
@@ -118,7 +118,15 @@ def simple_recover_shield(
         safe[i] = _solve_per_robot_qp(
             safe[i], constraints, progress_dir, cfg.env.max_accel, progress_w,
         )
-    return safe
+    max_blend = float(getattr(cfg.method, "max_shield_blend", 0.06))
+    # Soft blend avoids over-damping learned policy when shield activates.
+    if all_negative:
+        blend = min(max_blend, 0.8 * max_blend)
+    else:
+        denom = max(1e-6, 1.0 - threshold)
+        severity = float(np.clip((risk - threshold) / denom, 0.0, 1.0))
+        blend = severity * max_blend
+    return (1.0 - blend) * actions + blend * safe
 
 
 # ── CBF-QP helpers ──────────────────────────────────────────────────
@@ -147,7 +155,7 @@ def _build_cbf_constraints(
         diff = pi - pos[j]
         dist_sq = float(np.dot(diff, diff))
         h = dist_sq - d_safe_rr ** 2
-        if h > 1.5:              # far enough → no constraint needed
+        if h > 0.9:              # far enough → no constraint needed
             continue
         rel_v = vi - vel[j]
         a = (2.0 * dt * diff).astype(np.float32)
@@ -162,7 +170,7 @@ def _build_cbf_constraints(
         diff = pi - obs_pos[k]
         dist_sq = float(np.dot(diff, diff))
         h = dist_sq - d_safe_ro ** 2
-        if h > 1.5:
+        if h > 0.9:
             continue
         ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
         rel_v = vi - ov
