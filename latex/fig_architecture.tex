@@ -27,7 +27,7 @@
 ]
 
 % --- Input ---
-\node[block] (obs) at (0,0) {Observation\\$\mathbf{o}_i \in \mathbb{R}^{67}$};
+\node[block] (obs) at (0,0) {Observation\\$\mathbf{o}_i \in \mathbb{R}^{68}$};
 
 % --- Backbone ---
 \node[block, fill=green!8] (enc) at (0,-1.4) {Linear\\Encoder};
@@ -45,7 +45,7 @@
 
 % --- Shield ---
 \node[shield] (cfsel) at (1.5,-7.0) {Counterfactual\\Selector};
-\node[shield] (cbf) at (-1.5,-7.0) {CBF-QP\\Shield};
+\node[shield] (cbf) at (-1.5,-7.0) {Projection\\Shield};
 
 % --- Final ---
 \node[block, fill=yellow!12] (out) at (0,-8.4) {$\tau^*, \;\mathbf{u}^{\text{safe}}$};
@@ -75,6 +75,6 @@
 
 % --- Grad scale annotation ---
 \node[font=\tiny\itshape, text=gray] at (1.6,-3.6)
-    {grad\_scale(0.3)};
+    {grad\_scale(0.2)};
 
 \end{tikzpicture}

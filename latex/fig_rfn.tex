@@ -47,7 +47,7 @@
       thick, black!50]
     (-1.1, 0.3) -- (-1.1,-3.9)
     node[midway, left=6pt, font=\scriptsize, align=right]
-    {$\mathbf{x}_i \in \mathbb{R}^{67}$};
+    {$\mathbf{x}_i \in \mathbb{R}^{68}$};
 
 % ── Column 2: Graph construction ──
 \node[block, fill=cyan!8] (knn) at (3.2,-1.35)
@@ -70,7 +70,7 @@
 % ── Column 3: Backbone ──
 \node[block, fill=green!10, minimum height=1.0cm,
       minimum width=2.0cm]
-    (enc) at (6.2,-0.6) {Linear\\$67 \!\to\! 128$};
+    (enc) at (6.2,-0.6) {Linear\\$68 \!\to\! 128$};
 \node[block, fill=green!10, minimum height=1.6cm,
       minimum width=2.0cm]
     (gat) at (6.2,-2.6) {Graph Attn\\Layer $\times 3$\\{\tiny Eq.\,(1)--(3)}};
@@ -96,7 +96,7 @@
     {Consensus\\$\bm{\ell}_\tau \in \mathbb{R}^5$};
 
 % grad scale annotation
-\node[note] at (7.9, -1.0) {\textcolor{red!60}{grad\_scale(0.3)}};
+\node[note] at (7.9, -1.0) {\textcolor{red!60}{grad\_scale(0.2)}};
 
 \draw[arr] (gat.east) -- ++(0.5,0) |- (act.west);
 \draw[parr] (gat.east) -- ++(0.5,0) |- (rscore.west);

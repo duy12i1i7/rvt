@@ -21,62 +21,69 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{oh2015survey}
-K.-K. Oh, M.-C. Park, and H.-S. Ahn, ``A survey of multi-agent formation
-  control,'' \emph{Automatica}, vol.~53, pp. 424--440, 2015.
+\bibitem{garg2024safe_multirobot_review}
+K.~Garg, S.~Zhang, O.~So, C.~Dawson, and C.~Fan, ``Learning safe control for
+  multi-robot systems: Methods, verification, and open challenges,''
+  \emph{Annual Reviews in Control}, vol.~57, p. 100948, 2024.
 
-\bibitem{yan2013survey}
-Z.~Yan, N.~Jouandeau, and A.~A. Cherif, ``A survey and analysis of multi-robot
-  coordination,'' \emph{International Journal of Advanced Robotic Systems},
-  vol.~10, no.~12, 2013.
+\bibitem{deng2024formation_adaptation}
+Z.~Deng, P.~Gao, W.~J. Jose, and H.~Zhang, ``Multi-robot collaborative
+  navigation with formation adaptation,'' \emph{arXiv preprint
+  arXiv:2404.01618}, 2024.
 
-\bibitem{gcbf_plus_2024}
-S.~Zhang, K.~Garg, and C.~Fan, ``{GCBF+}: A neural graph control barrier
-  function framework for distributed safe multi-agent control,'' \emph{arXiv
-  preprint arXiv:2401.14554}, 2024.
+\bibitem{xie2025multi_uav_formation_rl}
+Y.~Xie, C.~Yu, H.~Zang, F.~Gao, W.~Tang, J.~Huang, J.~Chen, B.~Xu, Y.~Wu, and
+  Y.~Wang, ``Multi-{UAV} formation control with static and dynamic obstacle
+  avoidance via reinforcement learning,'' in \emph{Proceedings of the IEEE/RSJ
+  International Conference on Intelligent Robots and Systems (IROS)}, 2025, pp.
+  20\,410--20\,417.
 
-\bibitem{afor_2025}
-X.~Li \emph{et~al.}, ``Multi-robot formation reconfiguration via adaptive
-  horizon planning,'' \emph{Information Sciences}, 2025.
+\bibitem{muthusamy2024gnn_generalizability}
+B.~Muthusamy, N.~Mittal, Q.~Li, A.~Sahu, T.~Chan, and A.~Prorok,
+  ``Generalizability of graph neural networks for decentralized unlabeled
+  motion planning,'' \emph{arXiv preprint arXiv:2404.16089}, 2024.
 
-\bibitem{multi_uav_formation_2024}
-W.~Chen \emph{et~al.}, ``Multi-{UAV} formation control with obstacle avoidance
-  via reinforcement learning,'' \emph{arXiv preprint arXiv:2409.15000}, 2024.
+\bibitem{goeckner2024magec}
+A.~Goeckner, Y.~Sui, N.~Martinet, X.~Li, and Q.~Zhu, ``Graph neural
+  network-based multi-agent reinforcement learning for resilient distributed
+  coordination of multi-robot systems,'' in \emph{Proceedings of the IEEE/RSJ
+  International Conference on Intelligent Robots and Systems (IROS)}, 2024.
 
-\bibitem{vboc_2023}
-A.~D. Bonzanini \emph{et~al.}, ``Learning the viable set of
-  control-barrier-based optimal control,'' \emph{arXiv preprint
-  arXiv:2310.00000}, 2023.
+\bibitem{zhang2025gcbf_plus}
+S.~Zhang, O.~So, K.~Garg, and C.~Fan, ``{GCBF+}: A neural graph control barrier
+  function framework for distributed safe multi-agent control,'' \emph{IEEE
+  Transactions on Robotics}, vol.~41, pp. 1533--1552, 2025.
 
-\bibitem{certifiable_reach_2024}
-C.~Dawson and C.~Fan, ``Certifiable deep learning for reachability analysis,''
-  \emph{arXiv preprint arXiv:2402.00000}, 2024.
+\bibitem{butler2024collaborative_safety}
+B.~A. Butler, C.~H. Leung, and P.~E. Par{\'e}, ``Collaborative safety-critical
+  formation control with obstacle avoidance,'' \emph{arXiv preprint
+  arXiv:2410.03885}, 2024.
 
-\bibitem{deadlock_free_cbf_2025}
-L.~Abate \emph{et~al.}, ``Discrete-time control barrier functions for
-  deadlock-free multi-robot navigation,'' \emph{Autonomous Robots}, 2025, to
-  appear.
-
-\bibitem{safety_critical_formation_2024}
-Y.~Sun and H.~Wang, ``Safety-critical formation control under communication
-  constraints,'' in \emph{arXiv preprint arXiv:2411.10000}, 2024.
-
-\bibitem{confined_formation_2024}
-T.~Nguyen \emph{et~al.}, ``Environment-adaptive confined-space formation for
-  multi-robot systems,'' \emph{arXiv preprint arXiv:2410.00000}, 2024.
-
-\bibitem{rail_2024}
-B.~Thananjeyan \emph{et~al.}, ``{RAIL}: Reachability-aware imitation learning
-  for safe policy execution,'' \emph{OpenReview}, 2024.
-
-\bibitem{grad_scale}
-Z.~Chen \emph{et~al.}, ``Gradnorm: Gradient normalization for adaptive loss
-  balancing in deep multitask networks,'' \emph{Proceedings of the 35th
-  International Conference on Machine Learning (ICML)}, 2018.
+\bibitem{zhang2025dgppo}
+S.~Zhang, O.~So, M.~Black, and C.~Fan, ``Discrete {GCBF} proximal policy
+  optimization for multi-agent safe optimal control,'' in \emph{Proceedings of
+  the International Conference on Learning Representations (ICLR)}, 2025.
 
 \bibitem{van2011orca}
 J.~van~den Berg, S.~J. Guy, M.~Lin, and D.~Manocha, ``Reciprocal $n$-body
   collision avoidance,'' in \emph{Robotics Research}.\hskip 1em plus 0.5em
   minus 0.4em\relax Springer, 2011, pp. 3--19.
+
+\bibitem{abate2024safe_reach_set}
+A.~Abate, S.~Bogomolov, A.~Edwards, K.~Potomkin, S.~Soudjani, and P.~Zuliani,
+  ``Safe reach set computation via neural barrier certificates,''
+  \emph{IFAC-PapersOnLine}, vol.~58, no.~11, pp. 107--114, 2024.
+
+\bibitem{li2025certifiable_reachability}
+G.~Li, H.~Mirinezhad, K.~Garg, J.~Sun, C.~Fan, B.~Gharesifard, A.~A. Ahmadi,
+  and A.~K. Sojoudi, ``Certifiable reachability learning using a new lipschitz
+  continuous value function,'' \emph{IEEE Robotics and Automation Letters},
+  vol.~10, no.~4, pp. 3582--3589, 2025.
+
+\bibitem{jung2025rail}
+Y.~Jung, M.~Kim, H.~J. Lim, and M.~Pavone, ``{RAIL}: Reachability-aided
+  imitation learning for safe policy execution,'' in \emph{Proceedings of the
+  IEEE International Conference on Robotics and Automation (ICRA)}, 2025, pp.
+  4903--4909.
 
 \end{thebibliography}

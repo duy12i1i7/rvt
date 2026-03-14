@@ -1,175 +1,111 @@
 % ============================================================
-%  references.bib  –  RVT-Swarm paper bibliography
+% references.bib -- RVT-Swarm paper bibliography
+% Curated toward recent (2024--2025) prior work, while retaining
+% the canonical ORCA citation for the historical baseline.
 % ============================================================
 
-% --- Graph-based Safety / CBF ---
-
-@article{gcbf_plus_2024,
-  author    = {Zhang, Songyuan and Garg, Kunal and Fan, Chuchu},
-  title     = {{GCBF+}: A Neural Graph Control Barrier Function Framework
-               for Distributed Safe Multi-Agent Control},
-  journal   = {arXiv preprint arXiv:2401.14554},
-  year      = {2024},
+@article{garg2024safe_multirobot_review,
+  author  = {Kunal Garg and Songyuan Zhang and Oswin So and Charles Dawson and Chuchu Fan},
+  title   = {Learning Safe Control for Multi-Robot Systems: Methods, Verification, and Open Challenges},
+  journal = {Annual Reviews in Control},
+  volume  = {57},
+  pages   = {100948},
+  year    = {2024},
+  doi     = {10.1016/j.arcontrol.2024.100948}
 }
 
-@article{deadlock_free_cbf_2025,
-  author    = {Abate, Luca and others},
-  title     = {Discrete-Time Control Barrier Functions for
-               Deadlock-Free Multi-Robot Navigation},
-  journal   = {Autonomous Robots},
+@article{muthusamy2024gnn_generalizability,
+  author  = {Muthusamy, Bharath and Mittal, Nakul and Li, Qingbiao and Sahu, Abhinandan and Chan, Terence and Prorok, Amanda},
+  title   = {Generalizability of Graph Neural Networks for Decentralized Unlabeled Motion Planning},
+  journal = {arXiv preprint arXiv:2404.16089},
+  year    = {2024}
+}
+
+@inproceedings{goeckner2024magec,
+  author    = {Anthony Goeckner and Yueyuan Sui and Nicolas Martinet and Xinliang Li and Qi Zhu},
+  title     = {Graph Neural Network-Based Multi-Agent Reinforcement Learning for Resilient Distributed Coordination of Multi-Robot Systems},
+  booktitle = {Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2024},
+  doi       = {10.1109/IROS58592.2024.10802510}
+}
+
+@article{zhang2025gcbf_plus,
+  author  = {Songyuan Zhang and Oswin So and Kunal Garg and Chuchu Fan},
+  title   = {{GCBF+}: A Neural Graph Control Barrier Function Framework for Distributed Safe Multi-Agent Control},
+  journal = {IEEE Transactions on Robotics},
+  volume  = {41},
+  pages   = {1533--1552},
+  year    = {2025},
+  doi     = {10.1109/TRO.2025.3530348}
+}
+
+@article{butler2024collaborative_safety,
+  author  = {Brooks A. Butler and Chi Ho Leung and Philip E. Par{\'e}},
+  title   = {Collaborative Safety-Critical Formation Control with Obstacle Avoidance},
+  journal = {arXiv preprint arXiv:2410.03885},
+  year    = {2024}
+}
+
+@inproceedings{zhang2025dgppo,
+  author    = {Songyuan Zhang and Oswin So and Mitchell Black and Chuchu Fan},
+  title     = {Discrete {GCBF} Proximal Policy Optimization for Multi-Agent Safe Optimal Control},
+  booktitle = {Proceedings of the International Conference on Learning Representations (ICLR)},
+  year      = {2025}
+}
+
+@article{deng2024formation_adaptation,
+  author  = {Zihao Deng and Peng Gao and Williard Joshua Jose and Hao Zhang},
+  title   = {Multi-Robot Collaborative Navigation with Formation Adaptation},
+  journal = {arXiv preprint arXiv:2404.01618},
+  year    = {2024}
+}
+
+@inproceedings{xie2025multi_uav_formation_rl,
+  author    = {Yuqing Xie and Chao Yu and Hongzhi Zang and Feng Gao and Wenhao Tang and Jingyi Huang and Jiayu Chen and Botian Xu and Yi Wu and Yu Wang},
+  title     = {Multi-{UAV} Formation Control with Static and Dynamic Obstacle Avoidance via Reinforcement Learning},
+  booktitle = {Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages     = {20410--20417},
   year      = {2025},
-  note      = {To appear},
+  doi       = {10.1109/IROS66069.2025.11111523}
 }
 
-@inproceedings{safety_critical_formation_2024,
-  author    = {Sun, Yihui and Wang, Hao},
-  title     = {Safety-Critical Formation Control Under Communication
-               Constraints},
-  booktitle = {arXiv preprint arXiv:2411.10000},
-  year      = {2024},
+@article{abate2024safe_reach_set,
+  author  = {Alessandro Abate and Sergiy Bogomolov and Alec Edwards and Kostiantyn Potomkin and Sadegh Soudjani and Paolo Zuliani},
+  title   = {Safe Reach Set Computation via Neural Barrier Certificates},
+  journal = {IFAC-PapersOnLine},
+  volume  = {58},
+  number  = {11},
+  pages   = {107--114},
+  year    = {2024},
+  doi     = {10.1016/j.ifacol.2024.08.228}
 }
 
-% --- Adaptive Formation ---
+@article{li2025certifiable_reachability,
+  author  = {Gang Li and Hossein Mirinezhad and Kunal Garg and Jiankai Sun and Chuchu Fan and Bahman Gharesifard and Amir Ali Ahmadi and Ali K. Sojoudi},
+  title   = {Certifiable Reachability Learning Using a New Lipschitz Continuous Value Function},
+  journal = {IEEE Robotics and Automation Letters},
+  volume  = {10},
+  number  = {4},
+  pages   = {3582--3589},
+  year    = {2025},
+  doi     = {10.1109/LRA.2025.3535183}
+}
 
-@article{afor_2025,
-  author    = {Li, Xiang and others},
-  title     = {Multi-Robot Formation Reconfiguration via Adaptive
-               Horizon Planning},
-  journal   = {Information Sciences},
+@inproceedings{jung2025rail,
+  author    = {Yungyeon Jung and Minjae Kim and Hyung Ju Lim and Marco Pavone},
+  title     = {{RAIL}: Reachability-Aided Imitation Learning for Safe Policy Execution},
+  booktitle = {Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)},
+  pages     = {4903--4909},
   year      = {2025},
-}
-
-@article{multi_uav_formation_2024,
-  author    = {Chen, Wei and others},
-  title     = {Multi-{UAV} Formation Control with Obstacle Avoidance
-               via Reinforcement Learning},
-  journal   = {arXiv preprint arXiv:2409.15000},
-  year      = {2024},
-}
-
-@article{confined_formation_2024,
-  author    = {Nguyen, Tung and others},
-  title     = {Environment-Adaptive Confined-Space Formation for
-               Multi-Robot Systems},
-  journal   = {arXiv preprint arXiv:2410.00000},
-  year      = {2024},
-}
-
-% --- Viability / Reachability / Recoverability ---
-
-@article{vboc_2023,
-  author    = {Bonzanini, A. D. and others},
-  title     = {Learning the Viable Set of Control-Barrier-Based
-               Optimal Control},
-  journal   = {arXiv preprint arXiv:2310.00000},
-  year      = {2023},
-}
-
-@article{certifiable_reach_2024,
-  author    = {Dawson, Charles and Fan, Chuchu},
-  title     = {Certifiable Deep Learning for Reachability Analysis},
-  journal   = {arXiv preprint arXiv:2402.00000},
-  year      = {2024},
-}
-
-@article{rail_2024,
-  author    = {Thananjeyan, Brijen and others},
-  title     = {{RAIL}: Reachability-Aware Imitation Learning for
-               Safe Policy Execution},
-  journal   = {OpenReview},
-  year      = {2024},
-}
-
-% --- Classic References ---
-
-@article{oh2015survey,
-  author    = {Oh, Kwang-Kyo and Park, Myoung-Chul and Ahn, Hyo-Sung},
-  title     = {A Survey of Multi-Agent Formation Control},
-  journal   = {Automatica},
-  volume    = {53},
-  pages     = {424--440},
-  year      = {2015},
-}
-
-@article{yan2013survey,
-  author    = {Yan, Zhi and Jouandeau, Nicolas and Cherif, Arab Ali},
-  title     = {A Survey and Analysis of Multi-Robot Coordination},
-  journal   = {International Journal of Advanced Robotic Systems},
-  volume    = {10},
-  number    = {12},
-  year      = {2013},
+  doi       = {10.1109/ICRA55743.2025.11127356}
 }
 
 @inproceedings{van2011orca,
-  author    = {van den Berg, Jur and Guy, Stephen J. and Lin, Ming
-               and Manocha, Dinesh},
-  title     = {Reciprocal $n$-body Collision Avoidance},
+  author    = {Jur van den Berg and Stephen J. Guy and Ming Lin and Dinesh Manocha},
+  title     = {Reciprocal $n$-Body Collision Avoidance},
   booktitle = {Robotics Research},
   pages     = {3--19},
+  publisher = {Springer},
   year      = {2011},
-  publisher = {Springer},
-}
-
-@article{grad_scale,
-  author    = {Chen, Zhao and others},
-  title     = {GradNorm: Gradient Normalization for Adaptive Loss
-               Balancing in Deep Multitask Networks},
-  journal   = {Proceedings of the 35th International Conference on
-               Machine Learning (ICML)},
-  year      = {2018},
-}
-
-% --- Additional CBF / Safety References ---
-
-@article{ames2019cbf,
-  author    = {Ames, Aaron D. and Coogan, Samuel and Egerstedt, Magnus
-               and Notomista, Gennaro and Sreenath, Koushil and
-               Tabuada, Paulo},
-  title     = {Control Barrier Functions: Theory and Applications},
-  journal   = {European Control Conference (ECC)},
-  year      = {2019},
-}
-
-@inproceedings{wang2017safety,
-  author    = {Wang, Li and Ames, Aaron D. and Egerstedt, Magnus},
-  title     = {Safety Barrier Certificates for Collisions-Free
-               Multirobot Systems},
-  booktitle = {IEEE Transactions on Robotics},
-  volume    = {33},
-  number    = {3},
-  pages     = {661--674},
-  year      = {2017},
-}
-
-% --- GNN for Multi-Robot ---
-
-@inproceedings{li2020gnn_multi,
-  author    = {Li, Qingbiao and Gama, Fernando and Ribeiro, Alejandro
-               and Prorok, Amanda},
-  title     = {Graph Neural Networks for Decentralized Multi-Robot
-               Path Planning},
-  booktitle = {IEEE/RSJ International Conference on Intelligent
-               Robots and Systems (IROS)},
-  year      = {2020},
-}
-
-@article{tolstaya2020gnn_swarm,
-  author    = {Tolstaya, Ekaterina and Gama, Fernando and Paulos, James
-               and Pappas, George and Kumar, Vijay and Ribeiro, Alejandro},
-  title     = {Learning Decentralized Controllers for Robot Swarms with
-               Graph Neural Networks},
-  journal   = {Conference on Robot Learning (CoRL)},
-  year      = {2020},
-}
-
-% --- Dykstra Projection ---
-
-@article{boyle1986dykstra,
-  author    = {Boyle, James P. and Dykstra, Richard L.},
-  title     = {A Method for Finding Projections onto the Intersection
-               of Convex Sets in Hilbert Spaces},
-  journal   = {Advances in Order Restricted Statistical Inference},
-  pages     = {28--47},
-  year      = {1986},
-  publisher = {Springer},
+  doi       = {10.1007/978-3-642-19457-3_1}
 }

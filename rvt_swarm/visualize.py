@@ -20,10 +20,9 @@ import matplotlib.patches as mpatches
 import numpy as np
 
 from .baselines import historical_baseline
-from .config import Config, TOPOLOGY_ACTIONS, TOPOLOGY_IDS
-from .dataset import build_graph
+from .config import Config, TOPOLOGY_ACTIONS
 from .environment import SwarmFormationEnv
-from .safety import choose_counterfactual_topology, simple_recover_shield
+from .policy_runtime import infer_learned_action, is_learned_method, load_learned_model
 from .utils import torch_device, pairwise_dist, unit
 
 try:
@@ -139,20 +138,6 @@ def _setup_dark_ax(ax, title, xlim, ylim):
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# Batch helper
-# ═══════════════════════════════════════════════════════════════════════
-
-def _batch_from_obs(obs: Dict, cfg: Config, device):
-    node_x, edge_index, edge_attr = build_graph(obs, cfg)
-    return {
-        "node_x": node_x.to(device),
-        "edge_index": edge_index.to(device),
-        "edge_attr": edge_attr.to(device),
-        "batch_index": torch.zeros(node_x.shape[0], dtype=torch.long, device=device),
-    }
-
-
-# ═══════════════════════════════════════════════════════════════════════
 # Record episode — captures velocities for heading computation
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -171,15 +156,8 @@ def record_episode(
     device = torch_device(cfg.train.device) if torch is not None else "cpu"
 
     model = None
-    if method in ["rvt_swarm", "gnn_only", "instant_cert"] and torch is not None:
-        from .models import build_model
-        model = build_model(
-            method, cfg.train.hidden_dim, cfg.train.message_passes,
-            getattr(cfg.train, "aux_gradient_scale", 0.3),
-        ).to(device)
-        ckpt = torch.load(Path(ckpt_dir) / f"{method}.pt", map_location=device, weights_only=False)
-        model.load_state_dict(ckpt["model"])
-        model.eval()
+    if is_learned_method(method) and torch is not None:
+        model = load_learned_model(method, cfg, ckpt_dir, device)
 
     frames: List[Dict] = []
     done = False
@@ -209,27 +187,9 @@ def record_episode(
         if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
             actions, topo = historical_baseline(method, obs, cfg)
         else:
-            batch = _batch_from_obs(obs, cfg, device)
-            with torch.no_grad():
-                out = model(batch)
-            actions = out["actions"].cpu().numpy() * cfg.env.max_accel
-            topo = 0
-            recover = None
-            rec_scores_np = None
-            if out["topology_logits"] is not None:
-                topo = choose_counterfactual_topology(
-                    obs, out["topology_logits"], out["recoverability_scores"],
-                    cfg, prev_topo, out.get("uncertainty"),
-                )
-            if out["recoverability_scores"] is not None:
-                rec_scores_np = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
-            if out["recoverability"] is not None:
-                if rec_scores_np is not None and out["topology_logits"] is not None:
-                    recover = float(rec_scores_np[TOPOLOGY_IDS.index(topo)])
-                else:
-                    recover = float(out["recoverability"].squeeze().cpu().item())
-            if method in ["rvt_swarm", "instant_cert"]:
-                actions = simple_recover_shield(actions, obs, cfg, recover, topo, rec_scores_np)
+            runtime = infer_learned_action(method, obs, cfg, model, prev_topo)
+            actions = runtime["actions"]
+            topo = runtime["topology"]
 
         frame["topology_action"] = topo
         frames.append(frame)

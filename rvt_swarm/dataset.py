@@ -8,7 +8,8 @@ import torch
 from torch.utils.data import Dataset
 
 from .config import Config, TOPOLOGY_IDS
-from .environment import SwarmFormationEnv, expert_action
+from .controllers import expert_action
+from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
 from .utils import heading_features, pairwise_dist, unit
 

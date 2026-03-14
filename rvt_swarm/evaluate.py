@@ -1,30 +1,14 @@
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Dict, List
 
 import numpy as np
-import torch
 
 from .baselines import historical_baseline
-from .config import Config, TOPOLOGY_IDS
-from .dataset import build_graph
+from .config import Config
 from .environment import SwarmFormationEnv
-from .models import build_model
-from .safety import choose_counterfactual_topology, simple_recover_shield
+from .policy_runtime import infer_learned_action, is_learned_method, load_learned_model
 from .utils import torch_device
-
-LEARNED_METHODS = {"rvt_swarm", "gnn_only", "instant_cert"}
-
-
-def batch_from_obs(obs: Dict, cfg: Config, device: torch.device) -> Dict[str, torch.Tensor]:
-    node_x, edge_index, edge_attr = build_graph(obs, cfg)
-    return {
-        "node_x": node_x.to(device),
-        "edge_index": edge_index.to(device),
-        "edge_attr": edge_attr.to(device),
-        "batch_index": torch.zeros(node_x.shape[0], dtype=torch.long, device=device),
-    }
 
 
 def run_policy_episode(
@@ -42,11 +26,8 @@ def run_policy_episode(
     if model is not None:
         model_device = next(model.parameters()).device
     device = model_device or torch_device(cfg.train.device)
-    if model is None and method in LEARNED_METHODS:
-        model = build_model(method, cfg.train.hidden_dim, cfg.train.message_passes, getattr(cfg.train, 'aux_gradient_scale', 0.3)).to(device)
-        ckpt = torch.load(Path(ckpt_dir) / f"{method}.pt", map_location=device, weights_only=False)
-        model.load_state_dict(ckpt["model"])
-        model.eval()
+    if model is None and is_learned_method(method):
+        model = load_learned_model(method, cfg, ckpt_dir, device)
     done = False
     last_info = None
     steps = 0
@@ -57,26 +38,10 @@ def run_policy_episode(
         if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
             actions, topo = historical_baseline(method, obs, cfg)
         else:
-            batch = batch_from_obs(obs, cfg, device)
-            with torch.no_grad():
-                out = model(batch)
-            actions = out["actions"].cpu().numpy() * cfg.env.max_accel
-            topo = 0
-            recover = None
-            uncertainty = None
-            rec_scores_np = None
-            if out["topology_logits"] is not None and cfg.method.use_topology:
-                topo = choose_counterfactual_topology(obs, out["topology_logits"], out["recoverability_scores"], cfg, prev_topo, out.get("uncertainty"))
-            if out["recoverability_scores"] is not None:
-                rec_scores_np = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
-            if out["recoverability"] is not None and cfg.method.use_recoverability:
-                uncertainty = float(out["uncertainty"].mean().cpu().item()) if out.get("uncertainty") is not None else 0.0
-                if rec_scores_np is not None and cfg.method.use_topology:
-                    recover = float(rec_scores_np[TOPOLOGY_IDS.index(topo)])
-                else:
-                    recover = float(out["recoverability"].squeeze().cpu().item())
-            if method in ["rvt_swarm", "instant_cert"]:
-                actions = simple_recover_shield(actions, obs, cfg, recover, topo, rec_scores_np)
+            runtime = infer_learned_action(method, obs, cfg, model, prev_topo)
+            actions = runtime["actions"]
+            topo = runtime["topology"]
+            recover = runtime["recoverability"]
         prev_topo = topo
         obs, _, done, info = env.step(actions, topo)
         if method in ["rvt_swarm", "instant_cert"] and recover is not None:

@@ -5,7 +5,7 @@ from typing import Dict, Tuple
 import numpy as np
 
 from .config import Config
-from .environment import expert_action
+from .controllers import expert_action
 from .utils import soft_clip, unit
 
 

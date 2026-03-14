@@ -6,7 +6,8 @@ from typing import Dict, List, Tuple
 import numpy as np
 
 from .config import Config, TOPOLOGY_IDS
-from .environment import SwarmFormationEnv, expert_action
+from .controllers import expert_action
+from .environment import SwarmFormationEnv
 
 
 CANDIDATE_TOPOLOGIES = TOPOLOGY_IDS
