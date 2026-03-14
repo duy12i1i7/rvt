@@ -246,7 +246,8 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
     print(f"  Generating {episodes} episodes with {n_workers} workers...")
 
     if n_workers > 1:
-        with mp.Pool(n_workers) as pool:
+        ctx = mp.get_context("spawn")
+        with ctx.Pool(n_workers) as pool:
             results = pool.map(_generate_episode, args_list)
     else:
         results = [_generate_episode(a) for a in args_list]
