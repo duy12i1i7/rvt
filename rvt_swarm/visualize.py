@@ -20,7 +20,7 @@ import matplotlib.patches as mpatches
 import numpy as np
 
 from .baselines import historical_baseline
-from .config import Config, TOPOLOGY_ACTIONS
+from .config import Config, TOPOLOGY_ACTIONS, TOPOLOGY_IDS
 from .dataset import build_graph
 from .environment import SwarmFormationEnv
 from .safety import choose_counterfactual_topology, simple_recover_shield
@@ -167,7 +167,7 @@ def record_episode(
     """Run one episode and record per-step state for rendering."""
     np.random.seed(seed)
     env = SwarmFormationEnv(cfg)
-    obs = env.reset(n_agents, scenario)
+    obs = env.reset(n_agents, scenario, seed=seed)
     device = torch_device(cfg.train.device) if torch is not None else "cpu"
 
     model = None
@@ -215,15 +215,21 @@ def record_episode(
             actions = out["actions"].cpu().numpy() * cfg.env.max_accel
             topo = 0
             recover = None
+            rec_scores_np = None
             if out["topology_logits"] is not None:
                 topo = choose_counterfactual_topology(
                     obs, out["topology_logits"], out["recoverability_scores"],
                     cfg, prev_topo, out.get("uncertainty"),
                 )
+            if out["recoverability_scores"] is not None:
+                rec_scores_np = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
             if out["recoverability"] is not None:
-                recover = float(out["recoverability"].squeeze().cpu().item())
+                if rec_scores_np is not None and out["topology_logits"] is not None:
+                    recover = float(rec_scores_np[TOPOLOGY_IDS.index(topo)])
+                else:
+                    recover = float(out["recoverability"].squeeze().cpu().item())
             if method in ["rvt_swarm", "instant_cert"]:
-                actions = simple_recover_shield(actions, obs, cfg, recover, topo)
+                actions = simple_recover_shield(actions, obs, cfg, recover, topo, rec_scores_np)
 
         frame["topology_action"] = topo
         frames.append(frame)

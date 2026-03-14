@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader, random_split
 
 from .config import Config
 from .dataset import SwarmDataset, collate_graphs, generate_dataset
+from .evaluate import rollout_validation_score, rollout_validation_summary
 from .models import build_model
 from .utils import set_seed, torch_device
 
@@ -101,11 +102,25 @@ def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, tr
     return totals
 
 
-def checkpoint_metric(val_losses: Dict[str, float], model_name: str) -> tuple[str, float]:
-    # For RVT-Swarm, selecting checkpoints on action-only loss hid regressions in
-    # the recoverability/topology branches and made logged "best val" incomparable
-    # with the printed total validation loss.
-    return ("total", val_losses["total"])
+def loss_checkpoint_metric(val_losses: Dict[str, float]) -> tuple[str, float, str]:
+    return ("total", val_losses["total"], "min")
+
+
+def rollout_validation_start_epoch(cfg: Config, warmup: int) -> int:
+    interval = max(int(cfg.train.rollout_val_interval), 1)
+    if warmup > 0:
+        return warmup + 1
+    return interval
+
+
+def should_run_rollout_validation(cfg: Config, model_name: str, epoch: int, warmup: int) -> bool:
+    if not cfg.train.rollout_val_enabled:
+        return False
+    if model_name not in {"rvt_swarm", "gnn_only", "instant_cert"}:
+        return False
+    start_epoch = rollout_validation_start_epoch(cfg, warmup)
+    interval = max(int(cfg.train.rollout_val_interval), 1)
+    return epoch >= start_epoch and (epoch - start_epoch) % interval == 0
 
 
 def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset: SwarmDataset | None = None) -> str:
@@ -125,6 +140,8 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
     best_val = float("inf")
     best_epoch = 0
     patience_counter = 0
+    best_mode = "min"
+    last_rollout_score = None
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
     best_ckpt = out_path / f"{model_name}_best.pt"
@@ -142,31 +159,74 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         # During warmup: always save, don't count patience
         in_warmup = epoch <= warmup
 
-        # After warmup ends, reset best_val so we compare fairly
-        if epoch == warmup + 1:
-            best_val = float("inf")
+        rollout_summary = None
+        ran_rollout = should_run_rollout_validation(cfg, model_name, epoch, warmup)
+        rollout_start = rollout_validation_start_epoch(cfg, warmup)
+        if ran_rollout:
+            rollout_summary = rollout_validation_summary(model_name, cfg, model, str(out_path))
+            last_rollout_score = rollout_validation_score(rollout_summary)
+
+        use_rollout_metric = (
+            cfg.train.rollout_val_enabled
+            and model_name in {"rvt_swarm", "gnn_only", "instant_cert"}
+            and epoch >= rollout_start
+        )
+        metric_ready = not use_rollout_metric or ran_rollout
+        update_best = False
+        if in_warmup:
+            metric_name, tracking, metric_mode = loss_checkpoint_metric(va)
+        elif use_rollout_metric:
+            metric_name, metric_mode = "rollout_score", "max"
+            tracking = last_rollout_score if last_rollout_score is not None else float("nan")
+        else:
+            metric_name, tracking, metric_mode = loss_checkpoint_metric(va)
+
+        # When switching from loss-based to rollout-based checkpointing,
+        # reset the comparator so old supervised-loss checkpoints don't dominate.
+        if metric_ready and metric_mode != best_mode:
+            best_mode = metric_mode
+            best_val = float("-inf") if metric_mode == "max" else float("inf")
             patience_counter = 0
 
-        metric_name, tracking = checkpoint_metric(va, model_name)
-        improved = tracking < (best_val - min_delta)
-        if improved or in_warmup:
-            if tracking < best_val or in_warmup:
-                best_val = tracking
+        if in_warmup:
+            update_best = True
+            best_val = tracking
             best_epoch = epoch
             patience_counter = 0
+        elif use_rollout_metric:
+            if metric_ready:
+                improved = tracking > (best_val + min_delta)
+                if improved:
+                    best_val = tracking
+                    best_epoch = epoch
+                    patience_counter = 0
+                    update_best = True
+                else:
+                    patience_counter += 1
+        else:
+            improved = tracking < (best_val - min_delta)
+            if improved:
+                best_val = tracking
+                best_epoch = epoch
+                patience_counter = 0
+                update_best = True
+            else:
+                patience_counter += 1
+
+        if update_best:
             state = {
                 "model": model.state_dict(),
                 "config": cfg,
                 "epoch": epoch,
                 "best_val": best_val,
                 "best_metric": metric_name,
+                "best_metric_mode": best_mode,
+                "validation_summary": rollout_summary,
                 "model_name": model_name,
             }
             torch.save(state, best_ckpt)
             if cfg.train.save_best_only:
                 torch.save(state, legacy_ckpt)
-        else:
-            patience_counter += 1
 
         torch.save({
             "model": model.state_dict(),
@@ -174,14 +234,24 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
             "epoch": epoch,
             "best_val": best_val,
             "best_metric": metric_name,
+            "best_metric_mode": best_mode,
+            "validation_summary": rollout_summary,
             "model_name": model_name,
         }, last_ckpt)
 
         warmup_tag = " [warmup]" if in_warmup else ""
+        rollout_tag = ""
+        if rollout_summary is not None and last_rollout_score is not None:
+            rollout_tag = (
+                f" roll_succ={rollout_summary['success']:.3f}"
+                f" roll_cf={rollout_summary['collision_free']:.3f}"
+                f" roll_form={rollout_summary['form_ok']:.3f}"
+                f" roll_score={last_rollout_score:.4f}"
+            )
         print(
             f"[{model_name}] epoch {epoch:02d} train={tr['total']:.4f} val={va['total']:.4f} "
             f"rank={va['rank']:.4f} topo={va['topology']:.4f} "
-            f"track_{metric_name}={tracking:.4f}{warmup_tag}"
+            f"track_{metric_name}={tracking:.4f}{rollout_tag}{warmup_tag}"
         )
 
         if not in_warmup and patience_counter >= patience:

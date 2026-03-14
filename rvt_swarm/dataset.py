@@ -190,7 +190,7 @@ def _generate_episode(args):
     env = SwarmFormationEnv(cfg)
     n = int(rng.choice(cfg.env.team_sizes))
     scenario = str(rng.choice(cfg.env.scenarios, p=np.array([0.18, 0.28, 0.30, 0.24])))
-    obs = env.reset(n, scenario)
+    obs = env.reset(n, scenario, seed=seed)
     done = False
     episode_samples = []
     while not done:

@@ -37,8 +37,11 @@ class SwarmFormationEnv:
         self.ec = cfg.env
         self.state: EnvState | None = None
         self.n_agents = 0
+        self.rng = np.random.default_rng(cfg.train.seed)
 
-    def reset(self, n_agents: int, scenario: str) -> Dict:
+    def reset(self, n_agents: int, scenario: str, seed: int | None = None) -> Dict:
+        if seed is not None:
+            self.rng = np.random.default_rng(seed)
         self.n_agents = n_agents
         positions = self._spawn_agents(n_agents, scenario)
         velocities = np.zeros_like(positions)
@@ -96,16 +99,15 @@ class SwarmFormationEnv:
             count = self.ec.obstacle_count + 4
         else:
             count = self.ec.obstacle_count
-        rng = np.random.default_rng()
         for _ in range(count):
-            x = rng.uniform(-2.0, 2.0)
-            y = rng.uniform(-3.5, 3.5)
+            x = self.rng.uniform(-2.0, 2.0)
+            y = self.rng.uniform(-3.5, 3.5)
             if scenario == "narrow_passage" and abs(x) < 1.1 and abs(y) > 0.9:
-                x = rng.choice([-0.6, 0.6])
+                x = self.rng.choice([-0.6, 0.6])
             obs.append([x, y])
             if scenario == "dynamic_obstacles" and len(vel) < self.ec.dynamic_obstacle_count:
-                vx = rng.choice([-1.0, 1.0]) * self.ec.dynamic_obstacle_speed
-                vy = rng.uniform(-0.15, 0.15)
+                vx = self.rng.choice([-1.0, 1.0]) * self.ec.dynamic_obstacle_speed
+                vy = self.rng.uniform(-0.15, 0.15)
                 vel.append([vx, vy])
             else:
                 vel.append([0.0, 0.0])

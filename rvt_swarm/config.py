@@ -52,13 +52,21 @@ class TrainConfig:
     graph_k: int = 6
     lambda_action: float = 5.0
     lambda_recover: float = 0.02
-    lambda_topology: float = 0.015
-    lambda_aux: float = 0.008
+    lambda_topology: float = 0.01
+    lambda_aux: float = 0.004
     early_stopping_patience: int = 40
     early_stopping_min_delta: float = 1e-4
     save_best_only: bool = True
     curriculum_warmup_epochs: int = 50
-    aux_gradient_scale: float = 0.3
+    aux_gradient_scale: float = 0.2
+    rollout_val_enabled: bool = True
+    rollout_val_interval: int = 5
+    rollout_val_episodes_per_setting: int = 2
+    rollout_val_scenarios: List[str] = field(default_factory=lambda: [
+        "narrow_passage",
+        "dynamic_obstacles",
+    ])
+    rollout_val_team_sizes: List[int] = field(default_factory=lambda: [8, 16])
     n_workers: int = 0  # 0 = auto (3/4 of cpu_count)
 
 

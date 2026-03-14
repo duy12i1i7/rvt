@@ -5,9 +5,6 @@ import json
 from pathlib import Path
 
 from rvt_swarm.config import Config
-from rvt_swarm.evaluate import evaluate_method, summarize
-from rvt_swarm.train import train_model
-from rvt_swarm.visualize import visualize_methods
 
 
 LEARNED = ["gnn_only", "instant_cert", "rvt_swarm"]
@@ -22,10 +19,16 @@ def save_json(obj, path: Path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", type=str, default="train_all", choices=["train_all", "eval_all", "ablations", "visualize", "all"])
+    parser.add_argument(
+        "--mode",
+        type=str,
+        default="train_all",
+        choices=["train_all", "eval_all", "ablations", "visualize", "all", "diagnose"],
+    )
     parser.add_argument("--device", type=str, default="auto", help="cpu, cuda, mps, or auto")
     parser.add_argument("--results-dir", type=str, default="results")
     parser.add_argument("--workers", type=int, default=0, help="Max parallel workers (0 = auto = cpu_count-1)")
+    parser.add_argument("--skip-visualize", action="store_true", help="Skip GIF generation in --mode all")
     args = parser.parse_args()
 
     cfg = Config()
@@ -36,6 +39,7 @@ def main():
 
     def do_train():
         from rvt_swarm.dataset import generate_dataset
+        from rvt_swarm.train import train_model
         print("Generating shared dataset...")
         ds = generate_dataset(cfg)
         for m in LEARNED:
@@ -44,6 +48,7 @@ def main():
         print("Training done.")
 
     def do_eval():
+        from rvt_swarm.evaluate import evaluate_method, summarize
         summary = {}
         for m in LEARNED + BASELINES:
             print(f"Evaluating {m}...")
@@ -54,6 +59,8 @@ def main():
         print(json.dumps(summary, indent=2))
 
     def do_ablations():
+        from rvt_swarm.evaluate import evaluate_method, summarize
+        from rvt_swarm.train import train_model
         abl_dir = Path(str(results_dir) + "_ablation")
         ablations = {
             "full": Config(),
@@ -89,7 +96,7 @@ def main():
         print(json.dumps(all_rows, indent=2))
 
     def do_visualize():
-        from rvt_swarm.visualize import visualize_comparisons
+        from rvt_swarm.visualize import visualize_comparisons, visualize_methods
         gif_dir = str(results_dir / "gifs")
         methods = LEARNED + BASELINES
         print("Generating per-method GIFs...")
@@ -118,11 +125,35 @@ def main():
         print(f"{len(cpaths)} comparison GIFs saved.")
         print(f"All GIFs in {gif_dir}/")
 
+    def do_diagnose():
+        import importlib
+
+        modules = [
+            "numpy",
+            "torch",
+            "matplotlib",
+            "PIL.Image",
+            "rvt_swarm.environment",
+            "rvt_swarm.dataset",
+            "rvt_swarm.train",
+            "rvt_swarm.evaluate",
+            "rvt_swarm.visualize",
+        ]
+        print("Diagnosing imports...", flush=True)
+        for name in modules:
+            print(f"  importing {name} ...", flush=True)
+            importlib.import_module(name)
+            print(f"  ok: {name}", flush=True)
+        print("Import diagnosis completed.", flush=True)
+
     if args.mode == "all":
         do_train()
         do_eval()
         do_ablations()
-        do_visualize()
+        if args.skip_visualize:
+            print("Skipping visualization.")
+        else:
+            do_visualize()
         print("All done.")
         return
 
@@ -137,6 +168,9 @@ def main():
         return
     if args.mode == "visualize":
         do_visualize()
+        return
+    if args.mode == "diagnose":
+        do_diagnose()
         return
 
 
