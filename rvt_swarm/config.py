@@ -81,6 +81,10 @@ class MethodConfig:
     use_topology: bool = True
     use_counterfactual_topology: bool = True
     use_progress_shield: bool = True
+    # For RVT, the topology score-map is the primary recoverability signal.
+    # Keep scalar recoverability loss off by default so it does not fight the
+    # score-map/ranking objectives during shared representation learning.
+    rvt_recover_loss_scale: float = 0.0
     shield_gain: float = 0.25
     progress_weight: float = 0.10
     topology_temperature: float = 1.5

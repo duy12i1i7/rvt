@@ -101,12 +101,15 @@ def simple_recover_shield(
     risk = collision_risk(obs)
     form_rms = estimated_form_rms(obs)
 
-    # Recoverability-aware risk modulation
+    # Recoverability is treated as a conservative warning signal only.
+    # Positive scores should not "explain away" geometric collision risk.
     all_negative = False
     if recoverability_scores is not None:
         all_negative = bool(np.all(recoverability_scores < 0.0))
     if recoverability is not None:
-        risk = max(0.0, risk - 0.15 * float(recoverability))
+        recover_value = float(recoverability)
+        if recover_value < -0.10:
+            risk = max(risk, 0.52 + 0.12 * min(-recover_value, 1.0))
     # Docs: "chỉ can thiệp nếu tất cả lựa chọn có recoverability âm"
     if all_negative:
         risk = max(risk, 0.55)
