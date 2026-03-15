@@ -60,8 +60,8 @@ class TrainConfig:
     curriculum_warmup_epochs: int = 50
     aux_gradient_scale: float = 0.2
     rollout_val_enabled: bool = True
-    rollout_val_interval: int = 5
-    rollout_val_episodes_per_setting: int = 2
+    rollout_val_interval: int = 10
+    rollout_val_episodes_per_setting: int = 4
     rollout_val_scenarios: List[str] = field(default_factory=lambda: [
         "narrow_passage",
         "dynamic_obstacles",
@@ -86,7 +86,7 @@ class MethodConfig:
     topology_temperature: float = 1.5
     switch_hysteresis: float = 0.08
     shield_risk_threshold: float = 0.85
-    topology_cooldown: int = 12
+    topology_cooldown: int = 8
     max_shield_blend: float = 0.06
 
 

@@ -71,6 +71,13 @@ def progress_direction(obs: Dict) -> np.ndarray:
     return unit(obs["goal"] - centroid)
 
 
+def estimated_form_rms(obs: Dict) -> float:
+    formation_error = obs.get("formation_error")
+    if formation_error is None or len(formation_error) == 0:
+        return 0.0
+    return float(np.sqrt(np.mean(np.sum(np.square(formation_error), axis=1))))
+
+
 def simple_recover_shield(
     actions: np.ndarray,
     obs: Dict,
@@ -92,6 +99,7 @@ def simple_recover_shield(
     if not cfg.method.use_progress_shield:
         return actions
     risk = collision_risk(obs)
+    form_rms = estimated_form_rms(obs)
 
     # Recoverability-aware risk modulation
     all_negative = False
@@ -104,6 +112,11 @@ def simple_recover_shield(
         risk = max(risk, 0.55)
 
     threshold = getattr(cfg.method, 'shield_risk_threshold', 0.85)
+    if not all_negative:
+        if obs.get("time_since_switch", 999) < 4:
+            threshold += 0.05
+        if topo in (2, 3, 4) and form_rms > 0.85 * cfg.env.formation_tolerance:
+            threshold += 0.03
     if risk < threshold:
         return actions
 
@@ -123,6 +136,8 @@ def simple_recover_shield(
     if all_negative:
         blend = min(max_blend, 0.8 * max_blend)
     else:
+        if obs.get("time_since_switch", 999) < 4:
+            max_blend *= 0.75
         denom = max(1e-6, 1.0 - threshold)
         severity = float(np.clip((risk - threshold) / denom, 0.0, 1.0))
         blend = severity * max_blend
@@ -222,6 +237,52 @@ def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:
     return TOPOLOGY_IDS[int(torch.argmax(topology_logits, dim=-1).item())]
 
 
+def topology_context_mask(obs: Dict, cfg: Config, previous_topology: int) -> tuple[np.ndarray, np.ndarray]:
+    form_rms = estimated_form_rms(obs)
+    bottleneck = float(obs["bottleneck"])
+    progress = float(obs["progress"])
+    split_active = float(obs.get("split_active", 0.0))
+    n_agents = int(len(obs["positions"]))
+
+    allowed = np.ones(len(TOPOLOGY_IDS), dtype=bool)
+    context = np.zeros(len(TOPOLOGY_IDS), dtype=np.float32)
+
+    keep_idx = TOPOLOGY_IDS.index(0)
+    compress_idx = TOPOLOGY_IDS.index(1)
+    line_idx = TOPOLOGY_IDS.index(2)
+    split_idx = TOPOLOGY_IDS.index(3)
+    recover_idx = TOPOLOGY_IDS.index(4)
+
+    if bottleneck < 0.38:
+        allowed[line_idx] = False
+    if bottleneck < 0.52 or n_agents < 10:
+        allowed[split_idx] = False
+    if progress < 0.60 and split_active < 0.22 and form_rms < 0.95 * cfg.env.formation_tolerance:
+        allowed[recover_idx] = False
+
+    if bottleneck > 0.45:
+        context[compress_idx] += 0.06
+        context[line_idx] += 0.16
+    if bottleneck > 0.60 and n_agents >= 10:
+        context[split_idx] += 0.12
+    if bottleneck < 0.28:
+        context[keep_idx] += 0.12
+        context[compress_idx] -= 0.04
+    if progress > 0.72 and bottleneck < 0.30:
+        context[recover_idx] += 0.18
+        context[keep_idx] += 0.05
+    if split_active > 0.25 or form_rms > 1.05 * cfg.env.formation_tolerance:
+        context[recover_idx] += 0.14
+        context[keep_idx] -= 0.05
+    if previous_topology == 3 and bottleneck < 0.35:
+        context[recover_idx] += 0.12
+    if previous_topology in (2, 3) and bottleneck < 0.30:
+        context[keep_idx] += 0.08
+        context[recover_idx] += 0.08
+
+    return allowed, context
+
+
 def choose_counterfactual_topology(
     obs: Dict,
     topology_logits: torch.Tensor,
@@ -230,59 +291,59 @@ def choose_counterfactual_topology(
     previous_topology: int = 0,
     uncertainty: torch.Tensor | None = None,
 ) -> int:
-    # Cooldown: don't switch if recently switched — let formation converge
-    cooldown = getattr(cfg.method, 'topology_cooldown', 5)
-    if obs.get("time_since_switch", 999) < cooldown:
-        return previous_topology
-
     topo_prior = torch.softmax(topology_logits / max(cfg.method.topology_temperature, 1e-6), dim=-1).squeeze(0)
+    logit_choice = choose_topology_from_logits(topology_logits)
     if recoverability_scores is None or not cfg.method.use_counterfactual_topology:
-        return choose_topology_from_logits(topology_logits)
+        return logit_choice
+
     scores = recoverability_scores.squeeze(0).detach().cpu().numpy().astype(np.float32)
     prior = topo_prior.detach().cpu().numpy().astype(np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
-
-    # Use uncertainty as a soft penalty. A hard gate froze topology selection
-    # in practice because the uncertainty head often stayed above the old
-    # threshold even when one topology was clearly more recoverable.
+    score_signal = np.tanh(0.9 * scores)
     mean_uncert = float(np.mean(uncert))
+    allowed, context = topology_context_mask(obs, cfg, previous_topology)
+    invalid_penalty = np.where(allowed, 0.0, -1.5).astype(np.float32)
 
-    # Context bonuses for situationally appropriate topologies
-    context = np.zeros_like(scores)
-    bottleneck = obs["bottleneck"] > 0.50
-    if bottleneck:
-        context[TOPOLOGY_IDS.index(1)] += 0.08
-        context[TOPOLOGY_IDS.index(2)] += 0.18
-        context[TOPOLOGY_IDS.index(3)] += 0.10
-    if obs["progress"] > 0.75 and obs["bottleneck"] < 0.30:
-        context[TOPOLOGY_IDS.index(4)] += 0.18
-    # Mild preference for keep in easy situations
-    if obs["bottleneck"] < 0.35:
-        context[TOPOLOGY_IDS.index(0)] += 0.10
-
-    # Preserve inertia, but do not suppress switching entirely.
     switch_penalty = np.zeros_like(scores)
+    bottleneck = float(obs["bottleneck"])
     for idx, topo in enumerate(TOPOLOGY_IDS):
         if topo != previous_topology:
-            switch_penalty[idx] = 0.08
+            switch_penalty[idx] = 0.05
         if topo == 3:  # Split is most disruptive
             switch_penalty[idx] += 0.12
-        if topo == 4 and obs["bottleneck"] > 0.45:
+        if topo == 4 and bottleneck > 0.45:
             switch_penalty[idx] += 0.05
-        if topo == 0 and bottleneck:
+        if topo == 0 and bottleneck > 0.50:
             switch_penalty[idx] += 0.04
 
-    combined = 0.62 * scores + 0.22 * prior + context - 0.08 * uncert - switch_penalty
-    best_idx = int(np.argmax(combined))
     current_idx = TOPOLOGY_IDS.index(previous_topology)
-    if best_idx == current_idx:
+    logit_idx = TOPOLOGY_IDS.index(logit_choice)
+    if not allowed[logit_idx]:
+        allowed_scores = prior + context + invalid_penalty
+        logit_idx = int(np.argmax(allowed_scores))
+
+    combined = 0.44 * prior + 0.34 * score_signal + context - 0.06 * uncert - switch_penalty + invalid_penalty
+    best_idx = int(np.argmax(combined))
+    candidate_idx = logit_idx
+
+    current_invalid = not allowed[current_idx]
+    score_gain_over_logits = float(score_signal[best_idx] - score_signal[logit_idx])
+    combined_gain_over_logits = float(combined[best_idx] - combined[logit_idx])
+    override_margin = 0.18 + 0.08 * max(0.0, mean_uncert - 0.35)
+    if allowed[best_idx] and score_gain_over_logits > override_margin and combined_gain_over_logits > 0.03:
+        candidate_idx = best_idx
+
+    if candidate_idx == current_idx:
         return previous_topology
 
-    recover_gap = float(scores[best_idx] - scores[current_idx])
-    if recover_gap > 0.35 and combined[best_idx] >= combined[current_idx] - 0.02:
-        return TOPOLOGY_IDS[best_idx]
+    cooldown = getattr(cfg.method, 'topology_cooldown', 5)
+    score_gain_over_current = float(score_signal[candidate_idx] - score_signal[current_idx])
+    prior_gain_over_current = float(prior[candidate_idx] - prior[current_idx])
+    if obs.get("time_since_switch", 999) < cooldown:
+        if not current_invalid and score_gain_over_current < 0.28 and prior_gain_over_current < 0.18:
+            return previous_topology
 
     required_margin = cfg.method.switch_hysteresis + 0.05 * max(0.0, mean_uncert - 0.45)
-    if combined[best_idx] < combined[current_idx] + required_margin:
+    if not current_invalid and combined[candidate_idx] < combined[current_idx] + required_margin:
         return previous_topology
-    return TOPOLOGY_IDS[best_idx]
+    return TOPOLOGY_IDS[candidate_idx]
