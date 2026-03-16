@@ -242,6 +242,7 @@ def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:
 
 def topology_context_mask(obs: Dict, cfg: Config, previous_topology: int) -> tuple[np.ndarray, np.ndarray]:
     form_rms = estimated_form_rms(obs)
+    form_tol = max(cfg.env.formation_tolerance, 1e-6)
     bottleneck = float(obs["bottleneck"])
     progress = float(obs["progress"])
     split_active = float(obs.get("split_active", 0.0))
@@ -256,32 +257,35 @@ def topology_context_mask(obs: Dict, cfg: Config, previous_topology: int) -> tup
     split_idx = TOPOLOGY_IDS.index(3)
     recover_idx = TOPOLOGY_IDS.index(4)
 
-    if bottleneck < 0.38:
+    if bottleneck < 0.44:
         allowed[line_idx] = False
-    if bottleneck < 0.52 or n_agents < 10:
+    if bottleneck < 0.60 or n_agents < 12:
         allowed[split_idx] = False
-    if progress < 0.60 and split_active < 0.22 and form_rms < 0.95 * cfg.env.formation_tolerance:
+    if progress < 0.65 and split_active < 0.28 and form_rms < 1.00 * form_tol:
         allowed[recover_idx] = False
 
-    if bottleneck > 0.45:
-        context[compress_idx] += 0.06
-        context[line_idx] += 0.16
-    if bottleneck > 0.60 and n_agents >= 10:
-        context[split_idx] += 0.12
+    if bottleneck > 0.50:
+        context[compress_idx] += 0.05
+        context[line_idx] += 0.14
+    if bottleneck > 0.65 and n_agents >= 12:
+        context[split_idx] += 0.10
     if bottleneck < 0.28:
-        context[keep_idx] += 0.12
-        context[compress_idx] -= 0.04
-    if progress > 0.72 and bottleneck < 0.30:
-        context[recover_idx] += 0.18
-        context[keep_idx] += 0.05
-    if split_active > 0.25 or form_rms > 1.05 * cfg.env.formation_tolerance:
+        context[keep_idx] += 0.14
+        context[compress_idx] -= 0.05
+    if progress > 0.76 and bottleneck < 0.26 and form_rms > 0.80 * form_tol:
         context[recover_idx] += 0.14
-        context[keep_idx] -= 0.05
-    if previous_topology == 3 and bottleneck < 0.35:
+        context[keep_idx] += 0.06
+    if split_active > 0.28 or form_rms > 1.10 * form_tol:
         context[recover_idx] += 0.12
+        context[keep_idx] -= 0.04
+    if previous_topology == 3 and bottleneck < 0.35:
+        context[keep_idx] += 0.10
+        if split_active > 0.30 or form_rms > form_tol:
+            context[recover_idx] += 0.08
     if previous_topology in (2, 3) and bottleneck < 0.30:
-        context[keep_idx] += 0.08
-        context[recover_idx] += 0.08
+        context[keep_idx] += 0.12
+        if split_active > 0.24 or form_rms > 1.02 * form_tol:
+            context[recover_idx] += 0.06
 
     return allowed, context
 
@@ -309,15 +313,20 @@ def choose_counterfactual_topology(
 
     switch_penalty = np.zeros_like(scores)
     bottleneck = float(obs["bottleneck"])
+    cooldown = float(getattr(cfg.method, "topology_cooldown", 5))
+    time_since_switch = float(obs.get("time_since_switch", 999.0))
+    cooldown_frac = float(np.clip((cooldown - time_since_switch) / max(cooldown, 1.0), 0.0, 1.0))
     for idx, topo in enumerate(TOPOLOGY_IDS):
         if topo != previous_topology:
-            switch_penalty[idx] = 0.05
-        if topo == 3:  # Split is most disruptive
-            switch_penalty[idx] += 0.12
-        if topo == 4 and bottleneck > 0.45:
-            switch_penalty[idx] += 0.05
-        if topo == 0 and bottleneck > 0.50:
+            switch_penalty[idx] += 0.08 + 0.08 * cooldown_frac
+        if previous_topology == 0 and topo in (2, 3, 4):
             switch_penalty[idx] += 0.04
+        if topo == 3:  # Split is most disruptive
+            switch_penalty[idx] += 0.16
+        if topo == 4 and bottleneck > 0.40:
+            switch_penalty[idx] += 0.07
+        if topo == 0 and bottleneck > 0.55:
+            switch_penalty[idx] += 0.06
 
     current_idx = TOPOLOGY_IDS.index(previous_topology)
     logit_idx = TOPOLOGY_IDS.index(logit_choice)
@@ -325,28 +334,42 @@ def choose_counterfactual_topology(
         allowed_scores = prior + context + invalid_penalty
         logit_idx = int(np.argmax(allowed_scores))
 
-    combined = 0.44 * prior + 0.34 * score_signal + context - 0.06 * uncert - switch_penalty + invalid_penalty
+    combined = 0.48 * prior + 0.30 * score_signal + context - 0.06 * uncert - switch_penalty + invalid_penalty
     best_idx = int(np.argmax(combined))
     candidate_idx = logit_idx
 
     current_invalid = not allowed[current_idx]
     score_gain_over_logits = float(score_signal[best_idx] - score_signal[logit_idx])
     combined_gain_over_logits = float(combined[best_idx] - combined[logit_idx])
-    override_margin = 0.18 + 0.08 * max(0.0, mean_uncert - 0.35)
+    override_margin = 0.24 + 0.08 * max(0.0, mean_uncert - 0.35)
+    if TOPOLOGY_IDS[best_idx] in (2, 3, 4):
+        override_margin += 0.05
+    if previous_topology == 0 and TOPOLOGY_IDS[best_idx] in (2, 3, 4):
+        override_margin += 0.04
     if allowed[best_idx] and score_gain_over_logits > override_margin and combined_gain_over_logits > 0.03:
         candidate_idx = best_idx
 
     if candidate_idx == current_idx:
         return previous_topology
 
-    cooldown = getattr(cfg.method, 'topology_cooldown', 5)
     score_gain_over_current = float(score_signal[candidate_idx] - score_signal[current_idx])
     prior_gain_over_current = float(prior[candidate_idx] - prior[current_idx])
-    if obs.get("time_since_switch", 999) < cooldown:
-        if not current_invalid and score_gain_over_current < 0.28 and prior_gain_over_current < 0.18:
+    combined_gain_over_current = float(combined[candidate_idx] - combined[current_idx])
+    if time_since_switch < cooldown:
+        if not current_invalid and (score_gain_over_current < 0.34 or combined_gain_over_current < 0.10):
             return previous_topology
 
-    required_margin = cfg.method.switch_hysteresis + 0.05 * max(0.0, mean_uncert - 0.45)
+    if candidate_idx != logit_idx and not current_invalid:
+        if score_gain_over_current < 0.26 and prior_gain_over_current < 0.10:
+            return previous_topology
+
+    candidate_topology = TOPOLOGY_IDS[candidate_idx]
+    specialist_margin = 0.0
+    if candidate_topology in (2, 3, 4):
+        specialist_margin += 0.04
+    if previous_topology == 0 and candidate_topology in (2, 3, 4):
+        specialist_margin += 0.03
+    required_margin = cfg.method.switch_hysteresis + specialist_margin + 0.06 * max(0.0, mean_uncert - 0.35)
     if not current_invalid and combined[candidate_idx] < combined[current_idx] + required_margin:
         return previous_topology
     return TOPOLOGY_IDS[candidate_idx]

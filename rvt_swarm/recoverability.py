@@ -52,15 +52,22 @@ def rollout_score(env: SwarmFormationEnv, topology_action: int, horizon: int, cf
         collision = float(info["collision_free"])
         recover_proxy = float(info["recoverability_proxy"])
         deadlock_penalty = compute_deadlock_penalty(info)
-        switch_penalty = 0.08 * float(info["topology_switches"] > 2)
+        switch_count = float(info["topology_switches"])
+        switch_penalty = 0.03 * switch_count + 0.06 * float(switch_count > 1)
+        if topology_action in (2, 3, 4):
+            switch_penalty += 0.03
+        if topology_action in (2, 3) and obs["bottleneck"] < 0.48:
+            switch_penalty += 0.06
+        if topology_action == 4 and obs["bottleneck"] > 0.38 and tube > 0.72:
+            switch_penalty += 0.06
         recovery_bonus = 0.0
         if topology_action == 4:
-            recovery_bonus += 0.20 * tube + 0.08 * float(obs.get("split_active", 0.0) > 0.0)
-            if obs["bottleneck"] < 0.3:
-                recovery_bonus += 0.14
-        if topology_action in [2, 3] and obs["bottleneck"] > 0.4:
-            recovery_bonus += 0.05
-        lingering_split_penalty = 0.12 * float(obs.get("split_active", 0.0) > 0.45 and obs["bottleneck"] < 0.25)
+            recovery_bonus += 0.14 * tube + 0.06 * float(obs.get("split_active", 0.0) > 0.0)
+            if obs["bottleneck"] < 0.28:
+                recovery_bonus += 0.10
+        if topology_action in [2, 3] and obs["bottleneck"] > 0.52:
+            recovery_bonus += 0.03
+        lingering_split_penalty = 0.16 * float(obs.get("split_active", 0.0) > 0.45 and obs["bottleneck"] < 0.25)
         step_score = 0.95 * collision + 0.65 * progress + 1.55 * tube + 0.75 * recover_proxy + recovery_bonus - deadlock_penalty - switch_penalty - lingering_split_penalty
         alive_bonus += 0.05 * collision
         score += step_score
