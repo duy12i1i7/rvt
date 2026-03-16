@@ -62,6 +62,9 @@ class TrainConfig:
     rollout_val_enabled: bool = True
     rollout_val_interval: int = 10
     rollout_val_episodes_per_setting: int = 4
+    rollout_val_topk_checkpoints: int = 5
+    rollout_val_recheck_episodes_per_setting: int = 8
+    rollout_val_recheck_seed_offset: int = 80_000
     rollout_val_scenarios: List[str] = field(default_factory=lambda: [
         "narrow_passage",
         "dynamic_obstacles",
@@ -88,9 +91,9 @@ class MethodConfig:
     shield_gain: float = 0.25
     progress_weight: float = 0.10
     topology_temperature: float = 1.5
-    switch_hysteresis: float = 0.12
+    switch_hysteresis: float = 0.10
     shield_risk_threshold: float = 0.85
-    topology_cooldown: int = 10
+    topology_cooldown: int = 8
     max_shield_blend: float = 0.06
 
 

@@ -120,9 +120,17 @@ def summarize(rows: List[Dict]) -> Dict[str, float]:
     return out
 
 
-def rollout_validation_summary(method: str, cfg: Config, model, ckpt_dir: str = "results") -> Dict[str, float]:
+def rollout_validation_summary(
+    method: str,
+    cfg: Config,
+    model,
+    ckpt_dir: str = "results",
+    episodes_per_setting: int | None = None,
+    seed_offset: int = 50_000,
+) -> Dict[str, float]:
     scenarios = [s for s in cfg.train.rollout_val_scenarios if s in cfg.env.scenarios]
     team_sizes = [n for n in cfg.train.rollout_val_team_sizes if n in cfg.env.team_sizes]
+    episodes = int(episodes_per_setting or cfg.train.rollout_val_episodes_per_setting)
     if not scenarios:
         scenarios = list(cfg.env.scenarios[:1])
     if not team_sizes:
@@ -136,8 +144,8 @@ def rollout_validation_summary(method: str, cfg: Config, model, ckpt_dir: str = 
                 cfg,
                 scenario_idx,
                 n_agents,
-                cfg.train.rollout_val_episodes_per_setting,
-                seed_offset=50_000,
+                episodes,
+                seed_offset=seed_offset,
             ):
                 metrics.append(
                     run_policy_episode(

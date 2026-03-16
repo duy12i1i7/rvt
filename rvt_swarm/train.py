@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, random_split
@@ -127,13 +128,94 @@ def should_run_rollout_validation(cfg: Config, model_name: str, epoch: int, warm
     return epoch >= start_epoch and (epoch - start_epoch) % interval == 0
 
 
+def rollout_candidate_path(out_path: Path, model_name: str, epoch: int) -> Path:
+    return out_path / f"{model_name}_rollout_epoch{epoch:03d}.pt"
+
+
+def maybe_record_rollout_candidate(
+    *,
+    records: list[dict[str, object]],
+    out_path: Path,
+    model_name: str,
+    epoch: int,
+    score: float,
+    state: Dict[str, object],
+    topk: int,
+) -> None:
+    candidate_path = rollout_candidate_path(out_path, model_name, epoch)
+    torch.save(state, candidate_path)
+    records.append({"score": float(score), "epoch": int(epoch), "path": candidate_path})
+    records.sort(key=lambda item: (float(item["score"]), int(item["epoch"])), reverse=True)
+    while len(records) > max(topk, 1):
+        dropped = records.pop()
+        dropped_path = Path(dropped["path"])
+        if dropped_path.exists():
+            dropped_path.unlink()
+
+
+def recheck_rollout_candidates(
+    model_name: str,
+    cfg: Config,
+    model,
+    records: list[dict[str, object]],
+    out_path: Path,
+    device: torch.device,
+) -> tuple[dict[str, object] | None, dict[str, float] | None, float | None]:
+    if not records:
+        return None, None, None
+
+    recheck_eps = max(
+        int(cfg.train.rollout_val_recheck_episodes_per_setting),
+        int(cfg.train.rollout_val_episodes_per_setting),
+    )
+    seed_offset = int(cfg.train.rollout_val_recheck_seed_offset)
+
+    best_state = None
+    best_summary = None
+    best_score = None
+    best_epoch = -1
+    for record in records:
+        state = torch.load(Path(record["path"]), map_location=device, weights_only=False)
+        model.load_state_dict(state["model"])
+        model.eval()
+        summary = rollout_validation_summary(
+            model_name,
+            cfg,
+            model,
+            str(out_path),
+            episodes_per_setting=recheck_eps,
+            seed_offset=seed_offset,
+        )
+        score = rollout_validation_score(summary)
+        epoch = int(state.get("epoch", record["epoch"]))
+        if best_score is None or score > best_score or (score == best_score and epoch > best_epoch):
+            best_state = state
+            best_summary = summary
+            best_score = score
+            best_epoch = epoch
+
+    return best_state, best_summary, best_score
+
+
 def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset: SwarmDataset | None = None) -> str:
     set_seed(cfg.train.seed)
     device = torch_device(cfg.train.device)
     ds = dataset if dataset is not None else generate_dataset(cfg)
     train_ds, val_ds = split_dataset(ds)
-    train_loader = DataLoader(train_ds, batch_size=cfg.train.batch_size, shuffle=True, collate_fn=collate_graphs)
-    val_loader = DataLoader(val_ds, batch_size=cfg.train.batch_size, shuffle=False, collate_fn=collate_graphs)
+    train_loader = DataLoader(
+        train_ds,
+        batch_size=cfg.train.batch_size,
+        shuffle=True,
+        collate_fn=collate_graphs,
+        generator=torch.Generator().manual_seed(cfg.train.seed),
+    )
+    val_loader = DataLoader(
+        val_ds,
+        batch_size=cfg.train.batch_size,
+        shuffle=False,
+        collate_fn=collate_graphs,
+        generator=torch.Generator().manual_seed(cfg.train.seed + 1),
+    )
     model = build_model(model_name, cfg.train.hidden_dim, cfg.train.message_passes, cfg.train.aux_gradient_scale).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.lr, weight_decay=cfg.train.weight_decay)
 
@@ -151,6 +233,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
     best_ckpt = out_path / f"{model_name}_best.pt"
     last_ckpt = out_path / f"{model_name}_last.pt"
     legacy_ckpt = out_path / f"{model_name}.pt"
+    rollout_candidates: list[dict[str, object]] = []
 
     # For rvt_swarm with curriculum warmup, early stopping must not activate
     # until warmup is complete, because aux losses ramp up and inflate total loss.
@@ -231,6 +314,34 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
             torch.save(state, best_ckpt)
             if cfg.train.save_best_only:
                 torch.save(state, legacy_ckpt)
+        else:
+            state = {
+                "model": model.state_dict(),
+                "config": cfg,
+                "epoch": epoch,
+                "best_val": best_val,
+                "best_metric": metric_name,
+                "best_metric_mode": best_mode,
+                "validation_summary": rollout_summary,
+                "model_name": model_name,
+            }
+
+        if (
+            ran_rollout
+            and not in_warmup
+            and use_rollout_metric
+            and last_rollout_score is not None
+            and np.isfinite(last_rollout_score)
+        ):
+            maybe_record_rollout_candidate(
+                records=rollout_candidates,
+                out_path=out_path,
+                model_name=model_name,
+                epoch=epoch,
+                score=last_rollout_score,
+                state=state,
+                topk=int(cfg.train.rollout_val_topk_checkpoints),
+            )
 
         torch.save({
             "model": model.state_dict(),
@@ -264,6 +375,32 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
                 f"best epoch={best_epoch}, best {metric_name}={best_val:.4f}"
             )
             break
+
+    if rollout_candidates:
+        rechecked_state, rechecked_summary, rechecked_score = recheck_rollout_candidates(
+            model_name,
+            cfg,
+            model,
+            rollout_candidates,
+            out_path,
+            device,
+        )
+        if rechecked_state is not None and rechecked_score is not None:
+            rechecked_state = dict(rechecked_state)
+            rechecked_state["best_val"] = float(rechecked_score)
+            rechecked_state["best_metric"] = "rollout_recheck_score"
+            rechecked_state["best_metric_mode"] = "max"
+            rechecked_state["validation_summary"] = rechecked_summary
+            torch.save(rechecked_state, best_ckpt)
+            torch.save(rechecked_state, legacy_ckpt)
+            print(
+                f"[{model_name}] rollout recheck selected epoch {rechecked_state.get('epoch', 0):02d} "
+                f"with rollout_recheck_score={rechecked_score:.4f}"
+            )
+        for record in rollout_candidates:
+            candidate_path = Path(record["path"])
+            if candidate_path.exists():
+                candidate_path.unlink()
 
     if best_ckpt.exists():
         state = torch.load(best_ckpt, map_location=device, weights_only=False)

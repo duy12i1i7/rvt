@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.29)  14 MAR 2026 23:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.29)  16 MAR 2026 15:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**main.tex
-(./main.tex
+**/Users/udy/rvt/latex/main.tex
+(/Users/udy/rvt/latex/main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
@@ -962,133 +962,233 @@ Package caption Info: End \AtBeginDocument code.
 
 
 
+Underfull \hbox (badness 3396) in paragraph at lines 154--160
+[]\T1/ptm/m/n/10 We pro-vide a uni-fied ex-per-i-men-tal scaf-fold with
+ []
+
+
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/l
 ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 205
+LaTeX Font Info:    Trying to load font information for U+msa on input line 208
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 205
+LaTeX Font Info:    Trying to load font information for U+msb on input line 208
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 29
+3.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+Underfull \hbox (badness 1681) in paragraph at lines 286--302
+\T1/ptm/m/n/10 state vari-ables: \T1/pcr/m/n/10 topology_mode\T1/ptm/m/n/10 , \
+T1/pcr/m/n/10 formation_scale\T1/ptm/m/n/10 ,
+ []
 
-Underfull \hbox (badness 3942) in paragraph at lines 327--331
+
+Underfull \hbox (badness 1648) in paragraph at lines 317--329
+\T1/ptm/m/n/10 recoverability-proxy term, to-gether with topology-specific
+ []
+
+
+Underfull \hbox (badness 3942) in paragraph at lines 346--350
 []\T1/ptm/m/n/10 RVT-Swarm com-bines a graph-attention back-bone, a
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 327--331
+Underfull \hbox (badness 2351) in paragraph at lines 346--350
 \T1/ptm/m/n/10 recoverability-aware multi-head de-coder, a coun-ter-fac-tual
  []
 
-(./fig_architecture.tex)
 
-[2]
-Underfull \hbox (badness 4316) in paragraph at lines 355--359
+
+[2] (./fig_architecture.tex)
+
+
+Overfull \hbox (0.66234pt too wide) detected at line 406
+[][][][]\OT1/cmr/bx/n/10 e[] \OT1/cmr/m/n/10 = [^^A\OT1/cmr/bx/n/10 p[]\OML/cmm
+/m/it/10 ; \OT1/cmr/m/n/10 ^^A\OT1/cmr/bx/n/10 v[]\OML/cmm/m/it/10 ; \OMS/cmsy/
+m/n/10 k\OT1/cmr/m/n/10 ^^A\OT1/cmr/bx/n/10 p[]\OMS/cmsy/m/n/10 k\OML/cmm/m/it/
+10 ; \OT1/cmr/m/n/10 ^^E[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 ^^E[]\OML/cmm/m/it
+/10 ; ^^O[]; [][]; b[]; ^^Y[]\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 ;
+ []
+
+
+Underfull \hbox (badness 4316) in paragraph at lines 413--417
 []\T1/ptm/m/n/10 The graph is pro-cessed by three attention-weighted
  []
 
 
 
-
-Underfull \hbox (badness 1681) in paragraph at lines 379--381
+[3]
+Underfull \hbox (badness 1681) in paragraph at lines 444--446
 []\T1/ptm/m/n/10 a \T1/ptm/b/n/10 score head \T1/ptm/m/n/10 pro-duc-ing per-top
 ology re-cov-er-abil-ity
  []
 
+(./fig_rfn.tex)
 
 
-[3] (./fig_rfn.tex)
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 47
-7.
-
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
-
-
-Underfull \hbox (badness 3118) in paragraph at lines 573--580
-[]\T1/ptm/m/n/10 The bench-mark uses a com-mon 2D sim-u-la-tor with
- []
-
-
-
-[4]
-
-
-
-[5] (./main.bbl
-
-)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
+[4]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+
+[5]
+Underfull \hbox (badness 5893) in paragraph at lines 707--719
+\T1/ptm/m/n/10 where $[]$ is the centroid-to-goal unit vec-tor, $\OML/cmm/m/it/
+10 ^^M[] \OMS/cmsy/m/n/10 2
+ []
+
+
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 801--816
+\T1/ptm/m/n/10 re-cov-er-abil-ity re-gres-sion term is re-tained for In-stantCe
+rt
+ []
+
+
+
 [6]
+Underfull \hbox (badness 3118) in paragraph at lines 845--852
+[]\T1/ptm/m/n/10 The bench-mark uses a com-mon 2D sim-u-la-tor with
+ []
+
+
+Underfull \hbox (badness 2326) in paragraph at lines 865--872
+\T1/ptm/m/n/10 obstacle col-li-sions over the episode, and $[] \OT1/cmr/m/n/10 
+=
+ []
 
 
 
-[7
 
-] (./main.aux)
+
+[7]
+
+(./main.bbl
+
+[8])
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+
+[9]
+Overfull \hbox (81.49821pt too wide) detected at line 1264
+[][]
+ []
+
+
+Overfull \hbox (34.53114pt too wide) detected at line 1273
+[][]
+ []
+
+
+Overfull \hbox (81.16794pt too wide) detected at line 1314
+[][]
+ []
+
+
+
+
+Overfull \hbox (40.14682pt too wide) detected at line 1387
+[][]
+ []
+
+
+Underfull \hbox (badness 2165) in paragraph at lines 1394--1402
+\T1/ptm/m/n/7 eval-u-a-tion of those three learned meth-ods plus {\T1/ptm/m/sc/
+7 adaptive_formation\T1/ptm/m/n/7 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1402--1411
+[]\T1/ptm/m/n/7 The ab-la-tion tog-gles are ex-actly: \T1/pcr/m/n/7 full\T1/ptm
+/m/n/7 , \T1/pcr/m/n/7 no_recoverability\T1/ptm/m/n/7 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1402--1411
+\T1/pcr/m/n/7 no_counterfactual\T1/ptm/m/n/7 , \T1/pcr/m/n/7 no_progress_shield
+\T1/ptm/m/n/7 , \T1/pcr/m/n/7 no_topology\T1/ptm/m/n/7 ,
+ []
+
+
+
+[10] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 97FA3C5DF9DB600CD96A70103D706F43;4251.
+(rerunfilecheck)             Checksum: D8D308C6A467F1D432B3FBF9A369FBB2;4511.
  ) 
 Here is how much of TeX's memory you used:
- 27493 strings out of 473190
- 525295 string characters out of 5715800
- 916751 words of memory out of 5000000
- 50157 multiletter control sequences out of 15000+600000
- 692332 words of font info for 185 fonts, out of 8000000 for 9000
+ 27542 strings out of 473190
+ 526149 string characters out of 5715800
+ 916845 words of memory out of 5000000
+ 50187 multiletter control sequences out of 15000+600000
+ 703385 words of font info for 191 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,15n,87p,597b,886s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,15n,87p,618b,886s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><
-/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></u
-sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/l
-ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/loc
-al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
-/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
-exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local
-/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
-exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texl
-ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
-/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
-25/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf
--dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/te
-xmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist
-/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/typ
-e1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/ti
-mes/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8
-a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (7 pages, 352995 bytes).
+/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/
+local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb>
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
+ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
+al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/l
+ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
+al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/
+texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
+e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
+025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/tex
+mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
+1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/tim
+es/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a
+.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on main.pdf (10 pages, 450727 bytes).
 PDF statistics:
- 446 PDF objects out of 1000 (max. 8388607)
- 373 compressed objects within 4 object streams
- 112 named destinations out of 1000 (max. 500000)
- 237 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 506 PDF objects out of 1000 (max. 8388607)
+ 419 compressed objects within 5 object streams
+ 127 named destinations out of 1000 (max. 500000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 
