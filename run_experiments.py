@@ -127,6 +127,38 @@ def run_visualize(cfg: Config, results_dir: Path) -> None:
     print(f"All GIFs in {gif_dir}/")
 
 
+def run_robustness(cfg: Config, results_dir: Path, methods: list[str], episodes_per_setting: int) -> None:
+    from rvt_swarm.robustness import (
+        derived_scale_sensitivity_variants,
+        run_variant_suite,
+        zero_retune_variants,
+    )
+
+    robustness_dir = results_dir / "robustness"
+    print("Running zero-retune robustness suite...")
+    env_results = run_variant_suite(
+        "zero_retune_robustness",
+        methods,
+        zero_retune_variants(cfg, episodes_per_setting=episodes_per_setting),
+        ckpt_dir=str(results_dir),
+        out_dir=str(robustness_dir),
+    )
+    print(json.dumps(env_results, indent=2))
+
+    print("Running inference sensitivity suite...")
+    sensitivity_methods = [m for m in methods if m == "rvt_swarm"]
+    if not sensitivity_methods:
+        sensitivity_methods = ["rvt_swarm"]
+    sensitivity_results = run_variant_suite(
+        "derived_scale_sensitivity",
+        sensitivity_methods,
+        derived_scale_sensitivity_variants(cfg, episodes_per_setting=episodes_per_setting),
+        ckpt_dir=str(results_dir),
+        out_dir=str(robustness_dir),
+    )
+    print(json.dumps(sensitivity_results, indent=2))
+
+
 def run_diagnose() -> None:
     modules = [
         "numpy",
@@ -153,7 +185,7 @@ def parse_args() -> argparse.Namespace:
         "--mode",
         type=str,
         default="train_all",
-        choices=["train_all", "eval_all", "ablations", "visualize", "all", "diagnose"],
+        choices=["train_all", "eval_all", "ablations", "visualize", "robustness", "all", "diagnose"],
     )
     parser.add_argument("--device", type=str, default="auto", help="cpu, cuda, mps, or auto")
     parser.add_argument("--results-dir", type=str, default="results")
@@ -167,6 +199,18 @@ def parse_args() -> argparse.Namespace:
         "--skip-visualize",
         action="store_true",
         help="Skip GIF generation in --mode all",
+    )
+    parser.add_argument(
+        "--robustness-methods",
+        type=str,
+        default="rvt_swarm,instant_cert,gnn_only",
+        help="Comma-separated methods for --mode robustness",
+    )
+    parser.add_argument(
+        "--robustness-episodes",
+        type=int,
+        default=10,
+        help="Episodes per (scenario, team-size) setting for --mode robustness",
     )
     return parser.parse_args()
 
@@ -199,6 +243,10 @@ def main() -> None:
         return
     if args.mode == "visualize":
         run_visualize(cfg, results_dir)
+        return
+    if args.mode == "robustness":
+        methods = [m.strip() for m in args.robustness_methods.split(",") if m.strip()]
+        run_robustness(cfg, results_dir, methods, args.robustness_episodes)
         return
     if args.mode == "diagnose":
         run_diagnose()

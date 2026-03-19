@@ -67,9 +67,10 @@ def build_graph(obs: Dict, cfg: Config):
     obs_vel = obs.get("obstacle_velocities", np.zeros((0, 2), dtype=np.float32))
 
     # ── Precompute min time-to-collision per robot (predictive feature) ──
-    r_safe_rr = 2.0 * cfg.env.robot_radius + 0.1
-    r_safe_ro = cfg.env.robot_radius + cfg.env.obstacle_radius + 0.05
-    min_ttc_per_robot = np.full(n, 10.0, dtype=np.float32)
+    r_safe_rr = max(cfg.env.min_rr_distance, 2.0 * cfg.env.robot_radius)
+    r_safe_ro = max(cfg.env.min_ro_distance, cfg.env.robot_radius + cfg.env.obstacle_radius)
+    ttc_horizon = max(cfg.env.dt, cfg.env.sensing_radius / max(cfg.env.max_speed, 1e-6))
+    min_ttc_per_robot = np.full(n, ttc_horizon, dtype=np.float32)
     for i in range(n):
         for j in range(n):
             if j == i:
@@ -111,8 +112,9 @@ def build_graph(obs: Dict, cfg: Config):
         relc = pos[i] - centroid
         ro = pos[i] - obstacle_centroid
         ferr = obs["formation_error"][i]
-        local_bottleneck = float(np.mean(np.linalg.norm(obs_pos - pos[i], axis=1) < 1.5)) if len(obs_pos) else 0.0
-        min_obs = float(np.min(np.linalg.norm(obs_pos - pos[i], axis=1))) if len(obs_pos) else 4.0
+        local_window = max(cfg.env.nominal_spacing * 2.0, cfg.env.min_ro_distance)
+        local_bottleneck = float(np.mean(np.linalg.norm(obs_pos - pos[i], axis=1) < local_window)) if len(obs_pos) else 0.0
+        min_obs = float(np.min(np.linalg.norm(obs_pos - pos[i], axis=1))) if len(obs_pos) else float(cfg.env.lidar_range)
         dyn_obs = np.zeros(2, dtype=np.float32)
         if len(obs_pos):
             j = int(np.argmin(np.linalg.norm(obs_pos - pos[i], axis=1)))
@@ -133,7 +135,7 @@ def build_graph(obs: Dict, cfg: Config):
             dyn_obs[0], dyn_obs[1],
             float(obs.get("split_active", 0.0)),
             topo_onehot[0], topo_onehot[1], topo_onehot[2], topo_onehot[3], topo_onehot[4],
-            min(float(min_ttc_per_robot[i]) / 10.0, 1.0),  # normalised min TTC
+            min(float(min_ttc_per_robot[i]) / max(ttc_horizon, 1e-6), 1.0),  # normalised min TTC
         ]
         # Append 36 normalised LiDAR distances
         node.extend(lidar_norm[i].tolist())
@@ -157,7 +159,7 @@ def build_graph(obs: Dict, cfg: Config):
             aq_e = float(np.dot(dv_e, dv_e))
             bq_e = 2.0 * float(np.dot(dp_e, dv_e))
             cq_e = float(np.dot(dp_e, dp_e)) - r_safe_rr ** 2
-            ttc_edge = 10.0
+            ttc_edge = ttc_horizon
             if cq_e < 0:
                 ttc_edge = 0.0
             elif aq_e > 1e-12:
@@ -165,7 +167,7 @@ def build_graph(obs: Dict, cfg: Config):
                 if disc_e >= 0:
                     t_e = (-bq_e - np.sqrt(disc_e)) / (2.0 * aq_e)
                     if t_e > 0:
-                        ttc_edge = min(10.0, t_e)
+                        ttc_edge = min(ttc_horizon, t_e)
             edge_src.append(i)
             edge_dst.append(j)
             edge_attr.append([
@@ -190,7 +192,7 @@ def _generate_episode(args):
     rng = np.random.default_rng(seed)
     env = SwarmFormationEnv(cfg)
     n = int(rng.choice(cfg.env.team_sizes))
-    scenario = str(rng.choice(cfg.env.scenarios, p=np.array([0.18, 0.28, 0.30, 0.24])))
+    scenario = str(rng.choice(cfg.env.scenarios))
     obs = env.reset(n, scenario, seed=seed)
     done = False
     episode_samples = []
@@ -213,8 +215,9 @@ def _generate_episode(args):
             'aux_target': aux,
         }
         episode_samples.append(sample)
-        if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > 0.35:
-            noisy_action = 0.75 * action + 0.25 * rng.normal(size=action.shape).astype(np.float32) * cfg.env.max_accel
+        if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > obs["progress"]:
+            noise_scale = float(np.clip(1.0 - recover_margin, 0.0, 1.0))
+            noisy_action = action + noise_scale * rng.normal(size=action.shape).astype(np.float32) * cfg.env.max_accel
             noisy_action = np.clip(noisy_action, -cfg.env.max_accel, cfg.env.max_accel)
             noisy_action_norm = noisy_action / cfg.env.max_accel
             sample_noisy = {

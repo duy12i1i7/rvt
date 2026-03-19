@@ -67,3 +67,27 @@ def soft_clip(x: np.ndarray, limit: float) -> np.ndarray:
 def heading_features(v: np.ndarray) -> Tuple[float, float]:
     ang = angle_to(v) if np.linalg.norm(v) > 1e-8 else 0.0
     return math.cos(ang), math.sin(ang)
+
+
+def clip01(value: float) -> float:
+    return float(np.clip(value, 0.0, 1.0))
+
+
+def normalized_mean(values) -> float:
+    arr = np.asarray(list(values), dtype=np.float32)
+    if arr.size == 0:
+        return 0.0
+    return float(arr.mean())
+
+
+def standardize_np(values: np.ndarray) -> np.ndarray:
+    arr = np.asarray(values, dtype=np.float32)
+    return ((arr - arr.mean()) / max(float(arr.std()), 1e-6)).astype(np.float32)
+
+
+def score_dispersion_tensor(scores: torch.Tensor) -> torch.Tensor:
+    return scores.detach().std(dim=-1, keepdim=True, unbiased=False).clamp_min(1e-6)
+
+
+def uncertainty_adjusted_scores(scores: torch.Tensor, uncertainty: torch.Tensor) -> torch.Tensor:
+    return scores - uncertainty * score_dispersion_tensor(scores)

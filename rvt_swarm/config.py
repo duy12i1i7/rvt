@@ -47,18 +47,11 @@ class TrainConfig:
     weight_decay: float = 1e-5
     hidden_dim: int = 128
     message_passes: int = 3
-    dropout: float = 0.0
     recover_horizon: int = 14
     graph_k: int = 6
-    lambda_action: float = 5.0
-    lambda_recover: float = 0.02
-    lambda_topology: float = 0.01
-    lambda_aux: float = 0.004
     early_stopping_patience: int = 40
     early_stopping_min_delta: float = 1e-4
     save_best_only: bool = True
-    curriculum_warmup_epochs: int = 50
-    aux_gradient_scale: float = 0.2
     rollout_val_enabled: bool = True
     rollout_val_interval: int = 10
     rollout_val_episodes_per_setting: int = 4
@@ -84,17 +77,6 @@ class MethodConfig:
     use_topology: bool = True
     use_counterfactual_topology: bool = True
     use_progress_shield: bool = True
-    # For RVT, the topology score-map is the primary recoverability signal.
-    # Keep scalar recoverability loss off by default so it does not fight the
-    # score-map/ranking objectives during shared representation learning.
-    rvt_recover_loss_scale: float = 0.0
-    shield_gain: float = 0.25
-    progress_weight: float = 0.10
-    topology_temperature: float = 1.5
-    switch_hysteresis: float = 0.10
-    shield_risk_threshold: float = 0.85
-    topology_cooldown: int = 8
-    max_shield_blend: float = 0.06
 
 
 @dataclass

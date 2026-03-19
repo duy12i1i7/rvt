@@ -8,7 +8,7 @@ from .baselines import historical_baseline
 from .config import Config
 from .environment import SwarmFormationEnv
 from .policy_runtime import infer_learned_action, is_learned_method, load_learned_model
-from .utils import torch_device
+from .utils import normalized_mean, torch_device
 
 
 def run_policy_episode(
@@ -167,14 +167,19 @@ def rollout_validation_summary(
 
 
 def rollout_validation_score(summary: Dict[str, float]) -> float:
-    # Weighted toward end-task success, but still smooth enough for
-    # checkpointing on a small rollout set.
-    return float(
-        1.00 * summary["success"]
-        + 0.30 * summary["collision_free"]
-        + 0.20 * summary["form_ok"]
-        + 0.10 * summary["goal_reached"]
-        - 0.18 * summary["irreversible_collapse"]
-        - 0.08 * summary["deadlock"]
-        - 0.03 * summary["stall_rate"]
+    positive = normalized_mean(
+        [
+            summary["success"],
+            summary["collision_free"],
+            summary["form_ok"],
+            summary["goal_reached"],
+        ]
     )
+    negative = normalized_mean(
+        [
+            summary["irreversible_collapse"],
+            summary["deadlock"],
+            summary["stall_rate"],
+        ]
+    )
+    return float(positive - negative)

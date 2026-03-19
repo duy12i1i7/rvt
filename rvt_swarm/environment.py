@@ -6,7 +6,7 @@ from typing import Dict, Tuple
 import numpy as np
 
 from .config import Config
-from .utils import pairwise_dist, soft_clip, unit
+from .utils import clip01, normalized_mean, pairwise_dist, soft_clip, unit
 
 
 @dataclass
@@ -121,17 +121,18 @@ class SwarmFormationEnv:
     def _compute_bottleneck_score(self) -> float:
         assert self.state is not None
         centroid = self.state.positions.mean(axis=0)
-        score = 0.0
+        score_terms = []
         if self.state.scenario == "narrow_passage":
-            score += 0.65
-            score += max(0.0, 1.2 - abs(centroid[0])) * 0.18
+            score_terms.append(clip01(1.0 - abs(centroid[0]) / max(self.ec.world_size * 0.5, 1e-6)))
         if len(self.state.obstacles):
             rel = self.state.obstacles - centroid[None, :]
             d = np.linalg.norm(rel, axis=1)
-            nearby = np.mean(d < 1.8)
-            frontal = np.mean((np.abs(rel[:, 0]) < 1.4) & (np.abs(rel[:, 1]) < 1.4))
-            score += 0.25 * nearby + 0.2 * frontal
-        return float(np.clip(score, 0.0, 1.0))
+            local_range = max(self.ec.nominal_spacing * 2.0, self.ec.min_ro_distance)
+            frontal_range = max(self.ec.nominal_spacing, self.ec.min_rr_distance)
+            nearby = float(np.mean(d < local_range))
+            frontal = float(np.mean((np.abs(rel[:, 0]) < local_range) & (np.abs(rel[:, 1]) < frontal_range)))
+            score_terms.extend([nearby, frontal])
+        return clip01(normalized_mean(score_terms))
 
     def _corridor_direction(self) -> np.ndarray:
         assert self.state is not None
@@ -167,17 +168,17 @@ class SwarmFormationEnv:
         if mode == 3:  # split into two lines on both sides of corridor axis
             split = self.state.subteam_ids
             counts = [max(1, int(np.sum(split == 0))), max(1, int(np.sum(split == 1)))]
-            lane_gap = max(0.7, 1.1 * spacing)
+            lane_gap = max(self.ec.nominal_spacing, spacing + self.ec.min_rr_distance)
             offsets = np.zeros((n, 2), dtype=np.float32)
             idx0 = idx1 = 0
             for i in range(n):
                 if split[i] == 0:
                     longitudinal = (idx0 - (counts[0] - 1) / 2) * spacing
-                    offsets[i] = corridor * longitudinal - lateral * (0.55 * lane_gap)
+                    offsets[i] = corridor * longitudinal - lateral * (0.5 * lane_gap)
                     idx0 += 1
                 else:
                     longitudinal = (idx1 - (counts[1] - 1) / 2) * spacing
-                    offsets[i] = corridor * longitudinal + lateral * (0.55 * lane_gap)
+                    offsets[i] = corridor * longitudinal + lateral * (0.5 * lane_gap)
                     idx1 += 1
             return offsets
 
@@ -198,7 +199,7 @@ class SwarmFormationEnv:
         d_goal = np.linalg.norm(self.state.goal - centroid)
         self.state.bottleneck_score = self._compute_bottleneck_score()
         self.state.corridor_direction = self._corridor_direction()
-        progress = 1.0 - min(1.0, d_goal / (self.ec.world_size * 0.76))
+        progress = clip01(1.0 - d_goal / max(self.ec.world_size, 1e-6))
         avg_speed = float(np.mean(np.linalg.norm(self.state.velocities, axis=1)))
         return {
             "goal_distance": float(d_goal),
@@ -244,35 +245,68 @@ class SwarmFormationEnv:
         old_mode = self.state.topology_mode
         old_scale = self.state.formation_scale
         self.state.time_since_switch += 1
+        min_scale = clip01(self.ec.min_rr_distance / max(self.ec.nominal_spacing, 1e-6))
+        bottleneck = clip01(self.state.bottleneck_score)
+        open_space = clip01(1.0 - bottleneck)
 
         if topology_action == 1:  # compress
             self.state.topology_mode = 0
-            target_scale = 1.0 - 0.38 * max(self.state.bottleneck_score, 0.3)
-            self.state.formation_scale = float(np.clip(0.72 * self.state.formation_scale + 0.28 * target_scale, 0.5, 1.0))
-            self.state.split_active = max(0.0, self.state.split_active - 0.10)
+            target_scale = max(min_scale, 1.0 - bottleneck * (1.0 - min_scale))
+            self.state.formation_scale = float(
+                np.clip(
+                    self.state.formation_scale + (target_scale - self.state.formation_scale) * bottleneck,
+                    min_scale,
+                    1.0,
+                )
+            )
+            self.state.split_active = clip01(self.state.split_active * open_space)
         elif topology_action == 2:  # line
             self.state.topology_mode = 2
-            target_scale = 0.52 if self.state.bottleneck_score > 0.35 else 0.72
-            self.state.formation_scale = float(np.clip(0.58 * self.state.formation_scale + 0.42 * target_scale, 0.42, 0.9))
-            self.state.split_active = max(0.0, self.state.split_active - 0.14)
+            target_scale = max(min_scale, min(self.state.formation_scale, 1.0 - bottleneck * (1.0 - min_scale)))
+            blend = max(bottleneck, clip01(self.state.split_active))
+            self.state.formation_scale = float(
+                np.clip(
+                    self.state.formation_scale + (target_scale - self.state.formation_scale) * blend,
+                    min_scale,
+                    1.0,
+                )
+            )
+            self.state.split_active = clip01(self.state.split_active * open_space)
         elif topology_action == 3:  # split
             self.state.topology_mode = 3
             self.state.subteam_ids = self._subteam_assignments()
-            self.state.formation_scale = float(np.clip(0.72 * self.state.formation_scale + 0.28 * 0.8, 0.58, 1.0))
-            self.state.split_active = min(1.0, self.state.split_active + 0.22)
+            self.state.formation_scale = float(
+                np.clip(
+                    self.state.formation_scale + bottleneck * (1.0 - self.state.formation_scale),
+                    min_scale,
+                    1.0,
+                )
+            )
+            self.state.split_active = clip01(self.state.split_active + bottleneck)
         elif topology_action == 4:  # recover
             self.state.topology_mode = 0
-            recover_boost = 0.22 if self.state.bottleneck_score < 0.35 else 0.12
-            self.state.formation_scale = float(np.clip(self.state.formation_scale + recover_boost, 0.5, 1.0))
-            self.state.split_active = max(0.0, self.state.split_active - 0.28)
+            self.state.formation_scale = float(
+                np.clip(
+                    self.state.formation_scale + (1.0 - self.state.formation_scale) * max(open_space, clip01(self.state.split_active)),
+                    min_scale,
+                    1.0,
+                )
+            )
+            self.state.split_active = clip01(self.state.split_active * bottleneck)
             self.state.subteam_ids[:] = 0
         else:  # keep
-            self.state.topology_mode = self.state.topology_mode if self.state.bottleneck_score > 0.52 else 0
-            drift_target = 0.82 if self.state.bottleneck_score > 0.55 else 1.0
-            self.state.formation_scale = float(np.clip(0.92 * self.state.formation_scale + 0.08 * drift_target, 0.5, 1.0))
-            self.state.split_active = max(0.0, self.state.split_active - 0.07)
+            self.state.topology_mode = self.state.topology_mode if bottleneck > open_space else 0
+            target_scale = max(min_scale, 1.0 - bottleneck * (1.0 - min_scale))
+            self.state.formation_scale = float(
+                np.clip(
+                    self.state.formation_scale + (target_scale - self.state.formation_scale) * bottleneck,
+                    min_scale,
+                    1.0,
+                )
+            )
+            self.state.split_active = clip01(self.state.split_active * open_space)
 
-        if old_mode != self.state.topology_mode or abs(old_scale - self.state.formation_scale) > 0.06:
+        if old_mode != self.state.topology_mode or abs(old_scale - self.state.formation_scale) * self.ec.nominal_spacing > self.ec.robot_radius:
             self.state.topology_switches += 1
             self.state.time_since_switch = 0
 
@@ -434,9 +468,28 @@ class SwarmFormationEnv:
         self.state.prev_goal_distance = goal_distance
 
         metrics = self.compute_metrics()
-        self.state.formation_recovery_progress = float(max(0.0, 1.0 - metrics["form_rms"] / max(self.ec.formation_tolerance * 2.0, 1e-6)))
-        reward = 1.6 * metrics["goal_progress"] + 1.0 * metrics["recoverability_proxy"] + 1.1 * metrics["formation_recovery_score"] + 0.55 * metrics["form_ok"]
-        reward -= 1.2 * metrics["form_rms"] + 3.0 * (metrics["rr_collision"] + metrics["ro_collision"]) + 0.22 * metrics["stall_rate"] + 0.05 * metrics["topology_switches"]
+        self.state.formation_recovery_progress = clip01(
+            1.0 - metrics["form_rms"] / max(self.ec.formation_tolerance, 1e-6)
+        )
+        form_ratio = clip01(metrics["form_rms"] / max(self.ec.formation_tolerance, 1e-6))
+        switch_rate = clip01(metrics["topology_switches"] / max(self.state.step_count, 1))
+        positive = normalized_mean(
+            [
+                metrics["goal_progress"],
+                metrics["recoverability_proxy"],
+                metrics["formation_recovery_score"],
+                metrics["form_ok"],
+            ]
+        )
+        negative = normalized_mean(
+            [
+                form_ratio,
+                clip01(metrics["rr_collision"] + metrics["ro_collision"]),
+                metrics["stall_rate"],
+                switch_rate,
+            ]
+        )
+        reward = positive - negative
         done = bool(metrics["goal_reached"] or self.state.step_count >= self.ec.max_steps)
         return self.observe(), reward, done, metrics.copy()
 
@@ -457,19 +510,28 @@ class SwarmFormationEnv:
         success = float(goal_reached and collision_free and form_ok)
         stall_rate = float(self.state.stall_counter / max(1, self.state.step_count))
         deadlock = float(self.state.stall_counter >= 12 and not goal_reached)
-        formation_recovery_score = float(np.clip(1.0 - form_rms / max(self.ec.formation_tolerance * 1.45, 1e-6), 0.0, 1.0))
-        if self.state.topology_mode == 0 and self.state.bottleneck_score < 0.3:
-            formation_recovery_score = float(np.clip(formation_recovery_score + 0.12, 0.0, 1.0))
-        formation_recovery_time = float(self.state.step_count / max(0.25 + formation_recovery_score, 1e-3))
-        irrecoverable = float((rr_collision + ro_collision > 0.05 and form_rms > self.ec.formation_tolerance * 1.8) or deadlock or (self.state.split_active > 0.55 and self.state.bottleneck_score < 0.25 and form_rms > self.ec.formation_tolerance * 1.2))
-        recoverability_proxy = float(
-            0.95 * float(collision_free) + 1.1 * formation_recovery_score
-            + 0.65 * (1.0 - min(1.0, d_goal / (self.ec.world_size * 0.76)))
-            - 0.75 * deadlock - 0.8 * irrecoverable - 0.06 * min(self.state.topology_switches, 8)
+        form_ratio = clip01(form_rms / max(self.ec.formation_tolerance, 1e-6))
+        formation_recovery_score = clip01(1.0 - form_ratio)
+        formation_recovery_time = float(
+            self.state.step_count / max(formation_recovery_score, 1.0 / max(self.ec.max_steps, 1))
         )
+        switch_rate = clip01(self.state.topology_switches / max(self.state.step_count, 1))
+        goal_progress = clip01(1.0 - min(1.0, d_goal / max(self.ec.world_size, 1e-6)))
+        irrecoverable = float(
+            (not collision_free and form_rms > self.ec.formation_tolerance)
+            or deadlock
+            or (self.state.split_active > 0.0 and self.state.bottleneck_score < goal_progress and form_rms > self.ec.formation_tolerance)
+        )
+        recoverability_proxy = normalized_mean(
+            [
+                float(collision_free),
+                formation_recovery_score,
+                goal_progress,
+            ]
+        ) - normalized_mean([deadlock, irrecoverable, switch_rate])
         return {
             "goal_distance": float(d_goal),
-            "goal_progress": float(1.0 - min(1.0, d_goal / (self.ec.world_size * 0.76))),
+            "goal_progress": goal_progress,
             "goal_reached": float(goal_reached),
             "form_rms": form_rms,
             "form_ok": float(form_ok),

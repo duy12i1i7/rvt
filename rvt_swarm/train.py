@@ -12,7 +12,7 @@ from .config import Config
 from .dataset import SwarmDataset, collate_graphs, generate_dataset
 from .evaluate import rollout_validation_score, rollout_validation_summary
 from .models import build_model
-from .utils import set_seed, torch_device
+from .utils import score_dispersion_tensor, set_seed, torch_device
 
 
 def epochs_for_model(cfg: Config, model_name: str) -> int:
@@ -39,48 +39,42 @@ def pairwise_ranking_loss(pred_scores: torch.Tensor, target_scores: torch.Tensor
     mask = sign != 0
     if mask.sum() == 0:
         return pred_scores.new_tensor(0.0)
-    margins = 1.0 - sign[mask] * diffs_p[mask]
-    return torch.relu(margins).mean()
+    return F.softplus(-(sign[mask] * diffs_p[mask])).mean()
 
 
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
     losses = {}
     losses["action"] = F.mse_loss(outputs["actions"], batch["action_target"])
 
-    # Curriculum warmup: gradually ramp up auxiliary losses for rvt_swarm
-    warmup = cfg.train.curriculum_warmup_epochs
-    if model_name == "rvt_swarm" and epoch <= warmup:
-        aux_scale = max(0.0, (epoch - 1) / max(warmup, 1))
-    else:
-        aux_scale = 1.0
-
-    recover_loss_scale = 1.0
-    if model_name == "rvt_swarm" and cfg.method.use_topology:
-        recover_loss_scale = float(getattr(cfg.method, "rvt_recover_loss_scale", 0.0))
-
-    if outputs["recoverability"] is not None and model_name in ["rvt_swarm", "instant_cert"] and cfg.method.use_recoverability:
-        losses["recover"] = F.mse_loss(outputs["recoverability"], batch["recover_target"]) * aux_scale * recover_loss_scale
+    if outputs["recoverability"] is not None and model_name == "instant_cert" and cfg.method.use_recoverability:
+        losses["recover"] = F.mse_loss(outputs["recoverability"], batch["recover_target"])
     else:
         losses["recover"] = torch.tensor(0.0, device=batch["node_x"].device)
     if outputs["topology_logits"] is not None and model_name == "rvt_swarm" and cfg.method.use_topology:
-        losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"]) * aux_scale
-        losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"]) * aux_scale
-        losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"]) * aux_scale
-        losses["aux"] = F.mse_loss(outputs["aux"], batch["aux_target"]) * aux_scale
-        losses["uncertainty"] = (outputs["uncertainty"].mean() * 0.02 if outputs["uncertainty"] is not None else batch["node_x"].new_tensor(0.0)) * aux_scale
+        losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
+        losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
+        losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
+        losses["aux"] = F.mse_loss(outputs["aux"], batch["aux_target"])
+        if outputs["uncertainty"] is not None:
+            score_scale = score_dispersion_tensor(batch["recover_scores_target"]).mean()
+            losses["uncertainty"] = outputs["uncertainty"].mean() / (1.0 + score_scale)
+        else:
+            losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
     else:
         losses["topology"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["score_map"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["rank"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["aux"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["uncertainty"] = torch.tensor(0.0, device=batch["node_x"].device)
-    total = (
-        cfg.train.lambda_action * losses["action"]
-        + cfg.train.lambda_recover * losses["recover"]
-        + cfg.train.lambda_topology * (losses["topology"] + 0.8 * losses["score_map"] + 0.45 * losses["rank"])
-        + cfg.train.lambda_aux * losses["aux"]
-        + losses["uncertainty"]
-    )
+    topology_bundle = torch.stack(
+        [losses["topology"], losses["score_map"], losses["rank"]]
+    ).mean()
+    active_terms = [losses["action"]]
+    if model_name == "instant_cert" and cfg.method.use_recoverability:
+        active_terms.append(losses["recover"])
+    if model_name == "rvt_swarm" and cfg.method.use_topology:
+        active_terms.extend([topology_bundle, losses["aux"], losses["uncertainty"]])
+    total = torch.stack(active_terms).mean()
     losses["total"] = total
     return losses
 
@@ -216,7 +210,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         collate_fn=collate_graphs,
         generator=torch.Generator().manual_seed(cfg.train.seed + 1),
     )
-    model = build_model(model_name, cfg.train.hidden_dim, cfg.train.message_passes, cfg.train.aux_gradient_scale).to(device)
+    model = build_model(model_name, cfg.train.hidden_dim, cfg.train.message_passes).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.lr, weight_decay=cfg.train.weight_decay)
 
     num_epochs = epochs_for_model(cfg, model_name)
@@ -235,9 +229,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
     legacy_ckpt = out_path / f"{model_name}.pt"
     rollout_candidates: list[dict[str, object]] = []
 
-    # For rvt_swarm with curriculum warmup, early stopping must not activate
-    # until warmup is complete, because aux losses ramp up and inflate total loss.
-    warmup = cfg.train.curriculum_warmup_epochs if model_name == "rvt_swarm" else 0
+    warmup = 0
 
     for epoch in range(1, num_epochs + 1):
         tr = run_epoch(model, train_loader, optimizer, device, model_name, cfg, True, epoch)

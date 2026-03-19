@@ -6,7 +6,37 @@ import numpy as np
 import torch
 
 from .config import Config, TOPOLOGY_IDS
-from .utils import soft_clip, unit
+from .utils import clip01, normalized_mean, soft_clip, unit
+
+
+def selector_temperature(cfg: Config) -> float:
+    spacing_ratio = cfg.env.nominal_spacing / max(cfg.env.sensing_radius, 1e-6)
+    motion_ratio = (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.min_rr_distance, 1e-6)
+    return max(1.0, 1.0 + spacing_ratio + motion_ratio)
+
+
+def selector_cooldown(cfg: Config) -> int:
+    horizon_ratio = (
+        cfg.train.recover_horizon
+        * cfg.env.max_speed
+        * cfg.env.dt
+        / max(cfg.env.min_rr_distance, 1e-6)
+    )
+    return max(1, int(round(horizon_ratio + len(cfg.env.team_sizes))))
+
+
+def switch_hysteresis_margin(cfg: Config) -> float:
+    return clip01(cfg.env.min_rr_distance / max(cfg.env.sensing_radius, 1e-6))
+
+
+def shield_risk_threshold(cfg: Config) -> float:
+    return clip01(1.0 - (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.nominal_spacing, 1e-6))
+
+
+def shield_blend_limit(cfg: Config) -> float:
+    progress_ratio = (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.nominal_spacing, 1e-6)
+    clearance_ratio = cfg.env.min_rr_distance / max(cfg.env.nominal_spacing, 1e-6)
+    return clip01(progress_ratio * clearance_ratio)
 
 
 def time_to_collision(
@@ -37,32 +67,37 @@ def time_to_collision(
     return float(t) if t > 0.0 else float('inf')
 
 
-def collision_risk(obs: Dict, horizon: float = 2.0) -> float:
+def collision_risk(obs: Dict, cfg: Config, horizon: float | None = None) -> float:
     """Compute collision risk using both proximity AND predicted TTC.
 
     Predictive: uses relative velocities to anticipate future collisions,
     not just current distances.  Risk is high when TTC is short, even if
     agents are currently far apart.
     """
+    horizon = horizon or max(cfg.env.dt, cfg.env.sensing_radius / max(cfg.env.max_speed, 1e-6))
     pos = obs["positions"]
     vel = obs["velocities"]
     obs_pos = obs["obstacles"]
     obs_vel = obs.get("obstacle_velocities", np.zeros_like(obs_pos))
     risk = 0.0
+    rr_buffer = max(cfg.env.min_rr_distance, cfg.env.nominal_spacing)
+    ro_buffer = max(cfg.env.min_ro_distance, cfg.env.robot_radius + cfg.env.obstacle_radius)
     for i in range(len(pos)):
         for j in range(i + 1, len(pos)):
             d = np.linalg.norm(pos[i] - pos[j])
-            dist_risk = max(0.0, 0.9 - d)
-            ttc = time_to_collision(pos[i], vel[i], pos[j], vel[j], 0.9)
-            ttc_risk = max(0.0, 1.0 - ttc / horizon) if ttc < horizon else 0.0
-            risk = max(risk, dist_risk, 0.45 * ttc_risk)
+            dist_risk = clip01(1.0 - d / max(rr_buffer, 1e-6))
+            ttc = time_to_collision(pos[i], vel[i], pos[j], vel[j], rr_buffer)
+            ttc_risk = clip01(1.0 - ttc / horizon) if ttc < horizon else 0.0
+            predictive_risk = ttc_risk / (1.0 + d / max(rr_buffer, 1e-6))
+            risk = max(risk, dist_risk, predictive_risk)
         for k, o in enumerate(obs_pos):
             d = np.linalg.norm(pos[i] - o)
-            dist_risk = max(0.0, 0.95 - d)
+            dist_risk = clip01(1.0 - d / max(ro_buffer, 1e-6))
             ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
-            ttc = time_to_collision(pos[i], vel[i], o, ov, 0.95)
-            ttc_risk = max(0.0, 1.0 - ttc / horizon) if ttc < horizon else 0.0
-            risk = max(risk, dist_risk, 0.45 * ttc_risk)
+            ttc = time_to_collision(pos[i], vel[i], o, ov, ro_buffer)
+            ttc_risk = clip01(1.0 - ttc / horizon) if ttc < horizon else 0.0
+            predictive_risk = ttc_risk / (1.0 + d / max(ro_buffer, 1e-6))
+            risk = max(risk, dist_risk, predictive_risk)
     return float(risk)
 
 
@@ -98,8 +133,10 @@ def simple_recover_shield(
     """
     if not cfg.method.use_progress_shield:
         return actions
-    risk = collision_risk(obs)
+    threshold = shield_risk_threshold(cfg)
+    risk = collision_risk(obs, cfg)
     form_rms = estimated_form_rms(obs)
+    form_ratio = form_rms / max(cfg.env.formation_tolerance, 1e-6)
 
     # Recoverability is treated as a conservative warning signal only.
     # Positive scores should not "explain away" geometric collision risk.
@@ -108,24 +145,23 @@ def simple_recover_shield(
         all_negative = bool(np.all(recoverability_scores < 0.0))
     if recoverability is not None:
         recover_value = float(recoverability)
-        if recover_value < -0.10:
-            risk = max(risk, 0.52 + 0.12 * min(-recover_value, 1.0))
+        if recover_value < 0.0:
+            neg_level = clip01(-recover_value)
+            risk = max(risk, threshold + (1.0 - threshold) * neg_level)
     # Docs: "chỉ can thiệp nếu tất cả lựa chọn có recoverability âm"
     if all_negative:
-        risk = max(risk, 0.55)
-
-    threshold = getattr(cfg.method, 'shield_risk_threshold', 0.85)
+        risk = max(risk, threshold)
     if not all_negative:
-        if obs.get("time_since_switch", 999) < 4:
-            threshold += 0.05
-        if topo in (2, 3, 4) and form_rms > 0.85 * cfg.env.formation_tolerance:
-            threshold += 0.03
+        cooldown = max(float(selector_cooldown(cfg)), 1.0)
+        time_since_switch = float(obs.get("time_since_switch", cooldown))
+        switch_guard = clip01((cooldown - time_since_switch) / cooldown)
+        threshold = min(1.0, threshold + (1.0 - threshold) * switch_guard * clip01(1.0 - form_ratio))
     if risk < threshold:
         return actions
 
     # --- QP-based intervention ---
     progress_dir = progress_direction(obs)
-    progress_w = 0.02 if all_negative else 0.008
+    progress_w = cfg.env.max_accel * clip01(1.0 - risk)
     safe = actions.copy()
     for i in range(len(safe)):
         constraints = _build_cbf_constraints(i, obs, cfg)
@@ -134,16 +170,13 @@ def simple_recover_shield(
         safe[i] = _solve_per_robot_qp(
             safe[i], constraints, progress_dir, cfg.env.max_accel, progress_w,
         )
-    max_blend = float(getattr(cfg.method, "max_shield_blend", 0.06))
+    max_blend = shield_blend_limit(cfg)
     # Soft blend avoids over-damping learned policy when shield activates.
-    if all_negative:
-        blend = min(max_blend, 0.8 * max_blend)
-    else:
-        if obs.get("time_since_switch", 999) < 4:
-            max_blend *= 0.75
-        denom = max(1e-6, 1.0 - threshold)
-        severity = float(np.clip((risk - threshold) / denom, 0.0, 1.0))
-        blend = severity * max_blend
+    denom = max(1e-6, 1.0 - threshold)
+    severity = float(np.clip((risk - threshold) / denom, 0.0, 1.0))
+    blend = severity * max_blend
+    if all_negative and recoverability is not None:
+        blend = max(blend, max_blend * clip01(-float(recoverability)))
     return (1.0 - blend) * actions + blend * safe
 
 
@@ -151,7 +184,6 @@ def simple_recover_shield(
 
 def _build_cbf_constraints(
     robot_idx: int, obs: Dict, cfg: Config,
-    alpha_rr: float = 1.0, alpha_ro: float = 1.5,
 ) -> list:
     """Build linear CBF half-plane constraints for robot *robot_idx*.
 
@@ -166,34 +198,36 @@ def _build_cbf_constraints(
     constraints: list = []
 
     # Robot-robot
-    d_safe_rr = cfg.env.min_rr_distance + 0.03
+    d_safe_rr = max(cfg.env.min_rr_distance, 2.0 * cfg.env.robot_radius)
+    active_rr = max(d_safe_rr, cfg.env.nominal_spacing)
     for j in range(len(pos)):
         if j == robot_idx:
             continue
         diff = pi - pos[j]
         dist_sq = float(np.dot(diff, diff))
         h = dist_sq - d_safe_rr ** 2
-        if h > 0.9:              # far enough → no constraint needed
+        if dist_sq > active_rr ** 2:
             continue
         rel_v = vi - vel[j]
         a = (2.0 * dt * diff).astype(np.float32)
-        b = float(-alpha_rr * h - 2.0 * np.dot(diff, rel_v))
+        b = float(max(0.0, -h) - 2.0 * np.dot(diff, rel_v))
         constraints.append((a, b))
 
     # Robot-obstacle
     obs_pos = obs["obstacles"]
     obs_vel = obs.get("obstacle_velocities", np.zeros_like(obs_pos))
-    d_safe_ro = cfg.env.min_ro_distance + 0.02
+    d_safe_ro = max(cfg.env.min_ro_distance, cfg.env.robot_radius + cfg.env.obstacle_radius)
+    active_ro = max(d_safe_ro, cfg.env.nominal_spacing)
     for k in range(len(obs_pos)):
         diff = pi - obs_pos[k]
         dist_sq = float(np.dot(diff, diff))
         h = dist_sq - d_safe_ro ** 2
-        if h > 0.9:
+        if dist_sq > active_ro ** 2:
             continue
         ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
         rel_v = vi - ov
         a = (2.0 * dt * diff).astype(np.float32)
-        b = float(-alpha_ro * h - 2.0 * np.dot(diff, rel_v))
+        b = float(max(0.0, -h) - 2.0 * np.dot(diff, rel_v))
         constraints.append((a, b))
 
     return constraints
@@ -243,10 +277,15 @@ def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:
 def topology_context_mask(obs: Dict, cfg: Config, previous_topology: int) -> tuple[np.ndarray, np.ndarray]:
     form_rms = estimated_form_rms(obs)
     form_tol = max(cfg.env.formation_tolerance, 1e-6)
-    bottleneck = float(obs["bottleneck"])
-    progress = float(obs["progress"])
-    split_active = float(obs.get("split_active", 0.0))
+    bottleneck = clip01(float(obs["bottleneck"]))
+    progress = clip01(float(obs["progress"]))
+    split_active = clip01(float(obs.get("split_active", 0.0)))
     n_agents = int(len(obs["positions"]))
+    team_factor = clip01(n_agents / max(cfg.env.team_sizes))
+    form_ratio = form_rms / form_tol
+    form_stretch = clip01(max(form_ratio - 1.0, 0.0))
+    form_quality = clip01(1.0 - form_stretch)
+    open_space = clip01(1.0 - bottleneck)
 
     allowed = np.ones(len(TOPOLOGY_IDS), dtype=bool)
     context = np.zeros(len(TOPOLOGY_IDS), dtype=np.float32)
@@ -257,35 +296,23 @@ def topology_context_mask(obs: Dict, cfg: Config, previous_topology: int) -> tup
     split_idx = TOPOLOGY_IDS.index(3)
     recover_idx = TOPOLOGY_IDS.index(4)
 
-    if bottleneck < 0.42:
-        allowed[line_idx] = False
-    if bottleneck < 0.60 or n_agents < 12:
+    if n_agents < 4:
         allowed[split_idx] = False
-    if progress < 0.60 and split_active < 0.28 and form_rms < 1.00 * form_tol:
-        allowed[recover_idx] = False
+    keep_signal = open_space * normalized_mean([form_quality, progress])
+    compress_signal = bottleneck * normalized_mean([1.0 - split_active, 1.0 - progress])
+    line_signal = bottleneck * normalized_mean([1.0, team_factor, 1.0 - split_active])
+    split_signal = bottleneck * split_active * team_factor
+    recover_signal = normalized_mean([open_space, split_active, form_stretch])
 
-    if bottleneck > 0.50:
-        context[compress_idx] += 0.05
-        context[line_idx] += 0.16
-    if bottleneck > 0.65 and n_agents >= 12:
-        context[split_idx] += 0.10
-    if bottleneck < 0.28:
-        context[keep_idx] += 0.14
-        context[compress_idx] -= 0.05
-    if progress > 0.76 and bottleneck < 0.26 and form_rms > 0.80 * form_tol:
-        context[recover_idx] += 0.14
-        context[keep_idx] += 0.06
-    if split_active > 0.28 or form_rms > 1.10 * form_tol:
-        context[recover_idx] += 0.14
-        context[keep_idx] -= 0.04
-    if previous_topology == 3 and bottleneck < 0.35:
-        context[keep_idx] += 0.10
-        if split_active > 0.30 or form_rms > form_tol:
-            context[recover_idx] += 0.08
-    if previous_topology in (2, 3) and bottleneck < 0.30:
-        context[keep_idx] += 0.12
-        if split_active > 0.24 or form_rms > 1.02 * form_tol:
-            context[recover_idx] += 0.06
+    context[keep_idx] += keep_signal
+    context[compress_idx] += compress_signal
+    context[line_idx] += line_signal
+    context[split_idx] += split_signal
+    context[recover_idx] += recover_signal
+
+    if previous_topology in (2, 3):
+        context[recover_idx] += open_space * split_active
+        context[keep_idx] += open_space * form_quality
 
     return allowed, context
 
@@ -298,7 +325,7 @@ def choose_counterfactual_topology(
     previous_topology: int = 0,
     uncertainty: torch.Tensor | None = None,
 ) -> int:
-    topo_prior = torch.softmax(topology_logits / max(cfg.method.topology_temperature, 1e-6), dim=-1).squeeze(0)
+    topo_prior = torch.softmax(topology_logits / selector_temperature(cfg), dim=-1).squeeze(0)
     logit_choice = choose_topology_from_logits(topology_logits)
     if recoverability_scores is None or not cfg.method.use_counterfactual_topology:
         return logit_choice
@@ -306,27 +333,24 @@ def choose_counterfactual_topology(
     scores = recoverability_scores.squeeze(0).detach().cpu().numpy().astype(np.float32)
     prior = topo_prior.detach().cpu().numpy().astype(np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
-    score_signal = np.tanh(0.9 * scores)
+    score_signal = np.tanh(scores)
     mean_uncert = float(np.mean(uncert))
     allowed, context = topology_context_mask(obs, cfg, previous_topology)
-    invalid_penalty = np.where(allowed, 0.0, -1.5).astype(np.float32)
+    invalid_penalty = np.where(allowed, 0.0, -1.0).astype(np.float32)
 
     switch_penalty = np.zeros_like(scores)
-    bottleneck = float(obs["bottleneck"])
-    cooldown = float(getattr(cfg.method, "topology_cooldown", 5))
+    bottleneck = clip01(float(obs["bottleneck"]))
+    split_active = clip01(float(obs.get("split_active", 0.0)))
+    cooldown = float(selector_cooldown(cfg))
     time_since_switch = float(obs.get("time_since_switch", 999.0))
     cooldown_frac = float(np.clip((cooldown - time_since_switch) / max(cooldown, 1.0), 0.0, 1.0))
     for idx, topo in enumerate(TOPOLOGY_IDS):
         if topo != previous_topology:
-            switch_penalty[idx] += 0.06 + 0.05 * cooldown_frac
-        if previous_topology == 0 and topo in (2, 3, 4):
-            switch_penalty[idx] += 0.02
-        if topo == 3:  # Split is most disruptive
-            switch_penalty[idx] += 0.13
-        if topo == 4 and bottleneck > 0.46:
-            switch_penalty[idx] += 0.05
-        if topo == 0 and bottleneck > 0.55:
-            switch_penalty[idx] += 0.04
+            switch_penalty[idx] += normalized_mean([1.0, cooldown_frac])
+        if topo in (2, 3, 4):
+            switch_penalty[idx] += normalized_mean([bottleneck, split_active])
+        if topo == 0:
+            switch_penalty[idx] += bottleneck * split_active
 
     current_idx = TOPOLOGY_IDS.index(previous_topology)
     logit_idx = TOPOLOGY_IDS.index(logit_choice)
@@ -334,42 +358,32 @@ def choose_counterfactual_topology(
         allowed_scores = prior + context + invalid_penalty
         logit_idx = int(np.argmax(allowed_scores))
 
-    combined = 0.44 * prior + 0.34 * score_signal + context - 0.05 * uncert - switch_penalty + invalid_penalty
+    uncert_penalty = uncert / (1.0 + mean_uncert) if mean_uncert > 0.0 else uncert
+    combined = prior + score_signal + context - uncert_penalty - switch_penalty + invalid_penalty
     best_idx = int(np.argmax(combined))
     candidate_idx = logit_idx
 
     current_invalid = not allowed[current_idx]
     score_gain_over_logits = float(score_signal[best_idx] - score_signal[logit_idx])
     combined_gain_over_logits = float(combined[best_idx] - combined[logit_idx])
-    override_margin = 0.20 + 0.06 * max(0.0, mean_uncert - 0.35)
-    if TOPOLOGY_IDS[best_idx] in (2, 3, 4):
-        override_margin += 0.04
-    if previous_topology == 0 and TOPOLOGY_IDS[best_idx] in (2, 3, 4):
-        override_margin += 0.02
-    if allowed[best_idx] and score_gain_over_logits > override_margin and combined_gain_over_logits > 0.03:
+    override_margin = clip01(mean_uncert / (1.0 + mean_uncert))
+    if allowed[best_idx] and score_gain_over_logits > override_margin and combined_gain_over_logits > 0.0:
         candidate_idx = best_idx
 
     if candidate_idx == current_idx:
         return previous_topology
 
     score_gain_over_current = float(score_signal[candidate_idx] - score_signal[current_idx])
-    prior_gain_over_current = float(prior[candidate_idx] - prior[current_idx])
     combined_gain_over_current = float(combined[candidate_idx] - combined[current_idx])
     if time_since_switch < cooldown:
-        if not current_invalid and (score_gain_over_current < 0.28 or combined_gain_over_current < 0.08):
-            return previous_topology
-
-    if candidate_idx != logit_idx and not current_invalid:
-        if score_gain_over_current < 0.22 and prior_gain_over_current < 0.08:
+        if not current_invalid and combined_gain_over_current <= score_gain_over_current:
             return previous_topology
 
     candidate_topology = TOPOLOGY_IDS[candidate_idx]
-    specialist_margin = 0.0
-    if candidate_topology in (2, 3, 4):
-        specialist_margin += 0.03
-    if previous_topology == 0 and candidate_topology in (2, 3, 4):
-        specialist_margin += 0.02
-    required_margin = cfg.method.switch_hysteresis + specialist_margin + 0.06 * max(0.0, mean_uncert - 0.35)
+    specialist_margin = switch_penalty[candidate_idx] / (1.0 + switch_penalty[candidate_idx])
+    required_margin = switch_hysteresis_margin(cfg) * (
+        1.0 + specialist_margin + clip01(mean_uncert / (1.0 + mean_uncert))
+    )
     if not current_invalid and combined[candidate_idx] < combined[current_idx] + required_margin:
         return previous_topology
     return TOPOLOGY_IDS[candidate_idx]

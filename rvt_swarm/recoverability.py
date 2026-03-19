@@ -8,18 +8,20 @@ import numpy as np
 from .config import Config, TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
+from .utils import clip01, normalized_mean, standardize_np
 
 
 CANDIDATE_TOPOLOGIES = TOPOLOGY_IDS
 
 
 def compute_deadlock_penalty(info: Dict[str, float]) -> float:
-    return 0.7 * float(info["deadlock"]) + 0.5 * float(info["stall_rate"] > 0.35) + 0.2 * float(info["stall_rate"])
+    stall_rate = clip01(float(info["stall_rate"]))
+    return normalized_mean([float(info["deadlock"]), stall_rate, float(stall_rate > 0.0)])
 
 
 def compute_formation_tube_score(info: Dict[str, float], cfg: Config) -> float:
-    tol = max(cfg.env.formation_tolerance * 1.45, 1e-6)
-    return float(np.clip(1.0 - info["form_rms"] / tol, 0.0, 1.0))
+    tol = max(cfg.env.formation_tolerance, 1e-6)
+    return clip01(1.0 - float(info["form_rms"]) / tol)
 
 
 def clone_env(env: SwarmFormationEnv, cfg: Config) -> SwarmFormationEnv:
@@ -42,7 +44,6 @@ def clone_env(env: SwarmFormationEnv, cfg: Config) -> SwarmFormationEnv:
 def rollout_score(env: SwarmFormationEnv, topology_action: int, horizon: int, cfg: Config) -> float:
     sim = clone_env(env, cfg)
     score = 0.0
-    alive_bonus = 0.0
     for t in range(horizon):
         obs = sim.observe()
         action = expert_action(obs, cfg, topology_action)
@@ -53,37 +54,39 @@ def rollout_score(env: SwarmFormationEnv, topology_action: int, horizon: int, cf
         recover_proxy = float(info["recoverability_proxy"])
         deadlock_penalty = compute_deadlock_penalty(info)
         switch_count = float(info["topology_switches"])
-        switch_penalty = 0.03 * switch_count + 0.06 * float(switch_count > 1)
-        if topology_action in (2, 3, 4):
-            switch_penalty += 0.03
-        if topology_action in (2, 3) and obs["bottleneck"] < 0.48:
-            switch_penalty += 0.06
-        if topology_action == 4 and obs["bottleneck"] > 0.38 and tube > 0.72:
-            switch_penalty += 0.06
+        switch_penalty = clip01(switch_count / max(t + 1, 1))
+        bottleneck = clip01(float(obs["bottleneck"]))
+        split_active = clip01(float(obs.get("split_active", 0.0)))
+        open_space = clip01(1.0 - bottleneck)
         recovery_bonus = 0.0
         if topology_action == 4:
-            recovery_bonus += 0.14 * tube + 0.06 * float(obs.get("split_active", 0.0) > 0.0)
-            if obs["bottleneck"] < 0.28:
-                recovery_bonus += 0.10
-        if topology_action in [2, 3] and obs["bottleneck"] > 0.52:
-            recovery_bonus += 0.03
-        lingering_split_penalty = 0.16 * float(obs.get("split_active", 0.0) > 0.45 and obs["bottleneck"] < 0.25)
-        step_score = 0.95 * collision + 0.65 * progress + 1.55 * tube + 0.75 * recover_proxy + recovery_bonus - deadlock_penalty - switch_penalty - lingering_split_penalty
-        alive_bonus += 0.05 * collision
+            recovery_bonus = normalized_mean([tube, split_active, open_space])
+        elif topology_action in (2, 3):
+            recovery_bonus = bottleneck
+        lingering_split_penalty = split_active * open_space * float(topology_action != 4)
+        positive = normalized_mean([collision, progress, tube, recover_proxy, recovery_bonus])
+        negative = normalized_mean([deadlock_penalty, switch_penalty, lingering_split_penalty])
+        step_score = positive - negative
         score += step_score
         if done:
-            score += 1.2 * float(info["success"]) + 0.3 * float(info["goal_reached"])
+            score += normalized_mean(
+                [
+                    float(info["success"]),
+                    float(info["goal_reached"]),
+                    float(info["collision_free"]),
+                ]
+            )
             break
         if t >= 3 and info["irreversible_collapse"] > 0.5:
-            score -= 1.0
+            score -= clip01(float(info["irreversible_collapse"]) + float(info["deadlock"]))
             break
-    return float((score + alive_bonus) / max(horizon, 1))
+    return float(score / max(horizon, 1))
 
 
 def classify_recoverability(score: float) -> float:
-    if score > 0.78:
+    if score > 0.0:
         return 1.0
-    if score < 0.05:
+    if score < 0.0:
         return -1.0
     return 0.0
 
@@ -93,10 +96,10 @@ def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, 
     for topo in CANDIDATE_TOPOLOGIES:
         scores.append(rollout_score(env, topo, cfg.train.recover_horizon, cfg))
     scores_np = np.array(scores, dtype=np.float32)
-    best_idx = int(np.argmax(scores_np))
-    ordered = np.sort(scores_np)
-    gap = float(scores_np[best_idx] - ordered[-2]) if len(ordered) > 1 else float(scores_np[best_idx])
-    norm_scores = (scores_np - scores_np.mean()) / max(scores_np.std(), 1e-6)
-    formation_bonus = 0.18 if CANDIDATE_TOPOLOGIES[best_idx] == 4 else 0.0
-    recover_margin = float(np.tanh(0.55 * gap + 0.30 * scores_np[best_idx] + formation_bonus))
+    norm_scores = standardize_np(scores_np)
+    best_idx = int(np.argmax(norm_scores))
+    ordered = np.sort(norm_scores)
+    gap = float(norm_scores[best_idx] - ordered[-2]) if len(ordered) > 1 else float(norm_scores[best_idx])
+    formation_bonus = float(CANDIDATE_TOPOLOGIES[best_idx] == 4)
+    recover_margin = float(np.tanh(norm_scores[best_idx] + gap + formation_bonus))
     return recover_margin, CANDIDATE_TOPOLOGIES[best_idx], norm_scores

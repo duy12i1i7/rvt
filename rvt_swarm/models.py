@@ -6,6 +6,7 @@ import torch.nn.functional as F
 
 from .dataset import EDGE_DIM, NODE_DIM
 from .config import TOPOLOGY_ACTIONS
+from .utils import uncertainty_adjusted_scores
 
 
 def _edge_softmax(logits: torch.Tensor, dst: torch.Tensor, n_nodes: int) -> torch.Tensor:
@@ -170,10 +171,11 @@ def grad_scale(x: torch.Tensor, scale: float) -> torch.Tensor:
 
 
 class RVTSwarmPolicy(nn.Module):
-    def __init__(self, hidden_dim: int = 128, passes: int = 3, topology_count: int | None = None, aux_grad_scale: float = 0.3):
+    def __init__(self, hidden_dim: int = 128, passes: int = 3, topology_count: int | None = None):
         super().__init__()
         topology_count = topology_count or len(TOPOLOGY_ACTIONS)
-        self.aux_grad_scale = aux_grad_scale
+        # Auxiliary gradients weaken automatically as the backbone gets deeper.
+        self.aux_grad_scale = 1.0 / max(float(passes + 1), 1.0)
         self.backbone = GraphBackbone(hidden_dim, passes)
         # Deeper action head for better control quality
         self.action_head = nn.Sequential(
@@ -206,7 +208,7 @@ class RVTSwarmPolicy(nn.Module):
         recover_scores = self.score_head(pooled)
         aux = self.aux_head(pooled)
         uncertainty = F.softplus(self.uncertainty_head(pooled))
-        adjusted_scores = recover_scores - 0.25 * uncertainty
+        adjusted_scores = uncertainty_adjusted_scores(recover_scores, uncertainty)
         recoverability = adjusted_scores.max(dim=-1, keepdim=True).values
         return {
             "actions": actions,
@@ -218,11 +220,11 @@ class RVTSwarmPolicy(nn.Module):
         }
 
 
-def build_model(name: str, hidden_dim: int = 128, passes: int = 3, aux_grad_scale: float = 0.3) -> nn.Module:
+def build_model(name: str, hidden_dim: int = 128, passes: int = 3) -> nn.Module:
     if name == "gnn_only":
         return GNNOnlyPolicy(hidden_dim, passes)
     if name == "instant_cert":
         return InstantCertPolicy(hidden_dim, passes)
     if name == "rvt_swarm":
-        return RVTSwarmPolicy(hidden_dim, passes, aux_grad_scale=aux_grad_scale)
+        return RVTSwarmPolicy(hidden_dim, passes)
     raise ValueError(f"Unknown model: {name}")

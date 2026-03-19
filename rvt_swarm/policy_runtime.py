@@ -35,7 +35,6 @@ def load_learned_model(method: str, cfg: Config, ckpt_dir: str, device: torch.de
         method,
         cfg.train.hidden_dim,
         cfg.train.message_passes,
-        cfg.train.aux_gradient_scale,
     ).to(device)
     ckpt = torch.load(Path(ckpt_dir) / f"{method}.pt", map_location=device, weights_only=False)
     model.load_state_dict(ckpt["model"])

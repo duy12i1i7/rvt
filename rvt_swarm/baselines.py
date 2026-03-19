@@ -6,7 +6,14 @@ import numpy as np
 
 from .config import Config
 from .controllers import expert_action
-from .utils import soft_clip, unit
+from .utils import clip01, soft_clip, unit
+
+
+def _repulsion(diff: np.ndarray, active_distance: float) -> np.ndarray:
+    d = np.linalg.norm(diff)
+    if d <= 1e-6 or d >= active_distance:
+        return np.zeros(2, dtype=np.float32)
+    return unit(diff) * clip01(1.0 - d / max(active_distance, 1e-6))
 
 
 def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
@@ -17,29 +24,29 @@ def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     actions = np.zeros((n, 2), dtype=np.float32)
     centroid = pos.mean(axis=0)
     desired = unit(goal - centroid)
+    rr_active = max(cfg.env.nominal_spacing, cfg.env.min_rr_distance)
+    ro_active = max(cfg.env.nominal_spacing, cfg.env.min_ro_distance)
     for i in range(n):
-        a = 0.7 * desired - 0.2 * vel[i]
+        terms = [
+            desired,
+            -vel[i] / max(cfg.env.max_speed, 1e-6),
+        ]
         for j in range(n):
             if i == j:
                 continue
-            diff = pos[i] - pos[j]
-            d = np.linalg.norm(diff)
-            if d < 1.3:
-                a += 0.8 * unit(diff) * max(0.0, 1.3 - d)
+            terms.append(_repulsion(pos[i] - pos[j], rr_active))
         for o in obs["obstacles"]:
-            diff = pos[i] - o
-            d = np.linalg.norm(diff)
-            if d < 1.2:
-                a += 0.7 * unit(diff) * max(0.0, 1.2 - d)
-        actions[i] = soft_clip(a, cfg.env.max_accel)
+            terms.append(_repulsion(pos[i] - o, ro_active))
+        actions[i] = soft_clip(np.mean(np.stack(terms, axis=0), axis=0), cfg.env.max_accel)
     return actions, 0
 
 
 def adaptive_formation(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
-    if obs["bottleneck"] > 0.5:
+    open_space = clip01(1.0 - float(obs["bottleneck"]))
+    if obs["bottleneck"] > open_space:
         topo = 2 if len(obs["positions"]) <= 8 else 3
     else:
-        topo = 4 if obs["progress"] > 0.82 else (1 if obs["progress"] < 0.35 else 0)
+        topo = 4 if float(obs.get("recovery_progress", 0.0)) < float(obs["progress"]) else 0
     actions = expert_action(obs, cfg, topo)
     return actions, topo
 
@@ -47,31 +54,31 @@ def adaptive_formation(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
 def cbf_qp_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     actions = expert_action(obs, cfg, 0)
     pos = obs["positions"]
+    rr_active = max(cfg.env.nominal_spacing, cfg.env.min_rr_distance)
+    ro_active = max(cfg.env.nominal_spacing, cfg.env.min_ro_distance)
     for i in range(len(pos)):
         repel = np.zeros(2, dtype=np.float32)
         for j in range(len(pos)):
             if i == j:
                 continue
-            diff = pos[i] - pos[j]
-            d = np.linalg.norm(diff)
-            if d < 1.1:
-                repel += unit(diff) * (1.1 - d)
+            repel += _repulsion(pos[i] - pos[j], rr_active)
         for o in obs["obstacles"]:
-            diff = pos[i] - o
-            d = np.linalg.norm(diff)
-            if d < 1.0:
-                repel += 1.6 * unit(diff) * (1.0 - d)
-        actions[i] = soft_clip(actions[i] + 0.6 * repel, cfg.env.max_accel)
+            repel += _repulsion(pos[i] - o, ro_active)
+        actions[i] = soft_clip(actions[i] + repel, cfg.env.max_accel)
     return actions, 0
 
 
 def centralized_mpc_proxy(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
-    topo = 2 if obs["bottleneck"] > 0.5 else (4 if obs["progress"] > 0.8 else 0)
+    open_space = clip01(1.0 - float(obs["bottleneck"]))
+    topo = 2 if obs["bottleneck"] > open_space else (4 if float(obs.get("recovery_progress", 0.0)) < float(obs["progress"]) else 0)
     actions = expert_action(obs, cfg, topo)
     centroid = obs["positions"].mean(axis=0)
     goal_dir = unit(obs["goal"] - centroid)
-    actions += 0.08 * goal_dir[None, :]
-    return np.array([soft_clip(a, cfg.env.max_accel) for a in actions], dtype=np.float32), topo
+    mixed = []
+    for a in actions:
+        terms = [a / max(cfg.env.max_accel, 1e-6), goal_dir]
+        mixed.append(soft_clip(np.mean(np.stack(terms, axis=0), axis=0), cfg.env.max_accel))
+    return np.array(mixed, dtype=np.float32), topo
 
 
 def historical_baseline(name: str, obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:

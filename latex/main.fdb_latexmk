@@ -1,14 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1773647428.45561 "main.aux" "main.bbl" "main" 1773649948.85074 0
+["bibtex main"] 1773901291.54259 "main.aux" "main.bbl" "main" 1773901292.62808 0
   "./references.bib" 1773504039.16036 4834 57303dee2e3f16033e5cb1996cd0a417 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1773649948.60048 15568 ecc934d55faf643565db70a9efecacdd "pdflatex"
+  "main.aux" 1773901292.37152 16509 2c7ea6d1430f3eec72604a562504d691 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1773649947.84636 "/Users/udy/rvt/latex/main.tex" "main.pdf" "main" 1773649948.85085 0
-  "/Users/udy/rvt/latex/main.tex" 1773649875.12748 62125 466b8240b3465d498bcedc08bd6a3c5c ""
+["pdflatex"] 1773901291.63024 "main.tex" "main.pdf" "main" 1773901292.62822 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -256,10 +255,10 @@
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "fig_architecture.tex" 1773501972.84591 2653 a1a5f67e2529cf3eab57667393211ad8 ""
   "fig_rfn.tex" 1773501995.95349 4666 55f7f75ce2d21112678758a1e2b3d4f2 ""
-  "main.aux" 1773649948.60048 15568 ecc934d55faf643565db70a9efecacdd "pdflatex"
-  "main.bbl" 1773647428.54468 4040 a7a9510b6c9012c344257c754e70ca8e "bibtex main"
-  "main.out" 1773649948.60133 4511 d8d308c6a467f1d432b3fbf9a369fbb2 "pdflatex"
-  "main.tex" 1773649875.12748 62125 466b8240b3465d498bcedc08bd6a3c5c ""
+  "main.aux" 1773901292.37152 16509 2c7ea6d1430f3eec72604a562504d691 "pdflatex"
+  "main.bbl" 1773901291.62758 4040 a7a9510b6c9012c344257c754e70ca8e "bibtex main"
+  "main.out" 1773901292.37243 4511 4060d79b4c35d2c49cc8b53c04b55141 "pdflatex"
+  "main.tex" 1773901266.99893 57236 2cfa9f072f3c53f0ee8ec9831d245ad2 ""
   (generated)
   "main.aux"
   "main.log"
