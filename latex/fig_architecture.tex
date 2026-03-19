@@ -27,7 +27,7 @@
 ]
 
 % --- Input ---
-\node[block] (obs) at (0,0) {Observation\\$\mathbf{o}_i \in \mathbb{R}^{68}$};
+\node[block] (obs) at (0,0) {Node features\\$\mathbf{x}_i \in \mathbb{R}^{68}$};
 
 % --- Backbone ---
 \node[block, fill=green!8] (enc) at (0,-1.4) {Linear\\Encoder};
@@ -40,8 +40,8 @@
 
 % --- Outputs ---
 \node (uout) at (-3.0,-5.6) {$\mathbf{u}_i$};
-\node (tout) at (0,-5.6) {$\boldsymbol{\ell}_\tau$};
-\node (rout) at (3.0,-5.6) {$\tilde{\mathbf{r}}_\tau$};
+\node (tout) at (0,-5.6) {$\boldsymbol{\ell}$};
+\node (rout) at (3.0,-5.6) {$\tilde{\mathbf{r}}$};
 
 % --- Shield ---
 \node[shield] (cfsel) at (1.5,-7.0) {Counterfactual\\Selector};
@@ -75,6 +75,6 @@
 
 % --- Grad scale annotation ---
 \node[font=\tiny\itshape, text=gray] at (1.6,-3.6)
-    {grad\_scale(0.2)};
+    {grad\_scale($1/(K+1)$)};
 
 \end{tikzpicture}

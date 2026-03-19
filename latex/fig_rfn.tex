@@ -33,14 +33,14 @@
     note/.style={font=\tiny\itshape, text=gray!70!black},
 ]
 
-% ── Column 1: Observation ──
-\node[feat] (pos)   at (0, 0.0) {$\bfp_i, \bfv_i, \theta_i$};
-\node[feat] (goal)  at (0,-0.9) {$\mathbf{g}_i, \bm{e}_i$};
-\node[feat] (obs)   at (0,-1.8) {obstacle feat.};
+% ── Column 1: Node features ──
+\node[feat] (pos)   at (0, 0.0) {$\bfp_i, \bfv_i, \mathrm{head}_i$};
+\node[feat] (goal)  at (0,-0.9) {$\mathbf{g}_i, \hat{\mathbf{g}}_i$};
+\node[feat] (obs)   at (0,-1.8) {obs./corridor feat.};
 \node[feat] (lidar) at (0,-2.7) {LiDAR$_{36}$};
-\node[feat] (topo)  at (0,-3.6) {$\tau_{\text{one-hot}}$};
+\node[feat] (topo)  at (0,-3.6) {$\mathrm{onehot}(m_t)$};
 
-\node[note, above=0.15cm of pos] {Local observation};
+\node[note, above=0.15cm of pos] {Derived node features};
 
 % ── Brace ──
 \draw[decorate, decoration={brace, amplitude=4pt, mirror},
@@ -73,7 +73,7 @@
     (enc) at (6.2,-0.6) {Linear\\$68 \!\to\! 128$};
 \node[block, fill=green!10, minimum height=1.6cm,
       minimum width=2.0cm]
-    (gat) at (6.2,-2.6) {Graph Attn\\Layer $\times 3$\\{\tiny Eq.\,(1)--(3)}};
+    (gat) at (6.2,-2.6) {Graph Attn\\Layer $\times 3$\\{\tiny attn + msg pass}};
 
 \draw[arr] (knn.east) -- (enc.west);
 \draw[arr] (enc.south) -- (gat.north);
@@ -90,13 +90,13 @@
     {Score head\\$\hat{\mathbf{r}} \in \mathbb{R}^5$};
 % Uncertainty
 \node[score] (unc) at (9.5,-2.7)
-    {Uncertainty\\$\hat{\bm{\sigma}}_u \in \mathbb{R}^5$};
+    {Uncertainty\\$\hat{\bm{\sigma}} \in \mathbb{R}^5$};
 % Consensus
 \node[head] (cons) at (9.5,-4.0)
-    {Consensus\\$\bm{\ell}_\tau \in \mathbb{R}^5$};
+    {Consensus\\$\bm{\ell} \in \mathbb{R}^5$};
 
 % grad scale annotation
-\node[note] at (7.9, -1.0) {\textcolor{red!60}{grad\_scale(0.2)}};
+\node[note] at (7.9, -1.0) {\textcolor{red!60}{grad\_scale($1/(K+1)$)}};
 
 \draw[arr] (gat.east) -- ++(0.5,0) |- (act.west);
 \draw[parr] (gat.east) -- ++(0.5,0) |- (rscore.west);
@@ -106,7 +106,7 @@
 % ── Column 5: RFN output ──
 \node[score, fill=purple!15, minimum width=2.3cm]
     (rfn_out) at (12.8,-1.5)
-    {$\tilde{r}_\tau = \hat{r}_\tau - 0.25\hat{\sigma}_{u,\tau}$};
+    {$\tilde{r}_\tau = \hat{r}_\tau - \operatorname{std}(\hat{\mathbf{r}})\hat{\sigma}_{\tau}$};
 \node[note, above=0.02cm of rfn_out]
     {Adjusted recoverability};
 \draw[parr] (rscore.east) -- (rfn_out.west);

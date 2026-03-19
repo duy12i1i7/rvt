@@ -152,6 +152,11 @@ We make the following contributions:
     progress-preserving projection shield that activates only under
     elevated risk or global negative recoverability.
 
+    \item We reduce exposed method hyperparameters by deriving
+    selector/shield runtime scales from environment-normalized
+    quantities and by replacing hand-balanced loss weights with an
+    equal-weight active-objective formulation reused across all runs.
+
     \item We provide a unified experimental scaffold with learned
     baselines, historical baselines, rollout-based labels, matched-seed
     evaluation, and liveness metrics such as deadlock, topology
@@ -164,35 +169,88 @@ We make the following contributions:
 \label{sec:related}
 
 \subsection{Decentralized Graph Policies}
-Graph neural networks are a natural fit for decentralized multi-robot
-control because they preserve permutation invariance and local
-communication structure~\cite{muthusamy2024gnn_generalizability,goeckner2024magec}.
-Our work follows this line in using a local interaction graph, but adds
-explicit topology adaptation and a recoverability score map rather than
-predicting control alone.
+Recent decentralized graph-policy work already shows that local message
+passing is a strong inductive bias for swarm control. Gama et
+al.~\cite{gama2022gnn_synthesis} formulate decentralized controller
+synthesis through graph neural networks and imitation learning, Shi et
+al.'s \emph{Neural-Swarm2} demonstrates learned interaction models for
+heterogeneous multirotor swarms in \emph{IEEE Transactions on
+Robotics}~\cite{shi2022neural_swarm2}, and Goeckner et al.'s
+\emph{MAGEC} pushes graph-based resilient coordination in
+\emph{IROS~2024}~\cite{goeckner2024magec}. Soualhi et al. then extend
+the same decentralized-navigation agenda in \emph{RA-L~2025} with
+\emph{Learning Decentralized Multi-Robot PointGoal Navigation}~\cite{soualhi2025pointgoal}.
+These papers learn local control or coordination signals from graph
+structure, but they do not explicitly score multiple candidate team
+topologies and then switch between them online. RVT-Swarm stays in this
+decentralized graph-policy regime, yet augments the controller with a
+topology-conditioned recoverability map whose purpose is not merely to
+output a safer action, but to decide which team geometry should be
+executed next.
 
 \subsection{Safety-Critical Multi-Robot Control}
-Recent safety-critical multi-robot controllers use graph-structured
-certificates, collaborative safety filters, or discrete safe-policy
-learning to enforce pairwise constraints in distributed teams~\cite{zhang2025gcbf_plus,butler2024collaborative_safety,zhang2025dgppo}.
-Recent graph-CBF work scales safety reasoning through local
-graphs~\cite{zhang2025gcbf_plus,zhang2025dgppo}. RVT-Swarm is influenced by this design,
-but our shield is intentionally lightweight and approximate: it is a
-projection-based correction mechanism rather than a formally certified
-QP solver. More importantly, our main decision variable is not only the
-continuous action but also the topology under which the swarm remains
-recoverable.
+The most relevant safety literature for our method is also recent and
+graph-structured. Tonkens and Herbert show in \emph{IROS~2022} that
+Hamilton--Jacobi analysis can refine control-barrier reasoning rather
+than simply sit outside it~\cite{tonkens2022refining_cbf_hj}. Garg et
+al.'s 2024 review in \emph{Annual Reviews in Control} synthesizes the
+safe-learning design space for multi-robot systems~\cite{garg2024safe_multirobot_review}.
+Borquez et al. then make reachability-based safety and liveness
+filtering explicit in \emph{IEEE Transactions on Robotics}~\cite{borquez2024hj_filtering}.
+On the learned-distributed side, Zhang et al.'s \emph{GCBF+} learns
+graph control-barrier functions for safe multi-agent control in
+\emph{T-RO~2025}~\cite{zhang2025gcbf_plus}, while \emph{DGPPO} combines
+discrete decision making with graph-safe policy optimization at
+\emph{ICLR~2025}~\cite{zhang2025dgppo}. Mestres et al.'s
+\emph{Distributed Safe Navigation of Multi-Agent Systems Using Control
+Barrier Function-Based Controllers} gives a recent \emph{RA-L~2024}
+reference point for distributed CBF-based navigation without an
+explicit topology-selection layer~\cite{mestres2024distributed_safe_navigation}.
+RVT-Swarm is inspired by these works, but it deliberately does not
+solve a full certified safety QP at every step. Instead, it uses a
+lighter projection shield that is called only after the recoverability
+network and topology selector have chosen the most promising formation
+mode.
 
 \subsection{Adaptive Formation and Recoverability}
-Adaptive formation methods change the team geometry to fit corridors,
-obstacles, or task context~\cite{deng2024formation_adaptation,xie2025multi_uav_formation_rl}.
-Viability and reachability learning study whether a state can remain in
-or return to a desirable set over a finite horizon~\cite{abate2024safe_reach_set,
-li2025certifiable_reachability,jung2025rail}. RVT-Swarm sits between these directions: it learns a
-short-horizon, local-graph surrogate of recoverability and uses it to
-guide topology changes. The current implementation should therefore be
-understood as a recoverability-informed formation controller rather than
-as a formal reachability engine.
+Recent clutter-aware formation navigation has moved closer to the use
+case we study. Tordesillas and How's \emph{MADER} models decentralized
+multi-agent trajectory planning in dynamic environments in
+\emph{T-RO~2022}~\cite{tordesillas2022mader}, Kondo et al.'s
+\emph{Robust MADER} extends that line to communication-delay robustness
+in \emph{RA-L~2024}~\cite{kondo2024robust_mader}, Adajania et al.'s
+\emph{AMSwarm} tackles safe planning for quadrotor swarms in cluttered
+environments at \emph{ICRA~2023}~\cite{adajania2023amswarm}, Jiang and
+D'Andrea propose distributed belief-propagation MPC for multi-robot
+formation navigation in \emph{RA-L~2024}~\cite{jiang2024belief_mpc_formation},
+Pavlasek et al. introduce \emph{Stein Variational Belief Propagation for
+Multi-Robot Coordination} in \emph{RA-L~2024}~\cite{pavlasek2024stein_belief},
+Zhang et al. study assignment-free \emph{Mean-Shift Shape Formation of
+Multi-Robot Systems Without Target Assignment} in \emph{RA-L~2024}~\cite{zhang2024mean_shift_shape},
+and Park et al. as well as {\c{S}}enba{\c{s}}lar and Sukhatme push
+decentralized cluttered-environment swarm planning further in
+\emph{IJRR~2025} and \emph{T-RO~2025}, respectively~\cite{park2025goal_convergence,senbaslar2025dream}.
+In parallel, Xie et al. use reinforcement learning for
+formation-preserving multi-UAV obstacle avoidance in
+\emph{IROS~2025}~\cite{xie2025multi_uav_formation_rl}. RVT-Swarm is
+closest to this recent generation of clutter-aware decentralized swarm
+planners, but differs in treating topology change itself as a discrete
+decision variable rather than as an emergent consequence of a single
+trajectory optimizer.
+
+The recoverability side of RVT-Swarm is closer to recent
+reachability-informed safety learning than to classical fixed-formation
+control. Borquez et al. use Hamilton--Jacobi analysis for safety and
+liveness filtering in \emph{T-RO~2024}~\cite{borquez2024hj_filtering},
+Li et al. study certifiable reachability learning in
+\emph{RA-L~2025}~\cite{li2025certifiable_reachability}, and Jung et al.'s
+\emph{RAIL} combines reachability with imitation learning for safe
+execution in \emph{ICRA~2025}~\cite{jung2025rail}. RVT-Swarm does not
+aim to be a formal reachability engine. Instead, it learns a
+short-horizon recoverability surrogate that is cheap enough to query for
+every candidate topology at runtime, and then uses that surrogate to
+decide when the team should keep, compress, line up, split, or recover
+before geometric intervention becomes necessary.
 
 To make this positioning explicit, \Cref{tab:comparison} contrasts
 RVT-Swarm with representative prior work along the axes that matter most
@@ -225,12 +283,9 @@ taxonomy.}
 GCBF+~\cite{zhang2025gcbf_plus}
     & T-RO & 2025 & \cmark & \pmark & \cmark
     & \xmark & \xmark & \xmark & \pmark \\
-Collab.\ safety form.~\cite{butler2024collaborative_safety}
-    & arXiv & 2024 & \cmark & \cmark & \pmark
-    & \xmark & \xmark & \xmark & \pmark \\
-Neural barrier reach~\cite{abate2024safe_reach_set}
-    & IFAC & 2024 & \xmark & \xmark & \pmark
-    & \xmark & \cmark & \xmark & \xmark \\
+HJ safety/liveness~\cite{borquez2024hj_filtering}
+    & T-RO & 2024 & \xmark & \xmark & \cmark
+    & \xmark & \cmark & \xmark & \cmark \\
 Cert.\ Reach.~\cite{li2025certifiable_reachability}
     & RA-L & 2025 & \pmark & \xmark & \cmark
     & \xmark & \cmark & \xmark & \xmark \\
@@ -240,9 +295,15 @@ RAIL~\cite{jung2025rail}
 DGPPO~\cite{zhang2025dgppo}
     & ICLR & 2025 & \cmark & \xmark & \cmark
     & \xmark & \xmark & \xmark & \cmark \\
-Form.-adapt nav.~\cite{deng2024formation_adaptation}
-    & arXiv & 2024 & \cmark & \cmark & \pmark
-    & \cmark & \xmark & \xmark & \xmark \\
+Belief-prop.\ MPC~\cite{jiang2024belief_mpc_formation}
+    & RA-L & 2024 & \cmark & \cmark & \pmark
+    & \pmark & \xmark & \xmark & \xmark \\
+Robust MADER~\cite{kondo2024robust_mader}
+    & RA-L & 2024 & \cmark & \pmark & \cmark
+    & \xmark & \xmark & \xmark & \xmark \\
+Goal-conv.\ swarm~\cite{park2025goal_convergence}
+    & IJRR & 2025 & \cmark & \pmark & \cmark
+    & \xmark & \xmark & \xmark & \xmark \\
 Multi-UAV RL~\cite{xie2025multi_uav_formation_rl}
     & IROS & 2025 & \cmark & \cmark & \cmark
     & \pmark & \xmark & \xmark & \xmark \\
@@ -302,41 +363,32 @@ inside a bottleneck or relaxes the swarm back toward the nominal grid
 outside the bottleneck.
 
 \subsection{Recoverability}
-For a state $s_t$ and topology $\tau$, we define recoverability as a
-short-horizon score that rewards collision-free motion, goal progress,
-and return toward a formation tube while penalizing deadlock, excessive
-switching, and persistent split states:
+For a state $s_t$ and topology $\tau$, the released code evaluates
+recoverability through short-horizon counterfactual rollouts that reward
+collision-free motion, goal progress, return toward a formation tube,
+and topology-appropriate recovery bonuses, while penalizing deadlock,
+excessive switching, and lingering split behavior:
 \begin{equation}
 \begin{aligned}
 R(s_t;\tau) = \frac{1}{H}\sum_{h=0}^{H-1}
 \Bigl[
-&w_c c_{t+h} + w_p p_{t+h} + w_f f_{t+h} \\
-&- w_d d_{t+h} - w_s q_{t+h}
+ &\mathrm{Mean}\!\bigl(c_{t+h},p_{t+h},f_{t+h},r_{t+h},b^{\mathrm{rec}}_{t+h}\bigr) \\
+ &- \mathrm{Mean}\!\bigl(d_{t+h},q_{t+h},\ell_{t+h}\bigr)
 \Bigr].
 \end{aligned}
 \label{eq:recoverability}
 \end{equation}
 Here $c_{t+h}$ is a collision-free indicator, $p_{t+h}$ measures goal
-progress, $f_{t+h}$ measures formation-tube recovery, $d_{t+h}$ is a
-deadlock-related penalty, and $q_{t+h}$ captures switching/splitting
-penalties. In the implementation, these scores are generated by
-short-horizon counterfactual rollouts of a common expert controller. The
-released implementation fixes these terms once in normalized units and
-reuses them across all experiments; the paper intentionally presents
-only the score structure rather than coefficient-level artifact values.
-
-The online objective is then to select $(\bfu,\tau)$ that preserves
-progress while favoring positive recoverability:
-\begin{equation}
-\max_{\bfu,\tau}\;
-\alpha\,\text{progress}
-\;+\;
-\beta\,\text{formation}
-\;+\;
-\gamma\,\hat{R}(s_t;\tau),
-\label{eq:objective}
-\end{equation}
-where $\hat{R}$ is the learned recoverability surrogate.
+progress, $f_{t+h}$ measures formation-tube recovery, $r_{t+h}$ is the
+environment recoverability proxy, $b^{\mathrm{rec}}_{t+h}$ is the
+topology-dependent recovery bonus used for \textsc{line}/\textsc{split}/
+\textsc{recover}, $d_{t+h}$ is a deadlock-related penalty, $q_{t+h}$
+captures switching accumulation, and $\ell_{t+h}$ penalizes lingering
+split activity outside bottlenecks. The rollout also adds a terminal
+bonus for early successful termination and subtracts a collapse penalty
+after irreversible failure. Thus the release uses one shared normalized
+positive-minus-negative score structure rather than a list of
+hand-tuned scalar weights.
 
 \section{Method}
 \label{sec:method}
@@ -349,11 +401,12 @@ pipeline and \Cref{fig:rfn} details the recoverability network.
 \begin{figure}[H]
 \centering
 \input{fig_architecture.tex}
-\caption{Overview of RVT-Swarm. Local graph observations feed a shared
-graph-attention encoder whose outputs are decoded into control actions,
-topology logits, and per-topology recoverability scores. A
-counterfactual selector and a lightweight projection shield operate only
-at inference time.}
+\caption{Overview of RVT-Swarm. A team-level observation $o_t$ is first
+converted into node and edge features $(\mathbf{x}_i,\mathbf{e}_{ij})$
+for the interaction graph. The shared graph-attention encoder then
+produces control actions, topology logits, and per-topology
+recoverability scores. A counterfactual selector and a lightweight
+projection shield operate only at inference time.}
 \label{fig:architecture}
 \end{figure}
 
@@ -363,11 +416,18 @@ at inference time.}
 At each step, the swarm builds a $k$-nearest-neighbor interaction graph
 with $k=6$. Each node contains a 68-dimensional feature vector
 including position, velocity, heading, goal vector, centroid-relative
-position, formation error, obstacle-relative cues, topology encoding,
-normalized minimum TTC proxy, and 36 normalized LiDAR ranges. Each edge
-contains 11-dimensional relational features, including relative
-position, relative velocity, spacing error, corridor projections, and a
-TTC-style safety descriptor.
+position, formation error, obstacle-relative cues, global
+formation/context scalars, a nearest dynamic-obstacle cue, a normalized
+minimum TTC proxy, and 36 normalized LiDAR ranges. Each edge contains
+11-dimensional relational features, including relative position,
+relative velocity, spacing error, corridor projections, and a TTC-style
+safety descriptor.
+
+We use $o_t$ to denote the raw team-level observation returned by the
+simulator at time $t$, and $(\mathbf{x}_i,\mathbf{e}_{ij})$ to denote the
+derived node and edge feature tensors constructed from $o_t$ before they
+are passed to the graph encoder. Thus $o_t$ is the observation object,
+whereas $\mathbf{x}_i$ is the per-robot feature vector extracted from it.
 
 Table~\ref{tab:encoder_features} summarizes the exact feature
 decomposition used by the released encoder. The total dimensions are 68
@@ -387,15 +447,15 @@ Node & Kinematics & $\bfp_i,\bfv_i,\mathrm{head}_i$ & 6 \\
 Node & Goal cues & $\mathbf{g}_i,\hat{\mathbf{g}}_i$ & 4 \\
 Node & Formation context & $(\bfp_i-\bar{\bfp}),\bfe_i^\tau$ & 4 \\
 Node & Obstacle/corridor & $(\bfp_i-\bfp_{\mathrm{obs,c}}),\Pi_i^{\mathrm{corr}},\Pi_i^{\mathrm{lat}}$ & 4 \\
-Node & Global state & $\kappa_t,b_t,\pi_t,\chi_t,\mathrm{onehot}(m_t)$ & 9 \\
-Node & Local safety cues & $\rho_i^{\mathrm{local}},d_i^{\min},\mathrm{TTC}_i^{\min}$ & 3 \\
+Node & Global state & $\kappa_t,b_t,p_t^{\mathrm{prog}},\chi_t,\mathrm{onehot}(m_t)$ & 9 \\
+Node & Local safety cues & $b_i^{\mathrm{local}},d_i^{\mathrm{obs,min}},\mathrm{TTC}_i^{\min}$ & 3 \\
 Node & Dynamic-obstacle cue & $\bfv_i^{\mathrm{dyn}}$ & 2 \\
 Node & LiDAR scan & $\mathrm{LiDAR}_{i,1:36}$ & 36 \\
 \midrule
 Edge & Relative geometry & $\Delta \bfp_{ij},\|\Delta \bfp_{ij}\|$ & 3 \\
 Edge & Relative velocity & $\Delta \bfv_{ij}$ & 2 \\
 Edge & Corridor/spacing & $\Pi_{ij}^{\mathrm{corr}},\Pi_{ij}^{\mathrm{lat}},\epsilon_{ij}^{\mathrm{space}}$ & 3 \\
-Edge & Safety/global context & $\mathrm{TTC}_{ij},b_t,\pi_t$ & 3 \\
+Edge & Safety/global context & $\mathrm{TTC}_{ij},b_t,p_t^{\mathrm{prog}}$ & 3 \\
 \bottomrule
 \end{tabular}
 }
@@ -407,7 +467,7 @@ For completeness, the exact concatenated node and edge vectors are
 \mathbf{x}_i = [&\bfp_i,\bfv_i,\mathrm{head}_i,\mathbf{g}_i,\hat{\mathbf{g}}_i,
 (\bfp_i-\bar{\bfp}),\bfe_i^\tau,(\bfp_i-\bfp_{\mathrm{obs,c}}), \\
 &\Pi_i^{\mathrm{corr}},\Pi_i^{\mathrm{lat}},
-\kappa_t,b_t,\pi_t,\rho_i^{\mathrm{local}},d_i^{\min},
+\kappa_t,b_t,p_t^{\mathrm{prog}},b_i^{\mathrm{local}},d_i^{\mathrm{obs,min}},
 \bfv_i^{\mathrm{dyn}},\chi_t, \\
 &\mathrm{onehot}(m_t),\mathrm{TTC}_i^{\min},
 \mathrm{LiDAR}_{i,1:36}],
@@ -419,27 +479,33 @@ and
 \mathbf{e}_{ij} =
 [\Delta \bfp_{ij},\Delta \bfv_{ij},\|\Delta \bfp_{ij}\|,
 \Pi_{ij}^{\mathrm{corr}},\Pi_{ij}^{\mathrm{lat}},
-\epsilon_{ij}^{\mathrm{space}},\mathrm{TTC}_{ij},b_t,\pi_t].
+\epsilon_{ij}^{\mathrm{space}},\mathrm{TTC}_{ij},b_t,p_t^{\mathrm{prog}}].
 \label{eq:edge_features}
 \end{equation}
 
 Here $\mathrm{head}_i=(\cos\theta_i,\sin\theta_i)$ is a velocity-derived
 heading encoding, $\mathbf{g}_i$ and $\hat{\mathbf{g}}_i$ are raw and
-normalized goal vectors, $\bfp_{\mathrm{obs,c}}$ is obstacle centroid,
-$\Pi^{\mathrm{corr}}$ and $\Pi^{\mathrm{lat}}$ denote projections onto
-the inferred corridor and lateral axes, and $m_t$ is the current
-topology mode. Both $\mathrm{TTC}_i^{\min}$ and $\mathrm{TTC}_{ij}$ are
-computed from the quadratic collision equation for circular agents
-rather than from a purely geometric distance threshold. The graph is
-directed because each robot independently selects its own six nearest
-neighbors.
+normalized goal vectors, $\bfe_i^\tau$ is the current formation-error
+offset, $\bfp_{\mathrm{obs,c}}$ is obstacle centroid, and
+$\Pi^{\mathrm{corr}}$ / $\Pi^{\mathrm{lat}}$ denote projections onto
+the inferred corridor and lateral axes. The scalars
+$\kappa_t,b_t,p_t^{\mathrm{prog}},\chi_t$ denote formation scale,
+bottleneck score, normalized goal progress, and split activity,
+respectively; $\bfv_i^{\mathrm{dyn}}$ is the velocity of the nearest
+dynamic obstacle (or zero if none is present); and
+$\epsilon_{ij}^{\mathrm{space}}$ is the absolute spacing error relative
+to the current scaled nominal spacing. Both $\mathrm{TTC}_i^{\min}$ and
+$\mathrm{TTC}_{ij}$ are computed from the quadratic collision equation
+for circular agents rather than from a purely geometric distance
+threshold. The graph is directed because each robot independently
+selects its own six nearest neighbors.
 
 The graph is processed by three attention-weighted message-passing
 layers. For edge $(j \rightarrow i)$, an edge MLP produces a message
 $\mathbf{m}_{ij}$ and a learned attention weight $\alpha_{ij}$, and the
 node update is
 \begin{align}
-\mathbf{m}_{ij} &= \phi_e([\mathbf{h}_i \| \mathbf{h}_j \|
+\mathbf{m}_{ij} &= \phi_e([\mathbf{h}_j \| \mathbf{h}_i \|
 \mathbf{e}_{ij}]), \\
 \alpha_{ij} &= \operatorname{softmax}_{j \in \cN(i)}
 \bigl(\phi_a(\mathbf{m}_{ij})\bigr), \\
@@ -518,7 +584,7 @@ whole team configuration.
 
 Recoverability scores are adjusted by dispersion-scaled uncertainty:
 \begin{equation}
-\tilde{r}_\tau = \hat{r}_\tau - \sigma(\hat{\mathbf{r}})\,\hat{\sigma}_{\tau},\qquad
+\tilde{r}_\tau = \hat{r}_\tau - \operatorname{std}(\hat{\mathbf{r}})\,\hat{\sigma}_{\tau},\qquad
 \hat{R}(s_t) = \max_{\tau \in \cT} \tilde{r}_\tau .
 \label{eq:adjusted_recover}
 \end{equation}
@@ -553,9 +619,9 @@ contextual bonuses, validity masks, and switching cost:
 \begin{equation}
 \begin{aligned}
 C_\tau ={}& \pi_\tau
-       + \phi(\tilde{r}_\tau)
+       + \tanh(\tilde{r}_\tau)
        + b_\tau^{\text{ctx}} \\
-       &- \sigma_\tau
+       &- \frac{\hat{\sigma}_\tau}{1+\bar{\sigma}}
        - \psi_\tau^{\text{switch}}
        + m_\tau^{\text{valid}},
 \end{aligned}
@@ -568,30 +634,84 @@ changes, especially disruptive split actions. The current selector is a
 two-stage gate rather than a single argmax: it starts from the topology
 logit winner, permits a recoverability-based override only when the
 score gain exceeds an uncertainty-dependent margin, and finally applies
-cooldown and hysteresis checks with additional margins for specialist
-actions (\textsc{line}, \textsc{split}, \textsc{recover}). In the
+cooldown and hysteresis checks with additional
+candidate-specific switching surcharges. Here
+$m_\tau^{\text{valid}}\in\{0,-1\}$ is an additive validity mask and
+$\bar{\sigma}=\frac{1}{|\cT|}\sum_{\tau\in\cT}\hat{\sigma}_\tau$ is the mean
+predicted topology uncertainty. In the
 released implementation, the prior temperature, switching cooldown, and
 hysteresis margin are not exposed as free user-tuned knobs; instead
 they are derived from environment scale quantities such as $d_0$,
 $d_{\min}$, sensing range, and $v_{\max}\Delta t$. The online
 selection-and-shield loop is summarized in \Cref{alg:selector}.
+Concretely, the current code uses
+\begin{equation}
+\begin{aligned}
+T_{\mathrm{env}} &=
+1 + \frac{d_0}{r_{\mathrm{sense}}}
+  + \frac{v_{\max}\Delta t}{d_{\min}^{\mathrm{rr}}}, \\
+T_{\mathrm{cool}} &=
+\mathrm{round}\!\left(
+H \frac{v_{\max}\Delta t}{d_{\min}^{\mathrm{rr}}}
++ |\mathcal{N}_{\mathrm{train}}|
+\right), \\
+\eta_{\mathrm{hys}} &= \frac{d_{\min}^{\mathrm{rr}}}{r_{\mathrm{sense}}},
+\end{aligned}
+\label{eq:selector_scales}
+\end{equation}
+where $H$ is the recoverability rollout horizon and
+$|\mathcal{N}_{\mathrm{train}}|$ is the number of team sizes used in the
+benchmark. The final switching margin used by the selector is
+\begin{equation}
+\eta_{\mathrm{dyn}} =
+\eta_{\mathrm{hys}}
+\left(
+1 + \eta_{\mathrm{spec}}
+    + \frac{\bar{\sigma}}{1 + \bar{\sigma}}
+\right),
+\label{eq:selector_margin}
+\end{equation}
+where $\eta_{\mathrm{spec}}$ is the candidate-specific switch surcharge
+computed from the current bottleneck/split context.
 
 \removelatexerror
-\begin{algorithm}[H]
+\begin{algorithm}[!t]
 \caption{Counterfactual Topology Selection with Projection Shield}
 \label{alg:selector}
 \SetAlgoLined
+\footnotesize
 \KwIn{Observation $o_t$, topology logits $\bm{\ell}$, adjusted scores
-$\tilde{\mathbf{r}}$, uncertainty $\bm{\sigma}$, previous topology
+$\tilde{\mathbf{r}}$, uncertainty $\hat{\bm{\sigma}}$, previous topology
 $\tau_{\mathrm{prev}}$, nominal action $\bfu$}
 \KwOut{Selected topology $\tau^\star$, shielded action $\bfu^{\mathrm{safe}}$}
 Compute prior $\bm{\pi} = \mathrm{softmax}(\bm{\ell}/T_{\mathrm{env}})$\;
+$t_{\mathrm{switch}} \leftarrow o_t[\texttt{time\_since\_switch}]$\;
 Compute contextual bonuses $b_\tau^{\mathrm{ctx}}$\;
 Compute switching penalties $\psi_\tau^{\mathrm{switch}}$\;
 Compute $C_\tau$ using~\eqref{eq:selector}\;
-$\tau' \leftarrow \argmax_{\tau \in \cT} C_\tau$\;
+$\tau_{\mathrm{logit}} \leftarrow \argmax_{\tau \in \cT} \ell_\tau$\;
+\If{$\tau_{\mathrm{logit}}$ is invalid}{
+    $\tau_{\mathrm{logit}} \leftarrow \argmax_{\tau \in \cT}
+    (\pi_\tau + b_\tau^{\mathrm{ctx}} + m_\tau^{\mathrm{valid}})$\;
+}
+$\tau_{\mathrm{best}} \leftarrow \argmax_{\tau \in \cT} C_\tau$\;
+$\tau' \leftarrow \tau_{\mathrm{logit}}$\;
+Compute override margin $\delta_{\mathrm{ovr}}=\bar{\sigma}/(1+\bar{\sigma})$\;
+\If{$\tau_{\mathrm{best}}$ is valid \textbf{and}
+    $\tanh(\tilde r_{\tau_{\mathrm{best}}})-\tanh(\tilde r_{\tau_{\mathrm{logit}}})
+    > \delta_{\mathrm{ovr}}$ \textbf{and}
+    $C_{\tau_{\mathrm{best}}} > C_{\tau_{\mathrm{logit}}}$}{
+    $\tau' \leftarrow \tau_{\mathrm{best}}$\;
+}
 Compute uncertainty/specialist margin $\eta_{\mathrm{dyn}}$\;
-\eIf{$C_{\tau'} < C_{\tau_{\mathrm{prev}}} + \eta_{\mathrm{dyn}}$}{
+\If{$t_{\mathrm{switch}} < T_{\mathrm{cool}}$ \textbf{and}
+    $\tau_{\mathrm{prev}}$ is valid \textbf{and}
+    $C_{\tau'}-C_{\tau_{\mathrm{prev}}}
+    \le \tanh(\tilde r_{\tau'})-\tanh(\tilde r_{\tau_{\mathrm{prev}}})$}{
+    $\tau' \leftarrow \tau_{\mathrm{prev}}$\;
+}
+\eIf{$\tau_{\mathrm{prev}}$ is valid \textbf{and}
+    $C_{\tau'} < C_{\tau_{\mathrm{prev}}} + \eta_{\mathrm{dyn}}$}{
     $\tau^\star \leftarrow \tau_{\mathrm{prev}}$\;
 }{
     $\tau^\star \leftarrow \tau'$\;
@@ -599,16 +719,14 @@ Compute uncertainty/specialist margin $\eta_{\mathrm{dyn}}$\;
 \tcp{Risk-triggered projection shield}
 $\rho \leftarrow \mathrm{CollisionRisk}(o_t)$\;
 \If{$\max_{\tau \in \cT}\tilde{r}_\tau < 0$}{
-    $\rho \leftarrow \max(\rho, |\max_{\tau \in \cT}\tilde{r}_\tau|)$\;
+    $\rho \leftarrow \max(\rho,\rho_{\mathrm{th}})$\;
 }
-\If{$\rho > 0$}{
-    Build pairwise robot-robot and robot-obstacle half-planes\;
-    Project $\bfu$ onto the feasible intersection and acceleration ball\;
-    Blend projected and nominal actions using a geometry-derived blend cap\;
+\If{$\rho < \rho_{\mathrm{th}}$}{
+    \Return{$\tau^\star,\bfu$}\;
 }
-\Else{
-    $\bfu^{\mathrm{safe}} \leftarrow \bfu$\;
-}
+Build pairwise robot-robot and robot-obstacle half-planes\;
+Project $\bfu$ onto the feasible intersection and acceleration ball\;
+Blend projected and nominal actions using a geometry-derived blend cap to obtain $\bfu^{\mathrm{safe}}$\;
 \Return{$\tau^\star, \bfu^{\mathrm{safe}}$}
 \end{algorithm}
 
@@ -660,15 +778,18 @@ and robot-obstacle constraints are converted into half-plane
 constraints in action space using a CBF-inspired linearization. For
 robot $i$, we use the barrier
 \begin{equation}
-h_{ij} = \|\bfp_i - \bfp_j\|^2 - d_{\text{safe}}^2
+h_{ij} = \|\bfp_i - \bfp_j\|^2 - (d_{ij}^{\mathrm{safe}})^2
 \label{eq:barrier}
 \end{equation}
 and enforce
 \begin{equation}
-\nabla h_{ij}^{\top}\bfu_i \ge
--\alpha h_{ij} - 2(\bfp_i - \bfp_j)^\top(\bfv_i - \bfv_j).
+2\Delta t\,(\bfp_i-\bfp_j)^\top \bfu_i \ge
+\max(0,-h_{ij}) - 2(\bfp_i-\bfp_j)^\top(\bfv_i-\bfv_j),
 \label{eq:cbf_constraint}
 \end{equation}
+where $d_{ij}^{\mathrm{safe}}$ is instantiated as the robot-robot or
+robot-obstacle clearance threshold depending on the pair under
+consideration.
 Rather than solving a full external QP, we iteratively project a
 progress-biased target action onto the intersection of these half-planes
 and the acceleration ball. The final shielded action is softly blended
@@ -680,7 +801,18 @@ the shield more willing to intervene during unrecoverable crises. In the
 released artifact, the trigger level and blend cap are derived from
 environment scale quantities such as nominal spacing, clearance, and
 $v_{\max}\Delta t$, rather than being exposed as hand-tuned runtime
-thresholds.
+thresholds. The current implementation uses
+\begin{equation}
+\rho_{\mathrm{th}} =
+1 - \frac{v_{\max}\Delta t}{d_0},
+\qquad
+\beta_{\max} =
+\frac{v_{\max}\Delta t}{d_0}
+\frac{d_{\min}^{\mathrm{rr}}}{d_0},
+\label{eq:shield_scales}
+\end{equation}
+and blends the projected action with the nominal action using a severity
+factor clipped by $\beta_{\max}$.
 
 \section{Training}
 \label{sec:training}
@@ -727,7 +859,7 @@ released code forms the supervised targets as
 \begin{aligned}
 \mathbf{y}^{\mathrm{score}}
 &= \frac{\mathbf{q}-\mu(\mathbf{q})\mathbf{1}}
-         {\max(\sigma(\mathbf{q}),\epsilon)}, \\
+         {\max(\operatorname{std}(\mathbf{q}),\epsilon)}, \\
 y^{\mathrm{topo}} &= \tau^\star, \\
 y^{\mathrm{rec}}
 &= \tanh\!\Bigl(
@@ -741,11 +873,13 @@ y^{\mathrm{rec}}
 \end{aligned}
 \end{equation}
 \endgroup
-where $\mu(\mathbf{q})$ and $\sigma(\mathbf{q})$ are the mean and
+where $\mu(\mathbf{q})$ and $\operatorname{std}(\mathbf{q})$ are the mean and
 standard deviation of the rollout-score vector, $\mathbf{1}$ is the
 all-ones vector, $\epsilon$ is a small floor used to avoid division by a
-near-zero standard deviation, and $q_{(2)}$ is the second-best rollout
-score; equivalently, $\bar{\mathbf q}$ denotes the standardized rollout
+near-zero standard deviation, and $\bar q_{(2)}$ is the second-best
+entry of the standardized rollout-score vector
+$\bar{\mathbf q}$; equivalently, $q_{(2)}$ denotes the second-best raw rollout
+score, and $\bar{\mathbf q}$ denotes the standardized rollout
 score vector. Thus the scalar
 recoverability target is not an independent label; it is a distilled
 margin derived from the topology score vector itself. In the released
@@ -783,8 +917,13 @@ for topology-enabled RVT-Swarm, because the score-map and ranking
 objectives were empirically more stable than jointly optimizing an
 additional scalar recoverability head. The ranking term is implemented
 as a softplus sign-consistency loss over all topology pairs with unequal
-target scores, and the uncertainty penalty is dispersion-normalized so
-that inflating uncertainty is discouraged without tying the calibration
+target scores, and the uncertainty penalty is dispersion-normalized:
+\begin{equation}
+\mathcal{L}_{\text{unc}}
+= \frac{\mathrm{Mean}(\hat{\bm{\sigma}})}
+       {1 + \mathrm{Mean}(\operatorname{std}(\mathbf{y}^{\mathrm{score}}))},
+\end{equation}
+so inflating uncertainty is discouraged without tying the calibration
 term to a hand-chosen fixed coefficient.
 
 The three learned methods are trained with one fixed AdamW
@@ -1225,6 +1364,7 @@ Fixed formation     & 0.790 & 0.0073 & 0.0071 & 0.028 & 210.58 & 0.0397 & 0.0009
     \mathrm{Deadlock}
     = \mathbb{I}[\mathrm{stall\_counter}\ge T_{\mathrm{stall}} \wedge \neg \mathrm{GoalReached}],
     \end{equation*}
+    with $T_{\mathrm{stall}}=12$ in the released simulator, and
     \begin{equation*}
     \begin{aligned}
     \mathrm{Collapse}
@@ -1246,13 +1386,6 @@ Fixed formation     & 0.790 & 0.0073 & 0.0071 & 0.028 & 210.58 & 0.0397 & 0.0009
     time, and recoverability false-positive / false-negative rates;
     \Cref{tab:appendix_main_extra,tab:appendix_ablation_extra} record
     the current single-seed dumps.
-    \item The repository also includes a zero-retune robustness suite
-    and a derived-scale sensitivity suite. These drivers reevaluate
-    fixed checkpoints under environment perturbations (obstacle density,
-    LiDAR range, actuation limits, workspace scale, dynamic-obstacle
-    speed) and under small perturbations of the shared geometric scales
-    that feed topology and recoverability logic (spacing, sensing,
-    clearance, horizon) without retraining.
     \item The experiment driver runs the full artifact in the order:
     shared learned-method dataset generation, training of
     \{\textsc{gnn\_only}, \textsc{instant\_cert}, \textsc{rvt\_swarm}\},

@@ -69,10 +69,77 @@ J.~van~den Berg, S.~J. Guy, M.~Lin, and D.~Manocha, ``Reciprocal $n$-body
   collision avoidance,'' in \emph{Robotics Research}.\hskip 1em plus 0.5em
   minus 0.4em\relax Springer, 2011, pp. 3--19.
 
-\bibitem{abate2024safe_reach_set}
-A.~Abate, S.~Bogomolov, A.~Edwards, K.~Potomkin, S.~Soudjani, and P.~Zuliani,
-  ``Safe reach set computation via neural barrier certificates,''
-  \emph{IFAC-PapersOnLine}, vol.~58, no.~11, pp. 107--114, 2024.
+\bibitem{gama2022gnn_synthesis}
+F.~Gama, Q.~Li, E.~Tolstaya, and A.~Prorok, ``Synthesizing decentralized
+  controllers with graph neural networks and imitation learning,'' \emph{IEEE
+  Transactions on Signal Processing}, 2022.
+
+\bibitem{shi2022neural_swarm2}
+G.~Shi, W.~H{\"o}nig, X.~Shi, Y.~Yue, and S.-J. Chung, ``Neural-swarm2:
+  Planning and control of heterogeneous multirotor swarms using learned
+  interactions,'' \emph{IEEE Transactions on Robotics}, 2022.
+
+\bibitem{soualhi2025pointgoal}
+T.~Soualhi, N.~Crombez, Y.~Ruichek, A.~Lombard, and S.~Galland, ``Learning
+  decentralized multi-robot pointgoal navigation,'' \emph{IEEE Robotics and
+  Automation Letters}, vol.~10, no.~4, pp. 4117--4124, 2025.
+
+\bibitem{tonkens2022refining_cbf_hj}
+S.~Tonkens and S.~Herbert, ``Refining control barrier functions through
+  hamilton-jacobi reachability,'' in \emph{Proceedings of the IEEE/RSJ
+  International Conference on Intelligent Robots and Systems (IROS)}, 2022.
+
+\bibitem{borquez2024hj_filtering}
+J.~Borquez, K.~Chakraborty, H.~Wang, and S.~Bansal, ``On safety and liveness
+  filtering using hamilton--jacobi reachability analysis,'' \emph{IEEE
+  Transactions on Robotics}, 2024.
+
+\bibitem{mestres2024distributed_safe_navigation}
+P.~Mestres, C.~Nieto-Granda, and J.~Cort{\'e}s, ``Distributed safe navigation
+  of multi-agent systems using control barrier function-based controllers,''
+  \emph{IEEE Robotics and Automation Letters}, vol.~9, no.~7, pp. 6760--6767,
+  2024.
+
+\bibitem{tordesillas2022mader}
+J.~Tordesillas and J.~P. How, ``Mader: Trajectory planner in multiagent and
+  dynamic environments,'' \emph{IEEE Transactions on Robotics}, 2022.
+
+\bibitem{kondo2024robust_mader}
+K.~Kondo, R.~Figueroa, J.~Rached, and J.~Tordesillas, ``Robust {MADER}:
+  Decentralized multiagent trajectory planner robust to communication delay in
+  dynamic environments,'' \emph{IEEE Robotics and Automation Letters}, 2024.
+
+\bibitem{adajania2023amswarm}
+V.~K. Adajania, S.~Zhou, A.~K. Singh, and A.~P. Schoellig, ``{AMSwarm}: An
+  alternating minimization approach for safe motion planning of quadrotor
+  swarms in cluttered environments,'' in \emph{Proceedings of the IEEE
+  International Conference on Robotics and Automation (ICRA)}, 2023.
+
+\bibitem{jiang2024belief_mpc_formation}
+C.~Jiang and R.~D'Andrea, ``Distributed sampling-based model predictive control
+  via belief propagation for multi-robot formation navigation,'' \emph{IEEE
+  Robotics and Automation Letters}, 2024.
+
+\bibitem{pavlasek2024stein_belief}
+J.~Pavlasek, J.~J.~Z. Mah, R.~Xu, O.~C. Jenkins, and F.~Ramos, ``Stein
+  variational belief propagation for multi-robot coordination,'' \emph{IEEE
+  Robotics and Automation Letters}, vol.~9, no.~5, pp. 4194--4201, 2024.
+
+\bibitem{zhang2024mean_shift_shape}
+Y.~Zhang, R.~Zhou, X.~Li, and G.~Sun, ``Mean-shift shape formation of
+  multi-robot systems without target assignment,'' \emph{IEEE Robotics and
+  Automation Letters}, vol.~9, no.~2, pp. 1772--1779, 2024.
+
+\bibitem{park2025goal_convergence}
+J.~Park, Y.~Lee, I.~Jang, and H.~J. Kim, ``Decentralized trajectory planning
+  for quadrotor swarm in cluttered environments with goal convergence
+  guarantee,'' \emph{The International Journal of Robotics Research}, 2025.
+
+\bibitem{senbaslar2025dream}
+B.~{\c{S}}enba{\c{s}}lar and G.~S. Sukhatme, ``{DREAM}: Decentralized real-time
+  asynchronous probabilistic trajectory planning for collision-free multirobot
+  navigation in cluttered environments,'' \emph{IEEE Transactions on Robotics},
+  2025.
 
 \bibitem{li2025certifiable_reachability}
 G.~Li, H.~Mirinezhad, K.~Garg, J.~Sun, C.~Fan, B.~Gharesifard, A.~A. Ahmadi,

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.29)  19 MAR 2026 13:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.29)  19 MAR 2026 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -962,142 +962,143 @@ Package caption Info: End \AtBeginDocument code.
 
 
 
-Underfull \hbox (badness 3396) in paragraph at lines 155--161
-[]\T1/ptm/m/n/10 We pro-vide a uni-fied ex-per-i-men-tal scaf-fold with
- []
-
-
 
 [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/l
 ocal/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 209
-.
+Underfull \hbox (badness 3396) in paragraph at lines 160--166
+[]\T1/ptm/m/n/10 We pro-vide a uni-fied ex-per-i-men-tal scaf-fold with
+ []
 
+
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 267
+.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 209
+LaTeX Font Info:    Trying to load font information for U+msb on input line 267
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 29
-4.
-(/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
+[2]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 35
+5.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \hbox (badness 1681) in paragraph at lines 287--303
+Underfull \hbox (badness 1681) in paragraph at lines 348--364
 \T1/ptm/m/n/10 state vari-ables: \T1/pcr/m/n/10 topology_mode\T1/ptm/m/n/10 , \
 T1/pcr/m/n/10 formation_scale\T1/ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 3942) in paragraph at lines 344--348
+
+
+Underfull \hbox (badness 3942) in paragraph at lines 396--400
 []\T1/ptm/m/n/10 RVT-Swarm com-bines a graph-attention back-bone, a
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 344--348
+Underfull \hbox (badness 2351) in paragraph at lines 396--400
 \T1/ptm/m/n/10 recoverability-aware multi-head de-coder, a coun-ter-fac-tual
  []
 
+(./fig_architecture.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-[2] (./fig_architecture.tex)
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 401--401
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 461--461
 []\T1/ptm/m/n/7 Dynamic-obstacle
  []
 
 
-Underfull \hbox (badness 2884) in paragraph at lines 401--401
+Underfull \hbox (badness 2884) in paragraph at lines 461--461
 []\T1/ptm/m/n/7 Safety/global con-
  []
 
 
-Overfull \hbox (0.66234pt too wide) detected at line 424
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (12.59406pt too wide) detected at line 484
 [][][][]\OT1/cmr/bx/n/10 e[] \OT1/cmr/m/n/10 = [^^A\OT1/cmr/bx/n/10 p[]\OML/cmm
 /m/it/10 ; \OT1/cmr/m/n/10 ^^A\OT1/cmr/bx/n/10 v[]\OML/cmm/m/it/10 ; \OMS/cmsy/
 m/n/10 k\OT1/cmr/m/n/10 ^^A\OT1/cmr/bx/n/10 p[]\OMS/cmsy/m/n/10 k\OML/cmm/m/it/
 10 ; \OT1/cmr/m/n/10 ^^E[]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 ^^E[]\OML/cmm/m/it
-/10 ; ^^O[]; [][]; b[]; ^^Y[]\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 :
+/10 ; ^^O[]; [][]; b[]; p[]\OT1/cmr/m/n/10 ]\OML/cmm/m/it/10 :
  []
 
 
-Underfull \hbox (badness 4316) in paragraph at lines 437--441
+Underfull \hbox (badness 4316) in paragraph at lines 503--507
 []\T1/ptm/m/n/10 The graph is pro-cessed by three attention-weighted
  []
 
 
 
-[3]
-Underfull \hbox (badness 1681) in paragraph at lines 468--470
+[4]
+Underfull \hbox (badness 1681) in paragraph at lines 534--536
 []\T1/ptm/m/n/10 a \T1/ptm/b/n/10 score head \T1/ptm/m/n/10 pro-duc-ing per-top
 ology re-cov-er-abil-ity
  []
 
-
-
 (./fig_rfn.tex)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[4]
 
 
 
 [5]
 
 
-Underfull \hbox (badness 1360) in paragraph at lines 770--789
+
+[6]
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 904--921
 \T1/ptm/m/n/10 is an equal-weight bun-dle of the topology-classification,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--789
+Underfull \hbox (badness 10000) in paragraph at lines 904--921
 \T1/ptm/m/n/10 score-map, and pairwise-ranking ob-jec-tives. For
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 770--789
+Underfull \hbox (badness 10000) in paragraph at lines 904--921
 \T1/ptm/m/sc/10 gnn_only\T1/ptm/m/n/10 , $\OMS/cmsy/m/n/10 S[] \OT1/cmr/m/n/10 
 = \OMS/cmsy/m/n/10 fL[]g$\T1/ptm/m/n/10 ; for \T1/ptm/m/sc/10 in-stant_cert\T1/
 ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 770--789
+Underfull \hbox (badness 1968) in paragraph at lines 904--921
 \OMS/cmsy/m/n/10 S[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 fL[]\OML/cmm/m/it/10 ; 
 \OMS/cmsy/m/n/10 L[]g$\T1/ptm/m/n/10 ; and for topology-enabled RVT-
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 770--789
+Underfull \hbox (badness 1577) in paragraph at lines 904--921
 \T1/ptm/m/n/10 co-ef-fi-cients. The scalar re-cov-er-abil-ity re-gres-sion term
  is
  []
 
 
-Underfull \hbox (badness 1953) in paragraph at lines 770--789
-\T1/ptm/m/n/10 is dis-cour-aged with-out ty-ing the cal-i-bra-tion term to a
- []
-
-
-Underfull \hbox (badness 3118) in paragraph at lines 814--821
+Underfull \hbox (badness 3118) in paragraph at lines 953--960
 []\T1/ptm/m/n/10 The bench-mark uses a com-mon 2D sim-u-la-tor with
  []
 
 
 
-[6]
-Underfull \hbox (badness 2326) in paragraph at lines 834--841
+[7]
+Underfull \hbox (badness 2326) in paragraph at lines 973--980
 \T1/ptm/m/n/10 obstacle col-li-sions over the episode, and $[] \OT1/cmr/m/n/10 
 =
  []
@@ -1106,8 +1107,8 @@ Underfull \hbox (badness 2326) in paragraph at lines 834--841
 
 
 
-[7]
-Underfull \hbox (badness 2662) in paragraph at lines 1034--1041
+[8]
+Underfull \hbox (badness 2662) in paragraph at lines 1173--1180
 []\T1/ptm/b/n/10 Some aux-il-iary safety com-po-nents are not yet
  []
 
@@ -1115,50 +1116,56 @@ Underfull \hbox (badness 2662) in paragraph at lines 1034--1041
 
 (./main.bbl
 
-[8])
-Underfull \vbox (badness 1681) has occurred while \output is active []
+[9])
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
 
-Overfull \hbox (21.47469pt too wide) detected at line 1240
+
+[10]
+Overfull \hbox (21.47469pt too wide) detected at line 1380
 [][]
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 1256--1264
+Underfull \hbox (badness 2165) in paragraph at lines 1389--1397
 \T1/ptm/m/n/7 eval-u-a-tion of those three learned meth-ods plus {\T1/ptm/m/sc/
 7 adaptive_formation\T1/ptm/m/n/7 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1264--1273
+Underfull \hbox (badness 10000) in paragraph at lines 1397--1406
 []\T1/ptm/m/n/7 The ab-la-tion tog-gles are ex-actly: \T1/pcr/m/n/7 full\T1/ptm
 /m/n/7 , \T1/pcr/m/n/7 no_recoverability\T1/ptm/m/n/7 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1264--1273
+Underfull \hbox (badness 10000) in paragraph at lines 1397--1406
 \T1/pcr/m/n/7 no_counterfactual\T1/ptm/m/n/7 , \T1/pcr/m/n/7 no_progress_shield
 \T1/ptm/m/n/7 , \T1/pcr/m/n/7 no_topology\T1/ptm/m/n/7 ,
  []
 
 
 
-[9] (./main.aux)
+
+
+[11
+
+] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 4060D79B4C35D2C49CC8B53C04B55141;4511.
+(rerunfilecheck)             Checksum: E437D7C300B9837F0E99306681F32F0B;4511.
  ) 
 Here is how much of TeX's memory you used:
- 27537 strings out of 473190
- 526040 string characters out of 5715800
- 923098 words of memory out of 5000000
- 50185 multiletter control sequences out of 15000+600000
- 703385 words of font info for 191 fonts, out of 8000000 for 9000
+ 27596 strings out of 473190
+ 527205 string characters out of 5715800
+ 929021 words of memory out of 5000000
+ 50209 multiletter control sequences out of 15000+600000
+ 709656 words of font info for 199 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,15n,87p,597b,886s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1176,29 +1183,31 @@ ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loc
 al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/l
-ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/
-texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2025/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/tex
-mf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/
-fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type
-1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/tim
-es/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a
-.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on main.pdf (9 pages, 438102 bytes).
+ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></u
+sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/lo
+cal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
+xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
+2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/202
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025
+/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-d
+ist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/
+type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw
+/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utm
+ri8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+
+Output written on main.pdf (11 pages, 465828 bytes).
 PDF statistics:
- 507 PDF objects out of 1000 (max. 8388607)
- 419 compressed objects within 5 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 566 PDF objects out of 1000 (max. 8388607)
+ 474 compressed objects within 5 object streams
+ 156 named destinations out of 1000 (max. 500000)
  245 words of extra memory for PDF output out of 10000 (max. 10000000)
 
