@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader, random_split
 
 from .config import Config
 from .dataset import SwarmDataset, collate_graphs, generate_dataset
-from .evaluate import rollout_validation_score, rollout_validation_summary
+from .evaluate import rollout_validation_key, rollout_validation_score, rollout_validation_summary
 from .models import build_model
 from .utils import score_dispersion_tensor, set_seed, torch_device
 
@@ -132,14 +132,22 @@ def maybe_record_rollout_candidate(
     out_path: Path,
     model_name: str,
     epoch: int,
+    score_key: tuple[float, ...],
     score: float,
     state: Dict[str, object],
     topk: int,
 ) -> None:
     candidate_path = rollout_candidate_path(out_path, model_name, epoch)
     torch.save(state, candidate_path)
-    records.append({"score": float(score), "epoch": int(epoch), "path": candidate_path})
-    records.sort(key=lambda item: (float(item["score"]), int(item["epoch"])), reverse=True)
+    records.append(
+        {
+            "key": tuple(float(x) for x in score_key),
+            "score": float(score),
+            "epoch": int(epoch),
+            "path": candidate_path,
+        }
+    )
+    records.sort(key=lambda item: (tuple(item["key"]), int(item["epoch"])), reverse=True)
     while len(records) > max(topk, 1):
         dropped = records.pop()
         dropped_path = Path(dropped["path"])
@@ -167,6 +175,7 @@ def recheck_rollout_candidates(
     best_state = None
     best_summary = None
     best_score = None
+    best_key = None
     best_epoch = -1
     for record in records:
         state = torch.load(Path(record["path"]), map_location=device, weights_only=False)
@@ -181,11 +190,17 @@ def recheck_rollout_candidates(
             seed_offset=seed_offset,
         )
         score = rollout_validation_score(summary)
+        key = rollout_validation_key(summary)
         epoch = int(state.get("epoch", record["epoch"]))
-        if best_score is None or score > best_score or (score == best_score and epoch > best_epoch):
+        if (
+            best_key is None
+            or key > best_key
+            or (key == best_key and (best_score is None or score > best_score or (score == best_score and epoch > best_epoch)))
+        ):
             best_state = state
             best_summary = summary
             best_score = score
+            best_key = key
             best_epoch = epoch
 
     return best_state, best_summary, best_score
@@ -222,6 +237,8 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
     patience_counter = 0
     best_mode = "min"
     last_rollout_score = None
+    last_rollout_key = None
+    best_rollout_key = None
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
     best_ckpt = out_path / f"{model_name}_best.pt"
@@ -244,6 +261,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         if ran_rollout:
             rollout_summary = rollout_validation_summary(model_name, cfg, model, str(out_path))
             last_rollout_score = rollout_validation_score(rollout_summary)
+            last_rollout_key = rollout_validation_key(rollout_summary)
 
         use_rollout_metric = (
             cfg.train.rollout_val_enabled
@@ -265,6 +283,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         if metric_ready and metric_mode != best_mode:
             best_mode = metric_mode
             best_val = float("-inf") if metric_mode == "max" else float("inf")
+            best_rollout_key = None
             patience_counter = 0
 
         if in_warmup:
@@ -274,9 +293,18 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
             patience_counter = 0
         elif use_rollout_metric:
             if metric_ready:
-                improved = tracking > (best_val + min_delta)
+                improved = (
+                    best_rollout_key is None
+                    or (last_rollout_key is not None and last_rollout_key > best_rollout_key)
+                    or (
+                        last_rollout_key is not None
+                        and last_rollout_key == best_rollout_key
+                        and tracking > (best_val + min_delta)
+                    )
+                )
                 if improved:
                     best_val = tracking
+                    best_rollout_key = last_rollout_key
                     best_epoch = epoch
                     patience_counter = 0
                     update_best = True
@@ -330,6 +358,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
                 out_path=out_path,
                 model_name=model_name,
                 epoch=epoch,
+                score_key=last_rollout_key if last_rollout_key is not None else tuple(),
                 score=last_rollout_score,
                 state=state,
                 topk=int(cfg.train.rollout_val_topk_checkpoints),

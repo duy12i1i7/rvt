@@ -170,9 +170,9 @@ def rollout_validation_score(summary: Dict[str, float]) -> float:
     positive = normalized_mean(
         [
             summary["success"],
+            summary["goal_reached"],
             summary["collision_free"],
             summary["form_ok"],
-            summary["goal_reached"],
         ]
     )
     negative = normalized_mean(
@@ -183,3 +183,15 @@ def rollout_validation_score(summary: Dict[str, float]) -> float:
         ]
     )
     return float(positive - negative)
+
+
+def rollout_validation_key(summary: Dict[str, float]) -> tuple[float, ...]:
+    return (
+        float(summary["success"]),
+        float(summary["goal_reached"]),
+        float(summary["collision_free"]),
+        float(summary["form_ok"]),
+        -float(summary["irreversible_collapse"]),
+        -float(summary["deadlock"]),
+        -float(summary["stall_rate"]),
+    )

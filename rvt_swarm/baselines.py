@@ -16,6 +16,15 @@ def _repulsion(diff: np.ndarray, active_distance: float) -> np.ndarray:
     return unit(diff) * clip01(1.0 - d / max(active_distance, 1e-6))
 
 
+def _heuristic_topology(obs: Dict) -> int:
+    open_space = clip01(1.0 - float(obs["bottleneck"]))
+    split_active = clip01(float(obs.get("split_active", 0.0)))
+    recovering = float(obs.get("recovery_progress", 0.0)) < float(obs["progress"])
+    if obs["bottleneck"] > open_space:
+        return 3 if split_active > 0.0 else 2
+    return 4 if recovering and split_active > 0.0 else 0
+
+
 def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     pos = obs["positions"]
     vel = obs["velocities"]
@@ -42,11 +51,7 @@ def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
 
 
 def adaptive_formation(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
-    open_space = clip01(1.0 - float(obs["bottleneck"]))
-    if obs["bottleneck"] > open_space:
-        topo = 2 if len(obs["positions"]) <= 8 else 3
-    else:
-        topo = 4 if float(obs.get("recovery_progress", 0.0)) < float(obs["progress"]) else 0
+    topo = _heuristic_topology(obs)
     actions = expert_action(obs, cfg, topo)
     return actions, topo
 
@@ -69,8 +74,7 @@ def cbf_qp_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
 
 
 def centralized_mpc_proxy(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
-    open_space = clip01(1.0 - float(obs["bottleneck"]))
-    topo = 2 if obs["bottleneck"] > open_space else (4 if float(obs.get("recovery_progress", 0.0)) < float(obs["progress"]) else 0)
+    topo = _heuristic_topology(obs)
     actions = expert_action(obs, cfg, topo)
     centroid = obs["positions"].mean(axis=0)
     goal_dir = unit(obs["goal"] - centroid)

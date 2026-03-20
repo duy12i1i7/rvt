@@ -66,8 +66,7 @@ def build_ablation_configs(device: str, workers: int) -> dict[str, Config]:
     ablations["no_counterfactual"].method.use_counterfactual_topology = False
     ablations["no_progress_shield"].method.use_progress_shield = False
     ablations["no_topology"].method.use_topology = False
-    ablations["fixed_formation"].method.use_topology = False
-    ablations["fixed_formation"].method.use_counterfactual_topology = False
+    ablations["fixed_formation"].method.use_adaptive_formation_scale = False
     return ablations
 
 

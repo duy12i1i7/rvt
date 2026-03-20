@@ -245,6 +245,7 @@ class SwarmFormationEnv:
         old_mode = self.state.topology_mode
         old_scale = self.state.formation_scale
         self.state.time_since_switch += 1
+        adaptive_scale = bool(self.cfg.method.use_adaptive_formation_scale)
         min_scale = clip01(self.ec.min_rr_distance / max(self.ec.nominal_spacing, 1e-6))
         bottleneck = clip01(self.state.bottleneck_score)
         open_space = clip01(1.0 - bottleneck)
@@ -252,61 +253,70 @@ class SwarmFormationEnv:
         if topology_action == 1:  # compress
             self.state.topology_mode = 0
             target_scale = max(min_scale, 1.0 - bottleneck * (1.0 - min_scale))
-            self.state.formation_scale = float(
-                np.clip(
-                    self.state.formation_scale + (target_scale - self.state.formation_scale) * bottleneck,
-                    min_scale,
-                    1.0,
+            if adaptive_scale:
+                self.state.formation_scale = float(
+                    np.clip(
+                        self.state.formation_scale + (target_scale - self.state.formation_scale) * bottleneck,
+                        min_scale,
+                        1.0,
+                    )
                 )
-            )
             self.state.split_active = clip01(self.state.split_active * open_space)
         elif topology_action == 2:  # line
             self.state.topology_mode = 2
             target_scale = max(min_scale, min(self.state.formation_scale, 1.0 - bottleneck * (1.0 - min_scale)))
             blend = max(bottleneck, clip01(self.state.split_active))
-            self.state.formation_scale = float(
-                np.clip(
-                    self.state.formation_scale + (target_scale - self.state.formation_scale) * blend,
-                    min_scale,
-                    1.0,
+            if adaptive_scale:
+                self.state.formation_scale = float(
+                    np.clip(
+                        self.state.formation_scale + (target_scale - self.state.formation_scale) * blend,
+                        min_scale,
+                        1.0,
+                    )
                 )
-            )
             self.state.split_active = clip01(self.state.split_active * open_space)
         elif topology_action == 3:  # split
             self.state.topology_mode = 3
             self.state.subteam_ids = self._subteam_assignments()
-            self.state.formation_scale = float(
-                np.clip(
-                    self.state.formation_scale + bottleneck * (1.0 - self.state.formation_scale),
-                    min_scale,
-                    1.0,
+            if adaptive_scale:
+                self.state.formation_scale = float(
+                    np.clip(
+                        self.state.formation_scale + bottleneck * (1.0 - self.state.formation_scale),
+                        min_scale,
+                        1.0,
+                    )
                 )
-            )
             self.state.split_active = clip01(self.state.split_active + bottleneck)
         elif topology_action == 4:  # recover
             self.state.topology_mode = 0
-            self.state.formation_scale = float(
-                np.clip(
-                    self.state.formation_scale + (1.0 - self.state.formation_scale) * max(open_space, clip01(self.state.split_active)),
-                    min_scale,
-                    1.0,
+            if adaptive_scale:
+                self.state.formation_scale = float(
+                    np.clip(
+                        self.state.formation_scale + (1.0 - self.state.formation_scale) * max(open_space, clip01(self.state.split_active)),
+                        min_scale,
+                        1.0,
+                    )
                 )
-            )
             self.state.split_active = clip01(self.state.split_active * bottleneck)
             self.state.subteam_ids[:] = 0
         else:  # keep
             self.state.topology_mode = self.state.topology_mode if bottleneck > open_space else 0
             target_scale = max(min_scale, 1.0 - bottleneck * (1.0 - min_scale))
-            self.state.formation_scale = float(
-                np.clip(
-                    self.state.formation_scale + (target_scale - self.state.formation_scale) * bottleneck,
-                    min_scale,
-                    1.0,
+            if adaptive_scale:
+                self.state.formation_scale = float(
+                    np.clip(
+                        self.state.formation_scale + (target_scale - self.state.formation_scale) * bottleneck,
+                        min_scale,
+                        1.0,
+                    )
                 )
-            )
             self.state.split_active = clip01(self.state.split_active * open_space)
 
-        if old_mode != self.state.topology_mode or abs(old_scale - self.state.formation_scale) * self.ec.nominal_spacing > self.ec.robot_radius:
+        if not adaptive_scale:
+            self.state.formation_scale = 1.0
+
+        scale_changed = adaptive_scale and abs(old_scale - self.state.formation_scale) * self.ec.nominal_spacing > self.ec.robot_radius
+        if old_mode != self.state.topology_mode or scale_changed:
             self.state.topology_switches += 1
             self.state.time_since_switch = 0
 
@@ -461,10 +471,10 @@ class SwarmFormationEnv:
         centroid = self.state.positions.mean(axis=0)
         goal_distance = float(np.linalg.norm(self.state.goal - centroid))
         goal_delta = self.state.prev_goal_distance - goal_distance
-        if goal_delta < 0.01:
+        if goal_delta <= 0.0:
             self.state.stall_counter += 1
         else:
-            self.state.stall_counter = max(0, self.state.stall_counter - 2)
+            self.state.stall_counter = max(0, self.state.stall_counter - 1)
         self.state.prev_goal_distance = goal_distance
 
         metrics = self.compute_metrics()
@@ -509,7 +519,9 @@ class SwarmFormationEnv:
         form_ok = form_rms < self.ec.formation_tolerance
         success = float(goal_reached and collision_free and form_ok)
         stall_rate = float(self.state.stall_counter / max(1, self.state.step_count))
-        deadlock = float(self.state.stall_counter >= 12 and not goal_reached)
+        stalled_distance = float(self.state.stall_counter) * self.ec.max_speed * self.ec.dt
+        deadlock_distance = max(self.ec.goal_tolerance, self.ec.nominal_spacing)
+        deadlock = float(stalled_distance >= deadlock_distance and not goal_reached)
         form_ratio = clip01(form_rms / max(self.ec.formation_tolerance, 1e-6))
         formation_recovery_score = clip01(1.0 - form_ratio)
         formation_recovery_time = float(

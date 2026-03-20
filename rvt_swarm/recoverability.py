@@ -60,7 +60,7 @@ def rollout_score(env: SwarmFormationEnv, topology_action: int, horizon: int, cf
         open_space = clip01(1.0 - bottleneck)
         recovery_bonus = 0.0
         if topology_action == 4:
-            recovery_bonus = normalized_mean([tube, split_active, open_space])
+            recovery_bonus = normalized_mean([tube, split_active, bottleneck])
         elif topology_action in (2, 3):
             recovery_bonus = bottleneck
         lingering_split_penalty = split_active * open_space * float(topology_action != 4)
@@ -97,9 +97,12 @@ def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, 
         scores.append(rollout_score(env, topo, cfg.train.recover_horizon, cfg))
     scores_np = np.array(scores, dtype=np.float32)
     norm_scores = standardize_np(scores_np)
-    best_idx = int(np.argmax(norm_scores))
-    ordered = np.sort(norm_scores)
-    gap = float(norm_scores[best_idx] - ordered[-2]) if len(ordered) > 1 else float(norm_scores[best_idx])
-    formation_bonus = float(CANDIDATE_TOPOLOGIES[best_idx] == 4)
-    recover_margin = float(np.tanh(norm_scores[best_idx] + gap + formation_bonus))
+    best_idx = int(np.argmax(scores_np))
+    ordered = np.sort(scores_np)
+    best_score = float(scores_np[best_idx])
+    gap = best_score - float(ordered[-2]) if len(ordered) > 1 else best_score
+    score_scale = max(float(np.mean(np.abs(scores_np))), 1e-6)
+    best_signal = best_score / score_scale
+    gap_signal = gap / score_scale
+    recover_margin = float(np.tanh(0.5 * (best_signal + gap_signal)))
     return recover_margin, CANDIDATE_TOPOLOGIES[best_idx], norm_scores

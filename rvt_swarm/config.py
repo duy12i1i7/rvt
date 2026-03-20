@@ -77,6 +77,7 @@ class MethodConfig:
     use_topology: bool = True
     use_counterfactual_topology: bool = True
     use_progress_shield: bool = True
+    use_adaptive_formation_scale: bool = True
 
 
 @dataclass

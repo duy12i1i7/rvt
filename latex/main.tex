@@ -62,9 +62,10 @@ ability to remain collision-free, make goal progress, and return toward
 a formation tube under a candidate topology.
 RVT-Swarm combines (i) a local interaction-graph encoder with action,
 recoverability, uncertainty, and topology heads; (ii) a counterfactual
-topology selector whose switching margins are derived from state and
-environment scale; and (iii) an optional lightweight CBF-inspired
-projection shield.
+topology selector that ranks feasible candidates by recoverability,
+context, prior consistency, and switch readiness without
+scenario-specific runtime retuning; and (iii) an optional lightweight
+CBF-inspired projection shield.
 Training uses imitation learning plus counterfactual short-horizon
 rollouts from a common expert controller. On the current prototype
 benchmark (400 evaluation episodes per method, single seed),
@@ -121,10 +122,11 @@ In RVT-Swarm, each local graph observation is mapped not only to a
 control action but also to a score map over topological actions
 (\textsc{keep}, \textsc{compress}, \textsc{line}, \textsc{split},
 \textsc{recover}). The controller then evaluates these topologies
-counterfactually and selects the one with the best predicted
-recoverability, subject to state-derived switching margins. An optional
-lightweight projection-based shield intervenes only when risk is high
-or when all candidate topologies appear unrecoverable.
+counterfactually and selects among them using a fixed rank-based rule
+that compares recoverability, context, prior agreement, and switching
+readiness. An optional lightweight projection-based shield intervenes
+only when risk is high or when all candidate topologies appear
+unrecoverable.
 
 The resulting system is deliberately pragmatic. It does not claim an
 exact viability kernel or a formal distributed reachability proof.
@@ -147,14 +149,17 @@ We make the following contributions:
     gradient-scaling mechanism reduces interference from auxiliary heads
     on the action pathway.
 
-    \item We introduce a recoverability-aware topology selector with
-    state-derived switching margins, and study an optional lightweight
-    progress-preserving projection shield that activates only under
-    elevated risk or global negative recoverability.
+    \item We introduce a recoverability-aware topology selector that
+    ranks feasible candidates by predicted recoverability, local
+    context, prior agreement, and switch readiness, and study an
+    optional lightweight progress-preserving projection shield that
+    activates only under elevated risk or global negative
+    recoverability.
 
-    \item We reduce exposed method hyperparameters by deriving
-    selector/shield runtime scales from environment-normalized
-    quantities and by replacing hand-balanced loss weights with an
+    \item We reduce exposed method hyperparameters by removing
+    hand-balanced selector margins and loss weights: runtime topology
+    choice uses one fixed lexicographic rule, while shield intervention
+    scales remain geometry-normalized and the training loss uses an
     equal-weight active-objective formulation reused across all runs.
 
     \item We provide a unified experimental scaffold with learned
@@ -613,66 +618,33 @@ and by the shield trigger.}
 \subsection{Counterfactual Topology Selection}
 \label{sec:selector}
 
-At inference, RVT-Swarm evaluates all candidate topologies using a
-combination of uncertainty-adjusted recoverability, topology prior,
-contextual bonuses, validity masks, and switching cost:
+At inference, RVT-Swarm no longer collapses all selector evidence into a
+single hand-balanced scalar. Instead, each candidate topology is mapped
+to a lexicographic decision key:
 \begin{equation}
 \begin{aligned}
-C_\tau ={}& \pi_\tau
-       + \tanh(\tilde{r}_\tau)
-       + b_\tau^{\text{ctx}} \\
-       &- \frac{\hat{\sigma}_\tau}{1+\bar{\sigma}}
-       - \psi_\tau^{\text{switch}}
-       + m_\tau^{\text{valid}},
+K_\tau = (&a_\tau,\ \tanh(\tilde r_\tau),\ c_{\tau,1},\ c_{\tau,2},\ c_{\tau,3},\ c_{\tau,4}, \\
+          &\pi_\tau,\ \xi_\tau,\ \mathbb{I}[\tau=\tau_{\mathrm{prev}}],\ -\hat\sigma_\tau),
 \end{aligned}
-\label{eq:selector}
+\label{eq:selector_key}
 \end{equation}
-The context term favors, for example, \textsc{line} or
-\textsc{compress} in bottlenecks and \textsc{recover} once the
-bottleneck clears. The switch penalty discourages excessive topology
-changes, especially disruptive split actions. The current selector is a
-two-stage gate rather than a single argmax: it starts from the topology
-logit winner, permits a recoverability-based override only when the
-score gain exceeds an uncertainty-dependent margin, and finally applies
-cooldown and hysteresis checks with additional
-candidate-specific switching surcharges. Here
-$m_\tau^{\text{valid}}\in\{0,-1\}$ is an additive validity mask and
-$\bar{\sigma}=\frac{1}{|\cT|}\sum_{\tau\in\cT}\hat{\sigma}_\tau$ is the mean
-predicted topology uncertainty. In the
-released implementation, the prior temperature, switching cooldown, and
-hysteresis margin are not exposed as free user-tuned knobs; instead
-they are derived from environment scale quantities such as $d_0$,
-$d_{\min}$, sensing range, and $v_{\max}\Delta t$. The online
-selection-and-shield loop is summarized in \Cref{alg:selector}.
-Concretely, the current code uses
+and the selector chooses
 \begin{equation}
-\begin{aligned}
-T_{\mathrm{env}} &=
-1 + \frac{d_0}{r_{\mathrm{sense}}}
-  + \frac{v_{\max}\Delta t}{d_{\min}^{\mathrm{rr}}}, \\
-T_{\mathrm{cool}} &=
-\mathrm{round}\!\left(
-H \frac{v_{\max}\Delta t}{d_{\min}^{\mathrm{rr}}}
-+ |\mathcal{N}_{\mathrm{train}}|
-\right), \\
-\eta_{\mathrm{hys}} &= \frac{d_{\min}^{\mathrm{rr}}}{r_{\mathrm{sense}}},
-\end{aligned}
-\label{eq:selector_scales}
+\tau^\star = \arg\max_{\tau \in \cT}^{\mathrm{lex}} K_\tau.
+\label{eq:selector_choice}
 \end{equation}
-where $H$ is the recoverability rollout horizon and
-$|\mathcal{N}_{\mathrm{train}}|$ is the number of team sizes used in the
-benchmark. The final switching margin used by the selector is
-\begin{equation}
-\eta_{\mathrm{dyn}} =
-\eta_{\mathrm{hys}}
-\left(
-1 + \eta_{\mathrm{spec}}
-    + \frac{\bar{\sigma}}{1 + \bar{\sigma}}
-\right),
-\label{eq:selector_margin}
-\end{equation}
-where $\eta_{\mathrm{spec}}$ is the candidate-specific switch surcharge
-computed from the current bottleneck/split context.
+Here $a_\tau\in\{0,1\}$ is a validity flag, $\tilde r_\tau$ is the
+uncertainty-adjusted recoverability score from
+\eqref{eq:adjusted_recover}, $(c_{\tau,1},\dots,c_{\tau,4})$ are
+context features extracted from the current bottleneck, formation
+quality, progress, and split state, $\pi_\tau$ is the topology prior
+from the graph logits, $\xi_\tau$ is a switch-readiness term derived
+from time since the last topology change, and $\hat\sigma_\tau$ is the
+predicted uncertainty. The current topology is preserved unless another
+candidate has a strictly better key. This runtime rule removes selector
+temperature, cooldown, hysteresis, and manually tuned switching margins
+from the deployment path. The online selection-and-shield loop is
+summarized in \Cref{alg:selector}.
 
 \removelatexerror
 \begin{algorithm}[!t]
@@ -684,37 +656,17 @@ computed from the current bottleneck/split context.
 $\tilde{\mathbf{r}}$, uncertainty $\hat{\bm{\sigma}}$, previous topology
 $\tau_{\mathrm{prev}}$, nominal action $\bfu$}
 \KwOut{Selected topology $\tau^\star$, shielded action $\bfu^{\mathrm{safe}}$}
-Compute prior $\bm{\pi} = \mathrm{softmax}(\bm{\ell}/T_{\mathrm{env}})$\;
-$t_{\mathrm{switch}} \leftarrow o_t[\texttt{time\_since\_switch}]$\;
-Compute contextual bonuses $b_\tau^{\mathrm{ctx}}$\;
-Compute switching penalties $\psi_\tau^{\mathrm{switch}}$\;
-Compute $C_\tau$ using~\eqref{eq:selector}\;
-$\tau_{\mathrm{logit}} \leftarrow \argmax_{\tau \in \cT} \ell_\tau$\;
-\If{$\tau_{\mathrm{logit}}$ is invalid}{
-    $\tau_{\mathrm{logit}} \leftarrow \argmax_{\tau \in \cT}
-    (\pi_\tau + b_\tau^{\mathrm{ctx}} + m_\tau^{\mathrm{valid}})$\;
-}
-$\tau_{\mathrm{best}} \leftarrow \argmax_{\tau \in \cT} C_\tau$\;
-$\tau' \leftarrow \tau_{\mathrm{logit}}$\;
-Compute override margin $\delta_{\mathrm{ovr}}=\bar{\sigma}/(1+\bar{\sigma})$\;
-\If{$\tau_{\mathrm{best}}$ is valid \textbf{and}
-    $\tanh(\tilde r_{\tau_{\mathrm{best}}})-\tanh(\tilde r_{\tau_{\mathrm{logit}}})
-    > \delta_{\mathrm{ovr}}$ \textbf{and}
-    $C_{\tau_{\mathrm{best}}} > C_{\tau_{\mathrm{logit}}}$}{
-    $\tau' \leftarrow \tau_{\mathrm{best}}$\;
-}
-Compute uncertainty/specialist margin $\eta_{\mathrm{dyn}}$\;
-\If{$t_{\mathrm{switch}} < T_{\mathrm{cool}}$ \textbf{and}
-    $\tau_{\mathrm{prev}}$ is valid \textbf{and}
-    $C_{\tau'}-C_{\tau_{\mathrm{prev}}}
-    \le \tanh(\tilde r_{\tau'})-\tanh(\tilde r_{\tau_{\mathrm{prev}}})$}{
-    $\tau' \leftarrow \tau_{\mathrm{prev}}$\;
-}
+Compute prior $\bm{\pi} = \mathrm{softmax}(\bm{\ell})$\;
+Compute topology validity flags $a_\tau$ and context features $c_{\tau,1:4}$\;
+Compute switch-readiness terms $\xi_\tau$ from
+$o_t[\texttt{time\_since\_switch}]$\;
+Construct lexicographic selector keys $K_\tau$ using~\eqref{eq:selector_key}\;
+$\tau_{\mathrm{best}} \leftarrow \argmax_{\tau \in \cT}^{\mathrm{lex}} K_\tau$\;
 \eIf{$\tau_{\mathrm{prev}}$ is valid \textbf{and}
-    $C_{\tau'} < C_{\tau_{\mathrm{prev}}} + \eta_{\mathrm{dyn}}$}{
+    $K_{\tau_{\mathrm{best}}} \preceq_{\mathrm{lex}} K_{\tau_{\mathrm{prev}}}$}{
     $\tau^\star \leftarrow \tau_{\mathrm{prev}}$\;
 }{
-    $\tau^\star \leftarrow \tau'$\;
+    $\tau^\star \leftarrow \tau_{\mathrm{best}}$\;
 }
 \tcp{Risk-triggered projection shield}
 $\rho \leftarrow \mathrm{CollisionRisk}(o_t)$\;
@@ -863,9 +815,12 @@ released code forms the supervised targets as
 y^{\mathrm{topo}} &= \tau^\star, \\
 y^{\mathrm{rec}}
 &= \tanh\!\Bigl(
-\bar q_{\tau^\star}
-+ [\bar q_{\tau^\star}-\bar q_{(2)}]
-+ \mathbb{I}[\tau^\star=\textsc{recover}]
+\frac{1}{2}
+\Bigl[
+\frac{q_{\tau^\star}}{\bar{|q|}+\epsilon}
+\;+\;
+\frac{q_{\tau^\star}-q_{(2)}}{\bar{|q|}+\epsilon}
+\Bigr]
 \Bigr), \\
 \mathbf{y}^{\mathrm{act}}
 &= \bfu^{\mathrm{expert}}(s_t,\tau^\star) / u_{\max},
@@ -876,11 +831,8 @@ y^{\mathrm{rec}}
 where $\mu(\mathbf{q})$ and $\operatorname{std}(\mathbf{q})$ are the mean and
 standard deviation of the rollout-score vector, $\mathbf{1}$ is the
 all-ones vector, $\epsilon$ is a small floor used to avoid division by a
-near-zero standard deviation, and $\bar q_{(2)}$ is the second-best
-entry of the standardized rollout-score vector
-$\bar{\mathbf q}$; equivalently, $q_{(2)}$ denotes the second-best raw rollout
-score, and $\bar{\mathbf q}$ denotes the standardized rollout
-score vector. Thus the scalar
+near-zero scale, $\bar{|q|}=\frac{1}{|\cT|}\sum_{\tau\in\cT}|q_\tau|$, and
+$q_{(2)}$ denotes the second-best raw rollout score. Thus the scalar
 recoverability target is not an independent label; it is a distilled
 margin derived from the topology score vector itself. In the released
 dataset generator, low-margin bottleneck states also receive perturbed
@@ -942,9 +894,12 @@ evaluate a small validation set over
 \end{aligned}
 \label{eq:rollout_val_score}
 \end{equation}
-This is the exact scalar used by the training script once rollout-based
-checkpointing activates; it is not a hand-written summary added after
-the fact.
+The training script logs \eqref{eq:rollout_val_score} as a compact
+summary, but final checkpoint selection is lexicographic:
+success first, then goal reaching, collision-free execution, formation
+satisfaction, and finally the failure metrics
+(collapse, deadlock, stall). This avoids favoring a ``safe but frozen''
+policy over one that actually completes the task.
 
 \section{Experiments}
 \label{sec:experiments}
@@ -1124,8 +1079,9 @@ though raw collision-free execution improves slightly. At the same time,
 identical to the full model in this single-seed run, indicating that
 those two paths are currently neutral under the present evaluation
 distribution. As before, \emph{fixed formation} and \emph{no-topology}
-remain nearly degenerate once topology execution is disabled, so their
-gap should not be over-interpreted. \Cref{tab:appendix_ablation_extra}
+appear numerically close in this archived single-seed table, but they
+toggle different mechanisms in the current code path and should be
+re-evaluated separately after regeneration. \Cref{tab:appendix_ablation_extra}
 reports the remaining ablation metrics omitted from
 \Cref{tab:ablation}.
 
@@ -1173,10 +1129,11 @@ The main limitations are:
     benchmark-positive.}
     In the current single-seed run, removing the scalar recoverability
     path or the progress shield leaves the aggregate metrics unchanged,
-    and \emph{fixed formation} / \emph{no-topology} remain nearly
-    degenerate. This suggests the topology/counterfactual stack is
-    active, but parts of the auxiliary safety machinery are still
-    under-exercised.
+    while the archived \emph{fixed formation} / \emph{no-topology}
+    rows are too close to cleanly separate without regenerating the
+    ablation table after the revised toggle split. This suggests the
+    topology/counterfactual stack is active, but parts of the auxiliary
+    safety machinery are still under-exercised.
 
     \item \textbf{Runtime proxy, not timing benchmark.}
     The released \texttt{ms/step} field is a normalized proxy baked into
@@ -1274,9 +1231,11 @@ Runtime field & normalized proxy, not wall-clock \\
 
 \noindent\textit{Note:} the current release exposes shared experimental
 settings such as environment scale, horizon, and optimizer setup, but
-does not expose separate user-tuned loss-balancing coefficients or
-selector/shield thresholds. Runtime margins are derived from the same
-environment-scale quantities used everywhere else in the simulator.
+does not expose separate user-tuned loss-balancing coefficients,
+selector temperatures, switching margins, cooldown schedules, or
+hysteresis thresholds. Runtime topology choice follows one fixed
+lexicographic rule, while the optional shield uses geometry-normalized
+intervention scales.
 
 \section*{Appendix: Complete Single-Seed Metric Dumps}
 
@@ -1362,9 +1321,13 @@ Fixed formation     & 0.790 & 0.0073 & 0.0071 & 0.028 & 210.58 & 0.0397 & 0.0009
     \end{equation*}
     \begin{equation*}
     \mathrm{Deadlock}
-    = \mathbb{I}[\mathrm{stall\_counter}\ge T_{\mathrm{stall}} \wedge \neg \mathrm{GoalReached}],
+    = \mathbb{I}\!\left[
+    \mathrm{stall\_counter}\, v_{\max}\Delta t
+    \ge \max(\epsilon_{\mathrm{goal}}, d_0)
+    \wedge \neg \mathrm{GoalReached}
+    \right],
     \end{equation*}
-    with $T_{\mathrm{stall}}=12$ in the released simulator, and
+    and
     \begin{equation*}
     \begin{aligned}
     \mathrm{Collapse}
@@ -1400,9 +1363,10 @@ Fixed formation     & 0.790 & 0.0073 & 0.0071 & 0.028 & 210.58 & 0.0397 & 0.0009
     \texttt{no\_counterfactual},
     \texttt{no\_progress\_shield},
     \texttt{no\_topology}, and
-    \texttt{fixed\_formation}; the last two are nearly degenerate once
-    topology execution is disabled, which is why their gap should not be
-    over-interpreted under single-seed runs.
+    \texttt{fixed\_formation}; the last two disable different mechanisms:
+    \texttt{no\_topology} removes discrete topology execution, whereas
+    \texttt{fixed\_formation} keeps topology switching but freezes
+    formation scale at $1.0$.
     \item The released visualization pipeline renders 28 per-method GIFs
     and 8 comparison GIFs for \emph{open field} and \emph{narrow
     passage} scenarios at team sizes 4 and 8, which is useful for

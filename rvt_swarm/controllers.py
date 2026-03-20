@@ -33,6 +33,13 @@ def _mean_vector(terms: list[np.ndarray]) -> np.ndarray:
     return np.mean(np.stack(terms, axis=0), axis=0).astype(np.float32)
 
 
+def _sum_group_means(*groups: list[np.ndarray]) -> np.ndarray:
+    group_means = [_mean_vector(group) for group in groups if group]
+    if not group_means:
+        return np.zeros(2, dtype=np.float32)
+    return np.sum(np.stack(group_means, axis=0), axis=0).astype(np.float32)
+
+
 def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarray:
     pos = obs["positions"]
     vel = obs["velocities"]
@@ -55,6 +62,10 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
             form_err[i] / spacing,
             -vel[i] / max(cfg.env.max_speed, 1e-6),
         ]
+        rr_clear_terms: list[np.ndarray] = []
+        rr_ttc_terms: list[np.ndarray] = []
+        ro_clear_terms: list[np.ndarray] = []
+        ro_ttc_terms: list[np.ndarray] = []
         if topology_action == 2:
             along = np.dot(form_err[i], corridor)
             base_terms.append(corridor * (along / spacing))
@@ -71,13 +82,20 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
             if i == j:
                 continue
             diff = pos[i] - pos[j]
-            base_terms.append(_clearance_term(diff, rr_active))
-            base_terms.append(_ttc_term(diff, vel[i] - vel[j], horizon))
+            rr_clear_terms.append(_clearance_term(diff, rr_active))
+            rr_ttc_terms.append(_ttc_term(diff, vel[i] - vel[j], horizon))
         obs_vel = obs.get("obstacle_velocities", np.zeros_like(obstacles))
         for k, o in enumerate(obstacles):
             diff = pos[i] - o
             ov_k = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
-            base_terms.append(_clearance_term(diff, ro_active))
-            base_terms.append(_ttc_term(diff, vel[i] - ov_k, horizon))
-        actions[i] = soft_clip(_mean_vector(base_terms), cfg.env.max_accel)
+            ro_clear_terms.append(_clearance_term(diff, ro_active))
+            ro_ttc_terms.append(_ttc_term(diff, vel[i] - ov_k, horizon))
+        action_vec = _sum_group_means(
+            base_terms,
+            rr_clear_terms,
+            rr_ttc_terms,
+            ro_clear_terms,
+            ro_ttc_terms,
+        )
+        actions[i] = soft_clip(action_vec, cfg.env.max_accel)
     return actions
