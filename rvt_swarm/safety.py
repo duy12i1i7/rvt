@@ -6,17 +6,11 @@ import numpy as np
 import torch
 
 from .config import Config, TOPOLOGY_IDS
-from .utils import clip01, normalized_mean, soft_clip, unit
+from .utils import clip01, unit
 
 
 def shield_risk_threshold(cfg: Config) -> float:
     return clip01(1.0 - (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.nominal_spacing, 1e-6))
-
-
-def shield_blend_limit(cfg: Config) -> float:
-    progress_ratio = (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.nominal_spacing, 1e-6)
-    clearance_ratio = cfg.env.min_rr_distance / max(cfg.env.nominal_spacing, 1e-6)
-    return clip01(progress_ratio * clearance_ratio)
 
 
 def time_to_collision(
@@ -93,6 +87,11 @@ def estimated_form_rms(obs: Dict) -> float:
     return float(np.sqrt(np.mean(np.sum(np.square(formation_error), axis=1))))
 
 
+def projected_adjustment_ratio(actions: np.ndarray, safe: np.ndarray, cfg: Config) -> float:
+    delta = np.linalg.norm(safe - actions, axis=1)
+    return clip01(float(np.mean(delta)) / max(cfg.env.max_accel, 1e-6))
+
+
 def simple_recover_shield(
     actions: np.ndarray,
     obs: Dict,
@@ -115,8 +114,6 @@ def simple_recover_shield(
         return actions
     threshold = shield_risk_threshold(cfg)
     risk = collision_risk(obs, cfg)
-    form_rms = estimated_form_rms(obs)
-    form_ratio = form_rms / max(cfg.env.formation_tolerance, 1e-6)
 
     # Recoverability is treated as a conservative warning signal only.
     # Positive scores should not "explain away" geometric collision risk.
@@ -131,10 +128,6 @@ def simple_recover_shield(
     # Docs: "chỉ can thiệp nếu tất cả lựa chọn có recoverability âm"
     if all_negative:
         risk = max(risk, threshold)
-    if not all_negative:
-        time_since_switch = max(float(obs.get("time_since_switch", 0.0)), 0.0)
-        switch_guard = 1.0 / (1.0 + time_since_switch)
-        threshold = min(1.0, threshold + (1.0 - threshold) * switch_guard * clip01(1.0 - form_ratio))
     if risk < threshold:
         return actions
 
@@ -149,13 +142,14 @@ def simple_recover_shield(
         safe[i] = _solve_per_robot_qp(
             safe[i], constraints, progress_dir, cfg.env.max_accel, progress_w,
         )
-    max_blend = shield_blend_limit(cfg)
-    # Soft blend avoids over-damping learned policy when shield activates.
+    # Blend by the actual projected correction magnitude rather than a fixed cap.
+    # This keeps the intervention scale-free across environments.
+    adjustment = projected_adjustment_ratio(actions, safe, cfg)
     denom = max(1e-6, 1.0 - threshold)
     severity = float(np.clip((risk - threshold) / denom, 0.0, 1.0))
-    blend = severity * max_blend
+    blend = max(severity, adjustment)
     if all_negative and recoverability is not None:
-        blend = max(blend, max_blend * clip01(-float(recoverability)))
+        blend = max(blend, clip01(-float(recoverability)))
     return (1.0 - blend) * actions + blend * safe
 
 
@@ -217,36 +211,90 @@ def _solve_per_robot_qp(
     constraints: list,
     progress_dir: np.ndarray,
     max_accel: float,
-    progress_weight: float = 0.05,
-    n_iters: int = 25,
+    progress_weight: float,
 ) -> np.ndarray:
-    """Solve a small QP via iterative half-plane projection (Dykstra).
+    """Solve the 2D shield QP exactly by enumerating active-set candidates.
 
         min_u  ||u - u*||²
         s.t.   a_j^T u >= b_j   ∀ j   (CBF half-planes)
                ||u|| <= max_accel
 
     where  u* = u_nom + w · progress_dir  biases toward goal progress.
-    Converges for convex feasible sets (all constraints are half-planes + ball).
+    In 2D, the optimum lies either:
+      - in the interior,
+      - on one active boundary,
+      - or at the intersection of two active boundaries.
+    We enumerate those candidates directly, so no iteration budget is needed.
     """
-    u_target = u_nom + progress_weight * progress_dir
-    u = u_target.copy().astype(np.float64)
+    u_target = (u_nom + progress_weight * progress_dir).astype(np.float64)
+    radius = float(max_accel)
+    machine_tol = np.finfo(np.float64).eps
+    feasibility_tol = machine_tol * max(1.0, radius, float(np.linalg.norm(u_target)))
 
-    for _ in range(n_iters):
-        # Project onto each CBF half-plane
-        for a, b_val in constraints:
-            a = a.astype(np.float64)
-            margin = np.dot(a, u) - b_val
-            if margin < 0.0:
-                a_sq = np.dot(a, a)
-                if a_sq > 1e-12:
-                    u += (-margin / a_sq) * a
-        # Project onto acceleration ball
-        norm = np.linalg.norm(u)
-        if norm > max_accel:
-            u *= max_accel / norm
+    processed_constraints: list[tuple[np.ndarray, float]] = []
+    for a, b_val in constraints:
+        a64 = np.asarray(a, dtype=np.float64)
+        a_sq = float(np.dot(a64, a64))
+        if a_sq <= machine_tol:
+            continue
+        processed_constraints.append((a64, float(b_val)))
 
-    return u.astype(np.float32)
+    def is_feasible(u: np.ndarray) -> bool:
+        if np.dot(u, u) > radius * radius + feasibility_tol:
+            return False
+        for a, b_val in processed_constraints:
+            if float(np.dot(a, u) - b_val) < -feasibility_tol:
+                return False
+        return True
+
+    candidates: list[np.ndarray] = []
+
+    def maybe_add(u: np.ndarray) -> None:
+        if np.all(np.isfinite(u)) and is_feasible(u):
+            candidates.append(u.astype(np.float64))
+
+    def clip_to_ball(u: np.ndarray) -> np.ndarray:
+        norm = float(np.linalg.norm(u))
+        if norm <= radius:
+            return u
+        return u * (radius / max(norm, machine_tol))
+
+    # Interior / ball-only candidate
+    maybe_add(clip_to_ball(u_target.copy()))
+
+    # Single active half-space boundary candidates
+    for a, b_val in processed_constraints:
+        a_sq = float(np.dot(a, a))
+        proj = u_target + ((b_val - float(np.dot(a, u_target))) / a_sq) * a
+        maybe_add(proj)
+
+        # Line-circle intersections for cases where both a half-space and the ball are active
+        norm_a = np.sqrt(a_sq)
+        closest = (b_val / a_sq) * a
+        dist_sq = float(np.dot(closest, closest))
+        if dist_sq <= radius * radius + feasibility_tol:
+            tangent_sq = max(radius * radius - dist_sq, 0.0)
+            tangent_dir = np.array([-a[1], a[0]], dtype=np.float64) / max(norm_a, machine_tol)
+            tangent_mag = np.sqrt(tangent_sq)
+            maybe_add(closest + tangent_mag * tangent_dir)
+            maybe_add(closest - tangent_mag * tangent_dir)
+
+    # Pairwise active half-space boundary intersections
+    for i, (a1, b1) in enumerate(processed_constraints):
+        for a2, b2 in processed_constraints[i + 1:]:
+            system = np.stack([a1, a2], axis=0)
+            det = float(np.linalg.det(system))
+            cond_scale = np.linalg.norm(system, ord=1) * np.linalg.norm(system, ord=np.inf)
+            if abs(det) <= machine_tol * max(cond_scale, 1.0):
+                continue
+            intersection = np.linalg.solve(system, np.array([b1, b2], dtype=np.float64))
+            maybe_add(intersection)
+
+    if not candidates:
+        return clip_to_ball(u_target).astype(np.float32)
+
+    best = min(candidates, key=lambda u: float(np.dot(u - u_target, u - u_target)))
+    return best.astype(np.float32)
 
 
 def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:

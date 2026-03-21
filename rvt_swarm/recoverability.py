@@ -91,7 +91,7 @@ def classify_recoverability(score: float) -> float:
     return 0.0
 
 
-def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, int, np.ndarray]:
+def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, int, np.ndarray, float]:
     scores: List[float] = []
     for topo in CANDIDATE_TOPOLOGIES:
         scores.append(rollout_score(env, topo, cfg.train.recover_horizon, cfg))
@@ -105,4 +105,6 @@ def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, 
     best_signal = best_score / score_scale
     gap_signal = gap / score_scale
     recover_margin = float(np.tanh(0.5 * (best_signal + gap_signal)))
-    return recover_margin, CANDIDATE_TOPOLOGIES[best_idx], norm_scores
+    keep_idx = CANDIDATE_TOPOLOGIES.index(0)
+    keep_margin = float(np.tanh(float(scores_np[keep_idx]) / score_scale))
+    return recover_margin, CANDIDATE_TOPOLOGIES[best_idx], norm_scores, keep_margin

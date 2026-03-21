@@ -42,9 +42,18 @@ def pairwise_ranking_loss(pred_scores: torch.Tensor, target_scores: torch.Tensor
     return F.softplus(-(sign[mask] * diffs_p[mask])).mean()
 
 
+def select_action_target(batch: Dict, model_name: str, cfg: Config) -> torch.Tensor:
+    # Keep action supervision aligned with runtime execution.
+    # `rvt_swarm` can switch topology online; the baselines `gnn_only`
+    # and `instant_cert` always execute topology 0 at runtime.
+    if model_name == "rvt_swarm" and cfg.method.use_topology:
+        return batch["action_target_best"]
+    return batch["action_target_keep"]
+
+
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
     losses = {}
-    losses["action"] = F.mse_loss(outputs["actions"], batch["action_target"])
+    losses["action"] = F.mse_loss(outputs["actions"], select_action_target(batch, model_name, cfg))
 
     if outputs["recoverability"] is not None and model_name == "instant_cert" and cfg.method.use_recoverability:
         losses["recover"] = F.mse_loss(outputs["recoverability"], batch["recover_target"])

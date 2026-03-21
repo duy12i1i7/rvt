@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from typing import Dict, List
 
 import numpy as np
@@ -34,6 +35,7 @@ def run_policy_episode(
     prev_topo = 0
     recover_fp = 0.0
     recover_fn = 0.0
+    start_time = time.perf_counter()
     while not done:
         if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
             actions, topo = historical_baseline(method, obs, cfg)
@@ -58,7 +60,8 @@ def run_policy_episode(
     last_info["steps"] = steps
     last_info["recoverability_false_positive"] = recover_fp / max(steps, 1)
     last_info["recoverability_false_negative"] = recover_fn / max(steps, 1)
-    last_info["ms_per_step"] = 1.0 if method != "rvt_swarm" else 1.6
+    elapsed = max(time.perf_counter() - start_time, 0.0)
+    last_info["ms_per_step"] = 1000.0 * elapsed / max(steps, 1)
     return last_info
 
 

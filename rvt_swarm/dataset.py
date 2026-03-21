@@ -19,7 +19,8 @@ class GraphSample:
     node_x: torch.Tensor
     edge_index: torch.Tensor
     edge_attr: torch.Tensor
-    action_target: torch.Tensor
+    action_target_best: torch.Tensor
+    action_target_keep: torch.Tensor
     recover_target: torch.Tensor
     recover_scores_target: torch.Tensor
     topology_target: torch.Tensor
@@ -197,19 +198,21 @@ def _generate_episode(args):
     done = False
     episode_samples = []
     while not done:
-        recover_margin, best_topology, score_vec = recoverability_targets(env, cfg)
-        action = expert_action(obs, cfg, best_topology)
+        recover_margin, best_topology, score_vec, keep_recover_margin = recoverability_targets(env, cfg)
+        action_best = expert_action(obs, cfg, best_topology)
+        action_keep = expert_action(obs, cfg, 0)
         node_x, edge_index, edge_attr = build_graph(obs, cfg)
         aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
         # Store as numpy to avoid torch FD issues in multiprocessing
-        # Normalize actions to [-1, 1] so Tanh output matches target scale
-        action_norm = action / cfg.env.max_accel
+        # Keep-topology targets are used by methods that never switch topology at runtime.
+        # Normalize actions to [-1, 1] so Tanh output matches target scale.
         sample = {
             'node_x': node_x.numpy(),
             'edge_index': edge_index.numpy(),
             'edge_attr': edge_attr.numpy(),
-            'action_target': np.asarray(action_norm, dtype=np.float32),
-            'recover_target': np.array([[recover_margin]], dtype=np.float32),
+            'action_target_best': np.asarray(action_best / cfg.env.max_accel, dtype=np.float32),
+            'action_target_keep': np.asarray(action_keep / cfg.env.max_accel, dtype=np.float32),
+            'recover_target': np.array([[keep_recover_margin]], dtype=np.float32),
             'recover_scores_target': np.asarray(score_vec[None, :], dtype=np.float32),
             'topology_target': np.array([TOPOLOGY_IDS.index(best_topology)], dtype=np.int64),
             'aux_target': aux,
@@ -217,21 +220,22 @@ def _generate_episode(args):
         episode_samples.append(sample)
         if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > obs["progress"]:
             noise_scale = float(np.clip(1.0 - recover_margin, 0.0, 1.0))
-            noisy_action = action + noise_scale * rng.normal(size=action.shape).astype(np.float32) * cfg.env.max_accel
-            noisy_action = np.clip(noisy_action, -cfg.env.max_accel, cfg.env.max_accel)
-            noisy_action_norm = noisy_action / cfg.env.max_accel
+            noise = noise_scale * rng.normal(size=action_best.shape).astype(np.float32) * cfg.env.max_accel
+            noisy_action_best = np.clip(action_best + noise, -cfg.env.max_accel, cfg.env.max_accel)
+            noisy_action_keep = np.clip(action_keep + noise, -cfg.env.max_accel, cfg.env.max_accel)
             sample_noisy = {
                 'node_x': sample['node_x'].copy(),
                 'edge_index': sample['edge_index'].copy(),
                 'edge_attr': sample['edge_attr'].copy(),
-                'action_target': np.asarray(noisy_action_norm, dtype=np.float32),
+                'action_target_best': np.asarray(noisy_action_best / cfg.env.max_accel, dtype=np.float32),
+                'action_target_keep': np.asarray(noisy_action_keep / cfg.env.max_accel, dtype=np.float32),
                 'recover_target': sample['recover_target'].copy(),
                 'recover_scores_target': sample['recover_scores_target'].copy(),
                 'topology_target': sample['topology_target'].copy(),
                 'aux_target': sample['aux_target'].copy(),
             }
             episode_samples.append(sample_noisy)
-        obs, _, done, _ = env.step(action, best_topology)
+        obs, _, done, _ = env.step(action_best, best_topology)
     return episode_samples
 
 
@@ -264,7 +268,8 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
                 node_x=torch.from_numpy(d['node_x']),
                 edge_index=torch.from_numpy(d['edge_index']),
                 edge_attr=torch.from_numpy(d['edge_attr']),
-                action_target=torch.from_numpy(d['action_target']),
+                action_target_best=torch.from_numpy(d['action_target_best']),
+                action_target_keep=torch.from_numpy(d['action_target_keep']),
                 recover_target=torch.from_numpy(d['recover_target']),
                 recover_scores_target=torch.from_numpy(d['recover_scores_target']),
                 topology_target=torch.from_numpy(d['topology_target']),
@@ -275,8 +280,9 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
 
 
 def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
-    node_x, edge_attr, action_t = [], [], []
+    node_x, edge_attr = [], []
     edge_index = []
+    action_best_t, action_keep_t = [], []
     recover_t, recover_scores_t, topo_t, aux_t = [], [], [], []
     batch_index = []
     offset = 0
@@ -285,7 +291,8 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
         node_x.append(sample.node_x)
         edge_attr.append(sample.edge_attr)
         edge_index.append(sample.edge_index + offset)
-        action_t.append(sample.action_target)
+        action_best_t.append(sample.action_target_best)
+        action_keep_t.append(sample.action_target_keep)
         recover_t.append(sample.recover_target)
         recover_scores_t.append(sample.recover_scores_target)
         topo_t.append(sample.topology_target)
@@ -296,7 +303,8 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
         "node_x": torch.cat(node_x, dim=0),
         "edge_index": torch.cat(edge_index, dim=1),
         "edge_attr": torch.cat(edge_attr, dim=0),
-        "action_target": torch.cat(action_t, dim=0),
+        "action_target_best": torch.cat(action_best_t, dim=0),
+        "action_target_keep": torch.cat(action_keep_t, dim=0),
         "recover_target": torch.cat(recover_t, dim=0),
         "recover_scores_target": torch.cat(recover_scores_t, dim=0),
         "topology_target": torch.cat(topo_t, dim=0),
