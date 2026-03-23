@@ -9,7 +9,7 @@ from .baselines import historical_baseline
 from .config import Config
 from .environment import SwarmFormationEnv
 from .policy_runtime import infer_learned_action, is_learned_method, load_learned_model
-from .utils import normalized_mean, torch_device
+from .utils import configure_worker_runtime, limit_child_threads, normalized_mean, torch_device
 
 
 def run_policy_episode(
@@ -67,6 +67,7 @@ def run_policy_episode(
 
 def _eval_setting(args):
     """Worker: run all episodes for one (method, scenario, n_agents) setting."""
+    configure_worker_runtime()
     method, cfg, n_agents, scenario, ckpt_dir, episode_seeds = args
     metrics = []
     for seed in episode_seeds:
@@ -103,9 +104,10 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
     if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
         auto = max(1, (os.cpu_count() * 3) // 4)
         n_workers = min(len(settings), cfg.train.n_workers or auto)
-        ctx = mp.get_context("spawn")
-        with ctx.Pool(n_workers) as pool:
-            rows = pool.map(_eval_setting, settings)
+        with limit_child_threads(True):
+            ctx = mp.get_context("spawn")
+            with ctx.Pool(n_workers) as pool:
+                rows = pool.map(_eval_setting, settings)
     else:
         rows = [_eval_setting(s) for s in settings]
 

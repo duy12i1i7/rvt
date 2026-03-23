@@ -11,7 +11,7 @@ from .config import Config, TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
-from .utils import heading_features, pairwise_dist, unit
+from .utils import configure_worker_runtime, heading_features, limit_child_threads, pairwise_dist, unit
 
 
 @dataclass
@@ -189,6 +189,7 @@ def _generate_episode(args):
     Returns plain numpy dicts (not torch tensors) to avoid file-descriptor-heavy
     torch serialisation over multiprocessing IPC.
     """
+    configure_worker_runtime()
     ep, cfg, seed = args
     rng = np.random.default_rng(seed)
     env = SwarmFormationEnv(cfg)
@@ -254,9 +255,10 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
     print(f"  Generating {episodes} episodes with {n_workers} workers...")
 
     if n_workers > 1:
-        ctx = mp.get_context("spawn")
-        with ctx.Pool(n_workers) as pool:
-            results = pool.map(_generate_episode, args_list)
+        with limit_child_threads(True):
+            ctx = mp.get_context("spawn")
+            with ctx.Pool(n_workers) as pool:
+                results = pool.map(_generate_episode, args_list)
     else:
         results = [_generate_episode(a) for a in args_list]
 

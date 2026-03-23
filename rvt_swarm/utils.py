@@ -1,9 +1,21 @@
 import math
+import os
 import random
-from typing import Tuple
+from contextlib import contextmanager
+from typing import Iterator, Tuple
 
 import numpy as np
 import torch
+
+
+_CHILD_THREAD_ENV_VARS = (
+    "OMP_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "VECLIB_MAXIMUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+    "BLIS_NUM_THREADS",
+)
 
 
 def set_seed(seed: int) -> None:
@@ -16,6 +28,35 @@ def set_seed(seed: int) -> None:
         torch.backends.cudnn.benchmark = False
     try:
         torch.use_deterministic_algorithms(True, warn_only=True)
+    except Exception:
+        pass
+
+
+@contextmanager
+def limit_child_threads(enabled: bool) -> Iterator[None]:
+    if not enabled:
+        yield
+        return
+    previous = {name: os.environ.get(name) for name in _CHILD_THREAD_ENV_VARS}
+    try:
+        for name in _CHILD_THREAD_ENV_VARS:
+            os.environ[name] = "1"
+        yield
+    finally:
+        for name, value in previous.items():
+            if value is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = value
+
+
+def configure_worker_runtime() -> None:
+    try:
+        torch.set_num_threads(1)
+    except Exception:
+        pass
+    try:
+        torch.set_num_interop_threads(1)
     except Exception:
         pass
 
