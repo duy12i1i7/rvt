@@ -43,7 +43,7 @@ NODE_DIM = 68  # 32 original + 36 LiDAR rays (added min_ttc)
 EDGE_DIM = 11
 
 
-def build_graph(obs: Dict, cfg: Config):
+def build_graph_arrays(obs: Dict, cfg: Config):
     pos = obs["positions"]
     vel = obs["velocities"]
     goal_vec = obs["goal_vec"]
@@ -141,7 +141,7 @@ def build_graph(obs: Dict, cfg: Config):
         # Append 36 normalised LiDAR distances
         node.extend(lidar_norm[i].tolist())
         node_features.append(node)
-    node_x = torch.tensor(np.asarray(node_features, dtype=np.float32))
+    node_x = np.asarray(node_features, dtype=np.float32)
 
     d = pairwise_dist(pos, pos)
     edge_src, edge_dst, edge_attr = [], [], []
@@ -178,18 +178,21 @@ def build_graph(obs: Dict, cfg: Config):
                 ttc_edge,
                 obs["bottleneck"], obs["progress"],
             ])
-    edge_index = torch.tensor(np.asarray([edge_src, edge_dst], dtype=np.int64))
-    edge_attr = torch.tensor(np.asarray(edge_attr, dtype=np.float32))
+    edge_index = np.asarray([edge_src, edge_dst], dtype=np.int64)
+    edge_attr = np.asarray(edge_attr, dtype=np.float32)
     return node_x, edge_index, edge_attr
 
 
-def _generate_episode(args):
-    """Generate samples for a single episode (worker function for multiprocessing).
+def build_graph(obs: Dict, cfg: Config):
+    node_x, edge_index, edge_attr = build_graph_arrays(obs, cfg)
+    return (
+        torch.from_numpy(node_x),
+        torch.from_numpy(edge_index),
+        torch.from_numpy(edge_attr),
+    )
 
-    Returns plain numpy dicts (not torch tensors) to avoid file-descriptor-heavy
-    torch serialisation over multiprocessing IPC.
-    """
-    configure_worker_runtime()
+
+def _generate_episode_impl(args):
     ep, cfg, seed = args
     rng = np.random.default_rng(seed)
     env = SwarmFormationEnv(cfg)
@@ -202,15 +205,15 @@ def _generate_episode(args):
         recover_margin, best_topology, score_vec, keep_recover_margin = recoverability_targets(env, cfg)
         action_best = expert_action(obs, cfg, best_topology)
         action_keep = expert_action(obs, cfg, 0)
-        node_x, edge_index, edge_attr = build_graph(obs, cfg)
+        node_x, edge_index, edge_attr = build_graph_arrays(obs, cfg)
         aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
         # Store as numpy to avoid torch FD issues in multiprocessing
         # Keep-topology targets are used by methods that never switch topology at runtime.
         # Normalize actions to [-1, 1] so Tanh output matches target scale.
         sample = {
-            'node_x': node_x.numpy(),
-            'edge_index': edge_index.numpy(),
-            'edge_attr': edge_attr.numpy(),
+            'node_x': node_x,
+            'edge_index': edge_index,
+            'edge_attr': edge_attr,
             'action_target_best': np.asarray(action_best / cfg.env.max_accel, dtype=np.float32),
             'action_target_keep': np.asarray(action_keep / cfg.env.max_accel, dtype=np.float32),
             'recover_target': np.array([[keep_recover_margin]], dtype=np.float32),
@@ -240,6 +243,31 @@ def _generate_episode(args):
     return episode_samples
 
 
+def _generate_episode(args):
+    """Generate samples for a single episode (worker function for multiprocessing).
+
+    Returns plain numpy dicts (not torch tensors) to avoid file-descriptor-heavy
+    torch serialisation over multiprocessing IPC.
+    """
+    configure_worker_runtime()
+    return _generate_episode_impl(args)
+
+
+def _append_episode_samples(samples: List[GraphSample], ep_samples: List[Dict[str, np.ndarray]]) -> None:
+    for d in ep_samples:
+        samples.append(GraphSample(
+            node_x=torch.from_numpy(d['node_x']),
+            edge_index=torch.from_numpy(d['edge_index']),
+            edge_attr=torch.from_numpy(d['edge_attr']),
+            action_target_best=torch.from_numpy(d['action_target_best']),
+            action_target_keep=torch.from_numpy(d['action_target_keep']),
+            recover_target=torch.from_numpy(d['recover_target']),
+            recover_scores_target=torch.from_numpy(d['recover_scores_target']),
+            topology_target=torch.from_numpy(d['topology_target']),
+            aux_target=torch.from_numpy(d['aux_target']),
+        ))
+
+
 def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
     import multiprocessing as mp
     import os
@@ -254,29 +282,16 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
     n_workers = min(episodes, cfg.train.n_workers or auto)
     print(f"  Generating {episodes} episodes with {n_workers} workers...")
 
+    samples: List[GraphSample] = []
     if n_workers > 1:
         with limit_child_threads(True):
             ctx = mp.get_context("spawn")
             with ctx.Pool(n_workers) as pool:
-                results = pool.map(_generate_episode, args_list)
+                for ep_samples in pool.imap(_generate_episode, args_list):
+                    _append_episode_samples(samples, ep_samples)
     else:
-        results = [_generate_episode(a) for a in args_list]
-
-    # Convert numpy dicts back to GraphSample with torch tensors (main process)
-    samples: List[GraphSample] = []
-    for ep_samples in results:
-        for d in ep_samples:
-            samples.append(GraphSample(
-                node_x=torch.from_numpy(d['node_x']),
-                edge_index=torch.from_numpy(d['edge_index']),
-                edge_attr=torch.from_numpy(d['edge_attr']),
-                action_target_best=torch.from_numpy(d['action_target_best']),
-                action_target_keep=torch.from_numpy(d['action_target_keep']),
-                recover_target=torch.from_numpy(d['recover_target']),
-                recover_scores_target=torch.from_numpy(d['recover_scores_target']),
-                topology_target=torch.from_numpy(d['topology_target']),
-                aux_target=torch.from_numpy(d['aux_target']),
-            ))
+        for args in args_list:
+            _append_episode_samples(samples, _generate_episode_impl(args))
     print(f"  Dataset: {len(samples)} samples from {episodes} episodes")
     return SwarmDataset(cfg, samples)
 

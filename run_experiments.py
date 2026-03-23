@@ -160,7 +160,7 @@ def parse_args() -> argparse.Namespace:
         "--workers",
         type=int,
         default=0,
-        help="Max parallel workers (0 = auto = cpu_count-1)",
+        help="Max parallel workers (0 = auto = 3/4 of cpu_count)",
     )
     parser.add_argument(
         "--skip-visualize",
