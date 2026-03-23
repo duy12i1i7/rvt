@@ -174,12 +174,14 @@ class RVTSwarmPolicy(nn.Module):
     def __init__(self, hidden_dim: int = 128, passes: int = 3, topology_count: int | None = None):
         super().__init__()
         topology_count = topology_count or len(TOPOLOGY_ACTIONS)
+        self.topology_count = topology_count
         # Auxiliary gradients weaken automatically as the backbone gets deeper.
         self.aux_grad_scale = 1.0 / max(float(passes + 1), 1.0)
         self.backbone = GraphBackbone(hidden_dim, passes)
-        # Deeper action head for better control quality
+        # Condition the control primitive on the chosen topology so that
+        # "u_i" and "tau_i" remain coupled, as required by the project docs.
         self.action_head = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
+            nn.Linear(hidden_dim + topology_count, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim // 2),
             nn.ReLU(),
@@ -192,10 +194,35 @@ class RVTSwarmPolicy(nn.Module):
         self.aux_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, 4))
         self.uncertainty_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, topology_count))
 
-    def forward(self, batch):
+    def _normalize_action_topology(
+        self,
+        action_topology: int | torch.Tensor | None,
+        topology_logits: torch.Tensor,
+    ) -> torch.Tensor:
+        if action_topology is None:
+            action_topology = torch.argmax(topology_logits, dim=-1)
+        topo = torch.as_tensor(action_topology, device=topology_logits.device, dtype=torch.long).view(-1)
+        if topo.numel() == 1 and topology_logits.shape[0] > 1:
+            topo = topo.expand(topology_logits.shape[0])
+        if topo.numel() != topology_logits.shape[0]:
+            raise ValueError("Action topology count must match batch graph count")
+        return topo.clamp_(0, self.topology_count - 1)
+
+    def decode_actions(
+        self,
+        h: torch.Tensor,
+        batch_index: torch.Tensor,
+        action_topology: int | torch.Tensor,
+    ) -> torch.Tensor:
+        topo = torch.as_tensor(action_topology, device=h.device, dtype=torch.long).view(-1)
+        if topo.numel() == 1 and batch_index.numel():
+            topo = topo.expand(int(batch_index.max().item()) + 1)
+        topo_onehot = F.one_hot(topo.clamp(0, self.topology_count - 1), num_classes=self.topology_count).to(h.dtype)
+        topo_node = topo_onehot[batch_index]
+        return self.action_head(torch.cat([h, topo_node], dim=-1))
+
+    def forward(self, batch, action_topology: int | torch.Tensor | None = None):
         h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
-        # Action head gets full gradient flow
-        actions = self.action_head(h)
 
         # Auxiliary heads get scaled gradients to protect backbone for actions
         h_aux = grad_scale(h, self.aux_grad_scale)
@@ -210,6 +237,8 @@ class RVTSwarmPolicy(nn.Module):
         uncertainty = F.softplus(self.uncertainty_head(pooled))
         adjusted_scores = uncertainty_adjusted_scores(recover_scores, uncertainty)
         recoverability = adjusted_scores.max(dim=-1, keepdim=True).values
+        topo = self._normalize_action_topology(action_topology, topology_logits)
+        actions = self.decode_actions(h, batch["batch_index"], topo)
         return {
             "actions": actions,
             "recoverability": recoverability,
@@ -217,6 +246,7 @@ class RVTSwarmPolicy(nn.Module):
             "topology_logits": topology_logits,
             "aux": aux,
             "uncertainty": uncertainty,
+            "node_latent": h,
         }
 
 

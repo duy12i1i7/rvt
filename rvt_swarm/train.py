@@ -96,7 +96,11 @@ def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, tr
         batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}
         if train:
             optimizer.zero_grad(set_to_none=True)
-        outputs = model(batch)
+        if model_name == "rvt_swarm":
+            action_topology = batch["topology_target"] if cfg.method.use_topology else torch.zeros_like(batch["topology_target"])
+            outputs = model(batch, action_topology=action_topology)
+        else:
+            outputs = model(batch)
         losses = compute_loss(outputs, batch, model_name, cfg, epoch)
         if train:
             losses["total"].backward()

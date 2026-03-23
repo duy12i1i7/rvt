@@ -51,10 +51,15 @@ def infer_learned_action(
 ) -> Dict[str, object]:
     device = next(model.parameters()).device
     batch = batch_from_obs(obs, cfg, device)
+    action_topology = None
+    if method == "rvt_swarm" and not cfg.method.use_topology:
+        action_topology = torch.zeros((1,), dtype=torch.long, device=device)
     with torch.no_grad():
-        out = model(batch)
+        if action_topology is None:
+            out = model(batch)
+        else:
+            out = model(batch, action_topology=action_topology)
 
-    actions = out["actions"].cpu().numpy() * cfg.env.max_accel
     topology = 0
     recoverability = None
     uncertainty = None
@@ -69,6 +74,14 @@ def infer_learned_action(
             prev_topology,
             out.get("uncertainty"),
         )
+        if hasattr(model, "decode_actions") and out.get("node_latent") is not None:
+            topo_tensor = torch.tensor([TOPOLOGY_IDS.index(topology)], device=device, dtype=torch.long)
+            actions = model.decode_actions(out["node_latent"], batch["batch_index"], topo_tensor)
+        else:
+            actions = out["actions"]
+    else:
+        actions = out["actions"]
+    actions = actions.cpu().numpy() * cfg.env.max_accel
     if out["recoverability_scores"] is not None:
         recoverability_scores = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
     if out["recoverability"] is not None and cfg.method.use_recoverability:
