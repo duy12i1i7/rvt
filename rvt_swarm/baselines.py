@@ -6,14 +6,15 @@ import numpy as np
 
 from .config import Config
 from .controllers import expert_action
-from .utils import clip01, soft_clip, unit
+from .utils import clip01, soft_clip, unit, vec_norm
 
 
 def _repulsion(diff: np.ndarray, active_distance: float) -> np.ndarray:
-    d = np.linalg.norm(diff)
+    d = vec_norm(diff)
     if d <= 1e-6 or d >= active_distance:
         return np.zeros(2, dtype=np.float32)
-    return unit(diff) * clip01(1.0 - d / max(active_distance, 1e-6))
+    scale = clip01(1.0 - d / max(active_distance, 1e-6)) / d
+    return (diff * scale).astype(np.float32)
 
 
 def _heuristic_topology(obs: Dict) -> int:
@@ -46,7 +47,10 @@ def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
             terms.append(_repulsion(pos[i] - pos[j], rr_active))
         for o in obs["obstacles"]:
             terms.append(_repulsion(pos[i] - o, ro_active))
-        actions[i] = soft_clip(np.mean(np.stack(terms, axis=0), axis=0), cfg.env.max_accel)
+        mean_term = np.zeros(2, dtype=np.float32)
+        for term in terms:
+            mean_term += term
+        actions[i] = soft_clip(mean_term / float(len(terms)), cfg.env.max_accel)
     return actions, 0
 
 
@@ -81,7 +85,7 @@ def centralized_mpc_proxy(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     mixed = []
     for a in actions:
         terms = [a / max(cfg.env.max_accel, 1e-6), goal_dir]
-        mixed.append(soft_clip(np.mean(np.stack(terms, axis=0), axis=0), cfg.env.max_accel))
+        mixed.append(soft_clip((terms[0] + terms[1]) * 0.5, cfg.env.max_accel))
     return np.array(mixed, dtype=np.float32), topo
 
 

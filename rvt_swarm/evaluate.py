@@ -8,7 +8,7 @@ import numpy as np
 from .baselines import historical_baseline
 from .config import Config
 from .environment import SwarmFormationEnv
-from .utils import limit_child_threads, normalized_mean, torch_device
+from .utils import configure_worker_runtime, limit_child_threads, normalized_mean, torch_device
 
 
 def run_policy_episode(
@@ -104,10 +104,17 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
     if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
         auto = max(1, (os.cpu_count() * 3) // 4)
         n_workers = min(len(settings), cfg.train.n_workers or auto)
-        with limit_child_threads(True):
-            ctx = mp.get_context("spawn")
-            with ctx.Pool(n_workers) as pool:
-                rows = pool.map(_eval_setting, settings)
+        try:
+            with limit_child_threads(True):
+                ctx = mp.get_context("spawn")
+                with ctx.Pool(n_workers, initializer=configure_worker_runtime) as pool:
+                    rows = pool.map(_eval_setting, settings)
+        except Exception as exc:
+            print(
+                f"[warn] Parallel baseline evaluation failed ({exc.__class__.__name__}: {exc}). "
+                "Falling back to sequential evaluation."
+            )
+            rows = [_eval_setting(s) for s in settings]
     else:
         rows = [_eval_setting(s) for s in settings]
 

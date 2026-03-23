@@ -5,18 +5,19 @@ from typing import Dict
 import numpy as np
 
 from .config import Config
-from .utils import clip01, normalized_mean, soft_clip, unit
+from .utils import clip01, soft_clip, unit, vec_norm
 
 
 def _clearance_term(diff: np.ndarray, active_distance: float) -> np.ndarray:
-    d = np.linalg.norm(diff)
+    d = vec_norm(diff)
     if d <= 1e-6 or d >= active_distance:
         return np.zeros(2, dtype=np.float32)
-    return unit(diff) * clip01(1.0 - d / max(active_distance, 1e-6))
+    scale = clip01(1.0 - d / max(active_distance, 1e-6)) / d
+    return (diff * scale).astype(np.float32)
 
 
 def _ttc_term(diff: np.ndarray, rel_vel: np.ndarray, horizon: float) -> np.ndarray:
-    d = np.linalg.norm(diff)
+    d = vec_norm(diff)
     if d <= 1e-6:
         return np.zeros(2, dtype=np.float32)
     normal = diff / d
@@ -24,20 +25,28 @@ def _ttc_term(diff: np.ndarray, rel_vel: np.ndarray, horizon: float) -> np.ndarr
     if closing_speed <= 0.0:
         return np.zeros(2, dtype=np.float32)
     ttc = d / max(closing_speed, 1e-6)
-    return unit(diff) * clip01(1.0 - ttc / max(horizon, 1e-6))
+    scale = clip01(1.0 - ttc / max(horizon, 1e-6)) / d
+    return (diff * scale).astype(np.float32)
 
 
 def _mean_vector(terms: list[np.ndarray]) -> np.ndarray:
     if not terms:
         return np.zeros(2, dtype=np.float32)
-    return np.mean(np.stack(terms, axis=0), axis=0).astype(np.float32)
+    acc = np.zeros(2, dtype=np.float32)
+    for term in terms:
+        acc += term
+    return acc / float(len(terms))
 
 
 def _sum_group_means(*groups: list[np.ndarray]) -> np.ndarray:
-    group_means = [_mean_vector(group) for group in groups if group]
-    if not group_means:
-        return np.zeros(2, dtype=np.float32)
-    return np.sum(np.stack(group_means, axis=0), axis=0).astype(np.float32)
+    total = np.zeros(2, dtype=np.float32)
+    used = False
+    for group in groups:
+        if not group:
+            continue
+        total += _mean_vector(group)
+        used = True
+    return total if used else np.zeros(2, dtype=np.float32)
 
 
 def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarray:
@@ -53,14 +62,21 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
     corridor = np.array([obs.get("corridor_dx", 1.0), obs.get("corridor_dy", 0.0)], dtype=np.float32)
     lateral = np.array([corridor[1], -corridor[0]], dtype=np.float32)
     spacing = max(cfg.env.nominal_spacing, 1e-6)
+    max_speed = max(cfg.env.max_speed, 1e-6)
     rr_active = max(cfg.env.nominal_spacing, cfg.env.min_rr_distance)
     ro_active = max(cfg.env.nominal_spacing, cfg.env.min_ro_distance)
     horizon = max(cfg.env.dt, cfg.env.sensing_radius / max(cfg.env.max_speed, 1e-6))
+    subteam_ids = obs.get("subteam_ids")
+    if subteam_ids is None or len(subteam_ids) != n:
+        subteam_ids = np.zeros((n,), dtype=np.int64)
+    obs_vel = obs.get("obstacle_velocities")
+    if obs_vel is None:
+        obs_vel = np.zeros_like(obstacles)
     for i in range(n):
         base_terms = [
             progress_dir,
             form_err[i] / spacing,
-            -vel[i] / max(cfg.env.max_speed, 1e-6),
+            -vel[i] / max_speed,
         ]
         rr_clear_terms: list[np.ndarray] = []
         rr_ttc_terms: list[np.ndarray] = []
@@ -70,21 +86,20 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
             along = np.dot(form_err[i], corridor)
             base_terms.append(corridor * (along / spacing))
         elif topology_action == 3:
-            lane_sign = -1.0 if obs.get("subteam_ids", np.zeros((n,)))[i] == 0 else 1.0
+            lane_sign = -1.0 if subteam_ids[i] == 0 else 1.0
             base_terms.append(lane_sign * lateral)
             base_terms.append(progress_dir)
         elif topology_action == 1:
             base_terms.append(form_err[i] / spacing)
         elif topology_action == 4:
             base_terms.append(form_err[i] / spacing)
-            base_terms.append(-vel[i] / max(cfg.env.max_speed, 1e-6))
+            base_terms.append(-vel[i] / max_speed)
         for j in range(n):
             if i == j:
                 continue
             diff = pos[i] - pos[j]
             rr_clear_terms.append(_clearance_term(diff, rr_active))
             rr_ttc_terms.append(_ttc_term(diff, vel[i] - vel[j], horizon))
-        obs_vel = obs.get("obstacle_velocities", np.zeros_like(obstacles))
         for k, o in enumerate(obstacles):
             diff = pos[i] - o
             ov_k = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)

@@ -9,7 +9,7 @@ from .config import Config, TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
-from .utils import heading_features, limit_child_threads, pairwise_dist, unit
+from .utils import configure_worker_runtime, heading_features, limit_child_threads, pairwise_dist, unit
 
 
 @dataclass
@@ -285,11 +285,20 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
 
     samples: List[GraphSample] = []
     if n_workers > 1:
-        with limit_child_threads(True):
-            ctx = mp.get_context("spawn")
-            with ctx.Pool(n_workers) as pool:
-                for ep_samples in pool.imap(_generate_episode, args_list):
-                    _append_episode_samples(samples, ep_samples)
+        try:
+            with limit_child_threads(True):
+                ctx = mp.get_context("spawn")
+                with ctx.Pool(n_workers, initializer=configure_worker_runtime) as pool:
+                    for ep_samples in pool.imap(_generate_episode, args_list):
+                        _append_episode_samples(samples, ep_samples)
+        except Exception as exc:
+            print(
+                f"[warn] Parallel dataset generation failed ({exc.__class__.__name__}: {exc}). "
+                "Falling back to sequential generation."
+            )
+            samples = []
+            for args in args_list:
+                _append_episode_samples(samples, _generate_episode_impl(args))
     else:
         for args in args_list:
             _append_episode_samples(samples, _generate_episode_impl(args))

@@ -54,7 +54,13 @@ def limit_child_threads(enabled: bool) -> Iterator[None]:
 
 
 def configure_worker_runtime() -> None:
-    import torch
+    for name in _CHILD_THREAD_ENV_VARS:
+        os.environ[name] = "1"
+
+    try:
+        import torch
+    except Exception:
+        return
 
     try:
         torch.set_num_threads(1)
@@ -75,8 +81,12 @@ def angle_to(vec: np.ndarray) -> float:
     return math.atan2(vec[1], vec[0])
 
 
+def vec_norm(vec: np.ndarray) -> float:
+    return float(math.hypot(float(vec[0]), float(vec[1])))
+
+
 def unit(vec: np.ndarray, eps: float = 1e-8) -> np.ndarray:
-    n = np.linalg.norm(vec)
+    n = vec_norm(vec)
     if n < eps:
         return np.zeros_like(vec)
     return vec / n
@@ -106,14 +116,14 @@ def torch_device(name: str) -> torch.device:
 
 
 def soft_clip(x: np.ndarray, limit: float) -> np.ndarray:
-    n = np.linalg.norm(x)
+    n = vec_norm(x)
     if n <= limit:
         return x
     return x / max(n, 1e-8) * limit
 
 
 def heading_features(v: np.ndarray) -> Tuple[float, float]:
-    ang = angle_to(v) if np.linalg.norm(v) > 1e-8 else 0.0
+    ang = angle_to(v) if vec_norm(v) > 1e-8 else 0.0
     return math.cos(ang), math.sin(ang)
 
 
