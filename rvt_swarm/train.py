@@ -53,7 +53,10 @@ def select_action_target(batch: Dict, model_name: str, cfg: Config) -> torch.Ten
 
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
     losses = {}
-    losses["action"] = F.mse_loss(outputs["actions"], select_action_target(batch, model_name, cfg))
+    if model_name == "rvt_swarm" and cfg.method.use_topology and outputs.get("actions_by_topology") is not None:
+        losses["action"] = F.mse_loss(outputs["actions_by_topology"], batch["action_target_all"])
+    else:
+        losses["action"] = F.mse_loss(outputs["actions"], select_action_target(batch, model_name, cfg))
 
     if outputs["recoverability"] is not None and model_name == "instant_cert" and cfg.method.use_recoverability:
         losses["recover"] = F.mse_loss(outputs["recoverability"], batch["recover_target"])

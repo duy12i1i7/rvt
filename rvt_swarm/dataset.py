@@ -17,6 +17,7 @@ class GraphSample:
     node_x: torch.Tensor
     edge_index: torch.Tensor
     edge_attr: torch.Tensor
+    action_target_all: torch.Tensor
     action_target_best: torch.Tensor
     action_target_keep: torch.Tensor
     recover_target: torch.Tensor
@@ -203,34 +204,41 @@ def _generate_episode_impl(args):
     episode_samples = []
     while not done:
         recover_margin, best_topology, score_vec, keep_recover_margin = recoverability_targets(env, cfg)
-        action_best = expert_action(obs, cfg, best_topology)
-        action_keep = expert_action(obs, cfg, 0)
+        candidate_actions = [expert_action(obs, cfg, topo) for topo in TOPOLOGY_IDS]
+        action_all = np.stack(candidate_actions, axis=1).astype(np.float32)
+        best_idx = TOPOLOGY_IDS.index(best_topology)
+        action_best = action_all[:, best_idx, :]
+        action_keep = action_all[:, 0, :]
         node_x, edge_index, edge_attr = build_graph_arrays(obs, cfg)
         aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
         # Store as numpy to avoid torch FD issues in multiprocessing
         # Keep-topology targets are used by methods that never switch topology at runtime.
-        # Normalize actions to [-1, 1] so Tanh output matches target scale.
+        # RVT gets supervision for the full action bank across all topology choices,
+        # which keeps control/topology coupling aligned with the docs' counterfactual view.
         sample = {
             'node_x': node_x,
             'edge_index': edge_index,
             'edge_attr': edge_attr,
+            'action_target_all': np.asarray(action_all / cfg.env.max_accel, dtype=np.float32),
             'action_target_best': np.asarray(action_best / cfg.env.max_accel, dtype=np.float32),
             'action_target_keep': np.asarray(action_keep / cfg.env.max_accel, dtype=np.float32),
             'recover_target': np.array([[keep_recover_margin]], dtype=np.float32),
             'recover_scores_target': np.asarray(score_vec[None, :], dtype=np.float32),
-            'topology_target': np.array([TOPOLOGY_IDS.index(best_topology)], dtype=np.int64),
+            'topology_target': np.array([best_idx], dtype=np.int64),
             'aux_target': aux,
         }
         episode_samples.append(sample)
         if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > obs["progress"]:
             noise_scale = float(np.clip(1.0 - recover_margin, 0.0, 1.0))
             noise = noise_scale * rng.normal(size=action_best.shape).astype(np.float32) * cfg.env.max_accel
-            noisy_action_best = np.clip(action_best + noise, -cfg.env.max_accel, cfg.env.max_accel)
-            noisy_action_keep = np.clip(action_keep + noise, -cfg.env.max_accel, cfg.env.max_accel)
+            noisy_action_all = np.clip(action_all + noise[:, None, :], -cfg.env.max_accel, cfg.env.max_accel)
+            noisy_action_best = noisy_action_all[:, best_idx, :]
+            noisy_action_keep = noisy_action_all[:, 0, :]
             sample_noisy = {
                 'node_x': sample['node_x'].copy(),
                 'edge_index': sample['edge_index'].copy(),
                 'edge_attr': sample['edge_attr'].copy(),
+                'action_target_all': np.asarray(noisy_action_all / cfg.env.max_accel, dtype=np.float32),
                 'action_target_best': np.asarray(noisy_action_best / cfg.env.max_accel, dtype=np.float32),
                 'action_target_keep': np.asarray(noisy_action_keep / cfg.env.max_accel, dtype=np.float32),
                 'recover_target': sample['recover_target'].copy(),
@@ -260,6 +268,7 @@ def _append_episode_samples(samples: List[GraphSample], ep_samples: List[Dict[st
             node_x=torch.from_numpy(d['node_x']),
             edge_index=torch.from_numpy(d['edge_index']),
             edge_attr=torch.from_numpy(d['edge_attr']),
+            action_target_all=torch.from_numpy(d['action_target_all']),
             action_target_best=torch.from_numpy(d['action_target_best']),
             action_target_keep=torch.from_numpy(d['action_target_keep']),
             recover_target=torch.from_numpy(d['recover_target']),
@@ -311,7 +320,7 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
 
     node_x, edge_attr = [], []
     edge_index = []
-    action_best_t, action_keep_t = [], []
+    action_all_t, action_best_t, action_keep_t = [], [], []
     recover_t, recover_scores_t, topo_t, aux_t = [], [], [], []
     batch_index = []
     offset = 0
@@ -320,6 +329,7 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
         node_x.append(sample.node_x)
         edge_attr.append(sample.edge_attr)
         edge_index.append(sample.edge_index + offset)
+        action_all_t.append(sample.action_target_all)
         action_best_t.append(sample.action_target_best)
         action_keep_t.append(sample.action_target_keep)
         recover_t.append(sample.recover_target)
@@ -332,6 +342,7 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
         "node_x": torch.cat(node_x, dim=0),
         "edge_index": torch.cat(edge_index, dim=1),
         "edge_attr": torch.cat(edge_attr, dim=0),
+        "action_target_all": torch.cat(action_all_t, dim=0),
         "action_target_best": torch.cat(action_best_t, dim=0),
         "action_target_keep": torch.cat(action_keep_t, dim=0),
         "recover_target": torch.cat(recover_t, dim=0),

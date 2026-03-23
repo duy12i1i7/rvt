@@ -74,8 +74,11 @@ def infer_learned_action(
             prev_topology,
             out.get("uncertainty"),
         )
-        if hasattr(model, "decode_actions") and out.get("node_latent") is not None:
-            topo_tensor = torch.tensor([TOPOLOGY_IDS.index(topology)], device=device, dtype=torch.long)
+        topo_idx = TOPOLOGY_IDS.index(topology)
+        if out.get("actions_by_topology") is not None:
+            actions = out["actions_by_topology"][:, topo_idx, :]
+        elif hasattr(model, "decode_actions") and out.get("node_latent") is not None:
+            topo_tensor = torch.tensor([topo_idx], device=device, dtype=torch.long)
             actions = model.decode_actions(out["node_latent"], batch["batch_index"], topo_tensor)
         else:
             actions = out["actions"]

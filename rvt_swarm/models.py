@@ -221,6 +221,18 @@ class RVTSwarmPolicy(nn.Module):
         topo_node = topo_onehot[batch_index]
         return self.action_head(torch.cat([h, topo_node], dim=-1))
 
+    def decode_all_actions(
+        self,
+        h: torch.Tensor,
+        batch_index: torch.Tensor,
+        num_graphs: int,
+    ) -> torch.Tensor:
+        action_bank = []
+        for topo_idx in range(self.topology_count):
+            topo = torch.full((num_graphs,), topo_idx, device=h.device, dtype=torch.long)
+            action_bank.append(self.decode_actions(h, batch_index, topo))
+        return torch.stack(action_bank, dim=1)
+
     def forward(self, batch, action_topology: int | torch.Tensor | None = None):
         h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
 
@@ -237,10 +249,17 @@ class RVTSwarmPolicy(nn.Module):
         uncertainty = F.softplus(self.uncertainty_head(pooled))
         adjusted_scores = uncertainty_adjusted_scores(recover_scores, uncertainty)
         recoverability = adjusted_scores.max(dim=-1, keepdim=True).values
+        num_graphs = topology_logits.shape[0]
+        actions_by_topology = self.decode_all_actions(h, batch["batch_index"], num_graphs)
         topo = self._normalize_action_topology(action_topology, topology_logits)
-        actions = self.decode_actions(h, batch["batch_index"], topo)
+        node_topology = topo[batch["batch_index"]]
+        actions = actions_by_topology[
+            torch.arange(h.shape[0], device=h.device),
+            node_topology,
+        ]
         return {
             "actions": actions,
+            "actions_by_topology": actions_by_topology,
             "recoverability": recoverability,
             "recoverability_scores": adjusted_scores,
             "topology_logits": topology_logits,
