@@ -81,7 +81,7 @@ def infer_learned_action(
             actions = out["actions"]
     else:
         actions = out["actions"]
-    actions = actions.cpu().numpy() * cfg.env.max_accel
+    actions = actions.detach().cpu().numpy() * cfg.env.max_accel
     if out["recoverability_scores"] is not None:
         recoverability_scores = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
     if out["recoverability"] is not None and cfg.method.use_recoverability:
