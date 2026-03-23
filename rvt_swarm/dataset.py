@@ -4,14 +4,12 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 import numpy as np
-import torch
-from torch.utils.data import Dataset
 
 from .config import Config, TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
-from .utils import configure_worker_runtime, heading_features, limit_child_threads, pairwise_dist, unit
+from .utils import heading_features, limit_child_threads, pairwise_dist, unit
 
 
 @dataclass
@@ -27,7 +25,7 @@ class GraphSample:
     aux_target: torch.Tensor
 
 
-class SwarmDataset(Dataset):
+class SwarmDataset:
     def __init__(self, cfg: Config, samples: List[GraphSample]):
         self.cfg = cfg
         self.samples = samples
@@ -184,6 +182,8 @@ def build_graph_arrays(obs: Dict, cfg: Config):
 
 
 def build_graph(obs: Dict, cfg: Config):
+    import torch
+
     node_x, edge_index, edge_attr = build_graph_arrays(obs, cfg)
     return (
         torch.from_numpy(node_x),
@@ -249,11 +249,12 @@ def _generate_episode(args):
     Returns plain numpy dicts (not torch tensors) to avoid file-descriptor-heavy
     torch serialisation over multiprocessing IPC.
     """
-    configure_worker_runtime()
     return _generate_episode_impl(args)
 
 
 def _append_episode_samples(samples: List[GraphSample], ep_samples: List[Dict[str, np.ndarray]]) -> None:
+    import torch
+
     for d in ep_samples:
         samples.append(GraphSample(
             node_x=torch.from_numpy(d['node_x']),
@@ -297,6 +298,8 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
 
 
 def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
+    import torch
+
     node_x, edge_attr = [], []
     edge_index = []
     action_best_t, action_keep_t = [], []

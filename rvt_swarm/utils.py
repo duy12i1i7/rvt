@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import math
 import os
 import random
@@ -5,7 +7,6 @@ from contextlib import contextmanager
 from typing import Iterator, Tuple
 
 import numpy as np
-import torch
 
 
 _CHILD_THREAD_ENV_VARS = (
@@ -19,6 +20,8 @@ _CHILD_THREAD_ENV_VARS = (
 
 
 def set_seed(seed: int) -> None:
+    import torch
+
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -51,6 +54,8 @@ def limit_child_threads(enabled: bool) -> Iterator[None]:
 
 
 def configure_worker_runtime() -> None:
+    import torch
+
     try:
         torch.set_num_threads(1)
     except Exception:
@@ -78,6 +83,8 @@ def unit(vec: np.ndarray, eps: float = 1e-8) -> np.ndarray:
 
 
 def torch_device(name: str) -> torch.device:
+    import torch
+
     name = (name or "auto").lower()
     if name == "auto":
         if torch.cuda.is_available():

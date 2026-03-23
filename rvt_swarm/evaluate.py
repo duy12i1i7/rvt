@@ -8,8 +8,7 @@ import numpy as np
 from .baselines import historical_baseline
 from .config import Config
 from .environment import SwarmFormationEnv
-from .policy_runtime import infer_learned_action, is_learned_method, load_learned_model
-from .utils import configure_worker_runtime, limit_child_threads, normalized_mean, torch_device
+from .utils import limit_child_threads, normalized_mean, torch_device
 
 
 def run_policy_episode(
@@ -23,12 +22,6 @@ def run_policy_episode(
 ) -> Dict[str, float]:
     env = SwarmFormationEnv(cfg)
     obs = env.reset(n_agents, scenario, seed=seed)
-    model_device = None
-    if model is not None:
-        model_device = next(model.parameters()).device
-    device = model_device or torch_device(cfg.train.device)
-    if model is None and is_learned_method(method):
-        model = load_learned_model(method, cfg, ckpt_dir, device)
     done = False
     last_info = None
     steps = 0
@@ -40,6 +33,14 @@ def run_policy_episode(
         if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
             actions, topo = historical_baseline(method, obs, cfg)
         else:
+            from .policy_runtime import infer_learned_action, load_learned_model
+
+            model_device = None
+            if model is not None:
+                model_device = next(model.parameters()).device
+            device = model_device or torch_device(cfg.train.device)
+            if model is None:
+                model = load_learned_model(method, cfg, ckpt_dir, device)
             runtime = infer_learned_action(method, obs, cfg, model, prev_topo)
             actions = runtime["actions"]
             topo = runtime["topology"]
@@ -67,7 +68,6 @@ def run_policy_episode(
 
 def _eval_setting(args):
     """Worker: run all episodes for one (method, scenario, n_agents) setting."""
-    configure_worker_runtime()
     method, cfg, n_agents, scenario, ckpt_dir, episode_seeds = args
     metrics = []
     for seed in episode_seeds:
