@@ -64,12 +64,13 @@ def infer_learned_action(
     recoverability = None
     uncertainty = None
     recoverability_scores = None
+    topology_scores = out["recoverability_scores"] if cfg.method.use_recoverability else None
 
     if out["topology_logits"] is not None and cfg.method.use_topology:
         topology = choose_counterfactual_topology(
             obs,
             out["topology_logits"],
-            out["recoverability_scores"],
+            topology_scores,
             cfg,
             prev_topology,
             out.get("uncertainty"),
@@ -85,8 +86,8 @@ def infer_learned_action(
     else:
         actions = out["actions"]
     actions = actions.detach().cpu().numpy() * cfg.env.max_accel
-    if out["recoverability_scores"] is not None:
-        recoverability_scores = out["recoverability_scores"].squeeze(0).detach().cpu().numpy()
+    if topology_scores is not None:
+        recoverability_scores = topology_scores.squeeze(0).detach().cpu().numpy()
     if out["recoverability"] is not None and cfg.method.use_recoverability:
         uncertainty = (
             float(out["uncertainty"].mean().cpu().item())

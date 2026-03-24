@@ -349,7 +349,9 @@ def choose_counterfactual_topology(
 ) -> int:
     topo_prior = torch.softmax(topology_logits, dim=-1).squeeze(0)
     logit_choice = choose_topology_from_logits(topology_logits)
-    if recoverability_scores is None or not cfg.method.use_counterfactual_topology:
+    if not cfg.method.use_counterfactual_topology:
+        return logit_choice
+    if recoverability_scores is None or not cfg.method.use_recoverability:
         return logit_choice
 
     scores = recoverability_scores.squeeze(0).detach().cpu().numpy().astype(np.float32)

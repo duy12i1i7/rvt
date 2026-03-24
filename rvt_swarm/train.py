@@ -64,13 +64,18 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
         losses["recover"] = torch.tensor(0.0, device=batch["node_x"].device)
     if outputs["topology_logits"] is not None and model_name == "rvt_swarm" and cfg.method.use_topology:
         losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
-        losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
-        losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
         losses["aux"] = F.mse_loss(outputs["aux"], batch["aux_target"])
-        if outputs["uncertainty"] is not None:
-            score_scale = score_dispersion_tensor(batch["recover_scores_target"]).mean()
-            losses["uncertainty"] = outputs["uncertainty"].mean() / (1.0 + score_scale)
+        if cfg.method.use_recoverability:
+            losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
+            losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
+            if outputs["uncertainty"] is not None:
+                score_scale = score_dispersion_tensor(batch["recover_scores_target"]).mean()
+                losses["uncertainty"] = outputs["uncertainty"].mean() / (1.0 + score_scale)
+            else:
+                losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
         else:
+            losses["score_map"] = batch["node_x"].new_tensor(0.0)
+            losses["rank"] = batch["node_x"].new_tensor(0.0)
             losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
     else:
         losses["topology"] = torch.tensor(0.0, device=batch["node_x"].device)
@@ -78,14 +83,17 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
         losses["rank"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["aux"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["uncertainty"] = torch.tensor(0.0, device=batch["node_x"].device)
-    topology_bundle = torch.stack(
-        [losses["topology"], losses["score_map"], losses["rank"]]
-    ).mean()
+    topology_terms = [losses["topology"]]
+    if model_name == "rvt_swarm" and cfg.method.use_topology and cfg.method.use_recoverability:
+        topology_terms.extend([losses["score_map"], losses["rank"]])
+    topology_bundle = torch.stack(topology_terms).mean()
     active_terms = [losses["action"]]
     if model_name == "instant_cert" and cfg.method.use_recoverability:
         active_terms.append(losses["recover"])
     if model_name == "rvt_swarm" and cfg.method.use_topology:
-        active_terms.extend([topology_bundle, losses["aux"], losses["uncertainty"]])
+        active_terms.extend([topology_bundle, losses["aux"]])
+        if cfg.method.use_recoverability:
+            active_terms.append(losses["uncertainty"])
     total = torch.stack(active_terms).mean()
     losses["total"] = total
     return losses

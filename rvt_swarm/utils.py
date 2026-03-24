@@ -138,11 +138,6 @@ def normalized_mean(values) -> float:
     return float(arr.mean())
 
 
-def standardize_np(values: np.ndarray) -> np.ndarray:
-    arr = np.asarray(values, dtype=np.float32)
-    return ((arr - arr.mean()) / max(float(arr.std()), 1e-6)).astype(np.float32)
-
-
 def score_dispersion_tensor(scores: torch.Tensor) -> torch.Tensor:
     return scores.detach().std(dim=-1, keepdim=True, unbiased=False).clamp_min(1e-6)
 
