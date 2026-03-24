@@ -201,9 +201,15 @@ def _generate_episode_impl(args):
     scenario = str(rng.choice(cfg.env.scenarios))
     obs = env.reset(n, scenario, seed=seed)
     done = False
+    prev_topology = 0
     episode_samples = []
     while not done:
-        recover_margin, best_topology, score_vec, keep_recover_margin = recoverability_targets(env, cfg)
+        recover_margin, best_topology, score_vec, keep_recover_margin = recoverability_targets(
+            env,
+            cfg,
+            obs=obs,
+            previous_topology=prev_topology,
+        )
         candidate_actions = [expert_action(obs, cfg, topo) for topo in TOPOLOGY_IDS]
         action_all = np.stack(candidate_actions, axis=1).astype(np.float32)
         best_idx = TOPOLOGY_IDS.index(best_topology)
@@ -248,6 +254,7 @@ def _generate_episode_impl(args):
             }
             episode_samples.append(sample_noisy)
         obs, _, done, _ = env.step(action_best, best_topology)
+        prev_topology = best_topology
     return episode_samples
 
 

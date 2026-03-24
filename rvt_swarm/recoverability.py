@@ -8,6 +8,7 @@ import numpy as np
 from .config import Config, TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
+from .safety import select_topology_from_score_signal, topology_context_features, topology_switch_readiness
 from .utils import clip01, normalized_mean
 
 
@@ -84,7 +85,12 @@ def classify_recoverability(score: float) -> float:
     return 0.0
 
 
-def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, int, np.ndarray, float]:
+def recoverability_targets(
+    env: SwarmFormationEnv,
+    cfg: Config,
+    obs: Dict | None = None,
+    previous_topology: int = 0,
+) -> Tuple[float, int, np.ndarray, float]:
     scores: List[float] = []
     for topo in CANDIDATE_TOPOLOGIES:
         scores.append(rollout_score(env, topo, cfg.train.recover_horizon, cfg))
@@ -100,4 +106,14 @@ def recoverability_targets(env: SwarmFormationEnv, cfg: Config) -> Tuple[float, 
     keep_idx = CANDIDATE_TOPOLOGIES.index(0)
     keep_margin = float(np.tanh(float(scores_np[keep_idx]) / score_scale))
     score_targets = np.tanh(scores_np / score_scale).astype(np.float32)
-    return recover_margin, CANDIDATE_TOPOLOGIES[best_idx], score_targets, keep_margin
+    current_obs = env.observe() if obs is None else obs
+    allowed, context = topology_context_features(current_obs, cfg, previous_topology)
+    switch_ready = topology_switch_readiness(current_obs, previous_topology)
+    selected_topology = select_topology_from_score_signal(
+        score_targets,
+        allowed,
+        context,
+        previous_topology=previous_topology,
+        switch_ready=switch_ready,
+    )
+    return recover_margin, selected_topology, score_targets, keep_margin

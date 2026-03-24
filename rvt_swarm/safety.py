@@ -301,7 +301,14 @@ def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:
     return TOPOLOGY_IDS[int(torch.argmax(topology_logits, dim=-1).item())]
 
 
+def stable_topology_anchor(topology: int) -> int:
+    # Only line/split are persistent topology modes in the environment.
+    # keep/compress/recover all collapse back to mode 0 after one step.
+    return topology if topology in (2, 3) else 0
+
+
 def topology_context_features(obs: Dict, cfg: Config, previous_topology: int) -> tuple[np.ndarray, np.ndarray]:
+    previous_topology = stable_topology_anchor(previous_topology)
     form_rms = estimated_form_rms(obs)
     form_tol = max(cfg.env.formation_tolerance, 1e-6)
     bottleneck = clip01(float(obs["bottleneck"]))
@@ -339,6 +346,69 @@ def topology_context_features(obs: Dict, cfg: Config, previous_topology: int) ->
     return allowed, context
 
 
+def topology_switch_readiness(obs: Dict, previous_topology: int) -> np.ndarray:
+    previous_topology = stable_topology_anchor(previous_topology)
+    time_since_switch = max(float(obs.get("time_since_switch", 0.0)), 0.0)
+    switch_ready = np.ones(len(TOPOLOGY_IDS), dtype=np.float32)
+    for idx, topo in enumerate(TOPOLOGY_IDS):
+        if topo != previous_topology:
+            switch_ready[idx] = float(time_since_switch / (1.0 + time_since_switch))
+    return switch_ready
+
+
+def select_topology_from_score_signal(
+    score_signal: np.ndarray,
+    allowed: np.ndarray,
+    context: np.ndarray,
+    previous_topology: int = 0,
+    prior: np.ndarray | None = None,
+    uncertainty: np.ndarray | None = None,
+    switch_ready: np.ndarray | None = None,
+) -> int:
+    previous_topology = stable_topology_anchor(previous_topology)
+    current_idx = TOPOLOGY_IDS.index(previous_topology)
+    prior_arr = np.asarray(prior, dtype=np.float32) if prior is not None else np.zeros_like(score_signal, dtype=np.float32)
+    uncert_arr = (
+        np.asarray(uncertainty, dtype=np.float32)
+        if uncertainty is not None
+        else np.zeros_like(score_signal, dtype=np.float32)
+    )
+    switch_arr = (
+        np.asarray(switch_ready, dtype=np.float32)
+        if switch_ready is not None
+        else np.ones_like(score_signal, dtype=np.float32)
+    )
+
+    # Structural hysteresis: once the current stable topology stays inside the
+    # recoverable set, do not switch just because another candidate ranks slightly
+    # higher. Switch only to re-enter the recoverable set.
+    if bool(allowed[current_idx]) and float(score_signal[current_idx]) >= 0.0:
+        return TOPOLOGY_IDS[current_idx]
+
+    recoverable = np.flatnonzero(allowed & (score_signal >= 0.0))
+    candidates = recoverable if recoverable.size else np.flatnonzero(allowed)
+    if candidates.size == 0:
+        return TOPOLOGY_IDS[current_idx]
+
+    def candidate_key(idx: int) -> tuple[float, ...]:
+        stay_pref = 1.0 if TOPOLOGY_IDS[idx] == previous_topology else 0.0
+        return (
+            float(score_signal[idx] >= 0.0),
+            float(score_signal[idx]),
+            float(context[idx, 0]),
+            float(context[idx, 1]),
+            float(context[idx, 2]),
+            float(context[idx, 3]),
+            float(prior_arr[idx]),
+            float(switch_arr[idx]),
+            stay_pref,
+            -float(uncert_arr[idx]),
+        )
+
+    best_idx = max(candidates.tolist(), key=candidate_key)
+    return TOPOLOGY_IDS[best_idx]
+
+
 def choose_counterfactual_topology(
     obs: Dict,
     topology_logits: torch.Tensor,
@@ -359,32 +429,13 @@ def choose_counterfactual_topology(
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
     score_signal = np.tanh(scores)
     allowed, context = topology_context_features(obs, cfg, previous_topology)
-    time_since_switch = max(float(obs.get("time_since_switch", 0.0)), 0.0)
-
-    current_idx = TOPOLOGY_IDS.index(previous_topology)
-    switch_ready = np.ones_like(scores, dtype=np.float32)
-    for idx, topo in enumerate(TOPOLOGY_IDS):
-        if topo != previous_topology:
-            switch_ready[idx] = float(time_since_switch / (1.0 + time_since_switch))
-
-    def candidate_key(idx: int) -> tuple[float, ...]:
-        stay_pref = 1.0 if TOPOLOGY_IDS[idx] == previous_topology else 0.0
-        return (
-            float(allowed[idx]),
-            float(score_signal[idx]),
-            float(context[idx, 0]),
-            float(context[idx, 1]),
-            float(context[idx, 2]),
-            float(context[idx, 3]),
-            float(prior[idx]),
-            float(switch_ready[idx]),
-            stay_pref,
-            -float(uncert[idx]),
-        )
-
-    best_idx = max(range(len(TOPOLOGY_IDS)), key=candidate_key)
-    if not allowed[current_idx]:
-        return TOPOLOGY_IDS[best_idx]
-    if candidate_key(best_idx) > candidate_key(current_idx):
-        return TOPOLOGY_IDS[best_idx]
-    return previous_topology
+    switch_ready = topology_switch_readiness(obs, previous_topology)
+    return select_topology_from_score_signal(
+        score_signal,
+        allowed,
+        context,
+        previous_topology=previous_topology,
+        prior=prior,
+        uncertainty=uncert,
+        switch_ready=switch_ready,
+    )
