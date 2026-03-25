@@ -124,7 +124,8 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
 def summarize(rows: List[Dict]) -> Dict[str, float]:
     keys = [
         "success", "goal_reached", "collision_free", "form_ok", "rr_collision", "ro_collision",
-        "form_rms", "stall_rate", "deadlock", "topology_switches", "formation_recovery_time",
+        "form_rms", "stall_rate", "deadlock", "topology_switches", "formation_scale_motion_rate",
+        "formation_recovery_time",
         "irreversible_collapse", "recoverability_false_positive", "recoverability_false_negative", "ms_per_step"
     ]
     out = {k: float(np.mean([r[k] for r in rows])) for k in keys}

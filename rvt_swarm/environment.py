@@ -29,6 +29,7 @@ class EnvState:
     split_active: float
     subteam_ids: np.ndarray
     time_since_switch: int
+    formation_scale_motion: float
 
 
 class SwarmFormationEnv:
@@ -68,6 +69,7 @@ class SwarmFormationEnv:
             split_active=0.0,
             subteam_ids=np.zeros((n_agents,), dtype=np.int64),
             time_since_switch=0,
+            formation_scale_motion=0.0,
         )
         self.state.bottleneck_score = self._compute_bottleneck_score()
         # Ensure no robot spawns inside an obstacle
@@ -211,6 +213,7 @@ class SwarmFormationEnv:
             "recovery_progress": float(self.state.formation_recovery_progress),
             "split_active": float(self.state.split_active),
             "time_since_switch": float(self.state.time_since_switch),
+            "formation_scale_motion": float(self.state.formation_scale_motion),
         }
 
     def observe(self) -> Dict:
@@ -236,6 +239,7 @@ class SwarmFormationEnv:
             "formation_error": formation_err,
             "stall_counter": self.state.stall_counter,
             "topology_switches": self.state.topology_switches,
+            "formation_scale_motion": self.state.formation_scale_motion,
             "subteam_ids": self.state.subteam_ids.copy(),
             **ctx,
         }
@@ -315,8 +319,12 @@ class SwarmFormationEnv:
         if not adaptive_scale:
             self.state.formation_scale = 1.0
 
-        scale_changed = adaptive_scale and abs(old_scale - self.state.formation_scale) * self.ec.nominal_spacing > self.ec.robot_radius
-        if old_mode != self.state.topology_mode or scale_changed:
+        scale_delta = abs(old_scale - self.state.formation_scale) * self.ec.nominal_spacing
+        self.state.formation_scale_motion += float(scale_delta)
+        # Count only discrete topology-mode changes as "switches".
+        # Continuous scale adaptation is a separate mechanism and should not
+        # be penalized as topology churn.
+        if old_mode != self.state.topology_mode:
             self.state.topology_switches += 1
             self.state.time_since_switch = 0
 
@@ -528,6 +536,7 @@ class SwarmFormationEnv:
             self.state.step_count / max(formation_recovery_score, 1.0 / max(self.ec.max_steps, 1))
         )
         switch_rate = clip01(self.state.topology_switches / max(self.state.step_count, 1))
+        scale_motion_rate = float(self.state.formation_scale_motion / max(self.state.step_count, 1))
         goal_progress = clip01(1.0 - min(1.0, d_goal / max(self.ec.world_size, 1e-6)))
         irrecoverable = float(
             (not collision_free and form_rms > self.ec.formation_tolerance)
@@ -555,6 +564,8 @@ class SwarmFormationEnv:
             "deadlock": deadlock,
             "formation_recovery_score": formation_recovery_score,
             "topology_switches": float(self.state.topology_switches),
+            "formation_scale_motion": float(self.state.formation_scale_motion),
+            "formation_scale_motion_rate": scale_motion_rate,
             "formation_recovery_time": formation_recovery_time,
             "irreversible_collapse": irrecoverable,
             "recoverability_proxy": recoverability_proxy,

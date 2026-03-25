@@ -395,14 +395,14 @@ def select_topology_from_score_signal(
         return (
             float(score_signal[idx] >= 0.0),
             float(score_signal[idx]),
+            stay_pref,
+            float(switch_arr[idx]),
+            -float(uncert_arr[idx]),
             float(context[idx, 0]),
             float(context[idx, 1]),
             float(context[idx, 2]),
             float(context[idx, 3]),
             float(prior_arr[idx]),
-            float(switch_arr[idx]),
-            stay_pref,
-            -float(uncert_arr[idx]),
         )
 
     best_idx = max(candidates.tolist(), key=candidate_key)
