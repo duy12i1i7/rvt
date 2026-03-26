@@ -5,7 +5,7 @@ from typing import Dict
 
 import torch
 
-from .config import Config, TOPOLOGY_IDS
+from .config import Config, LEARNED_TOPOLOGY_IDS
 from .dataset import build_graph
 from .models import build_model
 from .safety import choose_counterfactual_topology, simple_recover_shield
@@ -75,7 +75,7 @@ def infer_learned_action(
             prev_topology,
             out.get("uncertainty"),
         )
-        topo_idx = TOPOLOGY_IDS.index(topology)
+        topo_idx = LEARNED_TOPOLOGY_IDS.index(topology)
         if out.get("actions_by_topology") is not None:
             actions = out["actions_by_topology"][:, topo_idx, :]
         elif hasattr(model, "decode_actions") and out.get("node_latent") is not None:
@@ -95,7 +95,7 @@ def infer_learned_action(
             else 0.0
         )
         if recoverability_scores is not None and cfg.method.use_topology:
-            recoverability = float(recoverability_scores[TOPOLOGY_IDS.index(topology)])
+            recoverability = float(recoverability_scores[LEARNED_TOPOLOGY_IDS.index(topology)])
         else:
             recoverability = float(out["recoverability"].squeeze().cpu().item())
     if method in {"rvt_swarm", "instant_cert"}:

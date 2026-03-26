@@ -5,14 +5,14 @@ from typing import Dict, List, Tuple
 
 import numpy as np
 
-from .config import Config, TOPOLOGY_IDS
+from .config import Config, LEARNED_TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .safety import select_topology_from_score_signal, topology_context_features, topology_switch_readiness
 from .utils import clip01, normalized_mean
 
 
-CANDIDATE_TOPOLOGIES = TOPOLOGY_IDS
+CANDIDATE_TOPOLOGIES = LEARNED_TOPOLOGY_IDS
 
 
 def compute_deadlock_penalty(info: Dict[str, float]) -> float:
@@ -107,13 +107,19 @@ def recoverability_targets(
     keep_margin = float(np.tanh(float(scores_np[keep_idx]) / score_scale))
     score_targets = np.tanh(scores_np / score_scale).astype(np.float32)
     current_obs = env.observe() if obs is None else obs
-    allowed, context = topology_context_features(current_obs, cfg, previous_topology)
-    switch_ready = topology_switch_readiness(current_obs, previous_topology)
+    allowed, context = topology_context_features(
+        current_obs,
+        cfg,
+        previous_topology,
+        candidate_topologies=CANDIDATE_TOPOLOGIES,
+    )
+    switch_ready = topology_switch_readiness(current_obs, previous_topology, candidate_topologies=CANDIDATE_TOPOLOGIES)
     selected_topology = select_topology_from_score_signal(
         score_targets,
         allowed,
         context,
         previous_topology=previous_topology,
+        candidate_topologies=CANDIDATE_TOPOLOGIES,
         switch_ready=switch_ready,
     )
     return recover_margin, selected_topology, score_targets, keep_margin

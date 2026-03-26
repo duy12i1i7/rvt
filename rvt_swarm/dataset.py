@@ -5,7 +5,7 @@ from typing import Dict, List
 
 import numpy as np
 
-from .config import Config, TOPOLOGY_IDS
+from .config import Config, LEARNED_TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
@@ -210,9 +210,9 @@ def _generate_episode_impl(args):
             obs=obs,
             previous_topology=prev_topology,
         )
-        candidate_actions = [expert_action(obs, cfg, topo) for topo in TOPOLOGY_IDS]
+        candidate_actions = [expert_action(obs, cfg, topo) for topo in LEARNED_TOPOLOGY_IDS]
         action_all = np.stack(candidate_actions, axis=1).astype(np.float32)
-        best_idx = TOPOLOGY_IDS.index(best_topology)
+        best_idx = LEARNED_TOPOLOGY_IDS.index(best_topology)
         action_best = action_all[:, best_idx, :]
         action_keep = action_all[:, 0, :]
         node_x, edge_index, edge_attr = build_graph_arrays(obs, cfg)

@@ -97,3 +97,8 @@ TOPOLOGY_ACTIONS: Dict[int, str] = {
 }
 
 TOPOLOGY_IDS: List[int] = sorted(TOPOLOGY_ACTIONS.keys())
+# RVT only needs persistent structural topology choices. Continuous
+# formation-scale adaptation already covers compress/recover semantics, so
+# learning them as extra discrete classes makes switching noisier without
+# adding structural benefit.
+LEARNED_TOPOLOGY_IDS: List[int] = [0, 2, 3]

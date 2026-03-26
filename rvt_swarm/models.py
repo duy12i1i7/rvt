@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from .dataset import EDGE_DIM, NODE_DIM
-from .config import TOPOLOGY_ACTIONS
+from .config import LEARNED_TOPOLOGY_IDS
 from .utils import uncertainty_adjusted_scores
 
 
@@ -173,7 +173,7 @@ def grad_scale(x: torch.Tensor, scale: float) -> torch.Tensor:
 class RVTSwarmPolicy(nn.Module):
     def __init__(self, hidden_dim: int = 128, passes: int = 3, topology_count: int | None = None):
         super().__init__()
-        topology_count = topology_count or len(TOPOLOGY_ACTIONS)
+        topology_count = topology_count or len(LEARNED_TOPOLOGY_IDS)
         self.topology_count = topology_count
         # Auxiliary gradients weaken automatically as the backbone gets deeper.
         self.aux_grad_scale = 1.0 / max(float(passes + 1), 1.0)
@@ -275,5 +275,5 @@ def build_model(name: str, hidden_dim: int = 128, passes: int = 3) -> nn.Module:
     if name == "instant_cert":
         return InstantCertPolicy(hidden_dim, passes)
     if name == "rvt_swarm":
-        return RVTSwarmPolicy(hidden_dim, passes)
+        return RVTSwarmPolicy(hidden_dim, passes, topology_count=len(LEARNED_TOPOLOGY_IDS))
     raise ValueError(f"Unknown model: {name}")

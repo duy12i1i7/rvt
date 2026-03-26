@@ -5,7 +5,7 @@ from typing import Dict
 import numpy as np
 import torch
 
-from .config import Config, TOPOLOGY_IDS
+from .config import Config, LEARNED_TOPOLOGY_IDS, TOPOLOGY_IDS
 from .utils import clip01, unit
 
 
@@ -297,8 +297,16 @@ def _solve_per_robot_qp(
     return best.astype(np.float32)
 
 
-def choose_topology_from_logits(topology_logits: torch.Tensor) -> int:
-    return TOPOLOGY_IDS[int(torch.argmax(topology_logits, dim=-1).item())]
+def _candidate_topology_ids(candidate_topologies: list[int] | None = None) -> list[int]:
+    return list(candidate_topologies) if candidate_topologies is not None else list(TOPOLOGY_IDS)
+
+
+def choose_topology_from_logits(
+    topology_logits: torch.Tensor,
+    candidate_topologies: list[int] | None = None,
+) -> int:
+    topology_ids = _candidate_topology_ids(candidate_topologies)
+    return topology_ids[int(torch.argmax(topology_logits, dim=-1).item())]
 
 
 def stable_topology_anchor(topology: int) -> int:
@@ -307,7 +315,13 @@ def stable_topology_anchor(topology: int) -> int:
     return topology if topology in (2, 3) else 0
 
 
-def topology_context_features(obs: Dict, cfg: Config, previous_topology: int) -> tuple[np.ndarray, np.ndarray]:
+def topology_context_features(
+    obs: Dict,
+    cfg: Config,
+    previous_topology: int,
+    candidate_topologies: list[int] | None = None,
+) -> tuple[np.ndarray, np.ndarray]:
+    topology_ids = _candidate_topology_ids(candidate_topologies)
     previous_topology = stable_topology_anchor(previous_topology)
     form_rms = estimated_form_rms(obs)
     form_tol = max(cfg.env.formation_tolerance, 1e-6)
@@ -322,35 +336,48 @@ def topology_context_features(obs: Dict, cfg: Config, previous_topology: int) ->
     form_quality = clip01(1.0 - form_stretch)
     open_space = clip01(1.0 - bottleneck)
 
-    allowed = np.ones(len(TOPOLOGY_IDS), dtype=bool)
-    context = np.zeros((len(TOPOLOGY_IDS), 4), dtype=np.float32)
+    allowed = np.ones(len(topology_ids), dtype=bool)
+    context = np.zeros((len(topology_ids), 4), dtype=np.float32)
+    idx_by_topology = {topo: idx for idx, topo in enumerate(topology_ids)}
 
-    keep_idx = TOPOLOGY_IDS.index(0)
-    compress_idx = TOPOLOGY_IDS.index(1)
-    line_idx = TOPOLOGY_IDS.index(2)
-    split_idx = TOPOLOGY_IDS.index(3)
-    recover_idx = TOPOLOGY_IDS.index(4)
+    keep_idx = idx_by_topology.get(0)
+    compress_idx = idx_by_topology.get(1)
+    line_idx = idx_by_topology.get(2)
+    split_idx = idx_by_topology.get(3)
+    recover_idx = idx_by_topology.get(4)
 
-    if n_agents < 4:
+    if split_idx is not None and n_agents < 4:
         allowed[split_idx] = False
-    context[keep_idx] = np.array([open_space, form_quality, progress, 1.0 - split_active], dtype=np.float32)
-    context[compress_idx] = np.array([bottleneck, 1.0 - split_active, 1.0 - progress, form_stretch], dtype=np.float32)
-    context[line_idx] = np.array([bottleneck, team_factor, 1.0 - split_active, progress], dtype=np.float32)
-    context[split_idx] = np.array([bottleneck, split_active, team_factor, progress], dtype=np.float32)
-    context[recover_idx] = np.array([split_active, form_stretch, open_space, 1.0 - bottleneck], dtype=np.float32)
+    if keep_idx is not None:
+        context[keep_idx] = np.array([open_space, form_quality, progress, 1.0 - split_active], dtype=np.float32)
+    if compress_idx is not None:
+        context[compress_idx] = np.array([bottleneck, 1.0 - split_active, 1.0 - progress, form_stretch], dtype=np.float32)
+    if line_idx is not None:
+        context[line_idx] = np.array([bottleneck, team_factor, 1.0 - split_active, progress], dtype=np.float32)
+    if split_idx is not None:
+        context[split_idx] = np.array([bottleneck, split_active, team_factor, progress], dtype=np.float32)
+    if recover_idx is not None:
+        context[recover_idx] = np.array([split_active, form_stretch, open_space, 1.0 - bottleneck], dtype=np.float32)
 
     if previous_topology in (2, 3):
-        context[recover_idx, 2] = max(float(context[recover_idx, 2]), open_space)
-        context[keep_idx, 1] = max(float(context[keep_idx, 1]), form_quality)
+        if recover_idx is not None:
+            context[recover_idx, 2] = max(float(context[recover_idx, 2]), open_space)
+        if keep_idx is not None:
+            context[keep_idx, 1] = max(float(context[keep_idx, 1]), form_quality)
 
     return allowed, context
 
 
-def topology_switch_readiness(obs: Dict, previous_topology: int) -> np.ndarray:
+def topology_switch_readiness(
+    obs: Dict,
+    previous_topology: int,
+    candidate_topologies: list[int] | None = None,
+) -> np.ndarray:
+    topology_ids = _candidate_topology_ids(candidate_topologies)
     previous_topology = stable_topology_anchor(previous_topology)
     time_since_switch = max(float(obs.get("time_since_switch", 0.0)), 0.0)
-    switch_ready = np.ones(len(TOPOLOGY_IDS), dtype=np.float32)
-    for idx, topo in enumerate(TOPOLOGY_IDS):
+    switch_ready = np.ones(len(topology_ids), dtype=np.float32)
+    for idx, topo in enumerate(topology_ids):
         if topo != previous_topology:
             switch_ready[idx] = float(time_since_switch / (1.0 + time_since_switch))
     return switch_ready
@@ -364,9 +391,14 @@ def select_topology_from_score_signal(
     prior: np.ndarray | None = None,
     uncertainty: np.ndarray | None = None,
     switch_ready: np.ndarray | None = None,
+    candidate_topologies: list[int] | None = None,
 ) -> int:
+    topology_ids = _candidate_topology_ids(candidate_topologies)
     previous_topology = stable_topology_anchor(previous_topology)
-    current_idx = TOPOLOGY_IDS.index(previous_topology)
+    if previous_topology not in topology_ids:
+        previous_topology = 0 if 0 in topology_ids else topology_ids[0]
+    current_idx = topology_ids.index(previous_topology)
+    keep_idx = topology_ids.index(0) if 0 in topology_ids else current_idx
     prior_arr = np.asarray(prior, dtype=np.float32) if prior is not None else np.zeros_like(score_signal, dtype=np.float32)
     uncert_arr = (
         np.asarray(uncertainty, dtype=np.float32)
@@ -379,22 +411,23 @@ def select_topology_from_score_signal(
         else np.ones_like(score_signal, dtype=np.float32)
     )
 
-    # Structural hysteresis: once the current stable topology stays inside the
-    # recoverable set, do not switch just because another candidate ranks slightly
-    # higher. Switch only to re-enter the recoverable set.
-    if bool(allowed[current_idx]) and float(score_signal[current_idx]) >= 0.0:
-        return TOPOLOGY_IDS[current_idx]
-
     recoverable = np.flatnonzero(allowed & (score_signal >= 0.0))
     candidates = recoverable if recoverable.size else np.flatnonzero(allowed)
     if candidates.size == 0:
-        return TOPOLOGY_IDS[current_idx]
+        return topology_ids[current_idx]
+
+    if keep_idx in candidates.tolist():
+        keep_score = float(score_signal[keep_idx])
+        if not np.any(score_signal[candidates] > keep_score):
+            return topology_ids[keep_idx]
 
     def candidate_key(idx: int) -> tuple[float, ...]:
-        stay_pref = 1.0 if TOPOLOGY_IDS[idx] == previous_topology else 0.0
+        stay_pref = 1.0 if topology_ids[idx] == previous_topology else 0.0
+        keep_pref = 1.0 if topology_ids[idx] == 0 else 0.0
         return (
             float(score_signal[idx] >= 0.0),
             float(score_signal[idx]),
+            keep_pref,
             stay_pref,
             float(switch_arr[idx]),
             -float(uncert_arr[idx]),
@@ -406,7 +439,7 @@ def select_topology_from_score_signal(
         )
 
     best_idx = max(candidates.tolist(), key=candidate_key)
-    return TOPOLOGY_IDS[best_idx]
+    return topology_ids[best_idx]
 
 
 def choose_counterfactual_topology(
@@ -417,7 +450,7 @@ def choose_counterfactual_topology(
     previous_topology: int = 0,
     uncertainty: torch.Tensor | None = None,
 ) -> int:
-    logit_choice = choose_topology_from_logits(topology_logits)
+    logit_choice = choose_topology_from_logits(topology_logits, candidate_topologies=LEARNED_TOPOLOGY_IDS)
     if not cfg.method.use_counterfactual_topology:
         return logit_choice
     if recoverability_scores is None or not cfg.method.use_recoverability:
@@ -430,8 +463,17 @@ def choose_counterfactual_topology(
     prior = np.zeros_like(scores, dtype=np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
     score_signal = np.tanh(scores)
-    allowed, context = topology_context_features(obs, cfg, previous_topology)
-    switch_ready = topology_switch_readiness(obs, previous_topology)
+    allowed, context = topology_context_features(
+        obs,
+        cfg,
+        previous_topology,
+        candidate_topologies=LEARNED_TOPOLOGY_IDS,
+    )
+    switch_ready = topology_switch_readiness(
+        obs,
+        previous_topology,
+        candidate_topologies=LEARNED_TOPOLOGY_IDS,
+    )
     return select_topology_from_score_signal(
         score_signal,
         allowed,
@@ -440,4 +482,5 @@ def choose_counterfactual_topology(
         prior=prior,
         uncertainty=uncert,
         switch_ready=switch_ready,
+        candidate_topologies=LEARNED_TOPOLOGY_IDS,
     )

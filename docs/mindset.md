@@ -16,6 +16,13 @@ Một GNN học xấp xỉ **recoverability margin** chứ không chỉ collisio
 
 Không xem action chỉ là vận tốc. Mỗi robot còn tham gia vào một **topological action** cục bộ: giữ đội hình, co giãn, xếp hàng, tách subteam, nhập team lại. Khác với các paper adaptive formation gần đây vốn hay chọn từ vài pattern định sẵn hoặc framework phân tầng, ở đây topological action được quyết định trực tiếp bởi policy nhưng bị ràng buộc bởi recoverability margin. Tôi đã thấy adaptive formation, formation reconfiguration, environment-adaptive confined-space formation, và cả subteaming rất gần hướng này, nhưng chưa thấy cái nào dùng **recoverability-verified topology switching** làm cơ chế điều khiển chính.
 
+Về mặt triển khai, nên tách rõ **structural topology** và **continuous morphology**:
+
+- **Structural topology**: keep, line, split/subteam. Đây là các mode rời rạc có ý nghĩa cấu trúc bền theo thời gian.
+- **Continuous morphology**: co giãn đội hình, nới lại đội hình, quay về formation tube. Phần này nên đi qua formation-scale / recover controller liên tục thay vì bị ép thành thêm class rời rạc.
+
+Tách như vậy giúp action space gọn hơn, giảm churn do switch giả, và quan trọng hơn là tránh phụ thuộc vào các rule/threshold tay để quản lý quá nhiều mode rời rạc.
+
 **3) Counterfactual Topology Selector**
 
 Mỗi robot không chỉ hỏi "action hiện tại có an toàn không?" mà hỏi thêm:
