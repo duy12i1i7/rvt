@@ -417,7 +417,6 @@ def choose_counterfactual_topology(
     previous_topology: int = 0,
     uncertainty: torch.Tensor | None = None,
 ) -> int:
-    topo_prior = torch.softmax(topology_logits, dim=-1).squeeze(0)
     logit_choice = choose_topology_from_logits(topology_logits)
     if not cfg.method.use_counterfactual_topology:
         return logit_choice
@@ -425,7 +424,10 @@ def choose_counterfactual_topology(
         return logit_choice
 
     scores = recoverability_scores.squeeze(0).detach().cpu().numpy().astype(np.float32)
-    prior = topo_prior.detach().cpu().numpy().astype(np.float32)
+    # When the recoverability score map is available, topology selection should
+    # be driven by that map directly. Keep the classifier prior neutral here so
+    # it cannot override the recoverability-margin ordering.
+    prior = np.zeros_like(scores, dtype=np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
     score_signal = np.tanh(scores)
     allowed, context = topology_context_features(obs, cfg, previous_topology)

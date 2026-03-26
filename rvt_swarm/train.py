@@ -42,6 +42,14 @@ def pairwise_ranking_loss(pred_scores: torch.Tensor, target_scores: torch.Tensor
     return F.softplus(-(sign[mask] * diffs_p[mask])).mean()
 
 
+def soft_topology_alignment_loss(logits: torch.Tensor, target_scores: torch.Tensor) -> torch.Tensor:
+    # Align topology preference with the full recoverability score map rather
+    # than a brittle argmax label. This keeps topology supervision consistent
+    # with the docs' counterfactual "positive margin wins" semantics.
+    target_dist = torch.softmax(target_scores, dim=-1)
+    return F.kl_div(F.log_softmax(logits, dim=-1), target_dist, reduction="batchmean")
+
+
 def select_action_target(batch: Dict, model_name: str, cfg: Config) -> torch.Tensor:
     # Keep action supervision aligned with runtime execution.
     # `rvt_swarm` can switch topology online; the baselines `gnn_only`
@@ -63,9 +71,12 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
     else:
         losses["recover"] = torch.tensor(0.0, device=batch["node_x"].device)
     if outputs["topology_logits"] is not None and model_name == "rvt_swarm" and cfg.method.use_topology:
-        losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
         losses["aux"] = F.mse_loss(outputs["aux"], batch["aux_target"])
         if cfg.method.use_recoverability:
+            losses["topology"] = soft_topology_alignment_loss(
+                outputs["topology_logits"],
+                batch["recover_scores_target"],
+            )
             losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
             losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
             if outputs["uncertainty"] is not None:
@@ -74,6 +85,7 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
             else:
                 losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
         else:
+            losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
             losses["score_map"] = batch["node_x"].new_tensor(0.0)
             losses["rank"] = batch["node_x"].new_tensor(0.0)
             losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
