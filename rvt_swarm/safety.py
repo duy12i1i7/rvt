@@ -416,8 +416,18 @@ def select_topology_from_score_signal(
     if candidates.size == 0:
         return topology_ids[current_idx]
 
+    current_score = float(score_signal[current_idx])
+    keep_score = float(score_signal[keep_idx])
+    if bool(allowed[current_idx]) and current_score >= 0.0:
+        # Persistent structural modes should not churn while they remain inside
+        # the recoverable set. Exit back to keep only when keep is itself
+        # recoverable and no worse, which gives a zero-margin, score-based
+        # return path without hand-tuned dwell times.
+        if current_idx != keep_idx and bool(allowed[keep_idx]) and keep_score >= current_score:
+            return topology_ids[keep_idx]
+        return topology_ids[current_idx]
+
     if keep_idx in candidates.tolist():
-        keep_score = float(score_signal[keep_idx])
         if not np.any(score_signal[candidates] > keep_score):
             return topology_ids[keep_idx]
 
