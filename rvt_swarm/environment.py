@@ -49,7 +49,7 @@ class SwarmFormationEnv:
         goal = np.array([self.ec.world_size * 0.38, 0.0], dtype=np.float32)
         obstacles, obstacle_velocities = self._spawn_obstacles(scenario)
         prev_goal_distance = float(np.linalg.norm(goal - positions.mean(axis=0)))
-        corridor_direction = np.array([0.0, 1.0], dtype=np.float32) if scenario == "narrow_passage" else np.array([1.0, 0.0], dtype=np.float32)
+        corridor_direction = np.array([1.0, 0.0], dtype=np.float32)
         self.state = EnvState(
             positions=positions,
             velocities=velocities,
@@ -139,7 +139,7 @@ class SwarmFormationEnv:
     def _corridor_direction(self) -> np.ndarray:
         assert self.state is not None
         if self.state.scenario == "narrow_passage":
-            return np.array([0.0, 1.0], dtype=np.float32)
+            return np.array([1.0, 0.0], dtype=np.float32)
         return unit(self.state.goal - self.state.positions.mean(axis=0)).astype(np.float32)
 
     def _subteam_assignments(self) -> np.ndarray:
@@ -163,25 +163,26 @@ class SwarmFormationEnv:
         lateral = np.array([corridor[1], -corridor[0]], dtype=np.float32)
 
         if mode == 2:  # line along corridor
-            return np.array([
-                corridor * ((i - (n - 1) / 2) * spacing) for i in range(n)
-            ], dtype=np.float32)
+            order = np.argsort(self.state.positions @ corridor)
+            offsets = np.zeros((n, 2), dtype=np.float32)
+            for rank, robot_idx in enumerate(order):
+                offsets[robot_idx] = corridor * ((rank - (n - 1) / 2) * spacing)
+            return offsets
 
         if mode == 3:  # split into two lines on both sides of corridor axis
             split = self.state.subteam_ids
             counts = [max(1, int(np.sum(split == 0))), max(1, int(np.sum(split == 1)))]
             lane_gap = max(self.ec.nominal_spacing, spacing + self.ec.min_rr_distance)
             offsets = np.zeros((n, 2), dtype=np.float32)
-            idx0 = idx1 = 0
-            for i in range(n):
-                if split[i] == 0:
-                    longitudinal = (idx0 - (counts[0] - 1) / 2) * spacing
-                    offsets[i] = corridor * longitudinal - lateral * (0.5 * lane_gap)
-                    idx0 += 1
-                else:
-                    longitudinal = (idx1 - (counts[1] - 1) / 2) * spacing
-                    offsets[i] = corridor * longitudinal + lateral * (0.5 * lane_gap)
-                    idx1 += 1
+            for team_id in (0, 1):
+                members = np.flatnonzero(split == team_id)
+                if members.size == 0:
+                    continue
+                order = members[np.argsort(self.state.positions[members] @ corridor)]
+                for rank, robot_idx in enumerate(order):
+                    longitudinal = (rank - (counts[team_id] - 1) / 2) * spacing
+                    lane_offset = -lateral if team_id == 0 else lateral
+                    offsets[robot_idx] = corridor * longitudinal + lane_offset * (0.5 * lane_gap)
             return offsets
 
         cols = max(2, int(np.ceil(np.sqrt(n))))

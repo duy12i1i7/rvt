@@ -153,46 +153,52 @@ class InstantCertPolicy(nn.Module):
         return {"actions": actions, "recoverability": pooled, "recoverability_scores": None, "topology_logits": None, "aux": None, "uncertainty": None}
 
 
-class _GradScale(torch.autograd.Function):
-    """Scale gradients in backward pass to protect backbone from auxiliary losses."""
-
-    @staticmethod
-    def forward(ctx, x, scale):
-        ctx.scale = scale
-        return x.clone()
-
-    @staticmethod
-    def backward(ctx, grad):
-        return grad * ctx.scale, None
-
-
-def grad_scale(x: torch.Tensor, scale: float) -> torch.Tensor:
-    return _GradScale.apply(x, scale)
-
-
 class RVTSwarmPolicy(nn.Module):
     def __init__(self, hidden_dim: int = 128, passes: int = 3, topology_count: int | None = None):
         super().__init__()
         topology_count = topology_count or len(LEARNED_TOPOLOGY_IDS)
         self.topology_count = topology_count
-        # Auxiliary gradients weaken automatically as the backbone gets deeper.
-        self.aux_grad_scale = 1.0 / max(float(passes + 1), 1.0)
+        self.context_dim = NODE_DIM
         self.backbone = GraphBackbone(hidden_dim, passes)
-        # Condition the control primitive on the chosen topology so that
-        # "u_i" and "tau_i" remain coupled, as required by the project docs.
-        self.action_head = nn.Sequential(
+        # Keep action learning anchored to a topology-agnostic base controller.
+        # Structural topology should contribute a residual correction, not force
+        # the model to relearn the whole action map for every mode.
+        self.base_action_head = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 2),
+        )
+        self.topology_delta_head = nn.Sequential(
             nn.Linear(hidden_dim + topology_count, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim // 2),
             nn.ReLU(),
             nn.Linear(hidden_dim // 2, 2),
-            nn.Tanh(),
         )
         # Topology via neighbourhood consensus (not plain pool→MLP)
         self.topology_consensus = TopologyConsensus(hidden_dim, topology_count)
-        self.score_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, topology_count))
-        self.aux_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, 4))
-        self.uncertainty_head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, topology_count))
+        self.topology_refine = nn.Sequential(
+            nn.Linear(topology_count + self.context_dim, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim // 2, topology_count),
+        )
+        self.score_head = nn.Sequential(
+            nn.Linear(hidden_dim + self.context_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, topology_count),
+        )
+        self.aux_head = nn.Sequential(
+            nn.Linear(hidden_dim + self.context_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, 4),
+        )
+        self.uncertainty_head = nn.Sequential(
+            nn.Linear(hidden_dim + self.context_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, topology_count),
+        )
 
     def _normalize_action_topology(
         self,
@@ -219,7 +225,12 @@ class RVTSwarmPolicy(nn.Module):
             topo = topo.expand(int(batch_index.max().item()) + 1)
         topo_onehot = F.one_hot(topo.clamp(0, self.topology_count - 1), num_classes=self.topology_count).to(h.dtype)
         topo_node = topo_onehot[batch_index]
-        return self.action_head(torch.cat([h, topo_node], dim=-1))
+        base = self.base_action_head(h)
+        delta = self.topology_delta_head(torch.cat([h, topo_node], dim=-1))
+        # Index 0 corresponds to the structural anchor `keep`. It should not
+        # pay a residual penalty for the extra topology machinery.
+        switch_mask = 1.0 - topo_node[:, [0]]
+        return torch.tanh(base + switch_mask * delta)
 
     def decode_all_actions(
         self,
@@ -236,17 +247,22 @@ class RVTSwarmPolicy(nn.Module):
     def forward(self, batch, action_topology: int | torch.Tensor | None = None):
         h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
 
-        # Auxiliary heads get scaled gradients to protect backbone for actions
-        h_aux = grad_scale(h, self.aux_grad_scale)
+        # Keep the control backbone focused on action quality. Topology and
+        # recoverability heads learn on top of the same latent state, but they
+        # do not backpropagate into the action features.
+        h_aux = h.detach()
+        raw_pooled = pooled_graph_features(batch["node_x"], batch["batch_index"])
 
         # Topology logits via neighbourhood consensus layer
-        topology_logits = self.topology_consensus(
+        topology_votes = self.topology_consensus(
             h_aux, batch["edge_index"], batch["batch_index"]
         )
+        topology_logits = topology_votes + self.topology_refine(torch.cat([topology_votes, raw_pooled], dim=-1))
         pooled = pooled_graph_features(h_aux, batch["batch_index"])
-        recover_scores = self.score_head(pooled)
-        aux = self.aux_head(pooled)
-        uncertainty = F.softplus(self.uncertainty_head(pooled))
+        pooled_ctx = torch.cat([pooled, raw_pooled], dim=-1)
+        recover_scores = self.score_head(pooled_ctx)
+        aux = self.aux_head(pooled_ctx)
+        uncertainty = F.softplus(self.uncertainty_head(pooled_ctx))
         adjusted_scores = uncertainty_adjusted_scores(recover_scores, uncertainty)
         recoverability = adjusted_scores.max(dim=-1, keepdim=True).values
         num_graphs = topology_logits.shape[0]

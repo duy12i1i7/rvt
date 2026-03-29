@@ -59,10 +59,34 @@ def select_action_target(batch: Dict, model_name: str, cfg: Config) -> torch.Ten
     return batch["action_target_keep"]
 
 
+def selected_topology_actions(
+    action_bank: torch.Tensor,
+    topology_target: torch.Tensor,
+    batch_index: torch.Tensor,
+) -> torch.Tensor:
+    topo = topology_target.view(-1).long()
+    node_topology = topo[batch_index]
+    return action_bank[
+        torch.arange(action_bank.shape[0], device=action_bank.device),
+        node_topology,
+    ]
+
+
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
     losses = {}
     if model_name == "rvt_swarm" and cfg.method.use_topology and outputs.get("actions_by_topology") is not None:
-        losses["action"] = F.mse_loss(outputs["actions_by_topology"], batch["action_target_all"])
+        keep_actions = outputs["actions_by_topology"][:, 0, :]
+        best_actions = selected_topology_actions(
+            outputs["actions_by_topology"],
+            batch["topology_target"],
+            batch["batch_index"],
+        )
+        losses["action"] = torch.stack(
+            [
+                F.mse_loss(keep_actions, batch["action_target_keep"]),
+                F.mse_loss(best_actions, batch["action_target_best"]),
+            ]
+        ).mean()
     else:
         losses["action"] = F.mse_loss(outputs["actions"], select_action_target(batch, model_name, cfg))
 

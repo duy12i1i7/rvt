@@ -104,7 +104,8 @@ def recoverability_targets(
     gap_signal = gap / score_scale
     recover_margin = float(np.tanh(0.5 * (best_signal + gap_signal)))
     keep_idx = CANDIDATE_TOPOLOGIES.index(0)
-    keep_margin = float(np.tanh(float(scores_np[keep_idx]) / score_scale))
+    keep_score = float(scores_np[keep_idx])
+    keep_margin = float(np.tanh(keep_score / score_scale))
     score_targets = np.tanh(scores_np / score_scale).astype(np.float32)
     current_obs = env.observe() if obs is None else obs
     allowed, context = topology_context_features(

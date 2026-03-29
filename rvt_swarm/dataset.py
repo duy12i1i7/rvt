@@ -112,14 +112,19 @@ def build_graph_arrays(obs: Dict, cfg: Config):
         relc = pos[i] - centroid
         ro = pos[i] - obstacle_centroid
         ferr = obs["formation_error"][i]
-        local_window = max(cfg.env.nominal_spacing * 2.0, cfg.env.min_ro_distance)
-        local_bottleneck = float(np.mean(np.linalg.norm(obs_pos - pos[i], axis=1) < local_window)) if len(obs_pos) else 0.0
-        min_obs = float(np.min(np.linalg.norm(obs_pos - pos[i], axis=1))) if len(obs_pos) else float(cfg.env.lidar_range)
         dyn_obs = np.zeros(2, dtype=np.float32)
+        local_window = max(cfg.env.nominal_spacing * 2.0, cfg.env.min_ro_distance)
         if len(obs_pos):
-            j = int(np.argmin(np.linalg.norm(obs_pos - pos[i], axis=1)))
+            obs_delta = obs_pos - pos[i]
+            obs_d2 = np.sum(obs_delta * obs_delta, axis=1, dtype=np.float32)
+            local_bottleneck = float((obs_d2 < (local_window * local_window)).sum()) / float(len(obs_d2))
+            min_obs = float(np.sqrt(float(obs_d2.min())))
+            j = int(np.argmin(obs_d2))
             if len(obs_vel):
                 dyn_obs = obs_vel[j]
+        else:
+            local_bottleneck = 0.0
+            min_obs = float(cfg.env.lidar_range)
         node = [
             pos[i, 0], pos[i, 1],
             vel[i, 0], vel[i, 1],
