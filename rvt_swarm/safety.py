@@ -120,11 +120,6 @@ def simple_recover_shield(
     all_negative = False
     if recoverability_scores is not None:
         all_negative = bool(np.all(recoverability_scores < 0.0))
-    if recoverability is not None:
-        recover_value = float(recoverability)
-        if recover_value < 0.0:
-            neg_level = clip01(-recover_value)
-            risk = max(risk, threshold + (1.0 - threshold) * neg_level)
     # Docs: "chỉ can thiệp nếu tất cả lựa chọn có recoverability âm"
     if all_negative:
         risk = max(risk, threshold)
@@ -418,28 +413,24 @@ def select_topology_from_score_signal(
 
     current_score = float(score_signal[current_idx])
     keep_score = float(score_signal[keep_idx])
-    if bool(allowed[current_idx]) and current_score >= 0.0:
-        # Persistent structural modes should not churn while they remain inside
-        # the recoverable set. Exit back to keep only when keep is itself
-        # recoverable and no worse, which gives a zero-margin, score-based
-        # return path without hand-tuned dwell times.
-        if current_idx != keep_idx and bool(allowed[keep_idx]) and keep_score >= current_score:
-            return topology_ids[keep_idx]
-        return topology_ids[current_idx]
-
-    if keep_idx in candidates.tolist():
-        if not np.any(score_signal[candidates] > keep_score):
-            return topology_ids[keep_idx]
 
     def candidate_key(idx: int) -> tuple[float, ...]:
+        score = float(score_signal[idx])
         stay_pref = 1.0 if topology_ids[idx] == previous_topology else 0.0
         keep_pref = 1.0 if topology_ids[idx] == 0 else 0.0
+        switch_pref = 1.0 if topology_ids[idx] == previous_topology else float(switch_arr[idx])
+        # Counterfactual selection should keep comparing all recoverable
+        # topologies, not early-return as soon as the current mode is merely
+        # non-negative. This keeps switching driven by relative recoverability
+        # gains and avoids hand-tuned hysteresis thresholds.
         return (
-            float(score_signal[idx] >= 0.0),
-            float(score_signal[idx]),
-            keep_pref,
+            float(score >= 0.0),
+            score,
+            float(score - current_score),
+            float(score - keep_score),
+            switch_pref,
             stay_pref,
-            float(switch_arr[idx]),
+            keep_pref,
             -float(uncert_arr[idx]),
             float(context[idx, 0]),
             float(context[idx, 1]),
