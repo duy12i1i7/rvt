@@ -394,6 +394,7 @@ def select_topology_from_score_signal(
         previous_topology = 0 if 0 in topology_ids else topology_ids[0]
     current_idx = topology_ids.index(previous_topology)
     keep_idx = topology_ids.index(0) if 0 in topology_ids else current_idx
+    has_prior = prior is not None
     prior_arr = np.asarray(prior, dtype=np.float32) if prior is not None else np.zeros_like(score_signal, dtype=np.float32)
     uncert_arr = (
         np.asarray(uncertainty, dtype=np.float32)
@@ -415,31 +416,44 @@ def select_topology_from_score_signal(
     keep_score = float(score_signal[keep_idx])
 
     def candidate_key(idx: int) -> tuple[float, ...]:
-        score = float(score_signal[idx])
         stay_pref = 1.0 if topology_ids[idx] == previous_topology else 0.0
         keep_pref = 1.0 if topology_ids[idx] == 0 else 0.0
-        switch_pref = 1.0 if topology_ids[idx] == previous_topology else float(switch_arr[idx])
-        # Counterfactual selection should keep comparing all recoverable
-        # topologies, not early-return as soon as the current mode is merely
-        # non-negative. This keeps switching driven by relative recoverability
-        # gains and avoids hand-tuned hysteresis thresholds.
         return (
-            float(score >= 0.0),
-            score,
-            float(score - current_score),
-            float(score - keep_score),
-            switch_pref,
-            stay_pref,
+            float(score_signal[idx] >= 0.0),
+            float(score_signal[idx]),
+            float(prior_arr[idx]),
             keep_pref,
+            stay_pref,
+            float(switch_arr[idx]),
             -float(uncert_arr[idx]),
             float(context[idx, 0]),
             float(context[idx, 1]),
             float(context[idx, 2]),
             float(context[idx, 3]),
-            float(prior_arr[idx]),
         )
 
     best_idx = max(candidates.tolist(), key=candidate_key)
+    best_score = float(score_signal[best_idx])
+
+    if bool(allowed[current_idx]) and current_score >= 0.0:
+        # Structural topology should persist while it remains recoverable.
+        # Runtime switching is permitted only when the recoverability head and
+        # the topology-consensus head agree on a better structural mode.
+        if has_prior and best_idx not in (current_idx, keep_idx):
+            prior_best = float(prior_arr[best_idx])
+            if best_score >= max(current_score, keep_score) and prior_best >= max(
+                float(prior_arr[current_idx]),
+                float(prior_arr[keep_idx]),
+            ):
+                return topology_ids[best_idx]
+        # Exit back to keep when keep is itself recoverable and no worse.
+        if current_idx != keep_idx and bool(allowed[keep_idx]) and keep_score >= current_score:
+            return topology_ids[keep_idx]
+        return topology_ids[current_idx]
+
+    if keep_idx in candidates.tolist():
+        if not np.any(score_signal[candidates] > keep_score):
+            return topology_ids[keep_idx]
     return topology_ids[best_idx]
 
 
@@ -458,10 +472,11 @@ def choose_counterfactual_topology(
         return logit_choice
 
     scores = recoverability_scores.squeeze(0).detach().cpu().numpy().astype(np.float32)
-    # When the recoverability score map is available, topology selection should
-    # be driven by that map directly. Keep the classifier prior neutral here so
-    # it cannot override the recoverability-margin ordering.
-    prior = np.zeros_like(scores, dtype=np.float32)
+    # The recoverability map certifies which structural modes stay viable.
+    # The topology head supplies a separate consensus prior over persistent
+    # modes. Requiring both to agree reduces structural churn without
+    # introducing hand-tuned margins.
+    prior = torch.softmax(topology_logits.squeeze(0), dim=-1).detach().cpu().numpy().astype(np.float32)
     uncert = uncertainty.squeeze(0).detach().cpu().numpy().astype(np.float32) if uncertainty is not None else np.zeros_like(scores)
     score_signal = np.tanh(scores)
     allowed, context = topology_context_features(
