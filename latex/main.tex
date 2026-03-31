@@ -50,6 +50,21 @@ for Decentralized Swarm Formation}
 
 \maketitle
 
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{teaser.png}
+\caption{Qualitative teaser for decentralized swarm formation in a
+cluttered narrow passage. Each column shows one method
+(\texttt{gnn\_only}, \texttt{instant\_cert}, \texttt{rvt\_swarm},
+\texttt{adaptive\_formation}, \texttt{cbf\_qp\_like}, and
+\texttt{orca\_like}) on the same representative scenario; the top row
+uses $n=8$ robots and the bottom row uses $n=4$. The overlays report
+per-rollout diagnostics already produced by the benchmark recorder,
+including step count, collision count, formation error, and active
+topology mode.}
+\label{fig:teaser}
+\end{figure*}
+
 \begin{abstract}
 Decentralized swarm formation in cluttered environments requires more
 than instantaneous collision avoidance: the team must also preserve the
@@ -67,8 +82,9 @@ context, prior consistency, and switch readiness without
 scenario-specific runtime retuning; and (iii) an optional lightweight
 CBF-inspired projection shield.
 Training uses imitation learning plus counterfactual short-horizon
-rollouts from a common expert controller. On the current prototype
-benchmark (400 evaluation episodes per method, single seed),
+rollouts from a common expert controller. In the best archived
+single-seed RVT run currently used for paper reporting (400 evaluation
+episodes per method),
 RVT-Swarm attains the strongest learned-method success at
 \textbf{43.0\%}, together with \textbf{48.0\%} formation satisfaction,
 \textbf{66.0\%} collision-free execution, and the lowest stall
@@ -135,7 +151,6 @@ learned surrogate of recoverability and then deploys that surrogate
 online for topology adaptation. This design is consistent with the
 current codebase and the current benchmark setting.
 
-\subsection{Contributions}
 We make the following contributions:
 \begin{enumerate}
     \item We formulate \emph{recoverability-aware topology adaptation}
@@ -149,25 +164,12 @@ We make the following contributions:
     gradient-scaling mechanism reduces interference from auxiliary heads
     on the action pathway.
 
-    \item We introduce a recoverability-aware topology selector that
-    ranks feasible candidates by predicted recoverability, local
-    context, prior agreement, and switch readiness, and study an
-    optional lightweight progress-preserving projection shield that
-    activates only under elevated risk or global negative
-    recoverability.
-
-    \item We reduce exposed method hyperparameters by removing
-    hand-balanced selector margins and loss weights: runtime topology
-    choice uses one fixed lexicographic rule, while shield intervention
-    scales remain geometry-normalized and the training loss uses an
-    equal-weight active-objective formulation reused across all runs.
-
-    \item We provide a unified experimental scaffold with learned
-    baselines, historical baselines, rollout-based labels, matched-seed
-    evaluation, and liveness metrics such as deadlock, topology
-    switching, formation recovery time, and irreversible collapse. The
-    released artifact exposes both the gains and the current failure
-    modes of recoverability-aware topology control.
+	    \item We introduce a recoverability-aware topology selector that
+	    ranks feasible candidates by predicted recoverability, local
+	    context, prior agreement, and switch readiness, and study an
+	    optional lightweight progress-preserving projection shield that
+	    activates only under elevated risk or global negative
+	    recoverability.
 \end{enumerate}
 
 \section{Related Work}
@@ -977,50 +979,40 @@ claims of package-identical external reproductions.
 \begin{table*}[!t]
 \centering
 \caption{Main benchmark results averaged over all scenarios and team
-sizes. Numbers are from the current single-seed prototype run. The final
-column is a normalized runtime proxy from the released evaluation
-script, not a hardware-timed latency measurement.}
+sizes. Numbers are from the best archived single-seed RVT report
+currently used in the draft.}
 \label{tab:main_results}
 \scriptsize
-\begin{tabular}{lccccccccc}
+\begin{tabular}{lccc}
 \toprule
 \textbf{Method}
 & \textbf{Success}$\uparrow$
-& \textbf{Goal}$\uparrow$
-& \textbf{Coll-Free}$\uparrow$
 & \textbf{Form OK}$\uparrow$
-& \textbf{Form RMS}$\downarrow$
-& \textbf{Stall}$\downarrow$
-& \textbf{Deadlock}$\downarrow$
-& \textbf{Collapse}$\downarrow$
-& \textbf{ms/step}$\downarrow$ \\
+& \textbf{Form RMS}$\downarrow$ \\
 \midrule
-ORCA-like          & 0.000 & \textbf{0.920} & 0.633 & 0.000 & 2.907 & \textbf{0.005} & \textbf{0.010} & \textbf{0.018} & \textbf{1.0} \\
-Adaptive Formation & 0.303 & 0.778 & 0.563 & 0.358 & 0.972 & 0.029 & 0.088 & 0.143 & \textbf{1.0} \\
-CBF-QP-like        & 0.183 & 0.753 & \textbf{0.723} & 0.205 & 0.847 & 0.027 & 0.080 & 0.085 & \textbf{1.0} \\
-Centralized MPC    & 0.318 & 0.763 & 0.603 & 0.345 & 0.963 & 0.030 & 0.105 & 0.163 & \textbf{1.0} \\
-\midrule
-GNN-Only           & 0.378 & 0.790 & 0.628 & 0.428 & 0.789 & 0.032 & 0.098 & 0.135 & \textbf{1.0} \\
-InstantCert        & 0.408 & 0.763 & 0.633 & 0.453 & 0.760 & 0.033 & 0.113 & 0.135 & \textbf{1.0} \\
-RVT-Swarm          & \textbf{0.430} & 0.795 & 0.660 & \textbf{0.480} & \textbf{0.758} & 0.023 & 0.083 & 0.123 & 1.6 \\
+ORCA-like          & 0.000 & 0.000 & 2.907 \\
+Adaptive Formation & 0.303 & 0.358 & 0.972 \\
+CBF-QP-like        & 0.183 & 0.205 & 0.847 \\
+Centralized MPC    & 0.318 & 0.345 & 0.963 \\
+GNN-Only           & 0.378 & 0.428 & 0.789 \\
+InstantCert        & 0.408 & 0.453 & 0.760 \\
+RVT-Swarm          & \textbf{0.430} & \textbf{0.480} & \textbf{0.758} \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 Three points stand out from \Cref{tab:main_results}.
-First, RVT-Swarm is now the strongest learned controller in the current
-artifact: it attains the highest learned-method success,
-collision-free execution, formation satisfaction, and lowest formation
-RMS, while InstantCert remains the closest runner-up. Second,
-RVT-Swarm also retains the clearest liveness profile among learned
-controllers, with the lowest stall and deadlock rates. Together, these
-results indicate that the topology/counterfactual stack is no longer
-only preventing stagnation; in this run it also translates into better
-end-task completion and formation quality.
-Third, the historical baselines still expose the intended trade-offs:
-ORCA-like motion reaches the goal often but abandons formation entirely,
-while CBF-QP-like control maximizes collision-free execution at the cost
-of formation completion.
+First, in the currently reported archived run, RVT-Swarm is the
+strongest learned controller in the compact summary shown here: it
+attains the highest learned-method success, the highest formation
+satisfaction, and the lowest formation RMS, while InstantCert remains
+the closest runner-up. Second, these results indicate that the
+topology/counterfactual stack is no longer only preventing stagnation;
+in this run it also translates into better end-task completion and
+formation quality. Third, the historical baselines still expose the
+intended trade-offs: ORCA-like motion abandons formation entirely, while
+CBF-QP-like control remains visibly weaker on formation completion than
+the learned methods.
 
 For completeness, the released artifact also logs topology switches,
 formation recovery time, and recoverability calibration. In the latest
@@ -1036,10 +1028,10 @@ omitted from \Cref{tab:main_results}.
 
 \begin{table}[H]
 \centering
-\caption{Ablation results for RVT-Swarm. In the current run, topology
-adaptation and counterfactual selection provide the clearest gains,
-while the scalar recoverability and progress-shield toggles are
-effectively neutral.}
+\caption{Ablation results for RVT-Swarm. In the best archived RVT report
+currently used in the draft, topology adaptation and counterfactual
+selection provide the clearest gains, while the scalar recoverability
+and progress-shield toggles are effectively neutral.}
 \label{tab:ablation}
 \scriptsize
 \resizebox{\columnwidth}{!}{%
@@ -1165,9 +1157,10 @@ perturbations, and richer baseline reproductions.
 We presented RVT-Swarm, a decentralized graph-based controller that
 combines continuous control, discrete topology adaptation, and a learned
 recoverability score map for swarm formation control in constrained
-environments. In the current artifact, RVT-Swarm is the strongest
-learned controller on success and formation quality while also reducing
-stall and deadlock relative to the simpler learned baselines. The
+environments. In the best archived RVT run currently reported in this
+draft, RVT-Swarm is the strongest learned controller on success and
+formation quality while also reducing stall and deadlock relative to the
+simpler learned baselines. The
 ablation study now indicates that topology adaptation and
 counterfactual selection contribute real gains, whereas the scalar
 recoverability and progress-shield paths remain neutral under

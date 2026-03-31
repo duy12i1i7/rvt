@@ -75,9 +75,18 @@ def selected_topology_actions(
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
     losses = {}
     if model_name == "rvt_swarm" and cfg.method.use_topology and outputs.get("actions_by_topology") is not None:
-        # Supervise the full action bank so control quality does not collapse
-        # on rarely selected structural modes.
-        losses["action"] = F.mse_loss(outputs["actions_by_topology"], batch["action_target_all"])
+        keep_actions = outputs["actions_by_topology"][:, 0, :]
+        best_actions = selected_topology_actions(
+            outputs["actions_by_topology"],
+            batch["topology_target"],
+            batch["batch_index"],
+        )
+        losses["action"] = torch.stack(
+            [
+                F.mse_loss(keep_actions, batch["action_target_keep"]),
+                F.mse_loss(best_actions, batch["action_target_best"]),
+            ]
+        ).mean()
     else:
         losses["action"] = F.mse_loss(outputs["actions"], select_action_target(batch, model_name, cfg))
 
@@ -87,17 +96,11 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
         losses["recover"] = torch.tensor(0.0, device=batch["node_x"].device)
     if outputs["topology_logits"] is not None and model_name == "rvt_swarm" and cfg.method.use_topology:
         losses["aux"] = F.mse_loss(outputs["aux"], batch["aux_target"])
-        structural_topology = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
         if cfg.method.use_recoverability:
-            losses["topology"] = torch.stack(
-                [
-                    structural_topology,
-                    soft_topology_alignment_loss(
-                        outputs["topology_logits"],
-                        batch["recover_scores_target"],
-                    ),
-                ]
-            ).mean()
+            losses["topology"] = soft_topology_alignment_loss(
+                outputs["topology_logits"],
+                batch["recover_scores_target"],
+            )
             losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
             losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
             if outputs["uncertainty"] is not None:
@@ -106,7 +109,7 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
             else:
                 losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
         else:
-            losses["topology"] = structural_topology
+            losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
             losses["score_map"] = batch["node_x"].new_tensor(0.0)
             losses["rank"] = batch["node_x"].new_tensor(0.0)
             losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
