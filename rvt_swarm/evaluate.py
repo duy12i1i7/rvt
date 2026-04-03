@@ -133,6 +133,19 @@ def summarize(rows: List[Dict]) -> Dict[str, float]:
     return out
 
 
+def summarize_by_team_size(rows: List[Dict]) -> Dict[str, Dict[str, float]]:
+    """Aggregate benchmark rows by team size for clearer per-N reporting."""
+    grouped: Dict[int, List[Dict]] = {}
+    for row in rows:
+        grouped.setdefault(int(row["n_agents"]), []).append(row)
+
+    summary: Dict[str, Dict[str, float]] = {}
+    for n_agents in sorted(grouped):
+        summary[str(n_agents)] = summarize(grouped[n_agents])
+        summary[str(n_agents)]["n_agents"] = int(n_agents)
+    return summary
+
+
 def rollout_validation_summary(
     method: str,
     cfg: Config,

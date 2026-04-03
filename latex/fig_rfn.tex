@@ -1,130 +1,119 @@
 % ============================================================
-%  fig_rfn.tex  –  TikZ: Recoverability Field Network detail
-%  Include via \input{fig_rfn.tex} in main.tex
+%  fig_rfn.tex  –  Recoverability Field Network detail
+%  Simplified five-column layout for the paper
 % ============================================================
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
     >=Stealth,
-    block/.style={
-        rectangle, draw=black!70, fill=blue!6,
-        minimum height=0.75cm, minimum width=1.9cm,
-        font=\scriptsize, align=center, rounded corners=2pt,
-        thick
+    arr/.style={->, thick, black!65},
+    parr/.style={->, thick, purple!65!black},
+    earr/.style={->, thick, teal!60!black},
+    box/.style={
+        rectangle, rounded corners=2pt, draw=black!65, fill=blue!6,
+        minimum height=0.70cm, text width=2.0cm, align=center,
+        font=\scriptsize, thick
     },
     feat/.style={
-        rectangle, draw=black!50, fill=green!8,
-        minimum height=0.6cm, minimum width=1.6cm,
-        font=\scriptsize, align=center, rounded corners=1pt,
+        rectangle, rounded corners=2pt, draw=black!50, fill=green!8,
+        minimum height=0.58cm, text width=1.95cm, align=center,
+        font=\scriptsize
+    },
+    model/.style={
+        rectangle, rounded corners=2pt, draw=black!70, fill=green!12,
+        minimum height=0.90cm, text width=2.15cm, align=center,
+        font=\scriptsize, thick
     },
     head/.style={
-        rectangle, draw=black!70, fill=orange!12,
-        minimum height=0.7cm, minimum width=1.7cm,
-        font=\scriptsize, align=center, rounded corners=2pt,
-        thick
+        rectangle, rounded corners=2pt, draw=black!70, fill=orange!12,
+        minimum height=0.62cm, text width=1.85cm, align=center,
+        font=\scriptsize, thick
     },
-    score/.style={
-        rectangle, draw=purple!70, fill=purple!8,
-        minimum height=0.7cm, minimum width=1.7cm,
-        font=\scriptsize, align=center, rounded corners=2pt,
-        thick
+    recbox/.style={
+        rectangle, rounded corners=2pt, draw=purple!65!black, fill=purple!8,
+        minimum height=0.72cm, text width=2.35cm, align=center,
+        font=\scriptsize, thick
     },
-    arr/.style={->, thick, black!60},
-    garr/.style={->, thick, green!50!black},
-    parr/.style={->, thick, purple!60},
-    note/.style={font=\tiny\itshape, text=gray!70!black},
+    label/.style={font=\scriptsize\bfseries, text=black!75},
+    note/.style={font=\tiny\itshape, text=black!65}
 ]
 
-% ── Column 1: Node features ──
-\node[feat] (pos)   at (0, 0.0) {$\bfp_i, \bfv_i, \mathrm{head}_i$};
-\node[feat] (goal)  at (0,-0.9) {$\mathbf{g}_i, \hat{\mathbf{g}}_i$};
-\node[feat] (obs)   at (0,-1.8) {obs./corridor feat.};
-\node[feat] (lidar) at (0,-2.7) {LiDAR$_{36}$};
-\node[feat] (topo)  at (0,-3.6) {$\mathrm{onehot}(m_t)$};
+% ------------------------------------------------------------
+% Column titles
+% ------------------------------------------------------------
+\node[label] at (0.0,0.55)  {Derived Node Features};
+\node[label] at (3.2,0.55)  {Graph Construction};
+\node[label] at (6.4,0.55)  {Backbone};
+\node[label] at (9.7,0.55)  {Decoder Heads};
+\node[label] at (13.1,0.55) {Recoverability Output};
 
-\node[note, above=0.15cm of pos] {Derived node features};
+% ------------------------------------------------------------
+% Column 1: five stacked node-feature boxes
+% ------------------------------------------------------------
+\node[feat] (f1) at (0.0, 0.00) {$\bfp_i, \bfv_i,$ heading};
+\node[feat] (f2) at (0.0,-0.80) {goal vector\\and direction};
+\node[feat] (f3) at (0.0,-1.60) {obstacle / corridor\\features};
+\node[feat] (f4) at (0.0,-2.40) {normalized\\LiDAR$_{36}$};
+\node[feat] (f5) at (0.0,-3.20) {topology state\\$\mathrm{onehot}(m_t)$};
 
-% ── Brace ──
-\draw[decorate, decoration={brace, amplitude=4pt, mirror},
-      thick, black!50]
-    (-1.1, 0.3) -- (-1.1,-3.9)
-    node[midway, left=6pt, font=\scriptsize, align=right]
+\draw[decorate, decoration={brace, amplitude=4pt, mirror}, thick, black!45]
+    (-1.45,0.30) -- (-1.45,-3.50)
+    node[midway, left=7pt, font=\scriptsize, align=right]
     {$\mathbf{x}_i \in \mathbb{R}^{68}$};
 
-% ── Column 2: Graph construction ──
-\node[block, fill=cyan!8] (knn) at (3.2,-1.35)
-    {$k$-NN graph\\$\mathcal{G}_t$};
-\node[note, above=0.05cm of knn] {$k\!=\!6$ neighbours};
+% ------------------------------------------------------------
+% Column 2: graph + edge features
+% ------------------------------------------------------------
+\node[box, fill=cyan!10] (knn) at (3.2,-1.05) {$k$-NN interaction graph\\$\mathcal{G}_t$};
+\node[feat, fill=teal!8, text width=2.0cm] (edge) at (3.2,-3.05)
+    {edge features\\$\mathbf{e}_{ij}\in\mathbb{R}^{11}$};
+\node[note] at (3.2,-3.62) {relative position, velocity, distance, TTC, \ldots};
 
-\draw[arr] (pos.east)   -- ++(0.4,0) |- (knn.west);
-\draw[arr] (goal.east)  -- ++(0.25,0) |- (knn.west);
-\draw[arr] (obs.east)   -- ++(0.4,0) |- (knn.west);
-\draw[arr] (lidar.east) -- ++(0.25,0) |- (knn.west);
-\draw[arr] (topo.east)  -- ++(0.4,0) |- (knn.west);
+\draw[arr] (0.95,-1.60) -- (knn.west);
+\draw[earr, dashed] (knn.south) -- (edge.north);
 
-% ── Edge features label ──
-\node[feat, minimum width=1.4cm] (efeat) at (3.2,-3.3)
-    {$\mathbf{e}_{ij} \in \mathbb{R}^{11}$};
-\node[note, below=0.02cm of efeat]
-    {rel pos, vel, dist, TTC\ldots};
-\draw[arr, dashed] (knn.south) -- (efeat.north);
-
-% ── Column 3: Backbone ──
-\node[block, fill=green!10, minimum height=1.0cm,
-      minimum width=2.0cm]
-    (enc) at (6.2,-0.6) {Linear\\$68 \!\to\! 128$};
-\node[block, fill=green!10, minimum height=1.6cm,
-      minimum width=2.0cm]
-    (gat) at (6.2,-2.6) {Graph Attn\\Layer $\times 3$\\{\tiny attn + msg pass}};
+% ------------------------------------------------------------
+% Column 3: encoder + GAT backbone
+% ------------------------------------------------------------
+\node[model] (enc) at (6.4,-0.75) {Linear encoder\\$68 \rightarrow 128$};
+\node[model, minimum height=1.35cm] (gat) at (6.4,-2.55)
+    {Graph attention backbone\\Layer $\times 3$};
 
 \draw[arr] (knn.east) -- (enc.west);
 \draw[arr] (enc.south) -- (gat.north);
-\draw[garr] (efeat.east) -- ++(0.8,0) |- ([yshift=-0.2cm]gat.west);
+\draw[earr] (edge.east) -- ++(0.65,0) |- ([yshift=-0.15cm]gat.west);
 
-\node[note] at (6.2, 0.15) {Backbone ($\S$\,IV-C)};
+% ------------------------------------------------------------
+% Column 4: four decoder heads
+% ------------------------------------------------------------
+\node[head] (act)   at (9.7,-0.10) {Action head\\$\bfu_i \in \mathbb{R}^2$};
+\node[head] (score) at (9.7,-1.25) {Score head\\$\hat{\mathbf{r}} \in \mathbb{R}^5$};
+\node[head] (unc)   at (9.7,-2.40) {Uncertainty head\\$\hat{\bm{\sigma}} \in \mathbb{R}^5$};
+\node[head] (cons)  at (9.7,-3.55) {Consensus head\\$\bm{\ell} \in \mathbb{R}^5$};
 
-% ── Column 4: Heads (branch) ──
-% Action
-\node[head] (act) at (9.5, 0.0)
-    {Action head\\$\bfu_i \in \mathbb{R}^2$};
-% Score
-\node[score] (rscore) at (9.5,-1.5)
-    {Score head\\$\hat{\mathbf{r}} \in \mathbb{R}^5$};
-% Uncertainty
-\node[score] (unc) at (9.5,-2.7)
-    {Uncertainty\\$\hat{\bm{\sigma}} \in \mathbb{R}^5$};
-% Consensus
-\node[head] (cons) at (9.5,-4.0)
-    {Consensus\\$\bm{\ell} \in \mathbb{R}^5$};
+\draw[arr]  (gat.east) -- ++(0.55,0) |- (act.west);
+\draw[parr] (gat.east) -- ++(0.55,0) |- (score.west);
+\draw[parr] (gat.east) -- ++(0.55,0) |- (unc.west);
+\draw[arr]  (gat.east) -- ++(0.55,0) |- (cons.west);
 
-% grad scale annotation
-\node[note] at (7.9, -1.0) {\textcolor{red!60}{grad\_scale($1/(K+1)$)}};
+% ------------------------------------------------------------
+% Column 5: adjusted recoverability + scalar summary
+% ------------------------------------------------------------
+\node[recbox] (adj) at (13.1,-1.25)
+    {Adjusted recoverability\\$\tilde{r}_{\tau} = \hat{r}_{\tau} - \operatorname{std}(\hat{\mathbf{r}})\hat{\sigma}_{\tau}$};
+\node[recbox] (rhat) at (13.1,-3.05)
+    {Recoverability summary\\$\hat{R} = \max_{\tau}\tilde{r}_{\tau}$};
 
-\draw[arr] (gat.east) -- ++(0.5,0) |- (act.west);
-\draw[parr] (gat.east) -- ++(0.5,0) |- (rscore.west);
-\draw[parr] (gat.east) -- ++(0.5,0) |- (unc.west);
-\draw[parr] (gat.east) -- ++(0.5,0) |- (cons.west);
+\draw[parr] (score.east) -- (adj.west);
+\draw[parr] (unc.east) -- ++(0.45,0) |- (adj.south west);
+\draw[parr] (adj.south) -- (rhat.north);
 
-% ── Column 5: RFN output ──
-\node[score, fill=purple!15, minimum width=2.3cm]
-    (rfn_out) at (12.8,-1.5)
-    {$\tilde{r}_\tau = \hat{r}_\tau - \operatorname{std}(\hat{\mathbf{r}})\hat{\sigma}_{\tau}$};
-\node[note, above=0.02cm of rfn_out]
-    {Adjusted recoverability};
-\draw[parr] (rscore.east) -- (rfn_out.west);
-\draw[parr] (unc.east) -- ++(0.4,0) |- (rfn_out.south west);
+% ------------------------------------------------------------
+% RFN dashed enclosure around columns 3--5
+% ------------------------------------------------------------
+\draw[thick, dashed, purple!55!black, rounded corners=5pt]
+    (4.95,0.28) rectangle (14.65,-4.00);
+\node[font=\small\bfseries, text=purple!70!black, fill=white, inner sep=2pt]
+    at (9.80,0.28) {Recoverability Field Network (RFN)};
 
-% RFN margin
-\node[score, fill=red!10, minimum width=2.3cm]
-    (margin) at (12.8,-3.0)
-    {$\hat{R} = \max_\tau \tilde{r}_\tau$};
-\draw[parr] (rfn_out.south) -- (margin.north);
-
-\node[note, below=0.02cm of margin]
-    {$\hat{R} \ge 0$: recoverable};
-
-% ── Dashed box: RFN ──
-\draw[thick, dashed, purple!50, rounded corners=5pt]
-    (5.0, 0.8) rectangle (13.8, -4.6);
-\node[font=\small\bfseries, text=purple!70]
-    at (9.4, 0.65) {Recoverability Field Network (RFN)};
-
-\end{tikzpicture}
+\end{tikzpicture}%
+}

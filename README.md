@@ -30,6 +30,7 @@ Implemented and runnable:
 - training pipeline
 - evaluation / comparison / ablations
 - extra liveness metrics: stall rate, deadlock, topology switches
+- visualization outputs for both episode GIFs and per-step metrics plots
 
 Research approximations in this prototype:
 - `cbf_qp_like`, `orca_like`, and `centralized_mpc` are simplified research baselines, not exact reproductions of published packages.
@@ -45,6 +46,7 @@ pip install -r requirements.txt
 python run_experiments.py --mode train_all --device auto
 python run_experiments.py --mode eval_all --device auto
 python run_experiments.py --mode ablations --device auto
+python run_experiments.py --mode visualize --device auto
 ```
 
 ## Suggested paper framing

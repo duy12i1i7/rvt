@@ -104,16 +104,16 @@ P.~Mestres, C.~Nieto-Granda, and J.~Cort{\'e}s, ``Distributed safe navigation
 J.~Tordesillas and J.~P. How, ``Mader: Trajectory planner in multiagent and
   dynamic environments,'' \emph{IEEE Transactions on Robotics}, 2022.
 
-\bibitem{kondo2024robust_mader}
-K.~Kondo, R.~Figueroa, J.~Rached, and J.~Tordesillas, ``Robust {MADER}:
-  Decentralized multiagent trajectory planner robust to communication delay in
-  dynamic environments,'' \emph{IEEE Robotics and Automation Letters}, 2024.
-
 \bibitem{adajania2023amswarm}
 V.~K. Adajania, S.~Zhou, A.~K. Singh, and A.~P. Schoellig, ``{AMSwarm}: An
   alternating minimization approach for safe motion planning of quadrotor
   swarms in cluttered environments,'' in \emph{Proceedings of the IEEE
   International Conference on Robotics and Automation (ICRA)}, 2023.
+
+\bibitem{kondo2024robust_mader}
+K.~Kondo, R.~Figueroa, J.~Rached, and J.~Tordesillas, ``Robust {MADER}:
+  Decentralized multiagent trajectory planner robust to communication delay in
+  dynamic environments,'' \emph{IEEE Robotics and Automation Letters}, 2024.
 
 \bibitem{jiang2024belief_mpc_formation}
 C.~Jiang and R.~D'Andrea, ``Distributed sampling-based model predictive control

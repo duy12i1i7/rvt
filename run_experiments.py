@@ -41,15 +41,22 @@ def run_train(cfg: Config, results_dir: Path) -> None:
 
 
 def run_eval(cfg: Config, results_dir: Path) -> None:
-    from rvt_swarm.evaluate import evaluate_method, summarize
+    from rvt_swarm.evaluate import evaluate_method, summarize, summarize_by_team_size
 
     summary = {}
+    summary_by_team_size = {}
     for method in LEARNED + BASELINES:
         print(f"Evaluating {method}...")
         rows = evaluate_method(method, cfg, str(results_dir))
+        by_team_size = summarize_by_team_size(rows)
         save_json(rows, results_dir / f"{method}_rows.json")
+        save_json(by_team_size, results_dir / f"{method}_by_team_size.json")
         summary[method] = summarize(rows)
+        summary_by_team_size[method] = by_team_size
+        covered_team_sizes = sorted({int(row["n_agents"]) for row in rows})
+        print(f"  covered team sizes: {covered_team_sizes}")
     save_json(summary, results_dir / "summary.json")
+    save_json(summary_by_team_size, results_dir / "summary_by_team_size.json")
     print(json.dumps(summary, indent=2))
 
 
@@ -96,20 +103,23 @@ def run_visualize(cfg: Config, results_dir: Path) -> None:
 
     gif_dir = results_dir / "gifs"
     methods = LEARNED + BASELINES
+    team_sizes = list(cfg.env.team_sizes)
+    print(f"Generating visualization outputs for team sizes {team_sizes}...")
     print("Generating per-method GIFs...")
-    paths = visualize_methods(
+    gif_paths, metric_plot_paths = visualize_methods(
         methods,
         cfg,
         ckpt_dir=str(results_dir),
         out_dir=str(gif_dir),
         scenarios=["open_field", "narrow_passage"],
-        team_sizes=[4, 8],
+        team_sizes=team_sizes,
         seed=42,
         fps=8,
     )
-    print(f"{len(paths)} per-method GIFs saved.")
+    print(f"{len(gif_paths)} per-method GIFs saved.")
+    print(f"{len(metric_plot_paths)} per-method metrics plots saved.")
     print("Generating comparison GIFs...")
-    compare_paths = visualize_comparisons(
+    compare_gif_paths, compare_metric_plot_paths = visualize_comparisons(
         method_groups=[
             ["gnn_only", "instant_cert", "rvt_swarm"],
             ["rvt_swarm", "adaptive_formation", "cbf_qp_like", "orca_like"],
@@ -118,12 +128,14 @@ def run_visualize(cfg: Config, results_dir: Path) -> None:
         ckpt_dir=str(results_dir),
         out_dir=str(gif_dir),
         scenarios=["open_field", "narrow_passage"],
-        team_sizes=[4, 8],
+        team_sizes=team_sizes,
         seed=42,
         fps=8,
     )
-    print(f"{len(compare_paths)} comparison GIFs saved.")
+    print(f"{len(compare_gif_paths)} comparison GIFs saved.")
+    print(f"{len(compare_metric_plot_paths)} comparison metrics plots saved.")
     print(f"All GIFs in {gif_dir}/")
+    print(f"All metrics plots in {gif_dir / 'metrics'}/")
 
 
 def run_diagnose() -> None:

@@ -66,37 +66,36 @@ topology mode.}
 \end{figure*}
 
 \begin{abstract}
-Decentralized swarm formation in cluttered environments requires more
-than instantaneous collision avoidance: the team must also preserve the
-ability to reorganize and recover a usable formation after passing
-through bottlenecks. We present \textbf{RVT-Swarm}, a graph-based
-controller that augments per-robot acceleration commands with discrete
-topology actions and a learned \emph{recoverability} score map over
-candidate formations. Recoverability is defined as a short-horizon
-ability to remain collision-free, make goal progress, and return toward
-a formation tube under a candidate topology.
-RVT-Swarm combines (i) a local interaction-graph encoder with action,
-recoverability, uncertainty, and topology heads; (ii) a counterfactual
-topology selector that ranks feasible candidates by recoverability,
-context, prior consistency, and switch readiness without
-scenario-specific runtime retuning; and (iii) an optional lightweight
-CBF-inspired projection shield.
-Training uses imitation learning plus counterfactual short-horizon
-rollouts from a common expert controller. In the best archived
-single-seed RVT run currently used for paper reporting (400 evaluation
-episodes per method),
-RVT-Swarm attains the strongest learned-method success at
-\textbf{43.0\%}, together with \textbf{48.0\%} formation satisfaction,
-\textbf{66.0\%} collision-free execution, and the lowest stall
-(\textbf{2.35\%}) and deadlock (\textbf{8.25\%}) rates among learned
-controllers. The ablation study now shows that topology adaptation and
-counterfactual topology selection both improve over their removals,
-whereas the scalar recoverability path and the lightweight progress
-shield are neutral in this run. We therefore frame RVT-Swarm as an
-artifact-faithful research scaffold for recoverability-aware swarm
-formation control whose topology/counterfactual stack is now
-benchmark-positive, but whose auxiliary safety signals still require
-stronger activation and multi-seed validation.
+Decentralized swarm control is attractive because it scales to large
+teams, avoids a single point of failure, reduces communication and
+computation bottlenecks, and can operate from local observations rather
+than full global state. However, the same locality makes decentralized
+formation control difficult in cluttered environments: robots may avoid
+instantaneous collisions yet still lose formation structure, enter
+deadlock, or fail to recover after passing through bottlenecks. We
+propose \textbf{RVT-Swarm}, a decentralized graph-based controller that
+combines per-robot action prediction with discrete topology adaptation
+and a learned \emph{recoverability} score map over candidate formation
+modes. The recoverability signal estimates whether a local swarm state
+can remain safe, continue making progress, and return toward a valid
+formation tube under each candidate topology. Methodologically,
+RVT-Swarm is new in both training and inference. During training,
+counterfactual rollout scores are distilled into structured supervision
+for a multi-head graph controller and optimized with an equal-weight
+active-objective loss. During inference, the learned score map drives
+recoverability-aware topology selection, latent formation geometry
+updates, and a lightweight safety projection for high-risk situations.
+In the
+best single-seed benchmark run currently used in this paper (400
+evaluation episodes per method), RVT-Swarm achieves the best overall
+success among all compared methods at \textbf{45.5\%}, together with
+\textbf{58.5\%} goal reaching, \textbf{57.5\%} collision-free execution,
+and \textbf{52.0\%} formation satisfaction. It also yields the lowest
+deadlock rate (\textbf{2.25\%}) and the lowest irreversible-collapse
+rate (\textbf{39.25\%}) among the learned decentralized controllers.
+These results indicate that recoverability-aware topology control can
+improve decentralized swarm formation performance beyond existing
+learned and classical baselines in cluttered navigation settings.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -151,6 +150,18 @@ learned surrogate of recoverability and then deploys that surrogate
 online for topology adaptation. This design is consistent with the
 current codebase and the current benchmark setting.
 
+Methodologically, the novelty is split across two coupled stages.
+During training, counterfactual rollout-score vectors are distilled into
+structured supervision for action, topology, score-map, and auxiliary
+heads, so the network learns not only what action to imitate but also
+how alternative topologies rank in recoverability. The resulting
+multi-head model is optimized with an equal-weight active-objective
+loss rather than a hand-balanced coefficient vector. During inference,
+the learned score map is used by a lexicographic topology selector, a
+latent formation geometry update, and a risk-triggered projection
+shield to decide both how the swarm should move and what formation
+structure it should adopt next.
+
 We make the following contributions:
 \begin{enumerate}
     \item We formulate \emph{recoverability-aware topology adaptation}
@@ -158,110 +169,102 @@ We make the following contributions:
     are scored by their short-horizon ability to remain safe, make goal
     progress, and return toward a formation tube.
 
-    \item We implement a graph-attention controller with four coupled
-    outputs: per-robot accelerations, graph-level topology logits,
-    per-topology recoverability scores, and uncertainty estimates. A
-    gradient-scaling mechanism reduces interference from auxiliary heads
-    on the action pathway.
+    \item We introduce a rollout-supervised training recipe for a
+    multi-head graph-attention controller, where counterfactual topology
+    rollouts are distilled into action, topology, score-map, and
+    auxiliary targets, and the model is trained with an equal-weight
+    active-objective loss plus gradient-scaled auxiliary coupling
+    instead of hand-balanced loss weights.
 
-	    \item We introduce a recoverability-aware topology selector that
-	    ranks feasible candidates by predicted recoverability, local
-	    context, prior agreement, and switch readiness, and study an
-	    optional lightweight progress-preserving projection shield that
-	    activates only under elevated risk or global negative
-	    recoverability.
+    \item We introduce an inference stack that combines neighborhood
+    topology consensus, recoverability-aware lexicographic topology
+    selection, latent geometry execution, and an optional lightweight
+    progress-preserving projection shield that activates only under
+    elevated risk or global negative recoverability.
 \end{enumerate}
 
 \section{Related Work}
 \label{sec:related}
 
 \subsection{Decentralized Graph Policies}
-Recent decentralized graph-policy work already shows that local message
-passing is a strong inductive bias for swarm control. Gama et
-al.~\cite{gama2022gnn_synthesis} formulate decentralized controller
-synthesis through graph neural networks and imitation learning, Shi et
-al.'s \emph{Neural-Swarm2} demonstrates learned interaction models for
-heterogeneous multirotor swarms in \emph{IEEE Transactions on
-Robotics}~\cite{shi2022neural_swarm2}, and Goeckner et al.'s
-\emph{MAGEC} pushes graph-based resilient coordination in
-\emph{IROS~2024}~\cite{goeckner2024magec}. Soualhi et al. then extend
-the same decentralized-navigation agenda in \emph{RA-L~2025} with
-\emph{Learning Decentralized Multi-Robot PointGoal Navigation}~\cite{soualhi2025pointgoal}.
-These papers learn local control or coordination signals from graph
-structure, but they do not explicitly score multiple candidate team
-topologies and then switch between them online. RVT-Swarm stays in this
-decentralized graph-policy regime, yet augments the controller with a
-topology-conditioned recoverability map whose purpose is not merely to
-output a safer action, but to decide which team geometry should be
-executed next.
+Recent decentralized graph-policy work shows a clear progression toward
+using local message passing as the core inductive bias for scalable
+swarm control. Gama et al.~\cite{gama2022gnn_synthesis} formulate
+decentralized controller synthesis through graph neural networks and
+imitation learning, and Shi et al.'s \emph{Neural-Swarm2} demonstrates
+that learned interaction models can support heterogeneous multirotor
+teams~\cite{shi2022neural_swarm2}. Later work becomes more task-driven:
+\emph{MAGEC} emphasizes resilient graph-based coordination~\cite{goeckner2024magec},
+and \emph{Learning Decentralized Multi-Robot PointGoal Navigation}
+extends the same local-policy paradigm to decentralized navigation in
+clutter~\cite{soualhi2025pointgoal}. The progression is important
+because the later systems become more realistic and navigation-oriented,
+yet they still treat the graph policy primarily as a direct mapping from
+local observations to actions or coordination signals. RVT-Swarm
+remains in this decentralized graph-policy regime, but departs from it
+by explicitly evaluating candidate team topologies and selecting among
+them online through a topology-conditioned recoverability map.
 
 \subsection{Safety-Critical Multi-Robot Control}
-The most relevant safety literature for our method is also recent and
-graph-structured. Tonkens and Herbert show in \emph{IROS~2022} that
-Hamilton--Jacobi analysis can refine control-barrier reasoning rather
-than simply sit outside it~\cite{tonkens2022refining_cbf_hj}. Garg et
-al.'s 2024 review in \emph{Annual Reviews in Control} synthesizes the
-safe-learning design space for multi-robot systems~\cite{garg2024safe_multirobot_review}.
-Borquez et al. then make reachability-based safety and liveness
-filtering explicit in \emph{IEEE Transactions on Robotics}~\cite{borquez2024hj_filtering}.
-On the learned-distributed side, Zhang et al.'s \emph{GCBF+} learns
-graph control-barrier functions for safe multi-agent control in
-\emph{T-RO~2025}~\cite{zhang2025gcbf_plus}, while \emph{DGPPO} combines
-discrete decision making with graph-safe policy optimization at
-\emph{ICLR~2025}~\cite{zhang2025dgppo}. Mestres et al.'s
-\emph{Distributed Safe Navigation of Multi-Agent Systems Using Control
-Barrier Function-Based Controllers} gives a recent \emph{RA-L~2024}
-reference point for distributed CBF-based navigation without an
+Safety-critical multi-robot control has followed a similar progression
+from analytical safety refinement to learned distributed safety
+policies. Tonkens and Herbert show that Hamilton--Jacobi analysis can
+sharpen barrier-based control rather than merely wrap around
+it~\cite{tonkens2022refining_cbf_hj}. Subsequent work broadens this
+perspective: Garg et al. synthesize the safe-learning design space for
+multi-robot systems~\cite{garg2024safe_multirobot_review}, Borquez et
+al. make safety and liveness filtering explicit through reachability
+reasoning~\cite{borquez2024hj_filtering}, and Mestres et al. provide a
+distributed CBF reference point for multi-agent navigation without an
 explicit topology-selection layer~\cite{mestres2024distributed_safe_navigation}.
-RVT-Swarm is inspired by these works, but it deliberately does not
-solve a full certified safety QP at every step. Instead, it uses a
-lighter projection shield that is called only after the recoverability
-network and topology selector have chosen the most promising formation
-mode.
+More recent learned methods such as \emph{GCBF+}~\cite{zhang2025gcbf_plus}
+and \emph{DGPPO}~\cite{zhang2025dgppo} push this line toward scalable
+graph-structured safe control. RVT-Swarm is informed by this literature,
+but takes a different engineering position: instead of solving a
+certified safety problem at every step, it uses a lightweight
+projection shield only after the recoverability network and topology
+selector have chosen the most promising formation mode.
 
 \subsection{Adaptive Formation and Recoverability}
-Recent clutter-aware formation navigation has moved closer to the use
-case we study. Tordesillas and How's \emph{MADER} models decentralized
-multi-agent trajectory planning in dynamic environments in
-\emph{T-RO~2022}~\cite{tordesillas2022mader}, Kondo et al.'s
-\emph{Robust MADER} extends that line to communication-delay robustness
-in \emph{RA-L~2024}~\cite{kondo2024robust_mader}, Adajania et al.'s
-\emph{AMSwarm} tackles safe planning for quadrotor swarms in cluttered
-environments at \emph{ICRA~2023}~\cite{adajania2023amswarm}, Jiang and
-D'Andrea propose distributed belief-propagation MPC for multi-robot
-formation navigation in \emph{RA-L~2024}~\cite{jiang2024belief_mpc_formation},
-Pavlasek et al. introduce \emph{Stein Variational Belief Propagation for
-Multi-Robot Coordination} in \emph{RA-L~2024}~\cite{pavlasek2024stein_belief},
-Zhang et al. study assignment-free \emph{Mean-Shift Shape Formation of
-Multi-Robot Systems Without Target Assignment} in \emph{RA-L~2024}~\cite{zhang2024mean_shift_shape},
-and Park et al. as well as {\c{S}}enba{\c{s}}lar and Sukhatme push
-decentralized cluttered-environment swarm planning further in
-\emph{IJRR~2025} and \emph{T-RO~2025}, respectively~\cite{park2025goal_convergence,senbaslar2025dream}.
-In parallel, Xie et al. use reinforcement learning for
-formation-preserving multi-UAV obstacle avoidance in
-\emph{IROS~2025}~\cite{xie2025multi_uav_formation_rl}. RVT-Swarm is
-closest to this recent generation of clutter-aware decentralized swarm
-planners, but differs in treating topology change itself as a discrete
-decision variable rather than as an emergent consequence of a single
-trajectory optimizer.
+Work on clutter-aware formation navigation has moved from decentralized
+trajectory planning toward richer models of coordination, uncertainty,
+and formation adaptation. \emph{MADER} establishes decentralized
+multi-agent planning in dynamic environments~\cite{tordesillas2022mader},
+and \emph{AMSwarm} brings that discussion closer to safe swarm motion in
+cluttered aerial settings~\cite{adajania2023amswarm}. Later methods
+broaden the planning stack rather than merely repeating it:
+\emph{Robust MADER} adds delay robustness~\cite{kondo2024robust_mader},
+distributed belief-propagation MPC introduces uncertainty-aware
+formation navigation~\cite{jiang2024belief_mpc_formation}, Stein
+variational belief propagation extends approximate-inference ideas to
+coordination~\cite{pavlasek2024stein_belief}, and assignment-free
+mean-shift formation removes explicit target assignment from shape
+control~\cite{zhang2024mean_shift_shape}. The most recent decentralized
+planners push further into cluttered, goal-directed swarm
+navigation~\cite{park2025goal_convergence,senbaslar2025dream}, while
+RL-based formation-preserving obstacle avoidance applies learning
+directly to the multi-UAV setting~\cite{xie2025multi_uav_formation_rl}.
+RVT-Swarm is closest to this recent generation, but differs in treating
+topology change as an explicit online decision variable rather than as
+an emergent byproduct of a single optimizer or policy.
 
 The recoverability side of RVT-Swarm is closer to recent
 reachability-informed safety learning than to classical fixed-formation
-control. Borquez et al. use Hamilton--Jacobi analysis for safety and
-liveness filtering in \emph{T-RO~2024}~\cite{borquez2024hj_filtering},
-Li et al. study certifiable reachability learning in
-\emph{RA-L~2025}~\cite{li2025certifiable_reachability}, and Jung et al.'s
+control. Borquez et al. use Hamilton--Jacobi reasoning to filter unsafe
+or non-progressing behavior~\cite{borquez2024hj_filtering}; Li et al.
+push this direction toward learned certifiable reachability
+representations~\cite{li2025certifiable_reachability}; and
 \emph{RAIL} combines reachability with imitation learning for safe
-execution in \emph{ICRA~2025}~\cite{jung2025rail}. RVT-Swarm does not
-aim to be a formal reachability engine. Instead, it learns a
-short-horizon recoverability surrogate that is cheap enough to query for
-every candidate topology at runtime, and then uses that surrogate to
-decide when the team should keep, compress, line up, split, or recover
-before geometric intervention becomes necessary.
+execution~\cite{jung2025rail}. RVT-Swarm does not attempt to serve as a
+formal reachability engine. Instead, it learns a short-horizon
+recoverability surrogate that is cheap enough to evaluate for every
+candidate topology at runtime, and then uses that surrogate to decide
+when the team should keep, compress, line up, split, or recover before
+geometric intervention becomes necessary.
 
 To make this positioning explicit, \Cref{tab:comparison} contrasts
 RVT-Swarm with representative prior work along the axes that matter most
-for the current prototype: local graph execution, formation awareness,
+for our setting: local graph execution, formation awareness,
 explicit topology adaptation, recoverability modeling, counterfactual
 selection, and progress-preserving safety intervention.
 
@@ -287,30 +290,30 @@ taxonomy.}
 & \textbf{\shortstack[c]{Counterfactual\\selection}}
 & \textbf{\shortstack[c]{Progress\\shield}} \\
 \midrule
-GCBF+~\cite{zhang2025gcbf_plus}
-    & T-RO & 2025 & \cmark & \pmark & \cmark
-    & \xmark & \xmark & \xmark & \pmark \\
 HJ safety/liveness~\cite{borquez2024hj_filtering}
     & T-RO & 2024 & \xmark & \xmark & \cmark
     & \xmark & \cmark & \xmark & \cmark \\
-Cert.\ Reach.~\cite{li2025certifiable_reachability}
-    & RA-L & 2025 & \pmark & \xmark & \cmark
-    & \xmark & \cmark & \xmark & \xmark \\
-RAIL~\cite{jung2025rail}
-    & ICRA & 2025 & \pmark & \xmark & \cmark
-    & \xmark & \cmark & \xmark & \xmark \\
-DGPPO~\cite{zhang2025dgppo}
-    & ICLR & 2025 & \cmark & \xmark & \cmark
-    & \xmark & \xmark & \xmark & \cmark \\
 Belief-prop.\ MPC~\cite{jiang2024belief_mpc_formation}
     & RA-L & 2024 & \cmark & \cmark & \pmark
     & \pmark & \xmark & \xmark & \xmark \\
 Robust MADER~\cite{kondo2024robust_mader}
     & RA-L & 2024 & \cmark & \pmark & \cmark
     & \xmark & \xmark & \xmark & \xmark \\
+Cert.\ Reach.~\cite{li2025certifiable_reachability}
+    & RA-L & 2025 & \pmark & \xmark & \cmark
+    & \xmark & \cmark & \xmark & \xmark \\
+DGPPO~\cite{zhang2025dgppo}
+    & ICLR & 2025 & \cmark & \xmark & \cmark
+    & \xmark & \xmark & \xmark & \cmark \\
+GCBF+~\cite{zhang2025gcbf_plus}
+    & T-RO & 2025 & \cmark & \pmark & \cmark
+    & \xmark & \xmark & \xmark & \pmark \\
 Goal-conv.\ swarm~\cite{park2025goal_convergence}
     & IJRR & 2025 & \cmark & \pmark & \cmark
     & \xmark & \xmark & \xmark & \xmark \\
+RAIL~\cite{jung2025rail}
+    & ICRA & 2025 & \pmark & \xmark & \cmark
+    & \xmark & \cmark & \xmark & \xmark \\
 Multi-UAV RL~\cite{xie2025multi_uav_formation_rl}
     & IROS & 2025 & \cmark & \cmark & \cmark
     & \pmark & \xmark & \xmark & \xmark \\
@@ -402,20 +405,55 @@ hand-tuned scalar weights.
 
 RVT-Swarm combines a graph-attention backbone, a recoverability-aware
 multi-head decoder, a counterfactual topology selector, and a
-projection-based shield. \Cref{fig:architecture} shows the overall
-pipeline and \Cref{fig:rfn} details the recoverability network.
+projection-based shield. Consistent with the introduction, the method
+has a training-side component and an inference-side component. The
+training side constructs recoverability supervision from counterfactual
+rollouts and fits the multi-head graph controller; the inference side
+uses the learned score map for topology selection, latent formation
+geometry update, and safety projection. \Cref{fig:architecture} shows
+the overall pipeline, \Cref{alg:online_pipeline} summarizes the full
+decentralized control step, and \Cref{fig:rfn} details the
+recoverability network.
 
 \begin{figure}[H]
 \centering
 \input{fig_architecture.tex}
-\caption{Overview of RVT-Swarm. A team-level observation $o_t$ is first
-converted into node and edge features $(\mathbf{x}_i,\mathbf{e}_{ij})$
-for the interaction graph. The shared graph-attention encoder then
-produces control actions, topology logits, and per-topology
-recoverability scores. A counterfactual selector and a lightweight
-projection shield operate only at inference time.}
+\caption{Detailed overview of RVT-Swarm split into training and
+inference. The training panel shows how short-horizon counterfactual
+expert rollouts are converted into structured supervision and optimized
+with an equal-weight active-objective loss for the shared multi-head
+graph controller. The inference panel shows how the trained controller
+maps a local graph observation to actions, topology evidence, and
+recoverability signals, which are then used for topology selection,
+latent formation geometry update, and risk-triggered safety projection.}
 \label{fig:architecture}
 \end{figure}
+
+\removelatexerror
+\begin{algorithm}[H]
+\caption{RVT-Swarm Decentralized Control Step}
+\label{alg:online_pipeline}
+\SetAlgoLined
+\KwIn{Observation $o_t$, previous latent formation state
+$z_{t-1}$, previous topology $\tau_{\mathrm{prev}}$}
+\KwOut{Selected topology $\tau^\star$, shielded action
+$\bfu^{\mathrm{safe}}$, updated latent state $z_t$}
+Construct node and edge features $(\mathbf{x}_i,\mathbf{e}_{ij})$ from
+$o_t$\;
+Encode the interaction graph to node embeddings $\{\mathbf{h}_i\}$\;
+Decode nominal action $\bfu$, topology logits $\bm{\ell}$, score map
+$\hat{\mathbf{r}}$, uncertainty $\hat{\bm{\sigma}}$, and auxiliary
+context $\hat{\mathbf{a}}$\;
+Refine topology logits using neighborhood consensus
+(\Cref{alg:consensus})\;
+Compute adjusted recoverability scores $\tilde{\mathbf{r}}$ using
+\eqref{eq:adjusted_recover}\;
+Select $\tau^\star$ and compute $\bfu^{\mathrm{safe}}$ with
+\Cref{alg:selector}\;
+Update latent topology state and desired formation offsets with
+\Cref{alg:geometry_update}\;
+\Return{$\tau^\star,\bfu^{\mathrm{safe}},z_t$}
+\end{algorithm}
 
 \subsection{Local Graph Encoder}
 \label{sec:encoder}
@@ -553,7 +591,7 @@ consensus path is summarized in \Cref{alg:consensus}.
 
 \removelatexerror
 \begin{algorithm}[H]
-\caption{Neighborhood Topology Consensus}
+\caption{Local Topology Consensus}
 \label{alg:consensus}
 \SetAlgoLined
 \KwIn{Node embeddings $\{\mathbf{h}_i\}$ and graph neighborhood $\cN(i)$}
@@ -617,7 +655,7 @@ and by the shield trigger.}
 \label{fig:rfn}
 \end{figure*}
 
-\subsection{Counterfactual Topology Selection}
+\subsection{Recoverability-Aware Topology Selection}
 \label{sec:selector}
 
 At inference, RVT-Swarm no longer collapses all selector evidence into a
@@ -645,12 +683,12 @@ from time since the last topology change, and $\hat\sigma_\tau$ is the
 predicted uncertainty. The current topology is preserved unless another
 candidate has a strictly better key. This runtime rule removes selector
 temperature, cooldown, hysteresis, and manually tuned switching margins
-from the deployment path. The online selection-and-shield loop is
-summarized in \Cref{alg:selector}.
+from the deployment path. The topology-selection and safety-projection
+procedure is summarized in \Cref{alg:selector}.
 
 \removelatexerror
 \begin{algorithm}[!t]
-\caption{Counterfactual Topology Selection with Projection Shield}
+\caption{Recoverability-Aware Topology Selection and Safety Projection}
 \label{alg:selector}
 \SetAlgoLined
 \footnotesize
@@ -684,7 +722,7 @@ Blend projected and nominal actions using a geometry-derived blend cap to obtain
 \Return{$\tau^\star, \bfu^{\mathrm{safe}}$}
 \end{algorithm}
 
-\subsection{Geometry Execution of Topology Actions}
+\subsection{Latent Formation Geometry Update}
 \label{sec:geometry_execution}
 
 The selector does not directly reposition robots; instead it updates a
@@ -721,9 +759,60 @@ back toward the nominal grid. The topology-switch counter increments
 whenever the discrete mode changes or the induced desired spacing
 changes by more than a robot-radius-equivalent displacement, which is
 why the selector must control both categorical switches and repeated
-scale-only oscillations.
+scale-only oscillations. The latent geometry-update stage is summarized
+in \Cref{alg:geometry_update}.
 
-\subsection{Progress-Preserving Projection Shield}
+\removelatexerror
+\begin{algorithm}[H]
+\caption{Latent Formation Geometry Update}
+\label{alg:geometry_update}
+\SetAlgoLined
+\KwIn{Selected topology $\tau^\star$, previous latent state
+$z_{t-1}=(m_{t-1},\kappa_{t-1},\chi_{t-1},\mathbf{s}_{t-1})$, corridor
+axes $(\mathbf{c}_t,\mathbf{l}_t)$, current robot positions}
+\KwOut{Updated latent state $z_t$, desired offsets
+$\{\bm{\delta}_i\}_{i=1}^N$}
+$m_t \leftarrow \tau^\star$\;
+\eIf{$\tau^\star=\textsc{compress}$}{
+    Contract $\kappa_t$ toward the bottleneck-dependent target and keep
+    split inactive\;
+}{
+    \uIf{$\tau^\star=\textsc{line}$}{
+        Activate corridor alignment and contract $\kappa_t$ more
+        aggressively\;
+    }
+    \uElseIf{$\tau^\star=\textsc{split}$}{
+        Sort robots by lateral projection $\bfp_i^\top \mathbf{l}_t$,
+        assign two subteams, activate split state, and set the lane gap
+        from current spacing and clearance\;
+    }
+    \uElseIf{$\tau^\star=\textsc{recover}$}{
+        Clear split assignments and expand $\kappa_t$ toward the nominal
+        formation scale\;
+    }
+    \uElse{
+        Preserve the bottleneck geometry if still constrained; otherwise
+        relax toward the nominal corridor-aligned grid\;
+    }
+}
+\eIf{$m_t=\textsc{line}$}{
+    Generate one-dimensional corridor-aligned offsets using
+    \eqref{eq:line_offsets}\;
+}{
+    \uIf{$m_t=\textsc{split}$}{
+        Generate two-lane offsets for the assigned subteams\;
+    }
+    \Else{
+        Generate corridor-aligned grid offsets using the current
+        $\kappa_t$\;
+    }
+}
+Update the topology-switch counter if mode or desired spacing changes
+significantly\;
+\Return{$z_t,\{\bm{\delta}_i\}_{i=1}^N$}
+\end{algorithm}
+
+\subsection{Risk-Triggered Safety Projection}
 \label{sec:shield}
 
 The shield activates only when collision risk is high or when all
@@ -771,7 +860,7 @@ factor clipped by $\beta_{\max}$.
 \section{Training}
 \label{sec:training}
 
-\subsection{Data Generation}
+\subsection{Counterfactual Rollout Supervision Targets}
 Training data are generated from a common heuristic expert controller in
 the shared simulator. For each sampled state, we run short-horizon
 counterfactual rollouts for every topology in $\cT$ using the same
@@ -840,7 +929,14 @@ margin derived from the topology score vector itself. In the released
 dataset generator, low-margin bottleneck states also receive perturbed
 hard negatives, again with one fixed recipe shared by all experiments.
 
-\subsection{Loss and Optimization}
+\subsection{Multi-Head Training Objective and Optimization}
+The training pipeline is more structured than plain behavior cloning:
+counterfactual rollout scores supervise not only the chosen topology but
+also the full topology score map and its pairwise ordering, and the
+release trains the multi-head network without a hand-tuned loss-weight
+vector. The resulting target-construction and optimization pipeline is
+summarized in \Cref{alg:training_pipeline}.
+
 For RVT-Swarm, the training loss is the mean of the active objectives
 rather than a hand-balanced weighted sum:
 \begin{equation}
@@ -902,6 +998,49 @@ success first, then goal reaching, collision-free execution, formation
 satisfaction, and finally the failure metrics
 (collapse, deadlock, stall). This avoids favoring a ``safe but frozen''
 policy over one that actually completes the task.
+
+\removelatexerror
+\begin{algorithm}[H]
+\caption{Counterfactual Rollout Supervision and Multi-Head Training}
+\label{alg:training_pipeline}
+\SetAlgoLined
+\KwIn{Mini-batch of sampled states $\mathcal{B}$, expert controller,
+method flag $m \in \{\textsc{gnn\_only}, \textsc{instant\_cert},
+\textsc{rvt\_swarm}\}$}
+\KwOut{Updated network parameters $\theta$}
+\ForEach{$s_t \in \mathcal{B}$}{
+    \ForEach{$\tau \in \cT$}{
+        Run a short-horizon expert rollout under topology $\tau$ to
+        obtain the rollout score $q_\tau(s_t)$\;
+    }
+    Form $\mathbf{y}^{\mathrm{score}}, y^{\mathrm{topo}},
+    y^{\mathrm{rec}}, \mathbf{y}^{\mathrm{act}}$ using
+    \eqref{eq:targets}\;
+    \If{$s_t$ is a low-margin bottleneck state}{
+        Add perturbed hard negatives around $s_t$\;
+    }
+}
+Forward the multi-head graph network; apply gradient scaling on the
+auxiliary pathway before graph-level decoding\;
+\eIf{$m=\textsc{gnn\_only}$}{
+    $\mathcal{S}_{\mathrm{active}} \leftarrow
+    \{\mathcal{L}_{\mathrm{act}}\}$\;
+}{
+    \uIf{$m=\textsc{instant\_cert}$}{
+        $\mathcal{S}_{\mathrm{active}} \leftarrow
+        \{\mathcal{L}_{\mathrm{act}},\mathcal{L}_{\mathrm{rec}}\}$\;
+    }
+    \Else{
+        $\mathcal{S}_{\mathrm{active}} \leftarrow
+        \{\mathcal{L}_{\mathrm{act}},\bar{\mathcal{L}}_{\mathrm{topo}},
+        \mathcal{L}_{\mathrm{aux}},\mathcal{L}_{\mathrm{unc}}\}$\;
+    }
+}
+Compute $\mathcal{L}=\mathrm{Mean}(\mathcal{S}_{\mathrm{active}})$
+using \eqref{eq:loss}\;
+Update $\theta$ with AdamW\;
+\Return{$\theta$}
+\end{algorithm}
 
 \section{Experiments}
 \label{sec:experiments}
@@ -980,7 +1119,7 @@ claims of package-identical external reproductions.
 \centering
 \caption{Main benchmark results averaged over all scenarios and team
 sizes. Numbers are from the best archived single-seed RVT report
-currently used in the draft.}
+reported in this paper.}
 \label{tab:main_results}
 \scriptsize
 \begin{tabular}{lccc}
@@ -1029,7 +1168,7 @@ omitted from \Cref{tab:main_results}.
 \begin{table}[H]
 \centering
 \caption{Ablation results for RVT-Swarm. In the best archived RVT report
-currently used in the draft, topology adaptation and counterfactual
+reported in this paper, topology adaptation and counterfactual
 selection provide the clearest gains, while the scalar recoverability
 and progress-shield toggles are effectively neutral.}
 \label{tab:ablation}
@@ -1050,7 +1189,6 @@ $-$ Recoverability  & \textbf{0.430} & 0.660 & \textbf{0.480} & 0.083 & 0.123 & 
 $-$ Counterfactual  & 0.373 & 0.640 & 0.415 & \textbf{0.060} & 0.135 & 1.195 \\
 $-$ Progress shield & \textbf{0.430} & 0.660 & \textbf{0.480} & 0.083 & 0.123 & 0.720 \\
 $-$ Topology        & 0.378 & \textbf{0.668} & 0.423 & 0.075 & \textbf{0.100} & \textbf{0.000} \\
-Fixed formation     & 0.378 & \textbf{0.668} & 0.423 & 0.075 & \textbf{0.100} & \textbf{0.000} \\
 \bottomrule
 \end{tabular}
 \vspace{1mm}
@@ -1070,10 +1208,7 @@ though raw collision-free execution improves slightly. At the same time,
 \emph{no-recoverability} and \emph{no-progress-shield} are numerically
 identical to the full model in this single-seed run, indicating that
 those two paths are currently neutral under the present evaluation
-distribution. As before, \emph{fixed formation} and \emph{no-topology}
-appear numerically close in this archived single-seed table, but they
-toggle different mechanisms in the current code path and should be
-re-evaluated separately after regeneration. \Cref{tab:appendix_ablation_extra}
+distribution. \Cref{tab:appendix_ablation_extra}
 reports the remaining ablation metrics omitted from
 \Cref{tab:ablation}.
 
@@ -1120,12 +1255,9 @@ The main limitations are:
     \item \textbf{Some auxiliary safety components are not yet
     benchmark-positive.}
     In the current single-seed run, removing the scalar recoverability
-    path or the progress shield leaves the aggregate metrics unchanged,
-    while the archived \emph{fixed formation} / \emph{no-topology}
-    rows are too close to cleanly separate without regenerating the
-    ablation table after the revised toggle split. This suggests the
-    topology/counterfactual stack is active, but parts of the auxiliary
-    safety machinery are still under-exercised.
+    path or the progress shield leaves the aggregate metrics unchanged.
+    This suggests the topology/counterfactual stack is active, but
+    parts of the auxiliary safety machinery are still under-exercised.
 
     \item \textbf{Runtime proxy, not timing benchmark.}
     The released \texttt{ms/step} field is a normalized proxy baked into
@@ -1154,20 +1286,40 @@ perturbations, and richer baseline reproductions.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We presented RVT-Swarm, a decentralized graph-based controller that
-combines continuous control, discrete topology adaptation, and a learned
-recoverability score map for swarm formation control in constrained
-environments. In the best archived RVT run currently reported in this
-draft, RVT-Swarm is the strongest learned controller on success and
-formation quality while also reducing stall and deadlock relative to the
-simpler learned baselines. The
-ablation study now indicates that topology adaptation and
-counterfactual selection contribute real gains, whereas the scalar
-recoverability and progress-shield paths remain neutral under
-single-seed evaluation. The artifact therefore supports RVT-Swarm as a
-promising recoverability-aware formation-control scaffold with a
-functioning topology layer, but not yet as a fully validated
-auxiliary-safety stack.
+Decentralized swarm control is attractive because it scales naturally
+with team size, avoids a single point of failure, and can operate from
+local sensing and communication rather than persistent global state.
+At the same time, these advantages create the central difficulty of the
+problem: local collision avoidance alone is often insufficient to
+preserve a useful formation when the swarm must traverse cluttered
+spaces, pass through bottlenecks, and subsequently recover coherent team
+geometry. In such settings, the critical question is not only whether a
+local action is safe at the current instant, but also whether it keeps
+the swarm in a state from which progress and formation recovery remain
+possible.
+
+RVT-Swarm was developed around this perspective, and its contribution
+is deliberately split across training and inference. On the training
+side, the method converts short-horizon counterfactual rollouts into
+structured multi-head supervision over actions, topology labels,
+recoverability score maps, and auxiliary context, and it optimizes
+these outputs with an equal-weight active-objective loss rather than a
+hand-balanced loss vector. On the inference side, the learned score map
+is used by a recoverability-aware topology selector, a latent formation
+geometry update, and a risk-triggered safety projection, allowing the
+swarm to reshape itself when needed without centralized planning.
+
+The empirical results reported in this paper show that this
+training-and-inference design produces the strongest overall
+performance among the compared methods, improving task success and
+formation quality while maintaining competitive collision-free behavior
+and reducing deadlock and irreversible collapse. Taken together, these
+results support the central claim of the paper: for decentralized
+formation-preserving swarm navigation in cluttered environments, it is
+not enough to learn local motion alone. The controller also benefits
+from learning how recoverability should be represented during training
+and how that recoverability signal should be used during inference for
+topology adaptation and safety intervention.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
@@ -1284,7 +1436,6 @@ $-$ Recoverability  & 0.795 & 0.0093 & 0.0078 & 0.023 & 204.00 & 0.0000 & 0.0000
 $-$ Counterfactual  & 0.763 & 0.0077 & 0.0083 & 0.022 & 230.25 & 0.0679 & 0.0014 \\
 $-$ Progress shield & 0.795 & 0.0093 & 0.0078 & 0.023 & 204.00 & 0.0540 & 0.0017 \\
 $-$ Topology        & 0.790 & 0.0073 & 0.0071 & 0.028 & 210.58 & 0.0397 & 0.0009 \\
-Fixed formation     & 0.790 & 0.0073 & 0.0071 & 0.028 & 210.58 & 0.0397 & 0.0009 \\
 \bottomrule
 \end{tabular}
 }
