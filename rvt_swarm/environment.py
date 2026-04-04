@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from typing import Dict, Tuple
 
@@ -340,65 +341,71 @@ class SwarmFormationEnv:
         """
         n = self.n_agents
         n_rays = self.ec.lidar_num_rays
-        max_r = self.ec.lidar_range
-        half_fov = self.ec.lidar_fov / 2.0
-        pos = self.state.positions
-        vel = self.state.velocities
-        obs = self.state.obstacles
-        r_obs = self.ec.obstacle_radius
-        r_robot = self.ec.robot_radius
+        max_r = float(self.ec.lidar_range)
+        half_fov = float(self.ec.lidar_fov) / 2.0
+        pos = np.ascontiguousarray(self.state.positions, dtype=np.float32)
+        vel = np.ascontiguousarray(self.state.velocities, dtype=np.float32)
+        obs = np.ascontiguousarray(self.state.obstacles, dtype=np.float32)
+        goal = np.asarray(self.state.goal, dtype=np.float32)
+        r_obs = float(self.ec.obstacle_radius)
+        r_robot = float(self.ec.robot_radius)
+        r_obs_sq = r_obs * r_obs
+        r_robot_sq = r_robot * r_robot
 
         scans = np.full((n, n_rays), max_r, dtype=np.float32)
-        angles_offset = np.linspace(-half_fov, half_fov, n_rays)
+        if n_rays <= 1:
+            angles_offset = [0.0]
+        else:
+            step = (2.0 * half_fov) / float(n_rays - 1)
+            angles_offset = [(-half_fov + step * idx) for idx in range(n_rays)]
 
         for i in range(n):
+            px = float(pos[i, 0])
+            py = float(pos[i, 1])
+            vx = float(vel[i, 0])
+            vy = float(vel[i, 1])
+
             # Heading from velocity (fallback: toward goal)
-            spd = np.linalg.norm(vel[i])
+            spd = math.hypot(vx, vy)
             if spd > 0.02:
-                heading = np.arctan2(vel[i, 1], vel[i, 0])
+                heading = math.atan2(vy, vx)
             else:
-                gdir = self.state.goal - pos[i]
-                heading = np.arctan2(gdir[1], gdir[0])
-            ray_angles = heading + angles_offset
-            cos_a = np.cos(ray_angles)
-            sin_a = np.sin(ray_angles)
+                heading = math.atan2(float(goal[1]) - py, float(goal[0]) - px)
+
+            ray_dirs = []
+            for offset in angles_offset:
+                angle = heading + offset
+                ray_dirs.append((math.cos(angle), math.sin(angle)))
 
             # Check against obstacles (circles)
             for k in range(len(obs)):
-                dx = obs[k, 0] - pos[i, 0]
-                dy = obs[k, 1] - pos[i, 1]
-                # Project onto each ray direction
-                # For ray origin O, direction D, circle center C, radius R:
-                # t_closest = dot(C-O, D),  dist_perp² = |C-O|² - t²
-                # hit if dist_perp < R  and  t > 0
-                for ray_idx in range(n_rays):
-                    d_x, d_y = cos_a[ray_idx], sin_a[ray_idx]
+                dx = float(obs[k, 0]) - px
+                dy = float(obs[k, 1]) - py
+                for ray_idx, (d_x, d_y) in enumerate(ray_dirs):
                     t = dx * d_x + dy * d_y
-                    if t < 0:
+                    if t < 0.0:
                         continue
                     perp_sq = dx * dx + dy * dy - t * t
-                    if perp_sq < r_obs * r_obs:
-                        # Ray enters circle at t - sqrt(R² - perp²)
-                        entry = t - np.sqrt(max(0.0, r_obs * r_obs - perp_sq))
-                        if 0 < entry < scans[i, ray_idx]:
-                            scans[i, ray_idx] = entry
+                    if perp_sq < r_obs_sq:
+                        entry = t - math.sqrt(max(0.0, r_obs_sq - perp_sq))
+                        if 0.0 < entry < float(scans[i, ray_idx]):
+                            scans[i, ray_idx] = float(entry)
 
             # Check against other robots (circles)
             for j in range(n):
                 if j == i:
                     continue
-                dx = pos[j, 0] - pos[i, 0]
-                dy = pos[j, 1] - pos[i, 1]
-                for ray_idx in range(n_rays):
-                    d_x, d_y = cos_a[ray_idx], sin_a[ray_idx]
+                dx = float(pos[j, 0]) - px
+                dy = float(pos[j, 1]) - py
+                for ray_idx, (d_x, d_y) in enumerate(ray_dirs):
                     t = dx * d_x + dy * d_y
-                    if t < 0:
+                    if t < 0.0:
                         continue
                     perp_sq = dx * dx + dy * dy - t * t
-                    if perp_sq < r_robot * r_robot:
-                        entry = t - np.sqrt(max(0.0, r_robot * r_robot - perp_sq))
-                        if 0 < entry < scans[i, ray_idx]:
-                            scans[i, ray_idx] = entry
+                    if perp_sq < r_robot_sq:
+                        entry = t - math.sqrt(max(0.0, r_robot_sq - perp_sq))
+                        if 0.0 < entry < float(scans[i, ray_idx]):
+                            scans[i, ray_idx] = float(entry)
 
         return scans
 
