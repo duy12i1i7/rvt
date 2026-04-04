@@ -3,7 +3,15 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import os
 from pathlib import Path
+
+
+# Avoid high-contention BLAS/OpenMP native crashes in long training/eval runs.
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
+os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
 
 from rvt_swarm.config import Config
 

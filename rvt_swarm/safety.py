@@ -10,6 +10,19 @@ from .config import Config, LEARNED_TOPOLOGY_IDS, TOPOLOGY_IDS
 from .utils import clip01, unit
 
 
+def _dot2(a: np.ndarray, b: np.ndarray) -> float:
+    """Robust 2D dot-product without calling BLAS-backed np.dot."""
+    a_arr = np.asarray(a, dtype=np.float64).reshape(-1)
+    b_arr = np.asarray(b, dtype=np.float64).reshape(-1)
+    if a_arr.size < 2 or b_arr.size < 2:
+        return 0.0
+    ax, ay = float(a_arr[0]), float(a_arr[1])
+    bx, by = float(b_arr[0]), float(b_arr[1])
+    if not (math.isfinite(ax) and math.isfinite(ay) and math.isfinite(bx) and math.isfinite(by)):
+        return 0.0
+    return ax * bx + ay * by
+
+
 def shield_risk_threshold(cfg: Config) -> float:
     return clip01(1.0 - (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.nominal_spacing, 1e-6))
 
@@ -28,9 +41,9 @@ def time_to_collision(
     """
     dp = p2 - p1
     dv = v2 - v1
-    a = float(np.dot(dv, dv))
-    b = 2.0 * float(np.dot(dp, dv))
-    c = float(np.dot(dp, dp)) - r_safe ** 2
+    a = _dot2(dv, dv)
+    b = 2.0 * _dot2(dp, dv)
+    c = _dot2(dp, dp) - r_safe ** 2
     if c < 0.0:          # already overlapping
         return 0.0
     if a < 1e-12:         # negligible relative motion
@@ -178,13 +191,18 @@ def _build_cbf_constraints(
         if j == robot_idx:
             continue
         diff = pi - pos[j]
-        dist_sq = float(np.dot(diff, diff))
+        dist_sq = _dot2(diff, diff)
+        if not math.isfinite(dist_sq):
+            continue
         h = dist_sq - d_safe_rr ** 2
         if dist_sq > active_rr ** 2:
             continue
         rel_v = vi - vel[j]
         a = (2.0 * dt * diff).astype(np.float32)
-        b = float(max(0.0, -h) - 2.0 * np.dot(diff, rel_v))
+        rel_term = _dot2(diff, rel_v)
+        if not math.isfinite(rel_term):
+            continue
+        b = float(max(0.0, -h) - 2.0 * rel_term)
         constraints.append((a, b))
 
     # Robot-obstacle
@@ -194,14 +212,19 @@ def _build_cbf_constraints(
     active_ro = max(d_safe_ro, cfg.env.nominal_spacing)
     for k in range(len(obs_pos)):
         diff = pi - obs_pos[k]
-        dist_sq = float(np.dot(diff, diff))
+        dist_sq = _dot2(diff, diff)
+        if not math.isfinite(dist_sq):
+            continue
         h = dist_sq - d_safe_ro ** 2
         if dist_sq > active_ro ** 2:
             continue
         ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
         rel_v = vi - ov
         a = (2.0 * dt * diff).astype(np.float32)
-        b = float(max(0.0, -h) - 2.0 * np.dot(diff, rel_v))
+        rel_term = _dot2(diff, rel_v)
+        if not math.isfinite(rel_term):
+            continue
+        b = float(max(0.0, -h) - 2.0 * rel_term)
         constraints.append((a, b))
 
     return constraints
