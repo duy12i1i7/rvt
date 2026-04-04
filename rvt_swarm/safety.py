@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from typing import Dict
 
 import numpy as np
@@ -226,74 +227,102 @@ def _solve_per_robot_qp(
       - or at the intersection of two active boundaries.
     We enumerate those candidates directly, so no iteration budget is needed.
     """
-    u_target = (u_nom + progress_weight * progress_dir).astype(np.float64)
+    u_target = np.asarray(u_nom + progress_weight * progress_dir, dtype=np.float64)
+    target_x = float(u_target[0])
+    target_y = float(u_target[1])
     radius = float(max_accel)
     machine_tol = np.finfo(np.float64).eps
-    feasibility_tol = machine_tol * max(1.0, radius, float(np.linalg.norm(u_target)))
+    feasibility_tol = machine_tol * max(1.0, radius, math.hypot(target_x, target_y))
 
-    processed_constraints: list[tuple[np.ndarray, float]] = []
+    processed_constraints: list[tuple[tuple[float, float], float]] = []
     for a, b_val in constraints:
         a64 = np.asarray(a, dtype=np.float64)
-        a_sq = float(np.dot(a64, a64))
+        ax = float(a64[0])
+        ay = float(a64[1])
+        a_sq = ax * ax + ay * ay
         if a_sq <= machine_tol:
             continue
-        processed_constraints.append((a64, float(b_val)))
+        processed_constraints.append(((ax, ay), float(b_val)))
 
     def is_feasible(u: np.ndarray) -> bool:
-        if np.dot(u, u) > radius * radius + feasibility_tol:
+        ux = float(u[0])
+        uy = float(u[1])
+        if ux * ux + uy * uy > radius * radius + feasibility_tol:
             return False
-        for a, b_val in processed_constraints:
-            if float(np.dot(a, u) - b_val) < -feasibility_tol:
+        for (ax, ay), b_val in processed_constraints:
+            if ax * ux + ay * uy - b_val < -feasibility_tol:
                 return False
         return True
 
     candidates: list[np.ndarray] = []
 
     def maybe_add(u: np.ndarray) -> None:
-        if np.all(np.isfinite(u)) and is_feasible(u):
-            candidates.append(u.astype(np.float64))
+        ux = float(u[0])
+        uy = float(u[1])
+        if not (math.isfinite(ux) and math.isfinite(uy)):
+            return
+        candidate = np.array([ux, uy], dtype=np.float64)
+        if is_feasible(candidate):
+            candidates.append(candidate)
 
     def clip_to_ball(u: np.ndarray) -> np.ndarray:
-        norm = float(np.linalg.norm(u))
+        ux = float(u[0])
+        uy = float(u[1])
+        norm = math.hypot(ux, uy)
         if norm <= radius:
-            return u
-        return u * (radius / max(norm, machine_tol))
+            return np.array([ux, uy], dtype=np.float64)
+        scale = radius / max(norm, machine_tol)
+        return np.array([ux * scale, uy * scale], dtype=np.float64)
 
     # Interior / ball-only candidate
     maybe_add(clip_to_ball(u_target.copy()))
 
     # Single active half-space boundary candidates
-    for a, b_val in processed_constraints:
-        a_sq = float(np.dot(a, a))
-        proj = u_target + ((b_val - float(np.dot(a, u_target))) / a_sq) * a
+    for (ax, ay), b_val in processed_constraints:
+        a_sq = ax * ax + ay * ay
+        dot_target = ax * target_x + ay * target_y
+        offset = (b_val - dot_target) / a_sq
+        proj = np.array([target_x + offset * ax, target_y + offset * ay], dtype=np.float64)
         maybe_add(proj)
 
         # Line-circle intersections for cases where both a half-space and the ball are active
-        norm_a = np.sqrt(a_sq)
-        closest = (b_val / a_sq) * a
-        dist_sq = float(np.dot(closest, closest))
+        norm_a = math.sqrt(a_sq)
+        closest = np.array([(b_val / a_sq) * ax, (b_val / a_sq) * ay], dtype=np.float64)
+        cx = float(closest[0])
+        cy = float(closest[1])
+        dist_sq = cx * cx + cy * cy
         if dist_sq <= radius * radius + feasibility_tol:
             tangent_sq = max(radius * radius - dist_sq, 0.0)
-            tangent_dir = np.array([-a[1], a[0]], dtype=np.float64) / max(norm_a, machine_tol)
-            tangent_mag = np.sqrt(tangent_sq)
+            tangent_dir = np.array([-ay / max(norm_a, machine_tol), ax / max(norm_a, machine_tol)], dtype=np.float64)
+            tangent_mag = math.sqrt(tangent_sq)
             maybe_add(closest + tangent_mag * tangent_dir)
             maybe_add(closest - tangent_mag * tangent_dir)
 
     # Pairwise active half-space boundary intersections
-    for i, (a1, b1) in enumerate(processed_constraints):
-        for a2, b2 in processed_constraints[i + 1:]:
-            system = np.stack([a1, a2], axis=0)
-            det = float(np.linalg.det(system))
-            cond_scale = np.linalg.norm(system, ord=1) * np.linalg.norm(system, ord=np.inf)
+    for i, ((a1x, a1y), b1) in enumerate(processed_constraints):
+        for (a2x, a2y), b2 in processed_constraints[i + 1:]:
+            det = a1x * a2y - a1y * a2x
+            col_norm = max(abs(a1x) + abs(a2x), abs(a1y) + abs(a2y))
+            row_norm = max(abs(a1x) + abs(a1y), abs(a2x) + abs(a2y))
+            cond_scale = col_norm * row_norm
             if abs(det) <= machine_tol * max(cond_scale, 1.0):
                 continue
-            intersection = np.linalg.solve(system, np.array([b1, b2], dtype=np.float64))
+            intersection = np.array(
+                [
+                    (b1 * a2y - a1y * b2) / det,
+                    (a1x * b2 - b1 * a2x) / det,
+                ],
+                dtype=np.float64,
+            )
             maybe_add(intersection)
 
     if not candidates:
         return clip_to_ball(u_target).astype(np.float32)
 
-    best = min(candidates, key=lambda u: float(np.dot(u - u_target, u - u_target)))
+    best = min(
+        candidates,
+        key=lambda u: (float(u[0]) - target_x) ** 2 + (float(u[1]) - target_y) ** 2,
+    )
     return best.astype(np.float32)
 
 
