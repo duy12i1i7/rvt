@@ -8,7 +8,7 @@ import numpy as np
 from .baselines import historical_baseline
 from .config import Config
 from .environment import SwarmFormationEnv
-from .utils import configure_worker_runtime, limit_child_threads, normalized_mean, torch_device
+from .utils import normalized_mean, torch_device
 
 
 def run_policy_episode(
@@ -88,9 +88,6 @@ def _setting_episode_seeds(cfg: Config, scenario_idx: int, n_agents: int, n_epis
 
 
 def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List[Dict]:
-    import multiprocessing as mp
-    import os
-
     settings = []
     for scenario_idx, scenario in enumerate(cfg.env.scenarios):
         for n_agents in cfg.env.team_sizes:
@@ -99,24 +96,9 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
             )
             settings.append((method, cfg, n_agents, scenario, ckpt_dir, episode_seeds))
 
-    # Baselines are CPU-only → parallelize freely
-    # Learned methods use GPU → run sequentially to avoid GPU contention
-    if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
-        auto = max(1, (os.cpu_count() * 3) // 4)
-        n_workers = min(len(settings), cfg.train.n_workers or auto)
-        try:
-            with limit_child_threads(True):
-                ctx = mp.get_context("spawn")
-                with ctx.Pool(n_workers, initializer=configure_worker_runtime) as pool:
-                    rows = pool.map(_eval_setting, settings)
-        except Exception as exc:
-            print(
-                f"[warn] Parallel baseline evaluation failed ({exc.__class__.__name__}: {exc}). "
-                "Falling back to sequential evaluation."
-            )
-            rows = [_eval_setting(s) for s in settings]
-    else:
-        rows = [_eval_setting(s) for s in settings]
+    # Evaluate sequentially. This avoids worker-process crashes from
+    # platform-specific NumPy / BLAS runtime issues without changing metrics.
+    rows = [_eval_setting(s) for s in settings]
 
     return rows
 

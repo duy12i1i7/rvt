@@ -133,21 +133,29 @@ def _ttc_term(diff: np.ndarray, rel_vel: np.ndarray, horizon: float) -> np.ndarr
 def _mean_vector(terms: list[np.ndarray]) -> np.ndarray:
     if not terms:
         return np.zeros(2, dtype=np.float32)
-    acc = np.zeros(2, dtype=np.float32)
+    acc_x = 0.0
+    acc_y = 0.0
     for term in terms:
-        acc += term
-    return acc / float(len(terms))
+        acc_x += float(term[0])
+        acc_y += float(term[1])
+    inv = 1.0 / float(len(terms))
+    return np.array([acc_x * inv, acc_y * inv], dtype=np.float32)
 
 
 def _sum_group_means(*groups: list[np.ndarray]) -> np.ndarray:
-    total = np.zeros(2, dtype=np.float32)
+    total_x = 0.0
+    total_y = 0.0
     used = False
     for group in groups:
         if not group:
             continue
-        total += _mean_vector(group)
+        mean_vec = _mean_vector(group)
+        total_x += float(mean_vec[0])
+        total_y += float(mean_vec[1])
         used = True
-    return total if used else np.zeros(2, dtype=np.float32)
+    if not used:
+        return np.zeros(2, dtype=np.float32)
+    return np.array([total_x, total_y], dtype=np.float32)
 
 
 def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarray:
