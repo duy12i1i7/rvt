@@ -42,13 +42,28 @@ NODE_DIM = 68  # 32 original + 36 LiDAR rays (added min_ttc)
 EDGE_DIM = 11
 
 
+def _ensure_2d_float32(arr, width: int, name: str) -> np.ndarray:
+    """Normalize observation arrays to contiguous float32 matrices."""
+    out = np.asarray(arr, dtype=np.float32)
+    if out.size == 0:
+        return np.zeros((0, width), dtype=np.float32)
+    if out.ndim == 1:
+        if out.size % width != 0:
+            raise ValueError(f"{name} has incompatible size {out.size} for width {width}")
+        out = out.reshape(-1, width)
+    if out.ndim != 2 or out.shape[1] != width:
+        raise ValueError(f"{name} must have shape (N, {width}), got {out.shape}")
+    return np.ascontiguousarray(out, dtype=np.float32)
+
+
 def build_graph_arrays(obs: Dict, cfg: Config):
-    pos = obs["positions"]
-    vel = obs["velocities"]
-    goal_vec = obs["goal_vec"]
+    pos = _ensure_2d_float32(obs["positions"], 2, "positions")
+    vel = _ensure_2d_float32(obs["velocities"], 2, "velocities")
+    goal_vec = _ensure_2d_float32(obs["goal_vec"], 2, "goal_vec")
     n = len(pos)
     centroid = pos.mean(axis=0)
-    obstacle_centroid = obs["obstacles"].mean(axis=0) if len(obs["obstacles"]) else np.zeros(2, dtype=np.float32)
+    obs_pos = _ensure_2d_float32(obs["obstacles"], 2, "obstacles")
+    obstacle_centroid = obs_pos.mean(axis=0) if len(obs_pos) else np.zeros(2, dtype=np.float32)
     corridor = np.array([obs.get("corridor_dx", 1.0), obs.get("corridor_dy", 0.0)], dtype=np.float32)
     lateral = np.array([corridor[1], -corridor[0]], dtype=np.float32)
     topo_onehot = np.zeros((5,), dtype=np.float32)
@@ -60,11 +75,16 @@ def build_graph_arrays(obs: Dict, cfg: Config):
     if lidar_raw is None:
         lidar_norm = np.ones((n, cfg.env.lidar_num_rays), dtype=np.float32)
     else:
-        lidar_norm = np.clip(lidar_raw / lidar_range, 0.0, 1.0)
+        lidar_norm = _ensure_2d_float32(lidar_raw, cfg.env.lidar_num_rays, "lidar_scans")
+        if len(lidar_norm) != n:
+            raise ValueError(f"lidar_scans expected {n} rows, got {len(lidar_norm)}")
+        lidar_norm = np.clip(lidar_norm / lidar_range, 0.0, 1.0)
 
     node_features = []
-    obs_pos = obs["obstacles"]
-    obs_vel = obs.get("obstacle_velocities", np.zeros((0, 2), dtype=np.float32))
+    obs_vel = _ensure_2d_float32(obs.get("obstacle_velocities", np.zeros((0, 2), dtype=np.float32)), 2, "obstacle_velocities")
+    formation_error = _ensure_2d_float32(obs["formation_error"], 2, "formation_error")
+    if len(formation_error) != n:
+        raise ValueError(f"formation_error expected {n} rows, got {len(formation_error)}")
 
     # ── Precompute min time-to-collision per robot (predictive feature) ──
     r_safe_rr = max(cfg.env.min_rr_distance, 2.0 * cfg.env.robot_radius)
@@ -111,17 +131,23 @@ def build_graph_arrays(obs: Dict, cfg: Config):
         gc = goal_vec[i] / max(gnorm, 1e-8)
         relc = pos[i] - centroid
         ro = pos[i] - obstacle_centroid
-        ferr = obs["formation_error"][i]
+        ferr = formation_error[i]
         dyn_obs = np.zeros(2, dtype=np.float32)
         local_window = max(cfg.env.nominal_spacing * 2.0, cfg.env.min_ro_distance)
         if len(obs_pos):
             obs_delta = obs_pos - pos[i]
             obs_d2 = np.sum(obs_delta * obs_delta, axis=1, dtype=np.float32)
             local_bottleneck = float((obs_d2 < (local_window * local_window)).sum()) / float(len(obs_d2))
-            min_obs = float(np.sqrt(float(obs_d2.min())))
-            j = int(np.argmin(obs_d2))
-            if len(obs_vel):
-                dyn_obs = obs_vel[j]
+            nearest_idx = 0
+            nearest_d2 = float(obs_d2[0])
+            for idx in range(1, len(obs_d2)):
+                candidate = float(obs_d2[idx])
+                if candidate < nearest_d2:
+                    nearest_d2 = candidate
+                    nearest_idx = idx
+            min_obs = float(np.sqrt(nearest_d2))
+            if nearest_idx < len(obs_vel):
+                dyn_obs = obs_vel[nearest_idx]
         else:
             local_bottleneck = 0.0
             min_obs = float(cfg.env.lidar_range)
@@ -150,7 +176,8 @@ def build_graph_arrays(obs: Dict, cfg: Config):
     d = pairwise_dist(pos, pos)
     edge_src, edge_dst, edge_attr = [], [], []
     for i in range(n):
-        nbrs = np.argsort(d[i])[: cfg.train.graph_k + 1]
+        dist_row = np.asarray(d[i], dtype=np.float32).reshape(-1)
+        nbrs = sorted(range(n), key=lambda j: float(dist_row[j]))[: cfg.train.graph_k + 1]
         for j in nbrs:
             if i == j:
                 continue
