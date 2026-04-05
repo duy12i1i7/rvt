@@ -12,15 +12,27 @@ from .utils import clip01, unit
 
 def _dot2(a: np.ndarray, b: np.ndarray) -> float:
     """Robust 2D dot-product without calling BLAS-backed np.dot."""
-    a_arr = np.asarray(a, dtype=np.float64).reshape(-1)
-    b_arr = np.asarray(b, dtype=np.float64).reshape(-1)
-    if a_arr.size < 2 or b_arr.size < 2:
+    try:
+        ax = float(a[0])
+        ay = float(a[1])
+        bx = float(b[0])
+        by = float(b[1])
+    except Exception:
         return 0.0
-    ax, ay = float(a_arr[0]), float(a_arr[1])
-    bx, by = float(b_arr[0]), float(b_arr[1])
     if not (math.isfinite(ax) and math.isfinite(ay) and math.isfinite(bx) and math.isfinite(by)):
         return 0.0
     return ax * bx + ay * by
+
+
+def _norm2(vec: np.ndarray) -> float:
+    try:
+        x = float(vec[0])
+        y = float(vec[1])
+    except Exception:
+        return 0.0
+    if not (math.isfinite(x) and math.isfinite(y)):
+        return 0.0
+    return math.hypot(x, y)
 
 
 def shield_risk_threshold(cfg: Config) -> float:
@@ -72,14 +84,18 @@ def collision_risk(obs: Dict, cfg: Config, horizon: float | None = None) -> floa
     ro_buffer = max(cfg.env.min_ro_distance, cfg.env.robot_radius + cfg.env.obstacle_radius)
     for i in range(len(pos)):
         for j in range(i + 1, len(pos)):
-            d = np.linalg.norm(pos[i] - pos[j])
+            dx = float(pos[i][0]) - float(pos[j][0])
+            dy = float(pos[i][1]) - float(pos[j][1])
+            d = math.hypot(dx, dy)
             dist_risk = clip01(1.0 - d / max(rr_buffer, 1e-6))
             ttc = time_to_collision(pos[i], vel[i], pos[j], vel[j], rr_buffer)
             ttc_risk = clip01(1.0 - ttc / horizon) if ttc < horizon else 0.0
             predictive_risk = ttc_risk / (1.0 + d / max(rr_buffer, 1e-6))
             risk = max(risk, dist_risk, predictive_risk)
         for k, o in enumerate(obs_pos):
-            d = np.linalg.norm(pos[i] - o)
+            dx = float(pos[i][0]) - float(o[0])
+            dy = float(pos[i][1]) - float(o[1])
+            d = math.hypot(dx, dy)
             dist_risk = clip01(1.0 - d / max(ro_buffer, 1e-6))
             ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
             ttc = time_to_collision(pos[i], vel[i], o, ov, ro_buffer)
@@ -102,8 +118,15 @@ def estimated_form_rms(obs: Dict) -> float:
 
 
 def projected_adjustment_ratio(actions: np.ndarray, safe: np.ndarray, cfg: Config) -> float:
-    delta = np.linalg.norm(safe - actions, axis=1)
-    return clip01(float(np.mean(delta)) / max(cfg.env.max_accel, 1e-6))
+    if len(actions) == 0:
+        return 0.0
+    total = 0.0
+    for i in range(len(actions)):
+        dx = float(safe[i][0]) - float(actions[i][0])
+        dy = float(safe[i][1]) - float(actions[i][1])
+        total += math.hypot(dx, dy)
+    mean_delta = total / max(len(actions), 1)
+    return clip01(mean_delta / max(cfg.env.max_accel, 1e-6))
 
 
 def simple_recover_shield(
@@ -133,7 +156,11 @@ def simple_recover_shield(
     # Positive scores should not "explain away" geometric collision risk.
     all_negative = False
     if recoverability_scores is not None:
-        all_negative = bool(np.all(recoverability_scores < 0.0))
+        all_negative = True
+        for score in recoverability_scores:
+            if float(score) >= 0.0:
+                all_negative = False
+                break
     if recoverability is not None:
         recover_value = float(recoverability)
         if recover_value < 0.0:
@@ -160,7 +187,7 @@ def simple_recover_shield(
     # This keeps the intervention scale-free across environments.
     adjustment = projected_adjustment_ratio(actions, safe, cfg)
     denom = max(1e-6, 1.0 - threshold)
-    severity = float(np.clip((risk - threshold) / denom, 0.0, 1.0))
+    severity = clip01((risk - threshold) / denom)
     blend = max(severity, adjustment)
     if all_negative and recoverability is not None:
         blend = max(blend, clip01(-float(recoverability)))
@@ -190,16 +217,18 @@ def _build_cbf_constraints(
     for j in range(len(pos)):
         if j == robot_idx:
             continue
-        diff = pi - pos[j]
-        dist_sq = _dot2(diff, diff)
+        dx = float(pi[0]) - float(pos[j][0])
+        dy = float(pi[1]) - float(pos[j][1])
+        dist_sq = dx * dx + dy * dy
         if not math.isfinite(dist_sq):
             continue
         h = dist_sq - d_safe_rr ** 2
         if dist_sq > active_rr ** 2:
             continue
-        rel_v = vi - vel[j]
-        a = (2.0 * dt * diff).astype(np.float32)
-        rel_term = _dot2(diff, rel_v)
+        rvx = float(vi[0]) - float(vel[j][0])
+        rvy = float(vi[1]) - float(vel[j][1])
+        a = np.array([2.0 * dt * dx, 2.0 * dt * dy], dtype=np.float32)
+        rel_term = dx * rvx + dy * rvy
         if not math.isfinite(rel_term):
             continue
         b = float(max(0.0, -h) - 2.0 * rel_term)
@@ -211,17 +240,19 @@ def _build_cbf_constraints(
     d_safe_ro = max(cfg.env.min_ro_distance, cfg.env.robot_radius + cfg.env.obstacle_radius)
     active_ro = max(d_safe_ro, cfg.env.nominal_spacing)
     for k in range(len(obs_pos)):
-        diff = pi - obs_pos[k]
-        dist_sq = _dot2(diff, diff)
+        dx = float(pi[0]) - float(obs_pos[k][0])
+        dy = float(pi[1]) - float(obs_pos[k][1])
+        dist_sq = dx * dx + dy * dy
         if not math.isfinite(dist_sq):
             continue
         h = dist_sq - d_safe_ro ** 2
         if dist_sq > active_ro ** 2:
             continue
         ov = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
-        rel_v = vi - ov
-        a = (2.0 * dt * diff).astype(np.float32)
-        rel_term = _dot2(diff, rel_v)
+        rvx = float(vi[0]) - float(ov[0])
+        rvy = float(vi[1]) - float(ov[1])
+        a = np.array([2.0 * dt * dx, 2.0 * dt * dy], dtype=np.float32)
+        rel_term = dx * rvx + dy * rvy
         if not math.isfinite(rel_term):
             continue
         b = float(max(0.0, -h) - 2.0 * rel_term)
