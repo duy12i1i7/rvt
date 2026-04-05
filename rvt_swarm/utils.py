@@ -128,7 +128,14 @@ def heading_features(v: np.ndarray) -> Tuple[float, float]:
 
 
 def clip01(value: float) -> float:
-    return float(np.clip(value, 0.0, 1.0))
+    v = float(value)
+    if math.isnan(v):
+        return v
+    if v <= 0.0:
+        return 0.0
+    if v >= 1.0:
+        return 1.0
+    return v
 
 
 def normalized_mean(values) -> float:
