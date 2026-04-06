@@ -135,7 +135,15 @@ class GNNOnlyPolicy(nn.Module):
     def forward(self, batch):
         h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
         actions = self.action_head(h)
-        return {"actions": actions, "recoverability": None, "recoverability_scores": None, "topology_logits": None, "aux": None, "uncertainty": None}
+        return {
+            "actions": actions,
+            "recoverability": None,
+            "recoverability_scores": None,
+            "raw_recoverability_scores": None,
+            "topology_logits": None,
+            "aux": None,
+            "uncertainty": None,
+        }
 
 
 class InstantCertPolicy(nn.Module):
@@ -150,7 +158,15 @@ class InstantCertPolicy(nn.Module):
         actions = self.action_head(h)
         instant = self.cert_head(h)
         pooled = pooled_graph_features(instant, batch["batch_index"])
-        return {"actions": actions, "recoverability": pooled, "recoverability_scores": None, "topology_logits": None, "aux": None, "uncertainty": None}
+        return {
+            "actions": actions,
+            "recoverability": pooled,
+            "recoverability_scores": None,
+            "raw_recoverability_scores": None,
+            "topology_logits": None,
+            "aux": None,
+            "uncertainty": None,
+        }
 
 
 class RVTSwarmPolicy(nn.Module):
@@ -260,10 +276,10 @@ class RVTSwarmPolicy(nn.Module):
         topology_logits = topology_votes + self.topology_refine(torch.cat([topology_votes, raw_pooled], dim=-1))
         pooled = pooled_graph_features(h_aux, batch["batch_index"])
         pooled_ctx = torch.cat([pooled, raw_pooled], dim=-1)
-        recover_scores = self.score_head(pooled_ctx)
+        raw_recover_scores = self.score_head(pooled_ctx)
         aux = self.aux_head(pooled_ctx)
         uncertainty = F.softplus(self.uncertainty_head(pooled_ctx))
-        adjusted_scores = uncertainty_adjusted_scores(recover_scores, uncertainty)
+        adjusted_scores = uncertainty_adjusted_scores(raw_recover_scores, uncertainty)
         recoverability = adjusted_scores.max(dim=-1, keepdim=True).values
         num_graphs = topology_logits.shape[0]
         actions_by_topology = self.decode_all_actions(h, batch["batch_index"], num_graphs)
@@ -278,6 +294,7 @@ class RVTSwarmPolicy(nn.Module):
             "actions_by_topology": actions_by_topology,
             "recoverability": recoverability,
             "recoverability_scores": adjusted_scores,
+            "raw_recoverability_scores": raw_recover_scores,
             "topology_logits": topology_logits,
             "aux": aux,
             "uncertainty": uncertainty,

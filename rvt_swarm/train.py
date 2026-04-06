@@ -97,31 +97,38 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
     if outputs["topology_logits"] is not None and model_name == "rvt_swarm" and cfg.method.use_topology:
         losses["aux"] = F.mse_loss(outputs["aux"], batch["aux_target"])
         if cfg.method.use_recoverability:
+            raw_scores = outputs.get("raw_recoverability_scores")
+            adjusted_scores = outputs["recoverability_scores"]
+            target_scores = batch["recover_scores_target"]
             losses["topology"] = soft_topology_alignment_loss(
                 outputs["topology_logits"],
-                batch["recover_scores_target"],
+                target_scores,
             )
-            losses["score_map"] = F.mse_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
-            losses["rank"] = pairwise_ranking_loss(outputs["recoverability_scores"], batch["recover_scores_target"])
-            if outputs["uncertainty"] is not None:
-                score_scale = score_dispersion_tensor(batch["recover_scores_target"]).mean()
-                losses["uncertainty"] = outputs["uncertainty"].mean() / (1.0 + score_scale)
+            losses["score_map"] = F.mse_loss(adjusted_scores, target_scores)
+            losses["lower_bound"] = F.relu(adjusted_scores - target_scores).pow(2).mean()
+            losses["rank"] = pairwise_ranking_loss(adjusted_scores, target_scores)
+            if outputs["uncertainty"] is not None and raw_scores is not None:
+                score_scale = score_dispersion_tensor(raw_scores.detach())
+                uncertainty_target = F.relu(raw_scores.detach() - target_scores) / score_scale
+                losses["uncertainty"] = F.l1_loss(outputs["uncertainty"], uncertainty_target)
             else:
                 losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
         else:
             losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
             losses["score_map"] = batch["node_x"].new_tensor(0.0)
+            losses["lower_bound"] = batch["node_x"].new_tensor(0.0)
             losses["rank"] = batch["node_x"].new_tensor(0.0)
             losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
     else:
         losses["topology"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["score_map"] = torch.tensor(0.0, device=batch["node_x"].device)
+        losses["lower_bound"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["rank"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["aux"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["uncertainty"] = torch.tensor(0.0, device=batch["node_x"].device)
     topology_terms = [losses["topology"]]
     if model_name == "rvt_swarm" and cfg.method.use_topology and cfg.method.use_recoverability:
-        topology_terms.extend([losses["score_map"], losses["rank"]])
+        topology_terms.extend([losses["score_map"], losses["lower_bound"], losses["rank"]])
     topology_bundle = torch.stack(topology_terms).mean()
     active_terms = [losses["action"]]
     if model_name == "instant_cert" and cfg.method.use_recoverability:
@@ -137,7 +144,7 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
 
 def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, train: bool, epoch: int = 999):
     model.train(train)
-    totals = {k: 0.0 for k in ["total", "action", "recover", "topology", "score_map", "rank", "aux", "uncertainty"]}
+    totals = {k: 0.0 for k in ["total", "action", "recover", "topology", "score_map", "lower_bound", "rank", "aux", "uncertainty"]}
     n_batches = 0
     for batch in loader:
         batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}

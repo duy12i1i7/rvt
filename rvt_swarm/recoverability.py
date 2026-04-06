@@ -8,7 +8,7 @@ import numpy as np
 from .config import Config, LEARNED_TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
-from .safety import select_topology_from_score_signal, topology_context_features, topology_switch_readiness
+from .safety import stable_topology_anchor
 from .utils import clip01, normalized_mean
 
 
@@ -46,20 +46,25 @@ def rollout_score(env: SwarmFormationEnv, topology_action: int, horizon: int, cf
     sim = clone_env(env, cfg)
     score = 0.0
     prev_switches = 0.0
+    initial_obs = sim.observe()
+    initial_progress = float(initial_obs["progress"])
+    initial_bottleneck = float(initial_obs["bottleneck"])
+    current_obs = initial_obs
     for t in range(horizon):
-        obs = sim.observe()
-        action = expert_action(obs, cfg, topology_action)
-        _, _, done, info = sim.step(action, topology_action)
-        progress = float(info["goal_progress"])
+        action = expert_action(current_obs, cfg, topology_action)
+        current_obs, _, done, info = sim.step(action, topology_action)
+        progress = clip01(float(info["goal_progress"]) - initial_progress)
         tube = compute_formation_tube_score(info, cfg)
         collision = float(info["collision_free"])
         recover_proxy = float(info["recoverability_proxy"])
+        bottleneck_relief = clip01(initial_bottleneck - float(info["bottleneck"]))
         deadlock_penalty = compute_deadlock_penalty(info)
+        collapse_penalty = float(info["irreversible_collapse"])
         switch_count = float(info["topology_switches"])
         switch_penalty = clip01(max(switch_count - prev_switches, 0.0))
         prev_switches = switch_count
-        positive = normalized_mean([collision, progress, tube, recover_proxy])
-        negative = normalized_mean([deadlock_penalty, switch_penalty])
+        positive = normalized_mean([collision, progress, tube, recover_proxy, bottleneck_relief])
+        negative = normalized_mean([deadlock_penalty, switch_penalty, collapse_penalty])
         step_score = positive - negative
         score += step_score
         if done:
@@ -68,6 +73,7 @@ def rollout_score(env: SwarmFormationEnv, topology_action: int, horizon: int, cf
                     float(info["success"]),
                     float(info["goal_reached"]),
                     float(info["collision_free"]),
+                    float(info["form_ok"]),
                 ]
             )
             break
@@ -107,20 +113,13 @@ def recoverability_targets(
     keep_score = float(scores_np[keep_idx])
     keep_margin = float(np.tanh(keep_score / score_scale))
     score_targets = np.tanh(scores_np / score_scale).astype(np.float32)
-    current_obs = env.observe() if obs is None else obs
-    allowed, context = topology_context_features(
-        current_obs,
-        cfg,
-        previous_topology,
-        candidate_topologies=CANDIDATE_TOPOLOGIES,
-    )
-    switch_ready = topology_switch_readiness(current_obs, previous_topology, candidate_topologies=CANDIDATE_TOPOLOGIES)
-    selected_topology = select_topology_from_score_signal(
-        score_targets,
-        allowed,
-        context,
-        previous_topology=previous_topology,
-        candidate_topologies=CANDIDATE_TOPOLOGIES,
-        switch_ready=switch_ready,
+    previous_topology = stable_topology_anchor(previous_topology)
+    selected_topology = max(
+        CANDIDATE_TOPOLOGIES,
+        key=lambda topo: (
+            float(scores_np[CANDIDATE_TOPOLOGIES.index(topo)]),
+            float(topo == 0),
+            float(topo == previous_topology),
+        ),
     )
     return recover_margin, selected_topology, score_targets, keep_margin
