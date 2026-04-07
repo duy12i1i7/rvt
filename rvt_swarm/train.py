@@ -72,19 +72,39 @@ def selected_topology_actions(
     ]
 
 
+def recoverability_action_weights(score_targets: torch.Tensor) -> torch.Tensor:
+    shifted = score_targets - score_targets.amin(dim=-1, keepdim=True)
+    denom = shifted.sum(dim=-1, keepdim=True)
+    uniform = torch.full_like(shifted, 1.0 / float(shifted.shape[-1]))
+    normalized = shifted / denom.clamp_min(1e-6)
+    return torch.where(denom > 1e-6, normalized, uniform)
+
+
+def weighted_action_bank_loss(
+    action_bank: torch.Tensor,
+    action_target_all: torch.Tensor,
+    score_targets: torch.Tensor,
+    batch_index: torch.Tensor,
+) -> torch.Tensor:
+    graph_weights = recoverability_action_weights(score_targets)
+    node_weights = graph_weights[batch_index]
+    sq_error = (action_bank - action_target_all).pow(2).mean(dim=-1)
+    return (sq_error * node_weights).sum(dim=-1).mean()
+
+
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
     losses = {}
     if model_name == "rvt_swarm" and cfg.method.use_topology and outputs.get("actions_by_topology") is not None:
         keep_actions = outputs["actions_by_topology"][:, 0, :]
-        best_actions = selected_topology_actions(
-            outputs["actions_by_topology"],
-            batch["topology_target"],
-            batch["batch_index"],
-        )
         losses["action"] = torch.stack(
             [
                 F.mse_loss(keep_actions, batch["action_target_keep"]),
-                F.mse_loss(best_actions, batch["action_target_best"]),
+                weighted_action_bank_loss(
+                    outputs["actions_by_topology"],
+                    batch["action_target_all"],
+                    batch["recover_scores_target"],
+                    batch["batch_index"],
+                ),
             ]
         ).mean()
     else:
