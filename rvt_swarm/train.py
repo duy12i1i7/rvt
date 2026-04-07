@@ -42,12 +42,25 @@ def pairwise_ranking_loss(pred_scores: torch.Tensor, target_scores: torch.Tensor
     return F.softplus(-(sign[mask] * diffs_p[mask])).mean()
 
 
-def soft_topology_alignment_loss(logits: torch.Tensor, target_scores: torch.Tensor) -> torch.Tensor:
-    # Align topology preference with the full recoverability score map rather
-    # than a brittle argmax label. This keeps topology supervision consistent
-    # with the docs' counterfactual "positive margin wins" semantics.
-    target_dist = torch.softmax(target_scores, dim=-1)
-    return F.kl_div(F.log_softmax(logits, dim=-1), target_dist, reduction="batchmean")
+def distribution_alignment_loss(
+    logits: torch.Tensor,
+    target_dist: torch.Tensor,
+    sample_weight: torch.Tensor | None = None,
+) -> torch.Tensor:
+    per_sample = F.kl_div(
+        F.log_softmax(logits, dim=-1),
+        target_dist,
+        reduction="none",
+    ).sum(dim=-1)
+    if sample_weight is None:
+        return per_sample.mean()
+    weight = sample_weight.view(-1).to(per_sample.dtype)
+    if weight.numel() != per_sample.numel():
+        raise ValueError("Sample weights must align with graph-level logits")
+    weight_sum = weight.sum()
+    if float(weight_sum.item()) <= 0.0:
+        return per_sample.new_tensor(0.0)
+    return (per_sample * weight).sum() / weight_sum
 
 
 def select_action_target(batch: Dict, model_name: str, cfg: Config) -> torch.Tensor:
@@ -120,9 +133,14 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
             raw_scores = outputs.get("raw_recoverability_scores")
             adjusted_scores = outputs["recoverability_scores"]
             target_scores = batch["recover_scores_target"]
-            losses["topology"] = soft_topology_alignment_loss(
+            losses["topology"] = distribution_alignment_loss(
                 outputs["topology_logits"],
-                target_scores,
+                batch["topology_target_dist"],
+            )
+            losses["temporal_topology"] = distribution_alignment_loss(
+                outputs["topology_logits"],
+                batch["temporal_topology_target"],
+                batch["temporal_topology_weight"],
             )
             losses["score_map"] = F.mse_loss(adjusted_scores, target_scores)
             losses["lower_bound"] = F.relu(adjusted_scores - target_scores).pow(2).mean()
@@ -135,12 +153,14 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
                 losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
         else:
             losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
+            losses["temporal_topology"] = batch["node_x"].new_tensor(0.0)
             losses["score_map"] = batch["node_x"].new_tensor(0.0)
             losses["lower_bound"] = batch["node_x"].new_tensor(0.0)
             losses["rank"] = batch["node_x"].new_tensor(0.0)
             losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
     else:
         losses["topology"] = torch.tensor(0.0, device=batch["node_x"].device)
+        losses["temporal_topology"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["score_map"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["lower_bound"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["rank"] = torch.tensor(0.0, device=batch["node_x"].device)
@@ -148,7 +168,12 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
         losses["uncertainty"] = torch.tensor(0.0, device=batch["node_x"].device)
     topology_terms = [losses["topology"]]
     if model_name == "rvt_swarm" and cfg.method.use_topology and cfg.method.use_recoverability:
-        topology_terms.extend([losses["score_map"], losses["lower_bound"], losses["rank"]])
+        topology_terms.extend([
+            losses["temporal_topology"],
+            losses["score_map"],
+            losses["lower_bound"],
+            losses["rank"],
+        ])
     topology_bundle = torch.stack(topology_terms).mean()
     active_terms = [losses["action"]]
     if model_name == "instant_cert" and cfg.method.use_recoverability:
@@ -164,7 +189,7 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
 
 def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, train: bool, epoch: int = 999):
     model.train(train)
-    totals = {k: 0.0 for k in ["total", "action", "recover", "topology", "score_map", "lower_bound", "rank", "aux", "uncertainty"]}
+    totals = {k: 0.0 for k in ["total", "action", "recover", "topology", "temporal_topology", "score_map", "lower_bound", "rank", "aux", "uncertainty"]}
     n_batches = 0
     for batch in loader:
         batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}
