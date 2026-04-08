@@ -24,8 +24,6 @@ class GraphSample:
     recover_scores_target: torch.Tensor
     topology_target: torch.Tensor
     topology_target_dist: torch.Tensor
-    temporal_topology_target: torch.Tensor
-    temporal_topology_weight: torch.Tensor
     aux_target: torch.Tensor
 
 
@@ -47,44 +45,25 @@ EDGE_DIM = 11
 
 def topology_target_distribution(score_targets: np.ndarray) -> np.ndarray:
     scores = np.asarray(score_targets, dtype=np.float32).reshape(-1)
-    shifted = scores - float(np.max(scores))
-    exp_scores = np.exp(shifted, dtype=np.float32)
-    denom = float(np.sum(exp_scores))
-    if denom <= 0.0 or not np.isfinite(denom):
-        return np.full_like(scores, 1.0 / float(max(scores.shape[0], 1)))
-    return exp_scores / denom
+    if scores.size == 0:
+        return scores.astype(np.float32)
 
+    # Conservative soft target: only allocate probability mass away from the
+    # structural anchor `keep` when another topology has a positive advantage
+    # over it. This reduces gratuitous switching without hard-coded margins.
+    keep_score = float(scores[0])
+    weights = np.zeros_like(scores, dtype=np.float32)
+    if scores.shape[0] == 1:
+        weights[0] = 1.0
+        return weights
 
-def temporal_topology_target(
-    current: np.ndarray,
-    prev_dist: np.ndarray | None,
-    next_dist: np.ndarray | None,
-) -> tuple[np.ndarray, float]:
-    current = np.asarray(current, dtype=np.float32).reshape(-1)
-    accum = current.copy()
-    weight_total = 1.0
-    temporal_weight = 0.0
-
-    for neighbor in (prev_dist, next_dist):
-        if neighbor is None:
-            continue
-        neighbor = np.asarray(neighbor, dtype=np.float32).reshape(-1)
-        # Similarity is data-derived: identical utility maps get weight 1,
-        # diverging maps get proportionally less influence.
-        similarity = float(np.clip(1.0 - 0.5 * np.abs(current - neighbor).sum(), 0.0, 1.0))
-        if similarity <= 0.0:
-            continue
-        accum += similarity * neighbor
-        weight_total += similarity
-        temporal_weight += similarity
-
-    accum /= max(weight_total, 1e-6)
-    accum_sum = float(np.sum(accum))
-    if accum_sum <= 0.0 or not np.isfinite(accum_sum):
-        accum = np.full_like(current, 1.0 / float(max(current.shape[0], 1)))
-    else:
-        accum = accum / accum_sum
-    return accum.astype(np.float32), temporal_weight
+    weights[1:] = np.maximum(scores[1:] - keep_score, 0.0)
+    weights[0] = float(np.maximum(keep_score - scores[1:], 0.0).sum())
+    total = float(np.sum(weights))
+    if total <= 0.0 or not np.isfinite(total):
+        weights[0] = 1.0
+        return weights
+    return weights / total
 
 
 def _ensure_2d_float32(arr, width: int, name: str) -> np.ndarray:
@@ -279,7 +258,7 @@ def _generate_episode_impl(args):
     obs = env.reset(n, scenario, seed=seed)
     done = False
     prev_topology = 0
-    base_samples = []
+    episode_samples = []
     while not done:
         recover_margin, best_topology, score_vec, keep_recover_margin = recoverability_targets(
             env,
@@ -299,7 +278,7 @@ def _generate_episode_impl(args):
         # Keep-topology targets are used by methods that never switch topology at runtime.
         # RVT gets supervision for the full action bank across all topology choices,
         # which keeps control/topology coupling aligned with the docs' counterfactual view.
-        base_samples.append({
+        sample = {
             'node_x': node_x,
             'edge_index': edge_index,
             'edge_attr': edge_attr,
@@ -310,62 +289,29 @@ def _generate_episode_impl(args):
             'recover_scores_target': np.asarray(score_vec[None, :], dtype=np.float32),
             'topology_target': np.array([best_idx], dtype=np.int64),
             'topology_target_dist': np.asarray(topo_dist[None, :], dtype=np.float32),
-            'temporal_topology_target': np.asarray(topo_dist[None, :], dtype=np.float32),
-            'temporal_topology_weight': np.array([[0.0]], dtype=np.float32),
             'aux_target': aux,
-        })
+        }
+        episode_samples.append(sample)
         if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > obs["progress"]:
             noise_scale = float(np.clip(1.0 - recover_margin, 0.0, 1.0))
             noise = noise_scale * rng.normal(size=action_best.shape).astype(np.float32) * cfg.env.max_accel
             noisy_action_all = np.clip(action_all + noise[:, None, :], -cfg.env.max_accel, cfg.env.max_accel)
-            base_samples[-1]['noisy_action_target_all'] = np.asarray(noisy_action_all / cfg.env.max_accel, dtype=np.float32)
-            base_samples[-1]['noisy_action_target_best'] = np.asarray(noisy_action_all[:, best_idx, :] / cfg.env.max_accel, dtype=np.float32)
-            base_samples[-1]['noisy_action_target_keep'] = np.asarray(noisy_action_all[:, 0, :] / cfg.env.max_accel, dtype=np.float32)
-        obs, _, done, _ = env.step(action_best, best_topology)
-        prev_topology = best_topology
-
-    topology_dists = [sample['topology_target_dist'][0] for sample in base_samples]
-    for idx, sample in enumerate(base_samples):
-        prev_dist = topology_dists[idx - 1] if idx > 0 else None
-        next_dist = topology_dists[idx + 1] if idx + 1 < len(topology_dists) else None
-        smoothed_dist, temporal_weight = temporal_topology_target(sample['topology_target_dist'][0], prev_dist, next_dist)
-        sample['temporal_topology_target'] = np.asarray(smoothed_dist[None, :], dtype=np.float32)
-        sample['temporal_topology_weight'] = np.array([[temporal_weight]], dtype=np.float32)
-
-    episode_samples = []
-    for sample in base_samples:
-        episode_samples.append({
-            'node_x': sample['node_x'].copy(),
-            'edge_index': sample['edge_index'].copy(),
-            'edge_attr': sample['edge_attr'].copy(),
-            'action_target_all': sample['action_target_all'].copy(),
-            'action_target_best': sample['action_target_best'].copy(),
-            'action_target_keep': sample['action_target_keep'].copy(),
-            'recover_target': sample['recover_target'].copy(),
-            'recover_scores_target': sample['recover_scores_target'].copy(),
-            'topology_target': sample['topology_target'].copy(),
-            'topology_target_dist': sample['topology_target_dist'].copy(),
-            'temporal_topology_target': sample['temporal_topology_target'].copy(),
-            'temporal_topology_weight': sample['temporal_topology_weight'].copy(),
-            'aux_target': sample['aux_target'].copy(),
-        })
-        if 'noisy_action_target_all' in sample:
             sample_noisy = {
                 'node_x': sample['node_x'].copy(),
                 'edge_index': sample['edge_index'].copy(),
                 'edge_attr': sample['edge_attr'].copy(),
-                'action_target_all': sample['noisy_action_target_all'].copy(),
-                'action_target_best': sample['noisy_action_target_best'].copy(),
-                'action_target_keep': sample['noisy_action_target_keep'].copy(),
+                'action_target_all': np.asarray(noisy_action_all / cfg.env.max_accel, dtype=np.float32),
+                'action_target_best': np.asarray(noisy_action_all[:, best_idx, :] / cfg.env.max_accel, dtype=np.float32),
+                'action_target_keep': np.asarray(noisy_action_all[:, 0, :] / cfg.env.max_accel, dtype=np.float32),
                 'recover_target': sample['recover_target'].copy(),
                 'recover_scores_target': sample['recover_scores_target'].copy(),
                 'topology_target': sample['topology_target'].copy(),
                 'topology_target_dist': sample['topology_target_dist'].copy(),
-                'temporal_topology_target': sample['temporal_topology_target'].copy(),
-                'temporal_topology_weight': sample['temporal_topology_weight'].copy(),
                 'aux_target': sample['aux_target'].copy(),
             }
             episode_samples.append(sample_noisy)
+        obs, _, done, _ = env.step(action_best, best_topology)
+        prev_topology = best_topology
     return episode_samples
 
 
@@ -393,8 +339,6 @@ def _append_episode_samples(samples: List[GraphSample], ep_samples: List[Dict[st
             recover_scores_target=torch.from_numpy(d['recover_scores_target']),
             topology_target=torch.from_numpy(d['topology_target']),
             topology_target_dist=torch.from_numpy(d['topology_target_dist']),
-            temporal_topology_target=torch.from_numpy(d['temporal_topology_target']),
-            temporal_topology_weight=torch.from_numpy(d['temporal_topology_weight']),
             aux_target=torch.from_numpy(d['aux_target']),
         ))
 
@@ -442,7 +386,7 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
     node_x, edge_attr = [], []
     edge_index = []
     action_all_t, action_best_t, action_keep_t = [], [], []
-    recover_t, recover_scores_t, topo_t, topo_dist_t, temporal_topo_t, temporal_weight_t, aux_t = [], [], [], [], [], [], []
+    recover_t, recover_scores_t, topo_t, topo_dist_t, aux_t = [], [], [], [], []
     batch_index = []
     offset = 0
     for b, sample in enumerate(batch):
@@ -457,8 +401,6 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
         recover_scores_t.append(sample.recover_scores_target)
         topo_t.append(sample.topology_target)
         topo_dist_t.append(sample.topology_target_dist)
-        temporal_topo_t.append(sample.temporal_topology_target)
-        temporal_weight_t.append(sample.temporal_topology_weight)
         aux_t.append(sample.aux_target)
         batch_index.append(torch.full((n,), b, dtype=torch.long))
         offset += n
@@ -473,8 +415,6 @@ def collate_graphs(batch: List[GraphSample]) -> Dict[str, torch.Tensor]:
         "recover_scores_target": torch.cat(recover_scores_t, dim=0),
         "topology_target": torch.cat(topo_t, dim=0),
         "topology_target_dist": torch.cat(topo_dist_t, dim=0),
-        "temporal_topology_target": torch.cat(temporal_topo_t, dim=0),
-        "temporal_topology_weight": torch.cat(temporal_weight_t, dim=0),
         "aux_target": torch.cat(aux_t, dim=0),
         "batch_index": torch.cat(batch_index, dim=0),
     }

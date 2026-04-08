@@ -45,22 +45,13 @@ def pairwise_ranking_loss(pred_scores: torch.Tensor, target_scores: torch.Tensor
 def distribution_alignment_loss(
     logits: torch.Tensor,
     target_dist: torch.Tensor,
-    sample_weight: torch.Tensor | None = None,
 ) -> torch.Tensor:
     per_sample = F.kl_div(
         F.log_softmax(logits, dim=-1),
         target_dist,
         reduction="none",
     ).sum(dim=-1)
-    if sample_weight is None:
-        return per_sample.mean()
-    weight = sample_weight.view(-1).to(per_sample.dtype)
-    if weight.numel() != per_sample.numel():
-        raise ValueError("Sample weights must align with graph-level logits")
-    weight_sum = weight.sum()
-    if float(weight_sum.item()) <= 0.0:
-        return per_sample.new_tensor(0.0)
-    return (per_sample * weight).sum() / weight_sum
+    return per_sample.mean()
 
 
 def select_action_target(batch: Dict, model_name: str, cfg: Config) -> torch.Tensor:
@@ -137,11 +128,6 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
                 outputs["topology_logits"],
                 batch["topology_target_dist"],
             )
-            losses["temporal_topology"] = distribution_alignment_loss(
-                outputs["topology_logits"],
-                batch["temporal_topology_target"],
-                batch["temporal_topology_weight"],
-            )
             losses["score_map"] = F.mse_loss(adjusted_scores, target_scores)
             losses["lower_bound"] = F.relu(adjusted_scores - target_scores).pow(2).mean()
             losses["rank"] = pairwise_ranking_loss(adjusted_scores, target_scores)
@@ -153,14 +139,12 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
                 losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
         else:
             losses["topology"] = F.cross_entropy(outputs["topology_logits"], batch["topology_target"])
-            losses["temporal_topology"] = batch["node_x"].new_tensor(0.0)
             losses["score_map"] = batch["node_x"].new_tensor(0.0)
             losses["lower_bound"] = batch["node_x"].new_tensor(0.0)
             losses["rank"] = batch["node_x"].new_tensor(0.0)
             losses["uncertainty"] = batch["node_x"].new_tensor(0.0)
     else:
         losses["topology"] = torch.tensor(0.0, device=batch["node_x"].device)
-        losses["temporal_topology"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["score_map"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["lower_bound"] = torch.tensor(0.0, device=batch["node_x"].device)
         losses["rank"] = torch.tensor(0.0, device=batch["node_x"].device)
@@ -169,7 +153,6 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
     topology_terms = [losses["topology"]]
     if model_name == "rvt_swarm" and cfg.method.use_topology and cfg.method.use_recoverability:
         topology_terms.extend([
-            losses["temporal_topology"],
             losses["score_map"],
             losses["lower_bound"],
             losses["rank"],
@@ -189,7 +172,7 @@ def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch
 
 def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, train: bool, epoch: int = 999):
     model.train(train)
-    totals = {k: 0.0 for k in ["total", "action", "recover", "topology", "temporal_topology", "score_map", "lower_bound", "rank", "aux", "uncertainty"]}
+    totals = {k: 0.0 for k in ["total", "action", "recover", "topology", "score_map", "lower_bound", "rank", "aux", "uncertainty"]}
     n_batches = 0
     for batch in loader:
         batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}
