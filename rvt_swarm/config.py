@@ -24,7 +24,9 @@ class EnvConfig:
     lidar_num_rays: int = 36
     lidar_range: float = 3.0
     lidar_fov: float = 4.712389  # 270° in radians
-    team_sizes: List[int] = field(default_factory=lambda: [4, 8, 12, 16])
+    team_sizes: List[int] = field(
+        default_factory=lambda: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24]
+    )
     scenarios: List[str] = field(default_factory=lambda: [
         "open_field",
         "cluttered",
@@ -62,7 +64,7 @@ class TrainConfig:
         "narrow_passage",
         "dynamic_obstacles",
     ])
-    rollout_val_team_sizes: List[int] = field(default_factory=lambda: [8, 16])
+    rollout_val_team_sizes: List[int] = field(default_factory=lambda: [8, 16, 24])
     n_workers: int = 0  # 0 = auto (3/4 of cpu_count)
 
 
