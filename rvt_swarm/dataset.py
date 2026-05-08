@@ -80,6 +80,22 @@ def _ensure_2d_float32(arr, width: int, name: str) -> np.ndarray:
     return np.ascontiguousarray(out, dtype=np.float32)
 
 
+def _obs_float(obs: Dict, key: str, default: float) -> float:
+    """Read scalar observation fields with a backward-compatible default."""
+    value = obs.get(key, default)
+    arr = np.asarray(value, dtype=np.float32)
+    if arr.size == 0:
+        return float(default)
+    scalar = float(arr.reshape(-1)[0])
+    if not np.isfinite(scalar):
+        return float(default)
+    return scalar
+
+
+def _obs_int(obs: Dict, key: str, default: int) -> int:
+    return int(round(_obs_float(obs, key, float(default))))
+
+
 def build_graph_arrays(obs: Dict, cfg: Config):
     pos = _ensure_2d_float32(obs["positions"], 2, "positions")
     vel = _ensure_2d_float32(obs["velocities"], 2, "velocities")
@@ -88,10 +104,21 @@ def build_graph_arrays(obs: Dict, cfg: Config):
     centroid = pos.mean(axis=0)
     obs_pos = _ensure_2d_float32(obs["obstacles"], 2, "obstacles")
     obstacle_centroid = obs_pos.mean(axis=0) if len(obs_pos) else np.zeros(2, dtype=np.float32)
-    corridor = np.array([obs.get("corridor_dx", 1.0), obs.get("corridor_dy", 0.0)], dtype=np.float32)
+    formation_scale = _obs_float(obs, "formation_scale", 1.0)
+    bottleneck = _obs_float(obs, "bottleneck", 0.0)
+    progress = _obs_float(obs, "progress", 0.0)
+    split_active = _obs_float(obs, "split_active", 0.0)
+    corridor = np.array([
+        _obs_float(obs, "corridor_dx", 1.0),
+        _obs_float(obs, "corridor_dy", 0.0),
+    ], dtype=np.float32)
+    if np.linalg.norm(corridor) < 1e-6:
+        corridor = np.array([1.0, 0.0], dtype=np.float32)
+    else:
+        corridor = unit(corridor).astype(np.float32)
     lateral = np.array([corridor[1], -corridor[0]], dtype=np.float32)
     topo_onehot = np.zeros((5,), dtype=np.float32)
-    topo_onehot[int(obs["topology_mode"])] = 1.0
+    topo_onehot[int(np.clip(_obs_int(obs, "topology_mode", 0), 0, topo_onehot.size - 1))] = 1.0
 
     # LiDAR scans: (n, lidar_num_rays), normalised to [0, 1]
     lidar_raw = obs.get("lidar_scans", None)
@@ -185,10 +212,10 @@ def build_graph_arrays(obs: Dict, cfg: Config):
             ferr[0], ferr[1],
             ro[0], ro[1],
             float(np.dot(relc, corridor)), float(np.dot(relc, lateral)),
-            obs["formation_scale"], obs["bottleneck"], obs["progress"],
+            formation_scale, bottleneck, progress,
             local_bottleneck, min_obs,
             dyn_obs[0], dyn_obs[1],
-            float(obs.get("split_active", 0.0)),
+            split_active,
             topo_onehot[0], topo_onehot[1], topo_onehot[2], topo_onehot[3], topo_onehot[4],
             min(float(min_ttc_per_robot[i]) / max(ttc_horizon, 1e-6), 1.0),  # normalised min TTC
         ]
@@ -209,7 +236,7 @@ def build_graph_arrays(obs: Dict, cfg: Config):
             rv = vel[j] - vel[i]
             corridor_proj = float(np.dot(rel, corridor))
             lateral_proj = float(np.dot(rel, lateral))
-            desired_spacing_error = abs(np.linalg.norm(rel) - cfg.env.nominal_spacing * obs["formation_scale"])
+            desired_spacing_error = abs(np.linalg.norm(rel) - cfg.env.nominal_spacing * formation_scale)
             # Proper TTC via quadratic formula for circular agents
             dp_e = rel; dv_e = rv
             aq_e = float(np.dot(dv_e, dv_e))
@@ -231,7 +258,7 @@ def build_graph_arrays(obs: Dict, cfg: Config):
                 corridor_proj, lateral_proj,
                 desired_spacing_error,
                 ttc_edge,
-                obs["bottleneck"], obs["progress"],
+                bottleneck, progress,
             ])
     edge_index = np.asarray([edge_src, edge_dst], dtype=np.int64)
     edge_attr = np.asarray(edge_attr, dtype=np.float32)
@@ -272,7 +299,12 @@ def _generate_episode_impl(args):
         action_best = action_all[:, best_idx, :]
         action_keep = action_all[:, 0, :]
         node_x, edge_index, edge_attr = build_graph_arrays(obs, cfg)
-        aux = np.array([[obs["formation_scale"], obs["bottleneck"], obs["progress"], obs.get("split_active", 0.0)]], dtype=np.float32)
+        aux = np.array([[
+            _obs_float(obs, "formation_scale", 1.0),
+            _obs_float(obs, "bottleneck", 0.0),
+            _obs_float(obs, "progress", 0.0),
+            _obs_float(obs, "split_active", 0.0),
+        ]], dtype=np.float32)
         topo_dist = topology_target_distribution(score_vec)
         # Store as numpy to avoid torch FD issues in multiprocessing
         # Keep-topology targets are used by methods that never switch topology at runtime.
