@@ -5,7 +5,7 @@ from typing import Dict
 import numpy as np
 
 from .config import Config
-from .utils import clip01, dot2, soft_clip, unit, vec_norm
+from .utils import clip01, soft_clip, unit, vec_norm
 
 
 def _subteam_assignments(pos: np.ndarray, corridor: np.ndarray) -> np.ndarray:
@@ -122,7 +122,7 @@ def _ttc_term(diff: np.ndarray, rel_vel: np.ndarray, horizon: float) -> np.ndarr
     if d <= 1e-6:
         return np.zeros(2, dtype=np.float32)
     normal = diff / d
-    closing_speed = -dot2(rel_vel, normal)
+    closing_speed = float(-np.dot(rel_vel, normal))
     if closing_speed <= 0.0:
         return np.zeros(2, dtype=np.float32)
     ttc = d / max(closing_speed, 1e-6)
@@ -184,7 +184,7 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
     for i in range(n):
         progress_weight = 1.0
         if topology_action == 2:
-            lateral_err = abs(dot2(form_err[i], lateral))
+            lateral_err = abs(float(np.dot(form_err[i], lateral)))
             progress_weight = clip01(1.0 - lateral_err / spacing)
         elif topology_action == 3:
             progress_weight = clip01(1.0 - vec_norm(form_err[i]) / spacing)
@@ -198,7 +198,7 @@ def expert_action(obs: Dict, cfg: Config, topology_action: int = 0) -> np.ndarra
         ro_clear_terms: list[np.ndarray] = []
         ro_ttc_terms: list[np.ndarray] = []
         if topology_action == 2:
-            along = dot2(form_err[i], corridor)
+            along = np.dot(form_err[i], corridor)
             base_terms.append(corridor * (along / spacing))
         elif topology_action == 3:
             lane_sign = -1.0 if subteam_ids[i] == 0 else 1.0

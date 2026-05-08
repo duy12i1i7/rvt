@@ -9,8 +9,6 @@ import torch
 from .config import Config, LEARNED_TOPOLOGY_IDS, TOPOLOGY_IDS
 from .utils import clip01, unit
 
-QP_DTYPE = np.dtype("float64")
-
 
 def _dot2(a: np.ndarray, b: np.ndarray) -> float:
     """Robust 2D dot-product without calling BLAS-backed np.dot."""
@@ -283,16 +281,16 @@ def _solve_per_robot_qp(
       - or at the intersection of two active boundaries.
     We enumerate those candidates directly, so no iteration budget is needed.
     """
-    u_target = np.asarray(u_nom + progress_weight * progress_dir, dtype=QP_DTYPE)
+    u_target = np.asarray(u_nom + progress_weight * progress_dir, dtype=np.float64)
     target_x = float(u_target[0])
     target_y = float(u_target[1])
     radius = float(max_accel)
-    machine_tol = np.finfo(QP_DTYPE).eps
+    machine_tol = np.finfo(np.float64).eps
     feasibility_tol = machine_tol * max(1.0, radius, math.hypot(target_x, target_y))
 
     processed_constraints: list[tuple[tuple[float, float], float]] = []
     for a, b_val in constraints:
-        a64 = np.asarray(a, dtype=QP_DTYPE)
+        a64 = np.asarray(a, dtype=np.float64)
         ax = float(a64[0])
         ay = float(a64[1])
         a_sq = ax * ax + ay * ay
@@ -317,7 +315,7 @@ def _solve_per_robot_qp(
         uy = float(u[1])
         if not (math.isfinite(ux) and math.isfinite(uy)):
             return
-        candidate = np.array([ux, uy], dtype=QP_DTYPE)
+        candidate = np.array([ux, uy], dtype=np.float64)
         if is_feasible(candidate):
             candidates.append(candidate)
 
@@ -326,9 +324,9 @@ def _solve_per_robot_qp(
         uy = float(u[1])
         norm = math.hypot(ux, uy)
         if norm <= radius:
-            return np.array([ux, uy], dtype=QP_DTYPE)
+            return np.array([ux, uy], dtype=np.float64)
         scale = radius / max(norm, machine_tol)
-        return np.array([ux * scale, uy * scale], dtype=QP_DTYPE)
+        return np.array([ux * scale, uy * scale], dtype=np.float64)
 
     # Interior / ball-only candidate
     maybe_add(clip_to_ball(u_target.copy()))
@@ -338,21 +336,18 @@ def _solve_per_robot_qp(
         a_sq = ax * ax + ay * ay
         dot_target = ax * target_x + ay * target_y
         offset = (b_val - dot_target) / a_sq
-        proj = np.array([target_x + offset * ax, target_y + offset * ay], dtype=QP_DTYPE)
+        proj = np.array([target_x + offset * ax, target_y + offset * ay], dtype=np.float64)
         maybe_add(proj)
 
         # Line-circle intersections for cases where both a half-space and the ball are active
         norm_a = math.sqrt(a_sq)
-        closest = np.array([(b_val / a_sq) * ax, (b_val / a_sq) * ay], dtype=QP_DTYPE)
+        closest = np.array([(b_val / a_sq) * ax, (b_val / a_sq) * ay], dtype=np.float64)
         cx = float(closest[0])
         cy = float(closest[1])
         dist_sq = cx * cx + cy * cy
         if dist_sq <= radius * radius + feasibility_tol:
             tangent_sq = max(radius * radius - dist_sq, 0.0)
-            tangent_dir = np.array(
-                [-ay / max(norm_a, machine_tol), ax / max(norm_a, machine_tol)],
-                dtype=QP_DTYPE,
-            )
+            tangent_dir = np.array([-ay / max(norm_a, machine_tol), ax / max(norm_a, machine_tol)], dtype=np.float64)
             tangent_mag = math.sqrt(tangent_sq)
             maybe_add(closest + tangent_mag * tangent_dir)
             maybe_add(closest - tangent_mag * tangent_dir)
@@ -371,7 +366,7 @@ def _solve_per_robot_qp(
                     (b1 * a2y - a1y * b2) / det,
                     (a1x * b2 - b1 * a2x) / det,
                 ],
-                dtype=QP_DTYPE,
+                dtype=np.float64,
             )
             maybe_add(intersection)
 

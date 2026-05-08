@@ -9,7 +9,7 @@ from .config import Config, LEARNED_TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
-from .utils import configure_worker_runtime, dot2, heading_features, limit_child_threads, pairwise_dist, unit
+from .utils import configure_worker_runtime, heading_features, limit_child_threads, pairwise_dist, unit
 
 
 @dataclass
@@ -148,9 +148,9 @@ def build_graph_arrays(obs: Dict, cfg: Config):
                 continue
             dp = pos[j] - pos[i]
             dv = vel[j] - vel[i]
-            aq = dot2(dv, dv)
-            bq = 2.0 * dot2(dp, dv)
-            cq = dot2(dp, dp) - r_safe_rr ** 2
+            aq = float(np.dot(dv, dv))
+            bq = 2.0 * float(np.dot(dp, dv))
+            cq = float(np.dot(dp, dp)) - r_safe_rr ** 2
             if cq < 0:
                 min_ttc_per_robot[i] = 0.0
                 break
@@ -164,9 +164,9 @@ def build_graph_arrays(obs: Dict, cfg: Config):
             dp = obs_pos[k] - pos[i]
             ov_k = obs_vel[k] if k < len(obs_vel) else np.zeros(2, dtype=np.float32)
             dv = ov_k - vel[i]
-            aq = dot2(dv, dv)
-            bq = 2.0 * dot2(dp, dv)
-            cq = dot2(dp, dp) - r_safe_ro ** 2
+            aq = float(np.dot(dv, dv))
+            bq = 2.0 * float(np.dot(dp, dv))
+            cq = float(np.dot(dp, dp)) - r_safe_ro ** 2
             if cq < 0:
                 min_ttc_per_robot[i] = 0.0
             elif aq > 1e-12:
@@ -211,7 +211,7 @@ def build_graph_arrays(obs: Dict, cfg: Config):
             relc[0], relc[1],
             ferr[0], ferr[1],
             ro[0], ro[1],
-            dot2(relc, corridor), dot2(relc, lateral),
+            float(np.dot(relc, corridor)), float(np.dot(relc, lateral)),
             formation_scale, bottleneck, progress,
             local_bottleneck, min_obs,
             dyn_obs[0], dyn_obs[1],
@@ -234,14 +234,14 @@ def build_graph_arrays(obs: Dict, cfg: Config):
                 continue
             rel = pos[j] - pos[i]
             rv = vel[j] - vel[i]
-            corridor_proj = dot2(rel, corridor)
-            lateral_proj = dot2(rel, lateral)
+            corridor_proj = float(np.dot(rel, corridor))
+            lateral_proj = float(np.dot(rel, lateral))
             desired_spacing_error = abs(np.linalg.norm(rel) - cfg.env.nominal_spacing * formation_scale)
             # Proper TTC via quadratic formula for circular agents
             dp_e = rel; dv_e = rv
-            aq_e = dot2(dv_e, dv_e)
-            bq_e = 2.0 * dot2(dp_e, dv_e)
-            cq_e = dot2(dp_e, dp_e) - r_safe_rr ** 2
+            aq_e = float(np.dot(dv_e, dv_e))
+            bq_e = 2.0 * float(np.dot(dp_e, dv_e))
+            cq_e = float(np.dot(dp_e, dp_e)) - r_safe_rr ** 2
             ttc_edge = ttc_horizon
             if cq_e < 0:
                 ttc_edge = 0.0
