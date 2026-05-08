@@ -7,7 +7,7 @@ from typing import Dict, Tuple
 import numpy as np
 
 from .config import Config
-from .utils import clip01, normalized_mean, pairwise_dist, soft_clip, unit
+from .utils import clip01, dot2, normalized_mean, pairwise_dist, soft_clip, unit
 
 
 @dataclass
@@ -437,8 +437,8 @@ class SwarmFormationEnv:
                         pos[j] -= push
                         # Kill approach velocity component
                         n_hat = diff / d
-                        vi_along = np.dot(self.state.velocities[i], n_hat)
-                        vj_along = np.dot(self.state.velocities[j], n_hat)
+                        vi_along = dot2(self.state.velocities[i], n_hat)
+                        vj_along = dot2(self.state.velocities[j], n_hat)
                         if vi_along < 0:
                             self.state.velocities[i] -= vi_along * n_hat
                         if vj_along > 0:
@@ -456,7 +456,7 @@ class SwarmFormationEnv:
                         pos[i] += push
                         # Kill approach velocity toward obstacle
                         n_hat = diff / d
-                        v_along = np.dot(self.state.velocities[i], n_hat)
+                        v_along = dot2(self.state.velocities[i], n_hat)
                         if v_along < 0:
                             self.state.velocities[i] -= v_along * n_hat
 

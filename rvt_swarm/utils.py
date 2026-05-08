@@ -85,6 +85,10 @@ def vec_norm(vec: np.ndarray) -> float:
     return float(math.hypot(float(vec[0]), float(vec[1])))
 
 
+def dot2(a: np.ndarray, b: np.ndarray) -> float:
+    return float(a[0]) * float(b[0]) + float(a[1]) * float(b[1])
+
+
 def unit(vec: np.ndarray, eps: float = 1e-8) -> np.ndarray:
     n = vec_norm(vec)
     if n < eps:
