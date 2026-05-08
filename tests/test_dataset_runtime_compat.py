@@ -1,6 +1,11 @@
+import sys
+import types
 import unittest
 
 import numpy as np
+
+if "torch" not in sys.modules:
+    sys.modules["torch"] = types.ModuleType("torch")
 
 from rvt_swarm.config import Config
 from rvt_swarm.dataset import EDGE_DIM, NODE_DIM, build_graph_arrays
