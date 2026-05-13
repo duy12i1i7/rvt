@@ -1,0 +1,13 @@
+rvt_agent:
+  ros__parameters:
+    method: rvt_swarm
+    control_rate_hz: 6.67
+    communication_radius: 4.0
+    peer_timeout_sec: 1.0
+    obstacle_cluster_distance: 0.35
+    max_obstacles: 16
+    goal_x: 4.0
+    goal_y: 0.0
+    twist_heading_gain: 2.8
+    twist_max_linear: 0.22
+    twist_max_angular: 1.82

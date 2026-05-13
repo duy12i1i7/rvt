@@ -1,0 +1,13 @@
+std_msgs/Header header
+string robot_name
+int32 robot_id
+float32 x
+float32 y
+float32 yaw
+float32 vx
+float32 vy
+int32 topology_mode
+float32 formation_scale
+float32 split_active
+float32 time_since_switch
+int32 subteam_id
