@@ -39,8 +39,18 @@ pip install -r requirements.txt
 
 Use `--symlink-install`. The node resolves the repo root from the source tree,
 so a regular copy-install is not the intended workflow for this scaffold.
+Build the ROS workspace with the system Python from `/opt/ros/jazzy`, not with
+the project `.venv` activated. The `.venv` is only for runtime dependencies
+such as `torch`.
 
 ```bash
+cd /path/to/rvt
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+deactivate
+
 cd /path/to/rvt/ros2_ws
 source /opt/ros/jazzy/setup.bash
 colcon build --symlink-install
@@ -59,6 +69,10 @@ source install/setup.bash
 export TURTLEBOT3_MODEL=waffle_pi
 ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py
 ```
+
+If you see build errors such as `ModuleNotFoundError: No module named 'em'`,
+it usually means `colcon` was invoked while `.venv` was still active. Deactivate
+the virtual environment and build again.
 
 Important arguments:
 
