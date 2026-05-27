@@ -8,6 +8,24 @@ from .config import Config
 from .controllers import expert_action
 from .utils import clip01, soft_clip, unit, vec_norm
 
+try:
+    import rvo2
+except ImportError:  # pragma: no cover - depends on optional compiled third-party package.
+    rvo2 = None
+
+
+BASELINE_METHODS = {
+    "adaptive_formation",
+    "cbf_qp_like",
+    "orca",
+    "orca_like",
+    "centralized_mpc",
+}
+
+
+def is_baseline_method(name: str) -> bool:
+    return name in BASELINE_METHODS
+
 
 def _repulsion(diff: np.ndarray, active_distance: float) -> np.ndarray:
     d = vec_norm(diff)
@@ -24,6 +42,116 @@ def _heuristic_topology(obs: Dict) -> int:
     if obs["bottleneck"] > open_space:
         return 3 if split_active > 0.0 else 2
     return 4 if recovering and split_active > 0.0 else 0
+
+
+def _clip_velocity(vec: np.ndarray, max_speed: float) -> np.ndarray:
+    speed = vec_norm(vec)
+    if speed <= max_speed:
+        return vec.astype(np.float32)
+    return (vec / max(speed, 1e-6) * max_speed).astype(np.float32)
+
+
+def _circle_vertices(center: np.ndarray, radius: float, num_vertices: int = 8) -> list[tuple[float, float]]:
+    vertices: list[tuple[float, float]] = []
+    for idx in range(num_vertices):
+        angle = 2.0 * np.pi * float(idx) / float(num_vertices)
+        vertices.append(
+            (
+                float(center[0] + radius * np.cos(angle)),
+                float(center[1] + radius * np.sin(angle)),
+            )
+        )
+    return vertices
+
+
+def _require_rvo2() -> None:
+    if rvo2 is None:
+        raise ImportError(
+            "The 'orca' baseline requires the compiled 'rvo2' module. "
+            "Install repo requirements or build third_party/Python-RVO2 first."
+        )
+
+
+def orca(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
+    _require_rvo2()
+
+    pos = np.asarray(obs["positions"], dtype=np.float32)
+    vel = np.asarray(obs["velocities"], dtype=np.float32)
+    obs_pos = np.asarray(obs["obstacles"], dtype=np.float32)
+    obs_vel = np.asarray(obs.get("obstacle_velocities", np.zeros_like(obs_pos)), dtype=np.float32)
+
+    topology = _heuristic_topology(obs)
+    desired_accel = expert_action(obs, cfg, topology)
+    pref_vel = np.asarray(
+        [_clip_velocity(vel[i] + cfg.env.dt * desired_accel[i], cfg.env.max_speed) for i in range(len(pos))],
+        dtype=np.float32,
+    )
+
+    time_horizon = max(2.0 * cfg.env.dt, cfg.env.sensing_radius / max(cfg.env.max_speed, 1e-6))
+    sim = rvo2.PyRVOSimulator(
+        float(cfg.env.dt),
+        float(cfg.env.sensing_radius),
+        int(max(len(pos) + len(obs_pos) - 1, 1)),
+        float(time_horizon),
+        float(time_horizon),
+        float(cfg.env.robot_radius),
+        float(cfg.env.max_speed),
+    )
+
+    moving_mask = np.linalg.norm(obs_vel, axis=1) > 1e-5 if len(obs_vel) else np.zeros((0,), dtype=bool)
+    static_obstacles = obs_pos[~moving_mask] if len(obs_pos) else np.zeros((0, 2), dtype=np.float32)
+    moving_obstacles = obs_pos[moving_mask] if len(obs_pos) else np.zeros((0, 2), dtype=np.float32)
+    moving_obstacle_vel = obs_vel[moving_mask] if len(obs_vel) else np.zeros((0, 2), dtype=np.float32)
+
+    for center in static_obstacles:
+        sim.addObstacle(_circle_vertices(center, cfg.env.obstacle_radius))
+    if len(static_obstacles):
+        sim.processObstacles()
+
+    robot_ids = []
+    for i in range(len(pos)):
+        robot_ids.append(
+            sim.addAgent(
+                (float(pos[i, 0]), float(pos[i, 1])),
+                float(cfg.env.sensing_radius),
+                int(max(len(pos) + len(moving_obstacles) - 1, 1)),
+                float(time_horizon),
+                float(time_horizon),
+                float(cfg.env.robot_radius),
+                float(cfg.env.max_speed),
+                (float(vel[i, 0]), float(vel[i, 1])),
+            )
+        )
+    obstacle_agent_ids = []
+    obstacle_agent_speed = max(cfg.env.dynamic_obstacle_speed, 1e-3)
+    for i in range(len(moving_obstacles)):
+        ov = moving_obstacle_vel[i]
+        obstacle_agent_ids.append(
+            sim.addAgent(
+                (float(moving_obstacles[i, 0]), float(moving_obstacles[i, 1])),
+                float(cfg.env.sensing_radius),
+                int(max(len(pos) + len(moving_obstacles) - 1, 1)),
+                float(time_horizon),
+                float(time_horizon),
+                float(cfg.env.obstacle_radius),
+                float(max(obstacle_agent_speed, vec_norm(ov))),
+                (float(ov[0]), float(ov[1])),
+            )
+        )
+
+    for agent_id, target_vel in zip(robot_ids, pref_vel):
+        sim.setAgentPrefVelocity(agent_id, (float(target_vel[0]), float(target_vel[1])))
+    for agent_id, target_vel in zip(obstacle_agent_ids, moving_obstacle_vel):
+        sim.setAgentPrefVelocity(agent_id, (float(target_vel[0]), float(target_vel[1])))
+
+    sim.doStep()
+
+    actions = np.zeros_like(pos)
+    inv_dt = 1.0 / max(cfg.env.dt, 1e-6)
+    for i, agent_id in enumerate(robot_ids):
+        next_vel = np.asarray(sim.getAgentVelocity(agent_id), dtype=np.float32)
+        actions[i] = soft_clip((next_vel - vel[i]) * inv_dt, cfg.env.max_accel)
+    return actions, topology
 
 
 def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
@@ -94,6 +222,8 @@ def historical_baseline(name: str, obs: Dict, cfg: Config) -> Tuple[np.ndarray, 
         return adaptive_formation(obs, cfg)
     if name == "cbf_qp_like":
         return cbf_qp_like(obs, cfg)
+    if name == "orca":
+        return orca(obs, cfg)
     if name == "orca_like":
         return orca_like(obs, cfg)
     if name == "centralized_mpc":

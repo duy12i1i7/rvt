@@ -5,7 +5,7 @@ from typing import Dict, List
 
 import numpy as np
 
-from .baselines import historical_baseline
+from .baselines import historical_baseline, is_baseline_method
 from .config import Config
 from .environment import SwarmFormationEnv
 from .utils import normalized_mean, torch_device
@@ -30,7 +30,7 @@ def run_policy_episode(
     recover_fn = 0.0
     start_time = time.perf_counter()
     while not done:
-        if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
+        if is_baseline_method(method):
             actions, topo = historical_baseline(method, obs, cfg)
         else:
             from .policy_runtime import infer_learned_action, load_learned_model

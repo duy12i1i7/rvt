@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
 
-from .baselines import historical_baseline
+from .baselines import historical_baseline, is_baseline_method
 from .config import Config, TOPOLOGY_ACTIONS
 from .environment import SwarmFormationEnv
 from .policy_runtime import infer_learned_action, is_learned_method, load_learned_model
@@ -383,7 +383,7 @@ def record_episode(
         }
 
         # Compute action
-        if method in ["adaptive_formation", "cbf_qp_like", "orca_like", "centralized_mpc"]:
+        if is_baseline_method(method):
             actions, topo = historical_baseline(method, obs, cfg)
         else:
             runtime = infer_learned_action(method, obs, cfg, model, prev_topo)
@@ -732,7 +732,7 @@ def visualize_comparisons(
     if method_groups is None:
         method_groups = [
             ["gnn_only", "instant_cert", "rvt_swarm"],
-            ["rvt_swarm", "adaptive_formation", "cbf_qp_like", "orca_like"],
+            ["rvt_swarm", "adaptive_formation", "cbf_qp_like", "orca"],
         ]
 
     gif_paths = []

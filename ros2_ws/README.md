@@ -166,7 +166,7 @@ For repeated runs with seed variation, use:
 
 ```bash
 cd /path/to/rvt/ros2_ws
-METHODS="rvt_swarm adaptive_formation cbf_qp_like orca_like centralized_mpc" \
+METHODS="rvt_swarm adaptive_formation cbf_qp_like orca centralized_mpc" \
 SEEDS="0 1 2 3 4" \
 ./deploy/run_multiseed_ugv_eval.sh
 ```

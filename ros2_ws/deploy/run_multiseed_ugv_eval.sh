@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
 REPO_DIR="$(cd "${ROOT_DIR}"/.. && pwd)"
 
-METHODS="${METHODS:-rvt_swarm adaptive_formation cbf_qp_like orca_like centralized_mpc}"
+METHODS="${METHODS:-rvt_swarm adaptive_formation cbf_qp_like orca centralized_mpc}"
 SEEDS="${SEEDS:-0 1 2 3 4}"
 LOG_DIR="${LOG_DIR:-${REPO_DIR}/results/gazebo_runs}"
 SUMMARY_JSON="${SUMMARY_JSON:-${LOG_DIR}/aggregate_summary.json}"

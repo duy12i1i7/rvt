@@ -18,6 +18,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install "numpy>=1.24" "matplotlib>=3.8" "pillow>=10"
+python3 -m pip install "Cython>=3.0,<3.1" "cmake>=3.5" setuptools wheel
+python3 -m pip install --no-build-isolation "${REPO_DIR}/third_party/Python-RVO2"
 python3 -m pip install --index-url https://download.pytorch.org/whl/cpu "torch>=2.2"
 deactivate
 
