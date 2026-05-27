@@ -32,6 +32,7 @@ TIMEOUT_SEC="${TIMEOUT_SEC:-90}"
 GAZEBO_GUI="${GAZEBO_GUI:-false}"
 SPAWN_SEED="${SPAWN_SEED:-0}"
 SPAWN_JITTER="${SPAWN_JITTER:-0.10}"
+LIGHTWEIGHT_MODE="${LIGHTWEIGHT_MODE:-true}"
 
 mkdir -p "${LOG_DIR}"
 
@@ -44,6 +45,7 @@ echo "  goal:        (${GOAL_X}, ${GOAL_Y})"
 echo "  timeout:     ${TIMEOUT_SEC}s"
 echo "  spawn_seed:  ${SPAWN_SEED}"
 echo "  jitter:      ${SPAWN_JITTER}"
+echo "  lightweight: ${LIGHTWEIGHT_MODE}"
 
 ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py \
   robot_count:="${ROBOT_COUNT}" \
@@ -58,7 +60,8 @@ ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py \
   log_dir:="${LOG_DIR}" \
   run_name:="${RUN_NAME}" \
   spawn_seed:="${SPAWN_SEED}" \
-  spawn_jitter:="${SPAWN_JITTER}"
+  spawn_jitter:="${SPAWN_JITTER}" \
+  lightweight_mode:="${LIGHTWEIGHT_MODE}"
 
 echo
 echo "Expected summary:"

@@ -84,6 +84,8 @@ Important arguments:
 - `goal_x`, `goal_y`: shared goal for the swarm
 - `spawn_seed`: random seed for spawn jitter
 - `spawn_jitter`: per-robot spawn perturbation in meters
+- `lightweight_mode`: when `true`, bridge only `odom`, `scan`, and `cmd_vel`,
+  and skip `robot_state_publisher`
 
 Example:
 
@@ -94,7 +96,8 @@ ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py \
   repo_root:=/path/to/rvt \
   ckpt_dir:=/path/to/rvt/results \
   goal_x:=4.0 goal_y:=0.0 \
-  spawn_seed:=0 spawn_jitter:=0.10
+  spawn_seed:=0 spawn_jitter:=0.10 \
+  lightweight_mode:=true
 ```
 
 Additional experiment arguments:
@@ -134,12 +137,17 @@ Useful environment overrides:
 - `SPAWN_JITTER=0.10`
 - `RUN_NAME=my_trial`
 - `TIMEOUT_SEC=90`
+- `LIGHTWEIGHT_MODE=true`
 
 This script:
 
 - launches a 2-robot RVT trial in the cluttered Gazebo world
 - runs a swarm-level monitor alongside the agents
 - writes a JSON summary and CSV time series under `results/gazebo_runs`
+
+By default it enables `LIGHTWEIGHT_MODE=true`, which is the recommended path
+for constrained remote machines because it removes nonessential Gazebo bridges
+and skips `robot_state_publisher`.
 
 The monitor reuses the simulator-side thresholds for:
 

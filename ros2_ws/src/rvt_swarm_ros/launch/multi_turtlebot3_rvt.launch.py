@@ -30,6 +30,7 @@ def _spawn_swarm(
     timeout_sec,
     spawn_seed,
     spawn_jitter,
+    lightweight_mode,
 ):
     count = max(1, int(LaunchConfiguration("robot_count").perform(context)))
     names = [f"tb3_{i}" for i in range(count)]
@@ -41,14 +42,21 @@ def _spawn_swarm(
     jitter = max(0.0, float(spawn_jitter.perform(context)))
 
     entities = []
-    robot_description = urdf_path.read_text()
+    enable_lightweight = lightweight_mode.perform(context).lower() in {"true", "1", "yes"}
+    robot_description = urdf_path.read_text() if not enable_lightweight else ""
     model_sdf_xacro = nav2_tb3_share / "urdf" / "gz_waffle.sdf.xacro"
-    bridge_cfg = str(pkg_share / "config" / "turtlebot3_waffle_pi_rvt_bridge.yaml")
+    bridge_cfg = str(
+        pkg_share / "config" / (
+            "turtlebot3_waffle_pi_rvt_bridge_minimal.yaml"
+            if enable_lightweight
+            else "turtlebot3_waffle_pi_rvt_bridge.yaml"
+        )
+    )
     for idx, name in enumerate(names):
         spawn_x = start_x[idx] + (rng.uniform(-jitter, jitter) if jitter > 0.0 else 0.0)
         spawn_y = start_y[idx] + (rng.uniform(-jitter, jitter) if jitter > 0.0 else 0.0)
-        entities.extend(
-            [
+        if not enable_lightweight:
+            entities.append(
                 Node(
                     package="robot_state_publisher",
                     executable="robot_state_publisher",
@@ -56,7 +64,10 @@ def _spawn_swarm(
                     name="robot_state_publisher",
                     output="screen",
                     parameters=[{"use_sim_time": True, "robot_description": robot_description, "frame_prefix": f"{name}/"}],
-                ),
+                )
+            )
+        entities.extend(
+            [
                 Node(
                     package="ros_gz_bridge",
                     executable="parameter_bridge",
@@ -157,6 +168,7 @@ def generate_launch_description() -> LaunchDescription:
     run_name = LaunchConfiguration("run_name")
     spawn_seed = LaunchConfiguration("spawn_seed")
     spawn_jitter = LaunchConfiguration("spawn_jitter")
+    lightweight_mode = LaunchConfiguration("lightweight_mode")
 
     world = pkg_share / "worlds" / "rvt_cluttered.world"
     urdf = turtlebot_share / "urdf" / "turtlebot3_waffle_pi.urdf"
@@ -176,6 +188,7 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument("run_name", default_value=""),
         DeclareLaunchArgument("spawn_seed", default_value="0"),
         DeclareLaunchArgument("spawn_jitter", default_value="0.10"),
+        DeclareLaunchArgument("lightweight_mode", default_value="false"),
         SetEnvironmentVariable("TURTLEBOT3_MODEL", turtlebot_model),
         SetEnvironmentVariable("RVT_SWARM_REPO", repo_root),
         AppendEnvironmentVariable("GZ_SIM_RESOURCE_PATH", str(nav2_tb3_share / "models")),
@@ -226,6 +239,7 @@ def generate_launch_description() -> LaunchDescription:
                 timeout_sec,
                 spawn_seed,
                 spawn_jitter,
+                lightweight_mode,
             )
         )
     )
