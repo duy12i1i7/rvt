@@ -10,8 +10,10 @@ if [[ ! -d "${REPO_DIR}/.venv" ]]; then
 fi
 
 source "${REPO_DIR}/.venv/bin/activate"
+set +u
 source /opt/ros/jazzy/setup.bash
 source "${ROOT_DIR}/install/setup.bash"
+set -u
 
 export TURTLEBOT3_MODEL=waffle_pi
 
@@ -22,4 +24,3 @@ ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py \
   goal_x:=4.0 \
   goal_y:=0.0 \
   "$@"
-

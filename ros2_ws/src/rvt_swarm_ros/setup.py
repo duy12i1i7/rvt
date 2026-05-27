@@ -23,6 +23,7 @@ setup(
     entry_points={
         "console_scripts": [
             "rvt_agent = rvt_swarm_ros.agent_node:main",
+            "swarm_monitor = rvt_swarm_ros.experiment_monitor:main",
         ],
     },
 )

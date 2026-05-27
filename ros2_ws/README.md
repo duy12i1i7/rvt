@@ -77,19 +77,104 @@ the virtual environment and build again.
 Important arguments:
 
 - `robot_count`: number of robots to spawn
+- `method`: controller to run; supports `rvt_swarm` plus the current
+  baseline names from `rvt_swarm.baselines`
 - `repo_root`: absolute path to this repo
 - `ckpt_dir`: directory containing `rvt_swarm.pt`
 - `goal_x`, `goal_y`: shared goal for the swarm
+- `spawn_seed`: random seed for spawn jitter
+- `spawn_jitter`: per-robot spawn perturbation in meters
 
 Example:
 
 ```bash
 ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py \
   robot_count:=4 \
+  method:=rvt_swarm \
   repo_root:=/path/to/rvt \
   ckpt_dir:=/path/to/rvt/results \
-  goal_x:=4.0 goal_y:=0.0
+  goal_x:=4.0 goal_y:=0.0 \
+  spawn_seed:=0 spawn_jitter:=0.10
 ```
+
+Additional experiment arguments:
+
+- `enable_monitor`: start a swarm-level experiment monitor
+- `timeout_sec`: stop the monitor after this many seconds
+- `log_dir`: directory for JSON summary and CSV trace
+- `run_name`: filename stem for the monitor outputs
+
+Example with logging:
+
+```bash
+ros2 launch rvt_swarm_ros multi_turtlebot3_rvt.launch.py \
+  robot_count:=2 \
+  repo_root:=/path/to/rvt \
+  ckpt_dir:=/path/to/rvt/results \
+  goal_x:=4.0 goal_y:=0.0 \
+  enable_monitor:=true \
+  timeout_sec:=90 \
+  log_dir:=/path/to/rvt/results/gazebo_runs \
+  run_name:=ugv_small_trial
+```
+
+## Small UGV experiment
+
+For a repeatable two-robot TurtleBot3 run with automatic logging, use:
+
+```bash
+cd /path/to/rvt/ros2_ws
+./deploy/run_small_ugv_experiment.sh
+```
+
+Useful environment overrides:
+
+- `METHOD=rvt_swarm`
+- `SPAWN_SEED=0`
+- `SPAWN_JITTER=0.10`
+- `RUN_NAME=my_trial`
+- `TIMEOUT_SEC=90`
+
+This script:
+
+- launches a 2-robot RVT trial in the cluttered Gazebo world
+- runs a swarm-level monitor alongside the agents
+- writes a JSON summary and CSV time series under `results/gazebo_runs`
+
+The monitor reuses the simulator-side thresholds for:
+
+- goal reached
+- formation RMS / `FormOK`
+- robot-robot collision
+- robot-obstacle collision
+- deadlock and irreversible collapse proxies
+
+This keeps the Gazebo-side metrics close in meaning to the paper
+benchmark, even though the physics stack is now ROS 2 + Gazebo Sim.
+
+## Multi-seed evaluation and statistics
+
+For repeated runs with seed variation, use:
+
+```bash
+cd /path/to/rvt/ros2_ws
+METHODS="rvt_swarm adaptive_formation cbf_qp_like orca_like centralized_mpc" \
+SEEDS="0 1 2 3 4" \
+./deploy/run_multiseed_ugv_eval.sh
+```
+
+This script:
+
+- runs one logged Gazebo trial per `(method, seed)` pair
+- writes per-run JSON and CSV artifacts to `results/gazebo_runs`
+- aggregates run summaries into `results/gazebo_runs/aggregate_summary.json`
+
+The aggregator reports, per metric and per method:
+
+- mean
+- standard deviation
+- 95% confidence interval
+- permutation-test p-value on success rate versus the reference method
 
 ## Current scope
 
@@ -127,6 +212,8 @@ Validated smoke test on `100.86.40.33`:
   `/tb3_0/scan`, and `/tb3_0/cmd_vel`
 - ROS side receives `/tb3_0/odom` and `/tb3_0/scan`
 - the RVT agent publishes `/tb3_0/cmd_vel`
+- the optional monitor writes swarm-level JSON/CSV summaries for small
+  UGV trials
 
 For longer experiments, a machine with working GUI / OpenGL support is still
 preferred because Gazebo Sim renders the lidar sensor through Ogre2.

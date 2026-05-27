@@ -39,7 +39,8 @@ def _add_repo_venv_site_packages(repo_root: Path) -> None:
 _add_repo_venv_site_packages(REPO_ROOT)
 
 from rvt_swarm.config import Config
-from rvt_swarm.policy_runtime import infer_learned_action, load_learned_model
+from rvt_swarm.baselines import historical_baseline
+from rvt_swarm.policy_runtime import infer_learned_action, is_learned_method, load_learned_model
 from rvt_swarm.utils import torch_device, vec_norm
 
 from rvt_swarm_msgs.msg import PeerState
@@ -104,7 +105,7 @@ class RVTSwarmAgent(Node):
 
         self.cfg = Config()
         self.device = torch_device("cpu")
-        self.model = load_learned_model(self.method, self.cfg, self.ckpt_dir, self.device)
+        self.model = load_learned_model(self.method, self.cfg, self.ckpt_dir, self.device) if is_learned_method(self.method) else None
         self.runtime = RuntimeFormationState()
         self.obstacle_tracker = ObstacleTrackerState()
 
@@ -256,13 +257,17 @@ class RVTSwarmAgent(Node):
             obstacle_velocities,
         )
 
-        result = infer_learned_action(
-            self.method,
-            obs,
-            self.cfg,
-            self.model,
-            prev_topology=self.runtime.topology_mode,
-        )
+        if is_learned_method(self.method):
+            result = infer_learned_action(
+                self.method,
+                obs,
+                self.cfg,
+                self.model,
+                prev_topology=self.runtime.topology_mode,
+            )
+        else:
+            actions, topology = historical_baseline(self.method, obs, self.cfg)
+            result = {"actions": actions, "topology": topology}
 
         self_index = next(idx for idx, state in enumerate(team) if state.robot_name == self.robot_name)
         action_xy = np.asarray(result["actions"][self_index], dtype=np.float32)

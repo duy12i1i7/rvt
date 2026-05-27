@@ -1,28 +1,52 @@
 from __future__ import annotations
 
+import random
 from pathlib import Path
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import AppendEnvironmentVariable, DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction, SetEnvironmentVariable
+from launch.actions import AppendEnvironmentVariable, DeclareLaunchArgument, EmitEvent, IncludeLaunchDescription, OpaqueFunction, RegisterEventHandler, SetEnvironmentVariable
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 
-def _spawn_swarm(context, pkg_share: Path, nav2_tb3_share: Path, urdf_path: Path, repo_root, ckpt_dir, goal_x, goal_y):
+def _spawn_swarm(
+    context,
+    pkg_share: Path,
+    nav2_tb3_share: Path,
+    urdf_path: Path,
+    repo_root,
+    ckpt_dir,
+    goal_x,
+    goal_y,
+    method,
+    world_path,
+    log_dir,
+    run_name,
+    timeout_sec,
+    spawn_seed,
+    spawn_jitter,
+):
     count = max(1, int(LaunchConfiguration("robot_count").perform(context)))
     names = [f"tb3_{i}" for i in range(count)]
     start_x = [-3.0, -3.0, -2.2, -2.2, -1.4, -1.4, -0.6, -0.6]
     start_y = [-0.8, 0.8, -0.8, 0.8, -0.8, 0.8, -0.8, 0.8]
     if count > len(start_x):
         raise RuntimeError(f"robot_count={count} exceeds the built-in spawn layout ({len(start_x)} robots).")
+    rng = random.Random(int(spawn_seed.perform(context)))
+    jitter = max(0.0, float(spawn_jitter.perform(context)))
 
     entities = []
     robot_description = urdf_path.read_text()
     model_sdf_xacro = nav2_tb3_share / "urdf" / "gz_waffle.sdf.xacro"
     bridge_cfg = str(pkg_share / "config" / "turtlebot3_waffle_pi_rvt_bridge.yaml")
     for idx, name in enumerate(names):
+        spawn_x = start_x[idx] + (rng.uniform(-jitter, jitter) if jitter > 0.0 else 0.0)
+        spawn_y = start_y[idx] + (rng.uniform(-jitter, jitter) if jitter > 0.0 else 0.0)
         entities.extend(
             [
                 Node(
@@ -51,9 +75,9 @@ def _spawn_swarm(context, pkg_share: Path, nav2_tb3_share: Path, urdf_path: Path
                         "-string",
                         Command([FindExecutable(name="xacro"), " ", "namespace:=", name, " ", str(model_sdf_xacro)]),
                         "-x",
-                        str(start_x[idx]),
+                        str(spawn_x),
                         "-y",
-                        str(start_y[idx]),
+                        str(spawn_y),
                         "-z",
                         "0.01",
                     ],
@@ -69,6 +93,7 @@ def _spawn_swarm(context, pkg_share: Path, nav2_tb3_share: Path, urdf_path: Path
                             "use_sim_time": True,
                             "repo_root": repo_root,
                             "ckpt_dir": ckpt_dir,
+                            "method": method,
                             "robot_name": name,
                             "robot_id": idx,
                             "team_members": names,
@@ -78,6 +103,36 @@ def _spawn_swarm(context, pkg_share: Path, nav2_tb3_share: Path, urdf_path: Path
                     ],
                 ),
             ]
+        )
+    if LaunchConfiguration("enable_monitor").perform(context).lower() in {"true", "1", "yes"}:
+        monitor = Node(
+            package="rvt_swarm_ros",
+            executable="swarm_monitor",
+            name="swarm_monitor",
+            output="screen",
+            parameters=[
+                {
+                    "use_sim_time": True,
+                    "repo_root": repo_root,
+                    "team_members": names,
+                    "method": method,
+                    "goal_x": ParameterValue(goal_x, value_type=float),
+                    "goal_y": ParameterValue(goal_y, value_type=float),
+                    "timeout_sec": ParameterValue(timeout_sec, value_type=float),
+                    "world_path": world_path,
+                    "log_dir": log_dir,
+                    "run_name": run_name,
+                }
+            ],
+        )
+        entities.append(monitor)
+        entities.append(
+            RegisterEventHandler(
+                OnProcessExit(
+                    target_action=monitor,
+                    on_exit=[EmitEvent(event=Shutdown(reason="swarm monitor completed"))],
+                )
+            )
         )
     return entities
 
@@ -92,9 +147,16 @@ def generate_launch_description() -> LaunchDescription:
     ckpt_dir = LaunchConfiguration("ckpt_dir")
     goal_x = LaunchConfiguration("goal_x")
     goal_y = LaunchConfiguration("goal_y")
+    method = LaunchConfiguration("method")
     robot_count = LaunchConfiguration("robot_count")
     turtlebot_model = LaunchConfiguration("turtlebot_model")
     gazebo_gui = LaunchConfiguration("gazebo_gui")
+    enable_monitor = LaunchConfiguration("enable_monitor")
+    timeout_sec = LaunchConfiguration("timeout_sec")
+    log_dir = LaunchConfiguration("log_dir")
+    run_name = LaunchConfiguration("run_name")
+    spawn_seed = LaunchConfiguration("spawn_seed")
+    spawn_jitter = LaunchConfiguration("spawn_jitter")
 
     world = pkg_share / "worlds" / "rvt_cluttered.world"
     urdf = turtlebot_share / "urdf" / "turtlebot3_waffle_pi.urdf"
@@ -104,9 +166,16 @@ def generate_launch_description() -> LaunchDescription:
         DeclareLaunchArgument("ckpt_dir", default_value=str(Path(__file__).resolve().parents[4] / "results")),
         DeclareLaunchArgument("goal_x", default_value="4.0"),
         DeclareLaunchArgument("goal_y", default_value="0.0"),
+        DeclareLaunchArgument("method", default_value="rvt_swarm"),
         DeclareLaunchArgument("robot_count", default_value="4"),
         DeclareLaunchArgument("turtlebot_model", default_value="waffle_pi"),
         DeclareLaunchArgument("gazebo_gui", default_value="false"),
+        DeclareLaunchArgument("enable_monitor", default_value="true"),
+        DeclareLaunchArgument("timeout_sec", default_value="90.0"),
+        DeclareLaunchArgument("log_dir", default_value=str(Path(__file__).resolve().parents[4] / "results" / "gazebo_runs")),
+        DeclareLaunchArgument("run_name", default_value=""),
+        DeclareLaunchArgument("spawn_seed", default_value="0"),
+        DeclareLaunchArgument("spawn_jitter", default_value="0.10"),
         SetEnvironmentVariable("TURTLEBOT3_MODEL", turtlebot_model),
         SetEnvironmentVariable("RVT_SWARM_REPO", repo_root),
         AppendEnvironmentVariable("GZ_SIM_RESOURCE_PATH", str(nav2_tb3_share / "models")),
@@ -150,6 +219,13 @@ def generate_launch_description() -> LaunchDescription:
                 ckpt_dir,
                 goal_x,
                 goal_y,
+                method,
+                str(world),
+                log_dir,
+                run_name,
+                timeout_sec,
+                spawn_seed,
+                spawn_jitter,
             )
         )
     )

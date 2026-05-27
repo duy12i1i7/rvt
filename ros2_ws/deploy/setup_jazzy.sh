@@ -9,13 +9,16 @@ if [[ ! -f /opt/ros/jazzy/setup.bash ]]; then
   exit 1
 fi
 
+set +u
 source /opt/ros/jazzy/setup.bash
+set -u
 
 cd "${REPO_DIR}"
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
+python3 -m pip install "numpy>=1.24" "matplotlib>=3.8" "pillow>=10"
+python3 -m pip install --index-url https://download.pytorch.org/whl/cpu "torch>=2.2"
 deactivate
 
 cd "${ROOT_DIR}"

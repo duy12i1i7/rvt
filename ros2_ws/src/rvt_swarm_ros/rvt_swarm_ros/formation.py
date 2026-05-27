@@ -23,6 +23,7 @@ class PeerSnapshot:
     time_since_switch: float = 0.0
     subteam_id: int = 0
     stamp_sec: float = 0.0
+    recv_wall_sec: float = 0.0
 
 
 @dataclass
