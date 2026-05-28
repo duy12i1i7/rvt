@@ -57,6 +57,34 @@ python run_experiments.py --mode visualize --device auto
 The real `orca` baseline compiles the vendored RVO2 extension, so the install
 step above requires a working C++ toolchain and CMake.
 
+## Multi-seed study
+
+For seed-robust simulator results with confidence intervals and permutation
+tests on success, use:
+
+```bash
+python run_experiments.py \
+  --mode multi_seed \
+  --device auto \
+  --results-dir results_multiseed \
+  --multi-seeds 0 1 2 3 4 \
+  --episodes-per-setting 25
+```
+
+This creates one subdirectory per seed:
+
+- `results_multiseed/seed_000`
+- `results_multiseed/seed_001`
+- `...`
+
+and writes aggregate reports to:
+
+- `results_multiseed/aggregate_summary.json`
+- `results_multiseed/aggregate_by_team_size.json`
+
+If checkpoints already exist and you only want to rerun statistics or
+evaluation, use `--skip-train` and/or `--skip-eval`.
+
 ## Suggested paper framing
 
 See `docs/PAPER_BLUEPRINT.md`.
