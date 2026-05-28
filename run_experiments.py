@@ -17,7 +17,7 @@ from rvt_swarm.config import Config
 
 
 LEARNED = ["gnn_only", "instant_cert", "rvt_swarm"]
-BASELINES = ["adaptive_formation", "cbf_qp_like", "orca", "centralized_mpc"]
+BASELINES = ["adaptive_formation", "cbf_qp", "orca", "centralized_mpc"]
 
 
 def save_json(obj, path: Path) -> None:
@@ -130,7 +130,7 @@ def run_visualize(cfg: Config, results_dir: Path) -> None:
     compare_gif_paths, compare_metric_plot_paths = visualize_comparisons(
         method_groups=[
             ["gnn_only", "instant_cert", "rvt_swarm"],
-            ["rvt_swarm", "adaptive_formation", "cbf_qp_like", "orca"],
+            ["rvt_swarm", "adaptive_formation", "cbf_qp", "orca"],
         ],
         cfg=cfg,
         ckpt_dir=str(results_dir),

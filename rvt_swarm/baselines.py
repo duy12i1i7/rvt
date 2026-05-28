@@ -6,6 +6,7 @@ import numpy as np
 
 from .config import Config
 from .controllers import expert_action
+from .safety import _build_cbf_constraints, _solve_per_robot_qp, progress_direction
 from .utils import clip01, soft_clip, unit, vec_norm
 
 try:
@@ -16,6 +17,7 @@ except ImportError:  # pragma: no cover - depends on optional compiled third-par
 
 BASELINE_METHODS = {
     "adaptive_formation",
+    "cbf_qp",
     "cbf_qp_like",
     "orca",
     "orca_like",
@@ -205,6 +207,24 @@ def cbf_qp_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     return actions, 0
 
 
+def cbf_qp(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
+    nominal = np.asarray(expert_action(obs, cfg, 0), dtype=np.float32)
+    safe = nominal.copy()
+    progress_dir = progress_direction(obs)
+    for i in range(len(safe)):
+        constraints = _build_cbf_constraints(i, obs, cfg)
+        if not constraints:
+            continue
+        safe[i] = _solve_per_robot_qp(
+            u_nom=safe[i],
+            constraints=constraints,
+            progress_dir=progress_dir,
+            max_accel=cfg.env.max_accel,
+            progress_weight=0.0,
+        )
+    return safe, 0
+
+
 def centralized_mpc_proxy(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     topo = _heuristic_topology(obs)
     actions = expert_action(obs, cfg, topo)
@@ -220,6 +240,8 @@ def centralized_mpc_proxy(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
 def historical_baseline(name: str, obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
     if name == "adaptive_formation":
         return adaptive_formation(obs, cfg)
+    if name == "cbf_qp":
+        return cbf_qp(obs, cfg)
     if name == "cbf_qp_like":
         return cbf_qp_like(obs, cfg)
     if name == "orca":

@@ -732,7 +732,7 @@ def visualize_comparisons(
     if method_groups is None:
         method_groups = [
             ["gnn_only", "instant_cert", "rvt_swarm"],
-            ["rvt_swarm", "adaptive_formation", "cbf_qp_like", "orca"],
+            ["rvt_swarm", "adaptive_formation", "cbf_qp", "orca"],
         ]
 
     gif_paths = []
