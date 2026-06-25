@@ -17,7 +17,7 @@ class BuildRvo2Ext(_build_ext):
             os.makedirs(build_dir)
             subprocess.check_call(['cmake', '../..', '-DCMAKE_CXX_FLAGS=-fPIC'],
                                   cwd=build_dir)
-        subprocess.check_call(['cmake', '--build', '.'], cwd=build_dir)
+        subprocess.check_call(['cmake', '--build', '.', '--config', 'Release'], cwd=build_dir)
 
         _build_ext.run(self)
 
@@ -26,7 +26,7 @@ extensions = [
     Extension('rvo2', ['src/*.pyx'],
               include_dirs=['src'],
               libraries=['RVO'],
-              library_dirs=['build/RVO2/src'],
+              library_dirs=['build/RVO2/src', 'build/RVO2/src/Release', 'build/RVO2/src/Debug'],
               extra_compile_args=['-fPIC']),
 ]
 
