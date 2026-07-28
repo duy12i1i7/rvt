@@ -341,9 +341,28 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
     legacy_ckpt = out_path / f"{model_name}.pt"
     rollout_candidates: list[dict[str, object]] = []
 
+    start_epoch = 1
+    if last_ckpt.exists():
+        try:
+            print(f"Resuming {model_name} from {last_ckpt}")
+            state = torch.load(last_ckpt, map_location=device, weights_only=False)
+            model.load_state_dict(state["model"])
+            if "epoch" in state:
+                start_epoch = state["epoch"] + 1
+                best_val = state.get("best_val", float("inf"))
+                best_mode = state.get("best_metric_mode", "min")
+            if "optimizer" in state:
+                optimizer.load_state_dict(state["optimizer"])
+        except Exception as e:
+            print(f"Failed to resume from {last_ckpt}: {e}")
+
+    if start_epoch > num_epochs:
+        print(f"{model_name} is already trained to {num_epochs} epochs. Skipping.")
+        return str(best_ckpt)
+
     warmup = 0
 
-    for epoch in range(1, num_epochs + 1):
+    for epoch in range(start_epoch, num_epochs + 1):
         tr = run_epoch(model, train_loader, optimizer, device, model_name, cfg, True, epoch)
         va = run_epoch(model, val_loader, optimizer, device, model_name, cfg, False, epoch)
 
@@ -418,6 +437,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         if update_best:
             state = {
                 "model": model.state_dict(),
+                "optimizer": optimizer.state_dict(),
                 "config": cfg,
                 "epoch": epoch,
                 "best_val": best_val,
@@ -432,6 +452,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         else:
             state = {
                 "model": model.state_dict(),
+                "optimizer": optimizer.state_dict(),
                 "config": cfg,
                 "epoch": epoch,
                 "best_val": best_val,
