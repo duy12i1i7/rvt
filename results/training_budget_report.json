@@ -1,0 +1,82 @@
+{
+  "evaluation_schema_version": 2,
+  "note": "steps_per_epoch is dataset-dependent and identical across methods (one shared dataset, one shared batch size); populate after data generation.",
+  "training_seeds_planned": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "methods": {
+    "rvt_swarm": {
+      "epochs": 300,
+      "steps_per_epoch": null,
+      "max_optimizer_steps": null,
+      "validation_interval_epochs": 10,
+      "max_validation_calls": 30,
+      "checkpoints_considered": 5,
+      "early_stopping_patience": 40,
+      "early_stopping_min_delta": 0.0001,
+      "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+      "hyperparameter_trials": 0,
+      "validation_scenarios": [
+        "narrow_passage",
+        "dynamic_obstacles"
+      ],
+      "validation_team_sizes": [
+        5,
+        11,
+        21
+      ],
+      "validation_episodes_per_setting": 4,
+      "recheck_episodes_per_setting": 8
+    },
+    "gnn_only": {
+      "epochs": 300,
+      "steps_per_epoch": null,
+      "max_optimizer_steps": null,
+      "validation_interval_epochs": 10,
+      "max_validation_calls": 30,
+      "checkpoints_considered": 5,
+      "early_stopping_patience": 40,
+      "early_stopping_min_delta": 0.0001,
+      "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+      "hyperparameter_trials": 0,
+      "validation_scenarios": [
+        "narrow_passage",
+        "dynamic_obstacles"
+      ],
+      "validation_team_sizes": [
+        5,
+        11,
+        21
+      ],
+      "validation_episodes_per_setting": 4,
+      "recheck_episodes_per_setting": 8
+    },
+    "instant_cert": {
+      "epochs": 300,
+      "steps_per_epoch": null,
+      "max_optimizer_steps": null,
+      "validation_interval_epochs": 10,
+      "max_validation_calls": 30,
+      "checkpoints_considered": 5,
+      "early_stopping_patience": 40,
+      "early_stopping_min_delta": 0.0001,
+      "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+      "hyperparameter_trials": 0,
+      "validation_scenarios": [
+        "narrow_passage",
+        "dynamic_obstacles"
+      ],
+      "validation_team_sizes": [
+        5,
+        11,
+        21
+      ],
+      "validation_episodes_per_setting": 4,
+      "recheck_episodes_per_setting": 8
+    }
+  }
+}
