@@ -31,3 +31,6 @@ Thumbs.db
 
 # Local deployment bundles
 /deploy/
+
+# Smoke/audit checkpoints are large and regenerable from the tagged commit + seed.
+checkpoints/
