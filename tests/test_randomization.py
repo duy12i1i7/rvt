@@ -79,6 +79,26 @@ def test_spawn_randomisation_never_creates_an_initial_collision() -> None:
                 )
 
 
+def test_spawn_randomisation_never_starts_a_robot_outside_the_workspace() -> None:
+    """Regression: jitter pushed the outermost narrow_passage column out of bounds.
+
+    That layout uses four columns whose outermost offset sits ~9 mm inside the
+    boundary, so un-clamped jitter started robots up to ~3 cm outside the world.
+    Caught by consistency check 8 during the protocol-v2 smoke benchmark.
+    """
+    cfg = Config()
+    limit = cfg.env.world_size * 0.5
+    for scenario in cfg.env.scenarios:
+        for n_agents in (2, 4, 8, 16, 24):
+            for seed in range(8):
+                pos = SwarmFormationEnv(cfg).reset(n_agents, scenario, seed=seed)["positions"]
+                worst = float(np.abs(pos).max())
+                assert worst <= limit, (
+                    f"{scenario} N={n_agents} seed={seed}: robot starts at "
+                    f"|pos|={worst:.4f} m, outside the {limit:.1f} m workspace bound"
+                )
+
+
 def test_obstacle_layouts_were_already_seeded() -> None:
     """Scopes the finding: obstacles were never the problem, starts were."""
     a = _reset(1)

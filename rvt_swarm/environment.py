@@ -98,6 +98,11 @@ class SwarmFormationEnv:
         jitter = float(getattr(self.ec, "spawn_jitter", 0.0))
         if jitter > 0.0:
             starts = starts + self.rng.uniform(-jitter, jitter, size=starts.shape).astype(np.float32)
+        # Clamp into the workspace. The narrow_passage layout packs robots into
+        # four columns whose outermost offset already sits ~9 mm inside the
+        # boundary, so un-clamped jitter can start a robot outside the world.
+        limit = self.ec.world_size * 0.5 - self.ec.robot_radius
+        starts = np.clip(starts, -limit, limit)
         return starts.astype(np.float32)
 
     def _spawn_obstacles(self, scenario: str) -> Tuple[np.ndarray, np.ndarray]:

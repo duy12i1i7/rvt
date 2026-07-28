@@ -45,6 +45,7 @@ def run_policy_episode(
     ckpt_dir: str = "results",
     seed: int | None = None,
     model=None,
+    trace: bool = False,
 ) -> Dict[str, float]:
     # Everything before the loop -- environment construction, model construction,
     # checkpoint loading -- is deliberately OUTSIDE the timed region. Only the
@@ -69,6 +70,8 @@ def run_policy_episode(
         _synchronize(device)
 
     step_latencies_ms: List[float] = []
+    trace_rows: List[Dict] = []
+    initial_obs = {k: (v.copy() if hasattr(v, "copy") else v) for k, v in obs.items()}
     done = False
     last_info = None
     steps = 0
@@ -98,6 +101,26 @@ def run_policy_episode(
         prev_topo = topo
         obs, _, done, info = env.step(actions, topo)
         accumulator.update(info, shield_activated=shield_activated)
+        if trace:
+            trace_rows.append({
+                "step": steps,
+                "positions": obs["positions"].copy(),
+                "obstacles": obs["obstacles"].copy(),
+                "goal": obs["goal"].copy(),
+                "topology_mode": int(obs["topology_mode"]),
+                "selected_topology": int(topo),
+                "formation_scale": float(obs["formation_scale"]),
+                "collision_free": float(info["collision_free"]),
+                "rr_collision": float(info["rr_collision"]),
+                "ro_collision": float(info["ro_collision"]),
+                "min_rr_clearance": float(info["min_rr_clearance"]),
+                "min_ro_clearance": float(info["min_ro_clearance"]),
+                "form_rms": float(info["form_rms"]),
+                "goal_progress": float(info["goal_progress"]),
+                "deadlock": float(info["deadlock"]),
+                "irreversible_collapse": float(info["irreversible_collapse"]),
+                "shield_activated": float(shield_activated),
+            })
         if method in ["rvt_swarm", "instant_cert"] and recover is not None:
             fail_now = float(info["irreversible_collapse"] > 0.5)
             pred_safe = float(recover > 0.0)
@@ -112,6 +135,9 @@ def run_policy_episode(
     last_info["recoverability_false_positive"] = recover_fp / max(steps, 1)
     last_info["recoverability_false_negative"] = recover_fn / max(steps, 1)
     last_info.update(inference_latency_stats(step_latencies_ms))
+    if trace:
+        last_info["trace"] = trace_rows
+        last_info["initial_obs"] = initial_obs
     return last_info
 
 
