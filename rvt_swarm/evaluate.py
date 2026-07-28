@@ -19,6 +19,24 @@ from .splits import (
 from .utils import normalized_mean, torch_device
 
 
+INFERENCE_WARMUP_CALLS = 3
+
+
+def _synchronize(device) -> None:
+    """Flush asynchronous device queues so a timer measures completed work."""
+    try:
+        import torch
+
+        if device is None:
+            return
+        if device.type == "cuda":
+            torch.cuda.synchronize()
+        elif device.type == "mps" and hasattr(torch, "mps"):
+            torch.mps.synchronize()
+    except Exception:
+        pass
+
+
 def run_policy_episode(
     method: str,
     cfg: Config,
@@ -28,8 +46,29 @@ def run_policy_episode(
     seed: int | None = None,
     model=None,
 ) -> Dict[str, float]:
+    # Everything before the loop -- environment construction, model construction,
+    # checkpoint loading -- is deliberately OUTSIDE the timed region. Only the
+    # repeated online inference (policy forward pass, graph construction, topology
+    # selection and the runtime safety filter) is timed, because that is what runs
+    # on the robot at control rate.
     env = SwarmFormationEnv(cfg)
     obs = env.reset(n_agents, scenario, seed=seed)
+
+    device = None
+    if not is_baseline_method(method):
+        from .policy_runtime import infer_learned_action, load_learned_model
+
+        if model is not None:
+            device = next(model.parameters()).device
+        else:
+            device = torch_device(cfg.train.device)
+            model = load_learned_model(method, cfg, ckpt_dir, device)  # NOT timed
+        # Warm-up: first calls pay lazy-init, kernel autotune and allocator costs.
+        for _ in range(INFERENCE_WARMUP_CALLS):
+            infer_learned_action(method, obs, cfg, model, 0)
+        _synchronize(device)
+
+    step_latencies_ms: List[float] = []
     done = False
     last_info = None
     steps = 0
@@ -41,25 +80,21 @@ def run_policy_episode(
     accumulator = EpisodeAccumulator(
         formation_tolerance=cfg.env.formation_tolerance, dt=cfg.env.dt
     )
-    start_time = time.perf_counter()
     while not done:
         shield_activated = False
+        # --- timed region: online inference only -------------------------------
+        step_start = time.perf_counter()
         if is_baseline_method(method):
             actions, topo = historical_baseline(method, obs, cfg)
         else:
-            from .policy_runtime import infer_learned_action, load_learned_model
-
-            model_device = None
-            if model is not None:
-                model_device = next(model.parameters()).device
-            device = model_device or torch_device(cfg.train.device)
-            if model is None:
-                model = load_learned_model(method, cfg, ckpt_dir, device)
             runtime = infer_learned_action(method, obs, cfg, model, prev_topo)
             actions = runtime["actions"]
             topo = runtime["topology"]
             recover = runtime["recoverability"]
             shield_activated = bool(runtime.get("safety_stats", {}).get("activated", 0.0) > 0.5)
+        _synchronize(device)
+        step_latencies_ms.append(1000.0 * (time.perf_counter() - step_start))
+        # --- end timed region --------------------------------------------------
         prev_topo = topo
         obs, _, done, info = env.step(actions, topo)
         accumulator.update(info, shield_activated=shield_activated)
@@ -76,9 +111,37 @@ def run_policy_episode(
     last_info = accumulator.finalize(last_info)
     last_info["recoverability_false_positive"] = recover_fp / max(steps, 1)
     last_info["recoverability_false_negative"] = recover_fn / max(steps, 1)
-    elapsed = max(time.perf_counter() - start_time, 0.0)
-    last_info["ms_per_step"] = 1000.0 * elapsed / max(steps, 1)
+    last_info.update(inference_latency_stats(step_latencies_ms))
     return last_info
+
+
+def inference_latency_stats(latencies_ms: List[float]) -> Dict[str, float]:
+    """Summarise per-step online-inference latency.
+
+    Excludes checkpoint loading, model construction, environment construction,
+    result serialization and plotting: only the timed region inside the control
+    loop contributes.
+    """
+    if not latencies_ms:
+        nan = float("nan")
+        return {
+            "inference_latency_mean_ms": nan,
+            "inference_latency_median_ms": nan,
+            "inference_latency_p95_ms": nan,
+            "inference_latency_p99_ms": nan,
+            "timed_control_steps": 0.0,
+            "ms_per_step": nan,
+        }
+    arr = np.asarray(latencies_ms, dtype=np.float64)
+    return {
+        "inference_latency_mean_ms": float(np.mean(arr)),
+        "inference_latency_median_ms": float(np.median(arr)),
+        "inference_latency_p95_ms": float(np.percentile(arr, 95)),
+        "inference_latency_p99_ms": float(np.percentile(arr, 99)),
+        "timed_control_steps": float(arr.size),
+        # Retained for backward compatibility; identical to the mean.
+        "ms_per_step": float(np.mean(arr)),
+    }
 
 
 def _eval_setting(args):
@@ -155,7 +218,10 @@ SUMMARY_KEYS = [
     "topology_switches", "formation_scale_motion_rate",
     "safety_filter_activations", "safety_filter_activation_rate",
     # diagnostics
-    "recoverability_false_positive", "recoverability_false_negative", "ms_per_step",
+    "recoverability_false_positive", "recoverability_false_negative",
+    "inference_latency_mean_ms", "inference_latency_median_ms",
+    "inference_latency_p95_ms", "inference_latency_p99_ms",
+    "timed_control_steps", "ms_per_step",
 ]
 
 

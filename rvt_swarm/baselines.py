@@ -16,6 +16,7 @@ except ImportError:  # pragma: no cover - depends on optional compiled third-par
 
 
 BASELINE_METHODS = {
+    "fixed_formation_expert",
     "adaptive_formation",
     "cbf_qp",
     "cbf_qp_like",
@@ -182,6 +183,17 @@ def orca_like(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
             mean_term += term
         actions[i] = soft_clip(mean_term / float(len(terms)), cfg.env.max_accel)
     return actions, 0
+
+
+def fixed_formation_expert(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
+    """The shared heuristic controller with the topology pinned to KEEP.
+
+    This is the reference point every behaviour-cloned method is imitating: the
+    learned policies are trained on this controller's actions, so it bounds what
+    imitation alone can achieve. It is named for what it is -- an internal
+    heuristic expert -- and carries no external citation.
+    """
+    return expert_action(obs, cfg, 0), 0
 
 
 def adaptive_formation(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
@@ -405,6 +417,8 @@ def centralized_mpc(obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
 
 
 def historical_baseline(name: str, obs: Dict, cfg: Config) -> Tuple[np.ndarray, int]:
+    if name == "fixed_formation_expert":
+        return fixed_formation_expert(obs, cfg)
     if name == "adaptive_formation":
         return adaptive_formation(obs, cfg)
     if name == "cbf_qp":
