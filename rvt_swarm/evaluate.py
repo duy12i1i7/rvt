@@ -28,6 +28,12 @@ def run_policy_episode(
     prev_topo = 0
     recover_fp = 0.0
     recover_fn = 0.0
+    # Safety is an episode-wide property: a collision at any step makes the whole
+    # episode unsafe. `compute_metrics` is evaluated on the current state only, so
+    # it must be accumulated here rather than sampled at termination.
+    episode_collision_free = 1.0
+    rr_collision_max = 0.0
+    ro_collision_max = 0.0
     start_time = time.perf_counter()
     while not done:
         if is_baseline_method(method):
@@ -47,6 +53,9 @@ def run_policy_episode(
             recover = runtime["recoverability"]
         prev_topo = topo
         obs, _, done, info = env.step(actions, topo)
+        episode_collision_free = min(episode_collision_free, float(info["collision_free"]))
+        rr_collision_max = max(rr_collision_max, float(info["rr_collision"]))
+        ro_collision_max = max(ro_collision_max, float(info["ro_collision"]))
         if method in ["rvt_swarm", "instant_cert"] and recover is not None:
             fail_now = float(info["irreversible_collapse"] > 0.5)
             pred_safe = float(recover > 0.0)
@@ -58,6 +67,21 @@ def run_policy_episode(
             break
     assert last_info is not None
     last_info = last_info.copy()
+
+    # Preserve the pre-correction terminal-step values under explicit names so the
+    # two conventions can be compared, then report the episode-wide quantities.
+    last_info["collision_free_terminal"] = float(last_info["collision_free"])
+    last_info["success_terminal"] = float(last_info["success"])
+    last_info["collision_free"] = float(episode_collision_free)
+    last_info["rr_collision_max"] = float(rr_collision_max)
+    last_info["ro_collision_max"] = float(ro_collision_max)
+    # Success is conjunctive, so it inherits the corrected safety term.
+    last_info["success"] = float(
+        last_info["goal_reached"] > 0.5
+        and episode_collision_free > 0.5
+        and last_info["form_ok"] > 0.5
+    )
+
     last_info["steps"] = steps
     last_info["recoverability_false_positive"] = recover_fp / max(steps, 1)
     last_info["recoverability_false_negative"] = recover_fn / max(steps, 1)

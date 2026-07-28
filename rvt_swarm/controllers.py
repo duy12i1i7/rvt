@@ -25,7 +25,7 @@ def _project_topology_state(obs: Dict, cfg: Config, topology_action: int) -> tup
     open_space = clip01(1.0 - bottleneck)
     split_active = clip01(float(obs.get("split_active", 0.0)))
     adaptive_scale = bool(cfg.method.use_adaptive_formation_scale)
-    min_scale = clip01(cfg.env.min_rr_distance / max(cfg.env.nominal_spacing, 1e-6))
+    min_scale = cfg.env.min_formation_scale
     corridor = np.array([obs.get("corridor_dx", 1.0), obs.get("corridor_dy", 0.0)], dtype=np.float32)
     subteam_ids = np.asarray(obs.get("subteam_ids"), dtype=np.int64)
     if subteam_ids.shape[0] != len(obs["positions"]):

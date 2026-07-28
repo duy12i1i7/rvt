@@ -17,6 +17,30 @@ class EnvConfig:
     nominal_spacing: float = 0.9
     min_rr_distance: float = 0.40
     min_ro_distance: float = 0.55
+    # Clearance the commanded formation keeps above the robot-robot collision
+    # threshold. Without it the fully compressed template commands a spacing
+    # exactly equal to min_rr_distance, i.e. the controller's own set-point sits
+    # on the failure boundary.
+    spacing_margin: float = 0.05
+    # Std-dev of the seeded jitter applied to spawn positions. Zero reproduces the
+    # old deterministic lattice, in which every seed shared one initial state.
+    spawn_jitter: float = 0.12
+
+    @property
+    def min_formation_scale(self) -> float:
+        """Smallest formation scale whose commanded spacing clears min_rr_distance.
+
+        Shared by `SwarmFormationEnv.apply_topology` and
+        `controllers._project_topology_state`, which previously computed this
+        floor independently and could drift apart.
+
+        `getattr` keeps this working for `EnvConfig` instances unpickled from
+        checkpoints written before `spacing_margin` existed (`train.py` stores the
+        whole `Config` in each checkpoint).
+        """
+        margin = float(getattr(self, "spacing_margin", 0.0))
+        floor = (self.min_rr_distance + margin) / max(self.nominal_spacing, 1e-6)
+        return float(min(max(floor, 0.0), 1.0))
     obstacle_count: int = 8
     dynamic_obstacle_count: int = 2
     dynamic_obstacle_speed: float = 0.35
@@ -42,8 +66,14 @@ class TrainConfig:
     expert_episodes: int = 500
     batch_size: int = 32
     epochs: int = 30
-    epochs_gnn_only: int = 120
-    epochs_instant_cert: int = 120
+    # Equal budgets across learned methods. Because the best checkpoint is chosen
+    # from interval-gated rollout validations, the epoch budget also sets the
+    # model-selection budget: at 300 vs 120 epochs the proposed method received
+    # 30 selection opportunities against the baseline's 12 (a 2.5x advantage) for
+    # a reported success margin of 0.005. Early stopping (patience 40) still ends
+    # runs that stop improving, so raising the baselines does not force 300 epochs.
+    epochs_gnn_only: int = 300
+    epochs_instant_cert: int = 300
     epochs_rvt_swarm: int = 300
     lr: float = 3e-4
     weight_decay: float = 1e-5

@@ -89,7 +89,16 @@ class SwarmFormationEnv:
             r, c = divmod(i, cols)
             offset = np.array([(c - (cols - 1) / 2) * spacing, (r - (rows - 1) / 2) * spacing], dtype=np.float32)
             pts.append(base + offset)
-        return np.stack(pts, axis=0)
+        starts = np.stack(pts, axis=0)
+        # Seeded jitter: without it `_spawn_agents` consumes no randomness, so every
+        # episode with the same (n_agents, scenario) began from an identical state
+        # regardless of seed. Bounded well below `nominal_spacing` so the lattice
+        # stays feasible; `_resolve_collisions` is still run afterwards by `reset`.
+        # getattr: tolerate EnvConfig instances unpickled from older checkpoints.
+        jitter = float(getattr(self.ec, "spawn_jitter", 0.0))
+        if jitter > 0.0:
+            starts = starts + self.rng.uniform(-jitter, jitter, size=starts.shape).astype(np.float32)
+        return starts.astype(np.float32)
 
     def _spawn_obstacles(self, scenario: str) -> Tuple[np.ndarray, np.ndarray]:
         obs = []
@@ -252,7 +261,7 @@ class SwarmFormationEnv:
         old_scale = self.state.formation_scale
         self.state.time_since_switch += 1
         adaptive_scale = bool(self.cfg.method.use_adaptive_formation_scale)
-        min_scale = clip01(self.ec.min_rr_distance / max(self.ec.nominal_spacing, 1e-6))
+        min_scale = self.ec.min_formation_scale
         bottleneck = clip01(self.state.bottleneck_score)
         open_space = clip01(1.0 - bottleneck)
 
@@ -429,7 +438,11 @@ class SwarmFormationEnv:
                 for j in range(i + 1, n):
                     diff = pos[i] - pos[j]
                     d = np.linalg.norm(diff)
-                    min_d = 2 * r_robot  # sum of radii
+                    # Separate to the distance the metric scores against, not merely
+                    # to physical contact. Resolving only to 2*r leaves the pair
+                    # inside min_rr_distance, so every resolved contact was still
+                    # counted as a collision by compute_metrics().
+                    min_d = max(2 * r_robot, self.ec.min_rr_distance)
                     if d < min_d and d > 1e-8:
                         overlap = min_d - d
                         push = (overlap / 2 + 0.01) * diff / d
@@ -449,7 +462,8 @@ class SwarmFormationEnv:
                 for k in range(len(obs)):
                     diff = pos[i] - obs[k]
                     d = np.linalg.norm(diff)
-                    min_d = r_robot + r_obs
+                    # Same correction as the robot-robot case above.
+                    min_d = max(r_robot + r_obs, self.ec.min_ro_distance)
                     if d < min_d and d > 1e-8:
                         overlap = min_d - d
                         push = (overlap + 0.01) * diff / d
