@@ -98,6 +98,7 @@ def infer_learned_action(
             recoverability = float(recoverability_scores[LEARNED_TOPOLOGY_IDS.index(topology)])
         else:
             recoverability = float(out["recoverability"].squeeze().cpu().item())
+    safety_stats: Dict[str, float] = {}
     if method in {"rvt_swarm", "instant_cert"}:
         actions = simple_recover_shield(
             actions,
@@ -106,6 +107,7 @@ def infer_learned_action(
             recoverability,
             topology,
             recoverability_scores,
+            stats=safety_stats,
         )
 
     return {
@@ -114,5 +116,6 @@ def infer_learned_action(
         "recoverability": recoverability,
         "recoverability_scores": recoverability_scores,
         "uncertainty": uncertainty,
+        "safety_stats": safety_stats,
         "outputs": out,
     }

@@ -8,6 +8,14 @@ import numpy as np
 from .baselines import historical_baseline, is_baseline_method
 from .config import Config
 from .environment import SwarmFormationEnv
+from .metrics import EVALUATION_SCHEMA_VERSION, EpisodeAccumulator
+from .splits import (
+    TEST,
+    VALIDATION,
+    assert_no_test_seeds,
+    assert_validation_config,
+    setting_episode_seeds,
+)
 from .utils import normalized_mean, torch_device
 
 
@@ -28,14 +36,14 @@ def run_policy_episode(
     prev_topo = 0
     recover_fp = 0.0
     recover_fn = 0.0
-    # Safety is an episode-wide property: a collision at any step makes the whole
-    # episode unsafe. `compute_metrics` is evaluated on the current state only, so
-    # it must be accumulated here rather than sampled at termination.
-    episode_collision_free = 1.0
-    rr_collision_max = 0.0
-    ro_collision_max = 0.0
+    # Episode-level aggregation with the semantics fixed in
+    # docs/EPISODE_METRIC_SPECIFICATION.md.
+    accumulator = EpisodeAccumulator(
+        formation_tolerance=cfg.env.formation_tolerance, dt=cfg.env.dt
+    )
     start_time = time.perf_counter()
     while not done:
+        shield_activated = False
         if is_baseline_method(method):
             actions, topo = historical_baseline(method, obs, cfg)
         else:
@@ -51,11 +59,10 @@ def run_policy_episode(
             actions = runtime["actions"]
             topo = runtime["topology"]
             recover = runtime["recoverability"]
+            shield_activated = bool(runtime.get("safety_stats", {}).get("activated", 0.0) > 0.5)
         prev_topo = topo
         obs, _, done, info = env.step(actions, topo)
-        episode_collision_free = min(episode_collision_free, float(info["collision_free"]))
-        rr_collision_max = max(rr_collision_max, float(info["rr_collision"]))
-        ro_collision_max = max(ro_collision_max, float(info["ro_collision"]))
+        accumulator.update(info, shield_activated=shield_activated)
         if method in ["rvt_swarm", "instant_cert"] and recover is not None:
             fail_now = float(info["irreversible_collapse"] > 0.5)
             pred_safe = float(recover > 0.0)
@@ -66,23 +73,7 @@ def run_policy_episode(
         if steps >= cfg.env.max_steps:
             break
     assert last_info is not None
-    last_info = last_info.copy()
-
-    # Preserve the pre-correction terminal-step values under explicit names so the
-    # two conventions can be compared, then report the episode-wide quantities.
-    last_info["collision_free_terminal"] = float(last_info["collision_free"])
-    last_info["success_terminal"] = float(last_info["success"])
-    last_info["collision_free"] = float(episode_collision_free)
-    last_info["rr_collision_max"] = float(rr_collision_max)
-    last_info["ro_collision_max"] = float(ro_collision_max)
-    # Success is conjunctive, so it inherits the corrected safety term.
-    last_info["success"] = float(
-        last_info["goal_reached"] > 0.5
-        and episode_collision_free > 0.5
-        and last_info["form_ok"] > 0.5
-    )
-
-    last_info["steps"] = steps
+    last_info = accumulator.finalize(last_info)
     last_info["recoverability_false_positive"] = recover_fp / max(steps, 1)
     last_info["recoverability_false_negative"] = recover_fn / max(steps, 1)
     elapsed = max(time.perf_counter() - start_time, 0.0)
@@ -104,19 +95,37 @@ def _eval_setting(args):
     return agg
 
 
-def _setting_episode_seeds(cfg: Config, scenario_idx: int, n_agents: int, n_episodes: int, seed_offset: int = 0) -> List[int]:
-    return [
-        int(cfg.train.seed + seed_offset + 10_000 * scenario_idx + 100 * n_agents + episode_idx)
-        for episode_idx in range(n_episodes)
-    ]
+def _setting_episode_seeds(
+    cfg: Config,
+    scenario_idx: int,
+    n_agents: int,
+    n_episodes: int,
+    split: str = TEST,
+) -> List[int]:
+    """Episode seeds drawn from `split`'s namespace.
+
+    Test episodes depend only on `seeds.final_test_seed` and validation episodes
+    only on `seeds.validation_seed`; neither depends on `model_seed`, so every
+    method and every training seed sees an identical episode set.
+    """
+    seeds = cfg.seed_config()
+    split_seed = seeds.final_test_seed if split == TEST else seeds.validation_seed
+    return setting_episode_seeds(split, scenario_idx, n_agents, n_episodes, split_seed=split_seed)
 
 
-def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List[Dict]:
+def evaluate_method(
+    method: str, cfg: Config, ckpt_dir: str = "results", split: str = TEST
+) -> List[Dict]:
+    """Evaluate on `split`. Defaults to the final test split.
+
+    This function is *not* a model-selection path: it is called only after a
+    checkpoint has been frozen.
+    """
     settings = []
     for scenario_idx, scenario in enumerate(cfg.env.scenarios):
         for n_agents in cfg.env.team_sizes:
             episode_seeds = _setting_episode_seeds(
-                cfg, scenario_idx, n_agents, cfg.eval.episodes_per_setting
+                cfg, scenario_idx, n_agents, cfg.eval.episodes_per_setting, split=split
             )
             settings.append((method, cfg, n_agents, scenario, ckpt_dir, episode_seeds))
 
@@ -127,15 +136,37 @@ def evaluate_method(method: str, cfg: Config, ckpt_dir: str = "results") -> List
     return rows
 
 
+SUMMARY_KEYS = [
+    # task
+    "success", "success_terminal", "goal_reached", "goal_reached_terminal",
+    "completion_time", "completion_time_censored",
+    # safety
+    "collision_free", "collision_free_terminal",
+    "rr_collision", "ro_collision", "rr_collision_max", "ro_collision_max",
+    "robot_robot_collision_steps", "robot_obstacle_collision_steps",
+    "min_rr_clearance", "min_ro_clearance",
+    # formation
+    "form_ok", "time_in_formation_tube", "form_rms", "form_rms_mean", "form_rms_max",
+    "formation_recovery_time",
+    # liveness / failure
+    "stall_rate", "stall_rate_terminal", "deadlock", "deadlock_terminal",
+    "irreversible_collapse", "irreversible_collapse_terminal",
+    # topology and safety filter
+    "topology_switches", "formation_scale_motion_rate",
+    "safety_filter_activations", "safety_filter_activation_rate",
+    # diagnostics
+    "recoverability_false_positive", "recoverability_false_negative", "ms_per_step",
+]
+
+
 def summarize(rows: List[Dict]) -> Dict[str, float]:
-    keys = [
-        "success", "goal_reached", "collision_free", "form_ok", "rr_collision", "ro_collision",
-        "form_rms", "stall_rate", "deadlock", "topology_switches", "formation_scale_motion_rate",
-        "formation_recovery_time",
-        "irreversible_collapse", "recoverability_false_positive", "recoverability_false_negative", "ms_per_step"
-    ]
-    out = {k: float(np.mean([r[k] for r in rows])) for k in keys}
+    out = {
+        k: float(np.nanmean([r[k] for r in rows]))
+        for k in SUMMARY_KEYS
+        if rows and k in rows[0]
+    }
     out["max_n"] = max(r["n_agents"] for r in rows)
+    out["evaluation_schema_version"] = float(EVALUATION_SCHEMA_VERSION)
     return out
 
 
@@ -158,27 +189,40 @@ def rollout_validation_summary(
     model,
     ckpt_dir: str = "results",
     episodes_per_setting: int | None = None,
-    seed_offset: int = 50_000,
+    seed_offset: int = 0,
 ) -> Dict[str, float]:
+    """THIS IS A MODEL-SELECTION PATH.
+
+    Everything computed here feeds early stopping, checkpoint ranking, and the
+    top-k re-evaluation. It must therefore touch the validation split only. The
+    guards below raise `TestSetLeakageError` rather than silently proceeding.
+    """
     scenarios = [s for s in cfg.train.rollout_val_scenarios if s in cfg.env.scenarios]
-    team_sizes = [n for n in cfg.train.rollout_val_team_sizes if n in cfg.env.team_sizes]
+    # Validation team sizes are intentionally NOT filtered against
+    # cfg.env.team_sizes: the validation sweep is disjoint from the test sweep by
+    # construction, so filtering would empty it.
+    team_sizes = list(cfg.train.rollout_val_team_sizes)
     episodes = int(episodes_per_setting or cfg.train.rollout_val_episodes_per_setting)
     if not scenarios:
         scenarios = list(cfg.env.scenarios[:1])
     if not team_sizes:
-        team_sizes = list(cfg.env.team_sizes[-1:])
+        raise ValueError("rollout validation requires at least one validation team size")
+
+    assert_validation_config(scenarios, team_sizes, context="rollout_validation_summary")
 
     rows: List[Dict] = []
     for scenario_idx, scenario in enumerate(scenarios):
         for n_agents in team_sizes:
             metrics = []
-            for seed in _setting_episode_seeds(
+            episode_seeds = _setting_episode_seeds(
                 cfg,
                 scenario_idx,
                 n_agents,
                 episodes,
-                seed_offset=seed_offset,
-            ):
+                split=VALIDATION,
+            )
+            assert_no_test_seeds(episode_seeds, context="rollout_validation_summary")
+            for seed in episode_seeds:
                 metrics.append(
                     run_policy_episode(
                         method,

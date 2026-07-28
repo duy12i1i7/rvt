@@ -136,6 +136,7 @@ def simple_recover_shield(
     recoverability: float | None = None,
     topo: int = 0,
     recoverability_scores: np.ndarray | None = None,
+    stats: Dict[str, float] | None = None,
 ) -> np.ndarray:
     """Progress-preserving safety shield via per-robot CBF-QP.
 
@@ -147,6 +148,12 @@ def simple_recover_shield(
             s.t.   CBF constraints  ∧  ||u|| ≤ max_accel
         to minimise constraint violation while preserving progress.
     """
+    # Activation instrumentation: `activated` is 1.0 only when the filter both
+    # triggers and modifies the action. Counted by the evaluator (semantics D).
+    if stats is not None:
+        stats.setdefault("activated", 0.0)
+        stats.setdefault("triggered", 0.0)
+        stats.setdefault("action_delta", 0.0)
     if not cfg.method.use_progress_shield:
         return actions
     threshold = shield_risk_threshold(cfg)
@@ -171,6 +178,8 @@ def simple_recover_shield(
         risk = max(risk, threshold)
     if risk < threshold:
         return actions
+    if stats is not None:
+        stats["triggered"] = 1.0
 
     # --- QP-based intervention ---
     progress_dir = progress_direction(obs)
@@ -191,7 +200,12 @@ def simple_recover_shield(
     blend = max(severity, adjustment)
     if all_negative and recoverability is not None:
         blend = max(blend, clip01(-float(recoverability)))
-    return (1.0 - blend) * actions + blend * safe
+    filtered = (1.0 - blend) * actions + blend * safe
+    if stats is not None:
+        delta = float(np.max(np.linalg.norm(filtered - actions, axis=-1))) if len(actions) else 0.0
+        stats["action_delta"] = delta
+        stats["activated"] = float(delta > 1e-9)
+    return filtered
 
 
 # ── CBF-QP helpers ──────────────────────────────────────────────────

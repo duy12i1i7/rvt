@@ -545,6 +545,10 @@ class SwarmFormationEnv:
         rr_collision = float(np.mean(rr_d < self.ec.min_rr_distance))
         ro_d = pairwise_dist(self.state.positions, self.state.obstacles)
         ro_collision = float(np.mean(ro_d < self.ec.min_ro_distance)) if ro_d.size else 0.0
+        # Instantaneous clearances; the evaluator aggregates these to an
+        # episode-wide minimum (semantics E).
+        min_rr_clearance = float(np.min(rr_d)) if self.n_agents > 1 else float("inf")
+        min_ro_clearance = float(np.min(ro_d)) if ro_d.size else float("inf")
         collision_free = rr_collision == 0.0 and ro_collision == 0.0
         form_ok = form_rms < self.ec.formation_tolerance
         success = float(goal_reached and collision_free and form_ok)
@@ -580,6 +584,8 @@ class SwarmFormationEnv:
             "form_ok": float(form_ok),
             "rr_collision": rr_collision,
             "ro_collision": ro_collision,
+            "min_rr_clearance": min_rr_clearance,
+            "min_ro_clearance": min_ro_clearance,
             "collision_free": float(collision_free),
             "success": success,
             "stall_rate": stall_rate,

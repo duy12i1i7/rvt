@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Dict, List
 
+from .splits import VALIDATION_TEAM_SIZES
+
 
 @dataclass
 class EnvConfig:
@@ -60,7 +62,26 @@ class EnvConfig:
 
 
 @dataclass
+class SeedConfig:
+    """Explicit seed roles.
+
+    Each role is independent: changing `model_seed` must not perturb the final
+    test episodes, and changing `final_test_seed` must not perturb model
+    initialisation. Proven by `tests/test_seed_independence.py`.
+    """
+
+    model_seed: int = 0              # network init, batch order
+    training_data_seed: int = 0      # expert-episode generation
+    validation_seed: int = 0         # validation episode set
+    final_test_seed: int = 0         # final test episode set (shared by all methods)
+    counterfactual_rollout_seed: int = 0  # stochastic rollout labelling
+    environment_noise_seed: int = 0  # sensor/actuation noise, when enabled
+
+
+@dataclass
 class TrainConfig:
+    # DEPRECATED: retained only so that older checkpoints unpickle. It no longer
+    # drives model init, data generation, or episode selection -- see SeedConfig.
     seed: int = 42
     device: str = "cpu"
     expert_episodes: int = 500
@@ -94,7 +115,15 @@ class TrainConfig:
         "narrow_passage",
         "dynamic_obstacles",
     ])
-    rollout_val_team_sizes: List[int] = field(default_factory=lambda: [8, 16, 24])
+    # Validation team sizes come from the validation split and are disjoint from
+    # the final test sweep, so a validation episode can never coincide with a test
+    # episode. Previously [8, 16, 24] -- all three are final-test sizes.
+    rollout_val_team_sizes: List[int] = field(
+        default_factory=lambda: list(VALIDATION_TEAM_SIZES)
+    )
+    # Hyperparameter trials per method. Kept at 0 (no tuning was performed) and
+    # asserted equal across methods by tests/test_equal_model_selection_budget.py.
+    hyperparameter_trials: int = 0
     n_workers: int = 0  # 0 = auto (3/4 of cpu_count)
 
 
@@ -118,6 +147,12 @@ class Config:
     train: TrainConfig = field(default_factory=TrainConfig)
     eval: EvalConfig = field(default_factory=EvalConfig)
     method: MethodConfig = field(default_factory=MethodConfig)
+    seeds: SeedConfig = field(default_factory=SeedConfig)
+
+    def seed_config(self) -> SeedConfig:
+        """Tolerate Config objects unpickled from checkpoints predating SeedConfig."""
+        existing = getattr(self, "seeds", None)
+        return existing if existing is not None else SeedConfig()
 
 
 TOPOLOGY_ACTIONS: Dict[int, str] = {

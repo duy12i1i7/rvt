@@ -23,10 +23,50 @@ LEARNED = ["gnn_only", "instant_cert", "rvt_swarm"]
 BASELINES = ["adaptive_formation", "cbf_qp", "orca", "centralized_mpc"]
 
 
+from rvt_swarm.metrics import EVALUATION_SCHEMA_VERSION
+
+
+class SchemaVersionError(RuntimeError):
+    """Raised when result files from incompatible metric semantics are mixed."""
+
+
 def save_json(obj, path: Path) -> None:
+    """Write a result file, stamping it with the evaluation schema version.
+
+    Results produced under different metric semantics must never be aggregated
+    together; `require_schema_version` enforces that on read.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "evaluation_schema_version": EVALUATION_SCHEMA_VERSION,
+        "data": obj,
+    }
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=2)
+        json.dump(payload, f, indent=2)
+
+
+def require_schema_version(payload, path: Path):
+    """Return the payload's data, rejecting foreign or unstamped schema versions."""
+    if not isinstance(payload, dict) or "evaluation_schema_version" not in payload:
+        raise SchemaVersionError(
+            f"{path}: result file carries no evaluation_schema_version. It predates "
+            f"schema {EVALUATION_SCHEMA_VERSION} and was produced under the invalid "
+            f"terminal-step metric semantics. Move it to results/legacy_pre_metric_fix/ "
+            f"and regenerate; see that directory's README."
+        )
+    found = int(payload["evaluation_schema_version"])
+    if found != EVALUATION_SCHEMA_VERSION:
+        raise SchemaVersionError(
+            f"{path}: evaluation_schema_version={found}, expected "
+            f"{EVALUATION_SCHEMA_VERSION}. Results from different metric semantics "
+            f"must not be aggregated."
+        )
+    return payload["data"]
+
+
+def load_json(path: Path):
+    with open(path, "r", encoding="utf-8") as f:
+        return require_schema_version(json.load(f), path)
 
 
 DEFAULT_MULTI_SEEDS = [0, 1, 2, 3, 4]
@@ -42,7 +82,10 @@ def apply_runtime_overrides(
     cfg.train.device = device
     cfg.train.n_workers = workers
     if seed is not None:
-        cfg.train.seed = int(seed)
+        # `seed` now varies the MODEL seed only. The training-data, validation and
+        # final-test episode sets are deliberately left untouched so that every
+        # training seed is evaluated on exactly the same test episodes.
+        cfg.seeds.model_seed = int(seed)
     if episodes_per_setting is not None:
         cfg.eval.episodes_per_setting = int(episodes_per_setting)
     return cfg
@@ -393,10 +436,9 @@ def run_multi_seed(
                 f"Missing summary outputs for seed {seed} in {seed_dir}. "
                 "Run evaluation or disable skip flags."
             )
-        with summary_path.open("r", encoding="utf-8") as f:
-            seed_summaries[int(seed)] = json.load(f)
-        with by_team_size_path.open("r", encoding="utf-8") as f:
-            seed_team_summaries[int(seed)] = json.load(f)
+        # Rejects files produced under different metric semantics.
+        seed_summaries[int(seed)] = load_json(summary_path)
+        seed_team_summaries[int(seed)] = load_json(by_team_size_path)
 
     aggregate = aggregate_multiseed_summary(
         seed_summaries,

@@ -9,6 +9,7 @@ from .config import Config, LEARNED_TOPOLOGY_IDS
 from .controllers import expert_action
 from .environment import SwarmFormationEnv
 from .recoverability import classify_recoverability, recoverability_targets
+from .splits import SPLIT_SEED_BASE, SPLIT_SEED_SPAN, TRAIN
 from .utils import configure_worker_runtime, heading_features, limit_child_threads, pairwise_dist, unit
 
 
@@ -380,9 +381,14 @@ def generate_dataset(cfg: Config, episodes: int | None = None) -> SwarmDataset:
     import os
 
     episodes = episodes or cfg.train.expert_episodes
-    # Each episode gets a unique seed derived from base seed
-    base_rng = np.random.default_rng(cfg.train.seed)
-    seeds = base_rng.integers(0, 2**31, size=episodes)
+    # Training episodes are drawn from the TRAINING data seed, independently of
+    # model_seed and of the validation/final-test episode sets. Seeds are mapped
+    # into the training namespace so they can never collide with an evaluation
+    # episode seed.
+    seed_cfg = cfg.seed_config()
+    base_rng = np.random.default_rng(seed_cfg.training_data_seed)
+    raw = base_rng.integers(0, SPLIT_SEED_SPAN, size=episodes)
+    seeds = [SPLIT_SEED_BASE[TRAIN] + int(v) for v in raw]
     args_list = [(ep, cfg, int(seeds[ep])) for ep in range(episodes)]
 
     auto = max(1, (os.cpu_count() * 3) // 4)

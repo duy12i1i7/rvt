@@ -25,11 +25,46 @@ def epochs_for_model(cfg: Config, model_name: str) -> int:
     return cfg.train.epochs
 
 
+LEARNED_METHOD_NAMES = ("rvt_swarm", "gnn_only", "instant_cert")
+
+
 def split_dataset(ds: SwarmDataset):
     n = len(ds)
     n_train = int(0.9 * n)
     n_val = n - n_train
-    return random_split(ds, [n_train, n_val], generator=torch.Generator().manual_seed(ds.cfg.train.seed))
+    seed = ds.cfg.seed_config().model_seed
+    return random_split(ds, [n_train, n_val], generator=torch.Generator().manual_seed(seed))
+
+
+def training_budget_report(cfg: Config, steps_per_epoch: int | None = None) -> Dict[str, Dict]:
+    """Machine-readable training and model-selection budget, per learned method.
+
+    Every field must be identical across methods; asserted by
+    `tests/test_equal_model_selection_budget.py`.
+    """
+    report: Dict[str, Dict] = {}
+    for name in LEARNED_METHOD_NAMES:
+        epochs = epochs_for_model(cfg, name)
+        validation_calls = sum(
+            1 for e in range(1, epochs + 1) if should_run_rollout_validation(cfg, name, e, 0)
+        )
+        report[name] = {
+            "epochs": int(epochs),
+            "steps_per_epoch": int(steps_per_epoch) if steps_per_epoch else None,
+            "max_optimizer_steps": int(epochs * steps_per_epoch) if steps_per_epoch else None,
+            "validation_interval_epochs": int(cfg.train.rollout_val_interval),
+            "max_validation_calls": int(validation_calls),
+            "checkpoints_considered": int(cfg.train.rollout_val_topk_checkpoints),
+            "early_stopping_patience": int(cfg.train.early_stopping_patience),
+            "early_stopping_min_delta": float(cfg.train.early_stopping_min_delta),
+            "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+            "hyperparameter_trials": int(cfg.train.hyperparameter_trials),
+            "validation_scenarios": list(cfg.train.rollout_val_scenarios),
+            "validation_team_sizes": list(cfg.train.rollout_val_team_sizes),
+            "validation_episodes_per_setting": int(cfg.train.rollout_val_episodes_per_setting),
+            "recheck_episodes_per_setting": int(cfg.train.rollout_val_recheck_episodes_per_setting),
+        }
+    return report
 
 
 def pairwise_ranking_loss(pred_scores: torch.Tensor, target_scores: torch.Tensor) -> torch.Tensor:
@@ -302,7 +337,8 @@ def recheck_rollout_candidates(
 
 
 def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset: SwarmDataset | None = None) -> str:
-    set_seed(cfg.train.seed)
+    seeds = cfg.seed_config()
+    set_seed(seeds.model_seed)
     device = torch_device(cfg.train.device)
     ds = dataset if dataset is not None else generate_dataset(cfg)
     train_ds, val_ds = split_dataset(ds)
@@ -311,14 +347,14 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
         batch_size=cfg.train.batch_size,
         shuffle=True,
         collate_fn=collate_graphs,
-        generator=torch.Generator().manual_seed(cfg.train.seed),
+        generator=torch.Generator().manual_seed(seeds.model_seed),
     )
     val_loader = DataLoader(
         val_ds,
         batch_size=cfg.train.batch_size,
         shuffle=False,
         collate_fn=collate_graphs,
-        generator=torch.Generator().manual_seed(cfg.train.seed + 1),
+        generator=torch.Generator().manual_seed(seeds.model_seed + 1),
     )
     model = build_model(model_name, cfg.train.hidden_dim, cfg.train.message_passes).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.lr, weight_decay=cfg.train.weight_decay)
