@@ -64,8 +64,19 @@ def infer_learned_action(
     recoverability = None
     uncertainty = None
     recoverability_scores = None
+    audit = cfg.audit_config() if hasattr(cfg, "audit_config") else None
     topology_scores = out["recoverability_scores"] if cfg.method.use_recoverability else None
+    if (
+        topology_scores is not None
+        and audit is not None
+        and not audit.use_uncertainty_adjustment
+        and out.get("raw_recoverability_scores") is not None
+    ):
+        # Diagnostic variant: rank on the raw score head, bypassing the
+        # dispersion-scaled uncertainty adjustment. No retraining required.
+        topology_scores = out["raw_recoverability_scores"]
 
+    selector_stats: Dict[str, object] = {}
     if out["topology_logits"] is not None and cfg.method.use_topology:
         topology = choose_counterfactual_topology(
             obs,
@@ -74,6 +85,7 @@ def infer_learned_action(
             cfg,
             prev_topology,
             out.get("uncertainty"),
+            stats=selector_stats,
         )
         topo_idx = LEARNED_TOPOLOGY_IDS.index(topology)
         if out.get("actions_by_topology") is not None:
@@ -99,6 +111,7 @@ def infer_learned_action(
         else:
             recoverability = float(out["recoverability"].squeeze().cpu().item())
     safety_stats: Dict[str, float] = {}
+    nominal_actions = actions.copy()
     if method in {"rvt_swarm", "instant_cert"}:
         actions = simple_recover_shield(
             actions,
@@ -112,10 +125,12 @@ def infer_learned_action(
 
     return {
         "actions": actions,
+        "nominal_actions": nominal_actions,
         "topology": topology,
         "recoverability": recoverability,
         "recoverability_scores": recoverability_scores,
         "uncertainty": uncertainty,
         "safety_stats": safety_stats,
+        "selector_stats": selector_stats,
         "outputs": out,
     }

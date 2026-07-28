@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from .splits import VALIDATION_TEAM_SIZES
 
@@ -133,6 +133,26 @@ class EvalConfig:
 
 
 @dataclass
+class AuditConfig:
+    """Diagnostic knobs for the method audit.
+
+    Every default reproduces the shipped behaviour exactly, so enabling audit
+    instrumentation cannot change any Evaluation Protocol V2 result. These are
+    swept on TRAINING and VALIDATION scenarios only.
+    """
+
+    # Safety filter: override the geometry-derived risk trigger (None = derived).
+    risk_threshold_override: Optional[float] = None
+    disable_safety_filter: bool = False
+    # Topology selector variant:
+    #   "lexicographic" (shipped) | "logits_argmax" | "score_argmax" | "fixed"
+    selector_mode: str = "lexicographic"
+    min_dwell_steps: int = 0          # 0 = no dwell constraint (shipped)
+    hysteresis_margin: float = 0.0    # 0 = no hysteresis (shipped)
+    use_uncertainty_adjustment: bool = True
+
+
+@dataclass
 class MethodConfig:
     use_recoverability: bool = True
     use_topology: bool = True
@@ -148,6 +168,12 @@ class Config:
     eval: EvalConfig = field(default_factory=EvalConfig)
     method: MethodConfig = field(default_factory=MethodConfig)
     seeds: SeedConfig = field(default_factory=SeedConfig)
+    audit: AuditConfig = field(default_factory=AuditConfig)
+
+    def audit_config(self) -> AuditConfig:
+        """Tolerate Config objects unpickled from checkpoints predating AuditConfig."""
+        existing = getattr(self, "audit", None)
+        return existing if existing is not None else AuditConfig()
 
     def seed_config(self) -> SeedConfig:
         """Tolerate Config objects unpickled from checkpoints predating SeedConfig."""

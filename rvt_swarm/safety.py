@@ -36,6 +36,9 @@ def _norm2(vec: np.ndarray) -> float:
 
 
 def shield_risk_threshold(cfg: Config) -> float:
+    override = getattr(cfg, "audit", None)
+    if override is not None and override.risk_threshold_override is not None:
+        return clip01(float(override.risk_threshold_override))
     return clip01(1.0 - (cfg.env.max_speed * cfg.env.dt) / max(cfg.env.nominal_spacing, 1e-6))
 
 
@@ -154,10 +157,25 @@ def simple_recover_shield(
         stats.setdefault("activated", 0.0)
         stats.setdefault("triggered", 0.0)
         stats.setdefault("action_delta", 0.0)
+        stats.setdefault("reason", "not_triggered")
+        stats.setdefault("risk", 0.0)
+        stats.setdefault("threshold", 0.0)
+        stats.setdefault("n_active_constraints", 0.0)
+        stats.setdefault("nominal_norm", 0.0)
+        stats.setdefault("relative_intervention", 0.0)
+        stats.setdefault("mean_cos_direction_change", 1.0)
+    audit = getattr(cfg, "audit", None)
+    if audit is not None and audit.disable_safety_filter:
+        if stats is not None:
+            stats["reason"] = "disabled"
+        return actions
     if not cfg.method.use_progress_shield:
+        if stats is not None:
+            stats["reason"] = "disabled"
         return actions
     threshold = shield_risk_threshold(cfg)
-    risk = collision_risk(obs, cfg)
+    geometric_risk = collision_risk(obs, cfg)
+    risk = geometric_risk
 
     # Recoverability is treated as a conservative warning signal only.
     # Positive scores should not "explain away" geometric collision risk.
@@ -176,22 +194,35 @@ def simple_recover_shield(
     # Docs: "chỉ can thiệp nếu tất cả lựa chọn có recoverability âm"
     if all_negative:
         risk = max(risk, threshold)
+    if stats is not None:
+        stats["risk"] = float(risk)
+        stats["threshold"] = float(threshold)
     if risk < threshold:
         return actions
     if stats is not None:
         stats["triggered"] = 1.0
+        if geometric_risk >= threshold:
+            stats["reason"] = "geometric_risk"
+        elif all_negative:
+            stats["reason"] = "all_topologies_negative"
+        else:
+            stats["reason"] = "negative_recoverability_escalation"
 
     # --- QP-based intervention ---
     progress_dir = progress_direction(obs)
     progress_w = cfg.env.max_accel * clip01(1.0 - risk)
     safe = actions.copy()
+    n_constraints = 0
     for i in range(len(safe)):
         constraints = _build_cbf_constraints(i, obs, cfg)
         if not constraints:
             continue
+        n_constraints += len(constraints)
         safe[i] = _solve_per_robot_qp(
             safe[i], constraints, progress_dir, cfg.env.max_accel, progress_w,
         )
+    if stats is not None:
+        stats["n_active_constraints"] = float(n_constraints)
     # Blend by the actual projected correction magnitude rather than a fixed cap.
     # This keeps the intervention scale-free across environments.
     adjustment = projected_adjustment_ratio(actions, safe, cfg)
@@ -201,10 +232,18 @@ def simple_recover_shield(
     if all_negative and recoverability is not None:
         blend = max(blend, clip01(-float(recoverability)))
     filtered = (1.0 - blend) * actions + blend * safe
-    if stats is not None:
-        delta = float(np.max(np.linalg.norm(filtered - actions, axis=-1))) if len(actions) else 0.0
-        stats["action_delta"] = delta
-        stats["activated"] = float(delta > 1e-9)
+    if stats is not None and len(actions):
+        diff = np.linalg.norm(filtered - actions, axis=-1)
+        nom = np.linalg.norm(actions, axis=-1)
+        eps = 1e-6
+        stats["action_delta"] = float(np.max(diff))
+        stats["nominal_norm"] = float(np.mean(nom))
+        # relative_intervention = ||u_filtered - u_nominal|| / max(||u_nominal||, eps)
+        stats["relative_intervention"] = float(np.mean(diff / np.maximum(nom, eps)))
+        denom = np.maximum(nom, eps) * np.maximum(np.linalg.norm(filtered, axis=-1), eps)
+        cos = np.sum(actions * filtered, axis=-1) / denom
+        stats["mean_cos_direction_change"] = float(np.mean(np.clip(cos, -1.0, 1.0)))
+        stats["activated"] = float(np.max(diff) > 1e-9)
     return filtered
 
 
@@ -556,11 +595,34 @@ def choose_counterfactual_topology(
     cfg: Config,
     previous_topology: int = 0,
     uncertainty: torch.Tensor | None = None,
+    stats: Dict | None = None,
 ) -> int:
+    audit = getattr(cfg, "audit", None)
     logit_choice = choose_topology_from_logits(topology_logits, candidate_topologies=LEARNED_TOPOLOGY_IDS)
+    if stats is not None:
+        stats["logits"] = topology_logits.squeeze(0).detach().cpu().numpy().tolist()
+        stats["logit_argmax_choice"] = int(logit_choice)
+        stats["previous_topology"] = int(previous_topology)
+        stats["time_since_switch"] = float(obs.get("time_since_switch", 0.0))
+        stats["bottleneck"] = float(obs.get("bottleneck", 0.0))
+        stats["progress"] = float(obs.get("progress", 0.0))
+        stats["formation_scale"] = float(obs.get("formation_scale", 1.0))
+        stats["reason"] = "lexicographic"
+    if audit is not None and audit.selector_mode == "fixed":
+        if stats is not None:
+            stats["reason"] = "fixed"
+        return 0
     if not cfg.method.use_counterfactual_topology:
+        if stats is not None:
+            stats["reason"] = "logits_argmax_fallback"
         return logit_choice
     if recoverability_scores is None or not cfg.method.use_recoverability:
+        if stats is not None:
+            stats["reason"] = "logits_argmax_fallback"
+        return logit_choice
+    if audit is not None and audit.selector_mode == "logits_argmax":
+        if stats is not None:
+            stats["reason"] = "logits_argmax"
         return logit_choice
 
     scores = recoverability_scores.squeeze(0).detach().cpu().numpy().astype(np.float32)
@@ -581,7 +643,21 @@ def choose_counterfactual_topology(
         previous_topology,
         candidate_topologies=LEARNED_TOPOLOGY_IDS,
     )
-    return select_topology_from_score_signal(
+    if stats is not None:
+        stats["scores"] = scores.tolist()
+        stats["score_signal"] = score_signal.tolist()
+        stats["uncertainty"] = uncert.tolist()
+        stats["allowed"] = allowed.tolist()
+        stats["context"] = context.tolist()
+        stats["switch_ready"] = switch_ready.tolist()
+
+    if audit is not None and audit.selector_mode == "score_argmax":
+        idx = int(np.argmax(np.where(allowed, score_signal, -np.inf)))
+        if stats is not None:
+            stats["reason"] = "score_argmax"
+        return LEARNED_TOPOLOGY_IDS[idx]
+
+    choice = select_topology_from_score_signal(
         score_signal,
         allowed,
         context,
@@ -591,3 +667,24 @@ def choose_counterfactual_topology(
         switch_ready=switch_ready,
         candidate_topologies=LEARNED_TOPOLOGY_IDS,
     )
+
+    if audit is not None and choice != stable_topology_anchor(previous_topology):
+        prev_anchor = stable_topology_anchor(previous_topology)
+        # Minimum dwell time: refuse to leave the current mode too soon.
+        if audit.min_dwell_steps > 0:
+            if float(obs.get("time_since_switch", 0.0)) < audit.min_dwell_steps:
+                if stats is not None:
+                    stats["reason"] = "dwell_blocked"
+                return prev_anchor
+        # Hysteresis: require a score margin over the incumbent to switch.
+        if audit.hysteresis_margin > 0.0 and prev_anchor in LEARNED_TOPOLOGY_IDS:
+            prev_idx = LEARNED_TOPOLOGY_IDS.index(prev_anchor)
+            new_idx = LEARNED_TOPOLOGY_IDS.index(choice)
+            if score_signal[new_idx] - score_signal[prev_idx] < audit.hysteresis_margin:
+                if stats is not None:
+                    stats["reason"] = "hysteresis_blocked"
+                return prev_anchor
+    if stats is not None:
+        stats["selected"] = int(choice)
+        stats["switched"] = int(choice != stable_topology_anchor(previous_topology))
+    return choice

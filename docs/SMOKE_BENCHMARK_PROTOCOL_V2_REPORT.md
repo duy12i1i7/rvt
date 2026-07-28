@@ -15,9 +15,22 @@ as performance.
 | | |
 |---|---|
 | Branch | `fix/benchmark-validity` (not merged) |
-| Commit at benchmark time | **`fafafc5008dd932c27fec409716eb7547c4f3fee`** |
+| Commit **stamped at runtime** | `fafafc5008dd932c27fec409716eb7547c4f3fee` |
+| Commit that **actually reproduces this run** | **`3e93d95`**, tagged `benchmark-protocol-v2-smoke` |
 | Schema | `evaluation_schema_version = 2` |
 | Recorded in | every checkpoint, every CSV row, `config.yaml` |
+
+> **Provenance correction (added during the method audit).** The commit stamped
+> into the result files is `fafafc5`, because that was `HEAD` when the run
+> executed — but the working tree at that moment also contained uncommitted
+> changes that were only committed afterwards: the **spawn-clamp fix** (without
+> which consistency check 8 fails, §8.1) and the **checkpoint provenance
+> stamping** (without which check 11 cannot read a schema version). `fafafc5`
+> therefore does *not* reproduce this benchmark. The first commit that does is
+> `3e93d95`, tagged `benchmark-protocol-v2-smoke`. Treat the stamped `fafafc5`
+> in `per_episode.csv` and `config.yaml` as an under-specification of the true
+> code state, not as a reproducible pointer. The stamping mechanism is sound; it
+> was the commit discipline that failed, and the tag now fixes the reference.
 
 Pre-smoke state:
 
