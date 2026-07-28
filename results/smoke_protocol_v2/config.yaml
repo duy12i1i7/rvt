@@ -1,0 +1,250 @@
+# PyYAML unavailable; emitted as JSON (valid YAML 1.2)
+{
+  "evaluation_schema_version": 2,
+  "git_commit": "fafafc5008dd932c27fec409716eb7547c4f3fee",
+  "purpose": "DIAGNOSTIC SMOKE BENCHMARK - not a publication experiment",
+  "determinism": {
+    "deterministic_mode": true,
+    "sensor_noise": "none (no noise model implemented)",
+    "actuation_noise": "none",
+    "counterfactual_rollout_seed": "INACTIVE - rollout labelling is deterministic (M=1)",
+    "environment_noise_seed": "INACTIVE - no noise model exists",
+    "noise_robustness_claims_permitted": false
+  },
+  "methods": [
+    "fixed_formation_expert",
+    "gnn_only",
+    "rvt_swarm",
+    "orca",
+    "cbf_qp"
+  ],
+  "learned_methods": [
+    "gnn_only",
+    "rvt_swarm"
+  ],
+  "test_split": {
+    "scenarios": [
+      "open_field",
+      "narrow_passage"
+    ],
+    "team_sizes": [
+      4,
+      8
+    ],
+    "episodes_per_cell": 30,
+    "final_test_seed": 0,
+    "total_episodes_per_method": 120
+  },
+  "validation_split": {
+    "scenarios": [
+      "narrow_passage",
+      "dynamic_obstacles"
+    ],
+    "team_sizes": [
+      5,
+      11
+    ],
+    "episodes_per_setting": 1
+  },
+  "smoke_budget": {
+    "expert_episodes": 8,
+    "epochs": 6,
+    "rollout_val_interval": 2,
+    "rollout_val_episodes_per_setting": 1,
+    "rollout_val_topk_checkpoints": 2,
+    "rollout_val_recheck_episodes_per_setting": 1,
+    "early_stopping_patience": 3,
+    "validation_team_sizes": [
+      5,
+      11
+    ],
+    "validation_scenarios": [
+      "narrow_passage",
+      "dynamic_obstacles"
+    ]
+  },
+  "model_seed": 0,
+  "dataset_size_samples": 897,
+  "steps_per_epoch": 26,
+  "training_budget_report": {
+    "rvt_swarm": {
+      "epochs": 6,
+      "steps_per_epoch": 26,
+      "max_optimizer_steps": 156,
+      "validation_interval_epochs": 2,
+      "max_validation_calls": 3,
+      "checkpoints_considered": 2,
+      "early_stopping_patience": 3,
+      "early_stopping_min_delta": 0.0001,
+      "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+      "hyperparameter_trials": 0,
+      "validation_scenarios": [
+        "narrow_passage",
+        "dynamic_obstacles"
+      ],
+      "validation_team_sizes": [
+        5,
+        11
+      ],
+      "validation_episodes_per_setting": 1,
+      "recheck_episodes_per_setting": 1
+    },
+    "gnn_only": {
+      "epochs": 6,
+      "steps_per_epoch": 26,
+      "max_optimizer_steps": 156,
+      "validation_interval_epochs": 2,
+      "max_validation_calls": 3,
+      "checkpoints_considered": 2,
+      "early_stopping_patience": 3,
+      "early_stopping_min_delta": 0.0001,
+      "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+      "hyperparameter_trials": 0,
+      "validation_scenarios": [
+        "narrow_passage",
+        "dynamic_obstacles"
+      ],
+      "validation_team_sizes": [
+        5,
+        11
+      ],
+      "validation_episodes_per_setting": 1,
+      "recheck_episodes_per_setting": 1
+    },
+    "instant_cert": {
+      "epochs": 6,
+      "steps_per_epoch": 26,
+      "max_optimizer_steps": 156,
+      "validation_interval_epochs": 2,
+      "max_validation_calls": 3,
+      "checkpoints_considered": 2,
+      "early_stopping_patience": 3,
+      "early_stopping_min_delta": 0.0001,
+      "checkpoint_selection_rule": "lexicographic_validation_key_then_topk_recheck",
+      "hyperparameter_trials": 0,
+      "validation_scenarios": [
+        "narrow_passage",
+        "dynamic_obstacles"
+      ],
+      "validation_team_sizes": [
+        5,
+        11
+      ],
+      "validation_episodes_per_setting": 1,
+      "recheck_episodes_per_setting": 1
+    }
+  },
+  "checkpoints": {
+    "gnn_only": {
+      "evaluation_schema_version": 2,
+      "git_commit": "fafafc5008dd932c27fec409716eb7547c4f3fee",
+      "epoch": 6,
+      "is_fresh": true,
+      "path": "checkpoints/smoke_protocol_v2/gnn_only.pt"
+    },
+    "rvt_swarm": {
+      "evaluation_schema_version": 2,
+      "git_commit": "fafafc5008dd932c27fec409716eb7547c4f3fee",
+      "epoch": 4,
+      "is_fresh": true,
+      "path": "checkpoints/smoke_protocol_v2/rvt_swarm.pt"
+    }
+  },
+  "environment": {
+    "world_size": 12.0,
+    "dt": 0.15,
+    "max_steps": 120,
+    "robot_radius": 0.18,
+    "obstacle_radius": 0.35,
+    "sensing_radius": 4.0,
+    "max_speed": 0.9,
+    "max_accel": 0.6,
+    "goal_tolerance": 0.55,
+    "formation_tolerance": 0.55,
+    "nominal_spacing": 0.9,
+    "min_rr_distance": 0.4,
+    "min_ro_distance": 0.55,
+    "spacing_margin": 0.05,
+    "spawn_jitter": 0.12,
+    "obstacle_count": 8,
+    "dynamic_obstacle_count": 2,
+    "dynamic_obstacle_speed": 0.35,
+    "lidar_num_rays": 36,
+    "lidar_range": 3.0,
+    "lidar_fov": 4.712389
+  },
+  "consistency_checks": [
+    {
+      "name": "1. every result carries evaluation_schema_version == 2",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "2. episode signatures identical across methods",
+      "passed": true,
+      "detail": "",
+      "n": 120
+    },
+    {
+      "name": "3. no final-test episode used for validation / selection",
+      "passed": true,
+      "detail": "",
+      "n": 124
+    },
+    {
+      "name": "4. success <= goal_reached and success <= collision_free",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "5. any collision step implies collision_free == 0",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "6. collision_free == 1 implies both collision-step counts are zero",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "7. episode-wide collision_free <= terminal collision_free",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "8. all initial states valid (no collision, in bounds, valid geometry)",
+      "passed": true,
+      "detail": "",
+      "n": 120
+    },
+    {
+      "name": "9. no NaN or infinity in metrics or runtime values",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "10. runtime measurement covers exactly the control steps",
+      "passed": true,
+      "detail": "",
+      "n": 600
+    },
+    {
+      "name": "11. every learned method uses a fresh schema-2 checkpoint",
+      "passed": true,
+      "detail": "",
+      "n": 2
+    },
+    {
+      "name": "12. training and model-selection budgets equal across learned methods",
+      "passed": true,
+      "detail": "",
+      "n": 2
+    }
+  ]
+}
