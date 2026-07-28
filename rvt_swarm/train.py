@@ -11,8 +11,22 @@ from torch.utils.data import DataLoader, random_split
 from .config import Config
 from .dataset import SwarmDataset, collate_graphs, generate_dataset
 from .evaluate import rollout_validation_key, rollout_validation_score, rollout_validation_summary
+from .metrics import EVALUATION_SCHEMA_VERSION
 from .models import build_model
 from .utils import score_dispersion_tensor, set_seed, torch_device
+
+
+def git_commit() -> str:
+    """Commit hash recorded into every checkpoint for provenance."""
+    import subprocess
+
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=Path(__file__).resolve().parent.parent,
+            stderr=subprocess.DEVNULL,
+        ).decode().strip()
+    except Exception:
+        return "unknown"
 
 
 def epochs_for_model(cfg: Config, model_name: str) -> int:
@@ -481,6 +495,8 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
                 "best_metric_mode": best_mode,
                 "validation_summary": rollout_summary,
                 "model_name": model_name,
+                "evaluation_schema_version": EVALUATION_SCHEMA_VERSION,
+                "git_commit": git_commit(),
             }
             torch.save(state, best_ckpt)
             if cfg.train.save_best_only:
@@ -496,6 +512,8 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
                 "best_metric_mode": best_mode,
                 "validation_summary": rollout_summary,
                 "model_name": model_name,
+                "evaluation_schema_version": EVALUATION_SCHEMA_VERSION,
+                "git_commit": git_commit(),
             }
 
         if (
@@ -525,6 +543,8 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
             "best_metric_mode": best_mode,
             "validation_summary": rollout_summary,
             "model_name": model_name,
+            "evaluation_schema_version": EVALUATION_SCHEMA_VERSION,
+            "git_commit": git_commit(),
         }, last_ckpt)
 
         warmup_tag = " [warmup]" if in_warmup else ""
