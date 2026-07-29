@@ -12,7 +12,9 @@ from .safety import choose_counterfactual_topology, simple_recover_shield
 
 
 LEARNED_METHODS = {"rvt_swarm", "gnn_only", "instant_cert",
-                   "rvt_simple_rank", "direct_topology_classifier"}
+                   "rvt_simple_rank", "direct_topology_classifier",
+                   "rvt_binary_recovery", "direct_keep_line_classifier",
+                   "topology_agnostic_gnn"}
 
 
 def is_learned_method(method: str) -> bool:
@@ -78,7 +80,19 @@ def infer_learned_action(
         topology_scores = out["raw_recoverability_scores"]
 
     selector_stats: Dict[str, object] = {}
-    if method == "rvt_simple_rank" and cfg.method.use_topology:
+    if method in ("rvt_binary_recovery", "direct_keep_line_classifier"):
+        from .binary_pilot import MODES as BIN_MODES
+        probs = out["recovery_probs"].squeeze(0).detach().cpu().numpy()
+        idx = int(probs.argmax())
+        topology = BIN_MODES[idx]
+        selector_stats = {"reason": "argmax_recovery_probability",
+                          "probs": probs.tolist(), "selected": int(topology)}
+        actions = out["actions_by_topology"][:, idx, :]
+        recoverability_scores = probs
+    elif method == "topology_agnostic_gnn":
+        actions = out["actions"]
+        topology = 0
+    elif method == "rvt_simple_rank" and cfg.method.use_topology:
         # Direct argmax over the per-mode ranking score. No lexicographic key,
         # no tie-break levels, no uncertainty adjustment.
         scores_np = topology_scores.squeeze(0).detach().cpu().numpy()

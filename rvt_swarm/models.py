@@ -504,7 +504,7 @@ def build_model(name: str, hidden_dim: int = 128, passes: int = 3) -> nn.Module:
     if name == "direct_keep_line_classifier":
         return DirectKeepLineClassifier(hidden_dim, passes)
     # Legacy names are preserved; the original implementation is untouched.
-    if name in ("gnn_only", "gnn_topology_agnostic"):
+    if name in ("gnn_only", "gnn_topology_agnostic", "topology_agnostic_gnn"):
         return GNNOnlyPolicy(hidden_dim, passes)
     if name == "instant_cert":
         return InstantCertPolicy(hidden_dim, passes)
