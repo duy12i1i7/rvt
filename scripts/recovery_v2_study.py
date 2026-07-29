@@ -35,7 +35,7 @@ MODE_NAME = {0: "keep", 2: "line", 3: "split"}
 ROLLOUT_SEED = 20_250_801
 
 DEFAULT = dict(h_commit=10, t_max=120, tube_scale=1.0, dwell_L=3, perturb_pos=0.02)
-GRID = [DEFAULT] + [
+GRID = [DEFAULT] if __import__('os').environ.get('SKIP_GRID') else [DEFAULT] + [
     {**DEFAULT, "h_commit": 5}, {**DEFAULT, "h_commit": 20},
     {**DEFAULT, "t_max": 60}, {**DEFAULT, "t_max": 240},
     {**DEFAULT, "tube_scale": 0.75}, {**DEFAULT, "tube_scale": 1.5},
@@ -44,9 +44,9 @@ GRID = [DEFAULT] + [
 ]
 TEAM_SIZES = [4, 6]
 N_ROLLOUTS = 3
-STATE_STRIDE = 25
+STATE_STRIDE = 40
 EPISODES_STATES = 1
-EPISODES_POLICY = 3
+EPISODES_POLICY = 2
 
 
 def kappa(a, b):

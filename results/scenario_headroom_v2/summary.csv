@@ -1,0 +1,8 @@
+benchmark_tag,best_keep_frac,best_line_frac,best_split_frac,family,keep_success,line_success,mean_oracle_switches,median_mode_margin,mode_necessity,oracle_advantage,oracle_success,qualified_states,selector_headroom,split_success,states,switch_necessity
+scenario-headroom-v1-invalid-recovery-label,1.0,0.0,0.0,ambiguous,1.0,1.0,0.125,0.6666666666666667,0.0,0.0,1.0,3,0.0,0.0,12,0.0
+scenario-headroom-v1-invalid-recovery-label,0.0,0.0,0.0,infeasible,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,12,0.0
+scenario-headroom-v1-invalid-recovery-label,0.25,0.75,0.0,keep_line_keep,0.375,1.0,1.5,0.6666666666666667,0.75,0.125,0.5,4,0.5833333333333334,0.0,12,0.0
+scenario-headroom-v1-invalid-recovery-label,1.0,0.0,0.0,keep_open,1.0,1.0,0.0,1.0,0.0,0.0,1.0,2,0.0,0.0,12,0.0
+scenario-headroom-v1-invalid-recovery-label,1.0,0.0,0.0,keep_split_merge,0.875,0.0,0.0,0.0,0.0,0.0,0.875,7,0.0,0.0,12,0.0
+scenario-headroom-v1-invalid-recovery-label,0.4444444444444444,0.5555555555555556,0.0,line_corridor,0.5,1.0,1.4166666666666667,0.33333333333333337,0.4444444444444444,0.33333333333333337,0.8333333333333334,9,0.48148148148148157,0.0,18,0.0
+scenario-headroom-v1-invalid-recovery-label,1.0,0.0,0.0,split_around,0.75,0.0,0.0,0.0,0.0,0.0,0.75,5,0.0,0.0,12,0.0

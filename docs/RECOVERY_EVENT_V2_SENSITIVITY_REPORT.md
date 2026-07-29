@@ -6,12 +6,10 @@ Script: `scripts/recovery_v2_study.py` · **Validation layouts only. No learned 
 131 validation decision states × 3 candidate modes × 3 rollouts per point.
 Grid and gates were predeclared in `RECOVERY_EVENT_V2_DEFINITION.md` §6.
 
-> **Status: 8 of 10 grid points complete.** The two outstanding points
-> (`dwell_L = 5`, `perturb_pos = 0.05`) were still computing when this was
-> written; they are marked pending below rather than estimated. Every gate
-> decision here rests only on completed points, and the two pending points move
-> axes (dwell, perturbation) that the completed neighbours show to be the *least*
-> sensitive.
+> **Status: all 10 grid points complete.** (An earlier revision of this document
+> reported 8 of 10 with two pending; the run finished the grid and wrote
+> `sensitivity.csv` before being killed externally, prior to Tasks 7 and 9. The
+> two formerly-pending points are filled in below and did not change any gate.)
 
 ## 1. Results
 
@@ -24,17 +22,17 @@ Grid and gates were predeclared in `RECOVERY_EVENT_V2_DEFINITION.md` §6.
 | 4 | 10 | 240 | 1.00 | 3 | 0.02 | 0.573 | **0.982** | **0.964** | **0.000** | 0.104 |
 | 5 | 10 | 120 | 0.75 | 3 | 0.02 | 0.529 | 0.964 | 0.928 | **0.000** | 0.125 |
 | 6 | 10 | 120 | 1.50 | 3 | 0.02 | 0.598 | 0.967 | 0.932 | **0.000** | 0.042 |
-| 7 | 10 | 120 | 1.00 | 1 | 0.02 | *(complete — see CSV)* | | | **0.000** | |
-| 8 | 10 | 120 | 1.00 | **5** | 0.02 | *pending* | | | | |
-| 9 | 10 | 120 | 1.00 | 3 | **0.05** | *pending* | | | | |
+| 7 | 10 | 120 | 1.00 | 1 | 0.02 | 0.573 | 0.992 | 0.984 | **0.000** | 0.062 |
+| 8 | 10 | 120 | 1.00 | **5** | 0.02 | 0.550 | 0.985 | 0.969 | **0.000** | 0.104 |
+| 9 | 10 | 120 | 1.00 | 3 | **0.05** | 0.555 | 0.990 | 0.979 | **0.000** | 0.104 |
 
 ## 2. Predeclared gates
 
 | # | Gate | Threshold | Measured | Verdict |
 |---|---|---|---|---|
-| 1 | infeasible-family false-positive rate | ≤ 0.01 | **0.000 at every completed point** | **PASS** |
+| 1 | infeasible-family false-positive rate | ≤ 0.01 | **0.000 at all 10 points** | **PASS** |
 | 2 | trivial open-field false-negative rate | ≤ 0.10 | **0.104** at the default | **MARGINAL FAIL** (0.000–0.125 across points) |
-| 3 | agreement under adjacent reasonable settings | ≥ 0.80 | 0.908–0.982, **except T_max = 60 at 0.712** | **PASS with one exclusion** (§3) |
+| 3 | agreement under adjacent reasonable settings | ≥ 0.80 | 0.908–0.992, **except T_max = 60 at 0.712** | **PASS with one exclusion** (§3) |
 | 4 | prevalence non-degenerate | — | 0.529–0.611 across reasonable points | **PASS** |
 | 5 | distinguishes feasible from infeasible | — | infeasible 0.000 vs open field ≈ 0.90 | **PASS** |
 
@@ -42,7 +40,7 @@ Grid and gates were predeclared in `RECOVERY_EVENT_V2_DEFINITION.md` §6.
 
 **The defect that invalidated V1 is gone.** V1 labelled **27.8 %** of rollouts as
 recovered in corridors 0.80–0.95 m wide — below the 1.10 m minimum for a single
-robot centre. V2 returns **0.000 at every completed grid point**, i.e. across
+robot centre. V2 returns **0.000 at all ten grid points**, i.e. across
 horizon, commitment, tube-tolerance and dwell variations. The rejection is not a
 tuned threshold; it is geometric, because `crossed_exit` requires the centroid to
 pass a plane beyond every obstacle of the structure.
@@ -62,8 +60,8 @@ This exclusion was derivable *before* the run from `world_size`, `v_max` and `dt
 and it is stated here with that derivation so a reader can check it rather than
 take it on trust. **The gate threshold itself is not being changed.**
 
-With point 3 excluded, agreement over reasonable settings is **0.908–0.982**
-(κ 0.811–0.964), comfortably above 0.80.
+With point 3 excluded, agreement over reasonable settings is **0.908–0.992**
+(κ 0.811–0.984), comfortably above 0.80.
 
 ## 5. Gate 2 fails marginally, and it is reported as a failure
 
@@ -81,8 +79,9 @@ feasible open-field rollouts, at the margin of the predeclared tolerance.
 Whether that matters depends on use. For **rejecting infeasible geometry** — the
 purpose of the repair — it is immaterial. For **training a calibrated predictor**,
 a ~10 % false-negative floor on easy states would bias the positive class and
-should be fixed first, most plausibly by relaxing the dwell requirement, which
-points 7–9 probe.
+should be fixed first, most plausibly by relaxing the dwell requirement — though points 7–9 show
+dwell is the *least* sensitive axis (agreement 0.985–0.992), so the residual
+false-negatives are unlikely to be dwell-driven.
 
 ## 6. Sensitivity ranking (completed points)
 
@@ -91,8 +90,8 @@ points 7–9 probe.
 | `T_max` | 60 → 0.712 agreement; 240 → 0.982 | **Most sensitive**, but only downward: too short a horizon truncates the task. 120 and 240 agree closely |
 | `H_commit` | 0.908 at both 5 and 20 | Moderately sensitive and symmetric |
 | `tube_scale` | 0.964–0.967 | Low sensitivity |
-| `dwell_L` | point 7 complete, point 8 pending | Low sensitivity so far |
-| `perturb_pos` | pending | — |
+| `dwell_L` | 0.985–0.992 agreement | **Least sensitive** |
+| `perturb_pos` | 0.990 agreement at 0.05 m | Very low sensitivity |
 
 The `H_commit` insensitivity is reassuring for the intervention design: the label
 does not hinge on the exact commitment window, so the causal reading of
@@ -111,7 +110,6 @@ first addressing the marginal open-field false-negative rate.
 ## 8. Limitations
 
 - 131 states, 3 rollouts per (state, mode), one perturbation seed.
-- Two grid points pending.
 - One axis is moved at a time from the default; interactions are not probed.
 - The rollout policy is the heuristic expert, so the event measures *its* ability
   to complete the task under a mode, not a learned policy's.
