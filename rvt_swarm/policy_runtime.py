@@ -11,7 +11,8 @@ from .models import build_model
 from .safety import choose_counterfactual_topology, simple_recover_shield
 
 
-LEARNED_METHODS = {"rvt_swarm", "gnn_only", "instant_cert"}
+LEARNED_METHODS = {"rvt_swarm", "gnn_only", "instant_cert",
+                   "rvt_simple_rank", "direct_topology_classifier"}
 
 
 def is_learned_method(method: str) -> bool:
@@ -52,7 +53,7 @@ def infer_learned_action(
     device = next(model.parameters()).device
     batch = batch_from_obs(obs, cfg, device)
     action_topology = None
-    if method == "rvt_swarm" and not cfg.method.use_topology:
+    if method in ("rvt_swarm", "rvt_simple_rank") and not cfg.method.use_topology:
         action_topology = torch.zeros((1,), dtype=torch.long, device=device)
     with torch.no_grad():
         if action_topology is None:
@@ -77,7 +78,16 @@ def infer_learned_action(
         topology_scores = out["raw_recoverability_scores"]
 
     selector_stats: Dict[str, object] = {}
-    if out["topology_logits"] is not None and cfg.method.use_topology:
+    if method == "rvt_simple_rank" and cfg.method.use_topology:
+        # Direct argmax over the per-mode ranking score. No lexicographic key,
+        # no tie-break levels, no uncertainty adjustment.
+        scores_np = topology_scores.squeeze(0).detach().cpu().numpy()
+        topology = LEARNED_TOPOLOGY_IDS[int(scores_np.argmax())]
+        selector_stats = {"reason": "score_argmax_simple", "scores": scores_np.tolist(),
+                          "selected": int(topology)}
+        topo_idx = LEARNED_TOPOLOGY_IDS.index(topology)
+        actions = out["actions_by_topology"][:, topo_idx, :]
+    elif out["topology_logits"] is not None and cfg.method.use_topology:
         topology = choose_counterfactual_topology(
             obs,
             out["topology_logits"],

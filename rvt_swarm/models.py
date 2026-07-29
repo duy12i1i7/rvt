@@ -302,11 +302,113 @@ class RVTSwarmPolicy(nn.Module):
         }
 
 
+class RVTSimpleRankPolicy(nn.Module):
+    """Simplified RVT: shared encoder + action bank + per-mode ranking score.
+
+    Removed relative to `RVTSwarmPolicy` (each on Method-Audit-v2 evidence):
+      * uncertainty head and the dispersion-scaled score adjustment
+        -- uncalibrated, fitted to its own in-sample residual, and removing it
+        improved every ranking metric (top-1 0.840 vs 0.827, Kendall 0.631 vs 0.596);
+      * auxiliary head -- its four targets are all already input node features;
+      * topology-classification head -- retained only as a separate baseline model
+        (`direct_topology_classifier`), not as a component here.
+
+    Kept: the shared graph encoder, the mode-conditioned action bank, and a single
+    score head whose only job is to *rank* the candidate modes.
+    """
+
+    def __init__(self, hidden_dim: int = 128, passes: int = 3, topology_count: int | None = None):
+        super().__init__()
+        topology_count = topology_count or len(LEARNED_TOPOLOGY_IDS)
+        self.topology_count = topology_count
+        self.context_dim = NODE_DIM
+        self.backbone = GraphBackbone(hidden_dim, passes)
+        self.base_action_head = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim // 2), nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 2),
+        )
+        self.topology_delta_head = nn.Sequential(
+            nn.Linear(hidden_dim + topology_count, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim // 2), nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 2),
+        )
+        self.score_head = nn.Sequential(
+            nn.Linear(hidden_dim + self.context_dim, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, topology_count),
+        )
+
+    # Action decoding is identical to the legacy model so the two remain comparable.
+    decode_actions = RVTSwarmPolicy.decode_actions
+    decode_all_actions = RVTSwarmPolicy.decode_all_actions
+    _normalize_action_topology = RVTSwarmPolicy._normalize_action_topology
+
+    def forward(self, batch, action_topology: int | torch.Tensor | None = None):
+        h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
+        h_aux = h.detach()
+        raw_pooled = pooled_graph_features(batch["node_x"], batch["batch_index"])
+        pooled = pooled_graph_features(h_aux, batch["batch_index"])
+        scores = self.score_head(torch.cat([pooled, raw_pooled], dim=-1))
+
+        num_graphs = scores.shape[0]
+        actions_by_topology = self.decode_all_actions(h, batch["batch_index"], num_graphs)
+        if action_topology is None:
+            topo = torch.argmax(scores, dim=-1)          # direct argmax selection
+        else:
+            topo = torch.as_tensor(action_topology, device=h.device, dtype=torch.long).view(-1)
+            if topo.numel() == 1 and num_graphs > 1:
+                topo = topo.expand(num_graphs)
+        topo = topo.clamp(0, self.topology_count - 1)
+        actions = actions_by_topology[
+            torch.arange(h.shape[0], device=h.device), topo[batch["batch_index"]]
+        ]
+        return {
+            "actions": actions,
+            "actions_by_topology": actions_by_topology,
+            # `recoverability_scores` carries the ranking score under the name the
+            # runtime already consumes; it is NOT uncertainty-adjusted here.
+            "recoverability_scores": scores,
+            "raw_recoverability_scores": scores,
+            "recoverability": scores.max(dim=-1, keepdim=True).values,
+            "topology_logits": None,   # no classifier head
+            "aux": None,               # no auxiliary head
+            "uncertainty": None,       # no uncertainty head
+            "node_latent": h,
+        }
+
+
+class DirectTopologyClassifierPolicy(RVTSwarmPolicy):
+    """Baseline: action bank + hard best-mode classifier, no ranking score.
+
+    Kept as a *baseline* rather than a component, per the audit: the classifier
+    ranked modes about as well as the score head (pairwise 0.810 vs 0.814), so
+    carrying both inside one model is unjustified duplication.
+    """
+
+    def forward(self, batch, action_topology: int | torch.Tensor | None = None):
+        out = super().forward(batch, action_topology=action_topology)
+        out["recoverability_scores"] = None
+        out["raw_recoverability_scores"] = None
+        out["uncertainty"] = None
+        out["aux"] = None
+        return out
+
+
 def build_model(name: str, hidden_dim: int = 128, passes: int = 3) -> nn.Module:
-    if name == "gnn_only":
+    # Legacy names are preserved; the original implementation is untouched.
+    if name in ("gnn_only", "gnn_topology_agnostic"):
         return GNNOnlyPolicy(hidden_dim, passes)
     if name == "instant_cert":
         return InstantCertPolicy(hidden_dim, passes)
-    if name == "rvt_swarm":
+    if name in ("rvt_swarm", "rvt_full_legacy"):
         return RVTSwarmPolicy(hidden_dim, passes, topology_count=len(LEARNED_TOPOLOGY_IDS))
+    if name == "rvt_simple_rank":
+        return RVTSimpleRankPolicy(hidden_dim, passes, topology_count=len(LEARNED_TOPOLOGY_IDS))
+    if name == "direct_topology_classifier":
+        return DirectTopologyClassifierPolicy(
+            hidden_dim, passes, topology_count=len(LEARNED_TOPOLOGY_IDS)
+        )
+    if name == "fixed_keep_policy":
+        # No parameters: mode is pinned to KEEP and actions come from the expert.
+        raise ValueError("fixed_keep_policy is a non-learned baseline; use baselines.py")
     raise ValueError(f"Unknown model: {name}")

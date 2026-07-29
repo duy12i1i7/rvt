@@ -41,14 +41,28 @@ class SwarmFormationEnv:
         self.n_agents = 0
         self.rng = np.random.default_rng(cfg.train.seed)
 
-    def reset(self, n_agents: int, scenario: str, seed: int | None = None) -> Dict:
+    def reset(self, n_agents: int, scenario: str, seed: int | None = None, layout=None) -> Dict:
+        """`layout`, when given, replaces the procedural obstacle/goal generation.
+
+        Layouts come from `rvt_swarm.layouts` and carry explicit, split-disjoint
+        geometry. Spawn jitter still applies, so episodes within one layout differ.
+        """
         if seed is not None:
             self.rng = np.random.default_rng(seed)
         self.n_agents = n_agents
+        self.layout = layout
         positions = self._spawn_agents(n_agents, scenario)
+        if layout is not None:
+            positions = positions + (np.asarray(layout.start_center, dtype=np.float32)
+                                     - np.array([-self.ec.world_size * 0.38, 0.0], dtype=np.float32))
         velocities = np.zeros_like(positions)
-        goal = np.array([self.ec.world_size * 0.38, 0.0], dtype=np.float32)
-        obstacles, obstacle_velocities = self._spawn_obstacles(scenario)
+        if layout is not None:
+            goal = np.array(layout.goal, dtype=np.float32)
+            obstacles = layout.obstacle_array.copy()
+            obstacle_velocities = np.zeros_like(obstacles)
+        else:
+            goal = np.array([self.ec.world_size * 0.38, 0.0], dtype=np.float32)
+            obstacles, obstacle_velocities = self._spawn_obstacles(scenario)
         prev_goal_distance = float(np.linalg.norm(goal - positions.mean(axis=0)))
         corridor_direction = np.array([1.0, 0.0], dtype=np.float32)
         self.state = EnvState(

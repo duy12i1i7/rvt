@@ -150,6 +150,13 @@ class AuditConfig:
     min_dwell_steps: int = 0          # 0 = no dwell constraint (shipped)
     hysteresis_margin: float = 0.0    # 0 = no hysteresis (shipped)
     use_uncertainty_adjustment: bool = True
+    # Simplified-model objective:  L = L_action + lambda_rank * L_pair_rank
+    # lambda_score > 0 additionally enables the absolute-score term, reported
+    # separately rather than averaged into a bundle.
+    lambda_rank: float = 1.0
+    lambda_score: float = 0.0
+    # Disable the hard-negative action-label perturbation during data generation.
+    use_hard_negative_mining: bool = True
 
 
 @dataclass

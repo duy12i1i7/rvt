@@ -30,7 +30,8 @@ def git_commit() -> str:
 
 
 def epochs_for_model(cfg: Config, model_name: str) -> int:
-    if model_name == "rvt_swarm":
+    if model_name in ("rvt_swarm", "rvt_full_legacy", "rvt_simple_rank",
+                      "direct_topology_classifier"):
         return cfg.train.epochs_rvt_swarm
     if model_name == "instant_cert":
         return cfg.train.epochs_instant_cert
@@ -39,7 +40,8 @@ def epochs_for_model(cfg: Config, model_name: str) -> int:
     return cfg.train.epochs
 
 
-LEARNED_METHOD_NAMES = ("rvt_swarm", "gnn_only", "instant_cert")
+LEARNED_METHOD_NAMES = ("rvt_swarm", "gnn_only", "instant_cert",
+                        "rvt_simple_rank", "direct_topology_classifier")
 
 
 def split_dataset(ds: SwarmDataset):
@@ -145,7 +147,59 @@ def weighted_action_bank_loss(
     return (sq_error * node_weights).sum(dim=-1).mean()
 
 
+SIMPLE_RANK_METHODS = ("rvt_simple_rank",)
+
+
+def compute_simple_rank_loss(outputs: Dict, batch: Dict, cfg: Config) -> Dict:
+    """L = L_action + lambda_rank * L_pair_rank  [+ lambda_score * L_score].
+
+    Two terms by default. The absolute-score term is OFF unless
+    `cfg.audit.lambda_score > 0`, and when enabled it is reported as an explicitly
+    separate term rather than folded into an averaged bundle.
+    """
+    audit = cfg.audit_config()
+    bank = outputs["actions_by_topology"]
+    scores = outputs["recoverability_scores"]
+    targets = batch["recover_scores_target"]
+
+    l_action = torch.stack([
+        F.mse_loss(bank[:, 0, :], batch["action_target_keep"]),
+        weighted_action_bank_loss(bank, batch["action_target_all"], targets,
+                                  batch["batch_index"]),
+    ]).mean()
+    l_rank = pairwise_ranking_loss(scores, targets)
+    l_score = F.mse_loss(scores, targets)
+
+    total = l_action + audit.lambda_rank * l_rank
+    if audit.lambda_score > 0.0:
+        total = total + audit.lambda_score * l_score
+
+    zero = batch["node_x"].new_tensor(0.0)
+    return {"total": total, "action": l_action, "rank": l_rank, "score_map": l_score,
+            "topology": zero, "lower_bound": zero, "aux": zero, "uncertainty": zero,
+            "recover": zero}
+
+
+def compute_classifier_loss(outputs: Dict, batch: Dict, cfg: Config) -> Dict:
+    """Baseline: action bank + hard best-mode cross-entropy. No ranking score."""
+    bank = outputs["actions_by_topology"]
+    l_action = torch.stack([
+        F.mse_loss(bank[:, 0, :], batch["action_target_keep"]),
+        weighted_action_bank_loss(bank, batch["action_target_all"],
+                                  batch["recover_scores_target"], batch["batch_index"]),
+    ]).mean()
+    l_topo = F.cross_entropy(outputs["topology_logits"], batch["topology_target"].view(-1))
+    zero = batch["node_x"].new_tensor(0.0)
+    return {"total": l_action + l_topo, "action": l_action, "topology": l_topo,
+            "rank": zero, "score_map": zero, "lower_bound": zero, "aux": zero,
+            "uncertainty": zero, "recover": zero}
+
+
 def compute_loss(outputs: Dict, batch: Dict, model_name: str, cfg: Config, epoch: int = 999):
+    if model_name in SIMPLE_RANK_METHODS:
+        return compute_simple_rank_loss(outputs, batch, cfg)
+    if model_name == "direct_topology_classifier":
+        return compute_classifier_loss(outputs, batch, cfg)
     losses = {}
     if model_name == "rvt_swarm" and cfg.method.use_topology and outputs.get("actions_by_topology") is not None:
         keep_actions = outputs["actions_by_topology"][:, 0, :]
@@ -227,7 +281,7 @@ def run_epoch(model, loader, optimizer, device, model_name: str, cfg: Config, tr
         batch = {k: v.to(device) if torch.is_tensor(v) else v for k, v in batch.items()}
         if train:
             optimizer.zero_grad(set_to_none=True)
-        if model_name == "rvt_swarm":
+        if model_name in ("rvt_swarm", "rvt_simple_rank", "direct_topology_classifier"):
             action_topology = batch["topology_target"] if cfg.method.use_topology else torch.zeros_like(batch["topology_target"])
             outputs = model(batch, action_topology=action_topology)
         else:
@@ -259,7 +313,7 @@ def rollout_validation_start_epoch(cfg: Config, warmup: int) -> int:
 def should_run_rollout_validation(cfg: Config, model_name: str, epoch: int, warmup: int) -> bool:
     if not cfg.train.rollout_val_enabled:
         return False
-    if model_name not in {"rvt_swarm", "gnn_only", "instant_cert"}:
+    if model_name not in LEARNED_METHOD_NAMES:
         return False
     start_epoch = rollout_validation_start_epoch(cfg, warmup)
     interval = max(int(cfg.train.rollout_val_interval), 1)
@@ -429,7 +483,7 @@ def train_model(model_name: str, cfg: Config, out_dir: str = "results", dataset:
 
         use_rollout_metric = (
             cfg.train.rollout_val_enabled
-            and model_name in {"rvt_swarm", "gnn_only", "instant_cert"}
+            and model_name in LEARNED_METHOD_NAMES
             and epoch >= rollout_start
         )
         metric_ready = not use_rollout_metric or ran_rollout

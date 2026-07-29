@@ -325,7 +325,8 @@ def _generate_episode_impl(args):
             'aux_target': aux,
         }
         episode_samples.append(sample)
-        if classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > obs["progress"]:
+        hard_neg_enabled = bool(getattr(getattr(cfg, 'audit', None), 'use_hard_negative_mining', True))
+        if hard_neg_enabled and classify_recoverability(recover_margin) <= 0.0 and obs["bottleneck"] > obs["progress"]:
             noise_scale = float(np.clip(1.0 - recover_margin, 0.0, 1.0))
             noise = noise_scale * rng.normal(size=action_best.shape).astype(np.float32) * cfg.env.max_accel
             noisy_action_all = np.clip(action_all + noise[:, None, :], -cfg.env.max_accel, cfg.env.max_accel)
