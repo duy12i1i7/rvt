@@ -394,7 +394,115 @@ class DirectTopologyClassifierPolicy(RVTSwarmPolicy):
         return out
 
 
+BINARY_MODES = (0, 2)   # keep, line.  Split is REMOVED (Task 8 of the scenario gate).
+
+
+class RVTBinaryRecoveryPolicy(nn.Module):
+    """Pilot model: shared encoder + per-mode action head + per-mode recovery head.
+
+    Exactly five components, per the pilot specification:
+      shared graph encoder
+      keep-conditioned action head          (base action head)
+      line-conditioned action head          (base + conditioned residual)
+      keep task-recovery probability head   (logit index 0)
+      line task-recovery probability head   (logit index 1)
+
+    Inference:  tau_hat = argmax_{tau in {keep, line}} p_task_recovery(x, tau)
+    then execute the action head for tau_hat.
+
+    Contains no split output, no uncertainty head, no auxiliary head, no
+    classifier head, and no selector state of any kind.
+    """
+
+    def __init__(self, hidden_dim: int = 128, passes: int = 3):
+        super().__init__()
+        self.modes = BINARY_MODES
+        self.topology_count = len(BINARY_MODES)
+        self.context_dim = NODE_DIM
+        self.backbone = GraphBackbone(hidden_dim, passes)
+        self.base_action_head = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim // 2), nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 2))
+        self.mode_action_head = nn.Sequential(
+            nn.Linear(hidden_dim + self.topology_count, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim // 2), nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 2))
+        # One logit per candidate mode = the two task-recovery probability heads.
+        self.recovery_head = nn.Sequential(
+            nn.Linear(hidden_dim + self.context_dim, hidden_dim), nn.ReLU(),
+            nn.Linear(hidden_dim, self.topology_count))
+
+    def decode_actions(self, h, batch_index, mode_index):
+        topo = torch.as_tensor(mode_index, device=h.device, dtype=torch.long).view(-1)
+        if topo.numel() == 1 and batch_index.numel():
+            topo = topo.expand(int(batch_index.max().item()) + 1)
+        onehot = F.one_hot(topo.clamp(0, self.topology_count - 1),
+                           num_classes=self.topology_count).to(h.dtype)
+        node_onehot = onehot[batch_index]
+        base = self.base_action_head(h)
+        delta = self.mode_action_head(torch.cat([h, node_onehot], dim=-1))
+        keep_mask = 1.0 - node_onehot[:, [0]]      # index 0 is KEEP
+        return torch.tanh(base + keep_mask * delta)
+
+    def forward(self, batch, action_topology=None):
+        h = self.backbone(batch["node_x"], batch["edge_index"], batch["edge_attr"])
+        pooled = pooled_graph_features(h.detach(), batch["batch_index"])
+        raw_pooled = pooled_graph_features(batch["node_x"], batch["batch_index"])
+        logits = self.recovery_head(torch.cat([pooled, raw_pooled], dim=-1))
+        probs = torch.sigmoid(logits)
+        num_graphs = logits.shape[0]
+
+        bank = torch.stack([
+            self.decode_actions(h, batch["batch_index"],
+                                torch.full((num_graphs,), i, device=h.device, dtype=torch.long))
+            for i in range(self.topology_count)], dim=1)
+
+        if action_topology is None:
+            sel = torch.argmax(probs, dim=-1)
+        else:
+            sel = torch.as_tensor(action_topology, device=h.device, dtype=torch.long).view(-1)
+            if sel.numel() == 1 and num_graphs > 1:
+                sel = sel.expand(num_graphs)
+        sel = sel.clamp(0, self.topology_count - 1)
+        actions = bank[torch.arange(h.shape[0], device=h.device), sel[batch["batch_index"]]]
+        return {
+            "actions": actions,
+            "actions_by_topology": bank,
+            "recovery_logits": logits,
+            "recovery_probs": probs,
+            "recoverability_scores": probs,     # runtime consumes this name
+            "raw_recoverability_scores": logits,
+            "recoverability": probs.max(dim=-1, keepdim=True).values,
+            "topology_logits": None,
+            "aux": None,
+            "uncertainty": None,
+            "node_latent": h,
+        }
+
+
+class DirectKeepLineClassifier(RVTBinaryRecoveryPolicy):
+    """Baseline: identical trunk and action heads, but a 2-class softmax classifier
+    over {keep, line} instead of two independent recovery-probability heads.
+
+    This is the control that decides whether *probability prediction* adds
+    anything over *direct classification* (pilot mechanism criterion)."""
+
+    def forward(self, batch, action_topology=None):
+        out = super().forward(batch, action_topology=action_topology)
+        out["class_logits"] = out.pop("recovery_logits")
+        probs = torch.softmax(out["class_logits"], dim=-1)
+        out["recovery_probs"] = probs
+        out["recoverability_scores"] = probs
+        out["raw_recoverability_scores"] = out["class_logits"]
+        return out
+
+
 def build_model(name: str, hidden_dim: int = 128, passes: int = 3) -> nn.Module:
+    if name == "rvt_binary_recovery":
+        return RVTBinaryRecoveryPolicy(hidden_dim, passes)
+    if name == "direct_keep_line_classifier":
+        return DirectKeepLineClassifier(hidden_dim, passes)
     # Legacy names are preserved; the original implementation is untouched.
     if name in ("gnn_only", "gnn_topology_agnostic"):
         return GNNOnlyPolicy(hidden_dim, passes)
