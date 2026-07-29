@@ -78,9 +78,16 @@ L = λ_action · L_action + λ_bce · L_task_recovery        [+ λ_rank · L_pai
 The shaped rollout utility is **not** a target — it failed its retention rule
 (AUROC 0.704 vs 0.714 for minimum clearance).
 
-Variant A (BCE only) vs Variant B (BCE + pairwise rank, applied only where the two
-candidate labels differ) is decided **on validation data alone**, before final-test
-evaluation. The rank term is not retained automatically.
+**AMENDED before training (see `BINARY_MODE_LABEL_GATE_REPORT.md` §8):**
+**BCE-only is the primary and sole loss for the three-seed pilot.** The pairwise
+ranking term is removed from the main pilot and may be evaluated later as a
+one-seed, validation-only ablation. Neither variant may be selected using
+final-test results.
+
+Rationale: the hypothesis concerns recovery-*probability* prediction and
+calibration; BCE is the proper scoring rule for it, whereas a ranking term
+optimises order rather than probability and would compromise the ECE measurement
+in gate G1 while doubling the training runs from 9 to 18.
 
 ## 7. Primary statistical comparisons
 
