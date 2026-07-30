@@ -7,12 +7,13 @@
 
 \usepackage{cite}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc} 
 \usepackage{amsmath,amssymb,amsfonts,bm}
 \usepackage{amsthm}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{textcomp}
+\usepackage{comment}
 
 \makeatletter
 \AtBeginDocument{\DeclareMathVersion{bold}
@@ -83,48 +84,30 @@
 \history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
 \doi{10.1109/ACCESS.XXXX.XXXXXXX}
 
-\title{RVT-Swarm: Recoverability-Aware Topology Control for Decentralized Swarm Formation}
+\title{Rollout-Supervised Resilient Formation Reconfiguration in Multi-Robot Systems}
 
-\author{\uppercase{Dinh Duy Nguyen}\authorrefmark{1}\orcidicon{0009-0005-7812-9546}, \uppercase{Cuong Manh Hoang}\authorrefmark{1,2}\orcidicon{0009-0007-5207-1627}, \uppercase{Hieu Trung Nguyen}\authorrefmark{1}, and \uppercase{Hoang Anh Pham}\authorrefmark{1}\orcidicon{0000-0001-9621-9266}}
+\author{\uppercase{Dinh Duy Nguyen}\authorrefmark{1}\orcidicon{0009-0005-7812-9546}, \uppercase{Cuong Manh Hoang}\authorrefmark{1,2}\orcidicon{0009-0007-5207-1627}, \uppercase{Hieu Trung Nguyen}\authorrefmark{1}, and \uppercase{Hoang Anh Pham}\authorrefmark{1,*}\orcidicon{0000-0001-9621-9266}}
 
 
 \address[1]{AViS Lab., Faculty of Electronics Engineering 1, Posts and Telecommunications Institute of Technology, Hanoi, Vietnam.}
 \address[2]{Faculty of Information Technology, Posts and Telecommunications Institute of Technology, Hanoi, Vietnam.}
 
 \markboth
-{Duy \headeretal: RVT-Swarm: Recoverability-Aware Topology Control for Decentralized Swarm Formation}
-{Duy \headeretal: RVT-Swarm: Recoverability-Aware Topology Control for Decentralized Swarm Formation}
+{Nguyen \headeretal: Rollout-Supervised Resilient Formation Reconfiguration in Multi-Robot Systems}
+{Nguyen \headeretal: Rollout-Supervised Resilient Formation Reconfiguration in Multi-Robot Systems}
 
-\corresp{Corresponding author: Hoang Anh Pham (email: anhph@ptit.edu.vn).}
+\corresp{* Corresponding author: Hoang Anh Pham (email: anhph@ptit.edu.vn).}
 
 \titlepgskip=-15pt
 
 
 \begin{abstract}
-Decentralized swarm control scales well and avoids a single point of
-failure. The main difficulty appears in cluttered environments. Under
-local sensing, a swarm must do more than avoid immediate collisions. It
-must also preserve a useful formation, pass through bottlenecks, and
-regroup after deformation. In this paper, we propose Recoverability-Aware Topology Control
-(RVT-Swarm), a decentralized graph controller that selects both
-continuous robot actions and a discrete formation topology from a small
-candidate set. Given a local interaction graph, the model predicts a
-topology-conditioned action bank together with a recoverability score
-map that estimates whether each candidate topology can support safe
-progress and return to the desired formation. During training,
-counterfactual rollouts supervise the action bank, topology preference,
-recoverability map, and auxiliary context heads of a multi-head graph
-network. During execution, the recoverability map guides topology
-selection, formation-geometry updates, and a lightweight safety
-projection. In the reported benchmark, RVT-Swarm achieves the strongest
-overall performance among the compared methods. These results indicate
-that explicit recoverability reasoning improves decentralized swarm
-formation in clutter while remaining competitive with stronger reactive
-safety filters on instantaneous safety.
+Decentralized multi-robot navigation in cluttered environments has several important challenges, including collision avoidance and formation recovery. This paper proposes a rollout-supervised and recoverability-driven framework for resilient formation reconfiguration in multi-robot systems. First, the local interactions among robots are represented as a graph using navigation and formation features. Second, different reconfiguration modes are evaluated by using mode-conditioned control commands and recoverability scores. This allows the system to compare different choices, such as keeping the formation, moving in a line, or splitting the formation. Third, the learned recoverability scores are used for online formation-mode selection, latent geometry adaptation, and risk-triggered safety projection. Short-horizon rollout supervision helps the model select modes that support safe motion and recovery after formation deformation. Experiments with 2 to 24 robots in 2D cluttered environments show that the proposed framework improves overall performance compared with the internal baselines, especially in success rate, collision-free navigation, formation satisfaction, and collapse reduction.
+
 \end{abstract}
 
 \begin{keywords}
-Multi-robot systems, swarm robotics, formation control, graph neural networks, multi-agent systems, and autonomous navigation.
+Multi-robot systems, formation control, graph neural networks, and autonomous navigation.
 \end{keywords}
 
 \maketitle
@@ -191,7 +174,7 @@ topology-conditioned action bank, graph-level topology evidence, and a
 recoverability score map. The controller then compares these topologies
 counterfactually and applies a fixed rule based on recoverability,
 keep/stay preference, uncertainty, context, and switching readiness. An
-optional projection shield intervenes only when risk is high or when
+optional projection safety filter intervenes only when risk is high or when
 all candidate topologies look unrecoverable.
 
 The method does not claim an exact viability kernel or a formal
@@ -207,7 +190,7 @@ targets, soft topology distributions, recoverability score maps, and
 auxiliary context targets, so the network learns both what action to
 take and how candidate topologies compare. During inference, the
 learned score map drives topology selection, latent-geometry updates,
-and a risk-triggered projection shield.
+and a risk-triggered projection safety filter.
 
 We make the following contributions:
 \begin{enumerate}
@@ -215,7 +198,7 @@ We make the following contributions:
 
     \item We develop a rollout-supervised multi-head graph controller that learns this recoverability structure directly from counterfactual topology rollouts. The resulting Recoverability Field Network distills each sampled state into topology-conditioned action targets, soft topology distributions, recoverability score maps, uncertainty estimates, and auxiliary graph-level context, enabling the policy to learn not only what action to take but also which candidate topology remains most recoverable.
 
-    \item We develop a recoverability-first inference stack in which graph-level topology evidence, recoverability scores, uncertainty, and auxiliary context are combined to choose a structural topology, select the corresponding action slice from a topology-conditioned action bank, update latent formation geometry, and invoke a progress-preserving shield only when risk is elevated.
+    \item We develop a recoverability-first inference stack in which graph-level topology evidence, recoverability scores, uncertainty, and auxiliary context are combined to choose a structural topology, select the corresponding action slice from a topology-conditioned action bank, update latent formation geometry, and invoke a progress-preserving safety filter only when risk is elevated.
 
     \item Across the reported benchmark, RVT-Swarm achieves the strongest overall performance among the compared methods, supporting the case for recoverability-aware topology control as a practical advantage for decentralized swarm formation.
 \end{enumerate}
@@ -245,7 +228,7 @@ taxonomy.}
 & \parbox[c]{0.09\textwidth}{\centering\textbf{Topology}\\\textbf{adaptation}}
 & \parbox[c]{0.09\textwidth}{\centering\textbf{Recoverability}\\\textbf{model}}
 & \parbox[c]{0.10\textwidth}{\centering\textbf{Counterfactual}\\\textbf{selection}}
-& \parbox[c]{0.08\textwidth}{\centering\textbf{Progress}\\\textbf{shield}} \\
+& \parbox[c]{0.08\textwidth}{\centering\textbf{Progress}\\\textbf{safety}\\\textbf{filter}} \\
 \midrule
 HJ safety/liveness~\cite{borquez2024hj_filtering}
     & T-RO & 2024 & \xmark & \xmark & \cmark
@@ -286,7 +269,7 @@ Multi-UAV RL~\cite{xie2025multi_uav_formation_rl}
 Recent decentralised graph-policy work shows a clear progression toward using local message passing as the core inductive bias for scalable swarm control. Gama et al.~\cite{gama2022gnn_synthesis} formulate decentralised controller synthesis through graph neural networks and imitation learning, and Shi et al.'s \emph{Neural-Swarm2}~\cite{shi2022neural_swarm2} demonstrates that learned interaction models can support heterogeneous multirotor teams. Later work becomes more task-driven: \emph{MAGEC}~\cite{goeckner2024magec} emphasises resilient graph-based coordination, and \emph{Learning Decentralised Multi-Robot PointGoal Navigation}~\cite{soualhi2025pointgoal} extends the same local-policy paradigm to decentralised navigation in clutter. The progression is important because the later systems become more realistic and navigation-oriented. Yet, they still treat the graph policy primarily as a direct mapping from local observations to actions or coordination signals. RVT-Swarm remains in this decentralised graph-policy regime, but departs from it by explicitly evaluating candidate team topologies and selecting among them online through a topology-conditioned recoverability map.
 
 \subsection{Safety-Critical Multi-Robot Control}
-Safety-critical multi-robot control has followed a similar progression from analytical safety refinement to learned distributed safety policies. Tonkens and Herbert~\cite{tonkens2022refining_cbf_hj} show that Hamilton--Jacobi analysis can sharpen barrier-based control rather than merely wrap around it. Subsequent work broadens this perspective: Garg et al.~\cite{garg2024safe_multirobot_review} synthesise the safe-learning design space for multi-robot systems, Borquez et al.~\cite{borquez2024hj_filtering} make safety and liveness filtering explicit through reachability reasoning, and Mestres et al.~\cite{mestres2024distributed_safe_navigation} provide a distributed CBF reference point for multi-agent navigation without an explicit topology-selection layer. More recent learned methods such as \emph{GCBF+}~\cite{zhang2025gcbf_plus} and \emph{DGPPO}~\cite{zhang2025dgppo} push this line toward scalable graph-structured safe control. RVT-Swarm is informed by this literature but differs in its emphasis: instead of solving a certified safety problem at every step, it uses a lightweight projection shield only after the recoverability network and the topology selector have chosen the most promising formation mode.
+Safety-critical multi-robot control has followed a similar progression from analytical safety refinement to learned distributed safety policies. Tonkens and Herbert~\cite{tonkens2022refining_cbf_hj} show that Hamilton--Jacobi analysis can sharpen barrier-based control rather than merely wrap around it. Subsequent work broadens this perspective: Garg et al.~\cite{garg2024safe_multirobot_review} synthesise the safe-learning design space for multi-robot systems, Borquez et al.~\cite{borquez2024hj_filtering} make safety and liveness filtering explicit through reachability reasoning, and Mestres et al.~\cite{mestres2024distributed_safe_navigation} provide a distributed CBF reference point for multi-agent navigation without an explicit topology-selection layer. More recent learned methods such as \emph{GCBF+}~\cite{zhang2025gcbf_plus} and \emph{DGPPO}~\cite{zhang2025dgppo} push this line toward scalable graph-structured safe control. RVT-Swarm is informed by this literature but differs in its emphasis: instead of solving a certified safety problem at every step, it uses a lightweight projection safety filter only after the recoverability network and the topology selector have chosen the most promising formation mode.
 
 \subsection{Adaptive Formation and Recoverability}
 Work on clutter-aware formation navigation has shifted from decentralised trajectory planning to richer models of coordination, uncertainty, and formation adaptation. \emph{MADER}~\cite{tordesillas2022mader} establishes decentralised multi-agent planning in dynamic environments, and \emph{AMSwarm}~\cite{adajania2023amswarm} brings that discussion closer to safe swarm motion in cluttered aerial settings. Later methods broaden the planning stack rather than merely repeating it: \emph{Robust MADER}~\cite{kondo2024robust_mader} adds delay robustness, distributed belief-propagation MPC~\cite{jiang2024belief_mpc_formation} introduces uncertainty-aware formation navigation, Stein variational belief propagation~\cite{pavlasek2024stein_belief} extends approximate-inference ideas to coordination. Assignment-free mean-shift formation~\cite{zhang2024mean_shift_shape} removes explicit target assignment from shape control. The most recent decentralised planners, including Park et al.~\cite{park2025goal_convergence} and Senbaslar et al.~\cite{senbaslar2025dream}, push further into cluttered, goal-directed swarm navigation, while RL-based formation-preserving obstacle avoidance~\cite{xie2025multi_uav_formation_rl} applies learning directly to the multi-UAV setting. RVT-Swarm is closest to this recent generation, but differs in treating topology change as an explicit online decision variable rather than as an emergent byproduct of a single optimiser or policy.
@@ -457,11 +440,14 @@ candidate structural topology still permits safe progress together with
 a return toward the desired formation set. RVT-Swarm addresses this
 hybrid decision problem with a recoverability-aware policy learned from
 counterfactual rollout supervision.
+\Cref{fig:rfn} summarizes the model-level dataflow used to approximate
+this decision rule, while \Cref{fig:architecture} later shows how the
+trained model outputs are consumed by the robot-side runtime.
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=\textwidth]{figures/main/f2.pdf}
-\caption{Detailed architecture of the multi-head Recoverability Field Network (RFN). The simulation environment is converted into Graph~$G$, enriched, and processed by stacked graph attention layers. The \emph{Actor Layer} contains the action decoder, the topology consensus vote, and the topology refine MLP, and it outputs \emph{Actions by topology $\tau$} together with a \emph{Topology logit}. The \emph{Cost Layer} outputs the \emph{Score head}, \emph{Uncertainty head}, and \emph{Aux head}; these three outputs are later assembled into the \emph{Recovery matrix} in \Cref{fig:architecture}.}
+\caption{Model-level processing pipeline of RVT-Swarm. Local robot observations and neighboring-agent information are transformed into graph tensors, encoded by attention-based message passing, and decoded into the decision quantities required by the controller: topology preference, recoverability, uncertainty, auxiliary context, and topology-conditioned actions.}
 \label{fig:rfn}
 \end{figure*}
 
@@ -469,18 +455,35 @@ counterfactual rollout supervision.
 \label{sec:method}
 
 We first define the graph encoder and the multi-head Recoverability
-Field Network (RFN). We then describe the counterfactual rollout
-supervision used to train it, and finally present the
-recoverability-aware execution stack that uses its outputs online.
+Field Network (RFN) shown in \Cref{fig:rfn}. We then describe the
+counterfactual rollout supervision used to train it, and finally present
+the recoverability-aware execution stack in \Cref{fig:architecture} that
+uses the trained outputs online.
 
 \subsection{Local Graph Encoder}
 \label{sec:encoder}
 
-At each step, the swarm builds a fixed-$K$ nearest-neighbor interaction graph. Each node encodes local kinematic, goal-directed, formation, obstacle-relative, and sensing cues, while each edge encodes relative geometry, relative motion, spacing, corridor, and TTC-style safety descriptors.
+At each step, the swarm builds a fixed-$K$ nearest-neighbor interaction
+graph from the robot-side policy observation. As summarized in the input
+and graph-preparation columns of \Cref{fig:rfn}, the adapter starts from
+local state, LiDAR-style sensing, the shared goal, the current topology
+runtime state, and nearby peer messages. These quantities are packed into
+node features, edge features, an edge index, a batch index, and a pooled
+raw graph context before they enter the neural encoder.
 
-We use $o_k$ to denote the raw team-level observation returned by the simulator at step $k$, and $(\mathbf{x}_i,\mathbf{e}_{ij})$ to denote the derived node and edge feature tensors constructed from $o_k$ before they are passed to the graph encoder. Thus $o_k$ is the observation object, whereas $\mathbf{x}_i$ is the per-robot feature vector extracted from it.
-
-In the main text, only the feature families matter: node tensors combine kinematics, goal cues, formation context, obstacle and corridor cues, global topology state, local safety indicators, and LiDAR-style sensing, while edge tensors encode relative geometry, relative motion, spacing, and TTC-style safety context. The exact feature inventory, concatenated vector definitions, and symbol glossary are deferred to the appendix so that the encoder discussion here can focus on the inductive bias rather than feature bookkeeping.
+We use $o_k$ to denote the raw team-level observation returned by the
+simulator at step $k$, and $(\mathbf{x}_i,\mathbf{e}_{ij})$ to denote
+the derived node and edge feature tensors constructed from $o_k$ before
+they are passed to the graph encoder. Thus $o_k$ is the observation
+object, whereas $\mathbf{x}_i$ is the per-robot feature vector extracted
+from it. In the main text, only the feature families matter: node tensors
+combine kinematics, goal cues, formation context, obstacle and corridor
+cues, global topology state, local safety indicators, and LiDAR-style
+sensing, while edge tensors encode relative geometry, relative motion,
+spacing, and TTC-style safety context. Because the model equations depend
+on these feature families rather than on a particular ordering of
+bookkeeping terms, the encoder discussion here focuses on the inductive
+bias imposed by the graph representation.
 
 A small stack of attention-weighted message-passing layers processes the
 graph. For edge $(j \rightarrow i)$, an edge MLP produces a message
@@ -564,8 +567,10 @@ predicts graph-level context scalars used later by the selector and the
 auxiliary loss. The action bank is then
 $\mathbf{U}_i=\{\bfu_i^{(\tau)}\}_{\tau\in\cT}$, while the topology
 branch produces logits $\bm{\ell}$ over the same candidate set. This
-separation is deliberate. The continuous action is local and per-robot.
-Topology and recoverability are graph-level properties of the team.
+separation is deliberate and matches the right side of \Cref{fig:rfn}.
+The continuous action is local and per-robot, whereas topology,
+uncertainty, auxiliary context, and recoverability are graph-level
+properties of the team.
 
 Recoverability scores are adjusted by dispersion-scaled uncertainty:
 \begin{equation}
@@ -577,19 +582,21 @@ Here $\operatorname{std}(\hat{\mathbf{r}})$ is the standard deviation of
 the raw score vector across candidate topologies. The term
 $\tilde{r}_\tau$ is the conservative score of topology $\tau$, and
 $\hat{R}(x_k)$ is the best adjusted recoverability score at state
-$x_k$. At runtime, the selector consumes
-$(\tilde{\mathbf{r}},\bm{\ell},\hat{\mathbf{a}},\hat{\bm{\sigma}})$ to
-choose a structural topology $\tau^\star$. The controller then slices
+$x_k$. The quantities
+$(\mathbf{U}_i,\tilde{\mathbf{r}},\bm{\ell},\hat{\mathbf{a}},
+\hat{\bm{\sigma}})$ are the model outputs shown on the right of
+\Cref{fig:rfn}. At runtime, the selector consumes the graph-level outputs
+to choose a structural topology $\tau^\star$. The controller then slices
 the action bank to obtain $\bfu_i=\mathbf{U}_i[\tau^\star]$, and the
-shield modifies this nominal action only if geometric risk is high or
+safety filter modifies this nominal action only if geometric risk is high or
 all candidate topologies have negative recoverability. Only the action
 decoder receives full-strength gradients from the shared backbone,
-whereas the graph-level branches are driven from detached pooled
-latents and raw pooled inputs. This keeps the action representation
-anchored while still exposing topology and recoverability structure to
-the network. With these outputs in place, we next explain how
-counterfactual rollouts supervise the RFN branches before returning to
-the online execution stack that uses the trained outputs at runtime.
+whereas the graph-level branches are driven from detached pooled latents
+and raw pooled inputs. This keeps the action representation anchored
+while still exposing topology and recoverability structure to the
+network. With these outputs in place, we next explain how counterfactual
+rollouts supervise the RFN branches before returning to the online
+execution stack that uses the trained outputs at runtime.
 
 \subsection{Counterfactual Rollout Supervision}
 \label{sec:training}
@@ -598,13 +605,6 @@ Before describing the deployment-time execution stack, we define the
 supervision signals that shape the RFN heads. Counterfactual rollouts
 are converted into structured targets, and those targets are then
 assembled into a multi-head objective.
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=\textwidth]{figures/main/f1.pdf}
-\caption{Overview of the RVT-Swarm framework. Graph~$G$ is passed to the RFN Network, whose \emph{Actor layer} produces \emph{Topo} and \emph{Action}, while the \emph{Cost layer} produces the \emph{Recovery matrix}. These outputs drive the runtime path on the right: \emph{Chosen topology}, \emph{Select action slice}, \emph{Simulator-level latent mode}, and \emph{Progress-preserving shield}, which together produce \emph{Final topo + action}. The labels above this path distinguish the learned topology set $\mathcal{T}=\{\textsc{keep},\textsc{line},\textsc{split}\}$ from the simulator-level latent mode set $\mathcal{M}=\{\textsc{keep},\textsc{compress},\textsc{line},\textsc{split},\textsc{recover}\}$.}
-\label{fig:architecture}
-\end{figure*}
 
 \subsubsection{Counterfactual Rollout Supervision Targets}
 Training data are generated from a common heuristic expert controller in
@@ -623,7 +623,7 @@ Scenarios are sampled from a shared scenario pool. Hard-negative mining
 augments low-margin constrained states using perturbations whose
 amplitude increases with the recoverability deficit. The exact dataset
 size, scenario mix, and rollout settings are reported later in
-\Cref{sec:experiments} and in the appendix.
+\Cref{sec:experiments}.
 
 The shared expert is a deterministic scale-normalized controller. It is
 used for both label generation and counterfactual rollouts. It combines
@@ -703,7 +703,7 @@ a near-zero scale. Thus, the scalar recoverability target retained for
 \textsc{instant\_cert} is not an independent label. It is simply the
 \textsc{keep}-topology margin distilled from the topology score vector.
 For RVT-Swarm, the actively used supervision is the score map, the
-conservative soft topology distribution, the selected-topology anchor, the full topology-conditioned action bank, the \textsc{keep} anchor, and the graph-level auxiliary target shown in \Cref{fig:architecture}.
+conservative soft topology distribution, the selected-topology anchor, the full topology-conditioned action bank, the \textsc{keep} anchor, and the graph-level auxiliary target shown in \Cref{fig:rfn}.
 Low-margin bottleneck states also receive perturbed hard negatives,
 again, with a single fixed recipe shared across all experiments.
 
@@ -829,10 +829,8 @@ optimization does not depend on a hand-tuned vector of cross-head loss
 weights.
 
 The three learned methods are trained with one fixed AdamW
-configuration shared across all reported runs. The exact optimization
-settings and rollout-validation protocol are listed in the appendix
-rather than in the main text. Best-checkpoint selection is based on a
-periodic rollout-validation score,
+configuration shared across all reported runs. Best-checkpoint selection
+is based on a periodic rollout-validation score,
 \begin{equation}
 \resizebox{\columnwidth}{!}{$
 \begin{aligned}
@@ -851,24 +849,32 @@ rollout-validation batch. Final checkpoint selection is still lexicographic: suc
 first, then goal reaching, collision-free execution, formation
 satisfaction, and finally the failure metrics (collapse, deadlock,
 stall). This avoids favoring a ``safe but frozen'' policy over one that
-actually completes the task. A compact pseudocode summary of the
-training loop is deferred to Appendix~\Cref{alg:training_pipeline} so
-that the main text can focus on target construction and objective
-design rather than the mechanics of minibatch optimization.
+actually completes the task, and keeps the emphasis on target
+construction and objective design rather than minibatch optimization
+mechanics.
 
 \subsection{Recoverability-Aware Control Execution}
 \label{sec:control_execution}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/main/f1.pdf}
+\caption{End-to-end robot execution flow of RVT-Swarm. The ROS~2 interface collects onboard sensing and communication data, the policy module evaluates formation-topology alternatives, and the runtime control layer selects a recoverable topology, updates the formation state, applies risk-triggered safety projection, and sends velocity commands to the robot base.}
+\label{fig:architecture}
+\end{figure*}
 
 Once the RFN outputs and their supervision signals have been defined,
 the rest of the runtime stack is straightforward. The controller first
 evaluates recoverability-aware topology evidence, then updates the
 latent formation state associated with that choice, and finally applies
-a shield only when geometric risk or globally negative recoverability
+a safety filter only when geometric risk or globally negative recoverability
 justifies intervention. \Cref{fig:architecture} summarizes this full
-inference-side flow. We present its three runtime pieces in the order
+robot-side inference and command-execution flow. 
+\begin{comment}
+We present its three runtime pieces in the order
 in which they are executed online, and defer compact online-control
 pseudocode to Appendix~\Cref{alg:online_pipeline}.
-
+\end{comment}
 
 
 \subsubsection{Recoverability-Aware Topology Selection}
@@ -905,9 +911,8 @@ disabled or unavailable. If the current structural topology remains
 valid and recoverable, the selector keeps it unless \textsc{keep} is
 itself recoverable and no worse. This rule removes selector
 temperature, cooldown, hysteresis, and manually tuned switching
-margins from the deployment path. The topology-selection rule is
-summarized in Appendix~\Cref{alg:online_pipeline}, followed by the
-risk-triggered projection shield.
+margins from the deployment path. The topology-selection rule is applied
+before the risk-triggered projection safety filter described below.
 
 \subsubsection{Latent Formation Geometry Update}
 \label{sec:geometry_execution}
@@ -955,14 +960,13 @@ the nominal grid. The topology-switch counter increments only when the
 discrete \texttt{topology\_mode} changes. Continuous scale adaptation
 is tracked separately through the accumulated
 \texttt{formation\_scale\_motion} metric, so the topology-switch metric
-does not count pure scale oscillations as topology churn. These latent
-geometry rules are summarized in Appendix~\Cref{alg:online_pipeline}.
+does not count pure scale oscillations as topology churn.
 
 \subsubsection{Risk-Triggered Safety Projection}
-\label{sec:shield}
+\label{sec:safety_filter}
 
 After topology and desired geometry have been updated, the nominal
-action is passed through a final safety layer. The shield activates
+action is passed through a final safety layer. The safety filter activates
 only when collision risk is high or when all candidate topologies have
 negative recoverability. Pairwise robot-robot and robot-obstacle
 constraints are converted into half-plane constraints in action space
@@ -980,12 +984,12 @@ and enforce
 where $d_{ij}^{\mathrm{safe}}$ is the required clearance for that pair.
 Rather than solving a full external QP, we iteratively project a
 progress-biased target action onto the intersection of these
-half-planes and the acceleration ball. The final shielded action is
+half-planes and the acceleration ball. The final safety-filtered action is
 softly blended with the learned action, which reduces overreaction
 under moderate risk. Recoverability is used conservatively. Positive
 recoverability does not suppress geometric collision risk. Globally
 negative recoverability raises the intervention floor and therefore
-makes the shield more willing to intervene during unrecoverable crises.
+makes the safety filter more willing to intervene during unrecoverable crises.
 The trigger level and blend cap are derived from environment-scale
 quantities such as nominal spacing, clearance, and $v_{\max}\Delta t$.
 They are not exposed as hand-tuned runtime thresholds. Concretely,
@@ -996,16 +1000,19 @@ They are not exposed as hand-tuned runtime thresholds. Concretely,
 \beta_{\max} =
 \frac{v_{\max}\Delta t}{d_0}
 \frac{d_{\min}^{\mathrm{rr}}}{d_0},
-\label{eq:shield_scales}
+\label{eq:safety_filter_scales}
 \end{equation}
 Here $\rho_{\mathrm{th}}$ is the risk trigger, and $\beta_{\max}$ is
-the maximum blend cap. The shield uses these two scales to blend the
+the maximum blend cap. The safety filter uses these two scales to blend the
 projected action with the nominal action through a clipped severity
 factor.
 
 Taken together, the RFN forward pass, the topology selection rule, the
-latent geometry update, and the risk-triggered shield define one online
-control step, summarized in Appendix~\Cref{alg:online_pipeline}.
+latent geometry update, and the risk-triggered safety filter define one online
+control step.
+\begin{comment}
+summarized in Appendix~\Cref{alg:online_pipeline}.
+\end{comment}
 
 \section{Experiments}
 \label{sec:experiments}
@@ -1051,14 +1058,14 @@ entries are episode averages,
 \end{equation}
 where $M$ is the number of evaluated episodes for the corresponding
 setting. Thus, the values in the tables lie in $[0,1]$ and should be
-read as success rates rather than binary outcomes. For completeness,
-the appendix also gives the exact definitions of deadlock,
-irreversible collapse, and recoverability calibration.
+read as success rates rather than binary outcomes. Deadlock,
+irreversible collapse, and recoverability calibration are computed by
+the same evaluation script for every method.
 
 \paragraph{Implementation scope.}
 This benchmark is intentionally a \emph{common-simulator study}. The
 non-learned baselines (\textsc{adaptive\_formation},
-\textsc{cbf\_qp\_like}, \textsc{orca\_like}, and
+\textsc{cbf\_qp}, \textsc{orca}, and
 \textsc{centralized\_mpc}) are internal normalized baselines rather
 than exact package-level reproductions. The paper reports a single-seed
 run, so multi-seed confidence intervals remain future work. We also
@@ -1067,17 +1074,17 @@ measurement recorded within the evaluation script rather than a
 synchronized deployment-time benchmark.
 
 \subsection{Compared Methods}
-\textbf{GNN-Only} uses the shared graph backbone with only an action
+\textbf{GNN} uses the shared graph backbone with only an action
 head. \textbf{InstantCert} adds a scalar recoverability-style head but
 no topology adaptation. \textbf{RVT-Swarm} is the full model.
 Historical baselines include a heuristic adaptive-formation controller,
-a CBF-QP-like reactive filter, ORCA-like avoidance, and a centralized
+a CBF-QP reactive filter, ORCA avoidance, and a centralized
 MPC-inspired proxy. For code-level reproducibility, these historical
 baselines are instantiated as follows:
 \begin{itemize}
-    \item \textbf{ORCA-like} uses clipped goal tracking with velocity damping plus pairwise and obstacle repulsion, with no topology adaptation.
+    \item \textbf{ORCA} uses clipped goal tracking with velocity damping plus pairwise and obstacle repulsion, with no topology adaptation.
     \item \textbf{Adaptive formation} selects a heuristic topology from bottleneck/progress comparisons and then calls the same shared heuristic expert controller used for data generation and counterfactual rollouts.
-    \item \textbf{CBF-QP-like} starts from the \textsc{keep}-topology expert action and adds stronger reactive repulsion terms before clipping.
+    \item \textbf{CBF-QP} starts from the \textsc{keep}-topology expert action and adds stronger reactive repulsion terms before clipping.
     \item \textbf{Centralised MPC proxy} also reuses the expert controller with a heuristic topology, then adds a small global centroid-to-goal bias.
 \end{itemize}
 These are therefore normalized internal baselines in one simulator, not claims of package-identical external reproductions.
@@ -1085,7 +1092,14 @@ These are therefore normalized internal baselines in one simulator, not claims o
 \subsection{Main Results}
 \label{sec:main_results}
 
-\begin{table}[!t]
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/results/all_trajectories.png}
+\caption{Qualitative trajectory comparison across team sizes and controllers. Columns correspond to team sizes $N\in\{2,4,\ldots,24\}$, and rows correspond to the compared controllers. Colored curves denote individual robot trajectories, red disks denote obstacles, green disks show the goal, and black markers denote terminal robot positions. The figure complements the main-results table by showing how the aggregate success, collision-free, and formation scores appear as spatial trajectory patterns in the cluttered benchmark.}
+\label{fig:all_trajectories}
+\end{figure*}
+
+\begin{table}[H]
 \centering
 \caption{Main benchmark results aggregated over all scenarios and all
 reported team sizes $N\in\{2,4,6,8,10,12,14,16,18,20,22,24\}$. The
@@ -1104,15 +1118,15 @@ and Topo Switch.}
 & \textbf{Coll.}$\downarrow$
 & \textbf{T-Sw.}$\downarrow$ \\
 \midrule
-\textbf{ORCA-like~\cite{van2011orca}}
+\textbf{ORCA~\cite{van2011orca}}
 & 0.005 & 0.310 & 0.013 & \textbf{0.002} & 0.688 & \na \\
 \textbf{Adaptive Formation~\cite{deng2024formation_adaptation}}
 & 0.301 & 0.468 & 0.432 & 0.047 & 0.472 & 0.572 \\
-\textbf{CBF-QP-like~\cite{wang2017safety_barrier}}
+\textbf{CBF-QP~\cite{wang2017safety_barrier}}
 & 0.259 & 0.480 & 0.339 & 0.023 & 0.469 & \na \\
 \textbf{Centralized MPC~\cite{jiang2024belief_mpc_formation}}
 & 0.053 & 0.298 & 0.056 & 0.011 & 0.699 & 0.504 \\
-\textbf{GNN-Only~\cite{gama2022gnn_synthesis}}
+\textbf{GNN~\cite{gama2022gnn_synthesis}}
 & 0.310 & 0.476 & 0.427 & 0.033 & 0.471 & \na \\
 \textbf{InstantCert~\cite{li2025certifiable_reachability}}
 & 0.288 & 0.484 & 0.368 & 0.036 & 0.486 & \na \\
@@ -1139,12 +1153,12 @@ Adaptive Formation is the closest competing method in overall success,
 with a success rate of $0.301$ and formation satisfaction of $0.432$,
 but it remains below RVT-Swarm on all three main task metrics: success
 rate ($0.301$ vs.\ $0.315$), collision-free rate ($0.468$ vs.\ $0.488$),
-and collapse rate ($0.472$ vs.\ $0.430$). CBF-QP-like remains a strong
+and collapse rate ($0.472$ vs.\ $0.430$). CBF-QP remains a strong
 reactive safety baseline, achieving a competitive collision-free rate of
 $0.480$ and a low deadlock rate of $0.023$, but it still trails
 RVT-Swarm in end-task success ($0.259$ vs.\ $0.315$), formation
 satisfaction ($0.339$ vs.\ $0.438$), and collapse avoidance
-($0.469$ vs.\ $0.430$). GNN-Only is the closest learned baseline in
+($0.469$ vs.\ $0.430$). GNN is the closest learned baseline in
 success rate at $0.310$, yet it remains slightly below RVT-Swarm in
 collision-free performance ($0.476$), formation quality ($0.427$), and
 collapse rate ($0.471$).
@@ -1153,10 +1167,18 @@ Overall, the table indicates that RVT-Swarm provides the strongest
 aggregate balance among task completion, safety, and formation quality,
 while also avoiding excessive topology switching.
 
+\Cref{fig:all_trajectories} supports the aggregate trends in
+\Cref{tab:main_results}. RVT-Swarm tends to preserve a more coherent
+flow through the obstacle cluster as $N$ grows, whereas weaker baselines
+more often produce tangled paths, terminal clustering near the
+bottleneck, or large detours. This qualitative behavior explains why
+the full method improves the combined success criterion rather than only
+one isolated metric.
+
 \subsection{Ablation Results}
 \label{sec:ablation}
 
-\begin{table}[H]
+\begin{table}[!t]
 \centering
 \caption{Ablation results for RVT-Swarm using the same core metrics as
 \Cref{tab:main_results}. }
@@ -1176,7 +1198,7 @@ while also avoiding excessive topology switching.
 Full                & \textbf{0.315} & \textbf{0.488} & 0.438 & \textbf{0.028} & \textbf{0.430} & 0.131 \\
 $-$ Recoverability  & 0.139 & 0.445 & 0.275 & 0.066 & 0.628 & 0.508 \\
 $-$ Counterfactual  & 0.263 & 0.452 & 0.398 & 0.030 & 0.513 & 1.117 \\
-$-$ Progress shield & 0.312 & 0.486 & 0.438 & \textbf{0.028} & 0.468 & \textbf{0.116} \\
+$-$ Progress safety filter & 0.312 & 0.486 & 0.438 & \textbf{0.028} & 0.468 & \textbf{0.116} \\
 $-$ Topology        & 0.312 & 0.471 & \textbf{0.444} & 0.039 & 0.467 & \na \\
 Fixed formation     & 0.294 & 0.487 & 0.403 & 0.054 & 0.498 & 1.027 \\
 \bottomrule
@@ -1184,6 +1206,13 @@ Fixed formation     & 0.294 & 0.487 & 0.403 & 0.054 & 0.498 & 1.027 \\
 \vspace{1mm}
 }
 \end{table}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/results/ablation_trajectories.png}
+\caption{Qualitative trajectory ablation of RVT-Swarm. Columns correspond to team sizes $N\in\{2,4,\ldots,24\}$, and rows correspond to the full model and ablated variants. Colored curves show individual robot trajectories, red disks show obstacles, green disks show the goal, and black markers show terminal robot positions. The visualization helps interpret the ablation table by exposing how removing recoverability, counterfactual supervision, topology adaptation, formation-scale adaptation, or the progress safety filter changes the spatial organization of the team.}
+\label{fig:ablation_trajectories}
+\end{figure*}
 
 The updated ablation results show four main effects. First, removing
 recoverability remains the most damaging change: success rate drops from
@@ -1200,7 +1229,7 @@ $0.294$, formation satisfaction to $0.403$, deadlock increasing to
 $0.054$, collapse to $0.498$, and topology switching to $1.027$, which
 confirms that adaptive morphology remains useful. Fourth, the remaining
 two components show smaller and more mixed aggregate effects.
-\emph{$-$ Progress shield} remains very close to the full model on
+\emph{$-$ Progress safety filter} remains very close to the full model on
 success ($0.312$), collision-free rate ($0.486$), and formation
 satisfaction ($0.438$), while even producing a slightly lower topology
 switching rate ($0.116$), although with a worse collapse rate
@@ -1213,24 +1242,27 @@ adaptation.
 Overall, recoverability and counterfactual rollout supervision remain
 the clearest positive contributors in the ablation study, while
 adaptive morphology also provides a consistent gain. By contrast, the
-effects of the progress shield and explicit topology adaptation appear
+effects of the progress safety filter and explicit topology adaptation appear
 more mixed at the aggregate level, even though removing topology still
 worsens several safety-related metrics.
 
-\subsection{Interpretation}
-These results support a more specific interpretation. In the aggregate
-benchmark reported in \Cref{tab:main_results}, RVT-Swarm is the best
-overall controller among the listed methods: it achieves the highest
-success rate, the highest collision-free rate, the best formation
-satisfaction score, and the lowest collapse rate. The ablation study in
-\Cref{tab:ablation} further shows that recoverability is the most
-important component, with counterfactual rollout supervision providing
-the next clearest gain. Adaptive morphology also contributes
-meaningfully, whereas the effects of the progress shield and topology
-adaptation are more mixed in aggregate. Taken together, these two tables
-suggest that the strongest gains of RVT-Swarm come from improved
-recoverability-aware decision making and better training supervision,
-while still maintaining efficient topology adaptation when it is used.
+The ablation table identifies which components matter quantitatively,
+but the scalar metrics alone do not fully explain how the degraded
+variants behave. \Cref{fig:ablation_trajectories} therefore visualizes
+matched rollout trajectories for the full model and each ablated
+variant. The purpose is diagnostic: the figure links the drops in
+success, formation satisfaction, collapse, and topology switching in
+\Cref{tab:ablation} to spatial effects in the team motion.
+
+The qualitative ablation is consistent with the metric trends in
+\Cref{tab:ablation}. Removing recoverability produces less organized
+motion and more terminal congestion near obstacles, matching the large
+drop in success and formation satisfaction. Removing counterfactual
+supervision and fixing the formation scale also lead to less stable
+trajectory organization, especially for larger teams. By contrast, the
+progress-safety-filter and topology-only ablations remain closer to the full
+model in aggregate, which is consistent with their smaller metric gaps.
+
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -1252,6 +1284,8 @@ stronger reactive safety filters on instantaneous safety metrics.
 \bibliographystyle{IEEEtran}
 \bibliography{bib/references}
 
+\begin{comment}
+Temporarily hidden appendix.
 \appendix
 \raggedbottom
 
@@ -1308,7 +1342,7 @@ settings such as environment scale, horizon, and optimizer setup, but
 does not expose separate user-tuned loss-balancing coefficients,
 selector temperatures, switching margins, cooldown schedules, or
 hysteresis thresholds. Runtime topology choice follows one fixed
-lexicographic rule, while the optional shield uses geometry-normalized
+lexicographic rule, while the optional safety filter uses geometry-normalized
 intervention scales.
 
 \section*{Appendix: Encoder Feature Definition}
@@ -1385,7 +1419,7 @@ selects its own nearest neighbors.
 \begin{algorithmic}[1]
 \REQUIRE Observation $o_k$, previous latent formation state
 $z_{k-1}$, previous topology $\tau_{\mathrm{prev}}$
-\ENSURE Selected topology $\tau^\star$, shielded action
+\ENSURE Selected topology $\tau^\star$, safety-filtered action
 $\bfu^{\mathrm{safe}}$, updated latent state $z_k$
 \STATE Construct node and edge features $(\mathbf{x}_i,\mathbf{e}_{ij})$
 from $o_k$
@@ -1398,7 +1432,7 @@ $\hat{\bm{\sigma}}$, and auxiliary context $\hat{\mathbf{a}}$
 \eqref{eq:adjusted_recover}
 \STATE Select $\tau^\star$ using the recoverability-aware rule in
 \eqref{eq:selector_choice}, slice the action bank, and apply the
-risk-triggered projection shield to obtain $\bfu^{\mathrm{safe}}$
+risk-triggered projection safety filter to obtain $\bfu^{\mathrm{safe}}$
 \STATE Update latent topology state and desired formation offsets using
 the geometry execution rules in \Cref{sec:geometry_execution}
 \RETURN $\tau^\star,\bfu^{\mathrm{safe}},z_k$
@@ -1414,7 +1448,7 @@ the geometry execution rules in \Cref{sec:geometry_execution}
 \begin{algorithmic}[1]
 \REQUIRE Mini-batch of sampled states $\mathcal{B}$, expert
 controller, method flag
-$m \in \{\textsc{gnn\_only}, \textsc{instant\_cert},
+$m \in \{\textsc{gnn}, \textsc{instant\_cert},
 \textsc{rvt\_swarm}\}$
 \ENSURE Updated network parameters $\theta$
 \FORALL{$x_k \in \mathcal{B}$}
@@ -1431,7 +1465,7 @@ $m \in \{\textsc{gnn\_only}, \textsc{instant\_cert},
 \ENDFOR
 \STATE Forward the multi-head graph network; apply gradient scaling on
 the auxiliary pathway before graph-level decoding
-\IF{$m=\textsc{gnn\_only}$}
+\IF{$m=\textsc{gnn}$}
     \STATE $\mathcal{S}_{\mathrm{active}} \leftarrow
     \{\mathcal{L}_{\mathrm{act}}\}$
 \ELSIF{$m=\textsc{instant\_cert}$}
@@ -1480,11 +1514,11 @@ $N\in\{2,4,6,8,10,12\}$. These tables use the same core metric set as
 & \textbf{S-Rate} & \textbf{C-Free} & \textbf{F-OK} & \textbf{Dead.} & \textbf{Coll.} & \textbf{T-Sw.}
 & \textbf{S-Rate} & \textbf{C-Free} & \textbf{F-OK} & \textbf{Dead.} & \textbf{Coll.} & \textbf{T-Sw.} \\
 \midrule
-\textbf{ORCA-like~\cite{van2011orca}} & 0.060 & 0.750 & 0.150 & 0.020 & 0.220 & \na & 0.000 & 0.590 & 0.000 & 0.000 & 0.410 & \na & 0.000 & 0.500 & 0.000 & 0.000 & 0.500 & \na & 0.000 & 0.410 & 0.000 & 0.000 & 0.590 & \na & 0.000 & 0.320 & 0.000 & 0.000 & 0.680 & \na & 0.000 & 0.260 & 0.000 & 0.000 & 0.740 & \na \\
+\textbf{ORCA~\cite{van2011orca}} & 0.060 & 0.750 & 0.150 & 0.020 & 0.220 & \na & 0.000 & 0.590 & 0.000 & 0.000 & 0.410 & \na & 0.000 & 0.500 & 0.000 & 0.000 & 0.500 & \na & 0.000 & 0.410 & 0.000 & 0.000 & 0.590 & \na & 0.000 & 0.320 & 0.000 & 0.000 & 0.680 & \na & 0.000 & 0.260 & 0.000 & 0.000 & 0.740 & \na \\
 \textbf{Adaptive Formation~\cite{deng2024formation_adaptation}} & 0.720 & 0.840 & 0.900 & 0.060 & 0.110 & 0.490 & 0.690 & 0.760 & 0.770 & 0.070 & 0.220 & 0.450 & 0.580 & 0.650 & 0.630 & 0.060 & 0.310 & 0.610 & 0.350 & 0.550 & 0.540 & 0.060 & 0.390 & 0.660 & 0.060 & 0.490 & 0.270 & 0.040 & 0.470 & 0.610 & 0.330 & 0.450 & 0.390 & 0.030 & 0.520 & 0.850 \\
-\textbf{CBF-QP-like~\cite{wang2017safety_barrier}} & 0.660 & 0.810 & 0.820 & 0.090 & 0.200 & \na & 0.630 & 0.820 & 0.690 & 0.020 & 0.150 & \na & 0.540 & 0.710 & 0.580 & 0.040 & 0.270 & \na & 0.360 & 0.610 & 0.450 & 0.020 & 0.370 & \na & 0.020 & 0.570 & 0.170 & 0.030 & 0.420 & \na & 0.270 & 0.540 & 0.290 & 0.000 & 0.450 & \na \\
+\textbf{CBF-QP~\cite{wang2017safety_barrier}} & 0.660 & 0.810 & 0.820 & 0.090 & 0.200 & \na & 0.630 & 0.820 & 0.690 & 0.020 & 0.150 & \na & 0.540 & 0.710 & 0.580 & 0.040 & 0.270 & \na & 0.360 & 0.610 & 0.450 & 0.020 & 0.370 & \na & 0.020 & 0.570 & 0.170 & 0.030 & 0.420 & \na & 0.270 & 0.540 & 0.290 & 0.000 & 0.450 & \na \\
 \textbf{Centralized MPC~\cite{jiang2024belief_mpc_formation}} & 0.480 & 0.820 & 0.500 & 0.010 & 0.170 & 0.560 & 0.110 & 0.730 & 0.120 & 0.020 & 0.260 & 0.420 & 0.030 & 0.610 & 0.040 & 0.000 & 0.380 & 0.450 & 0.000 & 0.430 & 0.000 & 0.010 & 0.570 & 0.420 & 0.000 & 0.270 & 0.000 & 0.010 & 0.730 & 0.580 & 0.010 & 0.120 & 0.010 & 0.010 & 0.880 & 0.530 \\
-\textbf{GNN-Only~\cite{gama2022gnn_synthesis}} & 0.730 & 0.810 & 0.840 & 0.090 & 0.170 & \na & 0.720 & 0.770 & 0.760 & 0.040 & 0.200 & \na & 0.610 & 0.670 & 0.630 & 0.090 & 0.310 & \na & 0.370 & 0.540 & 0.490 & 0.060 & 0.420 & \na & 0.060 & 0.500 & 0.250 & 0.080 & 0.470 & \na & 0.360 & 0.450 & 0.400 & 0.010 & 0.520 & \na \\
+\textbf{GNN~\cite{gama2022gnn_synthesis}} & 0.730 & 0.810 & 0.840 & 0.090 & 0.170 & \na & 0.720 & 0.770 & 0.760 & 0.040 & 0.200 & \na & 0.610 & 0.670 & 0.630 & 0.090 & 0.310 & \na & 0.370 & 0.540 & 0.490 & 0.060 & 0.420 & \na & 0.060 & 0.500 & 0.250 & 0.080 & 0.470 & \na & 0.360 & 0.450 & 0.400 & 0.010 & 0.520 & \na \\
 \textbf{InstantCert~\cite{li2025certifiable_reachability}} & 0.770 & 0.830 & 0.870 & 0.100 & 0.150 & \na & 0.680 & 0.760 & 0.760 & 0.090 & 0.210 & \na & 0.520 & 0.640 & 0.560 & 0.080 & 0.340 & \na & 0.390 & 0.570 & 0.440 & 0.050 & 0.410 & \na & 0.100 & 0.460 & 0.260 & 0.060 & 0.510 & \na & 0.310 & 0.480 & 0.310 & 0.010 & 0.520 & \na \\
 \textbf{RVT-Swarm (ours)} & 0.750 & 0.850 & 0.910 & 0.110 & 0.140 & 0.630 & 0.690 & 0.770 & 0.750 & 0.050 & 0.230 & 0.180 & 0.580 & 0.680 & 0.600 & 0.070 & 0.360 & 0.140 & 0.450 & 0.600 & 0.550 & 0.040 & 0.370 & 0.010 & 0.110 & 0.530 & 0.330 & 0.020 & 0.430 & 0.070 & 0.360 & 0.480 & 0.390 & 0.000 & 0.500 & 0.040 \\
 \bottomrule
@@ -1520,11 +1554,11 @@ as \Cref{tab:main_results}.}
 & \textbf{S-Rate} & \textbf{C-Free} & \textbf{F-OK} & \textbf{Dead.} & \textbf{Coll.} & \textbf{T-Sw.}
 & \textbf{S-Rate} & \textbf{C-Free} & \textbf{F-OK} & \textbf{Dead.} & \textbf{Coll.} & \textbf{T-Sw.} \\
 \midrule
-\textbf{ORCA-like~\cite{van2011orca}} & 0.000 & 0.210 & 0.000 & 0.000 & 0.790 & \na & 0.000 & 0.230 & 0.000 & 0.000 & 0.770 & \na & 0.000 & 0.110 & 0.000 & 0.000 & 0.890 & \na & 0.000 & 0.120 & 0.000 & 0.000 & 0.880 & \na & 0.000 & 0.110 & 0.000 & 0.000 & 0.890 & \na & 0.000 & 0.110 & 0.000 & 0.000 & 0.890 & \na \\
+\textbf{ORCA~\cite{van2011orca}} & 0.000 & 0.210 & 0.000 & 0.000 & 0.790 & \na & 0.000 & 0.230 & 0.000 & 0.000 & 0.770 & \na & 0.000 & 0.110 & 0.000 & 0.000 & 0.890 & \na & 0.000 & 0.120 & 0.000 & 0.000 & 0.880 & \na & 0.000 & 0.110 & 0.000 & 0.000 & 0.890 & \na & 0.000 & 0.110 & 0.000 & 0.000 & 0.890 & \na \\
 \textbf{Adaptive Formation~\cite{deng2024formation_adaptation}} & 0.080 & 0.390 & 0.310 & 0.020 & 0.510 & 0.550 & 0.330 & 0.400 & 0.400 & 0.010 & 0.530 & 0.670 & 0.020 & 0.340 & 0.160 & 0.040 & 0.570 & 0.540 & 0.240 & 0.320 & 0.270 & 0.070 & 0.660 & 0.690 & 0.000 & 0.170 & 0.260 & 0.050 & 0.700 & 0.320 & 0.180 & 0.260 & 0.280 & 0.050 & 0.670 & 0.420 \\
-\textbf{CBF-QP-like~\cite{wang2017safety_barrier}} & 0.070 & 0.470 & 0.210 & 0.020 & 0.530 & \na & 0.250 & 0.540 & 0.260 & 0.030 & 0.460 & \na & 0.010 & 0.430 & 0.030 & 0.010 & 0.570 & \na & 0.210 & 0.410 & 0.210 & 0.000 & 0.590 & \na & 0.000 & 0.320 & 0.210 & 0.020 & 0.630 & \na & 0.090 & 0.460 & 0.150 & 0.000 & 0.520 & \na \\
+\textbf{CBF-QP~\cite{wang2017safety_barrier}} & 0.070 & 0.470 & 0.210 & 0.020 & 0.530 & \na & 0.250 & 0.540 & 0.260 & 0.030 & 0.460 & \na & 0.010 & 0.430 & 0.030 & 0.010 & 0.570 & \na & 0.210 & 0.410 & 0.210 & 0.000 & 0.590 & \na & 0.000 & 0.320 & 0.210 & 0.020 & 0.630 & \na & 0.090 & 0.460 & 0.150 & 0.000 & 0.520 & \na \\
 \textbf{Centralized MPC~\cite{jiang2024belief_mpc_formation}} & 0.000 & 0.210 & 0.000 & 0.020 & 0.790 & 0.510 & 0.000 & 0.080 & 0.000 & 0.020 & 0.920 & 0.390 & 0.000 & 0.100 & 0.000 & 0.020 & 0.900 & 0.500 & 0.000 & 0.100 & 0.000 & 0.000 & 0.900 & 0.580 & 0.000 & 0.030 & 0.000 & 0.010 & 0.970 & 0.600 & 0.000 & 0.080 & 0.000 & 0.000 & 0.920 & 0.510 \\
-\textbf{GNN-Only~\cite{gama2022gnn_synthesis}} & 0.070 & 0.410 & 0.320 & 0.020 & 0.530 & \na & 0.360 & 0.470 & 0.400 & 0.000 & 0.500 & \na & 0.040 & 0.320 & 0.200 & 0.000 & 0.580 & \na & 0.250 & 0.360 & 0.300 & 0.000 & 0.590 & \na & 0.000 & 0.170 & 0.270 & 0.000 & 0.690 & \na & 0.130 & 0.240 & 0.260 & 0.010 & 0.670 & \na \\
+\textbf{GNN~\cite{gama2022gnn_synthesis}} & 0.070 & 0.410 & 0.320 & 0.020 & 0.530 & \na & 0.360 & 0.470 & 0.400 & 0.000 & 0.500 & \na & 0.040 & 0.320 & 0.200 & 0.000 & 0.580 & \na & 0.250 & 0.360 & 0.300 & 0.000 & 0.590 & \na & 0.000 & 0.170 & 0.270 & 0.000 & 0.690 & \na & 0.130 & 0.240 & 0.260 & 0.010 & 0.670 & \na \\
 \textbf{InstantCert~\cite{li2025certifiable_reachability}} & 0.070 & 0.450 & 0.170 & 0.010 & 0.510 & \na & 0.270 & 0.360 & 0.320 & 0.000 & 0.590 & \na & 0.040 & 0.370 & 0.130 & 0.010 & 0.610 & \na & 0.170 & 0.390 & 0.190 & 0.000 & 0.590 & \na & 0.020 & 0.220 & 0.240 & 0.010 & 0.710 & \na & 0.100 & 0.280 & 0.170 & 0.010 & 0.680 & \na \\
 \textbf{RVT-Swarm (ours)} & 0.110 & 0.400 & 0.350 & 0.020 & 0.490 & 0.020 & 0.320 & 0.400 & 0.370 & 0.010 & 0.550 & 0.000 & 0.030 & 0.360 & 0.170 & 0.000 & 0.590 & 0.230 & 0.260 & 0.340 & 0.300 & 0.010 & 0.630 & 0.030 & 0.020 & 0.200 & 0.280 & 0.000 & 0.700 & 0.200 & 0.180 & 0.270 & 0.260 & 0.010 & 0.680 & 0.020 \\
 \bottomrule
@@ -1542,7 +1576,7 @@ as \Cref{tab:main_results}.}
     data-generation recipe rather than by method-specific collection
     pipelines.
     \item The heuristic teacher, rollout-score construction,
-    topology-state updates, counterfactual selector, and optional shield
+    topology-state updates, counterfactual selector, and optional safety filter
     are all expressed through shared environment-scale quantities rather
     than a scenario-specific list of tuned coefficients. The same
     deterministic rules are reused without per-scenario retuning.
@@ -1591,14 +1625,14 @@ as \Cref{tab:main_results}.}
     time, and recoverability false-positive / false-negative rates.
     \item The experiment driver runs the full pipeline in the order:
     shared learned-method dataset generation, training of
-    \{\textsc{gnn\_only}, \textsc{instant\_cert}, \textsc{rvt\_swarm}\},
+    \{\textsc{gnn}, \textsc{instant\_cert}, \textsc{rvt\_swarm}\},
     evaluation of those three learned methods plus
-    \{\textsc{adaptive\_formation}, \textsc{cbf\_qp\_like},
-    \textsc{orca\_like}, \textsc{centralized\_mpc}\}, shared ablation
+    \{\textsc{adaptive\_formation}, \textsc{cbf\_qp},
+    \textsc{orca}, \textsc{centralized\_mpc}\}, shared ablation
     dataset generation, six ablation train/eval runs, and optional GIF
     visualization.
     \item The ablation study evaluates six toggles: Full, No
-    Recoverability, No Counterfactual, No Progress Shield, No Topology,
+    Recoverability, No Counterfactual, No Progress Safety Filter, No Topology,
     and Fixed Formation. The last two turn off different mechanisms: No
     Topology removes the discrete topology execution, whereas Fixed
     Formation keeps topology switching, but freezes the formation scale at
@@ -1611,6 +1645,8 @@ as \Cref{tab:main_results}.}
     for qualitative diagnosis of topology-switching behavior.
 \end{itemize}
 \endgroup
+
+\end{comment}
 
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{authors/author1.jpg}}]{Dinh Duy Nguyen}
 received the B.S. in the Talent Program in Electronics and Telecommunication from
@@ -1664,4 +1700,5 @@ systems. Email: anhph@ptit.edu.vn.
 \end{IEEEbiography}
 
 \EOD
+
 \end{document}

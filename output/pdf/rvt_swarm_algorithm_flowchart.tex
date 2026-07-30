@@ -1,0 +1,359 @@
+\documentclass[11pt]{article}
+\special{papersize=297mm,420mm}
+
+\usepackage[a3paper,portrait,margin=10mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.misc,calc,fit,backgrounds}
+
+\setmainfont{Arial}
+\pagestyle{empty}
+
+\definecolor{ink}{HTML}{1F2937}
+\definecolor{muted}{HTML}{6B7280}
+\definecolor{bluefill}{HTML}{EAF2FF}
+\definecolor{blueedge}{HTML}{2563EB}
+\definecolor{greenfill}{HTML}{EAF8F0}
+\definecolor{greenedge}{HTML}{16A34A}
+\definecolor{amberfill}{HTML}{FFF7E6}
+\definecolor{amberedge}{HTML}{D97706}
+\definecolor{redfill}{HTML}{FDECEC}
+\definecolor{rededge}{HTML}{DC2626}
+\definecolor{violetfill}{HTML}{F2ECFF}
+\definecolor{violetedge}{HTML}{7C3AED}
+\definecolor{grayfill}{HTML}{F8FAFC}
+\definecolor{grayedge}{HTML}{94A3B8}
+
+\tikzset{
+  font=\sffamily,
+  arrow/.style={-{Latex[length=2.4mm,width=1.8mm]}, line width=0.65pt, draw=ink},
+  looparrow/.style={-{Latex[length=2.4mm,width=1.8mm]}, line width=0.65pt, draw=muted, rounded corners=8pt},
+  startstop/.style={
+    rounded rectangle,
+    rounded rectangle arc length=90,
+    draw=blueedge,
+    fill=bluefill,
+    line width=0.8pt,
+    minimum width=34mm,
+    minimum height=9mm,
+    align=center,
+    text=ink
+  },
+  process/.style={
+    rectangle,
+    draw=grayedge,
+    fill=grayfill,
+    line width=0.7pt,
+    rounded corners=1.5pt,
+    minimum width=62mm,
+    minimum height=13mm,
+    text width=58mm,
+    align=center,
+    text=ink
+  },
+  io/.style={
+    trapezium,
+    trapezium left angle=70,
+    trapezium right angle=110,
+    draw=greenedge,
+    fill=greenfill,
+    line width=0.8pt,
+    minimum width=72mm,
+    minimum height=14mm,
+    text width=62mm,
+    align=center,
+    text=ink
+  },
+  decision/.style={
+    diamond,
+    aspect=2.05,
+    draw=amberedge,
+    fill=amberfill,
+    line width=0.8pt,
+    minimum width=46mm,
+    minimum height=24mm,
+    inner sep=1pt,
+    text width=35mm,
+    align=center,
+    text=ink
+  },
+  shield/.style={
+    rectangle,
+    draw=rededge,
+    fill=redfill,
+    line width=0.8pt,
+    rounded corners=1.5pt,
+    minimum width=62mm,
+    minimum height=13mm,
+    text width=58mm,
+    align=center,
+    text=ink
+  },
+  head/.style={
+    rectangle,
+    draw=violetedge,
+    fill=violetfill,
+    line width=0.7pt,
+    rounded corners=1.5pt,
+    minimum width=47mm,
+    minimum height=12mm,
+    text width=43mm,
+    align=center,
+    text=ink
+  },
+  note/.style={
+    rectangle,
+    draw=grayedge,
+    fill=white,
+    line width=0.55pt,
+    rounded corners=1.5pt,
+    text width=48mm,
+    align=left,
+    font=\sffamily\scriptsize,
+    text=muted,
+    inner sep=3mm
+  }
+}
+
+\begin{document}
+\begin{center}
+{\LARGE\bfseries Lưu đồ thuật toán RVT-Swarm}\\[2mm]
+{\large Từ dữ liệu trạng thái/cảm biến đến đầu ra điều khiển}
+\end{center}
+
+\vspace{2mm}
+
+\begin{center}
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[node distance=7mm and 16mm]
+  \node[startstop] (start) {Bắt đầu\\chu kỳ điều khiển};
+
+  \node[io, below=of start] (input) {
+    Nhập dữ liệu ban đầu:\\
+    vị trí, vận tốc, goal, vật cản, LiDAR,\\
+    topology hiện tại và trạng thái đội hình
+  };
+
+  \node[process, below=of input] (context) {
+    Tính context swarm:\\
+    centroid, goal distance, progress,\\
+    bottleneck, corridor direction
+  };
+
+  \node[process, below=of context] (formation) {
+    Tính đội hình mong muốn\\
+    theo topology hiện tại:\\
+    grid / line / split
+  };
+
+  \node[process, below=of formation] (ferr) {
+    Tính formation error:\\
+    target position - current position
+  };
+
+  \node[process, below=of ferr] (graph) {
+    Xây dựng graph tương tác local:\\
+    mỗi robot là một node,\\
+    robot lân cận là edge
+  };
+
+  \node[process, below left=8mm and 42mm of graph] (nodefeat) {
+    Tạo node features:\\
+    pose, velocity, goal vector,\\
+    formation error, LiDAR, TTC,\\
+    topology one-hot
+  };
+
+  \node[process, below right=8mm and 42mm of graph] (edgefeat) {
+    Tạo edge features:\\
+    relative pose/velocity, distance,\\
+    spacing error, TTC,\\
+    bottleneck, progress
+  };
+
+  \node[process, below=26mm of graph] (gnn) {
+    Đưa graph vào GNN:\\
+    message passing giữa các robot
+  };
+
+  \node[process, below=of gnn] (latent) {
+    Sinh latent state\\
+    cho từng robot
+  };
+
+  \node[head, below=9mm of latent, xshift=-120mm] (actionbank) {
+    Dự đoán action bank:\\
+    action cho từng topology ứng viên
+  };
+  \node[head, below=9mm of latent, xshift=-40mm] (topolog) {
+    Dự đoán\\
+    topology logits
+  };
+  \node[head, below=9mm of latent, xshift=40mm] (score) {
+    Dự đoán\\
+    recoverability score\\
+    cho từng topology
+  };
+  \node[head, below=9mm of latent, xshift=120mm] (uncert) {
+    Dự đoán\\
+    uncertainty
+  };
+
+  \node[decision, below=24mm of latent] (currec) {
+    Topology hiện tại\\
+    còn recoverable?
+  };
+
+  \node[process, below left=9mm and 50mm of currec] (keep) {
+    Giữ topology hiện tại\\
+    để tránh switching không cần thiết
+  };
+
+  \node[decision, below right=9mm and 50mm of currec] (better) {
+    Có topology khác\\
+    tốt hơn và\\
+    ít uncertain hơn?
+  };
+
+  \node[process, below=of better] (choosebetter) {
+    Chọn topology\\
+    có recoverability tốt hơn
+  };
+
+  \node[process, right=24mm of choosebetter] (choosesafe) {
+    Chọn topology an toàn nhất\\
+    trong các lựa chọn còn lại
+  };
+
+  \node[process, below=43mm of currec] (pick) {
+    Lấy action tương ứng\\
+    với topology đã chọn
+  };
+
+  \node[process, below=of pick] (risk) {
+    Tính collision risk:\\
+    khoảng cách robot-robot, robot-obstacle\\
+    và time-to-collision
+  };
+
+  \node[decision, below=of risk] (riskdec) {
+    Collision risk\\
+    vượt ngưỡng?
+  };
+
+  \node[process, below left=9mm and 50mm of riskdec] (learned) {
+    Giữ nguyên\\
+    action học được
+  };
+
+  \node[shield, below right=9mm and 50mm of riskdec] (cbf) {
+    Chạy CBF-QP safety shield:\\
+    project action để tránh va chạm\\
+    nhưng vẫn ưu tiên tiến về goal
+  };
+
+  \node[io, below=25mm of riskdec] (safeacc) {
+    Xuất safe acceleration 2D:\\
+    $(a_x, a_y)$ cho từng robot
+  };
+
+  \node[decision, below=of safeacc] (runtime) {
+    Runtime là\\
+    ROS/Gazebo?
+  };
+
+  \node[process, below left=9mm and 50mm of runtime] (simstep) {
+    Simulator env.step:\\
+    cập nhật velocity, position,\\
+    topology state và metrics
+  };
+
+  \node[process, below right=9mm and 50mm of runtime] (twist) {
+    Đổi acceleration sang cmd\_vel:\\
+    linear.x và angular.z
+  };
+
+  \node[io, below=of twist] (cmd) {
+    Xuất /cmd\_vel\\
+    cho robot thật hoặc Gazebo
+  };
+
+  \node[decision, below=27mm of runtime] (done) {
+    Đã tới goal\\
+    hoặc hết max steps?
+  };
+
+  \node[startstop, below=of done] (end) {Kết thúc};
+
+  \node[note, right=8mm of start] (legend) {
+    \textbf{Quy ước hình}\\[1mm]
+    Bo tròn: bắt đầu/kết thúc\\
+    Bình hành: dữ liệu vào/ra\\
+    Chữ nhật: xử lý\\
+    Hình thoi: điều kiện rẽ nhánh
+  };
+
+  \draw[arrow] (start) -- (input);
+  \draw[arrow] (input) -- (context);
+  \draw[arrow] (context) -- (formation);
+  \draw[arrow] (formation) -- (ferr);
+  \draw[arrow] (ferr) -- (graph);
+  \draw[arrow] (graph) -| (nodefeat);
+  \draw[arrow] (graph) -| (edgefeat);
+  \draw[arrow] (nodefeat) |- (gnn);
+  \draw[arrow] (edgefeat) |- (gnn);
+  \draw[arrow] (gnn) -- (latent);
+
+  \draw[arrow] (latent) -- (actionbank);
+  \draw[arrow] (latent) -- (topolog);
+  \draw[arrow] (latent) -- (score);
+  \draw[arrow] (latent) -- (uncert);
+
+  \draw[arrow] (topolog) |- (currec);
+  \draw[arrow] (score) |- (currec);
+  \draw[arrow] (uncert) |- (currec);
+  \draw[arrow] (context.east) -- ++(112mm,0) |- (currec.east);
+
+  \draw[arrow] (currec) -- node[above left,font=\sffamily\scriptsize,text=ink] {Có} (keep);
+  \draw[arrow] (currec) -- node[above right,font=\sffamily\scriptsize,text=ink] {Không} (better);
+  \draw[arrow] (better) -- node[right,font=\sffamily\scriptsize,text=ink] {Có} (choosebetter);
+  \draw[arrow] (better) -- node[above,font=\sffamily\scriptsize,text=ink] {Không} (choosesafe);
+
+  \draw[arrow] (keep) |- (pick);
+  \draw[arrow] (choosebetter) |- (pick);
+  \draw[arrow] (choosesafe) |- (pick);
+  \draw[arrow] (actionbank.south) |- (pick.west);
+
+  \draw[arrow] (pick) -- (risk);
+  \draw[arrow] (risk) -- (riskdec);
+  \draw[arrow] (riskdec) -- node[above left,font=\sffamily\scriptsize,text=ink] {Không} (learned);
+  \draw[arrow] (riskdec) -- node[above right,font=\sffamily\scriptsize,text=ink] {Có} (cbf);
+  \draw[arrow] (learned) |- (safeacc);
+  \draw[arrow] (cbf) |- (safeacc);
+
+  \draw[arrow] (safeacc) -- (runtime);
+  \draw[arrow] (runtime) -- node[above left,font=\sffamily\scriptsize,text=ink] {Không} (simstep);
+  \draw[arrow] (runtime) -- node[above right,font=\sffamily\scriptsize,text=ink] {Có} (twist);
+  \draw[arrow] (twist) -- (cmd);
+  \draw[arrow] (simstep) |- (done);
+  \draw[arrow] (cmd) |- (done);
+  \draw[arrow] (done) -- node[right,font=\sffamily\scriptsize,text=ink] {Rồi} (end);
+
+  \draw[looparrow] (done.west) -- ++(-132mm,0)
+    |- node[pos=0.25,left,font=\sffamily\scriptsize,text=muted] {Chưa: lặp timestep tiếp theo} (input.west);
+
+  \begin{scope}[on background layer]
+    \node[
+      draw=grayedge,
+      fill=white,
+      rounded corners=3pt,
+      inner sep=5mm,
+      fit=(nodefeat)(edgefeat)(gnn)(latent)(actionbank)(uncert)(currec)(better)(choosesafe)(safeacc)(done)
+    ] {};
+  \end{scope}
+\end{tikzpicture}%
+}
+\end{center}
+\end{document}

@@ -680,6 +680,11 @@ def test_from_initial_formation_is_never_called_from_runtime_code() -> None:
     setup_markers = (
         "setup", "configure", "config", "build", "make", "create", "init",
         "mission", "reset", "assign_roles", "prepare",
+        # A `simulate_`-prefixed function is, by the package's own convention,
+        # non-deployable boundary code. Calling mission setup from inside the
+        # episode harness at reset time is exactly the sanctioned use; the
+        # step/control assertion above still forbids the loop.
+        "simulate_",
     )
     for name, chain in call_sites:
         for fn_name in chain:

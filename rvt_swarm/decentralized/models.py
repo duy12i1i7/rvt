@@ -41,6 +41,12 @@ from .system_model import KEEP, LINE, MODES
 
 def _edge_softmax(scores: torch.Tensor, dst: torch.Tensor, n_nodes: int) -> torch.Tensor:
     """Softmax over the incoming edges of each node. Permutation invariant."""
+    # A robot can legitimately have NO edges: under heavy packet loss it may
+    # hear nobody and sense no obstacle, leaving a one-node ego graph. It must
+    # still produce a score from its own features rather than crash, so the
+    # empty case returns early instead of calling max() on an empty tensor.
+    if scores.numel() == 0:
+        return scores
     # Shift by the global max for numerical stability. A per-node max would be
     # marginally tighter but needs a scatter-max; the global shift is exactly
     # equivalent mathematically (the constant cancels within each node's

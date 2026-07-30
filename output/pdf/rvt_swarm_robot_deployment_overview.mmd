@@ -1,0 +1,89 @@
+flowchart LR
+    subgraph robotHardware["Robot hardware on each UGV"]
+        lidar["2D LiDAR<br/>L_i^t = {rho_i^m}_{m=1..M}"]
+        wheelImu["Wheel encoders + IMU<br/>fused odometry source"]
+        onboard["Onboard computer<br/>ROS 2 Jazzy + rvt_agent"]
+        radio["Wi-Fi / DDS radio<br/>communication radius R_c"]
+        driveBase["Differential-drive base<br/>low-level motor controller"]
+    end
+
+    subgraph rosInterface["ROS 2 interface"]
+        drivers["Robot drivers or Gazebo bridge<br/>real robot: hardware drivers<br/>simulation: ros_gz_bridge"]
+        topics["Topic contract for tb3_i<br/>/scan: LaserScan<br/>/odom: Odometry<br/>/cmd_vel: Twist"]
+        callbacks["rvt_agent callbacks<br/>/odom -> s_i^t=(p_i,v_i,psi_i)<br/>/scan -> L_i^t"]
+        adapter["Sensor-to-policy adapter<br/>O_i^t={o_k, odot_k}<br/>A_i^t={i} U N_i^t<br/>Omega_i^t=(s,L,O,g,z,s_form)"]
+    end
+
+    subgraph onboardController["RVT-Swarm onboard controller"]
+        graphBuild["Build local graph<br/>G_i^t=(V_i^t,E_i^t)<br/>x_j in R^68, e_jk in R^11"]
+        policy["RVT graph policy<br/>h_j=GNN(x_j,e_jk)<br/>a_j^k, ell_k, q_k, sigma_k"]
+        selector["Topology selector<br/>qtilde_k=q_k-lambda*sigma_k<br/>k_t=argmax_k H(ell_k,qtilde_k,k_{t-1})"]
+        runtime["Topology runtime<br/>(z_t,s_t,subteam_i)=F_topo(k_t,b_t)"]
+        risk{"Collision risk<br/>r_col >= theta?"}
+        cbf["CBF-QP shield<br/>a_i^{k_t} -> atilde_i"]
+        passAction["No shield update<br/>atilde_i = a_i^{k_t}"]
+        projection["Project to TurtleBot command<br/>v_i^d=v_i+atilde_i*Delta t<br/>u_i=(v_x,omega_z)=Pi_TB3(v_i^d,psi_i)"]
+    end
+
+    subgraph swarmNetwork["Swarm network"]
+        peerPub["Publish peer state<br/>m_i^t=(p_i,v_i,psi_i,z_t,s_t,subteam_i)<br/>/swarm/peer_states"]
+        peerSub["Receive nearby peer states<br/>P_i^t={m_j^t}"]
+        missionGoal["Mission command<br/>/swarm/goal -> g=(g_x,g_y)"]
+    end
+
+    subgraph robotOutput["Robot output"]
+        cmdVel["Velocity command<br/>/tb3_i/cmd_vel<br/>u_i=(v_x,omega_z)"]
+        baseController["Base controller<br/>(v_x,omega_z) -> (omega_L,omega_R)"]
+        motion["Robot motion in world<br/>s_i^{t+1}=(p_i^{t+1},v_i^{t+1},psi_i^{t+1})"]
+        evaluation["Paper / evaluation outputs<br/>T={p_i^t}, FormOK, success, topology switches"]
+    end
+
+    lidar -->|"LaserScan: LiDAR range set L_i^t"| drivers
+    wheelImu -->|"Odometry source: robot state s_i^t"| drivers
+    onboard -->|"runs: ROS 2 rvt_agent process"| callbacks
+    radio -.->|"DDS transport: sends peer message m_i^t"| peerPub
+    drivers -->|"hardware messages"| topics
+    topics -->|"ROS topic stream"| callbacks
+    callbacks -->|"s_i^t: pose/velocity/yaw; L_i^t: LiDAR scan"| adapter
+
+    peerSub -.->|"P_i^t: received neighbor states"| adapter
+    missionGoal -.->|"g: shared 2D goal position"| adapter
+    adapter -->|"Omega_i^t: complete policy observation"| graphBuild
+    graphBuild -->|"G_i^t: local robot interaction graph"| policy
+    policy -->|"ell_k,q_k,sigma_k: logit/recoverability/uncertainty"| selector
+    selector -->|"k_t: selected topology in K={0,2,3}"| runtime
+    policy -->|"a_i^{k_t}: learned acceleration candidate"| risk
+    runtime -->|"z_t: topology mode; s_t: formation scale; subteam_i: split lane"| risk
+    risk -->|"yes: r_col >= theta, shield is active"| cbf
+    risk -->|"no: r_col < theta, keep policy action"| passAction
+    cbf -->|"atilde_i: shielded safe acceleration"| projection
+    passAction -->|"atilde_i=a_i^{k_t}: unchanged acceleration"| projection
+
+    runtime -.->|"m_i^t: pose + topology runtime state"| peerPub
+    peerPub -.->|"DDS broadcast: peer-state message m_i^t"| peerSub
+    projection -->|"u_i: body velocity command (v_x,omega_z)"| cmdVel
+    cmdVel -->|"Twist command u_i"| baseController
+    baseController -->|"wheel commands (omega_L,omega_R)"| driveBase
+    baseController -->|"applies command to robot body"| motion
+    motion -.->|"next sensor feedback: /odom and /scan"| drivers
+    motion -->|"T={p_i^t}: trajectories and run metrics"| evaluation
+
+    classDef hardware fill:#f8fafc,stroke:#111827,stroke-width:1px,color:#111827;
+    classDef ros fill:#dff1fb,stroke:#111827,stroke-width:1px,color:#111827;
+    classDef controller fill:#f1e4fa,stroke:#111827,stroke-width:1px,color:#111827;
+    classDef network fill:#e7f5ea,stroke:#111827,stroke-width:1px,color:#111827;
+    classDef output fill:#fff7e6,stroke:#111827,stroke-width:1px,color:#111827;
+    classDef decision fill:#ffffff,stroke:#dc2626,stroke-width:2px,color:#111827;
+
+    class lidar,wheelImu,onboard,radio,driveBase hardware;
+    class drivers,topics,callbacks,adapter ros;
+    class graphBuild,policy,selector,runtime,cbf,passAction,projection controller;
+    class risk decision;
+    class peerPub,peerSub,missionGoal network;
+    class cmdVel,baseController,motion,evaluation output;
+
+    style robotHardware fill:#f8fafc,stroke:#f8fafc
+    style rosInterface fill:#dff1fb,stroke:#dff1fb
+    style onboardController fill:#f1e4fa,stroke:#f1e4fa
+    style swarmNetwork fill:#e7f5ea,stroke:#e7f5ea
+    style robotOutput fill:#fff7e6,stroke:#fff7e6

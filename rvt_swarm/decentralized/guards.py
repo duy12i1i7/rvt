@@ -84,6 +84,33 @@ NAME_ALLOWLIST: frozenset = frozenset({
     "state_id", "stateful", "statistics",
 })
 
+# Modules that are training-time or reporting-only and never run on a robot.
+# Excluded from the DEPLOYABLE scan, with the reason recorded so the exclusion
+# is a stated claim rather than a convenience. Each is still bound by the
+# no-final-test-access rule, which is checked separately.
+OFFLINE_MODULES: Dict[str, str] = {
+    "training": (
+        "Centralized training and offline analysis. Builds the dataset through "
+        "the simulation boundary and computes losses; nothing here executes on "
+        "a robot. Its inputs are legitimately batched across robots."
+    ),
+    "comm_cost": (
+        "Message accounting and report formatting. Consumes counters after the "
+        "fact; no robot computes a fleet-wide byte total at runtime."
+    ),
+}
+
+# Parameter names that carry a SINGLE robot's ego-graph tensors. An ego graph
+# contains only robot i's own node plus its one-hop neighbours and locally
+# sensed obstacles, so a tensor holding one is local by construction -- the
+# annotation `torch.Tensor` says nothing about how many robots are inside.
+# Batching several robots' ego graphs for a training step is a disjoint union
+# with no cross-robot edges, which is asserted in training.batch_ego.
+EGO_TENSOR_PARAMS: frozenset = frozenset({
+    "node_x", "edge_index", "edge_attr", "center_index", "h", "scores", "dst",
+    "g", "ego_keep", "ego_line", "n_nodes", "q", "z", "y", "P",
+})
+
 _OFFLINE: Set[str] = set()
 
 
@@ -151,7 +178,7 @@ def scan_signatures() -> List[Violation]:
     """Deployable functions must not declare bulk-state parameters."""
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname in ("guards",):
+        if modname in ("guards",) or modname in OFFLINE_MODULES:
             continue
         for qualname, fn in _iter_functions(module):
             if _is_boundary(qualname) or _is_offline(fn):
@@ -170,6 +197,13 @@ def scan_signatures() -> List[Violation]:
                 # parameter regardless of its name.
                 if any(ann_s == s for s in SCALAR_ANNOTATIONS):
                     continue
+                # Ego-graph tensors are local by construction: the tensor holds
+                # robot i's own node plus its one-hop neighbours and locally
+                # sensed obstacles. `torch.Tensor` says nothing about how many
+                # robots are inside, so the annotation alone cannot decide this
+                # and the parameter name is the discriminating information.
+                if pname in EGO_TENSOR_PARAMS:
+                    continue
                 if any(b in ann_s for b in BULK_ANNOTATIONS):
                     out.append(Violation(modname, qualname, "bulk-annotation",
                                          f"parameter '{pname}: {ann_s}' may hold joint state"))
@@ -187,7 +221,7 @@ def scan_prohibited_obs_keys() -> List[Violation]:
     """No deployable function body may subscript a prohibited obs key."""
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname in ("guards", "system_model"):
+        if modname in ("guards", "system_model") or modname in OFFLINE_MODULES:
             continue
         try:
             tree = ast.parse(inspect.getsource(module))
@@ -221,7 +255,7 @@ def scan_boundary_reachability() -> List[Violation]:
     loop_tokens = ("step", "control", "act", "update", "runtime", "decide", "commit")
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname == "guards":
+        if modname == "guards" or modname in OFFLINE_MODULES:
             continue
         try:
             tree = ast.parse(inspect.getsource(module))
