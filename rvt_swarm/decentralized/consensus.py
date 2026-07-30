@@ -113,11 +113,24 @@ class ConsensusNode:
         if now_step - msg.timestamp_step > delta_stale_steps:
             self.rejected_stale += 1
             return False
-        if msg.round_index != self.round_index:
-            # Only same-round values may be mixed; an off-round value would
-            # blend iterates from different points of the recursion.
-            self.rejected_round += 1
-            return False
+        # NOTE ON THE ROUND INDEX. It is a de-duplication key, NOT an admission
+        # gate. Two earlier versions gated on it and both were wrong:
+        #
+        #   round_index != self.round_index  -> any delay >= 1 step rejected
+        #       every message; consensus stalled with applied == 0.
+        #   round_index >  self.round_index  -> a robot with a clock offset is
+        #       behind its neighbours, so their messages look like the future
+        #       and it rejects all of them; the late robot and anything behind
+        #       it are severed from the graph.
+        #
+        # The round counter is a per-robot logical clock; comparing it across
+        # robots presumes the synchrony the protocol is supposed to tolerate.
+        # Temporal safety -- never consuming information that has not yet
+        # happened -- is enforced where it actually lives: the delivery queue
+        # releases a message only when deliver_step <= now, and the staleness
+        # check above rejects anything older than delta_stale_steps. A message
+        # that passes both was genuinely sent and genuinely received in the
+        # past, whatever its sender's counter reads.
         key = (msg.sender_id, msg.epoch_id, msg.round_index)
         if key in self._seen:
             self.rejected_duplicate += 1

@@ -75,6 +75,10 @@ SCALAR_ANNOTATIONS: Tuple[str, ...] = (
 )
 
 # Names that look bulk by substring but are provably scalar/per-robot here.
+# This allowlist suppresses ONLY the *name* heuristic. It must never suppress
+# the *annotation* check: `obstacles` is an allowlisted name because
+# `RobotView.obstacles` is a locally-sensed tuple, but `obstacles: np.ndarray`
+# is the full obstacle array and is a violation whatever it is called.
 NAME_ALLOWLIST: frozenset = frozenset({
     "self_state", "committed_mode", "obstacles", "n_obstacles",
     "state_id", "stateful", "statistics",
@@ -157,7 +161,7 @@ def scan_signatures() -> List[Violation]:
             except (ValueError, TypeError):
                 continue
             for pname, param in sig.parameters.items():
-                if pname in ("self", "cls") or pname in NAME_ALLOWLIST:
+                if pname in ("self", "cls"):
                     continue
                 ann = param.annotation
                 ann_s = str(ann if isinstance(ann, str)
@@ -169,6 +173,9 @@ def scan_signatures() -> List[Violation]:
                 if any(b in ann_s for b in BULK_ANNOTATIONS):
                     out.append(Violation(modname, qualname, "bulk-annotation",
                                          f"parameter '{pname}: {ann_s}' may hold joint state"))
+                elif pname in NAME_ALLOWLIST:
+                    # Name is cleared, annotation was not bulk: nothing to flag.
+                    continue
                 elif any(tok in pname.lower() for tok in BULK_NAME_TOKENS):
                     out.append(Violation(modname, qualname, "bulk-name",
                                          f"parameter '{pname}' is named like joint state "
