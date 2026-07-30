@@ -1,0 +1,9 @@
+topology_agnostic_gnn        forced-keep succ=0.550 goal=0.550
+rvt_binary_recovery          forced-keep succ=0.300 goal=0.300
+rvt_binary_recovery          forced-line succ=0.000 goal=0.000
+direct_keep_line_classifier  forced-keep succ=0.400 goal=0.500
+direct_keep_line_classifier  forced-line succ=0.000 goal=0.000
+
+per-step action magnitude (mean |a|, first 30 steps, N=4, keep head):
+  topology_agnostic_gnn        learned=0.1242  expert=0.1310  ratio=0.948
+  rvt_binary_recovery          learned=0.1310  expert=0.1285  ratio=1.019

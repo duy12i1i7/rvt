@@ -36,6 +36,9 @@ MODE_NAME = {0: "keep", 2: "line"}
 PILOT_FAMILIES = ["line_corridor", "keep_line_keep", "keep_open", "ambiguous"]
 TEAM_SIZES = [4, 6]
 STATE_STRIDE = 12                    # must match generate_binary_labels.py
+# Repair 3: dense action dataset (predeclared in DUAL_SUPERVISION_DATA_PROTOCOL.md)
+ACTION_STRIDE = 2
+ACTION_EPISODES = {"train": 3, "val": 2}
 EPISODES = {"train": 3, "val": 2}
 
 
@@ -89,6 +92,106 @@ def build_dataset(cfg: Config, split: str, labels: Dict[str, Dict[str, float]]) 
     return samples
 
 
+def build_action_dataset(cfg: Config, split: str) -> List[PilotSample]:
+    """Dense expert-action targets. No recovery rollouts, no outcome-based sampling.
+
+    Identical construction for every method; the returned list is consumed in the
+    same order by all three, so action-training opportunities are equal.
+    """
+    split_key = TRAIN if split == "train" else VALIDATION
+    samples: List[PilotSample] = []
+    for lay in [l for l in build_layouts(split) if l.family in PILOT_FAMILIES]:
+        for n in TEAM_SIZES:
+            for seed in setting_episode_seeds(split_key, 0, n, ACTION_EPISODES[split], 0):
+                env = SwarmFormationEnv(cfg)
+                obs = env.reset(n, "cluttered", seed=seed, layout=lay)
+                done, step = False, 0
+                while not done:
+                    if step % ACTION_STRIDE == 0:
+                        node_x, ei, ea = build_graph_arrays(obs, cfg)
+                        acts = np.stack(
+                            [expert_action(obs, cfg, m) / cfg.env.max_accel for m in MODES],
+                            axis=1).astype(np.float32)
+                        samples.append(PilotSample(
+                            torch.from_numpy(node_x), torch.from_numpy(ei),
+                            torch.from_numpy(ea), torch.from_numpy(acts),
+                            torch.tensor([[float("nan"), float("nan")]]),   # no labels here
+                            f"{lay.layout_id}|{n}|{seed}|{step}|act",
+                            lay.family, n, split))
+                    obs, _, done, _ = env.step(expert_action(obs, cfg, 0), 0)
+                    step += 1
+    return samples
+
+
+# ---------------------------------------------------------------------------
+# Repair 1: decisive / non-decisive states
+# ---------------------------------------------------------------------------
+def classify_states(labels: np.ndarray) -> Dict[str, np.ndarray]:
+    keep, line = labels[:, 0] > 0.5, labels[:, 1] > 0.5
+    keep_only = keep & ~line
+    line_only = ~keep & line
+    return {"keep_only": keep_only, "line_only": line_only,
+            "both_succeed": keep & line, "both_fail": ~keep & ~line,
+            "decisive": keep_only | line_only}
+
+
+def decisive_mode_metrics(probs: np.ndarray, labels: np.ndarray) -> Dict[str, float]:
+    """Mode accuracy on decisive states only. Ordering-invariant; ties score 0.5.
+
+    Non-decisive states (both-succeed / both-fail) have no correct answer and are
+    NEVER scored -- that tie-resolution is precisely the v1 defect.
+    """
+    probs = np.asarray(probs, float); labels = np.asarray(labels, float)
+    c = classify_states(labels)
+    n = max(len(labels), 1)
+    out = {
+        "keep_only_prevalence": float(c["keep_only"].mean()),
+        "line_only_prevalence": float(c["line_only"].mean()),
+        "both_succeed_prevalence": float(c["both_succeed"].mean()),
+        "both_fail_prevalence": float(c["both_fail"].mean()),
+        "decisive_coverage": float(c["decisive"].mean()),
+        "n_states": int(n), "n_decisive": int(c["decisive"].sum()),
+    }
+    d = c["decisive"]
+    if not d.any():
+        out.update({k: float("nan") for k in
+                    ("decisive_accuracy", "decisive_keep_recall", "decisive_line_recall",
+                     "decisive_balanced_accuracy", "always_keep_accuracy",
+                     "always_line_accuracy", "majority_class_accuracy")})
+        out.update(cm_keep_keep=0, cm_keep_line=0, cm_line_keep=0, cm_line_line=0,
+                   n_prediction_ties=0)
+        return out
+
+    pred_sign = np.sign(probs[d, 1] - probs[d, 0])
+    targ_sign = np.sign(labels[d, 1] - labels[d, 0])
+    score = np.where(pred_sign == 0, 0.5, (pred_sign == targ_sign).astype(float))
+    out["decisive_accuracy"] = float(score.mean())
+    out["n_prediction_ties"] = int((pred_sign == 0).sum())
+
+    ko, lo = c["keep_only"], c["line_only"]
+    def recall(mask, want_line):
+        if not mask.any():
+            return float("nan")
+        ps = np.sign(probs[mask, 1] - probs[mask, 0])
+        target = 1.0 if want_line else -1.0
+        return float(np.where(ps == 0, 0.5, (ps == target).astype(float)).mean())
+    out["decisive_keep_recall"] = recall(ko, False)
+    out["decisive_line_recall"] = recall(lo, True)
+    rec = [v for v in (out["decisive_keep_recall"], out["decisive_line_recall"])
+           if not math.isnan(v)]
+    out["decisive_balanced_accuracy"] = float(np.mean(rec)) if rec else float("nan")
+
+    pl = np.sign(probs[:, 1] - probs[:, 0]) > 0
+    out["cm_keep_keep"] = int((ko & ~pl).sum()); out["cm_keep_line"] = int((ko & pl).sum())
+    out["cm_line_keep"] = int((lo & ~pl).sum()); out["cm_line_line"] = int((lo & pl).sum())
+
+    nd = int(d.sum())
+    out["always_keep_accuracy"] = float(ko.sum() / nd)
+    out["always_line_accuracy"] = float(lo.sum() / nd)
+    out["majority_class_accuracy"] = float(max(ko.sum(), lo.sum()) / nd)
+    return out
+
+
 def collate(batch: List[PilotSample]) -> Dict[str, torch.Tensor]:
     node_x, edge_attr, edge_index, acts, labels, bidx = [], [], [], [], [], []
     offset = 0
@@ -110,28 +213,46 @@ LAMBDA_ACTION = 1.0
 LAMBDA_BCE = 1.0
 
 
-def compute_pilot_loss(out: Dict, batch: Dict, method: str) -> Dict[str, torch.Tensor]:
-    zero = batch["node_x"].new_tensor(0.0)
-    if method == "topology_agnostic_gnn":
-        # No mode conditioning: imitate the KEEP expert only.
-        l_action = F.mse_loss(out["actions"], batch["action_targets"][:, 0, :])
-        return {"total": LAMBDA_ACTION * l_action, "action": l_action,
-                "bce": zero, "ce": zero}
+LAMBDA_CLS = 1.0
 
-    l_action = F.mse_loss(out["actions_by_topology"], batch["action_targets"])
+
+def action_loss(out: Dict, batch: Dict, method: str) -> torch.Tensor:
+    if method == "topology_agnostic_gnn":
+        return F.mse_loss(out["actions"], batch["action_targets"][:, 0, :])
+    return F.mse_loss(out["actions_by_topology"], batch["action_targets"])
+
+
+def recovery_loss(out: Dict, batch: Dict, method: str) -> torch.Tensor:
+    """BCE on both heads (recovery model) or masked CE on decisive states only."""
+    lab = batch["recovery_labels"]
+    zero = lab.new_tensor(0.0)
     if method == "rvt_binary_recovery":
-        l_bce = F.binary_cross_entropy_with_logits(
-            out["recovery_logits"], batch["recovery_labels"])
-        return {"total": LAMBDA_ACTION * l_action + LAMBDA_BCE * l_bce,
-                "action": l_action, "bce": l_bce, "ce": zero}
+        return F.binary_cross_entropy_with_logits(out["recovery_logits"], lab)
     if method == "direct_keep_line_classifier":
-        # Hard best-mode target; ties resolved toward keep (the conservative default).
-        lab = batch["recovery_labels"]
-        target = (lab[:, 1] > lab[:, 0]).long()
-        l_ce = F.cross_entropy(out["class_logits"], target)
-        return {"total": LAMBDA_ACTION * l_action + LAMBDA_BCE * l_ce,
-                "action": l_action, "bce": zero, "ce": l_ce}
-    raise ValueError(method)
+        keep, line = lab[:, 0] > 0.5, lab[:, 1] > 0.5
+        decisive = (keep & ~line) | (~keep & line)
+        if int(decisive.sum()) == 0:
+            # No decisive example in this batch: exactly zero, no division by zero.
+            return zero
+        target = line[decisive].long()
+        return F.cross_entropy(out["class_logits"][decisive], target)
+    return zero
+
+
+def compute_pilot_loss(out: Dict, batch: Dict, method: str,
+                       recovery_out: Optional[Dict] = None,
+                       recovery_batch: Optional[Dict] = None) -> Dict[str, torch.Tensor]:
+    """L_action on the dense batch; the head term on the (optional) recovery batch."""
+    zero = batch["node_x"].new_tensor(0.0)
+    l_action = action_loss(out, batch, method)
+    l_head = zero
+    if recovery_out is not None and recovery_batch is not None:
+        l_head = recovery_loss(recovery_out, recovery_batch, method)
+    lam = LAMBDA_BCE if method == "rvt_binary_recovery" else LAMBDA_CLS
+    total = LAMBDA_ACTION * l_action + lam * l_head
+    return {"total": total, "action": l_action,
+            "bce": l_head if method == "rvt_binary_recovery" else zero,
+            "ce": l_head if method == "direct_keep_line_classifier" else zero}
 
 
 # ---------------------------------------------------------------------------
@@ -175,7 +296,7 @@ def prediction_metrics(probs: np.ndarray, labels: np.ndarray) -> Dict[str, float
     """probs/labels are (S, 2) over {keep, line}."""
     y = labels.reshape(-1)
     p = np.clip(probs.reshape(-1), 1e-7, 1 - 1e-7)
-    top1 = float(np.mean(np.argmax(probs, 1) == np.argmax(labels, 1)))
+    top1_legacy = float(np.mean(np.argmax(probs, 1) == np.argmax(labels, 1)))
     disagree = labels[:, 0] != labels[:, 1]
     pair = (float(np.mean(np.sign(probs[disagree, 1] - probs[disagree, 0])
                           == np.sign(labels[disagree, 1] - labels[disagree, 0])))
@@ -187,10 +308,12 @@ def prediction_metrics(probs: np.ndarray, labels: np.ndarray) -> Dict[str, float
         "nll": float(-np.mean(y * np.log(p) + (1 - y) * np.log(1 - p))),
         "brier": float(np.mean((p - y) ** 2)),
         "auroc": _auroc(y, p), "auprc": _auprc(y, p), "ece": _ece(y, p),
-        "top1_mode_accuracy": top1, "pairwise_ranking_accuracy": pair,
+        "top1_mode_accuracy_LEGACY_DEGENERATE": top1_legacy,
+        "pairwise_ranking_accuracy": pair,
         "false_keep_rate": (float(np.mean(~pred_line[line_req])) if line_req.any() else float("nan")),
         "false_line_rate": (float(np.mean(pred_line[keep_fav])) if keep_fav.any() else float("nan")),
         "n_states": int(len(labels)), "n_disagree": int(disagree.sum()),
+        **decisive_mode_metrics(probs, labels),
     }
 
 
@@ -259,6 +382,139 @@ def closed_loop_validation(model, cfg: Config, method: str,
             "constrained_collision_free": float(np.mean(cf)),
             "constrained_goal_reached": float(np.mean(goal)),
             "episodes": len(succ)}
+
+
+# ---------------------------------------------------------------------------
+# Repair 5: selector-only vs end-to-end evaluation. Never combined.
+# ---------------------------------------------------------------------------
+@torch.no_grad()
+def learned_action_for_mode(model, obs, cfg, method: str, mode: int) -> np.ndarray:
+    """Learned action from the head corresponding to `mode`, in physical units.
+
+    Keeps the executed action and the environment topology consistent, which
+    `infer_learned_action` does not guarantee when a mode is forced.
+    """
+    from .policy_runtime import batch_from_obs
+
+    model.eval()
+    out = model(batch_from_obs(obs, cfg, next(model.parameters()).device))
+    if method == "topology_agnostic_gnn":
+        act = out["actions"]
+    else:
+        act = out["actions_by_topology"][:, MODES.index(mode), :]
+    return act.detach().cpu().numpy() * cfg.env.max_accel
+
+
+def _episode(cfg, layout, n, seed, choose_mode, execute_learned, model=None, method=None):
+    """One episode. `choose_mode(obs)->mode`; execution is expert or learned."""
+    from .policy_runtime import infer_learned_action
+    from .recovery_v2 import CONTINUATION_MODE  # noqa: F401  (documents the default)
+
+    env = SwarmFormationEnv(cfg)
+    obs = env.reset(n, "cluttered", seed=seed, layout=layout)
+    acc = EpisodeAccumulator(formation_tolerance=cfg.env.formation_tolerance, dt=cfg.env.dt)
+    done, last = False, None
+    while not done:
+        mode = choose_mode(obs)
+        if execute_learned:
+            # The executed action head must match the mode handed to the
+            # environment. infer_learned_action() picks the head by its own
+            # argmax, which agrees with `mode` on the end-to-end path but not
+            # when a caller forces a mode, so bind the head to `mode` here.
+            act = learned_action_for_mode(model, obs, cfg, method, mode)
+        else:
+            act = expert_action(obs, cfg, mode)
+        obs, _, done, last = env.step(act, mode)
+        acc.update(last)
+    return acc.finalize(last)
+
+
+def _model_mode_chooser(model, cfg, method):
+    from .policy_runtime import infer_learned_action
+
+    def choose(obs):
+        return infer_learned_action(method, obs, cfg, model, 0)["topology"]
+    return choose
+
+
+def selector_only_evaluation(model, cfg: Config, method: str,
+                             families=("line_corridor", "keep_line_keep"),
+                             episodes: int = 2) -> Dict[str, float]:
+    """Learned selector, TRUSTED EXPERT executes. Isolates the mode decision."""
+    choose = (_model_mode_chooser(model, cfg, method) if model is not None
+              else (lambda obs: 0))
+    return _run_family_episodes(cfg, choose, False, families, episodes, None, None)
+
+
+def end_to_end_evaluation(model, cfg: Config, method: str,
+                          families=("line_corridor", "keep_line_keep"),
+                          episodes: int = 2) -> Dict[str, float]:
+    """Learned selector AND learned action head. The deployable system."""
+    choose = _model_mode_chooser(model, cfg, method)
+    return _run_family_episodes(cfg, choose, True, families, episodes, model, method)
+
+
+def fixed_mode_evaluation(cfg: Config, mode: int,
+                          families=("line_corridor", "keep_line_keep"),
+                          episodes: int = 2) -> Dict[str, float]:
+    return _run_family_episodes(cfg, lambda obs: mode, False, families, episodes, None, None)
+
+
+def _run_family_episodes(cfg, choose, execute_learned, families, episodes, model, method):
+    succ, cf, goal, sel = [], [], [], []
+    for lay in [l for l in build_layouts("val") if l.family in families]:
+        for n in TEAM_SIZES:
+            for seed in setting_episode_seeds(VALIDATION, 0, n, episodes, 0):
+                m = _episode(cfg, lay, n, seed, choose, execute_learned, model, method)
+                succ.append(m["success"]); cf.append(m["collision_free"])
+                goal.append(m["goal_reached"])
+    return {"task_recovery_proxy_success": float(np.mean(succ)),
+            "collision_free": float(np.mean(cf)),
+            "goal_reached": float(np.mean(goal)),
+            "episodes": len(succ)}
+
+
+# ---------------------------------------------------------------------------
+# Repair 6: action-learning validation
+# ---------------------------------------------------------------------------
+@torch.no_grad()
+def action_metrics(model, samples: List[PilotSample], method: str,
+                   batch_size: int = 32) -> Dict[str, float]:
+    model.eval()
+    se_keep = se_line = n_keep = n_line = 0.0
+    tgt = []
+    for i in range(0, len(samples), batch_size):
+        b = collate(samples[i:i + batch_size])
+        out = model(b)
+        t = b["action_targets"]
+        tgt.append(t.numpy())
+        if method == "topology_agnostic_gnn":
+            pred_keep = out["actions"]; pred_line = out["actions"]
+        else:
+            pred_keep = out["actions_by_topology"][:, 0, :]
+            pred_line = out["actions_by_topology"][:, 1, :]
+        se_keep += float(((pred_keep - t[:, 0, :]) ** 2).sum()); n_keep += t.shape[0] * 2
+        se_line += float(((pred_line - t[:, 1, :]) ** 2).sum()); n_line += t.shape[0] * 2
+    tgt = np.concatenate(tgt)
+    std = float(tgt.std())
+    rk, rl = math.sqrt(se_keep / max(n_keep, 1)), math.sqrt(se_line / max(n_line, 1))
+    return {"action_rmse_keep": rk, "action_rmse_line": rl,
+            "action_rmse": 0.5 * (rk + rl), "target_std": std,
+            "normalized_rmse": (0.5 * (rk + rl)) / max(std, 1e-9),
+            "n_action_states": len(samples)}
+
+
+def stratified_action_metrics(model, samples, method) -> Dict[str, Dict]:
+    out = {"all": action_metrics(model, samples, method)}
+    for n in TEAM_SIZES:
+        sub = [s for s in samples if s.team_size == n]
+        if sub:
+            out[f"N={n}"] = action_metrics(model, sub, method)
+    for fam in PILOT_FAMILIES:
+        sub = [s for s in samples if s.family == fam]
+        if sub:
+            out[fam] = action_metrics(model, sub, method)
+    return out
 
 
 def selection_key(metrics: Dict[str, float], closed_loop: Dict[str, float]) -> Tuple[float, ...]:
