@@ -1,0 +1,6 @@
+keep  centralized : success=0.450  (20 episodes)
+keep  local(init) : success=0.700  (20 episodes)
+keep  local(index): success=0.700  (20 episodes)
+line  centralized : success=1.000  (20 episodes)
+line  local(init) : success=1.000  (20 episodes)
+line  local(index): success=1.000  (20 episodes)
