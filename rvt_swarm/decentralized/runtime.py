@@ -60,7 +60,7 @@ from .ego_graph import build_ego_graph
 from .epoch import (PHASE_IDLE, EpochState, commit_or_retain,
                     latched_local_trigger, latched_local_trigger_v3,
                     local_recovery_trigger,
-                    local_trigger, note_transition,
+                    local_trigger, note_transition, requested_mode_for,
                     simulate_confirm_consensus, simulate_trigger_consensus,
                     update_passage_latch)
 from .guards import strict_enabled
@@ -229,8 +229,19 @@ def simulate_decentralized_episode(
                     epochs[i].begin_scoring()
 
                 # === 3. leaderless score consensus =========================
-                q = {i: _robot_decision(views[i], cfg, selector, mode_rule)
-                     for i in scoring}
+                # The proposal must be the mode the firing EVENT requested.
+                # For the scripted geometric policy the event type IS the
+                # decision, so re-deriving it from a second, lagging signal
+                # only discards valid epochs (see epoch.latched_local_trigger_v3).
+                # A learned selector still scores freely -- this branch is the
+                # scripted diagnostic path only.
+                q = {}
+                for i in scoring:
+                    req = requested_mode_for(epochs[i])
+                    if mode_rule == "geometric" and req is not None:
+                        q[i] = (1.0, 0.0) if req == KEEP else (0.0, 1.0)
+                    else:
+                        q[i] = _robot_decision(views[i], cfg, selector, mode_rule)
                 nodes = {i: ConsensusNode.from_logits(
                     i, q[i][0], q[i][1], len(adj[i]), epochs[i].epoch_id, cons)
                     for i in scoring}

@@ -573,7 +573,7 @@ def test_D02_no_deployable_function_takes_all_robots_or_returns_one_mode() -> No
         # Task 6-2 V3 forward-opening recovery event
         "forward_opening_evidence", "recovery_evidence_v3",
         "peer_support_for_recovery", "recovery_armable",
-        "latched_local_trigger_v3",
+        "latched_local_trigger_v3", "requested_mode_for",
         "protocol_signature"}, sorted(deployable)
 
     # and the end-to-end harness returns no scalar mode: every mode-bearing key
@@ -1296,6 +1296,7 @@ COVERAGE_MANIFEST: Dict[str, str] = {
     "peer_support_for_recovery": "tests/test_recovery_event_v3.py",
     "recovery_armable": "tests/test_recovery_event_v3.py",
     "latched_local_trigger_v3": "tests/test_recovery_event_v3.py",
+    "requested_mode_for": "tests/test_recovery_event_v3.py",
     "note_transition": "test_L01_latch_advances_through_the_passage_lifecycle",
     "recovery_trigger_reasons": "test_R04_recovery_trigger_reasons_reports_the_clearance_condition",
     "outgoing_trigger": "test_E01",
@@ -1333,7 +1334,7 @@ def test_ZZ_every_function_is_exercised_by_a_dedicated_test() -> None:
     `epoch.py` without a test turns this red.
     """
     declared = _declared_functions()
-    assert len(declared) == 50, declared   # 45 + 5 V3 recovery-event functions
+    assert len(declared) == 51, declared   # 50 + requested_mode_for
     missing = sorted(set(declared) - set(COVERAGE_MANIFEST))
     stale = sorted(set(COVERAGE_MANIFEST) - set(declared))
     assert missing == [], "no dedicated test for: {}".format(missing)

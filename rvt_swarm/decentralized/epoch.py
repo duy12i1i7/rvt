@@ -507,6 +507,7 @@ class EpochState:
     suppressed_recovery: int = 0
     suppressed_noop_arm: int = 0
     forward_open_streak: int = 0
+    requested_mode: Optional[int] = None
 
     @property
     def locked(self) -> bool:
@@ -1483,12 +1484,53 @@ def recovery_armable(view: RobotView, cfg: Config, epoch: "EpochState",
 
 def latched_local_trigger_v3(view: RobotView, cfg: Config, epoch: "EpochState",
                              consensus: Optional[ConsensusParams] = None) -> bool:
-    """V3 entry/recovery trigger. Same latch, forward-opening recovery event."""
+    """V3 entry/recovery trigger. Same latch, forward-opening recovery event.
+
+    Records `epoch.requested_mode` -- the mode the FIRING EVENT asks for. The
+    golden-trace audit found the whole residual delay here: a robot armed a
+    RECOVERY epoch at step 46 on valid forward-opening evidence, then the
+    proposal was re-derived from `nearest_obstacle_clearance` (0.872 m, still
+    between the walls) and came back LINE, the mode it already held. The epoch
+    was discarded as a no-op, 25 times over, until the lagging clearance signal
+    finally crossed its threshold at step 111 -- 65 steps of pure self-inflicted
+    delay against a 67-step total.
+
+    The event type determines the requested mode. Re-deriving it from a
+    different, later signal is the defect.
+    """
     update_passage_latch(epoch, view, cfg, consensus)
     if entry_trigger_allowed(epoch):
-        return local_trigger(view, cfg, epoch, consensus)
+        if local_trigger(view, cfg, epoch, consensus):
+            epoch.requested_mode = LINE
+            return True
+        return False
     if recovery_trigger_allowed(epoch):
-        return recovery_armable(view, cfg, epoch, consensus)
+        if recovery_armable(view, cfg, epoch, consensus):
+            epoch.requested_mode = KEEP
+            return True
+        return False
     if epoch.committed_mode == KEEP and local_trigger(view, cfg, epoch, consensus):
         epoch.suppressed_entry += 1
     return False
+
+
+def requested_mode_for(epoch: "EpochState") -> Optional[int]:
+    """The only mode transition robot i's own lifecycle currently permits.
+
+    Purely local and deterministic. A robot that ADOPTED a propagated trigger
+    token has no `requested_mode` of its own, and falling back to a second
+    sensor signal is what produced the 65-step delay: the robot proposed the
+    mode it already held and the epoch was discarded as a no-op.
+
+    The lifecycle already fixes the direction -- committed KEEP with the latch
+    before the passage can only be asking for LINE; committed LINE with the
+    latch inside the passage can only be asking for KEEP -- so the requested
+    mode is recoverable from robot i's own state without any extra evidence.
+    """
+    if epoch.requested_mode is not None:
+        return epoch.requested_mode
+    if entry_trigger_allowed(epoch):
+        return LINE
+    if recovery_trigger_allowed(epoch):
+        return KEEP
+    return None

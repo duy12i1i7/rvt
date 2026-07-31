@@ -101,3 +101,40 @@ def test_the_event_never_reads_a_global_exit_plane() -> None:
         body = src.split('"""')[2] if src.count('"""') >= 2 else src
         for banned in ("exit_x", "exit_plane", "centroid", "positions"):
             assert banned not in body, (fn.__name__, banned)
+
+
+# ---------------------------------------------------------------------------
+# Task 6R repair -- the proposal must be the mode the EVENT requested
+# ---------------------------------------------------------------------------
+def test_requested_mode_is_recorded_when_the_trigger_fires() -> None:
+    from rvt_swarm.config import Config
+    e = inside_epoch()
+    for _ in range(E.L_TRIGGER):
+        E.latched_local_trigger_v3(v(WALLS_BEHIND), Config(), e)
+    assert e.requested_mode == KEEP
+
+
+def test_requested_mode_for_is_recoverable_from_lifecycle_state_alone() -> None:
+    """A robot that ADOPTED a propagated token has no request of its own.
+
+    Falling back to a second sensor signal is what caused the 65-step delay in
+    the golden episode; the lifecycle already fixes the direction.
+    """
+    entry = E.EpochState(robot_id=0)
+    entry.committed_mode = KEEP
+    assert entry.requested_mode is None
+    assert E.requested_mode_for(entry) == LINE
+
+    rec = inside_epoch()
+    assert rec.requested_mode is None
+    assert E.requested_mode_for(rec) == KEEP
+
+
+def test_requested_mode_never_equals_the_committed_mode() -> None:
+    """The repair's whole point: an epoch cannot propose what it already holds."""
+    for mode, latch in ((KEEP, E.LATCH_BEFORE_ENTRY), (LINE, E.LATCH_INSIDE)):
+        e = E.EpochState(robot_id=0)
+        e.committed_mode = mode
+        e.passage_latch = latch
+        req = E.requested_mode_for(e)
+        assert req is not None and req != mode
