@@ -89,6 +89,11 @@ NAME_ALLOWLIST: frozenset = frozenset({
 # is a stated claim rather than a convenience. Each is still bound by the
 # no-final-test-access rule, which is checked separately.
 OFFLINE_MODULES: Dict[str, str] = {
+    "formation_metric_v3": (
+        "Offline formation-recovery evaluator. Uses the swarm centroid to remove "
+        "the common translation, which is permitted for offline metric "
+        "computation and appears nowhere in a deployable path."
+    ),
     "reconfiguration_metrics": (
         "Offline scoring of the V2 reconfiguration task. Reads the joint state "
         "to compute events and formation error after the fact; no robot "
