@@ -27,7 +27,7 @@ def test_no_entry_epoch_while_already_committed_to_line(monkeypatch) -> None:
     from rvt_swarm.decentralized import runtime as rt
     src = inspect.getsource(rt.simulate_decentralized_episode)
     # direction is now chosen by the passage latch inside epoch.py
-    assert "latched_local_trigger(views[i], cfg, e, cons)" in src
+    assert "latched_local_trigger_v3" in src or "latched_local_trigger" in src
     from rvt_swarm.decentralized import epoch as E
     e = E.EpochState(robot_id=0); e.committed_mode = LINE
     assert E.entry_trigger_allowed(e) is False

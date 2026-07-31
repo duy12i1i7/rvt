@@ -570,6 +570,10 @@ def test_D02_no_deployable_function_takes_all_robots_or_returns_one_mode() -> No
         # Task 5-7 passage latch
         "update_passage_latch", "entry_trigger_allowed",
         "recovery_trigger_allowed", "latched_local_trigger", "note_transition",
+        # Task 6-2 V3 forward-opening recovery event
+        "forward_opening_evidence", "recovery_evidence_v3",
+        "peer_support_for_recovery", "recovery_armable",
+        "latched_local_trigger_v3",
         "protocol_signature"}, sorted(deployable)
 
     # and the end-to-end harness returns no scalar mode: every mode-bearing key
@@ -1287,6 +1291,11 @@ COVERAGE_MANIFEST: Dict[str, str] = {
     "entry_trigger_allowed": "test_L01_latch_advances_through_the_passage_lifecycle",
     "recovery_trigger_allowed": "test_L01_latch_advances_through_the_passage_lifecycle",
     "latched_local_trigger": "test_L02_latched_trigger_picks_the_permitted_direction",
+    "forward_opening_evidence": "tests/test_recovery_event_v3.py",
+    "recovery_evidence_v3": "tests/test_recovery_event_v3.py",
+    "peer_support_for_recovery": "tests/test_recovery_event_v3.py",
+    "recovery_armable": "tests/test_recovery_event_v3.py",
+    "latched_local_trigger_v3": "tests/test_recovery_event_v3.py",
     "note_transition": "test_L01_latch_advances_through_the_passage_lifecycle",
     "recovery_trigger_reasons": "test_R04_recovery_trigger_reasons_reports_the_clearance_condition",
     "outgoing_trigger": "test_E01",
@@ -1324,7 +1333,7 @@ def test_ZZ_every_function_is_exercised_by_a_dedicated_test() -> None:
     `epoch.py` without a test turns this red.
     """
     declared = _declared_functions()
-    assert len(declared) == 45, declared   # 38 + 2 recovery triggers + 5 latch
+    assert len(declared) == 50, declared   # 45 + 5 V3 recovery-event functions
     missing = sorted(set(declared) - set(COVERAGE_MANIFEST))
     stale = sorted(set(COVERAGE_MANIFEST) - set(declared))
     assert missing == [], "no dedicated test for: {}".format(missing)

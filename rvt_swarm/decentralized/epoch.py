@@ -506,6 +506,7 @@ class EpochState:
     suppressed_entry: int = 0
     suppressed_recovery: int = 0
     suppressed_noop_arm: int = 0
+    forward_open_streak: int = 0
 
     @property
     def locked(self) -> bool:
@@ -1373,3 +1374,121 @@ def note_transition(epoch: "EpochState", new_mode: int) -> None:
         epoch.passage_latch = LATCH_COMPLETE
         epoch.recovery_epochs += 1
         epoch.open_clearance_streak = 0
+
+
+# ---------------------------------------------------------------------------
+# Recovery Event V3 -- FORWARD OPENING (Task 6-2, Option B)
+# ---------------------------------------------------------------------------
+# The Task 6-1 observability audit measured, on the line-requiring band, the
+# lead time of each candidate event against the command time that is known to
+# succeed (step 55):
+#
+#   cell    first local EXIT   forward OPENING   lead(exit)   lead(opening)
+#   a0.25         67.4              46.4           -12.4          +8.6
+#   a0.35         57.6              44.0            -2.6         +11.0
+#   a0.45         53.6              42.8            +1.4         +12.2
+#
+# Option A (first local exit) is NEGATIVE in two of three cells: the first robot
+# leaves the passage after the moment the command is already needed. Option B
+# has positive lead everywhere, using only the robot's own forward obstacle
+# returns within the already-declared R_obs = 3.0 m.
+#
+# The globally known exit plane is NOT used. A robot fires on the disappearance
+# of forward returns in its own sensor, which is evidence it can obtain while
+# still inside the passage.
+
+# Half-width of the forward sector, in metres. Slightly wider than the line
+# formation's own lateral extent (0 m) plus the robot-obstacle threshold, so a
+# robot looking down a corridor still sees the side walls until the corridor
+# actually ends.
+FORWARD_SECTOR_HALF_WIDTH: float = 1.2
+
+# Consecutive observations of an open forward sector required before the
+# evidence is considered persistent (Task 6-5). 3 steps = 0.45 s; at max_speed
+# that is 0.405 m of travel, far less than the +8.6-step minimum lead measured
+# above, so persistence does not consume the margin.
+L_TRIGGER: int = 3
+
+# Fraction of a robot's current one-hop neighbours that must report compatible
+# evidence. 0.0 means "no peer support required"; see the arming rule below for
+# why a nonzero value is used and what happens to low-degree robots.
+PEER_SUPPORT_FRACTION: float = 0.5
+
+
+def forward_opening_evidence(view: RobotView, cfg: Config,
+                             half_width: float = FORWARD_SECTOR_HALF_WIDTH) -> bool:
+    """Robot i's own evidence that the passage opens ahead of it.
+
+    Local sensing only: it inspects `view.obstacles`, which the simulation
+    boundary already gated to `r_obs` around robot i. No exit plane, no
+    centroid, no peer state.
+
+    True when no obstacle return lies in the forward sector -- i.e. the two side
+    walls robot i has been tracking have terminated ahead of it.
+    """
+    for ox, oy, _r in view.obstacles:
+        if ox > 0.0 and abs(oy) <= half_width:
+            return False
+    return True
+
+
+def recovery_evidence_v3(view: RobotView, cfg: Config,
+                         epoch: "EpochState",
+                         consensus: Optional[ConsensusParams] = None) -> bool:
+    """The V3 RECOVERY event: persistent forward opening, while in LINE.
+
+    Persistence is tracked in robot i's own memory. The peer-support term is
+    applied by `recovery_armable`, not here, so this function stays a pure
+    statement about robot i's own sensor.
+    """
+    if epoch.committed_mode != LINE:
+        epoch.forward_open_streak = 0
+        return False
+    if forward_opening_evidence(view, cfg):
+        epoch.forward_open_streak += 1
+    else:
+        epoch.forward_open_streak = 0
+    return epoch.forward_open_streak >= L_TRIGGER
+
+
+def peer_support_for_recovery(view: RobotView, epoch: "EpochState") -> float:
+    """Fraction of one-hop neighbours that are themselves in LINE.
+
+    Deliberately weak evidence, and deliberately local: a robot cannot see its
+    neighbours' sensors, only the committed mode each neighbour broadcasts in
+    its beacon. It is a sanity check that the team still believes it is in the
+    passage, not a vote on the opening.
+
+    A robot with NO neighbours returns 1.0 -- an isolated robot is trusted with
+    its own evidence rather than being frozen, because requiring support it
+    cannot obtain would make an isolated robot permanently unable to recover.
+    """
+    nbrs = [nb for nb in view.neighbours if nb.link_valid]
+    if not nbrs:
+        return 1.0
+    return sum(1 for nb in nbrs if nb.committed_mode == LINE) / len(nbrs)
+
+
+def recovery_armable(view: RobotView, cfg: Config, epoch: "EpochState",
+                     consensus: Optional[ConsensusParams] = None) -> bool:
+    """Full V3 recovery arming condition: persistence AND peer support."""
+    if epoch.locked or epoch.phase != PHASE_IDLE:
+        return False
+    if not recovery_trigger_allowed(epoch):
+        return False
+    if not recovery_evidence_v3(view, cfg, epoch, consensus):
+        return False
+    return peer_support_for_recovery(view, epoch) >= PEER_SUPPORT_FRACTION
+
+
+def latched_local_trigger_v3(view: RobotView, cfg: Config, epoch: "EpochState",
+                             consensus: Optional[ConsensusParams] = None) -> bool:
+    """V3 entry/recovery trigger. Same latch, forward-opening recovery event."""
+    update_passage_latch(epoch, view, cfg, consensus)
+    if entry_trigger_allowed(epoch):
+        return local_trigger(view, cfg, epoch, consensus)
+    if recovery_trigger_allowed(epoch):
+        return recovery_armable(view, cfg, epoch, consensus)
+    if epoch.committed_mode == KEEP and local_trigger(view, cfg, epoch, consensus):
+        epoch.suppressed_entry += 1
+    return False

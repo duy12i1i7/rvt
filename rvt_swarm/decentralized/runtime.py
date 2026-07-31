@@ -58,7 +58,8 @@ from .consensus import (ConsensusNode, agreement_rate, component_agreement,
                         simulate_consensus)
 from .ego_graph import build_ego_graph
 from .epoch import (PHASE_IDLE, EpochState, commit_or_retain,
-                    latched_local_trigger, local_recovery_trigger,
+                    latched_local_trigger, latched_local_trigger_v3,
+                    local_recovery_trigger,
                     local_trigger, note_transition,
                     simulate_confirm_consensus, simulate_trigger_consensus,
                     update_passage_latch)
@@ -112,6 +113,7 @@ def simulate_decentralized_episode(
     accountant: Optional[MessageAccountant] = None,
     trace_modes: bool = False,
     trace_positions: bool = False,
+    recovery_event: str = "v3",
     preset_env=None,
     preset_obs=None,
 ) -> Dict[str, object]:
@@ -190,7 +192,9 @@ def simulate_decentralized_episode(
                 # Latched trigger: the passage lifecycle decides WHICH
                 # direction may fire, and suppresses a direction that has
                 # already completed for this bottleneck (Task 5-7).
-                fired = latched_local_trigger(views[i], cfg, e, cons)
+                trig = (latched_local_trigger_v3 if recovery_event == "v3"
+                        else latched_local_trigger)
+                fired = trig(views[i], cfg, e, cons)
                 if fired:
                     # Local no-op pre-arm check. Robot i evaluates its OWN
                     # proposal from its OWN view and declines to open an epoch
