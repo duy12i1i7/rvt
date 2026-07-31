@@ -59,8 +59,8 @@ def test_01_runtime_calls_the_epoch_state_machine(cfg, monkeypatch) -> None:
             return fn(*a, **k)
         return wrapped
 
-    monkeypatch.setattr(runtime_mod, "local_trigger",
-                        spy("local_trigger", epoch_mod.local_trigger))
+    monkeypatch.setattr(runtime_mod, "latched_local_trigger",
+                        spy("local_trigger", epoch_mod.latched_local_trigger))
     monkeypatch.setattr(runtime_mod, "simulate_trigger_consensus",
                         spy("trigger_consensus", epoch_mod.simulate_trigger_consensus))
     monkeypatch.setattr(runtime_mod, "simulate_confirm_consensus",

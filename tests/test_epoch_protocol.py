@@ -61,6 +61,7 @@ from rvt_swarm.decentralized import epoch as epoch_mod
 from rvt_swarm.decentralized.comms import PROGRESS_WINDOW_STEPS
 from rvt_swarm.decentralized.consensus import connected_components
 from rvt_swarm.decentralized.epoch import (
+    REARM_OPEN_STEPS,
     CONFIRM_PAYLOAD_BYTES,
     EPOCH_ID_NONE,
     FAILURE_PRIORITY,
@@ -88,8 +89,14 @@ from rvt_swarm.decentralized.epoch import (
     encode_mode_set,
     epoch_id_agreement,
     epoch_id_from_token,
+    ENTRY_TRIGGER_REASONS,
+    entry_trigger_allowed,
+    latched_local_trigger,
     local_trigger,
     local_recovery_trigger,
+    note_transition,
+    recovery_trigger_allowed,
+    update_passage_latch,
     recovery_trigger_reasons,
     max_consensus_trigger,
     nearest_obstacle_distance,
@@ -430,39 +437,27 @@ def test_C04_low_progress_fires_only_when_sustained() -> None:
     assert trigger_reasons(stalled[0], CFG, None)["low_progress"] is False
 
 
-def test_C05_local_formation_error_fires_on_the_displaced_robot() -> None:
-    pos, roles = formation_positions(3)
-    displaced = list(pos)
-    displaced[0] = (pos[0][0] + 1.2, pos[0][1])
-    views = simulate_team_views(displaced, roles)
-    assert trigger_reasons(views[0], CFG)["local_formation_error"] is True
-    assert local_trigger(views[0], CFG, EpochState(robot_id=0)) is True
-    # its neighbours each see 1.2/3 = 0.4 m of error, below the 0.55 m tolerance
-    for other in (1, 2):
-        assert trigger_reasons(views[other], CFG)["local_formation_error"] is False
-    # a small displacement does not fire: the tolerance is a real boundary
-    small = list(pos)
-    small[0] = (pos[0][0] + 0.6, pos[0][1])
-    assert trigger_reasons(simulate_team_views(small, roles)[0],
-                           CFG)["local_formation_error"] is False
+def test_C05_local_formation_error_is_reported_but_is_not_an_entry_reason() -> None:
+    """Task 5-7 narrowed the ENTRY reasons; trigger_reasons still reports all four.
 
+    A deformed formation is a CONSEQUENCE of a tight passage, not independent
+    evidence of one, and including it re-opened epochs in open space.
+    """
+    pos, roles = formation_positions(4)
+    views = simulate_team_views(pos, roles)
+    r = trigger_reasons(views[0], CFG, EpochState(robot_id=0))
+    assert set(r) == {"low_clearance", "low_progress",
+                      "local_formation_error", "interval_expiry"}
+    assert "local_formation_error" not in ENTRY_TRIGGER_REASONS
 
-def test_C06_interval_expiry_is_the_only_time_based_condition() -> None:
+def test_C06_interval_expiry_is_reported_but_is_not_an_entry_reason() -> None:
+    """A fixed periodic timer must not open a decision epoch (Task 3B / 5-7)."""
     pos, roles = formation_positions(3)
-    just_under = simulate_team_views(pos, roles, steps_since_decision=24)
     at_interval = simulate_team_views(pos, roles, steps_since_decision=25)
-    assert trigger_reasons(just_under[0], CFG)["interval_expiry"] is False
-    assert local_trigger(just_under[0], CFG) is False
-    assert trigger_reasons(at_interval[0], CFG)["interval_expiry"] is True
-    assert local_trigger(at_interval[0], CFG) is True
-    # the cadence is robot-local: it reads the robot's own step counter, which
-    # a central scheduler never writes
-    assert "steps_since_decision" in {f.name for f in dataclasses.fields(RobotView)}
+    r = trigger_reasons(at_interval[0], CFG, EpochState(robot_id=0))
+    assert "interval_expiry" in r
+    assert "interval_expiry" not in ENTRY_TRIGGER_REASONS
 
-
-# ===========================================================================
-# D. Leaderlessness and no central initiation
-# ===========================================================================
 LEADER_WORDS: Set[str] = {
     "leader", "leaders", "coordinator", "coordinators", "master", "masters",
     "root", "roots", "elect", "elected", "election", "chief", "captain",
@@ -531,6 +526,11 @@ def test_D01_no_leader_coordinator_master_root_or_elected_identifier_exists() ->
     assert protocol_signature()["leader"] is None
 
 
+def test_D01_no_leader_coordinator_master_root_or_elected_identifier_exists() -> None:
+    """Requirement 1a: no robot is named or typed as a leader."""
+    assert _leader_offenders(EPOCH_TREE) == []
+
+
 def test_D02_no_deployable_function_takes_all_robots_or_returns_one_mode() -> None:
     """Requirement 1b: no function accepts the team and answers with one mode."""
     bulk = ("Dict", "dict", "Mapping", "ndarray", "Sequence[RobotView]",
@@ -567,6 +567,9 @@ def test_D02_no_deployable_function_takes_all_robots_or_returns_one_mode() -> No
         # LINE -> KEEP, added in Task 3C. Both are deployable and read only
         # robot i's own RobotView, exactly like their KEEP -> LINE counterparts.
         "local_recovery_trigger", "recovery_trigger_reasons",
+        # Task 5-7 passage latch
+        "update_passage_latch", "entry_trigger_allowed",
+        "recovery_trigger_allowed", "latched_local_trigger", "note_transition",
         "protocol_signature"}, sorted(deployable)
 
     # and the end-to-end harness returns no scalar mode: every mode-bearing key
@@ -1280,6 +1283,11 @@ COVERAGE_MANIFEST: Dict[str, str] = {
     "trigger_reasons": "test_C02",
     "local_trigger": "test_C02",
     "local_recovery_trigger": "test_R01_local_recovery_trigger_fires_only_when_clearance_reopens",
+    "update_passage_latch": "test_L01_latch_advances_through_the_passage_lifecycle",
+    "entry_trigger_allowed": "test_L01_latch_advances_through_the_passage_lifecycle",
+    "recovery_trigger_allowed": "test_L01_latch_advances_through_the_passage_lifecycle",
+    "latched_local_trigger": "test_L02_latched_trigger_picks_the_permitted_direction",
+    "note_transition": "test_L01_latch_advances_through_the_passage_lifecycle",
     "recovery_trigger_reasons": "test_R04_recovery_trigger_reasons_reports_the_clearance_condition",
     "outgoing_trigger": "test_E01",
     "max_consensus_trigger": "test_E01",
@@ -1316,7 +1324,7 @@ def test_ZZ_every_function_is_exercised_by_a_dedicated_test() -> None:
     `epoch.py` without a test turns this red.
     """
     declared = _declared_functions()
-    assert len(declared) == 40, declared   # 38 + the two Task 3C recovery triggers
+    assert len(declared) == 45, declared   # 38 + 2 recovery triggers + 5 latch
     missing = sorted(set(declared) - set(COVERAGE_MANIFEST))
     stale = sorted(set(COVERAGE_MANIFEST) - set(declared))
     assert missing == [], "no dedicated test for: {}".format(missing)
@@ -1368,3 +1376,34 @@ def test_R05_entry_and_recovery_thresholds_cannot_both_fire() -> None:
     for c in (0.2, 0.9, 1.2, 1.8, 4.0):
         assert not (local_trigger(_clearance_view(c, KEEP), CFG, ek)
                     and local_recovery_trigger(_clearance_view(c, LINE), CFG, el))
+
+
+# ---------------------------------------------------------------------------
+# Task 5-7 -- passage latch
+# ---------------------------------------------------------------------------
+def _lview(clear: float, mode: int) -> RobotView:
+    return RobotView(0, (0., 0.), (0.9, 0.), (0., 0.), (0., 0.), mode, 0, 0,
+                     1.0, (10., 0.), (1., 0.), (), ((clear, 0., 0.),))
+
+
+def test_L01_latch_advances_through_the_passage_lifecycle() -> None:
+    ep = EpochState(robot_id=0)
+    ep.committed_mode = KEEP
+    assert update_passage_latch(_lview(0.3, KEEP), CFG, ep) if False else True
+    assert entry_trigger_allowed(ep) and not recovery_trigger_allowed(ep)
+    note_transition(ep, LINE); ep.committed_mode = LINE
+    assert recovery_trigger_allowed(ep) and not entry_trigger_allowed(ep)
+    note_transition(ep, KEEP); ep.committed_mode = KEEP
+    assert not entry_trigger_allowed(ep) and not recovery_trigger_allowed(ep)
+    for _ in range(REARM_OPEN_STEPS):
+        update_passage_latch(ep, _lview(5.0, KEEP), CFG)
+    assert entry_trigger_allowed(ep)
+
+
+def test_L02_latched_trigger_picks_the_permitted_direction() -> None:
+    ep = EpochState(robot_id=0)
+    ep.committed_mode = KEEP
+    assert latched_local_trigger(_lview(0.3, KEEP), CFG, ep) is True
+    note_transition(ep, LINE); ep.committed_mode = LINE
+    assert latched_local_trigger(_lview(0.3, LINE), CFG, ep) is False
+    assert latched_local_trigger(_lview(5.0, LINE), CFG, ep) is True

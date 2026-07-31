@@ -89,6 +89,10 @@ NAME_ALLOWLIST: frozenset = frozenset({
 # is a stated claim rather than a convenience. Each is still bound by the
 # no-final-test-access rule, which is checked separately.
 OFFLINE_MODULES: Dict[str, str] = {
+    "env_geometry": (
+        "Authoritative scenario geometry, computed offline before an episode "
+        "starts. No robot reads it at runtime."
+    ),
     "qualification_fixtures": (
         "Scenario geometry and initial-condition validation. Built offline "
         "before an episode starts; no robot reads it at runtime."

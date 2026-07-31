@@ -118,6 +118,26 @@ from .system_model import (
 # ---------------------------------------------------------------------------
 # Phases
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Passage lifecycle latch (Task 5-7). Robot-local hysteresis, no central tracker.
+#
+# One physical bottleneck should cost exactly two successful epochs. Without a
+# latch the entry condition stays true for every step the team is inside the
+# corridor, so the trigger refires the moment `h_commit` expires -- measured at
+# 16.2 epochs per traversal against an ideal of 2.
+#
+# The latch is a per-robot state machine driven ONLY by robot i's own sensed
+# clearance and its own committed mode. Nothing is shared, and no robot tracks
+# "which bottleneck" the team is at.
+LATCH_BEFORE_ENTRY = "BEFORE_ENTRY"
+LATCH_INSIDE = "INSIDE_PASSAGE"
+LATCH_COMPLETE = "COMPLETE"
+
+# Consecutive steps of open clearance required to re-arm for a LATER, physically
+# distinct bottleneck. Long enough that the tail of one passage cannot re-arm
+# the entry trigger for the same passage.
+REARM_OPEN_STEPS: int = 25
+
 PHASE_IDLE = "IDLE"
 PHASE_TRIGGERED = "TRIGGERED"
 PHASE_SCORING = "SCORING"
@@ -478,6 +498,14 @@ class EpochState:
     rejected_stale: int = 0
     rejected_future: int = 0
     rejected_self: int = 0
+    # -- passage lifecycle latch (Task 5-7) --
+    passage_latch: str = LATCH_BEFORE_ENTRY
+    open_clearance_streak: int = 0
+    entry_epochs: int = 0
+    recovery_epochs: int = 0
+    suppressed_entry: int = 0
+    suppressed_recovery: int = 0
+    suppressed_noop_arm: int = 0
 
     @property
     def locked(self) -> bool:
@@ -668,6 +696,24 @@ def trigger_reasons(view: RobotView, cfg: Config,
     }
 
 
+# Which reasons may OPEN a KEEP -> LINE epoch. `trigger_reasons` still reports
+# all four for diagnostics, but two are excluded from the decision:
+#
+#   local_formation_error -- a deformed formation is a CONSEQUENCE of a tight
+#       passage, not independent evidence of one. Including it double-counted
+#       the clearance signal and re-opened epochs in open space after the
+#       passage latch re-armed (measured: 87 firings in one always-KEEP
+#       episode, driving no-op epochs).
+#   interval_expiry -- a fixed periodic timer. Task 3B removed periodic
+#       decision-making from the deployable path; leaving it inside the trigger
+#       would reintroduce it through the back door.
+#
+# Entry is therefore driven by robot i's own sensed clearance, or by its own
+# sustained lack of progress, both of which are direct evidence that the route
+# ahead does not admit the nominal formation.
+ENTRY_TRIGGER_REASONS: Tuple[str, ...] = ("low_clearance", "low_progress")
+
+
 def local_trigger(view: RobotView, cfg: Config,
                   epoch: Optional[EpochState] = None,
                   consensus: Optional[ConsensusParams] = None) -> bool:
@@ -683,7 +729,8 @@ def local_trigger(view: RobotView, cfg: Config,
     """
     if epoch is not None and (epoch.locked or epoch.phase != PHASE_IDLE):
         return False
-    return any(trigger_reasons(view, cfg, epoch, consensus).values())
+    reasons = trigger_reasons(view, cfg, epoch, consensus)
+    return any(reasons[k] for k in ENTRY_TRIGGER_REASONS)
 
 
 def local_recovery_trigger(view: RobotView, cfg: Config,
@@ -1251,3 +1298,78 @@ def protocol_signature() -> Dict[str, object]:
         "on_disagreement": "retain previous committed mode; record DisagreementEvent",
         "leader": None,
     }
+
+
+# ---------------------------------------------------------------------------
+# Passage lifecycle latching (Task 5-7)
+# ---------------------------------------------------------------------------
+def update_passage_latch(epoch: "EpochState", view: RobotView, cfg: Config,
+                         consensus: Optional[ConsensusParams] = None) -> str:
+    """Advance robot i's own passage latch from its own sensed clearance.
+
+    Deployable and strictly local: reads `view.obstacles` (robot i's own sensor)
+    and `epoch.committed_mode` (robot i's own memory). No peer state, no
+    bottleneck identity, no central tracker.
+
+    Re-arming for a LATER, physically distinct bottleneck requires
+    `REARM_OPEN_STEPS` consecutive steps of open clearance, so the tail of one
+    passage cannot re-arm the entry trigger for that same passage.
+    """
+    th = TriggerThresholds.from_config(cfg, consensus)
+    clear = nearest_obstacle_distance(view)
+    if clear >= th.recovery_clearance_m:
+        epoch.open_clearance_streak += 1
+    else:
+        epoch.open_clearance_streak = 0
+
+    if epoch.passage_latch == LATCH_COMPLETE:
+        if epoch.open_clearance_streak >= REARM_OPEN_STEPS:
+            epoch.passage_latch = LATCH_BEFORE_ENTRY
+            epoch.open_clearance_streak = 0
+    return epoch.passage_latch
+
+
+def entry_trigger_allowed(epoch: "EpochState") -> bool:
+    """KEEP -> LINE may only be proposed before the passage has been entered."""
+    return (epoch.passage_latch == LATCH_BEFORE_ENTRY
+            and epoch.committed_mode == KEEP)
+
+
+def recovery_trigger_allowed(epoch: "EpochState") -> bool:
+    """LINE -> KEEP may only be proposed once inside, and only from LINE."""
+    return (epoch.passage_latch == LATCH_INSIDE
+            and epoch.committed_mode == LINE)
+
+
+def latched_local_trigger(view: RobotView, cfg: Config, epoch: "EpochState",
+                          consensus: Optional[ConsensusParams] = None) -> bool:
+    """The latched entry/recovery trigger. One call, correct direction.
+
+    Returns True only when the latch permits that direction AND the underlying
+    geometric condition holds. Suppressions are counted so churn is measurable
+    rather than merely asserted.
+    """
+    update_passage_latch(epoch, view, cfg, consensus)
+    if entry_trigger_allowed(epoch):
+        return local_trigger(view, cfg, epoch, consensus)
+    if recovery_trigger_allowed(epoch):
+        return local_recovery_trigger(view, cfg, epoch, consensus)
+    # the geometric condition may still hold; record that the latch stopped it
+    if epoch.committed_mode == KEEP and local_trigger(view, cfg, epoch, consensus):
+        epoch.suppressed_entry += 1
+    elif epoch.committed_mode == LINE and local_recovery_trigger(
+            view, cfg, epoch, consensus):
+        epoch.suppressed_recovery += 1
+    return False
+
+
+def note_transition(epoch: "EpochState", new_mode: int) -> None:
+    """Advance the latch after a CONFIRMED transition. Local bookkeeping only."""
+    if new_mode == LINE and epoch.passage_latch == LATCH_BEFORE_ENTRY:
+        epoch.passage_latch = LATCH_INSIDE
+        epoch.entry_epochs += 1
+        epoch.open_clearance_streak = 0
+    elif new_mode == KEEP and epoch.passage_latch == LATCH_INSIDE:
+        epoch.passage_latch = LATCH_COMPLETE
+        epoch.recovery_epochs += 1
+        epoch.open_clearance_streak = 0

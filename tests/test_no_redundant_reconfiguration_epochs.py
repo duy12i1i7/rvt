@@ -26,8 +26,11 @@ def test_no_entry_epoch_while_already_committed_to_line(monkeypatch) -> None:
     import inspect
     from rvt_swarm.decentralized import runtime as rt
     src = inspect.getsource(rt.simulate_decentralized_episode)
-    assert "local_recovery_trigger(views[i], cfg, e, cons)" in src
-    assert "if e.committed_mode == LINE" in src
+    # direction is now chosen by the passage latch inside epoch.py
+    assert "latched_local_trigger(views[i], cfg, e, cons)" in src
+    from rvt_swarm.decentralized import epoch as E
+    e = E.EpochState(robot_id=0); e.committed_mode = LINE
+    assert E.entry_trigger_allowed(e) is False
 
 
 def test_recovery_trigger_refuses_when_already_in_keep(cfg=None) -> None:

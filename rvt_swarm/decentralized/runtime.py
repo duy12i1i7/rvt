@@ -57,9 +57,11 @@ from .consensus import (ConsensusNode, agreement_rate, component_agreement,
                         connected_components, consensus_residual,
                         simulate_consensus)
 from .ego_graph import build_ego_graph
-from .epoch import (PHASE_IDLE, EpochState, commit_or_retain, local_recovery_trigger,
-                    local_trigger, simulate_confirm_consensus,
-                    simulate_trigger_consensus)
+from .epoch import (PHASE_IDLE, EpochState, commit_or_retain,
+                    latched_local_trigger, local_recovery_trigger,
+                    local_trigger, note_transition,
+                    simulate_confirm_consensus, simulate_trigger_consensus,
+                    update_passage_latch)
 from .guards import strict_enabled
 from .local_controller import local_controller
 from .roles import RoleAssignment
@@ -105,6 +107,7 @@ def simulate_decentralized_episode(
     role_source: str = "initial_formation",
     forced_mode: Optional[int] = None,
     scripted: Optional[Dict[int, int]] = None,
+    scripted_planes: Optional[Tuple[float, float, float]] = None,
     legacy_periodic_epoch_baseline: bool = False,
     accountant: Optional[MessageAccountant] = None,
     trace_modes: bool = False,
@@ -177,16 +180,30 @@ def simulate_decentralized_episode(
             accountant=acc)
         adj = {i: list(views[i].neighbour_ids()) for i in range(n)}
 
-        if forced_mode is None and scripted is None:
+        if forced_mode is None and scripted is None and scripted_planes is None:
             # === 1. robot-local trigger, own sensors only ===================
             armed = False
             for i in range(n):
                 e = epochs[i]
                 if e.phase != PHASE_IDLE or e.locked:
                     continue
-                fired = (local_recovery_trigger(views[i], cfg, e, cons)
-                         if e.committed_mode == LINE
-                         else local_trigger(views[i], cfg, e, cons))
+                # Latched trigger: the passage lifecycle decides WHICH
+                # direction may fire, and suppresses a direction that has
+                # already completed for this bottleneck (Task 5-7).
+                fired = latched_local_trigger(views[i], cfg, e, cons)
+                if fired:
+                    # Local no-op pre-arm check. Robot i evaluates its OWN
+                    # proposal from its OWN view and declines to open an epoch
+                    # to propose the mode it already holds. Entirely local --
+                    # the same computation the epoch would perform anyway -- and
+                    # it is what removes the residual no-op epochs the latch
+                    # cannot see (a legitimate trigger reason firing where the
+                    # answer happens to be "no change").
+                    qk, ql = _robot_decision(views[i], cfg, selector, mode_rule)
+                    own = LINE if ql > qk else KEEP
+                    if own == e.committed_mode:
+                        e.suppressed_noop_arm += 1
+                        fired = False
                 if fired:
                     e.arm_trigger(step)
                     armed = True
@@ -265,6 +282,8 @@ def simulate_decentralized_episode(
                                 disagreement_events.append(
                                     epochs[i].disagreements[-1])
                             if ok and epochs[i].committed_mode != before:
+                                note_transition(epochs[i],
+                                                epochs[i].committed_mode)
                                 if epochs[i].committed_mode == LINE:
                                     n_entry += 1
                                 else:
@@ -277,6 +296,31 @@ def simulate_decentralized_episode(
                         if epochs[i].phase != PHASE_IDLE:
                             epochs[i].close_epoch()
 
+        elif scripted_planes is not None:
+            # DIAGNOSTIC policy P3/P4: scripted transitions at the KNOWN
+            # GEOMETRIC PLANES, reacting to the team's actual position. Uses
+            # global position and is therefore NOT deployable -- it is the
+            # reference against which the deployable event-triggered policy is
+            # measured. A precomputed step schedule cannot serve here: the step
+            # at which the team clears the exit depends on the mode it is in,
+            # so a schedule taken from a different policy's probe commands the
+            # return while the team is still inside the passage.
+            entry_x, exit_x, lookahead = scripted_planes
+            ax = np.asarray(mission, dtype=np.float64)
+            ax = ax / max(float(np.linalg.norm(ax)), 1e-9)
+            along = obs["positions"] @ ax
+            want = KEEP
+            if float(along.max()) >= entry_x - lookahead:
+                want = LINE
+            if float(along.min()) >= exit_x:
+                want = KEEP if scripted is None else scripted.get("return", KEEP)
+            for e in epochs.values():
+                if e.committed_mode != want:
+                    e.committed_mode = want
+                    if trace_modes:
+                        mode_trace.append(
+                            (step, [epochs[i].committed_mode for i in range(n)]))
+
         elif scripted is not None:
             if step in scripted:
                 for e in epochs.values():
@@ -284,7 +328,9 @@ def simulate_decentralized_episode(
                 if trace_modes:
                     mode_trace.append((step, [epochs[i].committed_mode for i in range(n)]))
 
-        for e in epochs.values():
+        for i, e in epochs.items():
+            if forced_mode is None and scripted is None and scripted_planes is None:
+                update_passage_latch(e, views[i], cfg, cons)
             e.tick()
 
         committed = [epochs[i].committed_mode for i in range(n)]
@@ -321,6 +367,10 @@ def simulate_decentralized_episode(
         "collisions_during_disagreement": collisions_during_disagreement,
         "n_decisions": n_epochs,
         "n_noop_epochs": n_noop,
+        "suppressed_entry": sum(e.suppressed_entry for e in epochs.values()),
+        "suppressed_recovery": sum(e.suppressed_recovery for e in epochs.values()),
+        "suppressed_noop_arm": sum(e.suppressed_noop_arm for e in epochs.values()),
+        "passage_latch": [epochs[i].passage_latch for i in range(n)],
         "n_keep_to_line": n_entry,
         "n_line_to_keep": n_recovery,
         "n_disagreement_events": len(disagreement_events),
