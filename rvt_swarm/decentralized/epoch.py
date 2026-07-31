@@ -397,6 +397,7 @@ class TriggerThresholds:
     # precisely when the robot's own avoidance term wakes up -- the same event,
     # not a second threshold invented for the trigger.
     clearance_m: float
+    recovery_clearance_m: float
 
     # Own along-mission displacement over `PROGRESS_WINDOW_STEPS` steps
     # (`comms.OwnHistory.progress`). Set to ``dt * max_speed`` = 0.135 m: one
@@ -423,6 +424,13 @@ class TriggerThresholds:
         cons = consensus or ConsensusParams()
         return cls(
             clearance_m=float(max(env.nominal_spacing, env.min_ro_distance)),
+            # LINE -> KEEP. Robot i needs room on its own flanks before the
+            # team can spread back into the nominal grid. Two nominal spacings
+            # is the smallest clearance at which a 3-column keep template
+            # (lateral extent 2 x spacing at N=6) can begin to re-form, and it
+            # is strictly greater than `clearance_m`, so the entry and recovery
+            # triggers cannot both fire on the same geometry.
+            recovery_clearance_m=float(2.0 * env.nominal_spacing),
             progress_m=float(env.dt * env.max_speed),
             progress_hold_steps=int(PROGRESS_WINDOW_STEPS),
             formation_err_m=float(env.formation_tolerance),
@@ -678,6 +686,37 @@ def local_trigger(view: RobotView, cfg: Config,
     return any(trigger_reasons(view, cfg, epoch, consensus).values())
 
 
+def local_recovery_trigger(view: RobotView, cfg: Config,
+                          epoch: Optional[EpochState] = None,
+                          consensus: Optional[ConsensusParams] = None) -> bool:
+    """LINE -> KEEP. Robot i's own detection that the passage is behind it.
+
+    Strictly local: robot i asks whether *its own* sensed clearance has opened
+    up past `recovery_clearance_m` while it is committed to LINE. No robot
+    consults the team's position, the exit plane, or anyone else's clearance --
+    the exit plane is an offline scoring construct (TASK_V2 section 3), never a
+    runtime input.
+
+    Like `local_trigger` this returns False while an epoch is in flight or the
+    commitment window is open, so the dwell bound applies to both directions.
+    """
+    if epoch is not None and (epoch.locked or epoch.phase != PHASE_IDLE):
+        return False
+    if epoch is not None and epoch.committed_mode != LINE:
+        return False        # only LINE can recover to KEEP
+    th = TriggerThresholds.from_config(cfg, consensus)
+    return bool(nearest_obstacle_distance(view) >= th.recovery_clearance_m)
+
+
+def recovery_trigger_reasons(view: RobotView, cfg: Config,
+                             epoch: Optional[EpochState] = None,
+                             consensus: Optional[ConsensusParams] = None
+                             ) -> Dict[str, bool]:
+    th = TriggerThresholds.from_config(cfg, consensus)
+    return {"clearance_reopened":
+            bool(nearest_obstacle_distance(view) >= th.recovery_clearance_m)}
+
+
 # ---------------------------------------------------------------------------
 # Trigger propagation: max-consensus on (flag, token)
 # ---------------------------------------------------------------------------
@@ -850,6 +889,7 @@ def simulate_trigger_consensus(
     seed: int = 0,
     arm_offsets: Optional[Dict[int, int]] = None,
     record_history: bool = True,
+    accountant: Optional[object] = None,
 ) -> Dict[str, object]:
     """Run `k_rounds` of trigger max-consensus. Simulation boundary.
 
@@ -880,6 +920,11 @@ def simulate_trigger_consensus(
                 if int(j) not in epochs:
                     continue
                 sent += 1
+                # Accounted at the SEND site from the real message object, so
+                # the byte total is never a post-hoc reconstruction, and a
+                # dropped packet still counts as transmitted airtime.
+                if accountant is not None:
+                    accountant.record_sent(msg, now, round_index=k)
                 if packet_loss > 0.0 and rng.random() < float(packet_loss):
                     dropped += 1
                     continue
@@ -929,6 +974,7 @@ def simulate_confirm_consensus(
     delay_steps: int = 0,
     seed: int = 0,
     record_history: bool = True,
+    accountant: Optional[object] = None,
 ) -> Dict[str, object]:
     """Run `k_rounds` of min/max confirmation consensus. Simulation boundary."""
     rng = np.random.default_rng(int(seed))
@@ -945,6 +991,11 @@ def simulate_confirm_consensus(
                 if int(j) not in epochs:
                     continue
                 sent += 1
+                # Accounted at the SEND site from the real message object, so
+                # the byte total is never a post-hoc reconstruction, and a
+                # dropped packet still counts as transmitted airtime.
+                if accountant is not None:
+                    accountant.record_sent(msg, now, round_index=k)
                 if packet_loss > 0.0 and rng.random() < float(packet_loss):
                     dropped += 1
                     continue

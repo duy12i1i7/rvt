@@ -184,6 +184,7 @@ def simulate_consensus(
     seed: int = 0,
     async_offsets: Optional[Dict[int, int]] = None,
     record_history: bool = True,
+    accountant: Optional[object] = None,
 ) -> Dict[str, object]:
     """Run k_rounds of leaderless consensus. Simulation boundary.
 
@@ -192,6 +193,7 @@ def simulate_consensus(
     only that robot's inbox.
     """
     rng = np.random.default_rng(seed)
+    sent_count = 0
     history: List[Dict[int, np.ndarray]] = []
     pending: List[Tuple[int, int, ScoreMessage]] = []   # (deliver_step, dst, msg)
     offsets = async_offsets or {}
@@ -207,6 +209,12 @@ def simulate_consensus(
                 continue                      # this robot has not started yet
             msg = node.outgoing(now)
             for j in neighbours_of.get(i, ()):
+                # Accounted at the SEND site, from the real message object, so
+                # the byte total can never be a post-hoc reconstruction. A
+                # dropped packet still consumed airtime and is still counted.
+                sent_count += 1
+                if accountant is not None:
+                    accountant.record_sent(msg, now, round_index=k)
                 if packet_loss > 0.0 and rng.random() < packet_loss:
                     continue                  # dropped; never resent from the future
                 pending.append((now + delay_steps, j, msg))
@@ -236,6 +244,7 @@ def simulate_consensus(
         "residual": consensus_residual(nodes),
         "max_pairwise_gap": max_pairwise_gap(nodes),
         "rounds": k_rounds,
+        "messages_sent": sent_count,
     }
 
 

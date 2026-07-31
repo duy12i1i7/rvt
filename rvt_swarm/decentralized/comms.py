@@ -633,6 +633,7 @@ def simulate_broadcast_round(
     mission_dir: Vec2,
     params: CommParams,
     valid: Optional[Sequence[bool]] = None,
+    accountant: Optional[object] = None,
 ) -> Dict[int, RobotView]:
     """THE SIMULATION BOUNDARY. **Not deployable code.**
 
@@ -690,6 +691,9 @@ def simulate_broadcast_round(
         for dst in ids:
             if src == dst:
                 continue
+            if accountant is not None:
+                # Accounted from the REAL Beacon object at the transmit site.
+                accountant.record_sent(beacons[src], step)
             channel.transmit(beacons[src], own_pos[src], dst, own_pos[dst], step)
 
     # 4. deliver whatever is due *now* and ingest it.

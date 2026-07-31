@@ -89,6 +89,8 @@ from rvt_swarm.decentralized.epoch import (
     epoch_id_agreement,
     epoch_id_from_token,
     local_trigger,
+    local_recovery_trigger,
+    recovery_trigger_reasons,
     max_consensus_trigger,
     nearest_obstacle_distance,
     observe_progress,
@@ -562,6 +564,9 @@ def test_D02_no_deployable_function_takes_all_robots_or_returns_one_mode() -> No
         "nearest_obstacle_distance", "observe_progress", "trigger_reasons",
         "local_trigger", "outgoing_trigger", "max_consensus_trigger",
         "outgoing_confirm", "confirm_mode", "commit_or_retain",
+        # LINE -> KEEP, added in Task 3C. Both are deployable and read only
+        # robot i's own RobotView, exactly like their KEEP -> LINE counterparts.
+        "local_recovery_trigger", "recovery_trigger_reasons",
         "protocol_signature"}, sorted(deployable)
 
     # and the end-to-end harness returns no scalar mode: every mode-bearing key
@@ -1274,6 +1279,8 @@ COVERAGE_MANIFEST: Dict[str, str] = {
     "observe_progress": "test_C04",
     "trigger_reasons": "test_C02",
     "local_trigger": "test_C02",
+    "local_recovery_trigger": "test_R01_local_recovery_trigger_fires_only_when_clearance_reopens",
+    "recovery_trigger_reasons": "test_R04_recovery_trigger_reasons_reports_the_clearance_condition",
     "outgoing_trigger": "test_E01",
     "max_consensus_trigger": "test_E01",
     "outgoing_confirm": "test_E02",
@@ -1309,8 +1316,55 @@ def test_ZZ_every_function_is_exercised_by_a_dedicated_test() -> None:
     `epoch.py` without a test turns this red.
     """
     declared = _declared_functions()
-    assert len(declared) == 38, declared
+    assert len(declared) == 40, declared   # 38 + the two Task 3C recovery triggers
     missing = sorted(set(declared) - set(COVERAGE_MANIFEST))
     stale = sorted(set(COVERAGE_MANIFEST) - set(declared))
     assert missing == [], "no dedicated test for: {}".format(missing)
     assert stale == [], "manifest names functions that no longer exist: {}".format(stale)
+
+
+# ---------------------------------------------------------------------------
+# Task 3C -- the LINE -> KEEP recovery trigger
+# ---------------------------------------------------------------------------
+def _clearance_view(clearance: float, mode: int) -> RobotView:
+    return RobotView(0, (0.0, 0.0), (0.9, 0.0), (0.0, 0.0), (0.0, 0.0),
+                     mode, 0, 0, 1.0, (10.0, 0.0), (1.0, 0.0), (),
+                     ((clearance, 0.0, 0.0),))
+
+
+def test_R01_local_recovery_trigger_fires_only_when_clearance_reopens() -> None:
+    ep = EpochState(robot_id=0)
+    ep.committed_mode = LINE
+    assert local_recovery_trigger(_clearance_view(0.5, LINE), CFG, ep) is False
+    assert local_recovery_trigger(_clearance_view(2.5, LINE), CFG, ep) is True
+
+
+def test_R02_local_recovery_trigger_requires_line_mode() -> None:
+    ep = EpochState(robot_id=0)
+    ep.committed_mode = KEEP
+    assert local_recovery_trigger(_clearance_view(2.5, KEEP), CFG, ep) is False
+
+
+def test_R03_local_recovery_trigger_is_refused_inside_the_dwell() -> None:
+    ep = EpochState(robot_id=0)
+    ep.committed_mode = KEEP
+    ep.commit(LINE, CONS.h_commit)
+    assert local_recovery_trigger(_clearance_view(3.0, LINE), CFG, ep) is False
+
+
+def test_R04_recovery_trigger_reasons_reports_the_clearance_condition() -> None:
+    r = recovery_trigger_reasons(_clearance_view(3.0, LINE), CFG)
+    assert set(r) == {"clearance_reopened"}
+    assert r["clearance_reopened"] is True
+    assert recovery_trigger_reasons(
+        _clearance_view(0.3, LINE), CFG)["clearance_reopened"] is False
+
+
+def test_R05_entry_and_recovery_thresholds_cannot_both_fire() -> None:
+    th = TriggerThresholds.from_config(CFG)
+    assert th.recovery_clearance_m > th.clearance_m
+    ek, el = EpochState(robot_id=0), EpochState(robot_id=1)
+    ek.committed_mode, el.committed_mode = KEEP, LINE
+    for c in (0.2, 0.9, 1.2, 1.8, 4.0):
+        assert not (local_trigger(_clearance_view(c, KEEP), CFG, ek)
+                    and local_recovery_trigger(_clearance_view(c, LINE), CFG, el))
