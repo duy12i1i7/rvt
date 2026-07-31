@@ -63,6 +63,58 @@ P4 gate named, and it is reported as a regression rather than averaged away.
 11. **Still fully decentralized and leaderless?** **Yes** — 0 guard violations,
     no exit plane, no centroid, no coordinator, each robot computes its own action.
 
+## 3b. Completed follow-up items (6RR-4 … 6RR-10)
+
+**Predeclared latency bound (6RR-7).** From the frozen configuration, with all
+consensus rounds executing inside the control step that opens the epoch at
+`D_nominal = 0`:
+
+```
+L_post_repair_max = collection(0) + propagation(0) + score(0) + confirm(0)
+                  + processing overhead(1)
+                  = 1 control step
+```
+
+Measured `commit − first_persistence_satisfied` = **0**. R3 passes with margin.
+
+**Confirmation semantics (6RR-6).** Across all 15 traced episodes:
+**0 confirmation rejections, 0 no-op epochs.** No robot ever rejected because it
+had not personally sensed the opening — confirmation votes on the accepted
+event's requested mode, never on the local detector. Confirmation is retained,
+not bypassed.
+
+**Four-arm comparison (6RR-10)**, complete three-cell set, 2 variants × 5 seeds:
+
+| cell | arm | full | crossing | dwell | coll-free | median epochs | no-op | commit step | bytes |
+|---|---|---|---|---|---|---|---|---|---|
+| α 0.25 | scripted early (plane-timed) | 0.00 | 1.00 | 0.00 | 1.00 | 0 | 0 | 102 | 239 316 |
+| α 0.25 | **V3 final** | 0.00 | 0.00 | 0.00 | 1.00 | 2 | 0 | **66** | 398 434 |
+| α 0.35 | scripted early (plane-timed) | 0.00 | 1.00 | 0.00 | 1.00 | 0 | 0 | 99 | 235 641 |
+| α 0.35 | **V3 final** | **0.70** | 1.00 | 0.70 | 1.00 | 2 | 0 | **61** | 271 944 |
+| α 0.45 | scripted early (plane-timed) | 0.00 | 1.00 | 0.00 | 1.00 | 0 | 0 | 98 | 233 730 |
+| α 0.45 | **V3 final** | **0.80** | 1.00 | 0.80 | 1.00 | 2 | 0 | **54** | 245 621 |
+
+**The decentralized V3 policy now outperforms the scripted geometric reference**,
+which scores 0.00 in every cell because returning at the exit plane commits at
+98–102 — the late timing Task 5 already showed to be insufficient. The
+forward-opening event fires substantially earlier than the exit plane, which is
+the whole point of Option B. P3's "retain a useful fraction of scripted
+performance" is satisfied trivially and in the wrong direction; the scripted
+plane-timed arm is no longer the right upper reference.
+
+**Origination vs adoption (6RR-5), event-type propagation (6RR-4) and the
+regression suite (6RR-9)** are covered by 21 tests in
+`tests/test_event_origination_and_adoption.py`, including the requested-mode
+invariance sweep at clearance 0.2 / 0.5 / **0.872** / 1.5 / 3.0 / 10.0 m — 0.872
+being the exact value that previously cancelled a valid event.
+
+**A propagation bound, recorded not tuned around.** `k_trigger = 4` propagates at
+most 4 hops, so on a 6-robot *chain* (diameter 5) an originator at one end
+reaches five of six robots. The general condition is `k_trigger >= diameter(G_c)`.
+It does not bind here: the measured degree across the post-repair traces is
+**5 of 5**, i.e. the communication graph at `r_comm = 3.0` is complete for N = 6
+throughout. `k_trigger` was not increased.
+
 ## 4. Gates
 
 | gate | result |
