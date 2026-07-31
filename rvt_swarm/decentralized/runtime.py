@@ -109,6 +109,8 @@ def simulate_decentralized_episode(
     accountant: Optional[MessageAccountant] = None,
     trace_modes: bool = False,
     trace_positions: bool = False,
+    preset_env=None,
+    preset_obs=None,
 ) -> Dict[str, object]:
     """BOUNDARY: run one closed-loop decentralized episode.
 
@@ -131,8 +133,14 @@ def simulate_decentralized_episode(
         k = 0
     acc = accountant if accountant is not None else MessageAccountant(n_robots=n)
 
-    env = SwarmFormationEnv(cfg)
-    obs = env.reset(n, "cluttered", seed=seed, layout=layout)
+    # `preset_env`/`preset_obs` let a qualification fixture install a valid
+    # initial condition (robots on the KEEP role template) before t = 0. It is
+    # initialization, not control: the loop below is unchanged.
+    if preset_env is not None and preset_obs is not None:
+        env, obs = preset_env, preset_obs
+    else:
+        env = SwarmFormationEnv(cfg)
+        obs = env.reset(n, "cluttered", seed=seed, layout=layout)
     mission = (float(obs["corridor_dx"]), float(obs["corridor_dy"]))
     roles = (RoleAssignment.simulate_mission_setup_from_initial_formation(
                 obs["positions"], mission, cfg.env.nominal_spacing)
@@ -153,7 +161,7 @@ def simulate_decentralized_episode(
     mode_trace: List[Tuple[int, List[int]]] = []
     pos_trace: List[np.ndarray] = []
     mode_per_step: List[int] = []
-    n_epochs = n_entry = n_recovery = 0
+    n_epochs = n_entry = n_recovery = n_noop = 0
     disagreement_steps = 0
     collisions_during_disagreement = 0
     step, done, last = 0, False, None
@@ -217,27 +225,50 @@ def simulate_decentralized_episode(
                     agree_comp.append(component_agreement(res["decisions"], comps))
                     residuals.append(consensus_residual(nodes))
 
-                    # === 4. peer mode confirmation =========================
-                    for i in scoring:
-                        epochs[i].begin_confirming(nodes[i].decide(), nodes[i].margin())
-                    simulate_confirm_consensus(
-                        epochs, adj, cons.k_confirm, start_step=step,
-                        delta_stale_steps=comm.delta_stale_steps,
-                        packet_loss=comm.packet_loss, delay_steps=comm.delay_steps,
-                        seed=int(seed) + step, record_history=False, accountant=acc)
+                    # === 3b. no-op guard ===================================
+                    # If every scoring robot's post-consensus proposal already
+                    # equals its committed mode, the epoch cannot change
+                    # anything. Closing it here skips the confirmation round
+                    # entirely. Measured churn before this guard was 16.2
+                    # epochs per corridor traversal against an ideal of 2, with
+                    # 26 % of protocol bytes spent on epochs that changed no
+                    # mode. This does NOT suppress legitimate retries: an epoch
+                    # whose proposal differs from the committed mode still runs
+                    # confirmation, and a confirmation failure still retains and
+                    # records a disagreement.
+                    if all(nodes[i].decide() == epochs[i].committed_mode
+                           for i in scoring):
+                        n_noop += 1
+                        for i in scoring:
+                            epochs[i].close_epoch()
+                            epochs[i].remaining_commitment = max(
+                                epochs[i].remaining_commitment, cons.h_commit)
+                        step += 0   # fall through to the control update
+                    else:
+                        # === 4. peer mode confirmation =====================
+                        for i in scoring:
+                            epochs[i].begin_confirming(nodes[i].decide(), nodes[i].margin())
+                        simulate_confirm_consensus(
+                            epochs, adj, cons.k_confirm, start_step=step,
+                            delta_stale_steps=comm.delta_stale_steps,
+                            packet_loss=comm.packet_loss,
+                            delay_steps=comm.delay_steps,
+                            seed=int(seed) + step, record_history=False,
+                            accountant=acc)
 
-                    # === 5. commit or retain, per robot ====================
-                    for i in scoring:
-                        before = epochs[i].committed_mode
-                        n_dis_before = len(epochs[i].disagreements)
-                        ok = commit_or_retain(epochs[i], step, cons)
-                        if len(epochs[i].disagreements) > n_dis_before:
-                            disagreement_events.append(epochs[i].disagreements[-1])
-                        if ok and epochs[i].committed_mode != before:
-                            if epochs[i].committed_mode == LINE:
-                                n_entry += 1
-                            else:
-                                n_recovery += 1
+                        # === 5. commit or retain, per robot ================
+                        for i in scoring:
+                            before = epochs[i].committed_mode
+                            n_dis_before = len(epochs[i].disagreements)
+                            ok = commit_or_retain(epochs[i], step, cons)
+                            if len(epochs[i].disagreements) > n_dis_before:
+                                disagreement_events.append(
+                                    epochs[i].disagreements[-1])
+                            if ok and epochs[i].committed_mode != before:
+                                if epochs[i].committed_mode == LINE:
+                                    n_entry += 1
+                                else:
+                                    n_recovery += 1
                     if trace_modes:
                         mode_trace.append(
                             (step, [epochs[i].committed_mode for i in range(n)]))
@@ -289,6 +320,7 @@ def simulate_decentralized_episode(
         "disagreement_fraction": disagreement_steps / max(step, 1),
         "collisions_during_disagreement": collisions_during_disagreement,
         "n_decisions": n_epochs,
+        "n_noop_epochs": n_noop,
         "n_keep_to_line": n_entry,
         "n_line_to_keep": n_recovery,
         "n_disagreement_events": len(disagreement_events),
