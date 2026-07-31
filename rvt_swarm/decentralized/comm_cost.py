@@ -40,16 +40,20 @@ Schema provenance
 `verify_schema_sizes()`), and `ScoreMessage` is defined in `consensus.py` with
 an exact field list from which the encoding here is derived.
 
-`trigger` and `mode_confirmation` are **PROVISIONAL**. At the time this module
-was written `rvt_swarm/decentralized/epoch.py` did not exist, so the two
-message types are declared here from the protocol field lists (sender, epoch,
-round, the consensus payload itself, timestamp) rather than imported. The
-dependency is live: `epoch_module_status()` reports whether the module has
-since appeared, `payload_of()` prefers an `epoch`-provided class's own
-`payload_bytes()` over the provisional encoder, and `verify_schema_sizes()`
-reports a mismatch instead of silently keeping the provisional number. Any
-report generated while `epoch_module_status()["available"]` is False must mark
-the trigger and confirmation rows *pending*, not zero.
+`trigger` and `mode_confirmation` were PROVISIONAL -- declared here from the
+protocol field lists while `rvt_swarm/decentralized/epoch.py` did not exist --
+and were **wrong**: 16 and 17 bytes against real encodings of 21 and 16. They
+are now bound to `epoch.TriggerMessage.payload_bytes()` and
+`epoch.ConfirmMessage.payload_bytes()`, and `_sample_messages()` builds its
+samples from those classes, so a future divergence is a hard failure rather
+than a silently skipped sample.
+
+**Schema-verified is not the same as measured.** No trigger or confirmation
+message is sent anywhere in the system yet: `runtime.py` does not import
+`epoch.py`. Those two rows are a per-message byte cost and a message count of
+zero, and that zero means *never sent*, not *free*. `pending` is True for any
+category with no recorded message, and `format_report` marks the row
+`[PENDING]`; a report must be read that way.
 
 Deployability
 -------------
@@ -194,20 +198,28 @@ SCORE_SCHEMA = WireSchema(
     ),
 )
 
-# -- trigger: PROVISIONAL, pending rvt_swarm/decentralized/epoch.py ----------
-# Max-consensus over (trigger_flag, trigger_epoch). Max-consensus needs no
+# -- trigger: BOUND to rvt_swarm/decentralized/epoch.TriggerMessage ----------
+# Max-consensus over (trigger_flag, trigger_token). Max-consensus needs no
 # weights, so -- unlike the score message -- there is deliberately no `degree`
 # field: carrying one would be unjustified airtime.
+#
+# This schema was PROVISIONAL and WRONG. It declared 16 bytes against six
+# fields that did not match epoch.TriggerMessage, whose real encoding is 21
+# bytes over five fields. The recovery audit found the mismatch through
+# verify_schema_sizes() self-reporting ok:false, which nothing consumed because
+# no test exercised this module. The token is a (uint32, uint32, uint16)
+# triple, which is the 10 bytes the old declaration was missing.
 TRIGGER_SCHEMA = WireSchema(
     message_type=TRIGGER,
-    source=f"PROVISIONAL -- declared in comm_cost.py pending {EPOCH_MODULE}",
-    provisional=True,
+    source=f"{EPOCH_MODULE}.TriggerMessage.payload_bytes()",
+    provisional=False,
     fields=(
         FieldSpec("sender_id", "uint16", "H", 2, "persistent robot id"),
-        FieldSpec("epoch_id", "uint32", "I", 4, "sender's current epoch"),
-        FieldSpec("round_index", "uint8", "B", 1, "0 .. k_trigger-1"),
+        FieldSpec("epoch_counter", "uint32", "I", 4, "sender's local epoch counter"),
         FieldSpec("trigger_flag", "uint8", "B", 1, "max-consensus over {0,1}"),
-        FieldSpec("trigger_epoch", "uint32", "I", 4, "epoch to open; max-consensus reconciles e_i"),
+        FieldSpec("token_epoch_counter", "uint32", "I", 4, "TriggerToken[0]"),
+        FieldSpec("token_timestamp", "uint32", "I", 4, "TriggerToken[1]"),
+        FieldSpec("token_robot_id", "uint16", "H", 2, "TriggerToken[2]; all-zero token = none held"),
         FieldSpec("timestamp_step", "uint32", "I", 4, "staleness gate"),
     ),
 )
@@ -217,17 +229,17 @@ TRIGGER_SCHEMA = WireSchema(
 # so also no `degree` field. `margin` is float32 because `confirm_margin` is a
 # score-unit threshold and a min-consensus over it is what enforces the
 # dead-band fleet-wide.
+# Was PROVISIONAL and declared 17 bytes; epoch.ConfirmMessage encodes 16.
 CONFIRM_SCHEMA = WireSchema(
     message_type=CONFIRM,
-    source=f"PROVISIONAL -- declared in comm_cost.py pending {EPOCH_MODULE}",
-    provisional=True,
+    source=f"{EPOCH_MODULE}.ConfirmMessage.payload_bytes()",
+    provisional=False,
     fields=(
         FieldSpec("sender_id", "uint16", "H", 2, "persistent robot id"),
         FieldSpec("epoch_id", "uint32", "I", 4, "epoch being confirmed"),
-        FieldSpec("round_index", "uint8", "B", 1, "0 .. k_confirm-1"),
-        FieldSpec("proposed_mode", "uint8", "B", 1, "KEEP=0 | LINE=2"),
+        FieldSpec("selected_mode", "uint8", "B", 1, "mode-SET code, carries running min and max"),
         FieldSpec("margin", "float32", "f", 4, "|z_keep - z_line|, min-consensus"),
-        FieldSpec("confirm_flag", "uint8", "B", 1, "min-consensus over {0,1}"),
+        FieldSpec("confirm_round", "uint8", "B", 1, "0 .. k_confirm-1"),
         FieldSpec("timestamp_step", "uint32", "I", 4, "staleness gate"),
     ),
 )
@@ -241,41 +253,69 @@ WIRE_SCHEMAS: Dict[str, WireSchema] = {
 
 
 # ---------------------------------------------------------------------------
-# Provisional message types (used only until epoch.py provides them)
+# Schema-mirror message types
 # ---------------------------------------------------------------------------
+# These two classes were the PROVISIONAL stand-ins written before `epoch.py`
+# existed. `epoch.py` is now authoritative for both, and `payload_of()` always
+# prefers a message object's own `payload_bytes()`, so nothing in the pipeline
+# depends on the encoders below.
+#
+# DEFECT FIXED HERE (see docs/DECENTRALIZED_COMMUNICATION_ACCOUNTING.md).
+# When the two schemas were re-bound to `epoch.py` the field *lists* changed but
+# these two encoders were left packing the old field lists into the new formats:
+#
+#     TriggerMessage.payload_bytes() -> struct.error: pack expected 7 items
+#                                       for packing (got 6)
+#     ConfirmMessage.payload_bytes() -> struct.error: pack expected 6 items
+#                                       for packing (got 7)
+#
+# Every call raised. The fields below now mirror TRIGGER_SCHEMA / CONFIRM_SCHEMA
+# one-for-one, which makes each class a second, independent encoder of the same
+# schema; `test_communication_cost.py` asserts each is byte-identical to the
+# `epoch.py` encoder for the same content, so the two modules cannot drift apart
+# again without a test going red.
 @dataclass(frozen=True)
 class TriggerMessage:
-    """PROVISIONAL decision-trigger message. See TRIGGER_SCHEMA."""
+    """Schema-mirror decision-trigger message. See TRIGGER_SCHEMA.
+
+    `epoch.TriggerMessage` is the message the protocol actually sends; this is
+    the wire format written out field by field, one field per FieldSpec.
+    """
 
     sender_id: int
-    epoch_id: int
-    round_index: int
+    epoch_counter: int
     trigger_flag: int
-    trigger_epoch: int
+    token_epoch_counter: int
+    token_timestamp: int
+    token_robot_id: int
     timestamp_step: int
 
     def payload_bytes(self) -> bytes:
         return struct.pack(
             TRIGGER_SCHEMA.struct_format,
             int(self.sender_id) & 0xFFFF,
-            int(self.epoch_id) & 0xFFFFFFFF,
-            int(self.round_index) & 0xFF,
+            int(self.epoch_counter) & 0xFFFFFFFF,
             1 if self.trigger_flag else 0,
-            int(self.trigger_epoch) & 0xFFFFFFFF,
+            int(self.token_epoch_counter) & 0xFFFFFFFF,
+            int(self.token_timestamp) & 0xFFFFFFFF,
+            int(self.token_robot_id) & 0xFFFF,
             int(self.timestamp_step) & 0xFFFFFFFF,
         )
 
 
 @dataclass(frozen=True)
 class ConfirmMessage:
-    """PROVISIONAL mode-confirmation message. See CONFIRM_SCHEMA."""
+    """Schema-mirror mode-confirmation message. See CONFIRM_SCHEMA.
+
+    `selected_mode` is the mode-SET code of `epoch.encode_mode_set`, not a plain
+    mode: min- and max-consensus travel in the same byte.
+    """
 
     sender_id: int
     epoch_id: int
-    round_index: int
-    proposed_mode: int
+    selected_mode: int
     margin: float
-    confirm_flag: int
+    confirm_round: int
     timestamp_step: int
 
     def payload_bytes(self) -> bytes:
@@ -283,10 +323,9 @@ class ConfirmMessage:
             CONFIRM_SCHEMA.struct_format,
             int(self.sender_id) & 0xFFFF,
             int(self.epoch_id) & 0xFFFFFFFF,
-            int(self.round_index) & 0xFF,
-            int(self.proposed_mode) & 0xFF,
+            int(self.selected_mode) & 0xFF,
             float(self.margin),
-            1 if self.confirm_flag else 0,
+            int(self.confirm_round) & 0xFF,
             int(self.timestamp_step) & 0xFFFFFFFF,
         )
 
@@ -415,28 +454,28 @@ def _sample_messages() -> List[object]:
     trigger_cls = getattr(mod, "TriggerMessage", None) if mod is not None else None
     confirm_cls = (getattr(mod, "ConfirmMessage", None)
                    or getattr(mod, "ConfirmationMessage", None)) if mod is not None else None
-    if trigger_cls is None:
-        out.append(TriggerMessage(sender_id=3, epoch_id=2, round_index=1,
-                                  trigger_flag=1, trigger_epoch=3,
-                                  timestamp_step=11))
-    else:
-        try:
-            out.append(trigger_cls(sender_id=3, epoch_id=2, round_index=1,
-                                   trigger_flag=1, trigger_epoch=3,
-                                   timestamp_step=11))
-        except TypeError:
-            pass          # signature unknown; verify_schema_sizes reports it
+    token_cls = getattr(mod, "TriggerToken", None) if mod is not None else None
+
+    # Bound to epoch.py's real constructors. The previous version guessed a
+    # signature and wrapped the call in `except TypeError: pass`, so when the
+    # guess was wrong -- which it was, for both message types -- the sample was
+    # silently dropped, `measured_bytes` stayed None, and the 16/17-byte
+    # declarations went unchecked against the real 21/16. A schema mismatch
+    # between two modules of the same package is now a hard failure.
+    if trigger_cls is None or token_cls is None:
+        raise ImportError(
+            f"{EPOCH_MODULE} must provide TriggerMessage and TriggerToken; "
+            "communication accounting cannot be verified without them"
+        )
+    out.append(trigger_cls(
+        sender_id=3, epoch_counter=2, trigger_flag=True,
+        trigger_token=token_cls(epoch_counter=2, trigger_timestamp=11, robot_id=3),
+        timestamp_step=11))
     if confirm_cls is None:
-        out.append(ConfirmMessage(sender_id=3, epoch_id=2, round_index=1,
-                                  proposed_mode=LINE, margin=0.5,
-                                  confirm_flag=1, timestamp_step=11))
-    else:
-        try:
-            out.append(confirm_cls(sender_id=3, epoch_id=2, round_index=1,
-                                   proposed_mode=LINE, margin=0.5,
-                                   confirm_flag=1, timestamp_step=11))
-        except TypeError:
-            pass
+        raise ImportError(f"{EPOCH_MODULE} must provide ConfirmMessage")
+    out.append(confirm_cls(
+        sender_id=3, epoch_id=2, selected_mode=LINE, margin=0.5,
+        confirm_round=1, timestamp_step=11))
     del status
     return out
 
@@ -784,7 +823,20 @@ class MessageAccountant:
             "bytes": int(byts),
             "wire_bytes_per_message": wire,
             "schema_provisional": bool(provisional),
-            "pending": bool(provisional and msgs == 0),
+            # PENDING means "this row is not a measurement". Two ways that
+            # happens: the schema is still provisional, or nothing of this type
+            # was ever recorded -- a zero that means "never sent", not "free".
+            #
+            # DEFECT FIXED HERE. This read `provisional and msgs == 0`. Once the
+            # trigger and confirmation schemas were bound to `epoch.py` their
+            # `provisional` flags went False, so the two categories that the
+            # runtime cannot yet send -- `epoch.py` is not wired into
+            # `runtime.py` -- reported `pending=False` with 0 bytes, i.e. as a
+            # measured zero. That is precisely the reading
+            # `simulate_episode_message_cost` warns against in its own
+            # docstring: "a report that shows them as zero cost is wrong and
+            # must be read as pending".
+            "pending": bool(provisional or msgs == 0),
             "messages_per_robot": msgs / n_rob,
             "bytes_per_robot_per_episode": byts / n_rob,
             "rounds_per_decision": rounds_per_decision,
@@ -832,7 +884,7 @@ def format_report(report: Dict[str, object]) -> str:
                  f"({report['episode_seconds']:.2f} s)")
     lines.append(f"decisions per episode: {report['decisions_per_episode']}")
     lines.append("")
-    header = ("{:<20} {:>6} {:>9} {:>9} {:>8} {:>10} {:>10} {:>10} {:>10}"
+    header = ("{:<28} {:>6} {:>9} {:>9} {:>8} {:>10} {:>10} {:>10} {:>10}"
               .format("category", "B/msg", "messages", "bytes", "rnd/dec",
                       "msg/rob", "B/rob/dec", "peak B/s", "avg B/s"))
     lines.append(header)
@@ -840,10 +892,13 @@ def format_report(report: Dict[str, object]) -> str:
     for name in list(MESSAGE_TYPES) + ["TOTAL"]:
         c = report["total"] if name == "TOTAL" else cats[name]
         wire = c["wire_bytes_per_message"]
+        # Widened from 20 to 28 columns: "mode_confirmation [PENDING]" is 27
+        # characters and used to be truncated to "mode_confirmation [P", which
+        # hid the one flag that says the row is not a measurement.
         tag = name + (" [PENDING]" if c.get("pending") else "")
         lines.append(
-            "{:<20} {:>6} {:>9} {:>9} {:>8.2f} {:>10.2f} {:>10.2f} {:>10.1f} {:>10.1f}"
-            .format(tag[:20], "-" if wire is None else wire, c["messages"],
+            "{:<28} {:>6} {:>9} {:>9} {:>8.2f} {:>10.2f} {:>10.2f} {:>10.1f} {:>10.1f}"
+            .format(tag[:28], "-" if wire is None else wire, c["messages"],
                     c["bytes"], c["rounds_per_decision"],
                     c["messages_per_robot"], c["bytes_per_robot_per_decision"],
                     c["peak_bytes_per_second"], c["average_bytes_per_second"]))
@@ -943,10 +998,13 @@ def simulate_episode_message_cost(
       `s .. s + k_score - 1`, so beacon and score traffic overlap exactly as
       they would on the air. The messages are observed through the instrumented
       consensus node.
-    * Trigger and mode-confirmation traffic is **not** simulated here: at the
-      time of writing `rvt_swarm/decentralized/epoch.py` does not exist. Those
-      two categories will report zero messages and `pending=True`; a report
-      that shows them as zero cost is wrong and must be read as pending.
+    * Trigger and mode-confirmation traffic is **not** simulated here.
+      `rvt_swarm/decentralized/epoch.py` now exists and its two message
+      encoders are what the schemas are checked against, but no runtime path
+      sends either message -- neither this function nor `runtime.py` imports
+      `epoch.py`. Those two categories report zero messages and `pending=True`;
+      a report that shows them as zero cost is wrong and must be read as
+      pending.
 
     Two deliberate simplifications, both stated because both are real:
 

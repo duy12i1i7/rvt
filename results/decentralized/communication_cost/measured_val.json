@@ -1,0 +1,1372 @@
+{
+  "by_arm": {
+    "always_line": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1633.333333333333,
+          "average_bytes_per_second_per_robot": 326.6666666666666,
+          "bytes": 25371.11111111111,
+          "bytes_per_robot_per_decision": 1015.661111111111,
+          "bytes_per_robot_per_episode": 5078.305555555556,
+          "messages": 517.7777777777778,
+          "peak_bytes_per_second": 1633.333333333333,
+          "peak_bytes_per_second_per_robot": 326.6666666666666,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 128.81367791209925,
+          "average_bytes_per_second_per_robot": 25.742207847639218,
+          "bytes": 2000.0,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 400.0,
+          "messages": 100.0,
+          "peak_bytes_per_second": 666.6666666666665,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 5.0,
+        "episodes": 36,
+        "steps_mean": 103.63888888888889,
+        "success_mean": 1.0
+      },
+      "total": {
+        "average_bytes_per_second": 1762.147011245433,
+        "average_bytes_per_second_per_robot": 352.40887451430586,
+        "bytes": 27371.11111111111,
+        "bytes_per_robot_per_decision": 1095.661111111111,
+        "bytes_per_robot_per_episode": 5478.305555555556,
+        "messages": 617.7777777777778,
+        "peak_bytes_per_second": 2300.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    },
+    "clearance": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1633.333333333333,
+          "average_bytes_per_second_per_robot": 326.6666666666666,
+          "bytes": 24323.055555555555,
+          "bytes_per_robot_per_decision": 1090.3180555555557,
+          "bytes_per_robot_per_episode": 4795.194444444444,
+          "messages": 496.3888888888889,
+          "peak_bytes_per_second": 1633.333333333333,
+          "peak_bytes_per_second_per_robot": 326.6666666666666,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 119.60468145670737,
+          "average_bytes_per_second_per_robot": 24.07157937703817,
+          "bytes": 1768.888888888889,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 351.1111111111111,
+          "messages": 88.44444444444444,
+          "peak_bytes_per_second": 666.6666666666665,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.388888888888889,
+        "episodes": 36,
+        "steps_mean": 97.86111111111111,
+        "success_mean": 0.3333333333333333
+      },
+      "total": {
+        "average_bytes_per_second": 1752.938014790041,
+        "average_bytes_per_second_per_robot": 350.73824604370486,
+        "bytes": 26091.944444444445,
+        "bytes_per_robot_per_decision": 1170.3180555555557,
+        "bytes_per_robot_per_episode": 5146.305555555556,
+        "messages": 584.8333333333334,
+        "peak_bytes_per_second": 2300.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    }
+  },
+  "by_family": {
+    "ambiguous": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1633.3333333333335,
+          "average_bytes_per_second_per_robot": 326.6666666666667,
+          "bytes": 22932.0,
+          "bytes_per_robot_per_decision": 1137.71875,
+          "bytes_per_robot_per_episode": 4550.875,
+          "messages": 468.0,
+          "peak_bytes_per_second": 1633.3333333333335,
+          "peak_bytes_per_second_per_robot": 326.6666666666667,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 114.1741591679029,
+          "average_bytes_per_second_per_robot": 23.015433812741925,
+          "bytes": 1600.0,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 320.0,
+          "messages": 80.0,
+          "peak_bytes_per_second": 666.6666666666667,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.0,
+        "episodes": 8,
+        "steps_mean": 92.875,
+        "success_mean": 0.25
+      },
+      "total": {
+        "average_bytes_per_second": 1747.5074925012364,
+        "average_bytes_per_second_per_robot": 349.68210047940863,
+        "bytes": 24532.0,
+        "bytes_per_robot_per_decision": 1217.71875,
+        "bytes_per_robot_per_episode": 4870.875,
+        "messages": 548.0,
+        "peak_bytes_per_second": 2300.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    },
+    "keep_line_keep": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1633.3333333333335,
+          "average_bytes_per_second_per_robot": 326.6666666666667,
+          "bytes": 26913.25,
+          "bytes_per_robot_per_decision": 1111.075,
+          "bytes_per_robot_per_episode": 5279.75,
+          "messages": 549.25,
+          "peak_bytes_per_second": 1633.3333333333335,
+          "peak_bytes_per_second_per_robot": 326.6666666666667,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 116.95274463681017,
+          "average_bytes_per_second_per_robot": 23.596593238848556,
+          "bytes": 1920.0,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 380.0,
+          "messages": 96.0,
+          "peak_bytes_per_second": 666.6666666666667,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.75,
+        "episodes": 8,
+        "steps_mean": 107.75,
+        "success_mean": 0.0
+      },
+      "total": {
+        "average_bytes_per_second": 1750.2860779701434,
+        "average_bytes_per_second_per_robot": 350.2632599055152,
+        "bytes": 28833.25,
+        "bytes_per_robot_per_decision": 1191.075,
+        "bytes_per_robot_per_episode": 5659.75,
+        "messages": 645.25,
+        "peak_bytes_per_second": 2300.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    },
+    "keep_open": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1633.3333333333333,
+          "average_bytes_per_second_per_robot": 326.66666666666663,
+          "bytes": 19955.25,
+          "bytes_per_robot_per_decision": 996.84375,
+          "bytes_per_robot_per_episode": 3987.375,
+          "messages": 407.25,
+          "peak_bytes_per_second": 1633.3333333333335,
+          "peak_bytes_per_second_per_robot": 326.6666666666667,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 130.9645689049483,
+          "average_bytes_per_second_per_robot": 26.21700291076985,
+          "bytes": 1600.0,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 320.0,
+          "messages": 80.0,
+          "peak_bytes_per_second": 666.6666666666667,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.0,
+        "episodes": 8,
+        "steps_mean": 81.375,
+        "success_mean": 1.0
+      },
+      "total": {
+        "average_bytes_per_second": 1764.2979022382817,
+        "average_bytes_per_second_per_robot": 352.88366957743654,
+        "bytes": 21555.25,
+        "bytes_per_robot_per_decision": 1076.84375,
+        "bytes_per_robot_per_episode": 4307.375,
+        "messages": 487.25,
+        "peak_bytes_per_second": 2300.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    },
+    "line_corridor": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1633.3333333333333,
+          "average_bytes_per_second_per_robot": 326.66666666666663,
+          "bytes": 26435.5,
+          "bytes_per_robot_per_decision": 1107.1958333333332,
+          "bytes_per_robot_per_episode": 5173.583333333333,
+          "messages": 539.5,
+          "peak_bytes_per_second": 1633.3333333333333,
+          "peak_bytes_per_second_per_robot": 326.66666666666663,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 117.41972923034778,
+          "average_bytes_per_second_per_robot": 23.662051489540968,
+          "bytes": 1893.3333333333333,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 373.3333333333333,
+          "messages": 94.66666666666667,
+          "peak_bytes_per_second": 666.6666666666666,
+          "peak_bytes_per_second_per_robot": 133.33333333333331,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.666666666666667,
+        "episodes": 12,
+        "steps_mean": 105.58333333333333,
+        "success_mean": 0.16666666666666666
+      },
+      "total": {
+        "average_bytes_per_second": 1750.753062563681,
+        "average_bytes_per_second_per_robot": 350.3287181562077,
+        "bytes": 28328.833333333332,
+        "bytes_per_robot_per_decision": 1187.1958333333332,
+        "bytes_per_robot_per_episode": 5546.916666666667,
+        "messages": 634.1666666666666,
+        "peak_bytes_per_second": 2300.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    }
+  },
+  "by_n": {
+    "4": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1306.666666666667,
+          "average_bytes_per_second_per_robot": 326.66666666666674,
+          "bytes": 17792.444444444445,
+          "bytes_per_robot_per_decision": 1055.1333333333334,
+          "bytes_per_robot_per_episode": 4448.111111111111,
+          "messages": 363.1111111111111,
+          "peak_bytes_per_second": 1306.666666666667,
+          "peak_bytes_per_second_per_robot": 326.66666666666674,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 99.29917922208674,
+          "average_bytes_per_second_per_robot": 24.824794805521684,
+          "bytes": 1351.111111111111,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 337.77777777777777,
+          "messages": 67.55555555555556,
+          "peak_bytes_per_second": 533.3333333333334,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.222222222222222,
+        "episodes": 18,
+        "steps_mean": 90.77777777777777,
+        "success_mean": 0.4444444444444444
+      },
+      "total": {
+        "average_bytes_per_second": 1405.9658458887534,
+        "average_bytes_per_second_per_robot": 351.49146147218835,
+        "bytes": 19143.555555555555,
+        "bytes_per_robot_per_decision": 1135.1333333333334,
+        "bytes_per_robot_per_episode": 4785.888888888889,
+        "messages": 430.6666666666667,
+        "peak_bytes_per_second": 1840.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    },
+    "6": {
+      "categories": {
+        "beacon": {
+          "average_bytes_per_second": 1960.0,
+          "average_bytes_per_second_per_robot": 326.66666666666674,
+          "bytes": 30853.666666666668,
+          "bytes_per_robot_per_decision": 1125.5027777777777,
+          "bytes_per_robot_per_episode": 5142.277777777777,
+          "messages": 629.6666666666666,
+          "peak_bytes_per_second": 1960.0,
+          "peak_bytes_per_second_per_robot": 326.66666666666674,
+          "pending": false
+        },
+        "mode_confirmation": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        },
+        "score_consensus": {
+          "average_bytes_per_second": 139.91018369132792,
+          "average_bytes_per_second_per_robot": 23.31836394855465,
+          "bytes": 2186.6666666666665,
+          "bytes_per_robot_per_decision": 80.0,
+          "bytes_per_robot_per_episode": 364.44444444444446,
+          "messages": 109.33333333333333,
+          "peak_bytes_per_second": 800.0,
+          "peak_bytes_per_second_per_robot": 133.33333333333334,
+          "pending": false
+        },
+        "trigger": {
+          "average_bytes_per_second": 0.0,
+          "average_bytes_per_second_per_robot": 0.0,
+          "bytes": 0.0,
+          "bytes_per_robot_per_decision": 0.0,
+          "bytes_per_robot_per_episode": 0.0,
+          "messages": 0.0,
+          "peak_bytes_per_second": 0.0,
+          "peak_bytes_per_second_per_robot": 0.0,
+          "pending": true
+        }
+      },
+      "summary": {
+        "decision_epochs_mean": 4.555555555555555,
+        "episodes": 18,
+        "steps_mean": 104.94444444444444,
+        "success_mean": 0.2222222222222222
+      },
+      "total": {
+        "average_bytes_per_second": 2099.9101836913273,
+        "average_bytes_per_second_per_robot": 349.9850306152213,
+        "bytes": 33040.333333333336,
+        "bytes_per_robot_per_decision": 1205.5027777777777,
+        "bytes_per_robot_per_episode": 5506.722222222223,
+        "messages": 739.0,
+        "peak_bytes_per_second": 2760.0,
+        "peak_bytes_per_second_per_robot": 460.0,
+        "pending": false
+      }
+    }
+  },
+  "decision_interval_steps": 25,
+  "episodes": [
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 81,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 81,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 81,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 82,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 81,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 81,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 82,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 82,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 107,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 102,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 120,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 120,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 93,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 88,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 119,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 113,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 89,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 85,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 115,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 116,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 108,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 101,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 120,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 120,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 91,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 89,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 120,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 113,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 91,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 87,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 98,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 95,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 92,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "clearance",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 87,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 98,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 4,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "clearance",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 95,
+      "success": 0.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 107,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 105,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 107,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_open",
+      "layout": "val_keep_open_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 105,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 103,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 103,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 102,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 102,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 104,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 102,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "line_corridor",
+      "layout": "val_line_corridor_003",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 102,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 103,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 103,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 102,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "keep_line_keep",
+      "layout": "val_keep_line_keep_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 101,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 105,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 107,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_001",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 105,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000400,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "always_line",
+      "n": 4,
+      "seed": 20000401,
+      "steps": 107,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000600,
+      "steps": 106,
+      "success": 1.0
+    },
+    {
+      "decision_epochs": 5,
+      "family": "ambiguous",
+      "layout": "val_ambiguous_002",
+      "mode_rule": "always_line",
+      "n": 6,
+      "seed": 20000601,
+      "steps": 105,
+      "success": 1.0
+    }
+  ],
+  "episodes_per_setting": 2,
+  "epoch_module": {
+    "available": true,
+    "confirm_class": "ConfirmMessage",
+    "confirm_schema_source": "epoch",
+    "module": "rvt_swarm.decentralized.epoch",
+    "trigger_class": "TriggerMessage",
+    "trigger_schema_source": "epoch"
+  },
+  "families": [
+    "line_corridor",
+    "keep_line_keep",
+    "keep_open",
+    "ambiguous"
+  ],
+  "k_score": 4,
+  "n_episodes_total": 72,
+  "pooled": {
+    "categories": {
+      "beacon": {
+        "average_bytes_per_second": 1633.333333333333,
+        "average_bytes_per_second_per_robot": 326.6666666666666,
+        "bytes": 24323.055555555555,
+        "bytes_per_robot_per_decision": 1090.3180555555557,
+        "bytes_per_robot_per_episode": 4795.194444444444,
+        "messages": 496.3888888888889,
+        "peak_bytes_per_second": 1633.333333333333,
+        "peak_bytes_per_second_per_robot": 326.6666666666666,
+        "pending": false
+      },
+      "mode_confirmation": {
+        "average_bytes_per_second": 0.0,
+        "average_bytes_per_second_per_robot": 0.0,
+        "bytes": 0.0,
+        "bytes_per_robot_per_decision": 0.0,
+        "bytes_per_robot_per_episode": 0.0,
+        "messages": 0.0,
+        "peak_bytes_per_second": 0.0,
+        "peak_bytes_per_second_per_robot": 0.0,
+        "pending": true
+      },
+      "score_consensus": {
+        "average_bytes_per_second": 119.60468145670737,
+        "average_bytes_per_second_per_robot": 24.07157937703817,
+        "bytes": 1768.888888888889,
+        "bytes_per_robot_per_decision": 80.0,
+        "bytes_per_robot_per_episode": 351.1111111111111,
+        "messages": 88.44444444444444,
+        "peak_bytes_per_second": 666.6666666666665,
+        "peak_bytes_per_second_per_robot": 133.33333333333334,
+        "pending": false
+      },
+      "trigger": {
+        "average_bytes_per_second": 0.0,
+        "average_bytes_per_second_per_robot": 0.0,
+        "bytes": 0.0,
+        "bytes_per_robot_per_decision": 0.0,
+        "bytes_per_robot_per_episode": 0.0,
+        "messages": 0.0,
+        "peak_bytes_per_second": 0.0,
+        "peak_bytes_per_second_per_robot": 0.0,
+        "pending": true
+      }
+    },
+    "summary": {
+      "decision_epochs_mean": 4.388888888888889,
+      "episodes": 36,
+      "steps_mean": 97.86111111111111,
+      "success_mean": 0.3333333333333333
+    },
+    "total": {
+      "average_bytes_per_second": 1752.938014790041,
+      "average_bytes_per_second_per_robot": 350.73824604370486,
+      "bytes": 26091.944444444445,
+      "bytes_per_robot_per_decision": 1170.3180555555557,
+      "bytes_per_robot_per_episode": 5146.305555555556,
+      "messages": 584.8333333333334,
+      "peak_bytes_per_second": 2300.0,
+      "peak_bytes_per_second_per_robot": 460.0,
+      "pending": false
+    }
+  },
+  "schema": {
+    "beacon": {
+      "declared_bytes": 49,
+      "declared_field_sum": 49,
+      "measured_bytes": 49,
+      "ok": true,
+      "provisional": false,
+      "source": "comms.Beacon.payload_bytes()"
+    },
+    "mode_confirmation": {
+      "declared_bytes": 16,
+      "declared_field_sum": 16,
+      "measured_bytes": 16,
+      "ok": true,
+      "provisional": false,
+      "source": "rvt_swarm.decentralized.epoch.ConfirmMessage.payload_bytes()"
+    },
+    "score_consensus": {
+      "declared_bytes": 20,
+      "declared_field_sum": 20,
+      "measured_bytes": 20,
+      "ok": true,
+      "provisional": false,
+      "source": "consensus.ScoreMessage field list; encoder declared here"
+    },
+    "trigger": {
+      "declared_bytes": 21,
+      "declared_field_sum": 21,
+      "measured_bytes": 21,
+      "ok": true,
+      "provisional": false,
+      "source": "rvt_swarm.decentralized.epoch.TriggerMessage.payload_bytes()"
+    }
+  },
+  "sizes": [
+    4,
+    6
+  ],
+  "t_ctrl_seconds": 0.15
+}
