@@ -89,6 +89,11 @@ NAME_ALLOWLIST: frozenset = frozenset({
 # is a stated claim rather than a convenience. Each is still bound by the
 # no-final-test-access rule, which is checked separately.
 OFFLINE_MODULES: Dict[str, str] = {
+    "reconfiguration_metrics": (
+        "Offline scoring of the V2 reconfiguration task. Reads the joint state "
+        "to compute events and formation error after the fact; no robot "
+        "computes any of it."
+    ),
     "training": (
         "Centralized training and offline analysis. Builds the dataset through "
         "the simulation boundary and computes losses; nothing here executes on "

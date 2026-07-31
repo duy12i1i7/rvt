@@ -108,6 +108,7 @@ def simulate_decentralized_episode(
     legacy_periodic_epoch_baseline: bool = False,
     accountant: Optional[MessageAccountant] = None,
     trace_modes: bool = False,
+    trace_positions: bool = False,
 ) -> Dict[str, object]:
     """BOUNDARY: run one closed-loop decentralized episode.
 
@@ -150,6 +151,8 @@ def simulate_decentralized_episode(
     agree_full, agree_comp, residuals = [], [], []
     disagreement_events: List[object] = []
     mode_trace: List[Tuple[int, List[int]]] = []
+    pos_trace: List[np.ndarray] = []
+    mode_per_step: List[int] = []
     n_epochs = n_entry = n_recovery = 0
     disagreement_steps = 0
     collisions_during_disagreement = 0
@@ -257,6 +260,9 @@ def simulate_decentralized_episode(
         disagree = len(set(committed)) > 1
         disagreement_steps += int(disagree)
 
+        if trace_positions:
+            pos_trace.append(obs["positions"].copy())
+            mode_per_step.append(Counter(committed).most_common(1)[0][0])
         actions = np.stack([local_controller(views[i], cfg, committed[i])
                             for i in range(n)])
         env_mode = Counter(committed).most_common(1)[0][0]   # bookkeeping only
@@ -288,5 +294,10 @@ def simulate_decentralized_episode(
         "n_disagreement_events": len(disagreement_events),
         "final_modes": [epochs[i].committed_mode for i in range(n)],
         "mode_trace": mode_trace,
+        "position_trace": pos_trace,
+        "mode_per_step": mode_per_step,
+        "obstacles": obs["obstacles"].copy(),
+        "mission_dir": mission,
+        "goal": (float(obs["goal"][0]), float(obs["goal"][1])),
         "comm": acc.report(),
     }
