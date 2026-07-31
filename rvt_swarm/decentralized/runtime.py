@@ -203,9 +203,17 @@ def simulate_decentralized_episode(
                     # it is what removes the residual no-op epochs the latch
                     # cannot see (a legitimate trigger reason firing where the
                     # answer happens to be "no change").
-                    qk, ql = _robot_decision(views[i], cfg, selector, mode_rule)
-                    own = LINE if ql > qk else KEEP
-                    if own == e.committed_mode:
+                    # The check must use the mode the EVENT requests, not a
+                    # re-derivation from a second signal. Using
+                    # `_robot_decision` here re-introduced exactly the defect
+                    # Task 6R repaired, one layer earlier: a robot with valid
+                    # forward-opening evidence at step 46 had its arming
+                    # cancelled because `nearest_obstacle_clearance` (0.872 m,
+                    # still between the walls) said LINE -- the mode it already
+                    # held. The traced protocol commits at 45-46; the runtime
+                    # was committing at 73-88 purely because of this line.
+                    own = requested_mode_for(e)
+                    if own is None or own == e.committed_mode:
                         e.suppressed_noop_arm += 1
                         fired = False
                 if fired:

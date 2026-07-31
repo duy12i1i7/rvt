@@ -1,0 +1,988 @@
+{
+  "alpha_025": {
+    "h": 0.7749999940395356,
+    "cells": [
+      {
+        "seed": 0,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 1,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 2,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 3,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 4,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      }
+    ]
+  },
+  "alpha_035": {
+    "h": 0.8649999916553497,
+    "cells": [
+      {
+        "seed": 0,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 1,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 2,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 3,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 44,
+            "persistence_satisfied": 46,
+            "armable": 46,
+            "originated": 46,
+            "requested_keep": 46,
+            "commit_keep": 46
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 46
+          }
+        }
+      },
+      {
+        "seed": 4,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      }
+    ]
+  },
+  "alpha_045": {
+    "h": 0.954999989271164,
+    "cells": [
+      {
+        "seed": 0,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      },
+      {
+        "seed": 1,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      },
+      {
+        "seed": 2,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      },
+      {
+        "seed": 3,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      },
+      {
+        "seed": 4,
+        "events": {
+          "0": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "1": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "2": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "3": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          },
+          "4": {
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "raw_evidence": 43,
+            "persistence_satisfied": 45,
+            "armable": 45,
+            "originated": 45,
+            "requested_keep": 45,
+            "commit_keep": 45
+          },
+          "5": {
+            "armable": 30,
+            "originated": 30,
+            "token_adopted": 30,
+            "eligible": 30,
+            "score_done": 30,
+            "confirm_done": 30,
+            "commit_line": 30,
+            "commit_keep": 45
+          }
+        }
+      }
+    ]
+  }
+}
