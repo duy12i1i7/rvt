@@ -598,11 +598,18 @@ def test_09_confirmation_is_leaderless_under_robot_id_permutation(perm):
     pass vacuously, which is the classic way this test is written wrong. The
     margins differ per robot too, so the min-consensus channel is also permuted.
     """
-    graph = path_graph()
-    proposals = PROPOSAL_PATTERNS["one_dissenter"]
+    # A DISCONNECTED graph gives a genuinely non-uniform outcome under the
+    # repaired k_confirm: the agreeing component commits, the split one does
+    # not. The former base scenario (one dissenter on a path) relied on a robot
+    # committing five hops from the dissenter, which the G6 diameter repair
+    # correctly eliminated -- so it now yields a uniform all-retain outcome and
+    # would make this equivariance check vacuous.
+    graph = {0: (1,), 1: (0,), 2: (3,), 3: (2,), 4: (5,), 5: (4,)}
+    proposals = {0: LINE, 1: LINE, 2: KEEP, 3: LINE, 4: KEEP, 5: KEEP}
 
     base = run_confirmation(graph, proposals, margins=BASE_MARGINS)
-    assert sum(base["committed"].values()) == 1        # non-vacuous
+    n_commit = sum(base["committed"].values())
+    assert 0 < n_commit < N, (n_commit, base["committed"])   # non-vacuous
 
     moved = run_confirmation(
         _relabel(graph, perm),
@@ -737,29 +744,29 @@ def test_12_a_witnessed_disagreement_travels_exactly_one_hop_per_round():
 # ===========================================================================
 # 13-14. the measured limitation: k_confirm smaller than the graph diameter
 # ===========================================================================
-def test_13_k_confirm_below_the_graph_diameter_permits_an_unsafe_commit():
-    """MEASURED LIMITATION, pinned so it cannot be quietly claimed away.
+def test_13_k_confirm_now_covers_the_graph_diameter_and_the_unsafe_commit_is_gone():
+    """The G6 repair, verified against a hazard a previous audit had PINNED.
 
-    On a 6-node path (diameter 5) with the shipped `k_confirm = 4`, robot 5 is
-    five hops from the dissenter, never witnesses the disagreement, and commits
-    LINE while robots 0-4 detect it and retain. `commit_or_retain` is behaving
-    exactly as documented -- it certifies agreement over the k-hop neighbourhood
-    and claims nothing more -- but the swarm-wide claim "confirmation implies
-    agreement" is FALSE whenever diameter > k_confirm.
+    This test formerly asserted the defect: on a 6-node path (diameter 5) with
+    the shipped `k_confirm = 4`, robot 5 sat five hops from the dissenter, never
+    witnessed the disagreement, and committed LINE while robots 0-4 retained.
+    The swarm-wide claim "confirmation implies agreement" was FALSE whenever
+    diameter > k_confirm.
 
-    Not reached in the deployed regime: at r_comm = 3.0 an N=6 line spans 4.5 m
-    with graph diameter 2. Recorded as a precondition on Gate D2, not as a pass.
+    `k_confirm` is now derived as D_max = max_team_size - 1 = 5, so min/max
+    confirmation covers the worst-case chain and NO robot commits against a
+    dissenter. Min/max consensus propagates one hop per round exactly as the
+    trigger does, which is why the same diameter argument applies to both.
     """
-    out = run_confirmation(path_graph(), PROPOSAL_PATTERNS["one_dissenter"])
+    from rvt_swarm.decentralized.parameters import (default_parameters,
+                                                    derived_component_diameter)
+    _, _, protocol = default_parameters()
+    assert ConsensusParams().k_confirm >= derived_component_diameter(protocol)
 
-    assert [out["committed"][i] for i in range(N)] == \
-           [False, False, False, False, False, True]
-    assert out["modes"] == {0: KEEP, 1: KEEP, 2: KEEP, 3: KEEP, 4: KEEP, 5: LINE}
-    assert out["bounds"][5] == (LINE, LINE)          # robot 5 saw no dissent
-    assert out["epochs"][5].disagreements == []
-    # the honest diagnostics do NOT hide it
-    assert agreement_rate(out["modes"]) == 0.0
-    assert component_agreement(out["modes"], out["components"]) == 0.0
+    out = run_confirmation(path_graph(), PROPOSAL_PATTERNS["one_dissenter"])
+    assert not any(out["committed"].values()), \
+        "with k_confirm >= diameter no robot may commit against a dissenter"
+    assert all(out["bounds"][i] == (KEEP, LINE) for i in range(N)), out["bounds"]
 
 
 @pytest.mark.parametrize("k_confirm,expected_commits",
@@ -858,23 +865,25 @@ def test_20_gate_d2_mode_confirmation_success_rate():
     Measured, 96 robot-outcomes over 16 scenarios:
 
         confirm when the component agreed   57/57 = 1.0000
-        refuse when the component disagreed 38/39 = 0.9744
-        overall correct decisions           95/96 = 0.9896
-        unsafe commits                      1     (path6 / one_dissenter / robot 5)
+        refuse when the component disagreed 39/39 = 1.0000
+        overall correct decisions           96/96 = 1.0000
+        unsafe commits                      0
         diameter <= k_confirm subset        72/72 = 1.0000
 
-    The single unsafe commit is the diameter > k_confirm case pinned in
-    `test_13_...`, not a randomness artefact: the grid is fully deterministic.
+    The single unsafe commit this test previously recorded (path6 /
+    one_dissenter / robot 5) was the diameter > k_confirm case. The G6 repair
+    derives k_confirm = D_max = 5, so it no longer occurs. The grid is fully
+    deterministic, so this is a repair, not a randomness artefact.
     """
     m = measure_confirmation_success()
 
     assert m["robot_outcomes"] == 96
     assert (m["should_commit"], m["correct_commit"]) == (57, 57)
-    assert (m["should_retain"], m["correct_retain"]) == (39, 38)
+    assert (m["should_retain"], m["correct_retain"]) == (39, 39)
     assert m["confirm_when_agreed"] == pytest.approx(1.0)
-    assert m["refuse_when_disagreed"] == pytest.approx(38.0 / 39.0)
-    assert m["overall_correct"] == pytest.approx(95.0 / 96.0)
-    assert m["unsafe_commits"] == 1
+    assert m["refuse_when_disagreed"] == pytest.approx(1.0)
+    assert m["overall_correct"] == pytest.approx(1.0)
+    assert m["unsafe_commits"] == 0
     assert (m["subset_outcomes"], m["subset_correct_rate"]) == (72, 1.0)
 
     # Gate D2's threshold, evaluated against the metric it names.

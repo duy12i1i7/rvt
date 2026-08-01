@@ -88,8 +88,15 @@ def _robot_decision(view: RobotView, cfg: Config, selector, mode_rule: str
         # Scripted local rule, no learning: propose LINE while robot i's own
         # sensed clearance is tight, KEEP once it has reopened. The epoch
         # protocol decides *when* to ask; this decides *what* to answer.
+        # G5 REPAIR. The literal factor 2.0 is gone. The threshold is the
+        # DERIVED lookahead distance: braking distance at the current speed
+        # plus the ground covered while the distributed protocol runs, capped
+        # at the sensor range. See docs/LOOKAHEAD_DISTANCE_DERIVATION.md.
+        from .parameters import default_parameters, derived_lookahead_distance
+        platform, mission, protocol = default_parameters(cfg.env)
+        lookahead = derived_lookahead_distance(platform, mission, protocol)
         c = nearest_obstacle_clearance(view)
-        return (0.0, 1.0) if c < 2.0 * cfg.env.nominal_spacing else (1.0, 0.0)
+        return (0.0, 1.0) if c < lookahead else (1.0, 0.0)
     if selector is None:
         raise ValueError(f"mode_rule={mode_rule!r} requires a selector")
     with torch.no_grad():

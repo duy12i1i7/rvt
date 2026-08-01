@@ -11,7 +11,7 @@ CFG = Config()
 
 
 def v(obstacles, mode=LINE, neighbours=()):
-    return RobotView(0, (0., 0.), (0.9, 0.), (0., 0.), (0., 0.), mode, 0, 0,
+    return RobotView(0, (0., 0.), (0.9, 0.), (0.45, 0.9), (-2.25, 0.0), mode, 0, 0,
                      1.0, (10., 0.), (1., 0.), tuple(neighbours), tuple(obstacles))
 
 
@@ -43,7 +43,7 @@ def test_evidence_requires_persistence() -> None:
     e = inside_epoch()
     fired = [E.recovery_evidence_v3(v(WALLS_BEHIND), CFG, e) for _ in range(4)]
     assert fired == [False, False, True, True], fired
-    assert E.L_TRIGGER == 3
+    assert E.evidence_persistence_steps(Config()) == 3
 
 
 def test_persistence_streak_resets_when_evidence_lapses() -> None:
@@ -109,7 +109,7 @@ def test_the_event_never_reads_a_global_exit_plane() -> None:
 def test_requested_mode_is_recorded_when_the_trigger_fires() -> None:
     from rvt_swarm.config import Config
     e = inside_epoch()
-    for _ in range(E.L_TRIGGER):
+    for _ in range(E.evidence_persistence_steps(Config())):
         E.latched_local_trigger_v3(v(WALLS_BEHIND), Config(), e)
     assert e.requested_mode == KEEP
 

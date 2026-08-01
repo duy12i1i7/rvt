@@ -133,10 +133,14 @@ LATCH_BEFORE_ENTRY = "BEFORE_ENTRY"
 LATCH_INSIDE = "INSIDE_PASSAGE"
 LATCH_COMPLETE = "COMPLETE"
 
-# Consecutive steps of open clearance required to re-arm for a LATER, physically
-# distinct bottleneck. Long enough that the tail of one passage cannot re-arm
-# the entry trigger for the same passage.
-REARM_OPEN_STEPS: int = 25
+# G4 REPAIR. The literal 25 is gone. The re-arm dwell is DERIVED from a
+# configured physical duration, `ProtocolParams.rearm_inactive_seconds`, via
+# ceil(seconds / control_period), so the time-domain behaviour is invariant to
+# control frequency. See docs/EVENT_REARMING_SEMANTICS.md.
+def rearm_open_steps(cfg: Config) -> int:
+    from .parameters import default_parameters, derived_rearm_inactive_steps
+    platform, _, protocol = default_parameters(cfg.env)
+    return derived_rearm_inactive_steps(protocol, platform)
 
 PHASE_IDLE = "IDLE"
 PHASE_TRIGGERED = "TRIGGERED"
@@ -1325,7 +1329,7 @@ def update_passage_latch(epoch: "EpochState", view: RobotView, cfg: Config,
         epoch.open_clearance_streak = 0
 
     if epoch.passage_latch == LATCH_COMPLETE:
-        if epoch.open_clearance_streak >= REARM_OPEN_STEPS:
+        if epoch.open_clearance_streak >= rearm_open_steps(cfg):
             epoch.passage_latch = LATCH_BEFORE_ENTRY
             epoch.open_clearance_streak = 0
     return epoch.passage_latch
@@ -1398,26 +1402,58 @@ def note_transition(epoch: "EpochState", new_mode: int) -> None:
 # of forward returns in its own sensor, which is evidence it can obtain while
 # still inside the passage.
 
-# Half-width of the forward sector, in metres. Slightly wider than the line
-# formation's own lateral extent (0 m) plus the robot-obstacle threshold, so a
-# robot looking down a corridor still sees the side walls until the corridor
-# actually ends.
-FORWARD_SECTOR_HALF_WIDTH: float = 1.2
+# G2 REPAIR. The literal 1.2 m is gone. The forward sector half-width is now
+# DERIVED PER ROLE by `parameters.derived_forward_sector_half_width` as
+#
+#     |lateral(r_i^KEEP) - lateral(r_i^LINE)| + collision_clearance + margin
+#
+# i.e. exactly the band robot i's own KEEP role will occupy once it expands.
+# At N = 6 that is 1.450 m for the outer roles and 0.550 m for the centre
+# roles; the audited 1.2 m under-covered the outer roles by 0.25 m, letting a
+# robot declare an opening while wall material still lay where it was about to
+# move. See docs/FORWARD_SECTOR_GEOMETRY_DERIVATION.md.
+#
+# This fallback is used only when a caller supplies no role information, and it
+# is deliberately the widest N=6 requirement rather than a tuned value.
+FORWARD_SECTOR_FALLBACK_HALF_WIDTH: float = 1.45
 
-# Consecutive observations of an open forward sector required before the
-# evidence is considered persistent (Task 6-5). 3 steps = 0.45 s; at max_speed
-# that is 0.405 m of travel, far less than the +8.6-step minimum lead measured
-# above, so persistence does not consume the margin.
-L_TRIGGER: int = 3
+# G7. Persistence is specified in SECONDS
+# (`ProtocolParams.evidence_persistence_seconds = 0.45`) and converted by
+# ceil(seconds / control_period), giving 3 steps at dt = 0.15 -- the same
+# behaviour, now invariant to control frequency.
+def evidence_persistence_steps(cfg: Config) -> int:
+    from .parameters import (default_parameters,
+                             derived_evidence_persistence_steps)
+    platform, _, protocol = default_parameters(cfg.env)
+    return derived_evidence_persistence_steps(protocol, platform)
 
-# Fraction of a robot's current one-hop neighbours that must report compatible
-# evidence. 0.0 means "no peer support required"; see the arming rule below for
-# why a nonzero value is used and what happens to low-degree robots.
-PEER_SUPPORT_FRACTION: float = 0.5
+
+L_TRIGGER: int = 3          # retained name; asserted equal to the derivation
+
+# G3 REPAIR, Option A. The 0.5 literal is gone. Peer support is NOT required
+# for ORIGINATION: a robot may originate from its own persistent valid local
+# evidence, and distributed propagation, consensus and confirmation remain
+# mandatory before any mode commitment. A support fraction was serving three
+# different semantics at once (noise suppression, token acceptance, transition
+# confirmation) with a single unexplained number; those are now separate
+# mechanisms. See docs/PEER_SUPPORT_SEMANTICS.md.
+#
+# `peer_support_for_recovery` is retained as a reported DIAGNOSTIC only and no
+# longer gates arming.
+PEER_SUPPORT_REQUIRED_FOR_ORIGINATION: bool = False
+
+
+def forward_sector_half_width_for(view: RobotView, cfg: Config) -> float:
+    """Robot i's own derived sector half-width, from its persistent role."""
+    from .parameters import (default_parameters,
+                             derived_forward_sector_half_width)
+    platform, mission, _ = default_parameters(cfg.env)
+    return derived_forward_sector_half_width(
+        view.role_keep, view.role_line, platform, mission)
 
 
 def forward_opening_evidence(view: RobotView, cfg: Config,
-                             half_width: float = FORWARD_SECTOR_HALF_WIDTH) -> bool:
+                             half_width: Optional[float] = None) -> bool:
     """Robot i's own evidence that the passage opens ahead of it.
 
     Local sensing only: it inspects `view.obstacles`, which the simulation
@@ -1426,7 +1462,12 @@ def forward_opening_evidence(view: RobotView, cfg: Config,
 
     True when no obstacle return lies in the forward sector -- i.e. the two side
     walls robot i has been tracking have terminated ahead of it.
+
+    The sector half-width is DERIVED from robot i's own persistent role when
+    not supplied (G2); it is the band its KEEP role will occupy.
     """
+    if half_width is None:
+        half_width = forward_sector_half_width_for(view, cfg)
     for ox, oy, _r in view.obstacles:
         if ox > 0.0 and abs(oy) <= half_width:
             return False
@@ -1449,7 +1490,7 @@ def recovery_evidence_v3(view: RobotView, cfg: Config,
         epoch.forward_open_streak += 1
     else:
         epoch.forward_open_streak = 0
-    return epoch.forward_open_streak >= L_TRIGGER
+    return epoch.forward_open_streak >= evidence_persistence_steps(cfg)
 
 
 def peer_support_for_recovery(view: RobotView, epoch: "EpochState") -> float:
@@ -1479,7 +1520,11 @@ def recovery_armable(view: RobotView, cfg: Config, epoch: "EpochState",
         return False
     if not recovery_evidence_v3(view, cfg, epoch, consensus):
         return False
-    return peer_support_for_recovery(view, epoch) >= PEER_SUPPORT_FRACTION
+    if PEER_SUPPORT_REQUIRED_FOR_ORIGINATION:
+        raise NotImplementedError(
+            "Option B/C peer-support origination is not implemented; "
+            "see docs/PEER_SUPPORT_SEMANTICS.md")
+    return True
 
 
 def latched_local_trigger_v3(view: RobotView, cfg: Config, epoch: "EpochState",

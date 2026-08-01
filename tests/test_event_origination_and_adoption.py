@@ -29,7 +29,7 @@ WALLS_BEHIND = ((-0.5, 0.9, 0.35), (-0.5, -0.9, 0.35))
 
 
 def view(obstacles, mode=LINE, neighbours=()):
-    return RobotView(0, (0., 0.), (0.9, 0.), (0., 0.), (0., 0.), mode, 0, 0,
+    return RobotView(0, (0., 0.), (0.9, 0.), (0.45, 0.9), (-2.25, 0.0), mode, 0, 0,
                      1.0, (10., 0.), (1., 0.), tuple(neighbours), tuple(obstacles))
 
 
@@ -62,7 +62,7 @@ def runtime_graph(n):
 def test_01_front_robot_observes_a_valid_opening() -> None:
     e = team(1, LINE, E.LATCH_INSIDE)[0]
     fired = [E.latched_local_trigger_v3(view(WALLS_BEHIND), CFG, e, CONS)
-             for _ in range(E.L_TRIGGER)]
+             for _ in range(E.evidence_persistence_steps(CFG))]
     assert fired[-1] is True
     assert e.requested_mode == KEEP
 
@@ -81,7 +81,7 @@ def test_03_04_05_06_recovery_token_propagates_and_rear_robots_adopt() -> None:
     eps = team(n, LINE, E.LATCH_INSIDE)
 
     # only robot 5 (the front of the line) has evidence
-    for _ in range(E.L_TRIGGER):
+    for _ in range(E.evidence_persistence_steps(CFG)):
         E.latched_local_trigger_v3(view(WALLS_BEHIND), CFG, eps[5], CONS)
     for i in range(5):
         E.latched_local_trigger_v3(view(WALLS_AHEAD), CFG, eps[i], CONS)
@@ -135,7 +135,7 @@ def test_requested_mode_never_equals_the_committed_mode() -> None:
 def test_token_origin_grants_no_decision_authority() -> None:
     """Originating robot and adopting robots run identical logic."""
     eps = team(6, LINE, E.LATCH_INSIDE)
-    for _ in range(E.L_TRIGGER):
+    for _ in range(E.evidence_persistence_steps(CFG)):
         E.latched_local_trigger_v3(view(WALLS_BEHIND), CFG, eps[3], CONS)
     eps[3].arm_trigger(0)
     E.simulate_trigger_consensus(eps, runtime_graph(6), CONS.k_trigger)
@@ -225,33 +225,26 @@ def test_communication_carries_a_proposal_not_a_command() -> None:
     assert "selected_mode" in cfields and "confirm_round" in cfields
 
 
-def test_propagation_reach_is_bounded_by_k_trigger_on_a_sparse_chain() -> None:
-    """A real bound, recorded rather than tuned around.
+def test_propagation_now_covers_the_worst_case_chain_after_the_G6_repair() -> None:
+    """G6 repair verified: k_trigger is derived as D_max = N_max - 1.
 
-    k_trigger = 4 propagates at most 4 hops. On a 6-robot CHAIN (diameter 5) an
-    originator at one end reaches five of six robots; the sixth is one hop too
-    far. This does not bind in the runtime -- the measured degree over the
-    post-repair traces is 5 of 5, i.e. the graph is complete -- but it is the
-    condition a sparser deployment would have to respect:
-
-        k_trigger >= diameter(G_c)
-
-    k_trigger is NOT increased here; the frozen configuration stands.
+    This test previously PINNED the defect -- k_trigger = 4 reached only five of
+    six robots on a chain of diameter 5. With k_trigger derived from the
+    declared maximum team size the whole chain is covered, and the guarantee is
+    now stated rather than assumed.
     """
+    from rvt_swarm.decentralized.parameters import (default_parameters,
+                                                    derived_component_diameter,
+                                                    derived_k_trigger)
+    _, _, protocol = default_parameters()
+    assert derived_k_trigger(protocol) == derived_component_diameter(protocol)
+    assert derived_k_trigger(protocol) == protocol.max_team_size - 1 == 5
+
     n = 6
     eps = team(n, LINE, E.LATCH_INSIDE)
-    for _ in range(E.L_TRIGGER):
+    for _ in range(E.evidence_persistence_steps(CFG)):
         E.latched_local_trigger_v3(view(WALLS_BEHIND), CFG, eps[5], CONS)
     eps[5].arm_trigger(0)
     E.simulate_trigger_consensus(eps, path(n), CONS.k_trigger)
-    adopted = [i for i in range(n) if eps[i].trigger_token is not None]
-    assert adopted == [1, 2, 3, 4, 5], adopted
-    assert 0 not in adopted, "robot 0 is 5 hops from the originator, k_trigger=4"
-
-    # the same originator on the runtime's actual (complete) graph reaches all
-    eps2 = team(n, LINE, E.LATCH_INSIDE)
-    for _ in range(E.L_TRIGGER):
-        E.latched_local_trigger_v3(view(WALLS_BEHIND), CFG, eps2[5], CONS)
-    eps2[5].arm_trigger(0)
-    E.simulate_trigger_consensus(eps2, runtime_graph(n), CONS.k_trigger)
-    assert all(eps2[i].trigger_token is not None for i in range(n))
+    assert all(eps[i].trigger_token is not None for i in range(n)), \
+        "the derived k_trigger must cover the worst-case chain"

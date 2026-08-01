@@ -61,7 +61,6 @@ from rvt_swarm.decentralized import epoch as epoch_mod
 from rvt_swarm.decentralized.comms import PROGRESS_WINDOW_STEPS
 from rvt_swarm.decentralized.consensus import connected_components
 from rvt_swarm.decentralized.epoch import (
-    REARM_OPEN_STEPS,
     CONFIRM_PAYLOAD_BYTES,
     EPOCH_ID_NONE,
     FAILURE_PRIORITY,
@@ -94,6 +93,8 @@ from rvt_swarm.decentralized.epoch import (
     latched_local_trigger,
     local_trigger,
     local_recovery_trigger,
+    rearm_open_steps,
+    evidence_persistence_steps,
     note_transition,
     recovery_trigger_allowed,
     update_passage_latch,
@@ -574,6 +575,9 @@ def test_D02_no_deployable_function_takes_all_robots_or_returns_one_mode() -> No
         "forward_opening_evidence", "recovery_evidence_v3",
         "peer_support_for_recovery", "recovery_armable",
         "latched_local_trigger_v3", "requested_mode_for",
+        # G2/G4/G7 derivations replacing the audited literals
+        "forward_sector_half_width_for", "evidence_persistence_steps",
+        "rearm_open_steps",
         "protocol_signature"}, sorted(deployable)
 
     # and the end-to-end harness returns no scalar mode: every mode-bearing key
@@ -1297,6 +1301,9 @@ COVERAGE_MANIFEST: Dict[str, str] = {
     "recovery_armable": "tests/test_recovery_event_v3.py",
     "latched_local_trigger_v3": "tests/test_recovery_event_v3.py",
     "requested_mode_for": "tests/test_recovery_event_v3.py",
+    "forward_sector_half_width_for": "tests/test_forward_sector_geometry_derivation.py",
+    "evidence_persistence_steps": "tests/test_forward_sector_geometry_derivation.py",
+    "rearm_open_steps": "tests/test_forward_sector_geometry_derivation.py",
     "note_transition": "test_L01_latch_advances_through_the_passage_lifecycle",
     "recovery_trigger_reasons": "test_R04_recovery_trigger_reasons_reports_the_clearance_condition",
     "outgoing_trigger": "test_E01",
@@ -1334,7 +1341,7 @@ def test_ZZ_every_function_is_exercised_by_a_dedicated_test() -> None:
     `epoch.py` without a test turns this red.
     """
     declared = _declared_functions()
-    assert len(declared) == 51, declared   # 50 + requested_mode_for
+    assert len(declared) == 54, declared   # 51 + 3 G-repair derivations
     missing = sorted(set(declared) - set(COVERAGE_MANIFEST))
     stale = sorted(set(COVERAGE_MANIFEST) - set(declared))
     assert missing == [], "no dedicated test for: {}".format(missing)
@@ -1405,7 +1412,7 @@ def test_L01_latch_advances_through_the_passage_lifecycle() -> None:
     assert recovery_trigger_allowed(ep) and not entry_trigger_allowed(ep)
     note_transition(ep, KEEP); ep.committed_mode = KEEP
     assert not entry_trigger_allowed(ep) and not recovery_trigger_allowed(ep)
-    for _ in range(REARM_OPEN_STEPS):
+    for _ in range(rearm_open_steps(CFG)):
         update_passage_latch(ep, _lview(5.0, KEEP), CFG)
     assert entry_trigger_allowed(ep)
 

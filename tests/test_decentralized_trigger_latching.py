@@ -84,7 +84,7 @@ def test_10_a_later_distinct_bottleneck_rearms_the_latch() -> None:
     E.note_transition(e, LINE); e.committed_mode = LINE
     E.note_transition(e, KEEP); e.committed_mode = KEEP
     assert e.passage_latch == E.LATCH_COMPLETE
-    for _ in range(E.REARM_OPEN_STEPS):
+    for _ in range(E.rearm_open_steps(CFG)):
         E.update_passage_latch(e, view(5.0, KEEP), CFG)
     assert e.passage_latch == E.LATCH_BEFORE_ENTRY
     assert E.entry_trigger_allowed(e)
@@ -95,7 +95,7 @@ def test_rearm_requires_sustained_open_clearance() -> None:
     e = fresh(KEEP)
     E.note_transition(e, LINE); e.committed_mode = LINE
     E.note_transition(e, KEEP); e.committed_mode = KEEP
-    for _ in range(E.REARM_OPEN_STEPS - 1):
+    for _ in range(E.rearm_open_steps(CFG) - 1):
         E.update_passage_latch(e, view(5.0, KEEP), CFG)
     E.update_passage_latch(e, view(0.3, KEEP), CFG)      # closes again
     assert e.passage_latch == E.LATCH_COMPLETE

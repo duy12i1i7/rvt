@@ -133,8 +133,18 @@ class ConsensusParams:
     """
 
     k_score: int = 4
-    k_trigger: int = 4          # max-consensus rounds for trigger propagation
-    k_confirm: int = 4          # min/max-consensus rounds for mode confirmation
+    # G6 REPAIR, Option A. Max-consensus propagates exactly one hop per round,
+    # so covering a component of diameter D needs D rounds. The literal 4 was
+    # unsound for N = 6, whose worst-case (chain) diameter is 5. The value is
+    # DERIVED from ProtocolParams.max_team_size by
+    # `parameters.derived_k_trigger`; the default below is a placeholder that
+    # `ConsensusParams.for_protocol` overrides.
+    k_trigger: int = 5          # max-consensus rounds for trigger propagation
+    # Min/max confirmation propagates one hop per round exactly as the trigger
+    # does, so the same diameter argument applies: leaving it at 4 would
+    # under-cover the worst-case N=6 chain and a robot could be committed
+    # without ever having heard the confirmation bounds.
+    k_confirm: int = 5          # min/max-consensus rounds for mode confirmation
     h_commit: int = 10          # must match recovery_v2.rollout(h_commit=10)
     decision_interval: int = 25  # forced epoch cadence, control steps
     confirm_margin: float = 0.0  # minimum |z_keep - z_line| to accept a commit
