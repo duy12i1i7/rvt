@@ -1,0 +1,603 @@
+{
+  "communication_configuration": {
+    "async_offset_steps": 0,
+    "delay_steps": 0,
+    "delta_stale_steps": 3,
+    "packet_loss": 0.0,
+    "r_comm": 3.0,
+    "r_obs": 3.0,
+    "r_sense": 4.0,
+    "symmetric": true,
+    "t_comm": 0.15,
+    "t_ctrl": 0.15
+  },
+  "consensus_runtime_binding": {
+    "confirm_margin": 0.0,
+    "decision_interval": 25,
+    "h_commit": 10,
+    "k_confirm": 5,
+    "k_score": 4,
+    "k_trigger": 5
+  },
+  "derived_quantities": {
+    "commitment": {
+      "derivation_formula": "ceil(commitment_seconds / control_period_seconds)",
+      "normalized_value": 10.0,
+      "result": {
+        "unit": "s_and_steps",
+        "value": {
+          "seconds": 1.5,
+          "steps": 10
+        }
+      },
+      "source_parameters": {
+        "commitment_seconds": 1.5,
+        "control_period_seconds": 0.15
+      }
+    },
+    "evidence_persistence": {
+      "derivation_formula": "ceil(evidence_persistence_seconds / control_period_seconds)",
+      "normalized_value": 3.0,
+      "result": {
+        "unit": "s_and_steps",
+        "value": {
+          "seconds": 0.45,
+          "steps": 3
+        }
+      },
+      "source_parameters": {
+        "control_period_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45
+      }
+    },
+    "graph_diameter_bound": {
+      "derivation_formula": "max_component_diameter if declared, otherwise max_team_size - 1",
+      "normalized_value": 1.0,
+      "result": {
+        "unit": "hops",
+        "value": 5
+      },
+      "source_parameters": {
+        "connectivity_assumption": "Each connected component of G_c is internally connected for the duration of an epoch. Swarm-wide agreement is claimed only when G_c is connected; otherwise results are reported per component.",
+        "max_component_diameter": null,
+        "max_team_size": 6
+      }
+    },
+    "k_confirm": {
+      "derivation_formula": "k_confirm = graph_diameter_bound",
+      "normalized_value": 1.0,
+      "result": {
+        "unit": "rounds",
+        "value": 5
+      },
+      "source_parameters": {
+        "graph_diameter_bound_hops": 5
+      }
+    },
+    "k_trigger": {
+      "derivation_formula": "k_trigger = graph_diameter_bound",
+      "normalized_value": 1.0,
+      "result": {
+        "unit": "rounds",
+        "value": 5
+      },
+      "source_parameters": {
+        "graph_diameter_bound_hops": 5
+      }
+    },
+    "lookahead_distance": {
+      "derivation_formula": "min(R_obs, v^2/(2*a) + v*(persistence_steps + collection_steps + k_trigger)*T_ctrl + safety_margin)",
+      "normalized_value": 1.9500000000000002,
+      "result": {
+        "unit": "m",
+        "value": 1.7550000000000001
+      },
+      "source_parameters": {
+        "control_period_seconds": 0.15,
+        "event_collection_steps": 0,
+        "evidence_persistence_steps": 3,
+        "k_trigger_rounds": 5,
+        "max_accel_m_s2": 0.6,
+        "max_speed_m_s": 0.9,
+        "obstacle_sensor_range_m": 3.0,
+        "safety_margin_m": 0.0
+      }
+    },
+    "max_message_age": {
+      "derivation_formula": "ceil(max_message_age_seconds / control_period_seconds)",
+      "normalized_value": 3.0,
+      "result": {
+        "unit": "s_and_steps",
+        "value": {
+          "seconds": 0.45,
+          "steps": 3
+        }
+      },
+      "source_parameters": {
+        "control_period_seconds": 0.15,
+        "max_message_age_seconds": 0.45
+      }
+    },
+    "rearm_inactive": {
+      "derivation_formula": "ceil(rearm_inactive_seconds / control_period_seconds)",
+      "normalized_value": 25.0,
+      "result": {
+        "unit": "s_and_steps",
+        "value": {
+          "seconds": 3.75,
+          "steps": 25
+        }
+      },
+      "source_parameters": {
+        "control_period_seconds": 0.15,
+        "rearm_inactive_seconds": 3.75
+      }
+    },
+    "recovery_dwell": {
+      "derivation_formula": "ceil(recovery_dwell_seconds / control_period_seconds)",
+      "normalized_value": 20.0,
+      "result": {
+        "unit": "s_and_steps",
+        "value": {
+          "seconds": 3.0,
+          "steps": 20
+        }
+      },
+      "source_parameters": {
+        "control_period_seconds": 0.15,
+        "recovery_dwell_seconds": 3.0
+      }
+    },
+    "role_dependent_forward_sector_half_widths": [
+      {
+        "derivation_formula": "abs(keep_role_lateral - line_role_lateral) + collision_clearance_obstacle + safety_margin",
+        "normalized_value": 1.611111084620158,
+        "result": {
+          "unit": "m",
+          "value": 1.4499999761581421
+        },
+        "source_parameters": {
+          "collision_clearance_obstacle_m": 0.55,
+          "keep_role_m": [
+            -0.44999998807907104,
+            0.8999999761581421
+          ],
+          "lateral_displacement_m": 0.8999999761581421,
+          "line_role_m": [
+            -2.25,
+            0.0
+          ],
+          "robot_id": 0,
+          "safety_margin_m": 0.0
+        }
+      },
+      {
+        "derivation_formula": "abs(keep_role_lateral - line_role_lateral) + collision_clearance_obstacle + safety_margin",
+        "normalized_value": 0.6111111111111112,
+        "result": {
+          "unit": "m",
+          "value": 0.55
+        },
+        "source_parameters": {
+          "collision_clearance_obstacle_m": 0.55,
+          "keep_role_m": [
+            -0.44999998807907104,
+            -0.0
+          ],
+          "lateral_displacement_m": 0.0,
+          "line_role_m": [
+            -1.350000023841858,
+            0.0
+          ],
+          "robot_id": 1,
+          "safety_margin_m": 0.0
+        }
+      },
+      {
+        "derivation_formula": "abs(keep_role_lateral - line_role_lateral) + collision_clearance_obstacle + safety_margin",
+        "normalized_value": 1.611111084620158,
+        "result": {
+          "unit": "m",
+          "value": 1.4499999761581421
+        },
+        "source_parameters": {
+          "collision_clearance_obstacle_m": 0.55,
+          "keep_role_m": [
+            -0.44999998807907104,
+            -0.8999999761581421
+          ],
+          "lateral_displacement_m": 0.8999999761581421,
+          "line_role_m": [
+            -0.44999998807907104,
+            0.0
+          ],
+          "robot_id": 2,
+          "safety_margin_m": 0.0
+        }
+      },
+      {
+        "derivation_formula": "abs(keep_role_lateral - line_role_lateral) + collision_clearance_obstacle + safety_margin",
+        "normalized_value": 1.611111084620158,
+        "result": {
+          "unit": "m",
+          "value": 1.4499999761581421
+        },
+        "source_parameters": {
+          "collision_clearance_obstacle_m": 0.55,
+          "keep_role_m": [
+            0.44999998807907104,
+            0.8999999761581421
+          ],
+          "lateral_displacement_m": 0.8999999761581421,
+          "line_role_m": [
+            0.44999998807907104,
+            0.0
+          ],
+          "robot_id": 3,
+          "safety_margin_m": 0.0
+        }
+      },
+      {
+        "derivation_formula": "abs(keep_role_lateral - line_role_lateral) + collision_clearance_obstacle + safety_margin",
+        "normalized_value": 0.6111111111111112,
+        "result": {
+          "unit": "m",
+          "value": 0.55
+        },
+        "source_parameters": {
+          "collision_clearance_obstacle_m": 0.55,
+          "keep_role_m": [
+            0.44999998807907104,
+            -0.0
+          ],
+          "lateral_displacement_m": 0.0,
+          "line_role_m": [
+            1.350000023841858,
+            0.0
+          ],
+          "robot_id": 4,
+          "safety_margin_m": 0.0
+        }
+      },
+      {
+        "derivation_formula": "abs(keep_role_lateral - line_role_lateral) + collision_clearance_obstacle + safety_margin",
+        "normalized_value": 1.611111084620158,
+        "result": {
+          "unit": "m",
+          "value": 1.4499999761581421
+        },
+        "source_parameters": {
+          "collision_clearance_obstacle_m": 0.55,
+          "keep_role_m": [
+            0.44999998807907104,
+            -0.8999999761581421
+          ],
+          "lateral_displacement_m": 0.8999999761581421,
+          "line_role_m": [
+            2.25,
+            0.0
+          ],
+          "robot_id": 5,
+          "safety_margin_m": 0.0
+        }
+      }
+    ]
+  },
+  "environment_configuration": {
+    "lidar_fov_rad": 4.712389,
+    "lidar_num_rays": 36,
+    "max_control_steps": 260,
+    "obstacle_radius_m": 0.35,
+    "spawn_jitter_m": 0.06,
+    "world_size_m": 18.0
+  },
+  "frozen_experiment_cells": {
+    "alphas": {
+      "alpha_025": 0.25,
+      "alpha_035": 0.35,
+      "alpha_045": 0.45
+    },
+    "communication_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "disturbance_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "episode_count": 30,
+    "geometry_variants": [
+      {
+        "centre_y_m": 0.0,
+        "corridor_length_m": 1.0,
+        "entry_offset_m": 0.0,
+        "id": "len1.0_off0.0"
+      },
+      {
+        "centre_y_m": 0.0,
+        "corridor_length_m": 2.0,
+        "entry_offset_m": 0.5,
+        "id": "len2.0_off0.5"
+      }
+    ],
+    "initial_condition_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "scenarios": [
+      {
+        "alpha": 0.25,
+        "alpha_cell": "alpha_025",
+        "corridor_x0_m": -4.5,
+        "corridor_x1_m": -3.5,
+        "entry_x_m": -5.23,
+        "exit_x_m": -2.77,
+        "free_width_m": 1.5499999880790711,
+        "geometry_sha256": "49a1fd59d917db0990cc4a05",
+        "goal_m": [
+          8.0,
+          0.0
+        ],
+        "half_separation_m": 0.7749999940395356,
+        "initial_condition_sha256_by_seed": {
+          "0": "13cb484b79f93602be67bb38c9624a2962ff38de30211a46ce81f79d2bc158d4",
+          "1": "1fff223b67a99a0e1e3452f317655fefb500ecfe30cd3a4ea5cc6cc6471b52ee",
+          "2": "f2251220cd3d01c4fdb11cf20c7e426992eda1bc8610caf914cb08caa36b57b4",
+          "3": "39f23cbdc2506c22990b439d362ae2fbb03cb6ccbf1a88729519b11991fc2b7b",
+          "4": "1f23f66fd0ce066867c595c281676e54337f20fbecbda151cecd1f46e15df26f"
+        },
+        "obstacle_count": 64,
+        "recovery_x0_m": -2.27,
+        "spawn_centre_m": [
+          -8.0,
+          0.0
+        ],
+        "team_size": 6,
+        "variant": {
+          "centre_y_m": 0.0,
+          "corridor_length_m": 1.0,
+          "entry_offset_m": 0.0,
+          "id": "len1.0_off0.0"
+        }
+      },
+      {
+        "alpha": 0.25,
+        "alpha_cell": "alpha_025",
+        "corridor_x0_m": -4.0,
+        "corridor_x1_m": -2.0,
+        "entry_x_m": -4.73,
+        "exit_x_m": -1.27,
+        "free_width_m": 1.5499999880790711,
+        "geometry_sha256": "4b2ee35c7966076c16e93e59",
+        "goal_m": [
+          8.0,
+          0.0
+        ],
+        "half_separation_m": 0.7749999940395356,
+        "initial_condition_sha256_by_seed": {
+          "0": "435d2c2cc065e5db6825b87ebb15cc9d40b4ec8f3dcc5ec2f2422a0c15092d3e",
+          "1": "62f966e4a5c1ab3d79a0f322da4508b24a96acbc16ca524c6f38a954d33c58fd",
+          "2": "cc37bbebed72ab367c8836d5ff033d087b5b24b3529a42df34e3cfa5816e079c",
+          "3": "7b456fcc1ac77f95a7195e52872a5ef95293b22abb175ce2b436afc5b2fa8d73",
+          "4": "7b71363510a84643b4d9854b9f54e3fdaa9016d089e93b88475017a899845ca3"
+        },
+        "obstacle_count": 128,
+        "recovery_x0_m": -0.77,
+        "spawn_centre_m": [
+          -7.5,
+          0.0
+        ],
+        "team_size": 6,
+        "variant": {
+          "centre_y_m": 0.0,
+          "corridor_length_m": 2.0,
+          "entry_offset_m": 0.5,
+          "id": "len2.0_off0.5"
+        }
+      },
+      {
+        "alpha": 0.35,
+        "alpha_cell": "alpha_035",
+        "corridor_x0_m": -4.5,
+        "corridor_x1_m": -3.5,
+        "entry_x_m": -5.23,
+        "exit_x_m": -2.77,
+        "free_width_m": 1.7299999833106994,
+        "geometry_sha256": "5f2a8f22f87f70ca87793857",
+        "goal_m": [
+          8.0,
+          0.0
+        ],
+        "half_separation_m": 0.8649999916553497,
+        "initial_condition_sha256_by_seed": {
+          "0": "13cb484b79f93602be67bb38c9624a2962ff38de30211a46ce81f79d2bc158d4",
+          "1": "1fff223b67a99a0e1e3452f317655fefb500ecfe30cd3a4ea5cc6cc6471b52ee",
+          "2": "f2251220cd3d01c4fdb11cf20c7e426992eda1bc8610caf914cb08caa36b57b4",
+          "3": "39f23cbdc2506c22990b439d362ae2fbb03cb6ccbf1a88729519b11991fc2b7b",
+          "4": "1f23f66fd0ce066867c595c281676e54337f20fbecbda151cecd1f46e15df26f"
+        },
+        "obstacle_count": 64,
+        "recovery_x0_m": -2.27,
+        "spawn_centre_m": [
+          -8.0,
+          0.0
+        ],
+        "team_size": 6,
+        "variant": {
+          "centre_y_m": 0.0,
+          "corridor_length_m": 1.0,
+          "entry_offset_m": 0.0,
+          "id": "len1.0_off0.0"
+        }
+      },
+      {
+        "alpha": 0.35,
+        "alpha_cell": "alpha_035",
+        "corridor_x0_m": -4.0,
+        "corridor_x1_m": -2.0,
+        "entry_x_m": -4.73,
+        "exit_x_m": -1.27,
+        "free_width_m": 1.7299999833106994,
+        "geometry_sha256": "64936a9a87a56bc086de471a",
+        "goal_m": [
+          8.0,
+          0.0
+        ],
+        "half_separation_m": 0.8649999916553497,
+        "initial_condition_sha256_by_seed": {
+          "0": "435d2c2cc065e5db6825b87ebb15cc9d40b4ec8f3dcc5ec2f2422a0c15092d3e",
+          "1": "62f966e4a5c1ab3d79a0f322da4508b24a96acbc16ca524c6f38a954d33c58fd",
+          "2": "cc37bbebed72ab367c8836d5ff033d087b5b24b3529a42df34e3cfa5816e079c",
+          "3": "7b456fcc1ac77f95a7195e52872a5ef95293b22abb175ce2b436afc5b2fa8d73",
+          "4": "7b71363510a84643b4d9854b9f54e3fdaa9016d089e93b88475017a899845ca3"
+        },
+        "obstacle_count": 128,
+        "recovery_x0_m": -0.77,
+        "spawn_centre_m": [
+          -7.5,
+          0.0
+        ],
+        "team_size": 6,
+        "variant": {
+          "centre_y_m": 0.0,
+          "corridor_length_m": 2.0,
+          "entry_offset_m": 0.5,
+          "id": "len2.0_off0.5"
+        }
+      },
+      {
+        "alpha": 0.45,
+        "alpha_cell": "alpha_045",
+        "corridor_x0_m": -4.5,
+        "corridor_x1_m": -3.5,
+        "entry_x_m": -5.23,
+        "exit_x_m": -2.77,
+        "free_width_m": 1.909999978542328,
+        "geometry_sha256": "b227ea362539c63c077f9714",
+        "goal_m": [
+          8.0,
+          0.0
+        ],
+        "half_separation_m": 0.954999989271164,
+        "initial_condition_sha256_by_seed": {
+          "0": "13cb484b79f93602be67bb38c9624a2962ff38de30211a46ce81f79d2bc158d4",
+          "1": "1fff223b67a99a0e1e3452f317655fefb500ecfe30cd3a4ea5cc6cc6471b52ee",
+          "2": "f2251220cd3d01c4fdb11cf20c7e426992eda1bc8610caf914cb08caa36b57b4",
+          "3": "39f23cbdc2506c22990b439d362ae2fbb03cb6ccbf1a88729519b11991fc2b7b",
+          "4": "1f23f66fd0ce066867c595c281676e54337f20fbecbda151cecd1f46e15df26f"
+        },
+        "obstacle_count": 64,
+        "recovery_x0_m": -2.27,
+        "spawn_centre_m": [
+          -8.0,
+          0.0
+        ],
+        "team_size": 6,
+        "variant": {
+          "centre_y_m": 0.0,
+          "corridor_length_m": 1.0,
+          "entry_offset_m": 0.0,
+          "id": "len1.0_off0.0"
+        }
+      },
+      {
+        "alpha": 0.45,
+        "alpha_cell": "alpha_045",
+        "corridor_x0_m": -4.0,
+        "corridor_x1_m": -2.0,
+        "entry_x_m": -4.73,
+        "exit_x_m": -1.27,
+        "free_width_m": 1.909999978542328,
+        "geometry_sha256": "e6f808d87b6c79e3b8841245",
+        "goal_m": [
+          8.0,
+          0.0
+        ],
+        "half_separation_m": 0.954999989271164,
+        "initial_condition_sha256_by_seed": {
+          "0": "435d2c2cc065e5db6825b87ebb15cc9d40b4ec8f3dcc5ec2f2422a0c15092d3e",
+          "1": "62f966e4a5c1ab3d79a0f322da4508b24a96acbc16ca524c6f38a954d33c58fd",
+          "2": "cc37bbebed72ab367c8836d5ff033d087b5b24b3529a42df34e3cfa5816e079c",
+          "3": "7b456fcc1ac77f95a7195e52872a5ef95293b22abb175ce2b436afc5b2fa8d73",
+          "4": "7b71363510a84643b4d9854b9f54e3fdaa9016d089e93b88475017a899845ca3"
+        },
+        "obstacle_count": 128,
+        "recovery_x0_m": -0.77,
+        "spawn_centre_m": [
+          -7.5,
+          0.0
+        ],
+        "team_size": 6,
+        "variant": {
+          "centre_y_m": 0.0,
+          "corridor_length_m": 2.0,
+          "entry_offset_m": 0.5,
+          "id": "len2.0_off0.5"
+        }
+      }
+    ],
+    "seed_binding": "Published harness variable sd is used unchanged for initial jitter, simulator RNG, and RadioChannel RNG. Nominal packet loss and delay are both zero."
+  },
+  "immutability_rule": "The harness refuses to overwrite this file unless the canonical manifest content is byte-for-byte identical.",
+  "manifest_content_sha256": "519acb13a79b4ef66fcaa4d1c84e13108265c927f46a848502461b763b3f8b87",
+  "mission_configuration": {
+    "formation_tolerance": 0.55,
+    "nominal_spacing": 0.9,
+    "recovery_dwell_seconds": 3.0,
+    "safety_margin": 0.0
+  },
+  "normalized_platform_and_mission": {
+    "collision_clearance_ratio": 0.6111111111111112,
+    "communication_range_ratio": 3.333333333333333,
+    "formation_tolerance_ratio": 0.6111111111111112,
+    "robot_radius_ratio": 0.19999999999999998,
+    "sensor_range_ratio": 3.333333333333333
+  },
+  "physical_platform_configuration": {
+    "collision_clearance_obstacle": 0.55,
+    "collision_clearance_robot": 0.4,
+    "communication_period": 0.15,
+    "communication_range": 3.0,
+    "control_period": 0.15,
+    "max_accel": 0.6,
+    "max_speed": 0.9,
+    "obstacle_sensor_range": 3.0,
+    "robot_radius": 0.18
+  },
+  "protocol_configuration": {
+    "commitment_seconds": 1.5,
+    "connectivity_assumption": "Each connected component of G_c is internally connected for the duration of an epoch. Swarm-wide agreement is claimed only when G_c is connected; otherwise results are reported per component.",
+    "event_collection_seconds": 0.0,
+    "evidence_persistence_seconds": 0.45,
+    "max_component_diameter": null,
+    "max_message_age_seconds": 0.45,
+    "max_team_size": 6,
+    "rearm_inactive_seconds": 3.75
+  },
+  "schema_version": "post_parameter_repair_regression_manifest_v1",
+  "scope": {
+    "closed_loop_team_size": 6,
+    "controller_changes": false,
+    "final_test_layout_access": false,
+    "learned_selector": false,
+    "parameter_tuning_from_results": false,
+    "protocol_phase_changes": false
+  },
+  "source": {
+    "parameter_repair_report": "docs/PARAMETER_SEMANTICS_REPAIR_REPORT.md",
+    "parameter_repair_report_sha256": "1d6f6228bedf3bfe371776ed6832ff31b4b0fe08af45eb4504b83e18a7efc088",
+    "preserved_pre_parameter_repair_results": "results/recovery_propagation_latency_repair/four_arm_comparison.json",
+    "preserved_pre_parameter_repair_results_sha256": "549d5369975056eb94719c3ece3222e2f79da12ca60a089a4fac2f2cfd42304a",
+    "runtime_commit": "cec0b408824883694ddaf3f7740688ecef2ab1cf",
+    "runtime_tag": "decentralized-parameter-semantics-v1"
+  }
+}

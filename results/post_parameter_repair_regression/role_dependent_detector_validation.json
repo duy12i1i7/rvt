@@ -1,0 +1,1485 @@
+{
+  "alpha_025_frozen_trace_comparison": [
+    {
+      "diagnostic_replay_steps": 260,
+      "entry_commit_step": 30,
+      "exact_trace_common_steps": 260,
+      "frozen_trace_source": "results/recovery_propagation_latency/alpha_025_trace.jsonl",
+      "frozen_trace_steps": 260,
+      "maximum_along_coordinate_error_m": 0.00017850602600066878,
+      "old_raw_opening_mismatch_count": 0,
+      "old_recovery_commit_step": 46,
+      "robots": [
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 111,
+          "first_forward_opening_evidence_step_B": 111,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                1.5641403198242188,
+                -1.4276371002197266
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                1.5641403198242188,
+                1.2223628759384155
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                2.114140272140503,
+                -1.4276371002197266
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                2.114140272140503,
+                1.2223628759384155
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 0,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 94,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 1,
+          "timing_difference_B_minus_A_steps": -64
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 117,
+          "first_forward_opening_evidence_step_B": 117,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 46,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 92,
+              "obstacle_index": 0,
+              "relative_point_at_first_admission_m": [
+                0.951439380645752,
+                1.4456690549850464
+              ],
+              "world_point_m": [
+                -4.5,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 46,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 92,
+              "obstacle_index": 5,
+              "relative_point_at_first_admission_m": [
+                0.951439380645752,
+                -1.2043309211730957
+              ],
+              "world_point_m": [
+                -4.5,
+                -1.875
+              ]
+            },
+            {
+              "first_admitted_step": 46,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 92,
+              "obstacle_index": 32,
+              "relative_point_at_first_admission_m": [
+                1.5014393329620361,
+                1.4456690549850464
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 46,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 92,
+              "obstacle_index": 37,
+              "relative_point_at_first_admission_m": [
+                1.5014393329620361,
+                -1.2043309211730957
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -1.875
+              ]
+            }
+          ],
+          "robot_id": 2,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 76,
+          "first_forward_opening_evidence_step_B": 76,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 54,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                0.5508322715759277,
+                -1.449084222316742
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 54,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                0.5508322715759277,
+                1.2009157538414001
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 54,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                1.100832223892212,
+                -1.449084222316742
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 54,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                1.100832223892212,
+                1.2009157538414001
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 3,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 44,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 4,
+          "timing_difference_B_minus_A_steps": -14
+        },
+        {
+          "B_only_point_count": 2,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": null,
+          "first_forward_opening_evidence_step_B": null,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 40,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 7,
+              "relative_point_at_first_admission_m": [
+                0.5196762084960938,
+                -1.4413456916809082
+              ],
+              "world_point_m": [
+                -4.5,
+                -2.424999952316284
+              ]
+            },
+            {
+              "first_admitted_step": 40,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 39,
+              "relative_point_at_first_admission_m": [
+                1.069676160812378,
+                -1.4413456916809082
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -2.424999952316284
+              ]
+            }
+          ],
+          "robot_id": 5,
+          "timing_difference_B_minus_A_steps": null
+        }
+      ],
+      "seed": 0,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "diagnostic_replay_steps": 260,
+      "entry_commit_step": 30,
+      "exact_trace_common_steps": 260,
+      "frozen_trace_source": "results/recovery_propagation_latency/alpha_025_trace.jsonl",
+      "frozen_trace_steps": 260,
+      "maximum_along_coordinate_error_m": 0.0003990983469126519,
+      "old_raw_opening_mismatch_count": 0,
+      "old_recovery_commit_step": 46,
+      "robots": [
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 109,
+          "first_forward_opening_evidence_step_B": 109,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                1.627856731414795,
+                -1.4275695085525513
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                1.627856731414795,
+                1.2224304676055908
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                2.177856683731079,
+                -1.4275695085525513
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 81,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                2.177856683731079,
+                1.2224304676055908
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 0,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 93,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 1,
+          "timing_difference_B_minus_A_steps": -63
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 115,
+          "first_forward_opening_evidence_step_B": 115,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 89,
+              "obstacle_index": 0,
+              "relative_point_at_first_admission_m": [
+                0.982518196105957,
+                1.4427964091300964
+              ],
+              "world_point_m": [
+                -4.5,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 89,
+              "obstacle_index": 5,
+              "relative_point_at_first_admission_m": [
+                0.982518196105957,
+                -1.2072035670280457
+              ],
+              "world_point_m": [
+                -4.5,
+                -1.875
+              ]
+            },
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 89,
+              "obstacle_index": 32,
+              "relative_point_at_first_admission_m": [
+                1.5325181484222412,
+                1.4427964091300964
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 45,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 89,
+              "obstacle_index": 37,
+              "relative_point_at_first_admission_m": [
+                1.5325181484222412,
+                -1.2072035670280457
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -1.875
+              ]
+            }
+          ],
+          "robot_id": 2,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 74,
+          "first_forward_opening_evidence_step_B": 74,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                0.5465407371520996,
+                -1.4279610514640808
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                0.5465407371520996,
+                1.2220389246940613
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                1.0965406894683838,
+                -1.4279610514640808
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 44,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                1.0965406894683838,
+                1.2220389246940613
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 3,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 44,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 4,
+          "timing_difference_B_minus_A_steps": -14
+        },
+        {
+          "B_only_point_count": 2,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": null,
+          "first_forward_opening_evidence_step_B": null,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 7,
+              "relative_point_at_first_admission_m": [
+                0.5199451446533203,
+                -1.4420167803764343
+              ],
+              "world_point_m": [
+                -4.5,
+                -2.424999952316284
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 39,
+              "relative_point_at_first_admission_m": [
+                1.0699450969696045,
+                -1.4420167803764343
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -2.424999952316284
+              ]
+            }
+          ],
+          "robot_id": 5,
+          "timing_difference_B_minus_A_steps": null
+        }
+      ],
+      "seed": 1,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "diagnostic_replay_steps": 260,
+      "entry_commit_step": 30,
+      "exact_trace_common_steps": 260,
+      "frozen_trace_source": "results/recovery_propagation_latency/alpha_025_trace.jsonl",
+      "frozen_trace_steps": 260,
+      "maximum_along_coordinate_error_m": 0.0013571033297896662,
+      "old_raw_opening_mismatch_count": 0,
+      "old_recovery_commit_step": 46,
+      "robots": [
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 109,
+          "first_forward_opening_evidence_step_B": 109,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                1.534956455230713,
+                -1.4337849020957947
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                1.534956455230713,
+                1.2162150740623474
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                2.084956407546997,
+                -1.4337849020957947
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                2.084956407546997,
+                1.2162150740623474
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 0,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 92,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 1,
+          "timing_difference_B_minus_A_steps": -62
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 113,
+          "first_forward_opening_evidence_step_B": 113,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 0,
+              "relative_point_at_first_admission_m": [
+                0.5960965156555176,
+                1.4483199715614319
+              ],
+              "world_point_m": [
+                -4.5,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 5,
+              "relative_point_at_first_admission_m": [
+                0.5960965156555176,
+                -1.2016800045967102
+              ],
+              "world_point_m": [
+                -4.5,
+                -1.875
+              ]
+            },
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 32,
+              "relative_point_at_first_admission_m": [
+                1.1460964679718018,
+                1.4483199715614319
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 37,
+              "relative_point_at_first_admission_m": [
+                1.1460964679718018,
+                -1.2016800045967102
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -1.875
+              ]
+            }
+          ],
+          "robot_id": 2,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 73,
+          "first_forward_opening_evidence_step_B": 73,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                0.5482187271118164,
+                -1.4357362389564514
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                0.5482187271118164,
+                1.2142637372016907
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                1.0982186794281006,
+                -1.4357362389564514
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                1.0982186794281006,
+                1.2142637372016907
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 3,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 44,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 4,
+          "timing_difference_B_minus_A_steps": -14
+        },
+        {
+          "B_only_point_count": 2,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": null,
+          "first_forward_opening_evidence_step_B": null,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 39,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 7,
+              "relative_point_at_first_admission_m": [
+                0.5221939086914062,
+                -1.4477289319038391
+              ],
+              "world_point_m": [
+                -4.5,
+                -2.424999952316284
+              ]
+            },
+            {
+              "first_admitted_step": 39,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 39,
+              "relative_point_at_first_admission_m": [
+                1.0721938610076904,
+                -1.4477289319038391
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -2.424999952316284
+              ]
+            }
+          ],
+          "robot_id": 5,
+          "timing_difference_B_minus_A_steps": null
+        }
+      ],
+      "seed": 2,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "diagnostic_replay_steps": 260,
+      "entry_commit_step": 30,
+      "exact_trace_common_steps": 260,
+      "frozen_trace_source": "results/recovery_propagation_latency/alpha_025_trace.jsonl",
+      "frozen_trace_steps": 260,
+      "maximum_along_coordinate_error_m": 0.001284534093749734,
+      "old_raw_opening_mismatch_count": 0,
+      "old_recovery_commit_step": 46,
+      "robots": [
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 108,
+          "first_forward_opening_evidence_step_B": 108,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                1.540684700012207,
+                -1.4380183219909668
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                1.540684700012207,
+                1.2119816541671753
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                2.090684652328491,
+                -1.4380183219909668
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                2.090684652328491,
+                1.2119816541671753
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 0,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 91,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 1,
+          "timing_difference_B_minus_A_steps": -61
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 113,
+          "first_forward_opening_evidence_step_B": 113,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 0,
+              "relative_point_at_first_admission_m": [
+                0.6084342002868652,
+                1.447394847869873
+              ],
+              "world_point_m": [
+                -4.5,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 5,
+              "relative_point_at_first_admission_m": [
+                0.6084342002868652,
+                -1.202605128288269
+              ],
+              "world_point_m": [
+                -4.5,
+                -1.875
+              ]
+            },
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 32,
+              "relative_point_at_first_admission_m": [
+                1.1584341526031494,
+                1.447394847869873
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 64,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 85,
+              "obstacle_index": 37,
+              "relative_point_at_first_admission_m": [
+                1.1584341526031494,
+                -1.202605128288269
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -1.875
+              ]
+            }
+          ],
+          "robot_id": 2,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 73,
+          "first_forward_opening_evidence_step_B": 73,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                0.5472941398620605,
+                -1.4313862919807434
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                0.5472941398620605,
+                1.2186136841773987
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                1.0972940921783447,
+                -1.4313862919807434
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 42,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 50,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                1.0972940921783447,
+                1.2186136841773987
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 3,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 44,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 4,
+          "timing_difference_B_minus_A_steps": -14
+        },
+        {
+          "B_only_point_count": 2,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": null,
+          "first_forward_opening_evidence_step_B": null,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 40,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 7,
+              "relative_point_at_first_admission_m": [
+                0.520380973815918,
+                -1.443110167980194
+              ],
+              "world_point_m": [
+                -4.5,
+                -2.424999952316284
+              ]
+            },
+            {
+              "first_admitted_step": 40,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 39,
+              "relative_point_at_first_admission_m": [
+                1.0703809261322021,
+                -1.443110167980194
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -2.424999952316284
+              ]
+            }
+          ],
+          "robot_id": 5,
+          "timing_difference_B_minus_A_steps": null
+        }
+      ],
+      "seed": 3,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "diagnostic_replay_steps": 260,
+      "entry_commit_step": 30,
+      "exact_trace_common_steps": 260,
+      "frozen_trace_source": "results/recovery_propagation_latency/alpha_025_trace.jsonl",
+      "frozen_trace_steps": 260,
+      "maximum_along_coordinate_error_m": 0.0011171271100849367,
+      "old_raw_opening_mismatch_count": 0,
+      "old_recovery_commit_step": 45,
+      "robots": [
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 108,
+          "first_forward_opening_evidence_step_B": 108,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                1.4887094497680664,
+                -1.446509599685669
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                1.4887094497680664,
+                1.2034903764724731
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                2.0387094020843506,
+                -1.446509599685669
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 80,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                2.0387094020843506,
+                1.2034903764724731
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 0,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 93,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 1,
+          "timing_difference_B_minus_A_steps": -63
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 115,
+          "first_forward_opening_evidence_step_B": 115,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 63,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 88,
+              "obstacle_index": 0,
+              "relative_point_at_first_admission_m": [
+                0.5996332168579102,
+                1.4493072032928467
+              ],
+              "world_point_m": [
+                -4.5,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 63,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 88,
+              "obstacle_index": 5,
+              "relative_point_at_first_admission_m": [
+                0.5996332168579102,
+                -1.2006927728652954
+              ],
+              "world_point_m": [
+                -4.5,
+                -1.875
+              ]
+            },
+            {
+              "first_admitted_step": 63,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 88,
+              "obstacle_index": 32,
+              "relative_point_at_first_admission_m": [
+                1.1496331691741943,
+                1.4493072032928467
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 63,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 88,
+              "obstacle_index": 37,
+              "relative_point_at_first_admission_m": [
+                1.1496331691741943,
+                -1.2006927728652954
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -1.875
+              ]
+            }
+          ],
+          "robot_id": 2,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 4,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": 74,
+          "first_forward_opening_evidence_step_B": 74,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 1,
+              "relative_point_at_first_admission_m": [
+                0.544337272644043,
+                -1.441793143749237
+              ],
+              "world_point_m": [
+                -4.5,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 4,
+              "relative_point_at_first_admission_m": [
+                0.544337272644043,
+                1.208206832408905
+              ],
+              "world_point_m": [
+                -4.5,
+                1.875
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 33,
+              "relative_point_at_first_admission_m": [
+                1.0943372249603271,
+                -1.441793143749237
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -0.7749999761581421
+              ]
+            },
+            {
+              "first_admitted_step": 43,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 53,
+              "obstacle_index": 36,
+              "relative_point_at_first_admission_m": [
+                1.0943372249603271,
+                1.208206832408905
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                1.875
+              ]
+            }
+          ],
+          "robot_id": 3,
+          "timing_difference_B_minus_A_steps": 0
+        },
+        {
+          "B_only_point_count": 0,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": false,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 0.55,
+          "first_forward_opening_evidence_step_A": 43,
+          "first_forward_opening_evidence_step_B": 30,
+          "obstacle_points_admitted_by_B_excluded_by_A": [],
+          "robot_id": 4,
+          "timing_difference_B_minus_A_steps": -13
+        },
+        {
+          "B_only_point_count": 2,
+          "any_B_only_point_intersects_future_KEEP_expansion_region": true,
+          "detector_A_half_width_m": 1.2,
+          "detector_B_half_width_m": 1.4499999761581421,
+          "first_forward_opening_evidence_step_A": null,
+          "first_forward_opening_evidence_step_B": null,
+          "obstacle_points_admitted_by_B_excluded_by_A": [
+            {
+              "first_admitted_step": 40,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 7,
+              "relative_point_at_first_admission_m": [
+                0.5159258842468262,
+                -1.4322377443313599
+              ],
+              "world_point_m": [
+                -4.5,
+                -2.424999952316284
+              ]
+            },
+            {
+              "first_admitted_step": 40,
+              "intersects_future_keep_expansion_region": true,
+              "last_admitted_step": 259,
+              "obstacle_index": 39,
+              "relative_point_at_first_admission_m": [
+                1.0659258365631104,
+                -1.4322377443313599
+              ],
+              "world_point_m": [
+                -3.950000047683716,
+                -2.424999952316284
+              ]
+            }
+          ],
+          "robot_id": 5,
+          "timing_difference_B_minus_A_steps": null
+        }
+      ],
+      "seed": 4,
+      "variant": "len1.0_off0.0"
+    }
+  ],
+  "deployable_runtime_detector": "B_role_dependent",
+  "detector_A": {
+    "half_width_m": 1.2,
+    "name": "preserved_old_literal"
+  },
+  "detector_B": {
+    "formula": "abs(KEEP_lateral - LINE_lateral) + collision_clearance + safety_margin",
+    "name": "role_dependent_geometric_derivation"
+  },
+  "diagnostic_only": true,
+  "role_geometry": [
+    {
+      "collision_clearance_m": 0.55,
+      "complete_future_expansion_region_observed": true,
+      "derived_forward_sector_half_width_m": 1.4499999761581421,
+      "keep_role_lateral_m": 0.8999999761581421,
+      "line_role_lateral_m": 0.0,
+      "maximum_width_observable_under_R_obs_m": 3.0,
+      "required_lateral_expansion_displacement_m": 0.8999999761581421,
+      "robot_id": 0,
+      "safety_margin_m": 0.0
+    },
+    {
+      "collision_clearance_m": 0.55,
+      "complete_future_expansion_region_observed": true,
+      "derived_forward_sector_half_width_m": 0.55,
+      "keep_role_lateral_m": -0.0,
+      "line_role_lateral_m": 0.0,
+      "maximum_width_observable_under_R_obs_m": 3.0,
+      "required_lateral_expansion_displacement_m": 0.0,
+      "robot_id": 1,
+      "safety_margin_m": 0.0
+    },
+    {
+      "collision_clearance_m": 0.55,
+      "complete_future_expansion_region_observed": true,
+      "derived_forward_sector_half_width_m": 1.4499999761581421,
+      "keep_role_lateral_m": -0.8999999761581421,
+      "line_role_lateral_m": 0.0,
+      "maximum_width_observable_under_R_obs_m": 3.0,
+      "required_lateral_expansion_displacement_m": 0.8999999761581421,
+      "robot_id": 2,
+      "safety_margin_m": 0.0
+    },
+    {
+      "collision_clearance_m": 0.55,
+      "complete_future_expansion_region_observed": true,
+      "derived_forward_sector_half_width_m": 1.4499999761581421,
+      "keep_role_lateral_m": 0.8999999761581421,
+      "line_role_lateral_m": 0.0,
+      "maximum_width_observable_under_R_obs_m": 3.0,
+      "required_lateral_expansion_displacement_m": 0.8999999761581421,
+      "robot_id": 3,
+      "safety_margin_m": 0.0
+    },
+    {
+      "collision_clearance_m": 0.55,
+      "complete_future_expansion_region_observed": true,
+      "derived_forward_sector_half_width_m": 0.55,
+      "keep_role_lateral_m": -0.0,
+      "line_role_lateral_m": 0.0,
+      "maximum_width_observable_under_R_obs_m": 3.0,
+      "required_lateral_expansion_displacement_m": 0.0,
+      "robot_id": 4,
+      "safety_margin_m": 0.0
+    },
+    {
+      "collision_clearance_m": 0.55,
+      "complete_future_expansion_region_observed": true,
+      "derived_forward_sector_half_width_m": 1.4499999761581421,
+      "keep_role_lateral_m": -0.8999999761581421,
+      "line_role_lateral_m": 0.0,
+      "maximum_width_observable_under_R_obs_m": 3.0,
+      "required_lateral_expansion_displacement_m": 0.8999999761581421,
+      "robot_id": 5,
+      "safety_margin_m": 0.0
+    }
+  ],
+  "schema_version": "role_dependent_opening_detector_validation_v1",
+  "source_commit": "cec0b408824883694ddaf3f7740688ecef2ab1cf",
+  "strict_runtime_guard_violations": []
+}

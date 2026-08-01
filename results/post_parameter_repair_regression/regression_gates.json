@@ -1,0 +1,114 @@
+{
+  "P1_detector_geometry": {
+    "complete_role_specific_coverage": true,
+    "no_unexplained_runtime_detector_literal": true,
+    "pass": true
+  },
+  "P2_decentralization": {
+    "centralized_event_trigger": false,
+    "global_centroid_runtime_access": false,
+    "global_exit_plane_runtime_access": false,
+    "pass": true,
+    "robot_local_action_computation": true,
+    "strict_runtime_guard_violations": []
+  },
+  "P3_propagation_correctness": {
+    "closed_loop_no_partial_commitment": true,
+    "mechanical_topology_contract": true,
+    "pass": true
+  },
+  "P4_closed_loop_passage": {
+    "measured": {
+      "bottleneck_crossing_rate": 0.4666666666666667,
+      "collision_free_rate": 1.0
+    },
+    "pass": false,
+    "thresholds": {
+      "bottleneck_crossing_rate": 0.8,
+      "collision_free_rate": 0.95
+    }
+  },
+  "P5_full_reconfiguration": {
+    "measured": {
+      "KEEP_recovery_dwell_rate": 0.4666666666666667,
+      "full_reconfiguration_success_rate": 0.4666666666666667
+    },
+    "pass": false,
+    "thresholds": {
+      "KEEP_recovery_dwell_rate": 0.7,
+      "full_reconfiguration_success_rate": 0.7
+    }
+  },
+  "P6_epoch_control": {
+    "median_total_epochs": 2.0,
+    "no_op_epochs": 0,
+    "pass": true,
+    "successful_episode_transition_contract": true
+  },
+  "P7_alpha_025_separate": {
+    "measured": {
+      "KEEP_tube_entry_rate": 0.0,
+      "bottleneck_crossing_rate": 0.0,
+      "collision_free_rate": 1.0,
+      "episode_count": 10,
+      "full_reconfiguration_success_rate": 0.0,
+      "goal_reaching_rate": 0.0,
+      "mean_protocol_bytes": 398100.0,
+      "median_total_epochs": 2.0,
+      "no_op_epochs_total": 0,
+      "recovery_dwell_completion_rate": 0.0,
+      "retry_epochs_total": 0,
+      "successful_epochs_total": 20
+    },
+    "pass": true,
+    "reported_separately": true
+  },
+  "decision_case": "CASE_2",
+  "per_alpha_corrected_runtime": {
+    "alpha_025": {
+      "KEEP_tube_entry_rate": 0.0,
+      "bottleneck_crossing_rate": 0.0,
+      "collision_free_rate": 1.0,
+      "episode_count": 10,
+      "full_reconfiguration_success_rate": 0.0,
+      "goal_reaching_rate": 0.0,
+      "mean_protocol_bytes": 398100.0,
+      "median_total_epochs": 2.0,
+      "no_op_epochs_total": 0,
+      "recovery_dwell_completion_rate": 0.0,
+      "retry_epochs_total": 0,
+      "successful_epochs_total": 20
+    },
+    "alpha_035": {
+      "KEEP_tube_entry_rate": 0.4,
+      "bottleneck_crossing_rate": 0.4,
+      "collision_free_rate": 1.0,
+      "episode_count": 10,
+      "full_reconfiguration_success_rate": 0.4,
+      "goal_reaching_rate": 0.4,
+      "mean_protocol_bytes": 351354.0,
+      "median_total_epochs": 2.0,
+      "no_op_epochs_total": 0,
+      "recovery_dwell_completion_rate": 0.4,
+      "retry_epochs_total": 0,
+      "successful_epochs_total": 20
+    },
+    "alpha_045": {
+      "KEEP_tube_entry_rate": 1.0,
+      "bottleneck_crossing_rate": 1.0,
+      "collision_free_rate": 1.0,
+      "episode_count": 10,
+      "full_reconfiguration_success_rate": 1.0,
+      "goal_reaching_rate": 1.0,
+      "mean_protocol_bytes": 245514.0,
+      "median_total_epochs": 2.0,
+      "no_op_epochs_total": 0,
+      "recovery_dwell_completion_rate": 1.0,
+      "retry_epochs_total": 0,
+      "successful_epochs_total": 20
+    }
+  },
+  "schema_version": "post_parameter_repair_regression_gates_v1",
+  "verdict": "B",
+  "verdict_text": "The detector is now correct, but a distributed safe-expansion certificate is still necessary."
+}

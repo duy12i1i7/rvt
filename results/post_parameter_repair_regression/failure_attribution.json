@@ -1,0 +1,1103 @@
+{
+  "categories": {
+    "A": "forward-opening detector still declares safe space too early",
+    "B": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+    "C": "detector is correct, but simultaneous KEEP commitment is physically unsafe",
+    "D": "recovery begins safely but insufficient downstream distance remains",
+    "E": "communication or confirmation disagreement",
+    "F": "local controller fails to converge",
+    "G": "collision avoidance prevents crossing or recovery",
+    "H": "invalid initial condition or geometry",
+    "I": "metric or evaluator defect",
+    "J": "other confirmed cause"
+  },
+  "failed_episode_count": 16,
+  "per_failed_episode": [
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.09409091509881197,
+            "outward_expansion_velocity_m_s": -0.09409091509881197,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.031452567529464175,
+            "outward_expansion_velocity_m_s": 0.031452567529464175,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.06014982670599692,
+            "outward_expansion_velocity_m_s": -0.06014982670599692,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.06706476228874787,
+            "outward_expansion_velocity_m_s": -0.06706476228874787,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.02699842124189736,
+            "outward_expansion_velocity_m_s": 0.02699842124189736,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": -0.08820934610156193,
+            "outward_expansion_velocity_m_s": 0.08820934610156193,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 0,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.06736379008064024,
+            "outward_expansion_velocity_m_s": -0.06736379008064024,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.022989716436008487,
+            "outward_expansion_velocity_m_s": 0.022989716436008487,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.08844564095128074,
+            "outward_expansion_velocity_m_s": -0.08844564095128074,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": 0.05411978173087396,
+            "outward_expansion_velocity_m_s": 0.05411978173087396,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.020475722788780452,
+            "outward_expansion_velocity_m_s": 0.020475722788780452,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.06908761903811446,
+            "outward_expansion_velocity_m_s": -0.06908761903811446,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 1,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.1487746715404247,
+            "outward_expansion_velocity_m_s": -0.1487746715404247,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.0647431170869725,
+            "outward_expansion_velocity_m_s": 0.0647431170869725,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.03067909358934631,
+            "outward_expansion_velocity_m_s": -0.03067909358934631,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.16070588140290107,
+            "outward_expansion_velocity_m_s": -0.16070588140290107,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.05094659877932792,
+            "outward_expansion_velocity_m_s": 0.05094659877932792,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": -0.0605323150358559,
+            "outward_expansion_velocity_m_s": 0.0605323150358559,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 2,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.08582461116439881,
+            "outward_expansion_velocity_m_s": -0.08582461116439881,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.0002457636730396599,
+            "outward_expansion_velocity_m_s": 0.0002457636730396599,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.09909774402239764,
+            "outward_expansion_velocity_m_s": -0.09909774402239764,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.05483983126499274,
+            "outward_expansion_velocity_m_s": -0.05483983126499274,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.0019369100723508888,
+            "outward_expansion_velocity_m_s": 0.0019369100723508888,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.06354264737563403,
+            "outward_expansion_velocity_m_s": -0.06354264737563403,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 3,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14415814018913886,
+            "outward_expansion_velocity_m_s": -0.14415814018913886,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.07181146634270222,
+            "outward_expansion_velocity_m_s": 0.07181146634270222,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.04485220086669229,
+            "outward_expansion_velocity_m_s": -0.04485220086669229,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.1661569317030616,
+            "outward_expansion_velocity_m_s": -0.1661569317030616,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.05877978546138151,
+            "outward_expansion_velocity_m_s": 0.05877978546138151,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": -0.055005491335134334,
+            "outward_expansion_velocity_m_s": 0.055005491335134334,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 4,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.09356935850026132,
+            "outward_expansion_velocity_m_s": -0.09356935850026132,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.031056374022939124,
+            "outward_expansion_velocity_m_s": 0.031056374022939124,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.06052807237889613,
+            "outward_expansion_velocity_m_s": -0.06052807237889613,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.06510673944488765,
+            "outward_expansion_velocity_m_s": -0.06510673944488765,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.02676266952933165,
+            "outward_expansion_velocity_m_s": 0.02676266952933165,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": -0.08779533930472544,
+            "outward_expansion_velocity_m_s": 0.08779533930472544,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 0,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.06763502789702787,
+            "outward_expansion_velocity_m_s": -0.06763502789702787,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.022684064729135044,
+            "outward_expansion_velocity_m_s": 0.022684064729135044,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.08795524039004578,
+            "outward_expansion_velocity_m_s": -0.08795524039004578,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": 0.0537828642449696,
+            "outward_expansion_velocity_m_s": 0.0537828642449696,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.020253400891135025,
+            "outward_expansion_velocity_m_s": 0.020253400891135025,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.06721134148255585,
+            "outward_expansion_velocity_m_s": -0.06721134148255585,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 1,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14848127893710972,
+            "outward_expansion_velocity_m_s": -0.14848127893710972,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.06439049788807265,
+            "outward_expansion_velocity_m_s": 0.06439049788807265,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.03085452046564014,
+            "outward_expansion_velocity_m_s": -0.03085452046564014,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.16042727846303023,
+            "outward_expansion_velocity_m_s": -0.16042727846303023,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.05159065743681374,
+            "outward_expansion_velocity_m_s": 0.05159065743681374,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": -0.06678525653693443,
+            "outward_expansion_velocity_m_s": 0.06678525653693443,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 2,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.08604214650125956,
+            "outward_expansion_velocity_m_s": -0.08604214650125956,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.000301651610748329,
+            "outward_expansion_velocity_m_s": 0.000301651610748329,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.09866399607202934,
+            "outward_expansion_velocity_m_s": -0.09866399607202934,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.05493295100310581,
+            "outward_expansion_velocity_m_s": -0.05493295100310581,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.0005653607754167022,
+            "outward_expansion_velocity_m_s": 0.0005653607754167022,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.06248172740649153,
+            "outward_expansion_velocity_m_s": -0.06248172740649153,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 3,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_025",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14369922936215074,
+            "outward_expansion_velocity_m_s": -0.14369922936215074,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.07140196454700244,
+            "outward_expansion_velocity_m_s": 0.07140196454700244,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.04510062095787056,
+            "outward_expansion_velocity_m_s": -0.04510062095787056,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.16540472495426933,
+            "outward_expansion_velocity_m_s": -0.16540472495426933,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.0588693710171993,
+            "outward_expansion_velocity_m_s": 0.0588693710171993,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": true,
+            "lateral_velocity_m_s": -0.060360297407054855,
+            "outward_expansion_velocity_m_s": 0.060360297407054855,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 4,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_035",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.10651458101670301,
+            "outward_expansion_velocity_m_s": -0.10651458101670301,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.00844699378393509,
+            "outward_expansion_velocity_m_s": 0.00844699378393509,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.0728600122087532,
+            "outward_expansion_velocity_m_s": -0.0728600122087532,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14195697931680445,
+            "outward_expansion_velocity_m_s": -0.14195697931680445,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.006077217324946974,
+            "outward_expansion_velocity_m_s": 0.006077217324946974,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.11941185491633574,
+            "outward_expansion_velocity_m_s": -0.11941185491633574,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 2,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_035",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.1087777122726812,
+            "outward_expansion_velocity_m_s": -0.1087777122726812,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.032784600942048825,
+            "outward_expansion_velocity_m_s": 0.032784600942048825,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.07704940863948385,
+            "outward_expansion_velocity_m_s": -0.07704940863948385,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.2159513342897518,
+            "outward_expansion_velocity_m_s": -0.2159513342897518,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.021317905180773908,
+            "outward_expansion_velocity_m_s": 0.021317905180773908,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.09136684688322165,
+            "outward_expansion_velocity_m_s": -0.09136684688322165,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 3,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_035",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.09263130917382707,
+            "outward_expansion_velocity_m_s": -0.09263130917382707,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.008912189375377987,
+            "outward_expansion_velocity_m_s": 0.008912189375377987,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.0877103763259168,
+            "outward_expansion_velocity_m_s": -0.0877103763259168,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14867148497160204,
+            "outward_expansion_velocity_m_s": -0.14867148497160204,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.010464736482646604,
+            "outward_expansion_velocity_m_s": 0.010464736482646604,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.13077087720245484,
+            "outward_expansion_velocity_m_s": -0.13077087720245484,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 4,
+      "variant": "len1.0_off0.0"
+    },
+    {
+      "alpha_cell": "alpha_035",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.10616723563728074,
+            "outward_expansion_velocity_m_s": -0.10616723563728074,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.00770976627199008,
+            "outward_expansion_velocity_m_s": 0.00770976627199008,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.07305254803093228,
+            "outward_expansion_velocity_m_s": -0.07305254803093228,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14249517573107787,
+            "outward_expansion_velocity_m_s": -0.14249517573107787,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.0066279061944527744,
+            "outward_expansion_velocity_m_s": 0.0066279061944527744,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.12147261293751549,
+            "outward_expansion_velocity_m_s": -0.12147261293751549,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 2,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_035",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.10878297162939393,
+            "outward_expansion_velocity_m_s": -0.10878297162939393,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.03278696792638162,
+            "outward_expansion_velocity_m_s": 0.03278696792638162,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.07683180322946541,
+            "outward_expansion_velocity_m_s": -0.07683180322946541,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.21628179992230784,
+            "outward_expansion_velocity_m_s": -0.21628179992230784,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.02238629364890956,
+            "outward_expansion_velocity_m_s": 0.02238629364890956,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.09176218390490529,
+            "outward_expansion_velocity_m_s": -0.09176218390490529,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 3,
+      "variant": "len2.0_off0.5"
+    },
+    {
+      "alpha_cell": "alpha_035",
+      "category_definition": "outer-role expansion begins while wall material remains inside its derived future expansion region",
+      "evidence": {
+        "LINE_to_KEEP_commitment_step": 42,
+        "bottleneck_crossing": false,
+        "first_RECOVERY_evidence_step": 42,
+        "lateral_velocity_after_commitment": [
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.09221710040982399,
+            "outward_expansion_velocity_m_s": -0.09221710040982399,
+            "robot_id": 0
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.00838235428847353,
+            "outward_expansion_velocity_m_s": 0.00838235428847353,
+            "robot_id": 1
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.08790954476659515,
+            "outward_expansion_velocity_m_s": -0.08790954476659515,
+            "robot_id": 2
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.14921738567737802,
+            "outward_expansion_velocity_m_s": -0.14921738567737802,
+            "robot_id": 3
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": -0.010845938323136364,
+            "outward_expansion_velocity_m_s": 0.010845938323136364,
+            "robot_id": 4
+          },
+          {
+            "expansion_started": false,
+            "lateral_velocity_m_s": 0.13276327074637925,
+            "outward_expansion_velocity_m_s": -0.13276327074637925,
+            "robot_id": 5
+          }
+        ],
+        "locally_constrained_outer_robot_ids": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "mode_commit_begins_KEEP_expansion_for_all_roles": true,
+        "originating_safe_centre_roles": [
+          1,
+          4
+        ],
+        "outer_forward_sector_wall_material": {
+          "0": true,
+          "2": true,
+          "3": true,
+          "5": true
+        }
+      },
+      "primary_category": "B",
+      "seed": 4,
+      "variant": "len2.0_off0.5"
+    }
+  ],
+  "primary_category_counts": {
+    "A": 0,
+    "B": 16,
+    "C": 0,
+    "D": 0,
+    "E": 0,
+    "F": 0,
+    "G": 0,
+    "H": 0,
+    "I": 0,
+    "J": 0
+  },
+  "safe_expansion_certificate_conclusion_rule": "A certificate is considered only after detector geometry passes and a failed corrected-runtime episode shows locally constrained outer roles at the common KEEP commit.",
+  "schema_version": "post_parameter_repair_failure_attribution_v1"
+}
