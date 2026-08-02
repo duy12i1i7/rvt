@@ -1,0 +1,350 @@
+[
+  {
+    "abort_cause": null,
+    "actual_communication_bytes": 67506,
+    "centre_robot_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "collision_free": true,
+    "committed": true,
+    "constrained_robot_ids": [],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": true,
+    "final_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "fixture": "wider_to_narrower",
+    "initial_all_ready": true,
+    "initial_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "mode_epoch_count": 1,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 0,
+    "target_topology": 2,
+    "timed_out_or_aborted": false,
+    "unknown_count": 0
+  },
+  {
+    "abort_cause": null,
+    "actual_communication_bytes": 67322,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": true,
+    "constrained_robot_ids": [],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": true,
+    "final_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "fixture": "narrower_to_wider",
+    "initial_all_ready": true,
+    "initial_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "mode_epoch_count": 1,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": false,
+    "unknown_count": 0
+  },
+  {
+    "abort_cause": "readiness_timeout",
+    "actual_communication_bytes": 34006,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": false,
+    "constrained_robot_ids": [
+      0,
+      2,
+      3,
+      5
+    ],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": false,
+    "final_states": {
+      "0": "UNSAFE",
+      "1": "SAFE",
+      "2": "UNSAFE",
+      "3": "UNSAFE",
+      "4": "SAFE",
+      "5": "UNSAFE"
+    },
+    "fixture": "centre_ready_before_outer",
+    "initial_all_ready": false,
+    "initial_states": {
+      "0": "UNSAFE",
+      "1": "SAFE",
+      "2": "UNSAFE",
+      "3": "UNSAFE",
+      "4": "SAFE",
+      "5": "UNSAFE"
+    },
+    "mode_epoch_count": 0,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": true,
+    "unknown_count": 0
+  },
+  {
+    "abort_cause": "readiness_timeout",
+    "actual_communication_bytes": 34732,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": false,
+    "constrained_robot_ids": [
+      0
+    ],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": false,
+    "final_states": {
+      "0": "UNSAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "fixture": "one_outer_wall_constrained",
+    "initial_all_ready": false,
+    "initial_states": {
+      "0": "UNSAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "mode_epoch_count": 0,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": true,
+    "unknown_count": 0
+  },
+  {
+    "abort_cause": null,
+    "actual_communication_bytes": 101334,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": true,
+    "constrained_robot_ids": [
+      0,
+      2,
+      3,
+      5
+    ],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": true,
+    "final_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "fixture": "all_roles_eventually_ready",
+    "initial_all_ready": false,
+    "initial_states": {
+      "0": "UNSAFE",
+      "1": "SAFE",
+      "2": "UNSAFE",
+      "3": "UNSAFE",
+      "4": "SAFE",
+      "5": "UNSAFE"
+    },
+    "mode_epoch_count": 1,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": false,
+    "unknown_count": 0
+  },
+  {
+    "abort_cause": "readiness_timeout",
+    "actual_communication_bytes": 33550,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": false,
+    "constrained_robot_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": false,
+    "final_states": {
+      "0": "UNSAFE",
+      "1": "UNSAFE",
+      "2": "UNSAFE",
+      "3": "UNSAFE",
+      "4": "UNSAFE",
+      "5": "UNSAFE"
+    },
+    "fixture": "no_feasible_transition_window",
+    "initial_all_ready": false,
+    "initial_states": {
+      "0": "UNSAFE",
+      "1": "UNSAFE",
+      "2": "UNSAFE",
+      "3": "UNSAFE",
+      "4": "UNSAFE",
+      "5": "UNSAFE"
+    },
+    "mode_epoch_count": 0,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": true,
+    "unknown_count": 0
+  },
+  {
+    "abort_cause": "readiness_timeout",
+    "actual_communication_bytes": 35158,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": false,
+    "constrained_robot_ids": [
+      0,
+      2,
+      3,
+      5
+    ],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": false,
+    "final_states": {
+      "0": "UNKNOWN",
+      "1": "SAFE",
+      "2": "UNKNOWN",
+      "3": "UNKNOWN",
+      "4": "SAFE",
+      "5": "UNKNOWN"
+    },
+    "fixture": "incomplete_local_sensing",
+    "initial_all_ready": false,
+    "initial_states": {
+      "0": "UNKNOWN",
+      "1": "SAFE",
+      "2": "UNKNOWN",
+      "3": "UNKNOWN",
+      "4": "SAFE",
+      "5": "UNKNOWN"
+    },
+    "mode_epoch_count": 0,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": true,
+    "unknown_count": 4
+  },
+  {
+    "abort_cause": null,
+    "actual_communication_bytes": 100972,
+    "centre_robot_ids": [
+      1,
+      4
+    ],
+    "collision_free": true,
+    "committed": true,
+    "constrained_robot_ids": [],
+    "false_safe_count": 0,
+    "false_unsafe_count": 0,
+    "final_all_ready": true,
+    "final_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "fixture": "temporary_communication_loss",
+    "initial_all_ready": false,
+    "initial_states": {
+      "0": "SAFE",
+      "1": "SAFE",
+      "2": "SAFE",
+      "3": "SAFE",
+      "4": "SAFE",
+      "5": "SAFE"
+    },
+    "mode_epoch_count": 1,
+    "no_op_epoch_count": 0,
+    "premature_commitment": false,
+    "schema_version": "rvt-phase7-qualification/v1",
+    "source_topology": 2,
+    "target_topology": 0,
+    "timed_out_or_aborted": false,
+    "unknown_count": 0
+  }
+]

@@ -122,6 +122,15 @@ OFFLINE_MODULES: Dict[str, str] = {
         "orchestrator. It invokes strict local adapters one robot at a time; "
         "joint arrays remain on this named simulation boundary."
     ),
+    "transition_runtime": (
+        "Phase 7 strict diagnostic simulator boundary. It owns communication "
+        "delivery and physics arrays, while each TransitionProtocolNode and "
+        "controller invocation receives only robot-local records."
+    ),
+    "phase7_qualification": (
+        "Offline Phase 7 matrix, exact-geometry evaluator and report writer. "
+        "It may aggregate per-robot outcomes after the local runtime calls."
+    ),
 }
 
 # Parameter names that carry a SINGLE robot's ego-graph tensors. An ego graph

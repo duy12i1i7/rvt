@@ -1,0 +1,21 @@
+{
+  "communication_agreement_success_count": 30,
+  "communication_cell_count": 35,
+  "constriction_fixture_count": 8,
+  "elapsed_seconds": 89.433497875,
+  "false_safe_count": 0,
+  "false_safe_rate": 0.0,
+  "final_test_layout_accesses": 0,
+  "learned_model_calls": 0,
+  "open_space_collision_free_count": 144,
+  "open_space_episode_count": 144,
+  "open_space_success_count": 47,
+  "peak_memory_bytes": 243974144,
+  "premature_commitment_count": 0,
+  "protocol_schema_version": "rvt-transition-protocol/v1",
+  "readiness_certificate_count": 48,
+  "residual_action_calls": 0,
+  "schema_version": "rvt-phase7-qualification/v1",
+  "scientific_training_runs": 0,
+  "temporary_disconnection_detected_count": 5
+}
