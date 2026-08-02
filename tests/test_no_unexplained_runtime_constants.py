@@ -23,12 +23,13 @@ import pytest
 from rvt_swarm.decentralized import guards
 
 PKG = pathlib.Path(guards.__file__).parent
+FD24_PKG = PKG.parent / "fd24"
 TMP = PKG / "_tmp_constant.py"
 
 # Literals whose mathematical / structural role is explicit.
 MATH_OK = {0, 1, 2, -1, 0.0, 1.0, 2.0, 0.5, 1e-6, 1e-9, 1e-12}
 # Serialization field-width masks, documented in the wire schema tables.
-WIRE_OK = {255, 65535, 4294967295, 2147483647, 8, 4, 16, 20, 21, 49, 64}
+WIRE_OK = {255, 65535, 4294967295, 2147483647, 8, 4, 16, 20, 21, 40, 49, 64}
 
 
 def _is_arity_check(node: ast.Compare) -> bool:
@@ -77,9 +78,10 @@ def _round_loop_literals(tree: ast.AST):
 
 def deployable_modules():
     off = set(guards.OFFLINE_MODULES) | {"guards", "__init__", "parameters"}
-    for p in sorted(PKG.glob("*.py")):
-        if p.stem not in off:
-            yield p
+    for package_path in (PKG, FD24_PKG):
+        for p in sorted(package_path.glob("*.py")):
+            if p.stem not in off:
+                yield p
 
 
 def unexplained_thresholds():

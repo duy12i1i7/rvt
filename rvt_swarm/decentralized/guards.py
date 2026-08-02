@@ -39,6 +39,7 @@ from .system_model import (
 )
 
 PACKAGE = "rvt_swarm.decentralized"
+STRICT_PACKAGES: Tuple[str, ...] = (PACKAGE, "rvt_swarm.fd24")
 BOUNDARY_PREFIX = "simulate_"
 
 # Annotations that can hold an arbitrary number of robots.
@@ -127,6 +128,9 @@ OFFLINE_MODULES: Dict[str, str] = {
 EGO_TENSOR_PARAMS: frozenset = frozenset({
     "node_x", "edge_index", "edge_attr", "center_index", "h", "scores", "dst",
     "g", "ego_keep", "ego_line", "n_nodes", "q", "z", "y", "P",
+    "local_features", "local_type_ids", "local_edge_destination",
+    "node_hidden", "edge_hidden", "root_hidden", "conditioned",
+    "raw_residual", "residual_limits", "conditioned_local_embedding",
 })
 
 _OFFLINE: Set[str] = set()
@@ -152,11 +156,12 @@ def _is_offline(fn) -> bool:
 # Attribute chains that read global information.
 FORBIDDEN_CALLS: Tuple[str, ...] = (
     "pooled_graph_features", "global_mean_pool", "global_max_pool",
-    "global_add_pool", "global_attention_pool", "all_reduce", "expert_action",
+    "global_add_pool", "global_attention_pool", "complete_swarm_attention",
+    "cross_batch_mean", "joint_action_output", "all_reduce", "expert_action",
 )
 
 FORBIDDEN_DEPLOYABLE_IMPORTS: Tuple[str, ...] = (
-    "dataset", "legacy_global_graph",
+    "dataset", "legacy_global_graph", "models",
 )
 
 
@@ -172,9 +177,19 @@ class Violation:
 
 
 def _iter_modules() -> Iterable[Tuple[str, object]]:
-    pkg = importlib.import_module(PACKAGE)
-    for info in pkgutil.iter_modules(pkg.__path__):
-        yield info.name, importlib.import_module(f"{PACKAGE}.{info.name}")
+    for package_name in STRICT_PACKAGES:
+        pkg = importlib.import_module(package_name)
+        for info in pkgutil.iter_modules(pkg.__path__):
+            label = (
+                info.name
+                if package_name == PACKAGE
+                else f"{package_name.rsplit('.', 1)[-1]}.{info.name}"
+            )
+            yield label, importlib.import_module(f"{package_name}.{info.name}")
+
+
+def _module_leaf(module_name: str) -> str:
+    return module_name.rsplit(".", 1)[-1]
 
 
 def _iter_functions(module) -> Iterable[Tuple[str, object]]:
@@ -201,7 +216,8 @@ def scan_signatures() -> List[Violation]:
     """Deployable functions must not declare bulk-state parameters."""
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname in ("guards",) or modname in OFFLINE_MODULES:
+        leaf = _module_leaf(modname)
+        if leaf in ("guards",) or leaf in OFFLINE_MODULES:
             continue
         for qualname, fn in _iter_functions(module):
             if _is_boundary(qualname) or _is_offline(fn):
@@ -244,7 +260,8 @@ def scan_prohibited_obs_keys() -> List[Violation]:
     """No deployable function body may subscript a prohibited obs key."""
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname in ("guards", "system_model") or modname in OFFLINE_MODULES:
+        leaf = _module_leaf(modname)
+        if leaf in ("guards", "system_model") or leaf in OFFLINE_MODULES:
             continue
         try:
             tree = ast.parse(inspect.getsource(module))
@@ -255,6 +272,14 @@ def scan_prohibited_obs_keys() -> List[Violation]:
                 continue
             if node.name.startswith(BOUNDARY_PREFIX):
                 continue
+            lowered_name = node.name.lower()
+            if "joint_action" in lowered_name:
+                out.append(Violation(
+                    modname,
+                    node.name,
+                    "joint-action-output",
+                    "function name declares a swarm-level joint action",
+                ))
             for sub in ast.walk(node):
                 if isinstance(sub, ast.Subscript) and isinstance(sub.slice, ast.Constant):
                     key = sub.slice.value
@@ -266,6 +291,17 @@ def scan_prohibited_obs_keys() -> List[Violation]:
                     if fname in FORBIDDEN_CALLS:
                         out.append(Violation(modname, node.name, "forbidden-call",
                                              f"calls {fname}()"))
+                    if (
+                        fname == "mean"
+                        and "batch" in lowered_name
+                        and any(token in lowered_name for token in ("cross", "global", "all"))
+                    ):
+                        out.append(Violation(
+                            modname,
+                            node.name,
+                            "cross-batch-reduction",
+                            "batch-named function performs a mean across samples",
+                        ))
     return out
 
 
@@ -278,7 +314,8 @@ def scan_boundary_reachability() -> List[Violation]:
     loop_tokens = ("step", "control", "act", "update", "runtime", "decide", "commit")
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname == "guards" or modname in OFFLINE_MODULES:
+        leaf = _module_leaf(modname)
+        if leaf == "guards" or leaf in OFFLINE_MODULES:
             continue
         try:
             tree = ast.parse(inspect.getsource(module))
@@ -304,7 +341,8 @@ def scan_global_pooling_paths() -> List[Violation]:
     """Reject historical whole-swarm graph imports from deployable modules."""
     out: List[Violation] = []
     for modname, module in _iter_modules():
-        if modname in ("guards", "system_model") or modname in OFFLINE_MODULES:
+        leaf = _module_leaf(modname)
+        if leaf in ("guards", "system_model") or leaf in OFFLINE_MODULES:
             continue
         try:
             tree = ast.parse(inspect.getsource(module))

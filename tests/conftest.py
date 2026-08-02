@@ -11,8 +11,11 @@ import pytest
 from rvt_swarm.decentralized.ego_graph_v2 import (
     LocalObstacleObservation,
     RobotLocalTopologyMetadata,
+    build_robot_local_ego_graph,
     prepare_robot_local_topology_metadata,
 )
+from rvt_swarm.fd24.configuration import FD24ModelConfig
+from rvt_swarm.fd24.model import RVTFD24LocalModel
 from rvt_swarm.decentralized.system_model import NeighbourRecord, RobotView
 from rvt_swarm.runtime_configuration import RuntimeConfig
 from rvt_swarm.topology_registry import (
@@ -161,6 +164,38 @@ def ego_v2_factory():
         )
         return EgoV2Case(
             config, roles, templates, local, view, observation_step
+        )
+
+    return factory
+
+
+@pytest.fixture
+def fd24_graph_factory(ego_v2_factory):
+    """Build one canonical Phase 4 graph for architecture-only Phase 5 tests."""
+    def factory(*, candidate_topology=KEEP, **case_options):
+        case = ego_v2_factory(**case_options)
+        graph = build_robot_local_ego_graph(
+            case.view,
+            case.config,
+            case.local_topology,
+            candidate_topology,
+            case.observation_step,
+        )
+        return case, graph
+
+    return factory
+
+
+@pytest.fixture
+def fd24_model_factory():
+    """Construct deterministic untrained models without scientific data."""
+    def factory(runtime_config, *, model_config=None, seed=1234):
+        import torch
+
+        torch.manual_seed(seed)
+        return RVTFD24LocalModel(
+            FD24ModelConfig() if model_config is None else model_config,
+            runtime_config,
         )
 
     return factory
