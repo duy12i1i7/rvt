@@ -1,0 +1,39 @@
+{
+  "approved_phase5_baseline": "b47a95fe238550e7fb7492c6fafd8427c1b572ec",
+  "final_test_access": false,
+  "learned_model_active": false,
+  "online_topology_transition": false,
+  "resampling": false,
+  "seeds": [
+    61001,
+    61002,
+    61003,
+    61004,
+    61005
+  ],
+  "stabilization_episode_count": 360,
+  "stabilization_fixtures": [
+    "exact_topology",
+    "bounded_position",
+    "bounded_velocity",
+    "combined_perturbation"
+  ],
+  "team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16,
+    24
+  ],
+  "topology_ids": [
+    0,
+    5,
+    2
+  ],
+  "translation_episode_count": 180,
+  "translation_headings_radians": [
+    0.0,
+    1.0471975511965976
+  ]
+}

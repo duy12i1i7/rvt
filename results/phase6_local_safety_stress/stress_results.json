@@ -1,0 +1,324 @@
+[
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.6,
+      0.0
+    ],
+    "case_name": "safe_open",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.013500000000000012,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": null,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.6,
+      0.0
+    ],
+    "case_name": "safe_open",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.013500000000000012,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": null,
+    "projection_enabled": true,
+    "projection_status": "unchanged",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.04444444444444451,
+      0.0
+    ],
+    "case_name": "static_obstacle_uncertain",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      0.04444444444444451,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.0010000000000000009,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": 0.5990000000000001,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.6444444444444445,
+    "base_action": [
+      0.04444444444444451,
+      0.0
+    ],
+    "case_name": "static_obstacle_uncertain",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      -0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": -0.013500000000000012,
+    "infeasible_fallback": true,
+    "intervention_duration_steps": 1,
+    "intervention_step": 0,
+    "minimum_clearance_meters": 0.6135000000000002,
+    "projection_enabled": true,
+    "projection_status": "infeasible_conservative_fallback",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.591,
+      0.0
+    ],
+    "case_name": "two_sided_restriction",
+    "collision_after_step": true,
+    "deadlock": false,
+    "executed_action": [
+      0.591,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.013297500000000018,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": 0.5434525000000001,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.2909999999999985,
+    "base_action": [
+      0.591,
+      0.0
+    ],
+    "case_name": "two_sided_restriction",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      0.3000000000000015,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.006750000000000034,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 1,
+    "intervention_step": 0,
+    "minimum_clearance_meters": 0.55,
+    "projection_enabled": true,
+    "projection_status": "local_constraint_projection",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.4,
+      0.0
+    ],
+    "case_name": "fresh_peer_approach",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      0.4,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.05399999999999999,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": 0.401,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.5555555555555564,
+    "base_action": [
+      0.4,
+      0.0
+    ],
+    "case_name": "fresh_peer_approach",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      -0.15555555555555634,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.04149999999999998,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 1,
+    "intervention_step": 0,
+    "minimum_clearance_meters": 0.41350000000000003,
+    "projection_enabled": true,
+    "projection_status": "local_constraint_projection",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.6,
+      0.0
+    ],
+    "case_name": "stale_peer",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.013500000000000012,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": 0.4365,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 1.2,
+    "base_action": [
+      0.6,
+      0.0
+    ],
+    "case_name": "stale_peer",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      -0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": -0.013500000000000012,
+    "infeasible_fallback": true,
+    "intervention_duration_steps": 1,
+    "intervention_step": 0,
+    "minimum_clearance_meters": 0.4635,
+    "projection_enabled": true,
+    "projection_status": "infeasible_conservative_fallback",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.11399999999999999,
+      0.0
+    ],
+    "case_name": "moving_obstacle",
+    "collision_after_step": true,
+    "deadlock": false,
+    "executed_action": [
+      0.11399999999999999,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.002564999999999984,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": 0.5406850000000001,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.4140000000000015,
+    "base_action": [
+      0.11399999999999999,
+      0.0
+    ],
+    "case_name": "moving_obstacle",
+    "collision_after_step": false,
+    "deadlock": false,
+    "executed_action": [
+      -0.3000000000000015,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": -0.006750000000000034,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 1,
+    "intervention_step": 0,
+    "minimum_clearance_meters": 0.55,
+    "projection_enabled": true,
+    "projection_status": "local_constraint_projection",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 0.0,
+    "base_action": [
+      0.6,
+      0.0
+    ],
+    "case_name": "infeasible_constraints",
+    "collision_after_step": true,
+    "deadlock": false,
+    "executed_action": [
+      0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": 0.013500000000000012,
+    "infeasible_fallback": false,
+    "intervention_duration_steps": 0,
+    "intervention_step": null,
+    "minimum_clearance_meters": 0.4865,
+    "projection_enabled": false,
+    "projection_status": "disabled_diagnostic",
+    "solver_failure": false
+  },
+  {
+    "action_modification_meters_per_second_squared": 1.2,
+    "base_action": [
+      0.6,
+      0.0
+    ],
+    "case_name": "infeasible_constraints",
+    "collision_after_step": true,
+    "deadlock": false,
+    "executed_action": [
+      -0.6,
+      0.0
+    ],
+    "false_intervention": false,
+    "goal_progress_meters": -0.013500000000000012,
+    "infeasible_fallback": true,
+    "intervention_duration_steps": 1,
+    "intervention_step": 0,
+    "minimum_clearance_meters": 0.4865,
+    "projection_enabled": true,
+    "projection_status": "infeasible_conservative_fallback",
+    "solver_failure": false
+  }
+]

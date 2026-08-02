@@ -6,6 +6,7 @@ import math
 from dataclasses import dataclass
 from typing import Mapping, Optional, Sequence, Tuple
 
+import numpy as np
 import pytest
 
 from rvt_swarm.decentralized.ego_graph_v2 import (
@@ -16,6 +17,14 @@ from rvt_swarm.decentralized.ego_graph_v2 import (
 )
 from rvt_swarm.fd24.configuration import FD24ModelConfig
 from rvt_swarm.fd24.model import RVTFD24LocalModel
+from rvt_swarm.decentralized.forced_topology_runtime import (
+    ForcedTopologyRuntimeAdapter,
+)
+from rvt_swarm.decentralized.phase6_qualification import (
+    _role_assignment,
+    _template_positions,
+    simulate_received_robot_views,
+)
 from rvt_swarm.decentralized.system_model import NeighbourRecord, RobotView
 from rvt_swarm.runtime_configuration import RuntimeConfig
 from rvt_swarm.topology_registry import (
@@ -165,6 +174,53 @@ def ego_v2_factory():
         return EgoV2Case(
             config, roles, templates, local, view, observation_step
         )
+
+    return factory
+
+
+@pytest.fixture
+def phase6_input_factory():
+    """Construct one exact robot-local forced-topology controller input."""
+    def factory(
+        *,
+        n=6,
+        topology=KEEP,
+        robot_id=0,
+        mission_direction=(1.0, 0.0),
+        goal=(0.0, 0.0),
+        positions=None,
+        velocities=None,
+        dense_communication=False,
+    ):
+        runtime = RuntimeConfig.for_team_size(n)
+        role_set = generate_persistent_roles(n)
+        roles = _role_assignment(n, runtime)
+        if positions is None:
+            positions = _template_positions(
+                n, topology, mission_direction, runtime
+            )
+        positions = np.asarray(positions, dtype=np.float64)
+        if velocities is None:
+            velocities = np.zeros_like(positions)
+        velocities = np.asarray(velocities, dtype=np.float64)
+        views = simulate_received_robot_views(
+            positions,
+            velocities,
+            roles,
+            topology,
+            goal,
+            mission_direction,
+            runtime,
+            dense_communication=dense_communication,
+        )
+        metadata = prepare_robot_local_topology_metadata(
+            role_set, robot_id, runtime.formation
+        )
+        adapter = ForcedTopologyRuntimeAdapter(
+            runtime, metadata, topology
+        )
+        controller_input = adapter.build_input(views[robot_id], 0.0)
+        return runtime, adapter, views[robot_id], controller_input
 
     return factory
 

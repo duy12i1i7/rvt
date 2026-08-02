@@ -117,6 +117,11 @@ OFFLINE_MODULES: Dict[str, str] = {
         "Message accounting and report formatting. Consumes counters after the "
         "fact; no robot computes a fleet-wide byte total at runtime."
     ),
+    "phase6_qualification": (
+        "Offline forced-topology simulator, Metric V3 evaluator and scaling "
+        "orchestrator. It invokes strict local adapters one robot at a time; "
+        "joint arrays remain on this named simulation boundary."
+    ),
 }
 
 # Parameter names that carry a SINGLE robot's ego-graph tensors. An ego graph
@@ -273,7 +278,10 @@ def scan_prohibited_obs_keys() -> List[Violation]:
             if node.name.startswith(BOUNDARY_PREFIX):
                 continue
             lowered_name = node.name.lower()
-            if "joint_action" in lowered_name:
+            if "joint_action" in lowered_name or (
+                "joint" in lowered_name
+                and any(token in lowered_name for token in ("safety", "optimizer", "qp"))
+            ):
                 out.append(Violation(
                     modname,
                     node.name,
