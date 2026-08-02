@@ -48,7 +48,9 @@ from rvt_swarm.decentralized import comm_cost as CC
 from rvt_swarm.decentralized import epoch as EP
 from rvt_swarm.decentralized.comms import Beacon
 from rvt_swarm.decentralized.consensus import ScoreMessage
-from rvt_swarm.decentralized.system_model import KEEP, LINE, CommParams
+from rvt_swarm.decentralized.system_model import (
+    KEEP, LINE, CommParams, ConsensusParams,
+)
 from rvt_swarm.layouts import build_layouts
 
 REPO = Path(__file__).resolve().parents[1]
@@ -714,7 +716,8 @@ def test_simulated_episode_accounts_exactly_the_messages_that_were_sent():
     """
     cfg = Config()
     cfg.train.device = "cpu"
-    n, k, interval = 4, 4, 25
+    protocol = ConsensusParams()
+    n, k, interval = 4, protocol.k_score, protocol.decision_interval
     out = CC.simulate_episode_message_cost(
         cfg, n, val_layout("line_corridor"), seed=3, mode=LINE, max_steps=6)
     acct = out["accountant"]

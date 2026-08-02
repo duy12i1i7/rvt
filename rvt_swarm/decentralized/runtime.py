@@ -48,9 +48,13 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 import torch
 
-from ..config import Config
 from ..environment import SwarmFormationEnv
 from ..metrics import EpisodeAccumulator
+from ..runtime_configuration import (
+    RuntimeConfig,
+    lookahead_distance_meters,
+    runtime_config_from_legacy,
+)
 from .comm_cost import MessageAccountant
 from .comms import RadioChannel, make_radio_states, simulate_broadcast_round
 from .consensus import (ConsensusNode, agreement_rate, component_agreement,
@@ -77,7 +81,7 @@ def nearest_obstacle_clearance(view: RobotView) -> float:
     return min(float(np.hypot(ox, oy)) - float(r) for ox, oy, r in view.obstacles)
 
 
-def _robot_decision(view: RobotView, cfg: Config, selector, mode_rule: str
+def _robot_decision(view: RobotView, cfg: RuntimeConfig, selector, mode_rule: str
                     ) -> Tuple[float, float]:
     """Robot i's own pre-consensus (q_keep, q_line). Sees only its RobotView."""
     if mode_rule == "always_keep":
@@ -92,9 +96,7 @@ def _robot_decision(view: RobotView, cfg: Config, selector, mode_rule: str
         # DERIVED lookahead distance: braking distance at the current speed
         # plus the ground covered while the distributed protocol runs, capped
         # at the sensor range. See docs/LOOKAHEAD_DISTANCE_DERIVATION.md.
-        from .parameters import default_parameters, derived_lookahead_distance
-        platform, mission, protocol = default_parameters(cfg.env)
-        lookahead = derived_lookahead_distance(platform, mission, protocol)
+        lookahead = lookahead_distance_meters(cfg)
         c = nearest_obstacle_clearance(view)
         return (0.0, 1.0) if c < lookahead else (1.0, 0.0)
     if selector is None:
@@ -108,7 +110,7 @@ def _robot_decision(view: RobotView, cfg: Config, selector, mode_rule: str
 
 
 def simulate_decentralized_episode(
-    cfg: Config, layout, n: int, seed: int, *,
+    cfg: object, layout, n: int, seed: int, *,
     selector=None, mode_rule: str = "geometric",
     k_score: Optional[int] = None, use_consensus: bool = True,
     comm: Optional[CommParams] = None, cons: Optional[ConsensusParams] = None,
@@ -138,8 +140,9 @@ def simulate_decentralized_episode(
             "decision epochs on a shared timer, which is a central epoch clock"
         )
 
-    comm = comm or CommParams()
-    cons = cons or ConsensusParams()
+    runtime_config = runtime_config_from_legacy(cfg, team_size=n)
+    comm = comm or CommParams.from_runtime_config(runtime_config)
+    cons = cons or ConsensusParams.from_runtime_config(runtime_config)
     k = cons.k_score if k_score is None else int(k_score)
     if not use_consensus:
         k = 0
@@ -155,13 +158,20 @@ def simulate_decentralized_episode(
         obs = env.reset(n, "cluttered", seed=seed, layout=layout)
     mission = (float(obs["corridor_dx"]), float(obs["corridor_dy"]))
     roles = (RoleAssignment.simulate_mission_setup_from_initial_formation(
-                obs["positions"], mission, cfg.env.nominal_spacing)
+                obs["positions"], mission,
+                runtime_config.formation.nominal_spacing_meters)
              if role_source == "initial_formation"
-             else RoleAssignment.from_index(n, cfg.env.nominal_spacing))
-    states = make_radio_states(range(n), comm)
+             else RoleAssignment.from_index(
+                 n, runtime_config.formation.nominal_spacing_meters))
+    states = make_radio_states(
+        range(n), comm,
+        progress_window=runtime_config.derived.progress_window_steps,
+    )
     channel = RadioChannel(comm, seed=int(seed))
-    acc_ep = EpisodeAccumulator(formation_tolerance=cfg.env.formation_tolerance,
-                                dt=cfg.env.dt)
+    acc_ep = EpisodeAccumulator(
+        formation_tolerance=runtime_config.derived.formation_tolerance_meters,
+        dt=runtime_config.physical.control_period_seconds,
+    )
 
     start_mode = KEEP if forced_mode is None else forced_mode
     epochs = {i: EpochState(robot_id=i) for i in range(n)}
@@ -201,7 +211,7 @@ def simulate_decentralized_episode(
                 # already completed for this bottleneck (Task 5-7).
                 trig = (latched_local_trigger_v3 if recovery_event == "v3"
                         else latched_local_trigger)
-                fired = trig(views[i], cfg, e, cons)
+                fired = trig(views[i], runtime_config, e, cons)
                 if fired:
                     # Local no-op pre-arm check. Robot i evaluates its OWN
                     # proposal from its OWN view and declines to open an epoch
@@ -256,7 +266,9 @@ def simulate_decentralized_episode(
                     if mode_rule == "geometric" and req is not None:
                         q[i] = (1.0, 0.0) if req == KEEP else (0.0, 1.0)
                     else:
-                        q[i] = _robot_decision(views[i], cfg, selector, mode_rule)
+                        q[i] = _robot_decision(
+                            views[i], runtime_config, selector, mode_rule
+                        )
                 nodes = {i: ConsensusNode.from_logits(
                     i, q[i][0], q[i][1], len(adj[i]), epochs[i].epoch_id, cons)
                     for i in scoring}
@@ -360,7 +372,7 @@ def simulate_decentralized_episode(
 
         for i, e in epochs.items():
             if forced_mode is None and scripted is None and scripted_planes is None:
-                update_passage_latch(e, views[i], cfg, cons)
+                update_passage_latch(e, views[i], runtime_config, cons)
             e.tick()
 
         committed = [epochs[i].committed_mode for i in range(n)]
@@ -370,7 +382,8 @@ def simulate_decentralized_episode(
         if trace_positions:
             pos_trace.append(obs["positions"].copy())
             mode_per_step.append(Counter(committed).most_common(1)[0][0])
-        actions = np.stack([local_controller(views[i], cfg, committed[i])
+        actions = np.stack([local_controller(
+            views[i], runtime_config, committed[i])
                             for i in range(n)])
         env_mode = Counter(committed).most_common(1)[0][0]   # bookkeeping only
         obs, _, done, last = env.step(actions, env_mode)

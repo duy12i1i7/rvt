@@ -35,6 +35,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from ..runtime_configuration import DEFAULT_RUNTIME_CONFIG
 from .ego_graph import EDGE_DIM, FEATURE_DIM
 from .system_model import KEEP, LINE, MODES
 
@@ -75,7 +76,14 @@ class EgoLayer(nn.Module):
                 edge_attr: torch.Tensor) -> torch.Tensor:
         src, dst = edge_index
         m = self.edge_mlp(torch.cat([h[src], h[dst], edge_attr], dim=-1))
-        alpha = _edge_softmax(F.leaky_relu(self.attn(m).squeeze(-1), 0.2), dst, h.shape[0])
+        alpha = _edge_softmax(
+            F.leaky_relu(
+                self.attn(m).squeeze(-1),
+                DEFAULT_RUNTIME_CONFIG.model.attention_leaky_relu_slope,
+            ),
+            dst,
+            h.shape[0],
+        )
         agg = torch.zeros_like(h).index_add_(0, dst, m * alpha.unsqueeze(-1))
         return h + self.node_mlp(torch.cat([h, agg], dim=-1))
 
@@ -83,7 +91,11 @@ class EgoLayer(nn.Module):
 class EgoTrunk(nn.Module):
     """Shared-weight encoder. Identical parameters on every robot."""
 
-    def __init__(self, hidden_dim: int = 96, passes: int = 3) -> None:
+    def __init__(
+        self,
+        hidden_dim: int = DEFAULT_RUNTIME_CONFIG.model.hidden_dimension,
+        passes: int = DEFAULT_RUNTIME_CONFIG.model.message_passing_steps,
+    ) -> None:
         super().__init__()
         self.enc = nn.Sequential(
             nn.Linear(FEATURE_DIM, hidden_dim), nn.ReLU(),
@@ -102,7 +114,11 @@ class EgoTrunk(nn.Module):
 class _SelectorBase(nn.Module):
     """Trunk + a 1-scalar head, applied once per candidate mode."""
 
-    def __init__(self, hidden_dim: int = 96, passes: int = 3) -> None:
+    def __init__(
+        self,
+        hidden_dim: int = DEFAULT_RUNTIME_CONFIG.model.hidden_dimension,
+        passes: int = DEFAULT_RUNTIME_CONFIG.model.message_passing_steps,
+    ) -> None:
         super().__init__()
         self.trunk = EgoTrunk(hidden_dim, passes)
         self.head = nn.Sequential(
@@ -160,7 +176,11 @@ SELECTORS = {
 }
 
 
-def build_selector(name: str, hidden_dim: int = 96, passes: int = 3) -> _SelectorBase:
+def build_selector(
+    name: str,
+    hidden_dim: int = DEFAULT_RUNTIME_CONFIG.model.hidden_dimension,
+    passes: int = DEFAULT_RUNTIME_CONFIG.model.message_passing_steps,
+) -> _SelectorBase:
     if name not in SELECTORS:
         raise ValueError(f"unknown selector {name!r}; choose from {sorted(SELECTORS)}")
     return SELECTORS[name](hidden_dim=hidden_dim, passes=passes)

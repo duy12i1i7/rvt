@@ -61,6 +61,20 @@ def _comparison_literals(tree: ast.AST):
     return out
 
 
+def _round_loop_literals(tree: ast.AST):
+    """Literal loop counts can hide fixed communication/protocol rounds."""
+    out = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        if getattr(node.func, "id", None) != "range":
+            continue
+        for arg in node.args:
+            if isinstance(arg, ast.Constant) and isinstance(arg.value, int):
+                out.append((node.lineno, arg.value))
+    return out
+
+
 def deployable_modules():
     off = set(guards.OFFLINE_MODULES) | {"guards", "__init__", "parameters"}
     for p in sorted(PKG.glob("*.py")):
@@ -72,7 +86,8 @@ def unexplained_thresholds():
     bad = []
     for p in deployable_modules():
         tree = ast.parse(p.read_text())
-        for lineno, value in _comparison_literals(tree):
+        literals = _comparison_literals(tree) + _round_loop_literals(tree)
+        for lineno, value in literals:
             if value in MATH_OK or value in WIRE_OK:
                 continue
             bad.append(f"{p.name}:{lineno} threshold {value!r}")
@@ -127,10 +142,16 @@ def injected(source: str):
 
 
 @pytest.mark.parametrize("src,label", [
-    ("def gate(clearance):\n    return clearance < 1.37\n", "mode-selection threshold"),
-    ("def should_fire(streak):\n    return streak >= 7\n", "persistence threshold"),
-    ("def is_safe(margin):\n    return margin > 0.42\n", "safety threshold"),
-    ("def in_range(d):\n    return d <= 2.75\n", "communication threshold"),
+    ("def event_trigger(clearance):\n    return clearance < 1.37\n",
+     "event threshold"),
+    ("def choose_for_team(team_size):\n    return team_size == 6\n",
+     "fixed team-size branch"),
+    ("def communication_rounds():\n    for _ in range(7):\n        pass\n",
+     "communication-round literal"),
+    ("def is_safe(margin):\n    return margin > 0.42\n",
+     "safety threshold"),
+    ("def transition_ready(transition_steps):\n    return transition_steps >= 9\n",
+     "hard-coded transition step"),
 ])
 def test_guard_catches_an_injected_threshold(src, label) -> None:
     before = unexplained_thresholds()

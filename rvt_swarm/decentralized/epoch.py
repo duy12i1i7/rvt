@@ -105,8 +105,14 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from ..config import Config
-from .comms import PROGRESS_WINDOW_STEPS, view_digest
+from ..runtime_configuration import (
+    DEFAULT_RUNTIME_CONFIG,
+    RuntimeConfig,
+    role_transition_observation_requirement_meters,
+    runtime_config_from_legacy,
+    steps_from_seconds,
+)
+from .comms import view_digest
 from .consensus import ConsensusNode, simulate_consensus
 from .ego_graph import EgoGraphConfig, build_ego_graph
 from .guards import offline_diagnostic
@@ -137,10 +143,8 @@ LATCH_COMPLETE = "COMPLETE"
 # configured physical duration, `ProtocolParams.rearm_inactive_seconds`, via
 # ceil(seconds / control_period), so the time-domain behaviour is invariant to
 # control frequency. See docs/EVENT_REARMING_SEMANTICS.md.
-def rearm_open_steps(cfg: Config) -> int:
-    from .parameters import default_parameters, derived_rearm_inactive_steps
-    platform, _, protocol = default_parameters(cfg.env)
-    return derived_rearm_inactive_steps(protocol, platform)
+def rearm_open_steps(cfg: object) -> int:
+    return runtime_config_from_legacy(cfg).derived.rearm_inactive_steps
 
 PHASE_IDLE = "IDLE"
 PHASE_TRIGGERED = "TRIGGERED"
@@ -442,22 +446,31 @@ class TriggerThresholds:
     decision_interval: int
 
     @classmethod
-    def from_config(cls, cfg: Config,
+    def from_config(cls, cfg: object,
                     consensus: Optional[ConsensusParams] = None) -> "TriggerThresholds":
-        env = cfg.env
-        cons = consensus or ConsensusParams()
+        runtime_config = runtime_config_from_legacy(cfg)
+        derived = runtime_config.derived
+        cons = consensus or ConsensusParams.from_runtime_config(runtime_config)
         return cls(
-            clearance_m=float(max(env.nominal_spacing, env.min_ro_distance)),
+            clearance_m=float(max(
+                runtime_config.formation.nominal_spacing_meters,
+                derived.robot_obstacle_required_clearance_meters,
+            )),
             # LINE -> KEEP. Robot i needs room on its own flanks before the
             # team can spread back into the nominal grid. Two nominal spacings
             # is the smallest clearance at which a 3-column keep template
             # (lateral extent 2 x spacing at N=6) can begin to re-form, and it
             # is strictly greater than `clearance_m`, so the entry and recovery
             # triggers cannot both fire on the same geometry.
-            recovery_clearance_m=float(2.0 * env.nominal_spacing),
-            progress_m=float(env.dt * env.max_speed),
-            progress_hold_steps=int(PROGRESS_WINDOW_STEPS),
-            formation_err_m=float(env.formation_tolerance),
+            recovery_clearance_m=float(
+                2.0 * runtime_config.formation.nominal_spacing_meters
+            ),
+            progress_m=float(
+                runtime_config.physical.control_period_seconds
+                * runtime_config.physical.maximum_speed_meters_per_second
+            ),
+            progress_hold_steps=int(derived.progress_window_steps),
+            formation_err_m=float(derived.formation_tolerance_meters),
             decision_interval=int(cons.decision_interval),
         )
 
@@ -655,7 +668,7 @@ def nearest_obstacle_distance(view: RobotView) -> float:
     return float(best)
 
 
-def observe_progress(view: RobotView, cfg: Config, epoch: EpochState) -> int:
+def observe_progress(view: RobotView, cfg: object, epoch: EpochState) -> int:
     """Advance robot i's own low-progress streak. Call once per control step.
 
     Kept separate from `local_trigger` so the trigger predicate stays pure: a
@@ -670,7 +683,7 @@ def observe_progress(view: RobotView, cfg: Config, epoch: EpochState) -> int:
     return int(epoch.low_progress_streak)
 
 
-def trigger_reasons(view: RobotView, cfg: Config,
+def trigger_reasons(view: RobotView, cfg: object,
                     epoch: Optional[EpochState] = None,
                     consensus: Optional[ConsensusParams] = None) -> Dict[str, bool]:
     """The four independent local trigger conditions, evaluated separately.
@@ -720,7 +733,7 @@ def trigger_reasons(view: RobotView, cfg: Config,
 ENTRY_TRIGGER_REASONS: Tuple[str, ...] = ("low_clearance", "low_progress")
 
 
-def local_trigger(view: RobotView, cfg: Config,
+def local_trigger(view: RobotView, cfg: object,
                   epoch: Optional[EpochState] = None,
                   consensus: Optional[ConsensusParams] = None) -> bool:
     """Does robot i want to open a decision epoch right now?
@@ -739,7 +752,7 @@ def local_trigger(view: RobotView, cfg: Config,
     return any(reasons[k] for k in ENTRY_TRIGGER_REASONS)
 
 
-def local_recovery_trigger(view: RobotView, cfg: Config,
+def local_recovery_trigger(view: RobotView, cfg: object,
                           epoch: Optional[EpochState] = None,
                           consensus: Optional[ConsensusParams] = None) -> bool:
     """LINE -> KEEP. Robot i's own detection that the passage is behind it.
@@ -761,7 +774,7 @@ def local_recovery_trigger(view: RobotView, cfg: Config,
     return bool(nearest_obstacle_distance(view) >= th.recovery_clearance_m)
 
 
-def recovery_trigger_reasons(view: RobotView, cfg: Config,
+def recovery_trigger_reasons(view: RobotView, cfg: object,
                              epoch: Optional[EpochState] = None,
                              consensus: Optional[ConsensusParams] = None
                              ) -> Dict[str, bool]:
@@ -936,7 +949,7 @@ def simulate_trigger_consensus(
     k_rounds: int,
     *,
     start_step: int = 0,
-    delta_stale_steps: int = 3,
+    delta_stale_steps: int = CommParams().delta_stale_steps,
     packet_loss: float = 0.0,
     delay_steps: int = 0,
     seed: int = 0,
@@ -1022,7 +1035,7 @@ def simulate_confirm_consensus(
     k_rounds: int,
     *,
     start_step: int = 0,
-    delta_stale_steps: int = 3,
+    delta_stale_steps: int = CommParams().delta_stale_steps,
     packet_loss: float = 0.0,
     delay_steps: int = 0,
     seed: int = 0,
@@ -1090,7 +1103,7 @@ def simulate_decision_epoch(
     epochs: Dict[int, EpochState],
     score_fn,
     *,
-    cfg: Optional[Config] = None,
+    cfg: Optional[object] = None,
     comm: Optional[CommParams] = None,
     consensus: Optional[ConsensusParams] = None,
     start_step: int = 0,
@@ -1309,7 +1322,7 @@ def protocol_signature() -> Dict[str, object]:
 # ---------------------------------------------------------------------------
 # Passage lifecycle latching (Task 5-7)
 # ---------------------------------------------------------------------------
-def update_passage_latch(epoch: "EpochState", view: RobotView, cfg: Config,
+def update_passage_latch(epoch: "EpochState", view: RobotView, cfg: object,
                          consensus: Optional[ConsensusParams] = None) -> str:
     """Advance robot i's own passage latch from its own sensed clearance.
 
@@ -1347,7 +1360,7 @@ def recovery_trigger_allowed(epoch: "EpochState") -> bool:
             and epoch.committed_mode == LINE)
 
 
-def latched_local_trigger(view: RobotView, cfg: Config, epoch: "EpochState",
+def latched_local_trigger(view: RobotView, cfg: object, epoch: "EpochState",
                           consensus: Optional[ConsensusParams] = None) -> bool:
     """The latched entry/recovery trigger. One call, correct direction.
 
@@ -1413,22 +1426,18 @@ def note_transition(epoch: "EpochState", new_mode: int) -> None:
 # robot declare an opening while wall material still lay where it was about to
 # move. See docs/FORWARD_SECTOR_GEOMETRY_DERIVATION.md.
 #
-# This fallback is used only when a caller supplies no role information, and it
-# is deliberately the widest N=6 requirement rather than a tuned value.
-FORWARD_SECTOR_FALLBACK_HALF_WIDTH: float = 1.45
-
 # G7. Persistence is specified in SECONDS
 # (`ProtocolParams.evidence_persistence_seconds = 0.45`) and converted by
 # ceil(seconds / control_period), giving 3 steps at dt = 0.15 -- the same
 # behaviour, now invariant to control frequency.
-def evidence_persistence_steps(cfg: Config) -> int:
-    from .parameters import (default_parameters,
-                             derived_evidence_persistence_steps)
-    platform, _, protocol = default_parameters(cfg.env)
-    return derived_evidence_persistence_steps(protocol, platform)
+def evidence_persistence_steps(cfg: object) -> int:
+    return runtime_config_from_legacy(cfg).derived.evidence_persistence_steps
 
 
-L_TRIGGER: int = 3          # retained name; asserted equal to the derivation
+L_TRIGGER: int = steps_from_seconds(
+    DEFAULT_RUNTIME_CONFIG.protocol.evidence_persistence_seconds,
+    DEFAULT_RUNTIME_CONFIG.physical.control_period_seconds,
+)  # deprecated nominal compatibility alias
 
 # G3 REPAIR, Option A. The 0.5 literal is gone. Peer support is NOT required
 # for ORIGINATION: a robot may originate from its own persistent valid local
@@ -1440,19 +1449,26 @@ L_TRIGGER: int = 3          # retained name; asserted equal to the derivation
 #
 # `peer_support_for_recovery` is retained as a reported DIAGNOSTIC only and no
 # longer gates arming.
-PEER_SUPPORT_REQUIRED_FOR_ORIGINATION: bool = False
+PEER_SUPPORT_REQUIRED_FOR_ORIGINATION: bool = (
+    DEFAULT_RUNTIME_CONFIG.protocol.peer_support_required_for_origination
+)
 
 
-def forward_sector_half_width_for(view: RobotView, cfg: Config) -> float:
+def forward_sector_half_width_for(view: RobotView, cfg: object) -> float:
     """Robot i's own derived sector half-width, from its persistent role."""
-    from .parameters import (default_parameters,
-                             derived_forward_sector_half_width)
-    platform, mission, _ = default_parameters(cfg.env)
-    return derived_forward_sector_half_width(
-        view.role_keep, view.role_line, platform, mission)
+    runtime_config = runtime_config_from_legacy(cfg)
+    derived = runtime_config.derived
+    return role_transition_observation_requirement_meters(
+        view.role_line,
+        view.role_keep,
+        derived.robot_obstacle_required_clearance_meters,
+        runtime_config.controller.transition_response_lateral_bound_meters,
+        runtime_config.controller.protocol_lateral_drift_bound_meters,
+        runtime_config.safety.transition_observation_margin_meters,
+    )
 
 
-def forward_opening_evidence(view: RobotView, cfg: Config,
+def forward_opening_evidence(view: RobotView, cfg: object,
                              half_width: Optional[float] = None) -> bool:
     """Robot i's own evidence that the passage opens ahead of it.
 
@@ -1474,7 +1490,7 @@ def forward_opening_evidence(view: RobotView, cfg: Config,
     return True
 
 
-def recovery_evidence_v3(view: RobotView, cfg: Config,
+def recovery_evidence_v3(view: RobotView, cfg: object,
                          epoch: "EpochState",
                          consensus: Optional[ConsensusParams] = None) -> bool:
     """The V3 RECOVERY event: persistent forward opening, while in LINE.
@@ -1511,7 +1527,7 @@ def peer_support_for_recovery(view: RobotView, epoch: "EpochState") -> float:
     return sum(1 for nb in nbrs if nb.committed_mode == LINE) / len(nbrs)
 
 
-def recovery_armable(view: RobotView, cfg: Config, epoch: "EpochState",
+def recovery_armable(view: RobotView, cfg: object, epoch: "EpochState",
                      consensus: Optional[ConsensusParams] = None) -> bool:
     """Full V3 recovery arming condition: persistence AND peer support."""
     if epoch.locked or epoch.phase != PHASE_IDLE:
@@ -1520,14 +1536,15 @@ def recovery_armable(view: RobotView, cfg: Config, epoch: "EpochState",
         return False
     if not recovery_evidence_v3(view, cfg, epoch, consensus):
         return False
-    if PEER_SUPPORT_REQUIRED_FOR_ORIGINATION:
+    runtime_config = runtime_config_from_legacy(cfg)
+    if runtime_config.protocol.peer_support_required_for_origination:
         raise NotImplementedError(
             "Option B/C peer-support origination is not implemented; "
             "see docs/PEER_SUPPORT_SEMANTICS.md")
     return True
 
 
-def latched_local_trigger_v3(view: RobotView, cfg: Config, epoch: "EpochState",
+def latched_local_trigger_v3(view: RobotView, cfg: object, epoch: "EpochState",
                              consensus: Optional[ConsensusParams] = None) -> bool:
     """V3 entry/recovery trigger. Same latch, forward-opening recovery event.
 

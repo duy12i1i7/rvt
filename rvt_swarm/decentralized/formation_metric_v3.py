@@ -28,15 +28,22 @@ from typing import Dict, Optional, Sequence, Tuple
 
 import numpy as np
 
+from ..runtime_configuration import DEFAULT_RUNTIME_CONFIG, steps_from_seconds
 from .roles import RoleAssignment, rotation
 from .system_model import KEEP, LINE
 
 # Unchanged from the environment configuration. NOT recalibrated using rerun
 # results; any change would need its own predeclaration.
-EPSILON_FORM: float = 0.55
+EPSILON_FORM: float = (
+    DEFAULT_RUNTIME_CONFIG.formation.formation_tolerance_ratio
+    * DEFAULT_RUNTIME_CONFIG.formation.nominal_spacing_meters
+)
 
 # Consecutive in-tube steps required for a recovery to count (3.0 s at dt=0.15).
-L_RECOVER: int = 20
+L_RECOVER: int = steps_from_seconds(
+    DEFAULT_RUNTIME_CONFIG.mission.recovery_dwell_seconds,
+    DEFAULT_RUNTIME_CONFIG.physical.control_period_seconds,
+)
 
 
 def role_errors(positions: np.ndarray, roles: RoleAssignment, mode: int,

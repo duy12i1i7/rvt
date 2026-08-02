@@ -19,6 +19,12 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Dict, FrozenSet, Sequence, Tuple
 
+from ..runtime_configuration import (
+    DEFAULT_RUNTIME_CONFIG,
+    RuntimeConfig,
+    steps_from_seconds,
+)
+
 # ---------------------------------------------------------------------------
 # Modes. Unchanged from the binary pilot: split remains removed.
 # ---------------------------------------------------------------------------
@@ -33,11 +39,11 @@ MODE_NAME: Dict[int, str] = {KEEP: "keep", LINE: "line"}
 # ---------------------------------------------------------------------------
 @dataclass(frozen=True)
 class CommParams:
-    """Runtime communication/sensing parameters.
+    """Deprecated compatibility projection of the runtime configuration.
 
-    Values are justified against the existing environment constants
-    (`EnvConfig`: dt=0.15 s, nominal_spacing=0.9 m, sensing_radius=4.0 m,
-    lidar_range=3.0 m, max_speed=0.9 m/s).
+    New code resolves :class:`~rvt_swarm.runtime_configuration.RuntimeConfig`
+    once and obtains this view with :meth:`from_runtime_config`. Direct
+    construction remains supported for historical tests and diagnostics.
     """
 
     # Peer-to-peer communication radius. A robot pair may exchange messages
@@ -51,38 +57,66 @@ class CommParams:
     # An N=6 keep grid (3x2, spacing 0.9) has maximum pairwise distance
     # ~2.01 m < 3.0 m, so keep is one-hop complete. The contrast between the two
     # regimes is deliberate and is measured, not assumed.
-    r_comm: float = 3.0
+    r_comm: float = DEFAULT_RUNTIME_CONFIG.communication.communication_range_meters
 
     # Radius within which robot i can sense other robots directly. Sensing is
     # NOT used to populate the neighbour set in the nominal configuration --
     # neighbours come from communication only, which is the stricter and more
     # testable choice. Retained so the assumption is explicit and auditable.
-    r_sense: float = 4.0
+    r_sense: float = DEFAULT_RUNTIME_CONFIG.sensing.peer_sensing_range_meters
 
     # Obstacle observation radius. Matches the existing lidar_range so the
     # decentralized obstacle view is exactly what the robot's own sensor sees.
-    r_obs: float = 3.0
+    r_obs: float = DEFAULT_RUNTIME_CONFIG.sensing.obstacle_sensing_range_meters
 
     # Maximum accepted message age, in control steps. A neighbour whose newest
     # message is older than this is marked stale and excluded from N_i.
     # 3 steps = 0.45 s; at max_speed 0.9 m/s a neighbour can move at most
     # 0.405 m in that window, well inside nominal_spacing 0.9 m.
-    delta_stale_steps: int = 3
+    delta_stale_steps: int = steps_from_seconds(
+        DEFAULT_RUNTIME_CONFIG.communication.maximum_message_age_seconds,
+        DEFAULT_RUNTIME_CONFIG.communication.communication_period_seconds,
+    )
 
     # Communication period and control period, in seconds. One beacon per
     # control step in the nominal configuration.
-    t_comm: float = 0.15
-    t_ctrl: float = 0.15
+    t_comm: float = DEFAULT_RUNTIME_CONFIG.communication.communication_period_seconds
+    t_ctrl: float = DEFAULT_RUNTIME_CONFIG.physical.control_period_seconds
 
     # --- Link model. Nominal values; the stress test overrides them. ---
-    symmetric: bool = True
-    packet_loss: float = 0.0
-    delay_steps: int = 0
-    async_offset_steps: int = 0
+    symmetric: bool = DEFAULT_RUNTIME_CONFIG.communication.symmetric_links
+    packet_loss: float = DEFAULT_RUNTIME_CONFIG.communication.packet_loss_probability
+    delay_steps: int = steps_from_seconds(
+        DEFAULT_RUNTIME_CONFIG.communication.maximum_message_delay_seconds,
+        DEFAULT_RUNTIME_CONFIG.communication.communication_period_seconds,
+    )
+    async_offset_steps: int = steps_from_seconds(
+        DEFAULT_RUNTIME_CONFIG.communication.asynchronous_offset_seconds,
+        DEFAULT_RUNTIME_CONFIG.communication.communication_period_seconds,
+    )
 
     @property
     def delta_stale_seconds(self) -> float:
-        return self.delta_stale_steps * self.t_ctrl
+        return self.delta_stale_steps * self.t_comm
+
+    @classmethod
+    def from_runtime_config(cls, config: RuntimeConfig) -> "CommParams":
+        derived = config.derived
+        return cls(
+            r_comm=config.communication.communication_range_meters,
+            r_sense=config.sensing.peer_sensing_range_meters,
+            r_obs=config.sensing.obstacle_sensing_range_meters,
+            delta_stale_steps=derived.message_stale_rounds,
+            t_comm=config.communication.communication_period_seconds,
+            t_ctrl=config.physical.control_period_seconds,
+            symmetric=config.communication.symmetric_links,
+            packet_loss=config.communication.packet_loss_probability,
+            delay_steps=derived.message_delay_bound_rounds,
+            async_offset_steps=steps_from_seconds(
+                config.communication.asynchronous_offset_seconds,
+                config.communication.communication_period_seconds,
+            ),
+        )
 
 
 # Nominal link assumptions, stated once so documents and tests agree.
@@ -125,29 +159,58 @@ LINK_ASSUMPTIONS: Dict[str, str] = {
 # ---------------------------------------------------------------------------
 @dataclass(frozen=True)
 class ConsensusParams:
-    """Finite-round leaderless consensus parameters.
+    """Deprecated compatibility projection of derived protocol quantities.
 
-    `k_score` is selected on validation data only, from the predeclared grid
-    below. The grid is fixed here *before* any run so the choice cannot be
-    rationalised after seeing results.
+    The old `k_score=4` default under-covered the declared N=6 path diameter.
+    The default now comes from the same diameter contract as intent/readiness/
+    confirmation. The historical validation grid remains training-only below.
     """
 
-    k_score: int = 4
+    k_score: int = int(
+        DEFAULT_RUNTIME_CONFIG.protocol.declared_maximum_component_diameter_hops
+        if DEFAULT_RUNTIME_CONFIG.protocol.declared_maximum_component_diameter_hops
+        is not None else DEFAULT_RUNTIME_CONFIG.protocol.maximum_team_size - 1
+    )
     # G6 REPAIR, Option A. Max-consensus propagates exactly one hop per round,
     # so covering a component of diameter D needs D rounds. The literal 4 was
     # unsound for N = 6, whose worst-case (chain) diameter is 5. The value is
     # DERIVED from ProtocolParams.max_team_size by
     # `parameters.derived_k_trigger`; the default below is a placeholder that
     # `ConsensusParams.for_protocol` overrides.
-    k_trigger: int = 5          # max-consensus rounds for trigger propagation
+    k_trigger: int = k_score    # compatibility name for intent propagation
     # Min/max confirmation propagates one hop per round exactly as the trigger
     # does, so the same diameter argument applies: leaving it at 4 would
     # under-cover the worst-case N=6 chain and a robot could be committed
     # without ever having heard the confirmation bounds.
-    k_confirm: int = 5          # min/max-consensus rounds for mode confirmation
-    h_commit: int = 10          # must match recovery_v2.rollout(h_commit=10)
-    decision_interval: int = 25  # forced epoch cadence, control steps
-    confirm_margin: float = 0.0  # minimum |z_keep - z_line| to accept a commit
+    k_ready: int = k_score      # configured now; protocol implementation is Phase 7
+    k_confirm: int = k_score    # min/max-consensus rounds for mode confirmation
+    h_commit: int = steps_from_seconds(
+        DEFAULT_RUNTIME_CONFIG.protocol.commitment_seconds,
+        DEFAULT_RUNTIME_CONFIG.physical.control_period_seconds,
+    )
+    decision_interval: int = steps_from_seconds(
+        DEFAULT_RUNTIME_CONFIG.protocol.decision_reference_seconds,
+        DEFAULT_RUNTIME_CONFIG.physical.control_period_seconds,
+    )
+    confirm_margin: float = DEFAULT_RUNTIME_CONFIG.protocol.minimum_confirmation_margin
+
+    @classmethod
+    def from_runtime_config(cls, config: RuntimeConfig) -> "ConsensusParams":
+        derived = config.derived
+        return cls(
+            k_score=derived.k_score_rounds,
+            k_trigger=derived.k_intent_rounds,
+            k_ready=derived.k_ready_rounds,
+            k_confirm=derived.k_confirm_rounds,
+            h_commit=derived.commitment_steps,
+            decision_interval=derived.decision_reference_steps,
+            confirm_margin=config.protocol.minimum_confirmation_margin,
+        )
+
+    @classmethod
+    def for_protocol(cls, config: RuntimeConfig) -> "ConsensusParams":
+        """Materialize all protocol rounds from one validated runtime config."""
+        return cls.from_runtime_config(config)
 
 
 # Predeclared before any run. Selection on validation layouts only.

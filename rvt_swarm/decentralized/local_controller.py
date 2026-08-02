@@ -52,8 +52,12 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from ..config import Config
 from ..controllers import _clearance_term, _ttc_term
+from ..runtime_configuration import (
+    DEFAULT_RUNTIME_CONFIG,
+    RuntimeConfig,
+    runtime_config_from_legacy,
+)
 from ..utils import soft_clip, unit, vec_norm
 from .roles import desired_offset_for_neighbour
 from .system_model import KEEP, LINE, CentralizedAccessError, RobotView
@@ -69,20 +73,36 @@ class LocalGains:
     attributable to locality rather than to retuning.
     """
 
-    k_goal: float = 1.0
-    k_formation: float = 1.0
-    k_damping: float = 1.0
-    k_rr_clearance: float = 1.0
-    k_rr_ttc: float = 1.0
-    k_ro_clearance: float = 1.0
-    k_ro_ttc: float = 1.0
+    k_goal: float = DEFAULT_RUNTIME_CONFIG.controller.goal_gain
+    k_formation: float = DEFAULT_RUNTIME_CONFIG.controller.formation_gain
+    k_damping: float = DEFAULT_RUNTIME_CONFIG.controller.damping_gain
+    k_rr_clearance: float = DEFAULT_RUNTIME_CONFIG.controller.robot_clearance_gain
+    k_rr_ttc: float = DEFAULT_RUNTIME_CONFIG.controller.robot_ttc_gain
+    k_ro_clearance: float = DEFAULT_RUNTIME_CONFIG.controller.obstacle_clearance_gain
+    k_ro_ttc: float = DEFAULT_RUNTIME_CONFIG.controller.obstacle_ttc_gain
     # Velocity-consensus damping sum_j k_v (v_j - v_i). Available locally
     # (relative velocity rides in the beacon) and part of the specified
     # controller structure, but it has no centralized counterpart -- so it is
     # its own term group, leaving the exact-correspondence property intact, and
     # setting it to 0.0 recovers a controller that mirrors the centralized one
     # term for term.
-    k_velocity_consensus: float = 1.0
+    k_velocity_consensus: float = (
+        DEFAULT_RUNTIME_CONFIG.controller.velocity_consensus_gain
+    )
+
+    @classmethod
+    def from_runtime_config(cls, config: RuntimeConfig) -> "LocalGains":
+        source = config.controller
+        return cls(
+            k_goal=source.goal_gain,
+            k_formation=source.formation_gain,
+            k_damping=source.damping_gain,
+            k_rr_clearance=source.robot_clearance_gain,
+            k_rr_ttc=source.robot_ttc_gain,
+            k_ro_clearance=source.obstacle_clearance_gain,
+            k_ro_ttc=source.obstacle_ttc_gain,
+            k_velocity_consensus=source.velocity_consensus_gain,
+        )
 
 
 def _mean(vs: Sequence[np.ndarray]) -> np.ndarray:
@@ -127,7 +147,7 @@ def local_formation_error(view: RobotView, mode: int) -> np.ndarray:
 
 def local_controller(
     view: RobotView,
-    cfg: Config,
+    cfg: object,
     committed_mode: int,
     gains: Optional[LocalGains] = None,
 ) -> np.ndarray:
@@ -143,7 +163,9 @@ def local_controller(
             "local_controller accepts a RobotView only; passing an obs dict or a "
             "joint-state array is a centralization violation"
         )
-    g = gains or LocalGains()
+    runtime_config = runtime_config_from_legacy(cfg)
+    derived = runtime_config.derived
+    g = gains or LocalGains.from_runtime_config(runtime_config)
 
     p_i = np.asarray(view.position, dtype=np.float32)
     v_i = np.asarray(view.velocity, dtype=np.float32)
@@ -151,11 +173,22 @@ def local_controller(
     mission = unit(np.asarray(view.mission_dir, dtype=np.float32))
     lateral = np.array([mission[1], -mission[0]], dtype=np.float32)
 
-    spacing = max(cfg.env.nominal_spacing, 1e-6)
-    max_speed = max(cfg.env.max_speed, 1e-6)
-    rr_active = max(cfg.env.nominal_spacing, cfg.env.min_rr_distance)
-    ro_active = max(cfg.env.nominal_spacing, cfg.env.min_ro_distance)
-    horizon = max(cfg.env.dt, cfg.env.sensing_radius / max_speed)
+    spacing = max(runtime_config.formation.nominal_spacing_meters, 1e-6)
+    max_speed = max(
+        runtime_config.physical.maximum_speed_meters_per_second, 1e-6
+    )
+    rr_active = max(
+        runtime_config.formation.nominal_spacing_meters,
+        derived.robot_robot_required_clearance_meters,
+    )
+    ro_active = max(
+        runtime_config.formation.nominal_spacing_meters,
+        derived.robot_obstacle_required_clearance_meters,
+    )
+    horizon = max(
+        runtime_config.physical.control_period_seconds,
+        runtime_config.sensing.peer_sensing_range_meters / max_speed,
+    )
 
     # -- formation error from pairwise neighbour residuals only --------------
     e_i = local_formation_error(view, committed_mode)
@@ -216,7 +249,10 @@ def local_controller(
         if len(group):
             total = total + _mean(group) * gain
 
-    return soft_clip(total, cfg.env.max_accel).astype(np.float32)
+    return soft_clip(
+        total,
+        runtime_config.physical.maximum_acceleration_meters_per_second_squared,
+    ).astype(np.float32)
 
 
 def controller_signature() -> Dict[str, object]:

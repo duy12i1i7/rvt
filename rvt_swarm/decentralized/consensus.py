@@ -29,7 +29,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
 from .guards import offline_diagnostic
-from .system_model import KEEP, LINE, MODES, ConsensusParams
+from .system_model import KEEP, LINE, MODES, CommParams, ConsensusParams
 
 # ---------------------------------------------------------------------------
 # Messages
@@ -178,7 +178,7 @@ def simulate_consensus(
     k_rounds: int,
     *,
     start_step: int = 0,
-    delta_stale_steps: int = 3,
+    delta_stale_steps: int = CommParams().delta_stale_steps,
     packet_loss: float = 0.0,
     delay_steps: int = 0,
     seed: int = 0,

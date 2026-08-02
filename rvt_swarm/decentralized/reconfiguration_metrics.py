@@ -17,11 +17,12 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
+from ..configuration import EvaluationConfig
+from .formation_metric_v3 import L_RECOVER
 from .roles import RoleAssignment, rotation
 from .system_model import KEEP, LINE
 
-L_RECOVER = 20          # control steps the keep tube must be held (3.0 s)
-RECOVERY_MARGIN = 0.5   # m past the exit plane before recovery may be scored
+RECOVERY_MARGIN = EvaluationConfig().downstream_recovery_margin_meters
 
 
 def pairwise_formation_error(pos: np.ndarray, roles: RoleAssignment,

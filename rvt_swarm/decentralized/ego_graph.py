@@ -59,6 +59,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 import torch
 
+from ..runtime_configuration import RuntimeConfig
 from .system_model import (
     KEEP,
     LINE,
@@ -394,6 +395,11 @@ def _resolve_cfg(cfg: Optional[object]) -> EgoGraphConfig:
         return EgoGraphConfig()
     if isinstance(cfg, EgoGraphConfig):
         return cfg
+    if isinstance(cfg, RuntimeConfig):
+        return EgoGraphConfig(
+            comm=CommParams.from_runtime_config(cfg),
+            consensus=ConsensusParams.from_runtime_config(cfg),
+        )
     if isinstance(cfg, CommParams):
         return EgoGraphConfig(comm=cfg)
     comm = getattr(cfg, "comm", None)

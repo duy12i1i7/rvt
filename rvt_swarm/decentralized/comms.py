@@ -37,6 +37,7 @@ from typing import (Deque, Dict, Iterable, List, Mapping, Optional, Sequence,
 
 import numpy as np
 
+from ..runtime_configuration import DEFAULT_RUNTIME_CONFIG, steps_from_seconds
 from .roles import RoleAssignment
 from .system_model import KEEP, LINE, CommParams, NeighbourRecord, RobotView
 
@@ -47,13 +48,18 @@ Vec2 = Tuple[float, float]
 # anyway (seq <= stored seq), so the horizon costs no correctness, only the
 # ability to *label* a very old retransmission "duplicate" rather than
 # "out-of-order".
-SEEN_SEQ_HORIZON: int = 64
+SEEN_SEQ_HORIZON: int = (
+    DEFAULT_RUNTIME_CONFIG.protocol.duplicate_sequence_horizon
+)
 
 # Own-history window used for `local_progress`, in control steps.
 # 5 steps = 0.75 s at t_ctrl = 0.15 s; at max_speed 0.9 m/s that is at most
 # 0.675 m of travel, i.e. under one nominal spacing, so the signal is local in
 # time as well as in space.
-PROGRESS_WINDOW_STEPS: int = 5
+PROGRESS_WINDOW_STEPS: int = steps_from_seconds(
+    DEFAULT_RUNTIME_CONFIG.controller.progress_window_seconds,
+    DEFAULT_RUNTIME_CONFIG.physical.control_period_seconds,
+)
 
 
 # ---------------------------------------------------------------------------
