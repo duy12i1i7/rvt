@@ -24,12 +24,11 @@ from ..runtime_configuration import (
     RuntimeConfig,
     steps_from_seconds,
 )
+from ..topology_registry import KEEP, LINE
 
 # ---------------------------------------------------------------------------
 # Modes. Unchanged from the binary pilot: split remains removed.
 # ---------------------------------------------------------------------------
-KEEP = 0
-LINE = 2
 MODES: Tuple[int, int] = (KEEP, LINE)
 MODE_NAME: Dict[int, str] = {KEEP: "keep", LINE: "line"}
 

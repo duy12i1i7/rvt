@@ -20,14 +20,21 @@ construction rather than by convention.
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 from typing import Dict, Optional, Sequence, Tuple
 
 import numpy as np
 
+from ..topology_registry import (
+    COMPACT,
+    KEEP,
+    LINE,
+    construct_topology_from_spacing,
+    local_pairwise_offset,
+    rotate_template_vector,
+)
 from .system_model import (
-    KEEP, LINE, MODES, CentralizedAccessError, NeighbourRecord, RobotView,
+    MODES, CentralizedAccessError, NeighbourRecord, RobotView,
 )
 
 Vec2 = Tuple[float, float]
@@ -40,11 +47,8 @@ def rotation(mission_dir: Vec2) -> np.ndarray:
     loads the same mission direction, so every robot computes the same R; no
     communication and no global state is involved.
     """
-    dx, dy = float(mission_dir[0]), float(mission_dir[1])
-    norm = math.hypot(dx, dy)
-    if norm < 1e-9:
-        dx, dy, norm = 1.0, 0.0, 1.0
-    c, s = dx / norm, dy / norm
+    ex = rotate_template_vector((1.0, 0.0), mission_dir)
+    c, s = ex
     return np.array([[c, -s], [s, c]], dtype=np.float32)
 
 
@@ -62,10 +66,13 @@ class RoleAssignment:
     line: np.ndarray            # (N, 2)
     spacing: float
     source: str                 # "index" | "initial_formation"
+    compact: Optional[np.ndarray] = None
 
     def __post_init__(self) -> None:
         if self.keep.shape != self.line.shape or self.keep.ndim != 2:
             raise ValueError("role tables must both be (N, 2)")
+        if self.compact is not None and self.compact.shape != self.keep.shape:
+            raise ValueError("compact role table must match KEEP/LINE shape")
 
     @property
     def n(self) -> int:
@@ -74,9 +81,14 @@ class RoleAssignment:
     def coords(self, mode: int) -> np.ndarray:
         if mode == KEEP:
             return self.keep
+        if mode == COMPACT and self.compact is not None:
+            return self.compact
         if mode == LINE:
             return self.line
-        raise ValueError(f"mode {mode} is not in {MODES} (split is removed)")
+        raise ValueError(
+            f"mode {mode} is unavailable in this role assignment; "
+            f"selected runtime modes are {MODES}"
+        )
 
     def role_of(self, robot_id: int, mode: int) -> Vec2:
         c = self.coords(mode)[robot_id]
@@ -92,16 +104,10 @@ class RoleAssignment:
         exactly. Template frame: +x along the mission direction (rows), +y
         lateral (columns).
         """
-        cols = max(2, int(math.ceil(math.sqrt(n))))
-        rows = int(math.ceil(n / cols))
-        out = np.zeros((n, 2), dtype=np.float32)
-        for i in range(n):
-            r, c = divmod(i, cols)
-            out[i] = (
-                (r - (rows - 1) / 2) * spacing,          # along mission dir
-                -(c - (cols - 1) / 2) * spacing,         # lateral, see note
-            )
-        return out
+        template = construct_topology_from_spacing(KEEP, n, spacing)
+        return np.asarray(
+            [role.offset for role in template.roles], dtype=np.float32
+        )
         # Lateral sign: the centralized template uses
         # lateral = (corridor_y, -corridor_x), i.e. the mission direction
         # rotated -90 deg, whereas the proper rotation R(psi) maps the template
@@ -121,6 +127,13 @@ class RoleAssignment:
             out[robot_id] = ((rank - (n - 1) / 2) * spacing, 0.0)
         return out
 
+    @staticmethod
+    def _compact_template(n: int, spacing: float) -> np.ndarray:
+        template = construct_topology_from_spacing(COMPACT, n, spacing)
+        return np.asarray(
+            [role.offset for role in template.roles], dtype=np.float32
+        )
+
     @classmethod
     def from_index(cls, n: int, spacing: float) -> "RoleAssignment":
         """Pure persistent-index roles: robot i takes line rank i.
@@ -131,9 +144,13 @@ class RoleAssignment:
         places to form the line. Reported as its own arm; not silently
         preferred.
         """
-        return cls(keep=cls._keep_template(n, spacing),
-                   line=cls._line_template(list(range(n)), spacing),
-                   spacing=spacing, source="index")
+        return cls(
+            keep=cls._keep_template(n, spacing),
+            line=cls._line_template(list(range(n)), spacing),
+            spacing=spacing,
+            source="index",
+            compact=cls._compact_template(n, spacing),
+        )
 
     @classmethod
     def simulate_mission_setup_from_initial_formation(
@@ -171,9 +188,13 @@ class RoleAssignment:
         ranks = [0] * n
         for rank, robot_id in enumerate(order):
             ranks[robot_id] = rank
-        return cls(keep=cls._keep_template(n, spacing),
-                   line=cls._line_template(ranks, spacing),
-                   spacing=spacing, source="initial_formation")
+        return cls(
+            keep=cls._keep_template(n, spacing),
+            line=cls._line_template(ranks, spacing),
+            spacing=spacing,
+            source="initial_formation",
+            compact=cls._compact_template(n, spacing),
+        )
 
 
 def pairwise_offset(role_i: Vec2, role_j: Vec2, mission_dir: Vec2) -> np.ndarray:
@@ -183,9 +204,9 @@ def pairwise_offset(role_i: Vec2, role_j: Vec2, mission_dir: Vec2) -> np.ndarray
     the shared mission direction. Exactly antisymmetric, because it is a
     rotation applied to a difference.
     """
-    diff = np.array([float(role_j[0]) - float(role_i[0]),
-                     float(role_j[1]) - float(role_i[1])], dtype=np.float32)
-    return (rotation(mission_dir) @ diff).astype(np.float32)
+    return np.asarray(
+        local_pairwise_offset(role_i, role_j, mission_dir), dtype=np.float32
+    )
 
 
 def desired_offset_for_neighbour(view: "RobotView", neighbour: "NeighbourRecord",

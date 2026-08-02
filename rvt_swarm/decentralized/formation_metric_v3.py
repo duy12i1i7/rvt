@@ -29,6 +29,7 @@ from typing import Dict, Optional, Sequence, Tuple
 import numpy as np
 
 from ..runtime_configuration import DEFAULT_RUNTIME_CONFIG, steps_from_seconds
+from ..topology_registry import COMPACT
 from .roles import RoleAssignment, rotation
 from .system_model import KEEP, LINE
 
@@ -90,13 +91,27 @@ def e_rms(positions: np.ndarray, roles: RoleAssignment, mode: int,
 def in_keep_tube(positions: np.ndarray, roles: RoleAssignment,
                  mission_dir: Tuple[float, float],
                  epsilon: float = EPSILON_FORM) -> bool:
-    return e_inf(positions, roles, KEEP, mission_dir) <= epsilon
+    return in_topology_tube(positions, roles, KEEP, mission_dir, epsilon)
 
 
 def in_line_tube(positions: np.ndarray, roles: RoleAssignment,
                  mission_dir: Tuple[float, float],
                  epsilon: float = EPSILON_FORM) -> bool:
-    return e_inf(positions, roles, LINE, mission_dir) <= epsilon
+    return in_topology_tube(positions, roles, LINE, mission_dir, epsilon)
+
+
+def in_compact_tube(positions: np.ndarray, roles: RoleAssignment,
+                    mission_dir: Tuple[float, float],
+                    epsilon: float = EPSILON_FORM) -> bool:
+    """Mechanical Metric V3 adapter; no COMPACT closed-loop claim."""
+    return in_topology_tube(positions, roles, COMPACT, mission_dir, epsilon)
+
+
+def in_topology_tube(positions: np.ndarray, roles: RoleAssignment,
+                     topology_id: int, mission_dir: Tuple[float, float],
+                     epsilon: float = EPSILON_FORM) -> bool:
+    """Shared Metric V3 tube predicate over registry-backed role geometry."""
+    return e_inf(positions, roles, topology_id, mission_dir) <= epsilon
 
 
 def nominal_keep_recovered(traj: Sequence[np.ndarray], roles: RoleAssignment,

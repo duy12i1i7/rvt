@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 
 from .splits import VALIDATION_TEAM_SIZES
+from .topology_registry import KEEP, LINE
 
 
 @dataclass
@@ -188,10 +189,13 @@ class Config:
         return existing if existing is not None else SeedConfig()
 
 
+# Legacy centralized action vocabulary. It mixes structural modes and
+# procedural scale actions and is not the Phase 3 topology registry.
+LEGACY_TOPOLOGY_ACTION_VOCABULARY_VERSION = "centralized-actions-v1"
 TOPOLOGY_ACTIONS: Dict[int, str] = {
-    0: "keep",
+    KEEP: "keep",
     1: "compress",
-    2: "line",
+    LINE: "line",
     3: "split_hint",
     4: "recover",
 }
@@ -201,4 +205,4 @@ TOPOLOGY_IDS: List[int] = sorted(TOPOLOGY_ACTIONS.keys())
 # formation-scale adaptation already covers compress/recover semantics, so
 # learning them as extra discrete classes makes switching noisier without
 # adding structural benefit.
-LEARNED_TOPOLOGY_IDS: List[int] = [0, 2, 3]
+LEARNED_TOPOLOGY_IDS: List[int] = [KEEP, LINE, 3]
