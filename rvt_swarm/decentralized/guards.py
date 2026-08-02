@@ -151,7 +151,12 @@ def _is_offline(fn) -> bool:
 
 # Attribute chains that read global information.
 FORBIDDEN_CALLS: Tuple[str, ...] = (
-    "pooled_graph_features", "global_mean_pool", "all_reduce", "expert_action",
+    "pooled_graph_features", "global_mean_pool", "global_max_pool",
+    "global_add_pool", "global_attention_pool", "all_reduce", "expert_action",
+)
+
+FORBIDDEN_DEPLOYABLE_IMPORTS: Tuple[str, ...] = (
+    "dataset", "legacy_global_graph",
 )
 
 
@@ -295,8 +300,57 @@ def scan_boundary_reachability() -> List[Violation]:
     return out
 
 
+def scan_global_pooling_paths() -> List[Violation]:
+    """Reject historical whole-swarm graph imports from deployable modules."""
+    out: List[Violation] = []
+    for modname, module in _iter_modules():
+        if modname in ("guards", "system_model") or modname in OFFLINE_MODULES:
+            continue
+        try:
+            tree = ast.parse(inspect.getsource(module))
+        except (OSError, TypeError, SyntaxError):
+            continue
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom):
+                imported = node.module or ""
+                imported_names = (imported,) + tuple(
+                    f"{imported}.{alias.name}" if imported else alias.name
+                    for alias in node.names
+                )
+                if any(
+                    name == forbidden or name.endswith("." + forbidden)
+                    for name in imported_names
+                    for forbidden in FORBIDDEN_DEPLOYABLE_IMPORTS
+                ):
+                    out.append(Violation(
+                        modname,
+                        f"line_{node.lineno}",
+                        "global-graph-import",
+                        "imports prohibited whole-swarm module from "
+                        f"{imported_names!r}",
+                    ))
+            elif isinstance(node, ast.Import):
+                for alias in node.names:
+                    if any(
+                        alias.name == forbidden or alias.name.endswith("." + forbidden)
+                        for forbidden in FORBIDDEN_DEPLOYABLE_IMPORTS
+                    ):
+                        out.append(Violation(
+                            modname,
+                            f"line_{node.lineno}",
+                            "global-graph-import",
+                            f"imports prohibited whole-swarm module {alias.name!r}",
+                        ))
+    return out
+
+
 def audit() -> List[Violation]:
-    return scan_signatures() + scan_prohibited_obs_keys() + scan_boundary_reachability()
+    return (
+        scan_signatures()
+        + scan_prohibited_obs_keys()
+        + scan_boundary_reachability()
+        + scan_global_pooling_paths()
+    )
 
 
 # ---------------------------------------------------------------------------

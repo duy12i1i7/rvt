@@ -6,7 +6,7 @@ from typing import Dict
 import torch
 
 from .config import Config, LEARNED_TOPOLOGY_IDS
-from .dataset import build_graph
+from .legacy_global_graph import build_legacy_global_graph
 from .models import build_model
 from .safety import choose_counterfactual_topology, simple_recover_shield
 
@@ -22,7 +22,8 @@ def is_learned_method(method: str) -> bool:
 
 
 def batch_from_obs(obs: Dict, cfg: Config, device: torch.device) -> Dict[str, torch.Tensor]:
-    node_x, edge_index, edge_attr = build_graph(obs, cfg)
+    """Historical global-checkpoint adapter; not the strict local V2 path."""
+    node_x, edge_index, edge_attr = build_legacy_global_graph(obs, cfg)
     return {
         "node_x": node_x.to(device),
         "edge_index": edge_index.to(device),

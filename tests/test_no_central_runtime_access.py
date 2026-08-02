@@ -93,10 +93,24 @@ def test_guard_catches_prohibited_obs_key_read() -> None:
 
 
 def test_guard_catches_global_pooling_and_expert_action_calls() -> None:
-    for call, in (("pooled_graph_features(h, b)",), ("expert_action(obs, cfg, 0)",)):
+    for call in (
+        "pooled_graph_features(h, b)",
+        "global_mean_pool(h, b)",
+        "global_max_pool(h, b)",
+        "global_add_pool(h, b)",
+        "global_attention_pool(h, b)",
+        "expert_action(obs, cfg, 0)",
+    ):
         with injected(f"def score_all(view):\n    return {call}\n"):
             v = guards.audit()
         assert "forbidden-call" in _kinds(v), (call, v)
+
+
+@pytest.mark.parametrize("module", ("dataset", "legacy_global_graph"))
+def test_guard_catches_global_graph_import_variants(module) -> None:
+    with injected(f"from rvt_swarm import {module}\n"):
+        v = guards.audit()
+    assert "global-graph-import" in _kinds(v), (module, v)
 
 
 def test_guard_catches_a_boundary_call_inside_a_control_loop() -> None:

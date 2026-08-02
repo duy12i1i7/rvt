@@ -13,7 +13,9 @@ type as a side effect.
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field, replace
+import hashlib
+import json
+from dataclasses import asdict, dataclass, field, replace
 from typing import Optional, Tuple
 
 
@@ -242,6 +244,25 @@ class ConfigurationValidationError(ValueError):
             for issue in self.issues
         )
         super().__init__(detail)
+
+
+def canonical_runtime_source(config: RuntimeConfig) -> dict[str, object]:
+    """Deployment-safe canonical source values for hashing and manifests."""
+    if not isinstance(config, RuntimeConfig):
+        raise TypeError("canonical runtime source requires RuntimeConfig")
+    return asdict(config)
+
+
+def canonical_runtime_hash(config: RuntimeConfig) -> str:
+    """SHA-256 over immutable runtime source values, excluding derived data."""
+    payload = json.dumps(
+        canonical_runtime_source(config),
+        allow_nan=False,
+        ensure_ascii=True,
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode("ascii")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def steps_from_seconds(seconds: float, period_seconds: float) -> int:

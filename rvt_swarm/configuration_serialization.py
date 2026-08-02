@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from dataclasses import asdict, fields
 from typing import Any, Dict, Mapping, Type, TypeVar
@@ -21,6 +20,8 @@ from .runtime_configuration import (
     RuntimeConfig,
     SafetyConfig,
     SensingConfig,
+    canonical_runtime_hash,
+    canonical_runtime_source,
     derive_runtime_configuration,
 )
 
@@ -128,15 +129,6 @@ def _canonical_json(value: object) -> str:
         separators=(",", ":"),
         sort_keys=True,
     )
-
-
-def canonical_runtime_source(config: RuntimeConfig) -> Dict[str, Any]:
-    return asdict(config)
-
-
-def canonical_runtime_hash(config: RuntimeConfig) -> str:
-    payload = _canonical_json(canonical_runtime_source(config)).encode("utf-8")
-    return hashlib.sha256(payload).hexdigest()
 
 
 def build_experiment_manifest(
