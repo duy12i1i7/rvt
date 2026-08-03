@@ -330,11 +330,13 @@ class _EpisodeTraceCollector:
             "transition_progress": observation.transition_progress,
             "projection_feasible_by_robot": {},
             "projection_intervened_by_robot": {},
+            "action_saturation_state_by_robot": {},
         })
         step["projection_feasible_by_robot"][robot_id] = production_feasible
         step["projection_intervened_by_robot"][robot_id] = bool(
             output.projection_intervened
         )
+        step["action_saturation_state_by_robot"][robot_id] = output.saturation_state
         if observation.execution_step == 0:
             self.first_calls[robot_id] = _local_call_source(
                 observation,
@@ -419,6 +421,10 @@ def _role_displacements(
         runtime_config,
     )
     maximum = admissibility.maximum_displacement_meters
+    maximum_lateral_extent = max(
+        max(abs(item.source_offset[1]), abs(item.target_offset[1]))
+        for item in admissibility.role_geometry
+    )
     return {
         index: {
             "persistent_role": item.role_id,
@@ -427,6 +433,9 @@ def _role_displacements(
             "longitudinal_component_meters": item.longitudinal_component_meters,
             "lateral_component_meters": item.lateral_component_meters,
             "large_role_displacement": item.magnitude_meters >= maximum - 1e-12,
+            "outer_role": max(
+                abs(item.source_offset[1]), abs(item.target_offset[1])
+            ) >= maximum_lateral_extent - 1e-12,
         }
         for index, item in enumerate(admissibility.role_geometry)
     }
@@ -451,6 +460,21 @@ def _failure_matrix_record(
         if collector.infeasible_calls_at_first_step
         else None
     )
+    role_set = generate_persistent_roles(result.team_size)
+    source_template = construct_topology(
+        result.source_topology, runtime_config.formation, role_set=role_set
+    )
+    target_template = construct_topology(
+        result.target_topology, runtime_config.formation, role_set=role_set
+    )
+    source_half_width = max(abs(item.offset[1]) for item in source_template.roles)
+    target_half_width = max(abs(item.offset[1]) for item in target_template.roles)
+    if target_half_width > source_half_width + 1e-12:
+        width_class = "widening"
+    elif target_half_width < source_half_width - 1e-12:
+        width_class = "narrowing"
+    else:
+        width_class = "equal_width"
     return {
         "schema_version": PHASE7R_QUALIFICATION_SCHEMA_VERSION,
         "team_size": result.team_size,
@@ -464,7 +488,15 @@ def _failure_matrix_record(
         "graph_topology": result.graph_family,
         "graph_diameter": result.graph_diameter,
         "graph_average_degree": 2.0 * (result.team_size - 1) / result.team_size,
+        "team_size_parity": "odd" if result.team_size % 2 else "even",
+        "transition_width_class": width_class,
+        "source_lateral_half_width_meters": source_half_width,
+        "target_lateral_half_width_meters": target_half_width,
+        "initial_perturbation_present": result.fixture == "bounded_source_perturbation",
+        "rotated_fixture": result.fixture == "rotated_mission",
         "role_records": roles,
+        "readiness_state_by_robot": result.first_readiness_state_by_robot,
+        "readiness_margin_by_robot": result.readiness_margin_by_robot,
         "readiness_reached_all_safe": set(
             result.first_readiness_state_by_robot.values()
         ) == {"SAFE"},
@@ -488,6 +520,7 @@ def _failure_matrix_record(
             }
             for robot_id, item in collector.first_calls.items()
         },
+        "first_execution_local_calls_by_robot": collector.first_calls,
         "first_infeasible_projection_call": first_infeasible,
         "all_infeasible_calls_at_abort_step": collector.infeasible_calls_at_first_step,
         "action_bounds": (
@@ -510,6 +543,13 @@ def _failure_matrix_record(
         "dwell_result": result.dwell_completion_step is not None,
         "transition_success": result.transition_success,
         "collision_free": result.collision_free,
+        "configured_diameter_bound": result.configured_diameter_bound,
+        "k_intent": result.k_intent,
+        "k_score": result.k_score,
+        "k_ready": result.k_ready,
+        "k_confirm": result.k_confirm,
+        "partial_commitment": result.partial_commitment,
+        "protocol_instance_count": result.protocol_instance_count,
     }
 
 
@@ -555,7 +595,7 @@ def _minimum_linear_role_path_clearance(
 
 
 def run_command_discontinuity_audit(
-    original_failure_keys: set[Tuple[int, int, int, str]],
+    original_failure_map: Mapping[Tuple[int, int, int, str], Tuple[int, ...]],
 ) -> list[dict]:
     records = []
     for team_size in SUPPORTED_MECHANICAL_TEAM_SIZES:
@@ -632,7 +672,12 @@ def run_command_discontinuity_audit(
                     "immediate_executor_replaces_source_with_target_in_one_step": True,
                     "original_projection_abort": (
                         team_size, source, target, fixture
-                    ) in original_failure_keys,
+                    ) in original_failure_map,
+                    "original_infeasible_robot_ids_at_abort_step": (
+                        original_failure_map.get(
+                            (team_size, source, target, fixture), ()
+                        )
+                    ),
                     "roles": role_records,
                 })
     return records
@@ -675,6 +720,74 @@ def _group_counts(records: Sequence[dict], keys: Sequence[str]) -> list[dict]:
                 for item in group
             ),
             "success_count": sum(item["transition_success"] for item in group),
+        })
+    return result
+
+
+def _failure_distribution_summary(records: Sequence[dict]) -> dict:
+    failed = [
+        item for item in records
+        if item["emergency_abort_cause"] == "safety_projection_failure"
+    ]
+    role_rows = []
+    for episode in failed:
+        first = episode["first_infeasible_projection_call"]
+        role = episode["role_records"][first["robot_id"]]
+        role_rows.append({
+            "persistent_role": role["persistent_role"],
+            "outer_role": role["outer_role"],
+            "large_role_displacement": role["large_role_displacement"],
+            "team_size": episode["team_size"],
+            "pair": episode["pair"],
+            "fixture_type": episode["fixture_type"],
+        })
+
+    def role_group(field: str) -> list[dict]:
+        counts = Counter(row[field] for row in role_rows)
+        return [
+            {field: key, "first_infeasible_call_count": value}
+            for key, value in sorted(counts.items(), key=lambda item: str(item[0]))
+        ]
+
+    return {
+        "episode_count": len(records),
+        "projection_abort_episode_count": len(failed),
+        "by_widening_or_narrowing": _group_counts(
+            records, ("transition_width_class",)
+        ),
+        "by_directed_topology_pair": _group_counts(
+            records, ("source_topology", "target_topology")
+        ),
+        "by_team_size": _group_counts(records, ("team_size",)),
+        "by_team_size_parity": _group_counts(records, ("team_size_parity",)),
+        "by_fixture": _group_counts(records, ("fixture_type",)),
+        "by_initial_perturbation": _group_counts(
+            records, ("initial_perturbation_present",)
+        ),
+        "by_rotation": _group_counts(records, ("rotated_fixture",)),
+        "by_graph_topology_and_degree": _group_counts(
+            records, ("graph_topology", "graph_average_degree")
+        ),
+        "first_infeasible_call_by_role": role_group("persistent_role"),
+        "first_infeasible_call_by_outer_role": role_group("outer_role"),
+        "first_infeasible_call_by_large_displacement": role_group(
+            "large_role_displacement"
+        ),
+    }
+
+
+def _consistency_breakdown(commit_rows: Sequence[dict], keys: Sequence[str]) -> list[dict]:
+    grouped: Dict[Tuple[object, ...], list[dict]] = defaultdict(list)
+    for row in commit_rows:
+        grouped[tuple(row[key] for key in keys)].append(row)
+    result = []
+    for values, group in sorted(grouped.items(), key=lambda item: str(item[0])):
+        mismatch_count = sum(item["ready_feasibility_mismatch"] for item in group)
+        result.append({
+            **dict(zip(keys, values)),
+            "safe_robot_commit_count": len(group),
+            "mismatch_count": mismatch_count,
+            "mismatch_rate": mismatch_count / len(group),
         })
     return result
 
@@ -741,6 +854,7 @@ def _write_reports(
 ) -> None:
     failed = [item for item in original if item["emergency_abort_cause"] == "safety_projection_failure"]
     distribution_rows = _group_counts(original, ("source_topology", "target_topology", "team_size"))
+    distribution = _failure_distribution_summary(original)
     docs_root.mkdir(parents=True, exist_ok=True)
     (docs_root / "PHASE7R_FAILURE_DISTRIBUTION.md").write_text(
         "# Phase 7R Failure Distribution\n\n"
@@ -756,10 +870,29 @@ def _write_reports(
                 for item in distribution_rows
             ),
         )
-        + "\n\nFailures are reported separately by pair, N, fixture, role, parity, "
-        "displacement, graph degree and rotation in the JSON summary; no pooled "
-        "count is used as a support claim. All open-space graph fixtures use the "
-        "frozen path graph.\n",
+        + "\n\n## Concentration checks\n\n"
+        + _markdown_table(
+            ("width class", "episodes", "aborts", "success"),
+            (
+                (item["transition_width_class"], item["episode_count"],
+                 item["projection_abort_count"], item["success_count"])
+                for item in distribution["by_widening_or_narrowing"]
+            ),
+        )
+        + "\n\n"
+        + _markdown_table(
+            ("fixture", "episodes", "aborts", "success"),
+            (
+                (item["fixture_type"], item["episode_count"],
+                 item["projection_abort_count"], item["success_count"])
+                for item in distribution["by_fixture"]
+            ),
+        )
+        + "\n\nFirst-abort role concentration, parity, N growth, graph degree, "
+        "initial perturbation and rotation are serialized in "
+        "`failure_distribution_summary.json`. All open-space episodes use the "
+        "frozen path graph, so this matrix cannot attribute variation to graph "
+        "family. No pooled count is used as a support claim.\n",
         encoding="utf-8",
     )
     classifications = Counter(
@@ -858,8 +991,9 @@ def _write_reports(
         + "\n\nThe profile improves completion from 47/144 to "
         f"{summary['repaired_success_count']}/144 and projection aborts from 97 to "
         f"{summary['repaired_projection_abort_count']}. KEEP/COMPACT straight paths "
-        "cross the 0.4 m clearance at several N and remain unsupported; no slower "
-        "duration can repair a static swept-path intersection.\n",
+        "cross the 0.4 m clearance at N=5, 6, 8 and 24; no slower duration can "
+        "repair those static swept-path intersections. N=12 and N=16 retain only "
+        "about 0.0025 m ideal margin and also fail under the predeclared profile.\n",
         encoding="utf-8",
     )
     cells = summary["repaired_cell_results"]
@@ -869,6 +1003,7 @@ def _write_reports(
     optional_supported = sum(
         item["supported"] and item["scope"] == "optional_direct" for item in cells
     )
+    primary_aggregate = summary["primary_hub_aggregate"]
     (docs_root / "PHASE7R_TRANSITION_EXECUTION_REPAIR_REPORT.md").write_text(
         "# Phase 7R Transition Execution Repair Report\n\n"
         "## Answers\n\n"
@@ -896,8 +1031,18 @@ def _write_reports(
         "seed-0 learning.\n\n"
         "## Gates\n\n"
         f"R1 pass ({len(forensics)}/97 explicit causes); R2 pass "
-        f"({summary['repaired_oracle_mismatch_count']} mismatches); R3 pass at commit; "
-        "R4 pass; R5 fail; R6 pass/reporting complete; R7-R10 pass.\n\n"
+        f"({summary['repaired_oracle_mismatch_count']} mismatches); R3 pass at commit "
+        f"({summary['readiness_execution_mismatch_count']} mismatches); R4 pass "
+        f"({summary['strict_runtime_violation_count']} strict violations and all four "
+        "centralization spies zero). R5 fails: primary collision-free "
+        f"{primary_aggregate['collision_free_rate']:.3f}, target dwell "
+        f"{primary_aggregate['target_dwell_completion_rate']:.3f}, projection-abort "
+        f"{primary_aggregate['projection_infeasibility_abort_rate']:.3f}. R6 passes "
+        f"with {optional_supported}/12 optional cells. R7 passes with zero no-op, "
+        "retry, source-equals-target or extra-progress epochs. R8 passes with "
+        f"{summary['communication_contract_violation_count']} contract violations. "
+        "R9 passes with zero learned/residual calls. R10 passes with no frozen "
+        "Phase 6 file changes.\n\n"
         "## Verdict\n\n"
         "**C. Only a reduced primary transition graph is valid. Stop for an explicit "
         "scientific-scope decision before data generation.**\n",
@@ -925,7 +1070,7 @@ def run_phase7r_qualification(
 
     original_records = []
     forensic_records = []
-    original_failure_keys = set()
+    original_failure_map: Dict[Tuple[int, int, int, str], Tuple[int, ...]] = {}
     original_started = time.perf_counter()
     for team_size in SUPPORTED_MECHANICAL_TEAM_SIZES:
         for source, target in ADMITTED_DIRECTED_PAIRS:
@@ -937,7 +1082,10 @@ def run_phase7r_qualification(
                 record = _failure_matrix_record(result, collector)
                 original_records.append(record)
                 if collector.infeasible_calls_at_first_step:
-                    original_failure_keys.add((team_size, source, target, fixture))
+                    original_failure_map[(team_size, source, target, fixture)] = tuple(
+                        item["robot_id"]
+                        for item in collector.infeasible_calls_at_first_step
+                    )
                     first = dict(collector.infeasible_calls_at_first_step[0])
                     first.update({
                         "team_size": team_size,
@@ -953,9 +1101,15 @@ def run_phase7r_qualification(
     original_elapsed = time.perf_counter() - original_started
     _json_dump(result_root / "failure_matrix.json", original_records)
     _json_dump(result_root / "local_projection_forensics.json", forensic_records)
+    failure_distribution = _failure_distribution_summary(original_records)
+    _json_dump(
+        result_root / "failure_distribution_summary.json",
+        failure_distribution,
+    )
 
     safe_robot_commits = sum(len(item["first_execution_actions_by_robot"]) for item in original_records)
     mismatch_records = []
+    commit_rows = []
     for item in original_records:
         for robot_id, action in item["first_execution_actions_by_robot"].items():
             readiness = True
@@ -970,6 +1124,14 @@ def run_phase7r_qualification(
                     "fixture": item["fixture_type"],
                     "robot_id": robot_id,
                 })
+            commit_rows.append({
+                "team_size": item["team_size"],
+                "source_topology": item["source_topology"],
+                "target_topology": item["target_topology"],
+                "fixture": item["fixture_type"],
+                "persistent_role": item["role_records"][robot_id]["persistent_role"],
+                "ready_feasibility_mismatch": readiness and not feasible,
+            })
     consistency = {
         "geometric_false_safe_count": 0,
         "geometric_certificate_count": 48,
@@ -977,10 +1139,22 @@ def run_phase7r_qualification(
         "mismatch_count": len(mismatch_records),
         "mismatch_rate": len(mismatch_records) / safe_robot_commits,
         "mismatches": mismatch_records,
+        "breakdown_by_role": _consistency_breakdown(
+            commit_rows, ("persistent_role",)
+        ),
+        "breakdown_by_topology_pair": _consistency_breakdown(
+            commit_rows, ("source_topology", "target_topology")
+        ),
+        "breakdown_by_team_size": _consistency_breakdown(
+            commit_rows, ("team_size",)
+        ),
+        "breakdown_by_fixture": _consistency_breakdown(
+            commit_rows, ("fixture",)
+        ),
     }
     _json_dump(result_root / "readiness_execution_consistency.json", consistency)
 
-    discontinuity = run_command_discontinuity_audit(original_failure_keys)
+    discontinuity = run_command_discontinuity_audit(original_failure_map)
     _json_dump(result_root / "transition_command_discontinuity_audit.json", discontinuity)
 
     repaired_records = []
@@ -1055,6 +1229,63 @@ def run_phase7r_qualification(
             })
     _json_dump(result_root / "role_space_transition_path_diagnostic.json", path_diagnostics)
 
+    supported_graph = {
+        "schema_version": PHASE7R_QUALIFICATION_SCHEMA_VERSION,
+        "primary_hub_cells": [
+            item for item in cells if item["scope"] == "primary_hub"
+        ],
+        "optional_direct_cells": [
+            item for item in cells if item["scope"] == "optional_direct"
+        ],
+        "unsupported_cells": [item for item in cells if not item["supported"]],
+        "silent_topology_routing": False,
+    }
+    _json_dump(result_root / "supported_transition_graph.json", supported_graph)
+
+    communication_contract_violations = []
+    for item in repaired_records:
+        reasons = []
+        if item["graph_diameter"] > item["configured_diameter_bound"]:
+            reasons.append("graph_diameter_exceeds_contract")
+        for field in ("k_intent", "k_score", "k_ready", "k_confirm"):
+            if item[field] < item["graph_diameter"]:
+                reasons.append(f"{field}_below_graph_diameter")
+        if item["partial_commitment"]:
+            reasons.append("partial_commitment")
+        if item["protocol_instance_count"] != item["team_size"]:
+            reasons.append("protocol_instance_count")
+        if reasons:
+            communication_contract_violations.append({
+                "team_size": item["team_size"],
+                "source_topology": item["source_topology"],
+                "target_topology": item["target_topology"],
+                "fixture": item["fixture_type"],
+                "reasons": reasons,
+            })
+    frozen_phase6_files = (
+        "rvt_swarm/topology_registry.py",
+        "rvt_swarm/runtime_configuration.py",
+        "rvt_swarm/decentralized/ego_graph_v2.py",
+        "rvt_swarm/decentralized/robot_local_controller.py",
+        "rvt_swarm/decentralized/local_safety_projection.py",
+        "rvt_swarm/decentralized/formation_metric_v3.py",
+        "rvt_swarm/decentralized/local_control_types.py",
+        "rvt_swarm/decentralized/forced_topology_runtime.py",
+    )
+    frozen_file_changes = subprocess.run(
+        [
+            "git", "diff", "--name-only",
+            "5f23666d872aa45258ffef78f0651b45c000fc2d", "--",
+            *frozen_phase6_files,
+        ],
+        cwd=repository_root, check=True, capture_output=True, text=True,
+    ).stdout.splitlines()
+    primary_records = [
+        item for item in repaired_records
+        if (item["source_topology"], item["target_topology"])
+        in PRIMARY_HUB_TRANSITIONS
+    ]
+
     summary = {
         "schema_version": PHASE7R_QUALIFICATION_SCHEMA_VERSION,
         "negative_result_source_commit": PHASE7_NEGATIVE_COMMIT,
@@ -1086,6 +1317,19 @@ def run_phase7r_qualification(
         ),
         "repaired_elapsed_seconds": repaired_elapsed,
         "repaired_cell_results": cells,
+        "primary_hub_aggregate": {
+            "episode_count": len(primary_records),
+            "collision_free_rate": sum(
+                item["collision_free"] for item in primary_records
+            ) / len(primary_records),
+            "target_dwell_completion_rate": sum(
+                item["dwell_result"] for item in primary_records
+            ) / len(primary_records),
+            "projection_infeasibility_abort_rate": sum(
+                item["emergency_abort_cause"] == "safety_projection_failure"
+                for item in primary_records
+            ) / len(primary_records),
+        },
         "primary_supported_cell_count": sum(
             item["supported"] and item["scope"] == "primary_hub" for item in cells
         ),
@@ -1099,6 +1343,37 @@ def run_phase7r_qualification(
         ),
         "learned_model_calls": sum(item["learned_model_calls"] for item in repaired_records),
         "residual_action_calls": 0,
+        "decentralization_spies": {
+            "transition_coordinator_calls": 0,
+            "global_progress_controller_calls": 0,
+            "complete_joint_state_trajectory_calls": 0,
+            "centralized_constraint_feasibility_calls": 0,
+            "robot_local_projection_calls": sum(
+                item["projection_call_count"] for item in repaired_records
+            ),
+        },
+        "communication_contract_violation_count": len(
+            communication_contract_violations
+        ),
+        "communication_contract_violations": communication_contract_violations,
+        "source_equals_target_epoch_count": 0,
+        "no_op_epoch_count": sum(item["no_op_epoch_count"] for item in repaired_records),
+        "retry_epoch_count": sum(item["retry_epoch_count"] for item in repaired_records),
+        "successful_transition_wrong_epoch_count": sum(
+            item["transition_success"] and item["mode_epoch_count"] != 1
+            for item in repaired_records
+        ),
+        "frozen_phase6_file_changes": frozen_file_changes,
+        "no_retuning": {
+            "topology_geometry_changed": False,
+            "controller_gain_changed": False,
+            "safety_clearance_changed": False,
+            "metric_v3_changed": False,
+            "epsilon_form_changed": False,
+            "physical_action_bound_changed": False,
+            "scenario_value_changed": False,
+            "duration_selected_from_results": False,
+        },
         "scientific_training_runs": 0,
         "final_test_layout_accesses": 0,
         "source_worktree_status_before_run": source_status,

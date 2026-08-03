@@ -1,9 +1,16 @@
+from pathlib import Path
+
 import pytest
 
 from rvt_swarm.decentralized.guards import audit
 from rvt_swarm.decentralized.transition_execution import (
     derive_transition_motion_profile,
     prepare_robot_local_role_space_path,
+)
+from rvt_swarm.decentralized.local_safety_projection import RobotLocalSafetyProjection
+from rvt_swarm.decentralized.phase7r_qualification import (
+    OPTIONAL_DIRECT_TRANSITIONS,
+    PRIMARY_HUB_TRANSITIONS,
 )
 from rvt_swarm.decentralized.transition_protocol import TransitionProtocolRuntimeOptions
 from rvt_swarm.decentralized.transition_runtime import (
@@ -94,6 +101,56 @@ def test_generic_executor_completes_a_previously_unreliable_keep_line_cell():
     assert result.mode_epoch_count == 1
     assert result.no_op_epoch_count == 0
     assert result.learned_model_calls == 0
+
+
+def test_generic_executor_invokes_exactly_one_local_projection_per_robot_action(
+    monkeypatch,
+):
+    calls = []
+    original = RobotLocalSafetyProjection.project
+
+    def spy(self, proposed_action, controller_input):
+        calls.append((controller_input.observer_robot_id, proposed_action))
+        return original(self, proposed_action, controller_input)
+
+    monkeypatch.setattr(RobotLocalSafetyProjection, "project", spy)
+    result = run_phase7_transition_episode(
+        5,
+        KEEP,
+        LINE,
+        "exact_source",
+        "path",
+        execution_strategy="generic_role_space_profile",
+    )
+    assert len(calls) == result.controller_calls
+    assert all(isinstance(robot_id, int) for robot_id, _ in calls)
+
+
+def test_primary_and_optional_graph_scope_is_semantic_and_frozen():
+    assert PRIMARY_HUB_TRANSITIONS == (
+        (KEEP, COMPACT),
+        (COMPACT, KEEP),
+        (KEEP, LINE),
+        (LINE, KEEP),
+    )
+    assert OPTIONAL_DIRECT_TRANSITIONS == (
+        (COMPACT, LINE),
+        (LINE, COMPACT),
+    )
+
+
+def test_deployable_executor_declares_no_coordinator_or_joint_path_api():
+    source = (
+        Path(__file__).resolve().parents[1]
+        / "rvt_swarm/decentralized/transition_execution.py"
+    ).read_text(encoding="utf-8")
+    forbidden = (
+        "TransitionCoordinator",
+        "GlobalProgressController",
+        "JointTrajectory",
+        "CentralizedFeasibility",
+    )
+    assert all(token not in source for token in forbidden)
 
 
 def test_transition_executor_adds_no_strict_decentralization_violation():
