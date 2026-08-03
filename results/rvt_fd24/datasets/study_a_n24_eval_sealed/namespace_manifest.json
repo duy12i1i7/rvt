@@ -1,0 +1,24 @@
+{
+  "access_count": 0,
+  "audit_source_commit": "22894fcc6db613e3d9798f30c2f2a5d22cb63daf",
+  "dataset_manifest_sha256": "16400d2781afde1bf3e3247abc5cb7213da8ec3007ccbfeef615b0e236647ce3",
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "namespace": "study_a_n24_eval_sealed",
+  "namespace_manifest_sha256": "e4d5cb70ff001cdfbe363cf438f6912162faf9c459130c3451ad8cd1e42a9e44",
+  "protocol_reference_id": "phase8-plus-phase9b-frozen",
+  "protocol_references": {
+    "phase8-plus-phase9b-frozen": {
+      "composite_generation_protocol_sha256": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+      "phase8_experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "phase9b_generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+      "source_commit": "20a7541a4ae946c2ca051cde0c353c396d2c1241"
+    }
+  },
+  "purpose": "zero_shot_size_evaluation_only",
+  "record_count": 0,
+  "requires_explicit_authorization": true,
+  "requires_frozen_checkpoint": true,
+  "requires_validation_selection_audit": true,
+  "schema_version": "rvt-phase9-dataset-namespace/v1",
+  "status": "SEALED_GENERATION_INCOMPLETE"
+}

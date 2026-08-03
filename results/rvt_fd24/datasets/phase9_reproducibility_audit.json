@@ -1,0 +1,31 @@
+{
+  "audit_source_commit": "22894fcc6db613e3d9798f30c2f2a5d22cb63daf",
+  "canary_audit_sha256": "f6ee1a7b652c4144f31e75574cff1ab097a61133b99aac7dc694f81c746faa2b",
+  "canary_exact_match": true,
+  "clean_checkout_commit": "22894fcc6db613e3d9798f30c2f2a5d22cb63daf",
+  "exact_mismatches": 0,
+  "final_test_opened": false,
+  "floating_point_tolerance_matches": 0,
+  "implementation_failures": 1,
+  "job_manifest_exact_match": true,
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "protocol_reference_id": "phase8-plus-phase9b-frozen",
+  "protocol_references": {
+    "phase8-plus-phase9b-frozen": {
+      "composite_generation_protocol_sha256": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+      "phase8_experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "phase9b_generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+      "source_commit": "20a7541a4ae946c2ca051cde0c353c396d2c1241"
+    }
+  },
+  "reason_scientific_outputs_absent": "PHASE8_SCENARIO_TO_ACTIVE_RUNTIME_BINDING_ABSENT",
+  "regenerated_canary_audit_sha256": "f6ee1a7b652c4144f31e75574cff1ab097a61133b99aac7dc694f81c746faa2b",
+  "regenerated_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "reproducibility_audit_sha256": "15b2d8b91126e91da98ee76df7c6c520b7cc48061a868ad8e37a21e80c396840",
+  "result": "EXACT_REPRODUCTION_OF_PLANNING_AND_FATAL_CANARY",
+  "schema_version": "rvt-phase9-reproducibility-audit/v1",
+  "scientific_outputs_compared": false,
+  "stochastic_replica_differences": 0,
+  "study_a_n24_opened": false,
+  "subset": "authoritative manifest plus canonical canary"
+}

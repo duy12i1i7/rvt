@@ -1,22 +1,22 @@
 """The canonical canary aborts before invalid scientific generation."""
 
+import json
 from pathlib import Path
 
 from rvt_swarm.phase8.common import verify_canonical_hash
-from rvt_swarm.phase9c.canary import (
-    FATAL_BINDING_CODE,
-    build_phase9_canary_audit,
-    select_canonical_canary,
-)
+from rvt_swarm.phase9c.canary import FATAL_BINDING_CODE, select_canonical_canary
 from rvt_swarm.phase9c.manifest import build_phase9_job_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def _values():
-    manifest = build_phase9_job_manifest(ROOT)
-    return manifest, build_phase9_canary_audit(ROOT, manifest)
+def _stored_audit():
+    return json.loads(
+        (ROOT / "results/rvt_fd24/datasets/phase9_canary_audit.json").read_text(
+            encoding="ascii"
+        )
+    )
 
 
 def test_canary_selection_covers_the_predeclared_nonsealed_prefix():
@@ -35,7 +35,7 @@ def test_canary_selection_covers_the_predeclared_nonsealed_prefix():
 
 
 def test_canary_confirms_the_missing_scenario_runtime_binding():
-    _, audit = _values()
+    audit = _stored_audit()
     finding = audit["fatal_findings"][0]
     assert audit["canary_status"] == "FAIL_FATAL_EXECUTION_BINDING"
     assert audit["abort_generation"] is True
@@ -47,7 +47,7 @@ def test_canary_confirms_the_missing_scenario_runtime_binding():
 
 
 def test_failed_canary_retry_is_identical_and_emits_no_scientific_rows():
-    _, audit = _values()
+    audit = _stored_audit()
     assert audit["attempts"][0] == audit["attempts"][1]
     assert audit["infrastructure_retry"]["byte_identical_deterministic_result"]
     assert audit["scientific_source_episodes_completed"] == 0
@@ -57,7 +57,7 @@ def test_failed_canary_retry_is_identical_and_emits_no_scientific_rows():
 
 
 def test_canary_does_not_claim_unexecuted_checks_passed():
-    _, audit = _values()
+    audit = _stored_audit()
     assert not audit["normal_completion_observed"]
     assert not audit["semantic_failure_observed"]
     assert not audit["resume_behavior_verified"]

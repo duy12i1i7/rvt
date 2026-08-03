@@ -1,0 +1,29 @@
+{
+  "audit_source_commit": "22894fcc6db613e3d9798f30c2f2a5d22cb63daf",
+  "backward_pass_executed": false,
+  "canary_audit_sha256": "f6ee1a7b652c4144f31e75574cff1ab097a61133b99aac7dc694f81c746faa2b",
+  "checkpoint_saved": false,
+  "gradients_retained": false,
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "loss_computed": false,
+  "mixed_team_sizes_loaded": [],
+  "model_forward_executed": false,
+  "optimizer_created": false,
+  "protocol_reference_id": "phase8-plus-phase9b-frozen",
+  "protocol_references": {
+    "phase8-plus-phase9b-frozen": {
+      "composite_generation_protocol_sha256": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+      "phase8_experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "phase9b_generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+      "source_commit": "20a7541a4ae946c2ca051cde0c353c396d2c1241"
+    }
+  },
+  "reason": "PHASE8_SCENARIO_TO_ACTIVE_RUNTIME_BINDING_ABSENT",
+  "schema_version": "rvt-phase9-training-readiness/v1",
+  "status": "BLOCKED_DATASET_INVALID",
+  "strict_loader_fail_closed": true,
+  "study_a_train_batch_loaded": false,
+  "study_a_validation_batch_loaded": false,
+  "training_readiness_audit_sha256": "84d0375ab91a7af1b4faf6b533dda2c7d191fd21797a8bae845797e6e4f71358",
+  "weights_retained": false
+}

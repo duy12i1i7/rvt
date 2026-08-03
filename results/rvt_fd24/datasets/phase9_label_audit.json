@@ -1,0 +1,51 @@
+{
+  "audit_source_commit": "22894fcc6db613e3d9798f30c2f2a5d22cb63daf",
+  "availability_not_evaluated": 15300,
+  "available_events": 0,
+  "canary_audit_sha256": "f6ee1a7b652c4144f31e75574cff1ab097a61133b99aac7dc694f81c746faa2b",
+  "class_weighting": false,
+  "distribution_tables": [],
+  "emitted_robot_candidate_rows": 0,
+  "failure_counts": {
+    "generation_failure_attempts": 2,
+    "generation_failure_unique_jobs": 1,
+    "infrastructure_timeouts": 0,
+    "instability": null,
+    "numerical_failures": null,
+    "protocol_failures": null,
+    "safety_failures": null,
+    "semantic_timeouts": null,
+    "task_failures": 0
+  },
+  "invalid_matched_pairs": 0,
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "joint_outcome_counts": {
+    "BOTH_FAIL": null,
+    "BOTH_SUCCESS": null,
+    "COMPACT_ONLY_SUCCESS": null,
+    "LINE_ONLY_SUCCESS": null
+  },
+  "label_audit_sha256": "5bfe8c062033d5b6d72461f309f5fa5d9ec7ac14eb01faf012f684e8beeb75d0",
+  "negative_labels": null,
+  "non_vacuity_gates": "NOT_EVALUATED",
+  "oversampling": false,
+  "pairs_not_materialized": 15300,
+  "planned_event_slots": 15300,
+  "positive_labels": null,
+  "protocol_reference_id": "phase8-plus-phase9b-frozen",
+  "protocol_references": {
+    "phase8-plus-phase9b-frozen": {
+      "composite_generation_protocol_sha256": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+      "phase8_experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "phase9b_generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+      "source_commit": "20a7541a4ae946c2ca051cde0c353c396d2c1241"
+    }
+  },
+  "reason": "PHASE8_SCENARIO_TO_ACTIVE_RUNTIME_BINDING_ABSENT",
+  "schema_version": "rvt-phase9-recoverability-label-audit/v1",
+  "source_episodes_completed": 0,
+  "status": "NOT_EVALUATED_GENERATION_ABORTED",
+  "unavailable_events": 0,
+  "undersampling": false,
+  "valid_matched_pairs": 0
+}
