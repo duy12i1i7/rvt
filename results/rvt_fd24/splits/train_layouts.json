@@ -1,0 +1,1792 @@
+{
+  "family_distribution": {
+    "F1": 2,
+    "F10": 2,
+    "F2": 2,
+    "F3": 2,
+    "F4": 2,
+    "F5": 2,
+    "F6": 2,
+    "F7": 2,
+    "F8": 2,
+    "F9": 2
+  },
+  "headroom_category_distribution": {
+    "BOTH_FAIL": 2,
+    "BOTH_SUCCESS": 7,
+    "COMPACT_ONLY_SUCCESS": 1,
+    "LINE_ONLY_SUCCESS": 6,
+    "RECONFIGURATION_REQUIRED": 4
+  },
+  "layout_count": 20,
+  "layout_records": [
+    {
+      "canonical_parameter_tuple_sha256": "b754baddd21c1330e712987941e3a23b9a939349840608edd15f823054088bc1",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F1",
+      "generation_seed_commitment": "6516a63aa014afd89e205930c7ade61900486f2c1d5d9c2dd667e999a42edd5e",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "sparse_obstacle_offset_m",
+            "3.000000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19795
+          ],
+          [
+            6.0,
+            0.19795
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 90.0,
+        "family_id": "F1",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19795
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19795
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "circle",
+            "values": [
+              -1.8,
+              3.0,
+              0.35
+            ]
+          },
+          {
+            "primitive_type": "circle",
+            "values": [
+              1.8,
+              -3.0,
+              0.35
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07",
+      "layout_id": "train-f1-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "5a20cd3a00378a82b3dc38063969fe46af34b95804d271c3c22546bd33b5e74f",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F1",
+      "generation_seed_commitment": "42942b9b543841823491e13b57370c1eeb3efcf7520460bfd767f00070ad3b30",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "sparse_obstacle_offset_m",
+            "3.110000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19893
+          ],
+          [
+            6.0,
+            0.19893
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 90.0,
+        "family_id": "F1",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19893
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19893
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "circle",
+            "values": [
+              -1.8,
+              3.11,
+              0.35
+            ]
+          },
+          {
+            "primitive_type": "circle",
+            "values": [
+              1.8,
+              -3.11,
+              0.35
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2",
+      "layout_id": "train-f1-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "eff3b8a8c5b8a695b7400ab476a65c436277200a72a73510604b3525af4cabf3",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "LINE_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F2",
+      "generation_seed_commitment": "a7d7b3c75ccd1b0e6e62a9b3c32524a6a8140a4e156155e04edd87afc973026e",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "passage_width_m",
+            "1.300000"
+          ],
+          [
+            "length_m",
+            "4.000000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19034
+          ],
+          [
+            6.0,
+            0.19034
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 120.0,
+        "family_id": "F2",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19034
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.3,
+        "start_center_meters": [
+          -6.0,
+          -0.19034
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -2.0,
+              2.0,
+              1.3
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+      "layout_id": "train-f2-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "738bfc3981f832175a7309e1660e6e5c1ee5d3b4bdf694913d987cad1efb1dfa",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "LINE_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F2",
+      "generation_seed_commitment": "edecc8ac89ea65a35c7bf32446e34473fcb1755d1772964eed654d4ef9f1f32f",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "passage_width_m",
+            "1.313200"
+          ],
+          [
+            "length_m",
+            "4.066000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19727
+          ],
+          [
+            6.0,
+            0.19727
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 120.0,
+        "family_id": "F2",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19727
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.3132,
+        "start_center_meters": [
+          -6.0,
+          -0.19727
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -2.033,
+              2.033,
+              1.3132000000000001
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+      "layout_id": "train-f2-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "342b4eea07b275998bf4a67430ecac8b0ac9aab0a65a68c1b9ee7d9960fe9868",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "LINE_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F3",
+      "generation_seed_commitment": "55cde1beedec60975cbc819781307ac733b5bb4964636f2bad6666ced552c430",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "entry_offset_m",
+            "0.700000"
+          ],
+          [
+            "passage_width_m",
+            "1.350000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19493
+          ],
+          [
+            -2.5,
+            -0.7
+          ],
+          [
+            0.0,
+            0.7
+          ],
+          [
+            6.0,
+            0.19493
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 135.0,
+        "family_id": "F3",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19493
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.35,
+        "start_center_meters": [
+          -6.0,
+          -0.19493
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "polyline_corridor",
+            "values": [
+              1.35,
+              0.7
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "74ccfe4ffa6d49b7ef89e87ee53833f3d20d37e7fc40b05b3658523724996570",
+      "layout_id": "train-f3-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "44819b5105f11181694482c76410c0ed8225c8dd19ae1744f780129ff7496214",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "LINE_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F3",
+      "generation_seed_commitment": "964c36039287ebdabde0cbe6d2a4e7b4fc3acd121f8be7ed720bb95cbb1d37ad",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "entry_offset_m",
+            "0.755000"
+          ],
+          [
+            "passage_width_m",
+            "1.361000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19306
+          ],
+          [
+            -2.5,
+            -0.755
+          ],
+          [
+            0.0,
+            0.755
+          ],
+          [
+            6.0,
+            0.19306
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 135.0,
+        "family_id": "F3",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19306
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.361,
+        "start_center_meters": [
+          -6.0,
+          -0.19306
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "polyline_corridor",
+            "values": [
+              1.361,
+              0.755
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1",
+      "layout_id": "train-f3-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "390a4811af7fb5e2aacfd8abed212a4a609d521612da2206a729efeda4097bcd",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "LINE_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F4",
+      "generation_seed_commitment": "68a85ded92bea215b4769304f87dba837a7823f2e5cc15f8c1d8e60ac0397158",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "curvature_amplitude_m",
+            "0.700000"
+          ],
+          [
+            "passage_width_m",
+            "1.400000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19236
+          ],
+          [
+            -3.0,
+            0.7
+          ],
+          [
+            0.0,
+            -0.7
+          ],
+          [
+            3.0,
+            0.7
+          ],
+          [
+            6.0,
+            0.19236
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 150.0,
+        "family_id": "F4",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19236
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.4,
+        "start_center_meters": [
+          -6.0,
+          -0.19236
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "s_corridor",
+            "values": [
+              1.4,
+              0.7
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "ae6d6f80bc708c332265aa24c009146b759eb4dc53a4184f550914141113a2f7",
+      "layout_id": "train-f4-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "6ef0b98438069887b69bd10081b13e7ab1623ae118eec76f392dae99d59021d3",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "LINE_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "LINE_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F4",
+      "generation_seed_commitment": "fc4410fb75b66c9934fa97040620b24c5926a2ca69d0e546d3655f071cd3d914",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "curvature_amplitude_m",
+            "0.755000"
+          ],
+          [
+            "passage_width_m",
+            "1.411000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19994
+          ],
+          [
+            -3.0,
+            0.755
+          ],
+          [
+            0.0,
+            -0.755
+          ],
+          [
+            3.0,
+            0.755
+          ],
+          [
+            6.0,
+            0.19994
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 150.0,
+        "family_id": "F4",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19994
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.411,
+        "start_center_meters": [
+          -6.0,
+          -0.19994
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "s_corridor",
+            "values": [
+              1.4109999999999998,
+              0.755
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab",
+      "layout_id": "train-f4-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "35cd8187ac6be00a81e2c1b5006c47125a3961778bbb3435d23eaac1d9df4aa6",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          6,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          8,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          12,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          16,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          24,
+          "RECONFIGURATION_REQUIRED"
+        ]
+      ],
+      "family_id": "F5",
+      "generation_seed_commitment": "2f612159ccb44bee02c202e4368e2f95b1e65e4c7cf18a6692a8d5f6542e4380",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "bottleneck_separation_m",
+            "3.000000"
+          ],
+          [
+            "passage_width_m",
+            "1.400000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19549
+          ],
+          [
+            6.0,
+            0.19549
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 180.0,
+        "family_id": "F5",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19549
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.4,
+        "start_center_meters": [
+          -6.0,
+          -0.19549
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -4.0,
+              -2.5,
+              1.4
+            ]
+          },
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              0.5,
+              2.0,
+              1.4
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0",
+      "layout_id": "train-f5-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "16d548b2b592e5e0b125dc504f728d89c12f55756212a348a790219e387fc1b3",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          6,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          8,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          12,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          16,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          24,
+          "RECONFIGURATION_REQUIRED"
+        ]
+      ],
+      "family_id": "F5",
+      "generation_seed_commitment": "68a80bba44771604cdd9c82a5df51ae3dcb2dfd5f3ee3195a60b7057b8984221",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "bottleneck_separation_m",
+            "3.132000"
+          ],
+          [
+            "passage_width_m",
+            "1.411000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19226
+          ],
+          [
+            6.0,
+            0.19226
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 180.0,
+        "family_id": "F5",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19226
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.411,
+        "start_center_meters": [
+          -6.0,
+          -0.19226
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -4.0,
+              -2.5,
+              1.4109999999999998
+            ]
+          },
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              0.6320000000000001,
+              2.132,
+              1.4109999999999998
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926",
+      "layout_id": "train-f5-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "0b175f3856cf534faaf38a33140bdf53aca432e94ed63a0981f9d805b7a326bd",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "COMPACT_ONLY_SUCCESS"
+        ],
+        [
+          6,
+          "COMPACT_ONLY_SUCCESS"
+        ],
+        [
+          8,
+          "COMPACT_ONLY_SUCCESS"
+        ],
+        [
+          12,
+          "COMPACT_ONLY_SUCCESS"
+        ],
+        [
+          16,
+          "COMPACT_ONLY_SUCCESS"
+        ],
+        [
+          24,
+          "COMPACT_ONLY_SUCCESS"
+        ]
+      ],
+      "family_id": "F6",
+      "generation_seed_commitment": "e0ffdbd9f83c9504dd492b8149d5f82f794cc52d89acf7e6adde3ad65d29cf26",
+      "geometry": {
+        "bypass_available": true,
+        "canonical_parameters": [
+          [
+            "bypass_turn_radius_m",
+            "1.000000"
+          ],
+          [
+            "bypass_clearance_m",
+            "1.200000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19471
+          ],
+          [
+            -1.5,
+            0.0
+          ],
+          [
+            0.0,
+            1.2
+          ],
+          [
+            1.5,
+            0.0
+          ],
+          [
+            6.0,
+            0.19471
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 130.0,
+        "family_id": "F6",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19471
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19471
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "central_blocker",
+            "values": [
+              0.0,
+              0.0,
+              0.8
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9",
+      "layout_id": "train-f6-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "3a02747e37214aa3021806c0042fee73dab01b8beb586e7a56d56da7a5f477d1",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F6",
+      "generation_seed_commitment": "6d804707869741bcb527e893b506138f21a2db3c30e848ce5bc8576f88202e4c",
+      "geometry": {
+        "bypass_available": true,
+        "canonical_parameters": [
+          [
+            "bypass_turn_radius_m",
+            "1.066000"
+          ],
+          [
+            "bypass_clearance_m",
+            "1.255000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19289
+          ],
+          [
+            -1.5,
+            0.0
+          ],
+          [
+            0.0,
+            1.255
+          ],
+          [
+            1.5,
+            0.0
+          ],
+          [
+            6.0,
+            0.19289
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 130.0,
+        "family_id": "F6",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19289
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19289
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "central_blocker",
+            "values": [
+              0.0,
+              0.0,
+              0.8
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826",
+      "layout_id": "train-f6-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "3c29a613460cc7e38840d561f9e0a913cc11f7ae9cc5428b188814a9cefa88e1",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F7",
+      "generation_seed_commitment": "5d68232aec77f21b7d547135c86fb749298ed283d35d3e6f9c57ce45353cf06c",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "clutter_clearance_m",
+            "2.800000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19909
+          ],
+          [
+            6.0,
+            0.19909
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 110.0,
+        "family_id": "F7",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19909
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19909
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "circle",
+            "values": [
+              -2.0,
+              2.8,
+              0.35
+            ]
+          },
+          {
+            "primitive_type": "circle",
+            "values": [
+              0.0,
+              -2.8,
+              0.35
+            ]
+          },
+          {
+            "primitive_type": "circle",
+            "values": [
+              2.0,
+              2.8,
+              0.35
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "a3c2a92527613714902a53f0c1438bec7dcc9443875405a6879200b36f471f01",
+      "layout_id": "train-f7-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "183661d42b93a787ba407486945194c9365125549ff012edc676247813546eb2",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F7",
+      "generation_seed_commitment": "9435fd51f4f95bade22c6ae485ef4e827d21e470f3bcb1d03c39bc45c7147104",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "clutter_clearance_m",
+            "2.866000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19355
+          ],
+          [
+            6.0,
+            0.19355
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 110.0,
+        "family_id": "F7",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19355
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19355
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "circle",
+            "values": [
+              -2.0,
+              2.8659999999999997,
+              0.35
+            ]
+          },
+          {
+            "primitive_type": "circle",
+            "values": [
+              0.0,
+              -2.8659999999999997,
+              0.35
+            ]
+          },
+          {
+            "primitive_type": "circle",
+            "values": [
+              2.0,
+              2.8659999999999997,
+              0.35
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "ba759176d4e30f57da300e7dff7050dae5c357ffc611e1f3db06178c08b60679",
+      "layout_id": "train-f7-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "14bbb35fdb37bdf7f52c9e3c8ee7b3127429f3b8157d18b4ac6e75ac0c2127a5",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          6,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          8,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          12,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          16,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          24,
+          "RECONFIGURATION_REQUIRED"
+        ]
+      ],
+      "family_id": "F8",
+      "generation_seed_commitment": "835871de2faf9d37d548f27eac04c571d4bd175ec7b397ddbbe07be1f8f39ae7",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "delay_s",
+            "0.050000"
+          ],
+          [
+            "packet_loss",
+            "0.020000"
+          ],
+          [
+            "passage_width_m",
+            "1.450000"
+          ]
+        ],
+        "communication_profile": "bounded_delay_loss",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19295
+          ],
+          [
+            6.0,
+            0.19295
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 180.0,
+        "family_id": "F8",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19295
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.45,
+        "start_center_meters": [
+          -6.0,
+          -0.19295
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -2.5,
+              2.5,
+              1.45
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f",
+      "layout_id": "train-f8-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "2c64ac484386a1ea7c2fb87c7ba000baec0bc959c6a92d4a7a2a03fc082b1826",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          6,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          8,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          12,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          16,
+          "RECONFIGURATION_REQUIRED"
+        ],
+        [
+          24,
+          "RECONFIGURATION_REQUIRED"
+        ]
+      ],
+      "family_id": "F8",
+      "generation_seed_commitment": "ca74d69612f247e9b0defcdfcc32fd33d864313d03220d902cab7cbd3bec5d70",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "delay_s",
+            "0.061000"
+          ],
+          [
+            "packet_loss",
+            "0.025500"
+          ],
+          [
+            "passage_width_m",
+            "1.458800"
+          ]
+        ],
+        "communication_profile": "temporary_disconnection_then_restore",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19423
+          ],
+          [
+            6.0,
+            0.19423
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 180.0,
+        "family_id": "F8",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19423
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 1.4588,
+        "start_center_meters": [
+          -6.0,
+          -0.19423
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -2.5,
+              2.5,
+              1.4587999999999999
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+      "layout_id": "train-f8-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "7497204364a3335c06f89ad607df26182b685298a1b921cec723a74612a5ae42",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F9",
+      "generation_seed_commitment": "8dbc5a62574b4030103a8ff6c609f7eed08f5cebac1a718128e6a1264e15599d",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "obstacle_speed_mps",
+            "0.150000"
+          ],
+          [
+            "crossing_time_s",
+            "12.000000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19866
+          ],
+          [
+            6.0,
+            0.19866
+          ]
+        ],
+        "dynamic_obstacle_paths": [
+          {
+            "radius_meters": 0.35,
+            "waypoints": [
+              [
+                -0.5,
+                -2.5,
+                0.0
+              ],
+              [
+                -0.5,
+                2.5,
+                12.0
+              ]
+            ]
+          }
+        ],
+        "episode_horizon_seconds": 150.0,
+        "family_id": "F9",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19866
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19866
+        ],
+        "static_obstacles": []
+      },
+      "geometry_sha256": "afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1",
+      "layout_id": "train-f9-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "518ed2bdc01a5766d6570a801cc3829862e99d4b7f03e500bfc496287817bd0a",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_SUCCESS"
+        ],
+        [
+          6,
+          "BOTH_SUCCESS"
+        ],
+        [
+          8,
+          "BOTH_SUCCESS"
+        ],
+        [
+          12,
+          "BOTH_SUCCESS"
+        ],
+        [
+          16,
+          "BOTH_SUCCESS"
+        ],
+        [
+          24,
+          "BOTH_SUCCESS"
+        ]
+      ],
+      "family_id": "F9",
+      "generation_seed_commitment": "04911c8a5317e92bb055e7f339e157684478db7e2b7c4f283b5aeaced9b55be3",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "obstacle_speed_mps",
+            "0.163200"
+          ],
+          [
+            "crossing_time_s",
+            "12.880000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19756
+          ],
+          [
+            6.0,
+            0.19756
+          ]
+        ],
+        "dynamic_obstacle_paths": [
+          {
+            "radius_meters": 0.35,
+            "waypoints": [
+              [
+                -0.5,
+                -2.5,
+                0.0
+              ],
+              [
+                -0.5,
+                2.5,
+                12.88
+              ]
+            ]
+          }
+        ],
+        "episode_horizon_seconds": 150.0,
+        "family_id": "F9",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19756
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 4.0,
+        "start_center_meters": [
+          -6.0,
+          -0.19756
+        ],
+        "static_obstacles": []
+      },
+      "geometry_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+      "layout_id": "train-f9-01"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "1bd40f234d610f2922edad7d0f1bf00b9cf21b8a28b5df04bbae6d4a81b73851",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_FAIL"
+        ],
+        [
+          6,
+          "BOTH_FAIL"
+        ],
+        [
+          8,
+          "BOTH_FAIL"
+        ],
+        [
+          12,
+          "BOTH_FAIL"
+        ],
+        [
+          16,
+          "BOTH_FAIL"
+        ],
+        [
+          24,
+          "BOTH_FAIL"
+        ]
+      ],
+      "family_id": "F10",
+      "generation_seed_commitment": "989bd60068761579a148bf258506a3a3515afc862153c26b418d7a756332b22b",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "passage_width_m",
+            "0.650000"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19071
+          ],
+          [
+            6.0,
+            0.19071
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 90.0,
+        "family_id": "F10",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19071
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 0.65,
+        "start_center_meters": [
+          -6.0,
+          -0.19071
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -2.0,
+              2.0,
+              0.65
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e",
+      "layout_id": "train-f10-00"
+    },
+    {
+      "canonical_parameter_tuple_sha256": "d00b04eb3346894f2842589b6caccac58cac53569b35192a8fd1c3f8d53665e1",
+      "diagnostic_headroom_by_team_size": [
+        [
+          5,
+          "BOTH_FAIL"
+        ],
+        [
+          6,
+          "BOTH_FAIL"
+        ],
+        [
+          8,
+          "BOTH_FAIL"
+        ],
+        [
+          12,
+          "BOTH_FAIL"
+        ],
+        [
+          16,
+          "BOTH_FAIL"
+        ],
+        [
+          24,
+          "BOTH_FAIL"
+        ]
+      ],
+      "family_id": "F10",
+      "generation_seed_commitment": "a92158cedf17939f181bc58096dee75456a0f6f6db53ed44c5365e5e9ec64fc6",
+      "geometry": {
+        "bypass_available": false,
+        "canonical_parameters": [
+          [
+            "passage_width_m",
+            "0.663200"
+          ]
+        ],
+        "communication_profile": "nominal",
+        "corridor_centerline_meters": [
+          [
+            -6.0,
+            -0.19042
+          ],
+          [
+            6.0,
+            0.19042
+          ]
+        ],
+        "dynamic_obstacle_paths": [],
+        "episode_horizon_seconds": 90.0,
+        "family_id": "F10",
+        "generator_version": "rvt-compact-line-geometry/v1",
+        "goal_center_meters": [
+          6.0,
+          0.19042
+        ],
+        "initial_topology_id": 5,
+        "nominal_passage_width_meters": 0.6632,
+        "start_center_meters": [
+          -6.0,
+          -0.19042
+        ],
+        "static_obstacles": [
+          {
+            "primitive_type": "straight_corridor",
+            "values": [
+              -2.0,
+              2.0,
+              0.6632
+            ]
+          }
+        ]
+      },
+      "geometry_sha256": "ee525840f176f0b16eab190774afbe7dda7480ea59b119d8b6bb202d7fa6f9ff",
+      "layout_id": "train-f10-01"
+    }
+  ],
+  "manifest_sha256": "a2a7257ae09d244f21224bd89b18ba32f7cd1457627f54d3b898cc83be2e9a35",
+  "primary_team_size_distribution": {
+    "12": 20,
+    "16": 20,
+    "5": 20,
+    "6": 20,
+    "8": 20
+  },
+  "schema_version": "rvt-layout-split/v1",
+  "sealed": false,
+  "split": "train",
+  "study_a_team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16
+  ],
+  "study_b_team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16,
+    24
+  ]
+}

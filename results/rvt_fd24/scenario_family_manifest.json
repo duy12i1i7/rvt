@@ -1,0 +1,535 @@
+{
+  "families": [
+    {
+      "allowed_transition_opportunities": [],
+      "canonical_name": "OPEN_NOMINAL_TRANSIT",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 90.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "BOTH_SUCCESS"
+      ],
+      "family_id": "F1",
+      "geometry_parameter_ranges": [
+        [
+          "sparse_obstacle_offset_m",
+          "3.0..3.9"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "static circles outside the nominal transit band",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "measure unnecessary LINE elongation in nominal open transit",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "COMPACT_TO_LINE",
+        "LINE_TO_COMPACT"
+      ],
+      "canonical_name": "STRAIGHT_NARROW_PASSAGE",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 120.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "LINE_ONLY_SUCCESS"
+      ],
+      "family_id": "F2",
+      "geometry_parameter_ranges": [
+        [
+          "passage_width_m",
+          "1.30..1.55"
+        ],
+        [
+          "length_m",
+          "4.0..5.2"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "paired finite wall segments",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "provide clear LINE headroom over COMPACT",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "COMPACT_TO_LINE",
+        "LINE_TO_COMPACT"
+      ],
+      "canonical_name": "OFFSET_ENTRY_PASSAGE",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 135.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "LINE_ONLY_SUCCESS"
+      ],
+      "family_id": "F3",
+      "geometry_parameter_ranges": [
+        [
+          "entry_offset_m",
+          "0.7..1.4"
+        ],
+        [
+          "passage_width_m",
+          "1.35..1.60"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "offset polyline corridor boundaries",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "test local reasoning at an entrance offset from the initial centreline",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "COMPACT_TO_LINE",
+        "LINE_TO_COMPACT"
+      ],
+      "canonical_name": "CURVED_OR_S_SHAPED_PASSAGE",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 150.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "LINE_ONLY_SUCCESS"
+      ],
+      "family_id": "F4",
+      "geometry_parameter_ranges": [
+        [
+          "curvature_amplitude_m",
+          "0.7..1.4"
+        ],
+        [
+          "passage_width_m",
+          "1.40..1.65"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "sampled S-centreline with finite-width boundaries",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "require sustained narrow operation through curvature",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "COMPACT_TO_LINE",
+        "LINE_TO_COMPACT",
+        "REPEAT"
+      ],
+      "canonical_name": "SEQUENTIAL_BOTTLENECKS",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 180.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "RECONFIGURATION_REQUIRED"
+      ],
+      "family_id": "F5",
+      "geometry_parameter_ranges": [
+        [
+          "bottleneck_separation_m",
+          "3.0..4.8"
+        ],
+        [
+          "passage_width_m",
+          "1.40..1.65"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "two finite corridor bands separated by open recovery space",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "test repeatable transition lifecycles across separated bottlenecks",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "OPTIONAL_COMPACT_TO_LINE"
+      ],
+      "canonical_name": "FALSE_BOTTLENECK_OR_FEASIBLE_BYPASS",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 130.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "COMPACT_ONLY_SUCCESS",
+        "BOTH_SUCCESS"
+      ],
+      "family_id": "F6",
+      "geometry_parameter_ranges": [
+        [
+          "bypass_turn_radius_m",
+          "1.0..1.8"
+        ],
+        [
+          "bypass_clearance_m",
+          "1.2..2.0"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "central blocker with an explicit curved bypass branch",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "penalize unnecessary LINE commitments when COMPACT has a valid bypass",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "OPTIONAL_COMPACT_TO_LINE",
+        "OPTIONAL_LINE_TO_COMPACT"
+      ],
+      "canonical_name": "TOPOLOGY_NEUTRAL_CLUTTER",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 110.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "BOTH_SUCCESS"
+      ],
+      "family_id": "F7",
+      "geometry_parameter_ranges": [
+        [
+          "clutter_clearance_m",
+          "2.8..3.8"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "sparse deterministic circles with two feasible corridors",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "preserve both-success outcomes without arbitrary winner labels",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "COMPACT_TO_LINE",
+        "LINE_TO_COMPACT"
+      ],
+      "canonical_name": "COMMUNICATION_DEGRADED_RECONFIGURATION",
+      "communication_conditions": [
+        "bounded_delay_loss",
+        "temporary_disconnection_then_restore"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 180.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "RECONFIGURATION_REQUIRED"
+      ],
+      "family_id": "F8",
+      "geometry_parameter_ranges": [
+        [
+          "delay_s",
+          "0.0..0.30"
+        ],
+        [
+          "packet_loss",
+          "0.0..0.15"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "straight or sequential passage plus a versioned link schedule",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "measure bounded communication effects on score readiness and confirmation",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "OPTIONAL_COMPACT_TO_LINE",
+        "OPTIONAL_LINE_TO_COMPACT"
+      ],
+      "canonical_name": "DYNAMIC_LOCAL_OBSTACLE",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 150.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "BOTH_SUCCESS",
+        "LINE_ONLY_SUCCESS"
+      ],
+      "family_id": "F9",
+      "geometry_parameter_ranges": [
+        [
+          "obstacle_speed_mps",
+          "0.15..0.35"
+        ],
+        [
+          "crossing_time_s",
+          "12..24"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "static passage plus one circular obstacle waypoint path",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "test candidate recoverability under a locally observable moving obstacle",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    },
+    {
+      "allowed_transition_opportunities": [
+        "COMPACT_TO_LINE"
+      ],
+      "canonical_name": "PROVABLY_OR_DIAGNOSTICALLY_INFEASIBLE",
+      "communication_conditions": [
+        "nominal"
+      ],
+      "diagnostic_policies": [
+        "always COMPACT rollout",
+        "always LINE rollout",
+        "frozen scripted COMPACT/LINE transition oracle"
+      ],
+      "episode_horizon_seconds": 90.0,
+      "exclusion_rules": [
+        "duplicate geometry or canonical parameter tuple",
+        "invalid initial collision or unreachable goal outside the intended task",
+        "metric or simulator numerical invalidity"
+      ],
+      "expected_headroom_categories": [
+        "BOTH_FAIL"
+      ],
+      "family_id": "F10",
+      "geometry_parameter_ranges": [
+        [
+          "passage_width_m",
+          "0.65..0.95"
+        ]
+      ],
+      "goal_semantics": "reach the declared goal region and satisfy required final Metric V3 dwell",
+      "initial_topology_id": 5,
+      "obstacle_representation": "paired walls below the frozen disk-clearance requirement",
+      "schema_version": "rvt-scenario-family/v1",
+      "scientific_purpose": "retain explicit both-fail outcomes and generator failure detection",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "validity_checks": [
+        "initial roles satisfy frozen physical-validity checks",
+        "goal and obstacles lie inside declared world bounds",
+        "geometry primitives are finite and non-self-intersecting",
+        "communication schedule satisfies or explicitly violates its named contract"
+      ]
+    }
+  ],
+  "family_count": 10,
+  "generator_version": "rvt-compact-line-geometry/v1",
+  "scenario_family_sha256": "e02726a65dcec9d062bd67633b54643728575077946b1fe07da90544dc994ec9",
+  "schema_version": "rvt-scenario-family/v1"
+}

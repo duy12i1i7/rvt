@@ -1,0 +1,64 @@
+{
+  "dagger_rounds": 0,
+  "declared_budget": {
+    "candidate_rollouts": 16,
+    "decision_events": 8,
+    "residual_action_samples": 16
+  },
+  "diagnostic_sha256": "63db8f5816b579576b650dc79534753ad126b8a982b1115a12f2c28ff43fee62",
+  "final_test_runtime_access_count": 0,
+  "model_training_runs": 0,
+  "recoverability": {
+    "average_rollout_cost_steps": 716.75,
+    "candidate_negative_counts": {
+      "COMPACT": 4,
+      "LINE": 4
+    },
+    "candidate_positive_counts": {
+      "COMPACT": 4,
+      "LINE": 4
+    },
+    "invalid_rollout_count": 0,
+    "joint_outcome_counts": {
+      "BOTH_FAIL": 2,
+      "BOTH_SUCCESS": 2,
+      "COMPACT_ONLY_SUCCESS": 2,
+      "LINE_ONLY_SUCCESS": 2
+    },
+    "matched_rollout_issues": [],
+    "unstable_target_count": 0
+  },
+  "residual_action": {
+    "candidate_distribution": {
+      "COMPACT": 8,
+      "LINE": 8
+    },
+    "committed_topology_distribution": {
+      "COMPACT": 8,
+      "LINE": 8
+    },
+    "expert_source": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V1",
+    "finite_count": 16,
+    "maximum_residual_magnitude_mps2": 0.15,
+    "nonzero_residual_count": 12,
+    "nonzero_residual_fraction": 0.75,
+    "role_distribution": {
+      "role_0": 4,
+      "role_1": 3,
+      "role_2": 3,
+      "role_3": 3,
+      "role_4": 3
+    },
+    "safety_compatible_count": 16,
+    "saturation_count": 4,
+    "saturation_fraction": 0.25,
+    "transition_direction_distribution": {
+      "COMPACT_TO_LINE": 8,
+      "LINE_TO_COMPACT": 8
+    },
+    "valid_sample_count": 16
+  },
+  "schema_version": "rvt-phase8-target-diagnostic/v1",
+  "scientific_dataset_generated": false,
+  "source_commit": "d24a0f674c1e75df293e4524f020acc49d4e2f35"
+}
