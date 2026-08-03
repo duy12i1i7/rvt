@@ -1,0 +1,90 @@
+{
+  "active_candidate_topology_ids": [
+    5,
+    2
+  ],
+  "active_directed_transition_pairs": [
+    [
+      5,
+      2
+    ],
+    [
+      2,
+      5
+    ]
+  ],
+  "active_online_topology_ids": [
+    5,
+    2
+  ],
+  "experimentally_qualified_team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16,
+    24
+  ],
+  "final_test_access_status": {
+    "access_count": 0,
+    "accessed": false
+  },
+  "fixed_only_topology_ids": [
+    0
+  ],
+  "historical_replay_compatibility": {
+    "generic_protocol_vocabulary_preserved": [
+      0,
+      5,
+      2
+    ],
+    "keep_transition_records_readable": true,
+    "publication_authority_granted": false
+  },
+  "mechanically_supported_team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16,
+    24
+  ],
+  "method_repair_cycle_count": 1,
+  "preserved_result_roots": [
+    {
+      "path": "results/phase7_transition_protocol/",
+      "source_git_tree": "93ac2641442b3113d75939b477f1d7a400afa8a8"
+    },
+    {
+      "path": "results/phase7_transition_execution_repair/",
+      "source_git_tree": "511a0027e873555884519efd8be867b855490b2d"
+    }
+  ],
+  "primary_initial_topology_id": 5,
+  "reason_for_scope_reduction": "Phase 7R qualified both COMPACT/LINE directions for every declared team size, while KEEP-edge transitions remained unreliable under the frozen controller and safety contract.",
+  "schema_version": "rvt-online-topology-scope/v1",
+  "scope_sha256": "bc65ec533c895a9ad82ef277e89998c772db3403d4177ec04d9dce375f0c7684",
+  "scope_version": "compact-line-publication-v1",
+  "single_graph_for_all_team_sizes": true,
+  "source_commit": "f74ba7d63e684be4213a89ca31d0214a48543b64",
+  "topology_registry_schema_version": "rvt-topology-registry/v1",
+  "transition_protocol_schema_version": "rvt-transition-protocol/v1",
+  "unsupported_online_transitions": [
+    [
+      0,
+      5
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      2,
+      0
+    ]
+  ]
+}
