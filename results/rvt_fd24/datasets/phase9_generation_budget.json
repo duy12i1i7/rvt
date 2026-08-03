@@ -1,0 +1,135 @@
+{
+  "authoritative_sources": [
+    {
+      "path": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md",
+      "sha256": "593bdb4662a10d955e5d7277ac066ac5c357c1097ce28643e9e9745d433cceb9"
+    },
+    {
+      "path": "docs/RVT_DENSE_ACTION_DATA_CONTRACT.md",
+      "sha256": "8858df033ed97cd5e8437c740ae98036d7e24bb664c0d22fdcfdb6f257da05cc"
+    },
+    {
+      "path": "docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md",
+      "sha256": "bfbfac4bf0d8e4b34666f29c57f0e0c3f07fce0ff26d706d66b8ddd05712f18e"
+    }
+  ],
+  "expected_total_upper_bound": null,
+  "experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "generation_authorized": false,
+  "generation_job_timeout_policy": null,
+  "generator_version": "rvt-phase9-generator-blocked/v1",
+  "invalid_record_policy": "mask_and_report_never_relabel",
+  "known_frozen_upper_bounds": {
+    "study_a_zero_shot": {
+      "candidate_topologies": [
+        5,
+        2
+      ],
+      "decision_state_limits": {
+        "maximum_events_per_episode": 12,
+        "minimum_temporal_spacing_seconds": 1.5,
+        "sampling_mix": {
+          "event_balanced_fraction": 0.7,
+          "trajectory_uniform_fraction": 0.3
+        },
+        "trajectory_source_fraction_each": 0.2
+      },
+      "dense_action_limits": {
+        "maximum_retained_timesteps_per_episode": 64,
+        "minimum_temporal_spacing_seconds": 0.45
+      },
+      "rollout_replica_rule": {
+        "F8": 3,
+        "F9": 3,
+        "aggregation": "all_success",
+        "all_other_families": 1
+      },
+      "scenario_family_count": 10,
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ],
+      "train": {
+        "maximum_candidate_replica_rollouts": 16800,
+        "maximum_decision_events": 6000,
+        "maximum_dense_action_records": 250000,
+        "maximum_events_per_family_team_cell": 120,
+        "maximum_local_recoverability_records": 112800
+      },
+      "validation": {
+        "maximum_candidate_replica_rollouts": 4200,
+        "maximum_decision_events": 1500,
+        "maximum_dense_action_records": 50000,
+        "maximum_events_per_family_team_cell": 30,
+        "maximum_local_recoverability_records": 28200
+      }
+    }
+  },
+  "maximum_generation_retries": null,
+  "missing_required_declarations": [
+    {
+      "approved_phase8_state": "not declared",
+      "field": "study_a_episode_budget_by_split_family_team_size",
+      "why_required": "job identity and the 12-events-per-episode cap require an episode allocation"
+    },
+    {
+      "approved_phase8_state": "not declared",
+      "field": "decision_event_episode_layout_seed_timestamp_mapping",
+      "why_required": "120/30 cell caps do not define which episode, layout, seed, or timestamp produces each event"
+    },
+    {
+      "approved_phase8_state": "not declared",
+      "field": "study_a_n24_evaluation_budget",
+      "why_required": "the sealed non-final N=24 evaluation namespace has no event or action-row budget"
+    },
+    {
+      "approved_phase8_state": "not declared",
+      "field": "study_b_generation_budget",
+      "why_required": "Study B names N=24 inclusion but declares no event, episode, or dense-row counts"
+    },
+    {
+      "approved_phase8_state": "upper bounds only",
+      "field": "dense_action_exact_cell_allocation_and_episode_budget",
+      "why_required": "250000/50000 are caps; the exact row count and episode allocation are unspecified"
+    },
+    {
+      "approved_phase8_state": "not declared",
+      "field": "maximum_generation_retries",
+      "why_required": "Phase 9C requires this value and forbids resampling until success"
+    },
+    {
+      "approved_phase8_state": "not declared",
+      "field": "generation_job_timeout_policy",
+      "why_required": "family rollout horizons exist, but no wall-clock/job timeout is defined"
+    },
+    {
+      "approved_phase8_state": "invalid rollout masking is declared; initialization treatment is not",
+      "field": "initialization_rejection_denominator_and_replacement_policy",
+      "why_required": "the exact retained budget after deterministic initialization rejection is not defined"
+    }
+  ],
+  "post_observation_budget_change_permitted": false,
+  "rollout_timeout_policy": "family_episode_horizon",
+  "schema_version": "rvt-phase9-generation-budget/v1",
+  "source_commit": "c17081fe1cf58cc2d3f929e35ff4bca811c75c58",
+  "status": "BLOCKED_PROTOCOL_INCOMPLETENESS",
+  "stop_rule": "Phase 9C requires an immediate stop when the approved Phase 8 documents do not determine one unique generation budget.",
+  "study_a_n24_eval_sealed": {
+    "budget": null,
+    "purpose": "zero_shot_size_evaluation_only"
+  },
+  "study_b_with_n24": {
+    "budget": null,
+    "team_sizes": [
+      5,
+      6,
+      8,
+      12,
+      16,
+      24
+    ]
+  }
+}

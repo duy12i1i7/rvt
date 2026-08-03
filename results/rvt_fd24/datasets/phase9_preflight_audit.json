@@ -1,0 +1,204 @@
+{
+  "approved_phase8_source_commit": "c17081fe1cf58cc2d3f929e35ff4bca811c75c58",
+  "checks": [
+    {
+      "expected": true,
+      "name": "protocol_canonical_hash",
+      "observed": true,
+      "passed": true
+    },
+    {
+      "expected": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "name": "protocol_identity",
+      "observed": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "passed": true
+    },
+    {
+      "expected": "rvt-experiment-protocol/v1",
+      "name": "protocol_schema",
+      "observed": "rvt-experiment-protocol/v1",
+      "passed": true
+    },
+    {
+      "expected": {
+        "candidates": [
+          5,
+          2
+        ],
+        "sha256": "bc65ec533c895a9ad82ef277e89998c772db3403d4177ec04d9dce375f0c7684"
+      },
+      "name": "online_scope",
+      "observed": {
+        "candidates": [
+          5,
+          2
+        ],
+        "sha256": "bc65ec533c895a9ad82ef277e89998c772db3403d4177ec04d9dce375f0c7684"
+      },
+      "passed": true
+    },
+    {
+      "expected": "a2a7257ae09d244f21224bd89b18ba32f7cd1457627f54d3b898cc83be2e9a35",
+      "name": "train_split",
+      "observed": "a2a7257ae09d244f21224bd89b18ba32f7cd1457627f54d3b898cc83be2e9a35",
+      "passed": true
+    },
+    {
+      "expected": "cff73ce294f16f557af783fbabee20cd89a2f929878f7b80122265f481c58d7f",
+      "name": "validation_split",
+      "observed": "cff73ce294f16f557af783fbabee20cd89a2f929878f7b80122265f481c58d7f",
+      "passed": true
+    },
+    {
+      "expected": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+      "name": "sealed_final_test_commitment",
+      "observed": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+      "passed": true
+    },
+    {
+      "expected": {
+        "feature_schema_sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+        "schema_version": "rvt-ego-graph/v2"
+      },
+      "name": "ego_graph_schema",
+      "observed": {
+        "feature_schema_sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+        "schema_version": "rvt-ego-graph/v2"
+      },
+      "passed": true
+    },
+    {
+      "expected": {
+        "config_sha256": "44cc7176a38e79d938952398ccb08d7fe2646643ddfe6dec08822a60de9fb1a3",
+        "schema_version": "rvt-fd24-model/v1"
+      },
+      "name": "model_schema",
+      "observed": {
+        "config_sha256": "44cc7176a38e79d938952398ccb08d7fe2646643ddfe6dec08822a60de9fb1a3",
+        "schema_version": "rvt-fd24-model/v1"
+      },
+      "passed": true
+    },
+    {
+      "expected": {
+        "12": "6187175cbd88eb4ec16524619c59552c8c8d0a95387f2d5a4993439542fdaf3f",
+        "16": "daa9fdb999cfaccc6d81d6510401e30ca1784b4d1158d894d0125e53f0455b79",
+        "24": "b7c2acbbdc4709ad8f1cb1ae3ad137a50a7fb09e017ee898fd1540ee0c9627e5",
+        "5": "fcf619d7af4052bdaf5ce088762de9d5165acbea077a15a4357e63f4ce4d42cd",
+        "6": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+        "8": "cd02e6ab626869e5d0a044b1ab36e5b3f69b40806de81bf185c3d910e5959059"
+      },
+      "name": "runtime_controller_safety_protocol_configuration",
+      "observed": {
+        "12": "6187175cbd88eb4ec16524619c59552c8c8d0a95387f2d5a4993439542fdaf3f",
+        "16": "daa9fdb999cfaccc6d81d6510401e30ca1784b4d1158d894d0125e53f0455b79",
+        "24": "b7c2acbbdc4709ad8f1cb1ae3ad137a50a7fb09e017ee898fd1540ee0c9627e5",
+        "5": "fcf619d7af4052bdaf5ce088762de9d5165acbea077a15a4357e63f4ce4d42cd",
+        "6": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+        "8": "cd02e6ab626869e5d0a044b1ab36e5b3f69b40806de81bf185c3d910e5959059"
+      },
+      "passed": true
+    },
+    {
+      "expected": "6a13281db6d4a2195ff4a73809986f173249c657fbaedda14b85ded16e0c2b3f",
+      "name": "seed_namespaces",
+      "observed": "6a13281db6d4a2195ff4a73809986f173249c657fbaedda14b85ded16e0c2b3f",
+      "passed": true
+    },
+    {
+      "expected": "b127f756184a4b4c87b4ca86ec07a2756e1f26f1416d8fa3e5e601343bc8beb5",
+      "name": "frozen_document:mechanical_architecture_scope",
+      "observed": "b127f756184a4b4c87b4ca86ec07a2756e1f26f1416d8fa3e5e601343bc8beb5",
+      "passed": true
+    },
+    {
+      "expected": "5c8f986014de94a6d169eb5e58bf4c4e56eca6d8abe677004a109c1b8eaa99b5",
+      "name": "frozen_document:scenario_family_specification",
+      "observed": "5c8f986014de94a6d169eb5e58bf4c4e56eca6d8abe677004a109c1b8eaa99b5",
+      "passed": true
+    },
+    {
+      "expected": "bc05d9d837564c073b7c7b3b4d9faaaee1ed288ed8b4a65a180f2f58fb4919b5",
+      "name": "frozen_document:recoverability_target",
+      "observed": "bc05d9d837564c073b7c7b3b4d9faaaee1ed288ed8b4a65a180f2f58fb4919b5",
+      "passed": true
+    },
+    {
+      "expected": "bfbfac4bf0d8e4b34666f29c57f0e0c3f07fce0ff26d706d66b8ddd05712f18e",
+      "name": "frozen_document:rollout_protocol",
+      "observed": "bfbfac4bf0d8e4b34666f29c57f0e0c3f07fce0ff26d706d66b8ddd05712f18e",
+      "passed": true
+    },
+    {
+      "expected": "1eb3d8341facb7336f7f6a28a08a35efd75d001c2d8af54aec3f658715b5e047",
+      "name": "frozen_document:action_target",
+      "observed": "1eb3d8341facb7336f7f6a28a08a35efd75d001c2d8af54aec3f658715b5e047",
+      "passed": true
+    },
+    {
+      "expected": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e",
+      "name": "frozen_document:loss_contract",
+      "observed": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e",
+      "passed": true
+    },
+    {
+      "expected": "81818646c153436a5268a08ff1ee7cd79e8711fbaefe1fede3435591000b8b41",
+      "name": "frozen_document:baseline_contract",
+      "observed": "81818646c153436a5268a08ff1ee7cd79e8711fbaefe1fede3435591000b8b41",
+      "passed": true
+    },
+    {
+      "expected": "d69b76d58350bdd41fbe943506386562fa29dd5b759e08d55158e158a3173422",
+      "name": "frozen_document:metric_contract",
+      "observed": "d69b76d58350bdd41fbe943506386562fa29dd5b759e08d55158e158a3173422",
+      "passed": true
+    },
+    {
+      "expected": "cc7506c5b4ba716d6372b865e69ed6171f2af5fbec27ada26970ae4c3f38ad4a",
+      "name": "frozen_document:statistical_contract",
+      "observed": "cc7506c5b4ba716d6372b865e69ed6171f2af5fbec27ada26970ae4c3f38ad4a",
+      "passed": true
+    },
+    {
+      "expected": "351bbb66f487ef5602009f89f5dc81537a68ffc0f669f787b9275f57f805bafb",
+      "name": "frozen_document:seed_contract",
+      "observed": "351bbb66f487ef5602009f89f5dc81537a68ffc0f669f787b9275f57f805bafb",
+      "passed": true
+    },
+    {
+      "expected": "4a6ce864d63269e82de2842c46fa2424edc5ad9f2c1ade2e2c500ee51e52045c",
+      "name": "frozen_document:practical_significance_gates",
+      "observed": "4a6ce864d63269e82de2842c46fa2424edc5ad9f2c1ade2e2c500ee51e52045c",
+      "passed": true
+    },
+    {
+      "expected": "f7f169784caba8c4e208b19f7d42633bfd63cd4219ecdbe1eefc0658123863e2",
+      "name": "frozen_document:final_test_guard",
+      "observed": "f7f169784caba8c4e208b19f7d42633bfd63cd4219ecdbe1eefc0658123863e2",
+      "passed": true
+    },
+    {
+      "expected": {
+        "admitted_entry_count": 0,
+        "successful_runtime_access_count": 0
+      },
+      "name": "final_test_runtime_access",
+      "observed": {
+        "admitted_entry_count": 0,
+        "audit_entry_count": 1,
+        "successful_runtime_access_count": 0
+      },
+      "passed": true
+    }
+  ],
+  "experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "final_test_access": {
+    "admitted_entry_count": 0,
+    "audit_entry_count": 1,
+    "successful_runtime_access_count": 0
+  },
+  "final_test_geometry_loaded": false,
+  "note": "The final-test split hash is checked only as an approved commitment stored in the Phase 8 protocol manifest; sealed geometry is not opened.",
+  "schema_version": "rvt-phase9-preflight/v1",
+  "status": "PASS"
+}
