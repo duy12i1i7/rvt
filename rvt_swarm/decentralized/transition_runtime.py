@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 import time
 from dataclasses import asdict, dataclass, replace
-from typing import Dict, Iterable, Mapping, Optional, Sequence, Tuple
+from typing import Callable, Dict, Iterable, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
@@ -24,6 +24,7 @@ from .phase6_qualification import (
     semi_implicit_acceleration_step,
     simulate_received_robot_views,
 )
+from .local_control_types import RobotLocalControllerInput, RobotLocalControllerOutput
 from .roles import RoleAssignment
 from .transition_admissibility import assess_transition_admissibility
 from .transition_messages import TransitionByteLedger
@@ -44,6 +45,12 @@ from .transition_readiness import (
     RobotLocalTransitionInput,
     evaluate_robot_local_transition_readiness,
 )
+from .transition_execution import (
+    RobotLocalTransitionExecutor,
+    TransitionMotionProfile,
+    derive_transition_motion_profile,
+    prepare_robot_local_role_space_path,
+)
 
 
 PHASE7_RUNTIME_SCHEMA_VERSION = "rvt-phase7-strict-transition-runtime/v1"
@@ -62,6 +69,20 @@ PHASE7_GRAPH_FAMILIES: Tuple[str, ...] = (
     "complete",
     "temporary_disconnection",
 )
+TRANSITION_EXECUTION_STRATEGIES: Tuple[str, ...] = (
+    "immediate_target_switch",
+    "generic_role_space_profile",
+)
+
+
+@dataclass(frozen=True)
+class LocalProjectionExecutionObservation:
+    """One robot-local projection call exposed to an offline trace sink."""
+
+    execution_step: int
+    transition_progress: float
+    controller_input: RobotLocalControllerInput
+    controller_output: RobotLocalControllerOutput
 
 
 @dataclass(frozen=True)
@@ -489,9 +510,16 @@ def run_phase7_transition_episode(
     target_topology: int,
     fixture: str = "exact_source",
     graph_family: str = "path",
+    *,
+    execution_strategy: str = "immediate_target_switch",
+    projection_observer: Optional[
+        Callable[[LocalProjectionExecutionObservation], None]
+    ] = None,
 ) -> Phase7TransitionEpisodeResult:
     if source_topology not in PRIMARY_TOPOLOGY_IDS or target_topology not in PRIMARY_TOPOLOGY_IDS:
         raise ValueError("Phase 7 episode requires primary topology IDs")
+    if execution_strategy not in TRANSITION_EXECUTION_STRATEGIES:
+        raise ValueError("unknown transition execution strategy")
     adjacency = communication_graph(team_size, graph_family)
     options = TransitionProtocolRuntimeOptions(transition_protocol_v1_enabled=True)
     runtime = StrictTransitionRuntime(
@@ -711,14 +739,37 @@ def run_phase7_transition_episode(
         )
         for robot_id in runtime.member_ids
     )
+    motion_profile: Optional[TransitionMotionProfile] = None
+    executors: Tuple[RobotLocalTransitionExecutor, ...] = ()
+    if execution_strategy == "generic_role_space_profile":
+        motion_profile = derive_transition_motion_profile(
+            admissibility.maximum_displacement_meters, config
+        )
+        executors = tuple(
+            RobotLocalTransitionExecutor(
+                config,
+                runtime.local_metadata[robot_id],
+                prepare_robot_local_role_space_path(
+                    runtime.role_set,
+                    robot_id,
+                    config.formation,
+                    source_topology,
+                    target_topology,
+                ),
+                motion_profile,
+                commit_time,
+            )
+            for robot_id in runtime.member_ids
+        )
     roles = RoleAssignment.from_index(
         team_size, config.formation.nominal_spacing_meters
     )
     duration_seconds = (
-        2.0 * admissibility.maximum_displacement_meters
+        motion_profile.duration_seconds
+        if motion_profile is not None
+        else 2.0 * admissibility.maximum_displacement_meters
         / config.physical.maximum_speed_meters_per_second
-        + 4.0 * config.mission.recovery_dwell_seconds
-    )
+    ) + 4.0 * config.mission.recovery_dwell_seconds
     execution_steps = int(math.ceil(
         duration_seconds / config.physical.control_period_seconds
     ))
@@ -737,6 +788,12 @@ def run_phase7_transition_episode(
     metric_latencies: list[float] = []
     completion_agreement_time: Optional[float] = None
     for step in range(execution_steps):
+        timestamp = commit_time + step * config.physical.control_period_seconds
+        transition_progress = (
+            motion_profile.progress(timestamp - commit_time)
+            if motion_profile is not None
+            else 1.0
+        )
         views = simulate_received_robot_views(
             positions, velocities, roles, target_topology,
             goal_origin, direction, config,
@@ -744,11 +801,21 @@ def run_phase7_transition_episode(
         actions = []
         for robot_id, adapter in enumerate(adapters):
             started = time.perf_counter()
-            output = adapter.evaluate(
-                views[robot_id],
-                commit_time + step * config.physical.control_period_seconds,
-            )
+            if executors:
+                controller_input = executors[robot_id].build_input(
+                    views[robot_id], timestamp
+                )
+            else:
+                controller_input = adapter.build_input(views[robot_id], timestamp)
+            output = adapter.controller.evaluate(controller_input)
             controller_latencies.append(time.perf_counter() - started)
+            if projection_observer is not None:
+                projection_observer(LocalProjectionExecutionObservation(
+                    execution_step=step,
+                    transition_progress=transition_progress,
+                    controller_input=controller_input,
+                    controller_output=output,
+                ))
             actions.append(output.projected_action)
             controller_calls += 1
             intervention_count += int(output.projection_intervened)
@@ -782,7 +849,13 @@ def run_phase7_transition_episode(
             current_distance > config.derived.robot_robot_required_clearance_meters
         )
         started = time.perf_counter()
-        inside_metric = e_inf(
+        profile_complete = (
+            motion_profile is None
+            or motion_profile.progress(
+                (step + 1) * config.physical.control_period_seconds
+            ) >= 1.0
+        )
+        inside_metric = profile_complete and e_inf(
             positions, roles, target_topology, direction
         ) <= EPSILON_FORM
         metric_latencies.append(time.perf_counter() - started)

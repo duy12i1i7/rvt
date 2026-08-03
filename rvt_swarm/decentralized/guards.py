@@ -131,6 +131,14 @@ OFFLINE_MODULES: Dict[str, str] = {
         "Offline Phase 7 matrix, exact-geometry evaluator and report writer. "
         "It may aggregate per-robot outcomes after the local runtime calls."
     ),
+    "local_projection_forensics": (
+        "Independent offline oracle used only to audit robot-local projection "
+        "calls after they have been emitted by the strict runtime."
+    ),
+    "phase7r_qualification": (
+        "Offline Phase 7R forensic reconstruction, repaired matrix runner and "
+        "report writer. Runtime actions still come from one local executor."
+    ),
 }
 
 # Parameter names that carry a SINGLE robot's ego-graph tensors. An ego graph

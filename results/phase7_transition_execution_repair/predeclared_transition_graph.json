@@ -1,0 +1,50 @@
+{
+  "frozen_before_repaired_closed_loop": true,
+  "optional_direct_transitions": [
+    {
+      "pair": "COMPACT -> LINE",
+      "source": 5,
+      "target": 2
+    },
+    {
+      "pair": "LINE -> COMPACT",
+      "source": 2,
+      "target": 5
+    }
+  ],
+  "per_pair_or_team_size_tuning": false,
+  "primary_hub_transitions": [
+    {
+      "pair": "KEEP -> COMPACT",
+      "source": 0,
+      "target": 5
+    },
+    {
+      "pair": "COMPACT -> KEEP",
+      "source": 5,
+      "target": 0
+    },
+    {
+      "pair": "KEEP -> LINE",
+      "source": 0,
+      "target": 2
+    },
+    {
+      "pair": "LINE -> KEEP",
+      "source": 2,
+      "target": 0
+    }
+  ],
+  "profile_rule": "shortest rest-to-rest triangular/trapezoidal role-space profile from maximum static role displacement and frozen physical v_max/a_max",
+  "repair_class": "C_generic_smooth_transition_executor",
+  "required_team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16,
+    24
+  ],
+  "schema_version": "rvt-phase7r-qualification/v1",
+  "selection_basis": "formation semantics, not observed success rates"
+}
