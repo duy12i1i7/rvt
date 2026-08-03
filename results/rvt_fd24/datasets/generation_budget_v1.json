@@ -1,0 +1,483 @@
+{
+  "candidate_topologies": [
+    5,
+    2
+  ],
+  "datasets": [
+    {
+      "dataset_id": "study_a_train",
+      "decision_events_per_cell": 60,
+      "dense_records_per_cell": 2000,
+      "derived_totals": {
+        "candidate_replica_rollouts": 16800,
+        "cell_count": 100,
+        "decision_events": 6000,
+        "decision_events_by_family": {
+          "F1": 600,
+          "F10": 600,
+          "F2": 600,
+          "F3": 600,
+          "F4": 600,
+          "F5": 600,
+          "F6": 600,
+          "F7": 600,
+          "F8": 600,
+          "F9": 600
+        },
+        "dense_residual_action_records": 200000,
+        "recoverability_robot_candidate_records": 112800,
+        "source_episodes": 1200
+      },
+      "expected_candidate_replica_rollouts": 16800,
+      "expected_decision_events": 6000,
+      "expected_dense_records": 200000,
+      "expected_recoverability_records": 112800,
+      "expected_source_episodes": 1200,
+      "layout_count": 20,
+      "layout_source_split": "train",
+      "purpose": "training",
+      "sealed_from_model_selection": false,
+      "source_episodes_per_cell": 12,
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ]
+    },
+    {
+      "dataset_id": "study_a_validation",
+      "decision_events_per_cell": 30,
+      "dense_records_per_cell": 800,
+      "derived_totals": {
+        "candidate_replica_rollouts": 4200,
+        "cell_count": 50,
+        "decision_events": 1500,
+        "decision_events_by_family": {
+          "F1": 150,
+          "F10": 150,
+          "F2": 150,
+          "F3": 150,
+          "F4": 150,
+          "F5": 150,
+          "F6": 150,
+          "F7": 150,
+          "F8": 150,
+          "F9": 150
+        },
+        "dense_residual_action_records": 40000,
+        "recoverability_robot_candidate_records": 28200,
+        "source_episodes": 300
+      },
+      "expected_candidate_replica_rollouts": 4200,
+      "expected_decision_events": 1500,
+      "expected_dense_records": 40000,
+      "expected_recoverability_records": 28200,
+      "expected_source_episodes": 300,
+      "layout_count": 10,
+      "layout_source_split": "validation",
+      "purpose": "checkpoint_selection_validation",
+      "sealed_from_model_selection": false,
+      "source_episodes_per_cell": 6,
+      "split": "validation",
+      "study": "study_a_zero_shot",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ]
+    },
+    {
+      "dataset_id": "study_a_n24_evaluation",
+      "decision_events_per_cell": 30,
+      "dense_records_per_cell": 800,
+      "derived_totals": {
+        "candidate_replica_rollouts": 840,
+        "cell_count": 10,
+        "decision_events": 300,
+        "decision_events_by_family": {
+          "F1": 30,
+          "F10": 30,
+          "F2": 30,
+          "F3": 30,
+          "F4": 30,
+          "F5": 30,
+          "F6": 30,
+          "F7": 30,
+          "F8": 30,
+          "F9": 30
+        },
+        "dense_residual_action_records": 8000,
+        "recoverability_robot_candidate_records": 14400,
+        "source_episodes": 60
+      },
+      "expected_candidate_replica_rollouts": 840,
+      "expected_decision_events": 300,
+      "expected_dense_records": 8000,
+      "expected_recoverability_records": 14400,
+      "expected_source_episodes": 60,
+      "layout_count": 10,
+      "layout_source_split": "validation",
+      "purpose": "zero_shot_size_evaluation_only",
+      "sealed_from_model_selection": true,
+      "source_episodes_per_cell": 6,
+      "split": "n24_evaluation",
+      "study": "study_a_zero_shot",
+      "team_sizes": [
+        24
+      ]
+    },
+    {
+      "dataset_id": "study_b_train",
+      "decision_events_per_cell": 50,
+      "dense_records_per_cell": 2000,
+      "derived_totals": {
+        "candidate_replica_rollouts": 16800,
+        "cell_count": 120,
+        "decision_events": 6000,
+        "decision_events_by_family": {
+          "F1": 600,
+          "F10": 600,
+          "F2": 600,
+          "F3": 600,
+          "F4": 600,
+          "F5": 600,
+          "F6": 600,
+          "F7": 600,
+          "F8": 600,
+          "F9": 600
+        },
+        "dense_residual_action_records": 240000,
+        "recoverability_robot_candidate_records": 142000,
+        "source_episodes": 1200
+      },
+      "expected_candidate_replica_rollouts": 16800,
+      "expected_decision_events": 6000,
+      "expected_dense_records": 240000,
+      "expected_recoverability_records": 142000,
+      "expected_source_episodes": 1200,
+      "layout_count": 20,
+      "layout_source_split": "train",
+      "purpose": "training",
+      "sealed_from_model_selection": false,
+      "source_episodes_per_cell": 10,
+      "split": "train",
+      "study": "study_b_with_n24",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ]
+    },
+    {
+      "dataset_id": "study_b_validation",
+      "decision_events_per_cell": 25,
+      "dense_records_per_cell": 800,
+      "derived_totals": {
+        "candidate_replica_rollouts": 4200,
+        "cell_count": 60,
+        "decision_events": 1500,
+        "decision_events_by_family": {
+          "F1": 150,
+          "F10": 150,
+          "F2": 150,
+          "F3": 150,
+          "F4": 150,
+          "F5": 150,
+          "F6": 150,
+          "F7": 150,
+          "F8": 150,
+          "F9": 150
+        },
+        "dense_residual_action_records": 48000,
+        "recoverability_robot_candidate_records": 35500,
+        "source_episodes": 360
+      },
+      "expected_candidate_replica_rollouts": 4200,
+      "expected_decision_events": 1500,
+      "expected_dense_records": 48000,
+      "expected_recoverability_records": 35500,
+      "expected_source_episodes": 360,
+      "layout_count": 10,
+      "layout_source_split": "validation",
+      "purpose": "checkpoint_selection_validation",
+      "sealed_from_model_selection": false,
+      "source_episodes_per_cell": 6,
+      "split": "validation",
+      "study": "study_b_with_n24",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16,
+        24
+      ]
+    }
+  ],
+  "dense_row_contract": {
+    "canonical_order": [
+      "episode_id",
+      "timestep",
+      "robot_id",
+      "topology_id",
+      "graph_fingerprint"
+    ],
+    "prohibited_rank_inputs": [
+      "residual_magnitude",
+      "expert_improvement",
+      "safety_intervention",
+      "label",
+      "success",
+      "scenario_outcome"
+    ],
+    "selection": "deterministic_hash_rank_without_replacement_up_to_cell_quota",
+    "selection_version": "rvt-dense-row-hash-ranking/v1",
+    "shortfall": "preserve_and_report_no_replacement_no_duplication"
+  },
+  "event_timestamp_contract": {
+    "early_termination": "mark_unavailable_preserve_denominator_no_replacement",
+    "episode_slot_allocation_by_dataset": {
+      "study_a_n24_evaluation": "6_episodes_each_with_5_slots",
+      "study_a_train": "12_episodes_each_with_5_slots",
+      "study_a_validation": "6_episodes_each_with_5_slots",
+      "study_b_train": "10_episodes_each_with_5_slots",
+      "study_b_validation": "6_episodes_one_with_5_slots_and_five_with_4_slots;five_slot_source_index=int(canonical_cell_sha256,16)%6"
+    },
+    "normalized_horizon_positions_by_slot_count": {
+      "4": [
+        0.15,
+        0.4,
+        0.65,
+        0.9
+      ],
+      "5": [
+        0.1,
+        0.3,
+        0.5,
+        0.7,
+        0.9
+      ]
+    },
+    "step_mapping": "ceil(normalized_position * horizon_seconds / control_period_seconds)"
+  },
+  "exact_total_budget": {
+    "candidate_replica_rollouts": 42840,
+    "decision_events": 15300,
+    "dense_residual_action_records": 536000,
+    "recoverability_robot_candidate_records": 332900,
+    "source_episodes": 3120
+  },
+  "final_test_runtime_access_count": 0,
+  "generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+  "invalid_record_contract": {
+    "recoverability_pair": "invalid_pair_preserve_traces_no_training_rows_keep_audit_denominator_no_replacement",
+    "residual_expert_invalid": "preserve_base_and_failure_metadata_no_target_row_keep_invalid_denominator_no_replacement",
+    "valid_task_failure": "legitimate_negative_label"
+  },
+  "job_identity_contract": {
+    "candidate_replica": [
+      "decision_event_id",
+      "candidate_topology",
+      "replica_index"
+    ],
+    "decision_event": [
+      "source_episode_job_id",
+      "event_slot_index"
+    ],
+    "duplicate_semantic_identity_policy": "reject",
+    "final_test_job_construction": "prohibited",
+    "permitted_layout_source_splits": [
+      "train",
+      "validation"
+    ],
+    "residual_cell": [
+      "study",
+      "split",
+      "family",
+      "layout_sha256",
+      "team_size"
+    ],
+    "schema_version": "rvt-generation-job-identity/v1",
+    "shard": [
+      "dataset_type",
+      "study",
+      "split",
+      "family",
+      "team_size",
+      "shard_index"
+    ],
+    "source_episode": [
+      "study",
+      "split",
+      "family",
+      "layout_sha256",
+      "team_size",
+      "source_class",
+      "episode_index"
+    ],
+    "worker_order_participates_in_identity": false
+  },
+  "post_observation_budget_change_permitted": false,
+  "references": {
+    "blocked_phase9_commit": "b7edc024eeb3d76f0827f23f3fc9a0aa34a461ae",
+    "online_topology_scope_sha256": "bc65ec533c895a9ad82ef277e89998c772db3403d4177ec04d9dce375f0c7684",
+    "phase8_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+    "phase8_source_commit": "c17081fe1cf58cc2d3f929e35ff4bca811c75c58",
+    "sealed_final_test_commitment_sha256": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+    "train_split_sha256": "a2a7257ae09d244f21224bd89b18ba32f7cd1457627f54d3b898cc83be2e9a35",
+    "validation_split_sha256": "cff73ce294f16f557af783fbabee20cd89a2f929878f7b80122265f481c58d7f"
+  },
+  "retry_contract": {
+    "allowed_infrastructure_reasons": [
+      "process_interruption",
+      "worker_crash",
+      "temporary_storage_failure",
+      "machine_interruption"
+    ],
+    "attempt_logging": "both_attempts",
+    "identity_rule": "same_job_seed_input_configuration_destination",
+    "maximum_infrastructure_retries": 1,
+    "scientific_denominator_delta": 0,
+    "semantic_generation_retries": 0
+  },
+  "rollout_jobs_executed": 0,
+  "scenario_family_contract": {
+    "aggregation": "all_success",
+    "candidate_replica_rollouts_per_f8_f9_event": 6,
+    "candidate_rollouts_per_deterministic_event": 2,
+    "equal_event_budget_within_each_dataset": true,
+    "family_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "F10"
+    ],
+    "replicas_by_family": {
+      "F1": 1,
+      "F10": 1,
+      "F2": 1,
+      "F3": 1,
+      "F4": 1,
+      "F5": 1,
+      "F6": 1,
+      "F7": 1,
+      "F8": 3,
+      "F9": 3
+    }
+  },
+  "schema_version": "rvt-generation-budget/v1",
+  "scientific_dataset_records_generated": 0,
+  "seed_contract": {
+    "approved_seed_width_bits": 32,
+    "canonical_encoding": "sorted_ascii_json_without_nan",
+    "derivation_version": "rvt-generation-seed-sha256-uint32/v1",
+    "digest": "SHA-256",
+    "digest_truncation": "first_4_bytes_big_endian",
+    "model_seed_namespace_is_separate": true
+  },
+  "source_trajectory_contract": {
+    "allocation_by_dataset": {
+      "study_a_n24_evaluation": {
+        "episodes_per_source_per_cell": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "study_a_train": {
+        "episodes_per_source_per_cell": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "study_a_validation": {
+        "episodes_per_source_per_cell": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "study_b_train": {
+        "episodes_per_source_multiset": [
+          2,
+          2,
+          2,
+          2,
+          1,
+          1
+        ],
+        "required_global_episode_count_per_source": 200,
+        "rotation": "canonical_cell_hash_rank_then_balanced_cyclic_four_source_window"
+      },
+      "study_b_validation": {
+        "episodes_per_source_per_cell": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "outcome_conditioned_source_selection": false,
+    "source_classes": [
+      "S0_SCRIPTED_DIAGNOSTIC",
+      "S1_ALWAYS_COMPACT",
+      "S2_ALWAYS_LINE",
+      "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "S4_FROZEN_TRANSITION_PROTOCOL",
+      "S5_BOUNDED_PERTURBATION"
+    ]
+  },
+  "study_a_n24_access": {
+    "prohibited_consumers": [
+      "training",
+      "early_stopping",
+      "hyperparameter_search",
+      "checkpoint_selection"
+    ],
+    "purpose": "zero_shot_size_evaluation_only",
+    "requires_access_log": true,
+    "requires_explicit_authorization": true,
+    "requires_frozen_checkpoint_sha256": true,
+    "requires_validation_selection_audit_sha256": true
+  },
+  "timeout_contract": {
+    "label_policy": "no_label_unless_simulator_semantic_timeout_was_reached_normally",
+    "simulator_semantic_timeout": "frozen_phase8_family_horizon",
+    "wall_clock_seconds": {
+      "counterfactual_candidate_replica_job": 900,
+      "residual_action_cell_generation_job": 1800,
+      "shard_finalization_job": 600,
+      "source_trajectory_episode_job": 600
+    },
+    "wall_clock_timeout_classification": "infrastructure_generation_failure"
+  },
+  "training_operations": 0
+}

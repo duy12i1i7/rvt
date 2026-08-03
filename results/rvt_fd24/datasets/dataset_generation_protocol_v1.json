@@ -1,0 +1,106 @@
+{
+  "blocked_phase9_audit": {
+    "can_authorize_generation": false,
+    "path": "results/rvt_fd24/datasets/phase9_generation_budget.json",
+    "sha256": "b94c0df28d84824eb4efa405a32a4b281a76ba29a7a40d0bb817288e1144f087"
+  },
+  "dataset_generation_protocol_sha256": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+  "event_timestamp_schedule": {
+    "early_termination": "mark_unavailable_preserve_denominator_no_replacement",
+    "episode_slot_allocation_by_dataset": {
+      "study_a_n24_evaluation": "6_episodes_each_with_5_slots",
+      "study_a_train": "12_episodes_each_with_5_slots",
+      "study_a_validation": "6_episodes_each_with_5_slots",
+      "study_b_train": "10_episodes_each_with_5_slots",
+      "study_b_validation": "6_episodes_one_with_5_slots_and_five_with_4_slots;five_slot_source_index=int(canonical_cell_sha256,16)%6"
+    },
+    "normalized_horizon_positions_by_slot_count": {
+      "4": [
+        0.15,
+        0.4,
+        0.65,
+        0.9
+      ],
+      "5": [
+        0.1,
+        0.3,
+        0.5,
+        0.7,
+        0.9
+      ]
+    },
+    "step_mapping": "ceil(normalized_position * horizon_seconds / control_period_seconds)"
+  },
+  "exact_expected_totals": {
+    "candidate_replica_rollouts": 42840,
+    "decision_events": 15300,
+    "dense_residual_action_records": 536000,
+    "recoverability_robot_candidate_records": 332900,
+    "source_episodes": 3120
+  },
+  "execution_scope": {
+    "final_test_geometry_loaded": false,
+    "final_test_runtime_access_count": 0,
+    "residual_expert_jobs_executed": 0,
+    "rollout_jobs_executed": 0,
+    "scientific_dataset_records_generated": 0,
+    "training_operations": 0
+  },
+  "future_dataset_required_hashes": [
+    "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+    "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e"
+  ],
+  "generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+  "invalid_record_policy": {
+    "recoverability_pair": "invalid_pair_preserve_traces_no_training_rows_keep_audit_denominator_no_replacement",
+    "residual_expert_invalid": "preserve_base_and_failure_metadata_no_target_row_keep_invalid_denominator_no_replacement",
+    "valid_task_failure": "legitimate_negative_label"
+  },
+  "online_topology_scope_sha256": "bc65ec533c895a9ad82ef277e89998c772db3403d4177ec04d9dce375f0c7684",
+  "phase8_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "retry_policy": {
+    "allowed_infrastructure_reasons": [
+      "process_interruption",
+      "worker_crash",
+      "temporary_storage_failure",
+      "machine_interruption"
+    ],
+    "attempt_logging": "both_attempts",
+    "identity_rule": "same_job_seed_input_configuration_destination",
+    "maximum_infrastructure_retries": 1,
+    "scientific_denominator_delta": 0,
+    "semantic_generation_retries": 0
+  },
+  "schema_version": "rvt-dataset-generation-protocol/v1",
+  "seed_derivation_version": "rvt-generation-seed-sha256-uint32/v1",
+  "source_commit": "c17081fe1cf58cc2d3f929e35ff4bca811c75c58",
+  "split_sha256": {
+    "final_test_sealed_commitment": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+    "train": "a2a7257ae09d244f21224bd89b18ba32f7cd1457627f54d3b898cc83be2e9a35",
+    "validation": "cff73ce294f16f557af783fbabee20cd89a2f929878f7b80122265f481c58d7f"
+  },
+  "study_a_n24_access": {
+    "prohibited_consumers": [
+      "training",
+      "early_stopping",
+      "hyperparameter_search",
+      "checkpoint_selection"
+    ],
+    "purpose": "zero_shot_size_evaluation_only",
+    "requires_access_log": true,
+    "requires_explicit_authorization": true,
+    "requires_frozen_checkpoint_sha256": true,
+    "requires_validation_selection_audit_sha256": true
+  },
+  "timeout_policy": {
+    "label_policy": "no_label_unless_simulator_semantic_timeout_was_reached_normally",
+    "simulator_semantic_timeout": "frozen_phase8_family_horizon",
+    "wall_clock_seconds": {
+      "counterfactual_candidate_replica_job": 900,
+      "residual_action_cell_generation_job": 1800,
+      "shard_finalization_job": 600,
+      "source_trajectory_episode_job": 600
+    },
+    "wall_clock_timeout_classification": "infrastructure_generation_failure"
+  }
+}
