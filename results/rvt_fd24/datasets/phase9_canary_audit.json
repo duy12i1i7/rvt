@@ -1,0 +1,189 @@
+{
+  "abort_generation": true,
+  "attempts": [
+    {
+      "attempt_status": "INFRASTRUCTURE_FAILURE",
+      "attempted_entrypoint": "rvt_swarm.decentralized.runtime.simulate_decentralized_episode",
+      "exception_message": "'ScenarioLayout' object has no attribute 'start_center'",
+      "exception_type": "AttributeError",
+      "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N12/S1_ALWAYS_COMPACT/episode-0",
+      "retry_permitted": true,
+      "retry_reason": "worker_crash",
+      "scientific_rollout_started": false,
+      "semantic_task_failure": false
+    },
+    {
+      "attempt_status": "INFRASTRUCTURE_FAILURE",
+      "attempted_entrypoint": "rvt_swarm.decentralized.runtime.simulate_decentralized_episode",
+      "exception_message": "'ScenarioLayout' object has no attribute 'start_center'",
+      "exception_type": "AttributeError",
+      "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N12/S1_ALWAYS_COMPACT/episode-0",
+      "retry_permitted": true,
+      "retry_reason": "worker_crash",
+      "scientific_rollout_started": false,
+      "semantic_task_failure": false
+    }
+  ],
+  "canary_audit_sha256": "f6ee1a7b652c4144f31e75574cff1ab097a61133b99aac7dc694f81c746faa2b",
+  "canary_status": "FAIL_FATAL_EXECUTION_BINDING",
+  "clean_checkout_regeneration_verified": false,
+  "corrections_applied": [
+    {
+      "budget_changed": false,
+      "correction_id": "CANARY-SELECTION-001",
+      "defect": "The initial lexicographic constrained prefix covered four study/split namespaces but selected N=12 for all four.",
+      "outcome_or_label_inspected": false,
+      "repair": "Add the first identity-ordered nonsealed Study A train source job whose team size differs from the existing prefix.",
+      "scientific_inputs_changed": false,
+      "seed_changed": false
+    }
+  ],
+  "counterfactual_matching_verified": false,
+  "deterministic_sharding_verified": false,
+  "execution_binding_evidence": {
+    "legacy_closed_loop_runtime": {
+      "active_phase8_candidates": [
+        5,
+        2
+      ],
+      "compact_supported": false,
+      "declared_topology_modes": [
+        0,
+        2
+      ],
+      "phase8_scenario_layout_fields": [
+        "start_center_meters",
+        "goal_center_meters",
+        "static_obstacles",
+        "dynamic_obstacle_paths",
+        "corridor_centerline_meters"
+      ],
+      "scenario_layout_fields_expected_by_environment": [
+        "start_center",
+        "goal",
+        "obstacle_array"
+      ]
+    },
+    "qualified_transition_runtime": {
+      "accepted_parameters": [
+        "team_size",
+        "source_topology",
+        "target_topology",
+        "fixture",
+        "graph_family",
+        "execution_strategy",
+        "projection_observer"
+      ],
+      "accepts_cloned_source_state": false,
+      "accepts_disturbance_state": false,
+      "accepts_dynamic_obstacle_state": false,
+      "accepts_phase8_layout": false,
+      "entrypoint": "rvt_swarm.decentralized.transition_runtime.run_phase7_transition_episode"
+    },
+    "source_trajectory_bindings": {
+      "S0_SCRIPTED_DIAGNOSTIC": null,
+      "S1_ALWAYS_COMPACT": null,
+      "S2_ALWAYS_LINE": null,
+      "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": null,
+      "S4_FROZEN_TRANSITION_PROTOCOL": null,
+      "S5_BOUNDED_PERTURBATION": null
+    }
+  },
+  "fatal_findings": [
+    {
+      "classification": "infrastructure_generation_implementation_failure",
+      "code": "PHASE8_SCENARIO_TO_ACTIVE_RUNTIME_BINDING_ABSENT",
+      "confirmed": true,
+      "explanation": "The Phase 8 ScenarioLayout cannot enter the repository's only full decentralized closed-loop harness, and that harness is limited to KEEP/LINE rather than the frozen COMPACT/LINE scope. The Phase 7 transition fixture has no scenario or cloned-state interface, and no executable S0-S5 source bindings exist.",
+      "repair_scope_assessment": "A repair would require defining a Phase 8 geometry compiler, six source-policy executions, dynamic/communication state semantics, and a COMPACT/LINE scenario runtime. Those are new scientific execution semantics, not a local Phase 9 defect fix."
+    }
+  ],
+  "final_test_runtime_access_count": 0,
+  "infrastructure_retry": {
+    "byte_identical_deterministic_result": true,
+    "performed": true,
+    "same_input_configuration": true,
+    "same_job_id": true,
+    "same_seed": true
+  },
+  "interrupted_job_recovery_verified": false,
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "model_weights_retained": 0,
+  "normal_completion_observed": false,
+  "note": "Downstream canary requirements are NOT_RUN, not passes. The frozen no-replacement rule prohibits substituting a diagnostic headroom label or another runtime for the failed source job.",
+  "optimizer_states_retained": 0,
+  "protocol_reference_id": "phase8-plus-phase9b-frozen",
+  "protocol_references": {
+    "phase8-plus-phase9b-frozen": {
+      "composite_generation_protocol_sha256": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+      "phase8_experiment_protocol_sha256": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+      "phase9b_generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+      "source_commit": "20a7541a4ae946c2ca051cde0c353c396d2c1241"
+    }
+  },
+  "recoverability_records_emitted": 0,
+  "residual_expert_locality_verified": false,
+  "residual_records_emitted": 0,
+  "resume_behavior_verified": false,
+  "schema_version": "rvt-phase9-execution-canary/v1",
+  "scientific_candidate_replicas_completed": 0,
+  "scientific_source_episodes_completed": 0,
+  "selected_jobs_not_run_due_fatal_canary": 12,
+  "selection": {
+    "candidate_replica_job_ids": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0/candidate-2/replica-0",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0/candidate-2/replica-1",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0/candidate-2/replica-2",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0/candidate-5/replica-0",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0/candidate-5/replica-1",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0/candidate-5/replica-2"
+    ],
+    "coverage": {
+      "candidates": [
+        2,
+        5
+      ],
+      "datasets": [
+        "study_a_train",
+        "study_a_validation",
+        "study_b_train",
+        "study_b_validation"
+      ],
+      "families": [
+        "F1",
+        "F8"
+      ],
+      "replicas_per_candidate": {
+        "2": 3,
+        "5": 3
+      },
+      "splits": [
+        "train",
+        "validation"
+      ],
+      "studies": [
+        "study_a_zero_shot",
+        "study_b_with_n24"
+      ],
+      "study_a_n24_opened": false,
+      "team_sizes": [
+        12,
+        16
+      ]
+    },
+    "residual_cell_job_id": "rvt-generation-job-identity/v1/residual_cell/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N12",
+    "selection_uses_outcomes_or_labels": false,
+    "selection_version": "rvt-phase9-canary-constrained-prefix/v1",
+    "source_episode_job_ids": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N12/S1_ALWAYS_COMPACT/episode-0",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/validation/F1/4e9d418dcbc740182e458de45506ac03bc6a2608980fcc34ad24f3278aafcdff/N12/S1_ALWAYS_COMPACT/episode-0",
+      "rvt-generation-job-identity/v1/source_episode/study_b_with_n24/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N12/S1_ALWAYS_COMPACT/episode-0",
+      "rvt-generation-job-identity/v1/source_episode/study_b_with_n24/validation/F1/4e9d418dcbc740182e458de45506ac03bc6a2608980fcc34ad24f3278aafcdff/N12/S1_ALWAYS_COMPACT/episode-0",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N16/S1_ALWAYS_COMPACT/episode-0",
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0"
+    ],
+    "stochastic_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0"
+  },
+  "semantic_failure_observed": false,
+  "study_a_n24_access_count": 0
+}
