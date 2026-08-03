@@ -1,0 +1,777 @@
+{
+  "optional_direct_cells": [
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> COMPACT",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 5,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> COMPACT",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 5,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> COMPACT",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 5,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> COMPACT",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 5,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> COMPACT",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 5,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> COMPACT",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 5,
+      "team_size": 24
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "COMPACT -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 5,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "COMPACT -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 5,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "COMPACT -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 5,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "COMPACT -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 5,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "COMPACT -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 5,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "COMPACT -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "optional_direct",
+      "source_topology": 5,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 24
+    }
+  ],
+  "primary_hub_cells": [
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "KEEP -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "KEEP -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "KEEP -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "KEEP -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "KEEP -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "KEEP -> LINE",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 2,
+      "team_size": 24
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 24
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 0,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 0,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 0,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 0,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 0.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": true,
+      "target_dwell_completion_rate": 1.0,
+      "target_topology": 0,
+      "team_size": 24
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 24
+    }
+  ],
+  "schema_version": "rvt-phase7r-qualification/v1",
+  "silent_topology_routing": false,
+  "unsupported_cells": [
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "KEEP -> COMPACT",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 0,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 5,
+      "team_size": 24
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "LINE -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 2,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 5
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 6
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 8
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 12
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 16
+    },
+    {
+      "collision_free_rate": 1.0,
+      "episode_count": 4,
+      "failed_fixtures": [
+        "exact_source",
+        "bounded_source_perturbation",
+        "translated_mission",
+        "rotated_mission"
+      ],
+      "pair": "COMPACT -> KEEP",
+      "projection_infeasibility_abort_rate": 1.0,
+      "scope": "primary_hub",
+      "source_topology": 5,
+      "supported": false,
+      "target_dwell_completion_rate": 0.0,
+      "target_topology": 0,
+      "team_size": 24
+    }
+  ]
+}

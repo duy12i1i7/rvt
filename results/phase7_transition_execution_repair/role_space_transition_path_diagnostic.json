@@ -1,0 +1,686 @@
+[
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.28460498941515416,
+      "progress_at_minimum": 0.6999999999999998,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "KEEP -> COMPACT",
+    "projection_abort_count": 4,
+    "source_topology": 0,
+    "success_count": 0,
+    "target_topology": 5,
+    "team_size": 5
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.28460498941515416,
+      "progress_at_minimum": 0.6999999999999998,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "KEEP -> COMPACT",
+    "projection_abort_count": 4,
+    "source_topology": 0,
+    "success_count": 0,
+    "target_topology": 5,
+    "team_size": 6
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.2846049894151541,
+      "progress_at_minimum": 0.7000000000000002,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "KEEP -> COMPACT",
+    "projection_abort_count": 4,
+    "source_topology": 0,
+    "success_count": 0,
+    "target_topology": 5,
+    "team_size": 8
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.40249223594996214,
+      "progress_at_minimum": 0.4,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        1,
+        2
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> COMPACT",
+    "projection_abort_count": 4,
+    "source_topology": 0,
+    "success_count": 0,
+    "target_topology": 5,
+    "team_size": 12
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.40249223594996214,
+      "progress_at_minimum": 0.4,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        1,
+        2
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> COMPACT",
+    "projection_abort_count": 4,
+    "source_topology": 0,
+    "success_count": 0,
+    "target_topology": 5,
+    "team_size": 16
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.17650452162436556,
+      "progress_at_minimum": 0.8076923076923076,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        4,
+        5
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "KEEP -> COMPACT",
+    "projection_abort_count": 4,
+    "source_topology": 0,
+    "success_count": 0,
+    "target_topology": 5,
+    "team_size": 24
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 0,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 5
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 0,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 6
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 0,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 8
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        1,
+        2
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 0,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 12
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678926,
+      "progress_at_minimum": 0.5000000000000004,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 0,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 16
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678923,
+      "progress_at_minimum": 0.5000000000000008,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "KEEP -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 0,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 24
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.28460498941515416,
+      "progress_at_minimum": 0.3,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "COMPACT -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 5,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 5
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.28460498941515416,
+      "progress_at_minimum": 0.3,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "COMPACT -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 5,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 6
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.2846049894151542,
+      "progress_at_minimum": 0.30000000000000004,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "COMPACT -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 5,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 8
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.40249223594996214,
+      "progress_at_minimum": 0.6,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        1,
+        2
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 5,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 12
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.40249223594996214,
+      "progress_at_minimum": 0.6,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        1,
+        2
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 5,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 16
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.17650452162436564,
+      "progress_at_minimum": 0.19230769230769232,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        4,
+        5
+      ],
+      "static_linear_role_path_supported": false
+    },
+    "pair": "COMPACT -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 5,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 24
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 5,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 5
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 5,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 6
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 5,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 8
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 5,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 12
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678926,
+      "progress_at_minimum": 0.5000000000000002,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 5,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 16
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678923,
+      "progress_at_minimum": 0.5000000000000008,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "COMPACT -> LINE",
+    "projection_abort_count": 0,
+    "source_topology": 5,
+    "success_count": 4,
+    "target_topology": 2,
+    "team_size": 24
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5000000000000001,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> KEEP",
+    "projection_abort_count": 4,
+    "source_topology": 2,
+    "success_count": 0,
+    "target_topology": 0,
+    "team_size": 5
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> KEEP",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 0,
+    "team_size": 6
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> KEEP",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 0,
+    "team_size": 8
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        1,
+        2
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> KEEP",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 0,
+    "team_size": 12
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678926,
+      "progress_at_minimum": 0.49999999999999967,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> KEEP",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 0,
+    "team_size": 16
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678923,
+      "progress_at_minimum": 0.49999999999999917,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> KEEP",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 0,
+    "team_size": 24
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.5,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> COMPACT",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 5,
+    "team_size": 5
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> COMPACT",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 5,
+    "team_size": 6
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> COMPACT",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 5,
+    "team_size": 8
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678927,
+      "progress_at_minimum": 0.49999999999999994,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        2,
+        3
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> COMPACT",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 5,
+    "team_size": 12
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678926,
+      "progress_at_minimum": 0.49999999999999967,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> COMPACT",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 5,
+    "team_size": 16
+  },
+  {
+    "episode_count": 4,
+    "linear_path_clearance": {
+      "minimum_center_distance_meters": 0.6363961030678923,
+      "progress_at_minimum": 0.49999999999999917,
+      "required_clearance_meters": 0.4,
+      "robot_pair": [
+        0,
+        1
+      ],
+      "static_linear_role_path_supported": true
+    },
+    "pair": "LINE -> COMPACT",
+    "projection_abort_count": 0,
+    "source_topology": 2,
+    "success_count": 4,
+    "target_topology": 5,
+    "team_size": 24
+  }
+]

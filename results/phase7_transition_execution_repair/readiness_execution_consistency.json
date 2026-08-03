@@ -1,0 +1,262 @@
+{
+  "breakdown_by_fixture": [
+    {
+      "fixture": "bounded_source_perturbation",
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 426
+    },
+    {
+      "fixture": "exact_source",
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 426
+    },
+    {
+      "fixture": "rotated_mission",
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 426
+    },
+    {
+      "fixture": "translated_mission",
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 426
+    }
+  ],
+  "breakdown_by_role": [
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0000",
+      "safe_robot_commit_count": 144
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0001",
+      "safe_robot_commit_count": 144
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0002",
+      "safe_robot_commit_count": 144
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0003",
+      "safe_robot_commit_count": 144
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0004",
+      "safe_robot_commit_count": 144
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0005",
+      "safe_robot_commit_count": 120
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0006",
+      "safe_robot_commit_count": 96
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0007",
+      "safe_robot_commit_count": 96
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0008",
+      "safe_robot_commit_count": 72
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0009",
+      "safe_robot_commit_count": 72
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0010",
+      "safe_robot_commit_count": 72
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0011",
+      "safe_robot_commit_count": 72
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0012",
+      "safe_robot_commit_count": 48
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0013",
+      "safe_robot_commit_count": 48
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0014",
+      "safe_robot_commit_count": 48
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0015",
+      "safe_robot_commit_count": 48
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0016",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0017",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0018",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0019",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0020",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0021",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0022",
+      "safe_robot_commit_count": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "persistent_role": "role-0023",
+      "safe_robot_commit_count": 24
+    }
+  ],
+  "breakdown_by_team_size": [
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 288,
+      "team_size": 12
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 384,
+      "team_size": 16
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 576,
+      "team_size": 24
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 120,
+      "team_size": 5
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 144,
+      "team_size": 6
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 192,
+      "team_size": 8
+    }
+  ],
+  "breakdown_by_topology_pair": [
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 284,
+      "source_topology": 0,
+      "target_topology": 2
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 284,
+      "source_topology": 0,
+      "target_topology": 5
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 284,
+      "source_topology": 2,
+      "target_topology": 0
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 284,
+      "source_topology": 2,
+      "target_topology": 5
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 284,
+      "source_topology": 5,
+      "target_topology": 0
+    },
+    {
+      "mismatch_count": 0,
+      "mismatch_rate": 0.0,
+      "safe_robot_commit_count": 284,
+      "source_topology": 5,
+      "target_topology": 2
+    }
+  ],
+  "geometric_certificate_count": 48,
+  "geometric_false_safe_count": 0,
+  "mismatch_count": 0,
+  "mismatch_rate": 0.0,
+  "mismatches": [],
+  "safe_robot_commit_count": 1704
+}

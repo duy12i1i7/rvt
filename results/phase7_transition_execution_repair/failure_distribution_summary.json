@@ -1,0 +1,278 @@
+{
+  "by_directed_topology_pair": [
+    {
+      "episode_count": 24,
+      "projection_abort_count": 16,
+      "source_topology": 0,
+      "success_count": 8,
+      "target_topology": 2
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 24,
+      "source_topology": 0,
+      "success_count": 0,
+      "target_topology": 5
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 20,
+      "source_topology": 2,
+      "success_count": 4,
+      "target_topology": 0
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 0,
+      "source_topology": 2,
+      "success_count": 24,
+      "target_topology": 5
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 20,
+      "source_topology": 5,
+      "success_count": 4,
+      "target_topology": 0
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 17,
+      "source_topology": 5,
+      "success_count": 7,
+      "target_topology": 2
+    }
+  ],
+  "by_fixture": [
+    {
+      "episode_count": 36,
+      "fixture_type": "bounded_source_perturbation",
+      "projection_abort_count": 25,
+      "success_count": 11
+    },
+    {
+      "episode_count": 36,
+      "fixture_type": "exact_source",
+      "projection_abort_count": 24,
+      "success_count": 12
+    },
+    {
+      "episode_count": 36,
+      "fixture_type": "rotated_mission",
+      "projection_abort_count": 24,
+      "success_count": 12
+    },
+    {
+      "episode_count": 36,
+      "fixture_type": "translated_mission",
+      "projection_abort_count": 24,
+      "success_count": 12
+    }
+  ],
+  "by_graph_topology_and_degree": [
+    {
+      "episode_count": 24,
+      "graph_average_degree": 1.6,
+      "graph_topology": "path",
+      "projection_abort_count": 13,
+      "success_count": 11
+    },
+    {
+      "episode_count": 24,
+      "graph_average_degree": 1.6666666666666667,
+      "graph_topology": "path",
+      "projection_abort_count": 9,
+      "success_count": 15
+    },
+    {
+      "episode_count": 24,
+      "graph_average_degree": 1.75,
+      "graph_topology": "path",
+      "projection_abort_count": 19,
+      "success_count": 5
+    },
+    {
+      "episode_count": 24,
+      "graph_average_degree": 1.8333333333333333,
+      "graph_topology": "path",
+      "projection_abort_count": 20,
+      "success_count": 4
+    },
+    {
+      "episode_count": 24,
+      "graph_average_degree": 1.875,
+      "graph_topology": "path",
+      "projection_abort_count": 16,
+      "success_count": 8
+    },
+    {
+      "episode_count": 24,
+      "graph_average_degree": 1.9166666666666667,
+      "graph_topology": "path",
+      "projection_abort_count": 20,
+      "success_count": 4
+    }
+  ],
+  "by_initial_perturbation": [
+    {
+      "episode_count": 108,
+      "initial_perturbation_present": false,
+      "projection_abort_count": 72,
+      "success_count": 36
+    },
+    {
+      "episode_count": 36,
+      "initial_perturbation_present": true,
+      "projection_abort_count": 25,
+      "success_count": 11
+    }
+  ],
+  "by_rotation": [
+    {
+      "episode_count": 108,
+      "projection_abort_count": 73,
+      "rotated_fixture": false,
+      "success_count": 35
+    },
+    {
+      "episode_count": 36,
+      "projection_abort_count": 24,
+      "rotated_fixture": true,
+      "success_count": 12
+    }
+  ],
+  "by_team_size": [
+    {
+      "episode_count": 24,
+      "projection_abort_count": 20,
+      "success_count": 4,
+      "team_size": 12
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 16,
+      "success_count": 8,
+      "team_size": 16
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 20,
+      "success_count": 4,
+      "team_size": 24
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 13,
+      "success_count": 11,
+      "team_size": 5
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 9,
+      "success_count": 15,
+      "team_size": 6
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 19,
+      "success_count": 5,
+      "team_size": 8
+    }
+  ],
+  "by_team_size_parity": [
+    {
+      "episode_count": 120,
+      "projection_abort_count": 84,
+      "success_count": 36,
+      "team_size_parity": "even"
+    },
+    {
+      "episode_count": 24,
+      "projection_abort_count": 13,
+      "success_count": 11,
+      "team_size_parity": "odd"
+    }
+  ],
+  "by_widening_or_narrowing": [
+    {
+      "episode_count": 72,
+      "projection_abort_count": 57,
+      "success_count": 15,
+      "transition_width_class": "narrowing"
+    },
+    {
+      "episode_count": 72,
+      "projection_abort_count": 40,
+      "success_count": 32,
+      "transition_width_class": "widening"
+    }
+  ],
+  "episode_count": 144,
+  "first_infeasible_call_by_large_displacement": [
+    {
+      "first_infeasible_call_count": 60,
+      "large_role_displacement": false
+    },
+    {
+      "first_infeasible_call_count": 37,
+      "large_role_displacement": true
+    }
+  ],
+  "first_infeasible_call_by_outer_role": [
+    {
+      "first_infeasible_call_count": 39,
+      "outer_role": false
+    },
+    {
+      "first_infeasible_call_count": 58,
+      "outer_role": true
+    }
+  ],
+  "first_infeasible_call_by_role": [
+    {
+      "first_infeasible_call_count": 11,
+      "persistent_role": "role-0000"
+    },
+    {
+      "first_infeasible_call_count": 11,
+      "persistent_role": "role-0001"
+    },
+    {
+      "first_infeasible_call_count": 25,
+      "persistent_role": "role-0002"
+    },
+    {
+      "first_infeasible_call_count": 7,
+      "persistent_role": "role-0003"
+    },
+    {
+      "first_infeasible_call_count": 17,
+      "persistent_role": "role-0004"
+    },
+    {
+      "first_infeasible_call_count": 6,
+      "persistent_role": "role-0005"
+    },
+    {
+      "first_infeasible_call_count": 5,
+      "persistent_role": "role-0006"
+    },
+    {
+      "first_infeasible_call_count": 4,
+      "persistent_role": "role-0008"
+    },
+    {
+      "first_infeasible_call_count": 6,
+      "persistent_role": "role-0009"
+    },
+    {
+      "first_infeasible_call_count": 1,
+      "persistent_role": "role-0018"
+    },
+    {
+      "first_infeasible_call_count": 4,
+      "persistent_role": "role-0021"
+    }
+  ],
+  "projection_abort_episode_count": 97
+}
