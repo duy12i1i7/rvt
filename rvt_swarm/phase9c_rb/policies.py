@@ -78,6 +78,8 @@ class ScriptedDiagnosticPolicy(SourcePolicy):
         # `phase8e.event_timing.build_family_event_plan`. It carries landmark
         # trigger positions, never times.
         self.event_plan = tuple(event_plan)
+        # Every declared event records an explicit, auditable disposition.
+        self.dispositions: list = []
 
     def observe(self, session, robot, view, controller_input) -> None:
         if robot.robot_id != 0:
@@ -93,10 +95,32 @@ class ScriptedDiagnosticPolicy(SourcePolicy):
                 continue
             if progress + 1e-12 < trigger:
                 continue
-            self.fired[index] = True    # one-shot: skipped, never moved
-            if event.candidate_topology != robot.committed_topology:
-                session.request_candidate(robot, event.candidate_topology,
-                                          event.event_type)
+            # One-shot. The frozen S0 contract is explicit: "skipped or blocked
+            # script entries are not moved". The entry is therefore consumed
+            # here whatever happens next -- never queued, delayed, debounced or
+            # merged with its neighbour.
+            self.fired[index] = True
+            if event.candidate_topology == robot.committed_topology:
+                disposition = "NO_OP_ALREADY_COMMITTED"
+                originated = False
+            else:
+                originated = session.request_candidate(
+                    robot, event.candidate_topology, event.event_type)
+                disposition = ("ORIGINATED" if originated
+                               else "SKIPPED_ORIGINATION_BLOCKED")
+            self.dispositions.append({
+                "ordinal": event.ordinal,
+                "event_type": event.event_type,
+                "candidate_topology": event.candidate_topology,
+                "landmark_id": event.landmark_id,
+                "trigger_longitudinal_meters": trigger,
+                "control_step": session.control_step,
+                "time_seconds": session.time_seconds,
+                "committed_topology_at_trigger": robot.committed_topology,
+                "protocol_state_at_trigger": robot.protocol_node.state,
+                "disposition": disposition,
+                "originated": originated,
+            })
 
 
 class FixedTopologyPolicy(SourcePolicy):

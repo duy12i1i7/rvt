@@ -36,7 +36,9 @@ from ..decentralized.system_model import NeighbourRecord, RobotView
 from ..decentralized.transition_protocol import (
     TransitionProtocolNode, TransitionProtocolRuntimeOptions,
 )
-from ..runtime_configuration import DEFAULT_RUNTIME_CONFIG, RuntimeConfig
+from ..runtime_configuration import (
+    DEFAULT_RUNTIME_CONFIG, RuntimeConfig, canonical_runtime_hash,
+)
 from ..topology_registry import COMPACT, LINE, generate_persistent_roles
 from ..utils import soft_clip
 from .binding import ScenarioRuntimeBinding
@@ -100,6 +102,19 @@ class SimulatorEpisodeSession:
         self.binding = binding
         self.protocol = protocol
         self.target_contract = target_contract
+        # The runtime config is team-size specific: the frozen protocol node
+        # requires `mission.team_size == len(member_ids)`, and the derived
+        # diameter and round counts follow team size. `RuntimeConfig.for_team_size`
+        # is the same approved constructor the Phase 8E compiler used, so the
+        # canonical hash must reproduce the compiled expectation exactly.
+        if int(runtime_config.mission.team_size) != int(binding.team_size):
+            runtime_config = RuntimeConfig.for_team_size(int(binding.team_size))
+        expected_config_hash = str(binding.config_hashes["runtime_configuration_sha256"])
+        actual_config_hash = canonical_runtime_hash(runtime_config)
+        if actual_config_hash != expected_config_hash:
+            raise ValueError(
+                "runtime configuration does not match the compiled specification: "
+                f"expected {expected_config_hash}, derived {actual_config_hash}")
         self.runtime_config = runtime_config
         self.episode_id = episode_id
         self.seeds = {str(k): int(v) for k, v in seeds.items()}
@@ -279,12 +294,16 @@ class SimulatorEpisodeSession:
                 packet_loss_estimate=0.0,
             ))
 
+        # STATIC tokens only. Dynamic obstacles are deliberately excluded here
+        # and supplied separately by `_dynamic_obstacle_relative_states`:
+        # `RobotView.obstacles` carries no velocity, so the frozen adapter
+        # assigns every entry the static relative velocity `-own_velocity`.
+        # Including a dynamic obstacle here as well would enter it twice -- once
+        # with a wrong (stationary) relative velocity and once with the right
+        # one -- and the wrong copy would drive the time-to-collision term.
         obstacles = [(float(offset[0]), float(offset[1]), float(radius))
                      for offset, radius, _ in self.static_world.observable_tokens(
                          robot.position, float(self.runtime_config.sensing.obstacle_sensing_range_meters))]
-        for offset, _velocity, radius, _key in self.dynamic_world.observable_tokens(
-                robot.position, self.time_seconds):
-            obstacles.append((float(offset[0]), float(offset[1]), float(radius)))
 
         return RobotView(
             robot_id=robot.robot_id,
@@ -600,6 +619,30 @@ class SimulatorEpisodeSession:
             self.termination = EpisodeTermination(
                 "HORIZON_COMPLETE", self.control_step, self.time_seconds)
         return self.termination
+
+
+def build_event_plan(binding: ScenarioRuntimeBinding, source_policy_contracts: Mapping[str, object],
+                     runtime_config: RuntimeConfig = DEFAULT_RUNTIME_CONFIG):
+    """ET-addendum landmark event plan for this binding.
+
+    S0 reads it because it is explicitly an offline scripted collection policy.
+    It contains landmark positions only -- never a time, a horizon fraction, a
+    headroom category or an outcome.
+    """
+    from ..phase8e.event_timing import build_family_event_plan
+    from ..phase8e.event_timing_artifacts import SUPPORT_DISC_RADIUS_METERS
+    table = dict(source_policy_contracts["policies"]["S0_SCRIPTED_DIAGNOSTIC"]
+                 ["machine_readable_script"])
+    topologies = tuple(int(entry[1]) for entry in table.get(binding.family, ()))
+    specification = _specification_from_binding(binding)
+    specification["mission_frame"] = binding.mission_frame
+    return build_family_event_plan(
+        specification, binding.team_size, topologies,
+        sensing_range_meters=float(runtime_config.sensing.obstacle_sensing_range_meters),
+        nominal_spacing_meters=float(runtime_config.formation.nominal_spacing_meters),
+        support_disc_radius_meters=SUPPORT_DISC_RADIUS_METERS,
+        maximum_speed_meters_per_second=float(
+            runtime_config.physical.maximum_speed_meters_per_second))
 
 
 def _specification_from_binding(binding: ScenarioRuntimeBinding) -> Dict[str, object]:

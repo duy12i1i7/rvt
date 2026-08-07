@@ -38,9 +38,22 @@ def test_s0_implementation_has_no_horizon_fraction_trigger() -> None:
 
 
 def test_s0_trigger_is_a_longitudinal_landmark_not_a_time() -> None:
+    """The eligibility comparison must be against progress, not a clock.
+
+    `time_seconds` does appear in `observe`, but only as audit metadata on the
+    RB-D disposition record. What must not exist is a *comparison* that gates
+    the event on a time.
+    """
+    import ast
     source = inspect.getsource(policies.ScriptedDiagnosticPolicy.observe)
     assert "trigger_longitudinal_meters" in source
-    assert "time_seconds" not in source
+    tree = ast.parse(source.lstrip())
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Compare):
+            continue
+        rendered = ast.dump(node)
+        assert "time_seconds" not in rendered, ast.dump(node)
+        assert "horizon" not in rendered, ast.dump(node)
 
 
 def test_s0_landmarks_derive_only_from_approved_geometry_and_sensing() -> None:
