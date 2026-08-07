@@ -1,0 +1,218 @@
+{
+  "category_d_count": 0,
+  "common_contract": {
+    "decision_state_sampling": "use only predeclared Phase 9B slots that occur while the episode is active; never move or replace an unavailable slot",
+    "termination": "goal completion, declared horizon, or typed terminal failure",
+    "typed_interface": {
+      "inputs": [
+        "policy_id",
+        "robot_local_view",
+        "robot_local_lifecycle_state",
+        "immutable_local_topology_metadata",
+        "shared_mission_clock",
+        "source_job_seed",
+        "episode_horizon_seconds"
+      ],
+      "outputs": [
+        "local_action_source",
+        "optional_candidate_request",
+        "event_eligibility"
+      ],
+      "prohibited_inputs": [
+        "headroom_category",
+        "candidate_outcome",
+        "future_obstacle_trajectory",
+        "future_disturbance",
+        "global_task_result",
+        "final_test_metadata"
+      ]
+    }
+  },
+  "phase8_protocol_hash": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "policies": {
+    "S0_SCRIPTED_DIAGNOSTIC": {
+      "action_source": "Phase 6 local controller plus safety projection",
+      "communication": "normal episode communication; not used to select script events",
+      "deployability": "offline_collection_only",
+      "event_rule": "one-shot normalized-horizon script table",
+      "initial_topology": 5,
+      "machine_readable_script": {
+        "F1": [],
+        "F10": [
+          [
+            0.4,
+            2
+          ]
+        ],
+        "F2": [
+          [
+            0.2,
+            2
+          ],
+          [
+            0.65,
+            5
+          ]
+        ],
+        "F3": [
+          [
+            0.2,
+            2
+          ],
+          [
+            0.65,
+            5
+          ]
+        ],
+        "F4": [
+          [
+            0.2,
+            2
+          ],
+          [
+            0.7,
+            5
+          ]
+        ],
+        "F5": [
+          [
+            0.15,
+            2
+          ],
+          [
+            0.35,
+            5
+          ],
+          [
+            0.55,
+            2
+          ],
+          [
+            0.75,
+            5
+          ]
+        ],
+        "F6": [
+          [
+            0.5,
+            2
+          ]
+        ],
+        "F7": [
+          [
+            0.33,
+            2
+          ],
+          [
+            0.67,
+            5
+          ]
+        ],
+        "F8": [
+          [
+            0.2,
+            2
+          ],
+          [
+            0.7,
+            5
+          ]
+        ],
+        "F9": [
+          [
+            0.33,
+            2
+          ],
+          [
+            0.67,
+            5
+          ]
+        ]
+      },
+      "retry": "none; skipped or blocked script entries are not moved",
+      "topology_behavior": "scripted desired topology follows the frozen smooth transition profile; offline oracle bypasses Phase 7 agreement but never safety projection"
+    },
+    "S1_ALWAYS_COMPACT": {
+      "action_source": "Phase 6 COMPACT local controller plus safety projection",
+      "communication": "normal local peer messages",
+      "deployability": "diagnostic_and_collection",
+      "event_rule": "no online candidate request",
+      "hold_semantics": "continue mission and obstacle response in COMPACT",
+      "initial_topology": 5,
+      "topology_behavior": "COMPACT remains committed for the complete episode"
+    },
+    "S2_ALWAYS_LINE": {
+      "action_source": "Phase 6 local controller plus safety projection",
+      "communication": "normal local peer messages",
+      "deployability": "diagnostic_and_collection",
+      "event_rule": "no online candidate request",
+      "hold_semantics": "LINE remains committed for the complete episode",
+      "initial_topology": 5,
+      "topology_behavior": "at time zero use the offline forced-topology qualification interface to initialize LINE role targets; no online request or epoch is created"
+    },
+    "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+      "action_source": "Phase 6 controller plus safety projection in committed topology",
+      "compact_to_line_rule": "after evidence_persistence, request LINE iff measured width is at least LINE required width and less than COMPACT required width+spacing_margin",
+      "deployability": "robot_local",
+      "hysteresis_meters": "spacing_margin_meters",
+      "initial_topology": 5,
+      "line_to_compact_rule": "after evidence_persistence, request COMPACT iff complete observation is open or measured width >= COMPACT required width+2*spacing_margin",
+      "local_inputs": [
+        "own state",
+        "fresh one-hop messages",
+        "ego-relative obstacle support discs",
+        "mission direction",
+        "local COMPACT and LINE role metadata",
+        "local lifecycle state"
+      ],
+      "minimum_commitment_seconds": "protocol.commitment_seconds",
+      "origination": "each robot may originate only on its own threshold crossing; an adopted active intent suppresses later local origins",
+      "required_width_formula": "candidate lateral role span + 2*(robot_radius+obstacle_surface_margin)",
+      "tie_behavior": "hold current topology",
+      "transition": "every request uses Phase 7 readiness, agreement, confirmation and profile",
+      "unknown_behavior": "hold current topology and emit no intent",
+      "width_statistic": "minimum free inner-surface separation from paired left/right boundary supports in the role-dependent lookahead sector"
+    },
+    "S4_FROZEN_TRANSITION_PROTOCOL": {
+      "abort_rearm": "unchanged Phase 7 abort and rearm rules; no event retry",
+      "action_source": "Phase 6 controller plus safety projection",
+      "aggregation": "existing Phase 7 min/max score agreement",
+      "candidate_selection": "the one candidate named by the scheduled local event",
+      "deployability": "offline_collection_only",
+      "diagnostic_score": 1.0,
+      "initial_topology": 5,
+      "lifecycle_origination": "role-0000 only; propagation and all decisions remain leaderless",
+      "local_event_source": "role-0000 local mission clock at 0.25*horizon requests LINE and at 0.65*horizon requests COMPACT if different from committed topology",
+      "no_event": "hold committed topology",
+      "score_semantics": "bounded_diagnostic_candidate_available",
+      "timeout": "remaining episode horizon",
+      "transition": "complete Phase 7 intent, score, readiness, all-ready, confirmation, profile and dwell"
+    },
+    "S5_BOUNDED_PERTURBATION": {
+      "action_source": "S1 action plus one bounded pre-projection acceleration perturbation",
+      "base_policy": "S1_ALWAYS_COMPACT",
+      "deployability": "offline_collection_only",
+      "distribution": "uniform disk",
+      "duration": "one control period",
+      "event_eligibility": "all predeclared active slots, including but not moved toward the perturbation",
+      "frame": "mission",
+      "initial_topology": 5,
+      "invalidity": "record invalid without resampling if perturbed command is nonfinite",
+      "maximum_magnitude_formula": "0.25*maximum_acceleration_meters_per_second_squared",
+      "perturbation_target": "one robot selected by seed modulo team size",
+      "repeat_count": 1,
+      "seed": "source_job.seeds.initial_condition with S5 perturbation draw keys",
+      "start_time": "first control tick at or after 0.40*episode_horizon_seconds"
+    }
+  },
+  "policy_ids": [
+    "S0_SCRIPTED_DIAGNOSTIC",
+    "S1_ALWAYS_COMPACT",
+    "S2_ALWAYS_LINE",
+    "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+    "S4_FROZEN_TRANSITION_PROTOCOL",
+    "S5_BOUNDED_PERTURBATION"
+  ],
+  "schema_version": "rvt-source-policy-contracts/v1",
+  "source_policy_contract_sha256": "aaf4e35a539d1ae864805ee52cfbd8be7579e7a61103e3807fbbc6d1706168df"
+}

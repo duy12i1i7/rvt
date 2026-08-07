@@ -1,0 +1,469 @@
+{
+  "category_d_count": 0,
+  "communication_degradation_contract": {
+    "base_graph": {
+      "directed_delivery": true,
+      "edge_rule": "symmetric Euclidean distance <= communication_range_meters",
+      "message_emission": "one message per required schema per communication tick",
+      "update_period": "communication_period_seconds"
+    },
+    "bounded_delay_loss": {
+      "assumption_class": "inside_method_assumptions",
+      "delay_distribution": "independent_uniform_closed[0,layout.delay_s] per directed message",
+      "delivery_quantization": "first communication tick at or after send_time+delay",
+      "draw_key": [
+        "communication_seed",
+        "sender",
+        "receiver",
+        "sequence",
+        "message_type",
+        "delay_or_drop"
+      ],
+      "drop_distribution": "independent Bernoulli(layout.packet_loss) per directed message"
+    },
+    "candidate_matching": "same counter-keyed schedule for both candidates; range gating may differ with candidate state",
+    "diameter": {
+      "D_max_formula": "team_size-1 for any connected component",
+      "protocol_rounds": "derived from the declared component-diameter bound"
+    },
+    "freshness": {
+      "maximum_age_seconds": "runtime communication.maximum_message_age_seconds",
+      "stale_behavior": "exclude from local neighbour table and all agreements"
+    },
+    "nominal": {
+      "assumption_class": "inside_method_assumptions",
+      "delay_seconds": 0.0,
+      "packet_drop_probability": 0.0
+    },
+    "schedule_seed": "source_job.seeds.communication",
+    "snapshot_fields": [
+      "tick",
+      "per-link sequence",
+      "queued messages",
+      "PRF identity",
+      "cut active"
+    ],
+    "temporary_disconnection_then_restore": {
+      "assumption_class": "explicit_assumption_violation_stress",
+      "base_delay_and_loss": "same stored F8 delay_s and packet_loss process",
+      "cut_rule": "drop every cross-partition message between role ordinals below and above ceil(N/2)",
+      "duration_formula": "2*(D_max+1)*communication_period_seconds",
+      "outcome_treatment": "valid task-negative when the violation prevents completion; never generation-invalid by itself",
+      "queued_cross_cut_messages": "drop, never deliver after restoration",
+      "restoration": "resume distance graph with empty cross-cut queues at first tick after duration",
+      "start_formula": "ceil(distance(start_center,first_passage_entry)/maximum_speed/communication_period)*communication_period"
+    }
+  },
+  "composite_generation_protocol_hash": "d928a7f614434b4d99395c5b75398b6277ec407cbf206e332a621f553022be57",
+  "configuration_hashes": {
+    "phase8_experiment_manifest_file_sha256": "bae6ed6500fdac37dd699b74f56861afb6eacf890c4a6969747cd3f38eae90e4",
+    "runtime_by_team_size": {
+      "12": "6187175cbd88eb4ec16524619c59552c8c8d0a95387f2d5a4993439542fdaf3f",
+      "16": "daa9fdb999cfaccc6d81d6510401e30ca1784b4d1158d894d0125e53f0455b79",
+      "24": "b7c2acbbdc4709ad8f1cb1ae3ad137a50a7fb09e017ee898fd1540ee0c9627e5",
+      "5": "fcf619d7af4052bdaf5ce088762de9d5165acbea077a15a4357e63f4ce4d42cd",
+      "6": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+      "8": "cd02e6ab626869e5d0a044b1ab36e5b3f69b40806de81bf185c3d910e5959059"
+    },
+    "scenario_schema_source_sha256": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+    "topology_registry_source_sha256": "f8528d24561abea52e2cd50b236dc69cc6c25b402498fe13d0ace05e1317bfe5"
+  },
+  "counterfactual_execution_contract": {
+    "aggregation": "all_success",
+    "candidate_differs_from_active_target": "do not supersede; resolve or abort active lifecycle, wait for REARMED, then issue candidate if horizon remains",
+    "candidate_differs_stable": "originate candidate through Phase 7",
+    "candidate_equals_current": "hold or continue; no source-equals-target epoch",
+    "candidate_injection_time": "same next communication tick in both clones",
+    "candidate_matches_active_target": "continue the existing lifecycle",
+    "candidate_timeout": "remaining episode horizon; no independent hidden timeout",
+    "clone_rule": "two independent deep clones with byte-identical canonical snapshot hash",
+    "horizon": "remaining time to ScenarioLayout.episode_horizon_seconds",
+    "invalid_pair": "generation-invalid pair; emit no training row and never replace",
+    "matching": [
+      "initial snapshot hash",
+      "source lifecycle hash",
+      "horizon",
+      "communication schedule identity",
+      "matched disturbance seed",
+      "dynamic obstacle snapshot and seed",
+      "runtime configuration hash"
+    ],
+    "mission_timeout": "absolute family episode horizon",
+    "protocol_initialization": "preserve source lifecycle exactly",
+    "replicas": "one except three matched replicas for F8 and F9",
+    "rollout_start": "resolved decision-event timestamp after source step completion",
+    "snapshot_contents": [
+      "time and control index",
+      "positions velocities accelerations",
+      "roles",
+      "committed topologies",
+      "transition profile and protocol nodes",
+      "controller state",
+      "safety latches",
+      "message queues and timestamps",
+      "communication schedule state",
+      "disturbance counters",
+      "dynamic obstacle state",
+      "mission progress",
+      "event state"
+    ]
+  },
+  "disturbance_contract": {
+    "communication_disturbance": "defined only by communication_degradation_contract",
+    "dynamic_obstacle_uncertainty": "disabled",
+    "initial_velocity": "defined only by initialization_contract",
+    "invalidity": "nonfinite generated value or magnitude outside the declared bound",
+    "obstacle_observation_delay": "disabled",
+    "obstacle_observation_noise": "disabled",
+    "reset": "all counter identities reset to the frozen episode or replica seed",
+    "robot_acceleration": {
+      "candidate_matching": "same vector for matching robot and step",
+      "counterfactual_rollout": "independent per-robot per-control-step uniform disk with maximum magnitude 0.05*maximum_acceleration, added before safety projection",
+      "draw_key": [
+        "robot_acceleration",
+        "robot_id",
+        "control_step",
+        "radius_or_angle"
+      ],
+      "seed": "candidate_replica.seeds.matched_disturbance_seed",
+      "snapshot_state": "seed identity and control-step index",
+      "source_episode": "disabled except S5",
+      "temporal_correlation": "zero; counter-keyed independent draws",
+      "update_period": "control_period_seconds"
+    },
+    "robot_sensing_noise": "disabled",
+    "runtime_velocity_disturbance": "disabled"
+  },
+  "dynamic_obstacle_contract": {
+    "acceleration": "zero inside a segment; velocity changes atomically at waypoint timestamps",
+    "after_last_waypoint": "hold final pose with zero velocity",
+    "applicable_family": "F9",
+    "authoritative_motion_fields": "timestamped DynamicObstaclePath.waypoints",
+    "before_first_waypoint": "hold first pose with zero velocity",
+    "candidate_matching": "identical snapshot and dynamic_obstacle seed for both candidates",
+    "collision": "continuous swept circle against linearly interpolated robot centers",
+    "declared_obstacle_speed_disposition": "audit-only family-range descriptor; waypoint timestamps win because they form complete position-time pairs",
+    "invalidity": "nonpositive radius, nonfinite waypoint, or nonincreasing waypoint time",
+    "looping": false,
+    "observation": {
+      "future_waypoints_robot_visible": false,
+      "latency_seconds": 0.0,
+      "position_noise": "disabled",
+      "range_formula": "center distance <= obstacle_sensing_range_meters",
+      "velocity_noise": "disabled"
+    },
+    "phase_seconds": 0.0,
+    "position_update": "linear interpolation in absolute episode time on each waypoint segment",
+    "primitive": "closed circle using stored radius_meters",
+    "reflection": false,
+    "rejected_speed_alternative": "constant declared speed cannot satisfy the frozen waypoint endpoint times",
+    "snapshot_fields": [
+      "segment_index",
+      "episode_time",
+      "position",
+      "velocity"
+    ],
+    "velocity_update": "constant segment displacement divided by segment duration"
+  },
+  "final_test_access_policy": {
+    "geometry_compilation": "prohibited",
+    "metadata_source": "approved Phase 8 protocol manifest and split contract; sealed layout records not opened",
+    "permitted_metadata": {
+      "family_count": 10,
+      "layout_count": 10,
+      "manifest_sha256": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+      "schema_compatibility": "rvt-layout-split/v1 metadata only"
+    },
+    "runtime_access_count": 0
+  },
+  "frozen_job_manifest_hash": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "generation_budget_hash": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+  "initialization_contract": {
+    "communication_state": "sequence counters zero; neighbour tables empty; PRF counter zero",
+    "controller_local_state": "new RobotLocalController per robot with empty mutable history",
+    "dynamic_obstacle_phase": "absolute episode time zero",
+    "initial_acceleration_meters_per_second_squared": [
+      0.0,
+      0.0
+    ],
+    "initial_topology": {
+      "keep_status": "prohibited",
+      "line_exception": "only an explicit frozen narrow-start declaration; none exists in v1 layouts",
+      "required_layout_value": 5
+    },
+    "invalidity_handling": "record one rejected scientific slot; never resample or replace",
+    "message_queues": "empty per directed link",
+    "mission_progress": "zero with maximum-progress origin at initial fitted topology origin",
+    "nominal_pose_formula": "origin + R(mission_heading)*COMPACT_role_offset",
+    "position_perturbation": {
+      "bounds_formula_meters": "[-spacing_margin_meters,+spacing_margin_meters] per mission-frame component",
+      "clipping": "none",
+      "distribution": "independent_uniform_closed",
+      "draw_key": [
+        "initial_position",
+        "robot_id",
+        "longitudinal_or_lateral"
+      ],
+      "enabled": true,
+      "frame": "mission",
+      "seed": "source_job.seeds.initial_condition",
+      "shared": false
+    },
+    "protocol_state": {
+      "active_intent": null,
+      "committed_topology": 5,
+      "duplicate_intent_count": 0,
+      "mode_epoch_count": 0,
+      "state": "STABLE_TOPOLOGY",
+      "state_entered_seconds": 0.0
+    },
+    "role_assignment": "generate_persistent_roles(sorted canonical integer robot keys)",
+    "topology_orientation_formula": "mission heading",
+    "topology_origin_formula": "ScenarioLayout.start_center_meters",
+    "velocity_perturbation": {
+      "bounds_formula_meters_per_second": "[-maximum_speed*control_period,+maximum_speed*control_period] per mission-frame component",
+      "clipping": "reject if Euclidean speed exceeds maximum_speed",
+      "distribution": "independent_uniform_closed",
+      "draw_key": [
+        "initial_velocity",
+        "robot_id",
+        "longitudinal_or_lateral"
+      ],
+      "enabled": true,
+      "frame": "mission",
+      "seed": "source_job.seeds.initial_condition",
+      "shared": false
+    }
+  },
+  "phase8_protocol_hash": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "protocol_hash": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+  "scenario_geometry_contract": {
+    "centerline_semantics": {
+      "join_semantics": "closed round distance-to-polyline join",
+      "passage_length_formula": "sum Euclidean segment lengths after entry/exit clipping",
+      "rejected_spline_alternative": "rejected because spline tension and endpoint derivatives are absent from ScenarioLayout",
+      "representation": "piecewise_linear_polyline_with_euclidean_tube"
+    },
+    "family_compilers": {
+      "F1": "explicit static circles; no confining passage",
+      "F10": "one straight_corridor below clearance requirement",
+      "F2": "one straight_corridor active on stored x0..x1",
+      "F3": "polyline tube active from first interior x to its reflected exit x",
+      "F4": "piecewise-linear S tube active between first and last interior control points",
+      "F5": "two independent straight_corridor tubes in declaration order",
+      "F6": "central circle plus declared polyline bypass with circular fillet radius parameter",
+      "F7": "explicit static circles; no confining passage",
+      "F8": "one straight_corridor plus the F8 communication contract",
+      "F9": "no static passage; one timestamp-authoritative moving circle"
+    },
+    "geometry_tolerance_meters": 1e-09,
+    "goal_region": {
+      "center_formula": "ScenarioLayout.goal_center_meters",
+      "origin_tolerance_formula": "formation_tolerance_ratio*nominal_spacing_meters",
+      "required_goal_dwell_seconds": "control_period_seconds"
+    },
+    "headroom_use": "audit_only_prohibited_from_compilation_and_execution",
+    "invalidity_conditions": [
+      "unknown schema, generator, split, family, topology, or primitive",
+      "nonfinite value, nonpositive width/radius/horizon, or nonmonotone waypoint time",
+      "start equals goal or centreline x is not monotone",
+      "primitive or inflated robot center leaves the declared world bounds",
+      "initial role state collides or lies outside robot-center bounds",
+      "declared passage width disagrees with primitive width",
+      "bypass flag or family-specific canonical parameter is inconsistent"
+    ],
+    "layout_field_dispositions": [
+      {
+        "consumption": "validate rvt-scenario-layout/v1",
+        "field": "schema_version",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "validate frozen geometry generator",
+        "field": "generator_version",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "canonical episode identity",
+        "field": "layout_id",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "select one F1-F10 compiler",
+        "field": "family_id",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "nonfinal access guard and identity",
+        "field": "split",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "canonical identity",
+        "field": "variant_index",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "provenance commitment",
+        "field": "generation_seed_commitment",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "mission and initial topology origin",
+        "field": "start_center_meters",
+        "visibility": "shared_mission"
+      },
+      {
+        "consumption": "goal-region center",
+        "field": "goal_center_meters",
+        "visibility": "shared_mission"
+      },
+      {
+        "consumption": "passage or bypass reference path",
+        "field": "corridor_centerline_meters",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "free width between analytic inner boundaries",
+        "field": "nominal_passage_width_meters",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "compile analytic occupied sets",
+        "field": "static_obstacles",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "compile timestamp-authoritative motion",
+        "field": "dynamic_obstacle_paths",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "validate F6 bypass declaration",
+        "field": "bypass_available",
+        "visibility": "audit_only"
+      },
+      {
+        "consumption": "select nominal, bounded, or disconnection process",
+        "field": "communication_profile",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "initial committed topology and role template",
+        "field": "initial_topology_id",
+        "visibility": "robot_local_metadata"
+      },
+      {
+        "consumption": "absolute source and mission timeout",
+        "field": "episode_horizon_seconds",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "compiler inputs and cross-checks",
+        "field": "canonical_parameters",
+        "visibility": "global_simulator"
+      },
+      {
+        "consumption": "never execution or label input",
+        "field": "diagnostic_headroom_by_team_size",
+        "visibility": "audit_only"
+      }
+    ],
+    "mission_frame": {
+      "heading_formula": "unit(goal_center_meters-start_center_meters)",
+      "lateral_axis_formula": "(-heading_y,heading_x)",
+      "longitudinal_axis_formula": "heading",
+      "origin_formula": "ScenarioLayout.start_center_meters",
+      "zero_length_goal_vector": "GEOMETRY_INVALID"
+    },
+    "world_frame": {
+      "bounds_meters": [
+        [
+          -18.0,
+          18.0
+        ],
+        [
+          -6.0,
+          6.0
+        ]
+      ],
+      "bounds_rationale": "contains the N=24 LINE half-length at both frozen start and goal, all declared family geometry ranges, and configured clearances",
+      "frame_id": "world",
+      "origin_meters": [
+        0.0,
+        0.0
+      ],
+      "x_axis": [
+        1.0,
+        0.0
+      ],
+      "y_axis": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "schema_version": "rvt-executable-scientific-protocol/v1",
+  "seed_binding": {
+    "closed_interval_mapping": "a+(b-a)*u; upper endpoint is approached but not exceeded",
+    "final_test": "seed construction rejected without the existing one-time authorization gate",
+    "job_order_independent": true,
+    "prf_version": "sha256-canonical-counter-uint64/v1",
+    "streams": {
+      "communication": "source_job.seeds.communication",
+      "counterfactual_disturbance": "candidate_replica.seeds.matched_disturbance_seed",
+      "data_sampling": "source_job.seeds.data_sampling",
+      "dynamic_obstacle": "source_job.seeds.dynamic_obstacle; deterministic v1 path uses no random draw",
+      "initial_condition": "source_job.seeds.initial_condition"
+    },
+    "uniform_disk_mapping": "radius=max_radius*sqrt(u_radius), angle=2*pi*u_angle",
+    "uniform_formula": "u=uint64_be(SHA256(canonical_json([prf_version,seed,process,*counter]))[0:8])/2^64"
+  },
+  "simulator_semantics": {
+    "clock": "integer control step multiplied by control period",
+    "collision_checking": "continuous swept check plus control-boundary state checks",
+    "control_period_seconds": 0.15,
+    "integration": "frozen semi-implicit acceleration step",
+    "runtime_binding_implemented": false,
+    "simulator_steps_executed": 0,
+    "specification_only": true,
+    "timeout": "first control boundary at or beyond absolute horizon"
+  },
+  "source_commits": {
+    "phase8_protocol": "c17081fe1cf58cc2d3f929e35ff4bca811c75c58",
+    "phase9b_budget": "20a7541a4ae946c2ca051cde0c353c396d2c1241",
+    "phase9c_blocked_audit": "62698414a9e2f0f1b388d1e9ee6401964862d86e"
+  },
+  "source_policy_contracts": {
+    "schema_version": "rvt-source-policy-contracts/v1",
+    "sha256": "aaf4e35a539d1ae864805ee52cfbd8be7579e7a61103e3807fbbc6d1706168df"
+  },
+  "static_obstacle_contract": {
+    "collision_inflation": {
+      "analytic_wall_surface_threshold_formula": "robot_radius + obstacle_surface_margin",
+      "circle_center_threshold_formula": "robot_radius + max(safety.obstacle_clearance_margin, circle_radius)",
+      "obstacle_surface_margin_meters": 0.02
+    },
+    "collision_truth_is_analytic": true,
+    "sensor_conversion": {
+      "analytic_boundary": "sample each visible inner boundary component by arc length, include endpoints, and place support-disc centers one support radius into occupied space",
+      "circle": "relative center and true radius when center distance <= R_obs",
+      "maximum_arc_spacing_meters": 0.175,
+      "ordering": "distance, primitive index, boundary side, arc index",
+      "robot_visibility": "only ego-relative current support discs within R_obs",
+      "sampling_anchor": "component start in canonical primitive order",
+      "support_disc_radius_meters": 0.35
+    },
+    "sensor_tokens_are_not_collision_truth": true,
+    "truth_geometry": {
+      "boundary_contact": "collision",
+      "central_blocker": "closed disk(center,radius)",
+      "circle": "closed disk(center,radius)",
+      "corridor": "inside active longitudinal slab, occupied space is the world-bound complement of the closed centreline tube of half-width width/2"
+    }
+  },
+  "target_v4_execution_contract": {
+    "schema_version": "rvt-target-v4-execution-contract/v1",
+    "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  }
+}

@@ -1,0 +1,581 @@
+{
+  "audit_only_fields": [
+    "diagnostic_headroom_by_team_size",
+    "variant_index",
+    "layout_id",
+    "generation_seed_commitment"
+  ],
+  "bypass": {
+    "available": false,
+    "clearance_meters": null,
+    "control_points_meters": [],
+    "curve": "not_applicable",
+    "fillet_radius_meters": null,
+    "validity": "not_applicable"
+  },
+  "canonical_parameters": [
+    [
+      "sparse_obstacle_offset_m",
+      3.43
+    ]
+  ],
+  "category_d_count": 0,
+  "centerline": {
+    "control_points_meters": [
+      [
+        -6.0,
+        -0.1935
+      ],
+      [
+        6.0,
+        0.1935
+      ]
+    ],
+    "full_length_meters": 12.006238753248246,
+    "representation": "piecewise_linear_polyline"
+  },
+  "communication": {
+    "assumption_class": "inside_method_assumptions",
+    "delay_upper_bound_seconds": 0.0,
+    "packet_drop_probability": 0.0,
+    "profile": "nominal",
+    "team_size_schedule": {}
+  },
+  "disturbance_contract": "executable_protocol.disturbance_contract",
+  "dynamic_obstacles": [],
+  "episode_horizon_seconds": 90.0,
+  "executable_protocol_sha256": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+  "goal_contract": {
+    "center_meters": [
+      6.0,
+      0.1935
+    ],
+    "dwell_seconds_formula": "runtime_config.physical.control_period_seconds",
+    "origin_tolerance_formula": "runtime_config.derived.formation_tolerance_meters"
+  },
+  "initial_topology_id": 5,
+  "initialization_by_team_size": {
+    "12": {
+      "goal_tolerance_meters": 0.55,
+      "nominal_positions_meters": [
+        [
+          -8.263335800535213,
+          0.18374137367954868
+        ],
+        [
+          -8.234325882678483,
+          -0.7157909629631903
+        ],
+        [
+          -7.363803463892473,
+          0.21275129153627698
+        ],
+        [
+          -7.334793546035744,
+          -0.686781045106462
+        ],
+        [
+          -6.4642711272497335,
+          0.24176120939300533
+        ],
+        [
+          -6.435261209393006,
+          -0.6577711272497337
+        ],
+        [
+          -5.564738790606994,
+          0.2707711272497337
+        ],
+        [
+          -5.5357288727502665,
+          -0.6287612093930053
+        ],
+        [
+          -4.665206453964256,
+          0.29978104510646203
+        ],
+        [
+          -4.636196536107527,
+          -0.599751291536277
+        ],
+        [
+          -3.7656741173215167,
+          0.3287909629631903
+        ],
+        [
+          -3.736664199464788,
+          -0.5707413736795487
+        ]
+      ],
+      "position_perturbation_bound_meters": 0.05,
+      "role_ids": [
+        "role-0000",
+        "role-0001",
+        "role-0002",
+        "role-0003",
+        "role-0004",
+        "role-0005",
+        "role-0006",
+        "role-0007",
+        "role-0008",
+        "role-0009",
+        "role-0010",
+        "role-0011"
+      ],
+      "runtime_configuration_sha256": "6187175cbd88eb4ec16524619c59552c8c8d0a95387f2d5a4993439542fdaf3f",
+      "velocity_component_bound_meters_per_second": 0.135
+    },
+    "16": {
+      "goal_tolerance_meters": 0.55,
+      "nominal_positions_meters": [
+        [
+          -9.16286813717795,
+          0.15473145582282033
+        ],
+        [
+          -9.133858219321223,
+          -0.7448008808199187
+        ],
+        [
+          -8.263335800535213,
+          0.18374137367954868
+        ],
+        [
+          -8.234325882678483,
+          -0.7157909629631903
+        ],
+        [
+          -7.363803463892473,
+          0.21275129153627698
+        ],
+        [
+          -7.334793546035744,
+          -0.686781045106462
+        ],
+        [
+          -6.4642711272497335,
+          0.24176120939300533
+        ],
+        [
+          -6.435261209393006,
+          -0.6577711272497337
+        ],
+        [
+          -5.564738790606994,
+          0.2707711272497337
+        ],
+        [
+          -5.5357288727502665,
+          -0.6287612093930053
+        ],
+        [
+          -4.665206453964256,
+          0.29978104510646203
+        ],
+        [
+          -4.636196536107527,
+          -0.599751291536277
+        ],
+        [
+          -3.7656741173215167,
+          0.3287909629631903
+        ],
+        [
+          -3.736664199464788,
+          -0.5707413736795487
+        ],
+        [
+          -2.866141780678778,
+          0.3578008808199187
+        ],
+        [
+          -2.837131862822049,
+          -0.5417314558228203
+        ]
+      ],
+      "position_perturbation_bound_meters": 0.05,
+      "role_ids": [
+        "role-0000",
+        "role-0001",
+        "role-0002",
+        "role-0003",
+        "role-0004",
+        "role-0005",
+        "role-0006",
+        "role-0007",
+        "role-0008",
+        "role-0009",
+        "role-0010",
+        "role-0011",
+        "role-0012",
+        "role-0013",
+        "role-0014",
+        "role-0015"
+      ],
+      "runtime_configuration_sha256": "daa9fdb999cfaccc6d81d6510401e30ca1784b4d1158d894d0125e53f0455b79",
+      "velocity_component_bound_meters_per_second": 0.135
+    },
+    "24": {
+      "goal_tolerance_meters": 0.55,
+      "nominal_positions_meters": [
+        [
+          -10.961932810463429,
+          0.09671162010936363
+        ],
+        [
+          -10.932922892606701,
+          -0.8028207165333754
+        ],
+        [
+          -10.06240047382069,
+          0.12572153796609198
+        ],
+        [
+          -10.033390555963962,
+          -0.773810798676647
+        ],
+        [
+          -9.16286813717795,
+          0.15473145582282033
+        ],
+        [
+          -9.133858219321223,
+          -0.7448008808199187
+        ],
+        [
+          -8.263335800535213,
+          0.18374137367954868
+        ],
+        [
+          -8.234325882678483,
+          -0.7157909629631903
+        ],
+        [
+          -7.363803463892473,
+          0.21275129153627698
+        ],
+        [
+          -7.334793546035744,
+          -0.686781045106462
+        ],
+        [
+          -6.4642711272497335,
+          0.24176120939300533
+        ],
+        [
+          -6.435261209393006,
+          -0.6577711272497337
+        ],
+        [
+          -5.564738790606994,
+          0.2707711272497337
+        ],
+        [
+          -5.5357288727502665,
+          -0.6287612093930053
+        ],
+        [
+          -4.665206453964256,
+          0.29978104510646203
+        ],
+        [
+          -4.636196536107527,
+          -0.599751291536277
+        ],
+        [
+          -3.7656741173215167,
+          0.3287909629631903
+        ],
+        [
+          -3.736664199464788,
+          -0.5707413736795487
+        ],
+        [
+          -2.866141780678778,
+          0.3578008808199187
+        ],
+        [
+          -2.837131862822049,
+          -0.5417314558228203
+        ],
+        [
+          -1.9666094440360382,
+          0.386810798676647
+        ],
+        [
+          -1.9375995261793104,
+          -0.512721537966092
+        ],
+        [
+          -1.067077107393299,
+          0.4158207165333754
+        ],
+        [
+          -1.0380671895365712,
+          -0.48371162010936364
+        ]
+      ],
+      "position_perturbation_bound_meters": 0.05,
+      "role_ids": [
+        "role-0000",
+        "role-0001",
+        "role-0002",
+        "role-0003",
+        "role-0004",
+        "role-0005",
+        "role-0006",
+        "role-0007",
+        "role-0008",
+        "role-0009",
+        "role-0010",
+        "role-0011",
+        "role-0012",
+        "role-0013",
+        "role-0014",
+        "role-0015",
+        "role-0016",
+        "role-0017",
+        "role-0018",
+        "role-0019",
+        "role-0020",
+        "role-0021",
+        "role-0022",
+        "role-0023"
+      ],
+      "runtime_configuration_sha256": "b7c2acbbdc4709ad8f1cb1ae3ad137a50a7fb09e017ee898fd1540ee0c9627e5",
+      "velocity_component_bound_meters_per_second": 0.135
+    },
+    "5": {
+      "goal_tolerance_meters": 0.55,
+      "nominal_positions_meters": [
+        [
+          -6.731229836456882,
+          0.14310500037171292
+        ],
+        [
+          -6.702219918600154,
+          -0.7564273362710262
+        ],
+        [
+          -5.831697499814144,
+          0.17211491822844122
+        ],
+        [
+          -5.802687581957415,
+          -0.7274174184142979
+        ],
+        [
+          -4.932165163171405,
+          0.20112483608516957
+        ]
+      ],
+      "position_perturbation_bound_meters": 0.05,
+      "role_ids": [
+        "role-0000",
+        "role-0001",
+        "role-0002",
+        "role-0003",
+        "role-0004"
+      ],
+      "runtime_configuration_sha256": "fcf619d7af4052bdaf5ce088762de9d5165acbea077a15a4357e63f4ce4d42cd",
+      "velocity_component_bound_meters_per_second": 0.135
+    },
+    "6": {
+      "goal_tolerance_meters": 0.55,
+      "nominal_positions_meters": [
+        [
+          -6.914037295571103,
+          0.22725625046464115
+        ],
+        [
+          -6.8850273777143745,
+          -0.6722760861780979
+        ],
+        [
+          -6.014504958928364,
+          0.2562661683213695
+        ],
+        [
+          -5.985495041071636,
+          -0.6432661683213695
+        ],
+        [
+          -5.1149726222856255,
+          0.28527608617809785
+        ],
+        [
+          -5.085962704428897,
+          -0.6142562504646412
+        ]
+      ],
+      "position_perturbation_bound_meters": 0.05,
+      "role_ids": [
+        "role-0000",
+        "role-0001",
+        "role-0002",
+        "role-0003",
+        "role-0004",
+        "role-0005"
+      ],
+      "runtime_configuration_sha256": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+      "velocity_component_bound_meters_per_second": 0.135
+    },
+    "8": {
+      "goal_tolerance_meters": 0.55,
+      "nominal_positions_meters": [
+        [
+          -7.363803463892473,
+          0.21275129153627698
+        ],
+        [
+          -7.334793546035744,
+          -0.686781045106462
+        ],
+        [
+          -6.4642711272497335,
+          0.24176120939300533
+        ],
+        [
+          -6.435261209393006,
+          -0.6577711272497337
+        ],
+        [
+          -5.564738790606994,
+          0.2707711272497337
+        ],
+        [
+          -5.5357288727502665,
+          -0.6287612093930053
+        ],
+        [
+          -4.665206453964256,
+          0.29978104510646203
+        ],
+        [
+          -4.636196536107527,
+          -0.599751291536277
+        ]
+      ],
+      "position_perturbation_bound_meters": 0.05,
+      "role_ids": [
+        "role-0000",
+        "role-0001",
+        "role-0002",
+        "role-0003",
+        "role-0004",
+        "role-0005",
+        "role-0006",
+        "role-0007"
+      ],
+      "runtime_configuration_sha256": "cd02e6ab626869e5d0a044b1ab36e5b3f69b40806de81bf185c3d910e5959059",
+      "velocity_component_bound_meters_per_second": 0.135
+    }
+  },
+  "layout_execution_specification_sha256": "5bab0b4106038fc4abebb9d382c60223eedd8e2d00159c81f94f6f453b793c51",
+  "mission_frame": {
+    "goal_center_meters": [
+      6.0,
+      0.1935
+    ],
+    "heading_radians": 0.03223882630010438,
+    "initial_topology_origin_meters": [
+      -6.0,
+      -0.1935
+    ],
+    "lateral_axis": [
+      -0.032233242063031485,
+      0.9994803740474878
+    ],
+    "longitudinal_axis": [
+      0.9994803740474878,
+      0.032233242063031485
+    ],
+    "mission_origin_meters": [
+      -6.0,
+      -0.1935
+    ],
+    "world_origin_meters": [
+      0.0,
+      0.0
+    ]
+  },
+  "nominal_initial_validity_by_team_size": {
+    "12": {
+      "reasons": [],
+      "valid": true
+    },
+    "16": {
+      "reasons": [],
+      "valid": true
+    },
+    "24": {
+      "reasons": [],
+      "valid": true
+    },
+    "5": {
+      "reasons": [],
+      "valid": true
+    },
+    "6": {
+      "reasons": [],
+      "valid": true
+    },
+    "8": {
+      "reasons": [],
+      "valid": true
+    }
+  },
+  "nominal_passage_width_meters": 4.0,
+  "passages": [],
+  "scenario_layout_schema_version": "rvt-scenario-layout/v1",
+  "schema_version": "rvt-layout-execution-specification/v1",
+  "source_layout": {
+    "family_id": "F1",
+    "generation_seed_commitment": "2e028de7c26ba973a442fc1f6de5d818303c69634f3d2c9b74458c112a7c3caa",
+    "geometry_sha256": "4e9d418dcbc740182e458de45506ac03bc6a2608980fcc34ad24f3278aafcdff",
+    "layout_id": "validation-f1-00",
+    "split": "validation"
+  },
+  "source_policy_ids": [
+    "S0_SCRIPTED_DIAGNOSTIC",
+    "S1_ALWAYS_COMPACT",
+    "S2_ALWAYS_LINE",
+    "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+    "S4_FROZEN_TRANSITION_PROTOCOL",
+    "S5_BOUNDED_PERTURBATION"
+  ],
+  "static_obstacles": [
+    {
+      "center_meters": [
+        -1.8,
+        3.43
+      ],
+      "primitive_index": 0,
+      "primitive_type": "circle",
+      "radius_meters": 0.35,
+      "source_primitive_type": "circle"
+    },
+    {
+      "center_meters": [
+        1.8,
+        -3.43
+      ],
+      "primitive_index": 1,
+      "primitive_type": "circle",
+      "radius_meters": 0.35,
+      "source_primitive_type": "circle"
+    }
+  ],
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "validity": "COMPILED_SPECIFICATION",
+  "world_bounds_meters": [
+    [
+      -18.0,
+      18.0
+    ],
+    [
+      -6.0,
+      6.0
+    ]
+  ]
+}

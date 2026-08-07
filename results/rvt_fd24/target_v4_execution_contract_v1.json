@@ -1,0 +1,117 @@
+{
+  "category_d_count": 0,
+  "conditions": {
+    "candidate_commitment_valid": {
+      "candidate_equals_current": "true without creating an epoch",
+      "required": "candidate differs from committed topology after any active lifecycle resolves",
+      "success": "all robot nodes commit the candidate in one lifecycle with no partial commitment"
+    },
+    "collision_free_complete_horizon": {
+      "continuous_check": "minimum distance of linearly interpolated centers over each interval",
+      "predicate": "no robot-robot, robot-static, robot-dynamic, or world-boundary contact over every closed control interval",
+      "robot_robot_threshold_meters": 0.4,
+      "tolerance_meters": 1e-09
+    },
+    "downstream_goal_complete": {
+      "quantity": "least-squares candidate topology origin",
+      "required_dwell_seconds": 0.15,
+      "target": "ScenarioLayout.goal_center_meters",
+      "tolerance_meters": 0.55
+    },
+    "no_irreversible_progress_loss": {
+      "predicate": "after any drop greater than nominal_spacing from maximum attained longitudinal progress, progress returns within spacing_margin of that maximum before termination",
+      "temporary_delay": "does not fail unless the terminal recovery condition remains unmet"
+    },
+    "no_persistent_deadlock": {
+      "paused_states": [
+        "INTENT_ACTIVE",
+        "CANDIDATE_SCORE_AGREEMENT",
+        "WAITING_FOR_LOCAL_READINESS",
+        "ALL_READY_AGREEMENT",
+        "TOPOLOGY_CONFIRMATION",
+        "TRANSITION_EXECUTION",
+        "TARGET_DWELL"
+      ],
+      "predicate": "every complete unpaused window advances by at least threshold",
+      "progress": "fitted topology-origin displacement along mission longitudinal axis",
+      "threshold_meters": 0.05,
+      "window_seconds": 3.75
+    },
+    "numerically_valid": {
+      "failure": "generation-invalid",
+      "predicate": "all state, action, geometry, queue time and metric values are finite and schema-valid"
+    },
+    "protocol_resolved": {
+      "assumption_violation": "valid task-negative, not generation-invalid",
+      "failure_states": [
+        "ABORTED",
+        "active_state_at_horizon",
+        "partial_commitment"
+      ],
+      "success_states": [
+        "STABLE_TOPOLOGY",
+        "COMPLETE",
+        "REARMED"
+      ]
+    },
+    "safety_projection_resolved": {
+      "conservative_fallback": "finite zero action; latch clears after next feasible successful projection",
+      "infeasible_or_solver_failure": "latch unresolved",
+      "persistent_intervention": "not failure by itself when every projection is feasible"
+    },
+    "target_metric_v3_dwell_complete": {
+      "clock": "continuous physical time sampled at control boundaries",
+      "duration_seconds": 3.0,
+      "entry": "Metric V3 e_inf <= formation_tolerance_meters",
+      "interruption": "reset dwell clock to zero",
+      "target": "candidate topology"
+    },
+    "transition_execution_valid": {
+      "candidate_differs": "Phase 7 profile reaches candidate Metric V3 tube without abort or timeout",
+      "candidate_equals_current": "true; continue hold behavior",
+      "projection_infeasibility": "false until a later successful projection resolves it; collision still latches"
+    }
+  },
+  "dispositions": [
+    "RECOVERABLE_POSITIVE",
+    "VALID_TASK_NEGATIVE",
+    "GENERATION_INVALID"
+  ],
+  "evaluation_precedence": [
+    "generation validity",
+    "collision",
+    "irreversible progress",
+    "deadlock",
+    "protocol and commitment",
+    "safety and transition",
+    "Metric V3 dwell",
+    "goal"
+  ],
+  "exception_policy": "every exception becomes typed EXECUTOR_EXCEPTION; never an implicit label",
+  "generation_invalid_rule": "initialization, geometry, schedule, numerical, schema, or executor validity failure",
+  "phase8_protocol_hash": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "positive_rule": "GOAL_COMPLETE and all ten predicates true",
+  "schema_version": "rvt-target-v4-execution-contract/v1",
+  "target_v4_execution_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "termination_causes": [
+    "GOAL_COMPLETE",
+    "HORIZON_COMPLETE",
+    "COLLISION",
+    "PERSISTENT_DEADLOCK",
+    "PROTOCOL_ABORT",
+    "PROTOCOL_TIMEOUT",
+    "TRANSITION_ABORT",
+    "TRANSITION_TIMEOUT",
+    "SAFETY_INFEASIBLE",
+    "SAFETY_SOLVER_FAILURE",
+    "IRREVERSIBLE_PROGRESS_LOSS",
+    "WORLD_BOUNDARY_EXIT",
+    "COMMUNICATION_ASSUMPTION_VIOLATION",
+    "INITIALIZATION_INVALID",
+    "GEOMETRY_INVALID",
+    "NUMERICAL_INVALID",
+    "SCHEDULE_INVALID",
+    "EXECUTOR_EXCEPTION"
+  ],
+  "valid_negative_rule": "generation valid and positive rule false"
+}
