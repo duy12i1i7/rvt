@@ -168,6 +168,10 @@ class SimulatorEpisodeSession:
         self.initialization_valid = True
         self.lifecycle_counter = 0
         self.event_log: List[Dict[str, object]] = []
+        # Metric V3 dwell clocks, one per admitted candidate topology. Physical
+        # time, reset to zero on any exit from the tube, exactly as the frozen
+        # condition specifies.
+        self.metric_v3_dwell: Dict[int, float] = {COMPACT: 0.0, LINE: 0.0}
 
         self._initialize_robots()
 
@@ -189,6 +193,20 @@ class SimulatorEpisodeSession:
 
         options = TransitionProtocolRuntimeOptions(transition_protocol_v1_enabled=True)
         member_ids = tuple(range(n))
+
+        # Publication initialization is COMPACT. The only admitted override is
+        # S2's offline forced-topology interface; KEEP is never reachable here
+        # because `initial_topology_override` may only return LINE.
+        initial_topology = COMPACT
+        override = getattr(self.source_policy, "initial_topology_override", None)
+        if callable(override):
+            requested = override()
+            if requested is not None:
+                if requested != LINE:
+                    raise ValueError(
+                        f"only LINE may override publication initialization, got {requested}")
+                initial_topology = LINE
+        self.initial_topology = initial_topology
 
         for robot_id in range(n):
             metadata = prepare_robot_local_topology_metadata(
@@ -216,16 +234,30 @@ class SimulatorEpisodeSession:
 
             compact_offset = metadata.candidate(COMPACT).own_role_offset_meters
             line_offset = metadata.candidate(LINE).own_role_offset_meters
+
+            # S2 is the sole initialization specialisation the frozen contract
+            # allows: "the offline forced topology interface initializes LINE
+            # role targets at time zero without creating a source-equals-target
+            # epoch". The compiled `nominal_positions_meters` are COMPACT poses,
+            # so the LINE poses are rebuilt from the same frozen formula
+            # `p_i = origin + R(heading) * role_offset_i` used by the compiler.
+            if initial_topology == LINE:
+                offset = line_offset
+                position = (
+                    self.mission_origin[0] + longitudinal[0] * float(offset[0])
+                    + lateral[0] * float(offset[1]) + dx * longitudinal[0] + dy * lateral[0],
+                    self.mission_origin[1] + longitudinal[1] * float(offset[0])
+                    + lateral[1] * float(offset[1]) + dx * longitudinal[1] + dy * lateral[1])
             self.robots.append(RobotRuntimeState(
                 robot_id=robot_id,
                 role_id=role_ids[robot_id] if robot_id < len(role_ids) else metadata.observer_role_id,
                 position=position, velocity=velocity, acceleration=(0.0, 0.0),
-                committed_topology=COMPACT,
+                committed_topology=initial_topology,
                 compact_offset=(float(compact_offset[0]), float(compact_offset[1])),
                 line_offset=(float(line_offset[0]), float(line_offset[1])),
                 protocol_node=TransitionProtocolNode(
                     robot_id=robot_id, member_ids=member_ids,
-                    runtime_config=self.runtime_config, committed_topology=COMPACT,
+                    runtime_config=self.runtime_config, committed_topology=initial_topology,
                     options=options),
                 adapter_by_topology=adapters,
             ))
@@ -578,6 +610,13 @@ class SimulatorEpisodeSession:
                     return
                 self.deadlock_window_elapsed = 0.0
                 self.deadlock_window_start_progress = progress
+
+        from .protocol_session import _inside_candidate_tube
+        for topology in (COMPACT, LINE):
+            if _inside_candidate_tube(self, topology):
+                self.metric_v3_dwell[topology] += self.control_period
+            else:
+                self.metric_v3_dwell[topology] = 0.0
 
         goal = conditions["downstream_goal_complete"]
         origin = self.fitted_topology_origin(self.robots[0].committed_topology)
