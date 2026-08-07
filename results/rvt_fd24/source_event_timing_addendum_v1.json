@@ -1,0 +1,157 @@
+{
+ "event_slot_distinction": {
+  "five_slot_episodes": [
+   0.1,
+   0.3,
+   0.5,
+   0.7,
+   0.9
+  ],
+  "four_slot_episodes": [
+   0.15,
+   0.4,
+   0.65,
+   0.9
+  ],
+  "modified_by_this_addendum": false,
+  "planned_decision_event_slots": 15300,
+  "statement": "Phase 9 decision-state slots are DATA SAMPLING TIMES; they are not source-policy transition event times and were not modified"
+ },
+ "event_vocabulary": [
+  "local_constriction",
+  "local_opening",
+  "externally_forced_diagnostic"
+ ],
+ "executable_scientific_protocol_sha256": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+ "final_test_access_count": 0,
+ "frozen_job_manifest_hash": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+ "frozen_principle": "source-policy transition events are anchored to physical mission state and local observability, never to a fraction of the episode wall-clock horizon",
+ "generation_budget_hash": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+ "horizon_semantics": {
+  "prohibited_use": "episode_horizon_fraction may not be the sole detector of a physical source-policy topology event unless a future contract defines a purely temporal experiment",
+  "roles": [
+   "maximum rollout and evaluation duration",
+   "timeout boundary",
+   "scientific denominator context"
+  ]
+ },
+ "hysteresis_and_rearm_reference": {
+  "commitment_seconds": 1.5,
+  "evidence_persistence_seconds": 0.45,
+  "modified_by_this_addendum": false,
+  "rearm_inactive_seconds": 3.75,
+  "source": "frozen S3 contract and Phase 7 abort/rearm semantics"
+ },
+ "local_evidence_predicate": {
+  "implementation": "rvt_swarm.phase8e.protocol.s3_local_geometric_decision",
+  "permitted_inputs": [
+   "own robot-local state",
+   "locally observed obstacle primitives",
+   "fresh permitted peer information",
+   "committed topology",
+   "local mission direction",
+   "frozen topology geometry",
+   "frozen physical clearances"
+  ],
+  "prohibited_inputs": [
+   "family id as a runtime feature",
+   "ScenarioLayout object",
+   "global corridor width",
+   "passage entry coordinate directly",
+   "global obstacle geometry",
+   "headroom category",
+   "future outcome"
+  ],
+  "second_threshold_system_introduced": false,
+  "shared_by": [
+   "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+   "S4_FROZEN_TRANSITION_PROTOCOL"
+  ],
+  "states": {
+   "LOCAL_COMPACT_FEASIBLE": "HOLD_COMPACT",
+   "LOCAL_GEOMETRY_UNKNOWN": "HOLD_UNKNOWN",
+   "LOCAL_LINE_REQUIRED": "REQUEST_LINE",
+   "LOCAL_OPENING_FOR_COMPACT": "REQUEST_COMPACT"
+  },
+  "version": "rvt-local-geometric-event-evidence/v1"
+ },
+ "no_event_marker": "NO_EVENT",
+ "phase8_protocol_hash": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+ "policy_role_distinction": {
+  "S0": "offline geometry-scripted diagnostic event timing",
+  "S3": "frozen deployable local geometric selector",
+  "S4": "runtime-local evidence-originated event timing through the real leaderless protocol",
+  "aliases": false
+ },
+ "post_hoc_data_used": false,
+ "s0_semantics": {
+  "absolute_event_seconds_present": false,
+  "constriction_rule": "landmark longitudinal coordinate minus the approved local observation extent along the mission direction, evaluated per template robot",
+  "directly_sets_topology": false,
+  "enters_phase7_protocol": true,
+  "initialization_case": "if the landmark is observable at episode initialization the event may occur at the first eligible control step",
+  "may_read_compiled_landmark": true,
+  "may_read_headroom_or_outcome": false,
+  "new_trigger": "deterministic mission landmark: the earliest nominal local observability of the corresponding physical feature, computed over the nominal role template with the frozen obstacle sensing range",
+  "old_trigger": "normalized fraction of episode horizon",
+  "opening_rule": "forward sector clears past the corresponding feature, under the already frozen opening and hysteresis semantics",
+  "role": "offline scripted diagnostic collection policy"
+ },
+ "s4_semantics": {
+  "event_implies_authorization": false,
+  "family_id_input": false,
+  "future_outcome_used": false,
+  "global_geometry_injected": false,
+  "headroom_input": false,
+  "horizon_fraction_trigger_present": false,
+  "new_trigger": "first eligible control step at which the frozen local geometric evidence predicate enters LOCAL_LINE_REQUIRED (COMPACT committed) or LOCAL_OPENING_FOR_COMPACT (LINE committed)",
+  "no_evidence_means_no_transition": true,
+  "old_trigger": "0.25H and 0.65H episode-horizon fractions",
+  "originator": "whichever robot detects first; it is not a leader",
+  "propagation": "neighbour-only through the real leaderless Phase 7 protocol",
+  "readiness_still_gates_commitment": true,
+  "role": "runtime-local evidence-originated event timing"
+ },
+ "schema_version": "rvt-source-event-timing-addendum/v1",
+ "simulator_steps_executed": 0,
+ "source_commit": "900a43f884dcb355bf544dd729e32a880cfd5f3a",
+ "source_event_timing_addendum_sha256": "fba87e4374f4a7b8c97e5435e148345ad5611223f663e6050967efe9aa0989c5",
+ "source_policy_contract_sha256": "aaf4e35a539d1ae864805ee52cfbd8be7579e7a61103e3807fbbc6d1706168df",
+ "specification_only": true,
+ "static_reachability_audit_sha256": "26562721a45162f7f8b9e15c7a920a559d595602f346ac13867d6e73b4a1937e",
+ "study_a_n24_access_count": 0,
+ "supersedes": {
+  "not_superseded": [
+   "event vocabulary",
+   "event order per family",
+   "candidate topology per event",
+   "S1",
+   "S2",
+   "S3",
+   "hysteresis and rearm semantics",
+   "Target V4",
+   "generation budget",
+   "job manifest",
+   "seed mapping",
+   "decision-state sampling slots",
+   "episode horizons",
+   "mission geometry",
+   "maximum speed",
+   "controller",
+   "safety projection",
+   "transition protocol",
+   "readiness"
+  ],
+  "old_source_policy_contract_rewritten": false,
+  "s0_superseded_fields": [
+   "policies.S0_SCRIPTED_DIAGNOSTIC.machine_readable_script",
+   "policies.S0_SCRIPTED_DIAGNOSTIC.event_rule"
+  ],
+  "s4_superseded_fields": [
+   "policies.S4_FROZEN_TRANSITION_PROTOCOL.event_schedule_normalized_horizon",
+   "policies.S4_FROZEN_TRANSITION_PROTOCOL.event_rule"
+  ],
+  "scope": "event origination and timing fields of S0 and S4 only"
+ },
+ "unreachable_declared_event_count": 0
+}

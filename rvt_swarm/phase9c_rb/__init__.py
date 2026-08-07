@@ -1,4 +1,4 @@
-"""Phase 9C-RB — executable scenario-to-runtime binding.
+"""Phase 9C-RB -- executable scenario-to-runtime binding.
 
 This package translates the frozen Phase 8E executable scientific protocol into
 running code. It introduces **no** scientific semantics of its own: every value

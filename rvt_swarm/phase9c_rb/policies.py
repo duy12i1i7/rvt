@@ -56,31 +56,47 @@ class SourcePolicy:
 class ScriptedDiagnosticPolicy(SourcePolicy):
     """S0 -- offline collection only. Bypasses agreement, never safety.
 
-    The script is a frozen `(normalized time, desired topology)` table read from
-    the source-policy contract. Each one-shot event is *skipped, not moved*, if
-    it is blocked, so a blocked episode cannot silently shift its event times.
+    Event timing follows the Phase 8E-PC-ET addendum: each declared event is
+    anchored to a **mission landmark**, specifically the earliest nominal local
+    observability of the corresponding physical feature. The superseded
+    fraction-of-horizon table is not used, and no absolute event time in seconds
+    exists in this class.
+
+    S0 may read the offline compiled landmark because it is explicitly an
+    offline scripted collection policy; robot-local deployment claims do not
+    apply to it. It still never sets the topology directly -- every event enters
+    the real Phase 7 protocol.
     """
 
     policy_id = S0
     offline_collection_only = True
 
-    def __init__(self, contract, seed, horizon_seconds, team_size, family_id: str) -> None:
+    def __init__(self, contract, seed, horizon_seconds, team_size, family_id: str,
+                 event_plan=()) -> None:
         super().__init__(contract, seed, horizon_seconds, team_size)
-        table = dict(contract.get("machine_readable_script") or {})
-        self.script = tuple(
-            (float(entry[0]), int(entry[1])) for entry in table.get(family_id, ()))
+        # `event_plan` is a tuple of SourceEvent from
+        # `phase8e.event_timing.build_family_event_plan`. It carries landmark
+        # trigger positions, never times.
+        self.event_plan = tuple(event_plan)
 
     def observe(self, session, robot, view, controller_input) -> None:
         if robot.robot_id != 0:
             return                      # one scripted origination, not N duplicates
-        for index, (normalized_time, topology) in enumerate(self.script):
+        progress = session._longitudinal_progress()
+        for index, event in enumerate(self.event_plan):
             if self.fired.get(index):
                 continue
-            if session.time_seconds + 1e-12 < normalized_time * self.horizon_seconds:
+            if index > 0 and not self.fired.get(index - 1):
+                break                   # declared sequence order is preserved
+            trigger = event.trigger_longitudinal_meters
+            if trigger is None:
                 continue
-            self.fired[index] = True    # one-shot: consumed whether or not it takes
-            if topology != robot.committed_topology:
-                session.request_candidate(robot, topology, "externally_forced_diagnostic")
+            if progress + 1e-12 < trigger:
+                continue
+            self.fired[index] = True    # one-shot: skipped, never moved
+            if event.candidate_topology != robot.committed_topology:
+                session.request_candidate(robot, event.candidate_topology,
+                                          event.event_type)
 
 
 class FixedTopologyPolicy(SourcePolicy):
@@ -178,29 +194,35 @@ class LocalGeometricSelectorPolicy(SourcePolicy):
 class FrozenTransitionProtocolPolicy(SourcePolicy):
     """S4 -- offline collection only; exercises the real Phase 7 protocol.
 
-    Role `role-0000` emits one LINE event at 0.25H and one COMPACT event at
-    0.65H when the candidate differs from the committed topology. That fixed
-    originator is a documented limitation (semantic review Severity 2, item 4);
-    propagation, score agreement, readiness, confirmation and commitment remain
-    per-robot leaderless states. The candidate score is exactly 1.0 -- Phase 5
-    is inactive, so no learned output can leak in.
+    Phase 8E-PC-ET replaced the `0.25H` / `0.65H` horizon-fraction trigger with
+    **local evidence origination**: a robot originates at the first eligible
+    control step at which the frozen local geometric evidence predicate enters
+    `LOCAL_LINE_REQUIRED` (while COMPACT is committed) or
+    `LOCAL_OPENING_FOR_COMPACT` (while LINE is committed).
+
+    The detecting robot is not a leader -- any robot may detect first, the event
+    propagates neighbour-only through the real leaderless protocol, and
+    detection does not imply authorization: readiness still gates commitment.
+    If local evidence never occurs, S4 correctly produces no transition.
+
+    The predicate is the *same* frozen `s3_local_geometric_decision` S3 uses; no
+    second threshold system exists. The candidate score remains exactly 1.0, so
+    Phase 5 output cannot leak in.
     """
 
     policy_id = S4
     offline_collection_only = True
-    ORIGINATOR_ROBOT_ID = 0
+
+    def __init__(self, contract, seed, horizon_seconds, team_size, runtime_config) -> None:
+        super().__init__(contract, seed, horizon_seconds, team_size)
+        self.evidence = LocalGeometricSelectorPolicy(
+            contract, seed, horizon_seconds, team_size, runtime_config)
 
     def observe(self, session, robot, view, controller_input) -> None:
-        if robot.robot_id != self.ORIGINATOR_ROBOT_ID:
-            return
-        for index, (fraction, topology) in enumerate(((0.25, LINE), (0.65, COMPACT))):
-            if self.fired.get(index):
-                continue
-            if session.time_seconds + 1e-12 < fraction * self.horizon_seconds:
-                continue
-            self.fired[index] = True        # a scheduled event is not retried
-            if topology != robot.committed_topology:
-                session.request_candidate(robot, topology, "externally_forced_diagnostic")
+        # Delegates to the shared local evidence interface. Whichever robot
+        # crosses its own threshold first originates; there is no fixed
+        # originator and no clock term.
+        self.evidence.observe(session, robot, view, controller_input)
 
 
 class BoundedPerturbationPolicy(SourcePolicy):
@@ -243,10 +265,11 @@ def _lateral_role_span(session, topology_id: int) -> float:
 
 def build_source_policy(policy_id: str, *, contracts: Mapping[str, object], seed: int,
                         horizon_seconds: float, team_size: int, family_id: str,
-                        runtime_config) -> SourcePolicy:
+                        runtime_config, event_plan=()) -> SourcePolicy:
     contract = dict(contracts["policies"])[policy_id]            # type: ignore[index]
     if policy_id == S0:
-        return ScriptedDiagnosticPolicy(contract, seed, horizon_seconds, team_size, family_id)
+        return ScriptedDiagnosticPolicy(
+            contract, seed, horizon_seconds, team_size, family_id, event_plan or ())
     if policy_id == S1:
         return FixedTopologyPolicy(contract, seed, horizon_seconds, team_size, COMPACT)
     if policy_id == S2:
@@ -255,7 +278,8 @@ def build_source_policy(policy_id: str, *, contracts: Mapping[str, object], seed
         return LocalGeometricSelectorPolicy(
             contract, seed, horizon_seconds, team_size, runtime_config)
     if policy_id == S4:
-        return FrozenTransitionProtocolPolicy(contract, seed, horizon_seconds, team_size)
+        return FrozenTransitionProtocolPolicy(
+            contract, seed, horizon_seconds, team_size, runtime_config)
     if policy_id == S5:
         return BoundedPerturbationPolicy(
             contract, seed, horizon_seconds, team_size,
