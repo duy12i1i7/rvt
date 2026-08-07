@@ -53,7 +53,10 @@ def test_protocol_tokens_belong_to_the_frozen_vocabulary() -> None:
     assert PS.DIAGNOSTIC_SCORE_SEMANTICS in SCORE_SEMANTICS
     import inspect
     source = inspect.getsource(PS.advance_transition_lifecycle)
-    assert '"SAFE"' in source and any(s in source for s in READINESS_STATES)
+    # Readiness is no longer a literal: it comes from the frozen certificate,
+    # whose readiness_state is drawn from READINESS_STATES by construction.
+    assert '"SAFE"' not in source
+    assert "certificates[rid].readiness_state" in source
     assert '"ACCEPT"' in source and any(d in source for d in CONFIRMATION_DECISIONS)
 
 
@@ -129,13 +132,16 @@ def test_no_centralized_commit_occurs() -> None:
 
 
 # -- F5, where the transition genuinely matters ------------------------------
-def test_f5_compact_to_line_completes_and_commits_before_the_bottleneck() -> None:
+def test_f5_compact_to_line_is_refused_by_the_frozen_readiness_certificate() -> None:
+    """BLOCKING FINDING, pinned. See test_phase9c_f5_readiness_blocking_finding.py."""
     session, created, trace = _drive(_compact_snapshot("train-f5-00", steps=1), LINE,
                                      steps=400)
     assert created is True
     flat = [s[0] for s in trace if len(s) == 1]
-    assert "TRANSITION_EXECUTION" in flat
-    assert sorted({r.committed_topology for r in session.robots}) == [LINE]
+    assert "ABORTED" in flat, (
+        "if this now reaches TRANSITION_EXECUTION the readiness blocker is "
+        "resolved and this test must be replaced")
+    assert sorted({r.committed_topology for r in session.robots}) == [COMPACT]
 
 
 # -- CASE 2: the open-field COMPACT -> LINE gap, pinned so it is not forgotten

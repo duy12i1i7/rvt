@@ -140,9 +140,22 @@ def advance_transition_lifecycle(session) -> None:
                     node.begin_all_ready_agreement(now)
         return
 
-    # 3. All-ready agreement.
+    # 3. All-ready agreement. Each robot evaluates the AUTHORITATIVE frozen
+    # robot-local readiness certificate from its own permitted inputs; no
+    # readiness state is asserted, and no central "if all safe then commit"
+    # shortcut exists outside the frozen agreement machinery.
     if any(node.state == "ALL_READY_AGREEMENT" for node in nodes.values()):
-        initial = {rid: (node.readiness_message("SAFE", 0.0, now),)
+        certificates = {robot.robot_id: local_readiness_certificate(session, robot, intent)
+                        for robot in session.robots}
+        session.readiness_certificates = {
+            rid: {"readiness_state": c.readiness_state,
+                  "readiness_margin_meters": float(c.readiness_margin_meters),
+                  "blocking_reasons": list(c.blocking_reasons),
+                  "unknown_reasons": list(c.unknown_reasons)}
+            for rid, c in certificates.items()}
+        initial = {rid: (node.readiness_message(
+                       certificates[rid].readiness_state,
+                       float(certificates[rid].readiness_margin_meters), now),)
                    for rid, node in nodes.items()}
         flood = flood_transition_messages(member_ids, initial, adjacency, rounds)
         result = evaluate_readiness_agreement(
@@ -225,6 +238,55 @@ def _build_transition_executor(session, robot, source_topology: int,
     return RobotLocalTransitionExecutor(
         session.runtime_config, robot.local_topology_metadata, path, profile,
         now_seconds)
+
+
+def local_readiness_certificate(session, robot, intent):
+    """The frozen robot-local readiness certificate for one robot.
+
+    `evaluate_robot_local_transition_readiness` is genuinely robot-local: its
+    input carries own state, own source/target role slices, ego-relative peer
+    and obstacle observations and local projection flags -- never joint state,
+    never the layout, never a global formation error. The simulator only
+    *renders* those local observations, exactly as it does for the controller.
+    """
+    from ..decentralized.transition_readiness import (
+        RobotLocalTransitionInput, evaluate_robot_local_transition_readiness,
+    )
+    view = session._build_robot_view(robot)
+    adapter = robot.adapter_by_topology[int(intent.source_topology)]
+    controller_input = adapter.build_input(view, session.time_seconds)
+    dynamic_states = session._dynamic_obstacle_relative_states(robot)
+    obstacles = controller_input.obstacle_states + dynamic_states
+    output = adapter.controller.evaluate(controller_input)
+    metadata = robot.local_topology_metadata
+    local_input = RobotLocalTransitionInput(
+        observer_robot_id=robot.robot_id,
+        observer_role_id=metadata.observer_role_id,
+        team_size=session.team_size,
+        timestamp_seconds=float(session.time_seconds),
+        lifecycle_id=int(intent.lifecycle_id),
+        epoch_id=int(intent.epoch_id),
+        committed_topology_id=int(robot.committed_topology),
+        source_topology_id=int(intent.source_topology),
+        candidate_topology_id=int(intent.candidate_topology),
+        mission_direction=tuple(map(float, view.mission_dir)),
+        own_position_meters=tuple(map(float, robot.position)),
+        own_velocity_meters_per_second=tuple(map(float, robot.velocity)),
+        source_topology=metadata.candidate(int(intent.source_topology)),
+        target_topology=metadata.candidate(int(intent.candidate_topology)),
+        peer_states=controller_input.peer_states,
+        obstacle_states=obstacles,
+        observed_extent_meters=float(
+            session.runtime_config.sensing.obstacle_sensing_range_meters),
+        projection_infeasible=bool(output.projection_infeasible),
+        projection_solver_failed=bool(output.projection_solver_failed),
+        projection_failure_persistent=bool(robot.safety_unresolved),
+        proposed_action_meters_per_second_squared=tuple(
+            map(float, output.projected_action)),
+    )
+    session.readiness_evaluation_count += 1
+    return evaluate_robot_local_transition_readiness(
+        local_input, session.runtime_config)
 
 
 def _abort_all(session, nodes, cause: str) -> None:

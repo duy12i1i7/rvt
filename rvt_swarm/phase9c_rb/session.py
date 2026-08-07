@@ -176,6 +176,8 @@ class SimulatorEpisodeSession:
         self.initialization_valid = True
         self.lifecycle_counter = 0
         self.role_set = None
+        self.readiness_certificates: Dict[int, Dict[str, object]] = {}
+        self.readiness_evaluation_count = 0
         self.event_log: List[Dict[str, object]] = []
         # Metric V3 dwell clocks, one per admitted candidate topology. Physical
         # time, reset to zero on any exit from the tube, exactly as the frozen
