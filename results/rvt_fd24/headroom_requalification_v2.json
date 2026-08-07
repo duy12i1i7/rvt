@@ -1,0 +1,909 @@
+{
+ "category_definitions_changed": false,
+ "cells": [
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F1",
+   "layout_id": "train-f1-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F1",
+   "layout_id": "train-f1-01",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.9,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F10",
+   "layout_id": "train-f10-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.56,
+    "steps": 96,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 5.79,
+    "steps": 127,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.9,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F10",
+   "layout_id": "train-f10-01",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.56,
+    "steps": 96,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.54,
+    "steps": 169,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.93,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F2",
+   "layout_id": "train-f2-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.48,
+    "steps": 170,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.93,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F2",
+   "layout_id": "train-f2-01",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.48,
+    "steps": 168,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.44,
+    "steps": 29,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F3",
+   "layout_id": "train-f3-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 3.0,
+    "steps": 34,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.88,
+    "steps": 95,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.33,
+    "steps": 28,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F3",
+   "layout_id": "train-f3-01",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.93,
+    "steps": 34,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.92,
+    "steps": 96,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.2,
+    "steps": 27,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F4",
+   "layout_id": "train-f4-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 0.16,
+    "steps": 8,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.18,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.09,
+    "steps": 26,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F4",
+   "layout_id": "train-f4-01",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 0.16,
+    "steps": 8,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.06,
+    "steps": 31,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 0.98,
+    "steps": 16,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F5",
+   "layout_id": "train-f5-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.87,
+    "steps": 29,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.89,
+    "steps": 24,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F5",
+   "layout_id": "train-f5-01",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.88,
+    "steps": 29,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.23,
+    "steps": 42,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F6",
+   "layout_id": "train-f6-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.79,
+    "steps": 31,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.29,
+    "steps": 65,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.23,
+    "steps": 42,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F6",
+   "layout_id": "train-f6-01",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.79,
+    "steps": 31,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.29,
+    "steps": 65,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F7",
+   "layout_id": "train-f7-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.49,
+    "steps": 174,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F7",
+   "layout_id": "train-f7-01",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.49,
+    "steps": 174,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 107,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F8",
+   "layout_id": "train-f8-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.46,
+    "steps": 107,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 11.49,
+    "steps": 111,
+    "success": false,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.56,
+    "steps": 108,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F8",
+   "layout_id": "train-f8-01",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.52,
+    "steps": 108,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 11.55,
+    "steps": 112,
+    "success": false,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "RECONFIGURATION_REQUIRED",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.1,
+    "steps": 41,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F9",
+   "layout_id": "train-f9-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 3.05,
+    "steps": 33,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.49,
+    "steps": 174,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "RECONFIGURATION_REQUIRED",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.35,
+    "steps": 43,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F9",
+   "layout_id": "train-f9-01",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 3.69,
+    "steps": 38,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.49,
+    "steps": 174,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F1",
+   "layout_id": "validation-f1-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.9,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F10",
+   "layout_id": "validation-f10-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.57,
+    "steps": 96,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.55,
+    "steps": 169,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.93,
+    "steps": 32,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F2",
+   "layout_id": "validation-f2-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.48,
+    "steps": 167,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.98,
+    "steps": 34,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F3",
+   "layout_id": "validation-f3-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.28,
+    "steps": 21,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 0.89,
+    "steps": 78,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.93,
+    "steps": 25,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F4",
+   "layout_id": "validation-f4-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.0,
+    "steps": 19,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.91,
+    "steps": 30,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "LINE_ONLY_SUCCESS",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 1.89,
+    "steps": 24,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F5",
+   "layout_id": "validation-f5-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.5,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 11.48,
+    "steps": 101,
+    "success": false,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_FAIL",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.23,
+    "steps": 42,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F6",
+   "layout_id": "validation-f6-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 2.79,
+    "steps": 31,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.29,
+    "steps": 65,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F7",
+   "layout_id": "validation-f7-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 95,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.49,
+    "steps": 175,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "BOTH_SUCCESS",
+   "compact": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.51,
+    "steps": 108,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "family": "F8",
+   "layout_id": "validation-f8-00",
+   "line": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.48,
+    "steps": 108,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "oracle": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 11.5,
+    "steps": 112,
+    "success": false,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  },
+  {
+   "category": "RECONFIGURATION_REQUIRED",
+   "compact": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 3.98,
+    "steps": 40,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "family": "F9",
+   "layout_id": "validation-f9-00",
+   "line": {
+    "disposition": "VALID_TASK_NEGATIVE",
+    "progress": 4.61,
+    "steps": 45,
+    "success": false,
+    "termination": "COLLISION"
+   },
+   "oracle": {
+    "disposition": "RECOVERABLE_POSITIVE",
+    "progress": 11.49,
+    "steps": 174,
+    "success": true,
+    "termination": "GOAL_COMPLETE"
+   },
+   "split": "validation",
+   "team_size": 6
+  }
+ ],
+ "coverage_limitation": "N=6 slice of the 6-team-size cell grid; the remaining 150 cells are not yet requalified",
+ "dataset_rows_generated": 0,
+ "executable_runtime": true,
+ "executable_scientific_protocol_sha256": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+ "f5_analysis": {
+  "declared_family_category": "RECONFIGURATION_REQUIRED",
+  "declared_pattern": "repeated C->L->C",
+  "executable_category_by_cell": {
+   "train-f5-00": "LINE_ONLY_SUCCESS",
+   "train-f5-01": "LINE_ONLY_SUCCESS",
+   "validation-f5-00": "LINE_ONLY_SUCCESS"
+  },
+  "reason": "fixed LINE completes the task, which the frozen definition excludes from RECONFIGURATION_REQUIRED"
+ },
+ "final_test_access_count": 0,
+ "h2_limitation": "RECONFIGURATION_REQUIRED is concentrated in a single family (F9) at N=6: 2 train cells and 1 validation cell",
+ "h2_viable": true,
+ "headroom_requalification_sha256": "2229e7d62a12c3756b03c670db7aa342acc40cc2bbbc1c122828cf2be107894a",
+ "learned_model_used": false,
+ "new_counts": {
+  "train": {
+   "BOTH_FAIL": 6,
+   "BOTH_SUCCESS": 6,
+   "LINE_ONLY_SUCCESS": 6,
+   "RECONFIGURATION_REQUIRED": 2
+  },
+  "validation": {
+   "BOTH_FAIL": 3,
+   "BOTH_SUCCESS": 3,
+   "LINE_ONLY_SUCCESS": 3,
+   "RECONFIGURATION_REQUIRED": 1
+  }
+ },
+ "old_counts": {
+  "train": {
+   "BOTH_FAIL": 2,
+   "BOTH_SUCCESS": 7,
+   "COMPACT_ONLY_SUCCESS": 1,
+   "LINE_ONLY_SUCCESS": 6,
+   "RECONFIGURATION_REQUIRED": 4
+  },
+  "validation": {
+   "BOTH_FAIL": 1,
+   "BOTH_SUCCESS": 3,
+   "COMPACT_ONLY_SUCCESS": 1,
+   "LINE_ONLY_SUCCESS": 3,
+   "RECONFIGURATION_REQUIRED": 2
+  }
+ },
+ "original_headroom_artifact": "docs/SCENARIO_HEADROOM_REPORT.md",
+ "reconfiguration_required_families": [
+  "F9"
+ ],
+ "reconfiguration_required_train": 2,
+ "reconfiguration_required_validation": 1,
+ "schema_version": "rvt-headroom-requalification/v2",
+ "source_commit": "c6e63f3dcd53508d74e9afb367e60494ce390167",
+ "source_event_timing_addendum_sha256": "fba87e4374f4a7b8c97e5435e148345ad5611223f663e6050967efe9aa0989c5",
+ "study_a_n24_access_count": 0,
+ "team_sizes_evaluated": [
+  6
+ ],
+ "transition_mission_coupling_sha256": "1a756b6ae21cc1008afcbe694d62dd4dd2c80af1ae20f15f3b97cec2b5dbca60",
+ "unit_of_analysis": "layout/team-size cell (frozen protocol)"
+}

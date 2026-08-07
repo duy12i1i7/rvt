@@ -73,3 +73,52 @@ Exactly one scientific choice, and it is the protocol owner's:
 
 Both readings are defensible; each implies a different runtime and a different
 time cost for the online method. Nothing in this phase chooses between them.
+
+
+---
+
+# Resolution (owner decision 1): mission-staged transition
+
+The owner froze staging. Implemented as `rvt_swarm/phase9c_rb/staging.py`.
+
+## Derived threshold, no new constant
+
+    v_settle = a_max * dt = 0.6 m/s^2 * 0.15 s = 0.09 m/s
+
+read from the authoritative runtime configuration and never written as a
+literal (asserted by an AST test that rejects any float literal in the module).
+A robot is MOTION_SETTLED when `||v_i|| <= v_settle` -- the speed the frozen
+acceleration bound can remove within one frozen control interval. No scaling
+coefficient, epsilon or tuning factor.
+
+## How the goal term is suppressed
+
+The frozen controller computes `base = formation + goal + damping + obstacle` as
+a plain sum *before* the safety projection. Staging therefore subtracts the
+already-separated `goal_term` from `base_action`, giving exactly `0 * u_goal`,
+and reapplies the unchanged projection. No Phase 6 equation is rewritten and no
+gain is touched. Formation/transition tracking, damping, obstacle response,
+safety and the normal dynamics all remain active; simulator time continues;
+velocity is never zeroed; there is no global pause.
+
+## Qualification results
+
+| binding | min pair separation | outcome |
+|---|---:|---|
+| immediate target switch | 0.3936 m | COLLISION |
+| frozen profile, asserted readiness | 0.3979 m | COLLISION |
+| frozen profile, real readiness | 0.3979 m | COLLISION |
+| **+ mission staging, COMPACT -> LINE** | **0.4244 m** | **GOAL_COMPLETE** |
+| **+ mission staging, LINE -> COMPACT** | **0.6507 m** | **GOAL_COMPLETE** |
+| frozen Phase 7R rest reference | 0.5247 m | no collision |
+
+COMPACT -> LINE milestones: staging starts at t=1.80 s from speeds 0.58-0.67
+m/s; robots settle at t=4.65-5.25 s; confirmation 5.25 s; profile execution
+5.40 s; target dwell 10.65 s; COMPLETE 13.65 s; GOAL_COMPLETE at step 173.
+
+## Time cost
+
+Staging is not free and is not compensated. A staged transition episode takes
+173 control steps against 95 for a fixed-topology hold on the same layout --
+deceleration, profile execution and the 3.0 s dwell all count toward mission
+duration, episode horizon and timeout metrics. The clock is never suspended.

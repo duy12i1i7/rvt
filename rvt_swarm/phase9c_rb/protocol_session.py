@@ -145,6 +145,17 @@ def advance_transition_lifecycle(session) -> None:
     # readiness state is asserted, and no central "if all safe then commit"
     # shortcut exists outside the frozen agreement machinery.
     if any(node.state == "ALL_READY_AGREEMENT" for node in nodes.values()):
+        # TS-4: a robot that is not yet MOTION_SETTLED has simply not submitted
+        # an eligible readiness certificate for this transition stage. The node
+        # waits in ALL_READY_AGREEMENT; no timeout is extended and readiness
+        # itself is untouched.
+        from .staging import motion_settled
+        unsettled = [robot.robot_id for robot in session.robots
+                     if not motion_settled(robot, session.runtime_config)]
+        if unsettled:
+            session.unsettled_robots = tuple(unsettled)
+            return
+        session.unsettled_robots = ()
         certificates = {robot.robot_id: local_readiness_certificate(session, robot, intent)
                         for robot in session.robots}
         session.readiness_certificates = {

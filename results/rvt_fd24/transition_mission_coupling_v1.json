@@ -1,0 +1,71 @@
+{
+ "authoritative_a_max_meters_per_second_squared": 0.6,
+ "authoritative_dt_seconds": 0.15,
+ "controller_gains_unchanged": true,
+ "dataset_rows_generated": 0,
+ "decentralization": {
+  "global_pause_command": false,
+  "global_settled_flag": false,
+  "peer_velocity_used_for_gate": false
+ },
+ "derived_v_settle_meters_per_second": 0.09,
+ "execution_semantics": "mission_staged_local_transition",
+ "generic_profile_unchanged": true,
+ "lifecycle_gate": {
+  "gate_input": "robot's own frozen lifecycle state only",
+  "hold_candidate_stages": false,
+  "resumed_states": [
+   "STABLE_TOPOLOGY",
+   "COMPLETE",
+   "ABORTED",
+   "REARMED"
+  ],
+  "staged_states": [
+   "INTENT_ACTIVE",
+   "CANDIDATE_SCORE_AGREEMENT",
+   "WAITING_FOR_LOCAL_READINESS",
+   "ALL_READY_AGREEMENT",
+   "TOPOLOGY_CONFIRMATION",
+   "TOPOLOGY_COMMITTED",
+   "TRANSITION_EXECUTION",
+   "TARGET_DWELL"
+  ]
+ },
+ "mc2_evidence": {
+  "baseline_cruising_min_separation_meters": 0.3979,
+  "profile_representation": "role-offset interpolation emitting pairwise desired_offset_from_observer_meters",
+  "translation_invariant_by_construction": true,
+  "velocity_zeroed_same_positions_min_separation_meters": 0.4166
+ },
+ "mc2_pure_frame_binding_bug": false,
+ "qualification": {
+  "history": {
+   "immediate_switch": 0.3936,
+   "phase7r_rest_reference": 0.5247,
+   "profile_asserted_readiness": 0.3979,
+   "profile_real_readiness": 0.3979,
+   "velocity_zeroed_diagnostic": 0.4166
+  },
+  "line_to_compact_min_separation_meters": 0.6507,
+  "open_space_compact_to_line_min_separation_meters": 0.4244,
+  "required_clearance_meters": 0.4
+ },
+ "readiness_unchanged": true,
+ "retained_components": [
+  "formation/transition tracking",
+  "damping",
+  "local obstacle response",
+  "local safety projection",
+  "normal dynamics"
+ ],
+ "runtime_configuration_sha256": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+ "safety_projection_unchanged": true,
+ "schema_version": "rvt-transition-mission-coupling/v1",
+ "settle_formula": "a_max * dt",
+ "settle_predicate": "||v_i|| <= a_max*dt, Euclidean, no scaling coefficient or epsilon",
+ "source_commit": "c6e63f3dcd53508d74e9afb367e60494ce390167",
+ "specification_and_runtime_binding_only": true,
+ "suppressed_component": "ordinary mission-progression (goal) term only",
+ "timeout_accounting": "all staging, profile and dwell time counts toward mission duration, episode horizon and timeout metrics; no clock suspension or compensation",
+ "transition_mission_coupling_sha256": "1a756b6ae21cc1008afcbe694d62dd4dd2c80af1ae20f15f3b97cec2b5dbca60"
+}

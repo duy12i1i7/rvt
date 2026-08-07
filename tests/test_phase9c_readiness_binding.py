@@ -52,7 +52,9 @@ def test_the_authoritative_evaluator_is_the_one_called() -> None:
 # -- D10-G2: behavioural spy, not a string search ----------------------------
 def test_a_certificate_is_actually_evaluated_once_per_robot(monkeypatch) -> None:
     live = _armed()
-    for _ in range(6):
+    # Mission staging defers readiness until every robot is MOTION_SETTLED,
+    # which takes roughly 0.64 m/s / 0.6 m/s^2 ~ 3.2 s of deceleration.
+    for _ in range(60):
         live.step()
         if live.readiness_evaluation_count:
             break
@@ -82,16 +84,16 @@ def test_an_unsafe_robot_blocks_all_ready_despite_safe_peers() -> None:
               for r in live.robots if r.robot_id != victim.robot_id]
     assert all(c.readiness_state == "SAFE" for c in others)
     # The frozen agreement, not this adapter, decides the outcome.
-    for _ in range(4):
+    for _ in range(60):
         live.step()
-        if live.termination is not None:
+        if live.readiness_certificates or live.termination is not None:
             break
     assert live.readiness_certificates
 
 
 def test_positive_control_all_safe_permits_the_lifecycle_to_proceed() -> None:
     live = _armed()
-    for _ in range(4):
+    for _ in range(60):
         live.step()
         if live.readiness_certificates:
             break
@@ -128,7 +130,7 @@ def test_readiness_responds_to_a_genuinely_observed_local_change() -> None:
 def test_readiness_state_survives_snapshot_and_restore() -> None:
     from rvt_swarm.phase9c_rb.counterfactual import canonical_execution_hash
     live = _armed()
-    for _ in range(4):
+    for _ in range(60):
         live.step()
         if live.readiness_certificates:
             break

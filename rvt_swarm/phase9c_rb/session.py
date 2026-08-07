@@ -48,6 +48,7 @@ from .streams import (
     STREAM_INITIAL_POSITION, STREAM_INITIAL_VELOCITY, STREAM_ROBOT_ACCELERATION,
     STREAM_S5_ACCELERATION, CounterStream,
 )
+from .staging import mission_staged, motion_settled, settle_speed_threshold
 from .world import build_static_world, StaticWorld
 
 Vec2 = Tuple[float, float]
@@ -77,6 +78,8 @@ class RobotRuntimeState:
     transition_executor: object = None
     transition_source_topology: Optional[int] = None
     transition_commit_seconds: Optional[float] = None
+    # Mission staging: gated purely by this robot's own lifecycle state.
+    mission_staged: bool = False
     neighbour_table: Dict[int, Dict[str, object]] = field(default_factory=dict)
     safety_unresolved: bool = False
     safety_infeasible_seen: bool = False
@@ -178,6 +181,7 @@ class SimulatorEpisodeSession:
         self.role_set = None
         self.readiness_certificates: Dict[int, Dict[str, object]] = {}
         self.readiness_evaluation_count = 0
+        self.unsettled_robots: Tuple[int, ...] = ()
         self.event_log: List[Dict[str, object]] = []
         # Metric V3 dwell clocks, one per admitted candidate topology. Physical
         # time, reset to zero on any exit from the tube, exactly as the frozen
@@ -459,6 +463,25 @@ class SimulatorEpisodeSession:
 
             controller = getattr(adapter, 'controller', None) or adapter.adapter.controller
             output = controller.evaluate(controller_input)
+
+            # Mission staging (owner decision 1). `base_action` is the plain sum
+            # formation + goal + damping + obstacle, so removing the already
+            # separated goal term yields exactly `0 * u_goal` without rewriting
+            # any Phase 6 equation. The unchanged safety projection is then
+            # reapplied to the staged base.
+            staged = mission_staged(robot)
+            robot.mission_staged = staged
+            if staged:
+                staged_base = (float(output.base_action[0]) - float(output.goal_term[0]),
+                               float(output.base_action[1]) - float(output.goal_term[1]))
+                projection = controller.safety_projection
+                result = projection.project(staged_base, controller_input)
+                output = replace(
+                    output, base_action=staged_base,
+                    projected_action=result.projected_action,
+                    projection_intervened=result.intervened,
+                    projection_infeasible=result.infeasible,
+                    projection_solver_failed=result.solver_failed)
             action = (float(output.projected_action[0]), float(output.projected_action[1]))
 
             disturbance = self._disturbance_for(robot)

@@ -145,26 +145,27 @@ def test_f5_compact_to_line_is_refused_by_the_frozen_readiness_certificate() -> 
 
 
 # -- CASE 2: the open-field COMPACT -> LINE gap, pinned so it is not forgotten
-def test_case2_compact_to_line_currently_collides_during_reconfiguration() -> None:
-    """RUNTIME INTEGRATION DEFECT, pinned deliberately.
+def test_case2_compact_to_line_is_collision_free_under_staged_execution() -> None:
+    """Replaces the former defect-9 pin, which instructed this substitution.
 
-    The publication session switches the controller's target topology
-    immediately on commit. The frozen contract instead requires the smooth
-    role-space profile (`generic_role_space_profile`, implemented by
-    `transition_execution.RobotLocalTransitionExecutor`), which exists precisely
-    to keep robots separated while they exchange grid positions.
+    History for this exact regression, minimum robot-robot separation against
+    the frozen 0.4000 m requirement:
 
-    Under the immediate switch, an open-field COMPACT -> LINE reconfiguration
-    puts robots 2 and 3 within 0.3936 m of the 0.40 m required clearance, with
-    no obstacle involved. This test records the defect; it must be replaced by
-    an assertion of success once the frozen profile is bound.
+        immediate target switch                 0.3936 m  COLLISION
+        frozen profile, asserted readiness      0.3979 m  COLLISION
+        frozen profile, real readiness          0.3979 m  COLLISION
+        + mission staging (v_settle = a_max*dt) 0.4244 m  GOAL_COMPLETE
     """
-    from rvt_swarm.decentralized.transition_runtime import TRANSITION_EXECUTION_STRATEGIES
-    assert "generic_role_space_profile" in TRANSITION_EXECUTION_STRATEGIES
-    result = execute_candidate(_compact_snapshot(), LINE, max_steps=700)
-    assert result.created_lifecycle is True
-    assert result.termination_cause == "COLLISION", (
-        "if this now passes, the smooth profile has been bound and this test "
-        "must be replaced by a success assertion")
-    assert result.disposition == "VALID_TASK_NEGATIVE", (
-        "a collision must stay a valid task-negative, never generation-invalid")
+    import math
+    from rvt_swarm.phase9c_rb.staging import mission_staged
+
+    session, created, trace = _drive(_compact_snapshot(), LINE, steps=600)
+    assert created is True
+    minimum = min(math.dist(a.position, b.position)
+                  for i, a in enumerate(session.robots) for b in session.robots[i + 1:])
+    required = float(session.runtime_config.derived.robot_robot_required_clearance_meters)
+    flat = [s[0] for s in trace if len(s) == 1]
+    assert "TRANSITION_EXECUTION" in flat
+    assert sorted({r.committed_topology for r in session.robots}) == [LINE]
+    assert session.termination.cause != "COLLISION"
+    assert minimum >= required
