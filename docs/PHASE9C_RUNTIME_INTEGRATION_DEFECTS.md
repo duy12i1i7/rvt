@@ -16,42 +16,63 @@ Metric V3 definition, budget, seed or split was altered to resolve any of them.
 | 6 | the originator never called `adopt_intent` on itself, so every lifecycle stayed in `STABLE_TOPOLOGY` | F5-R | runtime integration | fixed |
 | 7 | score / readiness / confirmation used tokens outside the frozen vocabulary | F5-R | runtime integration | fixed |
 | 8 | `accept_confirmation` records unanimity but `commit()` was never called, so `TOPOLOGY_COMMITTED` was never entered | F5-R | runtime integration | fixed |
-| 9 | **the transition uses `immediate_target_switch`, not the frozen smooth role-space profile** | RB-13R | runtime integration | **OPEN** |
+| 9 | the transition used `immediate_target_switch`, not the frozen role-space profile | RB-13R | runtime integration | **fixed** |
+| 10 | **readiness is hardcoded `SAFE`, so the frozen readiness certificate never gates commitment** | D9-5 | runtime integration | **OPEN** |
 
-## Defect 9 — the open blocker
+## Defect 9 — fixed
 
-The frozen Target V4 contract requires that a changed candidate "must use Phase 7
-and the frozen profile". Two execution strategies exist in the frozen code:
+`RobotLocalTransitionExecutor` is now bound. On commit each robot builds its own
+executor from `prepare_robot_local_role_space_path` and
+`derive_transition_motion_profile`, and the frozen executor supplies the local
+intermediate target until the frozen completion semantics retire it. Its
+`build_input`/`evaluate` interface is identical to the forced-topology adapter,
+so it drops in without restating any interpolation, displacement or progress
+law in this package.
 
-    TRANSITION_EXECUTION_STRATEGIES = ('immediate_target_switch',
-                                       'generic_role_space_profile')
+Measured effect on the open-space COMPACT -> LINE regression at N=6:
 
-The publication session swaps the controller's target topology the instant the
-node commits — the *immediate* strategy. It does not drive
-`transition_execution.RobotLocalTransitionExecutor` along the role-space path
-built by `prepare_robot_local_role_space_path`, which is what the smooth profile
-means and what keeps robots separated while they exchange grid positions.
+| binding | minimum pair separation | outcome |
+|---|---:|---|
+| immediate target switch | 0.3936 m | COLLISION |
+| **frozen role-space profile** | **0.3979 m** | **still COLLISION** |
+| frozen Phase 7R fixture, same profile | **0.5247 m** | no collision |
 
-Measured consequence, in an open field with **no obstacle involved**: a
-COMPACT → LINE reconfiguration on `train-f1-00` at N=6 brings robots 2 and 3 to
-**0.3936 m** against the frozen **0.40 m** required clearance, terminating the
-rollout with `COLLISION` at control step 25.
+The profile is sound — the frozen Phase 7R fixture clears 0.4000 m comfortably.
+Binding it improved separation but did not resolve the breach, which pointed at
+a second gap.
 
-Scope of the invalidation:
+## Defect 10 — the open blocker
 
-* **Unaffected** — hold candidates (cases 1 and 3), LINE → COMPACT (case 4,
-  which completes and yields a positive), all fixed-topology source policies,
-  snapshot/restore, clone isolation, stream matching, and the locality boundary.
-* **Not authoritative until fixed** — any Target V4 outcome for a
-  COMPACT → LINE candidate, and the collision statistics of any family whose
-  source policy performs that transition.
+`advance_transition_lifecycle` emits `readiness_message("SAFE", 0.0, now)`
+unconditionally. The frozen
+`StrictTransitionRuntime.local_readiness_certificates` instead *computes* each
+robot's readiness from positions, velocities, source and target topology, goal
+origin, mission direction and local obstacles.
 
-F5 is a partial exception worth stating precisely: its COMPACT → LINE transition
-does commit and the run reaches `GOAL_COMPLETE` past both bottlenecks, because
-the F5 formation geometry happens not to bring any pair inside the clearance
-during the swap. That is luck of geometry, not evidence that the profile is
-bound.
+Readiness is the gate that decides whether a transition may commit at all. By
+asserting it, the publication session commits transitions the frozen certificate
+would have refused, and the profile then executes from a formation whose
+accumulated error has already eaten the clearance margin. That is why the
+frozen fixture — which starts from an exact source formation and computes real
+readiness — reaches 0.5247 m while the session reaches 0.3979 m.
 
-`tests/test_phase9c_phase7_live_lifecycle.py::test_case2_compact_to_line_currently_collides_during_reconfiguration`
-pins this defect so it cannot be silently forgotten, and instructs its own
-replacement once the frozen profile is bound.
+Until readiness is computed, any changed-topology candidate outcome remains
+non-authoritative, exactly as defect 9 required.
+
+## F5 after the profile binding (D9-10 re-run)
+
+| milestone | step | t (s) | progress (m) |
+|---|---:|---:|---:|
+| event originated, intent adopted | 0 | 0.00 | — |
+| score agreement | 1 | 0.15 | -0.01 |
+| all-ready agreement | 2 | 0.30 | 0.01 |
+| confirmation | 3 | 0.45 | 0.04 |
+| commit + profile start | 4 | 0.60 | 0.08 |
+| target tube entry (`TARGET_DWELL`) | 84 | 12.60 | 9.52 |
+| GOAL_COMPLETE | 99 | 14.85 | 11.46 |
+
+Profile progress reaches 1.0 for every robot. Both bottlenecks (2.00-3.50 and
+6.50-8.00) are passed. The LINE dwell reaches 2.4 s of the required 3.0 s before
+the mission ends, so the lifecycle does not reach `COMPLETE` — a legitimate
+Target V4 negative, not a binding defect. Tube entry moved from step 36 to step
+84, which is the real cost of the frozen motion law.

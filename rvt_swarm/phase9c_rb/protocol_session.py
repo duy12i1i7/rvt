@@ -171,9 +171,14 @@ def advance_transition_lifecycle(session) -> None:
         for robot in session.robots:
             node = robot.protocol_node
             if node.state == "TOPOLOGY_CONFIRMATION":
+                source_topology = int(robot.committed_topology)
                 node.commit(now)
                 robot.committed_topology = int(node.committed_topology)
                 robot.steps_since_decision = 0
+                robot.transition_source_topology = source_topology
+                robot.transition_commit_seconds = now
+                robot.transition_executor = _build_transition_executor(
+                    session, robot, source_topology, int(node.committed_topology), now)
                 node.begin_execution(now)
         return
 
@@ -184,15 +189,49 @@ def advance_transition_lifecycle(session) -> None:
             node = robot.protocol_node
             robot.transition_progress = 1.0 if inside else robot.transition_progress
             if node.state in ("TRANSITION_EXECUTION", "TARGET_DWELL"):
+                if robot.transition_executor is not None:
+                    robot.transition_progress = float(
+                        robot.transition_executor.progress(now))
                 if node.observe_target_tube(inside, now):
                     node.mark_complete(now)
+                    # Frozen completion semantics reached: normal topology hold
+                    # resumes and the profile executor is retired.
+                    robot.transition_executor = None
         return
 
 
+def _build_transition_executor(session, robot, source_topology: int,
+                               target_topology: int, now_seconds: float):
+    """Bind the FROZEN generic role-space profile for one robot.
+
+    Everything here is a call into `transition_execution`; no interpolation
+    equation, displacement rule or progress law is restated in this package.
+    `test_phase9c_transition_profile_binding.py` asserts that by AST.
+    """
+    import math
+
+    from ..decentralized.transition_execution import (
+        RobotLocalTransitionExecutor, derive_transition_motion_profile,
+        prepare_robot_local_role_space_path,
+    )
+    path = prepare_robot_local_role_space_path(
+        session.role_set, robot.robot_id, session.runtime_config.formation,
+        source_topology, target_topology)
+    displacement = math.dist(path.source_role_offset_meters,
+                             path.target_role_offset_meters)
+    if displacement <= 0.0:
+        return None                      # this role does not move; nothing to profile
+    profile = derive_transition_motion_profile(displacement, session.runtime_config)
+    return RobotLocalTransitionExecutor(
+        session.runtime_config, robot.local_topology_metadata, path, profile,
+        now_seconds)
+
+
 def _abort_all(session, nodes, cause: str) -> None:
-    for node in nodes.values():
-        if node.state not in ("STABLE_TOPOLOGY", "COMPLETE"):
-            node.abort(cause, session.time_seconds)
+    for robot in session.robots:
+        if robot.protocol_node.state not in ("STABLE_TOPOLOGY", "COMPLETE"):
+            robot.protocol_node.abort(cause, session.time_seconds)
+            robot.transition_executor = None
 
 
 def _inside_candidate_tube(session, candidate_topology: int) -> bool:

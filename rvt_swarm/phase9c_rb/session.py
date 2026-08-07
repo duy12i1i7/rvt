@@ -69,6 +69,14 @@ class RobotRuntimeState:
     line_offset: Vec2
     protocol_node: TransitionProtocolNode
     adapter_by_topology: Mapping[int, ForcedTopologyRuntimeAdapter]
+    local_topology_metadata: object = None
+    # Defect 9: after commit the robot follows the FROZEN role-space profile,
+    # not an immediate target swap. `transition_executor` holds the frozen
+    # RobotLocalTransitionExecutor while the profile is running; it is cleared
+    # on completion, after which normal topology hold resumes.
+    transition_executor: object = None
+    transition_source_topology: Optional[int] = None
+    transition_commit_seconds: Optional[float] = None
     neighbour_table: Dict[int, Dict[str, object]] = field(default_factory=dict)
     safety_unresolved: bool = False
     safety_infeasible_seen: bool = False
@@ -167,6 +175,7 @@ class SimulatorEpisodeSession:
         self.numerically_valid = True
         self.initialization_valid = True
         self.lifecycle_counter = 0
+        self.role_set = None
         self.event_log: List[Dict[str, object]] = []
         # Metric V3 dwell clocks, one per admitted candidate topology. Physical
         # time, reset to zero on any exit from the tube, exactly as the frozen
@@ -181,6 +190,7 @@ class SimulatorEpisodeSession:
     def _initialize_robots(self) -> None:
         n = self.team_size
         role_set = generate_persistent_roles(n)
+        self.role_set = role_set
         nominal = self.binding.nominal_positions
         role_ids = self.binding.role_ids
         bound_position = float(self.binding.initialization["position_perturbation_bound_meters"])   # type: ignore[index]
@@ -260,6 +270,7 @@ class SimulatorEpisodeSession:
                     runtime_config=self.runtime_config, committed_topology=initial_topology,
                     options=options),
                 adapter_by_topology=adapters,
+                local_topology_metadata=metadata,
             ))
 
         if not bool(self.binding.initialization["nominal_validity"]["valid"]):   # type: ignore[index]
@@ -428,7 +439,12 @@ class SimulatorEpisodeSession:
 
         for robot in self.robots:
             view = self._build_robot_view(robot)
-            adapter = robot.adapter_by_topology[robot.committed_topology]
+            # While the frozen profile is running the robot's local target comes
+            # from RobotLocalTransitionExecutor, whose build_input/evaluate
+            # interface is identical to the forced-topology adapter. No
+            # interpolation is recomputed here.
+            adapter = (robot.transition_executor if robot.transition_executor is not None
+                       else robot.adapter_by_topology[robot.committed_topology])
             controller_input = adapter.build_input(view, self.time_seconds)
             dynamic_states = self._dynamic_obstacle_relative_states(robot)
             if dynamic_states:
@@ -439,13 +455,14 @@ class SimulatorEpisodeSession:
             # Source policy acts on robot-local data only.
             self.source_policy.observe(self, robot, view, controller_input)
 
-            output = adapter.controller.evaluate(controller_input)
+            controller = getattr(adapter, 'controller', None) or adapter.adapter.controller
+            output = controller.evaluate(controller_input)
             action = (float(output.projected_action[0]), float(output.projected_action[1]))
 
             disturbance = self._disturbance_for(robot)
             if disturbance != (0.0, 0.0):
                 # Additive command disturbance BEFORE the unchanged projection.
-                projection = adapter.controller.safety_projection
+                projection = controller.safety_projection
                 base = (float(output.base_action[0]) + disturbance[0],
                         float(output.base_action[1]) + disturbance[1])
                 if projection is not None:
