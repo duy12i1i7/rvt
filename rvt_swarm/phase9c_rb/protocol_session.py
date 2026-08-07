@@ -27,7 +27,9 @@ from ..decentralized.transition_protocol import (
 from ..topology_registry import COMPACT, LINE
 
 DIAGNOSTIC_SCORE = 1.0
-DIAGNOSTIC_SCORE_SEMANTICS = "bounded_diagnostic_candidate_available"
+# Frozen vocabulary: SCORE_SEMANTICS = (probability_like, bounded_diagnostic,
+# unavailable). S4's contract calls for a bounded diagnostic score of 1.0.
+DIAGNOSTIC_SCORE_SEMANTICS = "bounded_diagnostic"
 
 
 def _adjacency(session) -> Dict[int, Tuple[int, ...]]:
@@ -66,6 +68,13 @@ def originate_candidate(session, robot, candidate_topology: int, event_type: str
     intent = robot.protocol_node.request_intent(
         lifecycle_id, candidate_topology, event_type, session.time_seconds)
     if intent is None:
+        return False
+    # The frozen `request_intent` only *constructs* the intent; entering
+    # INTENT_ACTIVE is `adopt_intent`. The originator adopts its own intent
+    # first, exactly as every peer will. Without this the node stays in
+    # STABLE_TOPOLOGY, `_active_intent` finds nothing, and the whole lifecycle
+    # silently never advances.
+    if not robot.protocol_node.adopt_intent(intent, session.time_seconds):
         return False
     session.event_log.append({
         "control_step": session.control_step, "time_seconds": session.time_seconds,
@@ -133,7 +142,7 @@ def advance_transition_lifecycle(session) -> None:
 
     # 3. All-ready agreement.
     if any(node.state == "ALL_READY_AGREEMENT" for node in nodes.values()):
-        initial = {rid: (node.readiness_message("READY", 0.0, now),)
+        initial = {rid: (node.readiness_message("SAFE", 0.0, now),)
                    for rid, node in nodes.items()}
         flood = flood_transition_messages(member_ids, initial, adjacency, rounds)
         result = evaluate_readiness_agreement(
@@ -146,7 +155,7 @@ def advance_transition_lifecycle(session) -> None:
 
     # 4. Confirmation, then per-node commit.
     if any(node.state == "TOPOLOGY_CONFIRMATION" for node in nodes.values()):
-        initial = {rid: (node.confirmation_message("CONFIRM", now),)
+        initial = {rid: (node.confirmation_message("ACCEPT", now),)
                    for rid, node in nodes.items()}
         flood = flood_transition_messages(member_ids, initial, adjacency, rounds)
         result = evaluate_confirmation_agreement(
@@ -156,11 +165,14 @@ def advance_transition_lifecycle(session) -> None:
         if not result.agreed:
             _abort_all(session, nodes, "CONFIRMATION_FAILED")
             return
+        # `accept_confirmation` only records unanimity; `commit` is the frozen
+        # call that advances to TOPOLOGY_COMMITTED and bumps the epoch. Each
+        # node commits for itself -- nothing is written centrally.
         for robot in session.robots:
             node = robot.protocol_node
-            if node.state == "COMMITTED":
+            if node.state == "TOPOLOGY_CONFIRMATION":
                 node.commit(now)
-                robot.committed_topology = int(intent.candidate_topology)
+                robot.committed_topology = int(node.committed_topology)
                 robot.steps_since_decision = 0
                 node.begin_execution(now)
         return
