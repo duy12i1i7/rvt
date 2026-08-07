@@ -77,3 +77,64 @@ carry `RECONFIGURATION_REQUIRED` under the frozen definition. The declared
 `rvt-headroom-requalification/v2`, canonical hash
 `2229e7d62a12c3756b03c670db7aa342acc40cc2bbbc1c122828cf2be107894a`. Historical
 headroom artifacts are untouched.
+
+---
+
+# Full executable requalification (Phase 8E-HR-FULL)
+
+Supersedes the N=6 slice above. The v2 artifact is preserved; the full result is
+`results/rvt_fd24/headroom_requalification_v3.json`, schema
+`rvt-headroom-requalification/v3`, canonical hash
+`fd300e0b11c2ef8421058ecb2cb005fb6ed5927ab37ec70a81b9a799d747ebf7`.
+
+**150 of 150 Study A train/validation cells evaluated** (30 layouts x N in
+{5,6,8,12,16}), 450 episodes, zero executor exceptions. N=24 sealed and
+final-test geometry were not accessed.
+
+## Authoritative cell-level counts
+
+| category | train (100) | validation (50) |
+|---|---:|---:|
+| BOTH_SUCCESS | 29 | 19 |
+| LINE_ONLY_SUCCESS | 28 | 10 |
+| BOTH_FAIL | 25 | 11 |
+| RECONFIGURATION_REQUIRED | **8** | **4** |
+| INVALID_OR_AMBIGUOUS | 10 | 5 |
+| COMPACT_ONLY_SUCCESS | 0 | 1 |
+
+**104 of 150 cells changed category.** The layout-level projection used by the
+historical artifact is no longer well defined: 20 of 30 layouts now vary across
+N, where historically none did.
+
+## H2
+
+`RECONFIGURATION_REQUIRED` is nonzero in both splits, so H2 remains falsifiable
+against both fixed baselines. Concentration is **class B**: one family (F9)
+across four team sizes (5, 6, 8, 12). No other family provides switching
+headroom at any N. This is a Severity 2 concentration and is recorded as such
+rather than smoothed over.
+
+## F5 across scale
+
+The N=6 finding generalises. Across all 15 F5 cells, **no cell is
+RECONFIGURATION_REQUIRED at any N**: 12 are LINE_ONLY_SUCCESS and 3 are
+BOTH_SUCCESS. Fixed LINE completes every F5 cell. The additive wording
+correction stands unchanged and is not strengthened.
+
+## INVALID_OR_AMBIGUOUS — a newly exposed binding gap
+
+All 15 invalid cells have the same root cause: **S2 (ALWAYS LINE) raises
+`INITIALIZATION_INVALID`**. The frozen compiler validated the **COMPACT**
+initial state only (`initial_topology_id = 5`); S2's forced LINE start has no
+compiled nominal-validity record at any N. At larger N the LINE longitudinal
+span (6.3 m at N=8, 13.5 m at N=16) makes that start pose invalid against the
+compiled geometry.
+
+Twelve of the fifteen cells carry `binding_validity = RUNTIME_BINDING_VALID`,
+which refers to the COMPACT start and therefore does not contradict the compiled
+record — it simply does not cover the LINE start that the headroom protocol
+requires as a diagnostic policy.
+
+Per HRF-14 this is **reported, not patched**: running additional team sizes
+exposed a runtime binding gap, so the sweep stops here rather than fixing it
+mid-flight.
