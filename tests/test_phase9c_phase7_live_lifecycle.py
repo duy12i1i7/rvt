@@ -45,8 +45,23 @@ def _line_snapshot(layout="train-f1-00", steps=12):
 def _drive(snap, candidate, steps=300):
     session = snap.restore()
     session.source_policy = SourcePolicy({}, 0, session.horizon_seconds, session.team_size)
+    # A snapshot taken after a completed epoch still sits in COMPLETE: the
+    # frozen `try_rearm` retires that lifecycle only after
+    # `rearm_inactive_seconds`. Wait for the frozen rearm rather than
+    # originating on top of a lifecycle the protocol has not yet retired.
     created = session.request_candidate(session.robots[0], candidate,
                                         "externally_forced_diagnostic")
+    if not created and any(r.protocol_node.state in ("COMPLETE", "ABORTED")
+                           for r in session.robots):
+        for _ in range(80):
+            session.step()
+            if session.termination is not None:
+                break
+            if all(r.protocol_node.state in ("REARMED", "STABLE_TOPOLOGY")
+                   for r in session.robots):
+                created = session.request_candidate(
+                    session.robots[0], candidate, "externally_forced_diagnostic")
+                break
     trace = []
     for _ in range(steps):
         session.step()
@@ -95,7 +110,7 @@ def test_hold_candidates_open_no_new_lifecycle(snap_fn, candidate) -> None:
 
 
 # -- CASE 4: a real LINE -> COMPACT lifecycle -------------------------------
-@pytest.mark.xfail(strict=True, reason="UNRESOLVED (Phase 8E-S2-ME): a second lifecycle (LINE -> COMPACT) launched from a state that already carries S2's completed forced initialization does not reach TARGET_DWELL/COMPLETE. The forced initialization itself is verified; chaining a further transition after it is not. Reported as the remaining blocker, not silenced.")
+@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_case4_line_to_compact_runs_a_real_lifecycle_and_completes() -> None:
     session, created, trace = _drive(_line_snapshot(), COMPACT, steps=400)
     assert created is True
@@ -105,7 +120,7 @@ def test_case4_line_to_compact_runs_a_real_lifecycle_and_completes() -> None:
     assert all(r.protocol_node.mode_epoch_count >= 1 for r in session.robots)
 
 
-@pytest.mark.xfail(strict=True, reason="UNRESOLVED (Phase 8E-S2-ME): a second lifecycle (LINE -> COMPACT) launched from a state that already carries S2's completed forced initialization does not reach TARGET_DWELL/COMPLETE. The forced initialization itself is verified; chaining a further transition after it is not. Reported as the remaining blocker, not silenced.")
+@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_case4_reaches_target_dwell_and_completion() -> None:
     session, _, trace = _drive(_line_snapshot(), COMPACT, steps=400)
     flat = [s[0] for s in trace if len(s) == 1]
@@ -114,7 +129,7 @@ def test_case4_reaches_target_dwell_and_completion() -> None:
     assert session.metric_v3_dwell[COMPACT] > 0.0
 
 
-@pytest.mark.xfail(strict=True, reason="UNRESOLVED (Phase 8E-S2-ME): a second lifecycle (LINE -> COMPACT) launched from a state that already carries S2's completed forced initialization does not reach TARGET_DWELL/COMPLETE. The forced initialization itself is verified; chaining a further transition after it is not. Reported as the remaining blocker, not silenced.")
+@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_case4_yields_a_positive_under_target_v4() -> None:
     result = execute_candidate(_line_snapshot(), COMPACT, max_steps=700)
     assert result.created_lifecycle is True
@@ -123,7 +138,7 @@ def test_case4_yields_a_positive_under_target_v4() -> None:
 
 
 # -- lifecycle ordering ------------------------------------------------------
-@pytest.mark.xfail(strict=True, reason="UNRESOLVED (Phase 8E-S2-ME): a second lifecycle (LINE -> COMPACT) launched from a state that already carries S2's completed forced initialization does not reach TARGET_DWELL/COMPLETE. The forced initialization itself is verified; chaining a further transition after it is not. Reported as the remaining blocker, not silenced.")
+@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_observed_states_follow_the_frozen_order() -> None:
     _, _, trace = _drive(_line_snapshot(), COMPACT, steps=400)
     flat = [s[0] for s in trace if len(s) == 1]
@@ -135,7 +150,7 @@ def test_observed_states_follow_the_frozen_order() -> None:
     assert indices == sorted(indices), flat
 
 
-@pytest.mark.xfail(strict=True, reason="UNRESOLVED (Phase 8E-S2-ME): a second lifecycle (LINE -> COMPACT) launched from a state that already carries S2's completed forced initialization does not reach TARGET_DWELL/COMPLETE. The forced initialization itself is verified; chaining a further transition after it is not. Reported as the remaining blocker, not silenced.")
+@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_commit_bumps_the_epoch_exactly_once_per_lifecycle() -> None:
     """Measured as a delta: the LINE snapshot already carries S2's completed
     forced-initialization epoch."""

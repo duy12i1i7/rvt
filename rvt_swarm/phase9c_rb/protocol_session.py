@@ -90,15 +90,48 @@ def originate_candidate(session, robot, candidate_topology: int, event_type: str
     return True
 
 
-def _active_intent(session):
+# Terminal lifecycle states. A node here has finished its epoch; the frozen
+# `try_rearm` is what retires its intent and agreement flags.
+_TERMINAL_STATES = ("COMPLETE", "ABORTED", "REARMED", "STABLE_TOPOLOGY")
+
+
+def _retire_finished_lifecycles(session) -> None:
+    """Defect 12: invoke the FROZEN retirement step.
+
+    `mark_complete` advances to COMPLETE but deliberately leaves `active_intent`,
+    `_score_agreed`, `_all_ready`, `_confirmed` and the dwell clock latched --
+    the frozen `try_rearm` is what clears them, after `rearm_inactive_seconds`.
+    The adapter never called it, so a completed epoch kept its intent forever,
+    `_active_intent` returned that stale intent, and no second epoch could run.
+
+    This calls the frozen method per robot; it invents no reset rule and applies
+    no central shortcut.
+    """
     for robot in session.robots:
-        if robot.protocol_node.active_intent is not None:
-            return robot.protocol_node.active_intent
+        if robot.protocol_node.state in ("COMPLETE", "ABORTED"):
+            if robot.protocol_node.try_rearm(session.time_seconds):
+                robot.transition_executor = None
+                robot.transition_source_topology = None
+                robot.transition_commit_seconds = None
+
+
+def _active_intent(session):
+    """The intent of a lifecycle that is still running.
+
+    Nodes in a terminal state are skipped: during the rearm window a COMPLETE
+    node still holds its finished intent, and driving that would re-run the
+    previous epoch.
+    """
+    for robot in session.robots:
+        node = robot.protocol_node
+        if node.active_intent is not None and node.state not in _TERMINAL_STATES:
+            return node.active_intent
     return None
 
 
 def advance_transition_lifecycle(session) -> None:
     """Advance every node one protocol phase using the frozen evaluators."""
+    _retire_finished_lifecycles(session)
     intent = _active_intent(session)
     if intent is None:
         return
@@ -117,8 +150,14 @@ def advance_transition_lifecycle(session) -> None:
             member_ids, {intent.originator_robot_id: (intent,)}, adjacency, rounds)
         result = evaluate_intent_propagation(
             flood, member_ids, now_seconds=now, maximum_age_seconds=maximum_age)
+        # Adopt from the frozen `adopt_intent` precondition set. After a
+        # completed epoch is retired by `try_rearm` a node sits in REARMED, not
+        # STABLE_TOPOLOGY, so restricting adoption to STABLE_TOPOLOGY left it
+        # without an active lifecycle and the next phase raised
+        # "score requires active lifecycle".
         for node in nodes.values():
-            if node.state == "STABLE_TOPOLOGY":
+            if (node.state in ("STABLE_TOPOLOGY", "REARMED", "COMPLETE")
+                    and node.active_intent is None):
                 node.adopt_intent(intent, now)
         if result.agreed:
             for node in nodes.values():
@@ -131,7 +170,7 @@ def advance_transition_lifecycle(session) -> None:
     # 2. Score agreement -- every node emits its own score.
     if any(node.state == "CANDIDATE_SCORE_AGREEMENT" for node in nodes.values()):
         initial = {rid: (node.score_message(DIAGNOSTIC_SCORE, DIAGNOSTIC_SCORE_SEMANTICS, now),)
-                   for rid, node in nodes.items()}
+                   for rid, node in nodes.items() if node.active_intent is not None}
         flood = flood_transition_messages(member_ids, initial, adjacency, rounds)
         result = evaluate_score_agreement(
             flood, member_ids, intent, now_seconds=now, maximum_age_seconds=maximum_age,
@@ -173,7 +212,7 @@ def advance_transition_lifecycle(session) -> None:
         initial = {rid: (node.readiness_message(
                        certificates[rid].readiness_state,
                        float(certificates[rid].readiness_margin_meters), now),)
-                   for rid, node in nodes.items()}
+                   for rid, node in nodes.items() if node.active_intent is not None}
         flood = flood_transition_messages(member_ids, initial, adjacency, rounds)
         result = evaluate_readiness_agreement(
             flood, member_ids, intent, now_seconds=now, maximum_age_seconds=maximum_age)
@@ -186,7 +225,7 @@ def advance_transition_lifecycle(session) -> None:
     # 4. Confirmation, then per-node commit.
     if any(node.state == "TOPOLOGY_CONFIRMATION" for node in nodes.values()):
         initial = {rid: (node.confirmation_message("ACCEPT", now),)
-                   for rid, node in nodes.items()}
+                   for rid, node in nodes.items() if node.active_intent is not None}
         flood = flood_transition_messages(member_ids, initial, adjacency, rounds)
         result = evaluate_confirmation_agreement(
             flood, member_ids, intent, now_seconds=now, maximum_age_seconds=maximum_age)

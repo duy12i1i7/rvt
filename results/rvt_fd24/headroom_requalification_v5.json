@@ -10088,7 +10088,7 @@
   "nonzero_train": true,
   "nonzero_validation": true
  },
- "headroom_requalification_v5_sha256": "b4830e22632491ad7e5d51e0b09bbb28e89f0ac16124fa5b87200bb3f136b4ac",
+ "headroom_requalification_v5_sha256": "4566b8978018e9760ec54b8de07dc454d16a2351f6e71511eaffddf3908bd887",
  "invalid_or_ambiguous": {
   "cells": [
    {
@@ -10110,6 +10110,7 @@
   "classification": "compiler-declared nominal_initial_validity false",
   "count": 3
  },
+ "not_authoritative_reason": "switching-policy outcomes were produced before defect 12 (multi-epoch second-lifecycle execution) was repaired, so any cell whose switching diagnostic needed a second epoch may be misclassified. Superseded by a future v6.",
  "per_family_counts": {
   "F1": {
    "BOTH_SUCCESS": 6,
@@ -10238,7 +10239,7 @@
  "s2_semantics": "forced mechanical initialization from the common COMPACT start",
  "schema_version": "rvt-headroom-requalification/v5",
  "source_commit": "a9261dd09dbb998c128fd83e49421558a6e76e56",
- "status": "AUTHORITATIVE",
+ "status": "PROVISIONAL_PRE_D12",
  "study_a_n24_access_count": 0,
  "supersedes": [
   "v2 (N=6 slice)",
