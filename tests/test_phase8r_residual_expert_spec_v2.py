@@ -304,11 +304,24 @@ def test_the_deviation_norm_choice_is_materially_undetermined() -> None:
     assert len(norms) == 3
 
 
-def test_v2_specification_artifact_was_not_written() -> None:
-    """SPEC-19 is conditional; the completed artifact must not exist yet."""
-    assert not (ROOT / "residual_expert_spec_v2.json").exists()
+def test_this_audit_did_not_write_the_v2_specification() -> None:
+    """SPEC-19 was conditional, and this phase's audit correctly declined.
+
+    Phase 8R-V2B later wrote the specification, but only after the owner froze
+    the four utility semantics. What must stay true is that *this* artifact --
+    the audit that found them unresolved -- never claimed to be the completed
+    specification, and that the completed one is a separate schema.
+    """
     assert AUDIT["spec_19_versioned_artifact"]["status"] == "NOT_CREATED"
     assert AUDIT["schema_version"] == "rvt-residual-expert-spec-v2-audit/v1"
+    assert AUDIT["v2_specification_frozen"] is False
+    spec_path = ROOT / "residual_expert_spec_v2.json"
+    if spec_path.exists():                       # written by Phase 8R-V2B
+        spec = json.loads(spec_path.read_text())
+        assert spec["schema_version"] == "rvt-residual-expert-spec/v2"
+        assert spec["schema_version"] != AUDIT["schema_version"]
+        assert spec["source_commit"] != AUDIT["source_commit"], (
+            "the completed specification must postdate the audit that blocked it")
 
 
 def test_spec13_classification_was_not_forced() -> None:

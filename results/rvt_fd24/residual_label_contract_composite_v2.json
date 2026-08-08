@@ -1,0 +1,76 @@
+{
+ "blocking_items": [
+  "RESIDUAL_V2_GENERATION_TIMEOUT = PENDING_PERFORMANCE_BENCHMARK",
+  "residual job identity V2 not yet declared in the official job manifest"
+ ],
+ "components": [
+  {
+   "mutated": false,
+   "path": "docs/RVT_RESIDUAL_ACTION_TARGET_V1.md",
+   "role": "historical V1 target contract",
+   "sha256": "1eb3d8341facb7336f7f6a28a08a35efd75d001c2d8af54aec3f658715b5e047"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/residual_action_pipeline_erratum_v1.json",
+   "role": "action pipeline erratum",
+   "sha256": "e14848c8c540f386f29fd0360fbb7758bf71cfc0cfd7c21f2ca94004c0c96c8d"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/residual_expert_spec_v2.json",
+   "role": "residual expert V2 specification",
+   "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/rb15_local_information_mapping_v1.json",
+   "role": "local-information owner decision and provenance mapping",
+   "sha256": "6fce357065b20a6c0753a8c0a452904e152e8d43621f8385e10491cb81ec4bc5"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/rb15_residual_expert_binding_v1.json",
+   "role": "RB-15 under-specification finding",
+   "sha256": "19f55b3f03464b1c6f875626fd94b31896f133949a118fa908a27c3d19d147ac"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/residual_expert_spec_v2_audit_v1.json",
+   "role": "spec V2 utility audit that produced the owner decisions",
+   "sha256": "e1eadd4708d6e73dc1a339d402013cf5e1129c02c274804656962c3f3d59934d"
+  },
+  {
+   "mutated": false,
+   "path": "rvt_swarm/phase9c_rb/counterfactual.py",
+   "role": "snapshot and matched-stream contract (executable)",
+   "sha256": "6fc65a03f71393b84009338a4136cbdd7b1274501f98e1aa50e87ba7f4f09bb3"
+  },
+  {
+   "mutated": false,
+   "path": "rvt_swarm/phase9c_rb/streams.py",
+   "role": "matched exogenous stream contract (executable)",
+   "sha256": "08cbbec160c8f00aef51296d7a89764eb60d7b77d45663872c23ea89d0af00bd"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/proposed_generation_budget_addendum_v2.json",
+   "role": "generation-budget addendum status",
+   "sha256": "949e1c0413a168f577a659fa66c0703b809e699473d624cf68726a2f7dbd3ab5"
+  },
+  {
+   "mutated": false,
+   "path": "results/rvt_fd24/experiment_protocol_manifest.json",
+   "role": "historical Phase-8 experiment protocol (unchanged, referenced)",
+   "sha256": "bae6ed6500fdac37dd699b74f56861afb6eacf890c4a6969747cd3f38eae90e4"
+  }
+ ],
+ "generation_authorized": false,
+ "historical_phase8_hashes_altered": false,
+ "purpose": "the complete residual-label contract. The Phase-8 composite alone is not it: the producer semantics were completed after Phase 8 was frozen.",
+ "rb17_requirement": "RB-17 execution manifests must reference this composite hash in addition to the Phase-8 protocol hash; the Phase-8 hash alone no longer identifies the residual label contract",
+ "residual_label_contract_composite_sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+ "schema_version": "rvt-residual-label-contract-composite/v2",
+ "source_commit": "837d5aadd3d8d0a2b6de0b76d583a1b3a4c7a524",
+ "status": "ADDITIVE_PROVENANCE_RECORD"
+}

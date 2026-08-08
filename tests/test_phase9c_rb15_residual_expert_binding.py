@@ -197,26 +197,30 @@ def test_the_two_known_producers_are_fixtures_and_disagree() -> None:
     assert enumeration["new_hyperparameter_introduced"] is False
 
 
-def test_utility_normalizers_have_no_producer_anywhere() -> None:
-    """RB15-14: nothing in the package computes the four scored terms.
+def test_the_four_scored_terms_are_computed_only_by_the_frozen_v2_reducers() -> None:
+    """RB15-14 found nothing computed them; Phase 8R-V2B froze how.
 
-    The terms are not merely uncomputed -- outside the dataclass that declares
-    them they are never referenced by name at all. The one constructor supplies
-    them positionally, as fixture literals.
+    The invariant that must survive is that exactly one module produces those
+    values and that it is the owner-frozen specification module, not an ad-hoc
+    computation somewhere in the runtime.
     """
     scored = ("normalized_progress", "normalized_clearance_margin",
               "normalized_formation_error", "normalized_action_deviation")
     referencing = []
     for path in sorted(pathlib.Path("rvt_swarm").rglob("*.py")):
-        if path.as_posix() == "rvt_swarm/phase8/targets.py":
-            continue                            # the dataclass declaration itself
+        if path.as_posix() in ("rvt_swarm/phase8/targets.py",
+                               "rvt_swarm/phase8r/__init__.py"):
+            continue                    # the dataclass declaration and the re-export
         text = path.read_text()
         if any(name in text for name in scored):
             referencing.append(path.as_posix())
-    assert referencing == [], referencing
+    assert referencing == ["rvt_swarm/phase8r/utility_v2.py"], referencing
     assert _evaluation_constructors() == ["rvt_swarm/phase8/diagnostic.py"]
+    # The RB-15 finding itself is unchanged: at that commit, nothing computed them.
     assert BINDING["score_and_selection"]["normalizers_frozen"] is False
     assert BINDING["score_and_selection"]["normalizer_definitions_found"] == 0
+    spec = json.loads((ROOT / "residual_expert_spec_v2.json").read_text())
+    assert spec["utility"]["reducer_module"] == "rvt_swarm/phase8r/utility_v2.py"
 
 
 def test_no_frozen_candidate_rollout_horizon_exists() -> None:

@@ -1,6 +1,15 @@
 # Phase 8R — Pre-Data Residual Expert Specification Completion
 
-**Result: the specification is not complete. Verdict A.**
+> **Superseded in part by Phase 8R-V2B.** This document records the SPEC-1…SPEC-20
+> audit that stopped at Verdict A. The owner has since frozen the four utility
+> semantics, and the completed specification now exists as
+> `results/rvt_fd24/residual_expert_spec_v2.json` (schema
+> `rvt-residual-expert-spec/v2`). See
+> [PHASE8R_RESIDUAL_EXPERT_UTILITY_V2B.md](docs/PHASE8R_RESIDUAL_EXPERT_UTILITY_V2B.md).
+> Everything below remains accurate as the record of *why* those four decisions
+> had to be made by the owner rather than derived.
+
+**Result of this phase: the specification was not complete. Verdict A.**
 
 Fifteen of the twenty owner decisions in this phase are now frozen and testable.
 The one that decides whether RB-15 can be retried — SPEC-12, the utility
@@ -9,8 +18,8 @@ the owner rule, no number was chosen and the V2 expert was not implemented.
 
 Machine-readable: `results/rvt_fd24/residual_expert_spec_v2_audit_v1.json`
 (schema `rvt-residual-expert-spec-v2-audit/v1`). The completed specification
-artifact `residual_expert_spec_v2.json` is deliberately **not** written, because
-SPEC-19 conditions it on SPEC-10 through SPEC-12 resolving.
+artifact `residual_expert_spec_v2.json` was deliberately **not** written in this
+phase, because SPEC-19 conditioned it on SPEC-10 through SPEC-12 resolving.
 
 ## What is now frozen
 

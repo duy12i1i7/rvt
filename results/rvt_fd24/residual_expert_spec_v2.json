@@ -1,0 +1,373 @@
+{
+ "action_pipeline": {
+  "equation": "u_safe = local_safety_projection(u_base_pre_safety + delta_u_world)",
+  "erratum": "results/rvt_fd24/residual_action_pipeline_erratum_v1.json",
+  "erratum_sha256": "e14848c8c540f386f29fd0360fbb7758bf71cfc0cfd7c21f2ca94004c0c96c8d",
+  "frame": "world",
+  "insertion_point": "BEFORE_LOCAL_SAFETY_PROJECTION",
+  "u_base_pre_safety": "RobotLocalControllerOutput.base_action, the frozen Phase 6 pre-projection sum",
+  "units": "meters_per_second_squared"
+ },
+ "candidate_lattice": {
+  "candidate_set_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+  "candidates_meters_per_second_squared": [
+   [
+    -0.15,
+    -0.15
+   ],
+   [
+    -0.15,
+    0.0
+   ],
+   [
+    -0.15,
+    0.15
+   ],
+   [
+    0.0,
+    -0.15
+   ],
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.15
+   ],
+   [
+    0.15,
+    -0.15
+   ],
+   [
+    0.15,
+    0.0
+   ],
+   [
+    0.15,
+    0.15
+   ]
+  ],
+  "count": 9,
+  "module": "rvt_swarm/phase8r/residual_lattice.py",
+  "module_sha256": "67d0b0a5086892aa8a901836442293ec6df6d355f14903c8b27275c213153b3d",
+  "ordering": "x-major then y, each ascending: -b, 0, +b",
+  "zero_residual_index": 4,
+  "zero_residual_occurrences": 1
+ },
+ "clearance_sources": [
+  {
+   "always_applicable": true,
+   "authority": "the same threshold the frozen collision truth uses in SimulatorEpisodeSession._check_collisions",
+   "constraint_type": "ROBOT_ROBOT",
+   "distance_definition": "swept minimum centre-to-centre distance over the closed control interval (_moving_point_min_distance)",
+   "source_file": "rvt_swarm/phase9c_rb/session.py",
+   "source_file_sha256": "ad105e916979b69b2016346d58524af50dcf1648fc506ad6f4deb87694b8a812",
+   "threshold_derivation": "2 * physical.robot_radius_meters + safety.inter_robot_safety_margin_meters",
+   "threshold_field": "RuntimeConfig.derived.robot_robot_required_clearance_meters",
+   "threshold_value_meters": 0.4,
+   "units": "meters"
+  },
+  {
+   "always_applicable": false,
+   "authority": "StaticWorld.static_collision / swept_static_collision",
+   "constraint_type": "ROBOT_STATIC_CIRCLE",
+   "distance_definition": "centre-to-centre distance to the circle primitive",
+   "source_file": "rvt_swarm/phase9c_rb/world.py",
+   "source_file_sha256": "7dfd0127cc25a253caf7dc6b333bea26b1312c5a66343231dbace72133e54645",
+   "threshold_derivation": "physical.robot_radius_meters + max(safety.obstacle_clearance_margin_meters, circle.radius_meters)",
+   "threshold_field": "CirclePrimitive.collision_threshold",
+   "threshold_value_meters": "per obstacle",
+   "units": "meters"
+  },
+  {
+   "always_applicable": false,
+   "authority": "the frozen analytic_wall_surface_threshold_formula",
+   "constraint_type": "ROBOT_CORRIDOR_WALL",
+   "distance_definition": "CorridorPrimitive.surface_distance -- Euclidean distance to wall material, zero inside it",
+   "source_file": "rvt_swarm/phase9c_rb/world.py",
+   "source_file_sha256": "7dfd0127cc25a253caf7dc6b333bea26b1312c5a66343231dbace72133e54645",
+   "threshold_derivation": "robot_radius + obstacle_surface_margin",
+   "threshold_field": "physical.robot_radius_meters + static_obstacle_contract.collision_inflation.obstacle_surface_margin_meters",
+   "threshold_value_meters": 0.2,
+   "units": "meters"
+  },
+  {
+   "always_applicable": false,
+   "authority": "DynamicWorld.swept_collision",
+   "constraint_type": "ROBOT_DYNAMIC_CIRCLE",
+   "distance_definition": "swept minimum centre-to-centre distance to the moving circle over the control interval",
+   "source_file": "rvt_swarm/phase9c_rb/dynamics.py",
+   "source_file_sha256": "32088afdb74998b2c43db60e25590954d2b14d70f6d1da22c8077570a54fce82",
+   "threshold_derivation": "physical.robot_radius_meters + max(safety.obstacle_clearance_margin_meters, obstacle.radius_meters)",
+   "threshold_field": "DynamicWorld.threshold",
+   "threshold_value_meters": "per obstacle",
+   "units": "meters"
+  }
+ ],
+ "clearance_sources_excluded": [
+  {
+   "constraint_type": "WORLD_BOUNDARY",
+   "reason": "the owner definition names exactly two constraint classes, robot-robot and robot-obstacle. Boundary exit remains a separate frozen termination and validity condition and is deliberately not folded into the clearance margin."
+  }
+ ],
+ "collision_tolerance_note": "StaticWorld.collision_tolerance_meters (1e-9) is a numerical guard inside the collision predicate, not part of the frozen minimum admissible clearance, so it does not enter a slack",
+ "counterfactual_execution": {
+  "identical_canonical_snapshot_per_candidate": true,
+  "matched_exogenous_streams": true,
+  "other_robots": "ordinary frozen local policies; never artificially frozen and never given coordinated joint candidate actions",
+  "replica_rule": "rvt_swarm/phase9c_rb/counterfactual.py::replica_count_for_family",
+  "separate_utility_specific_simulation_permitted": false,
+  "single_trace_for_all_rollout_derived_utility": true,
+  "snapshot": "rvt_swarm/phase9c_rb/counterfactual.py::snapshot / EpisodeSnapshot",
+  "stream_source": "rvt_swarm/phase9c_rb/streams.py counter-keyed PRF"
+ },
+ "evaluation": {
+  "K_zero_audit": {
+   "executable_audit": {
+    "K_zero_cases": 0,
+    "controller_run_instants_snapshotted_and_restored": 503,
+    "episodes": [
+     "train/train-f5-00/N8 switching (GOAL_COMPLETE)",
+     "train/train-f5-00/N8 fixed COMPACT (COLLISION)",
+     "train/train-f9-00/N8 switching (GOAL_COMPLETE)"
+    ]
+   },
+   "structural_argument": "a dense row exists only where the controller produced an action, and the frozen step() returns immediately once an episode has terminated, so no row can be at or after termination; restoring such an instant always executes at least one interval"
+  },
+  "K_zero_possible": false,
+  "duration": "the remainder of the existing frozen episode: normal frozen policies until the ordinary terminal state or the family horizon",
+  "new_discount_factor": false,
+  "new_lookahead_horizon": false,
+  "new_planning_horizon": false,
+  "terminal_policy": "collision, task failure, readiness failure and ordinary horizon termination are all scored over the actually executed trace; only execution-invalid candidates follow the frozen validity semantics",
+  "terminal_trajectories_discarded": false,
+  "trace_sample_convention": {
+   "K": "the number of executed control intervals",
+   "M_equals_K": true,
+   "initial_state_included_in_M": false,
+   "rule": "post-step states only; the pre-step snapshot state is not a sample. Every per-step statistic in the frozen SimulatorEpisodeSession.step -- collision truth, progress, Metric V3 dwell, deadlock window and goal dwell -- is evaluated after the integration."
+  }
+ },
+ "expert_id": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V2",
+ "extends": {
+  "evaluation_schema_sha256": "c6f4d5176abe7b9c0366eb1a99440b5a63c0f1035ce76ff912eb892974360dc9",
+  "expert_id": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V1",
+  "phase8_targets_module_sha256": "184f464b77a550d400a3784b9d2bd8db892496cde8a3bb33c87148c0846bc809",
+  "relationship": "V2 completes producer semantics around the unchanged V1 selector and target builder; V1 semantics are not mutated",
+  "selector": "rvt_swarm/phase8/targets.py::select_counterfactual_local_action",
+  "selector_modified": false,
+  "selector_sha256": "535c4e639d598bb75bc4822cdbbc320c48c69a7f86f8d5b96dec2dd5ace9a123",
+  "target_builder_sha256": "b8bd0ae34c1a659009efbe9943c4e30d3a0b187ea8d3524dfd28ae4083d51c9e",
+  "tie_break_modified": false,
+  "weights_modified": false
+ },
+ "generation_budget_impact": {
+  "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_PERFORMANCE_BENCHMARK",
+  "addendum": "results/rvt_fd24/proposed_generation_budget_addendum_v2.json",
+  "addendum_sha256": "949e1c0413a168f577a659fa66c0703b809e699473d624cf68726a2f7dbd3ab5",
+  "candidate_evaluation_upper_bound": 4824000,
+  "candidate_evaluations_per_row": 9,
+  "official_generation_authorized": false,
+  "official_job_manifest_mutated": false,
+  "residual_job_identity_v2_required_dimensions": [
+   "scientific cell",
+   "decision state / dense row",
+   "robot",
+   "candidate residual identity/index",
+   "replica / matched-stream identity where applicable"
+  ],
+  "stored_dense_residual_row_upper_cap": 536000,
+  "this_is_a_compute_upper_bound_not_a_stored_row_count": true
+ },
+ "h4_optionality": {
+  "if_generation_is_operationally_infeasible": "disable or remove the residual branch under H4 optionality",
+  "post_hoc_horizon_or_objective_change_to_speed_generation_permitted": false,
+  "residual_learning_is_optional_h4": true
+ },
+ "information_boundary": {
+  "ACTION_INFORMATION_LOCAL": true,
+  "LABEL_ORACLE_CENTRALIZED": true,
+  "candidate_action_construction_sources": [
+   "RobotLocalView_i",
+   "immutable frozen local configuration",
+   "Phase-6 local controller output derived from that view",
+   "local protocol/topology state legitimately available to robot i",
+   "local safety state/operator legitimately available to robot i",
+   "the candidate residual vector"
+  ],
+  "label_oracle_centralized_field_required": true,
+  "offline_oracle_may_become_a_runtime_model_input": false,
+  "offline_oracle_may_use_centralized_physical_truth": true,
+  "robot_local_information_only": "certifies the provenance of the information used to construct the candidate action and its local admissibility; it makes no claim about the offline outcome oracle",
+  "v1_dataclass_extended_in_this_phase": false
+ },
+ "intervention": {
+  "after_the_interval": "robot i resumes the normal frozen local publication policy",
+  "control_period_seconds": 0.15,
+  "duration_control_intervals": 1,
+  "holding_parameter": null,
+  "interval": "[t, t + dt)",
+  "reapplied_through_rollout": false
+ },
+ "locally_feasible": {
+  "conditions": [
+   "RobotLocalView required fields finite and valid",
+   "Phase-6 base action finite",
+   "candidate residual finite",
+   "pre-safety candidate action finite",
+   "local controller/dynamics input domain valid"
+  ],
+  "definition": "the candidate can be constructed and the one-interval intervention executed inside the local controller/dynamics domain",
+  "duplicates_selector_bound_checks": false,
+  "excludes": [
+   "safety success",
+   "collision-free rollout",
+   "task success",
+   "recoverability success"
+  ]
+ },
+ "rb16": {
+  "PRIMARY_SYNTHETIC_ROTATION_AUGMENTATION": "DISABLED",
+  "predeclared_non_identity_transform_set_exists": false,
+  "rb16_started": false
+ },
+ "residual_bound_source": {
+  "bound_norm": 0.21213203435596426,
+  "bx_by_meters_per_second_squared": [
+   0.15,
+   0.15
+  ],
+  "derivation": "residual_limit_fractions_of_maximum_acceleration * a_max",
+  "fractions": [
+   0.25,
+   0.25
+  ],
+  "function": "rvt_swarm/fd24/configuration.py::residual_action_limits",
+  "literal_duplicated": false,
+  "maximum_acceleration_meters_per_second_squared": 0.6
+ },
+ "residual_expert_spec_v2_sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+ "safety_projection_compatible": {
+  "constraints_altered": false,
+  "global_safety_oracle": false,
+  "operator": "rvt_swarm/decentralized/local_safety_projection.py::RobotLocalSafetyProjection.project, own action only",
+  "recorded_raw_fields": [
+   "pre-safety action",
+   "post-safety action",
+   "projection status and reason"
+  ]
+ },
+ "schema_version": "rvt-residual-expert-spec/v2",
+ "scope": {
+  "final_test_access_count": 0,
+  "new_fd24_checkpoints": 0,
+  "optimizer_states": 0,
+  "rb15_producer_implemented": false,
+  "recoverability_rows": 0,
+  "residual_rows": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0,
+  "supervision_generated": false,
+  "training_operations": 0
+ },
+ "source_commit": "837d5aadd3d8d0a2b6de0b76d583a1b3a4c7a524",
+ "status": "FROZEN_PRE_DATA",
+ "tie_break": {
+  "deterministic": true,
+  "enumeration_order_determines_winner": false,
+  "key": "(utility(), -normalized_action_deviation, action_world_acceleration)",
+  "random_tie_break": false
+ },
+ "utility": {
+  "consumed_by": "the unchanged V1 selector and its frozen weights",
+  "data_dependent_normalization": false,
+  "expression": "normalized_progress + 0.50*normalized_clearance_margin - 0.25*normalized_formation_error - 0.05*normalized_action_deviation",
+  "fields": [
+   {
+    "absolute_value": false,
+    "clipped": false,
+    "dimensionless": true,
+    "field": "normalized_progress",
+    "formula": "(1/K) * sum_{k=0}^{K-1} (p_{k+1} - p_k) / nominal_spacing_meters",
+    "information_class": "OFFLINE_LABEL_ORACLE",
+    "normalizer": "RuntimeConfig.formation.nominal_spacing_meters",
+    "normalizer_authority": "ego_graph_v2 feature 'local_progress_spacing' -- 'own history progress / nominal spacing'",
+    "raw_source": "RobotView.local_progress, assigned by SimulatorEpisodeSession._update_progress as the longitudinal progress of the fitted topology origin along the mission direction",
+    "raw_units": "meters",
+    "scalar_reducer": "none required; the raw quantity is already scalar",
+    "selector_weight": 1.0,
+    "temporal_reducer": "signed mean per-control-interval increment"
+   },
+   {
+    "clipped": false,
+    "dimensionless": true,
+    "empty_set_audit": "the smallest qualified team size is 5, so at least ten robot-robot pairs are always applicable regardless of geometry; no sentinel, fallback radius or synthetic obstacle is introduced",
+    "empty_set_possible": false,
+    "field": "normalized_clearance_margin",
+    "formula": "min_t min_c (distance_c(t) - threshold_c) / threshold_c",
+    "information_class": "OFFLINE_LABEL_ORACLE",
+    "normalizer": "constraint-by-constraint: the corresponding frozen minimum admissible clearance",
+    "normalizer_authority": "the frozen collision truth; see clearance_sources",
+    "qualified_team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16,
+     24
+    ],
+    "raw_source": "centralized simulator physical truth: every applicable robot-robot pair distance and robot-obstacle clearance",
+    "raw_units": "meters",
+    "scalar_reducer": "minimum over applicable constraints at each trace sample, each normalized by its own frozen threshold",
+    "selector_weight": 0.5,
+    "sign_convention": "positive above the frozen physical threshold, zero at it, negative is a violation",
+    "temporal_reducer": "minimum over the counterfactual"
+   },
+   {
+    "M": "the number of post-step trace samples; M == K",
+    "dimensionless": true,
+    "field": "normalized_formation_error",
+    "formula": "sqrt((1/M) * sum_t ||e_form(t)||_2^2) / nominal_spacing_meters",
+    "information_class": "OFFLINE_LABEL_ORACLE",
+    "initial_state_included": false,
+    "normalizer": "RuntimeConfig.formation.nominal_spacing_meters",
+    "normalizer_authority": "the frozen geometric scale of the formation; the Phase-6 formation term and ego_graph_v2 'formation_residual_spacing' both normalize by it",
+    "normalizer_rejected": {
+     "field": "RuntimeConfig.derived.formation_tolerance_meters",
+     "reason": "Metric V3 epsilon_form is an acceptance/tube tolerance, not the geometric scale of the formation",
+     "value": 0.55
+    },
+    "raw_source": "the per-robot formation-error 2-vector, the Phase-6 mean pairwise residual over fresh nominal neighbours (robot_local_formation_term)",
+    "raw_units": "meters",
+    "scalar_reducer": "Euclidean norm",
+    "selector_weight": -0.25,
+    "temporal_reducer": "root mean square over the trace samples"
+   },
+   {
+    "also_the_secondary_tie_break_key": true,
+    "dimensionless": true,
+    "field": "normalized_action_deviation",
+    "formula": "||delta_u_world||_2 / ||(bx, by)||_2",
+    "information_class": "LOCAL_ACTION_INFORMATION",
+    "lattice_values": {
+     "axis_edge": 0.7071067811865475,
+     "corner": 1.0,
+     "zero": 0.0
+    },
+    "normalizer": "the Euclidean norm of the residual bound vector (bx, by)",
+    "normalizer_authority": "residual_action_limits",
+    "raw_source": "the candidate residual delta_u_world",
+    "raw_units": "meters_per_second_squared",
+    "scalar_reducer": "Euclidean norm",
+    "selector_weight": -0.05,
+    "sqrt_two_hardcoded": false,
+    "temporal_reducer": "none; the quantity is fixed at candidate construction time",
+    "values_emerge_from_the_formula": true
+   }
+  ],
+  "forbidden_normalization_sources_used": [],
+  "reducer_module": "rvt_swarm/phase8r/utility_v2.py",
+  "reducer_module_sha256": "7b32ce8a58b3909f48e25166274596de958a98391bee8bd54acc2719ab608af5"
+ }
+}
