@@ -1,0 +1,580 @@
+{
+ "expert_identity": {
+  "v1": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V1",
+  "v1_selector_modified": false,
+  "v1_selector_sha256": "535c4e639d598bb75bc4822cdbbc320c48c69a7f86f8d5b96dec2dd5ace9a123",
+  "v1_semantics_mutated": false,
+  "v1_target_builder_sha256": "b8bd0ae34c1a659009efbe9943c4e30d3a0b187ea8d3524dfd28ae4083d51c9e",
+  "v2_proposed": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V2"
+ },
+ "historical_artifacts_rewritten": false,
+ "isolation": {
+  "canary_requiring_v2_labels": false,
+  "final_test_access_count": 0,
+  "new_checkpoints": 0,
+  "optimizer_states": 0,
+  "rb15_retried": false,
+  "recoverability_rows": 0,
+  "residual_supervision_rows": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0
+ },
+ "phase": "PHASE 8R-RESIDUAL-SPEC-V2",
+ "reason": "SPEC-12 requires a unique defensible derivation for each of the four utility components from already-frozen quantities. None of the four has one.",
+ "residual_expert_spec_v2_audit_sha256": "1c5d137530cb67bea00a624b9f3bf515819a3cd8315f0c409c87122a3b794655",
+ "schema_version": "rvt-residual-expert-spec-v2-audit/v1",
+ "source_commit": "90d43e4a66bc39b0ef13f817947dd7ef14b00d03",
+ "spec_10_utility_field_audit": {
+  "field_count": 4,
+  "fields": [
+   {
+    "also_a_tie_break_key": false,
+    "blocking_reason": "TEMPORAL_REDUCTION_UNDEFINED",
+    "direction": "higher_is_better",
+    "field": "normalized_progress",
+    "frozen_normalizer_candidates": [
+     {
+      "dimensionless": true,
+      "normalizer": "formation.nominal_spacing_meters",
+      "source": "rvt_swarm/decentralized/ego_graph_v2.py feature 'local_progress_spacing' -- 'own history progress / nominal spacing'",
+      "value": 0.9
+     }
+    ],
+    "historical_producers": [
+     "phase8/diagnostic.py literals 0.40 / 0.65",
+     "unit-test literals 0.2 / 0.8"
+    ],
+    "most_plausible_raw_quantity": "RobotView.local_progress -- own along-mission displacement over the frozen progress window",
+    "normalizer_unique": true,
+    "raw_quantity_defined_by_a_frozen_source": false,
+    "raw_range_specified_by_a_frozen_source": false,
+    "raw_theoretical_range": [
+     -0.675,
+     0.675
+    ],
+    "raw_units": "meters",
+    "resolved": false,
+    "unresolved_sub_decisions": [
+     "temporal reduction: SPEC-5 evaluates each candidate over the remainder of the episode, so the utility term is an outcome statistic. No frozen source says whether progress is read instantaneously at the decision step, at the counterfactual terminal state, or reduced over the trajectory (final, mean, min or integral)."
+    ],
+    "utility_weight": 1.0,
+    "v1_semantic_text": "'normalized progress' (docs/RVT_RESIDUAL_ACTION_TARGET_V1.md:16)"
+   },
+   {
+    "also_a_tie_break_key": false,
+    "blocking_reason": "RAW_QUANTITY_AND_NORMALIZER_BOTH_UNDEFINED",
+    "direction": "higher_is_better",
+    "field": "normalized_clearance_margin",
+    "frozen_normalizer_candidates": [
+     {
+      "dimensionless": true,
+      "normalizer": "sensing.obstacle_sensing_range_meters (R_obs)",
+      "source": "ego_graph_v2 feature 'distance_range' -- 'obstacle clearance / R_obs'",
+      "value": 3.0
+     },
+     {
+      "dimensionless": true,
+      "normalizer": "communication.communication_range_meters (R_comm)",
+      "source": "ego_graph_v2 feature 'distance_range' -- 'peer range / R_comm'",
+      "value": 3.0
+     },
+     {
+      "dimensionless": true,
+      "normalizer": "formation.nominal_spacing_meters",
+      "source": "rvt_swarm/decentralized/parameters.py 'collision_clearance_ratio' = collision_clearance_obstacle / spacing",
+      "value": 0.9
+     },
+     {
+      "dimensionless": true,
+      "normalizer": "derived.robot_obstacle_required_clearance_meters",
+      "source": "rvt_swarm/runtime_configuration.py derived clearance",
+      "value": 0.55
+     },
+     {
+      "dimensionless": true,
+      "normalizer": "derived.robot_robot_required_clearance_meters",
+      "source": "rvt_swarm/runtime_configuration.py derived clearance",
+      "value": 0.4
+     }
+    ],
+    "historical_producers": [
+     "phase8/diagnostic.py literals 0.35 / 0.50",
+     "unit-test literal 0.4"
+    ],
+    "most_plausible_raw_quantity": null,
+    "normalizer_unique": false,
+    "raw_quantity_defined_by_a_frozen_source": false,
+    "raw_range_specified_by_a_frozen_source": false,
+    "raw_theoretical_range": null,
+    "raw_units": "meters",
+    "resolved": false,
+    "unresolved_sub_decisions": [
+     "the raw statistic itself: minimum or mean; over peers, over obstacles, or over both; a raw distance or a margin above the required clearance",
+     "the hazard-class combination rule, since the frozen scheme normalizes peer range by R_comm and obstacle clearance by R_obs -- two different fields that merely happen to share the value 3.0 m in the current configuration",
+     "the normalizer: five frozen quantities in metres are equally citable",
+     "temporal reduction over the counterfactual, as for progress"
+    ],
+    "utility_weight": 0.5,
+    "v1_semantic_text": "'clearance' (docs/RVT_RESIDUAL_ACTION_TARGET_V1.md:16)"
+   },
+   {
+    "also_a_tie_break_key": false,
+    "blocking_reason": "SCALAR_REDUCTION_AND_NORMALIZER_BOTH_UNDEFINED",
+    "direction": "lower_is_better",
+    "field": "normalized_formation_error",
+    "frozen_normalizer_candidates": [
+     {
+      "dimensionless": true,
+      "normalizer": "formation.nominal_spacing_meters",
+      "source": "rvt_swarm/decentralized/robot_local_controller.py::robot_local_formation_term divides the mean residual by nominal spacing; ego_graph_v2 'formation_residual_spacing' agrees",
+      "value": 0.9
+     },
+     {
+      "dimensionless": true,
+      "normalizer": "derived.formation_tolerance_meters",
+      "source": "rvt_swarm/decentralized/formation_metric_v3.py epsilon_form, the frozen Metric V3 formation tolerance",
+      "value": 0.55
+     }
+    ],
+    "historical_producers": [
+     "phase8/diagnostic.py literals 0.30 / 0.20",
+     "unit-test literal 0.2"
+    ],
+    "most_plausible_raw_quantity": "the Phase 6 mean pairwise formation residual over fresh nominal neighbours",
+    "normalizer_unique": false,
+    "raw_quantity_defined_by_a_frozen_source": true,
+    "raw_range_specified_by_a_frozen_source": false,
+    "raw_theoretical_range": null,
+    "raw_units": "meters (a 2-vector, not a scalar)",
+    "resolved": false,
+    "unresolved_sub_decisions": [
+     "the vector-to-scalar reduction: the frozen Phase 6 quantity is a 2-vector and the utility term is a scalar. Euclidean norm, componentwise maximum and per-axis absolute mean are all citable and none is frozen.",
+     "the normalizer: nominal spacing has two independent frozen precedents as a normalizer, while the Metric V3 tolerance is the frozen scale at which formation error becomes significant. The two differ by a factor of 1.636364.",
+     "temporal reduction over the counterfactual, as for progress"
+    ],
+    "utility_weight": -0.25,
+    "v1_semantic_text": "'formation_error' (docs/RVT_RESIDUAL_ACTION_TARGET_V1.md:16)"
+   },
+   {
+    "also_a_tie_break_key": true,
+    "blocking_reason": "SCALARIZING_NORM_UNDEFINED",
+    "candidate_norms": {
+     "L2_over_bound_norm": {
+      "normalizer": "Euclidean bound norm",
+      "range_over_admissible_box": [
+       0.0,
+       1.0
+      ],
+      "separates_edge_from_corner": true,
+      "values_over_the_frozen_lattice": {
+       "corner": 1.0,
+       "edge": 0.707107,
+       "zero": 0.0
+      }
+     },
+     "L2_over_first_component_bound_phase8_fixture": {
+      "normalizer": "Phase 8 diagnostic fixture rule",
+      "range_over_admissible_box": [
+       0.0,
+       1.414214
+      ],
+      "separates_edge_from_corner": true,
+      "values_over_the_frozen_lattice": {
+       "corner": 1.414214,
+       "edge": 1.0,
+       "zero": 0.0
+      }
+     },
+     "L_inf_over_componentwise_bound": {
+      "normalizer": "componentwise bound",
+      "range_over_admissible_box": [
+       0.0,
+       1.0
+      ],
+      "separates_edge_from_corner": false,
+      "values_over_the_frozen_lattice": {
+       "corner": 1.0,
+       "edge": 1.0,
+       "zero": 0.0
+      }
+     }
+    },
+    "direction": "lower_is_better",
+    "field": "normalized_action_deviation",
+    "frozen_normalizer_candidates": [
+     {
+      "dimensionless": true,
+      "normalizer": "residual_action_limits componentwise",
+      "source": "rvt_swarm/fd24/configuration.py::residual_action_limits",
+      "value": [
+       0.15,
+       0.15
+      ]
+     }
+    ],
+    "historical_producers": [
+     "phase8/diagnostic.py: hypot(delta) / residual_limit[0]",
+     "unit-test: literal 0.2 for every candidate"
+    ],
+    "most_plausible_raw_quantity": "candidate action minus base action, i.e. the residual",
+    "norm_choice_unique": false,
+    "normalizer_unique": true,
+    "raw_quantity_defined_by_a_frozen_source": true,
+    "raw_range_specified_by_a_frozen_source": true,
+    "raw_theoretical_range": [
+     0.0,
+     0.212132
+    ],
+    "raw_units": "meters_per_second_squared (a 2-vector, not a scalar)",
+    "resolved": false,
+    "unresolved_sub_decisions": [
+     "the scalarizing norm. Under L-infinity -- the selector's own admissibility norm -- all eight non-zero lattice candidates tie at 1.0, so the frozen secondary tie-break key becomes inert and the third key decides. Under the Euclidean norm the four edges score 0.7071 and the four corners 1.0, so edges are preferred. The two rules therefore select different expert actions; the choice is material, not bookkeeping."
+    ],
+    "utility_weight": -0.05,
+    "v1_semantic_text": "'action_deviation'; ties 'prefer lower action deviation' (docs/RVT_RESIDUAL_ACTION_TARGET_V1.md:16,19)"
+   }
+  ],
+  "status": "COMPLETE",
+  "utility_expression": "normalized_progress + 0.50*normalized_clearance_margin - 0.25*normalized_formation_error - 0.05*normalized_action_deviation",
+  "weights_frozen": true
+ },
+ "spec_11_normalizer_owner_rule": {
+  "forbidden_sources_used": [],
+  "rule": [
+   "analytic",
+   "deterministic",
+   "candidate-independent",
+   "data-independent",
+   "derived exclusively from already-frozen physical/task quantities",
+   "unit-consistent",
+   "sufficient to make the term dimensionless"
+  ],
+  "status": "APPLIED",
+  "tuned_constants_introduced": 0
+ },
+ "spec_12_hard_stop": {
+  "number_chosen": false,
+  "resolved_fields": [],
+  "status": "TRIGGERED",
+  "unresolved_fields": [
+   {
+    "blocking_reason": "TEMPORAL_REDUCTION_UNDEFINED",
+    "field": "normalized_progress",
+    "unresolved_sub_decisions": [
+     "temporal reduction: SPEC-5 evaluates each candidate over the remainder of the episode, so the utility term is an outcome statistic. No frozen source says whether progress is read instantaneously at the decision step, at the counterfactual terminal state, or reduced over the trajectory (final, mean, min or integral)."
+    ]
+   },
+   {
+    "blocking_reason": "RAW_QUANTITY_AND_NORMALIZER_BOTH_UNDEFINED",
+    "field": "normalized_clearance_margin",
+    "unresolved_sub_decisions": [
+     "the raw statistic itself: minimum or mean; over peers, over obstacles, or over both; a raw distance or a margin above the required clearance",
+     "the hazard-class combination rule, since the frozen scheme normalizes peer range by R_comm and obstacle clearance by R_obs -- two different fields that merely happen to share the value 3.0 m in the current configuration",
+     "the normalizer: five frozen quantities in metres are equally citable",
+     "temporal reduction over the counterfactual, as for progress"
+    ]
+   },
+   {
+    "blocking_reason": "SCALAR_REDUCTION_AND_NORMALIZER_BOTH_UNDEFINED",
+    "field": "normalized_formation_error",
+    "unresolved_sub_decisions": [
+     "the vector-to-scalar reduction: the frozen Phase 6 quantity is a 2-vector and the utility term is a scalar. Euclidean norm, componentwise maximum and per-axis absolute mean are all citable and none is frozen.",
+     "the normalizer: nominal spacing has two independent frozen precedents as a normalizer, while the Metric V3 tolerance is the frozen scale at which formation error becomes significant. The two differ by a factor of 1.636364.",
+     "temporal reduction over the counterfactual, as for progress"
+    ]
+   },
+   {
+    "blocking_reason": "SCALARIZING_NORM_UNDEFINED",
+    "field": "normalized_action_deviation",
+    "unresolved_sub_decisions": [
+     "the scalarizing norm. Under L-infinity -- the selector's own admissibility norm -- all eight non-zero lattice candidates tie at 1.0, so the frozen secondary tie-break key becomes inert and the third key decides. Under the Euclidean norm the four edges score 0.7071 and the four corners 1.0, so edges are preferred. The two rules therefore select different expert actions; the choice is material, not bookkeeping."
+    ]
+   }
+  ],
+  "v2_expert_implemented": false
+ },
+ "spec_13_utility_oracle_classification": {
+  "reason": "SPEC-13 is conditional on SPEC-10/12 resolving. Classification would be premature while the raw quantities and their temporal reductions are undefined: whether a term is LOCAL_ACTION_INFORMATION or OFFLINE_LABEL_ORACLE depends entirely on whether it is read at the decision step or from the counterfactual outcome, which is exactly what is unspecified.",
+  "status": "NOT_REACHED"
+ },
+ "spec_14_matched_execution": {
+  "candidate_starts_from_previous_terminal_state": false,
+  "identical_snapshot_per_candidate": true,
+  "implemented_in_this_phase": false,
+  "matched_exogenous_streams": true,
+  "snapshot": "rvt_swarm/phase9c_rb/counterfactual.py::snapshot / EpisodeSnapshot",
+  "status": "OWNER_DECIDED",
+  "stream_source": "rvt_swarm/phase9c_rb/streams.py counter-keyed PRF"
+ },
+ "spec_15_other_robots": {
+  "artificially_frozen": false,
+  "coordinated_joint_candidates": false,
+  "other_robots_run_ordinary_frozen_local_policies": true,
+  "scope": "robot-level local action expert",
+  "status": "OWNER_DECIDED"
+ },
+ "spec_16_selector": {
+  "preserved": [
+   "eligibility conjunction",
+   "utility calculation",
+   "normalized action deviation semantics",
+   "deterministic tie-break",
+   "no-eligible-candidate failure behaviour"
+  ],
+  "selector_modified": false,
+  "status": "PRESERVED",
+  "wrapper_added": false
+ },
+ "spec_17_generation_budget_impact": {
+  "additive_budget_v2_required": true,
+  "existing_budget_modified": false,
+  "existing_job_manifest_modified": false,
+  "generation_permitted": false,
+  "invalidated_frozen_fields": [
+   {
+    "consequence": "wall_clock_timeout_classification is 'infrastructure_generation_failure', so every residual cell job would be classified as an infrastructure failure",
+    "field": "generation_budget_v1.json#timeout_contract.wall_clock_seconds.residual_action_cell_generation_job",
+    "problem": "a train residual cell must now perform 2000 * 9 = 18000 full counterfactual continuations, which the stored budget allows 100 ms each. The measured cost of a complete publication episode in the v6 sweep was about 2.0 s (450 executions in 886 s), so even at a half-episode average the requirement exceeds the stored wall-clock budget by roughly one order of magnitude",
+    "stored_value_seconds": 1800
+   },
+   {
+    "field": "generation_budget_v1.json#job_identity_contract.residual_cell",
+    "problem": "the residual job identity carries no candidate or row dimension, so the nine candidate evaluations behind one dense row have no identity, cannot be retried individually, and cannot be audited under duplicate_semantic_identity_policy='reject'",
+    "stored_value": [
+     "study",
+     "split",
+     "family",
+     "layout_sha256",
+     "team_size"
+    ]
+   }
+  ],
+  "new_formula_with_nine_candidates": {
+   "dense_rows_unchanged": 536000,
+   "each_evaluation_is": "a full counterfactual continuation from the row's snapshot to the ordinary terminal state or family horizon (SPEC-5)",
+   "per_cell_train": {
+    "candidate_evaluations_per_cell": 18000,
+    "dense_rows_per_cell": 2000
+   },
+   "residual_candidate_evaluations": 4824000
+  },
+  "old_formula": {
+   "candidate_replica_rollouts_42840_refers_to": "topology candidates (COMPACT/LINE) with family replicas, not residual action candidates",
+   "dense_residual_action_records": "sum over datasets of cell_count * dense_records_per_cell",
+   "implicit_residual_candidate_count_assumption": null,
+   "totals": {
+    "study_a_n24_evaluation": 8000,
+    "study_a_train": 200000,
+    "study_a_validation": 40000,
+    "study_b_train": 240000,
+    "study_b_validation": 48000,
+    "total": 536000
+   },
+   "unit_of_a_dense_row": "one (episode, timestep, robot, topology) row"
+  },
+  "status": "PARTIALLY_INVALIDATED",
+  "stored_record_caps_reason": "dense rows are per (robot, timestep) and carry the selected expert action, not one row per candidate, so a 9-point lattice does not multiply any stored record count",
+  "stored_record_caps_remain_valid_upper_bounds": true
+ },
+ "spec_18_rb16": {
+  "permitted_rb16_primary_behaviour": [
+   "native world-frame verification",
+   "identity-transform equivalence",
+   "explicit confirmation that no synthetic rotation labels are emitted"
+  ],
+  "predeclared_non_identity_transform_set_exists": false,
+  "rb16_started": false,
+  "search_evidence": "docs/RVT_FD24_LOSS_CONTRACT.md defers the consistency term to 'a later enabled variant [that] may compare only predeclared local equivariant transforms', and no such set is declared anywhere in the repository",
+  "status": "OWNER_DECIDED",
+  "synthetic_residual_rotation_augmentation": "DISABLED"
+ },
+ "spec_19_versioned_artifact": {
+  "reason": "SPEC-19 is conditional on SPEC-10 through SPEC-12 fully resolving. They do not, so results/rvt_fd24/residual_expert_spec_v2.json with schema rvt-residual-expert-spec/v2 is deliberately not written. This audit artifact records the decisions that are frozen and the ones that are not, under a schema that cannot be mistaken for the completed specification.",
+  "status": "NOT_CREATED"
+ },
+ "spec_1_candidate_lattice": {
+  "candidate_count": 9,
+  "candidate_set_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+  "candidates": [
+   [
+    -0.15,
+    -0.15
+   ],
+   [
+    -0.15,
+    0.0
+   ],
+   [
+    -0.15,
+    0.15
+   ],
+   [
+    0.0,
+    -0.15
+   ],
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.15
+   ],
+   [
+    0.15,
+    -0.15
+   ],
+   [
+    0.15,
+    0.0
+   ],
+   [
+    0.15,
+    0.15
+   ]
+  ],
+  "configurable_resolution": false,
+  "distinct_candidates": 9,
+  "intermediate_magnitudes": false,
+  "module": "rvt_swarm/phase8r/residual_lattice.py",
+  "module_sha256": "67d0b0a5086892aa8a901836442293ec6df6d355f14903c8b27275c213153b3d",
+  "n_specific": false,
+  "ordering": "x-major then y, each ascending: -b, 0, +b",
+  "random_or_gaussian_candidates": false,
+  "status": "OWNER_DECIDED_AND_IMPLEMENTED",
+  "topology_specific": false,
+  "zero_residual_index": 4,
+  "zero_residual_occurrences": 1
+ },
+ "spec_20_protocol_versioning": {
+  "artifacts_a_future_residual_provenance_record_must_reference": [
+   {
+    "artifact": "docs/RVT_RESIDUAL_ACTION_TARGET_V1.md",
+    "role": "historical expert contract, unchanged",
+    "sha256": "1eb3d8341facb7336f7f6a28a08a35efd75d001c2d8af54aec3f658715b5e047"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_action_pipeline_erratum_v1.json",
+    "role": "additive action-pipeline erratum",
+    "sha256": "9790187c2366d846768ba2a578371396edd1b6649f4add34f51dcda27c5983fb"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb15_residual_expert_binding_v1.json",
+    "role": "RB-15 under-specification finding",
+    "sha256": "19f55b3f03464b1c6f875626fd94b31896f133949a118fa908a27c3d19d147ac"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb15_local_information_mapping_v1.json",
+    "role": "field-level information mapping",
+    "sha256": "6fce357065b20a6c0753a8c0a452904e152e8d43621f8385e10491cb81ec4bc5"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_expert_spec_v2.json (NOT YET CREATED)",
+    "role": "the completed V2 specification, once the normalizers are frozen",
+    "sha256": null
+   }
+  ],
+  "historical_hashes_rewritten": false,
+  "job_manifest_mutated": false,
+  "old_composite_is_not_the_complete_residual_label_contract": true,
+  "rb17_requirement": "RB-17 execution manifests must reference the residual provenance composite, not the Phase-8 composite alone, because the Phase-8 composite does not contain a complete residual label contract",
+  "status": "AUDITED_NO_MUTATION"
+ },
+ "spec_2_residual_bound": {
+  "bx_by": [
+   0.15,
+   0.15
+  ],
+  "derivation": "residual_limit_fractions_of_maximum_acceleration * a_max",
+  "fractions": [
+   0.25,
+   0.25
+  ],
+  "independent_literal_in_lattice_module": false,
+  "maximum_acceleration_meters_per_second_squared": 0.6,
+  "source": "rvt_swarm/fd24/configuration.py::residual_action_limits",
+  "status": "DERIVED"
+ },
+ "spec_3_action_pipeline": {
+  "artifact": "results/rvt_fd24/residual_action_pipeline_erratum_v1.json",
+  "artifact_sha256": "9790187c2366d846768ba2a578371396edd1b6649f4add34f51dcda27c5983fb",
+  "historical_document_edited": false,
+  "status": "OWNER_DECIDED"
+ },
+ "spec_4_intervention": {
+  "after_the_interval": "robot i resumes the normal frozen local publication policy",
+  "duration_control_intervals": 1,
+  "gate": "SPEC-4",
+  "holding_duration_parameter_added": false,
+  "interval": "[t, t + dt) with dt the existing frozen control period",
+  "reapplied_through_rollout": false
+ },
+ "spec_5_evaluation_horizon": {
+  "conflict_check": "docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md fixes the timeout as the family horizon for topology-candidate rollouts and imposes no separate action-candidate duration; docs/RVT_DENSE_ACTION_DATA_CONTRACT.md constrains row content and density, not evaluation duration. No hashed requirement is contradicted.",
+  "conflict_with_hashed_phase8_semantics": false,
+  "distinct_from_intervention_duration": true,
+  "evaluation_duration": "remainder of the existing frozen episode: continue with normal frozen policies until the ordinary terminal state or the existing family horizon",
+  "gate": "SPEC-5",
+  "new_discount_factor": false,
+  "new_lookahead_horizon": false,
+  "new_planning_horizon": false
+ },
+ "spec_6_information_boundary": {
+  "ACTION_INFORMATION_LOCAL": true,
+  "LABEL_ORACLE_CENTRALIZED": true,
+  "action_construction_may_use": [
+   "RobotLocalView_i",
+   "immutable frozen local config",
+   "Phase-6 local controller output derived from that view",
+   "local protocol/topology state legitimately available to robot i",
+   "local safety state/operator legitimately available to robot i",
+   "the candidate residual vector"
+  ],
+  "centralized_oracle_may_never_be_a_runtime_model_input": true,
+  "status": "OWNER_DECIDED"
+ },
+ "spec_7_provenance_fields": {
+  "new_field_required": "label_oracle_centralized",
+  "robot_local_information_only": "certifies the provenance of the information used to construct the candidate action and its local admissibility; it makes no claim about the offline outcome oracle",
+  "status": "OWNER_DECIDED_NOT_YET_IMPLEMENTED",
+  "v1_definition_evidence": "the V1 dataclass field carries no docstring, and the hashed contract says only that 'non-local candidates are ineligible', which is a statement about candidate construction, not about the label oracle. No explicitly frozen definition is contradicted.",
+  "v1_explicit_contradictory_definition_found": false,
+  "v1_schema_extended_in_this_phase": false
+ },
+ "spec_8_locally_feasible": {
+  "definition": "the candidate can be constructed and the one-interval intervention executed inside the local controller/dynamics domain",
+  "distinct_from": [
+   "safety_projection_compatible",
+   "task_success"
+  ],
+  "duplicates_selector_bound_checks": false,
+  "explicitly_excluded": [
+   "safety success",
+   "collision-free rollout",
+   "task success",
+   "recoverability success"
+  ],
+  "required_conditions": [
+   "RobotLocalView required fields finite and valid",
+   "Phase-6 base action finite",
+   "candidate residual finite",
+   "pre-safety candidate action finite",
+   "local controller/dynamics input domain valid"
+  ],
+  "status": "OWNER_DECIDED"
+ },
+ "spec_9_safety_compatibility": {
+  "constraints_altered": false,
+  "global_safety_oracle": false,
+  "operator": "rvt_swarm/decentralized/local_safety_projection.py::RobotLocalSafetyProjection.project, own action only",
+  "recorded_raw_fields": [
+   "pre-safety action",
+   "post-safety action",
+   "projection status and reason"
+  ],
+  "status": "OWNER_DECIDED"
+ },
+ "status": "BLOCKED_SPEC12_NORMALIZERS_UNRESOLVED",
+ "v2_specification_frozen": false,
+ "verdict": "A"
+}

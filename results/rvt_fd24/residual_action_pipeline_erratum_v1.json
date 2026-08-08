@@ -1,0 +1,80 @@
+{
+ "authoritative_pipeline": {
+  "delta_u_world": {
+   "componentwise_bound": [
+    0.15,
+    0.15
+   ],
+   "definition": "the residual candidate for robot i",
+   "frame": "world",
+   "units": "meters_per_second_squared"
+  },
+  "equation": "u_safe = local_safety_projection(u_base_pre_safety + delta_u_world)",
+  "insertion_point": "BEFORE_LOCAL_SAFETY_PROJECTION",
+  "u_base_pre_safety": {
+   "definition": "the frozen Phase 6 local base action before any safety projection: formation + goal + damping + obstacle",
+   "frame": "world",
+   "source": "rvt_swarm/decentralized/local_control_types.py::RobotLocalControllerOutput.base_action",
+   "units": "meters_per_second_squared"
+  },
+  "u_candidate_pre_safety": {
+   "definition": "u_base_pre_safety + delta_u_world",
+   "frame": "world",
+   "units": "meters_per_second_squared"
+  },
+  "u_safe_candidate": {
+   "definition": "local_safety_projection(u_candidate_pre_safety)",
+   "frame": "world",
+   "source": "rvt_swarm/decentralized/local_safety_projection.py::RobotLocalSafetyProjection.project",
+   "units": "meters_per_second_squared"
+  }
+ },
+ "candidate_intervention": {
+  "after_the_interval": "robot i resumes the normal frozen local publication policy",
+  "duration_control_intervals": 1,
+  "gate": "SPEC-4",
+  "holding_duration_parameter_added": false,
+  "interval": "[t, t + dt) with dt the existing frozen control period",
+  "reapplied_through_rollout": false
+ },
+ "consistency_evidence": [
+  {
+   "source": "docs/FULLY_DECENTRALIZED_RVT_SYSTEM_MODEL.md:117-122",
+   "statement": "u_i(t) = f_safe(I_i(t), u_base_i(t) + delta_u_i(t))"
+  },
+  {
+   "source": "rvt_swarm/decentralized/robot_local_controller.py",
+   "statement": "base_action is the plain pre-projection sum; projected_action is a separate output field"
+  },
+  {
+   "source": "rvt_swarm/phase9c_rb/session.py",
+   "statement": "the command disturbance is added to base_action and the unchanged projection is then reapplied -- the same insertion point a residual would use"
+  },
+  {
+   "source": "rvt_swarm/phase8/targets.py::DenseActionSample",
+   "statement": "base_action_world_acceleration and projected_base_action_world_acceleration are distinct fields, which is only meaningful if base is pre-projection"
+  }
+ ],
+ "control_period_seconds": 0.15,
+ "counterfactual_evaluation": {
+  "conflict_check": "docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md fixes the timeout as the family horizon for topology-candidate rollouts and imposes no separate action-candidate duration; docs/RVT_DENSE_ACTION_DATA_CONTRACT.md constrains row content and density, not evaluation duration. No hashed requirement is contradicted.",
+  "conflict_with_hashed_phase8_semantics": false,
+  "distinct_from_intervention_duration": true,
+  "evaluation_duration": "remainder of the existing frozen episode: continue with normal frozen policies until the ordinary terminal state or the existing family horizon",
+  "gate": "SPEC-5",
+  "new_discount_factor": false,
+  "new_lookahead_horizon": false,
+  "new_planning_horizon": false
+ },
+ "residual_action_pipeline_erratum_sha256": "9790187c2366d846768ba2a578371396edd1b6649f4add34f51dcda27c5983fb",
+ "schema_version": "rvt-residual-action-pipeline-erratum/v1",
+ "source_commit": "90d43e4a66bc39b0ef13f817947dd7ef14b00d03",
+ "status": "OWNER_DECIDED_ADDITIVE_ERRATUM",
+ "supersedes_wording_in": {
+  "document": "docs/RVT_RESIDUAL_ACTION_TARGET_V1.md",
+  "document_edited_in_place": false,
+  "document_sha256": "1eb3d8341facb7336f7f6a28a08a35efd75d001c2d8af54aec3f658715b5e047",
+  "line": 11,
+  "superseded_wording": "u_base_i is the frozen Phase 6 *projected* robot-local action"
+ }
+}

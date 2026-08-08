@@ -1,0 +1,59 @@
+{
+ "authorization": {
+  "budget_v1_superseded": false,
+  "generation_authorized": false,
+  "requires_owner_decision": true
+ },
+ "extends": {
+  "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json",
+  "modified": false,
+  "sha256": "e12e42052fd48a6647b4b7fdac77db3a20340d550617ff196fb40b7541da5492"
+ },
+ "new_budget_dimension_required": {
+  "by_dataset": {
+   "study_a_n24_evaluation": 72000,
+   "study_a_train": 1800000,
+   "study_a_validation": 360000,
+   "study_b_train": 2160000,
+   "study_b_validation": 432000
+  },
+  "formula": "dense_residual_action_records * residual_candidate_count",
+  "name": "residual_candidate_evaluations",
+  "residual_candidate_count": 9,
+  "total": 4824000
+ },
+ "proposed_changes": [
+  {
+   "field": "timeout_contract.wall_clock_seconds.residual_action_cell_generation_job",
+   "implied_work_per_train_cell": 18000,
+   "measured_full_episode_seconds": 1.97,
+   "measurement_source": "headroom v6 sweep: 450 complete policy executions in 886 s",
+   "proposal": "declare a residual cell timeout from an explicit per-evaluation cost budget rather than a single stored constant; the owner must choose the value, so none is written here",
+   "stored_seconds": 1800
+  },
+  {
+   "field": "job_identity_contract.residual_cell",
+   "proposal": "add an explicit residual candidate evaluation identity, for example (residual_cell_job_id, episode_id, timestep, robot_id, candidate_index), so each of the nine evaluations is individually identifiable, retryable and auditable",
+   "stored_value": [
+    "study",
+    "split",
+    "family",
+    "layout_sha256",
+    "team_size"
+   ]
+  }
+ ],
+ "proposed_generation_budget_addendum_sha256": "9b0dcdf4f149f59c2bb194e9f9cf7f31c56586e5ef040dfe95270c49a0979177",
+ "schema_version": "rvt-proposed-generation-budget-addendum/v2",
+ "source_commit": "90d43e4a66bc39b0ef13f817947dd7ef14b00d03",
+ "status": "PROPOSED_NOT_AUTHORITATIVE",
+ "trigger": "SPEC-1 fixes the residual candidate count at 9 and SPEC-5 makes each candidate a full counterfactual continuation. Two frozen fields no longer bound the work.",
+ "unchanged_and_still_valid": {
+  "candidate_replica_rollouts": 42840,
+  "decision_events": 15300,
+  "dense_residual_action_records": 536000,
+  "recoverability_robot_candidate_records": 332900,
+  "source_episodes": 3120,
+  "why": "no stored record count is per residual action candidate"
+ }
+}
