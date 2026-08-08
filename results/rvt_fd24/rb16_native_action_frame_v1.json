@@ -1,0 +1,484 @@
+{
+ "augmentation": {
+  "PRIMARY_SYNTHETIC_ROTATION_AUGMENTATION": "DISABLED",
+  "PRIMARY_TRANSFORM_MULTIPLIER": 1,
+  "consistency_loss_contract_state": "disabled_initially",
+  "consistency_loss_implementation_exists": false,
+  "dormant_code_classification": "OUTSIDE_PRIMARY_PATH",
+  "dormant_historical_augmentation_code": [],
+  "equivariance_consistency_loss": false,
+  "fixed_quarter_turn_transforms": false,
+  "historical_code_deleted": false,
+  "random_angle_sampling": false,
+  "reflected_actions": false,
+  "residual_label_duplication_through_transforms": false,
+  "synthetic_transformed_supervision_rows": 0
+ },
+ "axis_convention": {
+  "agree": false,
+  "model_side": {
+   "component_0": "mission longitudinal acceleration",
+   "component_1": "mission lateral acceleration",
+   "evidence": "ROBOT_LOCAL_ACTION_COMPONENTS"
+  },
+  "world_side": {
+   "component_0": "world X acceleration",
+   "component_1": "world Y acceleration",
+   "evidence": "the residual is added componentwise to base_action, whose components are world X and Y in the frozen integrator"
+  }
+ },
+ "counts_unchanged": {
+  "PRIMARY_TRANSFORM_MULTIPLIER": 1,
+  "candidate_count": 9,
+  "candidate_evaluation_upper_bound": 4824000,
+  "rb16_added_candidate_evaluations": 0,
+  "rb16_added_rows": 0,
+  "stored_dense_residual_row_cap": 536000
+ },
+ "expert_target_frame": "WORLD",
+ "frame_conflict": {
+  "authoritative_action_frame_conversion_exists": false,
+  "conflict": true,
+  "conversion_inserted": false,
+  "conversion_search": "no world<->mission conversion for *actions* exists anywhere. rotate_template_vector and roles.rotation convert role/template geometry into world, which is a different quantity; ego_graph_v2._to_mission converts observations into the mission frame and is never applied to an action",
+  "layouts_examined": 30,
+  "layouts_world_aligned": 0,
+  "material_consequences": [
+   {
+    "case": "axis-aligned residual (bx, 0) read in the other frame",
+    "cross_axis_error_meters_per_second_squared": 0.004877,
+    "leaves_componentwise_bound": false,
+    "value": [
+     0.149921,
+     0.004877
+    ]
+   },
+   {
+    "case": "corner residual (bx, by) read in the other frame",
+    "cross_axis_error_meters_per_second_squared": 0.004797,
+    "leaves_componentwise_bound": true,
+    "value": [
+     0.145044,
+     0.154797
+    ]
+   }
+  ],
+  "mission_frame_equals_world_frame": false,
+  "mission_vs_world_angle_degrees": {
+   "maximum": 1.90858,
+   "mean": 1.863066,
+   "minimum": 1.817004
+  },
+  "non_world_side": [
+   "RVTLocalBatchOutput.residual_action, whose components are declared mission_longitudinal_acceleration and mission_lateral_acceleration",
+   "every ego_graph_v2 feature the model consumes, all mission-frame"
+  ],
+  "primary_path": "Residual Expert V2 target (WORLD) -> residual supervision row (WORLD) -> residual training target (WORLD) -> model residual output (MISSION) -> u_base_pre_safety + residual (WORLD) -> local safety projection",
+  "why_this_is_not_resolvable_here": "RB16-1 forbids inserting a conversion to make the audit pass, and RB16-6's escape hatch applies only when the model output frame is unnamed. It is named: ROBOT_LOCAL_ACTION_COMPONENTS is the sole declaration of what the two output components mean, and it names the mission frame. The two authoritative declarations therefore conflict, and the choice between them is an owner decision, not an implementation detail.",
+  "world_side": [
+   "LocalActionEvaluation.action_world_acceleration",
+   "ResidualActionTarget.residual_target_world_acceleration",
+   "DenseActionSample.residual_target_world_acceleration",
+   "RobotLocalControllerOutput.base_action",
+   "the RB-15 V2 producer and the runtime injection point"
+  ]
+ },
+ "frame_table": [
+  {
+   "consumer": "select_counterfactual_local_action eligibility and tie-break",
+   "conversion": null,
+   "field": "LocalActionEvaluation.action_world_acceleration",
+   "frame": "WORLD",
+   "frame_evidence": "field name states the frame",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/phase8/targets.py",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "the eventual residual supervision row",
+   "conversion": null,
+   "field": "ResidualActionTarget.residual_target_world_acceleration",
+   "frame": "WORLD",
+   "frame_evidence": "field name states the frame",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/phase8/targets.py::build_residual_action_target",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "the eventual training row",
+   "conversion": null,
+   "field": "DenseActionSample.residual_target_world_acceleration",
+   "frame": "WORLD",
+   "frame_evidence": "field name states the frame; docs/RVT_DENSE_ACTION_DATA_CONTRACT.md says 'World-frame acceleration and dt=0.15 s are explicit'",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/phase8/targets.py::DenseActionSample",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "the local safety projection and the residual addition",
+   "conversion": null,
+   "field": "RobotLocalControllerOutput.base_action",
+   "frame": "WORLD",
+   "frame_evidence": "built from world-frame terms; the goal term rotates the template offset into world with rotate_template_vector",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/decentralized/robot_local_controller.py",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "local_safety_projection(base_action + delta)",
+   "conversion": null,
+   "field": "residual injection in SimulatorEpisodeSession.step",
+   "frame": "WORLD",
+   "frame_evidence": "added componentwise to the world-frame base action",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/phase9c_rb/session.py",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "the frozen selector and target builder",
+   "conversion": null,
+   "field": "RB-15 V2 producer delta_u_world",
+   "frame": "WORLD",
+   "frame_evidence": "the V2 specification fixes frame = world",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/phase9c_rb/residual_expert_v2.py",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "expert eligibility, target clip, model output bound",
+   "conversion": null,
+   "field": "residual_action_limits",
+   "frame": "FRAME_AGNOSTIC",
+   "frame_evidence": "a componentwise box; isotropic at (0.25, 0.25) but a box is not rotation invariant, so the frame in which it is applied matters",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/fd24/configuration.py::residual_action_limits",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "no runtime consumer exists yet; the intended consumer is the pre-safety addition",
+   "conversion": null,
+   "field": "RVTLocalBatchOutput.residual_action",
+   "frame": "MISSION",
+   "frame_evidence": "its two components are declared by ROBOT_LOCAL_ACTION_COMPONENTS = ('mission_longitudinal_acceleration', 'mission_lateral_acceleration'); no other source states the output frame",
+   "shape": [
+    2
+   ],
+   "source": "rvt_swarm/fd24/model.py",
+   "units": "meters_per_second_squared"
+  },
+  {
+   "consumer": "the FD24 encoder, hence the residual head",
+   "conversion": "_to_mission(vector, _mission_axes(view.mission_dir))",
+   "field": "ego_graph_v2 node and edge features",
+   "frame": "MISSION",
+   "frame_evidence": "every vector feature is documented as 'mission-frame' and is rotated by _to_mission before normalization",
+   "shape": [
+    "various"
+   ],
+   "source": "rvt_swarm/decentralized/ego_graph_v2.py",
+   "units": "dimensionless"
+  }
+ ],
+ "identity_transform": {
+  "all_exact": true,
+  "cases": [
+   {
+    "after_row_encode_decode": [
+     0.0,
+     0.0
+    ],
+    "after_target_builder": [
+     0.0,
+     0.0
+    ],
+    "axis_swapped": false,
+    "case": "selected_v2_target",
+    "component_0_preserved": true,
+    "component_1_preserved": true,
+    "exact_equality_through_identity_path": true,
+    "head_float32_round_trip_error": 0.0,
+    "head_representable": true,
+    "injected_model_output": [
+     0.0,
+     0.0
+    ],
+    "input": [
+     0.0,
+     0.0
+    ],
+    "inside_frozen_bound": true,
+    "runtime_pre_safety_action": [
+     -0.008681245271813465,
+     0.021103235426503573
+    ],
+    "runtime_residual_input": [
+     0.0,
+     0.0
+    ],
+    "sign_inverted": false,
+    "strictly_inside_bound": true
+   },
+   {
+    "after_row_encode_decode": [
+     0.15,
+     0.15
+    ],
+    "after_target_builder": [
+     0.15,
+     0.15
+    ],
+    "axis_swapped": false,
+    "case": "lattice_corner",
+    "component_0_preserved": true,
+    "component_1_preserved": true,
+    "exact_equality_through_identity_path": true,
+    "head_float32_round_trip_error": null,
+    "head_representable": null,
+    "injected_model_output": [
+     0.15,
+     0.15
+    ],
+    "input": [
+     0.15,
+     0.15
+    ],
+    "inside_frozen_bound": true,
+    "runtime_pre_safety_action": [
+     0.14131875472818653,
+     0.17110323542650357
+    ],
+    "runtime_residual_input": [
+     0.15,
+     0.15
+    ],
+    "sign_inverted": false,
+    "strictly_inside_bound": false
+   },
+   {
+    "after_row_encode_decode": [
+     -0.15,
+     0.15
+    ],
+    "after_target_builder": [
+     -0.15,
+     0.15
+    ],
+    "axis_swapped": false,
+    "case": "lattice_mixed_sign",
+    "component_0_preserved": true,
+    "component_1_preserved": true,
+    "exact_equality_through_identity_path": true,
+    "head_float32_round_trip_error": null,
+    "head_representable": null,
+    "injected_model_output": [
+     -0.15,
+     0.15
+    ],
+    "input": [
+     -0.15,
+     0.15
+    ],
+    "inside_frozen_bound": true,
+    "runtime_pre_safety_action": [
+     -0.15868124527181346,
+     0.17110323542650357
+    ],
+    "runtime_residual_input": [
+     -0.15,
+     0.15
+    ],
+    "sign_inverted": false,
+    "strictly_inside_bound": false
+   },
+   {
+    "after_row_encode_decode": [
+     0.075,
+     -0.0375
+    ],
+    "after_target_builder": [
+     0.075,
+     -0.0375
+    ],
+    "axis_swapped": false,
+    "case": "test_only_non_symmetric",
+    "component_0_preserved": true,
+    "component_1_preserved": true,
+    "exact_equality_through_identity_path": true,
+    "head_float32_round_trip_error": 2.98e-09,
+    "head_representable": true,
+    "injected_model_output": [
+     0.075,
+     -0.0375
+    ],
+    "input": [
+     0.075,
+     -0.0375
+    ],
+    "inside_frozen_bound": true,
+    "runtime_pre_safety_action": [
+     0.06631875472818653,
+     -0.016396764573496425
+    ],
+    "runtime_residual_input": [
+     0.075,
+     -0.0375
+    ],
+    "sign_inverted": false,
+    "strictly_inside_bound": true
+   }
+  ],
+  "definition": "T_identity(delta_u_world) = delta_u_world",
+  "general_rotation_api_created": false,
+  "head_saturation_note": "the residual head emits tanh(raw) * limits, so a target exactly at a componentwise bound is a limit point the head approaches but never emits. Every strictly interior case round-trips through the frozen bound within float32. This is recorded, not corrected: the bound itself is unchanged.",
+  "model_trained": false,
+  "no_axis_swap": true,
+  "no_sign_inversion": true,
+  "scope": "the world segment only: target builder -> row encode/decode -> frozen model bound -> runtime pre-safety addition. The model stage is a deterministic injected output equal to the target, so this fixture verifies the plumbing under the assumption RB16 could not confirm -- that the model output is world-frame"
+ },
+ "isolation": {
+  "final_test_access_count": 0,
+  "new_fd24_checkpoints": 0,
+  "optimizer_states": 0,
+  "recoverability_rows": 0,
+  "residual_rows": 0,
+  "scientific_shards": 0,
+  "scientific_supervision_generated": false,
+  "study_a_n24_access_count": 0,
+  "training_operations": 0
+ },
+ "loss_semantics": {
+  "implementation_exists": false,
+  "local_consistency_contract_state": "disabled_initially",
+  "residual_loss": "smooth_l1_beta_0.05_mps2",
+  "rotation_consistency_term_active": false,
+  "same_frame_requirement": "the loss compares the model output against the V2 target directly, so it inherits the frame conflict: as declared today it would compare a mission-frame output against a world-frame target",
+  "transformation_on_either_side": false,
+  "weights_tuned": false
+ },
+ "model_output_frame": "MISSION",
+ "no_eligible_semantics": {
+  "clipped_fallback": false,
+  "fallback_added": false,
+  "observed_in_rb15_canary": 1,
+  "preserved": true,
+  "rb17_requirement": "scientific generation must preserve the exact no-eligible outcome and must never fabricate a residual target",
+  "rotated_fallback": false,
+  "statement": "a decision state may have zero eligible residual candidates when all nine fail the frozen eligibility conjunction",
+  "zero_fallback": false
+ },
+ "provenance_class": "RUNTIME_CONFORMANCE_ONLY",
+ "rb16_native_action_frame_sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c",
+ "required_owner_decision": {
+  "if_mission": "an authoritative mission->world conversion must be frozen for the residual, applied on exactly one side, and the componentwise bound must be re-examined because a box is not rotation invariant",
+  "if_world": "ROBOT_LOCAL_ACTION_COMPONENTS must be renamed or superseded by an additive declaration; the model then emits world-frame components from mission-frame features, which is legitimate but must be stated",
+  "question": "which frame is authoritative for the FD24 residual head output: WORLD, matching the expert target, the dense-row schema and the runtime insertion, or MISSION, matching ROBOT_LOCAL_ACTION_COMPONENTS and every ego-graph feature the model consumes",
+  "rb16_must_not_choose": true
+ },
+ "residual_bound": {
+  "all_equal": true,
+  "evidence": "a componentwise box is not rotation invariant: the corner [0.15, 0.15] read in the other frame becomes [0.145044, 0.154797], which leaves the bound",
+  "expert_source": "residual_action_limits(model_config, runtime_config)",
+  "frame_conversion_would_alter_admissibility": true,
+  "independent_literal": false,
+  "model_source": "FD24 model registers residual_action_limits as a buffer and clamps with bounded_residual_action",
+  "runtime_source": "residual_action_limits(model_config, runtime_config)",
+  "target_source": "residual_action_limits(model_config, runtime_config)",
+  "values": [
+   0.15,
+   0.15
+  ]
+ },
+ "robot_local_action_components": [
+  "mission_longitudinal_acceleration",
+  "mission_lateral_acceleration"
+ ],
+ "runtime_insertion_frame": "WORLD",
+ "schema_version": "rvt-rb16-native-action-frame/v1",
+ "session_refactor_provenance": {
+  "behaviour_equivalence_evidence": "nine committed v6 policy records across three cells reproduce exactly after the refactor",
+  "cited_by": "results/rvt_fd24/residual_expert_spec_v2.json#clearance_sources[ROBOT_ROBOT].source_file_sha256",
+  "claims_historical_hash_matches_current_file": false,
+  "current_source_pinned_by": "the RB-15 V2 binding artifact and this RB-16 artifact",
+  "file": "rvt_swarm/phase9c_rb/session.py",
+  "post_refactor_sha256": "9a88932f69f6cba6eddd698af6a60840e12ed416e25c9eaad1b4286e31d2c342",
+  "pre_refactor_sha256": "ad105e916979b69b2016346d58524af50dcf1648fc506ad6f4deb87694b8a812",
+  "rb15_binding_sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+  "semantic_quantity_changed": false,
+  "semantic_quantity_cited": "the robot-robot minimum admissible clearance, RuntimeConfig.derived.robot_robot_required_clearance_meters, used by the frozen collision truth",
+  "v2_spec_rewritten": false
+ },
+ "source_commit": "4003b5bbacfb2489cd398d4094462d708e0fa42a",
+ "status": "BLOCKED_FRAME_CONFLICT",
+ "target_shape": [
+  2
+ ],
+ "target_units": "meters_per_second_squared",
+ "test_only_vector": {
+  "added_to_candidate_set": false,
+  "inside_authoritative_bound": true,
+  "purpose": "frame plumbing only; NOT a new expert candidate",
+  "value": [
+   0.075,
+   -0.0375
+  ]
+ },
+ "training_target_frame": "WORLD",
+ "transform_occurrences": [
+  {
+   "classification": "ROLE_GEOMETRY_NOT_ACTION",
+   "in_primary_residual_path": false,
+   "note": "rotates a template role offset into world; never applied to a residual",
+   "symbol": "topology_registry.rotate_template_vector / _rotation"
+  },
+  {
+   "classification": "ROLE_GEOMETRY_NOT_ACTION",
+   "in_primary_residual_path": false,
+   "note": "the same role rotation, used by formation metrics",
+   "symbol": "decentralized.roles.rotation"
+  },
+  {
+   "classification": "OBSERVATION_FRAME_NOT_ACTION",
+   "in_primary_residual_path": false,
+   "note": "converts observations into the mission frame for features; it is the reason the model's declared output frame is mission",
+   "symbol": "ego_graph_v2._to_mission / _mission_axes"
+  },
+  {
+   "classification": "QUALIFICATION_FIXTURE_OUTSIDE_PRIMARY_PATH",
+   "in_primary_residual_path": false,
+   "note": "a Phase-7R protocol qualification fixture; emits no residual label",
+   "symbol": "phase7r_qualification 'rotated_mission' fixture"
+  },
+  {
+   "classification": "OBSTACLE_GEOMETRY_FLAG_OUTSIDE_PRIMARY_PATH",
+   "in_primary_residual_path": false,
+   "note": "a dynamic-obstacle path flag, set False; unrelated to actions",
+   "symbol": "phase8e.protocol 'reflection' key"
+  }
+ ],
+ "upstream": {
+  "ego_graph_v2_sha256": "0867abf5fc7932331c4cc44399be4fa024042e2c07dc54141d3dae23846c6534",
+  "model_configuration_sha256": "42f3ce9fa880aa4545bc4863ee727503e2943cfb1452788edd3b9bb9815f866e",
+  "model_module_sha256": "855bf2ab90d081dfca692d7f2a3c74f47430f27a189a7f782cd1a7d7f395bbd0",
+  "modified": false,
+  "rb15_residual_expert_binding_v2_sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+  "rb15_v2_canary_sha256": "c09f7d20a6844cae13cd022604fe6e94b745596616a034c6285f13593f9523f4",
+  "residual_expert_spec_v2_sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+  "residual_label_contract_composite_sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+  "target_builder_sha256": "b8bd0ae34c1a659009efbe9943c4e30d3a0b187ea8d3524dfd28ae4083d51c9e"
+ },
+ "verdict": "B"
+}
