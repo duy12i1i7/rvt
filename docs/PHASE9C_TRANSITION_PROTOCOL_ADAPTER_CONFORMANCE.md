@@ -148,3 +148,55 @@ the distinction stays visible in later audit records.
   `_require_enabled`)
 * bound and tested: **17**
 * runtime-required omissions remaining: **0**
+
+---
+
+# Remaining PCA gates — status
+
+## PCA-18 — Target V4 current-epoch isolation: **PASS**
+
+Seven regressions, all passing:
+
+* epoch 1's LINE commit does **not** satisfy a COMPACT candidate's
+  `candidate_commitment_valid`;
+* epoch 1's LINE Metric V3 dwell does **not** contribute to COMPACT dwell
+  (`metric_v3_dwell[COMPACT] == 0.0` while `metric_v3_dwell[LINE] > 0`);
+* checkpoints A (intent adopted) and B (committed, profile active) leave the
+  transition predicate false;
+* epoch 2 records its **own** distributed completion agreement, with a distinct
+  lifecycle id, distinct epoch id and a strictly later agreement time;
+* PCA-18E: cumulative task history is *not* over-reset -- longitudinal progress,
+  collision history, irreversible-loss and numeric validity all persist across
+  the epoch boundary, since the isolation applies to transition-epoch predicates
+  only.
+
+## PCA-16 — four-epoch stress: **three epochs verified, fourth bounded by mission end**
+
+Three complete changed-topology epochs run with the full path each time, each
+retiring through the frozen rearm and each recording its **own** distributed
+completion agreement:
+
+| epoch | transition | local dwell | status agreement | agreed |
+|---:|---|---:|---:|---|
+| 1 | COMPACT -> LINE (S2 forced) | 9.45 s | 10.20 s | yes |
+| 2 | LINE -> COMPACT | 24.60 s | 25.35 s | yes |
+| 3 | COMPACT -> LINE | 41.10 s | 41.85 s | yes |
+
+Distinct lifecycle ids, distinct epoch ids, strictly increasing agreement times,
+`mode_epoch_count` monotonic 1/2/3, collision-free.
+
+A **fourth** epoch does not fit: the mission reaches `GOAL_COMPLETE` first.
+Measured on `train-f1-00` (3 epochs then goal) and `train-f7-00` (3 epochs, goal
+at 45.9 s of a 110 s horizon). Each epoch costs roughly 15 s because mission
+staging suppresses the goal term throughout, so four epochs exceed the time any
+frozen layout leaves before completion. That is the mission ending, not a
+protocol defect -- the third epoch completes normally in both cases. Recorded by
+test rather than worked around with a synthetic longer mission.
+
+## PCA-8 and PCA-15 — not run
+
+Message epoch isolation beyond the COMPLETE-status path (PCA-8A-8F) and the real
+frozen timeout path (PCA-15) were not exercised. They remain the outstanding
+conformance gates, and v6 should not run before them: a timeout or stale-message
+defect would be silently encoded into 150 headroom classifications, exactly as
+happened with v3, v4 and v5.
