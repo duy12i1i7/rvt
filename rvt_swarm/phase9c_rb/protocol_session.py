@@ -21,8 +21,8 @@ from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
 from ..decentralized.transition_protocol import (
     evaluate_confirmation_agreement, evaluate_intent_propagation,
-    evaluate_readiness_agreement, evaluate_score_agreement,
-    flood_transition_messages,
+    evaluate_lifecycle_status_agreement, evaluate_readiness_agreement,
+    evaluate_score_agreement, flood_transition_messages,
 )
 from ..topology_registry import COMPACT, LINE
 
@@ -258,22 +258,99 @@ def advance_transition_lifecycle(session) -> None:
                 node.begin_execution(now)
         return
 
-    # 5. Execution and target dwell, judged by Metric V3 per robot.
-    if any(node.state in ("TRANSITION_EXECUTION", "TARGET_DWELL") for node in nodes.values()):
+    # 5. Execution and target dwell, then DISTRIBUTED completion.
+    #
+    # Defect 13. The qualified runtime (transition_runtime.py:880-918) does not
+    # complete a lifecycle from local dwell alone. Only once every node reports
+    # `local_dwell_complete` does each emit
+    # `status_message("COMPLETE", "local_target_dwell", now)`; those are flooded
+    # over the one-hop graph for `k_confirm_rounds`, and
+    # `evaluate_lifecycle_status_agreement(..., "COMPLETE", ...)` decides. On
+    # agreement every node calls `mark_complete(completion_agreement_time)`; on
+    # disagreement every node aborts with the agreement's own reason.
+    if any(node.state in ("TRANSITION_EXECUTION", "TARGET_DWELL")
+           for node in nodes.values()):
         inside = _inside_candidate_tube(session, int(intent.candidate_topology))
         for robot in session.robots:
             node = robot.protocol_node
-            robot.transition_progress = 1.0 if inside else robot.transition_progress
+            if robot.transition_executor is not None:
+                robot.transition_progress = float(
+                    robot.transition_executor.progress(now))
             if node.state in ("TRANSITION_EXECUTION", "TARGET_DWELL"):
-                if robot.transition_executor is not None:
-                    robot.transition_progress = float(
-                        robot.transition_executor.progress(now))
-                if node.observe_target_tube(inside, now):
-                    node.mark_complete(now)
-                    # Frozen completion semantics reached: normal topology hold
-                    # resumes and the profile executor is retired.
-                    robot.transition_executor = None
+                node.observe_target_tube(inside, now)
+
+        if not all(node.local_dwell_complete for node in nodes.values()):
+            return                       # local dwell is necessary, not sufficient
+
+        config = session.runtime_config
+        completion_messages = {
+            rid: (node.status_message("COMPLETE", "local_target_dwell", now),)
+            for rid, node in nodes.items()}
+        completion_flood = flood_transition_messages(
+            member_ids, completion_messages, adjacency,
+            int(config.derived.k_confirm_rounds))
+        completion_agreement_time = (
+            now + config.derived.k_confirm_rounds
+            * config.communication.communication_period_seconds)
+        agreement = evaluate_lifecycle_status_agreement(
+            completion_flood, member_ids, intent, "COMPLETE",
+            now_seconds=completion_agreement_time,
+            maximum_age_seconds=(
+                config.derived.k_confirm_rounds
+                * config.communication.communication_period_seconds
+                + config.communication.maximum_message_age_seconds))
+        session.completion_agreements.append({
+            "lifecycle_id": int(intent.lifecycle_id),
+            "epoch_id": int(intent.epoch_id),
+            "agreed": bool(agreement.agreed),
+            "reason": agreement.reason,
+            "local_dwell_complete_time_seconds": float(now),
+            "status_agreement_time_seconds": float(completion_agreement_time),
+            "control_step": int(session.control_step),
+        })
+        if agreement.agreed:
+            for robot in session.robots:
+                robot.protocol_node.mark_complete(completion_agreement_time)
+                robot.transition_executor = None
+            return
+        for robot in session.robots:
+            if robot.protocol_node.state not in ("STABLE_TOPOLOGY", "COMPLETE", "REARMED"):
+                robot.protocol_node.abort(agreement.reason, completion_agreement_time)
+                robot.transition_executor = None
         return
+
+
+def _abort_all(session, nodes, cause: str) -> None:
+    # The frozen node refuses to abort from COMPLETE or REARMED, and there is
+    # nothing to abort from STABLE_TOPOLOGY. Honour that precondition exactly
+    # rather than forcing a state change the protocol forbids.
+    for robot in session.robots:
+        if robot.protocol_node.state in ("STABLE_TOPOLOGY", "COMPLETE", "REARMED"):
+            continue
+        robot.protocol_node.abort(cause, session.time_seconds)
+        robot.transition_executor = None
+
+
+def _inside_candidate_tube(session, candidate_topology: int) -> bool:
+    """Metric V3 tube membership for the candidate topology.
+
+    Offline evaluator scope: it reads the joint state, which
+    `formation_metric_v3` explicitly permits and `guards.OFFLINE_MODULES`
+    records. No robot receives this value.
+    """
+    import numpy as np
+
+    from ..decentralized.formation_metric_v3 import EPSILON_FORM
+    from ..decentralized.roles import rotation
+
+    positions = np.asarray([robot.position for robot in session.robots], dtype=np.float64)
+    template = np.asarray([robot.role_offset(candidate_topology) for robot in session.robots],
+                          dtype=np.float64)
+    template = template - template.mean(axis=0)
+    centre = positions.mean(axis=0)
+    rotated = (rotation(session.mission_direction).astype(np.float64) @ template.T).T
+    errors = np.linalg.norm((positions - centre) - rotated, axis=1)
+    return bool(errors.max() <= EPSILON_FORM)
 
 
 def _build_transition_executor(session, robot, source_topology: int,
@@ -282,7 +359,6 @@ def _build_transition_executor(session, robot, source_topology: int,
 
     Everything here is a call into `transition_execution`; no interpolation
     equation, displacement rule or progress law is restated in this package.
-    `test_phase9c_transition_profile_binding.py` asserts that by AST.
     """
     import math
 
@@ -309,8 +385,7 @@ def local_readiness_certificate(session, robot, intent):
     `evaluate_robot_local_transition_readiness` is genuinely robot-local: its
     input carries own state, own source/target role slices, ego-relative peer
     and obstacle observations and local projection flags -- never joint state,
-    never the layout, never a global formation error. The simulator only
-    *renders* those local observations, exactly as it does for the controller.
+    never the layout, never a global formation error.
     """
     from ..decentralized.transition_readiness import (
         RobotLocalTransitionInput, evaluate_robot_local_transition_readiness,
@@ -350,36 +425,3 @@ def local_readiness_certificate(session, robot, intent):
     session.readiness_evaluation_count += 1
     return evaluate_robot_local_transition_readiness(
         local_input, session.runtime_config)
-
-
-def _abort_all(session, nodes, cause: str) -> None:
-    # The frozen node refuses to abort from COMPLETE or REARMED, and there is
-    # nothing to abort from STABLE_TOPOLOGY. Honour that precondition exactly
-    # rather than forcing a state change the protocol forbids.
-    for robot in session.robots:
-        if robot.protocol_node.state in ("STABLE_TOPOLOGY", "COMPLETE", "REARMED"):
-            continue
-        robot.protocol_node.abort(cause, session.time_seconds)
-        robot.transition_executor = None
-
-
-def _inside_candidate_tube(session, candidate_topology: int) -> bool:
-    """Metric V3 tube membership for the candidate topology.
-
-    Offline evaluator scope: it reads the joint state, which
-    `formation_metric_v3` explicitly permits and `guards.OFFLINE_MODULES`
-    records. No robot receives this value.
-    """
-    import numpy as np
-
-    from ..decentralized.formation_metric_v3 import EPSILON_FORM
-    from ..decentralized.roles import rotation
-
-    positions = np.asarray([robot.position for robot in session.robots], dtype=np.float64)
-    template = np.asarray([robot.role_offset(candidate_topology) for robot in session.robots],
-                          dtype=np.float64)
-    template = template - template.mean(axis=0)
-    centre = positions.mean(axis=0)
-    rotated = (rotation(session.mission_direction).astype(np.float64) @ template.T).T
-    errors = np.linalg.norm((positions - centre) - rotated, axis=1)
-    return bool(errors.max() <= EPSILON_FORM)

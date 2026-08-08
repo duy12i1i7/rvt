@@ -26,13 +26,13 @@ to call.
 | `score_message` | no | yes | BOUND_AND_TESTED | requires active lifecycle |
 | `readiness_message` | no | yes | BOUND_AND_TESTED | requires active lifecycle |
 | `confirmation_message` | no | yes | BOUND_AND_TESTED | requires active lifecycle |
-| `status_message` | no | **no** | **DEFECT 13 — see below** | — |
+| `status_message` | no | yes | BOUND_AND_TESTED (defect 13 repaired) | requires active lifecycle |
 | `_advance` | yes | no | NOT_APPLICABLE (private state setter; correctly never called directly) | — |
 | `_require_enabled` | no | no | NOT_APPLICABLE (private guard) | — |
 
 No blank entries.
 
-## Defect 13 (identified, not repaired) — distributed completion agreement
+## Defect 13 (REPAIRED) — distributed completion agreement
 
 `status_message` is the one public method with no publication call site, and it
 is **runtime-required**: the qualified Phase 7R runtime at
@@ -88,3 +88,63 @@ Three complete mechanical epochs COMPACT -> LINE -> COMPACT -> LINE with
 monotonic `mode_epoch_count` 1/2/3, fresh profile per epoch, no stale agreement
 or dwell state, collision-free, and `topology_selection_epoch_count` 0 for
 forced diagnostics.
+
+
+---
+
+# Defect 13 repair
+
+## Authoritative completion sequence (D13-1)
+
+Read from `transition_runtime.py:880-918`, in executable order:
+
+1. every node calls `observe_target_tube(local_inside, now)` each step;
+2. **only once every node reports `local_dwell_complete`** does the runtime
+   proceed -- local dwell is necessary, not sufficient;
+3. each node emits `status_message("COMPLETE", "local_target_dwell", now)`
+   (exact frozen status and reason tokens, verified from code);
+4. those are flooded over the one-hop adjacency for
+   `derived.k_confirm_rounds`;
+5. `completion_agreement_time = now + k_confirm_rounds * communication_period`;
+6. `evaluate_lifecycle_status_agreement(flood, member_ids, intent, "COMPLETE",
+   now_seconds=completion_agreement_time, maximum_age_seconds=k_confirm_rounds *
+   communication_period + maximum_message_age_seconds)`;
+7. on agreement **every** node calls `mark_complete(completion_agreement_time)`;
+   on disagreement every node aborts with the agreement's own reason.
+
+## Root cause
+
+The adapter called `node.mark_complete(now)` per robot the instant that robot's
+own `observe_target_tube` returned True. Steps 3-6 -- the entire distributed
+status path -- were absent, so completion was a local decision.
+
+## Repair
+
+All four frozen calls are now bound in `advance_transition_lifecycle`, in the
+authoritative order, using the same range-gated cut-aware adjacency as every
+other protocol phase. COMPLETE status messages are therefore subject to the
+identical F8 partition, delay, loss and freshness semantics; they are not
+special-cased to be reliable. No agreement logic is recreated.
+
+## Measured separation
+
+`train-f1-00`, N=6, S2 forced initialization:
+
+| event | time |
+|---|---:|
+| all nodes `local_dwell_complete` | 9.45 s |
+| distributed status agreement | 10.20 s |
+| delta | 0.75 s = `k_confirm_rounds` (5) x `communication_period` (0.15 s) |
+
+`agreed: True`, reason `lifecycle_status_agreed`. The two instants are recorded
+separately in `session.completion_agreements` and carried through snapshots, so
+the distinction stays visible in later audit records.
+
+## Method matrix, corrected terminology
+
+* total methods audited: **19**
+* public runtime methods: **17**
+* private helpers intentionally never called directly: **2** (`_advance`,
+  `_require_enabled`)
+* bound and tested: **17**
+* runtime-required omissions remaining: **0**

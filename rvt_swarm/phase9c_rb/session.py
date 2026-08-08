@@ -182,6 +182,9 @@ class SimulatorEpisodeSession:
         # never reported as an online switching decision.
         self.topology_selection_epoch_count = 0
         self.mechanical_transition_epoch_count = 0
+        # Distributed completion audit: local dwell time vs status-agreement
+        # time are recorded separately (defect 13).
+        self.completion_agreements: List[Dict[str, object]] = []
         self.role_set = None
         self.readiness_certificates: Dict[int, Dict[str, object]] = {}
         self.readiness_evaluation_count = 0

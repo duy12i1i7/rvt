@@ -176,6 +176,7 @@ def canonical_execution_state(session) -> Dict[str, object]:
             "numerically_valid": bool(session.numerically_valid),
             "initialization_valid": bool(session.initialization_valid),
             "lifecycle_counter": int(session.lifecycle_counter),
+            "completion_agreements": list(session.completion_agreements),
             "metric_v3_dwell_seconds": {str(k): float(v)
                                         for k, v in sorted(session.metric_v3_dwell.items())},
         },
