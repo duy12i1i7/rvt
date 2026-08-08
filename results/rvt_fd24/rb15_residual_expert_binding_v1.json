@@ -1,0 +1,306 @@
+{
+ "action_frame": {
+  "control_period_seconds": 0.15,
+  "frame": "world",
+  "units": "meters_per_second_squared"
+ },
+ "action_pipeline_boundary": {
+  "contradiction": true,
+  "gate": "RB15-10",
+  "hashed_action_target_document_wording": "'u_base_i is the frozen Phase 6 projected robot-local action' -- implies boundary B",
+  "note": "RB15-10 forbids silently adapting either side; recorded, not resolved",
+  "publication_runtime_boundary": "A_BEFORE_LOCAL_SAFETY_PROJECTION",
+  "publication_runtime_evidence": "rvt_swarm/phase9c_rb/session.py adds the command disturbance to output.base_action and reapplies the unchanged projection; DenseActionSample stores base_action and projected_base_action separately",
+  "resolved_by_this_phase": false,
+  "system_model_boundary": "A_BEFORE_LOCAL_SAFETY_PROJECTION",
+  "system_model_equation": "u_i = f_safe(I_i, u_base_i + delta_u_i)"
+ },
+ "base_action": {
+  "gate": "RB15-11",
+  "reconstructed_approximation": false,
+  "source": "frozen Phase 6 local controller output at the candidate snapshot"
+ },
+ "blocking_findings": [
+  {
+   "finding": "no frozen candidate enumeration exists; the two known producers are a non-vacuity diagnostic fixture and a unit-test fixture, and they disagree on base action, candidate values, score values and the deviation rule",
+   "gate": "RB15-1",
+   "id": "RB15-F1",
+   "stop_condition": "RB15-1 both branches"
+  },
+  {
+   "finding": "the four normalized utility terms have no frozen normalizers; no code anywhere computes them, and the contract's phrase 'frozen local SI normalizers' has no referent",
+   "gate": "RB15-14",
+   "id": "RB15-F2",
+   "stop_condition": "the frozen objective cannot be used exactly"
+  },
+  {
+   "finding": "no unique frozen rollout/evaluation horizon exists for action candidates",
+   "gate": "RB15-13",
+   "id": "RB15-F3",
+   "stop_condition": "RB15-13 verbatim"
+  },
+  {
+   "finding": "the hashed action-target document calls u_base the *projected* Phase 6 action, contradicting the frozen system-model equation, the publication runtime and the dense-row schema",
+   "gate": "RB15-10",
+   "id": "RB15-F4",
+   "stop_condition": "RB15-10 conflict; not silently adapted"
+  },
+  {
+   "finding": "LocalActionEvaluation.locally_feasible has no frozen definition",
+   "gate": "RB15-4",
+   "id": "RB15-F5",
+   "stop_condition": "no concrete source for a required eligibility field"
+  }
+ ],
+ "candidate_enumeration": {
+  "authoritative_source_exists": false,
+  "candidate_count": null,
+  "candidate_values": null,
+  "candidate_values_sha256": null,
+  "disagreements": [
+   "base_action",
+   "candidate_values",
+   "score_values",
+   "normalized_action_deviation_rule"
+  ],
+  "gate": "RB15-1",
+  "known_producers": [
+   {
+    "base_action_rule": "(0.10 + 0.005*(i mod 3), 0.02*((i mod 2)*2 - 1))",
+    "candidate_count": 3,
+    "delta_cycle": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.05,
+      -0.03
+     ],
+     [
+      -0.04,
+      0.06
+     ],
+     [
+      0.15,
+      0.0
+     ]
+    ],
+    "delta_key": "sample_index mod 4",
+    "deviation_rule": "hypot(delta) / residual_limit",
+    "duplicate_condition": "sample_index mod 4 == 0 makes candidates 1 and 2 identical",
+    "evidence": "module docstring 'never a scientific dataset'; PHASE8_TARGET_NON_VACUITY_DIAGNOSTIC.md calls the outputs 'fixtures'; not among the twelve hashed protocol documents",
+    "producer": "rvt_swarm/phase8/diagnostic.py::_action_evaluations",
+    "produces_duplicate_candidates": true,
+    "scientifically_frozen": false,
+    "score_values": "literals 0.40/0.35/0.30 and 0.65/0.50/0.20",
+    "sha256": "fba4444a7d0a260c87e08c9cf7c0f3f33d57c8600f19f41fdcd022c60809aa78"
+   },
+   {
+    "base_action_rule": "(0.1, 0.0) literal",
+    "candidate_actions": [
+     [
+      0.1,
+      0.0
+     ],
+     [
+      0.2,
+      -0.05
+     ],
+     [
+      0.11,
+      0.0
+     ]
+    ],
+    "candidate_count": 3,
+    "deviation_rule": "literal 0.2 for every candidate",
+    "evidence": "a unit-test fixture",
+    "producer": "tests/test_residual_action_target.py::_evaluation fixture",
+    "scientifically_frozen": false,
+    "score_values": "literals 0.2/0.4/0.2 and 0.8/0.4/0.2",
+    "sha256": "29b4de054e1b4bfb4d99073fc1299c3b026f60430c983dca5b53a691a3dc93fd"
+   }
+  ],
+  "n_conditioned_variants": null,
+  "new_hyperparameter_introduced": false,
+  "only_textual_reference": "docs/RVT_RESIDUAL_ACTION_TARGET_V1.md:8 -- the expert 'may evaluate a fixed offline candidate lattice'; permissive, and it specifies nothing",
+  "ordering": null,
+  "producers_agree": false,
+  "topology_conditioned_variants": null,
+  "zero_residual_member": null
+ },
+ "counterfactual_execution": {
+  "approximate_clone_used": false,
+  "available": true,
+  "canonical_state": "canonical_execution_state / canonical_execution_hash",
+  "exercised": false,
+  "gate": "RB15-7 / RB15-8 / RB15-9",
+  "matched_stream_source": "rvt_swarm/phase9c_rb/streams.py counter-keyed PRF",
+  "reason_not_exercised": "no candidate enumeration exists to evaluate",
+  "replica_source": "replica_count_for_family (3 for F8/F9, 1 otherwise)",
+  "snapshot_source": "rvt_swarm/phase9c_rb/counterfactual.py::snapshot / EpisodeSnapshot"
+ },
+ "determinism": {
+  "frozen_selector_determinism_verified": true,
+  "gate": "RB15-20",
+  "producer_determinism": "NOT_EVALUATED_NO_PUBLICATION_PRODUCER",
+  "stochastic_search_introduced": false
+ },
+ "diagnostic_canary": {
+  "gate": "RB15-22",
+  "persisted_as_scientific_schema": false,
+  "provenance_that_would_be_used": "RUNTIME_CONFORMANCE_ONLY",
+  "reason": "the canary requires the candidate enumeration stage it is meant to exercise; running a canary over an invented enumeration would manufacture the very specification this phase found missing",
+  "result": "NOT_RUN"
+ },
+ "documentation": "docs/PHASE9C_RB15_RESIDUAL_EXPERT_BINDING.md",
+ "expert": {
+  "evaluation_schema_location": "rvt_swarm/phase8/targets.py::LocalActionEvaluation",
+  "evaluation_schema_sha256": "c6f4d5176abe7b9c0366eb1a99440b5a63c0f1035ce76ff912eb892974360dc9",
+  "expert_id": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V1",
+  "expert_modified": false,
+  "hashed_protocol_document": "docs/RVT_RESIDUAL_ACTION_TARGET_V1.md",
+  "hashed_protocol_document_sha256": "1eb3d8341facb7336f7f6a28a08a35efd75d001c2d8af54aec3f658715b5e047",
+  "hashed_protocol_document_unchanged": true,
+  "module_sha256": "184f464b77a550d400a3784b9d2bd8db892496cde8a3bb33c87148c0846bc809",
+  "selector_location": "rvt_swarm/phase8/targets.py::select_counterfactual_local_action",
+  "selector_sha256": "535c4e639d598bb75bc4822cdbbc320c48c69a7f86f8d5b96dec2dd5ace9a123",
+  "target_builder_location": "rvt_swarm/phase8/targets.py::build_residual_action_target",
+  "target_builder_sha256": "b8bd0ae34c1a659009efbe9943c4e30d3a0b187ea8d3524dfd28ae4083d51c9e"
+ },
+ "headroom_provenance": {
+  "H2_EMPIRICALLY_CONFIRMED": false,
+  "H2_PRE_DATA_VIABILITY": true,
+  "authoritative_artifacts_modified": false,
+  "f5_interpretation": {
+   "category": "RECONFIGURATION_REQUIRED",
+   "cell_id": "train/train-f5-00/N8",
+   "completed_switching_epochs": 0,
+   "may_be_cited_as_completed_topology_switch": false,
+   "mechanism": "PARTIAL_ATTEMPT_EFFECT"
+  },
+  "gate": "RB15-25",
+  "headroom_authority_record_sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+  "headroom_requalification_v6_sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "headroom_v6_detached_reproduction_sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32"
+ },
+ "information_boundary": {
+  "ACTION_INFORMATION_LOCAL": "REQUIRED_TRUE_BY_FROZEN_CONTRACT",
+  "LABEL_ORACLE_CENTRALIZED": "PERMITTED_BY_FROZEN_ROLLOUT_PROTOCOL_FOR_LABELS_ONLY",
+  "field_mapping_artifact": "results/rvt_fd24/rb15_local_information_mapping_v1.json",
+  "field_mapping_sha256": "217e0a014b267a1900aeea9c0ceff529e528c00e2d269cf5891c3a7907432789",
+  "gate": "RB15-3 / RB15-4 / RB15-5 / RB15-6",
+  "robot_local_information_only_asserted_in_production_code": false,
+  "robot_local_information_only_earned": "NOT_EVALUATED_NO_PRODUCER",
+  "robot_local_view_sha256": "c4abb4395034fc9f185d48415294a7f09cd35f7bf78fecd89be9b789d6ca5bf7",
+  "separate_expert_view_created": false,
+  "unresolved": "the frozen text does not say whether the four utility terms are action-side or label-oracle-side; because they select the action, the only conservative reading is action-side, and under that reading their normalizers are undefined"
+ },
+ "locality_intervention": {
+  "gate": "RB15-18 / RB15-19",
+  "note": "hidden-global and one-hop interventions require a candidate producer to intervene on; the RobotLocalView boundary itself remains covered by the existing locality suite",
+  "result": "NOT_EVALUATED_NO_PUBLICATION_PRODUCER"
+ },
+ "no_op_candidate": {
+  "added_by_this_phase": false,
+  "fallback_added": false,
+  "gate": "RB15-17",
+  "zero_residual_frozen_member": null
+ },
+ "phase": "PHASE 9C-RB15",
+ "phase8_fixture_equivalence": {
+  "gate": "RB15-21",
+  "historical_producer_rerun": true,
+  "historical_producer_unchanged": true,
+  "result": "NOT_EVALUATED_NO_PUBLICATION_PRODUCER"
+ },
+ "producer_implemented": false,
+ "rb15_residual_expert_binding_sha256": "376684d601f598111c806e5db63474cdac630ba45a92ff0b7bbd4092982bdd59",
+ "required_owner_decisions_before_retry": [
+  "the exact candidate enumeration: count, values or generating rule, ordering, zero-residual membership, and any topology/N conditioning",
+  "the four utility normalizers, in SI, computable from RobotLocalView",
+  "the definition of locally_feasible",
+  "the per-candidate evaluation horizon, or an explicit statement that candidate scoring is instantaneous",
+  "whether the utility terms are action-side or label-oracle-side",
+  "whether u_base is pre- or post-projection, correcting whichever document is wrong"
+ ],
+ "residual_bound": {
+  "derivation": "residual_limit_fractions_of_maximum_acceleration * a_max",
+  "duplicated_literal_introduced": false,
+  "fractions": [
+   0.25,
+   0.25
+  ],
+  "gate": "RB15-2",
+  "limits_meters_per_second_squared": [
+   0.15,
+   0.15
+  ],
+  "maximum_acceleration_meters_per_second_squared": 0.6,
+  "physical_disk_limit": 0.6,
+  "source": "rvt_swarm/fd24/configuration.py::residual_action_limits"
+ },
+ "rollout_horizon": {
+  "consequence": "supervision-definition ambiguity; RB15-13 stop condition",
+  "existing_producers_perform_rollouts": false,
+  "frozen_source_exists": false,
+  "gate": "RB15-13",
+  "nearest_related": "CounterfactualRolloutTrace.horizon_seconds is the *topology* candidate rollout horizon ('the family horizon'), not a per-action-candidate horizon"
+ },
+ "safety": {
+  "constraints_modified": false,
+  "gate": "RB15-12",
+  "global_safety_layer_used": false,
+  "operator": "existing robot-local own-action safety projection",
+  "penalty_invented": false
+ },
+ "schema_version": "rvt-rb15-residual-expert-binding/v1",
+ "scientific_isolation": {
+  "expert_calls_in_scientific_context": 0,
+  "final_test_access_count": 0,
+  "gate": "RB15-23",
+  "generation_budget_run": false,
+  "model_checkpoints": 0,
+  "model_checkpoints_note": "zero FD24 / Phase-9 checkpoints exist. Five legacy pre-FD24 checkpoint directories under checkpoints/ remain from commit 02d443b, outside the publication scope and untouched by this phase",
+  "official_recoverability_rows": 0,
+  "official_residual_supervision_rows": 0,
+  "optimizer_states": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0
+ },
+ "score_and_selection": {
+  "eligibility_conjunction": [
+   "locally_feasible",
+   "safety_projection_compatible",
+   "robot_local_information_only",
+   "componentwise residual bound",
+   "physical acceleration disk"
+  ],
+  "gate": "RB15-14",
+  "no_eligible_candidate_behaviour": "raises ValueError; no fallback, no no-op default",
+  "normalizer_definitions_found": 0,
+  "normalizers_frozen": false,
+  "objective": "normalized_progress + 0.50*normalized_clearance_margin - 0.25*normalized_formation_error - 0.05*normalized_action_deviation",
+  "objective_weights_frozen": true,
+  "selector_duplicated_by_adapter": false,
+  "selector_is_sole_final_selector": true
+ },
+ "source_commit": "0be5ec8c8f394f80b0278e5c2e4a6409ecc5aec6",
+ "status": "BLOCKED_UNDERSPECIFIED_FROZEN_EXPERT",
+ "target_construction": {
+  "builder": "rvt_swarm/phase8/targets.py::build_residual_action_target",
+  "gate": "RB15-16",
+  "native_frame_reported": "world_acceleration_meters_per_second_squared",
+  "rb16_rotation_or_frame_correction_applied": false,
+  "reimplemented": false
+ },
+ "tie_break": {
+  "deterministic": true,
+  "gate": "RB15-15",
+  "key": "(utility(), -normalized_action_deviation, action_world_acceleration)",
+  "note": "exercised by a new frozen-selector tie fixture; candidate ordering is irrelevant to the frozen outcome because the third key is the action vector itself, which makes the winner order-independent",
+  "random_tie_break": false,
+  "source": "rvt_swarm/phase8/targets.py::select_counterfactual_local_action"
+ },
+ "verdict": "A"
+}
