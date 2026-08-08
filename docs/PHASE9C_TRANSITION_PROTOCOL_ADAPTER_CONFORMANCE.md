@@ -339,3 +339,95 @@ over-age, fresh-accepted non-vacuity, duplicate refusal) remain in place.
 
 The real frozen timeout path remains the one outstanding conformance gate. v6
 was not generated.
+
+---
+
+# PCA-15 — Frozen Timeout Contract
+
+## PCA-15.0 — what the frozen timeout actually is
+
+**`TransitionProtocolNode` has no timeout method and no deadline config field.**
+Verified by test: no method name and no `protocol` config field contains
+`timeout` or `deadline`.
+
+The two timeout constructs in the qualified runtime are outer-loop labels, not
+protocol deadlines:
+
+| site | construct | meaning |
+|---|---|---|
+| `transition_runtime.py:657` | `"readiness_timeout:" + readiness_result.reason` | a *label* on a failed readiness agreement |
+| `transition_runtime.py:926` | `abort = "transition_or_dwell_timeout"` | assigned when `dwell_completion is None` after the episode step budget is exhausted |
+
+There is consequently **no runtime-required frozen timeout method for the
+adapter to bind**, and no class-A omission. PCA-15.1 finds nothing missing.
+
+## The publication equivalent
+
+The episode horizon plays the role of the step budget. A lifecycle still active
+when the horizon is reached fails Target V4's `protocol_resolved` predicate
+through its own frozen failure state:
+
+```
+conditions.protocol_resolved.failure_states =
+    ["ABORTED", "active_state_at_horizon", "partial_commitment"]
+```
+
+## PCA-15.5 — observed trace
+
+Fixture: `train-f1-00`, N=6, RUNTIME_CONFORMANCE_ONLY (only the harness horizon
+is shortened; the scientific horizon remains 90.0 s and is asserted intact).
+
+| item | value |
+|---|---|
+| request accepted | yes, through `request_candidate` |
+| states visited | `CANDIDATE_SCORE_AGREEMENT`, `ALL_READY_AGREEMENT` |
+| final lifecycle state | `ALL_READY_AGREEMENT` (genuinely still active) |
+| `active_intent` at horizon | held by every robot |
+| termination | `HORIZON_COMPLETE` at t = 3.30 s |
+| distributed completion agreements | none |
+
+No state was mutated to produce this; the lifecycle simply ran out of horizon.
+
+## PCA-15.6 — Target V4 mapping
+
+```
+lifecycle active at horizon
+  -> protocol_resolved = False   (frozen failure state active_state_at_horizon)
+  -> VALID_TASK_NEGATIVE, label 0
+```
+
+`executor_completed`, `geometry_valid`, `schedule_conformant` and
+`numerically_valid` all remain **true** -- the timeout is a scientific method
+failure, never generation invalidity. This mapping is used unchanged in any
+later sweep.
+
+## PCA-15.7 — no stale success leaks
+
+`candidate_commitment_valid`, `transition_execution_valid` and
+`target_metric_v3_dwell_complete` are all false, and no distributed completion
+agreement is recorded. PCA-18 isolation holds under the timeout path.
+
+## PCA-15.10 / 15.11 — reproduction and boundary
+
+Snapshotting before the horizon and replaying reproduces the canonical execution
+hash at every step, and the same termination cause, termination time and Target
+V4 disposition. With a generous harness horizon the *same* lifecycle completes
+and records its distributed agreement -- confirming the timeout is the horizon,
+not a protocol defect.
+
+## PCA-15 verdict: **PASS**
+
+## Final conformance matrix
+
+| metric | value |
+|---|---:|
+| TOTAL_METHODS_AUDITED | 19 |
+| PUBLIC_METHODS | 17 |
+| PRIVATE_HELPERS | 2 |
+| BOUND_AND_TESTED | 17 |
+| INTENTIONALLY_NOT_CALLED_DIRECTLY | 2 |
+| NOT_APPLICABLE | 0 |
+| **RUNTIME_REQUIRED_OMISSIONS** | **0** |
+| **NORMAL_RUNTIME_DIRECT_STATE_MUTATIONS** | **0** |
+
+PCA-8 PASS · PCA-15 PASS · PCA-16 PASS · PCA-18 PASS.
