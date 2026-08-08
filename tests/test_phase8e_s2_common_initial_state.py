@@ -118,7 +118,9 @@ def test_s2_failure_is_policy_failure_not_generation_invalidity() -> None:
 # -- v5 headroom --------------------------------------------------------------
 def test_v5_covers_all_one_hundred_and_fifty_cells() -> None:
     assert len(V5["cells"]) == 150
-    assert V5["status"] == "AUTHORITATIVE"
+    assert V5["status"] == "PROVISIONAL_PRE_D12", (
+        "v5 predates the defect 12 repair and must not be presented as "
+        "authoritative; a post-repair v6 supersedes it")
     assert V5["evaluation_domain"]["team_sizes"] == [5, 6, 8, 12, 16]
 
 

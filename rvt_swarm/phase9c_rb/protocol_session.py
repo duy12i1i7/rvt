@@ -65,6 +65,13 @@ def originate_candidate(session, robot, candidate_topology: int, event_type: str
     # transition -- including LINE -> COMPACT after S2's forced initialization.
     if robot.protocol_node.state not in ("STABLE_TOPOLOGY", "REARMED", "COMPLETE"):
         return False
+    # The frozen `adopt_intent` internally calls `abort("conflicting_lifecycle")`
+    # when a node still holds an active intent -- and `abort` raises from
+    # COMPLETE. A node in COMPLETE is only genuinely adoptable once `try_rearm`
+    # has retired its intent, so require that here rather than letting the
+    # frozen guard raise.
+    if robot.protocol_node.active_intent is not None:
+        return False
     if candidate_topology == robot.committed_topology:
         return False                      # no source-equals-target epoch, ever
     session.lifecycle_counter += 1

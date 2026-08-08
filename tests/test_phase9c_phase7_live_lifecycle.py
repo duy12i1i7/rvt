@@ -110,7 +110,6 @@ def test_hold_candidates_open_no_new_lifecycle(snap_fn, candidate) -> None:
 
 
 # -- CASE 4: a real LINE -> COMPACT lifecycle -------------------------------
-@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_case4_line_to_compact_runs_a_real_lifecycle_and_completes() -> None:
     session, created, trace = _drive(_line_snapshot(), COMPACT, steps=400)
     assert created is True
@@ -120,7 +119,6 @@ def test_case4_line_to_compact_runs_a_real_lifecycle_and_completes() -> None:
     assert all(r.protocol_node.mode_epoch_count >= 1 for r in session.robots)
 
 
-@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_case4_reaches_target_dwell_and_completion() -> None:
     session, _, trace = _drive(_line_snapshot(), COMPACT, steps=400)
     flat = [s[0] for s in trace if len(s) == 1]
@@ -129,7 +127,6 @@ def test_case4_reaches_target_dwell_and_completion() -> None:
     assert session.metric_v3_dwell[COMPACT] > 0.0
 
 
-@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_case4_yields_a_positive_under_target_v4() -> None:
     result = execute_candidate(_line_snapshot(), COMPACT, max_steps=700)
     assert result.created_lifecycle is True
@@ -138,7 +135,6 @@ def test_case4_yields_a_positive_under_target_v4() -> None:
 
 
 # -- lifecycle ordering ------------------------------------------------------
-@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_observed_states_follow_the_frozen_order() -> None:
     _, _, trace = _drive(_line_snapshot(), COMPACT, steps=400)
     flat = [s[0] for s in trace if len(s) == 1]
@@ -150,7 +146,6 @@ def test_observed_states_follow_the_frozen_order() -> None:
     assert indices == sorted(indices), flat
 
 
-@pytest.mark.xfail(strict=True, reason="SUPERSEDED FIXTURE (D12): chaining a further epoch from this older _line_snapshot fixture is unresolved. The D12-required multi-epoch functionality itself is covered and passing in test_phase9c_two_epoch_transition.py and test_phase9c_three_epoch_transition.py, which run two and three full epochs COMPACT->LINE->COMPACT->LINE with monotonic epoch identifiers, fresh profiles and no collision. Recorded, not silenced.")
 def test_commit_bumps_the_epoch_exactly_once_per_lifecycle() -> None:
     """Measured as a delta: the LINE snapshot already carries S2's completed
     forced-initialization epoch."""

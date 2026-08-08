@@ -353,6 +353,22 @@ def execute_candidate(source: EpisodeSnapshot, candidate_topology: int, *,
     if int(candidate_topology) != int(origin_robot.committed_topology):
         created_lifecycle = session.request_candidate(
             origin_robot, int(candidate_topology), "externally_forced_diagnostic")
+        if not created_lifecycle and any(
+                r.protocol_node.state in ("COMPLETE", "ABORTED") for r in session.robots):
+            # The snapshot was taken from a finished epoch. The frozen
+            # `try_rearm` retires it only after `rearm_inactive_seconds`; wait
+            # for that rather than originating on a lifecycle the protocol has
+            # not yet retired. The wait costs mission time like any other.
+            for _ in range(80):
+                session.step()
+                if session.termination is not None:
+                    break
+                if all(r.protocol_node.state in ("REARMED", "STABLE_TOPOLOGY")
+                       for r in session.robots):
+                    created_lifecycle = session.request_candidate(
+                        origin_robot, int(candidate_topology),
+                        "externally_forced_diagnostic")
+                    break
 
     steps = 0
     while session.termination is None and steps < max_steps:
