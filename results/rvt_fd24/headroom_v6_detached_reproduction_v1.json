@@ -1,0 +1,1194 @@
+{
+ "attribution_revalidation": {
+  "additive_correction": true,
+  "candidate_artifact_edited": false,
+  "cells": [
+   {
+    "causal_trace": "switching wins with zero completed epochs; two aborted LINE intents stage the mission and avoid the collision that kills both baselines",
+    "cell_id": "train/train-f5-00/N8",
+    "changed": true,
+    "completed_switching_epochs": 0,
+    "corrected_attribution": "PARTIAL_ATTEMPT_EFFECT",
+    "family": "F5",
+    "recorded_attribution": "INITIAL_CONVERSION_DRIVEN",
+    "s2_line_established": false
+   },
+   {
+    "causal_trace": "S2 never establishes LINE (forced initial C->L is lost) and the online policy additionally completes two during-task epochs COMPACT->LINE->COMPACT; both the initial realization and the later adaptation are material",
+    "cell_id": "train/train-f9-00/N8",
+    "changed": false,
+    "completed_switching_epochs": 2,
+    "corrected_attribution": "MIXED",
+    "family": "F9",
+    "recorded_attribution": "MIXED",
+    "s2_line_established": false
+   },
+   {
+    "causal_trace": "S2 never establishes LINE (forced initial C->L is lost) and the online policy additionally completes two during-task epochs COMPACT->LINE->COMPACT; both the initial realization and the later adaptation are material",
+    "cell_id": "train/train-f9-00/N12",
+    "changed": false,
+    "completed_switching_epochs": 2,
+    "corrected_attribution": "MIXED",
+    "family": "F9",
+    "recorded_attribution": "MIXED",
+    "s2_line_established": false
+   },
+   {
+    "causal_trace": "S2 never establishes LINE (forced initial C->L is lost) and the online policy additionally completes two during-task epochs COMPACT->LINE->COMPACT; both the initial realization and the later adaptation are material",
+    "cell_id": "train/train-f9-01/N8",
+    "changed": false,
+    "completed_switching_epochs": 2,
+    "corrected_attribution": "MIXED",
+    "family": "F9",
+    "recorded_attribution": "MIXED",
+    "s2_line_established": false
+   },
+   {
+    "causal_trace": "S2 never establishes LINE (forced initial C->L is lost) and the online policy additionally completes two during-task epochs COMPACT->LINE->COMPACT; both the initial realization and the later adaptation are material",
+    "cell_id": "train/train-f9-01/N12",
+    "changed": false,
+    "completed_switching_epochs": 2,
+    "corrected_attribution": "MIXED",
+    "family": "F9",
+    "recorded_attribution": "MIXED",
+    "s2_line_established": false
+   },
+   {
+    "causal_trace": "S2 never establishes LINE (forced initial C->L is lost) and the online policy additionally completes two during-task epochs COMPACT->LINE->COMPACT; both the initial realization and the later adaptation are material",
+    "cell_id": "validation/validation-f9-00/N8",
+    "changed": false,
+    "completed_switching_epochs": 2,
+    "corrected_attribution": "MIXED",
+    "family": "F9",
+    "recorded_attribution": "MIXED",
+    "s2_line_established": false
+   },
+   {
+    "causal_trace": "S2 never establishes LINE (forced initial C->L is lost) and the online policy additionally completes two during-task epochs COMPACT->LINE->COMPACT; both the initial realization and the later adaptation are material",
+    "cell_id": "validation/validation-f9-00/N12",
+    "changed": false,
+    "completed_switching_epochs": 2,
+    "corrected_attribution": "MIXED",
+    "family": "F9",
+    "recorded_attribution": "MIXED",
+    "s2_line_established": false
+   }
+  ],
+  "changed_cells": [
+   "train/train-f5-00/N8"
+  ],
+  "corrected_counts": {
+   "MIXED": 6,
+   "PARTIAL_ATTEMPT_EFFECT": 1
+  },
+  "gate": "DETACHED-8",
+  "note": "v6's stored attribution field for train/train-f5-00/N8 is superseded by this artifact. The committed candidate artifact is left byte-identical so its hash stays verifiable; this record is the authoritative analysis of that field.",
+  "recomputed_from": "raw detached traces and canonical v6 records",
+  "recorded_counts": {
+   "INITIAL_CONVERSION_DRIVEN": 1,
+   "MIXED": 6
+  },
+  "stored_field_trusted_blindly": false
+ },
+ "candidate": {
+  "artifact": "results/rvt_fd24/headroom_requalification_v6.json",
+  "branch": "research/rvt-headroom-v6-final-v1",
+  "commit": "8565113e6f432f07caf10db8ce8012fa6ecb63ca",
+  "headroom_requalification_v6_sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "status_before_reproduction": "CANDIDATE_AUTHORITATIVE",
+  "tag": "rvt-headroom-v6-candidate-v1"
+ },
+ "candidate_artifact_verification": {
+  "canonicalization": "sha256(canonical_json_bytes(artifact minus its own hash field))",
+  "cells": 150,
+  "duplicate_cell_keys": 0,
+  "expected_sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "final_test_records": 0,
+  "gate": "DETACHED-2",
+  "match": true,
+  "missing_policy_results": 0,
+  "n24_records": 0,
+  "policy_executions": 450,
+  "recomputed_sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "regenerated_before_verification": false,
+  "train": 100,
+  "validation": 50
+ },
+ "detached_checkout": {
+  "clean": true,
+  "gate": "DETACHED-1",
+  "git_status_porcelain": "",
+  "head_commit": "8565113e6f432f07caf10db8ce8012fa6ecb63ca",
+  "head_matches_candidate": true,
+  "path": "/private/tmp/claude-501/-Users-udy-rvt/11a6e7dd-155e-4e21-8fa2-4f8f305b038c/scratchpad/detached",
+  "reused_development_tree": false
+ },
+ "full_suite": {
+  "command": "python -m pytest tests/ -q",
+  "errors": 0,
+  "executed_from": "/private/tmp/claude-501/-Users-udy-rvt/11a6e7dd-155e-4e21-8fa2-4f8f305b038c/scratchpad/detached",
+  "failed": 0,
+  "gate": "DETACHED-16",
+  "passed": 2587,
+  "publication_required_xfailed": 0,
+  "wall_clock_seconds": 347,
+  "warnings": 1,
+  "xfailed": 0,
+  "xpassed": 0
+ },
+ "gate_outcomes": {
+  "DETACHED-0": "PASS",
+  "DETACHED-1": "PASS",
+  "DETACHED-10": "PASS",
+  "DETACHED-11": "PASS",
+  "DETACHED-12": "PASS",
+  "DETACHED-13": "PASS",
+  "DETACHED-14": "PASS",
+  "DETACHED-15": "PASS",
+  "DETACHED-16": "PASS",
+  "DETACHED-17": "PASS",
+  "DETACHED-2": "PASS",
+  "DETACHED-3": "PASS",
+  "DETACHED-4": "PASS",
+  "DETACHED-5": "PASS (class B)",
+  "DETACHED-6": "PASS",
+  "DETACHED-7": "PASS",
+  "DETACHED-8": "PASS (1 correction)",
+  "DETACHED-9": "PASS"
+ },
+ "h2_headroom_semantics": {
+  "FROZEN_H2_REQUIRES": "LEVEL_A",
+  "GENUINE_HEADROOM_PRESENT": true,
+  "H2_EMPIRICALLY_CONFIRMED": false,
+  "H2_PRE_DATA_VIABILITY": true,
+  "H2_REQUIRED_SCOPE": "LEVEL_A",
+  "V6_HEADROOM_SUPPORTS_H2_VIABILITY": true,
+  "effect_size_evaluated_by_this_artifact": false,
+  "exact_frozen_wording": "H2. Online COMPACT/LINE reconfiguration improves episode task success by at least 0.10 absolute over each fixed topology in predeclared families with genuine topology headroom.",
+  "headroom_cells_total": 7,
+  "headroom_cells_with_completed_reconfiguration": 6,
+  "multi_epoch_opportunity_evidence": "six cells complete COMPACT->LINE->COMPACT with two distributed completion agreements each; these demonstrate that multi-epoch reconfiguration opportunities genuinely exist and are not themselves proof of the final H2 effect size",
+  "per_family_diagnostic_rates_not_an_h2_test": {
+   "F1": {
+    "cells": 15,
+    "compact": 1.0,
+    "delta_vs_compact": 0.0,
+    "delta_vs_line": 0.6,
+    "line": 0.4,
+    "reconfiguration_required": 0,
+    "switching": 1.0,
+    "switching_successes": 15,
+    "switching_successes_with_a_completed_epoch": 0
+   },
+   "F10": {
+    "cells": 15,
+    "compact": 0.0,
+    "delta_vs_compact": 0.1333,
+    "delta_vs_line": -0.0667,
+    "line": 0.2,
+    "reconfiguration_required": 0,
+    "switching": 0.1333,
+    "switching_successes": 2,
+    "switching_successes_with_a_completed_epoch": 2
+   },
+   "F2": {
+    "cells": 15,
+    "compact": 0.1333,
+    "delta_vs_compact": -0.0666,
+    "delta_vs_line": -0.4,
+    "line": 0.4667,
+    "reconfiguration_required": 0,
+    "switching": 0.0667,
+    "switching_successes": 1,
+    "switching_successes_with_a_completed_epoch": 0
+   },
+   "F3": {
+    "cells": 15,
+    "compact": 0.0,
+    "delta_vs_compact": 0.0,
+    "delta_vs_line": 0.0,
+    "line": 0.0,
+    "reconfiguration_required": 0,
+    "switching": 0.0,
+    "switching_successes": 0,
+    "switching_successes_with_a_completed_epoch": 0
+   },
+   "F4": {
+    "cells": 15,
+    "compact": 0.0,
+    "delta_vs_compact": 0.0,
+    "delta_vs_line": 0.0,
+    "line": 0.0,
+    "reconfiguration_required": 0,
+    "switching": 0.0,
+    "switching_successes": 0,
+    "switching_successes_with_a_completed_epoch": 0
+   },
+   "F5": {
+    "cells": 15,
+    "compact": 0.2667,
+    "delta_vs_compact": 0.3333,
+    "delta_vs_line": 0.0,
+    "line": 0.6,
+    "reconfiguration_required": 1,
+    "switching": 0.6,
+    "switching_successes": 9,
+    "switching_successes_with_a_completed_epoch": 1
+   },
+   "F6": {
+    "cells": 15,
+    "compact": 0.0,
+    "delta_vs_compact": 0.0,
+    "delta_vs_line": 0.0,
+    "line": 0.0,
+    "reconfiguration_required": 0,
+    "switching": 0.0,
+    "switching_successes": 0,
+    "switching_successes_with_a_completed_epoch": 0
+   },
+   "F7": {
+    "cells": 15,
+    "compact": 1.0,
+    "delta_vs_compact": -0.2,
+    "delta_vs_line": 0.4,
+    "line": 0.4,
+    "reconfiguration_required": 0,
+    "switching": 0.8,
+    "switching_successes": 12,
+    "switching_successes_with_a_completed_epoch": 12
+   },
+   "F8": {
+    "cells": 15,
+    "compact": 0.8667,
+    "delta_vs_compact": -0.0667,
+    "delta_vs_line": -0.2,
+    "line": 1.0,
+    "reconfiguration_required": 0,
+    "switching": 0.8,
+    "switching_successes": 12,
+    "switching_successes_with_a_completed_epoch": 0
+   },
+   "F9": {
+    "cells": 15,
+    "compact": 0.0,
+    "delta_vs_compact": 0.8,
+    "delta_vs_line": 0.4,
+    "line": 0.4,
+    "reconfiguration_required": 6,
+    "switching": 0.8,
+    "switching_successes": 12,
+    "switching_successes_with_a_completed_epoch": 12
+   }
+  },
+  "source": "docs/RVT_FD24_RESEARCH_QUESTIONS_AND_HYPOTHESES.md:25",
+  "statement": "v6 is a pre-data headroom qualification. It establishes that executable genuine topology headroom exists, that the fixed baselines are meaningfully comparable against online switching, and that the exact frozen H2 remains falsifiable. It does NOT evaluate the >= 0.10 absolute criterion, which requires the later trained and evaluated primary method."
+ },
+ "headroom_v6_detached_reproduction_sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32",
+ "pca_regressions": {
+  "FOUR_EPOCH_STRESS": {
+   "gate": "DETACHED-13",
+   "result": "PASS",
+   "scope": "test-only fixture, outside the scientific headroom domain",
+   "test": "tests/test_phase9c_four_epoch_transition_stress.py",
+   "verified": [
+    "four distinct lifecycle IDs",
+    "four mode epochs",
+    "four distributed completion agreements",
+    "no collision"
+   ]
+  },
+  "PCA_15_UNRESOLVED_AT_HORIZON": {
+   "gate": "DETACHED-12",
+   "note": "no execution in the 450-execution headroom domain terminates at the horizon, so this path is covered by the conformance fixture rather than by a selected headroom cell",
+   "result": "PASS",
+   "test": "tests/test_phase9c_timeout_path.py",
+   "verified": [
+    "TransitionProtocolNode exposes no independent timeout method or deadline",
+    "active_state_at_horizon maps to VALID_TASK_NEGATIVE under the frozen Target V4 semantics",
+    "canonical termination time and result reproduced"
+   ]
+  },
+  "PCA_16_MESSAGE_EPOCH_ISOLATION": {
+   "gate": "DETACHED-14 (companion)",
+   "result": "PASS",
+   "test": "tests/test_phase9c_message_epoch_isolation.py"
+  },
+  "PCA_18_TARGET_V4_EPOCH_ISOLATION": {
+   "gate": "DETACHED-14",
+   "result": "PASS",
+   "test": "tests/test_phase9c_target_v4_epoch_isolation.py",
+   "verified": [
+    "a previous epoch's commit, profile, dwell and distributed COMPLETE cannot satisfy a later epoch"
+   ]
+  },
+  "PCA_8R_ROUND_LOCAL_TRANSPORT": {
+   "gate": "DETACHED-11",
+   "result": "PASS",
+   "test": "tests/test_phase9c_transport_semantics.py",
+   "verified": [
+    "frozen transport is ROUND_LOCAL",
+    "no persistent lifecycle-message queue survives a control step",
+    "old-epoch validator rejection still holds",
+    "F8 has no reliable lifecycle-message bypass"
+   ]
+  },
+  "S2_MECHANICAL_INITIALIZATION": {
+   "gate": "DETACHED-15",
+   "result": "PASS",
+   "test": "tests/test_phase8e_s2_common_initial_state.py",
+   "verified": [
+    "S1 and S2 share a byte-identical initial physical state",
+    "S2 topology_selection_epoch_count = 0",
+    "the forced COMPACT->LINE uses the full qualified stack",
+    "the open-field safety regression remains >= 0.4000 m"
+   ]
+  }
+ },
+ "reproduction": {
+  "category_matches": 150,
+  "cells_reproduced": 150,
+  "compared_fields_per_cell": [
+   91
+  ],
+  "deterministic_subset": {
+   "exact": 18,
+   "mismatched": 0,
+   "record_ids": [
+    "train/train-f1-00/N5",
+    "train/train-f1-00/N6",
+    "train/train-f1-00/N8",
+    "train/train-f1-00/N12",
+    "train/train-f1-00/N16",
+    "train/train-f5-00/N5",
+    "train/train-f8-00/N5",
+    "train/train-f9-00/N5",
+    "train/train-f5-00/N8",
+    "train/train-f10-00/N6",
+    "train/train-f10-00/N5",
+    "train/train-f4-00/N16",
+    "train/train-f9-00/N8",
+    "train/train-f9-00/N12",
+    "train/train-f9-01/N8",
+    "train/train-f9-01/N12",
+    "validation/validation-f9-00/N8",
+    "validation/validation-f9-00/N12"
+   ],
+   "selected_record_count": 18
+  },
+  "exact_cells": 150,
+  "executed_from": "/private/tmp/claude-501/-Users-udy-rvt/11a6e7dd-155e-4e21-8fa2-4f8f305b038c/scratchpad/detached",
+  "gate": "DETACHED-10",
+  "initial_physical_state_hashes_matched": 450,
+  "mismatched_cells": 0,
+  "mismatches": [],
+  "policy_executions_reproduced": 450,
+  "scope": "every one of the 150 v6 cells was re-executed with all three policies -- a strict superset of the deterministic subset",
+  "tolerance": "none -- exact canonical equality on every stored field",
+  "wall_clock_seconds": 895.3
+ },
+ "schema_version": "rvt-headroom-v6-detached-reproduction/v1",
+ "sealed_domain_audit": {
+  "final_test_access_count": 0,
+  "final_test_geometry_directory_present": false,
+  "final_test_runtime_access_count_in_protocol": 0,
+  "gate": "DETACHED-17",
+  "generation_budget_hash": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+  "generation_budget_hash_unchanged": true,
+  "guard_tests": [
+   "tests/test_phase8e_final_test_guard.py",
+   "tests/test_final_test_access_guard.py",
+   "tests/test_phase9b_n24_sealing.py",
+   "tests/test_phase9b_exact_generation_budget.py",
+   "tests/test_phase9_generation_budget.py",
+   "tests/test_data_provenance_contract.py"
+  ],
+  "guard_tests_result": "21 passed",
+  "locality_violations": 0,
+  "model_checkpoints": 0,
+  "optimizer_states": 0,
+  "protected_scientific_hash_verification": "each hash recorded in v6.protocol_hashes equals the corresponding artifact's embedded self-hash field on disk, and each artifact's self-hash was recomputed as sha256(canonical_json_bytes(artifact minus its own hash field)) and matched",
+  "protected_scientific_hashes": {
+   "et_timing_addendum": "fba87e4374f4a7b8c97e5435e148345ad5611223f663e6050967efe9aa0989c5",
+   "executable_scientific_protocol": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+   "mission_coupling": "1a756b6ae21cc1008afcbe694d62dd4dd2c80af1ae20f15f3b97cec2b5dbca60",
+   "s2_mechanical_contract": "19f146b5701b9cc830b60382b9204155e401e0c771700038fab4f98dbc983413",
+   "source_policy_contract": "aaf4e35a539d1ae864805ee52cfbd8be7579e7a61103e3807fbbc6d1706168df",
+   "target_v4_execution_contract": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "protected_scientific_hashes_unchanged": true,
+  "recoverability_dataset_rows": 0,
+  "residual_dataset_rows": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0,
+  "team_sizes_executed": [
+   5,
+   6,
+   8,
+   12,
+   16
+  ]
+ },
+ "selection_rule": {
+  "choice": "the first record in that ordering satisfying each coverage class",
+  "coverage": [
+   {
+    "coverage_class": "N=5",
+    "coverage_group": "TEAM_SIZE",
+    "population_size": 30,
+    "selected_record_id": "train/train-f1-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "N=6",
+    "coverage_group": "TEAM_SIZE",
+    "population_size": 30,
+    "selected_record_id": "train/train-f1-00/N6",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "N=8",
+    "coverage_group": "TEAM_SIZE",
+    "population_size": 30,
+    "selected_record_id": "train/train-f1-00/N8",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "N=12",
+    "coverage_group": "TEAM_SIZE",
+    "population_size": 30,
+    "selected_record_id": "train/train-f1-00/N12",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "N=16",
+    "coverage_group": "TEAM_SIZE",
+    "population_size": 30,
+    "selected_record_id": "train/train-f1-00/N16",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "F1",
+    "coverage_group": "FAMILY",
+    "population_size": 15,
+    "selected_record_id": "train/train-f1-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "F5",
+    "coverage_group": "FAMILY",
+    "population_size": 15,
+    "selected_record_id": "train/train-f5-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "F8",
+    "coverage_group": "FAMILY",
+    "population_size": 15,
+    "selected_record_id": "train/train-f8-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "F9",
+    "coverage_group": "FAMILY",
+    "population_size": 15,
+    "selected_record_id": "train/train-f9-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "RECONFIGURATION_REQUIRED",
+    "coverage_group": "CATEGORY",
+    "population_size": 7,
+    "selected_record_id": "train/train-f5-00/N8",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "BOTH_SUCCESS",
+    "coverage_group": "CATEGORY",
+    "population_size": 29,
+    "selected_record_id": "train/train-f1-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "COMPACT_ONLY_SUCCESS",
+    "coverage_group": "CATEGORY",
+    "population_size": 20,
+    "selected_record_id": "train/train-f1-00/N8",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "LINE_ONLY_SUCCESS",
+    "coverage_group": "CATEGORY",
+    "population_size": 23,
+    "selected_record_id": "train/train-f10-00/N6",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "BOTH_FAIL",
+    "coverage_group": "CATEGORY",
+    "population_size": 68,
+    "selected_record_id": "train/train-f10-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "INVALID_OR_AMBIGUOUS",
+    "coverage_group": "CATEGORY",
+    "population_size": 3,
+    "selected_record_id": "train/train-f4-00/N16",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "S2_FORCED_INITIALIZATION",
+    "coverage_group": "RUNTIME",
+    "population_size": 147,
+    "selected_record_id": "train/train-f1-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "SWITCHING_TWO_COMPLETED_EPOCHS",
+    "coverage_group": "RUNTIME",
+    "population_size": 9,
+    "selected_record_id": "train/train-f9-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "DISTRIBUTED_COMPLETION",
+    "coverage_group": "RUNTIME",
+    "population_size": 48,
+    "selected_record_id": "train/train-f10-00/N5",
+    "status": "SELECTED"
+   },
+   {
+    "coverage_class": "PCA15_UNRESOLVED_AT_HORIZON_NEGATIVE",
+    "coverage_group": "RUNTIME",
+    "population_size": 0,
+    "selected_record_id": null,
+    "status": "CLASS_EMPTY_IN_V6_DOMAIN"
+   }
+  ],
+  "empty_coverage_classes": [
+   "PCA15_UNRESOLVED_AT_HORIZON_NEGATIVE"
+  ],
+  "gate": "DETACHED-3",
+  "mandatory_additional_records": [
+   {
+    "count": 1,
+    "gate": "DETACHED-4",
+    "record_ids": [
+     "train/train-f5-00/N8"
+    ],
+    "requirement": "F5 RECONFIGURATION_REQUIRED with zero completed switching epochs"
+   },
+   {
+    "count": 6,
+    "gate": "DETACHED-7",
+    "record_ids": [
+     "train/train-f9-00/N8",
+     "train/train-f9-00/N12",
+     "train/train-f9-01/N8",
+     "train/train-f9-01/N12",
+     "validation/validation-f9-00/N8",
+     "validation/validation-f9-00/N12"
+    ],
+    "requirement": "every RECONFIGURATION_REQUIRED cell with two completed epochs"
+   }
+  ],
+  "manual_cherry_picking": false,
+  "ordering": "ascending (split, family, layout_id, team_size)",
+  "replacement_policy": "none -- a selected record is never replaced, including when its reproduction fails",
+  "rule_id": "rvt-headroom-v6-detached-subset/v1",
+  "selected_record_count": 18,
+  "selected_record_ids": [
+   "train/train-f1-00/N5",
+   "train/train-f1-00/N6",
+   "train/train-f1-00/N8",
+   "train/train-f1-00/N12",
+   "train/train-f1-00/N16",
+   "train/train-f5-00/N5",
+   "train/train-f8-00/N5",
+   "train/train-f9-00/N5",
+   "train/train-f5-00/N8",
+   "train/train-f10-00/N6",
+   "train/train-f10-00/N5",
+   "train/train-f4-00/N16",
+   "train/train-f9-00/N8",
+   "train/train-f9-00/N12",
+   "train/train-f9-01/N8",
+   "train/train-f9-01/N12",
+   "validation/validation-f9-00/N8",
+   "validation/validation-f9-00/N12"
+  ]
+ },
+ "switching_counter_audit": {
+  "authoritative_field": "completion_agreements",
+  "derived_epoch_distribution_all_switching_successes": {
+   "0": 36,
+   "1": 18,
+   "2": 9
+  },
+  "distributions_agree": true,
+  "regression_assertions": [
+   "the mechanical counter is incremented in exactly one place, FixedTopologyPolicy.observe (S2 forced initialization)",
+   "a live two-epoch switching cell reports mechanical=0 while reaching two distributed completions",
+   "the v6 switching epoch distribution is reproducible from completion_agreements and is NOT reproducible from the mechanical counter"
+  ],
+  "regression_test": "tests/test_phase8e_switching_epoch_measurement.py",
+  "regression_test_added_after_candidate_commit": true,
+  "rejected_field": "mechanical_transition_epoch_count",
+  "rejected_field_values_over_all_switching_executions": {
+   "0": 150
+  },
+  "reproduced_switching_executions_with_exact_counter_agreement": 150,
+  "v6_reported_distribution": {
+   "0": 36,
+   "1": 18,
+   "2": 9
+  }
+ },
+ "two_epoch_integrity_audit": {
+  "all_compact_line_compact": true,
+  "all_executably_reproduced": true,
+  "all_two_distributed_completions": true,
+  "cells": [
+   {
+    "cell_id": "train/train-f9-00/N8",
+    "compact_line_compact": true,
+    "executably_reproduced_in_detached_checkout": true,
+    "family": "F9",
+    "final_topology_compact": true,
+    "recorded": {
+     "completion_agreements": 2,
+     "final_topology": 5,
+     "lifecycle_ids": [
+      1,
+      2
+     ],
+     "mode_epoch_ids": [
+      2
+     ]
+    },
+    "reproduced": {
+     "committed_topology_sequence": [
+      "COMPACT",
+      "LINE",
+      "COMPACT"
+     ],
+     "completed_switching_epochs": 2,
+     "disposition": "RECOVERABLE_POSITIVE",
+     "distinct_lifecycle_ids": [
+      1,
+      2
+     ],
+     "final_committed_topology": "COMPACT",
+     "mechanical_transition_epoch_count": 0,
+     "mode_epoch_ids": [
+      2
+     ],
+     "termination": "GOAL_COMPLETE",
+     "topology_selection_epoch_count": 2,
+     "transition_executor_windows": 2
+    },
+    "s2_disposition": "VALID_TASK_NEGATIVE",
+    "s2_line_established": false,
+    "two_distinct_lifecycle_ids": true,
+    "two_distributed_completions": true,
+    "two_mode_epochs": true
+   },
+   {
+    "cell_id": "train/train-f9-00/N12",
+    "compact_line_compact": true,
+    "executably_reproduced_in_detached_checkout": true,
+    "family": "F9",
+    "final_topology_compact": true,
+    "recorded": {
+     "completion_agreements": 2,
+     "final_topology": 5,
+     "lifecycle_ids": [
+      1,
+      2
+     ],
+     "mode_epoch_ids": [
+      2
+     ]
+    },
+    "reproduced": {
+     "committed_topology_sequence": [
+      "COMPACT",
+      "LINE",
+      "COMPACT"
+     ],
+     "completed_switching_epochs": 2,
+     "disposition": "RECOVERABLE_POSITIVE",
+     "distinct_lifecycle_ids": [
+      1,
+      2
+     ],
+     "final_committed_topology": "COMPACT",
+     "mechanical_transition_epoch_count": 0,
+     "mode_epoch_ids": [
+      2
+     ],
+     "termination": "GOAL_COMPLETE",
+     "topology_selection_epoch_count": 2,
+     "transition_executor_windows": 2
+    },
+    "s2_disposition": "VALID_TASK_NEGATIVE",
+    "s2_line_established": false,
+    "two_distinct_lifecycle_ids": true,
+    "two_distributed_completions": true,
+    "two_mode_epochs": true
+   },
+   {
+    "cell_id": "train/train-f9-01/N8",
+    "compact_line_compact": true,
+    "executably_reproduced_in_detached_checkout": true,
+    "family": "F9",
+    "final_topology_compact": true,
+    "recorded": {
+     "completion_agreements": 2,
+     "final_topology": 5,
+     "lifecycle_ids": [
+      1,
+      2
+     ],
+     "mode_epoch_ids": [
+      2
+     ]
+    },
+    "reproduced": {
+     "committed_topology_sequence": [
+      "COMPACT",
+      "LINE",
+      "COMPACT"
+     ],
+     "completed_switching_epochs": 2,
+     "disposition": "RECOVERABLE_POSITIVE",
+     "distinct_lifecycle_ids": [
+      1,
+      2
+     ],
+     "final_committed_topology": "COMPACT",
+     "mechanical_transition_epoch_count": 0,
+     "mode_epoch_ids": [
+      2
+     ],
+     "termination": "GOAL_COMPLETE",
+     "topology_selection_epoch_count": 2,
+     "transition_executor_windows": 2
+    },
+    "s2_disposition": "VALID_TASK_NEGATIVE",
+    "s2_line_established": false,
+    "two_distinct_lifecycle_ids": true,
+    "two_distributed_completions": true,
+    "two_mode_epochs": true
+   },
+   {
+    "cell_id": "train/train-f9-01/N12",
+    "compact_line_compact": true,
+    "executably_reproduced_in_detached_checkout": true,
+    "family": "F9",
+    "final_topology_compact": true,
+    "recorded": {
+     "completion_agreements": 2,
+     "final_topology": 5,
+     "lifecycle_ids": [
+      1,
+      2
+     ],
+     "mode_epoch_ids": [
+      2
+     ]
+    },
+    "reproduced": {
+     "committed_topology_sequence": [
+      "COMPACT",
+      "LINE",
+      "COMPACT"
+     ],
+     "completed_switching_epochs": 2,
+     "disposition": "RECOVERABLE_POSITIVE",
+     "distinct_lifecycle_ids": [
+      1,
+      2
+     ],
+     "final_committed_topology": "COMPACT",
+     "mechanical_transition_epoch_count": 0,
+     "mode_epoch_ids": [
+      2
+     ],
+     "termination": "GOAL_COMPLETE",
+     "topology_selection_epoch_count": 2,
+     "transition_executor_windows": 2
+    },
+    "s2_disposition": "VALID_TASK_NEGATIVE",
+    "s2_line_established": false,
+    "two_distinct_lifecycle_ids": true,
+    "two_distributed_completions": true,
+    "two_mode_epochs": true
+   },
+   {
+    "cell_id": "validation/validation-f9-00/N8",
+    "compact_line_compact": true,
+    "executably_reproduced_in_detached_checkout": true,
+    "family": "F9",
+    "final_topology_compact": true,
+    "recorded": {
+     "completion_agreements": 2,
+     "final_topology": 5,
+     "lifecycle_ids": [
+      1,
+      2
+     ],
+     "mode_epoch_ids": [
+      2
+     ]
+    },
+    "reproduced": {
+     "committed_topology_sequence": [
+      "COMPACT",
+      "LINE",
+      "COMPACT"
+     ],
+     "completed_switching_epochs": 2,
+     "disposition": "RECOVERABLE_POSITIVE",
+     "distinct_lifecycle_ids": [
+      1,
+      2
+     ],
+     "final_committed_topology": "COMPACT",
+     "mechanical_transition_epoch_count": 0,
+     "mode_epoch_ids": [
+      2
+     ],
+     "termination": "GOAL_COMPLETE",
+     "topology_selection_epoch_count": 2,
+     "transition_executor_windows": 2
+    },
+    "s2_disposition": "VALID_TASK_NEGATIVE",
+    "s2_line_established": false,
+    "two_distinct_lifecycle_ids": true,
+    "two_distributed_completions": true,
+    "two_mode_epochs": true
+   },
+   {
+    "cell_id": "validation/validation-f9-00/N12",
+    "compact_line_compact": true,
+    "executably_reproduced_in_detached_checkout": true,
+    "family": "F9",
+    "final_topology_compact": true,
+    "recorded": {
+     "completion_agreements": 2,
+     "final_topology": 5,
+     "lifecycle_ids": [
+      1,
+      2
+     ],
+     "mode_epoch_ids": [
+      2
+     ]
+    },
+    "reproduced": {
+     "committed_topology_sequence": [
+      "COMPACT",
+      "LINE",
+      "COMPACT"
+     ],
+     "completed_switching_epochs": 2,
+     "disposition": "RECOVERABLE_POSITIVE",
+     "distinct_lifecycle_ids": [
+      1,
+      2
+     ],
+     "final_committed_topology": "COMPACT",
+     "mechanical_transition_epoch_count": 0,
+     "mode_epoch_ids": [
+      2
+     ],
+     "termination": "GOAL_COMPLETE",
+     "topology_selection_epoch_count": 2,
+     "transition_executor_windows": 2
+    },
+    "s2_disposition": "VALID_TASK_NEGATIVE",
+    "s2_line_established": false,
+    "two_distinct_lifecycle_ids": true,
+    "two_distributed_completions": true,
+    "two_mode_epochs": true
+   }
+  ],
+  "count": 6,
+  "described_from_scalar_count_only": false,
+  "gate": "DETACHED-7"
+ },
+ "zero_epoch_f5_audit": {
+  "attribution_corrected": "PARTIAL_ATTEMPT_EFFECT",
+  "attribution_recorded": "INITIAL_CONVERSION_DRIVEN",
+  "category_definition_still_satisfied": true,
+  "category_recorded": "RECONFIGURATION_REQUIRED",
+  "category_reproduced": "RECONFIGURATION_REQUIRED",
+  "cell_id": "train/train-f5-00/N8",
+  "effect_is_inside_the_frozen_topology_control_policy": true,
+  "fairness_note": "Mission staging is owner decision 1 and is gated purely by a robot's own frozen lifecycle state, so any policy that opens an intent stages identically -- S2 does, for its one forced attempt. The asymmetry is that the online policy opens intents repeatedly and the fixed baselines by construction do not. That is a property of the policies, not of the evaluation, so it is not a fairness defect; it is nonetheless the reason this cell may not be counted as completed-reconfiguration headroom.",
+  "family": "F5",
+  "may_be_reported_as_completed_topology_switch": false,
+  "mechanism_classification": "B_PARTIAL_TRANSITION_EFFECT",
+  "mechanism_explanation": "Two LINE intents are originated (lifecycles 1 and 2) at landmark passage_entry-0 and passage_entry-1. Both reach ALL_READY_AGREEMENT and both abort with READINESS_AGREEMENT_FAILED; mode_epoch_ids stays [0], no transition executor ever runs, local dwell is never complete and there is no distributed COMPLETE. The committed topology is COMPACT for the whole episode. What changes the trajectory is mission staging: while a robot is inside an active intent it suppresses only its own goal term, so the team is staged for 39 of 133 control steps in two windows, steps 1-7 and 42-75. Fixed COMPACT opens no lifecycle, never stages, and collides at step 69 -- inside the second staging window. Fixed LINE stages only once (6 steps, its single forced initialization, which also aborts on readiness) and collides at step 74, also inside that window. The advantage is therefore an attempted reconfiguration effect mediated by the frozen mission-staging rule, not a completed topology switch.",
+  "s1_compact": {
+   "changed_topology_attempts": 0,
+   "disposition": "VALID_TASK_NEGATIVE",
+   "failed_predicates": [
+    "collision_free_complete_horizon",
+    "downstream_goal_complete"
+   ],
+   "minimum_pair_separation": 0.44972,
+   "mission_completion_time_seconds": 10.35,
+   "mission_staged_steps": 0,
+   "steps": 69,
+   "termination": "COLLISION"
+  },
+  "s2_line": {
+   "changed_topology_attempts": 1,
+   "disposition": "VALID_TASK_NEGATIVE",
+   "failed_predicates": [
+    "collision_free_complete_horizon",
+    "downstream_goal_complete"
+   ],
+   "line_established": false,
+   "mechanical_transition_epoch_count": 1,
+   "minimum_pair_separation": 0.46383,
+   "mission_completion_time_seconds": 11.1,
+   "mission_staged_steps": 6,
+   "steps": 74,
+   "termination": "COLLISION"
+  },
+  "switching": {
+   "abort_events": [
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 0,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 1,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 2,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 3,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 4,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 5,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 6,
+     "time_seconds": 0.9
+    },
+    {
+     "cause": "READINESS_AGREEMENT_FAILED",
+     "control_step": 6,
+     "robot": 7,
+     "time_seconds": 0.9
+    }
+   ],
+   "changed_topology_attempts": 2,
+   "commits": 0,
+   "committed_topology_sequence": [
+    "COMPACT"
+   ],
+   "completed_switching_epochs": 0,
+   "disposition": "RECOVERABLE_POSITIVE",
+   "distinct_lifecycle_ids": [
+    1,
+    2
+   ],
+   "distributed_completion_agreements": [],
+   "event_dispositions": [
+    {
+     "candidate_topology": 2,
+     "committed_topology_at_trigger": 5,
+     "control_step": 0,
+     "disposition": "ORIGINATED",
+     "event_type": "local_constriction",
+     "landmark_id": "passage_entry-0",
+     "ordinal": 0,
+     "originated": true,
+     "protocol_state_at_trigger": "INTENT_ACTIVE",
+     "time_seconds": 0.0,
+     "trigger_longitudinal_meters": -2.288326407917662
+    },
+    {
+     "candidate_topology": 5,
+     "committed_topology_at_trigger": 5,
+     "control_step": 41,
+     "disposition": "NO_OP_ALREADY_COMMITTED",
+     "event_type": "local_opening",
+     "landmark_id": "passage_exit-0",
+     "ordinal": 1,
+     "originated": false,
+     "protocol_state_at_trigger": "REARMED",
+     "time_seconds": 6.1499999999999995,
+     "trigger_longitudinal_meters": 3.501857245988766
+    },
+    {
+     "candidate_topology": 2,
+     "committed_topology_at_trigger": 5,
+     "control_step": 41,
+     "disposition": "ORIGINATED",
+     "event_type": "local_constriction",
+     "landmark_id": "passage_entry-1",
+     "ordinal": 2,
+     "originated": true,
+     "protocol_state_at_trigger": "INTENT_ACTIVE",
+     "time_seconds": 6.1499999999999995,
+     "trigger_longitudinal_meters": 3.501857245988766
+    },
+    {
+     "candidate_topology": 5,
+     "committed_topology_at_trigger": 5,
+     "control_step": 107,
+     "disposition": "NO_OP_ALREADY_COMMITTED",
+     "event_type": "local_opening",
+     "landmark_id": "passage_exit-1",
+     "ordinal": 3,
+     "originated": false,
+     "protocol_state_at_trigger": "REARMED",
+     "time_seconds": 16.05,
+     "trigger_longitudinal_meters": 8.004245133688608
+    }
+   ],
+   "event_log": [
+    {
+     "candidate_topology": 2,
+     "control_step": 0,
+     "event_type": "local_constriction",
+     "lifecycle_id": 1,
+     "originator": 0,
+     "time_seconds": 0.0
+    },
+    {
+     "candidate_topology": 2,
+     "control_step": 41,
+     "event_type": "local_constriction",
+     "lifecycle_id": 2,
+     "originator": 0,
+     "time_seconds": 6.1499999999999995
+    }
+   ],
+   "final_committed_topology": "COMPACT",
+   "local_dwell_complete": [
+    false
+   ],
+   "mechanical_transition_epoch_count": 0,
+   "minimum_pair_separation": 0.41796,
+   "mission_completion_time_seconds": 19.95,
+   "mission_staged_steps": 39,
+   "mission_staging_intervals": [
+    {
+     "end_seconds": 1.05,
+     "end_step": 7,
+     "max_staged_robots": 8,
+     "start_seconds": 0.15,
+     "start_step": 1,
+     "steps": 6
+    },
+    {
+     "end_seconds": 11.25,
+     "end_step": 75,
+     "max_staged_robots": 8,
+     "start_seconds": 6.3,
+     "start_step": 42,
+     "steps": 33
+    }
+   ],
+   "mode_epoch_ids": [
+    0
+   ],
+   "motion_unsettled_steps": 33,
+   "protocol_state_change_points": [
+    {
+     "control_step": 1,
+     "states": [
+      "CANDIDATE_SCORE_AGREEMENT"
+     ],
+     "time_seconds": 0.15
+    },
+    {
+     "control_step": 2,
+     "states": [
+      "ALL_READY_AGREEMENT"
+     ],
+     "time_seconds": 0.3
+    },
+    {
+     "control_step": 6,
+     "states": [
+      "ABORTED"
+     ],
+     "time_seconds": 0.9
+    },
+    {
+     "control_step": 31,
+     "states": [
+      "REARMED"
+     ],
+     "time_seconds": 4.65
+    },
+    {
+     "control_step": 42,
+     "states": [
+      "CANDIDATE_SCORE_AGREEMENT"
+     ],
+     "time_seconds": 6.3
+    },
+    {
+     "control_step": 43,
+     "states": [
+      "ALL_READY_AGREEMENT"
+     ],
+     "time_seconds": 6.45
+    },
+    {
+     "control_step": 74,
+     "states": [
+      "ABORTED"
+     ],
+     "time_seconds": 11.1
+    },
+    {
+     "control_step": 99,
+     "states": [
+      "REARMED"
+     ],
+     "time_seconds": 14.85
+    }
+   ],
+   "protocol_terminal_states": [
+    "REARMED"
+   ],
+   "steps": 133,
+   "termination": "GOAL_COMPLETE",
+   "topology_selection_epoch_count": 2,
+   "transition_executor_windows": []
+  }
+ }
+}

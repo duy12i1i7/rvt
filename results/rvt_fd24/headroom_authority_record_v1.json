@@ -1,0 +1,71 @@
+{
+ "decision": {
+  "additive_record": true,
+  "candidate_artifact_edited": false,
+  "rationale": "Clean detached reproduction is exact on all 150 cells and 450 policy executions with no tolerance, the zero-completed-epoch F5 cell is mechanism-classified B (partial transition effect, legitimate under the frozen mission-staging decision) and is not reported as a completed switch, and all six two-epoch cells are executably confirmed as genuine COMPACT->LINE->COMPACT.",
+  "status_after": "AUTHORITATIVE_PRE_DATA_HEADROOM",
+  "status_before": "CANDIDATE_AUTHORITATIVE"
+ },
+ "evidence": {
+  "artifact": "results/rvt_fd24/headroom_v6_detached_reproduction_v1.json",
+  "cells_reproduced": 150,
+  "detached_checkout_clean": true,
+  "detached_checkout_commit": "8565113e6f432f07caf10db8ce8012fa6ecb63ca",
+  "exact_cells": 150,
+  "full_suite": {
+   "command": "python -m pytest tests/ -q",
+   "errors": 0,
+   "executed_from": "/private/tmp/claude-501/-Users-udy-rvt/11a6e7dd-155e-4e21-8fa2-4f8f305b038c/scratchpad/detached",
+   "failed": 0,
+   "gate": "DETACHED-16",
+   "passed": 2587,
+   "publication_required_xfailed": 0,
+   "wall_clock_seconds": 347,
+   "warnings": 1,
+   "xfailed": 0,
+   "xpassed": 0
+  },
+  "mismatched_cells": 0,
+  "policy_executions_reproduced": 450,
+  "schema_version": "rvt-headroom-v6-detached-reproduction/v1",
+  "sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32"
+ },
+ "headroom_authority_record_sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+ "promotion_parent_commit": "8565113e6f432f07caf10db8ce8012fa6ecb63ca",
+ "schema_version": "rvt-headroom-authority-record/v1",
+ "scope_and_limits": {
+  "H2_EMPIRICALLY_CONFIRMED": false,
+  "H2_REQUIRED_SCOPE": "LEVEL_A",
+  "V6_HEADROOM_SUPPORTS_H2_VIABILITY": true,
+  "effect_size_threshold_evaluated": false,
+  "statement": "AUTHORITATIVE_PRE_DATA_HEADROOM means the headroom qualification is settled for pre-data purposes. It does not evaluate the >= 0.10 absolute criterion in H2, which requires the later trained and evaluated primary method."
+ },
+ "subject": {
+  "artifact": "results/rvt_fd24/headroom_requalification_v6.json",
+  "candidate_commit": "8565113e6f432f07caf10db8ce8012fa6ecb63ca",
+  "schema_version": "rvt-headroom-requalification/v6",
+  "sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "tag": "rvt-headroom-v6-candidate-v1"
+ },
+ "supersedes_analysis_fields": {
+  "results/rvt_fd24/headroom_requalification_v6.json#authority_condition": {
+   "corrected": "satisfied; see the detached reproduction artifact",
+   "recorded": "conditional on clean detached reproduction, which has NOT been run"
+  },
+  "results/rvt_fd24/headroom_requalification_v6.json#reconfiguration_required.attribution": {
+   "corrected": {
+    "MIXED": 6,
+    "PARTIAL_ATTEMPT_EFFECT": 1
+   },
+   "corrected_by": "results/rvt_fd24/headroom_v6_detached_reproduction_v1.json",
+   "recorded": {
+    "INITIAL_CONVERSION_DRIVEN": 1,
+    "MIXED": 6
+   }
+  },
+  "results/rvt_fd24/headroom_requalification_v6.json#status": {
+   "corrected": "AUTHORITATIVE_PRE_DATA_HEADROOM",
+   "recorded": "CANDIDATE_AUTHORITATIVE"
+  }
+ }
+}
