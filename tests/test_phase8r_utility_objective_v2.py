@@ -184,9 +184,21 @@ def test_every_clearance_threshold_comes_from_the_frozen_collision_truth() -> No
         + inflation["obstacle_surface_margin_meters"])
     assert inflation["circle_center_threshold_formula"] == (
         "robot_radius + max(safety.obstacle_clearance_margin, circle_radius)")
+    binding_path = ROOT / "rb15_residual_expert_binding_v2.json"
+    refactor = (json.loads(binding_path.read_text())["producer"]["session_refactor"]
+                if binding_path.exists() else None)
     for row in SPEC["clearance_sources"]:
         digest = hashlib.sha256(pathlib.Path(row["source_file"]).read_bytes()).hexdigest()
-        assert digest == row["source_file_sha256"], row["source_file"]
+        if digest == row["source_file_sha256"]:
+            continue
+        # A cited file may move only through a recorded behaviour-identical
+        # refactor. The frozen specification is never rewritten to match.
+        assert refactor is not None, row["source_file"]
+        assert refactor["file"] == row["source_file"], row["source_file"]
+        assert refactor["sha256_before"] == row["source_file_sha256"]
+        assert refactor["sha256_after"] == digest
+        assert refactor["behaviour_identical"] is True
+        assert refactor["frozen_spec_rewritten"] is False
 
 
 def test_no_communication_sensing_or_formation_scale_is_used_as_a_clearance_threshold() -> None:

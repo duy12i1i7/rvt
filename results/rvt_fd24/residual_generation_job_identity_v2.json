@@ -1,0 +1,97 @@
+{
+ "derived_from": "the fields the implemented producer actually consumes and varies over, observed in the RB-15 V2 canary",
+ "generation_authorized": false,
+ "invalid_record_handling": {
+  "no_eligible_candidate": "the frozen selector raises; the frozen budget contract already declares residual_expert_invalid = 'preserve_base_and_failure_metadata_no_target_row_keep_invalid_denominator_no_replacement'",
+  "observed_cause": "the local safety projection reported infeasible_conservative_fallback for every candidate, including the zero residual, so no candidate is eligible",
+  "observed_in_canary": 1
+ },
+ "official_job_manifest_mutated": false,
+ "official_job_records_emitted": 0,
+ "required_fields": [
+  {
+   "components": [
+    "study",
+    "split",
+    "family",
+    "layout_sha256",
+    "team_size"
+   ],
+   "field": "residual_cell_job_id",
+   "producer_evidence": "one binding per (layout, team size, split)",
+   "role": "scientific cell identity"
+  },
+  {
+   "components": [
+    "source_episode_job_id",
+    "episode_id",
+    "control_step"
+   ],
+   "field": "decision_state_id",
+   "producer_evidence": "the snapshot hash varies with the control step; the canary evaluates two decision steps per case and gets different snapshot hashes and rollout lengths",
+   "role": "decision-state / dense-row identity"
+  },
+  {
+   "components": [
+    "robot_id"
+   ],
+   "field": "robot_id",
+   "producer_evidence": "the RobotView hash, base action and selected candidate differ per robot at the same decision state",
+   "role": "the observing robot"
+  },
+  {
+   "components": [
+    "candidate_index",
+    "candidate_lattice_sha256"
+   ],
+   "field": "candidate_index",
+   "producer_evidence": "nine independent counterfactual continuations per (decision state, robot), each with its own canonical hash and cost",
+   "role": "which of the nine residual candidates"
+  },
+  {
+   "components": [
+    "replica_index"
+   ],
+   "field": "replica_index",
+   "producer_evidence": "replica_count_for_family is 3 for F8/F9 and 1 otherwise; the canary covers both",
+   "role": "matched replica where the family declares one"
+  },
+  {
+   "components": [
+    "initial_position_stream",
+    "initial_velocity_stream",
+    "s5_stream",
+    "disturbance_stream",
+    "communication_snapshot"
+   ],
+   "field": "matched_stream_identity",
+   "producer_evidence": "recorded per evaluation and verified identical across all nine candidates of one decision state",
+   "role": "the exogenous realization"
+  },
+  {
+   "components": [
+    "residual_expert_spec_v2_sha256"
+   ],
+   "field": "residual_expert_spec_v2_sha256",
+   "producer_evidence": "the candidate set, insertion boundary, intervention duration and all four utility formulas come from this artifact; a different hash is a different label",
+   "role": "the label contract version"
+  }
+ ],
+ "residual_generation_job_identity_v2_sha256": "2b0923cd5f2ca2f1b6c1f45183e0386f292e18667cd5d1f910517217c402bef4",
+ "schema_version": "rvt-residual-generation-job-identity/v2",
+ "source_commit": "1255a432bc85e3861b44e6c6313214ea6332b18f",
+ "status": "PROPOSED_INPUT_TO_RB17",
+ "supersedes_for_residual_jobs_only": {
+  "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json",
+  "field": "job_identity_contract.residual_cell",
+  "stored_value": [
+   "study",
+   "split",
+   "family",
+   "layout_sha256",
+   "team_size"
+  ],
+  "why_insufficient": "the stored identity stops at the cell, so the nine candidate continuations behind one dense row share one identity; they cannot be retried, deduplicated or audited individually under duplicate_semantic_identity_policy = 'reject'"
+ },
+ "uniqueness_rule": "a counterfactual evaluation is uniquely identified by (residual_cell_job_id, decision_state_id, robot_id, candidate_index, replica_index); matched_stream_identity and residual_expert_spec_v2_sha256 are verification fields, not disambiguators"
+}

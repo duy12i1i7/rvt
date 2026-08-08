@@ -377,6 +377,31 @@ class SimulatorEpisodeSession:
             obstacles=tuple(obstacles),
         )
 
+    def local_decision_inputs(self, robot: RobotRuntimeState):
+        """The robot-local decision inputs for one control step.
+
+        Extracted so `step` and the RB-15 V2 residual-expert producer share one
+        implementation: the producer must see exactly the view, controller input
+        and controller instance the runtime itself would use, never a
+        reconstruction.
+
+        While the frozen profile is running the robot's local target comes from
+        `RobotLocalTransitionExecutor`, whose `build_input`/`evaluate` interface
+        is identical to the forced-topology adapter. No interpolation is
+        recomputed here.
+        """
+        view = self._build_robot_view(robot)
+        adapter = (robot.transition_executor if robot.transition_executor is not None
+                   else robot.adapter_by_topology[robot.committed_topology])
+        controller_input = adapter.build_input(view, self.time_seconds)
+        dynamic_states = self._dynamic_obstacle_relative_states(robot)
+        if dynamic_states:
+            controller_input = replace(
+                controller_input,
+                obstacle_states=controller_input.obstacle_states + dynamic_states)
+        controller = getattr(adapter, 'controller', None) or adapter.adapter.controller
+        return view, controller_input, controller
+
     def _dynamic_obstacle_relative_states(self, robot: RobotRuntimeState
                                           ) -> Tuple[LocalObstacleControlState, ...]:
         """Dynamic tokens with true relative velocity.
@@ -451,24 +476,11 @@ class SimulatorEpisodeSession:
         actions: List[Vec2] = []
 
         for robot in self.robots:
-            view = self._build_robot_view(robot)
-            # While the frozen profile is running the robot's local target comes
-            # from RobotLocalTransitionExecutor, whose build_input/evaluate
-            # interface is identical to the forced-topology adapter. No
-            # interpolation is recomputed here.
-            adapter = (robot.transition_executor if robot.transition_executor is not None
-                       else robot.adapter_by_topology[robot.committed_topology])
-            controller_input = adapter.build_input(view, self.time_seconds)
-            dynamic_states = self._dynamic_obstacle_relative_states(robot)
-            if dynamic_states:
-                controller_input = replace(
-                    controller_input,
-                    obstacle_states=controller_input.obstacle_states + dynamic_states)
+            view, controller_input, controller = self.local_decision_inputs(robot)
 
             # Source policy acts on robot-local data only.
             self.source_policy.observe(self, robot, view, controller_input)
 
-            controller = getattr(adapter, 'controller', None) or adapter.adapter.controller
             output = controller.evaluate(controller_input)
 
             # Mission staging (owner decision 1). `base_action` is the plain sum

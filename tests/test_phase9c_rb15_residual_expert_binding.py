@@ -161,16 +161,27 @@ def _evaluation_constructors() -> list[str]:
     return found
 
 
-def test_no_publication_runtime_candidate_producer_exists() -> None:
-    """The RB15-1 finding. A later phase that adds one must update this test.
+def test_the_publication_producer_arrived_with_a_frozen_enumeration() -> None:
+    """RB15-1 said adding a producer is a *specification* act. It was.
 
-    The point is that adding a producer is a *specification* act: it must arrive
-    with a frozen enumeration, not as an implementation detail.
+    RB-15 V1 recorded that no publication producer existed. One exists now, and
+    the invariant that must hold is the one RB15-1 actually cared about: there
+    is exactly one publication producer, and its candidate set comes from the
+    frozen V2 lattice rather than from an implementation detail.
     """
     constructors = _evaluation_constructors()
-    assert constructors == ["rvt_swarm/phase8/diagnostic.py"], constructors
-    assert not any(path.startswith("rvt_swarm/phase9c") for path in constructors)
+    assert constructors == ["rvt_swarm/phase8/diagnostic.py",
+                            "rvt_swarm/phase9c_rb/residual_expert_v2.py"], constructors
+    # the RB-15 V1 finding is unchanged: at that commit there was no producer
     assert BINDING["producer_implemented"] is False
+    v2 = json.loads((ROOT / "rb15_residual_expert_binding_v2.json").read_text())
+    assert v2["producer_implemented"] is True
+    assert v2["candidate_set"]["sha256"] == json.loads(
+        (ROOT / "residual_expert_spec_v2.json").read_text())[
+            "candidate_lattice"]["candidate_set_sha256"]
+    assert v2["candidate_set"]["literal_in_producer"] is False
+    producer = pathlib.Path("rvt_swarm/phase9c_rb/residual_expert_v2.py").read_text()
+    assert "residual_candidate_lattice" in producer
 
 
 def test_the_two_known_producers_are_fixtures_and_disagree() -> None:
@@ -214,8 +225,23 @@ def test_the_four_scored_terms_are_computed_only_by_the_frozen_v2_reducers() -> 
         text = path.read_text()
         if any(name in text for name in scored):
             referencing.append(path.as_posix())
-    assert referencing == ["rvt_swarm/phase8r/utility_v2.py"], referencing
-    assert _evaluation_constructors() == ["rvt_swarm/phase8/diagnostic.py"]
+    assert referencing == ["rvt_swarm/phase8r/utility_v2.py",
+                           "rvt_swarm/phase9c_rb/residual_expert_v2.py"], referencing
+    # The producer only *names* them. Every value is delegated to the frozen
+    # reducers: any attribute access on one must be `utility_v2.<name>`, and the
+    # producer may not define a function of that name itself.
+    import ast
+    producer_path = pathlib.Path("rvt_swarm/phase9c_rb/residual_expert_v2.py")
+    tree = ast.parse(producer_path.read_text())
+    delegated = 0
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and node.attr in scored:
+            assert isinstance(node.value, ast.Name) and node.value.id == "utility_v2", (
+                ast.dump(node))
+            delegated += 1
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            assert node.name not in scored, node.name
+    assert delegated == 4                       # one call per utility field
     # The RB-15 finding itself is unchanged: at that commit, nothing computed them.
     assert BINDING["score_and_selection"]["normalizers_frozen"] is False
     assert BINDING["score_and_selection"]["normalizer_definitions_found"] == 0
@@ -255,9 +281,31 @@ def test_field_mapping_is_complete_and_has_no_vague_entries() -> None:
 
 
 def test_robot_local_information_only_is_never_asserted_in_production_code() -> None:
-    """RB15-5: the flag must be earned. No publication module may set it True."""
+    """RB15-5: the flag must be earned, never assigned.
+
+    The producer now populates the field, so absence is no longer the test.
+    What must hold is that no publication module ever writes a literal into it:
+    it is a read-only property of recorded provenance.
+    """
+    import ast
     for path in sorted(pathlib.Path("rvt_swarm/phase9c_rb").rglob("*.py")):
-        assert "robot_local_information_only" not in path.read_text(), path
+        tree = ast.parse(path.read_text())
+        for node in ast.walk(tree):
+            targets = []
+            if isinstance(node, ast.Assign):
+                targets = node.targets
+            elif isinstance(node, ast.AnnAssign) and node.value is not None:
+                targets = [node.target]      # a bare annotation declares, it does not assign
+            for target in targets:
+                name = getattr(target, "attr", getattr(target, "id", ""))
+                assert name != "robot_local_information_only", (path, ast.dump(node))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.keyword) and (
+                    node.arg == "robot_local_information_only"):
+                assert not isinstance(node.value, ast.Constant), (path, ast.dump(node))
+    from rvt_swarm.phase9c_rb.residual_expert_v2 import CandidateActionProvenance
+    assert isinstance(
+        type(CandidateActionProvenance()).robot_local_information_only, property)
     assert BINDING["information_boundary"][
         "robot_local_information_only_asserted_in_production_code"] is False
     assert BINDING["information_boundary"]["separate_expert_view_created"] is False

@@ -1,0 +1,378 @@
+{
+ "audits": {
+  "candidate_order_independence": "PASS",
+  "determinism_repeat": "PASS",
+  "failure_trajectories_scored": "PASS",
+  "hidden_global_intervention": "PASS",
+  "identical_snapshot_per_candidate": "PASS",
+  "matched_exogenous_streams": "PASS",
+  "one_hop_non_vacuity": "PASS",
+  "one_interval_intervention": "PASS",
+  "provenance_negative_test": "PASS",
+  "rb16_rotation_applied": false,
+  "selector_equivalence": "PASS",
+  "target_builder_native_frame": "PASS",
+  "test_count": 39,
+  "test_module": "tests/test_phase9c_rb15_v2_producer.py"
+ },
+ "authoritative_inputs": {
+  "action_pipeline_erratum": {
+   "path": "results/rvt_fd24/residual_action_pipeline_erratum_v1.json",
+   "sha256": "e14848c8c540f386f29fd0360fbb7758bf71cfc0cfd7c21f2ca94004c0c96c8d"
+  },
+  "candidate_enumerator": {
+   "modified": false,
+   "path": "rvt_swarm/phase8r/residual_lattice.py",
+   "sha256": "67d0b0a5086892aa8a901836442293ec6df6d355f14903c8b27275c213153b3d"
+  },
+  "local_safety_projection": {
+   "modified": false,
+   "path": "rvt_swarm/decentralized/local_safety_projection.py",
+   "sha256": "16e06727f9052198070c74814fd1822d0450c25a4d5d456f48fc33362e46c26e"
+  },
+  "matched_streams": {
+   "path": "rvt_swarm/phase9c_rb/streams.py",
+   "sha256": "08cbbec160c8f00aef51296d7a89764eb60d7b77d45663872c23ea89d0af00bd"
+  },
+  "phase6_controller": {
+   "modified": false,
+   "path": "rvt_swarm/decentralized/robot_local_controller.py",
+   "sha256": "1cfe364d706f06fe4602c5a3033e89051b3ca808443d4afd906c7e1319564a9f"
+  },
+  "phase8_targets_module": {
+   "sha256": "184f464b77a550d400a3784b9d2bd8db892496cde8a3bb33c87148c0846bc809"
+  },
+  "residual_expert_spec_v2": {
+   "path": "results/rvt_fd24/residual_expert_spec_v2.json",
+   "reinterpreted": false,
+   "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf"
+  },
+  "residual_label_contract_composite_v2": {
+   "path": "results/rvt_fd24/residual_label_contract_composite_v2.json",
+   "sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad"
+  },
+  "robot_view": {
+   "accessor_symbol": "SimulatorEpisodeSession.local_decision_inputs",
+   "builder_path": "rvt_swarm/phase9c_rb/session.py",
+   "builder_sha256": "9a88932f69f6cba6eddd698af6a60840e12ed416e25c9eaad1b4286e31d2c342",
+   "builder_symbol": "SimulatorEpisodeSession._build_robot_view",
+   "definition_path": "rvt_swarm/decentralized/system_model.py",
+   "definition_sha256": "d62c0983234f26d6e73db1377e069a751310cc7950e1b5102b683a9c20d41607",
+   "definition_symbol": "RobotView",
+   "richer_expert_only_view_created": false
+  },
+  "snapshot": {
+   "path": "rvt_swarm/phase9c_rb/counterfactual.py",
+   "sha256": "6fc65a03f71393b84009338a4136cbdd7b1274501f98e1aa50e87ba7f4f09bb3",
+   "symbol": "EpisodeSnapshot"
+  },
+  "utility_reducers": {
+   "modified": false,
+   "path": "rvt_swarm/phase8r/utility_v2.py",
+   "sha256": "7b32ce8a58b3909f48e25166274596de958a98391bee8bd54acc2719ab608af5"
+  },
+  "v1_evaluation_schema": {
+   "extended": false,
+   "fields": [
+    "action_world_acceleration",
+    "locally_feasible",
+    "safety_projection_compatible",
+    "robot_local_information_only",
+    "normalized_progress",
+    "normalized_clearance_margin",
+    "normalized_formation_error",
+    "normalized_action_deviation"
+   ],
+   "path": "rvt_swarm/phase8/targets.py",
+   "sha256": "c6f4d5176abe7b9c0366eb1a99440b5a63c0f1035ce76ff912eb892974360dc9",
+   "symbol": "LocalActionEvaluation"
+  },
+  "v1_selector": {
+   "modified": false,
+   "path": "rvt_swarm/phase8/targets.py",
+   "sha256": "535c4e639d598bb75bc4822cdbbc320c48c69a7f86f8d5b96dec2dd5ace9a123",
+   "symbol": "select_counterfactual_local_action"
+  },
+  "v1_target_builder": {
+   "modified": false,
+   "path": "rvt_swarm/phase8/targets.py",
+   "sha256": "b8bd0ae34c1a659009efbe9943c4e30d3a0b187ea8d3524dfd28ae4083d51c9e",
+   "symbol": "build_residual_action_target"
+  }
+ },
+ "canary": {
+  "candidate_evaluations": 90,
+  "collision_counterfactuals": 26,
+  "decision_states": 10,
+  "families": [
+   "F1",
+   "F5",
+   "F8",
+   "F9"
+  ],
+  "path": "results/rvt_fd24/rb15_v2_canary_v1.json",
+  "projection_changed_the_action": 12,
+  "provenance_class": "RUNTIME_CONFORMANCE_ONLY",
+  "scientific_supervision": false,
+  "selector_failures": 1,
+  "sha256": "c09f7d20a6844cae13cd022604fe6e94b745596616a034c6285f13593f9523f4",
+  "team_sizes": [
+   5,
+   6,
+   8,
+   12
+  ]
+ },
+ "candidate_set": {
+  "bound_source": "rvt_swarm/fd24/configuration.py::residual_action_limits",
+  "candidates": [
+   [
+    -0.15,
+    -0.15
+   ],
+   [
+    -0.15,
+    0.0
+   ],
+   [
+    -0.15,
+    0.15
+   ],
+   [
+    0.0,
+    -0.15
+   ],
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.15
+   ],
+   [
+    0.15,
+    -0.15
+   ],
+   [
+    0.15,
+    0.0
+   ],
+   [
+    0.15,
+    0.15
+   ]
+  ],
+  "count": 9,
+  "literal_in_producer": false,
+  "ordering": "x-major then y, each ascending: -b, 0, +b",
+  "phase8_fixture_candidate_values_required_to_match": false,
+  "phase8_fixture_rationale": "RB-15 established those producers are non-authoritative fixtures; the equivalence requirement is selector and target-builder semantics on identical records, not fixture candidate values",
+  "sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+  "zero_residual_index": 4
+ },
+ "expert_id": "B_FROZEN_COUNTERFACTUAL_LOCAL_ACTION_SEARCH_V2",
+ "generation": {
+  "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_PERFORMANCE_BENCHMARK",
+  "generation_budget_modified": false,
+  "generation_budget_sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+  "official_generation_authorized": false,
+  "official_residual_generation_run": false
+ },
+ "headroom_provenance": {
+  "H2_EMPIRICALLY_CONFIRMED": false,
+  "H2_PRE_DATA_VIABILITY": true,
+  "headroom_authority_record_sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+  "headroom_requalification_v6_sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "headroom_v6_detached_reproduction_sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32",
+  "modified": false
+ },
+ "intervention_semantics": {
+  "behavioural_spy": "applied_control_steps, asserted to be exactly one step",
+  "duration_control_intervals": 1,
+  "insertion_point": "BEFORE_LOCAL_SAFETY_PROJECTION",
+  "mechanism": "SourcePolicy.acceleration_disturbance, which the runtime adds to base_action and then re-projects with the unchanged projection",
+  "other_robots": "ordinary frozen local policies; the wrapper is transparent",
+  "termination": "ordinary frozen terminal semantics; no new horizon or discount"
+ },
+ "isolation": {
+  "final_test_access_count": 0,
+  "locality_violations": 0,
+  "new_fd24_checkpoints": 0,
+  "optimizer_states": 0,
+  "recoverability_rows": 0,
+  "residual_rows": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0,
+  "training_operations": 0
+ },
+ "job_identity_v2": {
+  "input_to": "RB-17",
+  "official_manifest_changed": false,
+  "path": "results/rvt_fd24/residual_generation_job_identity_v2.json",
+  "sha256": "2b0923cd5f2ca2f1b6c1f45183e0386f292e18667cd5d1f910517217c402bef4"
+ },
+ "performance": {
+  "early_terminating_candidates_at_most_20_intervals": 14,
+  "efficiency_assumed": null,
+  "formula_single_worker": "mean_seconds_per_candidate_continuation * 4824000",
+  "formula_w_workers": "wall_seconds(W) = mean_seconds_per_candidate * 4824000 / (W * efficiency(W)), with efficiency(W) <= 1 and unmeasured here",
+  "frozen_candidate_evaluation_upper_bound": 4824000,
+  "gate": "RB15V2-35",
+  "limitations": [
+   "the canary samples a handful of decision states, not the generation distribution over families, team sizes, policies and timesteps",
+   "rollout length dominates cost and varies with the decision timestep: a late decision state continues for fewer intervals than an early one",
+   "larger teams cost more per interval; the canary covers N in {5,6,8,12} and never N=16 or N=24",
+   "no parallel efficiency was measured, so any W-worker figure is an upper bound on throughput rather than a prediction",
+   "the measurement is single-process on one machine with no I/O, serialization or job-scheduling overhead included"
+  ],
+  "long_rollout_candidates": 76,
+  "process_parallelism": {
+   "interpreter": "3.9.6",
+   "measurement": "single process, single worker, no parallelism applied",
+   "workers_used": 1
+  },
+  "rollout_control_intervals_per_candidate": {
+   "count": 90,
+   "maximum": 474.0,
+   "mean": 96.655556,
+   "median": 65.0,
+   "minimum": 9.0,
+   "p90": 89.0,
+   "p95": 471.0
+  },
+  "seconds_per_candidate_continuation": {
+   "count": 90,
+   "maximum": 8.990364,
+   "mean": 1.593423,
+   "median": 0.333563,
+   "minimum": 0.252298,
+   "p90": 3.768343,
+   "p95": 8.823311
+  },
+  "seconds_per_nine_candidate_expert_evaluation": {
+   "count": 10,
+   "maximum": 79.707886,
+   "mean": 14.344794,
+   "median": 3.574526,
+   "minimum": 2.314072,
+   "p90": 27.306187,
+   "p95": 27.306187
+  },
+  "single_worker_days": 88.97,
+  "single_worker_hours": 2135.2,
+  "single_worker_seconds": 7686672.6,
+  "timeout_chosen": null,
+  "timing_source": "the diagnostic canary only",
+  "total_wall_clock_seconds": 146.718,
+  "workers_chosen": null
+ },
+ "performance_status": {
+  "RESIDUAL_V2_PERFORMANCE_STATUS": "QUALIFIED_FOR_JOB_BUDGET_DESIGN",
+  "candidates_still": 9,
+  "evaluation_still_episode_remainder": true,
+  "evidence": {
+   "candidate_continuations_measured": 90,
+   "maximum_seconds_per_candidate": 8.990364,
+   "mean_seconds_per_candidate": 1.593423,
+   "median_seconds_per_candidate": 0.333563,
+   "p95_seconds_per_candidate": 8.823311,
+   "single_worker_days_for_the_frozen_upper_bound": 88.97
+  },
+  "intervention_still_one_control_interval": true,
+  "not_qualified_to_choose": [
+   "a generation timeout",
+   "a worker count",
+   "a parallel efficiency"
+  ],
+  "reasoning": "the producer runs end to end on every diagnostic case, the cost is dominated by rollout length in a way that scales predictably, and the single-worker projection is large but finite and parallelises over independent cells. That is enough to design a job budget, and it is not enough to choose a timeout, which is why none was chosen. It is not OPERATIONAL_RISK because no case failed, hung or exceeded the frozen horizon guard; it is not INSUFFICIENT_BENCHMARK because all four constraint classes, four families, four team sizes, both policies, collision and safety-infeasible outcomes were exercised.",
+  "scientific_parameters_changed_to_improve_performance": [],
+  "utility_objective_unchanged": true
+ },
+ "producer": {
+  "entry_point": "evaluate_residual_expert_v2",
+  "entry_point_sha256": "b1d088765d78c2276029c1be8d03d6446028cc57bdbf73e2af69e50955d58ec8",
+  "path": "rvt_swarm/phase9c_rb/residual_expert_v2.py",
+  "session_refactor": {
+   "behaviour_identical": true,
+   "change": "SimulatorEpisodeSession.local_decision_inputs extracted from step so the producer sees the runtime's own view, controller input and controller instance rather than a reconstruction",
+   "cited_threshold_unchanged": "the ROBOT_ROBOT threshold is still RuntimeConfig.derived.robot_robot_required_clearance_meters and the collision truth still uses it; only the file digest moved",
+   "evidence": "nine committed v6 policy records across three cells reproduce exactly after the refactor",
+   "file": "rvt_swarm/phase9c_rb/session.py",
+   "frozen_spec_rewritten": false,
+   "sha256_after": "9a88932f69f6cba6eddd698af6a60840e12ed416e25c9eaad1b4286e31d2c342",
+   "sha256_before": "ad105e916979b69b2016346d58524af50dcf1648fc506ad6f4deb87694b8a812",
+   "supersedes_citation_in": "results/rvt_fd24/residual_expert_spec_v2.json#clearance_sources[ROBOT_ROBOT].source_file_sha256"
+  },
+  "sha256": "8439f547e5d77e725c836771494dc2382aebc47ef97db87446d2b6adbab4a440"
+ },
+ "producer_implemented": true,
+ "provenance_semantics": {
+  "allowed_action_side": [
+   "SELF_LOCAL",
+   "ONE_HOP_LOCAL",
+   "LOCAL_OBSTACLE",
+   "LOCAL_PROTOCOL_STATE",
+   "LOCAL_CONTROLLER_DERIVED",
+   "LOCAL_SAFETY_DERIVED",
+   "IMMUTABLE_FROZEN_CONFIG"
+  ],
+  "empty_provenance_certifies_locality": false,
+  "forbidden_action_side": [
+   "GLOBAL_STATE",
+   "NON_NEIGHBOR_STATE",
+   "OFFLINE_LABEL_ORACLE",
+   "FINAL_OUTCOME",
+   "SEALED_LABEL"
+  ],
+  "label_oracle_centralized": true,
+  "label_oracle_field_location": "this artifact and the canary, never the frozen V1 dataclass",
+  "literal_assignment_present": false,
+  "recorded_fields": [
+   "robot_view.self_state",
+   "robot_view.neighbours",
+   "robot_view.obstacles",
+   "robot_view.committed_topology",
+   "runtime_configuration",
+   "model_configuration",
+   "phase6_base_action",
+   "local_safety_projection",
+   "residual_candidate"
+  ],
+  "robot_local_information_only": "derived from recorded provenance, never asserted"
+ },
+ "rb15_residual_expert_binding_v2_sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+ "rb16": {
+  "PRIMARY_SYNTHETIC_ROTATION_AUGMENTATION": "DISABLED",
+  "started": false
+ },
+ "schema_version": "rvt-rb15-residual-expert-binding/v2",
+ "source_commit": "1255a432bc85e3861b44e6c6313214ea6332b18f",
+ "status": "BOUND_AND_AUDITED",
+ "utility_binding": {
+  "normalized_action_deviation": {
+   "formula": "||delta_u_world||_2 / ||(bx, by)||_2",
+   "information_class": "LOCAL_ACTION_INFORMATION",
+   "reducer": "rvt_swarm/phase8r/utility_v2.py::normalized_action_deviation",
+   "trace_convention": "post-step samples, M == K, initial state excluded"
+  },
+  "normalized_clearance_margin": {
+   "formula": "min_t min_c (distance_c(t) - threshold_c) / threshold_c",
+   "information_class": "OFFLINE_LABEL_ORACLE",
+   "reducer": "rvt_swarm/phase8r/utility_v2.py::normalized_clearance_margin",
+   "trace_convention": "post-step samples, M == K, initial state excluded"
+  },
+  "normalized_formation_error": {
+   "formula": "sqrt((1/M) * sum_t ||e_form(t)||_2^2) / nominal_spacing_meters",
+   "information_class": "OFFLINE_LABEL_ORACLE",
+   "reducer": "rvt_swarm/phase8r/utility_v2.py::normalized_formation_error",
+   "trace_convention": "post-step samples, M == K, initial state excluded"
+  },
+  "normalized_progress": {
+   "formula": "(1/K) * sum_{k=0}^{K-1} (p_{k+1} - p_k) / nominal_spacing_meters",
+   "information_class": "OFFLINE_LABEL_ORACLE",
+   "reducer": "rvt_swarm/phase8r/utility_v2.py::normalized_progress",
+   "trace_convention": "post-step samples, M == K, initial state excluded"
+  }
+ }
+}

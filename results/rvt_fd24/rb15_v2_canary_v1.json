@@ -1,0 +1,3120 @@
+{
+ "SCIENTIFIC_SUPERVISION": false,
+ "candidate_evaluations": 90,
+ "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+ "candidates_where_projection_changed_the_action": 12,
+ "cases": [
+  {
+   "decision_steps": [
+    10,
+    30
+   ],
+   "family": "F1",
+   "layout_id": "train-f1-00",
+   "policy": "S1_ALWAYS_COMPACT",
+   "robots": [
+    0,
+    2
+   ],
+   "split": "train",
+   "team_size": 6
+  },
+  {
+   "decision_steps": [
+    40,
+    60
+   ],
+   "family": "F5",
+   "layout_id": "train-f5-00",
+   "policy": "S1_ALWAYS_COMPACT",
+   "robots": [
+    0,
+    3
+   ],
+   "split": "train",
+   "team_size": 8
+  },
+  {
+   "decision_steps": [
+    25
+   ],
+   "family": "F9",
+   "layout_id": "train-f9-00",
+   "policy": "S0_SCRIPTED_DIAGNOSTIC",
+   "robots": [
+    0
+   ],
+   "split": "train",
+   "team_size": 12
+  },
+  {
+   "decision_steps": [
+    20
+   ],
+   "family": "F8",
+   "layout_id": "validation-f8-00",
+   "policy": "S1_ALWAYS_COMPACT",
+   "robots": [
+    0
+   ],
+   "split": "validation",
+   "team_size": 5
+  }
+ ],
+ "collision_counterfactuals": 26,
+ "decision_states_evaluated": 10,
+ "families_covered": [
+  "F1",
+  "F5",
+  "F8",
+  "F9"
+ ],
+ "headroom_provenance": {
+  "H2_EMPIRICALLY_CONFIRMED": false,
+  "H2_PRE_DATA_VIABILITY": true,
+  "headroom_authority_record_sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+  "headroom_requalification_v6_sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+  "headroom_v6_detached_reproduction_sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32",
+  "modified": false
+ },
+ "n24_used": false,
+ "official_generation_counters_incremented": false,
+ "performance": {
+  "early_terminating_candidates_at_most_20_intervals": 14,
+  "gate": "RB15V2-34",
+  "long_rollout_candidates": 76,
+  "process_parallelism": {
+   "interpreter": "3.9.6",
+   "measurement": "single process, single worker, no parallelism applied",
+   "workers_used": 1
+  },
+  "rollout_control_intervals_per_candidate": {
+   "count": 90,
+   "maximum": 474.0,
+   "mean": 96.655556,
+   "median": 65.0,
+   "minimum": 9.0,
+   "p90": 89.0,
+   "p95": 471.0
+  },
+  "seconds_per_candidate_continuation": {
+   "count": 90,
+   "maximum": 8.990364,
+   "mean": 1.593423,
+   "median": 0.333563,
+   "minimum": 0.252298,
+   "p90": 3.768343,
+   "p95": 8.823311
+  },
+  "seconds_per_nine_candidate_expert_evaluation": {
+   "count": 10,
+   "maximum": 79.707886,
+   "mean": 14.344794,
+   "median": 3.574526,
+   "minimum": 2.314072,
+   "p90": 27.306187,
+   "p95": 27.306187
+  },
+  "timing_source": "the diagnostic canary only",
+  "total_wall_clock_seconds": 146.718
+ },
+ "projection": {
+  "efficiency_assumed": null,
+  "formula_single_worker": "mean_seconds_per_candidate_continuation * 4824000",
+  "formula_w_workers": "wall_seconds(W) = mean_seconds_per_candidate * 4824000 / (W * efficiency(W)), with efficiency(W) <= 1 and unmeasured here",
+  "frozen_candidate_evaluation_upper_bound": 4824000,
+  "gate": "RB15V2-35",
+  "limitations": [
+   "the canary samples a handful of decision states, not the generation distribution over families, team sizes, policies and timesteps",
+   "rollout length dominates cost and varies with the decision timestep: a late decision state continues for fewer intervals than an early one",
+   "larger teams cost more per interval; the canary covers N in {5,6,8,12} and never N=16 or N=24",
+   "no parallel efficiency was measured, so any W-worker figure is an upper bound on throughput rather than a prediction",
+   "the measurement is single-process on one machine with no I/O, serialization or job-scheduling overhead included"
+  ],
+  "single_worker_days": 88.97,
+  "single_worker_hours": 2135.2,
+  "single_worker_seconds": 7686672.6,
+  "timeout_chosen": null,
+  "workers_chosen": null
+ },
+ "provenance_class": "RUNTIME_CONFORMANCE_ONLY",
+ "rb15_v2_canary_sha256": "c09f7d20a6844cae13cd022604fe6e94b745596616a034c6285f13593f9523f4",
+ "records": [
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.3855488328916246,
+     0.0038089215231639135
+    ],
+    "formation_term": [
+     -0.04899287611328082,
+     -0.06485824881573389
+    ],
+    "goal_term": [
+     0.599725246173904,
+     0.01815569061341697
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    0.16518353716899853,
+    -0.042893636679153004
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "d5917a75a76b8b28a3a98ad44cf9c9517c66b058c2b40a103ba061a4207fd509",
+     "control_intervals": 85,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.328453,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.214229658807261,
+      "normalized_formation_error": 0.1436784297849016,
+      "normalized_progress": 0.14389712298286159
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "889bdfe86fb8e909de262eb4cad9c3594e893498230a45b9bb65499fc6503acd",
+     "control_intervals": 85,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.326098,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.2190712024648402,
+      "normalized_formation_error": 0.1440637871189175,
+      "normalized_progress": 0.1438994356070411
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "ea7b17a93493f5a4bc6626a58037452a965d642bfbb8a669f2517be030a5816c",
+     "control_intervals": 85,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.326596,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.2202914616693328,
+      "normalized_formation_error": 0.14470773815280386,
+      "normalized_progress": 0.14390170279911282
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "67517007eb109745a52d2606e881b1e46388d811088984d3a9a5993779b7fc9b",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.326169,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1879907490728685,
+      "normalized_formation_error": 0.1459179534183133,
+      "normalized_progress": 0.14395469876990533
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "e726be481e131ac5b354f8c3466c8e64ba4d053067801039399011a6721f686a",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.325142,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 1.1882203513623772,
+      "normalized_formation_error": 0.1462976426039114,
+      "normalized_progress": 0.1439568941221502
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "1b56c9cc0be03c8624f4b7e2d2ea1ebdbed30f8522b1f99881c3bc6310ce1881",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.326278,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1889978871425577,
+      "normalized_formation_error": 0.1469319725879578,
+      "normalized_progress": 0.14395905317236016
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "0e25b0cdc393fbd13caaf0736fe4e52af3da15a06b9736ccba4233ad1c9d9845",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.327382,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1526776576928195,
+      "normalized_formation_error": 0.14839534860038472,
+      "normalized_progress": 0.14400906995047244
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "1e3b767e0be37e5ce4081982504d0a1de8d2f2b2327186ea6ad338e84c276fd7",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.34792,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1524654873883462,
+      "normalized_formation_error": 0.1487689425878562,
+      "normalized_progress": 0.144011148986202
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "9447bf66df2a32f1fa7af90c27fdfbc98186ce929a724b866176d4dbe5d78ddb",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.341802,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1528780074950924,
+      "normalized_formation_error": 0.149392974152639,
+      "normalized_progress": 0.14401319353616335
+     }
+    }
+   ],
+   "case_id": "train/train-f1-00/N6/S1_ALWAYS_COMPACT/step10/robot0",
+   "decision_control_step": 10,
+   "expert_seconds": 2.978424,
+   "family": "F1",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "829ae28d3fd312d8b37909410f3814f8dea846a6484c828ab47b3c29b4b47b22"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "7ed4d9fa04dfb13ab5540eb87de27dedfa34bd974914500233a1640c5caa5cce",
+   "robot_id": 0,
+   "robot_view_sha256": "6d0460662b97618feba66fbb8ee45175a8dd38bfcf283d6d13c5b02d15363f2e",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "e715e1e9d7cad527aad4655ca846364dc96dadbea135bdbcdd71b7913caad040",
+   "target": {
+    "base_action_world_acceleration": [
+     0.16518353716899853,
+     -0.042893636679153004
+    ],
+    "expert_action_world_acceleration": [
+     0.16518353716899853,
+     -0.042893636679153004
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 6
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.36905275873015164,
+     -0.019391275684649885
+    ],
+    "formation_term": [
+     -0.051464347918849955,
+     0.04073460288904849
+    ],
+    "goal_term": [
+     0.599547624382147,
+     0.0232947654575861
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    0.1790305177331455,
+    0.0446380926619847
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "ff4457680b92f6b05b0af149070f476868564371b159d79131d2275df7f4632d",
+     "control_intervals": 85,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.327991,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.153709363000634,
+      "normalized_formation_error": 0.1413903604875108,
+      "normalized_progress": 0.14386119502663566
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "38add0246788ca0e172563548e1729dacae1c1ed8ec1e5fc261292807b6a375b",
+     "control_intervals": 85,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.331874,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1533163216865763,
+      "normalized_formation_error": 0.1415493533093581,
+      "normalized_progress": 0.14386490293271198
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "4ba547ebe6b6a961cc4fa2523f9d951fe22bfdd0310c9ac33d9ec0c7f5994c72",
+     "control_intervals": 85,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.332977,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.153517668602308,
+      "normalized_formation_error": 0.14197168141023628,
+      "normalized_progress": 0.14386852073811657
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "af3c975f94a9c67d345a18c53d2eebf53e35d3e0b2905f2053206dadd653dbf6",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.331751,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1889787063761688,
+      "normalized_formation_error": 0.14249141794805487,
+      "normalized_progress": 0.1439533485165761
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "df188d1b338cfeadba9016c811b62ecbfa67dffe3dc31ace4a92d848fe589595",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.337009,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 1.1882203513623772,
+      "normalized_formation_error": 0.14265170889712522,
+      "normalized_progress": 0.1439568941221502
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "06d43e3079a7e55d00771110f8d447985cc99de67045823bf390b3e8bdd3a0a7",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.333858,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1877634655069087,
+      "normalized_formation_error": 0.1430733876190998,
+      "normalized_progress": 0.14396035617460226
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "a62d6dfed3a3247d492e3170853923001d263b6a71c3cc3ea52afec0f9da332d",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.332549,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1987503141417735,
+      "normalized_formation_error": 0.1439646355001235,
+      "normalized_progress": 0.1440387272564642
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "a6a70344abfb781e367d26a2d36032ae3cff3cc3b809abaebdc44241d9b1ca84",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.333268,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1933102654864607,
+      "normalized_formation_error": 0.1441282361337271,
+      "normalized_progress": 0.14404196716550674
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "df7bfd624ad21a1a9c12b757f6d86276e625d131b563bf42767140be94450030",
+     "control_intervals": 85,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.33414,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1878700051269442,
+      "normalized_formation_error": 0.14454997640131978,
+      "normalized_progress": 0.1440451450527401
+     }
+    }
+   ],
+   "case_id": "train/train-f1-00/N6/S1_ALWAYS_COMPACT/step10/robot2",
+   "decision_control_step": 10,
+   "expert_seconds": 2.997786,
+   "family": "F1",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "829ae28d3fd312d8b37909410f3814f8dea846a6484c828ab47b3c29b4b47b22"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "1bcd4fb6a282a508dbe9b4a79af389ca109e14df997c0f1a07190f7ebcd9c2e5",
+   "robot_id": 2,
+   "robot_view_sha256": "fdc41b052ad9f1fb4e6ac0211e0446281bffc4ac10755308863b9da1c9551d17",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "e715e1e9d7cad527aad4655ca846364dc96dadbea135bdbcdd71b7913caad040",
+   "target": {
+    "base_action_world_acceleration": [
+     0.1790305177331455,
+     0.0446380926619847
+    ],
+    "expert_action_world_acceleration": [
+     0.1790305177331455,
+     0.0446380926619847
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 6
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.5722730668914731,
+     -0.01569767914479144
+    ],
+    "formation_term": [
+     -0.08069392454886286,
+     0.008160324496326846
+    ],
+    "goal_term": [
+     0.5995197968911267,
+     0.024000273657236487
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    -0.05344719454920921,
+    0.016462919008771896
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "fe2bf7a255ad54acf5e0498e2a07b800d42c4efe320e7889ae452606712d494d",
+     "control_intervals": 65,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256249,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.2059616064701828,
+      "normalized_formation_error": 0.14307873859356637,
+      "normalized_progress": 0.14878141917458432
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "fcb2ce6c482b652398b8b32826b9a48035d1ee335f10429cfe12e88e51125e68",
+     "control_intervals": 65,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.25764,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.2262139518759034,
+      "normalized_formation_error": 0.1430379666670009,
+      "normalized_progress": 0.1487868083345736
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "33320def33f557bc92c6275e0cd59977c299e75bf64d165064aae28cc2f9500f",
+     "control_intervals": 65,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257291,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.2262139518759034,
+      "normalized_formation_error": 0.1433127875493933,
+      "normalized_progress": 0.14879180622427762
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "b770e97226087b613859619583ee54674c08d0799fb716ff0c24f39f07bd35c3",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.258584,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.2043276649833656,
+      "normalized_formation_error": 0.14779056581877584,
+      "normalized_progress": 0.14890399829010645
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "ea532f12d820b9d6df2de061eaaaa1beeacfac1d5e0cdafd39d09ac2d6b9231d",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256718,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 1.2262139518759034,
+      "normalized_formation_error": 0.147702893182889,
+      "normalized_progress": 0.1489081347758147
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "27608ad02396f3d06c752e644a9737d289efdba598d819af4897352732606fdd",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.260543,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.2262139518759034,
+      "normalized_formation_error": 0.14793069363828903,
+      "normalized_progress": 0.14891182392063732
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "678bd2f3ff61e119e18f1fd2acc3507f2d6052f5d04558b18aedf98f81380522",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.258179,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.203227241225543,
+      "normalized_formation_error": 0.15132128057336816,
+      "normalized_progress": 0.14896565613071264
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "fbad2192b505249872cf770e4f30d07bfc3f922ab17abcb566c621c8212d8226",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257853,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.2255630960086423,
+      "normalized_formation_error": 0.1511999118305596,
+      "normalized_progress": 0.14896741124594573
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "fe32eb65d6c342a3000d421484ce3e932ae8005825cfa14eb151a314e4fef855",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.253077,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.2254562136444032,
+      "normalized_formation_error": 0.15139728217098494,
+      "normalized_progress": 0.148969067329046
+     }
+    }
+   ],
+   "case_id": "train/train-f1-00/N6/S1_ALWAYS_COMPACT/step30/robot0",
+   "decision_control_step": 30,
+   "expert_seconds": 2.318405,
+   "family": "F1",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "c2f4b8c3491a41d2085ce22c5c74d26d87571815fb59a565de9a99fc2beb3e38"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "3ccee51cec6e622dd9afab324ce4b1ef8573d4097910572bdf2c6348cc63f63c",
+   "robot_id": 0,
+   "robot_view_sha256": "d7fbbc3fbbbaf0cb46c61e91bbf51899f2ab2b5069875ba7273dc8b1fa13c701",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "724b5f73b332e090c43c8a8acdd44b3d5bfbed7069a9dc9ead4cddcca592c35a",
+   "target": {
+    "base_action_world_acceleration": [
+     -0.05344719454920921,
+     0.016462919008771896
+    ],
+    "expert_action_world_acceleration": [
+     -0.05344719454920921,
+     0.016462919008771896
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 6
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.5849440169624471,
+     -0.010651119354481632
+    ],
+    "formation_term": [
+     -0.08468539235837605,
+     -0.017877289238864526
+    ],
+    "goal_term": [
+     0.5995705948116665,
+     0.02269585506616189
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    -0.07005881450915663,
+    -0.005832553527184269
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "792f4302865e599a07040c83219f38c5be4073245b2116b73a5c5f6711a5fa13",
+     "control_intervals": 65,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.259508,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1579257321822982,
+      "normalized_formation_error": 0.14907154106451856,
+      "normalized_progress": 0.14880160656762517
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "031be06cedc2402d0b701fe2884366708a72ef3c1fca9ffe943d39ef22550dfa",
+     "control_intervals": 65,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.255367,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1939230202837365,
+      "normalized_formation_error": 0.1489219924331381,
+      "normalized_progress": 0.1488061112330501
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "b002e1392a419d0c1f812543e5e7c0897555afef17e93bc4092004c8223e7101",
+     "control_intervals": 65,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.255017,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.2269171121384894,
+      "normalized_formation_error": 0.14909422428277885,
+      "normalized_progress": 0.14881047096670003
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "90449a99f1f0c58b4777c0a7dbe85386169c9b229ceea5f55ca82dc7cddf44b4",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256035,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1571535444123993,
+      "normalized_formation_error": 0.1518538102414487,
+      "normalized_progress": 0.14890504827622966
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "cdb6c8d69b1a9362d9009005e1873190de4da2af00f3d3aa28c314b0fd3ac2eb",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257016,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 1.193201637449035,
+      "normalized_formation_error": 0.15170645038742833,
+      "normalized_progress": 0.1489081347758147
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "2dfbea9d960842641d3ed5da80c1a597f7eb401d0932b86a08c56b436bea70a3",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256795,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.2083977790064422,
+      "normalized_formation_error": 0.1518759261057313,
+      "normalized_progress": 0.14891103950256043
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "0cc36651bea41f8dd67853400f77a13389a3260d14cb536ade7ba39728f7f958",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257764,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1570676817899475,
+      "normalized_formation_error": 0.1548594082337821,
+      "normalized_progress": 0.1489616002951004
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "e4d6da2529d83510339ecff3dab1c69e55626607c4d7f043da651fede268f4e0",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256949,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 1.1771291030192073,
+      "normalized_formation_error": 0.1547133740188057,
+      "normalized_progress": 0.1489632987084967
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "6d4cf90eda4a0f52ec41672fca327163a511535a317b898c8346bb857cf5aa3f",
+     "control_intervals": 65,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257365,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 1.1771676955995758,
+      "normalized_formation_error": 0.154784206924353,
+      "normalized_progress": 0.14896365395785469
+     }
+    }
+   ],
+   "case_id": "train/train-f1-00/N6/S1_ALWAYS_COMPACT/step30/robot2",
+   "decision_control_step": 30,
+   "expert_seconds": 2.314072,
+   "family": "F1",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "c2f4b8c3491a41d2085ce22c5c74d26d87571815fb59a565de9a99fc2beb3e38"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "a897050aa4aa6eda877c8b81be2845e9361bce6dfd56d6cdbf53d75cfe5c63ec",
+   "robot_id": 2,
+   "robot_view_sha256": "3c9861e2027c1bd01f598a21442ec30832a30ddb989852f3cf0f0570fdc095e6",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "724b5f73b332e090c43c8a8acdd44b3d5bfbed7069a9dc9ead4cddcca592c35a",
+   "target": {
+    "base_action_world_acceleration": [
+     -0.07005881450915663,
+     -0.005832553527184269
+    ],
+    "expert_action_world_acceleration": [
+     -0.07005881450915663,
+     -0.005832553527184269
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 6
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.5693885916168977,
+     0.041619707629732924
+    ],
+    "formation_term": [
+     -0.09163101032613509,
+     0.029633835857852443
+    ],
+    "goal_term": [
+     0.5992686648936869,
+     0.02961532165177322
+    ],
+    "obstacle_term": [
+     0.0025950731919388162,
+     -0.14092708471401053
+    ]
+   },
+   "base_action_pre_safety": [
+    -0.05915586385740705,
+    -0.04005821957465194
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "3b567ccab2935899b75069f3faa8fac68558b6e07b64605d7eef001c5101e13a",
+     "control_intervals": 29,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.905939,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.06883150407544655,
+      "normalized_formation_error": 0.224576204158184,
+      "normalized_progress": 0.14208344343293527
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "a9ac6d772941b5d390f8b672f3708dacfccae4d9bcddfb7b1e0f82613aa5bd41",
+     "control_intervals": 29,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.913238,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.06800594927395973,
+      "normalized_formation_error": 0.21844854973459277,
+      "normalized_progress": 0.14209827457226995
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "ce725614c58f171798d930f0b7de6abb54c04d75a48d174bf800f60f671f366c",
+     "control_intervals": 29,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.927341,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.0671844569936024,
+      "normalized_formation_error": 0.212557036701675,
+      "normalized_progress": 0.1421126193723256
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "16888b5173d1dd490aa8eebde93a8bc4f22a00a214e7b7016d71722fbd0bfe5e",
+     "control_intervals": 29,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.918065,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.06401418524202465,
+      "normalized_formation_error": 0.23272241306520428,
+      "normalized_progress": 0.1422063062921586
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "585fb42c244cf0fa7e96906715e3068aff33cbe5f65844cc7bb0a393ea8d2662",
+     "control_intervals": 29,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.915466,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 0.07069609873953372,
+      "normalized_formation_error": 0.22673998890785785,
+      "normalized_progress": 0.14221969243330085
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "eeccdae8cf72221877b0ea657b3a6dfcee52a3748d4e640f56d7573d31fe09f3",
+     "control_intervals": 29,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.926773,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.07467369980816083,
+      "normalized_formation_error": 0.22111678431409834,
+      "normalized_progress": 0.1422328515477364
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "a3bdf60c0c552be3a08342ced2a9c6798ba4f8fb229bdd079cfccbd12563e28b",
+     "control_intervals": 56,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 1.377679,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.0777534235944756,
+      "normalized_formation_error": 0.2230320910547291,
+      "normalized_progress": 0.14781881288771714
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "b39877a0cf0237d27cf5ec645bf8cdbfbdcff74797d0c8276e04b51b32405eb3",
+     "control_intervals": 56,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 1.360807,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.07839504840025976,
+      "normalized_formation_error": 0.2191775828100524,
+      "normalized_progress": 0.14781527615967954
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "70acdd1e871dfabd260b71f033b17d9639b9229957282fe4edd688ee4b90595a",
+     "control_intervals": 56,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 1.37092,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.07157170327524678,
+      "normalized_formation_error": 0.21599778476989068,
+      "normalized_progress": 0.14782241439709393
+     }
+    }
+   ],
+   "case_id": "train/train-f5-00/N8/S1_ALWAYS_COMPACT/step40/robot0",
+   "decision_control_step": 40,
+   "expert_seconds": 9.621759,
+   "family": "F5",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "c85b017c3e00eb9ce93c93d21d5b9b0331a3548038a63e06a6e20e3d4cd06172"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "620ef5ca5eeb1d20d7de8ffee057f2311130a4cc1d37916b57338ffd0487babe",
+   "robot_id": 0,
+   "robot_view_sha256": "eb45dfbd5d2457527e44548f0806eb829f2ec5564fe055947f12141d9124222d",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+   "target": {
+    "base_action_world_acceleration": [
+     -0.05915586385740705,
+     -0.04005821957465194
+    ],
+    "expert_action_world_acceleration": [
+     -0.05915586385740705,
+     -0.04005821957465194
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 8
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.5835580331950857,
+     -0.07228045548259265
+    ],
+    "formation_term": [
+     -0.06757072590922435,
+     -0.13716492037808847
+    ],
+    "goal_term": [
+     0.5999865859598132,
+     0.0040120653394055275
+    ],
+    "obstacle_term": [
+     0.021326211478565085,
+     0.061599543379047314
+    ]
+   },
+   "base_action_pre_safety": [
+    -0.029815961665931676,
+    -0.14383376714222829
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "a964a5a85ec75d7038ae3094a34e5e47a2cefe2e8d209f7d731e82681e632fd7",
+     "control_intervals": 29,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 0.924775,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.1472433818390488,
+      "normalized_formation_error": 0.1784394260245635,
+      "normalized_progress": 0.14212125239207626
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "37be9b8960387907a2bd9821939a9f52c18f5c943a3084283876f6477e2b7fc9",
+     "control_intervals": 29,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 0.918425,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.12519159482403008,
+      "normalized_formation_error": 0.18425090694726803,
+      "normalized_progress": 0.14211779738732994
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "ed9a439b1667eeea4a0c69056ac256715f4287dccc27779b45f383caa3d5963d",
+     "control_intervals": 29,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 0.927709,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.10314162168754984,
+      "normalized_formation_error": 0.19037661506078868,
+      "normalized_progress": 0.14211768419806803
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "6a0c5568f1b5fc91dbad374d051ad15ec932ef7ec1e36b31765312b037ba244b",
+     "control_intervals": 56,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 1.384677,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.14636682057824854,
+      "normalized_formation_error": 0.18570847980555982,
+      "normalized_progress": 0.147800596482312
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "fe6e17c1f0214cf9089d7450d21f217835c5454f63e7b3078c55efd7d28a97cf",
+     "control_intervals": 29,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 0.929973,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 0.12429491533156908,
+      "normalized_formation_error": 0.19087031245062097,
+      "normalized_progress": 0.14221969243330085
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "191563b6590e2631ce5213138d824f54aa7ef3cb2cc5e611ab5003a55a731cfa",
+     "control_intervals": 29,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 0.939219,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.10222404570293872,
+      "normalized_formation_error": 0.19684077404378283,
+      "normalized_progress": 0.1422207940831854
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "08de7b5c3fde4f103d3546bf7612b627780ed2d544fcff8f46e0a5dcae6a606f",
+     "control_intervals": 56,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 1.391304,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.14694903202330398,
+      "normalized_formation_error": 0.18660811142048003,
+      "normalized_progress": 0.14781981009513825
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "b91af12e5482bafad6a03e0016308e95eaf5e996e32f7abb284f37ea1c67f6c4",
+     "control_intervals": 56,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 1.372343,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.12534762891227166,
+      "normalized_formation_error": 0.18956429140125905,
+      "normalized_progress": 0.1478003896904354
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "35604dc2943eccaa8afb3e14df4dab3cb66f4f335b24b85ab214f7a891cf89b2",
+     "control_intervals": 29,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "infeasible_conservative_fallback",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": false,
+     "seconds": 0.926982,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.10388735672586233,
+      "normalized_formation_error": 0.19756258984679037,
+      "normalized_progress": 0.1422398700972154
+     }
+    }
+   ],
+   "case_id": "train/train-f5-00/N8/S1_ALWAYS_COMPACT/step40/robot3",
+   "decision_control_step": 40,
+   "expert_seconds": 9.720564,
+   "family": "F5",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "c85b017c3e00eb9ce93c93d21d5b9b0331a3548038a63e06a6e20e3d4cd06172"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "f22001d1f97d7a2b1c8f5725eba0a909dfbf8088944ddc2bd347bc17256d942d",
+   "robot_id": 3,
+   "robot_view_sha256": "79de90759218778c7bd44f11a92e3521caa8a55c12d45af49be5bd04521beb46",
+   "selected_index": null,
+   "selected_residual": null,
+   "selector_error": "local action search has no eligible robot-local candidate",
+   "snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+   "target": null,
+   "team_size": 8
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.589839939879795,
+     -0.10994928523005419
+    ],
+    "formation_term": [
+     -0.0927331053998923,
+     0.054369345316478
+    ],
+    "goal_term": [
+     0.5994506424831189,
+     0.025669577841796843
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    -0.08312240279656846,
+    -0.029910362071779342
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "894d731915282bfa0ec87b53baf1fdc05747fa6dc75e2a5ea39b2f6d16fabb06",
+     "control_intervals": 36,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.710079,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.07124110344676901,
+      "normalized_formation_error": 0.19076988594091807,
+      "normalized_progress": 0.1480397779109236
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "40bf1b9499668492765051c25a0f7638c5e2dcb9e4c2fd44e41c8d280bbc78c5",
+     "control_intervals": 9,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.261448,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.06762795182431128,
+      "normalized_formation_error": 0.1562926826534418,
+      "normalized_progress": 0.1306401309541114
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "30d9bfb7b57352a874b19550cff68cec1f899aaafed231e2f83b92a4c2a3a7a6",
+     "control_intervals": 9,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257553,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.0428776150312181,
+      "normalized_formation_error": 0.15879036550715128,
+      "normalized_progress": 0.13061163057289313
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "9133b63e19c74bc0b521b421101314ac06246ee954385712447a266352ca81fc",
+     "control_intervals": 36,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.710466,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.07686547617467052,
+      "normalized_formation_error": 0.19772320708162647,
+      "normalized_progress": 0.14813176131586223
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "29a73962496541e59c19dd5b2a328c8e42122592b8beac67339d2a3e3108a1d4",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.254757,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 0.07069609873953372,
+      "normalized_formation_error": 0.16756746580566367,
+      "normalized_progress": 0.13090982395364084
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "67612101d998c6e5a1ca555780bd0837b59d444a5d1a991125baf47c45fee30d",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.259205,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.051297206388639806,
+      "normalized_formation_error": 0.16793629115997638,
+      "normalized_progress": 0.1308474952413239
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "7f24e69a1860333be58ae78de695041df206141b73f57352e2589bcc5a6e8669",
+     "control_intervals": 36,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.717993,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.08752018706152707,
+      "normalized_formation_error": 0.19880180569275907,
+      "normalized_progress": 0.14814917182470558
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "bc970eb8c96489ea4af356ffd44b2977a91278d62aef9a4c47414ab088bf40cf",
+     "control_intervals": 36,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.713222,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.06300476355810644,
+      "normalized_formation_error": 0.19555939738058362,
+      "normalized_progress": 0.14807567845293856
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "36a1ae648e350331354b830bb14e46849bf959f4e3e31c13d87b8e938f5df889",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.259008,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.06413848257189783,
+      "normalized_formation_error": 0.16761372530141494,
+      "normalized_progress": 0.1308581133208072
+     }
+    }
+   ],
+   "case_id": "train/train-f5-00/N8/S1_ALWAYS_COMPACT/step60/robot0",
+   "decision_control_step": 60,
+   "expert_seconds": 4.151265,
+   "family": "F5",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "a6a5ade2aa918f673f68d37622e59b9a9c19f4e0cf8787f424c3305a3c5c0e3a"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "cf73f0f41e602ba14879bd48246dc98a27d368c53f1ee2c049a8b76437b76496",
+   "robot_id": 0,
+   "robot_view_sha256": "9a34a9756d3c605243ff437063387f7cf8089ea0c8766b478d1a529981b8e149",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+   "target": {
+    "base_action_world_acceleration": [
+     -0.08312240279656846,
+     -0.029910362071779342
+    ],
+    "expert_action_world_acceleration": [
+     -0.08312240279656846,
+     -0.029910362071779342
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 8
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.5920527228425191,
+     0.020657847049046028
+    ],
+    "formation_term": [
+     -0.08947853365867306,
+     0.004543224358302729
+    ],
+    "goal_term": [
+     0.5997551299223314,
+     0.017140132200406978
+    ],
+    "obstacle_term": [
+     -0.043074653894163324,
+     0.05589543478261452
+    ]
+   },
+   "base_action_pre_safety": [
+    -0.12485078047302411,
+    0.09823663839037025
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "73cc3d2ffbcbe41810593dee3e748bd50b6443811aa916e3c5fd49596da55aba",
+     "control_intervals": 9,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.271144,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.2555902162995651,
+      "normalized_formation_error": 0.13286428740313805,
+      "normalized_progress": 0.13060134875129867
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "a8fbf089220f28ef74ab72617ad723ad8b80e87f7e911dbb4ae8821833faeb70",
+     "control_intervals": 9,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.252298,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.2999823049818841,
+      "normalized_formation_error": 0.13298745475593177,
+      "normalized_progress": 0.13061826018978773
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "43079a7fba1000ae92494d38dc46c60833bfc485d3a4893745bd6cf1cf2514b0",
+     "control_intervals": 9,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256378,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.335568132231746,
+      "normalized_formation_error": 0.13431420118771173,
+      "normalized_progress": 0.13063483848775465
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "26f693c80a44b74ce568bfebf51867d67cc60b50e81d7e5709ede1d256d1f370",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.261211,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.25436991133633946,
+      "normalized_formation_error": 0.14524999444562278,
+      "normalized_progress": 0.13089287639839833
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "f128ceddd1efc79b381e9dec35a67a01226360684a73145c958b835f5f1ad582",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.255429,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 0.29876054994285406,
+      "normalized_formation_error": 0.14542313010742525,
+      "normalized_progress": 0.13090982395364084
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "4e1e7b1504db580d9523a9979a41d269536e6a3495a4df45347e0080ce4f0435",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256076,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.3345927583897683,
+      "normalized_formation_error": 0.14669229414391205,
+      "normalized_progress": 0.13092658679549418
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "8e95f568337316b2d4ff71d897ccaa337ddeb3c3e558af4ba78c6d24c8cbf3cd",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.259755,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.25395130932922716,
+      "normalized_formation_error": 0.1545712904354273,
+      "normalized_progress": 0.13110914262947437
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "4ac0cc358cd214c1b736eb4fbd811d3de5e27900df4d43874874981fe1f64ed6",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.257349,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.2979957994320455,
+      "normalized_formation_error": 0.15515402278870966,
+      "normalized_progress": 0.13113446949315927
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "50a1b3ccf92b00728b612b4157f072cdd9e822fd35946792272bf4b990d4d475",
+     "control_intervals": 9,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 0.256487,
+     "termination": "COLLISION",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.333783321233163,
+      "normalized_formation_error": 0.156440947347666,
+      "normalized_progress": 0.13115251444801013
+     }
+    }
+   ],
+   "case_id": "train/train-f5-00/N8/S1_ALWAYS_COMPACT/step60/robot3",
+   "decision_control_step": 60,
+   "expert_seconds": 2.331588,
+   "family": "F5",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "a6a5ade2aa918f673f68d37622e59b9a9c19f4e0cf8787f424c3305a3c5c0e3a"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "eaef0978e5b2b014004203e85bee69775dbd7ef63d78ba51078d5e5718736a1c",
+   "robot_id": 3,
+   "robot_view_sha256": "8abbab68d87980ec2ee8d5d60d6273ec6f5ee1a930deee5d276a470a4bc65f9a",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+   "target": {
+    "base_action_world_acceleration": [
+     -0.12485078047302411,
+     0.09823663839037025
+    ],
+    "expert_action_world_acceleration": [
+     -0.12485078047302411,
+     0.09823663839037025
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 8
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.07795578322157241,
+     0.013875386822596961
+    ],
+    "formation_term": [
+     0.009250316917611447,
+     0.009217873063553315
+    ],
+    "goal_term": [
+     0.5995610791350052,
+     0.02294585771916055
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    0.5308556128310443,
+    0.04603911760531083
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "7c05ffd573ace834b5baaedceac3b39d5a1f44f637b086cfca84b91733afde21",
+     "control_intervals": 471,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.759708,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.32956511378114145,
+      "normalized_formation_error": 0.1427124740586745,
+      "normalized_progress": 0.024813128671536278
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "f381b7d74516cbc957b2d295ee12bf68ece2b077404a2a08eec589251a707965",
+     "control_intervals": 471,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.770515,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.32701301058217086,
+      "normalized_formation_error": 0.14296310729657144,
+      "normalized_progress": 0.024813204415477307
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "83d02d21c509fdaeeb5d1b2d262729b054e0b3b3504ab72fe18a1cf0a04396d5",
+     "control_intervals": 471,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.807565,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.32447048711944565,
+      "normalized_formation_error": 0.1432614851146569,
+      "normalized_progress": 0.024813275802019134
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "e3ce9e5c7b33fe6af7eb03c8a2eb2a81d3c4da910e85329c350966ffd18ece0d",
+     "control_intervals": 471,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.823311,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.33311639648647584,
+      "normalized_formation_error": 0.14294556829651855,
+      "normalized_progress": 0.024815147703206926
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "092707fd3769901a0ce75833c02a7428806d510acf3b0c3f5874ae0fa09b0843",
+     "control_intervals": 471,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.84461,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 0.33056975630504,
+      "normalized_formation_error": 0.14319294517043374,
+      "normalized_progress": 0.024815243902476164
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "8629541ffe3b6d5e85301d6aef92490aa4a59bf29abca9c599a05e8b6e56203d",
+     "control_intervals": 471,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.869631,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.3280325120493652,
+      "normalized_formation_error": 0.14348756727223635,
+      "normalized_progress": 0.024815337591719718
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "928ea51fc2a71d1270f7a73400f8a2cb5ac7049cb0836db4958116e5354301cd",
+     "control_intervals": 474,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "physical_bound_projection",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.902083,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.3382204930398097,
+      "normalized_formation_error": 0.14301495513888998,
+      "normalized_progress": 0.02465796047406852
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "74fb6d2b24ff49a02853e125fcf18b472773e36a5005ccb8142763909cc3d6bc",
+     "control_intervals": 474,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "physical_bound_projection",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.935678,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.3346336864305083,
+      "normalized_formation_error": 0.1429474737183168,
+      "normalized_progress": 0.024658121854914863
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "9e6b1aa7bd2e814655a64e6bde04c9fa12914506696a069f574e8791cf48ced2",
+     "control_intervals": 474,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": true,
+     "projection_status": "physical_bound_projection",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 8.990364,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.33105319367733005,
+      "normalized_formation_error": 0.14307695424830041,
+      "normalized_progress": 0.02465824312635721
+     }
+    }
+   ],
+   "case_id": "train/train-f9-00/N12/S0_SCRIPTED_DIAGNOSTIC/step25/robot0",
+   "decision_control_step": 25,
+   "expert_seconds": 79.707886,
+   "family": "F9",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "a3a4ec4d3418697ad502410257f81880c6e87fcadf3574ad77bb92d5838c1c42"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S0_SCRIPTED_DIAGNOSTIC",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "ac2c7535b800ba17949752c47d8f2320bb281971c255dffd90b10d4ca3584882",
+   "robot_id": 0,
+   "robot_view_sha256": "d5b7380cffafb7741011b36b8cd1f63f4d297d07109cd09dca33ccd05982028e",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+   "target": {
+    "base_action_world_acceleration": [
+     0.5308556128310443,
+     0.04603911760531083
+    ],
+    "expert_action_world_acceleration": [
+     0.5308556128310443,
+     0.04603911760531083
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 12
+  },
+  {
+   "base_action_components": {
+    "damping_term": [
+     -0.43311058585191764,
+     0.01340651746648083
+    ],
+    "formation_term": [
+     -0.1540808142834857,
+     -0.01395298895443008
+    ],
+    "goal_term": [
+     0.5996121416702647,
+     0.021570339858204633
+    ],
+    "obstacle_term": [
+     0.0,
+     0.0
+    ]
+   },
+   "base_action_pre_safety": [
+    0.012420741534861335,
+    0.021023868370255383
+   ],
+   "candidate_lattice_sha256": "9cf6a473b2550ec484d7ce932c7024ca07bc71c9fdcea9ddb179b0faadfcb706",
+   "candidates": [
+    {
+     "candidate_index": 0,
+     "canonical_hash": "c6bff8df554a327676b46716309c405034706e4357bafd79efda6d758a723629",
+     "control_intervals": 89,
+     "delta_u_world": [
+      -0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 3.022502,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.5391797672797011,
+      "normalized_formation_error": 0.2563351454629692,
+      "normalized_progress": 0.1269059146397363
+     }
+    },
+    {
+     "candidate_index": 1,
+     "canonical_hash": "2d8c37c4a3814195b21de497b1198d6a900ce83ccc82cbbfbbf73b8821ea714f",
+     "control_intervals": 89,
+     "delta_u_world": [
+      -0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 2.871293,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.5846062450681455,
+      "normalized_formation_error": 0.2556730755754717,
+      "normalized_progress": 0.1269440862065095
+     }
+    },
+    {
+     "candidate_index": 2,
+     "canonical_hash": "03f49976acce8ed67ff3be0fae66b31b9979125cfbcaf3b928df1dc0370680a5",
+     "control_intervals": 89,
+     "delta_u_world": [
+      -0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 3.072633,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.6324306295695786,
+      "normalized_formation_error": 0.25491315187791264,
+      "normalized_progress": 0.1267994326568812
+     }
+    },
+    {
+     "candidate_index": 3,
+     "canonical_hash": "da2d11b06d045d790aadcb113a83f95a89c868c50e5df2336b7b05ea9efe4b1c",
+     "control_intervals": 88,
+     "delta_u_world": [
+      0.0,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 2.824099,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.5365272810759633,
+      "normalized_formation_error": 0.2580990701086285,
+      "normalized_progress": 0.1271029509617136
+     }
+    },
+    {
+     "candidate_index": 4,
+     "canonical_hash": "57aecc9059e998ce1605418d419b6b77fb48a646d870280c24846960b575fcc2",
+     "control_intervals": 88,
+     "delta_u_world": [
+      0.0,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 2.888574,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.0,
+      "normalized_clearance_margin": 0.5772178152609408,
+      "normalized_formation_error": 0.2574649538004688,
+      "normalized_progress": 0.12713360566919107
+     }
+    },
+    {
+     "candidate_index": 5,
+     "canonical_hash": "e396f72a0852cd1d3481f99d351f5a40a75bf82835a468707364b74aa7424704",
+     "control_intervals": 89,
+     "delta_u_world": [
+      0.0,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 3.207279,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.6396893269903337,
+      "normalized_formation_error": 0.252417909826261,
+      "normalized_progress": 0.12677601622777926
+     }
+    },
+    {
+     "candidate_index": 6,
+     "canonical_hash": "efaf980c6a5bb59f069da060c7cad9bd59d9387c9b064d6af17be0f4bce8377d",
+     "control_intervals": 88,
+     "delta_u_world": [
+      0.15,
+      -0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 2.854243,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.5325389675566139,
+      "normalized_formation_error": 0.25981337874298294,
+      "normalized_progress": 0.12721105165829794
+     }
+    },
+    {
+     "candidate_index": 7,
+     "canonical_hash": "3d07b7a23583189c7d489afbcc7c047a36ff945082950fcedf8ac5b497c4fb43",
+     "control_intervals": 88,
+     "delta_u_world": [
+      0.15,
+      0.0
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 2.794904,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 0.7071067811865475,
+      "normalized_clearance_margin": 0.5729900023113079,
+      "normalized_formation_error": 0.25910059539620267,
+      "normalized_progress": 0.12716690823527146
+     }
+    },
+    {
+     "candidate_index": 8,
+     "canonical_hash": "8948cff149846f6b1ef39d7bbf5018c3f67259ec8dcd137cda8d23a5ac64fec4",
+     "control_intervals": 89,
+     "delta_u_world": [
+      0.15,
+      0.15
+     ],
+     "locally_feasible": true,
+     "projection_changed_the_action": false,
+     "projection_status": "unchanged",
+     "robot_local_information_only": true,
+     "safety_projection_compatible": true,
+     "seconds": 3.768343,
+     "termination": "GOAL_COMPLETE",
+     "utilities": {
+      "normalized_action_deviation": 1.0,
+      "normalized_clearance_margin": 0.6400426728692312,
+      "normalized_formation_error": 0.25900359895471314,
+      "normalized_progress": 0.1268122376369074
+     }
+    }
+   ],
+   "case_id": "validation/validation-f8-00/N5/S1_ALWAYS_COMPACT/step20/robot0",
+   "decision_control_step": 20,
+   "expert_seconds": 27.306187,
+   "family": "F8",
+   "matched_stream_identity": [
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_position"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "initial_velocity"
+    ],
+    [
+     "sha256-canonical-counter-uint64/v1",
+     "11",
+     "s5_acceleration"
+    ],
+    [
+     "communication",
+     "e50a43fd2fe3a63f1ed31a9165b0168fa2f109165059208c2792a912e378c3cb"
+    ]
+   ],
+   "matched_stream_identity_shared_by_all_candidates": true,
+   "policy": "S1_ALWAYS_COMPACT",
+   "provenance": {
+    "local_safety_projection": "LOCAL_SAFETY_DERIVED",
+    "model_configuration": "IMMUTABLE_FROZEN_CONFIG",
+    "phase6_base_action": "LOCAL_CONTROLLER_DERIVED",
+    "residual_candidate": "IMMUTABLE_FROZEN_CONFIG",
+    "robot_view.committed_topology": "LOCAL_PROTOCOL_STATE",
+    "robot_view.neighbours": "ONE_HOP_LOCAL",
+    "robot_view.obstacles": "LOCAL_OBSTACLE",
+    "robot_view.self_state": "SELF_LOCAL",
+    "runtime_configuration": "IMMUTABLE_FROZEN_CONFIG"
+   },
+   "result_digest": "93c4cf4d7f6c1a643192c63ad7b441ae0a31ff32d94205f0e0363886e3e1832b",
+   "robot_id": 0,
+   "robot_view_sha256": "70685d2b8edc02073e9d9d41ae7c2be9dd6732e9d1d7d230dda8dad93d7edb09",
+   "selected_index": 4,
+   "selected_residual": [
+    0.0,
+    0.0
+   ],
+   "selector_error": null,
+   "snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+   "target": {
+    "base_action_world_acceleration": [
+     0.012420741534861335,
+     0.021023868370255383
+    ],
+    "expert_action_world_acceleration": [
+     0.012420741534861335,
+     0.021023868370255383
+    ],
+    "finite": true,
+    "frame": "world",
+    "nonzero": false,
+    "rb16_rotation_applied": false,
+    "residual_bounds_world_acceleration": [
+     0.15,
+     0.15
+    ],
+    "residual_target_world_acceleration": [
+     0.0,
+     0.0
+    ],
+    "safety_projection_compatible": true,
+    "saturated": false,
+    "units": "meters_per_second_squared"
+   },
+   "team_size": 5
+  }
+ ],
+ "residual_expert_spec_v2_sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+ "residual_label_contract_composite_sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+ "schema_version": "rvt-rb15-v2-canary/v1",
+ "scientific_dataset_schema_used": false,
+ "selection_rule": "deterministic predeclared diagnostic cases: several team sizes among the allowed non-N24 set, four scenario families, a collision-prone counterfactual and a case where the safety projection changes the pre-safety action",
+ "selector_failures": 1,
+ "source_commit": "1255a432bc85e3861b44e6c6313214ea6332b18f",
+ "team_sizes_covered": [
+  5,
+  6,
+  8,
+  12
+ ]
+}
