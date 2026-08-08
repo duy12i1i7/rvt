@@ -49,25 +49,30 @@ def test_the_first_event_disposition_is_explicit_and_auditable() -> None:
             assert field in record
 
 
-def test_at_least_one_frozen_non_learned_path_survives_the_first_bottleneck() -> None:
-    """S2 holds LINE, whose required width (0.40 m) fits F5's 1.40 m free width."""
+def test_fixed_line_pays_the_forced_conversion_cost_at_n6() -> None:
+    """Under the owner-decided S2 semantics the fixed-LINE baseline starts at
+    COMPACT and must convert; at N=6 on F5 it does not complete the task."""
     session = _run(P.S2)
-    assert session.max_longitudinal_progress > BOTTLENECK_0_EXIT, (
-        "no frozen path clears the first bottleneck")
+    assert session.termination is not None
+    assert session.termination.cause == "COLLISION"
 
 
-def test_a_frozen_non_learned_path_reaches_the_later_bottleneck_region() -> None:
-    """The RB-18F5 gate proper: the second cycle must be structurally reachable."""
-    session = _run(P.S2)
-    assert session.max_longitudinal_progress >= BOTTLENECK_1_ENTRY, (
-        f"F5 cannot exercise its declared second bottleneck: "
-        f"max progress {session.max_longitudinal_progress:.2f} m "
-        f"< entry {BOTTLENECK_1_ENTRY} m")
+def test_f5_still_exposes_switching_headroom_at_small_n() -> None:
+    import json, pathlib
+    v5 = json.loads(pathlib.Path(
+        "results/rvt_fd24/headroom_requalification_v5.json").read_text())
+    f5 = [c for c in v5["cells"] if c["family"] == "F5"]
+    assert len(f5) == 15
+    assert any(c["line"]["success"] for c in f5), (
+        "fixed LINE must still succeed somewhere in F5")
 
 
-def test_that_path_passes_completely_through_the_second_bottleneck() -> None:
-    session = _run(P.S2)
-    assert session.max_longitudinal_progress >= BOTTLENECK_1_EXIT
+def test_f5_categories_follow_executable_outcomes() -> None:
+    import json, pathlib
+    v5 = json.loads(pathlib.Path(
+        "results/rvt_fd24/headroom_requalification_v5.json").read_text())
+    assert sum(v5["f5"]["categories"].values()) == 15
+    assert v5["f5"]["necessity_claim_restored"] is False
 
 
 def test_a_line_counterfactual_candidate_can_also_traverse() -> None:

@@ -1,0 +1,61 @@
+{
+ "additive_correction": "No online topology-SELECTION epoch is created. S2 performs one deterministic forced mechanical initialization transition solely to realize its fixed LINE target safely from the common COMPACT physical initial state.",
+ "canonical_physical_initial_topology": 5,
+ "common_initial_state_rule": "S1 and S2 share byte-identical physical initial state; only the target topology differs",
+ "defect_11": "physically relocating S2 to LINE poses -- corrected",
+ "epoch_accounting": {
+  "counted_as_online_switching_decision": false,
+  "mechanical_transition_epoch_count": 1,
+  "topology_selection_epoch_count": 0
+ },
+ "failure_taxonomy": {
+  "executor_numerical_schema_failure": "remains generation invalid",
+  "forced_conversion_failure": "fixed LINE policy failure, not INITIALIZATION_INVALID or GENERATION_INVALID"
+ },
+ "final_test_access_count": 0,
+ "fixed_target_topology": 2,
+ "forced_initialization": {
+  "duplicate_transition_implementation": false,
+  "event_type": "externally_forced_diagnostic",
+  "free_teleport": false,
+  "stack": [
+   "mission staging",
+   "derived motion-settled rule",
+   "robot-local readiness certificate",
+   "distributed all-ready",
+   "frozen confirmation and commit",
+   "generic_role_space_profile",
+   "Phase 6 controller",
+   "local safety projection",
+   "Metric V3 tube and dwell"
+  ],
+  "unmanaged_direct_convergence": false
+ },
+ "historical_contract": {
+  "file": "results/rvt_fd24/source_policy_contracts_v1.json",
+  "initial_topology": 5,
+  "policy": "S2_ALWAYS_LINE",
+  "rewritten": false,
+  "wording": "at time zero use the offline forced-topology qualification interface to initialize LINE role targets; no online request or epoch is created"
+ },
+ "mission_coupling_sha256": "1a756b6ae21cc1008afcbe694d62dd4dd2c80af1ae20f15f3b97cec2b5dbca60",
+ "open_field_regression": {
+  "corrected_min_separation_meters": 0.4264,
+  "corrected_result": "GOAL_COMPLETE",
+  "layout": "train-f1-00",
+  "required_clearance_meters": 0.4,
+  "team_size": 6,
+  "unmanaged_direct_convergence_min_separation_meters": 0.3635
+ },
+ "s2_fixed_line_mechanical_initialization_sha256": "19f146b5701b9cc830b60382b9204155e401e0c771700038fab4f98dbc983413",
+ "schema_version": "rvt-s2-fixed-line-mechanical-initialization/v1",
+ "selection_semantics": {
+  "candidate_comparison": false,
+  "geometry_oracle": false,
+  "learned_model": false,
+  "score_consulted": false,
+  "target_predetermined": true
+ },
+ "source_commit": "a9261dd09dbb998c128fd83e49421558a6e76e56",
+ "study_a_n24_access_count": 0
+}

@@ -66,11 +66,11 @@ def test_f5_cannot_perform_even_its_first_online_reconfiguration() -> None:
     assert session.max_longitudinal_progress < BOTTLENECK_0[0]
 
 
-def test_fixed_line_still_completes_so_the_geometry_itself_is_feasible() -> None:
-    """Geometry feasibility is unchanged; only the online path is blocked."""
+def test_fixed_line_now_pays_its_forced_conversion_cost() -> None:
+    """S2 starts at the common COMPACT state and must convert to LINE through
+    the qualified stack. At N=6 on F5 that cost is not recovered."""
     session = _run(policy_id=P.S2)
-    assert session.termination.cause == "GOAL_COMPLETE"
-    assert session.max_longitudinal_progress >= BOTTLENECK_1[1]
+    assert session.termination.cause == "COLLISION"
 
 
 def test_fixed_compact_still_fails_at_the_first_bottleneck() -> None:

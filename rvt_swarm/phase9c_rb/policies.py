@@ -124,18 +124,65 @@ class ScriptedDiagnosticPolicy(SourcePolicy):
 
 
 class FixedTopologyPolicy(SourcePolicy):
-    """S1 / S2 -- hold one topology, issue no request, create no epoch."""
+    """S1 / S2 -- one fixed topology target for the whole episode.
+
+    Both share the canonical physical initial state: COMPACT placement at the
+    frozen mission origin. Only the *target* differs.
+
+    S1 targets COMPACT, which the physical state already satisfies, so it never
+    requests anything and creates no epoch of any kind.
+
+    S2 targets LINE. Because the physical start is COMPACT, realizing that
+    target requires one deterministic **forced mechanical initialization
+    transition**, executed through the same qualified stack any changed-topology
+    execution uses: mission staging, the derived motion-settled rule, genuine
+    robot-local readiness, distributed all-ready, frozen confirmation/commit,
+    the frozen `generic_role_space_profile`, Phase 6 control, local safety
+    projection, and the Metric V3 tube and dwell.
+
+    Two things this is NOT:
+
+    * a free teleport -- S2 never spawns at LINE poses (that was defect 11);
+    * a topology *selection* -- LINE is predetermined, so no score, no candidate
+      comparison, no learned model and no geometry oracle is consulted. The
+      epoch it creates is a mechanical transition epoch, never a selection
+      epoch. See `session.topology_selection_epoch_count`.
+
+    The full physical cost of the conversion -- settling, readiness wait,
+    profile duration, dwell and any later mission delay -- is charged to S2.
+    """
 
     def __init__(self, contract, seed, horizon_seconds, team_size, topology_id: int) -> None:
         super().__init__(contract, seed, horizon_seconds, team_size)
         self.topology_id = int(topology_id)
         self.policy_id = S1 if topology_id == COMPACT else S2
         self.offline_collection_only = topology_id == LINE
+        self.forced_initialization: Optional[Dict[str, object]] = None
 
     def initial_topology_override(self) -> Optional[int]:
-        # S2 is the sole initialization specialisation: LINE role targets at
-        # t=0 through the offline forced-topology interface, with no epoch.
-        return LINE if self.topology_id == LINE else None
+        # None. The canonical physical initialization is COMPACT for every
+        # policy; S2's LINE-ness is a target, realized mechanically below.
+        return None
+
+    def observe(self, session, robot, view, controller_input) -> None:
+        if self.topology_id == COMPACT or self.forced_initialization is not None:
+            return
+        if robot.robot_id != 0:
+            return                       # one deterministic request, not N
+        if robot.committed_topology == self.topology_id:
+            return                       # already there; no epoch
+        originated = session.request_candidate(
+            robot, self.topology_id, "externally_forced_diagnostic")
+        if not originated:
+            return                       # not yet eligible; retry next step
+        session.mechanical_transition_epoch_count += 1
+        self.forced_initialization = {
+            "control_step": session.control_step,
+            "time_seconds": session.time_seconds,
+            "target_topology": self.topology_id,
+            "event_type": "externally_forced_diagnostic",
+            "selection_performed": False,
+        }
 
 
 class LocalGeometricSelectorPolicy(SourcePolicy):

@@ -178,6 +178,10 @@ class SimulatorEpisodeSession:
         self.numerically_valid = True
         self.initialization_valid = True
         self.lifecycle_counter = 0
+        # Epoch accounting is split so a forced mechanical initialization is
+        # never reported as an online switching decision.
+        self.topology_selection_epoch_count = 0
+        self.mechanical_transition_epoch_count = 0
         self.role_set = None
         self.readiness_certificates: Dict[int, Dict[str, object]] = {}
         self.readiness_evaluation_count = 0

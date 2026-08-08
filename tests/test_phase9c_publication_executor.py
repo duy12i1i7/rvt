@@ -96,10 +96,17 @@ def test_forced_topology_executes_beyond_step_zero(policy_id, topology) -> None:
         session.control_step * float(CONFIG.physical.control_period_seconds))
 
 
-def test_forced_policies_issue_no_candidate_request() -> None:
-    for policy_id in (P.S1, P.S2):
-        session = run(build_session("train-f1-00", policy_id=policy_id), steps=40)
-        assert session.event_log == [], policy_id
+def test_forced_policies_perform_no_topology_selection() -> None:
+    """S1 creates no epoch at all. S2 creates exactly one *mechanical*
+    initialization epoch to realize its fixed LINE target from the common
+    COMPACT start -- never a selection epoch."""
+    s1 = run(build_session("train-f1-00", policy_id=P.S1), steps=40)
+    assert s1.event_log == []
+    assert s1.topology_selection_epoch_count == 0
+    assert s1.mechanical_transition_epoch_count == 0
+    s2 = run(build_session("train-f1-00", policy_id=P.S2), steps=40)
+    assert s2.topology_selection_epoch_count == 0
+    assert s2.mechanical_transition_epoch_count == 1
 
 
 def test_open_field_mission_reaches_the_goal() -> None:

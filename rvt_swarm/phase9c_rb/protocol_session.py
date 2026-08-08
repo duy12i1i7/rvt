@@ -59,7 +59,11 @@ def originate_candidate(session, robot, candidate_topology: int, event_type: str
     """One robot originates on its own evidence. Adoption suppresses later origins."""
     if candidate_topology not in (COMPACT, LINE):
         return False
-    if robot.protocol_node.state != "STABLE_TOPOLOGY":
+    # Match the frozen `adopt_intent` precondition exactly rather than being
+    # stricter: it permits STABLE_TOPOLOGY, REARMED and COMPLETE. Requiring only
+    # STABLE_TOPOLOGY silently blocked any second lifecycle after a completed
+    # transition -- including LINE -> COMPACT after S2's forced initialization.
+    if robot.protocol_node.state not in ("STABLE_TOPOLOGY", "REARMED", "COMPLETE"):
         return False
     if candidate_topology == robot.committed_topology:
         return False                      # no source-equals-target epoch, ever
@@ -76,6 +80,8 @@ def originate_candidate(session, robot, candidate_topology: int, event_type: str
     # silently never advances.
     if not robot.protocol_node.adopt_intent(intent, session.time_seconds):
         return False
+    if event_type != "externally_forced_diagnostic":
+        session.topology_selection_epoch_count += 1
     session.event_log.append({
         "control_step": session.control_step, "time_seconds": session.time_seconds,
         "originator": robot.robot_id, "lifecycle_id": lifecycle_id,
@@ -301,10 +307,14 @@ def local_readiness_certificate(session, robot, intent):
 
 
 def _abort_all(session, nodes, cause: str) -> None:
+    # The frozen node refuses to abort from COMPLETE or REARMED, and there is
+    # nothing to abort from STABLE_TOPOLOGY. Honour that precondition exactly
+    # rather than forcing a state change the protocol forbids.
     for robot in session.robots:
-        if robot.protocol_node.state not in ("STABLE_TOPOLOGY", "COMPLETE"):
-            robot.protocol_node.abort(cause, session.time_seconds)
-            robot.transition_executor = None
+        if robot.protocol_node.state in ("STABLE_TOPOLOGY", "COMPLETE", "REARMED"):
+            continue
+        robot.protocol_node.abort(cause, session.time_seconds)
+        robot.transition_executor = None
 
 
 def _inside_candidate_tube(session, candidate_topology: int) -> bool:

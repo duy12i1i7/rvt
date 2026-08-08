@@ -31,7 +31,9 @@ def test_hold_compact_satisfies_the_compact_dwell() -> None:
 
 
 def test_hold_line_satisfies_the_line_dwell() -> None:
-    session = run(build_session("train-f1-00", policy_id=P.S2), steps=60)
+    """S2 reaches LINE via its forced mechanical initialization, so the dwell
+    begins only after the conversion enters the LINE tube."""
+    session = run(build_session("train-f1-00", policy_id=P.S2), steps=500)
     assert session.metric_v3_dwell[LINE] >= DWELL_REQUIRED
 
 
