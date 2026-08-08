@@ -200,3 +200,71 @@ frozen timeout path (PCA-15) were not exercised. They remain the outstanding
 conformance gates, and v6 should not run before them: a timeout or stale-message
 defect would be silently encoded into 150 headroom classifications, exactly as
 happened with v3, v4 and v5.
+
+---
+
+# PCA-8 and PCA-16 — results
+
+## PCA-16 — four-epoch stress: **PASS** (test-only harness)
+
+`tests/test_phase9c_four_epoch_transition_stress.py`.
+
+Four complete changed-topology mechanical epochs:
+
+| epoch | transition | `mode_epoch_count` | committed after |
+|---:|---|---:|---|
+| 1 | COMPACT -> LINE (S2 forced) | 1 | LINE |
+| 2 | LINE -> COMPACT | 2 | COMPACT |
+| 3 | COMPACT -> LINE | 3 | LINE |
+| 4 | LINE -> COMPACT | 4 | COMPACT |
+
+Four distributed completion agreements, all `agreed`, with four distinct
+lifecycle ids, four distinct epoch ids and strictly increasing agreement times,
+each strictly later than its own local-dwell instant. After every rearm all
+nodes show `active_intent is None`, `_score_agreed`/`_all_ready`/`_confirmed`
+false, `dwell_started_seconds is None`, `local_dwell_complete` false and a
+retired transition executor. Collision-free.
+
+**Why the scientific fixtures reached only three epochs.** Nothing in the
+protocol: the mission reaches `GOAL_COMPLETE` first. Mission staging suppresses
+the goal term for roughly 15 s per epoch, so three epochs consume ~42 s and the
+team arrives before a fourth can start (`train-f1-00`; `train-f7-00` at 45.9 s
+of a 110 s horizon).
+
+**PCA-16A provenance.** The harness pushes the goal *reference* 500 m along the
+mission axis and raises only its own horizon (approach C). It is asserted by
+test to differ from the compiled scientific goal and horizon. It is not evidence
+that any F1-F10 mission contains four transitions; scientific event counts are
+unchanged; it enters no split, job manifest, dataset, headroom count or paper
+result.
+
+## PCA-8 — message epoch and freshness isolation: **PASS**
+
+`tests/test_phase9c_message_epoch_isolation.py`.
+
+The isolation is **structural**, which is stronger than filtering: the adapter
+keeps no cross-step agreement-message queue. Every phase builds its messages
+fresh from the nodes' current lifecycle state and floods them synchronously over
+the current adjacency, so no cross-epoch message reservoir exists. Asserted by
+test, along with the absence of any manual queue purging.
+
+The frozen validator is exercised directly with genuinely constructed messages:
+
+| case | result |
+|---|---|
+| 8A score message from a previous epoch | rejected by `validate_message_context` |
+| 8B readiness from a previous epoch | rejected |
+| 8C confirmation from a previous epoch | rejected |
+| 8D COMPLETE status from a previous epoch | rejected |
+| 8E same-epoch message beyond `maximum_message_age_seconds` | rejected |
+| fresh same-epoch message | **accepted** (non-vacuity) |
+| 8F duplicate request for the committed topology | refused; no second agreement, no epoch increment |
+| 8G F8 transport | every phase, COMPLETE status included, floods over the same range-gated cut-aware adjacency -- no reliable bypass |
+
+The frozen freshness bound is not duplicated anywhere in the adapter (asserted:
+the literal `0.45` does not appear).
+
+## PCA-15 — not run
+
+The real frozen timeout path was not exercised. It is the one remaining
+conformance gate, and v6 was not generated.
