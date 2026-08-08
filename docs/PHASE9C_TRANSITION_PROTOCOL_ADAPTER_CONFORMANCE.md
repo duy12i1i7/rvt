@@ -242,8 +242,10 @@ result.
 
 `tests/test_phase9c_message_epoch_isolation.py`.
 
-The isolation is **structural**, which is stronger than filtering: the adapter
-keeps no cross-step agreement-message queue. Every phase builds its messages
+The isolation is structural: the adapter keeps no cross-step agreement-message
+queue. **That claim is only valid because the frozen transport is round-local**
+-- see the PCA-8R audit below, which establishes the classification from the
+frozen code rather than from the adapter. Every phase builds its messages
 fresh from the nodes' current lifecycle state and floods them synchronously over
 the current adjacency, so no cross-epoch message reservoir exists. Asserted by
 test, along with the absence of any manual queue purging.
@@ -268,3 +270,72 @@ the literal `0.45` does not appear).
 
 The real frozen timeout path was not exercised. It is the one remaining
 conformance gate, and v6 was not generated.
+
+
+---
+
+# PCA-8R — transport semantics audit
+
+The earlier PCA-8 entry justified "no cross-step queue" from the publication
+adapter and called it "stronger isolation". That was the wrong direction of
+evidence, and the phrasing pre-judged the question. Classification is now taken
+from the frozen implementation.
+
+## Classification: **ROUND_LOCAL**
+
+Authoritative implementation:
+`transition_protocol.flood_transition_messages`.
+
+| property | frozen behaviour |
+|---|---|
+| documented contract | "Flood immutable original records; the simulator performs delivery only" |
+| message store | `stores` is constructed **inside** the call, one dict per member |
+| persistence | none -- no `self.`, no module state; the call returns a `FloodResult` |
+| carried object | only the optional `TransitionByteLedger`, an accounting record |
+| enqueue / delivery | both occur within the single flood, across `rounds` hops |
+| delay units | protocol **rounds**, not control steps |
+| loss / partition | expressed as adjacency: a round-local graph, or a per-round `Sequence[Mapping]` schedule |
+| time variation | `temporary_disconnection_schedule(adjacency, rounds)` returns a per-round schedule consumed **within one flood** |
+| lifecycle vs ordinary messages | identical mechanism; lifecycle status messages use the same flood |
+
+No lifecycle message can survive into a later control step, because the frozen
+transport provides no mechanism for it to do so.
+
+## Consequence: **Defect 14 does not exist**
+
+The absence of a cross-step lifecycle delay queue in Phase 9C is **conformance**,
+not an omission. Binding a persistent queue for lifecycle messages would have
+*added* semantics the frozen protocol does not have.
+
+PCA-8R3 (real delayed old-epoch delivery through the transport) is therefore not
+constructible, and PCA-8R4's alternative applies: the frozen contract models
+lifecycle-message disruption as loss/partition via adjacency, **not** as
+persistent delivery delay. Reported explicitly rather than manufacturing a delay
+the contract does not contain.
+
+## What the adapter must therefore match, and does
+
+* all five agreement phases -- intent, score, all-ready, confirmation and
+  COMPLETE status -- use the frozen flood (asserted by test);
+* no lifecycle message is placed in the delayed state-broadcast channel
+  (`channel.send(` does not appear in `protocol_session`);
+* the only persistent queue in the session carries `state_broadcast` messages,
+  a separate frozen concern (peer state under F8 delay/loss), verified by
+  inspecting the live queue;
+* the F8 cut gates the same adjacency the flood consumes, so there is no
+  reliable bypass;
+* the frozen F8 contract expresses the cut in whole communication ticks
+  (`start_tick`, `duration_ticks`), so it is constant across the rounds of any
+  one control step's flood -- consistent with passing a single Mapping.
+
+## PCA-8 final verdict: **PASS**
+
+Transport classification matches, epoch isolation holds at the transport layer
+by construction, F8 introduces no reliable bypass, and the message-validator
+tests (previous-epoch score/readiness/confirmation/COMPLETE, same-epoch
+over-age, fresh-accepted non-vacuity, duplicate refusal) remain in place.
+
+## PCA-15 — still not run
+
+The real frozen timeout path remains the one outstanding conformance gate. v6
+was not generated.
