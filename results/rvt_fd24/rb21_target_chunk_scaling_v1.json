@@ -1,0 +1,266 @@
+{
+  "all_semantic_digests_equal": true,
+  "branches": {
+    "recoverability": [
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 82.28996703800021,
+          "mean": 16.86506186263335,
+          "median": 7.162139219999972,
+          "p90": 50.667299170000206,
+          "p95": 75.2018722339999,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 1,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 5,
+          "atomic_units_per_worker_mean": 2.5,
+          "atomic_units_per_worker_minimum": 1,
+          "atomic_units_per_worker_population_stdev": 0.9574271077563381,
+          "coefficient_of_variation": 0.38297084310253526,
+          "workers_observed": 12
+        },
+        "maximum_retry_blast_radius_atomic_units": 1,
+        "parallel_noncompute_wall_proxy_seconds": 48.62492526133352,
+        "peak_aggregate_worker_rss_bytes": 2598297600,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "b1e18735b6d1a7d6dd86b2639d2c88fbfe824eef89b339ebec5e79aa37184dcc",
+        "scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.33045638284743994,
+        "wall_seconds": 90.78353924200019
+      },
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 82.1345161549998,
+          "mean": 16.197404645400002,
+          "median": 6.93364234149999,
+          "p90": 47.07631055999991,
+          "p95": 74.3824382519997,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 2,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 4,
+          "atomic_units_per_worker_mean": 2.5,
+          "atomic_units_per_worker_minimum": 2,
+          "atomic_units_per_worker_population_stdev": 0.8660254037844386,
+          "coefficient_of_variation": 0.34641016151377546,
+          "workers_observed": 12
+        },
+        "maximum_retry_blast_radius_atomic_units": 2,
+        "parallel_noncompute_wall_proxy_seconds": 90.12136938049962,
+        "peak_aggregate_worker_rss_bytes": 2592415744,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "e6ed385cb9c75fd8f3dcc643d9ed3ec6c45281f4b13d3a8d8bae7df0b903b365",
+        "scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.2296904503011593,
+        "wall_seconds": 130.6105672249996
+      },
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 77.69654477699987,
+          "mean": 15.429044680699977,
+          "median": 6.303426754500379,
+          "p90": 46.69368945499991,
+          "p95": 72.82139881399962,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 4,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 4,
+          "atomic_units_per_worker_mean": 3.75,
+          "atomic_units_per_worker_minimum": 2,
+          "atomic_units_per_worker_population_stdev": 0.6614378277661477,
+          "coefficient_of_variation": 0.17638342073763938,
+          "workers_observed": 8
+        },
+        "maximum_retry_blast_radius_atomic_units": 4,
+        "parallel_noncompute_wall_proxy_seconds": 213.2543532349159,
+        "peak_aggregate_worker_rss_bytes": 1730301952,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "aa9d628a15bb7c1a632c8960d49c18779cf2966629e2f6f66f68eb5161117ca1",
+        "scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.11913143552440969,
+        "wall_seconds": 251.82270210999923
+      },
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 77.46782330099995,
+          "mean": 15.251001179333253,
+          "median": 6.24799280849993,
+          "p90": 46.519918606999454,
+          "p95": 69.3218772829996,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 8,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 8,
+          "atomic_units_per_worker_mean": 7.5,
+          "atomic_units_per_worker_minimum": 6,
+          "atomic_units_per_worker_population_stdev": 0.8660254037844386,
+          "coefficient_of_variation": 0.11547005383792515,
+          "workers_observed": 4
+        },
+        "maximum_retry_blast_radius_atomic_units": 8,
+        "parallel_noncompute_wall_proxy_seconds": 272.5473838130831,
+        "peak_aggregate_worker_rss_bytes": 869486592,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "d37529d8ecfc2563732365f263e03b7e6917b750ba6230cb2b658bc80a311759",
+        "scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.09656567299118889,
+        "wall_seconds": 310.6694032229998
+      }
+    ],
+    "residual": [
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 109.29947585700029,
+          "mean": 34.12363976610003,
+          "median": 21.999489506499913,
+          "p90": 86.00099080499967,
+          "p95": 101.22805111100024,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 1,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 3,
+          "atomic_units_per_worker_mean": 2.5,
+          "atomic_units_per_worker_minimum": 2,
+          "atomic_units_per_worker_population_stdev": 0.5,
+          "coefficient_of_variation": 0.2,
+          "workers_observed": 12
+        },
+        "maximum_retry_blast_radius_atomic_units": 1,
+        "parallel_noncompute_wall_proxy_seconds": 37.89049305100012,
+        "peak_aggregate_worker_rss_bytes": 2614145024,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "2b0e7288bbae3c47543f81f6ee305f067b26b72ee61c2691995783f1165b4655",
+        "scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.2435244999076591,
+        "wall_seconds": 123.19089049100012
+      },
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 108.09360147799998,
+          "mean": 32.87671864693333,
+          "median": 20.956214676999934,
+          "p90": 82.70560844300007,
+          "p95": 94.44680339199977,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 2,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 4,
+          "atomic_units_per_worker_mean": 2.5,
+          "atomic_units_per_worker_minimum": 2,
+          "atomic_units_per_worker_population_stdev": 0.8660254037844386,
+          "coefficient_of_variation": 0.34641016151377546,
+          "workers_observed": 12
+        },
+        "maximum_retry_blast_radius_atomic_units": 2,
+        "parallel_noncompute_wall_proxy_seconds": 121.75570456641664,
+        "peak_aggregate_worker_rss_bytes": 2603585536,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "225ab0fee91f1143854766184d8eb4198c13c2642f4f721fdd9455bfcc6bb059",
+        "scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.1471027539302519,
+        "wall_seconds": 203.939077947
+      },
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 104.96462408300022,
+          "mean": 31.118476806100034,
+          "median": 18.783328350500142,
+          "p90": 80.1564145870002,
+          "p95": 92.72593056400001,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 4,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 4,
+          "atomic_units_per_worker_mean": 3.75,
+          "atomic_units_per_worker_minimum": 2,
+          "atomic_units_per_worker_population_stdev": 0.6614378277661477,
+          "coefficient_of_variation": 0.17638342073763938,
+          "workers_observed": 8
+        },
+        "maximum_retry_blast_radius_atomic_units": 4,
+        "parallel_noncompute_wall_proxy_seconds": 279.15993639833346,
+        "peak_aggregate_worker_rss_bytes": 1733160960,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "3ffd6300442e61805be5cbe2f23333b0776d9f3390c2ca991cae0d342e3bbec5",
+        "scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.0840457327635304,
+        "wall_seconds": 356.94852092500014
+      },
+      {
+        "atomic_unit_latency_seconds": {
+          "count": 30,
+          "maximum": 101.84743866999997,
+          "mean": 30.832792927566608,
+          "median": 18.58647936349962,
+          "p90": 79.40789549700003,
+          "p95": 92.83204582500002,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "chunk_size_atomic_units": 8,
+        "load_balance": {
+          "atomic_units_per_worker_maximum": 8,
+          "atomic_units_per_worker_mean": 7.5,
+          "atomic_units_per_worker_minimum": 6,
+          "atomic_units_per_worker_population_stdev": 0.8660254037844386,
+          "coefficient_of_variation": 0.11547005383792515,
+          "workers_observed": 4
+        },
+        "maximum_retry_blast_radius_atomic_units": 8,
+        "parallel_noncompute_wall_proxy_seconds": 376.40745437649986,
+        "peak_aggregate_worker_rss_bytes": 871702528,
+        "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+        "run_sha256": "d03b841a64b70c26d9499c23fc5e7a1e3e54daaa92656788a44f842d352dc98b",
+        "scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+        "semantic_digest_equal_to_chunk_one": true,
+        "throughput_atomic_units_per_second": 0.06615552469004632,
+        "wall_seconds": 453.47686592399987
+      }
+    ]
+  },
+  "chunk_matrix_predeclaration": "2be2f55590d4c628a58212d42a99a27b5dc30fad24e7dd648a919d7f23d46ca9",
+  "official_generation_executed": false,
+  "rb21_target_chunk_scaling_sha256": "851662de4b36f8c01c2d330eb1786d376f63c3f5dc84c99193d65905c6f305be",
+  "schema_version": "rvt-rb21-target-chunk-scaling/v1",
+  "selected_recoverability_chunk_size_atomic_units": 1,
+  "selected_residual_chunk_size_atomic_units": 1,
+  "selected_worker_count": 12,
+  "selection_rationale": "smallest semantically invariant chunk within 95 percent of each branch's maximum throughput, limiting load imbalance and retry blast radius",
+  "selection_rule_applied": {
+    "hard_requirements": [
+      "scientific_semantic_digest_equal_to_chunk_one",
+      "no_operational_failure",
+      "peak_RSS_within_selected_worker_RAM_budget"
+    ],
+    "priority": [
+      "scientific_identity",
+      "reasonable_throughput",
+      "tail_load_balance",
+      "small_retry_blast_radius",
+      "atomic_resume_granularity",
+      "RAM_safety"
+    ],
+    "selection": "for each branch choose the smallest eligible chunk within 95 percent of that branch's maximum throughput",
+    "throughput_near_equal_fraction": 0.95
+  }
+}
