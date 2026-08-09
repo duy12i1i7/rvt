@@ -272,6 +272,8 @@ def main() -> None:
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--selected-workers", type=int, required=True)
+    parser.add_argument("--writer-workers", required=True,
+                        help="comma-separated predeclared worker counts")
     parser.add_argument("--writer-repetitions", type=int, default=256)
     parser.add_argument("--timeout-seconds", type=float, required=True)
     args = parser.parse_args()
@@ -287,6 +289,9 @@ def main() -> None:
     labeled = next(row for row in rows if row["unit_kind"] == "RESIDUAL"
                    and row["disposition"] == "LABELED")
     record, sidecar = _split_record(labeled)
+    writer_workers = sorted({int(value) for value in args.writer_workers.split(",")})
+    if args.selected_workers not in writer_workers or min(writer_workers) < 1:
+        raise SystemExit("writer matrix must include the selected positive worker count")
 
     disk = shutil.disk_usage(args.output.parent)
     with tempfile.TemporaryDirectory(
@@ -294,7 +299,7 @@ def main() -> None:
         temporary_root = Path(temporary)
         writer = [
             _writer_benchmark(temporary_root, record, sidecar, workers, args.writer_repetitions)
-            for workers in sorted({1, args.selected_workers})
+            for workers in writer_workers
         ]
         failure = _failure_resume(temporary_root / "failure", record, sidecar)
 
@@ -316,6 +321,7 @@ def main() -> None:
             "available_bytes": disk.free,
         },
         "writer_benchmarks": writer,
+        "selected_worker_count": args.selected_workers,
         "failure_resume": failure,
         "timeout_semantics_probe": timeout_probe,
         "official_generation_executed": False,
