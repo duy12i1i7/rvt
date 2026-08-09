@@ -1,0 +1,273 @@
+{
+  "baseline_references": {
+    "recoverability": "b1e18735b6d1a7d6dd86b2639d2c88fbfe824eef89b339ebec5e79aa37184dcc",
+    "residual": "2b0e7288bbae3c47543f81f6ee305f067b26b72ee61c2691995783f1165b4655"
+  },
+  "canonical_size_distributions": {
+    "official_qualified_serialization": {
+      "index_record_bytes": 271,
+      "no_eligible_audit_record_bytes": {
+        "count": 1,
+        "maximum": 5901.0,
+        "mean": 5901.0,
+        "median": 5901.0,
+        "p90": 5901.0,
+        "p95": 5901.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_replica_audit_sidecar_bytes": {
+        "count": 3,
+        "maximum": 3336.0,
+        "mean": 2508.0,
+        "median": 3111.0,
+        "p90": 3336.0,
+        "p95": 3336.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_scientific_record_bytes": {
+        "count": 14,
+        "maximum": 604.0,
+        "mean": 493.5,
+        "median": 439.0,
+        "p90": 604.0,
+        "p95": 604.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "representative_shard_manifest_bytes": 1290,
+      "residual_labeled_row_bytes": {
+        "count": 3,
+        "maximum": 5926.0,
+        "mean": 5908.333333333333,
+        "median": 5902.0,
+        "p90": 5926.0,
+        "p95": 5926.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_labeled_row_excluding_embedded_sidecar_bytes": {
+        "count": 3,
+        "maximum": 1688.0,
+        "mean": 1686.3333333333333,
+        "median": 1686.0,
+        "p90": 1688.0,
+        "p95": 1688.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_nine_candidate_sidecar_bytes": {
+        "count": 3,
+        "maximum": 4217.0,
+        "mean": 4201.0,
+        "median": 4196.0,
+        "p90": 4217.0,
+        "p95": 4217.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "source": "rb18_structural_generation_canary_v1.json_ALL_AVAILABLE_RECORDS"
+    },
+    "target_benchmark_atomic_unit_envelopes": {
+      "index_record_bytes": {
+        "count": 60,
+        "maximum": 268.0,
+        "mean": 268.0,
+        "median": 268.0,
+        "p90": 268.0,
+        "p95": 268.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "no_eligible_audit_record_bytes": {
+        "count": 3,
+        "maximum": 7133.0,
+        "mean": 7100.333333333333,
+        "median": 7119.0,
+        "p90": 7133.0,
+        "p95": 7133.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_replica_audit_sidecar_bytes": {
+        "count": 30,
+        "maximum": 1892.0,
+        "mean": 980.5666666666667,
+        "median": 557.5,
+        "p90": 1718.0,
+        "p95": 1892.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_scientific_record_bytes": {
+        "count": 30,
+        "maximum": 386.0,
+        "mean": 376.8,
+        "median": 375.0,
+        "p90": 385.0,
+        "p95": 386.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "representative_shard_manifest_bytes": 4104,
+      "residual_labeled_or_disposition_row_bytes": {
+        "count": 30,
+        "maximum": 838.0,
+        "mean": 782.5333333333333,
+        "median": 778.0,
+        "p90": 787.0,
+        "p95": 833.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_nine_candidate_sidecar_bytes": {
+        "count": 30,
+        "maximum": 6295.0,
+        "mean": 6262.4,
+        "median": 6280.5,
+        "p90": 6290.0,
+        "p95": 6290.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      }
+    }
+  },
+  "failure_resume": {
+    "abrupt_worker_cases": [
+      {
+        "accepted_as_complete": false,
+        "case": "worker-before-complete",
+        "exit_code": 17
+      },
+      {
+        "accepted_as_complete": false,
+        "case": "worker-after-compute-before-ack",
+        "exit_code": 17
+      }
+    ],
+    "changed_science_duplicate_rejected": true,
+    "duplicate_submission": "DUPLICATE_IDEMPOTENT",
+    "first_commit": "ACKNOWLEDGED",
+    "incomplete_attempt_count": 6,
+    "infrastructure_retry_limit": 1,
+    "insufficient_temporary_space_rejected": true,
+    "partial_record_accepted": false,
+    "partial_write_cases": [
+      {
+        "accepted_as_complete": false,
+        "attempt_preserved": true,
+        "failure_point": "after_record"
+      },
+      {
+        "accepted_as_complete": false,
+        "attempt_preserved": true,
+        "failure_point": "after_sidecar"
+      },
+      {
+        "accepted_as_complete": false,
+        "attempt_preserved": true,
+        "failure_point": "before_promotion"
+      }
+    ],
+    "record_identity_equal_after_resume": true,
+    "semantic_retry_count": 0,
+    "sidecar_identity_equal_after_resume": true,
+    "termination_between_chunks": {
+      "exit_code": 19,
+      "first_unit_complete": true,
+      "unscheduled_second_unit_complete": false
+    }
+  },
+  "final_test_accesses": 0,
+  "official_generation_executed": false,
+  "official_rows": 0,
+  "official_shards": 0,
+  "provenance_class": "OPERATIONAL_BENCHMARK_ONLY",
+  "rb21_target_operational_probes_sha256": "40d8f9cacdf92937c543cf778772321ce25b9f8d909cf39fab582379797ec222",
+  "schema_version": "rvt-rb21-target-operational-probes/v1",
+  "selected_worker_count": 12,
+  "study_a_n24_accesses": 0,
+  "target_storage": {
+    "available_bytes": 1024412712960,
+    "path": "/rvt-data/audit",
+    "total_bytes": 1081101176832
+  },
+  "timeout_semantics_probe": {
+    "atomic_unit_id": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+    "infrastructure_failure_reason": "OPERATIONAL_TIMEOUT",
+    "scientific_horizon_changed": false,
+    "semantic_retry_count": 0,
+    "status": "INFRASTRUCTURE_FAILURE",
+    "target_row_emitted": false,
+    "target_v4_evaluated_from_timeout": false,
+    "timeout_seconds": 1200.0
+  },
+  "writer_benchmarks": [
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.3108848140491673,
+      "records": 128,
+      "records_per_second": 44.08463046641623,
+      "wall_seconds": 2.9035062479997578,
+      "workers": 1
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.3201135091091259,
+      "records": 128,
+      "records_per_second": 45.39329397463498,
+      "wall_seconds": 2.8197997719998966,
+      "workers": 2
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.4480424838559368,
+      "records": 128,
+      "records_per_second": 63.53410151105173,
+      "wall_seconds": 2.0146660919999704,
+      "workers": 4
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.506158343300741,
+      "records": 128,
+      "records_per_second": 71.7751479439508,
+      "wall_seconds": 1.7833470730001864,
+      "workers": 6
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.5438820878747455,
+      "records": 128,
+      "records_per_second": 77.12451614786521,
+      "wall_seconds": 1.659653848000744,
+      "workers": 8
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.531596797614594,
+      "records": 128,
+      "records_per_second": 75.38241599753175,
+      "wall_seconds": 1.6980087239999193,
+      "workers": 12
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.5072320298522168,
+      "records": 128,
+      "records_per_second": 71.92740071642326,
+      "wall_seconds": 1.779572162000477,
+      "workers": 16
+    }
+  ]
+}
