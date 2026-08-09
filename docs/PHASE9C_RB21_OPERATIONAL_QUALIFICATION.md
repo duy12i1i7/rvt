@@ -1,269 +1,256 @@
-# Phase 9C-RB21 Operational Qualification
+# Phase 9C-RB21 Windows/WSL/Docker Operational Qualification
 
 ## Verdict
 
-**D. Operational qualification remains incomplete or the target environment is
-not qualified.**
+**B. Container/operational configuration changes scientific semantics.**
 
-The current machine is the same macOS development environment used for RB-20,
-but no owner-declared official generation environment identity or equivalence
-proof exists. RB-21 therefore does not select a worker count, chunk size,
-timeout or throughput commitment and does not authorize any official scope.
+The Windows host, WSL2, Docker Desktop, Linux-native storage, immutable source
+layout, and pinned CPU image were established successfully. The exact
+previously qualified Python 3.9.6 / PyTorch 2.8.0 / NumPy 2.0.2 stack still
+fails three scientific-semantic tests on Linux/amd64:
 
-No scientific semantics were changed. No official generation or training ran.
+- two FD24 batch/candidate isolation comparisons exceed the frozen absolute
+  tolerance of `1e-7`;
+- Linux recompilation of frozen layout `train-f2-01` changes one binary64
+  `heading_radians` value and therefore changes the layout self-hash.
 
-## Identity
+Phase 15 requires zero failures and explicitly requires a Verdict B stop when
+Docker changes scientific semantics. No scientific implementation, tolerance,
+rounding rule, layout, model, protocol, controller, or evaluator was changed to
+force a pass. Phases 16 through 35 were not executed.
 
-- Scientific source commit: `297a94b9a7e951b9b30b14befca16a92d9c1189e`.
-- Branch: `research/rvt-rb21-operational-qualification-v1`.
-- RB-19 current provenance root:
-  `e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571`.
-- RB-20 reproduction:
-  `8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a`.
-- Target V4:
-  `54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee`.
-- RB-21 evidence commit: recorded after final verification.
-- Baseline inherited from the handoff: 2946 passed, 0 failed, 0 xfailed,
-  0 xpassed. It was not rerun merely to restate the baseline.
+No official generation or training ran.
 
-## Takeover Audit
+## Remote Access
 
-The requested first inspection found a clean worktree already on the RB-21
-branch at the exact RB-20 source commit. The annotated tag
-`rvt-rb20-clean-repro-pass-v1` already existed and dereferenced exactly to that
-commit, so it was not moved.
+| Check | Result |
+|---|---|
+| ICMP | reachable |
+| TCP 22 | open |
+| TCP 3389 | open |
+| TCP 5985 / 5986 | closed or filtered |
+| Mechanism used | interactive SSH PTY |
+| Authentication | succeeded |
+| Credential persisted | no |
 
-The handoff described uncommitted `rb21_manifest.py`, `rb21_units.py` and
-`rb21_bench.py` files. None existed in the worktree, any registered worktree or
-the searched user/temp paths; `git status`, unstaged diff and staged diff were
-empty. Therefore:
+The Windows account is a local Administrator. No firewall or remote-access
+configuration was changed.
 
-- inherited `rb21_manifest.py`: absent;
-- inherited `rb21_units.py`: absent;
-- inherited `rb21_bench.py`: absent;
-- other inherited RB-21 changes: none found;
-- discarded predecessor work: none;
-- production operational code inherited: none;
-- syntax/import failures inherited: not applicable.
-
-The implementation added the corresponding modules under
-`rvt_swarm/phase9c_rb21/`. It reuses the qualified scientific executor,
-Residual Expert V2, Target V4 evaluator, identity contracts and RB-19/RB-20
-preflight evidence rather than reproducing their equations.
-
-## Target Environment
-
-Current diagnostic host:
+## Windows Host
 
 | Field | Observed |
 |---|---|
-| Identity | `udy-2.local:Darwin:arm64` |
-| OS | macOS 26.5 / Darwin 25.5.0 |
-| CPU | Apple M4 Pro |
-| Physical / logical cores | 12 / 12 |
-| RAM | 25,769,803,776 bytes |
-| Workspace filesystem | local APFS; about 68 GB available at final measurement |
-| Temporary storage | local `/tmp` mapping on the same data volume |
-| Python | 3.9.6 |
-| torch | 2.8.0 |
-| numpy | 2.0.2 |
-| multiprocessing | `spawn`, `fork`, `forkserver` available; harness uses `spawn` |
-| scheduler/container | none detected |
+| Hostname | `AVIS` |
+| OS | Microsoft Windows 11 Pro `10.0.26200.8875` |
+| Architecture | x64 |
+| CPU | Intel Core Ultra 9 285K |
+| Physical / logical cores | 24 / 24 |
+| RAM | 68,053,331,968 bytes |
+| System volume | NTFS, 3,999,702,970,368 bytes |
+| Free system-volume space | 2,994,896,723,968 bytes |
+| NVMe | Samsung SSD 990 PRO with Heatsink 4TB |
+| GPU | NVIDIA RTX 5000 Ada, 32,760 MiB, driver 536.96 |
+| Hypervisor | present |
+| Virtualization-based security | running |
 
-Qualification result: `TARGET_ENVIRONMENT_NOT_QUALIFIED`. The environment
-artifact hash is
-`e6ad3dd1ebc3d36593252bf658dcab41e5f42261034a4a7d416ef1180f1d4b3c`.
+The active default route is through `Ethernet 2` to `192.168.88.1`. The
+qualification address is the Tailscale address `100.71.102.9`.
 
-## Work Units
+## WSL2
 
-Residual atomicity is one expert decision for one robot containing candidate
-indices 0 through 8. Construction and scheduler checks reject every subset.
-One worker executes all nine continuations, the frozen selector and Target
-builder before returning the unit.
+| Field | Observed |
+|---|---|
+| WSL version | `2.7.10.0` |
+| WSL kernel | `6.18.33.2-microsoft-standard-WSL2` |
+| Default distribution | `Ubuntu-24.04` |
+| Distribution release | Ubuntu 24.04.4 LTS |
+| Distribution version/state | WSL2 / running |
+| CPUs exposed | 24 |
+| Memory exposed | 33,323,384,832 bytes |
+| Swap | 8,589,934,592 bytes |
+| Linux filesystem | ext4 |
+| Linux volume available | 1,024,412,991,488 bytes |
 
-Recoverability atomicity is one decision state times one candidate topology.
-It contains one replica for ordinary families and all three replicas for F8/F9
-before aggregation. Scheduler-level candidate and replica splitting are
-rejected. Parallelism is only across complete independent units.
+No `.wslconfig` override existed, so no arbitrary CPU or memory limits were
+introduced.
 
-Every worker receives `OMP_NUM_THREADS=1`, `MKL_NUM_THREADS=1`,
-`OPENBLAS_NUM_THREADS=1`, `torch_num_threads=1` and
-`torch_num_interop_threads=1`.
+## Docker
 
-## Benchmark Manifest
+| Field | Observed |
+|---|---|
+| Docker Desktop | `4.80.0.232116` |
+| Client / Engine | `29.6.1` / `29.6.1` |
+| API | `1.55` |
+| Container OS / architecture | Linux / amd64 |
+| Storage driver | overlayfs |
+| CPUs / memory | 24 / 33,323,384,832 bytes |
+| Docker root | `/var/lib/docker` |
+| WSL integration | enabled for Ubuntu-24.04 |
 
-The canonical manifest was written before timing. It contains 32 complete
-residual units (288 candidate evaluations) and 32 complete recoverability units
-(64 replica rollouts). It covers train and validation only, families F1, F5,
-F8 and F9, and N in {5, 8, 12, 16}. It includes structural cases for early and
-long continuations, topology change, dynamic obstacles, degraded
-communication, labeled residual states and the naturally available F5
-no-eligible state.
+The existing `lab-khai`, `lab-nhat`, and `lab-gpu-manager` containers
+were preserved. A controlled Docker Desktop restart restored them under their
+existing restart policies.
 
-Median, p90, p95 and empirical maximum are declared. P99 is explicitly not
-reported. The manifest hash is
-`4ac5bd1d00c6d2a1e0a71a712c98577e3e866066001802948b5cf3ecb3104ead`.
+Public image pulls use a credential-free Docker config at
+`/home/avis/.docker-rvt-public`. No registry credential was added. Linux
+container execution passed with the official Ubuntu 24.04 and hello-world
+images.
 
-The full manifest was not run because G1 failed before performance selection.
-This is intentional: insufficient target coverage is a hard-stop reason for
-Verdict D, not permission to extrapolate.
+## Filesystem
 
-## Diagnostic Timing
+All high-I/O project and data paths are on the WSL ext4 filesystem:
 
-One non-authorizing smoke used the same four complete units in both
-configurations:
+- project: `/home/avis/rvt`;
+- staging: `/home/avis/rvt-data/staging`;
+- final: `/home/avis/rvt-data/final`;
+- temporary: `/home/avis/rvt-data/temp`;
+- audit/log: `/home/avis/rvt-data/audit`.
 
-| W / chunk | Wall (s) | Units/s | Speedup | Efficiency | Peak worker RSS |
-|---|---:|---:|---:|---:|---:|
-| 1 / 1 | 18.17 | 0.2201 | 1.000 | 1.000 | 189 MB |
-| 2 / 2 | 14.02 | 0.2852 | 1.296 | 0.648 | 377 MB |
+No `/mnt/c` or Windows user-directory bind mount was selected for scientific
+generation.
 
-For W=1, residual atomic-unit time had count 2, median 6.49 s and maximum
-10.88 s. The 18 candidate continuations had mean 0.668 s, median 0.588 s, p90
-1.444 s, p95/max 1.522 s and at most 75 control intervals. Selector/target
-reduction was 0.00402 s median and serialization 0.0000474 s median. The two
-units produced one `LABELED` and one `NO_ELIGIBLE_ACTION` disposition.
+## Repository
 
-Recoverability atomic-unit time had count 2, median 2.285 s and maximum 3.588 s.
-The two replica rollouts had median 1.769 s, maximum 2.611 s and at most 164 control
-steps. Aggregation and serialization were each below 0.00001 s.
+The public remote was inspected rather than guessed:
+`https://github.com/duy12i1i7/rvt.git`.
 
-These counts do not support production percentiles or p99. Exact timing values
-and inherited RB-15 distributions are in the performance artifact.
+The remote did not advertise the required evidence commit. A clean incremental
+Git bundle was transferred, its SHA-256 matched at both ends, and the target
+checked out:
 
-## Semantic Equality
+`b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b`
 
-Both actual performance configurations produced the exact semantic digest:
+detached with an initially empty `git status --porcelain`. Historical commit
+and tree objects required by the scope guards were verified in the target
+clone.
 
-`ddfc1ef5a2534d5a4c7d4fbf415ec7dcae890375bd8d01b0c1069770bab7f5de`
+## Dependency Decision
 
-The projection excludes only worker, chunk, attempt, process, timing, memory and
-serialization metadata. Scientific identities, snapshots, streams, raw
-predicates, candidate records, utilities, dispositions, labels and WORLD
-targets remain included. The earlier RB-20 fixture projection independently
-passes the same metadata-invariance check.
+The current `requirements.txt` resolves to newer, previously unqualified
+versions, including PyTorch 2.11 and NumPy 2.4.4. That probe was rejected as an
+upgrade path. The semantic probe instead pins the versions from the
+previously passing host:
 
-This passes G2 only for the diagnostic task set. There is no selected production
-configuration to compare.
+- Python 3.9.6;
+- PyTorch 2.8.0 CPU;
+- NumPy 2.0.2;
+- Matplotlib 3.9.4;
+- pytest 8.4.2;
+- Pillow 11.3.0;
+- the complete transitive closure in
+  `docker/generation/requirements.lock.txt`;
+- local `third_party/Python-RVO2`.
 
-## Chunking and Timeout
+This version match is important: it proves the remaining failures are not
+caused by casually modernizing the stack.
 
-Predeclared diagnostic chunks are 1, 2, 4 and 8 complete units. Only chunks 1
-and 2 were smoke-tested. No chunk is selected. The future selection rule weighs
-throughput, p95 latency, RAM, load balance, retry blast radius and resume
-granularity, preferring the smaller chunk when throughput is near-equal.
+## Generation Image
 
-No timeout is selected. The historical residual value 1800 s remains recorded
-as non-authoritative. The harness maps an operational deadline only to
-`INFRASTRUCTURE_FAILURE`; it does not pass it into the simulator, shorten the
-counterfactual horizon, evaluate Target V4 from the deadline or emit a row.
-Semantic retries remain 0 and the frozen infrastructure retry limit remains 1.
+The headless semantic probe image is not a qualified production image.
 
-## Storage
+| Field | Value |
+|---|---|
+| Probe tag | `rvt-generation:rb21-qualified-stack-probe` |
+| Image ID / local RepoDigest | `sha256:695acb7a54004b32116820ac2e4b325dde5a73e1b63a9a163688a1366c61ff2b` |
+| Image manifest | `sha256:30d429a7802bf81215c42c9b6aa68100fa86f0850fe805adf414f0bbe4fd13aa` |
+| Base image | Python 3.9.6 slim bullseye, digest `4115592f...bcd7c` |
+| Container distribution | Debian 11 bullseye |
+| Source label | `b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b` |
+| Source path | `/opt/rvt`, root-owned, worker read-only |
+| Writable data | `/rvt-data/*` only |
 
-Measured canonical sizes were:
+Default nested thread environment values are all one:
+`OMP_NUM_THREADS`, `MKL_NUM_THREADS`, `OPENBLAS_NUM_THREADS`, and
+`NUMEXPR_NUM_THREADS`. The existing `ThreadSettings` helper sets both
+PyTorch compute and interop threads to one.
 
-| Payload | Bytes |
-|---|---:|
-| Recoverability scientific record | 438 |
-| Recoverability replica/audit metadata | 1,202 |
-| Residual labeled row | 5,902 |
-| Residual nine-candidate sidecar | 4,196 |
-| NO_ELIGIBLE_ACTION audit record | 5,901 |
-| Sample shard/index/manifest metadata | 322 |
+Some guard tests intentionally write temporary Python fixtures. `rvt-test`
+copies the immutable checkout into an ephemeral worker-owned directory for
+tests only. The production source remains root-owned and non-writable.
 
-The conservative projection is 3.31 GB scientific payload, 5.81 GB audit
-sidecars, 9.58 GB final dataset, 9.58 GB staging, 2.39 GB temporary data and
-21.74 GB for staging + final + temporary + resume metadata. Current diagnostic
-storage has about 3.1x this bound. This does not qualify the unknown target.
+## Test Results
 
-The unchanged canonical JSON writer measured about 680 record transactions/s
-and 6.88 MB/s over 200 fsync-backed diagnostic commits. No compression or
-scientific encoding change was introduced.
+The exact critical suite passed:
 
-## Resume and Failure Safety
+`359 passed, 0 failed in 61.45 s`
 
-Completion is indexed by atomic scientific unit identity. A unit is complete
-only after record and sidecar hashes match an atomic commit manifest. Restart
-rescans those identities, not chunk positions. Exact duplicate submission is
-idempotent; the same identity with changed content is rejected.
+The complete suite in the exact pinned Linux image produced:
 
-Injected failures after record write, after sidecar write and before promotion
-were never accepted as complete. Insufficient temporary space was rejected
-before commit. Attempt state remained in the diagnostic attempt journal. The
-same transaction path preserves `NO_ELIGIBLE_ACTION` without a target row.
+`2967 passed, 3 failed, 0 xfailed, 0 xpassed in 341.78 s`
 
-These helpers pass on the local diagnostic filesystem; target-filesystem and
-machine-interruption qualification remain pending.
+The same two relevant test files pass on the previous macOS/arm64 host:
 
-## Capacity and H4
+`9 passed, 0 failed`
 
-No target throughput exists, so recoverability wall time, Residual V2 wall
-time, CPU-hours, target peak RAM and candidate evaluations/s remain
-`PENDING_TARGET_ENVIRONMENT`. The frozen residual scale remains at most 536,000
-stored rows and 4,824,000 candidate evaluations; the latter is not a row count.
+The earlier upgraded-stack probe produced 38 failures. Thirty-five were
+operational test-checkout permission effects and disappeared when tests used
+the ephemeral writable checkout. The three semantic failures remained under
+the exact previously qualified versions.
 
-The required exact H4 label is
-`H4_OPERATIONAL_RISK_BUT_FEASIBLE`, scoped explicitly as a **provisional,
-non-authorizing diagnostic classification**. Existing measurements show finite
-execution without hangs, but target worker/timeout/capacity evidence is absent.
-The residual branch therefore stays disabled and unauthorized. This
-classification must be recomputed from the predeclared criteria on the actual
-target; it is not a production conclusion.
+## Semantic Mismatches
+
+### FD24 Batch Isolation
+
+`test_adding_unrelated_ego_graphs_cannot_change_target_output` observed an
+absolute difference of `1.043081283569336e-07`, above the frozen `1e-7`
+tolerance.
+
+`test_parallel_candidate_evaluation_does_not_mix_candidates` observed an
+absolute difference of `1.1175870895385742e-07`, also above the frozen
+tolerance.
+
+### Layout Compilation
+
+For `train-f2-01`:
+
+| Field | Frozen artifact | Linux recompilation |
+|---|---:|---:|
+| `heading_radians` | `0.032866494018365604` | `0.0328664940183656` |
+| layout self-hash | `1eacd9d6...48542c` | `2e978e2b...098d1` |
+
+The one-binary64-value difference is sufficient to change canonical JSON and
+the scientific layout identity. Changing a rounding rule, replacing persisted
+values, loosening the test, or changing the compiler would be a scientific
+semantic repair and is prohibited in this qualification.
+
+Because semantic equality is already false, a host/container semantic digest,
+worker scaling, chunk scaling, timeout selection, capacity projection, H4
+classification, and production preflight cannot produce authorization.
 
 ## Authorization
 
 | Scope | Status |
 |---|---|
-| RECOVERABILITY_GENERATION | NOT_AUTHORIZED_TARGET_ENVIRONMENT_PENDING |
-| RESIDUAL_V2_GENERATION | NOT_AUTHORIZED_TARGET_ENVIRONMENT_AND_H4_PENDING |
-| STUDY_A_TRAIN_VALIDATION | NOT_AUTHORIZED |
+| RECOVERABILITY_GENERATION | NOT_AUTHORIZED_SEMANTIC_GATE_FAILED |
+| RESIDUAL_V2_GENERATION | NOT_AUTHORIZED_SEMANTIC_GATE_FAILED |
+| STUDY_A_TRAIN_VALIDATION | NOT_AUTHORIZED_SEMANTIC_GATE_FAILED |
 | STUDY_A_N24_ZERO_SHOT | SEALED_NOT_AUTHORIZED |
 | STUDY_B | NOT_AUTHORIZED |
 | FINAL_TEST | SEALED_NOT_AUTHORIZED |
 
-No broad `generation_authorized=true` state exists.
-
-## Artifacts and Preflight
-
-Key hashes at the evidence run:
-
-- operational contract:
-  `41c9f2399b2c214c2d49cac7f9ac99d60a9679dfb75bdd1580a1e49d79fc1e5a`;
-- operational job manifest:
-  `f7eb010872d75f685decfc9cc9647a360490fb1876fc3a2f97e04202c3349efd`;
-- readiness root:
-  `1de91fd787a875e0a973bc66567b404fa5a3343b8fc915ac40696e4960c6ff21`.
-
-Scientific preflight passes with no failed checks. Operational preflight is
-blocked only by target environment, worker count, chunk size and timeout. All
-13 negative cases are rejected, including stale roots, oversubscription,
-unsafe writer mode, broken seals and broad authorization.
-
-## Command Plan
-
-The exact qualification command is prepared and was executed only in the
-diagnostic namespace:
-
-```bash
-env PYTHONPATH=. .venv/bin/python scripts/run_phase9c_rb21_qualification.py --run-diagnostic-benchmark
-```
-
-An official generation command cannot be made deterministic while worker,
-chunk and timeout are pending. Therefore no executable official command was
-created. No Study A N=24 or final-test command exists. After target
-qualification, a new versioned operational contract and job manifest must pin
-those values before an owner can authorize an exact staging command.
+No official command plan was prepared or executed.
 
 ## Isolation
 
-- final-test runtime accesses: 0;
-- Study A N=24 runtime accesses: 0;
+- final-test accesses: 0;
+- Study A N24 accesses: 0;
 - official recoverability rows: 0;
 - official residual rows: 0;
 - official scientific shards: 0;
-- new FD24 checkpoints: 0;
+- checkpoints: 0;
 - optimizer states: 0;
 - training operations: 0.
 
-Official Phase-9 scientific generation is **not operationally authorized**.
+## Evidence
+
+Canonical target record:
+`results/rvt_fd24/rb21_windows_docker_generation_readiness_v1.json`.
+
+Its canonical self-hash is:
+
+`90689f48419bcc738cb6ba37427951bd250629419cf7504464dd6f718f12b1b8`
+
+The target is technically capable, but it is not the official Phase-9
+generation environment under the frozen exact-semantics contract. Any next
+step requires an explicit scientific decision about cross-platform numeric
+semantics; this operational task does not make that decision.

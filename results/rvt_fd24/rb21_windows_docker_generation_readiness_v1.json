@@ -1,0 +1,249 @@
+{
+  "authorization": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "RECOVERABILITY_GENERATION": "NOT_AUTHORIZED_SEMANTIC_GATE_FAILED",
+    "RESIDUAL_V2_GENERATION": "NOT_AUTHORIZED_SEMANTIC_GATE_FAILED",
+    "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+    "STUDY_A_TRAIN_VALIDATION": "NOT_AUTHORIZED_SEMANTIC_GATE_FAILED",
+    "STUDY_B": "NOT_AUTHORIZED"
+  },
+  "benchmark_execution": {
+    "capacity_projection": "NOT_RUN_MANDATORY_PHASE15_STOP",
+    "chunk_matrix": "NOT_RUN_MANDATORY_PHASE15_STOP",
+    "failure_resume_matrix": "NOT_RUN_MANDATORY_PHASE15_STOP",
+    "h4_classification": "NOT_CLASSIFIED_MANDATORY_PHASE15_STOP",
+    "official_command_plan": "NOT_PREPARED_SEMANTIC_GATE_FAILED",
+    "selected_chunk_size": null,
+    "selected_timeout_seconds": null,
+    "selected_worker_count": null,
+    "single_worker_baseline": "NOT_RUN_MANDATORY_PHASE15_STOP",
+    "storage_projection": "NOT_RUN_MANDATORY_PHASE15_STOP",
+    "target_benchmark_manifest_sha256": "4ac5bd1d00c6d2a1e0a71a712c98577e3e866066001802948b5cf3ecb3104ead",
+    "worker_matrix": "NOT_RUN_MANDATORY_PHASE15_STOP"
+  },
+  "container": {
+    "architecture": "amd64",
+    "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+    "build_context_source_commit": "b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b",
+    "build_manifest_digest": "sha256:30d429a7802bf81215c42c9b6aa68100fa86f0850fe805adf414f0bbe4fd13aa",
+    "config_digest": "sha256:248c50a827374e4b4197589240786cdc44378a53140485aab01ddc28c51cf03eb",
+    "container_os": "Debian GNU/Linux 11 (bullseye)",
+    "dockerfile_sha256": "94a97c1d8cafb0067c9e3b5691cfe322c25864cf4b681b62e382bb7a5c49c59b",
+    "generation_data_paths": [
+      "/rvt-data/staging",
+      "/rvt-data/final",
+      "/rvt-data/temp",
+      "/rvt-data/audit"
+    ],
+    "image_id": "sha256:695acb7a54004b32116820ac2e4b325dde5a73e1b63a9a163688a1366c61ff2b",
+    "image_size_bytes": 618953985,
+    "image_status": "SEMANTIC_PROBE_NOT_QUALIFIED",
+    "kernel_visible": "6.18.33.2-microsoft-standard-WSL2",
+    "linux_distribution": "Debian GNU/Linux 11 (bullseye)",
+    "numpy_version": "2.0.2",
+    "os": "linux",
+    "python_version": "3.9.6",
+    "requirements_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+    "source_path": "/opt/rvt",
+    "source_runtime_owner": "root:root",
+    "source_runtime_writable_by_worker": false,
+    "test_copy_runner_sha256": "64e46fdc9c9d1f44898b213d06e587d17a9ec6d119185d1684ae434920fe86a1",
+    "thread_environment": {
+      "MKL_NUM_THREADS": 1,
+      "NUMEXPR_NUM_THREADS": 1,
+      "OMP_NUM_THREADS": 1,
+      "OPENBLAS_NUM_THREADS": 1
+    },
+    "torch_version": "2.8.0+cpu"
+  },
+  "dependency_provenance": {
+    "decision": "USE_PREVIOUSLY_QUALIFIED_STACK_NOT_CURRENT_REQUIREMENTS_UPGRADES",
+    "linux_cpu_lock_matches_qualified_versions": true,
+    "previous_qualified_host": {
+      "architecture": "arm64",
+      "numpy_version": "2.0.2",
+      "os": "macOS",
+      "python_version": "3.9.6",
+      "torch_version": "2.8.0"
+    },
+    "probe_with_current_requirements_result": "REJECTED_AS_UNQUALIFIED_UPGRADE_PATH",
+    "rvo2_install": "LOCAL_PINNED_SOURCE_third_party/Python-RVO2"
+  },
+  "docker": {
+    "architecture": "x86_64",
+    "available_cpus": 24,
+    "available_memory_bytes": 33323384832,
+    "client_version": "29.6.1",
+    "desktop_product_version": "4.80.0.232116",
+    "engine_version": "29.6.1",
+    "linux_containers": true,
+    "root_directory": "/var/lib/docker",
+    "server_api_version": "1.55",
+    "storage_driver": "overlayfs",
+    "swap_bytes": 8589934592,
+    "wsl_integration": "Ubuntu-24.04 enabled"
+  },
+  "filesystem": {
+    "audit": "/home/avis/rvt-data/audit",
+    "final": "/home/avis/rvt-data/final",
+    "filesystem": "ext4",
+    "linux_volume_available_bytes": 1024412991488,
+    "linux_volume_size_bytes": 1081101176832,
+    "project": "/home/avis/rvt",
+    "staging": "/home/avis/rvt-data/staging",
+    "temp": "/home/avis/rvt-data/temp",
+    "windows_bind_mount_selected_for_generation": false
+  },
+  "gate_result": {
+    "failed_gate": "PHASE_15_COMPLETE_TEST_SUITE_AND_SCIENTIFIC_SEMANTICS",
+    "later_phases_executed": false,
+    "mandatory_action": "STOP_NO_SCIENCE_CHANGE",
+    "official_environment_tuple_declared": false,
+    "qualification_status": "BLOCKED_SCIENTIFIC_SEMANTIC_MISMATCH",
+    "verdict": "B",
+    "verdict_text": "Container/operational configuration changes scientific semantics."
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_scientific_shards": 0,
+    "optimizer_states": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "network": {
+    "default_route": {
+      "interface": "Ethernet 2",
+      "next_hop": "192.168.88.1"
+    },
+    "dns_ipv4": [
+      "192.168.88.1"
+    ],
+    "ethernet_ipv4": "192.168.88.34",
+    "tailscale_ipv4": "100.71.102.9"
+  },
+  "provenance": {
+    "branch": "research/rvt-rb21-operational-qualification-v1",
+    "previous_rb21_readiness_sha256": "1de91fd787a875e0a973bc66567b404fa5a3343b8fc915ac40696e4960c6ff21",
+    "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20_clean_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "scientific_source_commit": "b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "rb21_windows_docker_generation_readiness_sha256": "90689f48419bcc738cb6ba37427951bd250629419cf7504464dd6f718f12b1b8",
+  "remote_access": {
+    "authentication": "INTERACTIVE_WINDOWS_ACCOUNT_AUTHENTICATION",
+    "authentication_succeeded": true,
+    "credential_persisted": false,
+    "icmp": "REACHABLE",
+    "mechanism_used": "SSH_INTERACTIVE_PTY",
+    "ports": {
+      "22": "OPEN",
+      "3389": "OPEN",
+      "5985": "CLOSED_OR_FILTERED",
+      "5986": "CLOSED_OR_FILTERED"
+    }
+  },
+  "repository": {
+    "initial_checkout_clean": true,
+    "remote": "https://github.com/duy12i1i7/rvt.git",
+    "source_commit_verified": "b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b",
+    "source_transfer": "INCREMENTAL_GIT_BUNDLE_WITH_MATCHING_SHA256",
+    "working_path": "/home/avis/rvt"
+  },
+  "schema_version": "rvt-rb21-windows-docker-generation-readiness/v1",
+  "semantic_validation": {
+    "host_reference": {
+      "failed": 0,
+      "passed": 9,
+      "tests": [
+        "tests/test_fd24_model_batch_isolation.py",
+        "tests/test_phase8e_layout_compilation.py"
+      ]
+    },
+    "mismatches": [
+      {
+        "absolute_difference": 1.043081283569336e-07,
+        "allowed_absolute_tolerance": 1e-07,
+        "container_mixed_output": -0.12159128487110138,
+        "container_single_output": -0.12159138917922974,
+        "test": "test_adding_unrelated_ego_graphs_cannot_change_target_output",
+        "type": "MODEL_BATCH_ISOLATION"
+      },
+      {
+        "absolute_difference": 1.1175870895385742e-07,
+        "allowed_absolute_tolerance": 1e-07,
+        "container_parallel_output": -0.11600988358259201,
+        "container_single_output": -0.11600999534130096,
+        "test": "test_parallel_candidate_evaluation_does_not_mix_candidates",
+        "type": "MODEL_CANDIDATE_ISOLATION"
+      },
+      {
+        "compiled_heading_radians": 0.0328664940183656,
+        "compiled_layout_execution_specification_sha256": "2e978e2bfc9acb9a03af49b2e02ab7036f75887341acbfd289991f0c1d53098d1",
+        "layout_id": "train-f2-01",
+        "persisted_heading_radians": 0.032866494018365604,
+        "persisted_layout_execution_specification_sha256": "1eacd9d6d04c8dfe8403cce5855345b427cd3e7add542780244bb2b01ae48542c",
+        "test": "test_persisted_layout_specs_match_compiler_and_have_unique_hashes",
+        "type": "CROSS_PLATFORM_LAYOUT_COMPILATION"
+      }
+    ],
+    "prior_probe_full_suite": {
+      "failed": 38,
+      "passed": 2932,
+      "reason_not_authoritative": "unqualified upgraded dependency stack and immutable-source test permission interference"
+    },
+    "target_critical_suite": {
+      "failed": 0,
+      "passed": 359,
+      "wall_seconds": 61.45
+    },
+    "target_exact_stack_full_suite": {
+      "failed": 3,
+      "passed": 2967,
+      "publication_required_xfailed": 0,
+      "warnings": 1,
+      "wall_seconds": 341.78,
+      "xfailed": 0,
+      "xpassed": 0
+    }
+  },
+  "windows_host": {
+    "account_is_local_administrator": true,
+    "architecture": "x64",
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 285K",
+    "gpu": {
+      "driver_version": "536.96",
+      "memory_mib": 32760,
+      "model": "NVIDIA RTX 5000 Ada Generation"
+    },
+    "hostname": "AVIS",
+    "hypervisor_present": true,
+    "logical_processors": 24,
+    "nvme_model": "Samsung SSD 990 PRO with Heatsink 4TB",
+    "nvme_size_bytes": 4000787030016,
+    "physical_cores": 24,
+    "ram_available_bytes_observed": 48214405120,
+    "ram_total_bytes": 68053331968,
+    "system_drive_filesystem": "NTFS",
+    "system_drive_free_bytes": 2994896723968,
+    "system_drive_size_bytes": 3999702970368,
+    "virtualization_based_security": "RUNNING",
+    "windows_edition": "Microsoft Windows 11 Pro",
+    "windows_version_build": "10.0.26200.8875"
+  },
+  "wsl": {
+    "available_memory_bytes": 31661375488,
+    "default_distribution": "Ubuntu-24.04",
+    "default_version": 2,
+    "distribution": "Ubuntu 24.04.4 LTS",
+    "distribution_state": "RUNNING",
+    "exposed_cpus": 24,
+    "kernel_version": "6.18.33.2-microsoft-standard-WSL2",
+    "swap_bytes": 8589934592,
+    "total_memory_bytes": 33323384832,
+    "version": "2.7.10.0"
+  }
+}

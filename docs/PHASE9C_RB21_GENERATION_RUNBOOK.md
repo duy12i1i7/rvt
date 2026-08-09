@@ -2,92 +2,94 @@
 
 ## Current State
 
-This runbook is blocked at target-environment qualification. Do not execute
-official generation from the current contract. Worker count, both chunk sizes
-and timeout are `PENDING_TARGET_ENVIRONMENT`.
+**Blocked by the Phase 15 scientific-semantic gate.**
 
-## Preconditions
+Do not execute official generation on `AVIS`, in WSL2, or in the RB21 probe
+image. Worker count, chunk size, timeout, capacity, H4 classification, and
+authorization are intentionally unset.
 
-1. Use the owner-declared official generation host or a documented equivalent.
-2. Checkout the eventual clean RB-21 evidence commit.
-3. Verify the RB-20 tag dereferences to
-   `297a94b9a7e951b9b30b14befca16a92d9c1189e`.
-4. Keep `OMP_NUM_THREADS`, `MKL_NUM_THREADS`, `OPENBLAS_NUM_THREADS`, torch
-   compute threads and torch interop threads at the versioned contract values.
-5. Confirm Study A N=24 and final test remain sealed.
+## Reboot Verification
 
-## Qualification
+After a Windows reboot, these commands only verify infrastructure. They do not
+authorize or start scientific generation.
 
-Run the benchmark manifest unchanged on the target. Measure W=1 first, then the
-predeclared worker and chunk matrices. Require identical semantic digests for
-every configuration. Reject swap-dependent or low-headroom worker counts.
+```powershell
+wsl --status
+wsl --version
+wsl -l -v
+docker version
+docker info
+docker ps --format "{{.ID}} {{.Names}} {{.Status}}"
+```
 
-Select chunk sizes using throughput, p95 tail, memory, load balance, retry cost
-and resume granularity. Prefer the smaller chunk for near-equal throughput.
-Derive timeout from the selected chunks, observed tail, maximum scientific
-workload and writer finalization. Never use timeout as a scientific horizon.
+Inside WSL:
 
-## Preflight
+```bash
+cd /home/avis/rvt
+git rev-parse HEAD
+git status --porcelain
+docker --config /home/avis/.docker-rvt-public image inspect \
+  rvt-generation:rb21-qualified-stack-probe
+```
 
-The positive preflight must pass both scientific and operational checks. Abort
-on a stale RB-19 root, missing RB-20 reproduction, target mismatch, worker or
-thread mismatch, wrong chunks, stale timeout, missing resume contract, direct
-final writes, broken seals, or unauthorized scope.
+The semantic probe source must remain
+`b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b`. The probe image ID recorded by
+this qualification is
+`sha256:695acb7a54004b32116820ac2e4b325dde5a73e1b63a9a163688a1366c61ff2b`.
+It is evidence of the failure, not an approved production identity.
 
-## Execution Shape
+## Reproducing The Gate
 
-- Residual: one worker owns one robot decision and all nine candidates.
-- Recoverability: one worker owns one decision/candidate and every frozen
-  replica; F8/F9 use all three.
-- Semantic retry: 0.
-- Infrastructure retry: at most 1 with identical scientific identity and
-  inputs.
-- Begin only in a versioned STAGING namespace.
+The critical suite is diagnostic and may be rerun. The complete suite is the
+decisive gate:
 
-No official command is present in RB-21 Verdict D. A later target-qualified job
-manifest must supply an exact version-pinned command for each authorized study,
-split and label branch. It must not contain Study A N=24 or final-test commands
-while their seals remain closed.
+```bash
+docker --config /home/avis/.docker-rvt-public run --rm \
+  rvt-generation:rb21-qualified-stack-probe rvt-test -q
+```
 
-## Resume
+The accepted negative result at the evidence source is:
 
-On restart, scan validated atomic unit commit manifests. Do not infer completion
-from chunk positions. Replay incomplete units exactly. Treat exact duplicate
-submissions as idempotent and reject identity/content conflicts.
+```text
+2967 passed, 3 failed, 0 xfailed, 0 xpassed
+```
 
-## Monitoring
+Do not loosen tolerances, round compiled layout values, regenerate frozen
+layout artifacts, change model batching, or replace the scientific stack to
+make this command pass.
 
-Track scheduled, started, acknowledged, retrying and failed atomic units;
-throughput by branch; median/p95 latency; worker/coordinator RSS; temporary and
-final storage; writer queue depth; duplicate identities; hash failures; and
-sealed-domain access counters.
+## Data Paths
 
-## Failure Handling
+The prepared Linux-native paths are:
 
-An operational timeout, worker death, process interruption or temporary storage
-failure is `INFRASTRUCTURE_FAILURE`. It cannot create a task-negative label.
-Abort the run on semantic digest drift, corrupted commits, unresolved failures,
-unexpected duplicates, insufficient storage headroom or any seal violation.
+- `/home/avis/rvt-data/staging`;
+- `/home/avis/rvt-data/final`;
+- `/home/avis/rvt-data/temp`;
+- `/home/avis/rvt-data/audit`.
 
-Do not increase retries to compensate for a bad timeout. Do not alter frozen
-science to improve throughput.
+They must remain unused for official data until a later qualification passes
+all semantic and operational gates.
 
-## Completion and Promotion
+## Sealed Domains
 
-A run is complete only when every scheduled source task is accounted for, every
-legitimate attempted unit has a terminal disposition, infrastructure failures
-are resolved, denominator counts reconcile, duplicates are resolved, all
-record/sidecar/shard/index hashes validate and sealed-domain counters remain
-zero.
+Study A N24 zero-shot and final test remain sealed and unauthorized. No command
+for either domain exists. Diagnostic work must remain limited to already
+authorized train/validation structures and must not generate official rows.
 
-Only then write the completion manifest and atomically promote STAGING to FINAL.
-Partial staging is never a finished scientific dataset.
+## Stop Rules
 
-## Abort Procedure
+Stop immediately if any action would:
 
-1. Stop scheduling new chunks.
-2. Allow acknowledged atomic commits to finish; never expose staging as final.
-3. Record active attempts as interrupted infrastructure failures.
-4. Preserve staging, attempt journals and monitoring logs for exact resume.
-5. Re-run preflight and hash validation before resuming.
-6. Require owner action before any new official authorization.
+- change frozen science;
+- access Study A N24 or final-test layouts;
+- generate official recoverability or residual rows;
+- train a model or create a checkpoint/optimizer state;
+- treat the semantic probe image as qualified;
+- select workers, chunks, or timeout from unexecuted benchmarks.
+
+## Required Scientific Decision
+
+The next action is not an infrastructure tuning task. A scientific owner must
+decide and version a cross-platform numeric contract for both model batching
+and layout compilation, then re-freeze affected provenance before RB21-TARGET
+can restart from Phase 8. Until that happens, Verdict B remains authoritative.
