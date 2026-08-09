@@ -1,6 +1,7 @@
 """The target workload is frozen before target performance timing."""
 
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 
@@ -8,6 +9,10 @@ from rvt_swarm.phase8.common import canonical_json_bytes
 from rvt_swarm.phase9c_rb21.rb21_manifest import (
     RB21P_QUALIFIED_IMAGE,
     build_target_benchmark_manifest,
+)
+from rvt_swarm.phase9c_rb21.rb21_units import (
+    RecoverabilityAtomicUnit,
+    ResidualAtomicUnit,
 )
 
 
@@ -49,3 +54,19 @@ def test_worker_and_chunk_matrices_remain_result_independent() -> None:
         "OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS",
         "NUMEXPR_NUM_THREADS", "torch_num_threads", "torch_num_interop_threads"))
     assert profile["scientific_cuda_execution"] is False
+
+
+def test_target_runner_reconstructs_only_complete_atomic_units() -> None:
+    path = ROOT / "scripts/run_phase9c_rb21_target_benchmark.py"
+    spec = importlib.util.spec_from_file_location("rb21_target_runner", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    units = module._units(MANIFEST, "all")
+    assert len(units) == 64
+    assert sum(isinstance(unit, ResidualAtomicUnit) for unit in units) == 32
+    assert sum(isinstance(unit, RecoverabilityAtomicUnit) for unit in units) == 32
+    assert all(len(unit.candidate_indices) == 9 for unit in units
+               if isinstance(unit, ResidualAtomicUnit))
+    assert all(len(unit.replica_indices) in (1, 3) for unit in units
+               if isinstance(unit, RecoverabilityAtomicUnit))
