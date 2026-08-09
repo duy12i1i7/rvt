@@ -1,0 +1,42 @@
+{
+  "atomic_boundaries": {
+    "candidate_split": "PROHIBITED",
+    "recoverability": "ONE_DECISION_ONE_TOPOLOGY_ALL_FROZEN_REPLICAS",
+    "replica_split": "PROHIBITED",
+    "residual": "ONE_DECISION_ONE_ROBOT_ALL_NINE_CANDIDATES"
+  },
+  "branches_benchmarked_separately": [
+    "residual",
+    "recoverability"
+  ],
+  "chunk_one_reuses_selected_worker_scaling_measurement": true,
+  "declared_chunk_sizes_atomic_units": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "official_generation_executed": false,
+  "rb21_target_chunk_matrix_predeclaration_sha256": "2be2f55590d4c628a58212d42a99a27b5dc30fad24e7dd648a919d7f23d46ca9",
+  "schema_version": "rvt-rb21-target-chunk-matrix-predeclaration/v1",
+  "selected_worker_count": 12,
+  "selection_rule_frozen_before_chunk_results": {
+    "hard_requirements": [
+      "scientific_semantic_digest_equal_to_chunk_one",
+      "no_operational_failure",
+      "peak_RSS_within_selected_worker_RAM_budget"
+    ],
+    "priority": [
+      "scientific_identity",
+      "reasonable_throughput",
+      "tail_load_balance",
+      "small_retry_blast_radius",
+      "atomic_resume_granularity",
+      "RAM_safety"
+    ],
+    "selection": "for each branch choose the smallest eligible chunk within 95 percent of that branch's maximum throughput",
+    "throughput_near_equal_fraction": 0.95
+  },
+  "status": "FROZEN_BEFORE_CHUNK_RESULTS",
+  "worker_scaling": "c96c6907069928911ff29fc7e19c6c215e14755b4d560f36e1fb9e6ccfa88fba"
+}
