@@ -8,7 +8,7 @@ import json
 import math
 import runpy
 import struct
-from dataclasses import asdict
+from dataclasses import asdict, fields, replace
 from pathlib import Path
 from typing import Any, Dict, Mapping, Sequence, Tuple
 
@@ -288,6 +288,120 @@ def audit_fd24_batch_numerics(root: Path) -> Dict[str, Any]:
         "unrelated_batch_case": unrelated,
         "parallel_candidate_cases": candidate_cases,
     }
+
+
+def _tensor_dataclass_to(instance: Any, device: torch.device) -> Any:
+    updates = {
+        item.name: value.to(device)
+        for item in fields(instance)
+        if isinstance((value := getattr(instance, item.name)), torch.Tensor)
+    }
+    return replace(instance, **updates)
+
+
+def _fd24_batch_to(local_batch: Any, device: torch.device) -> Any:
+    return replace(
+        local_batch,
+        graph_batch=_tensor_dataclass_to(local_batch.graph_batch, device),
+        mission_orientation_cos_sin=(
+            local_batch.mission_orientation_cos_sin.to(device)
+        ),
+    )
+
+
+def _cpu_cuda_tensor_comparison(cpu: torch.Tensor, cuda: torch.Tensor) -> Dict[str, Any]:
+    left = cpu.detach().cpu()
+    right = cuda.detach().cpu()
+    absolute = (left - right).abs()
+    relative = absolute / left.abs().clamp_min(torch.finfo(left.dtype).tiny)
+    return {
+        "shape": list(left.shape),
+        "cpu": left.tolist(),
+        "cuda": right.tolist(),
+        "exact": torch.equal(left, right),
+        "max_abs_difference": float(absolute.max()) if absolute.numel() else 0.0,
+        "max_relative_difference": (
+            float(relative.max()) if relative.numel() else 0.0
+        ),
+    }
+
+
+def audit_fd24_cuda_forward(root: Path) -> Dict[str, Any]:
+    """Compare one untrained fixture model on CPU and CUDA, without authority."""
+    document: Dict[str, Any] = {
+        "schema_version": "rvt-rb21p-fd24-cuda-forward-diagnostic/v1",
+        "authority": "TEST_ONLY_NON_AUTHORITATIVE",
+        "scientific_execution_path_changed": False,
+        "torch_version": torch.__version__,
+        "torch_version_cuda": torch.version.cuda,
+        "cuda_available": torch.cuda.is_available(),
+        "cuda_device_count": torch.cuda.device_count(),
+    }
+    if not document["cuda_available"]:
+        document["status"] = "CUDA_UNAVAILABLE"
+        return document
+
+    _, graph_factory, model_factory = _fixture_factories(root)
+    case, graph = graph_factory(
+        n=6,
+        root=0,
+        candidate_topology=LINE,
+        peer_ids=(1, 2),
+        obstacles=((1.0, 0.2, 0.1),),
+    )
+    cpu_model = model_factory(case.config).eval()
+    cpu_batch = prepare_fd24_model_batch((graph,))
+    with torch.no_grad():
+        cpu_output = cpu_model(cpu_batch)
+
+    device = torch.device("cuda:0")
+    cuda_model = copy.deepcopy(cpu_model).to(device).eval()
+    cuda_batch = _fd24_batch_to(cpu_batch, device)
+    with torch.no_grad():
+        cuda_output = cuda_model(cuda_batch)
+    torch.cuda.synchronize(device)
+
+    properties = torch.cuda.get_device_properties(device)
+    cpu_state = _state_dict_report(cpu_model)
+    cuda_state = _state_dict_report(cuda_model)
+    document.update({
+        "status": "COMPLETED",
+        "device": {
+            "index": 0,
+            "name": torch.cuda.get_device_name(device),
+            "capability": list(torch.cuda.get_device_capability(device)),
+            "total_memory_bytes": int(properties.total_memory),
+        },
+        "input_graph_fingerprint": graph.fingerprint(),
+        "model_state": {
+            "cpu": cpu_state,
+            "cuda": cuda_state,
+            "parameter_count_unchanged": (
+                cpu_state["parameter_count"] == cuda_state["parameter_count"]
+            ),
+            "state_dict_keys_unchanged": (
+                cpu_state["state_dict_keys"] == cuda_state["state_dict_keys"]
+            ),
+            "state_dict_values_unchanged": (
+                cpu_state["state_dict_sha256"] == cuda_state["state_dict_sha256"]
+            ),
+        },
+        "outputs": {
+            "recoverability_logit": _cpu_cuda_tensor_comparison(
+                cpu_output.recoverability_logit,
+                cuda_output.recoverability_logit,
+            ),
+            "recoverability_probability": _cpu_cuda_tensor_comparison(
+                cpu_output.recoverability_probability,
+                cuda_output.recoverability_probability,
+            ),
+            "residual_action": _cpu_cuda_tensor_comparison(
+                cpu_output.residual_action,
+                cuda_output.residual_action,
+            ),
+        },
+    })
+    return document
 
 
 def _physical_projection(document: Mapping[str, Any]) -> Dict[str, Any]:
