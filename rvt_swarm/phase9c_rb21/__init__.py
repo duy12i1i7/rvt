@@ -10,6 +10,7 @@ from .rb21_manifest import (
     RB20_REPRODUCTION_HASH,
     TARGET_V4_HASH,
     build_benchmark_manifest,
+    build_target_benchmark_manifest,
     capture_environment,
 )
 from .rb21_units import (
@@ -27,6 +28,7 @@ __all__ = [
     "ResidualAtomicUnit",
     "ThreadSettings",
     "build_benchmark_manifest",
+    "build_target_benchmark_manifest",
     "capture_environment",
     "scientific_semantic_digest",
 ]

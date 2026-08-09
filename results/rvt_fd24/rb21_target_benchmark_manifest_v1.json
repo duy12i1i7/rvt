@@ -1,0 +1,2889 @@
+{
+  "atomic_unit_contract": {
+    "recoverability": "one decision state x one candidate topology containing all frozen replicas",
+    "residual": "one robot expert decision containing all nine candidates",
+    "scheduler_level_candidate_split": "PROHIBITED",
+    "scheduler_level_replica_split": "PROHIBITED"
+  },
+  "cases": [
+    {
+      "case_id": "rb21-f1-n5-train",
+      "decision_steps": [
+        20,
+        60
+      ],
+      "family": "F1",
+      "layout_id": "train-f1-00",
+      "robot_ids": [
+        0,
+        4
+      ],
+      "seeds": {
+        "communication": 2201,
+        "data_sampling": 4401,
+        "dynamic_obstacle": 3301,
+        "initial_condition": 1101
+      },
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "train",
+      "structural_roles": [
+        "short_or_early_termination",
+        "residual_labeled"
+      ],
+      "team_size": 5
+    },
+    {
+      "case_id": "rb21-f1-n16-validation",
+      "decision_steps": [
+        20,
+        60
+      ],
+      "family": "F1",
+      "layout_id": "validation-f1-00",
+      "robot_ids": [
+        0,
+        15
+      ],
+      "seeds": {
+        "communication": 2202,
+        "data_sampling": 4402,
+        "dynamic_obstacle": 3302,
+        "initial_condition": 1102
+      },
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "validation",
+      "structural_roles": [
+        "large_nonsealed_team",
+        "long_continuation"
+      ],
+      "team_size": 16
+    },
+    {
+      "case_id": "rb21-f5-n8-train",
+      "decision_steps": [
+        40,
+        60
+      ],
+      "family": "F5",
+      "layout_id": "train-f5-00",
+      "robot_ids": [
+        0,
+        3
+      ],
+      "seeds": {
+        "communication": 22,
+        "data_sampling": 7,
+        "dynamic_obstacle": 33,
+        "initial_condition": 11
+      },
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "train",
+      "structural_roles": [
+        "changed_topology",
+        "no_eligible_action_naturally_available"
+      ],
+      "team_size": 8
+    },
+    {
+      "case_id": "rb21-f5-n16-validation",
+      "decision_steps": [
+        40,
+        60
+      ],
+      "family": "F5",
+      "layout_id": "validation-f5-00",
+      "robot_ids": [
+        0,
+        15
+      ],
+      "seeds": {
+        "communication": 2204,
+        "data_sampling": 4404,
+        "dynamic_obstacle": 3304,
+        "initial_condition": 1104
+      },
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "validation",
+      "structural_roles": [
+        "changed_topology",
+        "large_nonsealed_team"
+      ],
+      "team_size": 16
+    },
+    {
+      "case_id": "rb21-f8-n5-validation",
+      "decision_steps": [
+        20,
+        40
+      ],
+      "family": "F8",
+      "layout_id": "validation-f8-00",
+      "robot_ids": [
+        0,
+        4
+      ],
+      "seeds": {
+        "communication": 22,
+        "data_sampling": 7,
+        "dynamic_obstacle": 33,
+        "initial_condition": 11
+      },
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "validation",
+      "structural_roles": [
+        "communication_degradation",
+        "three_replica_aggregate"
+      ],
+      "team_size": 5
+    },
+    {
+      "case_id": "rb21-f8-n16-train",
+      "decision_steps": [
+        20,
+        40
+      ],
+      "family": "F8",
+      "layout_id": "train-f8-00",
+      "robot_ids": [
+        0,
+        15
+      ],
+      "seeds": {
+        "communication": 2206,
+        "data_sampling": 4406,
+        "dynamic_obstacle": 3306,
+        "initial_condition": 1106
+      },
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "train",
+      "structural_roles": [
+        "communication_degradation",
+        "long_continuation"
+      ],
+      "team_size": 16
+    },
+    {
+      "case_id": "rb21-f9-n12-train",
+      "decision_steps": [
+        25,
+        60
+      ],
+      "family": "F9",
+      "layout_id": "train-f9-00",
+      "robot_ids": [
+        0,
+        11
+      ],
+      "seeds": {
+        "communication": 22,
+        "data_sampling": 7,
+        "dynamic_obstacle": 33,
+        "initial_condition": 11
+      },
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "split": "train",
+      "structural_roles": [
+        "dynamic_obstacle",
+        "changed_topology",
+        "three_replica_aggregate"
+      ],
+      "team_size": 12
+    },
+    {
+      "case_id": "rb21-f9-n16-validation",
+      "decision_steps": [
+        25,
+        60
+      ],
+      "family": "F9",
+      "layout_id": "validation-f9-00",
+      "robot_ids": [
+        0,
+        15
+      ],
+      "seeds": {
+        "communication": 2208,
+        "data_sampling": 4408,
+        "dynamic_obstacle": 3308,
+        "initial_condition": 1108
+      },
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "split": "validation",
+      "structural_roles": [
+        "dynamic_obstacle",
+        "large_nonsealed_team"
+      ],
+      "team_size": 16
+    }
+  ],
+  "chunk_matrix_declaration": {
+    "candidate_values": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "near_equal_throughput_preference": "SMALLER_CHUNK",
+    "scheduler_candidate_split": "PROHIBITED",
+    "scheduler_replica_split": "PROHIBITED",
+    "selection_priority": [
+      "scientific_identity_invariant",
+      "reasonable_throughput",
+      "long_tail_load_balance",
+      "small_retry_blast_radius",
+      "resume_granularity",
+      "RAM_safety"
+    ],
+    "state": "FREEZE_AFTER_WORKER_SELECTION_BEFORE_CHUNK_TIMING",
+    "values_must_count_complete_atomic_units": true
+  },
+  "controlled_cpu_profile": {
+    "MKL_NUM_THREADS": 1,
+    "NUMEXPR_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "process_workers_for_baseline": 1,
+    "profile_id": "PROFILE_CPU_GENERATION",
+    "scientific_cuda_execution": false,
+    "torch_num_interop_threads": 1,
+    "torch_num_threads": 1
+  },
+  "coverage": {
+    "families": [
+      "F1",
+      "F5",
+      "F8",
+      "F9"
+    ],
+    "final_test": "SEALED_NOT_INCLUDED",
+    "splits": [
+      "train",
+      "validation"
+    ],
+    "structural_roles": [
+      "changed_topology",
+      "communication_degradation",
+      "dynamic_obstacle",
+      "large_nonsealed_team",
+      "long_continuation",
+      "no_eligible_action_naturally_available",
+      "residual_labeled",
+      "short_or_early_termination",
+      "three_replica_aggregate"
+    ],
+    "study_a_n24": "SEALED_NOT_INCLUDED",
+    "team_sizes": [
+      5,
+      8,
+      12,
+      16
+    ]
+  },
+  "freeze_state": {
+    "case_selection_depends_on_measured_speed": false,
+    "frozen_before_target_timing": true,
+    "target_timing_inspected_before_freeze": false,
+    "workload_is_identical_across_chunk_sizes": true,
+    "workload_is_identical_across_worker_counts": true
+  },
+  "official_generation_executed": false,
+  "p99_reporting": "PROHIBITED_SAMPLE_COUNT_INSUFFICIENT",
+  "portability": {
+    "artifact_sha256": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+    "requalification_root_sha256": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+    "verdict": "C"
+  },
+  "provenance_class": "OPERATIONAL_BENCHMARK_ONLY",
+  "qualified_target_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+  "rb21_target_benchmark_manifest_sha256": "c952bd3a5f871a511b228e9ddc9d3b36185fbba610cec9b02fbb8e379a1765b6",
+  "recoverability_atomic_units": [
+    {
+      "atomic_unit_id": "2c60335c374c1ebba4ee0a1c55ff39dde75b024d93f2ca7fa4c8767dd608d1fa",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "477e9c7de2f92fe96899432fa4a50f192c41a5447952ec94f5233618e33d7b8f",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "dfecf6bf75432c1b00f6ae4e80b5f4ddeba786a07b12a5eb3ed56ee3af6f1072",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "533b143778fcc4270e3b40ec0903d2a53d52f327f8ef9271f89387f74e7dcdff",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "d89fdfa84134609a186a7e6b360ba4edd2c3f05deafaeb24befc464522231ac9",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "0ff3d9f65ad7e28aab4aec2aeaf69de6045859a4273f2cafe850d3bbaaf49983",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "2b36364ecf61b86f921b52076f127c289e26d5a3ce96ce299dcea2c1320076e6",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "5a8ae1663676964dbc3e2bc21fdd45cd8b9c30db2c8f0c024495da14acf9a440",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "309986e7d0cb127908078ec0ed445c7ac0301760dbfb75d540ed805ea83a796a",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "22dd188b93f357ddb79a0e600815d8ceb11b81b753ebae8fdab6a8e28f704c83",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "01e22a6ddcf7766cc7c6403afdfe167280caebe9f9f85d01136ba1a4c9ca73d7",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "95c609aaef2b88098e77df9e0407079f63b9d02eb1d327784f7ef19e68181fe3",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "41ac37a53b9043fa8a51babbbd4353bb792c126c4846149992bc01e7140a651d",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "c32555850848a9e2374d8ddf035198027bab15c6cb99ebafd9cbe9d008da4aee",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "8cf7609b546982e1cc9ef2f7085e1e2daa106a701ecab10967c2a86aba88f8e7",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "9c67ee1d7fae7f5fd28cc809dbf2d6d7a8388b00c76f03bbdd89e19602775682",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "10c586cd7f88834f545334894c18aad094caa256b23bf13a7faa223540ebb3a2",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "d7013ba101bd1cf5d25e59af81b2d2bbf9045ddcd9ac936f8b38d035bb150d2c",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "b2cb10ecbd8d69610c20895b02305ce87ae29cbf8fb6c2b9bf3a9b53e6660bee",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "cd88cc6783579234985036ecb2d659f7b5f6a24ded3842c0de34adf7e226e92b",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "fadc7a59134d7d6124f8b24dc2d0b55ba98fa83d1d11d41b68da44c1142f0699",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "1a85cf5906569bf1ccdc8ac1a411259aaacf616ece1d62cf6bf92575e4045c81",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "f30fb6fe6202beaf4d352bfe9e5b302223a8045ed1746fd75680551eba06dcb7",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "7ced72e2736228a30de2daa581ceccc57b9ad96359650025438cb0123d5c724b",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "60230be95b7893f0161e095b52c96062f885b53d25e6d15a552f5b54512b2d02",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 25,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "932c57a51f6238281ad204a0be21214f75e00637a0ae02da8807966d7bbf1f53",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 25,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "643a0d8ce6beff283f63501c218156928a9e489e3bb0bd7f5df97bdb9eaa9ca2",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "c2da98a9c448878cfe890335d27414a8a96dc1a0a23d28b86c3a7491ba278838",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "03aa5593eef4eef0e85ba09d5e9c845d1509cfc769f0ebeffb4289e89f0a05e0",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 25,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "673108805d3f62f4207ccd55359bed381170616afa54d0f92ea489e04af32512",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 25,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "7ce4523abe614f33c421d392f83e91a595b51f2b87af5c1fc61d0c3442bde94b",
+      "candidate_topology": 2,
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "atomic_unit_id": "7207abe9e2a6803f473b5d0339057d9a6706d12ec4af1e5d2198a1b1a93f2974",
+      "candidate_topology": 5,
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "unit_kind": "RECOVERABILITY"
+    }
+  ],
+  "reported_statistics": [
+    "count",
+    "mean",
+    "median",
+    "p90",
+    "p95",
+    "maximum"
+  ],
+  "residual_atomic_units": [
+    {
+      "atomic_unit_id": "408b2aecc62ffbfdfb3884b31cb968cfaabf345a115315ee6a46043e6eaccf08",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "dc82147e48b506529bc4e9a6aeda06ec0a2eb6727ba7a9a8d1cfad82c37f0a57",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "robot_id": 4,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "81c8b843d225cbde62e601708a526138b120f45707c2f23a00fad948980cd3d9",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 60,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "62ee1fc9f942eef916075e111060a7fa6c9b3a7f8f60eb18157158515506ba2e",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n5-train",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "train-f1-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 2201,
+          "data_sampling": 4401,
+          "dynamic_obstacle": 3301,
+          "initial_condition": 1101
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "short_or_early_termination",
+          "residual_labeled"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 60,
+      "robot_id": 4,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "323ba7e453692e102459813d0be7153602f06d20f71c1e4a4c68235b376d981e",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "37946fc94b42446f499e0bcb2bea9e47f8eaa5999554b1c07507c0560424a5a1",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "310410b4e7ea91fcd6d6ce6415eaa19ff5e75a8427226f87301b3cfa8525ac59",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "fdc9d85644af6896dd45842ab36fad16354c3ddc02cd66ab39122b01bfe93a35",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f1-n16-validation",
+        "decision_steps": [
+          20,
+          60
+        ],
+        "family": "F1",
+        "layout_id": "validation-f1-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2202,
+          "data_sampling": 4402,
+          "dynamic_obstacle": 3302,
+          "initial_condition": 1102
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "large_nonsealed_team",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "26d06542d19330499a98626cd3c226b1cab5673c65abe392493727a2a14138bc",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 40,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "c4236f1c979a41e6590772058eaf9683f2a94b4c7dd585b9f253239a20769c31",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 40,
+      "robot_id": 3,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "2d6b5e40d365f7a364e39a46faf5f702a23d57d55fd33ce89eb3eb48b1fa028e",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 60,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "a689e8e9340691fae22b7cb5d4fc6e03ceba593da6dc08773b55ab328269145a",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n8-train",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "train-f5-00",
+        "robot_ids": [
+          0,
+          3
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "changed_topology",
+          "no_eligible_action_naturally_available"
+        ],
+        "team_size": 8
+      },
+      "decision_step": 60,
+      "robot_id": 3,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "b90aa444038e72dbceca556857286ea54fdd95caec2d3b672b09062fd8f78354",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "765b5906cfa0db3ed5bd76e104192c509fd31b0173bc812b1b0fa9c7714433ca",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "d0e25f603dd46159af8a91772fd17a15ed455b0e724d49cc5a76b083151aa3b9",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "a2970e2aab0a22591933de0e2455ed69b3c0568d7c12e18041d056c84e6b409c",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f5-n16-validation",
+        "decision_steps": [
+          40,
+          60
+        ],
+        "family": "F5",
+        "layout_id": "validation-f5-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2204,
+          "data_sampling": 4404,
+          "dynamic_obstacle": 3304,
+          "initial_condition": 1104
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "changed_topology",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "d987a7d06325bc44e72b6e6eb0b6fced23e1af03c13440746e0e8ded13077e0e",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "9f6fce41d4a9a79ca0a79622e431cb599f19fd7483c729b3d44ad733b9a0f105",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 20,
+      "robot_id": 4,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "e21562f22cc0802fe89188925010f66b424d29bca06247a08bbfc14278e94396",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 40,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "16f397e9b84bbfcafd75a18842eefbecd921ade92bf9281d070a4c773d278ce5",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n5-validation",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "validation-f8-00",
+        "robot_ids": [
+          0,
+          4
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "validation",
+        "structural_roles": [
+          "communication_degradation",
+          "three_replica_aggregate"
+        ],
+        "team_size": 5
+      },
+      "decision_step": 40,
+      "robot_id": 4,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "50afca82c352a9cfcc09f9e59e86fba5a4d54a0bfae57a199f132d2f705b1042",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "8237bc194250199d5f14e2f4e3a560333b43eebc5f035706438ef25ccc450629",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 20,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "9d8597b21ab62ef0ca49666dbb2bafbbbbb547be33c2a5b42cf1385ba0ca5c8b",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "125c4fd720fb85c6fd38e05bcc86cf83ca4911f64ae74d8ebf767ec414b0d4c4",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f8-n16-train",
+        "decision_steps": [
+          20,
+          40
+        ],
+        "family": "F8",
+        "layout_id": "train-f8-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2206,
+          "data_sampling": 4406,
+          "dynamic_obstacle": 3306,
+          "initial_condition": 1106
+        },
+        "source_policy": "S1_ALWAYS_COMPACT",
+        "split": "train",
+        "structural_roles": [
+          "communication_degradation",
+          "long_continuation"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 40,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "4346d150dbc28776aee2454b6c92dae8c9d54cbbf80a451212727ba161fe27dc",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 25,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "35e10c4d376ec57915f42a489df530ebe0c24eca546cca95627d852749846433",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 25,
+      "robot_id": 11,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "276e5a7efbef0ca708ffd13bd897654de31d9a444e7d87a6dcc13e2d60de839a",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 60,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "e0654ee00e7dc206016cd8524367d038aa29e297b2df26aa48ebe5a37273d478",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n12-train",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "train-f9-00",
+        "robot_ids": [
+          0,
+          11
+        ],
+        "seeds": {
+          "communication": 22,
+          "data_sampling": 7,
+          "dynamic_obstacle": 33,
+          "initial_condition": 11
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "changed_topology",
+          "three_replica_aggregate"
+        ],
+        "team_size": 12
+      },
+      "decision_step": 60,
+      "robot_id": 11,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "19e407dc8bd10209d0f28f67d946f31f42de7c4be46d1ee8b4f4e2f29e4169bf",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 25,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "348aac67e4e2e9127961dfa6de00dff02187dd53304b61bec1a6aaa61b69af41",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 25,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "cbd82243a5bd23053617ec1f21ea089d4a224f5e6a1ea7fb444217adc221f4c7",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "robot_id": 0,
+      "unit_kind": "RESIDUAL"
+    },
+    {
+      "atomic_unit_id": "51f2eae46babf8794f0c06f1f90278cb457e164c101d021b1d31046124272f79",
+      "candidate_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "case": {
+        "case_id": "rb21-f9-n16-validation",
+        "decision_steps": [
+          25,
+          60
+        ],
+        "family": "F9",
+        "layout_id": "validation-f9-00",
+        "robot_ids": [
+          0,
+          15
+        ],
+        "seeds": {
+          "communication": 2208,
+          "data_sampling": 4408,
+          "dynamic_obstacle": 3308,
+          "initial_condition": 1108
+        },
+        "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "validation",
+        "structural_roles": [
+          "dynamic_obstacle",
+          "large_nonsealed_team"
+        ],
+        "team_size": 16
+      },
+      "decision_step": 60,
+      "robot_id": 15,
+      "unit_kind": "RESIDUAL"
+    }
+  ],
+  "sample_counts": {
+    "p99_reporting_supported": false,
+    "recoverability_atomic_units": 32,
+    "recoverability_replica_rollouts": 64,
+    "reported_quantiles": [
+      "median",
+      "p90",
+      "p95",
+      "empirical_maximum"
+    ],
+    "residual_atomic_units": 32,
+    "residual_candidate_evaluations": 288
+  },
+  "schema_version": "rvt-rb21-target-benchmark-manifest/v1",
+  "scientific_roots": {
+    "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "sealed_domains": {
+    "final_test": "SEALED_NOT_INCLUDED",
+    "study_a_n24": "SEALED_NOT_INCLUDED"
+  },
+  "source_checkpoint": "a08f6f506333a20b71b60fc366c4a36d15e289ae",
+  "worker_matrix_declaration": {
+    "available_logical_cpus": 24,
+    "blind_use_of_candidate_sequence": false,
+    "candidate_sequence_ceiling": [
+      1,
+      2,
+      4,
+      6,
+      8,
+      12,
+      16
+    ],
+    "minimum_host_cpu_headroom_logical_cpus": 4,
+    "minimum_ram_headroom_fraction": 0.25,
+    "safe_ceiling_formula": "min(available_cpus-host_cpu_headroom, floor(wsl_ram*(1-minimum_ram_headroom_fraction)/measured_W1_peak_RSS))",
+    "state": "DERIVE_AND_FREEZE_AFTER_W1_BEFORE_SCALING",
+    "wsl_visible_ram_bytes_approximate": 33300000000
+  }
+}

@@ -22,8 +22,16 @@ RB19_PROVENANCE_ROOT = "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b2584
 RB20_REPRODUCTION_HASH = "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a"
 TARGET_V4_HASH = "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
 RB20_SOURCE_COMMIT = "297a94b9a7e951b9b30b14befca16a92d9c1189e"
+RB21P_SOURCE_CHECKPOINT = "a08f6f506333a20b71b60fc366c4a36d15e289ae"
+RB21P_PORTABILITY_ARTIFACT_HASH = (
+    "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900")
+RB21P_REQUALIFICATION_ROOT = (
+    "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176")
+RB21P_QUALIFIED_IMAGE = (
+    "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b")
 
 BENCHMARK_SCHEMA_VERSION = "rvt-rb21-benchmark-manifest/v1"
+TARGET_BENCHMARK_SCHEMA_VERSION = "rvt-rb21-target-benchmark-manifest/v1"
 ENVIRONMENT_SCHEMA_VERSION = "rvt-rb21-target-environment-qualification/v1"
 
 
@@ -249,6 +257,81 @@ def build_benchmark_manifest() -> Dict[str, Any]:
     # persisted readback compare exactly (tuples otherwise become lists on disk).
     document = json.loads(json.dumps(document, allow_nan=False, sort_keys=True))
     return attach_canonical_hash(document, "rb21_benchmark_manifest_sha256")
+
+
+def build_target_benchmark_manifest() -> Dict[str, Any]:
+    """Freeze the qualified-target workload before any target timing is inspected."""
+    workload = build_benchmark_manifest()
+    document: Dict[str, Any] = {
+        "schema_version": TARGET_BENCHMARK_SCHEMA_VERSION,
+        "provenance_class": "OPERATIONAL_BENCHMARK_ONLY",
+        "freeze_state": {
+            "frozen_before_target_timing": True,
+            "target_timing_inspected_before_freeze": False,
+            "case_selection_depends_on_measured_speed": False,
+            "workload_is_identical_across_worker_counts": True,
+            "workload_is_identical_across_chunk_sizes": True,
+        },
+        "source_checkpoint": RB21P_SOURCE_CHECKPOINT,
+        "qualified_target_image": RB21P_QUALIFIED_IMAGE,
+        "portability": {
+            "artifact_sha256": RB21P_PORTABILITY_ARTIFACT_HASH,
+            "requalification_root_sha256": RB21P_REQUALIFICATION_ROOT,
+            "verdict": "C",
+        },
+        "scientific_roots": workload["scientific_roots"],
+        "atomic_unit_contract": workload["atomic_unit_contract"],
+        "cases": workload["cases"],
+        "residual_atomic_units": workload["residual_atomic_units"],
+        "recoverability_atomic_units": workload["recoverability_atomic_units"],
+        "sample_counts": workload["sample_counts"],
+        "coverage": workload["coverage"],
+        "controlled_cpu_profile": {
+            "profile_id": "PROFILE_CPU_GENERATION",
+            "process_workers_for_baseline": 1,
+            "OMP_NUM_THREADS": 1,
+            "MKL_NUM_THREADS": 1,
+            "OPENBLAS_NUM_THREADS": 1,
+            "NUMEXPR_NUM_THREADS": 1,
+            "torch_num_threads": 1,
+            "torch_num_interop_threads": 1,
+            "scientific_cuda_execution": False,
+        },
+        "worker_matrix_declaration": {
+            "state": "DERIVE_AND_FREEZE_AFTER_W1_BEFORE_SCALING",
+            "available_logical_cpus": 24,
+            "wsl_visible_ram_bytes_approximate": 33_300_000_000,
+            "minimum_ram_headroom_fraction": 0.25,
+            "minimum_host_cpu_headroom_logical_cpus": 4,
+            "candidate_sequence_ceiling": [1, 2, 4, 6, 8, 12, 16],
+            "safe_ceiling_formula": (
+                "min(available_cpus-host_cpu_headroom, "
+                "floor(wsl_ram*(1-minimum_ram_headroom_fraction)/measured_W1_peak_RSS))"),
+            "blind_use_of_candidate_sequence": False,
+        },
+        "chunk_matrix_declaration": {
+            "state": "FREEZE_AFTER_WORKER_SELECTION_BEFORE_CHUNK_TIMING",
+            "values_must_count_complete_atomic_units": True,
+            "scheduler_candidate_split": "PROHIBITED",
+            "scheduler_replica_split": "PROHIBITED",
+            "candidate_values": [1, 2, 4, 8],
+            "selection_priority": [
+                "scientific_identity_invariant", "reasonable_throughput",
+                "long_tail_load_balance", "small_retry_blast_radius",
+                "resume_granularity", "RAM_safety",
+            ],
+            "near_equal_throughput_preference": "SMALLER_CHUNK",
+        },
+        "reported_statistics": ["count", "mean", "median", "p90", "p95", "maximum"],
+        "p99_reporting": "PROHIBITED_SAMPLE_COUNT_INSUFFICIENT",
+        "sealed_domains": {
+            "study_a_n24": "SEALED_NOT_INCLUDED",
+            "final_test": "SEALED_NOT_INCLUDED",
+        },
+        "official_generation_executed": False,
+    }
+    document = json.loads(json.dumps(document, allow_nan=False, sort_keys=True))
+    return attach_canonical_hash(document, "rb21_target_benchmark_manifest_sha256")
 
 
 def write_json(path: Path, document: Mapping[str, Any]) -> None:
