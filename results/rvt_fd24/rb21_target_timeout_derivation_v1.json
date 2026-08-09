@@ -1,0 +1,69 @@
+{
+  "all_configuration_tail": {
+    "maximum_serialization_seconds": 7.456299999830662e-05,
+    "recoverability_maximum_observed_total_control_intervals": 1101,
+    "recoverability_maximum_wall_seconds": 83.56458934600005,
+    "residual_maximum_observed_total_control_intervals": 4248,
+    "residual_maximum_wall_seconds": 111.40977839600009
+  },
+  "changes_scientific_horizon": false,
+  "classification": "INFRASTRUCTURE_FAILURE",
+  "emits_target_row": false,
+  "evaluates_target_v4_from_timeout": false,
+  "historical_1800_seconds_authoritative": false,
+  "qualification_result": "PASS",
+  "rb21_target_timeout_derivation_sha256": "6f9f7bccd9142efbac91578ee1a4d205758e39f827bc39208c37e78673423415",
+  "rounding_rule": "round upward to the next 300-second boundary",
+  "safety_margin_formula": "3 * max(scaled branch worst case) + 60 seconds",
+  "scaled_worst_case_seconds": {
+    "recoverability": 273.23571448283394,
+    "residual": 283.24519931186467
+  },
+  "schema_version": "rvt-rb21-target-timeout-derivation/v1",
+  "scientific_structure": {
+    "control_period_seconds": 0.15,
+    "maximum_episode_control_intervals": 1200,
+    "maximum_episode_horizon_seconds": 180.0,
+    "recoverability_maximum_replicas_per_atomic_unit": 3,
+    "recoverability_theoretical_maximum_total_intervals": 3600,
+    "residual_candidates_per_atomic_unit": 9,
+    "residual_theoretical_maximum_total_intervals": 10800
+  },
+  "selected_configuration_tail": {
+    "recoverability": {
+      "count": 30,
+      "maximum": 82.28996703800021,
+      "mean": 16.86506186263335,
+      "median": 7.162139219999972,
+      "p90": 50.667299170000206,
+      "p95": 75.2018722339999,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "residual": {
+      "count": 30,
+      "maximum": 109.29947585700029,
+      "mean": 34.12363976610003,
+      "median": 21.999489506499913,
+      "p90": 86.00099080499967,
+      "p95": 101.22805111100024,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    }
+  },
+  "selected_timeout_seconds": 1200,
+  "source_measurements": {
+    "chunk_scaling": "851662de4b36f8c01c2d330eb1786d376f63c3f5dc84c99193d65905c6f305be",
+    "operational_probe": "40d8f9cacdf92937c543cf778772321ce25b9f8d909cf39fab582379797ec222",
+    "worker_scaling": "c96c6907069928911ff29fc7e19c6c215e14755b4d560f36e1fb9e6ccfa88fba"
+  },
+  "timeout_probe": {
+    "atomic_unit_id": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+    "infrastructure_failure_reason": "OPERATIONAL_TIMEOUT",
+    "scientific_horizon_changed": false,
+    "semantic_retry_count": 0,
+    "status": "INFRASTRUCTURE_FAILURE",
+    "target_row_emitted": false,
+    "target_v4_evaluated_from_timeout": false,
+    "timeout_seconds": 1200.0
+  },
+  "unrounded_safety_bound_seconds": 909.735597935594
+}

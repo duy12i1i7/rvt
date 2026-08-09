@@ -1,0 +1,23 @@
+{
+  "classification": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+  "criteria_source": {
+    "H4_OPERATIONALLY_FEASIBLE": "qualified projection <=14 days, >=2.0x storage headroom, >=25% RAM headroom, and semantic/failure gates pass",
+    "H4_OPERATIONALLY_INFEASIBLE": "qualified projection >30 days, storage below 1.25x requirement, no safe worker configuration, or an unresolved operational failure",
+    "H4_OPERATIONAL_RISK_BUT_FEASIBLE": "qualified projection >14 and <=30 days, or storage headroom 1.25x-2.0x, with no hard resource or semantic failure"
+  },
+  "criteria_source_manifest": "4ac5bd1d00c6d2a1e0a71a712c98577e3e866066001802948b5cf3ecb3104ead",
+  "measured_inputs": {
+    "projected_residual_wall_days": 25.47465945338583,
+    "resume_failure_qualification": "b04c1c2c5b377d16d04ca4adb509ca5f80b1a5ce65e6977663e8cb989a9cf5bb",
+    "selected_peak_rss_bytes": 2614145024,
+    "semantic_invariance_across_chunks": true,
+    "semantic_invariance_across_workers": true,
+    "storage_headroom_ratio": 44.475926270527424,
+    "wsl_visible_ram_bytes": 33323384832
+  },
+  "rb21_target_h4_result_sha256": "1e45be60868db5a38e85187470ccae2982fc5b1e760bddd2b79b5426b3bd4e2d",
+  "reason": "projected residual upper-bound wall time is greater than 14 days and no greater than 30 days; storage, RAM, semantics, and resume gates pass",
+  "residual_v2_generation_result": "AUTHORIZED_ON_EXPLICIT_OWNER_INSTRUCTION_WITH_OPERATIONAL_RISK",
+  "schema_version": "rvt-rb21-target-h4-result/v1",
+  "scientific_semantics_changed": false
+}

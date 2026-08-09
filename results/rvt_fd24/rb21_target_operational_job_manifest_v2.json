@@ -1,0 +1,41 @@
+{
+  "authorization_scope": "5b5533277e2789fcb66dfc0de5f44102a33924492d57f2d90099e4eab4d9a015",
+  "final_test_command": "NOT_CREATED_SEALED",
+  "generation_budget_v2": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+  "h4_classification": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+  "identity_and_disposition_contracts": {
+    "candidate_evaluation": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef",
+    "disposition": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6",
+    "execution_attempt": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923",
+    "scientific_row": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20"
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_runtime_accesses": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_scientific_shards": 0,
+    "optimizer_states": 0,
+    "study_a_n24_runtime_accesses": 0,
+    "training_operations": 0
+  },
+  "low_vs_production_scientific_projection": {
+    "recoverability": true,
+    "residual": true
+  },
+  "low_vs_production_scientific_projection_equal": true,
+  "official_command_plan": "7c0dfa151856e6d2002b2452b74c3ba9154f7ba4e764dd56c13b99d575216e73",
+  "operational_contract": "204a3954de7da3d496ccd6ca9fd57757710293b4911abc83bcffce795426414a",
+  "qualified_image_source_commit": "8bfabd48969f1fa1e13a0a268a6df1cb366e90cc",
+  "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+  "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+  "rb21_target_operational_job_manifest_v2_sha256": "d585a1a823db980d8a166a16b6596ba41e49c1491594acda8d667b57f0bcb21b",
+  "rb21p_portability_artifact": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+  "rb21p_portability_root": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+  "schema_version": "rvt-rb21-target-operational-job-manifest/v2",
+  "scientific_source_checkpoint": "a08f6f506333a20b71b60fc366c4a36d15e289ae",
+  "source_phase9_job_manifest": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "status": "QUALIFIED_HELD_FOR_EXPLICIT_OWNER_INSTRUCTION",
+  "study_a_n24_command": "NOT_CREATED_SEALED",
+  "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+}

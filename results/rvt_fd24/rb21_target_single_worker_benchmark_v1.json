@@ -1,0 +1,203 @@
+{
+  "official_generation_executed": false,
+  "p99_reported": false,
+  "qualified_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+  "qualified_target_measurement": true,
+  "rb21_target_single_worker_benchmark_sha256": "0e346ac8cc458d62b238eddbb4f5606c06cadf145d52116cef717683174c1888",
+  "recoverability": {
+    "benchmark": {
+      "aggregate_cpu_seconds": 441.986339775,
+      "atomic_units": 30,
+      "chunk_size_atomic_units": 1,
+      "conservative_peak_total_worker_rss_bytes": 218365952,
+      "cpu_utilization_percent_of_one_core": 99.75010500452073,
+      "peak_worker_rss_bytes_by_pid": {
+        "10": 218365952
+      },
+      "scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "thread_settings": {
+        "mkl_num_threads": 1,
+        "omp_num_threads": 1,
+        "openblas_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "torch_num_threads": 1
+      },
+      "throughput_atomic_units_per_second": 0.06770578365971679,
+      "wall_seconds": 443.0936085279999,
+      "workers": 1
+    },
+    "distributions": {
+      "aggregation_seconds": {
+        "count": 30,
+        "maximum": 2.5810002171056112e-06,
+        "mean": 1.7976333500276571e-06,
+        "median": 1.8105000094692514e-06,
+        "p90": 2.2719999606124475e-06,
+        "p95": 2.305999942109338e-06,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "atomic_unit_wall_seconds": {
+        "count": 30,
+        "maximum": 76.4980249759999,
+        "mean": 14.736203560333298,
+        "median": 5.816978490999986,
+        "p90": 46.025322793999976,
+        "p95": 68.58796993299995,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "atomic_units": 30,
+      "max_rss_bytes": {
+        "count": 30,
+        "maximum": 218365952.0,
+        "mean": 217423462.4,
+        "median": 218365952.0,
+        "p90": 218365952.0,
+        "p95": 218365952.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollout_control_steps": {
+        "count": 58,
+        "maximum": 600.0,
+        "mean": 132.8793103448276,
+        "median": 108.0,
+        "p90": 366.0,
+        "p95": 368.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollout_seconds": {
+        "count": 58,
+        "maximum": 25.396066955999913,
+        "mean": 7.064486237724119,
+        "median": 4.7941350849999935,
+        "p90": 22.200519577000023,
+        "p95": 23.505508055000064,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollouts": 58,
+      "serialization_seconds": {
+        "count": 30,
+        "maximum": 1.4974999999139982e-05,
+        "mean": 1.07330999981059e-05,
+        "median": 1.0728000006565708e-05,
+        "p90": 1.36080000174843e-05,
+        "p95": 1.4481000107480213e-05,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "serialized_bytes": {
+        "count": 30,
+        "maximum": 2240.0,
+        "mean": 1323.3666666666666,
+        "median": 901.5,
+        "p90": 2061.0,
+        "p95": 2235.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      }
+    },
+    "raw_evidence": "0e9606871df0dcc23c1b13bab723487445e67ebc3a17c7761f3635478e8cc2d7"
+  },
+  "residual": {
+    "benchmark": {
+      "aggregate_cpu_seconds": 894.483180774,
+      "atomic_units": 30,
+      "chunk_size_atomic_units": 1,
+      "conservative_peak_total_worker_rss_bytes": 219430912,
+      "cpu_utilization_percent_of_one_core": 99.86399300797459,
+      "peak_worker_rss_bytes_by_pid": {
+        "10": 219430912
+      },
+      "scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "thread_settings": {
+        "mkl_num_threads": 1,
+        "omp_num_threads": 1,
+        "openblas_num_threads": 1,
+        "torch_num_interop_threads": 1,
+        "torch_num_threads": 1
+      },
+      "throughput_atomic_units_per_second": 0.033493304900902174,
+      "wall_seconds": 895.701397302,
+      "workers": 1
+    },
+    "distributions": {
+      "atomic_unit_wall_seconds": {
+        "count": 30,
+        "maximum": 99.01766731700002,
+        "mean": 29.82327141856667,
+        "median": 17.68766181699999,
+        "p90": 76.64850828400006,
+        "p95": 90.57460829199994,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "atomic_units": 30,
+      "candidate_continuation_seconds": {
+        "count": 270,
+        "maximum": 15.030277753999997,
+        "mean": 3.1923302891592584,
+        "median": 1.621718273500008,
+        "p90": 8.305938322999964,
+        "p95": 9.967017994000003,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "candidate_evaluations": 270,
+      "candidate_rollout_control_intervals": {
+        "count": 270,
+        "maximum": 474.0,
+        "mean": 105.64074074074074,
+        "median": 67.0,
+        "p90": 436.0,
+        "p95": 471.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "dispositions": {
+        "LABELED": 27,
+        "NO_ELIGIBLE_ACTION": 3
+      },
+      "max_rss_bytes": {
+        "count": 30,
+        "maximum": 219430912.0,
+        "mean": 217545932.8,
+        "median": 218120192.0,
+        "p90": 219430912.0,
+        "p95": 219430912.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "serialization_seconds": {
+        "count": 30,
+        "maximum": 5.639699998027936e-05,
+        "mean": 4.267803333419806e-05,
+        "median": 4.187999999771819e-05,
+        "p90": 4.3650000009165524e-05,
+        "p95": 5.4284999976061954e-05,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "serialized_bytes": {
+        "count": 30,
+        "maximum": 7073.0,
+        "mean": 6984.8,
+        "median": 6995.5,
+        "p90": 7007.0,
+        "p95": 7059.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "utility_selection_target_seconds": {
+        "count": 30,
+        "maximum": 0.014408773000013753,
+        "mean": 0.005456981600013459,
+        "median": 0.005147230499979116,
+        "p90": 0.007178590999984635,
+        "p95": 0.013130675000240899,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      }
+    },
+    "raw_evidence": "d89901350f3bf143ee76953d99ff1ca9b59fce7b7a0f326292a997bddfe1c78b"
+  },
+  "schema_version": "rvt-rb21-target-single-worker-benchmark/v1",
+  "target_manifest": "4dca5d1dc85f6d2ceb9ce64a16f2ff89578a323c86b44965029a87b9f43af377",
+  "thread_profile": {
+    "MKL_NUM_THREADS": 1,
+    "NUMEXPR_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "torch_num_interop_threads": 1,
+    "torch_num_threads": 1
+  }
+}

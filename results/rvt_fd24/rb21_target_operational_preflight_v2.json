@@ -1,0 +1,333 @@
+{
+  "check_count": 22,
+  "checks": [
+    {
+      "name": "scientific_preflight",
+      "observed": "PASS",
+      "passed": true
+    },
+    {
+      "name": "portability_artifact",
+      "observed": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+      "passed": true
+    },
+    {
+      "name": "portability_requalification_root",
+      "observed": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+      "passed": true
+    },
+    {
+      "name": "target_host",
+      "observed": {
+        "status": "QUALIFIED",
+        "windows": {
+          "cpu_model": "Intel(R) Core(TM) Ultra 9 285K",
+          "edition": "Microsoft Windows 11 Pro",
+          "hostname": "AVIS",
+          "logical_processors": 24,
+          "physical_cores": 24,
+          "ram_total_bytes": 68053331968,
+          "version_build": "10.0.26200.8875"
+        },
+        "wsl": {
+          "cpus": 24,
+          "data_filesystem": "ext4",
+          "distribution": "Ubuntu 24.04.4 LTS",
+          "kernel": "6.18.33.2-microsoft-standard-WSL2",
+          "ram_bytes": 33323384832,
+          "swap_bytes": 8589934592,
+          "version": "2.7.10.0"
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "qualified_image",
+      "observed": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "passed": true
+    },
+    {
+      "name": "source_commits",
+      "observed": {
+        "checkpoint": "a08f6f506333a20b71b60fc366c4a36d15e289ae",
+        "image_source": "8bfabd48969f1fa1e13a0a268a6df1cb366e90cc"
+      },
+      "passed": true
+    },
+    {
+      "name": "scientific_roots",
+      "observed": {
+        "benchmark_manifest": "4dca5d1dc85f6d2ceb9ce64a16f2ff89578a323c86b44965029a87b9f43af377",
+        "chunk_scaling": "851662de4b36f8c01c2d330eb1786d376f63c3f5dc84c99193d65905c6f305be",
+        "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+        "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+        "rb21p_portability_artifact": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+        "rb21p_portability_root": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+        "resume_failure": "b04c1c2c5b377d16d04ca4adb509ca5f80b1a5ce65e6977663e8cb989a9cf5bb",
+        "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+        "timeout": "6f9f7bccd9142efbac91578ee1a4d205758e39f827bc39208c37e78673423415",
+        "worker_scaling": "c96c6907069928911ff29fc7e19c6c215e14755b4d560f36e1fb9e6ccfa88fba",
+        "writer": "17814c7abe0830e7a42f096731ff76e9dd39147e5e0280181585fb8118b736bd"
+      },
+      "passed": true
+    },
+    {
+      "name": "portability_root_referenced",
+      "observed": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+      "passed": true
+    },
+    {
+      "name": "worker_count",
+      "observed": 12,
+      "passed": true
+    },
+    {
+      "name": "nested_threads",
+      "observed": {
+        "MKL_NUM_THREADS": 1,
+        "NUMEXPR_NUM_THREADS": 1,
+        "OMP_NUM_THREADS": 1,
+        "OPENBLAS_NUM_THREADS": 1,
+        "torch_num_interop_threads": 1,
+        "torch_num_threads": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "chunk_sizes",
+      "observed": {
+        "recoverability_chunk_size_atomic_units": 1,
+        "residual_chunk_size_atomic_units": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "timeout",
+      "observed": 1200,
+      "passed": true
+    },
+    {
+      "name": "resume",
+      "observed": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+      "passed": true
+    },
+    {
+      "name": "writer_staging",
+      "observed": "STAGING_VALIDATE_ATOMIC_PROMOTION",
+      "passed": true
+    },
+    {
+      "name": "authorization_scopes",
+      "observed": [
+        "FINAL_TEST",
+        "RECOVERABILITY_GENERATION",
+        "RESIDUAL_V2_GENERATION",
+        "STUDY_A_N24_ZERO_SHOT",
+        "STUDY_A_TRAIN_VALIDATION",
+        "STUDY_B"
+      ],
+      "passed": true
+    },
+    {
+      "name": "h4_authorization",
+      "observed": {
+        "h4": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+        "residual": "AUTHORIZED_ON_EXPLICIT_OWNER_INSTRUCTION"
+      },
+      "passed": true
+    },
+    {
+      "name": "study_a_n24_sealed",
+      "observed": "SEALED_NOT_AUTHORIZED",
+      "passed": true
+    },
+    {
+      "name": "final_test_sealed",
+      "observed": "SEALED_NOT_AUTHORIZED",
+      "passed": true
+    },
+    {
+      "name": "no_broad_authorization",
+      "observed": [
+        "authorization_scope",
+        "final_test_command",
+        "generation_budget_v2",
+        "h4_classification",
+        "identity_and_disposition_contracts",
+        "isolation",
+        "low_vs_production_scientific_projection",
+        "low_vs_production_scientific_projection_equal",
+        "official_command_plan",
+        "operational_contract",
+        "qualified_image_source_commit",
+        "rb19_current_provenance_root",
+        "rb20_reproduction",
+        "rb21_target_operational_job_manifest_v2_sha256",
+        "rb21p_portability_artifact",
+        "rb21p_portability_root",
+        "schema_version",
+        "scientific_source_checkpoint",
+        "source_phase9_job_manifest",
+        "status",
+        "study_a_n24_command",
+        "target_v4"
+      ],
+      "passed": true
+    },
+    {
+      "name": "low_vs_production_projection",
+      "observed": true,
+      "passed": true
+    },
+    {
+      "name": "no_official_execution",
+      "observed": {
+        "checkpoints": 0,
+        "final_test_runtime_accesses": 0,
+        "official_recoverability_rows": 0,
+        "official_residual_rows": 0,
+        "official_scientific_shards": 0,
+        "optimizer_states": 0,
+        "study_a_n24_runtime_accesses": 0,
+        "training_operations": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "sealed_commands_absent",
+      "observed": {
+        "final": "NOT_CREATED_SEALED",
+        "n24": "NOT_CREATED_SEALED"
+      },
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "final_test_geometry_loaded": false,
+  "negative_matrix": {
+    "case_count": 15,
+    "cases": [
+      {
+        "case": "wrong host",
+        "failed_checks": [
+          "target_host"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "wrong image digest",
+        "failed_checks": [
+          "qualified_image"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "wrong source commit",
+        "failed_checks": [
+          "source_commits"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "wrong worker count",
+        "failed_checks": [
+          "worker_count"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "nested oversubscription",
+        "failed_checks": [
+          "nested_threads"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "wrong chunk",
+        "failed_checks": [
+          "chunk_sizes"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "stale 1800 second timeout",
+        "failed_checks": [
+          "timeout"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "missing resume contract",
+        "failed_checks": [
+          "resume"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "wrong staging mode",
+        "failed_checks": [
+          "writer_staging"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "Study A N24 enabled",
+        "failed_checks": [
+          "study_a_n24_sealed"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "final test enabled",
+        "failed_checks": [
+          "final_test_sealed"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "H4 enabled while infeasible",
+        "failed_checks": [
+          "h4_authorization"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "stale scientific root",
+        "failed_checks": [
+          "scientific_roots"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "missing portability root",
+        "failed_checks": [
+          "portability_root_referenced"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "broad authorization flag",
+        "failed_checks": [
+          "no_broad_authorization"
+        ],
+        "rejected": true
+      }
+    ],
+    "escapes": 0
+  },
+  "rb21_target_operational_preflight_v2_sha256": "e9f683910de30ff9af60d76182f30fe00e21a68b5e1806a2bbad865531233500",
+  "schema_version": "rvt-rb21-target-operational-preflight/v2",
+  "source_job_manifest_validation": {
+    "canonical_hash_valid": true,
+    "final_test_jobs_present": false,
+    "study_a_n24_policy": {
+      "checkpoint_selection_visible": false,
+      "generation_namespace": "study_a_n24_eval_sealed",
+      "phase9_record_access_count": 0,
+      "sealed": true,
+      "training_visible": false
+    }
+  },
+  "status": "PASS",
+  "study_a_n24_outcomes_loaded": false
+}

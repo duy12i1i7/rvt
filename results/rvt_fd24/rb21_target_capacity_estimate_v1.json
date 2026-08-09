@@ -1,0 +1,34 @@
+{
+  "configuration": {
+    "recoverability_chunk_size_atomic_units": 1,
+    "residual_chunk_size_atomic_units": 1,
+    "threads_per_worker": 1,
+    "workers": 12
+  },
+  "generation_budget_v2": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+  "official_generation_executed": false,
+  "peak_aggregate_worker_rss_bytes": 2614145024,
+  "rb21_target_capacity_estimate_sha256": "b7ed461f89ddb53904b20a69e535d598c0b5dbd244a01a7f271934250d754755",
+  "recoverability": {
+    "atomic_units": 30600,
+    "atomic_units_per_second": 0.33045638284743994,
+    "estimated_cpu_hours": 143.33928753426665,
+    "estimated_wall_days": 1.071750116051391,
+    "estimated_wall_seconds": 92599.21002684018,
+    "parallel_efficiency": 0.5213999197242724,
+    "replica_rollouts": 42840,
+    "robot_candidate_records": 332900
+  },
+  "residual_v2": {
+    "candidate_evaluations_per_second": 2.1917204991689316,
+    "candidate_evaluations_upper_bound": 4824000,
+    "estimated_cpu_hours_upper_bound": 5080.112558648889,
+    "estimated_wall_days_upper_bound": 25.47465945338583,
+    "estimated_wall_seconds_upper_bound": 2201010.5767725357,
+    "expert_decisions_per_second": 0.2435244999076591,
+    "expert_decisions_upper_cap": 536000,
+    "parallel_efficiency": 0.5213999197242724
+  },
+  "schema_version": "rvt-rb21-target-capacity-estimate/v1",
+  "storage_projection": "3af6d19b2b31e36d66768fb4e169e7a588608b24bcc9c7e674060a241c69c778"
+}

@@ -1,0 +1,215 @@
+{
+  "commands_begin_in": "STAGING",
+  "executed": false,
+  "execution_binding": "the owner-authorized generation task must bind these immutable selectors to the qualified Phase-9 generator without changing this plan",
+  "final_test_command": "NOT_CREATED_SEALED",
+  "launch_specifications": [
+    {
+      "command_id": "study_a_zero_shot-train-recoverability",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "recoverability",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "train",
+        "study": "study_a_zero_shot"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_a_zero_shot-train-residual_v2",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "residual_v2",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "train",
+        "study": "study_a_zero_shot"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_a_zero_shot-validation-recoverability",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "recoverability",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "validation",
+        "study": "study_a_zero_shot"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_a_zero_shot-validation-residual_v2",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "residual_v2",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "validation",
+        "study": "study_a_zero_shot"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_b_with_n24-train-recoverability",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "recoverability",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "train",
+        "study": "study_b_with_n24"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_b_with_n24-train-residual_v2",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "residual_v2",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "train",
+        "study": "study_b_with_n24"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_b_with_n24-validation-recoverability",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "recoverability",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "validation",
+        "study": "study_b_with_n24"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    },
+    {
+      "command_id": "study_b_with_n24-validation-residual_v2",
+      "container_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+      "docker_mounts": {
+        "/opt/rvt": "QUALIFIED_IMAGE_IMMUTABLE_SOURCE",
+        "/rvt-data": "/home/avis/rvt-data"
+      },
+      "job_selector": {
+        "label_branch": "residual_v2",
+        "sealed": false,
+        "source_job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+        "split": "validation",
+        "study": "study_b_with_n24"
+      },
+      "operational_configuration": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_retries": 1,
+        "infrastructure_timeout_seconds": 1200,
+        "semantic_retries": 0,
+        "staging_root": "/rvt-data/staging",
+        "workers": 12
+      },
+      "profile": "PROFILE_CPU_GENERATION",
+      "release_state": "HELD_FOR_EXPLICIT_OWNER_INSTRUCTION"
+    }
+  ],
+  "operational_contract": "204a3954de7da3d496ccd6ca9fd57757710293b4911abc83bcffce795426414a",
+  "prepared": true,
+  "rb21_target_official_command_plan_sha256": "7c0dfa151856e6d2002b2452b74c3ba9154f7ba4e764dd56c13b99d575216e73",
+  "schema_version": "rvt-rb21-target-official-command-plan/v1",
+  "source_job_manifest": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "status": "PREPARED_HELD_FOR_EXPLICIT_OWNER_INSTRUCTION",
+  "study_a_n24_command": "NOT_CREATED_SEALED"
+}

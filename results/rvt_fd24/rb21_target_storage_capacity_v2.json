@@ -1,0 +1,88 @@
+{
+  "capacity_counts": {
+    "recoverability_robot_candidate_records": 332900,
+    "residual_candidate_evaluations_compute_only": 4824000,
+    "residual_scientific_rows_upper_cap": 536000
+  },
+  "headroom_ratio": 44.475926270527424,
+  "minimum_required_headroom_ratio": 2.0,
+  "projection": {
+    "audit_payload_bytes": 6533802400,
+    "final_upper_bytes": 10146683190,
+    "formula": "two complete payload copies + 2% resume metadata + 25% temporary working space; every row class uses its observed canonical maximum",
+    "index_and_manifest_bytes": 235473190,
+    "resume_metadata_bytes_two_percent": 202933664,
+    "scientific_payload_bytes": 3377407600,
+    "staging_plus_final_plus_resume_plus_temporary_upper_bytes": 23032970842,
+    "staging_upper_bytes": 10146683190,
+    "temporary_working_bytes_twenty_five_percent": 2536670798
+  },
+  "qualification_result": "PASS",
+  "rb21_target_storage_capacity_v2_sha256": "3af6d19b2b31e36d66768fb4e169e7a588608b24bcc9c7e674060a241c69c778",
+  "schema_version": "rvt-rb21-target-storage-capacity/v2",
+  "size_basis": {
+    "index_record_bytes": 271,
+    "no_eligible_audit_record_bytes": {
+      "count": 1,
+      "maximum": 5901.0,
+      "mean": 5901.0,
+      "median": 5901.0,
+      "p90": 5901.0,
+      "p95": 5901.0,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "recoverability_replica_audit_sidecar_bytes": {
+      "count": 3,
+      "maximum": 3336.0,
+      "mean": 2508.0,
+      "median": 3111.0,
+      "p90": 3336.0,
+      "p95": 3336.0,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "recoverability_scientific_record_bytes": {
+      "count": 14,
+      "maximum": 604.0,
+      "mean": 493.5,
+      "median": 439.0,
+      "p90": 604.0,
+      "p95": 604.0,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "representative_shard_manifest_bytes": 1290,
+    "residual_labeled_row_bytes": {
+      "count": 3,
+      "maximum": 5926.0,
+      "mean": 5908.333333333333,
+      "median": 5902.0,
+      "p90": 5926.0,
+      "p95": 5926.0,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "residual_labeled_row_excluding_embedded_sidecar_bytes": {
+      "count": 3,
+      "maximum": 1688.0,
+      "mean": 1686.3333333333333,
+      "median": 1686.0,
+      "p90": 1688.0,
+      "p95": 1688.0,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "residual_nine_candidate_sidecar_bytes": {
+      "count": 3,
+      "maximum": 4217.0,
+      "mean": 4201.0,
+      "median": 4196.0,
+      "p90": 4217.0,
+      "p95": 4217.0,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "source": "rb18_structural_generation_canary_v1.json_ALL_AVAILABLE_RECORDS"
+  },
+  "source_probe": "40d8f9cacdf92937c543cf778772321ce25b9f8d909cf39fab582379797ec222",
+  "target": {
+    "available_bytes": 1024412712960,
+    "path": "/rvt-data/audit",
+    "total_bytes": 1081101176832
+  }
+}

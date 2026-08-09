@@ -1,0 +1,53 @@
+{
+  "docker": {
+    "architecture": "linux/amd64",
+    "cpus": 24,
+    "desktop_version": "4.80.0.232116",
+    "engine_version": "29.6.1",
+    "image_digest": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "memory_bytes": 33323384832
+  },
+  "gpu": {
+    "compute_capability": "8.9",
+    "cuda_runtime_exposed_by_driver": "12.2",
+    "driver_version": "536.96",
+    "exact_model": "NVIDIA RTX 5000 Ada Generation",
+    "gpu_uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a",
+    "pci_bus_id": "00000000:02:00.0",
+    "vram_total_mib": 32760,
+    "windows_driver_mode": "WDDM",
+    "windows_nvidia_smi_version": "536.96",
+    "wsl_nvidia_smi_version": "535.98.01"
+  },
+  "qualification_evidence": {
+    "operational_probe": "40d8f9cacdf92937c543cf778772321ce25b9f8d909cf39fab582379797ec222",
+    "portability_artifact": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+    "portability_requalification_root": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176"
+  },
+  "qualification_result": "QUALIFIED",
+  "rb21_target_environment_qualification_v2_sha256": "851fcc32283a09f64b49f771f28930791b11bd8d5b188b86862f8c5abe695a17",
+  "schema_version": "rvt-rb21-target-environment-qualification/v2",
+  "storage": {
+    "available_bytes": 1024412712960,
+    "path": "/rvt-data/audit",
+    "total_bytes": 1081101176832
+  },
+  "windows": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 285K",
+    "edition": "Microsoft Windows 11 Pro",
+    "hostname": "AVIS",
+    "logical_processors": 24,
+    "physical_cores": 24,
+    "ram_total_bytes": 68053331968,
+    "version_build": "10.0.26200.8875"
+  },
+  "wsl": {
+    "cpus": 24,
+    "data_filesystem": "ext4",
+    "distribution": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "ram_bytes": 33323384832,
+    "swap_bytes": 8589934592,
+    "version": "2.7.10.0"
+  }
+}

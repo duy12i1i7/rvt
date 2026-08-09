@@ -1,0 +1,16 @@
+{
+  "broad_authorization_field": "PROHIBITED",
+  "h4_classification": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+  "official_generation_executed_by_this_qualification": false,
+  "owner_instruction_required": true,
+  "rb21_target_authorization_scope_v2_sha256": "5b5533277e2789fcb66dfc0de5f44102a33924492d57f2d90099e4eab4d9a015",
+  "schema_version": "rvt-rb21-target-authorization-scope/v2",
+  "scopes": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "RECOVERABILITY_GENERATION": "AUTHORIZED_ON_EXPLICIT_OWNER_INSTRUCTION",
+    "RESIDUAL_V2_GENERATION": "AUTHORIZED_ON_EXPLICIT_OWNER_INSTRUCTION",
+    "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+    "STUDY_A_TRAIN_VALIDATION": "AUTHORIZED_ON_EXPLICIT_OWNER_INSTRUCTION",
+    "STUDY_B": "AUTHORIZED_ON_EXPLICIT_OWNER_INSTRUCTION"
+  }
+}

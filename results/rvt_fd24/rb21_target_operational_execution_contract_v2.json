@@ -1,0 +1,61 @@
+{
+  "completion_acknowledgement": "AFTER_COHERENT_DURABLE_PROMOTION",
+  "docker_identity": "Docker-Desktop-4.80.0.232116/Engine-29.6.1/linux-amd64",
+  "host_identity": "AVIS",
+  "infrastructure_retry_limit": 1,
+  "infrastructure_timeout_seconds": 1200,
+  "nested_thread_settings": {
+    "MKL_NUM_THREADS": 1,
+    "NUMEXPR_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "torch_num_interop_threads": 1,
+    "torch_num_threads": 1
+  },
+  "partial_staging_is_completed_dataset": false,
+  "process_worker_count": 12,
+  "profile": "PROFILE_CPU_GENERATION",
+  "promotion_gates": [
+    "all_scheduled_atomic_units_reconciled",
+    "every_legitimate_attempt_has_disposition",
+    "zero_unresolved_infrastructure_failures",
+    "duplicate_validation_pass",
+    "counter_reconciliation_pass",
+    "shard_and_index_hash_validation_pass",
+    "seal_validation_pass"
+  ],
+  "qualified_docker_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+  "qualified_image_source_commit": "8bfabd48969f1fa1e13a0a268a6df1cb366e90cc",
+  "rb21_target_operational_execution_contract_v2_sha256": "204a3954de7da3d496ccd6ca9fd57757710293b4911abc83bcffce795426414a",
+  "recoverability_atomic_unit": "ONE_DECISION_ONE_TOPOLOGY_ALL_FROZEN_REPLICAS",
+  "recoverability_chunk_size_atomic_units": 1,
+  "references": {
+    "benchmark_manifest": "4dca5d1dc85f6d2ceb9ce64a16f2ff89578a323c86b44965029a87b9f43af377",
+    "chunk_scaling": "851662de4b36f8c01c2d330eb1786d376f63c3f5dc84c99193d65905c6f305be",
+    "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "rb21p_portability_artifact": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+    "rb21p_portability_root": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+    "resume_failure": "b04c1c2c5b377d16d04ca4adb509ca5f80b1a5ce65e6977663e8cb989a9cf5bb",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "timeout": "6f9f7bccd9142efbac91578ee1a4d205758e39f827bc39208c37e78673423415",
+    "worker_scaling": "c96c6907069928911ff29fc7e19c6c215e14755b4d560f36e1fb9e6ccfa88fba",
+    "writer": "17814c7abe0830e7a42f096731ff76e9dd39147e5e0280181585fb8118b736bd"
+  },
+  "residual_atomic_unit": "ONE_DECISION_ONE_ROBOT_ALL_NINE_CANDIDATES",
+  "residual_chunk_size_atomic_units": 1,
+  "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+  "schema_version": "rvt-rb21-target-operational-execution-contract/v2",
+  "scientific_source_checkpoint": "a08f6f506333a20b71b60fc366c4a36d15e289ae",
+  "semantic_retries": 0,
+  "storage_paths": {
+    "audit": "/home/avis/rvt-data/audit",
+    "final": "/home/avis/rvt-data/final",
+    "staging": "/home/avis/rvt-data/staging",
+    "temporary": "/home/avis/rvt-data/temp"
+  },
+  "timeout_changes_scientific_horizon": false,
+  "timeout_classification": "INFRASTRUCTURE_FAILURE",
+  "writer_mode": "STAGING_VALIDATE_ATOMIC_PROMOTION",
+  "wsl_identity": "Ubuntu-24.04/WSL2-2.7.10.0"
+}

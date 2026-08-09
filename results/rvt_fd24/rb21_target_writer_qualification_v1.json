@@ -1,0 +1,103 @@
+{
+  "compression": "NONE",
+  "encoding": "CANONICAL_JSON_UNCHANGED",
+  "qualification_result": "PASS",
+  "rb21_target_writer_qualification_sha256": "17814c7abe0830e7a42f096731ff76e9dd39147e5e0280181585fb8118b736bd",
+  "schema_version": "rvt-rb21-target-writer-qualification/v1",
+  "selected_measurement": {
+    "all_commits_validate": true,
+    "bytes": 902656,
+    "compression": "NONE",
+    "encoding": "CANONICAL_JSON_UNCHANGED",
+    "megabytes_per_second": 0.531596797614594,
+    "records": 128,
+    "records_per_second": 75.38241599753175,
+    "wall_seconds": 1.6980087239999193,
+    "workers": 12
+  },
+  "selected_scientific_atomic_units_per_second": 0.2804073368713667,
+  "selected_worker_count": 12,
+  "source_probe": "40d8f9cacdf92937c543cf778772321ce25b9f8d909cf39fab582379797ec222",
+  "worker_matrix": [
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.3108848140491673,
+      "records": 128,
+      "records_per_second": 44.08463046641623,
+      "wall_seconds": 2.9035062479997578,
+      "workers": 1
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.3201135091091259,
+      "records": 128,
+      "records_per_second": 45.39329397463498,
+      "wall_seconds": 2.8197997719998966,
+      "workers": 2
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.4480424838559368,
+      "records": 128,
+      "records_per_second": 63.53410151105173,
+      "wall_seconds": 2.0146660919999704,
+      "workers": 4
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.506158343300741,
+      "records": 128,
+      "records_per_second": 71.7751479439508,
+      "wall_seconds": 1.7833470730001864,
+      "workers": 6
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.5438820878747455,
+      "records": 128,
+      "records_per_second": 77.12451614786521,
+      "wall_seconds": 1.659653848000744,
+      "workers": 8
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.531596797614594,
+      "records": 128,
+      "records_per_second": 75.38241599753175,
+      "wall_seconds": 1.6980087239999193,
+      "workers": 12
+    },
+    {
+      "all_commits_validate": true,
+      "bytes": 902656,
+      "compression": "NONE",
+      "encoding": "CANONICAL_JSON_UNCHANGED",
+      "megabytes_per_second": 0.5072320298522168,
+      "records": 128,
+      "records_per_second": 71.92740071642326,
+      "wall_seconds": 1.779572162000477,
+      "workers": 16
+    }
+  ],
+  "writer_is_throughput_bottleneck": false,
+  "writer_mode": "STAGING_VALIDATE_ATOMIC_PROMOTION",
+  "writer_to_scientific_rate_ratio": 268.83182458279424
+}

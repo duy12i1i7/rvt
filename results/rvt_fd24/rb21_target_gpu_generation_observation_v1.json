@@ -1,0 +1,45 @@
+{
+  "container_visibility": {
+    "container_gpu_visibility_via_nvidia_smi": true,
+    "torch_cuda_device_count": 0,
+    "torch_cuda_is_available": false,
+    "torch_device_capability": null,
+    "torch_device_name_0": null,
+    "torch_version": "2.8.0+cpu",
+    "torch_version_cuda": null
+  },
+  "future_training_role": "CUDA_CAPABLE_NOT_RUN_OR_QUALIFIED_HERE",
+  "generation_image_torch": "2.8.0+cpu",
+  "generation_image_torch_cuda_available": false,
+  "hardware": {
+    "compute_capability": "8.9",
+    "cuda_runtime_exposed_by_driver": "12.2",
+    "driver_version": "536.96",
+    "exact_model": "NVIDIA RTX 5000 Ada Generation",
+    "gpu_uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a",
+    "pci_bus_id": "00000000:02:00.0",
+    "vram_total_mib": 32760,
+    "windows_driver_mode": "WDDM",
+    "windows_nvidia_smi_version": "536.96",
+    "wsl_nvidia_smi_version": "535.98.01"
+  },
+  "rb21_target_gpu_generation_observation_sha256": "1926c965051d7c9830c91c00a0ace805356df7d32837146a450874d1ca64f7fe",
+  "sampled_gpu_activity_attribution": "not attributable to scientific container CUDA execution; the generation image has a CPU-only PyTorch build",
+  "schema_version": "rvt-rb21-target-gpu-generation-observation/v1",
+  "scientific_cuda_execution": false,
+  "scientific_generation_execution": "CPU_AUTHORITATIVE",
+  "selected_configuration_nvidia_smi_samples_percent": [
+    0,
+    5
+  ],
+  "w1_gpu_utilization_samples_percent": {
+    "recoverability": [
+      0,
+      0
+    ],
+    "residual": [
+      1,
+      0
+    ]
+  }
+}
