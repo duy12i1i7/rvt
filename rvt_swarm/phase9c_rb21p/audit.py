@@ -14,8 +14,19 @@ from typing import Any, Dict, Mapping, Sequence, Tuple
 
 import torch
 
-from ..decentralized.ego_graph_v2 import build_robot_local_ego_graph
-from ..fd24.model import prepare_fd24_model_batch
+from ..decentralized.ego_graph_v2 import (
+    EDGE_FEATURE_DIM,
+    EGO_GRAPH_FEATURE_SCHEMA_SHA256,
+    EGO_GRAPH_NORMALIZATION_VERSION,
+    EGO_GRAPH_SCHEMA_VERSION,
+    NODE_FEATURE_DIM,
+    NODE_FEATURE_SLICES,
+    NODE_SELF,
+    RobotLocalEgoGraph,
+    build_robot_local_ego_graph,
+)
+from ..fd24.configuration import FD24ModelConfig
+from ..fd24.model import RVTFD24LocalModel, prepare_fd24_model_batch
 from ..phase8.common import canonical_json_bytes, verify_canonical_hash
 from ..phase8.splits import load_nonfinal_split_manifest
 from ..phase8e.compiler import compile_nonfinal_split, mission_axes
@@ -29,7 +40,14 @@ from ..phase9c_rb.residual_expert_v2 import (
 )
 from ..phase9c_rb21.rb21_bench import _session_for_unit
 from ..phase9c_rb21.rb21_units import DiagnosticCase, ResidualAtomicUnit
-from ..topology_registry import COMPACT, KEEP, LINE
+from ..runtime_configuration import RuntimeConfig, canonical_runtime_hash
+from ..topology_registry import (
+    COMPACT,
+    KEEP,
+    LINE,
+    PRIMARY_TOPOLOGY_IDS,
+    TOPOLOGY_REGISTRY_SCHEMA_VERSION,
+)
 
 
 def _tensor_payload(tensor: torch.Tensor) -> Dict[str, Any]:
@@ -326,6 +344,43 @@ def _cpu_cuda_tensor_comparison(cpu: torch.Tensor, cuda: torch.Tensor) -> Dict[s
     }
 
 
+def _cuda_diagnostic_fixture() -> Tuple[RuntimeConfig, RobotLocalEgoGraph]:
+    runtime = RuntimeConfig.for_team_size(6)
+    node_x = torch.zeros((1, NODE_FEATURE_DIM), dtype=torch.float32)
+    node_mask = torch.zeros_like(node_x, dtype=torch.bool)
+    candidate = NODE_FEATURE_SLICES["candidate_topology_onehot"]
+    candidate_index = PRIMARY_TOPOLOGY_IDS.index(LINE)
+    node_x[0, candidate.start + candidate_index] = 1.0
+    node_mask[0, candidate] = True
+    graph = RobotLocalEgoGraph(
+        schema_version=EGO_GRAPH_SCHEMA_VERSION,
+        normalization_version=EGO_GRAPH_NORMALIZATION_VERSION,
+        feature_schema_sha256=EGO_GRAPH_FEATURE_SCHEMA_SHA256,
+        topology_registry_schema_version=TOPOLOGY_REGISTRY_SCHEMA_VERSION,
+        runtime_config_sha256=canonical_runtime_hash(runtime),
+        observer_robot_id=0,
+        observer_role_id="cuda_diagnostic_role",
+        observation_timestamp_seconds=0.0,
+        lifecycle_id=0,
+        committed_topology_id=KEEP,
+        candidate_topology_id=LINE,
+        node_x=node_x,
+        node_feature_valid_mask=node_mask,
+        node_valid_mask=torch.ones(1, dtype=torch.bool),
+        node_kind=torch.tensor((NODE_SELF,), dtype=torch.int64),
+        node_source_key=("self:0",),
+        edge_index=torch.empty((2, 0), dtype=torch.int64),
+        edge_attr=torch.empty((0, EDGE_FEATURE_DIM), dtype=torch.float32),
+        edge_feature_valid_mask=torch.empty(
+            (0, EDGE_FEATURE_DIM), dtype=torch.bool
+        ),
+        edge_valid_mask=torch.empty(0, dtype=torch.bool),
+        edge_type=torch.empty(0, dtype=torch.int64),
+        mission_orientation_cos_sin=(1.0, 0.0),
+    )
+    return runtime, graph
+
+
 def audit_fd24_cuda_forward(root: Path) -> Dict[str, Any]:
     """Compare one untrained fixture model on CPU and CUDA, without authority."""
     document: Dict[str, Any] = {
@@ -341,15 +396,9 @@ def audit_fd24_cuda_forward(root: Path) -> Dict[str, Any]:
         document["status"] = "CUDA_UNAVAILABLE"
         return document
 
-    _, graph_factory, model_factory = _fixture_factories(root)
-    case, graph = graph_factory(
-        n=6,
-        root=0,
-        candidate_topology=LINE,
-        peer_ids=(1, 2),
-        obstacles=((1.0, 0.2, 0.1),),
-    )
-    cpu_model = model_factory(case.config).eval()
+    runtime, graph = _cuda_diagnostic_fixture()
+    torch.manual_seed(1234)
+    cpu_model = RVTFD24LocalModel(FD24ModelConfig(), runtime).eval()
     cpu_batch = prepare_fd24_model_batch((graph,))
     with torch.no_grad():
         cpu_output = cpu_model(cpu_batch)
