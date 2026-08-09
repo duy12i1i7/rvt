@@ -303,6 +303,50 @@ def _ulp_distance(left: float, right: float) -> int:
     return abs(a - b)
 
 
+def _value_differences(reference: Any, observed: Any, path: str = ""):
+    differences = []
+    if isinstance(reference, Mapping) and isinstance(observed, Mapping):
+        keys = sorted(set(reference) | set(observed))
+        for key in keys:
+            child = f"{path}.{key}" if path else str(key)
+            if key not in reference or key not in observed:
+                differences.append({
+                    "path": child,
+                    "reference": reference.get(key, "MISSING"),
+                    "observed": observed.get(key, "MISSING"),
+                })
+            else:
+                differences.extend(
+                    _value_differences(reference[key], observed[key], child)
+                )
+        return differences
+    if (
+        isinstance(reference, Sequence)
+        and not isinstance(reference, (str, bytes))
+        and isinstance(observed, Sequence)
+        and not isinstance(observed, (str, bytes))
+    ):
+        if len(reference) != len(observed):
+            return [{
+                "path": path,
+                "reference_length": len(reference),
+                "observed_length": len(observed),
+            }]
+        for index, (left, right) in enumerate(zip(reference, observed)):
+            differences.extend(_value_differences(left, right, f"{path}[{index}]"))
+        return differences
+    if reference != observed:
+        item = {"path": path, "reference": reference, "observed": observed}
+        if isinstance(reference, float) and isinstance(observed, float):
+            item.update({
+                "reference_hex": reference.hex(),
+                "observed_hex": observed.hex(),
+                "ulp_distance": _ulp_distance(reference, observed),
+            })
+        differences.append(item)
+    return differences
+
+
 def audit_authoritative_layouts(root: Path) -> Dict[str, Any]:
     protocol = build_executable_protocol(root)
     rows = []
@@ -322,6 +366,9 @@ def audit_authoritative_layouts(root: Path) -> Dict[str, Any]:
             fresh = compiled[layout_id]
             reference = float(persisted["mission_frame"]["heading_radians"])
             observed = float(fresh["mission_frame"]["heading_radians"])
+            physical_differences = _value_differences(
+                _physical_projection(persisted), _physical_projection(fresh)
+            )
             rows.append({
                 "split": split,
                 "layout_id": layout_id,
@@ -337,8 +384,9 @@ def audit_authoritative_layouts(root: Path) -> Dict[str, Any]:
                 ],
                 "exact_document_match": persisted == fresh,
                 "physical_projection_exact": (
-                    _physical_projection(persisted) == _physical_projection(fresh)
+                    not physical_differences
                 ),
+                "physical_projection_differences": physical_differences,
                 "heading_reference": reference,
                 "heading_observed": observed,
                 "heading_reference_hex": reference.hex(),
