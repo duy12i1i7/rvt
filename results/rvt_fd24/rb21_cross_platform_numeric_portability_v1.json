@@ -1,0 +1,416 @@
+{
+  "acceptance_gates": {
+    "G10_reference_host_failures": 0,
+    "G11_official_scientific_rows_generated": 0,
+    "G12_sealed_scopes_remain_unaccessed": true,
+    "G1_frozen_1e_7_guards_unchanged": true,
+    "G2_target_batch_candidate_isolation_passes": true,
+    "G3_model_architecture_schema_parameters_unchanged": true,
+    "G4_authoritative_layout_identities_exact": true,
+    "G5_no_rounding_or_layout_special_case": true,
+    "G6_physical_layout_semantics_unchanged": true,
+    "G7_rb20_semantic_mismatches": 0,
+    "G8_scientific_identity_mismatches": 0,
+    "G9_target_container_failures": 0
+  },
+  "blocked_evidence": {
+    "artifact_path": "results/rvt_fd24/rb21_windows_docker_generation_readiness_v1.json",
+    "artifact_self_sha256": "90689f48419bcc738cb6ba37427951bd250629419cf7504464dd6f718f12b1b8",
+    "commit": "96f1811888b5a462dceb905fa74022b78c2988b4",
+    "docker_image": "sha256:c730e0726e8d1d9dba781ded3205c5c22131bb35461cbca4f5633e977b4ae0f9",
+    "preserved": true,
+    "tag": "rvt-rb21-target-portability-block-v1"
+  },
+  "change_audit_b8c60b8_to_96f181": {
+    "classifications": {
+      ".dockerignore": "OPERATIONAL",
+      "docker/generation/Dockerfile": "OPERATIONAL",
+      "docker/generation/requirements.lock.txt": "OPERATIONAL",
+      "docker/generation/run-tests.sh": "OPERATIONAL",
+      "docs/PHASE9C_RB21_GENERATION_RUNBOOK.md": "DOCUMENTATION",
+      "docs/PHASE9C_RB21_OPERATIONAL_QUALIFICATION.md": "DOCUMENTATION",
+      "results/rvt_fd24/rb21_windows_docker_generation_readiness_v1.json": "ARTIFACT",
+      "tests/test_phase9c_rb21_windows_docker_stop.py": "TEST"
+    },
+    "scientific_runtime_changes": 0
+  },
+  "complete_suite_results": {
+    "reference_macos": {
+      "failed": 0,
+      "passed": 2984,
+      "publication_required_xfailed": 0,
+      "wall_seconds": 389.07,
+      "warnings": 1
+    },
+    "target_linux_final_image": {
+      "failed": 0,
+      "passed": 2978,
+      "publication_required_xfailed": 0,
+      "wall_seconds": 342.73,
+      "warnings": 1,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "target_scope_isolation_layout_smoke": {
+      "failed": 0,
+      "passed": 99,
+      "wall_seconds": 0.69
+    }
+  },
+  "cuda_model_diagnostic": {
+    "authority": "TEST_ONLY_NON_AUTHORITATIVE",
+    "canonical_sha256": "c2e066dfa72816037d54b40f9b725c242078a200a2693d893b67d71bfd42b81f",
+    "cpu_cuda_differences": {
+      "recoverability_logit_max_abs": 5.960464477539063e-08,
+      "recoverability_probability_max_abs": 0.0,
+      "residual_action_max_abs": 2.421438694000244e-08
+    },
+    "device": "NVIDIA RTX 5000 Ada Generation",
+    "device_capability": [
+      8,
+      9
+    ],
+    "parameter_count_unchanged": true,
+    "path": "results/rvt_fd24/rb21p_diagnostics/target/fd24_cuda_diagnostic.json",
+    "scientific_execution_path_changed": false,
+    "state_dict_keys_unchanged": true,
+    "state_dict_values_unchanged": true,
+    "torch_version": "2.1.2",
+    "torch_version_cuda": "11.8"
+  },
+  "environments": {
+    "reference_host": {
+      "architecture": "arm64",
+      "blas": "Apple Accelerate",
+      "cpu_feature_dispatch": "NEON/ASIMD; no x86 AVX family",
+      "deterministic_algorithms": false,
+      "float32_matmul_precision": "highest",
+      "interop_threads": 12,
+      "lapack": "Apple Accelerate",
+      "libc_libm": "macOS libSystem",
+      "mkl_available": false,
+      "mkldnn_available": false,
+      "numpy": "2.0.2",
+      "openmp_available": true,
+      "os": "macOS 26.5",
+      "python": "3.9.6",
+      "python_compiler": "Clang 17.0.0 (clang-1700.6.3.2)",
+      "thread_environment": {
+        "MKL_CBWR": null,
+        "MKL_NUM_THREADS": null,
+        "NUMEXPR_NUM_THREADS": null,
+        "OMP_NUM_THREADS": null,
+        "OPENBLAS_NUM_THREADS": null
+      },
+      "torch": "2.8.0",
+      "torch_threads": 8
+    },
+    "target_container": {
+      "architecture": "linux/amd64",
+      "blas_numpy": "scipy-openblas 0.3.27",
+      "cpu_feature_dispatch": {
+        "avx": true,
+        "avx2": true,
+        "avx512": false,
+        "torch_cpu_capability": "AVX2"
+      },
+      "deterministic_algorithms": false,
+      "float32_matmul_precision": "highest",
+      "interop_threads": 24,
+      "lapack_numpy": "scipy-openblas 0.3.27",
+      "libc_libm": "glibc 2.31",
+      "mkl_available": true,
+      "mkl_version": "2024.2",
+      "mkldnn_available": true,
+      "mkldnn_enabled": true,
+      "mkldnn_version": "3.7.1",
+      "numpy": "2.0.2",
+      "openmp": "OpenMP 4.5",
+      "os": "Debian GNU/Linux 11 (bullseye)",
+      "python": "3.9.6",
+      "python_compiler": "GCC 10.2.1",
+      "thread_environment": {
+        "MKL_CBWR": "COMPATIBLE",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "torch": "2.8.0+cpu",
+      "torch_threads": 1
+    },
+    "windows_native": {
+      "architecture": "x64",
+      "libc_libm": "Microsoft Universal CRT / Windows math runtime",
+      "numpy_installed": false,
+      "os": "Microsoft Windows 11 Pro 10.0.26200.8875",
+      "python": "3.12.10",
+      "python_compiler": "MSC v.1943 64 bit (AMD64)",
+      "scientific_runtime_role": "OBSERVATIONAL_HOST_ONLY",
+      "torch_installed": false
+    },
+    "wsl_native": {
+      "architecture": "x86_64",
+      "kernel": "6.18.33.2-microsoft-standard-WSL2",
+      "libc_libm": "glibc 2.39",
+      "numpy_installed": false,
+      "os": "Ubuntu 24.04.4 LTS",
+      "python": "3.12.3",
+      "python_compiler": "GCC 13.3.0",
+      "scientific_runtime_role": "OBSERVATIONAL_HOST_ONLY",
+      "torch_installed": false
+    }
+  },
+  "gpu_audit": {
+    "candidate_generation_container": {
+      "container_gpu_visibility_via_nvidia_smi": true,
+      "torch_cuda_device_count": 0,
+      "torch_cuda_is_available": false,
+      "torch_device_capability": null,
+      "torch_device_name_0": null,
+      "torch_version": "2.8.0+cpu",
+      "torch_version_cuda": null
+    },
+    "cuda_probe_container": {
+      "container_gpu_visibility": true,
+      "torch_cuda_device_count": 1,
+      "torch_cuda_is_available": true,
+      "torch_device_capability": [
+        8,
+        9
+      ],
+      "torch_device_name_0": "NVIDIA RTX 5000 Ada Generation",
+      "torch_version": "2.1.2",
+      "torch_version_cuda": "11.8"
+    },
+    "docker": {
+      "default_runtime": "runc",
+      "gpu_access_proven": true,
+      "nvidia_runtime_registered": true
+    },
+    "hardware": {
+      "compute_capability": "8.9",
+      "cuda_runtime_exposed_by_driver": "12.2",
+      "driver_version": "536.96",
+      "exact_model": "NVIDIA RTX 5000 Ada Generation",
+      "gpu_uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a",
+      "pci_bus_id": "00000000:02:00.0",
+      "vram_total_mib": 32760,
+      "windows_driver_mode": "WDDM",
+      "windows_nvidia_smi_version": "536.96",
+      "wsl_nvidia_smi_version": "535.98.01"
+    },
+    "no_cuda_or_driver_install_or_change": true,
+    "raw_evidence_root": "results/rvt_fd24/rb21p_diagnostics/target"
+  },
+  "gpu_semantic_boundary": {
+    "FD24_model_forward": "CPU_IN_QUALIFIED_GENERATION_IMAGE; CUDA_TEST_ONLY_SUPPORTED",
+    "Phase_6_controller": "CPU",
+    "Residual_Expert_V2_counterfactual_generation": "CPU",
+    "Target_V4": "CPU",
+    "ego_graph_construction": "CPU",
+    "future_training": "CUDA_CAPABLE_BUT_NOT_RUN_OR_QUALIFIED_HERE",
+    "local_safety_projection": "CPU",
+    "recoverability_counterfactual_generation": "CPU",
+    "source_simulator": "CPU",
+    "transition_protocol": "CPU"
+  },
+  "image": {
+    "dockerfile_sha256": "7bc931e328cd61dd9fe814986db494a58b0cc09b993df5803d5e318b627a68a7",
+    "failed_evidence_image_preserved": "sha256:c730e0726e8d1d9dba781ded3205c5c22131bb35461cbca4f5633e977b4ae0f9",
+    "final_image_id": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "final_local_repo_digest": "rvt-generation@sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "numeric_profile": "FD24_NUMERICAL_EXECUTION_PROFILE_V1",
+    "repo_digest_scope": "LOCAL_DOCKER_CONTENT_DIGEST",
+    "source_commit_label": "8bfabd48969f1fa1e13a0a268a6df1cb366e90cc"
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_scientific_shards": 0,
+    "optimizer_states": 0,
+    "performance_benchmarks": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "layout_portability": {
+    "all_layout_result": {
+      "fresh_compiler_exact_documents": 29,
+      "physical_projection_exact": 30,
+      "resolved_authoritative_hash_exact": 30,
+      "total_layouts": 30
+    },
+    "authority": {
+      "heading_runtime_consumers": 0,
+      "physical_source": "FROZEN_SOURCE_GEOMETRIC_PRIMITIVES",
+      "runtime_identity": "CANONICAL_COMMITTED_COMPILED_EXECUTION_SPECIFICATION"
+    },
+    "heading_derivation": {
+      "dx": 12.0,
+      "dy": 0.39454,
+      "formula": "direction=(goal-start)/hypot(dx,dy); heading=atan2(direction_y,direction_x)",
+      "goal_center_meters": [
+        6.0,
+        0.19727
+      ],
+      "layout_id": "train-f2-01",
+      "linux_float_hex": "0x1.0d3e089e2d8bep-5",
+      "linux_result": 0.0328664940183656,
+      "longitudinal_axis": [
+        0.9994599454023001,
+        0.032860577238251955
+      ],
+      "norm": 12.006484156971183,
+      "reference_float_hex": "0x1.0d3e089e2d8bfp-5",
+      "reference_result": 0.032866494018365604,
+      "start_center_meters": [
+        -6.0,
+        -0.19727
+      ],
+      "ulp_distance": 1
+    },
+    "mechanism": "LOAD_AND_VERIFY_COMMITTED_CANONICAL_COMPILED_ARTIFACT",
+    "new_layout_hash_version_created": false,
+    "per_layout_special_case": false,
+    "rounding_added": false,
+    "target_audit_canonical_sha256": "9b0d9ff48b3bfa8767a08db7d126820cbd9e71583531b507146350086a6b75b4"
+  },
+  "model_numerics": {
+    "architecture_schema_invariance": {
+      "model_code_changed": false,
+      "parameter_count": 272227,
+      "parameter_count_changed": false,
+      "parameter_shapes_changed": false,
+      "state_dict_key_count": 66,
+      "state_dict_keys_changed": false,
+      "tolerance_changed": false,
+      "trainable_parameters_added": 0
+    },
+    "backend_cause": "PLATFORM_DEPENDENT_CPU_BLAS_BATCHED_REDUCTION_ORDER",
+    "failure_localization": {
+      "candidate_isolation_first_divergence": "candidate.local_metadata.linear for the failing candidate; typed node projection differences also occur in other candidates",
+      "unrelated_batch_first_divergence": "candidate.local_metadata.linear"
+    },
+    "final_profile_isolation": {
+      "candidate_0_max_abs": 2.9802322387695312e-08,
+      "candidate_1_max_abs": 3.725290298461914e-08,
+      "candidate_2_max_abs": 8.195638656616211e-08,
+      "frozen_tolerance": 1e-07,
+      "unrelated_batch_max_abs": 3.725290298461914e-08
+    },
+    "implementation_repair": "NOT_REQUIRED",
+    "independent_example_computation_remains_authority": true,
+    "numeric_profile_matrix": [
+      {
+        "batch_pass": false,
+        "candidate_pass": false,
+        "controls": "baseline",
+        "id": "P0"
+      },
+      {
+        "batch_pass": false,
+        "candidate_pass": false,
+        "controls": "interop_threads=1",
+        "id": "P1"
+      },
+      {
+        "batch_pass": false,
+        "candidate_pass": false,
+        "controls": "deterministic_algorithms, interop_threads=1",
+        "id": "P2"
+      },
+      {
+        "batch_pass": false,
+        "candidate_pass": false,
+        "controls": "MKLDNN disabled, deterministic_algorithms, interop_threads=1",
+        "id": "P3"
+      },
+      {
+        "batch_pass": false,
+        "candidate_pass": false,
+        "controls": "float32_matmul_precision=high plus P3",
+        "id": "P4"
+      },
+      {
+        "batch_pass": true,
+        "candidate_pass": true,
+        "controls": "MKL_CBWR=COMPATIBLE, interop_threads=1",
+        "id": "P5"
+      },
+      {
+        "batch_pass": true,
+        "candidate_pass": true,
+        "controls": "MKL_CBWR=COMPATIBLE, default interop_threads=24",
+        "id": "P5A"
+      },
+      {
+        "batch_pass": true,
+        "candidate_pass": false,
+        "controls": "ATEN_CPU_CAPABILITY=default",
+        "id": "P6"
+      }
+    ],
+    "original_failures": [
+      {
+        "absolute_error": 1.043081283569336e-07,
+        "batched_bits": "0xbdf904da",
+        "batched_output": -0.12159128487110138,
+        "float32_ulp_distance": 14,
+        "relative_error": 8.57857855404382e-07,
+        "single_bits": "0xbdf904e8",
+        "single_output": -0.12159138917922974,
+        "test": "test_adding_unrelated_ego_graphs_cannot_change_target_output"
+      },
+      {
+        "absolute_error": 1.1175870895385742e-07,
+        "batched_bits": "0xbded9697",
+        "batched_output": -0.11600988358259201,
+        "float32_ulp_distance": 15,
+        "relative_error": 9.633541370729627e-07,
+        "single_bits": "0xbded96a6",
+        "single_output": -0.11600999534130096,
+        "test": "test_parallel_candidate_evaluation_does_not_mix_candidates"
+      }
+    ],
+    "selected_profile": {
+      "environment": {
+        "MKL_CBWR": "COMPATIBLE"
+      },
+      "name": "FD24_NUMERICAL_EXECUTION_PROFILE_V1",
+      "profile_preimage_and_final_image_diagnostic_identical": true
+    },
+    "target_baseline_audit_canonical_sha256": "64481096c622f7652a87af679dd04e5b0618ca027692d08d00c047c0cf887e23",
+    "target_profile_audit_canonical_sha256": "501eb80a957299e81aa7df34f3f68f0b0980103cd2314139b5f434791935c745"
+  },
+  "provenance": {
+    "audit_code_commit": "b91f1ad716f0901f9788642879c5016163bc3234",
+    "branch": "research/rvt-rb21-cross-platform-portability-v1",
+    "diagnostic_evidence_commit": "24117553f101a27b137254d59a4882978e493931",
+    "image_source_repair_commit": "8bfabd48969f1fa1e13a0a268a6df1cb366e90cc",
+    "portability_mechanism_commit": "47ea1ff2e2d048f62c5cc3ba327c81688685f243",
+    "rb21_audit_base_commit": "b8c60b8d7d744b8d8c4ee069bde58e05dc6e3e1b",
+    "rb21_blocked_commit": "96f1811888b5a462dceb905fa74022b78c2988b4"
+  },
+  "rb20_semantic_replay": {
+    "canonical_sha256_reference_and_target": "8a2b50fad6de75a2cee5ca97959b3d2570cbfdb096ae9f69457e1480fdae5c85",
+    "recoverability_rollouts": 14,
+    "residual_candidate_evaluations": 36,
+    "scientific_identity_mismatches": 0,
+    "semantic_mismatches": 0,
+    "source_episodes": 4,
+    "target_v4_mismatches": 0
+  },
+  "rb21_cross_platform_numeric_portability_sha256": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+  "resume_decision": {
+    "generation_authorized": false,
+    "performance_qualification_may_resume": true,
+    "performance_qualification_run_in_this_phase": false,
+    "required_generation_profile": "PROFILE_CPU_GENERATION",
+    "scientific_semantic_digest_must_remain_identical_for_any_future_profile": true
+  },
+  "schema_version": "rvt-rb21-cross-platform-numeric-portability/v1",
+  "verdict": "C",
+  "verdict_text": "Cross-platform numerical portability is closed without changing frozen scientific semantics; the new Docker image is qualified to resume RB21-TARGET performance benchmarking."
+}

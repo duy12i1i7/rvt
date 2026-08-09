@@ -1,0 +1,52 @@
+{
+  "authorization": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "OFFICIAL_GENERATION": "NOT_AUTHORIZED_IN_RB21P",
+    "PERFORMANCE_BENCHMARK": "QUALIFIED_TO_RESUME_NEXT_PHASE",
+    "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+    "TRAINING": "NOT_AUTHORIZED_IN_RB21P"
+  },
+  "candidate_image": {
+    "dockerfile_sha256": "7bc931e328cd61dd9fe814986db494a58b0cc09b993df5803d5e318b627a68a7",
+    "image_id": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "numeric_profile": "FD24_NUMERICAL_EXECUTION_PROFILE_V1",
+    "source_commit": "8bfabd48969f1fa1e13a0a268a6df1cb366e90cc"
+  },
+  "failed_rb21_evidence": {
+    "artifact_self_sha256": "90689f48419bcc738cb6ba37427951bd250629419cf7504464dd6f718f12b1b8",
+    "commit": "96f1811888b5a462dceb905fa74022b78c2988b4",
+    "image": "sha256:c730e0726e8d1d9dba781ded3205c5c22131bb35461cbca4f5633e977b4ae0f9",
+    "preserved": true
+  },
+  "gates": {
+    "authoritative_layout_hashes_exact": true,
+    "batch_candidate_isolation_pass": true,
+    "frozen_science_unchanged": true,
+    "reference_full_suite_failures": 0,
+    "semantic_digest_equal": true,
+    "semantic_identity_mismatches": 0,
+    "semantic_mismatches": 0,
+    "target_full_suite_failures": 0
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "official_rows": 0,
+    "optimizer_states": 0,
+    "scientific_shards": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "portability_artifact_path": "results/rvt_fd24/rb21_cross_platform_numeric_portability_v1.json",
+  "portability_artifact_sha256": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+  "rb21_portability_requalification_sha256": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+  "required_next_phase_rules": {
+    "default_profile": "PROFILE_CPU_GENERATION",
+    "generation_not_authorized_by_this_root": true,
+    "gpu_profile_requires_existing_semantic_permission": true,
+    "profiles_must_have_identical_SCIENTIFIC_SEMANTIC_DIGEST": true
+  },
+  "schema_version": "rvt-rb21-portability-requalification/v1",
+  "status": "QUALIFIED_TO_RESUME_RB21_TARGET_PERFORMANCE_BENCHMARK_ONLY",
+  "verdict": "C"
+}
