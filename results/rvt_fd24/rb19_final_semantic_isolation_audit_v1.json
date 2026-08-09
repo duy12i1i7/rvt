@@ -1,0 +1,904 @@
+{
+ "budget_consistency": {
+  "arithmetic_consistent": true,
+  "candidate_evaluation_compute_upper_bound": 4824000,
+  "compute_bound_called_scientific_rows": false,
+  "historical_source_counts_immutable": true,
+  "recoverability_caps_unchanged": true,
+  "residual_candidate_count": 9,
+  "stored_dense_residual_row_upper_cap": 536000
+ },
+ "counter_denominators": {
+  "recoverability": [
+   "scheduled",
+   "observed",
+   "candidate/replica attempted",
+   "valid positive",
+   "valid negative",
+   "execution invalid",
+   "infrastructure failure"
+  ],
+  "residual": [
+   "attempted expert states",
+   "LABELED",
+   "NO_ELIGIBLE_ACTION",
+   "execution invalid",
+   "infrastructure failure",
+   "emitted scientific rows"
+  ],
+  "residual_counters_implemented": [
+   "attempted_expert_decision_states",
+   "execution_invalid_states",
+   "infrastructure_failures",
+   "labeled_states",
+   "no_eligible_states",
+   "target_rows_emitted"
+  ],
+  "rows_can_be_fewer_than_attempted": true,
+  "silent_drop_possible": false
+ },
+ "decentralization": {
+  "centralized_training_orchestration_counted_as_violation": false,
+  "centralized_use": "offline label generation and evaluation only, where explicitly contracted",
+  "runtime_properties": [
+   "robot-local sensing",
+   "one-hop information",
+   "robot-local ego graph",
+   "SELF/root readout",
+   "no global graph pooling",
+   "no joint action",
+   "leaderless topology agreement",
+   "local readiness",
+   "distributed COMPLETE",
+   "local controller",
+   "local own-action safety"
+  ],
+  "strict_guard_violations": 0
+ },
+ "event_schedule_semantics": {
+  "addendum_current": true,
+  "early_termination_rule": "mark_unavailable_preserve_denominator_no_replacement",
+  "event_shifted_to_avoid_a_miss": false,
+  "horizon_fraction_timing_present": false,
+  "landmark_trigger_current": true,
+  "rb18_schedule_mutated": false
+ },
+ "f8_f9_replica_rule": {
+  "aggregation": "all_success",
+  "generation_shortcut_reducing_replicas": false,
+  "known_limitation": "three all-success replicas make the criterion a p^3-style confidence/strictness confound; recorded as a scientific limitation, not altered post hoc",
+  "matched_stream_identity_deterministic": true,
+  "rb18_used_the_same_implementation": true,
+  "replica_count": {
+   "F8": 3,
+   "F9": 3,
+   "other": 1
+  },
+  "rule_altered_in_rb19": false
+ },
+ "final_test_seal": {
+  "geometry_compilation": "prohibited",
+  "geometry_materialized": false,
+  "labels_or_statistics_used": false,
+  "permitted_metadata": [
+   "family_count",
+   "layout_count",
+   "manifest_sha256",
+   "schema_compatibility"
+  ],
+  "rb19_accesses": 0,
+  "runtime_access_count": 0
+ },
+ "frame_audit": {
+  "expert_target": "WORLD",
+  "input_ego_features_frame": "MISSION",
+  "model_output": "WORLD",
+  "one_current_chain": true,
+  "residual_bounds_world_componentwise": [
+   0.15,
+   0.15
+  ],
+  "rotation_equivariance_claimed": false,
+  "runtime_insertion": "WORLD",
+  "scientific_target": "WORLD",
+  "world_mission_residual_transformation_in_primary_path": false
+ },
+ "hyperparameter_freeze": {
+  "chosen_in_rb19": false,
+  "contract": "docs/RVT_FD24_HYPERPARAMETER_BUDGET.md",
+  "contract_sha256": "a8701aaa82ee0007aa56a4e2bcac8e18f8d6176af41f24ce466cfd6b97d1ba62",
+  "dropout_fixed": 0.0,
+  "loss_weight_choices": 2,
+  "maximum_searched_configurations": 12,
+  "maximum_steps": 50000,
+  "model_seeds": [
+   11,
+   29,
+   47
+  ],
+  "new_hyperparameter_introduced_by_generation_contracts": false,
+  "new_hyperparameter_introduced_by_orientation_context": false,
+  "new_hyperparameter_introduced_by_residual_v2": false,
+  "new_hyperparameter_introduced_by_world_repair": false,
+  "parameter_delta_is_a_hyperparameter": false,
+  "residual_head_parameter_delta": 192
+ },
+ "identity_audit": {
+  "all_three_distinct": true,
+  "candidate_evaluation_key": [
+   "residual_scientific_row_id",
+   "candidate_index",
+   "replica_index",
+   "matched_stream_identity_sha256"
+  ],
+  "chunk_invariance": true,
+  "execution_attempt_key": [
+   "chunk_id",
+   "worker_id",
+   "attempt_index",
+   "task_range"
+  ],
+  "hash_domain_collisions": 0,
+  "recoverability_namespace_separate": true,
+  "retry_invariance": true,
+  "scientific_row_key": [
+   "study",
+   "split",
+   "family",
+   "layout_sha256",
+   "team_size",
+   "episode_id",
+   "timestep",
+   "robot_id",
+   "topology_id",
+   "graph_fingerprint",
+   "residual_expert_spec_sha256"
+  ],
+  "semantic_retries": 0
+ },
+ "model_input_and_target": {
+  "orientation_consumed_only_by_residual_head": true,
+  "rb18_evidence": [
+   {
+    "candidate_context_identical": true,
+    "case_id": "c1-f1-n6-stable",
+    "edge_index_identical": true,
+    "edge_tensor_identical": true,
+    "node_tensor_identical": true,
+    "orientation": [
+     0.9994562188340212,
+     0.03297372641969908
+    ],
+    "orientation_exact": true,
+    "recoverability_logit_identical": true,
+    "residual_output_identical": true,
+    "row_payload_round_trip_exact": true,
+    "row_sha256": "ab9a552b4157fedb2d6154ba421aae123034c63b1e3bc13df3bfd7949db11321",
+    "target_world": [
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "candidate_context_identical": true,
+    "case_id": "c2-f9-n12-dynamic",
+    "edge_index_identical": true,
+    "edge_tensor_identical": true,
+    "node_tensor_identical": true,
+    "orientation": [
+     0.9994523142183656,
+     0.03309186612377009
+    ],
+    "orientation_exact": true,
+    "recoverability_logit_identical": true,
+    "residual_output_identical": true,
+    "row_payload_round_trip_exact": true,
+    "row_sha256": "65450f21a59454256d343a4cceb316deaf819d7402bb8c2f858051f452bd7081",
+    "target_world": [
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "candidate_context_identical": true,
+    "case_id": "c3-f8-n5-degraded",
+    "edge_index_identical": true,
+    "edge_tensor_identical": true,
+    "node_tensor_identical": true,
+    "orientation": [
+     0.9994529751319129,
+     0.033071898947115
+    ],
+    "orientation_exact": true,
+    "recoverability_logit_identical": true,
+    "residual_output_identical": true,
+    "row_payload_round_trip_exact": true,
+    "row_sha256": "0a80d3d39cd651089fdd5ed0ff13f9078860af9d36f646bc33c1921a8b30c02f",
+    "target_world": [
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "reconstructable_without_hidden_state": true,
+  "recoverability_orientation_independent": true,
+  "required": [
+   "mission-frame ego graph",
+   "mission_orientation_cos_sin",
+   "candidate/topology context",
+   "WORLD target"
+  ]
+ },
+ "new_scientific_mechanism_added": false,
+ "no_eligible_audit": {
+  "creates_clipped_residual": false,
+  "creates_fallback_candidate": false,
+  "creates_zero_residual": false,
+  "default_vector_behaviour_in_writers": false,
+  "deterministic_on_retry": true,
+  "emits_target_rows": false,
+  "is_execution_invalid": false,
+  "is_infrastructure_failure": false,
+  "rb18_observed": 1,
+  "rb18_rows_from_no_eligible": 0,
+  "scientifically_attempted": true
+ },
+ "official_counters": {
+  "final_test_accesses": 0,
+  "new_fd24_checkpoints": 0,
+  "official_recoverability_rows": 0,
+  "official_residual_rows": 0,
+  "official_scientific_shards": 0,
+  "optimizer_states": 0,
+  "study_a_n24_accesses": 0
+ },
+ "operational_pending": {
+  "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+  "chunk_size": "UNFROZEN",
+  "official_execution_authorized": false,
+  "parallel_efficiency": "UNMEASURED_PENDING_RB21",
+  "scientific_semantics_ambiguous": false,
+  "worker_count": "UNFROZEN"
+ },
+ "provenance_class": "AUDIT_ONLY",
+ "provenance_closure": {
+  "ambiguous_current_contracts": [],
+  "current_nodes_pointing_only_to_superseded": [],
+  "missing_required_contracts": [],
+  "nodes": [
+   {
+    "artifact": "results/rvt_fd24/executable_scientific_protocol_v1.json",
+    "concept": "scientific experiment protocol",
+    "note": "",
+    "sha256": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/splits/train_layouts.json",
+    "concept": "train split contract",
+    "note": "",
+    "sha256": "673d014f006b5a4cd35dda13dd3fa75bb306d1d6aacdfd13ea14c782d5250b8a",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/splits/validation_layouts.json",
+    "concept": "validation split contract",
+    "note": "",
+    "sha256": "b73879c7745cc1c0c56ea169ca36a5c9b913273e128e9730d96b86f7eda6d2e2",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/experiment_protocol_manifest.json#split_manifest_sha256.final_test",
+    "concept": "final-test split commitment",
+    "note": "commitment hash only; sealed geometry is never opened",
+    "sha256": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/source_event_timing_addendum_v1.json",
+    "concept": "ET event-timing addendum",
+    "note": "",
+    "sha256": "fba87e4374f4a7b8c97e5435e148345ad5611223f663e6050967efe9aa0989c5",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/online_topology_scope.json",
+    "concept": "online topology scope",
+    "note": "",
+    "sha256": "6035dd5748e8a7f7dd44576cd80e3f5167017a3fee24a1e2c9877241f5898b6a",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "rvt_swarm/topology_registry.py",
+    "concept": "topology registry",
+    "note": "",
+    "sha256": "f8528d24561abea52e2cd50b236dc69cc6c25b402498fe13d0ace05e1317bfe5",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "rvt_swarm/decentralized/ego_graph_v2.py",
+    "concept": "ego-graph feature schema",
+    "note": "schema rvt-ego-graph/v2; file 4cb4fe59b5e1408de9a8d2e21581ad406e2cbd778f9bfb2e515a6268e87059e4",
+    "sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "rvt_swarm/fd24/model.py",
+    "concept": "model input/output schema V2",
+    "note": "rvt-fd24-model/v2 / rvt-fd24-model-input/v2",
+    "sha256": "d2a92eea8984478e038d875775bd1dfb3e04db2745b60d1c82cc064d53ad2bef",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "rvt_swarm/decentralized/robot_local_controller.py",
+    "concept": "Phase-6 local controller",
+    "note": "",
+    "sha256": "1cfe364d706f06fe4602c5a3033e89051b3ca808443d4afd906c7e1319564a9f",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "rvt_swarm/decentralized/local_safety_projection.py",
+    "concept": "local safety projection",
+    "note": "",
+    "sha256": "16e06727f9052198070c74814fd1822d0450c25a4d5d456f48fc33362e46c26e",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "rvt_swarm/decentralized/transition_protocol.py",
+    "concept": "transition protocol runtime",
+    "note": "",
+    "sha256": "54f015e2c9a4da68d93c3e8e998f847b662fcfc8d7db4e75900b1e17ba6b1e01",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/target_v4_execution_contract_v1.json",
+    "concept": "Target V4 execution contract",
+    "note": "missing from the RB17 root; bound here",
+    "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json#scenario_family_contract",
+    "concept": "recoverability replica/aggregation rule",
+    "note": "frozen rule carried forward unchanged by budget V2",
+    "sha256": "b8b24a03c136faf8fbfa17fbf99444bb14c356a2f542b13ebf21e20770c5cef1",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/headroom_requalification_v6.json",
+    "concept": "authoritative pre-data headroom v6",
+    "note": "",
+    "sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/headroom_v6_detached_reproduction_v1.json",
+    "concept": "headroom detached reproduction",
+    "note": "",
+    "sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/headroom_authority_record_v1.json",
+    "concept": "headroom authority record",
+    "note": "",
+    "sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_expert_spec_v2.json",
+    "concept": "Residual Expert V2 specification",
+    "note": "",
+    "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_label_contract_composite_v2.json",
+    "concept": "residual label contract composite V2",
+    "note": "",
+    "sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb15_residual_expert_binding_v2.json",
+    "concept": "RB15 residual producer binding",
+    "note": "",
+    "sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/model_residual_output_frame_v2.json",
+    "concept": "model V2 WORLD-frame repair",
+    "note": "",
+    "sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb16_world_output_requalification_v1.json",
+    "concept": "RB16 requalification",
+    "note": "",
+    "sha256": "10c4aebe41a98db7674f7ee617db8a209a148bdfe18ca76bd04cde59660ab387",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb16_native_action_frame_v1.json",
+    "concept": "RB16 frame-conflict audit",
+    "note": "the failed audit, preserved as evidence",
+    "sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c",
+    "status": "SUPERSEDED_EVIDENCE"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_runtime_composite_v1.json",
+    "concept": "residual runtime composite",
+    "note": "",
+    "sha256": "24c65a41855a2ffe9345755f0630dfe707e9446065d7cef8516f8f1e89cb19ff",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_scientific_row_identity_v2.json",
+    "concept": "residual scientific row identity",
+    "note": "",
+    "sha256": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_candidate_evaluation_identity_v2.json",
+    "concept": "residual candidate evaluation identity",
+    "note": "",
+    "sha256": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_execution_attempt_identity_v1.json",
+    "concept": "execution attempt identity",
+    "note": "",
+    "sha256": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_generation_disposition_contract_v1.json",
+    "concept": "generation disposition contract",
+    "note": "",
+    "sha256": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_supervision_row_schema_v2.json",
+    "concept": "residual supervision row schema V2",
+    "note": "",
+    "sha256": "ecf9ebbd0f8f350df0a2daa44f0d3096874b20b5d7952734b43377abde423a30",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb17_generation_contract_composite_v1.json",
+    "concept": "RB17 generation-contract composite",
+    "note": "incomplete: does not cite Target V4; superseded by the RB19 root",
+    "sha256": "bba1aee0430bc540f20d010b923696b5b1c51d4bfb1d92d2fa21daf2e6242da8",
+    "status": "SUPERSEDED_EVIDENCE"
+   },
+   {
+    "artifact": "results/rvt_fd24/rb18_structural_generation_canary_v1.json",
+    "concept": "RB18 structural canary",
+    "note": "",
+    "sha256": "0291cb52e11e570f48272d76b98d32966513fc8f840a6e47e718076bf3187e3c",
+    "status": "DIAGNOSTIC_ONLY"
+   },
+   {
+    "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json",
+    "concept": "historical generation budget V1",
+    "note": "",
+    "sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+    "status": "HISTORICAL_IMMUTABLE"
+   },
+   {
+    "artifact": "results/rvt_fd24/generation_budget_v2.json",
+    "concept": "generation budget V2",
+    "note": "",
+    "sha256": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/datasets/phase9_job_manifest.json",
+    "concept": "historical job manifest",
+    "note": "",
+    "sha256": "9d094d7dca34e2daf8edc05c018d0372d7c4d2219a710032a6b066be494ea49f",
+    "status": "HISTORICAL_IMMUTABLE"
+   },
+   {
+    "artifact": "results/rvt_fd24/residual_job_manifest_v2.json",
+    "concept": "residual job manifest V2",
+    "note": "official execution NOT_AUTHORIZED_PENDING_RB18_RB21",
+    "sha256": "878a81c9a83fa0a390ac8c5f508baeb53b4964398575624066c5d1fb72fff10b",
+    "status": "PENDING_OPERATIONAL_QUALIFICATION"
+   },
+   {
+    "artifact": "rvt_swarm/phase9/preflight.py",
+    "concept": "preflight contract",
+    "note": "rvt-phase9-preflight/v1",
+    "sha256": "c07fea44387b3cf2a521ec388978b2c33cd4c36419483bbf7b7ea5d541bcf707",
+    "status": "CURRENT"
+   },
+   {
+    "artifact": "results/rvt_fd24/generation_budget_v2.json#timeout",
+    "concept": "residual V2 generation timeout",
+    "note": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+    "sha256": "b5928ce50b98180265812d623443bd823905ee161cea9ef29332e437f09142f5",
+    "status": "PENDING_OPERATIONAL_QUALIFICATION"
+   }
+  ],
+  "required_concepts": [
+   "scientific experiment protocol",
+   "train split contract",
+   "validation split contract",
+   "final-test split commitment",
+   "ET event-timing addendum",
+   "online topology scope",
+   "topology registry",
+   "ego-graph feature schema",
+   "model input/output schema V2",
+   "Phase-6 local controller",
+   "local safety projection",
+   "transition protocol runtime",
+   "Target V4 execution contract",
+   "recoverability replica/aggregation rule",
+   "authoritative pre-data headroom v6",
+   "Residual Expert V2 specification",
+   "residual label contract composite V2",
+   "RB15 residual producer binding",
+   "model V2 WORLD-frame repair",
+   "RB16 requalification",
+   "residual runtime composite",
+   "residual scientific row identity",
+   "residual candidate evaluation identity",
+   "execution attempt identity",
+   "generation disposition contract",
+   "residual supervision row schema V2",
+   "generation budget V2",
+   "residual job manifest V2",
+   "preflight contract"
+  ],
+  "required_node_count": 29,
+  "resolved_node_count": 37,
+  "status_counts": {
+   "CURRENT": 30,
+   "DIAGNOSTIC_ONLY": 1,
+   "HISTORICAL_IMMUTABLE": 2,
+   "PENDING_OPERATIONAL_QUALIFICATION": 2,
+   "SUPERSEDED_EVIDENCE": 2
+  }
+ },
+ "rb17_provenance_gap": {
+  "executable_semantic_mismatch_found_in_rb18": false,
+  "note": "RB18 executed the recoverability branch against the correct Target V4 contract; the defect was a missing citation, not a wrong contract",
+  "rb17_rewritten": false,
+  "rb17_root_sha256": "bba1aee0430bc540f20d010b923696b5b1c51d4bfb1d92d2fa21daf2e6242da8",
+  "rb17_status": "SUPERSEDED_EVIDENCE",
+  "repaired_by": "results/rvt_fd24/rb19_current_generation_provenance_v1.json",
+  "target_v4_cited_by_rb17": false
+ },
+ "rb19_final_semantic_isolation_audit_sha256": "7d8ac4c55ec46a6c46ceb1506b43eb2c699bd762ee01bd108076a88204dff813",
+ "recoverability_semantics": {
+  "evidence_artifact": "results/rvt_fd24/rb18_structural_generation_canary_v1.json",
+  "global_runtime_controller": false,
+  "historical_shortcut": false,
+  "ordinary_failure_is_a_valid_negative": true,
+  "path": [
+   "scientific decision state",
+   "candidate topology",
+   "snapshot",
+   "replica / matched streams",
+   "qualified candidate executor",
+   "transition lifecycle where changed topology",
+   "task execution",
+   "raw Target V4 predicates",
+   "Target V4 disposition",
+   "aggregate recoverability label"
+  ],
+  "proxy_classifier_label": false,
+  "raw_predicates_preserved_before_mapping": true,
+  "rb18_candidate_rollouts": 14,
+  "safety_infeasible_and_solver_failure_distinct": true,
+  "target_v4_taxonomy": [
+   "RECOVERABLE_POSITIVE",
+   "VALID_TASK_NEGATIVE",
+   "GENERATION_INVALID"
+  ],
+  "terminal_step_collision_only_label": false
+ },
+ "residual_optionality": {
+  "executable": true,
+  "h4_optional": true,
+  "official_generation_pending": true,
+  "post_hoc_change_permitted_to": [],
+  "predeclared_response_to_unacceptable_performance": "disable the optional residual branch; never redefine candidate set, horizon, utilities, frame or target",
+  "scientifically_specified": true
+ },
+ "residual_semantics": {
+  "candidate_count": 9,
+  "candidate_subset": false,
+  "candidates": [
+   [
+    -0.15,
+    -0.15
+   ],
+   [
+    -0.15,
+    0.0
+   ],
+   [
+    -0.15,
+    0.15
+   ],
+   [
+    0.0,
+    -0.15
+   ],
+   [
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.15
+   ],
+   [
+    0.15,
+    -0.15
+   ],
+   [
+    0.15,
+    0.0
+   ],
+   [
+    0.15,
+    0.15
+   ]
+  ],
+  "data_dependent_utility_normalization": false,
+  "hidden_fallback": false,
+  "path": [
+   "dense decision state",
+   "RobotLocalEgoGraph",
+   "mission_orientation_cos_sin",
+   "9 V2 candidate residuals",
+   "local base action",
+   "pre-safety injection",
+   "local safety",
+   "identical snapshots",
+   "matched counterfactuals",
+   "four V2 utilities",
+   "unchanged V1 selector",
+   "unchanged V1 target builder",
+   "WORLD residual target",
+   "generation disposition"
+  ],
+  "selector_sha256": "535c4e639d598bb75bc4822cdbbc320c48c69a7f86f8d5b96dec2dd5ace9a123",
+  "selector_unchanged": true,
+  "short_horizon_optimization": false,
+  "target_builder_sha256": "b8bd0ae34c1a659009efbe9943c4e30d3a0b187ea8d3524dfd28ae4083d51c9e",
+  "target_builder_unchanged": true,
+  "target_rotation": false
+ },
+ "schema_version": "rvt-rb19-final-semantic-isolation-audit/v1",
+ "source_commit": "c6ad5a344d92e7e73896b497c33268f9f80aefbd",
+ "split_isolation": {
+  "final_test_job_construction": "prohibited",
+  "permitted_layout_source_splits": [
+   "train",
+   "validation"
+  ],
+  "rb19_accessed_final_test": false,
+  "rb19_accessed_n24": false,
+  "train_validation_pooling": false,
+  "validation_namespace_separate": true
+ },
+ "stale_reference_audit": {
+  "checks": [
+   {
+    "blocked": true,
+    "evidence": [
+     "world_x_acceleration",
+     "world_y_acceleration"
+    ],
+    "stale": "model output frame = MISSION"
+   },
+   {
+    "blocked": true,
+    "evidence": "rvt-fd24-model/v2",
+    "stale": "historical model V1 residual semantics"
+   },
+   {
+    "blocked": true,
+    "evidence": "producer imports the frozen lattice only",
+    "stale": "old residual diagnostic candidate fixture as producer"
+   },
+   {
+    "blocked": true,
+    "evidence": 9,
+    "stale": "residual candidate count != 9"
+   },
+   {
+    "blocked": true,
+    "evidence": "BEFORE_LOCAL_SAFETY_PROJECTION",
+    "stale": "residual applied post-safety"
+   },
+   {
+    "blocked": true,
+    "evidence": "DISABLED",
+    "stale": "synthetic rotation augmentation enabled"
+   },
+   {
+    "blocked": true,
+    "evidence": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+    "stale": "residual job timeout = 1800 s authoritative"
+   },
+   {
+    "blocked": true,
+    "evidence": [
+     "residual_scientific_row_id",
+     "candidate_index",
+     "replica_index",
+     "matched_stream_identity_sha256"
+    ],
+    "stale": "residual job identity without candidate-evaluation identity"
+   },
+   {
+    "blocked": true,
+    "evidence": "present in the supervision row schema",
+    "stale": "missing mission_orientation_cos_sin"
+   },
+   {
+    "blocked": true,
+    "evidence": [
+     5,
+     2
+    ],
+    "stale": "KEEP in primary online topology scope"
+   },
+   {
+    "blocked": true,
+    "evidence": "AUTHORITATIVE_PRE_DATA_HEADROOM",
+    "stale": "pre-D12 / provisional headroom current"
+   },
+   {
+    "blocked": true,
+    "evidence": "distributed COMPLETE requires lifecycle status agreement",
+    "stale": "local dwell treated as distributed COMPLETE"
+   },
+   {
+    "blocked": true,
+    "evidence": "frozen readiness evaluator is bound",
+    "stale": "hardcoded SAFE readiness"
+   },
+   {
+    "blocked": true,
+    "evidence": "ROUND_LOCAL",
+    "stale": "persistent lifecycle message queue"
+   }
+  ],
+  "stale_current_references": []
+ },
+ "status": "COMPLETE",
+ "study_a_n24_seal": {
+  "prohibited_consumers": [
+   "training",
+   "early_stopping",
+   "hyperparameter_search",
+   "checkpoint_selection"
+  ],
+  "purpose": "zero_shot_size_evaluation_only",
+  "rb19_accesses": 0,
+  "requires_access_log": true,
+  "sealed_namespace_contents": [
+   "namespace_manifest.json"
+  ]
+ },
+ "study_b_distinction": {
+  "must_not_be_conflated": true,
+  "orchestration_rule": "future generation must not treat all N24 as sealed, nor all N24 as trainable; the study namespace decides",
+  "rb19_accessed_either": false,
+  "study_a_n24": "sealed zero-shot evaluation only; never trainable",
+  "study_b_n24": "a separate in-distribution all-N study whose N24 IS a training and validation size within its own namespace",
+  "study_b_namespace": "results/rvt_fd24/datasets/study_b_with_n24"
+ },
+ "target_v4": {
+  "contract_id": "rvt-target-v4-execution-contract/v1",
+  "cross_references": {
+   "headroom_v6.protocol_hashes.target_v4_execution_contract": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+   "rb18_canary.contract_root.target_v4_bound_additively_here": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "cross_references_agree": true,
+  "dispositions": [
+   "RECOVERABLE_POSITIVE",
+   "VALID_TASK_NEGATIVE",
+   "GENERATION_INVALID"
+  ],
+  "evaluation_precedence": [
+   "generation validity",
+   "collision",
+   "irreversible progress",
+   "deadlock",
+   "protocol and commitment",
+   "safety and transition",
+   "Metric V3 dwell",
+   "goal"
+  ],
+  "exception_policy": "every exception becomes typed EXECUTOR_EXCEPTION; never an implicit label",
+  "generation_invalid_rule": "initialization, geometry, schedule, numerical, schema, or executor validity failure",
+  "inferred_from_code": false,
+  "phase8_protocol_hash": "0bb68dd56ef0837f83c44dcf5281498f8c0ea934b00bbb9b3d3f298264d32147",
+  "positive_rule": "GOAL_COMPLETE and all ten predicates true",
+  "raw_file_digest": "a3abf73330314fdf332b0e9d69657dd1e9e1cae8a6ba53c83320186d8a2eb23c",
+  "raw_predicates": [
+   "candidate_commitment_valid",
+   "collision_free_complete_horizon",
+   "downstream_goal_complete",
+   "no_irreversible_progress_loss",
+   "no_persistent_deadlock",
+   "numerically_valid",
+   "protocol_resolved",
+   "safety_projection_resolved",
+   "target_metric_v3_dwell_complete",
+   "transition_execution_valid"
+  ],
+  "replica_aggregation": "all_success",
+  "replica_rule": {
+   "F8": 3,
+   "F9": 3,
+   "other": 1
+  },
+  "self_consistent": true,
+  "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "source_file": "results/rvt_fd24/target_v4_execution_contract_v1.json",
+  "termination_causes": [
+   "GOAL_COMPLETE",
+   "HORIZON_COMPLETE",
+   "COLLISION",
+   "PERSISTENT_DEADLOCK",
+   "PROTOCOL_ABORT",
+   "PROTOCOL_TIMEOUT",
+   "TRANSITION_ABORT",
+   "TRANSITION_TIMEOUT",
+   "SAFETY_INFEASIBLE",
+   "SAFETY_SOLVER_FAILURE",
+   "IRREVERSIBLE_PROGRESS_LOSS",
+   "WORLD_BOUNDARY_EXIT",
+   "COMMUNICATION_ASSUMPTION_VIOLATION",
+   "INITIALIZATION_INVALID",
+   "GEOMETRY_INVALID",
+   "NUMERICAL_INVALID",
+   "SCHEDULE_INVALID",
+   "EXECUTOR_EXCEPTION"
+  ],
+  "valid_negative_rule": "generation valid and positive rule false"
+ },
+ "topology_scope": {
+  "compact": 5,
+  "fixed_only_topology_ids": [
+   0
+  ],
+  "keep": 0,
+  "keep_is_primary_online": false,
+  "keep_status": "fixed-only / historical diagnostic",
+  "line": 2,
+  "primary_initial_topology_id": 5,
+  "primary_online_candidates": [
+   5,
+   2
+  ]
+ },
+ "train_validation_roles": {
+  "class_weighting": "NOT_SELECTED",
+  "frozen_reference": "docs/RVT_FD24_LOSS_CONTRACT.md, RVT_CHECKPOINT_SELECTION_CONTRACT.md",
+  "normalization_data_dependent": false,
+  "sampling_weights_chosen": false,
+  "silent_train_validation_pooling": false,
+  "threshold_selection_done": false,
+  "validation_labels_inspected_for_training_statistics": false,
+  "validation_permitted_uses": [
+   "hyperparameter selection under the frozen search",
+   "checkpoint selection under the frozen rules",
+   "protocol-permitted diagnostics"
+  ]
+ }
+}

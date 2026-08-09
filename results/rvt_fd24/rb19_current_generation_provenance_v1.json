@@ -1,0 +1,322 @@
+{
+ "audit": {
+  "artifact": "results/rvt_fd24/rb19_final_semantic_isolation_audit_v1.json",
+  "sha256": "7d8ac4c55ec46a6c46ceb1506b43eb2c699bd762ee01bd108076a88204dff813"
+ },
+ "authoritative_frame": "WORLD",
+ "closure": [
+  {
+   "artifact": "results/rvt_fd24/executable_scientific_protocol_v1.json",
+   "concept": "scientific experiment protocol",
+   "note": "",
+   "sha256": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/splits/train_layouts.json",
+   "concept": "train split contract",
+   "note": "",
+   "sha256": "673d014f006b5a4cd35dda13dd3fa75bb306d1d6aacdfd13ea14c782d5250b8a",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/splits/validation_layouts.json",
+   "concept": "validation split contract",
+   "note": "",
+   "sha256": "b73879c7745cc1c0c56ea169ca36a5c9b913273e128e9730d96b86f7eda6d2e2",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/experiment_protocol_manifest.json#split_manifest_sha256.final_test",
+   "concept": "final-test split commitment",
+   "note": "commitment hash only; sealed geometry is never opened",
+   "sha256": "e225a3114dfb2d74e8a691f24484898de1481a6f8f243bcc3eabbfba5aff8d0f",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/source_event_timing_addendum_v1.json",
+   "concept": "ET event-timing addendum",
+   "note": "",
+   "sha256": "fba87e4374f4a7b8c97e5435e148345ad5611223f663e6050967efe9aa0989c5",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/online_topology_scope.json",
+   "concept": "online topology scope",
+   "note": "",
+   "sha256": "6035dd5748e8a7f7dd44576cd80e3f5167017a3fee24a1e2c9877241f5898b6a",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "rvt_swarm/topology_registry.py",
+   "concept": "topology registry",
+   "note": "",
+   "sha256": "f8528d24561abea52e2cd50b236dc69cc6c25b402498fe13d0ace05e1317bfe5",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "rvt_swarm/decentralized/ego_graph_v2.py",
+   "concept": "ego-graph feature schema",
+   "note": "schema rvt-ego-graph/v2; file 4cb4fe59b5e1408de9a8d2e21581ad406e2cbd778f9bfb2e515a6268e87059e4",
+   "sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "rvt_swarm/fd24/model.py",
+   "concept": "model input/output schema V2",
+   "note": "rvt-fd24-model/v2 / rvt-fd24-model-input/v2",
+   "sha256": "d2a92eea8984478e038d875775bd1dfb3e04db2745b60d1c82cc064d53ad2bef",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "rvt_swarm/decentralized/robot_local_controller.py",
+   "concept": "Phase-6 local controller",
+   "note": "",
+   "sha256": "1cfe364d706f06fe4602c5a3033e89051b3ca808443d4afd906c7e1319564a9f",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "rvt_swarm/decentralized/local_safety_projection.py",
+   "concept": "local safety projection",
+   "note": "",
+   "sha256": "16e06727f9052198070c74814fd1822d0450c25a4d5d456f48fc33362e46c26e",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "rvt_swarm/decentralized/transition_protocol.py",
+   "concept": "transition protocol runtime",
+   "note": "",
+   "sha256": "54f015e2c9a4da68d93c3e8e998f847b662fcfc8d7db4e75900b1e17ba6b1e01",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/target_v4_execution_contract_v1.json",
+   "concept": "Target V4 execution contract",
+   "note": "missing from the RB17 root; bound here",
+   "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json#scenario_family_contract",
+   "concept": "recoverability replica/aggregation rule",
+   "note": "frozen rule carried forward unchanged by budget V2",
+   "sha256": "b8b24a03c136faf8fbfa17fbf99444bb14c356a2f542b13ebf21e20770c5cef1",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/headroom_requalification_v6.json",
+   "concept": "authoritative pre-data headroom v6",
+   "note": "",
+   "sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/headroom_v6_detached_reproduction_v1.json",
+   "concept": "headroom detached reproduction",
+   "note": "",
+   "sha256": "1f08ba77315e6fdbabfeac8f9350e6f5cd64468c431ecc9fba19747fcd26af32",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/headroom_authority_record_v1.json",
+   "concept": "headroom authority record",
+   "note": "",
+   "sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_expert_spec_v2.json",
+   "concept": "Residual Expert V2 specification",
+   "note": "",
+   "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_label_contract_composite_v2.json",
+   "concept": "residual label contract composite V2",
+   "note": "",
+   "sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/rb15_residual_expert_binding_v2.json",
+   "concept": "RB15 residual producer binding",
+   "note": "",
+   "sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/model_residual_output_frame_v2.json",
+   "concept": "model V2 WORLD-frame repair",
+   "note": "",
+   "sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/rb16_world_output_requalification_v1.json",
+   "concept": "RB16 requalification",
+   "note": "",
+   "sha256": "10c4aebe41a98db7674f7ee617db8a209a148bdfe18ca76bd04cde59660ab387",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/rb16_native_action_frame_v1.json",
+   "concept": "RB16 frame-conflict audit",
+   "note": "the failed audit, preserved as evidence",
+   "sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c",
+   "status": "SUPERSEDED_EVIDENCE"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_runtime_composite_v1.json",
+   "concept": "residual runtime composite",
+   "note": "",
+   "sha256": "24c65a41855a2ffe9345755f0630dfe707e9446065d7cef8516f8f1e89cb19ff",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_scientific_row_identity_v2.json",
+   "concept": "residual scientific row identity",
+   "note": "",
+   "sha256": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_candidate_evaluation_identity_v2.json",
+   "concept": "residual candidate evaluation identity",
+   "note": "",
+   "sha256": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_execution_attempt_identity_v1.json",
+   "concept": "execution attempt identity",
+   "note": "",
+   "sha256": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_generation_disposition_contract_v1.json",
+   "concept": "generation disposition contract",
+   "note": "",
+   "sha256": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_supervision_row_schema_v2.json",
+   "concept": "residual supervision row schema V2",
+   "note": "",
+   "sha256": "ecf9ebbd0f8f350df0a2daa44f0d3096874b20b5d7952734b43377abde423a30",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/rb17_generation_contract_composite_v1.json",
+   "concept": "RB17 generation-contract composite",
+   "note": "incomplete: does not cite Target V4; superseded by the RB19 root",
+   "sha256": "bba1aee0430bc540f20d010b923696b5b1c51d4bfb1d92d2fa21daf2e6242da8",
+   "status": "SUPERSEDED_EVIDENCE"
+  },
+  {
+   "artifact": "results/rvt_fd24/rb18_structural_generation_canary_v1.json",
+   "concept": "RB18 structural canary",
+   "note": "",
+   "sha256": "0291cb52e11e570f48272d76b98d32966513fc8f840a6e47e718076bf3187e3c",
+   "status": "DIAGNOSTIC_ONLY"
+  },
+  {
+   "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json",
+   "concept": "historical generation budget V1",
+   "note": "",
+   "sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e",
+   "status": "HISTORICAL_IMMUTABLE"
+  },
+  {
+   "artifact": "results/rvt_fd24/generation_budget_v2.json",
+   "concept": "generation budget V2",
+   "note": "",
+   "sha256": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/datasets/phase9_job_manifest.json",
+   "concept": "historical job manifest",
+   "note": "",
+   "sha256": "9d094d7dca34e2daf8edc05c018d0372d7c4d2219a710032a6b066be494ea49f",
+   "status": "HISTORICAL_IMMUTABLE"
+  },
+  {
+   "artifact": "results/rvt_fd24/residual_job_manifest_v2.json",
+   "concept": "residual job manifest V2",
+   "note": "official execution NOT_AUTHORIZED_PENDING_RB18_RB21",
+   "sha256": "878a81c9a83fa0a390ac8c5f508baeb53b4964398575624066c5d1fb72fff10b",
+   "status": "PENDING_OPERATIONAL_QUALIFICATION"
+  },
+  {
+   "artifact": "rvt_swarm/phase9/preflight.py",
+   "concept": "preflight contract",
+   "note": "rvt-phase9-preflight/v1",
+   "sha256": "c07fea44387b3cf2a521ec388978b2c33cd4c36419483bbf7b7ea5d541bcf707",
+   "status": "CURRENT"
+  },
+  {
+   "artifact": "results/rvt_fd24/generation_budget_v2.json#timeout",
+   "concept": "residual V2 generation timeout",
+   "note": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+   "sha256": "b5928ce50b98180265812d623443bd823905ee161cea9ef29332e437f09142f5",
+   "status": "PENDING_OPERATIONAL_QUALIFICATION"
+  }
+ ],
+ "closure_summary": {
+  "ambiguous_current_contracts": [],
+  "current_nodes_pointing_only_to_superseded": [],
+  "missing_required_contracts": [],
+  "required_node_count": 29,
+  "resolved_node_count": 37,
+  "status_counts": {
+   "CURRENT": 30,
+   "DIAGNOSTIC_ONLY": 1,
+   "HISTORICAL_IMMUTABLE": 2,
+   "PENDING_OPERATIONAL_QUALIFICATION": 2,
+   "SUPERSEDED_EVIDENCE": 2
+  }
+ },
+ "generation_authorized": false,
+ "next_phase": "RB-20 clean detached reproducibility, then RB-21 performance qualification, both on explicit owner instruction",
+ "official_scientific_execution_status": "NOT_AUTHORIZED_PENDING_RB20_RB21",
+ "operational_pending": {
+  "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+  "chunk_size": "UNFROZEN",
+  "official_execution_authorized": false,
+  "parallel_efficiency": "UNMEASURED_PENDING_RB21",
+  "scientific_semantics_ambiguous": false,
+  "worker_count": "UNFROZEN"
+ },
+ "primary_online_topologies": [
+  5,
+  2
+ ],
+ "purpose": "the single current generation-provenance root. RB20 and RB21 consume this. It resolves every current scientific generation contract, including the Target V4 execution contract the RB17 root omitted.",
+ "rb19_current_generation_provenance_sha256": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+ "schema_version": "rvt-rb19-current-generation-provenance/v1",
+ "sealed_domains": {
+  "accesses_in_rb19": 0,
+  "final_test": "SEALED",
+  "study_a_n24": "SEALED_ZERO_SHOT_EVALUATION_ONLY",
+  "study_b_n24": "SEPARATE_STUDY_NAMESPACE_NOT_ACCESSED"
+ },
+ "source_commit": "c6ad5a344d92e7e73896b497c33268f9f80aefbd",
+ "status": "CURRENT",
+ "supersedes": {
+  "artifact": "results/rvt_fd24/rb17_generation_contract_composite_v1.json",
+  "edited_in_place": false,
+  "reason": "resolves 12 of 13 required contracts but never cites the Target V4 execution contract, which governs the recoverability branch",
+  "retained_as_historical_evidence": true,
+  "sha256": "bba1aee0430bc540f20d010b923696b5b1c51d4bfb1d92d2fa21daf2e6242da8",
+  "status": "SUPERSEDED_EVIDENCE"
+ },
+ "target_v4": {
+  "artifact": "results/rvt_fd24/target_v4_execution_contract_v1.json",
+  "contract_id": "rvt-target-v4-execution-contract/v1",
+  "explicitly_cited": true,
+  "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+ }
+}

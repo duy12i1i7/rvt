@@ -253,6 +253,143 @@ def residual_v2_contract_checks(root: Path) -> list:
     return checks
 
 
+def rb19_provenance_checks(root: Path) -> list:
+    """RB19-28 -- the current provenance root and the sealed-domain semantics.
+
+    These reject a stale *root*, not just a stale contract: a root that omits
+    Target V4, cites the failed RB16 audit as current, exposes KEEP online,
+    unseals Study A N24 or the final-test split, or declares generation
+    authorized before RB20/RB21.
+    """
+    from ..phase9c_rb.generation_contract import EMITS_TARGET_ROW, NO_ELIGIBLE_ACTION
+
+    checks: list = []
+    root_path = root / "results/rvt_fd24/rb19_current_generation_provenance_v1.json"
+    if not root_path.exists():
+        checks.append(_check("rb19_current_root_present", False,
+                             str(root_path), "missing"))
+        return checks
+    document = json.loads(root_path.read_text(encoding="ascii"))
+    checks.append(_check(
+        "rb19_current_root_hash",
+        verify_canonical_hash(document, "rb19_current_generation_provenance_sha256"),
+        True, verify_canonical_hash(
+            document, "rb19_current_generation_provenance_sha256")))
+
+    target_contract = json.loads(
+        (root / "results/rvt_fd24/target_v4_execution_contract_v1.json")
+        .read_text(encoding="ascii"))
+    cited = document.get("target_v4", {})
+    checks.append(_check(
+        "rb19_target_v4_provenance",
+        cited.get("explicitly_cited") is True
+        and cited.get("sha256")
+        == target_contract["target_v4_execution_contract_sha256"],
+        target_contract["target_v4_execution_contract_sha256"], cited.get("sha256")))
+
+    closure = document.get("closure", [])
+    by_concept: Dict[str, list] = {}
+    for entry in closure:
+        by_concept.setdefault(entry["concept"], []).append(entry)
+    summary = document.get("closure_summary", {})
+    checks.append(_check(
+        "rb19_provenance_closure_complete",
+        summary.get("missing_required_contracts") == []
+        and summary.get("ambiguous_current_contracts") == []
+        and summary.get("current_nodes_pointing_only_to_superseded") == [],
+        {"missing": [], "ambiguous": [], "superseded_only": []},
+        {k: summary.get(k) for k in ("missing_required_contracts",
+                                     "ambiguous_current_contracts",
+                                     "current_nodes_pointing_only_to_superseded")}))
+
+    def status_of(concept):
+        entries = by_concept.get(concept, [])
+        return entries[0]["status"] if entries else None
+
+    checks.append(_check(
+        "rb19_repaired_rb16_is_current",
+        status_of("RB16 requalification") == "CURRENT"
+        and status_of("RB16 frame-conflict audit") == "SUPERSEDED_EVIDENCE",
+        {"requalification": "CURRENT", "frame_conflict_audit": "SUPERSEDED_EVIDENCE"},
+        {"requalification": status_of("RB16 requalification"),
+         "frame_conflict_audit": status_of("RB16 frame-conflict audit")}))
+
+    scope = json.loads(
+        (root / "results/rvt_fd24/online_topology_scope.json").read_text(
+            encoding="ascii"))
+    keep_ids = set(scope["fixed_only_topology_ids"])
+    checks.append(_check(
+        "rb19_keep_not_online",
+        not (set(scope["active_candidate_topology_ids"]) & keep_ids)
+        and document.get("primary_online_topologies")
+        == scope["active_candidate_topology_ids"],
+        scope["active_candidate_topology_ids"],
+        document.get("primary_online_topologies")))
+
+    sealed = document.get("sealed_domains", {})
+    n24_dir = root / "results/rvt_fd24/datasets/study_a_n24_eval_sealed"
+    checks.append(_check(
+        "rb19_study_a_n24_sealed",
+        sealed.get("study_a_n24") == "SEALED_ZERO_SHOT_EVALUATION_ONLY"
+        and sealed.get("accesses_in_rb19") == 0
+        and sorted(path.name for path in n24_dir.iterdir())
+        == ["namespace_manifest.json"],
+        "sealed with only its manifest", sealed.get("study_a_n24")))
+
+    protocol = json.loads(
+        (root / "results/rvt_fd24/executable_scientific_protocol_v1.json")
+        .read_text(encoding="ascii"))
+    final_dir = root / "results/rvt_fd24/layout_execution_specifications/final_test"
+    checks.append(_check(
+        "rb19_final_test_sealed",
+        sealed.get("final_test") == "SEALED"
+        and protocol["final_test_access_policy"]["runtime_access_count"] == 0
+        and protocol["final_test_access_policy"]["geometry_compilation"] == "prohibited"
+        and not final_dir.exists(),
+        "sealed", {"declared": sealed.get("final_test"),
+                   "geometry_present": final_dir.exists()}))
+
+    checks.append(_check(
+        "rb19_generation_not_authorized",
+        document.get("generation_authorized") is False
+        and document.get("official_scientific_execution_status", "").startswith(
+            "NOT_AUTHORIZED"),
+        "NOT_AUTHORIZED_PENDING_RB20_RB21",
+        document.get("official_scientific_execution_status")))
+
+    audit_reference = document.get("audit", {})
+    audit_path = root / "results/rvt_fd24/rb19_final_semantic_isolation_audit_v1.json"
+    audit_document = (json.loads(audit_path.read_text(encoding="ascii"))
+                      if audit_path.exists() else {})
+    no_eligible = audit_document.get("no_eligible_audit", {})
+    checks.append(_check(
+        "rb19_no_eligible_has_no_fallback",
+        EMITS_TARGET_ROW[NO_ELIGIBLE_ACTION] is False
+        and no_eligible.get("creates_zero_residual") is False
+        and no_eligible.get("creates_clipped_residual") is False
+        and no_eligible.get("creates_fallback_candidate") is False
+        and no_eligible.get("emits_target_rows") is False,
+        "no fallback of any kind", no_eligible))
+
+    checks.append(_check(
+        "rb19_audit_reference",
+        audit_path.exists()
+        and audit_reference.get("sha256")
+        == audit_document.get("rb19_final_semantic_isolation_audit_sha256")
+        and verify_canonical_hash(
+            audit_document, "rb19_final_semantic_isolation_audit_sha256"),
+        True, audit_reference.get("sha256")))
+
+    checks.append(_check(
+        "rb19_no_stale_current_semantics",
+        audit_document.get("stale_reference_audit", {}).get(
+            "stale_current_references") == [],
+        [], audit_document.get("stale_reference_audit", {}).get(
+            "stale_current_references")))
+
+    return checks
+
+
 def build_preflight_audit(root: Path) -> Dict[str, object]:
     """Verify Phase 8 without opening the sealed final-test split manifest."""
     protocol_path = root / "results/rvt_fd24/experiment_protocol_manifest.json"
@@ -375,6 +512,7 @@ def build_preflight_audit(root: Path) -> Dict[str, object]:
         checks.append(_check(f"frozen_document:{name}", observed == expected, expected, observed))
 
     checks.extend(residual_v2_contract_checks(root))
+    checks.extend(rb19_provenance_checks(root))
 
     final_access = _audit_runtime_access(
         root / "results/rvt_fd24/final_test_access_audit.jsonl"
