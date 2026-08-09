@@ -106,6 +106,61 @@ def _size_distributions(rows: Sequence[Mapping[str, Any]]) -> Mapping[str, Any]:
     }
 
 
+def _official_size_distributions(rb18: Mapping[str, Any]) -> Mapping[str, Any]:
+    recoverability_records = [
+        len(canonical_json_bytes(replica))
+        for case in rb18["recoverability"] for replica in case["replica_records"]
+    ]
+    recoverability_sidecars = [
+        len(canonical_json_bytes({
+            "case_id": case["case_id"],
+            "decision_snapshot_sha256": case["decision_snapshot_sha256"],
+            "candidate_rollouts": case["candidate_rollouts"],
+            "aggregate_labels": case["aggregate_labels"],
+            "replica_records": case["replica_records"],
+        }))
+        for case in rb18["recoverability"]
+    ]
+    labeled = [row for row in rb18["residual"] if row["disposition"] == "LABELED"]
+    no_eligible = [row for row in rb18["residual"]
+                   if row["disposition"] == "NO_ELIGIBLE_ACTION"]
+    residual_records = [len(canonical_json_bytes(row)) for row in labeled]
+    residual_records_without_sidecar = [
+        len(canonical_json_bytes({key: value for key, value in row.items()
+                                  if key != "candidate_sidecar"}))
+        for row in labeled
+    ]
+    residual_sidecars = [
+        len(canonical_json_bytes(row["candidate_sidecar"])) for row in labeled
+    ]
+    no_eligible_records = [len(canonical_json_bytes(row)) for row in no_eligible]
+    index_template = {
+        "scientific_row_id": "u" * 64,
+        "record_sha256": "r" * 64,
+        "sidecar_sha256": "s" * 64,
+        "complete": True,
+    }
+    shard_manifest = {
+        "schema_version": "rvt-rb21-diagnostic-shard-index/v1",
+        "unit_ids": ["u" * 64 for _ in range(
+            len(recoverability_records) + len(rb18["residual"]))],
+        "complete": True,
+    }
+    return {
+        "source": "rb18_structural_generation_canary_v1.json_ALL_AVAILABLE_RECORDS",
+        "recoverability_scientific_record_bytes": distribution(recoverability_records),
+        "recoverability_replica_audit_sidecar_bytes": distribution(
+            recoverability_sidecars),
+        "residual_labeled_row_bytes": distribution(residual_records),
+        "residual_labeled_row_excluding_embedded_sidecar_bytes": distribution(
+            residual_records_without_sidecar),
+        "residual_nine_candidate_sidecar_bytes": distribution(residual_sidecars),
+        "no_eligible_audit_record_bytes": distribution(no_eligible_records),
+        "index_record_bytes": len(canonical_json_bytes(index_template)),
+        "representative_shard_manifest_bytes": len(canonical_json_bytes(shard_manifest)),
+    }
+
+
 def _writer_benchmark(root: Path, record: Mapping[str, Any], sidecar: Mapping[str, Any],
                       workers: int, repetitions: int) -> Mapping[str, Any]:
     staging = root / f"writer-w{workers}"
@@ -214,6 +269,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--residual-baseline", type=Path, required=True)
     parser.add_argument("--recoverability-baseline", type=Path, required=True)
+    parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--selected-workers", type=int, required=True)
     parser.add_argument("--writer-repetitions", type=int, default=256)
@@ -224,6 +280,10 @@ def main() -> None:
     recoverability = json.loads(args.recoverability_baseline.read_text(encoding="ascii"))
     rows = residual["scientific_semantic_projection"] + recoverability[
         "scientific_semantic_projection"]
+    rb18 = json.loads(
+        (args.root / "results/rvt_fd24/rb18_structural_generation_canary_v1.json")
+        .read_text(encoding="ascii")
+    )
     labeled = next(row for row in rows if row["unit_kind"] == "RESIDUAL"
                    and row["disposition"] == "LABELED")
     record, sidecar = _split_record(labeled)
@@ -246,7 +306,10 @@ def main() -> None:
             "residual": residual["rb21_target_benchmark_run_sha256"],
             "recoverability": recoverability["rb21_target_benchmark_run_sha256"],
         },
-        "canonical_size_distributions": _size_distributions(rows),
+        "canonical_size_distributions": {
+            "official_qualified_serialization": _official_size_distributions(rb18),
+            "target_benchmark_atomic_unit_envelopes": _size_distributions(rows),
+        },
         "target_storage": {
             "path": str(args.output.parent.resolve()),
             "total_bytes": disk.total,
