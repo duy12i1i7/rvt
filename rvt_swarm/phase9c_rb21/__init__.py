@@ -11,6 +11,7 @@ from .rb21_manifest import (
     TARGET_V4_HASH,
     build_benchmark_manifest,
     build_target_benchmark_manifest,
+    build_target_benchmark_manifest_v2,
     capture_environment,
 )
 from .rb21_units import (
@@ -29,6 +30,7 @@ __all__ = [
     "ThreadSettings",
     "build_benchmark_manifest",
     "build_target_benchmark_manifest",
+    "build_target_benchmark_manifest_v2",
     "capture_environment",
     "scientific_semantic_digest",
 ]

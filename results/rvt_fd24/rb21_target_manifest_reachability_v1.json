@@ -1,0 +1,275 @@
+{
+  "all_original_steps_reachable": false,
+  "all_steps_have_reachable_replacement": false,
+  "counterfactuals_executed": 0,
+  "expert_decisions_executed": 0,
+  "final_test_accesses": 0,
+  "provenance_class": "OPERATIONAL_MANIFEST_PREFLIGHT_ONLY",
+  "rb21_target_manifest_reachability_sha256": "a06724f05beac8c3833b1ed7c46089a67aa63c325f8544f1dbef5763c09a63d2",
+  "rows": [
+    {
+      "case_id": "rb21-f1-n5-train",
+      "observations": [
+        {
+          "control_step_observed": 20,
+          "reachable": true,
+          "step": 20,
+          "termination": null
+        }
+      ],
+      "original_step": 20,
+      "selected_reachable_step": 20,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f1-n5-train",
+      "observations": [
+        {
+          "control_step_observed": 60,
+          "reachable": true,
+          "step": 60,
+          "termination": null
+        }
+      ],
+      "original_step": 60,
+      "selected_reachable_step": 60,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f1-n16-validation",
+      "observations": [
+        {
+          "control_step_observed": 20,
+          "reachable": true,
+          "step": 20,
+          "termination": null
+        }
+      ],
+      "original_step": 20,
+      "selected_reachable_step": 20,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f1-n16-validation",
+      "observations": [
+        {
+          "control_step_observed": 60,
+          "reachable": true,
+          "step": 60,
+          "termination": null
+        }
+      ],
+      "original_step": 60,
+      "selected_reachable_step": 60,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f5-n8-train",
+      "observations": [
+        {
+          "control_step_observed": 40,
+          "reachable": true,
+          "step": 40,
+          "termination": null
+        }
+      ],
+      "original_step": 40,
+      "selected_reachable_step": 40,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f5-n8-train",
+      "observations": [
+        {
+          "control_step_observed": 60,
+          "reachable": true,
+          "step": 60,
+          "termination": null
+        }
+      ],
+      "original_step": 60,
+      "selected_reachable_step": 60,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f5-n16-validation",
+      "observations": [
+        {
+          "control_step_observed": 40,
+          "reachable": true,
+          "step": 40,
+          "termination": null
+        }
+      ],
+      "original_step": 40,
+      "selected_reachable_step": 40,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f5-n16-validation",
+      "observations": [
+        {
+          "control_step_observed": 60,
+          "reachable": true,
+          "step": 60,
+          "termination": null
+        }
+      ],
+      "original_step": 60,
+      "selected_reachable_step": 60,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f8-n5-validation",
+      "observations": [
+        {
+          "control_step_observed": 20,
+          "reachable": true,
+          "step": 20,
+          "termination": null
+        }
+      ],
+      "original_step": 20,
+      "selected_reachable_step": 20,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f8-n5-validation",
+      "observations": [
+        {
+          "control_step_observed": 40,
+          "reachable": true,
+          "step": 40,
+          "termination": null
+        }
+      ],
+      "original_step": 40,
+      "selected_reachable_step": 40,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f8-n16-train",
+      "observations": [
+        {
+          "control_step_observed": 20,
+          "reachable": true,
+          "step": 20,
+          "termination": null
+        }
+      ],
+      "original_step": 20,
+      "selected_reachable_step": 20,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f8-n16-train",
+      "observations": [
+        {
+          "control_step_observed": 40,
+          "reachable": true,
+          "step": 40,
+          "termination": null
+        }
+      ],
+      "original_step": 40,
+      "selected_reachable_step": 40,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f9-n12-train",
+      "observations": [
+        {
+          "control_step_observed": 25,
+          "reachable": true,
+          "step": 25,
+          "termination": null
+        }
+      ],
+      "original_step": 25,
+      "selected_reachable_step": 25,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f9-n12-train",
+      "observations": [
+        {
+          "control_step_observed": 60,
+          "reachable": true,
+          "step": 60,
+          "termination": null
+        }
+      ],
+      "original_step": 60,
+      "selected_reachable_step": 60,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f9-n16-validation",
+      "observations": [
+        {
+          "control_step_observed": 25,
+          "reachable": true,
+          "step": 25,
+          "termination": null
+        }
+      ],
+      "original_step": 25,
+      "selected_reachable_step": 25,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    },
+    {
+      "case_id": "rb21-f9-n16-validation",
+      "observations": [
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 60,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 60"
+        },
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 55,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 55"
+        },
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 50,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 50"
+        },
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 45,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 45"
+        },
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 40,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 40"
+        },
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 35,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 35"
+        },
+        {
+          "control_step_observed": null,
+          "reachable": false,
+          "step": 30,
+          "termination": "rb21-f9-n16-validation terminated before predeclared step 30"
+        }
+      ],
+      "original_step": 60,
+      "selected_reachable_step": null,
+      "selection_rule": "HIGHEST_REACHABLE_FIVE_STEP_BACKOFF_ABOVE_PREVIOUS_STEP"
+    }
+  ],
+  "schema_version": "rvt-rb21-target-manifest-reachability/v1",
+  "source_manifest": "c952bd3a5f871a511b228e9ddc9d3b36185fbba610cec9b02fbb8e379a1765b6",
+  "study_a_n24_accesses": 0,
+  "target_rows_emitted": 0
+}

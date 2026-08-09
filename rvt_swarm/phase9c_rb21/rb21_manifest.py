@@ -32,6 +32,7 @@ RB21P_QUALIFIED_IMAGE = (
 
 BENCHMARK_SCHEMA_VERSION = "rvt-rb21-benchmark-manifest/v1"
 TARGET_BENCHMARK_SCHEMA_VERSION = "rvt-rb21-target-benchmark-manifest/v1"
+TARGET_BENCHMARK_V2_SCHEMA_VERSION = "rvt-rb21-target-benchmark-manifest/v2"
 ENVIRONMENT_SCHEMA_VERSION = "rvt-rb21-target-environment-qualification/v1"
 
 
@@ -332,6 +333,88 @@ def build_target_benchmark_manifest() -> Dict[str, Any]:
     }
     document = json.loads(json.dumps(document, allow_nan=False, sort_keys=True))
     return attach_canonical_hash(document, "rb21_target_benchmark_manifest_sha256")
+
+
+def build_target_benchmark_manifest_v2(
+        reachability: Mapping[str, Any]) -> Dict[str, Any]:
+    """Remove only decision states proven nonexistent by target preflight."""
+    v1 = build_target_benchmark_manifest()
+    if reachability.get("source_manifest") != v1[
+            "rb21_target_benchmark_manifest_sha256"]:
+        raise ValueError("reachability evidence does not bind the frozen v1 manifest")
+    if reachability.get("counterfactuals_executed") != 0:
+        raise ValueError("reachability evidence executed scientific counterfactuals")
+
+    selected_by_case: Dict[str, List[int]] = {}
+    rejected = []
+    for row in reachability["rows"]:
+        case_id = str(row["case_id"])
+        selected = row["selected_reachable_step"]
+        if selected is None:
+            rejected.append({
+                "case_id": case_id,
+                "decision_step": int(row["original_step"]),
+                "reason": "PREDECLARED_DECISION_STATE_DOES_NOT_EXIST",
+            })
+            continue
+        selected_by_case.setdefault(case_id, []).append(int(selected))
+
+    cases = []
+    for item in v1["cases"]:
+        selected_steps = tuple(selected_by_case.get(item["case_id"], ()))
+        if not selected_steps:
+            raise ValueError(f"reachability removed every state for {item['case_id']}")
+        cases.append(DiagnosticCase(
+            case_id=item["case_id"], split=item["split"], layout_id=item["layout_id"],
+            family=item["family"], team_size=int(item["team_size"]),
+            source_policy=item["source_policy"], seeds=dict(item["seeds"]),
+            decision_steps=selected_steps,
+            robot_ids=tuple(int(value) for value in item["robot_ids"]),
+            structural_roles=tuple(item["structural_roles"]),
+        ))
+    residual = [
+        ResidualAtomicUnit(case, step, robot).as_dict()
+        for case in cases for step in case.decision_steps for robot in case.robot_ids
+    ]
+    recoverability = [
+        RecoverabilityAtomicUnit(
+            case, step, topology, tuple(range(replica_count_for_family(case.family))))
+        .as_dict()
+        for case in cases for step in case.decision_steps for topology in (2, 5)
+    ]
+
+    document = {key: value for key, value in v1.items()
+                if key != "rb21_target_benchmark_manifest_sha256"}
+    document.update({
+        "schema_version": TARGET_BENCHMARK_V2_SCHEMA_VERSION,
+        "supersedes_manifest": v1["rb21_target_benchmark_manifest_sha256"],
+        "v1_rejection": {
+            "classification": "OPERATIONAL_WORKLOAD_REACHABILITY_DEFECT",
+            "successful_benchmark_artifact_emitted": False,
+            "selection_used_performance_measurements": False,
+            "rejected_decision_states": rejected,
+            "reachability_evidence": reachability[
+                "rb21_target_manifest_reachability_sha256"],
+        },
+        "cases": [asdict(case) for case in cases],
+        "residual_atomic_units": residual,
+        "recoverability_atomic_units": recoverability,
+        "sample_counts": {
+            "residual_atomic_units": len(residual),
+            "residual_candidate_evaluations": len(residual) * 9,
+            "recoverability_atomic_units": len(recoverability),
+            "recoverability_replica_rollouts": sum(
+                len(unit["replica_indices"]) for unit in recoverability),
+            "p99_reporting_supported": False,
+            "reported_quantiles": ["median", "p90", "p95", "empirical_maximum"],
+        },
+    })
+    document["freeze_state"].update({
+        "frozen_before_successful_target_timing": True,
+        "v2_selection_basis": "DECISION_STATE_REACHABILITY_ONLY",
+    })
+    document = json.loads(json.dumps(document, allow_nan=False, sort_keys=True))
+    return attach_canonical_hash(document, "rb21_target_benchmark_manifest_v2_sha256")
 
 
 def write_json(path: Path, document: Mapping[str, Any]) -> None:

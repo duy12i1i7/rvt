@@ -9,6 +9,7 @@ from rvt_swarm.phase8.common import canonical_json_bytes
 from rvt_swarm.phase9c_rb21.rb21_manifest import (
     RB21P_QUALIFIED_IMAGE,
     build_target_benchmark_manifest,
+    build_target_benchmark_manifest_v2,
 )
 from rvt_swarm.phase9c_rb21.rb21_units import (
     RecoverabilityAtomicUnit,
@@ -19,6 +20,14 @@ from rvt_swarm.phase9c_rb21.rb21_units import (
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = json.loads(
     (ROOT / "results/rvt_fd24/rb21_target_benchmark_manifest_v1.json")
+    .read_text(encoding="ascii")
+)
+REACHABILITY = json.loads(
+    (ROOT / "results/rvt_fd24/rb21_target_manifest_reachability_v1.json")
+    .read_text(encoding="ascii")
+)
+MANIFEST_V2 = json.loads(
+    (ROOT / "results/rvt_fd24/rb21_target_benchmark_manifest_v2.json")
     .read_text(encoding="ascii")
 )
 
@@ -70,3 +79,29 @@ def test_target_runner_reconstructs_only_complete_atomic_units() -> None:
                if isinstance(unit, ResidualAtomicUnit))
     assert all(len(unit.replica_indices) in (1, 3) for unit in units
                if isinstance(unit, RecoverabilityAtomicUnit))
+
+
+def test_v2_removes_only_the_proven_nonexistent_state() -> None:
+    reachability_body = {
+        key: value for key, value in REACHABILITY.items()
+        if key != "rb21_target_manifest_reachability_sha256"
+    }
+    assert hashlib.sha256(canonical_json_bytes(reachability_body)).hexdigest() == (
+        REACHABILITY["rb21_target_manifest_reachability_sha256"])
+    assert MANIFEST_V2 == build_target_benchmark_manifest_v2(REACHABILITY)
+    assert MANIFEST_V2["sample_counts"]["residual_atomic_units"] == 30
+    assert MANIFEST_V2["sample_counts"]["recoverability_atomic_units"] == 30
+    assert MANIFEST_V2["sample_counts"]["residual_candidate_evaluations"] == 270
+    assert MANIFEST_V2["sample_counts"]["recoverability_replica_rollouts"] == 58
+    assert MANIFEST_V2["v1_rejection"]["selection_used_performance_measurements"] is False
+    assert MANIFEST_V2["v1_rejection"]["rejected_decision_states"] == [{
+        "case_id": "rb21-f9-n16-validation",
+        "decision_step": 60,
+        "reason": "PREDECLARED_DECISION_STATE_DOES_NOT_EXIST",
+    }]
+    path = ROOT / "scripts/run_phase9c_rb21_target_benchmark.py"
+    spec = importlib.util.spec_from_file_location("rb21_target_runner_v2", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert len(module._units(MANIFEST_V2, "all")) == 60

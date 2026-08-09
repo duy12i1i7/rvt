@@ -101,6 +101,14 @@ def _units(manifest: Mapping[str, Any], kind: str) -> list:
     return units
 
 
+def _manifest_hash(manifest: Mapping[str, Any]) -> str:
+    for key in ("rb21_target_benchmark_manifest_v2_sha256",
+                "rb21_target_benchmark_manifest_sha256"):
+        if key in manifest:
+            return str(manifest[key])
+    raise ValueError("target benchmark manifest has no canonical hash")
+
+
 def _values(results: Iterable[Mapping[str, Any]], key: str) -> list:
     return [float(row[key]) for row in results]
 
@@ -197,8 +205,7 @@ def main() -> None:
         "qualified_image_expected": EXPECTED_IMAGE,
         "qualified_image_observed_by_host_wrapper": os.environ.get(
             "RVT_QUALIFIED_IMAGE_OBSERVED", "NOT_SET"),
-        "target_benchmark_manifest": manifest[
-            "rb21_target_benchmark_manifest_sha256"],
+        "target_benchmark_manifest": _manifest_hash(manifest),
         "container": {
             "hostname": socket.gethostname(),
             "platform": platform.platform(),
