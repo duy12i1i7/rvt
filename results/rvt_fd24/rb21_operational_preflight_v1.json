@@ -1,0 +1,194 @@
+{
+  "final_test_geometry_loaded": false,
+  "negative_matrix": {
+    "case_count": 13,
+    "cases": [
+      {
+        "case": "wrong target environment",
+        "rejected": true
+      },
+      {
+        "case": "wrong worker count",
+        "rejected": true
+      },
+      {
+        "case": "nested-thread oversubscription",
+        "rejected": true
+      },
+      {
+        "case": "wrong chunk size",
+        "rejected": true
+      },
+      {
+        "case": "stale timeout",
+        "rejected": true
+      },
+      {
+        "case": "missing resume contract",
+        "rejected": true
+      },
+      {
+        "case": "wrong writer staging mode",
+        "rejected": true
+      },
+      {
+        "case": "residual enabled despite H4 unresolved",
+        "rejected": true
+      },
+      {
+        "case": "Study A N24 enabled",
+        "rejected": true
+      },
+      {
+        "case": "final-test enabled",
+        "rejected": true
+      },
+      {
+        "case": "stale scientific root",
+        "rejected": true
+      },
+      {
+        "case": "missing RB20 reproduction",
+        "rejected": true
+      },
+      {
+        "case": "unauthorized broad execution state",
+        "rejected": true
+      }
+    ],
+    "escapes": 0
+  },
+  "operational_checks": [
+    {
+      "name": "scientific_preflight",
+      "observed": "PASS",
+      "passed": true
+    },
+    {
+      "name": "target_environment",
+      "observed": "TARGET_ENVIRONMENT_NOT_QUALIFIED",
+      "passed": false
+    },
+    {
+      "name": "worker_count",
+      "observed": "PENDING_TARGET_ENVIRONMENT",
+      "passed": false
+    },
+    {
+      "name": "nested_threads",
+      "observed": {
+        "MKL_NUM_THREADS": 1,
+        "OMP_NUM_THREADS": 1,
+        "OPENBLAS_NUM_THREADS": 1,
+        "torch_num_interop_threads": 1,
+        "torch_num_threads": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "chunk_sizes",
+      "observed": [
+        "PENDING_TARGET_ENVIRONMENT",
+        "PENDING_TARGET_ENVIRONMENT"
+      ],
+      "passed": false
+    },
+    {
+      "name": "timeout",
+      "observed": "PENDING_TARGET_ENVIRONMENT",
+      "passed": false
+    },
+    {
+      "name": "resume_contract",
+      "observed": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+      "passed": true
+    },
+    {
+      "name": "writer_staging",
+      "observed": "STAGING_VALIDATE_ATOMIC_PROMOTION",
+      "passed": true
+    },
+    {
+      "name": "scientific_roots",
+      "observed": {
+        "benchmark_manifest": "4ac5bd1d00c6d2a1e0a71a712c98577e3e866066001802948b5cf3ecb3104ead",
+        "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+        "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+        "target_environment_qualification": "e6ad3dd1ebc3d36593252bf658dcab41e5f42261034a4a7d416ef1180f1d4b3c",
+        "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+      },
+      "passed": true
+    },
+    {
+      "name": "authorization_scopes",
+      "observed": [
+        "FINAL_TEST",
+        "RECOVERABILITY_GENERATION",
+        "RESIDUAL_V2_GENERATION",
+        "STUDY_A_N24_ZERO_SHOT",
+        "STUDY_A_TRAIN_VALIDATION",
+        "STUDY_B"
+      ],
+      "passed": true
+    },
+    {
+      "name": "residual_h4_authorization",
+      "observed": {
+        "h4": null,
+        "residual": "NOT_AUTHORIZED_TARGET_ENVIRONMENT_AND_H4_PENDING"
+      },
+      "passed": true
+    },
+    {
+      "name": "no_broad_authorization",
+      "observed": [
+        "authorization_scope",
+        "final_test_command",
+        "generation_budget_v2",
+        "identity_contracts",
+        "official_commands",
+        "rb19_current_provenance_root",
+        "rb20_reproduction",
+        "rb21_operational_contract",
+        "rb21_operational_job_manifest_sha256",
+        "schema_version",
+        "scientific_source_commit",
+        "status",
+        "study_a_n24_command",
+        "target_v4"
+      ],
+      "passed": true
+    },
+    {
+      "name": "study_a_n24_sealed",
+      "observed": "SEALED_NOT_AUTHORIZED",
+      "passed": true
+    },
+    {
+      "name": "final_test_sealed",
+      "observed": "SEALED_NOT_AUTHORIZED",
+      "passed": true
+    },
+    {
+      "name": "job_manifest_roots",
+      "observed": {
+        "rb19": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+        "rb20": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a"
+      },
+      "passed": true
+    }
+  ],
+  "operational_failures": [
+    "target_environment",
+    "worker_count",
+    "chunk_sizes",
+    "timeout"
+  ],
+  "rb21_operational_preflight_sha256": "41e0af9bd75015492c897321cb52a9939aaeb9c7a05b1f704004d3f13f943f09",
+  "schema_version": "rvt-rb21-operational-preflight/v1",
+  "scientific_check_count": 53,
+  "scientific_failures": [],
+  "scientific_preflight_status": "PASS",
+  "status": "BLOCKED_TARGET_ENVIRONMENT",
+  "study_a_n24_outcomes_loaded": false
+}

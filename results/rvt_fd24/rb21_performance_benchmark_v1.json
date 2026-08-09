@@ -1,0 +1,283 @@
+{
+  "diagnostic_host_smoke": {
+    "configurations": [
+      {
+        "aggregate_cpu_seconds": 17.344182,
+        "atomic_unit_latency_seconds": {
+          "count": 4,
+          "maximum": 10.876909957999999,
+          "mean": 4.389108281,
+          "median": 2.8482543540000007,
+          "p90": 10.876909957999999,
+          "p95": 10.876909957999999,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "atomic_units": 4,
+        "chunk_size_atomic_units": 1,
+        "conservative_peak_total_worker_rss_bytes": 188514304,
+        "cpu_utilization_percent_of_one_core": 95.44595284550722,
+        "parallel_efficiency": 1.0,
+        "peak_worker_rss_bytes_by_pid": {
+          "47464": 188514304
+        },
+        "recoverability_unit_latency_seconds": {
+          "count": 2,
+          "maximum": 3.587698875000001,
+          "mean": 2.285356666500001,
+          "median": 2.285356666500001,
+          "p90": 3.587698875000001,
+          "p95": 3.587698875000001,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "residual_unit_latency_seconds": {
+          "count": 2,
+          "maximum": 10.876909957999999,
+          "mean": 6.4928598955,
+          "median": 6.4928598955,
+          "p90": 10.876909957999999,
+          "p95": 10.876909957999999,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "scientific_semantic_digest": "ddfc1ef5a2534d5a4c7d4fbf415ec7dcae890375bd8d01b0c1069770bab7f5de",
+        "speedup": 1.0,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "throughput_atomic_units_per_second": 0.22012212013344237,
+        "wall_seconds": 18.171731208,
+        "workers": 1
+      },
+      {
+        "aggregate_cpu_seconds": 17.51263,
+        "atomic_unit_latency_seconds": {
+          "count": 4,
+          "maximum": 10.977234042000001,
+          "mean": 4.39447448975,
+          "median": 2.8427059795,
+          "p90": 10.977234042000001,
+          "p95": 10.977234042000001,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "atomic_units": 4,
+        "chunk_size_atomic_units": 2,
+        "conservative_peak_total_worker_rss_bytes": 377929728,
+        "cpu_utilization_percent_of_one_core": 124.8863551518368,
+        "parallel_efficiency": 0.6479327426451663,
+        "peak_worker_rss_bytes_by_pid": {
+          "47512": 188514304,
+          "47513": 189415424
+        },
+        "recoverability_unit_latency_seconds": {
+          "count": 2,
+          "maximum": 3.508668292,
+          "mean": 2.211960125,
+          "median": 2.211960125,
+          "p90": 3.508668292,
+          "p95": 3.508668292,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "residual_unit_latency_seconds": {
+          "count": 2,
+          "maximum": 10.977234042000001,
+          "mean": 6.576988854500001,
+          "median": 6.576988854500001,
+          "p90": 10.977234042000001,
+          "p95": 10.977234042000001,
+          "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+        },
+        "scientific_semantic_digest": "ddfc1ef5a2534d5a4c7d4fbf415ec7dcae890375bd8d01b0c1069770bab7f5de",
+        "speedup": 1.2958654852903326,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "throughput_atomic_units_per_second": 0.2852486580298602,
+        "wall_seconds": 14.022853000000001,
+        "workers": 2
+      }
+    ],
+    "coverage_is_full_predeclared_manifest": false,
+    "production_selection_permitted": false,
+    "recoverability_unit_wall_seconds": {
+      "count": 4,
+      "maximum": 3.587698875000001,
+      "mean": 2.2486583957500006,
+      "median": 2.2458413750000004,
+      "p90": 3.587698875000001,
+      "p95": 3.587698875000001,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "residual_unit_wall_seconds": {
+      "count": 4,
+      "maximum": 10.977234042000001,
+      "mean": 6.534924375,
+      "median": 6.5268268124999995,
+      "p90": 10.977234042000001,
+      "p95": 10.977234042000001,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "semantic_digests_identical": true,
+    "single_worker_measurements": {
+      "aggregation_seconds": {
+        "count": 2,
+        "maximum": 1.4170000000035543e-06,
+        "mean": 1.2709999985816012e-06,
+        "median": 1.2709999985816012e-06,
+        "p90": 1.4170000000035543e-06,
+        "p95": 1.4170000000035543e-06,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "cpu_utilization_percent_of_one_core": 95.44595284550722,
+      "p95_is_production_qualified": false,
+      "peak_worker_rss_bytes": 188514304,
+      "per_replica_rollout_seconds": {
+        "count": 2,
+        "maximum": 2.611433625,
+        "mean": 1.7687645830000003,
+        "median": 1.7687645830000003,
+        "p90": 2.611433625,
+        "p95": 2.611433625,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_unit_wall_seconds": {
+        "count": 2,
+        "maximum": 3.587698875000001,
+        "mean": 2.285356666500001,
+        "median": 2.285356666500001,
+        "p90": 3.587698875000001,
+        "p95": 3.587698875000001,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_serialization_seconds": {
+        "count": 2,
+        "maximum": 8.499999999855845e-06,
+        "mean": 8.082999999992069e-06,
+        "median": 8.082999999992069e-06,
+        "p90": 8.499999999855845e-06,
+        "p95": 8.499999999855845e-06,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollout_control_steps": {
+        "count": 2,
+        "maximum": 164.0,
+        "mean": 130.0,
+        "median": 130.0,
+        "p90": 164.0,
+        "p95": 164.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_atomic_unit_wall_seconds": {
+        "count": 2,
+        "maximum": 10.876909957999999,
+        "mean": 6.4928598955,
+        "median": 6.4928598955,
+        "p90": 10.876909957999999,
+        "p95": 10.876909957999999,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_continuation_seconds": {
+        "count": 18,
+        "maximum": 1.5221304169999996,
+        "mean": 0.6681647477222221,
+        "median": 0.5878388959999998,
+        "p90": 1.4443612909999999,
+        "p95": 1.5221304169999996,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_rollout_control_intervals": {
+        "count": 18,
+        "maximum": 75.0,
+        "mean": 56.333333333333336,
+        "median": 65.0,
+        "p90": 75.0,
+        "p95": 75.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_dispositions": {
+        "LABELED": 1,
+        "NO_ELIGIBLE_ACTION": 1
+      },
+      "residual_serialization_seconds": {
+        "count": 2,
+        "maximum": 4.979199999999295e-05,
+        "mean": 4.743799999995524e-05,
+        "median": 4.743799999995524e-05,
+        "p90": 4.979199999999295e-05,
+        "p95": 4.979199999999295e-05,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "selector_target_reduction_seconds": {
+        "count": 2,
+        "maximum": 0.005247168000002134,
+        "mean": 0.004017229000001121,
+        "median": 0.004017229000001121,
+        "p90": 0.005247168000002134,
+        "p95": 0.005247168000002134,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      }
+    },
+    "status": "DIAGNOSTIC_HOST_SMOKE_ONLY"
+  },
+  "final_chunk_size": "PENDING_TARGET_ENVIRONMENT",
+  "final_timeout_seconds": "PENDING_TARGET_ENVIRONMENT",
+  "final_worker_count": "PENDING_TARGET_ENVIRONMENT",
+  "inherited_rb15_diagnostic_only": {
+    "early_terminating_candidates_at_most_20_intervals": 14,
+    "gate": "RB15V2-34",
+    "long_rollout_candidates": 76,
+    "process_parallelism": {
+      "interpreter": "3.9.6",
+      "measurement": "single process, single worker, no parallelism applied",
+      "workers_used": 1
+    },
+    "rollout_control_intervals_per_candidate": {
+      "count": 90,
+      "maximum": 474.0,
+      "mean": 96.655556,
+      "median": 65.0,
+      "minimum": 9.0,
+      "p90": 89.0,
+      "p95": 471.0
+    },
+    "seconds_per_candidate_continuation": {
+      "count": 90,
+      "maximum": 8.990364,
+      "mean": 1.593423,
+      "median": 0.333563,
+      "minimum": 0.252298,
+      "p90": 3.768343,
+      "p95": 8.823311
+    },
+    "seconds_per_nine_candidate_expert_evaluation": {
+      "count": 10,
+      "maximum": 79.707886,
+      "mean": 14.344794,
+      "median": 3.574526,
+      "minimum": 2.314072,
+      "p90": 27.306187,
+      "p95": 27.306187
+    },
+    "timing_source": "the diagnostic canary only",
+    "total_wall_clock_seconds": 146.718
+  },
+  "provenance_class": "OPERATIONAL_BENCHMARK_ONLY",
+  "rb21_performance_benchmark_sha256": "a0909a4a9e1a834aa08ea2d719639a481944f3248b39063949721be30f3a036a",
+  "schema_version": "rvt-rb21-performance-benchmark/v1",
+  "semantic_digest_helper": {
+    "changed_worker_and_chunk_digest": "4c01997754055c4c3b927a0f7ec9e18233948b9db309683511cfdf2233198046",
+    "identical": true,
+    "low_parallelism_digest": "4c01997754055c4c3b927a0f7ec9e18233948b9db309683511cfdf2233198046",
+    "source": "committed RB18/RB20 diagnostic scientific records",
+    "timing_and_operational_metadata_excluded_only": true
+  },
+  "single_worker_target_measurement": "NOT_RUN_TARGET_UNAVAILABLE",
+  "target_environment_qualified": false,
+  "target_manifest_run": false
+}

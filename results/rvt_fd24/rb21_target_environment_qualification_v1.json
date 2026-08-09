@@ -1,0 +1,56 @@
+{
+  "current_environment_id": "udy-2.local:Darwin:arm64",
+  "declared_equivalent_environment_ids": [],
+  "declared_official_environment_id": null,
+  "demonstrably_official_or_equivalent": false,
+  "environment": {
+    "container": "NONE_DETECTED",
+    "cpu_model": "Apple M4 Pro",
+    "hostname": "udy-2.local",
+    "logical_cores": 12,
+    "machine": "arm64",
+    "multiprocessing_start_method_default": null,
+    "multiprocessing_start_methods_available": [
+      "spawn",
+      "fork",
+      "forkserver"
+    ],
+    "nested_threads_before_control": {
+      "MKL_NUM_THREADS": null,
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "torch_num_interop_threads": 12,
+      "torch_num_threads": 8
+    },
+    "numpy_version": "2.0.2",
+    "os": "Darwin",
+    "os_release": "25.5.0",
+    "os_version": "Darwin Kernel Version 25.5.0: Mon Apr 27 20:41:15 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T6041",
+    "physical_cores": 12,
+    "platform": "macOS-26.5-arm64-arm-64bit",
+    "python_executable": "/Users/udy/rvt/.venv/bin/python",
+    "python_version": "3.9.6",
+    "ram_bytes": 25769803776,
+    "scheduler": "NONE_DETECTED",
+    "temporary_storage": {
+      "available_bytes": 67884666880,
+      "path": "/private/var/folders/_3/xsl59g6s7bsdwky2dgd4xgsw0000gn/T",
+      "total_bytes": 494384795648,
+      "used_bytes": 426500128768
+    },
+    "torch_version": "2.8.0",
+    "workspace_storage": {
+      "available_bytes": 67884666880,
+      "filesystem": "APFS_OR_LOCAL_UNKNOWN",
+      "local_vs_network": "LOCAL",
+      "path": "/Users/udy/rvt",
+      "total_bytes": 494384795648,
+      "used_bytes": 426500128768
+    }
+  },
+  "final_operational_values_may_be_selected": false,
+  "qualification_result": "TARGET_ENVIRONMENT_NOT_QUALIFIED",
+  "reason": "no owner-declared official target identity or equivalence proof exists",
+  "schema_version": "rvt-rb21-target-environment-qualification/v1",
+  "target_environment_qualification_sha256": "e6ad3dd1ebc3d36593252bf658dcab41e5f42261034a4a7d416ef1180f1d4b3c"
+}

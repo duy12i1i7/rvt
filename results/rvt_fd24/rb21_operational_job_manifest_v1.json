@@ -1,0 +1,21 @@
+{
+  "authorization_scope": "3a417e9d51f8a2c277289a8e1b8d40f426ebdbc087f0fdd05b1605a8a89b9a1b",
+  "final_test_command": "NOT_CREATED_SEALED",
+  "generation_budget_v2": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+  "identity_contracts": {
+    "candidate_evaluation": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef",
+    "disposition": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6",
+    "execution_attempt": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923",
+    "scientific_row": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20"
+  },
+  "official_commands": [],
+  "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+  "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+  "rb21_operational_contract": "41c9f2399b2c214c2d49cac7f9ac99d60a9679dfb75bdd1580a1e49d79fc1e5a",
+  "rb21_operational_job_manifest_sha256": "f7eb010872d75f685decfc9cc9647a360490fb1876fc3a2f97e04202c3349efd",
+  "schema_version": "rvt-rb21-operational-job-manifest/v1",
+  "scientific_source_commit": "297a94b9a7e951b9b30b14befca16a92d9c1189e",
+  "status": "NOT_AUTHORIZED_PENDING_TARGET_ENVIRONMENT",
+  "study_a_n24_command": "NOT_CREATED_SEALED",
+  "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+}

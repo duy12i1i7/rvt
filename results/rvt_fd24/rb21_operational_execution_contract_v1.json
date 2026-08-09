@@ -1,0 +1,47 @@
+{
+  "atomic_units": {
+    "recoverability": "ONE_DECISION_ONE_CANDIDATE_ALL_FROZEN_REPLICAS",
+    "residual": "ONE_DECISION_ONE_ROBOT_ALL_NINE_CANDIDATES"
+  },
+  "completion_policy": {
+    "all_scheduled_source_tasks_accounted_for": true,
+    "denominator_counts_reconcile": true,
+    "every_legitimate_attempt_has_terminal_disposition": true,
+    "sealed_domain_violations": 0,
+    "shard_index_hashes_validate": true,
+    "unexpected_duplicates": 0,
+    "unresolved_infrastructure_failures": 0
+  },
+  "infrastructure_retries": 1,
+  "infrastructure_timeout_seconds": "PENDING_TARGET_ENVIRONMENT",
+  "nested_thread_settings": {
+    "MKL_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "torch_num_interop_threads": 1,
+    "torch_num_threads": 1
+  },
+  "partial_staging_is_completed_dataset": false,
+  "process_worker_count": "PENDING_TARGET_ENVIRONMENT",
+  "promotion_policy": "STAGING_THEN_VALIDATE_THEN_ATOMIC_FINAL_PROMOTION",
+  "rb21_operational_execution_contract_sha256": "41c9f2399b2c214c2d49cac7f9ac99d60a9679dfb75bdd1580a1e49d79fc1e5a",
+  "recoverability_chunk_size_atomic_units": "PENDING_TARGET_ENVIRONMENT",
+  "references": {
+    "benchmark_manifest": "4ac5bd1d00c6d2a1e0a71a712c98577e3e866066001802948b5cf3ecb3104ead",
+    "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "target_environment_qualification": "e6ad3dd1ebc3d36593252bf658dcab41e5f42261034a4a7d416ef1180f1d4b3c",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "residual_chunk_size_atomic_units": "PENDING_TARGET_ENVIRONMENT",
+  "resume_granularity": "ATOMIC_SCIENTIFIC_UNIT_IDENTITY",
+  "schema_version": "rvt-rb21-operational-execution-contract/v1",
+  "scientific_contracts_redefined": false,
+  "semantic_retries": 0,
+  "status": "PROPOSAL_PENDING_TARGET_ENVIRONMENT",
+  "target_environment_id": "PENDING_TARGET_ENVIRONMENT",
+  "timeout_changes_scientific_horizon": false,
+  "timeout_classification": "INFRASTRUCTURE_FAILURE",
+  "writer_buffer_settings": "PENDING_TARGET_ENVIRONMENT",
+  "writer_mode": "STAGING_VALIDATE_ATOMIC_PROMOTION"
+}

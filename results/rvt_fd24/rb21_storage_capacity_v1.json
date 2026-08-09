@@ -1,0 +1,40 @@
+{
+  "diagnostic_workspace_available_bytes": 67884666880,
+  "diagnostic_workspace_headroom_ratio": 3.122439853476621,
+  "projection": {
+    "audit_sidecars_bytes": 5812137800,
+    "candidate_evaluation_bound_is_scientific_row_count": false,
+    "final_dataset_bytes": 9577491000,
+    "indexes_and_manifests_bytes": 456071000,
+    "recoverability_record_upper_count": 332900,
+    "residual_candidate_evaluation_upper_bound": 4824000,
+    "residual_stored_row_upper_cap": 536000,
+    "resume_metadata_bytes": 191549820,
+    "scientific_payload_bytes": 3309282200,
+    "staging_bytes": 9577491000,
+    "staging_plus_final_plus_temporary_upper_bytes": 21740904570,
+    "temporary_generation_bytes": 2394372750
+  },
+  "rb21_storage_capacity_sha256": "30c90011aa7db5c190d9d1003210ec6e62c6f32940932cde428682aeb960ea69",
+  "representative_canonical_sizes_bytes": {
+    "no_eligible_action_audit_record_bytes": 5901,
+    "recoverability_audit_replica_metadata_bytes": 1202,
+    "recoverability_scientific_record_bytes": 438,
+    "residual_labeled_row_bytes": 5902,
+    "residual_nine_candidate_sidecar_bytes": 4196,
+    "shard_index_manifest_metadata_bytes": 322
+  },
+  "schema_version": "rvt-rb21-storage-capacity/v1",
+  "target_storage_qualified": false,
+  "writer_benchmark": {
+    "all_commits_validate": true,
+    "bytes": 2024000,
+    "compression": "NONE",
+    "encoding": "canonical JSON, unchanged qualified encoding",
+    "megabytes_per_second": 6.878949835047609,
+    "path": "temporary diagnostic namespace removed after measurement",
+    "records": 200,
+    "records_per_second": 679.7381259928468,
+    "wall_seconds": 0.294230958
+  }
+}

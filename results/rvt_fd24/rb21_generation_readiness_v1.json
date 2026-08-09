@@ -1,0 +1,76 @@
+{
+  "acceptance_gates": {
+    "G10_h4": "PROVISIONAL_RISK_NOT_AUTHORIZING",
+    "G11_authorization_scope": "PASS",
+    "G12_study_a_n24_sealed": "PASS",
+    "G13_final_test_sealed": "PASS",
+    "G14_manifest_roots": "PASS",
+    "G15_preflight": "BLOCKED_TARGET_ENVIRONMENT",
+    "G16_no_official_data": "PASS",
+    "G17_full_suite": "PENDING_FINAL_VERIFICATION",
+    "G1_target_environment": "FAIL",
+    "G2_semantic_digests": "PASS_DIAGNOSTIC_ONLY",
+    "G3_worker_selection": "NOT_RUN",
+    "G4_nested_threads": "HARNESS_IMPLEMENTED_TARGET_PENDING",
+    "G5_chunk_selection": "NOT_RUN",
+    "G6_timeout": "NOT_SELECTED",
+    "G7_resume_failure": "PASS_HELPERS_TARGET_FILESYSTEM_PENDING",
+    "G8_storage": "PASS_DIAGNOSTIC_TARGET_PENDING",
+    "G9_recoverability_capacity": "NOT_QUALIFIED"
+  },
+  "artifacts": {
+    "authorization": "3a417e9d51f8a2c277289a8e1b8d40f426ebdbc087f0fdd05b1605a8a89b9a1b",
+    "benchmark_manifest": "4ac5bd1d00c6d2a1e0a71a712c98577e3e866066001802948b5cf3ecb3104ead",
+    "job_manifest": "f7eb010872d75f685decfc9cc9647a360490fb1876fc3a2f97e04202c3349efd",
+    "operational_contract": "41c9f2399b2c214c2d49cac7f9ac99d60a9679dfb75bdd1580a1e49d79fc1e5a",
+    "performance": "a0909a4a9e1a834aa08ea2d719639a481944f3248b39063949721be30f3a036a",
+    "preflight": "41e0af9bd75015492c897321cb52a9939aaeb9c7a05b1f704004d3f13f943f09",
+    "resume_failure": "e40cbc13bdffaff2063d2616f06f8a6d7b87efea05286daab1491d4716ea0198",
+    "storage_capacity": "30c90011aa7db5c190d9d1003210ec6e62c6f32940932cde428682aeb960ea69",
+    "target_environment": "e6ad3dd1ebc3d36593252bf658dcab41e5f42261034a4a7d416ef1180f1d4b3c",
+    "worker_chunk_scaling": "2b3c1e8bfa107e62f48b67ec66e07f4b644005283e8ae5a97435160ac5b6fbb8"
+  },
+  "branch": "research/rvt-rb21-operational-qualification-v1",
+  "capacity_projection": {
+    "recoverability": "PENDING_SELECTED_TARGET_THROUGHPUT",
+    "residual_candidate_evaluations": 4824000,
+    "residual_stored_rows_cap": 536000,
+    "residual_v2": "PENDING_SELECTED_TARGET_THROUGHPUT"
+  },
+  "isolation": {
+    "final_test_runtime_accesses": 0,
+    "locality_violations": 0,
+    "new_fd24_checkpoints": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_scientific_shards": 0,
+    "optimizer_states": 0,
+    "study_a_n24_runtime_accesses": 0,
+    "training_operations": 0
+  },
+  "official_command_plan_status": "BLOCKED_PENDING_TARGET_OPERATIONAL_VALUES",
+  "official_phase9_generation_executed": false,
+  "provenance_validation": {
+    "rb19_ambiguous": 0,
+    "rb19_checks_pass": true,
+    "rb19_current_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb19_missing": 0,
+    "rb19_stale_current": 0,
+    "rb20_expected": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "rb20_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "rb20_valid": true,
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "target_v4_valid": true
+  },
+  "rb21_generation_readiness_sha256": "1de91fd787a875e0a973bc66567b404fa5a3343b8fc915ac40696e4960c6ff21",
+  "schema_version": "rvt-rb21-generation-readiness/v1",
+  "scientific_source_commit": "297a94b9a7e951b9b30b14befca16a92d9c1189e",
+  "selected_operational_values": {
+    "recoverability_chunk_size": "PENDING_TARGET_ENVIRONMENT",
+    "residual_chunk_size": "PENDING_TARGET_ENVIRONMENT",
+    "timeout_seconds": "PENDING_TARGET_ENVIRONMENT",
+    "worker_count": "PENDING_TARGET_ENVIRONMENT"
+  },
+  "verdict": "D",
+  "verdict_text": "Operational qualification remains incomplete or the target environment is not qualified."
+}

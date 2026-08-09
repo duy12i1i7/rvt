@@ -1,0 +1,44 @@
+{
+  "completed_identity_preserved_across_restart": true,
+  "completed_unit_ids": [
+    "unit-a"
+  ],
+  "duplicate_retry_submission": "DUPLICATE_IDEMPOTENT",
+  "first_commit": "ACKNOWLEDGED",
+  "infrastructure_retry_limit": 1,
+  "injections": [
+    {
+      "accepted_as_complete": false,
+      "injection": "after_record"
+    },
+    {
+      "accepted_as_complete": false,
+      "injection": "after_sidecar"
+    },
+    {
+      "accepted_as_complete": false,
+      "injection": "before_promotion"
+    }
+  ],
+  "insufficient_temporary_space_rejected": true,
+  "no_eligible_preservation_tested_by_same_record_sidecar_transaction": true,
+  "partial_write_accepted": false,
+  "process_terminates_between_chunks": {
+    "exit_code": 72,
+    "first_unit_complete": true,
+    "resume_rechecks_atomic_unit_ids": true,
+    "unscheduled_second_unit_complete": false
+  },
+  "qualification_result": "HELPERS_PASS_TARGET_FILESYSTEM_PENDING",
+  "rb21_resume_failure_qualification_sha256": "e40cbc13bdffaff2063d2616f06f8a6d7b87efea05286daab1491d4716ea0198",
+  "schema_version": "rvt-rb21-resume-failure-qualification/v1",
+  "semantic_retry_count": 0,
+  "worker_dies_after_compute_before_ack": {
+    "accepted_as_complete": false,
+    "exit_code": 71
+  },
+  "worker_dies_before_complete": {
+    "accepted_as_complete": false,
+    "exit_code": 71
+  }
+}

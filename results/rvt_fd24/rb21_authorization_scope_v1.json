@@ -1,0 +1,18 @@
+{
+  "broad_generation_authorized_field": "PROHIBITED",
+  "h4_classification": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+  "h4_classification_scope": "PROVISIONAL_DIAGNOSTIC_NON_AUTHORIZING",
+  "h4_reason": "RB15 shows finite execution with no hangs, but target worker, timeout and capacity evidence is unavailable; the optional branch remains disabled",
+  "official_generation_authorized": false,
+  "rb21_authorization_scope_sha256": "3a417e9d51f8a2c277289a8e1b8d40f426ebdbc087f0fdd05b1605a8a89b9a1b",
+  "residual_branch_enabled": false,
+  "schema_version": "rvt-rb21-authorization-scope/v1",
+  "scopes": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "RECOVERABILITY_GENERATION": "NOT_AUTHORIZED_TARGET_ENVIRONMENT_PENDING",
+    "RESIDUAL_V2_GENERATION": "NOT_AUTHORIZED_TARGET_ENVIRONMENT_AND_H4_PENDING",
+    "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+    "STUDY_A_TRAIN_VALIDATION": "NOT_AUTHORIZED",
+    "STUDY_B": "NOT_AUTHORIZED"
+  }
+}
