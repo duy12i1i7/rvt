@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import pathlib
 import subprocess
+import sys
 
 from rvt_swarm.phase9c_rb21.rb21_manifest import TARGET_V4_HASH
 from rvt_swarm.phase9c_rb21.rb21_units import (
@@ -68,7 +69,7 @@ def test_nested_thread_controls_apply_in_a_fresh_process() -> None:
         "print(json.dumps(ThreadSettings().apply(), sort_keys=True))"
     )
     observed = json.loads(subprocess.check_output(
-        [str(pathlib.Path(".venv/bin/python")), "-c", code], text=True))
+        [sys.executable, "-c", code], text=True))
     assert set(observed.values()) == {1}
 
 
