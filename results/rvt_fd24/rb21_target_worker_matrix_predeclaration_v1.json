@@ -1,0 +1,67 @@
+{
+  "candidate_sequence_considered": [
+    1,
+    2,
+    4,
+    6,
+    8,
+    12,
+    16
+  ],
+  "declared_worker_matrix": [
+    1,
+    2,
+    4,
+    6,
+    8,
+    12,
+    16
+  ],
+  "official_generation_executed": false,
+  "qualified_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+  "rb21_target_worker_matrix_predeclaration_sha256": "6d1721cd57c00ec1bfa2e35d13440b50e887bbb985639b5779984b616a776f5b",
+  "resource_contract": {
+    "available_logical_cpus": 24,
+    "cpu_worker_ceiling": 20,
+    "minimum_cpu_headroom_logical_cpus": 4,
+    "minimum_ram_headroom_fraction": 0.25,
+    "ram_available_to_workers_bytes": 24992538624,
+    "ram_worker_ceiling": 113,
+    "safe_worker_ceiling": 20,
+    "wsl_visible_ram_bytes": 33323384832
+  },
+  "scaling_workload": {
+    "chunk_size_atomic_units": 1,
+    "recoverability_atomic_units_per_configuration": 30,
+    "residual_atomic_units_per_configuration": 30,
+    "reuse_W1_baselines": true,
+    "run_branches_separately": true,
+    "thread_profile": {
+      "mkl_num_threads": 1,
+      "omp_num_threads": 1,
+      "openblas_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "torch_num_threads": 1
+    }
+  },
+  "schema_version": "rvt-rb21-target-worker-matrix-predeclaration/v1",
+  "selection_rule_frozen_before_scaling": {
+    "efficiency_floor_when_available": 0.5,
+    "hard_requirements": [
+      "identical_scientific_semantic_digest_for_each_branch",
+      "observed_peak_RSS_within_75_percent_WSL_RAM_budget",
+      "worker_count_not_above_safe_ceiling",
+      "no_operational_failure"
+    ],
+    "incremental_gain_preference": "PREFER_SMALLER_W",
+    "tail_rule": "reject unexplained p95 or maximum latency regression",
+    "throughput_rule": "select the smallest eligible W within 95 percent of the maximum eligible aggregate throughput"
+  },
+  "status": "FROZEN_BEFORE_WORKER_SCALING_RESULTS",
+  "target_benchmark_manifest": "4dca5d1dc85f6d2ceb9ce64a16f2ff89578a323c86b44965029a87b9f43af377",
+  "w1_evidence": {
+    "conservative_peak_single_worker_rss_bytes": 219430912,
+    "recoverability": "0e9606871df0dcc23c1b13bab723487445e67ebc3a17c7761f3635478e8cc2d7",
+    "residual": "d89901350f3bf143ee76953d99ff1ca9b59fce7b7a0f326292a997bddfe1c78b"
+  }
+}
