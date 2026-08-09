@@ -29,9 +29,17 @@ No official data was generated and no training ran.
 | RB21P root | `fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176` |
 | Target V4 | `54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee` |
 
-The final clean-detached exact-image test result is the verification attached
-to the evidence commit. The already qualified RB21P baseline was `2978 passed,
-0 failed, 0 xfailed` on the same image.
+Final verification results:
+
+| Suite | Result | Wall time |
+|---|---|---:|
+| Reference host complete suite | 3002 passed, 0 failed | 361.57 s |
+| Target exact-image critical RB21 suite | 55 passed, 0 failed | 1.28 s |
+| Target exact-image complete suite | 3002 passed, 0 failed, 0 xfailed | 348.67 s |
+
+The target run used a clean detached evidence checkout mounted read-only over
+`/opt/rvt` in the exact image. One pre-existing tensor-conversion warning was
+reported; there were no publication-required xfails.
 
 ## Target Environment
 
@@ -233,7 +241,7 @@ recorded H4 operational risk and does not change its scientific budget.
 | Operational job manifest V2 | `d585a1a823db980d8a166a16b6596ba41e49c1491594acda8d667b57f0bcb21b` |
 | Authorization scope V2 | `5b5533277e2789fcb66dfc0de5f44102a33924492d57f2d90099e4eab4d9a015` |
 | Operational preflight V2 | `e9f683910de30ff9af60d76182f30fe00e21a68b5e1806a2bbad865531233500` |
-| Final readiness root V2 | `089552354f74f7cb84b6831bf394328d58734ff17d60f79e30a498dfaee39117` |
+| Final readiness root V2 | `b4333eca3ca00e4e2ecdd2c8ca68b7f7df9ad072468ab65699940dcc9329c5c0` |
 
 The positive preflight passes 22 checks. The negative matrix rejects all 15
 predeclared cases: wrong host, image, source, worker count, nested threads,

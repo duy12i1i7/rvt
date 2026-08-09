@@ -8,7 +8,7 @@
     "G15_final_test_sealed": "PASS",
     "G16_negative_preflight_escapes": 0,
     "G17_no_official_generation": "PASS",
-    "G18_final_full_suite": "PASS_REQUIRES_CLEAN_DETACHED_EVIDENCE_RECHECK",
+    "G18_final_full_suite": "PASS_CLEAN_DETACHED_EXACT_IMAGE_3002",
     "G1_qualified_image": "PASS",
     "G2_worker_semantic_digests": "PASS",
     "G3_chunk_semantic_digests": "PASS",
@@ -52,6 +52,29 @@
   "branch": "research/rvt-rb21-target-performance-v1",
   "command_plan_executed": false,
   "command_plan_prepared": true,
+  "final_verification": {
+    "checkout": "CLEAN_DETACHED_EVIDENCE_COMMIT",
+    "image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "reference_host_full_suite": {
+      "failed": 0,
+      "passed": 3002,
+      "wall_seconds": 361.57,
+      "warnings": 1
+    },
+    "target_exact_image_critical_suite": {
+      "failed": 0,
+      "passed": 55,
+      "wall_seconds": 1.28
+    },
+    "target_exact_image_full_suite": {
+      "failed": 0,
+      "passed": 3002,
+      "publication_required_xfailed": 0,
+      "wall_seconds": 348.67,
+      "warnings": 1,
+      "xfailed": 0
+    }
+  },
   "isolation": {
     "checkpoints": 0,
     "final_test_runtime_accesses": 0,
@@ -63,7 +86,7 @@
     "training_operations": 0
   },
   "qualified_docker_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
-  "rb21_target_generation_readiness_v2_sha256": "089552354f74f7cb84b6831bf394328d58734ff17d60f79e30a498dfaee39117",
+  "rb21_target_generation_readiness_v2_sha256": "b4333eca3ca00e4e2ecdd2c8ca68b7f7df9ad072468ab65699940dcc9329c5c0",
   "schema_version": "rvt-rb21-target-generation-readiness/v2",
   "scientific_semantics_changed": false,
   "scientific_source_checkpoint": "a08f6f506333a20b71b60fc366c4a36d15e289ae",
