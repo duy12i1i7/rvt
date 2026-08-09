@@ -1,0 +1,426 @@
+{
+ "chunking_replay": {
+  "execution_ids_differ": true,
+  "identical_after_canonical_sort": true,
+  "partition_a_tasks": 2,
+  "partition_b_tasks": 2
+ },
+ "critical_regressions": {
+  "failed": 0,
+  "modules": [
+   "transport_semantics",
+   "timeout_path",
+   "four_epoch_transition_stress",
+   "target_v4_epoch_isolation",
+   "s2_common_initial_state",
+   "message_epoch_isolation",
+   "rb15_v2_producer",
+   "phase5r_world_output_repair",
+   "rb17_generation_contract",
+   "rb18_structural_canary",
+   "rb19_final_semantic_audit"
+  ],
+  "passed": 257
+ },
+ "current_root": {
+  "ambiguous_current_contracts": [],
+  "current_nodes_pointing_only_to_superseded": [],
+  "missing_required_contracts": [],
+  "self_consistent": true,
+  "sha256": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+  "target_v4_explicitly_cited": true,
+  "target_v4_matches_contract": true,
+  "target_v4_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+ },
+ "environment": {
+  "detached_path": "/private/tmp/claude-501/-Users-udy-rvt/11a6e7dd-155e-4e21-8fa2-4f8f305b038c/scratchpad/rb20_exec",
+  "environment_values_are_scientific_inputs": false,
+  "execution_source_commit": "53a51f9a9e0b169c016742313b31c59e4cccbae6",
+  "machine": "arm64",
+  "numpy_version": "2.0.2",
+  "platform": "macOS-26.5-arm64-arm-64bit",
+  "processor": "arm",
+  "python_version": "3.9.6",
+  "relevant_environment_variables": {
+   "MKL_NUM_THREADS": null,
+   "OMP_NUM_THREADS": null,
+   "PYTHONHASHSEED": null,
+   "PYTORCH_ENABLE_MPS_FALLBACK": null
+  },
+  "torch_num_threads": 8,
+  "torch_version": "2.8.0"
+ },
+ "execution": {
+  "detached_head": "53a51f9a9e0b169c016742313b31c59e4cccbae6",
+  "detached_path": "/private/tmp/claude-501/-Users-udy-rvt/11a6e7dd-155e-4e21-8fa2-4f8f305b038c/scratchpad/rb20_exec",
+  "detached_status_porcelain_lines_after": 0,
+  "detached_status_porcelain_lines_before": 0,
+  "head_matches_execution_source_commit": true,
+  "outputs_written_inside_the_tracked_tree": false,
+  "reused_development_tree": false
+ },
+ "execution_source_commit": "53a51f9a9e0b169c016742313b31c59e4cccbae6",
+ "full_suite_from_execution_source_commit": {
+  "failed": 0,
+  "passed": 2922,
+  "xfailed": 0,
+  "xpassed": 0
+ },
+ "identity_replay": {
+  "candidate_index_in_scientific_row_identity": false,
+  "distinct_candidate_ids_per_decision": [
+   9
+  ],
+  "namespaces": {
+   "namespaces_explicit": true,
+   "recoverability_evaluation_ids": 14,
+   "residual_candidate_ids": 36,
+   "residual_row_ids": 4,
+   "residual_row_vs_candidate_collision": false,
+   "residual_vs_recoverability_collision": false
+  },
+  "recomputed_not_reused": true
+ },
+ "official_counters": {
+  "final_test_accesses": 0,
+  "new_fd24_checkpoints": 0,
+  "official_recoverability_rows": 0,
+  "official_residual_rows": 0,
+  "official_scientific_shards": 0,
+  "optimizer_states": 0,
+  "study_a_n24_accesses": 0,
+  "training_operations": 0
+ },
+ "preflight_replay": {
+  "cases": [
+   "missing Target V4",
+   "wrong Target V4 hash",
+   "failed RB16 current",
+   "MISSION output current",
+   "missing orientation",
+   "candidate count != 9",
+   "KEEP online",
+   "no-eligible fallback",
+   "N24 seal broken",
+   "final-test seal broken",
+   "1800s timeout authoritative",
+   "prematurely authorized"
+  ],
+  "negative_cases": 12,
+  "negative_escapes": 0,
+  "positive_checks": 53,
+  "positive_failures": 0,
+  "positive_status": "PASS"
+ },
+ "provenance_class": "RUNTIME_CONFORMANCE_ONLY",
+ "provenance_delta": {
+  "delta_is_metadata_only": true,
+  "rb18_referenced_root": "bba1aee0430bc540f20d010b923696b5b1c51d4bfb1d92d2fa21daf2e6242da8",
+  "rb18_root_cited_target_v4": false,
+  "rb18_root_status": "SUPERSEDED_EVIDENCE",
+  "rb20_referenced_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+  "rb20_root_cites_target_v4": true,
+  "scientific_fields_changed_by_the_repair": 0
+ },
+ "rb18_case_manifest": {
+  "cases": [
+   {
+    "case_id": "c1-f1-n6-stable",
+    "decision_steps": [
+     20
+    ],
+    "family": "F1",
+    "layout_id": "train-f1-00",
+    "policy": "S1_ALWAYS_COMPACT",
+    "robots": [
+     0
+    ],
+    "role": "no changed-topology event active; small N",
+    "split": "train",
+    "team_size": 6
+   },
+   {
+    "case_id": "c2-f9-n12-dynamic",
+    "decision_steps": [
+     25
+    ],
+    "family": "F9",
+    "layout_id": "train-f9-00",
+    "policy": "S0_SCRIPTED_DIAGNOSTIC",
+    "robots": [
+     0
+    ],
+    "role": "dynamic obstacle; changed-topology candidate events; larger non-N24 N; 3 matched replicas",
+    "split": "train",
+    "team_size": 12
+   },
+   {
+    "case_id": "c3-f8-n5-degraded",
+    "decision_steps": [
+     20
+    ],
+    "family": "F8",
+    "layout_id": "validation-f8-00",
+    "policy": "S1_ALWAYS_COMPACT",
+    "robots": [
+     0
+    ],
+    "role": "communication-degraded; 3 matched replicas",
+    "split": "validation",
+    "team_size": 5
+   },
+   {
+    "case_id": "c4-f5-n8-noeligible",
+    "decision_steps": [
+     40
+    ],
+    "family": "F5",
+    "layout_id": "train-f5-00",
+    "policy": "S1_ALWAYS_COMPACT",
+    "robots": [
+     3
+    ],
+    "role": "transition-heavy family; the qualified state where all nine residual candidates are safety-infeasible",
+    "split": "train",
+    "team_size": 8
+   }
+  ],
+  "read_from_committed_artifact": true,
+  "replacement_case_used": false,
+  "replayed": true,
+  "source": "results/rvt_fd24/rb18_structural_generation_canary_v1.json#predeclared_cases"
+ },
+ "rb20_clean_detached_reproduction_sha256": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+ "rb20_evidence_commit": "recorded after this artifact is committed; see the doc",
+ "recoverability_replay": {
+  "aggregate_invalid": 0,
+  "aggregate_negative": 2,
+  "aggregate_positive": 4,
+  "aggregation_recomputed_from_raw_replicas": true,
+  "candidate_rollouts": 14,
+  "changed_topology_lifecycle_reproduced": true,
+  "decision_states": 3,
+  "determinism": {
+   "first_digest": "d4c0e906dae80ad82fb0cc742c70a8232fcf272480c4a2d7c0a018e880537c6a",
+   "identical": true,
+   "second_digest": "d4c0e906dae80ad82fb0cc742c70a8232fcf272480c4a2d7c0a018e880537c6a"
+  },
+  "replica_rule": {
+   "F8": 3,
+   "F9": 3,
+   "other": 1
+  },
+  "rollouts_exactly_matched": 14
+ },
+ "residual_determinism_replay": {
+  "candidate_ids_stable": true,
+  "result_digest_stable": true,
+  "row_sha256_stable": true,
+  "sidecar_stable": true,
+  "target_stable": true
+ },
+ "residual_replay": {
+  "candidate_evaluations": 36,
+  "counts": {
+   "attempted_expert_decision_states": 4,
+   "execution_invalid_states": 0,
+   "infrastructure_failures": 0,
+   "labeled_states": 3,
+   "no_eligible_states": 1,
+   "target_rows_emitted": 3
+  },
+  "counts_consistent": true,
+  "counts_match_rb18": true,
+  "decision_states": 4,
+  "fallback_created": false,
+  "no_eligible_target_rows": 0,
+  "states_exactly_matched": 4,
+  "utility_records_compared": 36,
+  "utility_records_exactly_matched": 36
+ },
+ "retry_replay": {
+  "disposition_stable": true,
+  "execution_attempt_id_differs": true,
+  "row_sha256_stable": true,
+  "scientific_view_identical": true
+ },
+ "schema_round_trip_replay": [
+  {
+   "candidate_context_identical": true,
+   "case_id": "c1-f1-n6-stable",
+   "edge_index_identical": true,
+   "edge_tensor_identical": true,
+   "node_tensor_identical": true,
+   "orientation": [
+    0.9994562188340212,
+    0.03297372641969908
+   ],
+   "orientation_exact": true,
+   "recoverability_logit_identical": true,
+   "residual_output_identical": true,
+   "row_payload_round_trip_exact": true,
+   "row_sha256": "ab9a552b4157fedb2d6154ba421aae123034c63b1e3bc13df3bfd7949db11321",
+   "target_world": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "candidate_context_identical": true,
+   "case_id": "c2-f9-n12-dynamic",
+   "edge_index_identical": true,
+   "edge_tensor_identical": true,
+   "node_tensor_identical": true,
+   "orientation": [
+    0.9994523142183656,
+    0.03309186612377009
+   ],
+   "orientation_exact": true,
+   "recoverability_logit_identical": true,
+   "residual_output_identical": true,
+   "row_payload_round_trip_exact": true,
+   "row_sha256": "65450f21a59454256d343a4cceb316deaf819d7402bb8c2f858051f452bd7081",
+   "target_world": [
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "candidate_context_identical": true,
+   "case_id": "c3-f8-n5-degraded",
+   "edge_index_identical": true,
+   "edge_tensor_identical": true,
+   "node_tensor_identical": true,
+   "orientation": [
+    0.9994529751319129,
+    0.033071898947115
+   ],
+   "orientation_exact": true,
+   "recoverability_logit_identical": true,
+   "residual_output_identical": true,
+   "row_payload_round_trip_exact": true,
+   "row_sha256": "0a80d3d39cd651089fdd5ed0ff13f9078860af9d36f646bc33c1921a8b30c02f",
+   "target_world": [
+    0.0,
+    0.0
+   ]
+  }
+ ],
+ "schema_version": "rvt-rb20-clean-detached-reproduction/v1",
+ "semantic_projection": {
+  "definition": "every scientific and executable field of the canary; only version and provenance bookkeeping that legitimately changed additively is excluded",
+  "dispositions_excluded": false,
+  "exact_match": true,
+  "excluded_per_residual_record": [
+   "seconds"
+  ],
+  "excluded_per_writer_record": [
+   "path"
+  ],
+  "excluded_recoverability_rb20_only": [
+   "recomputed_aggregate_labels",
+   "aggregation_recomputation_agrees"
+  ],
+  "excluded_top_level": [
+   "source_commit",
+   "contract_root",
+   "timing",
+   "rb18_structural_generation_canary_sha256",
+   "schema_version",
+   "provenance_class",
+   "SCIENTIFIC_DATASET",
+   "canary_namespace",
+   "environment",
+   "current_root"
+  ],
+  "excluded_writer_top_level": [
+   "sidecar_path",
+   "written_outside_the_tracked_tree"
+  ],
+  "identities_excluded": false,
+  "included_top_level": [
+   "chunking",
+   "counts",
+   "dry_run_writer",
+   "namespace_coexistence",
+   "predeclared_cases",
+   "recoverability",
+   "recoverability_determinism",
+   "residual",
+   "residual_counts",
+   "residual_counts_consistent",
+   "residual_determinism",
+   "retry",
+   "schema_round_trip",
+   "source",
+   "world_target_round_trip"
+  ],
+  "labels_excluded": false,
+  "raw_predicates_excluded": false,
+  "rb18_projection_sha256": "53c9bdc24b0a85027ee9c482c495d479c7f733e88819e2df9a50632ecc1f8435",
+  "rb20_projection_sha256": "53c9bdc24b0a85027ee9c482c495d479c7f733e88819e2df9a50632ecc1f8435",
+  "schema_payloads_excluded": false,
+  "semantic_mismatch_count": 0,
+  "source_outcomes_excluded": false,
+  "streams_excluded": false,
+  "targets_excluded": false,
+  "traces_excluded": false,
+  "utilities_excluded": false
+ },
+ "semantic_repair_performed": false,
+ "source_episode_comparison": {
+  "episodes": 4,
+  "exact_matches": 4,
+  "mismatches": []
+ },
+ "status": "REPRODUCED_EXACTLY",
+ "target_v4": {
+  "contract_id": "rvt-target-v4-execution-contract/v1",
+  "resolved_explicitly_from_current_root": true,
+  "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+ },
+ "world_target_round_trip_replay": {
+  "frame": "WORLD",
+  "input": [
+   0.075,
+   -0.0375
+  ],
+  "no_rotation": true,
+  "recovered": [
+   0.075,
+   -0.0375
+  ],
+  "scale_preserved": true,
+  "sign_preserved": true,
+  "x_preserved": true,
+  "y_preserved": true
+ },
+ "writer_replay": {
+  "encoding": "canonical sorted-key ASCII JSON, the official encoder",
+  "mode": "RUNTIME_CONFORMANCE_ONLY",
+  "official_shard_paths_written": 0,
+  "peak_bytes": 1465,
+  "records": [
+   {
+    "bytes": 1461,
+    "readback_exact": true,
+    "readback_sha256": "ab9a552b4157fedb2d6154ba421aae123034c63b1e3bc13df3bfd7949db11321",
+    "written_sha256": "ab9a552b4157fedb2d6154ba421aae123034c63b1e3bc13df3bfd7949db11321"
+   },
+   {
+    "bytes": 1460,
+    "readback_exact": true,
+    "readback_sha256": "65450f21a59454256d343a4cceb316deaf819d7402bb8c2f858051f452bd7081",
+    "written_sha256": "65450f21a59454256d343a4cceb316deaf819d7402bb8c2f858051f452bd7081"
+   },
+   {
+    "bytes": 1465,
+    "readback_exact": true,
+    "readback_sha256": "0a80d3d39cd651089fdd5ed0ff13f9078860af9d36f646bc33c1921a8b30c02f",
+    "written_sha256": "0a80d3d39cd651089fdd5ed0ff13f9078860af9d36f646bc33c1921a8b30c02f"
+   }
+  ],
+  "sidecar_sha256": "202b9ac730991642a3ea97a4980ee5fb7b72bf53b83ed3193dd1cf3c719e3b73",
+  "written_outside_the_tracked_tree": true
+ }
+}
