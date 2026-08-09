@@ -1,0 +1,36 @@
+{
+ "decision_snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+ "dense_row": {
+  "base_action_world_acceleration": [
+   0.5308556128310443,
+   0.04603911760531083
+  ],
+  "episode_id": "c2-f9-n12-dynamic/episode-0",
+  "feature_sha256": "b3b146df03e294b360cc36c57677324b789fb9330c6c583c367a8bba5eb556ce",
+  "residual_target_world_acceleration": [
+   0.0,
+   0.0
+  ],
+  "robot_role_id": "role-0000",
+  "scenario_family": "F9",
+  "split": "train",
+  "team_size": 12,
+  "timestep": 25
+ },
+ "disposition": "LABELED",
+ "ego_graph_record_sha256": "66a611fde95ad8f94803cc85533b5205dadb1c46f1bca63b9bf0b817fbd88453",
+ "ego_graph_schema_version": "rvt-ego-graph/v2",
+ "matched_stream_identity_sha256": "eeb9aea16f5812b10f71e741330ebfc415b41b5d4ae4742e484a73a4f8719da8",
+ "mission_orientation_cos_sin": [
+  0.9994523142183656,
+  0.03309186612377009
+ ],
+ "model_input_schema_version": "rvt-fd24-model-input/v2",
+ "model_schema_version": "rvt-fd24-model/v2",
+ "residual_expert_spec_sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+ "residual_scientific_row_id": "0e4d41cfa9fd9f8d6441cb91d5957ad88ab8c7bd1ae1c98e833b38931c477b01",
+ "schema_version": "rvt-residual-supervision-row/v2",
+ "selected_candidate_evaluation_id": "db7aa0485236fb57185f016b0de1b39bb8ef6d4176c857d1a63f9b7fae03f27e",
+ "selected_candidate_index": 4,
+ "selector_sha256": "535c4e639d598bb75bc4822cdbbc320c48c69a7f86f8d5b96dec2dd5ace9a123"
+}
