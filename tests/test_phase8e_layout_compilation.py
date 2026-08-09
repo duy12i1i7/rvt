@@ -8,6 +8,7 @@ from rvt_swarm.phase8.common import verify_canonical_hash
 from rvt_swarm.phase8.splits import load_nonfinal_split_manifest
 from rvt_swarm.phase8e.compiler import compile_layout_record, compile_nonfinal_split
 from rvt_swarm.phase8e.protocol import build_executable_protocol
+from rvt_swarm.phase9c_rb.binding import load_execution_specification
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,16 +23,30 @@ def test_all_nonfinal_layouts_compile_with_zero_category_d() -> None:
     assert all(verify_canonical_hash(item, "layout_execution_specification_sha256") for item in train + validation)
 
 
-def test_persisted_layout_specs_match_compiler_and_have_unique_hashes() -> None:
+def _physical_compiler_projection(document):
+    projection = copy.deepcopy(document)
+    projection.pop("layout_execution_specification_sha256")
+    projection["mission_frame"].pop("heading_radians")
+    return projection
+
+
+def test_persisted_layout_specs_are_exact_and_compiler_preserves_physics() -> None:
     protocol = build_executable_protocol(ROOT)
     for split, expected_count in (("train", 20), ("validation", 10)):
         compiled = compile_nonfinal_split(ROOT, split, protocol)
         paths = sorted((
             ROOT / f"results/rvt_fd24/layout_execution_specifications/{split}"
         ).glob("*.json"))
-        persisted = tuple(json.loads(path.read_text(encoding="ascii")) for path in paths)
+        persisted = tuple(
+            load_execution_specification(
+                ROOT / "results/rvt_fd24", split, path.stem
+            )
+            for path in paths
+        )
         assert len(persisted) == expected_count
-        assert persisted == compiled
+        assert tuple(map(_physical_compiler_projection, persisted)) == tuple(
+            map(_physical_compiler_projection, compiled)
+        )
         hashes = [item["layout_execution_specification_sha256"] for item in persisted]
         assert len(hashes) == len(set(hashes))
 

@@ -23,7 +23,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Dict, Mapping, Optional, Sequence, Tuple
 
-from ..phase8.common import canonical_json_bytes
+from ..phase8.common import canonical_json_bytes, verify_canonical_hash
 from ..runtime_configuration import DEFAULT_RUNTIME_CONFIG, RuntimeConfig
 from ..topology_registry import COMPACT, LINE
 from . import SCHEMA_VERSION
@@ -100,7 +100,17 @@ def load_execution_specification(root: Path, split: str, layout_id: str) -> Dict
     path = root / "layout_execution_specifications" / split / f"{layout_id}.json"
     if not path.exists():
         raise BindingError(f"no compiled execution specification at {path}")
-    return json.loads(path.read_text())
+    specification = json.loads(path.read_text(encoding="ascii"))
+    if not verify_canonical_hash(
+        specification, "layout_execution_specification_sha256"
+    ):
+        raise BindingError(f"compiled execution specification hash mismatch at {path}")
+    source = specification.get("source_layout")
+    if not isinstance(source, Mapping):
+        raise BindingError(f"compiled execution specification lacks source identity at {path}")
+    if source.get("split") != split or source.get("layout_id") != layout_id:
+        raise BindingError(f"compiled execution specification identity mismatch at {path}")
+    return specification
 
 
 def build_binding(specification: Mapping[str, object], *, team_size: int,

@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import json
 import pathlib
+import shutil
 
 import pytest
 
@@ -93,6 +94,18 @@ def test_binding_rejects_a_mismatched_protocol_hash() -> None:
     with pytest.raises(BindingError):
         build_binding(spec, team_size=6, source_policy=P.S1, protocol=PROTOCOL,
                       target_contract=TARGET, source_policy_contracts=POLICIES)
+
+
+def test_loader_rejects_a_modified_compiled_artifact(tmp_path) -> None:
+    source = ROOT / "layout_execution_specifications/train/train-f2-01.json"
+    target = tmp_path / "layout_execution_specifications/train/train-f2-01.json"
+    target.parent.mkdir(parents=True)
+    shutil.copyfile(source, target)
+    specification = json.loads(target.read_text(encoding="ascii"))
+    specification["mission_frame"]["heading_radians"] = 0.0
+    target.write_text(json.dumps(specification), encoding="ascii")
+    with pytest.raises(BindingError, match="hash mismatch"):
+        load_execution_specification(tmp_path, "train", "train-f2-01")
 
 
 def test_binding_rejects_a_mismatched_target_contract_hash() -> None:
