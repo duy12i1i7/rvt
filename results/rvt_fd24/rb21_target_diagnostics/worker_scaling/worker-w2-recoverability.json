@@ -1,0 +1,4003 @@
+{
+  "benchmark": {
+    "aggregate_cpu_seconds": 450.866990795,
+    "atomic_units": 30,
+    "chunk_size_atomic_units": 1,
+    "conservative_peak_total_worker_rss_bytes": 435888128,
+    "cpu_utilization_percent_of_one_core": 197.13791676920317,
+    "peak_worker_rss_bytes_by_pid": {
+      "12": 218218496,
+      "9": 217669632
+    },
+    "results": [
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.4810000266152201e-06,
+        "atomic_unit_id": "2c60335c374c1ebba4ee0a1c55ff39dde75b024d93f2ca7fa4c8767dd608d1fa",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f1-n5-train",
+        "chunk_size": 1,
+        "cpu_seconds": 0.9150707229999999,
+        "decision_snapshot_sha256": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+        "decision_step": 20,
+        "max_rss_bytes": 212254720,
+        "pid": 9,
+        "replica_control_steps": [
+          164
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          0.8532066870000108
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 164,
+            "created_lifecycle": true,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "51ba7ccd0c1b6619589e4dcbc6bab8af2d96226db2ed0dabc05d7cfeb10a5183",
+            "initial_clone_hash": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 3,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 7.76299998506147e-06,
+        "serialized_bytes": 782,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 0.9151683869999943,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.759000042511616e-06,
+        "atomic_unit_id": "477e9c7de2f92fe96899432fa4a50f192c41a5447952ec94f5233618e33d7b8f",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f1-n5-train",
+        "chunk_size": 1,
+        "cpu_seconds": 0.424643078,
+        "decision_snapshot_sha256": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+        "decision_step": 20,
+        "max_rss_bytes": 212291584,
+        "pid": 12,
+        "replica_control_steps": [
+          95
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          0.3635152780000226
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 95,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "f7331abdf46f78c130104d44001ac7419773d0c96d2d485e7ead92291a72e0b7",
+            "initial_clone_hash": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 9.145999911197578e-06,
+        "serialized_bytes": 782,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 0.42582369000001563,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.4889999420120148e-06,
+        "atomic_unit_id": "dfecf6bf75432c1b00f6ae4e80b5f4ddeba786a07b12a5eb3ed56ee3af6f1072",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f1-n5-train",
+        "chunk_size": 1,
+        "cpu_seconds": 0.8675236579999999,
+        "decision_snapshot_sha256": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+        "decision_step": 60,
+        "max_rss_bytes": 214482944,
+        "pid": 12,
+        "replica_control_steps": [
+          167
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          0.6999231529998724
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 167,
+            "created_lifecycle": true,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "b391eadf8af7f720305194dfca4afc9676138d42770b6c541d8a3d983f113674",
+            "initial_clone_hash": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 8.634999858259107e-06,
+        "serialized_bytes": 782,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 0.867639206999911,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.1969998467975529e-06,
+        "atomic_unit_id": "533b143778fcc4270e3b40ec0903d2a53d52f327f8ef9271f89387f74e7dcdff",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f1-n5-train",
+        "chunk_size": 1,
+        "cpu_seconds": 0.3379155869999999,
+        "decision_snapshot_sha256": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+        "decision_step": 60,
+        "max_rss_bytes": 213934080,
+        "pid": 9,
+        "replica_control_steps": [
+          95
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          0.1690613549999398
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 95,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "af69de4335eca5ec070acbef404a75f0d9310e85104e9038ad96f3e11050cbbe",
+            "initial_clone_hash": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 7.442000196533627e-06,
+        "serialized_bytes": 782,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 0.3379553480001505,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.3659999897063244e-06,
+        "atomic_unit_id": "d89fdfa84134609a186a7e6b360ba4edd2c3f05deafaeb24befc464522231ac9",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f1-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 3.2020655230000004,
+        "decision_snapshot_sha256": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+        "decision_step": 20,
+        "max_rss_bytes": 216096768,
+        "pid": 9,
+        "replica_control_steps": [
+          66
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          2.8349260869999853
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 66,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "9f70411fbaa6e5ef12d0d59f930341342200cdb7c1982b1bce9bc955b54d7e49",
+            "initial_clone_hash": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 8,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          }
+        ],
+        "serialization_seconds": 8.828000090943533e-06,
+        "serialized_bytes": 925,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 3.2024480649999987,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.7990000742429402e-06,
+        "atomic_unit_id": "0ff3d9f65ad7e28aab4aec2aeaf69de6045859a4273f2cafe850d3bbaaf49983",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f1-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 2.6852631600000003,
+        "decision_snapshot_sha256": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+        "decision_step": 20,
+        "max_rss_bytes": 216055808,
+        "pid": 12,
+        "replica_control_steps": [
+          95
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          2.31993627199995
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 95,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "4b89d6eee28492bba36710a156b3b4eebf813daf900c1208785b56e0b398a6b0",
+            "initial_clone_hash": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 7.765999953335267e-06,
+        "serialized_bytes": 788,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 2.6855655809999917,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.6089999209943926e-06,
+        "atomic_unit_id": "2b36364ecf61b86f921b52076f127c289e26d5a3ce96ce299dcea2c1320076e6",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f1-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 22.475761748,
+        "decision_snapshot_sha256": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+        "decision_step": 60,
+        "max_rss_bytes": 217432064,
+        "pid": 12,
+        "replica_control_steps": [
+          600
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          21.478554061000068
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 600,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "443f0d8ca58eb69fa0b76fd51c17b881b122e1f84c52b3bb00a7a45b1b5d0352",
+            "initial_clone_hash": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 10,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "HORIZON_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 9.42799988479237e-06,
+        "serialized_bytes": 871,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 22.478173512000012,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.6439998944406398e-06,
+        "atomic_unit_id": "5a8ae1663676964dbc3e2bc21fdd45cd8b9c30db2c8f0c024495da14acf9a440",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f1-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 2.0995007589999997,
+        "decision_snapshot_sha256": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+        "decision_step": 60,
+        "max_rss_bytes": 216096768,
+        "pid": 9,
+        "replica_control_steps": [
+          95
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          1.0958932300000015
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 95,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "d06cf41d74a57376b7470539b055b80cd1688fe61e36a7f48128c0265aceeb81",
+            "initial_clone_hash": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 7.86300006438978e-06,
+        "serialized_bytes": 788,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 2.0997377599999254,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 1.8999999156221747e-06,
+        "atomic_unit_id": "309986e7d0cb127908078ec0ed445c7ac0301760dbfb75d540ed805ea83a796a",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f5-n8-train",
+        "chunk_size": 1,
+        "cpu_seconds": 5.7796402,
+        "decision_snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+        "decision_step": 40,
+        "max_rss_bytes": 216096768,
+        "pid": 9,
+        "replica_control_steps": [
+          126
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          4.90206205100003
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 126,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "94f2e887e6606abf7d851f201369a0d7c09b9d19c08f063df7ab48547fa660e1",
+            "initial_clone_hash": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 8.516999969288008e-06,
+        "serialized_bytes": 872,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 5.780320836999863,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.6179999420273816e-06,
+        "atomic_unit_id": "22dd188b93f357ddb79a0e600815d8ceb11b81b753ebae8fdab6a8e28f704c83",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f5-n8-train",
+        "chunk_size": 1,
+        "cpu_seconds": 3.1994081009999995,
+        "decision_snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+        "decision_step": 40,
+        "max_rss_bytes": 216096768,
+        "pid": 9,
+        "replica_control_steps": [
+          96
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          2.321493751999924
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 96,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "971948ebe9b370d3db692ebeb6583cc605d8d9f3effe5ec7847853c6db0225b4",
+            "initial_clone_hash": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 8.04200021775614e-06,
+        "serialized_bytes": 782,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 3.1997985189998417,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 1.824000037231599e-06,
+        "atomic_unit_id": "01e22a6ddcf7766cc7c6403afdfe167280caebe9f9f85d01136ba1a4c9ca73d7",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f5-n8-train",
+        "chunk_size": 1,
+        "cpu_seconds": 4.428246222000002,
+        "decision_snapshot_sha256": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+        "decision_step": 60,
+        "max_rss_bytes": 216096768,
+        "pid": 9,
+        "replica_control_steps": [
+          123
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          2.9465593370000533
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 123,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "1cd5436caf52e97cad1de7a6331035bad659201ffb8dedd63c42a360040ce44d",
+            "initial_clone_hash": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.4715000133946887e-05,
+        "serialized_bytes": 872,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 4.428767181000012,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.883000095403986e-06,
+        "atomic_unit_id": "95c609aaef2b88098e77df9e0407079f63b9d02eb1d327784f7ef19e68181fe3",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f5-n8-train",
+        "chunk_size": 1,
+        "cpu_seconds": 2.6810536220000003,
+        "decision_snapshot_sha256": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+        "decision_step": 60,
+        "max_rss_bytes": 216096768,
+        "pid": 9,
+        "replica_control_steps": [
+          96
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          1.1902909769999042
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 96,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "ca15bdfe0633b66be53ce1444deb7fc68cf4e1fd049960cb5f025f72e345a99c",
+            "initial_clone_hash": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 8.312000090882066e-06,
+        "serialized_bytes": 782,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 2.6813707290000366,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 1.9539997992978897e-06,
+        "atomic_unit_id": "41ac37a53b9043fa8a51babbbd4353bb792c126c4846149992bc01e7140a651d",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f5-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 12.206205853,
+        "decision_snapshot_sha256": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+        "decision_step": 40,
+        "max_rss_bytes": 217473024,
+        "pid": 9,
+        "replica_control_steps": [
+          121
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          10.303328110999928
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 121,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "4f85d192f50689e77daa9d9f81ca8757dcb313596ee170a9df42442431a802dd",
+            "initial_clone_hash": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 8.640000032755779e-06,
+        "serialized_bytes": 878,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 12.207668307000176,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.5139999050006736e-06,
+        "atomic_unit_id": "c32555850848a9e2374d8ddf035198027bab15c6cb99ebafd9cbe9d008da4aee",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f5-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 7.208954191,
+        "decision_snapshot_sha256": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+        "decision_step": 40,
+        "max_rss_bytes": 217432064,
+        "pid": 12,
+        "replica_control_steps": [
+          95
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          5.285167969999975
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 95,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "5f615e4292928ccb8b7b371ea1228afd26fe3762770aa811a92176b6f796eee4",
+            "initial_clone_hash": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 7.810999932189588e-06,
+        "serialized_bytes": 788,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 7.209740191000037,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 1.7980000848183408e-06,
+        "atomic_unit_id": "8cf7609b546982e1cc9ef2f7085e1e2daa106a701ecab10967c2a86aba88f8e7",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f5-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 10.947023211000001,
+        "decision_snapshot_sha256": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+        "decision_step": 60,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          124
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          7.832869839000068
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 124,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "134e6b65df9443724f44d8b623193815d36a05aec0545f8af1a56177ccd915dc",
+            "initial_clone_hash": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 8.726000032766024e-06,
+        "serialized_bytes": 878,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 10.948213893999991,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.8759999420581153e-06,
+        "atomic_unit_id": "9c67ee1d7fae7f5fd28cc809dbf2d6d7a8388b00c76f03bbdd89e19602775682",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f5-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 6.105743625999999,
+        "decision_snapshot_sha256": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+        "decision_step": 60,
+        "max_rss_bytes": 217473024,
+        "pid": 9,
+        "replica_control_steps": [
+          95
+        ],
+        "replica_count": 1,
+        "replica_indices": [
+          0
+        ],
+        "replica_seconds": [
+          2.9873389280000993
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 95,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "0f1eb5c0e4ced3a0512ec0b0e5f553d1f7c10f1b92d86bc106b0be698aa614ef",
+            "initial_clone_hash": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 0,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.0810999810928479e-05,
+        "serialized_bytes": 788,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 6.10648229100002,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 1.8999999156221747e-06,
+        "atomic_unit_id": "10c586cd7f88834f545334894c18aad094caa256b23bf13a7faa223540ebb3a2",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f8-n5-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 12.235580026000001,
+        "decision_snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+        "decision_step": 20,
+        "max_rss_bytes": 217473024,
+        "pid": 9,
+        "replica_control_steps": [
+          131,
+          131,
+          58
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          5.729224527000042,
+          5.405288989000155,
+          1.0144218540001475
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 131,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "021df3e054d81df336d4c4368b6a68d8b6ad54cc4ca45d7a827587587fa97430",
+            "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 3,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 131,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "a8a86b8c9e8b9c2dc20da04feadff0cf8ab5bf216ff4281bc54b790c34db323d",
+            "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 4,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 58,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "a43f9b58497e83a6b4e1a072c52c14ff4f260d5dc23002254566399482e70c94",
+            "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          }
+        ],
+        "serialization_seconds": 1.3726000133829075e-05,
+        "serialized_bytes": 2026,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 12.237622611999996,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.7239999579032883e-06,
+        "atomic_unit_id": "d7013ba101bd1cf5d25e59af81b2d2bbf9045ddcd9ac936f8b38d035bb150d2c",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f8-n5-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 13.985088225999995,
+        "decision_snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+        "decision_step": 20,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          108,
+          109,
+          108
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          4.467522676000044,
+          4.88324878200001,
+          4.547404626000116
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 108,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "a7202bf66dcef0238e12fb6042a74fa5453a2b976793060e8f361f2be3b74f76",
+            "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 1,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 109,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "0f8d546146d04f92fad7005c7ceb12b313cd820a0d934e0d59bab2b558b08ec6",
+            "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+            "label": 1,
+            "replica_index": 1,
+            "safety_infeasible_robots": 4,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 108,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "1217f40142b750a01cb57162a613571dd138ced74f3086b8cadc9ab87d07e0a3",
+            "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+            "label": 1,
+            "replica_index": 2,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.3261000049169525e-05,
+        "serialized_bytes": 1654,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 13.98656849300005,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.229000074294163e-06,
+        "atomic_unit_id": "b2cb10ecbd8d69610c20895b02305ce87ae29cbf8fb6c2b9bf3a9b53e6660bee",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f8-n5-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 20.398181885,
+        "decision_snapshot_sha256": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+        "decision_step": 40,
+        "max_rss_bytes": 217473024,
+        "pid": 9,
+        "replica_control_steps": [
+          126,
+          130,
+          128
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          6.079251596999939,
+          7.7736166720001165,
+          6.1770539350000035
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 126,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "5a4eb247964e6d762a029c2b0e0fb210bf01cb876571a8013cd329a3a532c626",
+            "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 130,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "5d3d6b5d2995344f6eef172f7af1520f7e30832944ebc44e6cee863aea6646fe",
+            "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 128,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "a90072d4bd9ecd69763614d330b695b9b85bc0e4519bbb46ad1522e418aac0f5",
+            "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.3836999869454303e-05,
+        "serialized_bytes": 1921,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 20.40148350100003,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.9590002011682373e-06,
+        "atomic_unit_id": "cd88cc6783579234985036ecb2d659f7b5f6a24ded3842c0de34adf7e226e92b",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f8-n5-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 14.053068001,
+        "decision_snapshot_sha256": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+        "decision_step": 40,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          108,
+          108,
+          108
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          3.9805169610001485,
+          4.082496626000193,
+          5.620443661000081
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 108,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "9d202b84eddab2784cd3fd8c32e5d5af8098a642612c0add83ef8c774ed99fda",
+            "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 108,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "7110fe8f0db0a674fbb0f117edcd5cfd15b01dd4b892884d949886d861950654",
+            "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+            "label": 1,
+            "replica_index": 1,
+            "safety_infeasible_robots": 3,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 108,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "015d9fe36c6a6843cf9a39c052fae0370297f1b8b02cb42b6fd74d1e044a6bee",
+            "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+            "label": 1,
+            "replica_index": 2,
+            "safety_infeasible_robots": 2,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.3361999890548759e-05,
+        "serialized_bytes": 1654,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 14.054467680000016,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.0280001535866177e-06,
+        "atomic_unit_id": "fadc7a59134d7d6124f8b24dc2d0b55ba98fa83d1d11d41b68da44c1142f0699",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f8-n16-train",
+        "chunk_size": 1,
+        "cpu_seconds": 70.027349899,
+        "decision_snapshot_sha256": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+        "decision_step": 20,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          128,
+          127,
+          128
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          23.488690417999806,
+          22.681630523999956,
+          23.076060520999818
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 128,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "b04c2b5fc7e5926a6adaf20ef240ca6d3782f92689128b51346d299148378d11",
+            "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 127,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "06eb1dc4cc3064ec4e93dc9b427da95348070748528af0fa0e9a2f96110e32ce",
+            "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 128,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "53e1fdd0d2d752c22b3b403dea150313b66c776dc582ca19d157057c19fa8f5f",
+            "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 6,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.374799990117026e-05,
+        "serialized_bytes": 1917,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 70.03658698699996,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.8709999949351186e-06,
+        "atomic_unit_id": "1a85cf5906569bf1ccdc8ac1a411259aaacf616ece1d62cf6bf92575e4045c81",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f8-n16-train",
+        "chunk_size": 1,
+        "cpu_seconds": 53.666377408,
+        "decision_snapshot_sha256": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+        "decision_step": 20,
+        "max_rss_bytes": 217473024,
+        "pid": 9,
+        "replica_control_steps": [
+          107,
+          107,
+          107
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          17.87485007500004,
+          17.414453483999978,
+          17.570546029999832
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 107,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "97af645afbfc8989d5e2e82543d6d80cfe8896bb94c493af74e429d42c212268",
+            "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 8,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 107,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "7808adb0eddd204046ebed8ee726759a152ab64ec8fb4ec869cde38c2eba0f28",
+            "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+            "label": 1,
+            "replica_index": 1,
+            "safety_infeasible_robots": 8,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 107,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "78948cbf23f52a34ea01c88cfbb2d76338691d394c8b3756a59fadcbacfeeff1",
+            "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+            "label": 1,
+            "replica_index": 2,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.259400005437783e-05,
+        "serialized_bytes": 1650,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 53.6741167969999,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 1.76799994733301e-06,
+        "atomic_unit_id": "f30fb6fe6202beaf4d352bfe9e5b302223a8045ed1746fd75680551eba06dcb7",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f8-n16-train",
+        "chunk_size": 1,
+        "cpu_seconds": 78.03287488499998,
+        "decision_snapshot_sha256": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+        "decision_step": 40,
+        "max_rss_bytes": 217669632,
+        "pid": 9,
+        "replica_control_steps": [
+          131,
+          130,
+          131
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          24.06842906499992,
+          25.353573104999896,
+          25.86026825099998
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 131,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "6a428eaca2514565ff06e5d9df671f8776cccb8eb1e4810b2da83296705511ff",
+            "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 130,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "4bf5c269de0d31f38892973a87a63f8b65258d1f65381ed74c3186d7cca62b17",
+            "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 131,
+            "created_lifecycle": true,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "d9ee03ad924cddf5cee40d25fd4f0df9105884fbb314502b893f49bc4cc9b059",
+            "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.3121999927534489e-05,
+        "serialized_bytes": 1917,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 78.04326979300004,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 2.043999984380207e-06,
+        "atomic_unit_id": "7ced72e2736228a30de2daa581ceccc57b9ad96359650025438cb0123d5c724b",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f8-n16-train",
+        "chunk_size": 1,
+        "cpu_seconds": 46.85906871499998,
+        "decision_snapshot_sha256": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+        "decision_step": 40,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          107,
+          107,
+          107
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          15.302645587000143,
+          14.52291005799998,
+          14.309027206999872
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 107,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "9056be9648488e624332ac8d149c3e928a23cd1a97f66a34eb4bcdae5ca7cfba",
+            "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 107,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "bb83fcfc08a21fe302aa2bf8954a1306e02e71296b11ad9f75f50aa73eb13084",
+            "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+            "label": 1,
+            "replica_index": 1,
+            "safety_infeasible_robots": 8,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 107,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "b761f99078c82373af3cca5c6abdb4bc81378a853d525aa695f7af92916580a7",
+            "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+            "label": 1,
+            "replica_index": 2,
+            "safety_infeasible_robots": 8,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.3967000086267944e-05,
+        "serialized_bytes": 1650,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 46.86488054200004,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.195999968535034e-06,
+        "atomic_unit_id": "60230be95b7893f0161e095b52c96062f885b53d25e6d15a552f5b54512b2d02",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f9-n12-train",
+        "chunk_size": 1,
+        "cpu_seconds": 3.523744860999983,
+        "decision_snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+        "decision_step": 25,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          51,
+          51,
+          52
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          0.9804203600001529,
+          0.9823416680001174,
+          1.0172743180000907
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 51,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "919661ef900cd9bb7ee363323e6236e0254fe8e23f951ed6e96ad71fd166c1c4",
+            "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 51,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "54f89261aa92353279ad00930d669ffde75e5a34825c1a42b57426de7b1c1f23",
+            "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 6,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 52,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "13829e2beeebbdbf7249ab4a9d7956924af068f910300fcdfedeef9757a430c4",
+            "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          }
+        ],
+        "serialization_seconds": 1.436200000171084e-05,
+        "serialized_bytes": 2061,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 3.524077158999944,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.10099983632972e-06,
+        "atomic_unit_id": "932c57a51f6238281ad204a0be21214f75e00637a0ae02da8807966d7bbf1f53",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f9-n12-train",
+        "chunk_size": 1,
+        "cpu_seconds": 3.5138294369999983,
+        "decision_snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+        "decision_step": 25,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          51,
+          51,
+          52
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          0.999436969999806,
+          0.9734971070001848,
+          1.0113928600001145
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 51,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "919661ef900cd9bb7ee363323e6236e0254fe8e23f951ed6e96ad71fd166c1c4",
+            "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 51,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "54f89261aa92353279ad00930d669ffde75e5a34825c1a42b57426de7b1c1f23",
+            "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 6,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 52,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "13829e2beeebbdbf7249ab4a9d7956924af068f910300fcdfedeef9757a430c4",
+            "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 7,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          }
+        ],
+        "serialization_seconds": 1.5103000123417587e-05,
+        "serialized_bytes": 2235,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 3.514105241000152,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 1,
+        "aggregation_seconds": 1.6970000160654308e-06,
+        "atomic_unit_id": "643a0d8ce6beff283f63501c218156928a9e489e3bb0bd7f5df97bdb9eaa9ca2",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f9-n12-train",
+        "chunk_size": 1,
+        "cpu_seconds": 22.40815066099998,
+        "decision_snapshot_sha256": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+        "decision_step": 60,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          366,
+          368,
+          367
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          6.943903829999954,
+          7.034676126000022,
+          6.979174315999899
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 366,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "300224819254ca458d491444a799e676c3e0485c088579ee2ab7b62bd6ad8b67",
+            "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+            "label": 1,
+            "replica_index": 0,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 368,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "5d7616da2a6cd89d8360414e43442825cbc88b2cd91ea738f9517f5f1576ff88",
+            "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+            "label": 1,
+            "replica_index": 1,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 367,
+            "created_lifecycle": false,
+            "disposition": "RECOVERABLE_POSITIVE",
+            "failed_predicates": [],
+            "final_state_hash": "f6658872b5662b94152ed272d45aef0fdbc4731b46f8c2d263fc78f3dd8ad88c",
+            "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+            "label": 1,
+            "replica_index": 2,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.2791000017386978e-05,
+        "serialized_bytes": 1650,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 22.410401083000124,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.545999905123608e-06,
+        "atomic_unit_id": "c2da98a9c448878cfe890335d27414a8a96dc1a0a23d28b86c3a7491ba278838",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f9-n12-train",
+        "chunk_size": 1,
+        "cpu_seconds": 22.347410354000004,
+        "decision_snapshot_sha256": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+        "decision_step": 60,
+        "max_rss_bytes": 217669632,
+        "pid": 9,
+        "replica_control_steps": [
+          366,
+          368,
+          367
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          6.963808946999961,
+          7.002613813999915,
+          6.936444308999853
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 366,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "300224819254ca458d491444a799e676c3e0485c088579ee2ab7b62bd6ad8b67",
+            "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 368,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "5d7616da2a6cd89d8360414e43442825cbc88b2cd91ea738f9517f5f1576ff88",
+            "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 367,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "f6658872b5662b94152ed272d45aef0fdbc4731b46f8c2d263fc78f3dd8ad88c",
+            "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "GOAL_COMPLETE"
+          }
+        ],
+        "serialization_seconds": 1.5052999970066594e-05,
+        "serialized_bytes": 1920,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 22.349937627000145,
+        "worker_count": 2,
+        "worker_id": 9
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.0319998839113396e-06,
+        "atomic_unit_id": "03aa5593eef4eef0e85ba09d5e9c845d1509cfc769f0ebeffb4289e89f0a05e0",
+        "attempt_index": 0,
+        "candidate_topology": 2,
+        "case_id": "rb21-f9-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 2.117235830999988,
+        "decision_snapshot_sha256": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+        "decision_step": 25,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          29,
+          29,
+          29
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          0.19093756999996003,
+          0.18993565599998874,
+          0.18858444299985422
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 2,
+            "control_steps": 29,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "413794c64863e3fbfefec3f4645daecc2768f71556d030b87f6d8e1faf424cb7",
+            "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 29,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "a5270303a8db5754e1c2276c08035e2a61dfed3c52cd166bd1b715d8eec847ec",
+            "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 2,
+            "control_steps": 29,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete"
+            ],
+            "final_state_hash": "2bacff8067f9eac99ff9af7e9ba1830b0588e50f4af35f5058b9e29eabd2e83b",
+            "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          }
+        ],
+        "serialization_seconds": 1.4266000107454602e-05,
+        "serialized_bytes": 2066,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 2.1174490629998672,
+        "worker_count": 2,
+        "worker_id": 12
+      },
+      {
+        "aggregate_label": 0,
+        "aggregation_seconds": 2.2849999368190765e-06,
+        "atomic_unit_id": "673108805d3f62f4207ccd55359bed381170616afa54d0f92ea489e04af32512",
+        "attempt_index": 0,
+        "candidate_topology": 5,
+        "case_id": "rb21-f9-n16-validation",
+        "chunk_size": 1,
+        "cpu_seconds": 2.1350113439999916,
+        "decision_snapshot_sha256": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+        "decision_step": 25,
+        "max_rss_bytes": 218218496,
+        "pid": 12,
+        "replica_control_steps": [
+          29,
+          29,
+          29
+        ],
+        "replica_count": 3,
+        "replica_indices": [
+          0,
+          1,
+          2
+        ],
+        "replica_seconds": [
+          0.19082117099992502,
+          0.189778054000044,
+          0.1909604740001214
+        ],
+        "replicas": [
+          {
+            "candidate_topology": 5,
+            "control_steps": 29,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "413794c64863e3fbfefec3f4645daecc2768f71556d030b87f6d8e1faf424cb7",
+            "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+            "label": 0,
+            "replica_index": 0,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 29,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "a5270303a8db5754e1c2276c08035e2a61dfed3c52cd166bd1b715d8eec847ec",
+            "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+            "label": 0,
+            "replica_index": 1,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          },
+          {
+            "candidate_topology": 5,
+            "control_steps": 29,
+            "created_lifecycle": false,
+            "disposition": "VALID_TASK_NEGATIVE",
+            "failed_predicates": [
+              "candidate_commitment_valid",
+              "collision_free_complete_horizon",
+              "downstream_goal_complete",
+              "protocol_resolved",
+              "safety_projection_resolved",
+              "target_metric_v3_dwell_complete",
+              "transition_execution_valid"
+            ],
+            "final_state_hash": "2bacff8067f9eac99ff9af7e9ba1830b0588e50f4af35f5058b9e29eabd2e83b",
+            "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+            "label": 0,
+            "replica_index": 2,
+            "safety_infeasible_robots": 9,
+            "safety_solver_failure_robots": 0,
+            "termination_cause": "COLLISION"
+          }
+        ],
+        "serialization_seconds": 1.4409999948838959e-05,
+        "serialized_bytes": 2240,
+        "thread_settings": {
+          "mkl_num_threads": 1,
+          "omp_num_threads": 1,
+          "openblas_num_threads": 1,
+          "torch_num_interop_threads": 1,
+          "torch_num_threads": 1
+        },
+        "unit_kind": "RECOVERABILITY",
+        "wall_seconds": 2.135234647000061,
+        "worker_count": 2,
+        "worker_id": 12
+      }
+    ],
+    "scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+    "thread_settings": {
+      "mkl_num_threads": 1,
+      "omp_num_threads": 1,
+      "openblas_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "torch_num_threads": 1
+    },
+    "throughput_atomic_units_per_second": 0.13117255474054282,
+    "wall_seconds": 228.70637885600013,
+    "workers": 2
+  },
+  "configuration": {
+    "attempt_index": 0,
+    "chunk_size_atomic_units": 1,
+    "kind": "recoverability",
+    "thread_settings": {
+      "mkl_num_threads": 1,
+      "omp_num_threads": 1,
+      "openblas_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "torch_num_threads": 1
+    },
+    "workers": 2
+  },
+  "container": {
+    "hostname": "72a477f54ce9",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.31",
+    "python": "3.9.6",
+    "root_source_commit": null
+  },
+  "distributions": {
+    "all_atomic_unit_wall_seconds": {
+      "count": 30,
+      "maximum": 78.04326979300004,
+      "mean": 15.030835824133343,
+      "median": 5.943401563999942,
+      "p90": 46.86488054200004,
+      "p95": 70.03658698699996,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "recoverability": {
+      "aggregation_seconds": {
+        "count": 30,
+        "maximum": 2.6089999209943926e-06,
+        "mean": 1.903033307826263e-06,
+        "median": 1.8795000187310507e-06,
+        "p90": 2.2849999368190765e-06,
+        "p95": 2.545999905123608e-06,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "atomic_unit_wall_seconds": {
+        "count": 30,
+        "maximum": 78.04326979300004,
+        "mean": 15.030835824133343,
+        "median": 5.943401563999942,
+        "p90": 46.86488054200004,
+        "p95": 70.03658698699996,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "atomic_units": 30,
+      "max_rss_bytes": {
+        "count": 30,
+        "maximum": 218218496.0,
+        "mean": 216845107.2,
+        "median": 217473024.0,
+        "p90": 218218496.0,
+        "p95": 218218496.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollout_control_steps": {
+        "count": 58,
+        "maximum": 600.0,
+        "mean": 132.8793103448276,
+        "median": 108.0,
+        "p90": 366.0,
+        "p95": 368.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollout_seconds": {
+        "count": 58,
+        "maximum": 25.86026825099998,
+        "mean": 7.2040293846896555,
+        "median": 4.89265541650002,
+        "p90": 22.681630523999956,
+        "p95": 24.06842906499992,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "replica_rollouts": 58,
+      "serialization_seconds": {
+        "count": 30,
+        "maximum": 1.5103000123417587e-05,
+        "mean": 1.1201566674875115e-05,
+        "median": 1.1702499932653154e-05,
+        "p90": 1.4409999948838959e-05,
+        "p95": 1.5052999970066594e-05,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "serialized_bytes": {
+        "count": 30,
+        "maximum": 2240.0,
+        "mean": 1323.3666666666666,
+        "median": 901.5,
+        "p90": 2061.0,
+        "p95": 2235.0,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      }
+    },
+    "residual": {
+      "atomic_units": 0
+    }
+  },
+  "final_test_accesses": 0,
+  "observations_after": {
+    "gpu": {
+      "gpus": [
+        {
+          "driver_version": "536.96",
+          "memory_total_mib": 32760,
+          "memory_used_mib": 620,
+          "name": "NVIDIA RTX 5000 Ada Generation",
+          "utilization_percent": 0,
+          "uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a"
+        }
+      ],
+      "visible": true
+    }
+  },
+  "observations_before": {
+    "environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "gpu": {
+      "gpus": [
+        {
+          "driver_version": "536.96",
+          "memory_total_mib": 32760,
+          "memory_used_mib": 623,
+          "name": "NVIDIA RTX 5000 Ada Generation",
+          "utilization_percent": 0,
+          "uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a"
+        }
+      ],
+      "visible": true
+    },
+    "torch": {
+      "mkl_num_threads": 1,
+      "omp_num_threads": 1,
+      "openblas_num_threads": 1,
+      "torch_num_interop_threads": 1,
+      "torch_num_threads": 1
+    }
+  },
+  "official_generation_executed": false,
+  "provenance_class": "OPERATIONAL_BENCHMARK_ONLY",
+  "qualified_image_expected": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+  "qualified_image_observed_by_host_wrapper": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+  "rb21_target_benchmark_run_sha256": "248f8ec457f40683f6231ab8cf6145d875457ba89beb4b117eb76890a3c384f9",
+  "run_id": "WORKER_W2_RECOVERABILITY",
+  "schema_version": "rvt-rb21-target-benchmark-run/v1",
+  "scientific_semantic_projection": [
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "01e22a6ddcf7766cc7c6403afdfe167280caebe9f9f85d01136ba1a4c9ca73d7",
+      "candidate_topology": 2,
+      "case_id": "rb21-f5-n8-train",
+      "decision_snapshot_sha256": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+      "decision_step": 60,
+      "replica_control_steps": [
+        123
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 123,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "1cd5436caf52e97cad1de7a6331035bad659201ffb8dedd63c42a360040ce44d",
+          "initial_clone_hash": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "03aa5593eef4eef0e85ba09d5e9c845d1509cfc769f0ebeffb4289e89f0a05e0",
+      "candidate_topology": 2,
+      "case_id": "rb21-f9-n16-validation",
+      "decision_snapshot_sha256": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+      "decision_step": 25,
+      "replica_control_steps": [
+        29,
+        29,
+        29
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 29,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "413794c64863e3fbfefec3f4645daecc2768f71556d030b87f6d8e1faf424cb7",
+          "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 29,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "a5270303a8db5754e1c2276c08035e2a61dfed3c52cd166bd1b715d8eec847ec",
+          "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 29,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "2bacff8067f9eac99ff9af7e9ba1830b0588e50f4af35f5058b9e29eabd2e83b",
+          "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "0ff3d9f65ad7e28aab4aec2aeaf69de6045859a4273f2cafe850d3bbaaf49983",
+      "candidate_topology": 5,
+      "case_id": "rb21-f1-n16-validation",
+      "decision_snapshot_sha256": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+      "decision_step": 20,
+      "replica_control_steps": [
+        95
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 95,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "4b89d6eee28492bba36710a156b3b4eebf813daf900c1208785b56e0b398a6b0",
+          "initial_clone_hash": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "10c586cd7f88834f545334894c18aad094caa256b23bf13a7faa223540ebb3a2",
+      "candidate_topology": 2,
+      "case_id": "rb21-f8-n5-validation",
+      "decision_snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+      "decision_step": 20,
+      "replica_control_steps": [
+        131,
+        131,
+        58
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 131,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "021df3e054d81df336d4c4368b6a68d8b6ad54cc4ca45d7a827587587fa97430",
+          "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 3,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 131,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "a8a86b8c9e8b9c2dc20da04feadff0cf8ab5bf216ff4281bc54b790c34db323d",
+          "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 4,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 58,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "a43f9b58497e83a6b4e1a072c52c14ff4f260d5dc23002254566399482e70c94",
+          "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "1a85cf5906569bf1ccdc8ac1a411259aaacf616ece1d62cf6bf92575e4045c81",
+      "candidate_topology": 5,
+      "case_id": "rb21-f8-n16-train",
+      "decision_snapshot_sha256": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+      "decision_step": 20,
+      "replica_control_steps": [
+        107,
+        107,
+        107
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 107,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "97af645afbfc8989d5e2e82543d6d80cfe8896bb94c493af74e429d42c212268",
+          "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 8,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 107,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "7808adb0eddd204046ebed8ee726759a152ab64ec8fb4ec869cde38c2eba0f28",
+          "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+          "label": 1,
+          "replica_index": 1,
+          "safety_infeasible_robots": 8,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 107,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "78948cbf23f52a34ea01c88cfbb2d76338691d394c8b3756a59fadcbacfeeff1",
+          "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+          "label": 1,
+          "replica_index": 2,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "22dd188b93f357ddb79a0e600815d8ceb11b81b753ebae8fdab6a8e28f704c83",
+      "candidate_topology": 5,
+      "case_id": "rb21-f5-n8-train",
+      "decision_snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+      "decision_step": 40,
+      "replica_control_steps": [
+        96
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 96,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "971948ebe9b370d3db692ebeb6583cc605d8d9f3effe5ec7847853c6db0225b4",
+          "initial_clone_hash": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "2b36364ecf61b86f921b52076f127c289e26d5a3ce96ce299dcea2c1320076e6",
+      "candidate_topology": 2,
+      "case_id": "rb21-f1-n16-validation",
+      "decision_snapshot_sha256": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+      "decision_step": 60,
+      "replica_control_steps": [
+        600
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 600,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "443f0d8ca58eb69fa0b76fd51c17b881b122e1f84c52b3bb00a7a45b1b5d0352",
+          "initial_clone_hash": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 10,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "HORIZON_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "2c60335c374c1ebba4ee0a1c55ff39dde75b024d93f2ca7fa4c8767dd608d1fa",
+      "candidate_topology": 2,
+      "case_id": "rb21-f1-n5-train",
+      "decision_snapshot_sha256": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+      "decision_step": 20,
+      "replica_control_steps": [
+        164
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 164,
+          "created_lifecycle": true,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "51ba7ccd0c1b6619589e4dcbc6bab8af2d96226db2ed0dabc05d7cfeb10a5183",
+          "initial_clone_hash": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 3,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "309986e7d0cb127908078ec0ed445c7ac0301760dbfb75d540ed805ea83a796a",
+      "candidate_topology": 2,
+      "case_id": "rb21-f5-n8-train",
+      "decision_snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+      "decision_step": 40,
+      "replica_control_steps": [
+        126
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 126,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "94f2e887e6606abf7d851f201369a0d7c09b9d19c08f063df7ab48547fa660e1",
+          "initial_clone_hash": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "41ac37a53b9043fa8a51babbbd4353bb792c126c4846149992bc01e7140a651d",
+      "candidate_topology": 2,
+      "case_id": "rb21-f5-n16-validation",
+      "decision_snapshot_sha256": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+      "decision_step": 40,
+      "replica_control_steps": [
+        121
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 121,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "4f85d192f50689e77daa9d9f81ca8757dcb313596ee170a9df42442431a802dd",
+          "initial_clone_hash": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "477e9c7de2f92fe96899432fa4a50f192c41a5447952ec94f5233618e33d7b8f",
+      "candidate_topology": 5,
+      "case_id": "rb21-f1-n5-train",
+      "decision_snapshot_sha256": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+      "decision_step": 20,
+      "replica_control_steps": [
+        95
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 95,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "f7331abdf46f78c130104d44001ac7419773d0c96d2d485e7ead92291a72e0b7",
+          "initial_clone_hash": "cda92caf19bbeaa5463915c763819d05950858afefb92649059ebccffe790ae4",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "533b143778fcc4270e3b40ec0903d2a53d52f327f8ef9271f89387f74e7dcdff",
+      "candidate_topology": 5,
+      "case_id": "rb21-f1-n5-train",
+      "decision_snapshot_sha256": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+      "decision_step": 60,
+      "replica_control_steps": [
+        95
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 95,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "af69de4335eca5ec070acbef404a75f0d9310e85104e9038ad96f3e11050cbbe",
+          "initial_clone_hash": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "5a8ae1663676964dbc3e2bc21fdd45cd8b9c30db2c8f0c024495da14acf9a440",
+      "candidate_topology": 5,
+      "case_id": "rb21-f1-n16-validation",
+      "decision_snapshot_sha256": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+      "decision_step": 60,
+      "replica_control_steps": [
+        95
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 95,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "d06cf41d74a57376b7470539b055b80cd1688fe61e36a7f48128c0265aceeb81",
+          "initial_clone_hash": "68def2aa5d1668a17e715be681598604c6864144047015ff281c61ef69d97014",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "60230be95b7893f0161e095b52c96062f885b53d25e6d15a552f5b54512b2d02",
+      "candidate_topology": 2,
+      "case_id": "rb21-f9-n12-train",
+      "decision_snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+      "decision_step": 25,
+      "replica_control_steps": [
+        51,
+        51,
+        52
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 51,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "919661ef900cd9bb7ee363323e6236e0254fe8e23f951ed6e96ad71fd166c1c4",
+          "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 51,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "54f89261aa92353279ad00930d669ffde75e5a34825c1a42b57426de7b1c1f23",
+          "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 6,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 52,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "13829e2beeebbdbf7249ab4a9d7956924af068f910300fcdfedeef9757a430c4",
+          "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "643a0d8ce6beff283f63501c218156928a9e489e3bb0bd7f5df97bdb9eaa9ca2",
+      "candidate_topology": 2,
+      "case_id": "rb21-f9-n12-train",
+      "decision_snapshot_sha256": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+      "decision_step": 60,
+      "replica_control_steps": [
+        366,
+        368,
+        367
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 366,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "300224819254ca458d491444a799e676c3e0485c088579ee2ab7b62bd6ad8b67",
+          "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 368,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "5d7616da2a6cd89d8360414e43442825cbc88b2cd91ea738f9517f5f1576ff88",
+          "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+          "label": 1,
+          "replica_index": 1,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 367,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "f6658872b5662b94152ed272d45aef0fdbc4731b46f8c2d263fc78f3dd8ad88c",
+          "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+          "label": 1,
+          "replica_index": 2,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "673108805d3f62f4207ccd55359bed381170616afa54d0f92ea489e04af32512",
+      "candidate_topology": 5,
+      "case_id": "rb21-f9-n16-validation",
+      "decision_snapshot_sha256": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+      "decision_step": 25,
+      "replica_control_steps": [
+        29,
+        29,
+        29
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 29,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "413794c64863e3fbfefec3f4645daecc2768f71556d030b87f6d8e1faf424cb7",
+          "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 29,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "a5270303a8db5754e1c2276c08035e2a61dfed3c52cd166bd1b715d8eec847ec",
+          "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 29,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "2bacff8067f9eac99ff9af7e9ba1830b0588e50f4af35f5058b9e29eabd2e83b",
+          "initial_clone_hash": "02ff6d5ee1830334ea16cf6f92e3e16d2f9f7450288cfb4a90604ed13c29dedc",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "7ced72e2736228a30de2daa581ceccc57b9ad96359650025438cb0123d5c724b",
+      "candidate_topology": 5,
+      "case_id": "rb21-f8-n16-train",
+      "decision_snapshot_sha256": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+      "decision_step": 40,
+      "replica_control_steps": [
+        107,
+        107,
+        107
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 107,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "9056be9648488e624332ac8d149c3e928a23cd1a97f66a34eb4bcdae5ca7cfba",
+          "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 107,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "bb83fcfc08a21fe302aa2bf8954a1306e02e71296b11ad9f75f50aa73eb13084",
+          "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+          "label": 1,
+          "replica_index": 1,
+          "safety_infeasible_robots": 8,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 107,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "b761f99078c82373af3cca5c6abdb4bc81378a853d525aa695f7af92916580a7",
+          "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+          "label": 1,
+          "replica_index": 2,
+          "safety_infeasible_robots": 8,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "8cf7609b546982e1cc9ef2f7085e1e2daa106a701ecab10967c2a86aba88f8e7",
+      "candidate_topology": 2,
+      "case_id": "rb21-f5-n16-validation",
+      "decision_snapshot_sha256": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+      "decision_step": 60,
+      "replica_control_steps": [
+        124
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 124,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "134e6b65df9443724f44d8b623193815d36a05aec0545f8af1a56177ccd915dc",
+          "initial_clone_hash": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "932c57a51f6238281ad204a0be21214f75e00637a0ae02da8807966d7bbf1f53",
+      "candidate_topology": 5,
+      "case_id": "rb21-f9-n12-train",
+      "decision_snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+      "decision_step": 25,
+      "replica_control_steps": [
+        51,
+        51,
+        52
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 51,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "919661ef900cd9bb7ee363323e6236e0254fe8e23f951ed6e96ad71fd166c1c4",
+          "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 51,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "54f89261aa92353279ad00930d669ffde75e5a34825c1a42b57426de7b1c1f23",
+          "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 6,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 52,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "13829e2beeebbdbf7249ab4a9d7956924af068f910300fcdfedeef9757a430c4",
+          "initial_clone_hash": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "95c609aaef2b88098e77df9e0407079f63b9d02eb1d327784f7ef19e68181fe3",
+      "candidate_topology": 5,
+      "case_id": "rb21-f5-n8-train",
+      "decision_snapshot_sha256": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+      "decision_step": 60,
+      "replica_control_steps": [
+        96
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 96,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "ca15bdfe0633b66be53ce1444deb7fc68cf4e1fd049960cb5f025f72e345a99c",
+          "initial_clone_hash": "c63936f3b7fe5d0c13c6bcc1c48f262194295cc74d9fc856c34493c14ff1b550",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "9c67ee1d7fae7f5fd28cc809dbf2d6d7a8388b00c76f03bbdd89e19602775682",
+      "candidate_topology": 5,
+      "case_id": "rb21-f5-n16-validation",
+      "decision_snapshot_sha256": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+      "decision_step": 60,
+      "replica_control_steps": [
+        95
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 95,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "0f1eb5c0e4ced3a0512ec0b0e5f553d1f7c10f1b92d86bc106b0be698aa614ef",
+          "initial_clone_hash": "2bf4267e7a5b2792ae59251d8b56879bdf53f4c61bfd97422da78ea7279f186c",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "b2cb10ecbd8d69610c20895b02305ce87ae29cbf8fb6c2b9bf3a9b53e6660bee",
+      "candidate_topology": 2,
+      "case_id": "rb21-f8-n5-validation",
+      "decision_snapshot_sha256": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+      "decision_step": 40,
+      "replica_control_steps": [
+        126,
+        130,
+        128
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 126,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "5a4eb247964e6d762a029c2b0e0fb210bf01cb876571a8013cd329a3a532c626",
+          "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 130,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "5d3d6b5d2995344f6eef172f7af1520f7e30832944ebc44e6cee863aea6646fe",
+          "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 128,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "a90072d4bd9ecd69763614d330b695b9b85bc0e4519bbb46ad1522e418aac0f5",
+          "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "c2da98a9c448878cfe890335d27414a8a96dc1a0a23d28b86c3a7491ba278838",
+      "candidate_topology": 5,
+      "case_id": "rb21-f9-n12-train",
+      "decision_snapshot_sha256": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+      "decision_step": 60,
+      "replica_control_steps": [
+        366,
+        368,
+        367
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 366,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "300224819254ca458d491444a799e676c3e0485c088579ee2ab7b62bd6ad8b67",
+          "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 368,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "5d7616da2a6cd89d8360414e43442825cbc88b2cd91ea738f9517f5f1576ff88",
+          "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 367,
+          "created_lifecycle": false,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "f6658872b5662b94152ed272d45aef0fdbc4731b46f8c2d263fc78f3dd8ad88c",
+          "initial_clone_hash": "b27ff7de95dfc7a383c576d98f4a447d5af1f90f7f2e091f06cc1c698ab46d8f",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "c32555850848a9e2374d8ddf035198027bab15c6cb99ebafd9cbe9d008da4aee",
+      "candidate_topology": 5,
+      "case_id": "rb21-f5-n16-validation",
+      "decision_snapshot_sha256": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+      "decision_step": 40,
+      "replica_control_steps": [
+        95
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 95,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "5f615e4292928ccb8b7b371ea1228afd26fe3762770aa811a92176b6f796eee4",
+          "initial_clone_hash": "2231efc45830794f8cc2fe9e0898cc148f33e50d99310aa5836170d7faea642a",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 0,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "cd88cc6783579234985036ecb2d659f7b5f6a24ded3842c0de34adf7e226e92b",
+      "candidate_topology": 5,
+      "case_id": "rb21-f8-n5-validation",
+      "decision_snapshot_sha256": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+      "decision_step": 40,
+      "replica_control_steps": [
+        108,
+        108,
+        108
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 108,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "9d202b84eddab2784cd3fd8c32e5d5af8098a642612c0add83ef8c774ed99fda",
+          "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 108,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "7110fe8f0db0a674fbb0f117edcd5cfd15b01dd4b892884d949886d861950654",
+          "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+          "label": 1,
+          "replica_index": 1,
+          "safety_infeasible_robots": 3,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 108,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "015d9fe36c6a6843cf9a39c052fae0370297f1b8b02cb42b6fd74d1e044a6bee",
+          "initial_clone_hash": "45b33f0c3d3b52afb7e350260bea15903d34d51347e0682378c5cc33ddce4209",
+          "label": 1,
+          "replica_index": 2,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "d7013ba101bd1cf5d25e59af81b2d2bbf9045ddcd9ac936f8b38d035bb150d2c",
+      "candidate_topology": 5,
+      "case_id": "rb21-f8-n5-validation",
+      "decision_snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+      "decision_step": 20,
+      "replica_control_steps": [
+        108,
+        109,
+        108
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 5,
+          "control_steps": 108,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "a7202bf66dcef0238e12fb6042a74fa5453a2b976793060e8f361f2be3b74f76",
+          "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 1,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 109,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "0f8d546146d04f92fad7005c7ceb12b313cd820a0d934e0d59bab2b558b08ec6",
+          "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+          "label": 1,
+          "replica_index": 1,
+          "safety_infeasible_robots": 4,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 5,
+          "control_steps": 108,
+          "created_lifecycle": false,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "1217f40142b750a01cb57162a613571dd138ced74f3086b8cadc9ab87d07e0a3",
+          "initial_clone_hash": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+          "label": 1,
+          "replica_index": 2,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "d89fdfa84134609a186a7e6b360ba4edd2c3f05deafaeb24befc464522231ac9",
+      "candidate_topology": 2,
+      "case_id": "rb21-f1-n16-validation",
+      "decision_snapshot_sha256": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+      "decision_step": 20,
+      "replica_control_steps": [
+        66
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 66,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "collision_free_complete_horizon",
+            "downstream_goal_complete",
+            "protocol_resolved",
+            "safety_projection_resolved",
+            "target_metric_v3_dwell_complete"
+          ],
+          "final_state_hash": "9f70411fbaa6e5ef12d0d59f930341342200cdb7c1982b1bce9bc955b54d7e49",
+          "initial_clone_hash": "1b8164f24ae42ec26ddae084bc39ecbf0f3b5dac21ae8fd7439e4e30889d4ce9",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 8,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "COLLISION"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 1,
+      "atomic_unit_id": "dfecf6bf75432c1b00f6ae4e80b5f4ddeba786a07b12a5eb3ed56ee3af6f1072",
+      "candidate_topology": 2,
+      "case_id": "rb21-f1-n5-train",
+      "decision_snapshot_sha256": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+      "decision_step": 60,
+      "replica_control_steps": [
+        167
+      ],
+      "replica_count": 1,
+      "replica_indices": [
+        0
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 167,
+          "created_lifecycle": true,
+          "disposition": "RECOVERABLE_POSITIVE",
+          "failed_predicates": [],
+          "final_state_hash": "b391eadf8af7f720305194dfca4afc9676138d42770b6c541d8a3d983f113674",
+          "initial_clone_hash": "b3f6cb68cd5be0b5652630fcb0d47ccb5364f1f658a55328d1a2f66d2e27d2f6",
+          "label": 1,
+          "replica_index": 0,
+          "safety_infeasible_robots": 2,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "f30fb6fe6202beaf4d352bfe9e5b302223a8045ed1746fd75680551eba06dcb7",
+      "candidate_topology": 2,
+      "case_id": "rb21-f8-n16-train",
+      "decision_snapshot_sha256": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+      "decision_step": 40,
+      "replica_control_steps": [
+        131,
+        130,
+        131
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 131,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "6a428eaca2514565ff06e5d9df671f8776cccb8eb1e4810b2da83296705511ff",
+          "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 130,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "4bf5c269de0d31f38892973a87a63f8b65258d1f65381ed74c3186d7cca62b17",
+          "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 131,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "d9ee03ad924cddf5cee40d25fd4f0df9105884fbb314502b893f49bc4cc9b059",
+          "initial_clone_hash": "2995fb82934536eb6b339867e3623fc3af2a01607549640fbf0f3e2cb3c87f04",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 9,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    },
+    {
+      "aggregate_label": 0,
+      "atomic_unit_id": "fadc7a59134d7d6124f8b24dc2d0b55ba98fa83d1d11d41b68da44c1142f0699",
+      "candidate_topology": 2,
+      "case_id": "rb21-f8-n16-train",
+      "decision_snapshot_sha256": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+      "decision_step": 20,
+      "replica_control_steps": [
+        128,
+        127,
+        128
+      ],
+      "replica_count": 3,
+      "replica_indices": [
+        0,
+        1,
+        2
+      ],
+      "replicas": [
+        {
+          "candidate_topology": 2,
+          "control_steps": 128,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "b04c2b5fc7e5926a6adaf20ef240ca6d3782f92689128b51346d299148378d11",
+          "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+          "label": 0,
+          "replica_index": 0,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 127,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "06eb1dc4cc3064ec4e93dc9b427da95348070748528af0fa0e9a2f96110e32ce",
+          "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+          "label": 0,
+          "replica_index": 1,
+          "safety_infeasible_robots": 7,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        },
+        {
+          "candidate_topology": 2,
+          "control_steps": 128,
+          "created_lifecycle": true,
+          "disposition": "VALID_TASK_NEGATIVE",
+          "failed_predicates": [
+            "candidate_commitment_valid",
+            "target_metric_v3_dwell_complete",
+            "transition_execution_valid"
+          ],
+          "final_state_hash": "53e1fdd0d2d752c22b3b403dea150313b66c776dc582ca19d157057c19fa8f5f",
+          "initial_clone_hash": "6efad9a229b9ffc572625ee95d7c15356b27ad9027a0cf62fdf0d914fdbadac9",
+          "label": 0,
+          "replica_index": 2,
+          "safety_infeasible_robots": 6,
+          "safety_solver_failure_robots": 0,
+          "termination_cause": "GOAL_COMPLETE"
+        }
+      ],
+      "unit_kind": "RECOVERABILITY"
+    }
+  ],
+  "study_a_n24_accesses": 0,
+  "target_benchmark_manifest": "4dca5d1dc85f6d2ceb9ce64a16f2ff89578a323c86b44965029a87b9f43af377"
+}

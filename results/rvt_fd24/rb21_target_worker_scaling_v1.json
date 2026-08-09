@@ -1,0 +1,365 @@
+{
+  "all_semantic_digests_equal": true,
+  "official_generation_executed": false,
+  "qualified_target_measurement": true,
+  "rb21_target_worker_scaling_sha256": "c96c6907069928911ff29fc7e19c6c215e14755b4d560f36e1fb9e6ccfa88fba",
+  "rows": [
+    {
+      "aggregate_cpu_seconds": 1336.469520549,
+      "allocated_worker_cpu_utilization_percent": 99.82630012280647,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0,
+        1
+      ],
+      "host_24_cpu_utilization_percent": 4.159429171783603,
+      "parallel_efficiency": 1.0,
+      "peak_aggregate_worker_rss_bytes": 219430912,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 76.4980249759999,
+        "mean": 14.736203560333298,
+        "median": 5.816978490999986,
+        "p90": 46.025322793999976,
+        "p95": 68.58796993299995,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.06770578365971679,
+      "recoverability_replica_rollouts_per_second": 0.1308978484087858,
+      "recoverability_run_sha256": "0e9606871df0dcc23c1b13bab723487445e67ebc3a17c7761f3635478e8cc2d7",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 99.01766731700002,
+        "mean": 29.82327141856667,
+        "median": 17.68766181699999,
+        "p90": 76.64850828400006,
+        "p95": 90.57460829199994,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 0.3014397441081195,
+      "residual_expert_decisions_per_second": 0.033493304900902174,
+      "residual_run_sha256": "d89901350f3bf143ee76953d99ff1ca9b59fce7b7a0f326292a997bddfe1c78b",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 1.0,
+      "throughput_atomic_units_per_second": 0.044816420541397506,
+      "wall_seconds_sequential_branches": 1338.7950058299998,
+      "workers": 1
+    },
+    {
+      "aggregate_cpu_seconds": 1360.139519948,
+      "allocated_worker_cpu_utilization_percent": 99.35993249402281,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0
+      ],
+      "host_24_cpu_utilization_percent": 8.279994374501902,
+      "parallel_efficiency": 0.9780068842326506,
+      "peak_aggregate_worker_rss_bytes": 439222272,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 78.04326979300004,
+        "mean": 15.030835824133343,
+        "median": 5.943401563999942,
+        "p90": 46.86488054200004,
+        "p95": 70.03658698699996,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.13117255474054282,
+      "recoverability_replica_rollouts_per_second": 0.2536002724983828,
+      "recoverability_run_sha256": "248f8ec457f40683f6231ab8cf6145d875457ba89beb4b117eb76890a3c384f9",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 100.296094391,
+        "mean": 30.313640514666652,
+        "median": 17.991795967500025,
+        "p90": 77.62892129800002,
+        "p95": 92.31974554199996,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 0.5924374338820465,
+      "residual_expert_decisions_per_second": 0.06582638154244962,
+      "residual_run_sha256": "1557842a93fddd68f308ac4097f5efe997943629de22a850d54614bad6897dcd",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 1.9560137684653012,
+      "throughput_atomic_units_per_second": 0.08766153563230467,
+      "wall_seconds_sequential_branches": 684.4507065410003,
+      "workers": 2
+    },
+    {
+      "aggregate_cpu_seconds": 1416.4196696169997,
+      "allocated_worker_cpu_utilization_percent": 97.67164358235344,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0
+      ],
+      "host_24_cpu_utilization_percent": 16.278607263725572,
+      "parallel_efficiency": 0.923189019781268,
+      "peak_aggregate_worker_rss_bytes": 876818432,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 81.05505003399958,
+        "mean": 15.652687417533327,
+        "median": 6.1721256640000774,
+        "p90": 48.57131426199976,
+        "p95": 73.14500388199986,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.24753788643315094,
+      "recoverability_replica_rollouts_per_second": 0.4785732471040918,
+      "recoverability_run_sha256": "8d1403591f6fa8bca1543989d4ae75ac431d3e18cd7bc54c8cb0bafb18e7c99f",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 104.94883100699985,
+        "mean": 31.566787698666676,
+        "median": 18.76121248200002,
+        "p90": 81.09629122799993,
+        "p95": 96.44011520799995,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 1.1186946740662314,
+      "residual_expert_decisions_per_second": 0.12429940822958126,
+      "residual_run_sha256": "96492f39ace9aa98f68bb529d6c331fb08517e09c8ddb38a86e75ba8448081d1",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 3.692756079125072,
+      "throughput_atomic_units_per_second": 0.16549610939887138,
+      "wall_seconds_sequential_branches": 362.5462871479997,
+      "workers": 4
+    },
+    {
+      "aggregate_cpu_seconds": 1414.051073595,
+      "allocated_worker_cpu_utilization_percent": 78.34610495892302,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0,
+        1
+      ],
+      "host_24_cpu_utilization_percent": 19.586526239730755,
+      "parallel_efficiency": 0.741765103141392,
+      "peak_aggregate_worker_rss_bytes": 1311891456,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 79.95276657000022,
+        "mean": 15.634663129200044,
+        "median": 6.23127563349999,
+        "p90": 48.82344488800027,
+        "p95": 72.48734057699994,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.2856548968913973,
+      "recoverability_replica_rollouts_per_second": 0.5522661339900348,
+      "recoverability_run_sha256": "62e21e525b78ded9ae35ec50b2a23ccc027c8d2b95509301f30d3ea61948f5e4",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 104.64442279700006,
+        "mean": 31.505239194199977,
+        "median": 18.773387530000036,
+        "p90": 81.0428020270001,
+        "p95": 96.2201993839999,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 1.3790211168709867,
+      "residual_expert_decisions_per_second": 0.15322456854122074,
+      "residual_run_sha256": "0414ef2143985dc3ef2eb40cf96550d5795ffbc56f86fc4ccb72e18493bd0d14",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 4.450590618848352,
+      "throughput_atomic_units_per_second": 0.1994595408319063,
+      "wall_seconds_sequential_branches": 300.81288540900005,
+      "workers": 6
+    },
+    {
+      "aggregate_cpu_seconds": 1447.478555379,
+      "allocated_worker_cpu_utilization_percent": 77.91125891255398,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0
+      ],
+      "host_24_cpu_utilization_percent": 25.970419637517992,
+      "parallel_efficiency": 0.7206131237139061,
+      "peak_aggregate_worker_rss_bytes": 1750036480,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 80.50073621399997,
+        "mean": 15.857863481933283,
+        "median": 6.43678505999992,
+        "p90": 49.13255226599995,
+        "p95": 72.976853312,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.3090243442378688,
+      "recoverability_replica_rollouts_per_second": 0.5974470655265464,
+      "recoverability_run_sha256": "7c508d5dc21f21f1f649421ce4c4e2e7ca4ddc8d6a64b991cd194cbdce1311aa",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 107.5439505270001,
+        "mean": 32.39552349870004,
+        "median": 19.289702716500187,
+        "p90": 83.74886018799998,
+        "p95": 98.88560001399992,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 1.9977477449931598,
+      "residual_expert_decisions_per_second": 0.22197197166590665,
+      "residual_run_sha256": "5229be118924c8b2429d6a331c3147c0ec8e1ee6187eee795d1cd11a265917f3",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 5.7649049897112485,
+      "throughput_atomic_units_per_second": 0.25836240640010016,
+      "wall_seconds_sequential_branches": 232.23192892499992,
+      "workers": 8
+    },
+    {
+      "aggregate_cpu_seconds": 1529.5081370479998,
+      "allocated_worker_cpu_utilization_percent": 59.56740325454374,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0,
+        5
+      ],
+      "host_24_cpu_utilization_percent": 29.78370162727187,
+      "parallel_efficiency": 0.5213999197242724,
+      "peak_aggregate_worker_rss_bytes": 2614145024,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 82.28996703800021,
+        "mean": 16.86506186263335,
+        "median": 7.162139219999972,
+        "p90": 50.667299170000206,
+        "p95": 75.2018722339999,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.33045638284743994,
+      "recoverability_replica_rollouts_per_second": 0.6388823401717172,
+      "recoverability_run_sha256": "b1e18735b6d1a7d6dd86b2639d2c88fbfe824eef89b339ebec5e79aa37184dcc",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 109.29947585700029,
+        "mean": 34.12363976610003,
+        "median": 21.999489506499913,
+        "p90": 86.00099080499967,
+        "p95": 101.22805111100024,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 2.1917204991689316,
+      "residual_expert_decisions_per_second": 0.2435244999076591,
+      "residual_run_sha256": "2b0e7288bbae3c47543f81f6ee305f067b26b72ee61c2691995783f1165b4655",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 6.256799036691269,
+      "throughput_atomic_units_per_second": 0.2804073368713667,
+      "wall_seconds_sequential_branches": 213.9744297330003,
+      "workers": 12
+    },
+    {
+      "aggregate_cpu_seconds": 1591.633168925,
+      "allocated_worker_cpu_utilization_percent": 48.145090839816824,
+      "atomic_units": 60,
+      "gpu_utilization_percent_before_after": [
+        0
+      ],
+      "host_24_cpu_utilization_percent": 32.09672722654455,
+      "parallel_efficiency": 0.4049702433325936,
+      "peak_aggregate_worker_rss_bytes": 3466756096,
+      "recoverability_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 83.56458934600005,
+        "mean": 17.422690122733364,
+        "median": 8.252310014500154,
+        "p90": 51.557387242999994,
+        "p95": 75.78026066499979,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "recoverability_atomic_units_per_second": 0.3384535721249907,
+      "recoverability_replica_rollouts_per_second": 0.6543435727749821,
+      "recoverability_run_sha256": "4ccb2818aa81f5ca3115f395942acbb2d0408aea5878213338a066423afc13f6",
+      "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+      "residual_atomic_latency_seconds": {
+        "count": 30,
+        "maximum": 111.40977839600009,
+        "mean": 35.637105755200054,
+        "median": 24.05946928000003,
+        "p90": 88.19269611699974,
+        "p95": 103.97894308500008,
+        "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+      },
+      "residual_candidate_evaluations_per_second": 2.288506047056729,
+      "residual_expert_decisions_per_second": 0.2542784496729699,
+      "residual_run_sha256": "ec6568d23b4c63af18d5a154125980c341bc8ff2e88645993a4dbeb50c7521e3",
+      "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+      "scientific_semantic_digests_equal_to_W1": true,
+      "speedup": 6.479523893321498,
+      "throughput_atomic_units_per_second": 0.29038906771112954,
+      "wall_seconds_sequential_branches": 206.6193485619997,
+      "workers": 16
+    }
+  ],
+  "schema_version": "rvt-rb21-target-worker-scaling/v1",
+  "selected_row": {
+    "aggregate_cpu_seconds": 1529.5081370479998,
+    "allocated_worker_cpu_utilization_percent": 59.56740325454374,
+    "atomic_units": 60,
+    "gpu_utilization_percent_before_after": [
+      0,
+      5
+    ],
+    "host_24_cpu_utilization_percent": 29.78370162727187,
+    "parallel_efficiency": 0.5213999197242724,
+    "peak_aggregate_worker_rss_bytes": 2614145024,
+    "recoverability_atomic_latency_seconds": {
+      "count": 30,
+      "maximum": 82.28996703800021,
+      "mean": 16.86506186263335,
+      "median": 7.162139219999972,
+      "p90": 50.667299170000206,
+      "p95": 75.2018722339999,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "recoverability_atomic_units_per_second": 0.33045638284743994,
+    "recoverability_replica_rollouts_per_second": 0.6388823401717172,
+    "recoverability_run_sha256": "b1e18735b6d1a7d6dd86b2639d2c88fbfe824eef89b339ebec5e79aa37184dcc",
+    "recoverability_scientific_semantic_digest": "b247b7432269563c3b5377c6797c79f66232a612ec1266ef2dd19ef370518297",
+    "residual_atomic_latency_seconds": {
+      "count": 30,
+      "maximum": 109.29947585700029,
+      "mean": 34.12363976610003,
+      "median": 21.999489506499913,
+      "p90": 86.00099080499967,
+      "p95": 101.22805111100024,
+      "p99": "NOT_REPORTED_SAMPLE_COUNT_INSUFFICIENT"
+    },
+    "residual_candidate_evaluations_per_second": 2.1917204991689316,
+    "residual_expert_decisions_per_second": 0.2435244999076591,
+    "residual_run_sha256": "2b0e7288bbae3c47543f81f6ee305f067b26b72ee61c2691995783f1165b4655",
+    "residual_scientific_semantic_digest": "5985e44026e83c5b98be6ce804e3525d3ad266707d7f5d079246883f1d765267",
+    "scientific_semantic_digests_equal_to_W1": true,
+    "speedup": 6.256799036691269,
+    "throughput_atomic_units_per_second": 0.2804073368713667,
+    "wall_seconds_sequential_branches": 213.9744297330003,
+    "workers": 12
+  },
+  "selected_worker_count": 12,
+  "selection_rationale": "smallest semantically valid, efficiency-qualified W within 95 percent of maximum eligible aggregate throughput",
+  "selection_rule_applied": {
+    "efficiency_floor_when_available": 0.5,
+    "hard_requirements": [
+      "identical_scientific_semantic_digest_for_each_branch",
+      "observed_peak_RSS_within_75_percent_WSL_RAM_budget",
+      "worker_count_not_above_safe_ceiling",
+      "no_operational_failure"
+    ],
+    "incremental_gain_preference": "PREFER_SMALLER_W",
+    "tail_rule": "reject unexplained p95 or maximum latency regression",
+    "throughput_rule": "select the smallest eligible W within 95 percent of the maximum eligible aggregate throughput"
+  },
+  "worker_matrix_predeclaration": "6d1721cd57c00ec1bfa2e35d13440b50e887bbb985639b5779984b616a776f5b",
+  "writer_throughput_reference": "QUALIFIED_SEPARATELY_FOR_EVERY_DECLARED_W"
+}
