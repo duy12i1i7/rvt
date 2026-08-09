@@ -153,6 +153,12 @@ EGO_TENSOR_PARAMS: frozenset = frozenset({
     "local_features", "local_type_ids", "local_edge_destination",
     "node_hidden", "edge_hidden", "root_hidden", "conditioned",
     "raw_residual", "residual_limits", "conditioned_local_embedding",
+    # RB16R: (cos, sin) of robot i's own mission-to-world orientation, one row
+    # per local graph. It is derived from `RobotView.mission_dir`, which every
+    # robot holds identically as frozen mission configuration, so it carries no
+    # peer state at all -- tests/test_phase5r_world_output_repair.py proves that
+    # changing hidden non-neighbour robots leaves it bit-identical.
+    "mission_orientation_cos_sin",
 })
 
 _OFFLINE: Set[str] = set()

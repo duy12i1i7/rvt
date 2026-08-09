@@ -1,0 +1,176 @@
+{
+ "authorized_frozen_file_changes": [
+  {
+   "change": "ROBOT_LOCAL_ACTION_COMPONENTS renamed to the WORLD declaration",
+   "file": "rvt_swarm/fd24/configuration.py",
+   "sha256": "1529033aa81e9b02a046c57f39db15997c76f1b9cf7e4e7228db3a56603c1247"
+  },
+  {
+   "change": "schema versions bumped to v2; model input carries the per-graph orientation; the residual head consumes it",
+   "file": "rvt_swarm/fd24/model.py",
+   "sha256": "d2a92eea8984478e038d875775bd1dfb3e04db2745b60d1c82cc064d53ad2bef"
+  },
+  {
+   "change": "the graph record carries mission_orientation_cos_sin from the existing _mission_axes call; features untouched",
+   "file": "rvt_swarm/decentralized/ego_graph_v2.py",
+   "sha256": "4cb4fe59b5e1408de9a8d2e21581ad406e2cbd778f9bfb2e515a6268e87059e4"
+  },
+  {
+   "change": "mission_orientation_cos_sin added to the strict-decentralization local-tensor allowlist, the guard's own declared mechanism",
+   "file": "rvt_swarm/decentralized/guards.py",
+   "sha256": "925140058c2656f941323ca1563ba062fa36a2bcb71a8c0bdd9ac29a3d7d0b41"
+  },
+  {
+   "change": "the model-schema check accepts the RB16R supersession recorded in this artifact instead of the historical v1 string alone",
+   "file": "rvt_swarm/phase9/preflight.py",
+   "sha256": "38cacc9c6907522c1a66fcf3b235b42e8b649aa194066b8fd1d331d55aa018e3"
+  }
+ ],
+ "conflict_artifact": {
+  "path": "results/rvt_fd24/rb16_native_action_frame_v1.json",
+  "preserved_unmodified": true,
+  "sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c"
+ },
+ "conflict_discovery_commit": "79904f87d8e35eaa5045c985adb52669d2727306",
+ "current_declaration": {
+  "axis_convention": {
+   "component_0": "world X acceleration",
+   "component_1": "world Y acceleration"
+  },
+  "declared_output_frame": "WORLD",
+  "forbidden_names": [
+   "mission_longitudinal",
+   "mission_lateral"
+  ],
+  "model_input_schema_version": "rvt-fd24-model-input/v2",
+  "model_output_schema_version": "rvt-fd24-model-output/v2",
+  "model_schema_version": "rvt-fd24-model/v2",
+  "output_shape": [
+   2
+  ],
+  "output_units": "meters_per_second_squared",
+  "robot_local_action_components": [
+   "world_x_acceleration",
+   "world_y_acceleration"
+  ]
+ },
+ "ego_graph_impact": {
+  "edge_feature_dim": 19,
+  "feature_schema_hash_changed": false,
+  "feature_schema_sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+  "node_feature_dim": 35,
+  "node_or_edge_feature_added": false,
+  "note": "the orientation is record-level provenance, not a feature: no node or edge tensor, no feature definition and no feature schema hash moved, so the artifacts that pin the ego feature contract remain accurate",
+  "record_level_field_added": "mission_orientation_cos_sin",
+  "schema_version": "rvt-ego-graph/v2"
+ },
+ "frame_context": {
+  "available_identically_to_every_robot": true,
+  "carried_on": "RobotLocalEgoGraph.mission_orientation_cos_sin",
+  "consumed_by": [
+   "FD24ResidualActionHead"
+  ],
+  "global_pooling_introduced": false,
+  "graph_topology_changed": false,
+  "message_passing_changed": false,
+  "not_consumed_by": [
+   "encoder",
+   "message passing",
+   "candidate conditioner",
+   "recoverability head"
+  ],
+  "provenance_class": "LOCAL_MISSION_CONFIGURATION",
+  "representation": "cos_sin_of_mission_to_world_orientation",
+  "required": true,
+  "requires_global_online_state_aggregation": false,
+  "separately_calculated_heading": false,
+  "source_field": "RobotView.mission_dir",
+  "source_transform": "rvt_swarm/decentralized/ego_graph_v2.py::_mission_axes, the same transform the ego-graph builder already applies to every feature; its longitudinal axis IS (cos, sin)",
+  "why": "R16R-4 proved CASE II: under a rigid 37 degree rotation the ego-graph node and edge tensors are bit-identical while the WORLD target rotates"
+ },
+ "historical_declaration": {
+  "declared_output_frame": "MISSION",
+  "model_input_schema_version": "rvt-fd24-model-input/v1",
+  "model_output_schema_version": "rvt-fd24-model-output/v1",
+  "model_schema_version": "rvt-fd24-model/v1",
+  "note": "V1 is preserved here exactly as it read. Nothing claims V1 ever said WORLD.",
+  "rewritten": false,
+  "robot_local_action_components": [
+   "mission_longitudinal_acceleration",
+   "mission_lateral_acceleration"
+  ]
+ },
+ "implementation_semantics": {
+  "OLD_MISSION_OUTPUT_DECLARATION_IS_METADATA_ONLY": true,
+  "evidence": "FD24ResidualActionHead is Linear -> ReLU -> Linear and the parent applies tanh * residual_action_limits. No cos, sin, basis change or heading term existed in the forward path, so the historical mission naming never corresponded to any arithmetic",
+  "input_frame": "MISSION",
+  "mixed_frame_contract": "the encoder consumes mission-frame local observations and the residual head additionally consumes the mission-to-world orientation, so a WORLD output is a single-valued function of the model input",
+  "output_frame": "WORLD",
+  "rotation_arithmetic_in_the_forward_path": false,
+  "rotation_equivariance_claimed": false
+ },
+ "model_residual_output_frame_v2_sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8",
+ "owner_decision": {
+  "PRIMARY_RESIDUAL_OUTPUT_FRAME": "WORLD",
+  "applies_to": [
+   "Residual Expert V2 target",
+   "DenseActionSample residual target",
+   "model residual output",
+   "loss target",
+   "runtime residual injection"
+  ],
+  "bounds_changed": false,
+  "componentwise_limits_are_world_axis_limits": true,
+  "expert_or_runtime_converted_to_mission": false,
+  "lattice_changed": false,
+  "world_mission_residual_rotation_added": false
+ },
+ "parameter_impact": {
+  "candidate_conditioner": 22144,
+  "delta_explanation": "the first Linear widened from 96 to 98 inputs, adding 2 * 96 weights and no biases",
+  "encoder": 230976,
+  "recoverability_head": 9409,
+  "recoverability_head_changed": false,
+  "residual_action_head_after": 9698,
+  "residual_action_head_before": 9506,
+  "residual_action_head_delta": 192,
+  "total_after": 272227
+ },
+ "schema_version": "rvt-fd24-model-residual-frame/v2",
+ "scope_guards_updated_not_disabled": true,
+ "source_commit": "79904f87d8e35eaa5045c985adb52669d2727306",
+ "status": "OWNER_DECIDED_REPAIRED",
+ "why_world_is_authoritative": {
+  "all_four_use_world": true,
+  "already_qualified_chain": [
+   "expert candidate and evaluation",
+   "target builder",
+   "dense target",
+   "runtime base-action addition",
+   "local safety projection"
+  ],
+  "box_rotation_evidence": [
+   {
+    "case": "axis-aligned residual (bx, 0) read in the other frame",
+    "cross_axis_error_meters_per_second_squared": 0.004877,
+    "leaves_componentwise_bound": false,
+    "value": [
+     0.149921,
+     0.004877
+    ]
+   },
+   {
+    "case": "corner residual (bx, by) read in the other frame",
+    "cross_axis_error_meters_per_second_squared": 0.004797,
+    "leaves_componentwise_bound": true,
+    "value": [
+     0.145044,
+     0.154797
+    ]
+   }
+  ],
+  "isolated_conflicting_element": "the model output declaration",
+  "rotating_a_componentwise_box_changes_its_admissible_set": true,
+  "therefore_no_target_or_runtime_rotation": true
+ }
+}

@@ -14,7 +14,26 @@ PATH = ROOT / "results/rvt_fd24/experiment_protocol_manifest.json"
 
 def test_committed_experiment_protocol_manifest_is_deterministic_and_authoritative():
     committed = json.loads(PATH.read_text(encoding="ascii"))
-    assert committed == build_experiment_protocol_manifest(ROOT)
+    rebuilt = build_experiment_protocol_manifest(ROOT)
+    if committed != rebuilt:
+        # The committed manifest is frozen and is never rewritten. RB16R moved
+        # the model schema version when it repaired the residual output frame to
+        # WORLD, so exactly that field -- and the manifest hash that covers it --
+        # may diverge, and only with the erratum as authority. Any other drift
+        # still fails.
+        erratum = json.loads(
+            (ROOT / "results/rvt_fd24/model_residual_output_frame_v2.json")
+            .read_text(encoding="ascii"))
+        assert committed["model"]["schema_version"] == (
+            erratum["historical_declaration"]["model_schema_version"])
+        assert rebuilt["model"]["schema_version"] == (
+            erratum["current_declaration"]["model_schema_version"])
+        allowed = {"model", "experiment_protocol_sha256"}
+        differing = {key for key in set(committed) | set(rebuilt)
+                     if committed.get(key) != rebuilt.get(key)}
+        assert differing <= allowed, differing
+        assert {k: v for k, v in committed["model"].items() if k != "schema_version"} == {
+            k: v for k, v in rebuilt["model"].items() if k != "schema_version"}
     assert verify_canonical_hash(committed, "experiment_protocol_sha256")
     assert committed["schema_version"] == "rvt-experiment-protocol/v1"
 

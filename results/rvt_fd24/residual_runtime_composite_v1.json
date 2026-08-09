@@ -1,0 +1,61 @@
+{
+ "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_PERFORMANCE_BENCHMARK",
+ "authoritative_frame": "WORLD",
+ "components": [
+  {
+   "path": "results/rvt_fd24/residual_expert_spec_v2.json",
+   "role": "residual expert V2 specification",
+   "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+   "state": "CURRENT"
+  },
+  {
+   "path": "results/rvt_fd24/residual_label_contract_composite_v2.json",
+   "role": "residual-label contract composite V2",
+   "sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+   "state": "CURRENT"
+  },
+  {
+   "path": "results/rvt_fd24/rb15_residual_expert_binding_v2.json",
+   "role": "RB-15 V2 producer binding",
+   "sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+   "state": "CURRENT"
+  },
+  {
+   "path": "results/rvt_fd24/rb16_native_action_frame_v1.json",
+   "role": "RB-16 frame-conflict audit",
+   "sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c",
+   "state": "SUPERSEDED_EVIDENCE",
+   "superseded_by": "results/rvt_fd24/rb16_world_output_requalification_v1.json"
+  },
+  {
+   "path": "results/rvt_fd24/model_residual_output_frame_v2.json",
+   "role": "model residual output-frame repair",
+   "sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8",
+   "state": "CURRENT"
+  },
+  {
+   "path": "results/rvt_fd24/rb16_world_output_requalification_v1.json",
+   "role": "RB-16 requalification",
+   "sha256": "10c4aebe41a98db7674f7ee617db8a209a148bdfe18ca76bd04cde59660ab387",
+   "state": "CURRENT"
+  },
+  {
+   "path": "results/rvt_fd24/residual_generation_job_identity_v2.json",
+   "role": "proposed residual job identity V2",
+   "sha256": "ed73c303885ec1539ae91678bbbb830ef6756307d2e528a5b79c77509a38f057",
+   "state": "PROPOSED_INPUT_TO_RB17"
+  }
+ ],
+ "generation_authorized": false,
+ "no_eligible_semantics": {
+  "fallback_added": false,
+  "preserved": true,
+  "rb17_requirement": "generation must preserve the exact no-eligible outcome and must never fabricate a residual target"
+ },
+ "purpose": "the single record RB-17 consumes. It states which artifact is current and which is superseded, so RB-17 never has to infer which frame artifact wins.",
+ "rb17_requirement": "RB-17 must reference this composite hash. The residual label contract is the V2 expert spec plus the WORLD output-frame repair; the RB-16 conflict artifact is evidence, not contract.",
+ "residual_runtime_composite_sha256": "24c65a41855a2ffe9345755f0630dfe707e9446065d7cef8516f8f1e89cb19ff",
+ "schema_version": "rvt-residual-runtime-composite/v1",
+ "source_commit": "79904f87d8e35eaa5045c985adb52669d2727306",
+ "status": "CURRENT"
+}

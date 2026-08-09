@@ -15,9 +15,12 @@ FD24_MODEL_CONFIG_SCHEMA_VERSION = "rvt-fd24-model-config/v1"
 
 # The verified controller and environment exchange planar acceleration vectors.
 # The model derives its output width from this named contract, never from N.
+# RB16R owner decision: the primary residual output frame is WORLD. The
+# historical mission-named declaration is preserved in
+# results/rvt_fd24/model_residual_output_frame_v2.json, not here.
 ROBOT_LOCAL_ACTION_COMPONENTS: Tuple[str, ...] = (
-    "mission_longitudinal_acceleration",
-    "mission_lateral_acceleration",
+    "world_x_acceleration",
+    "world_y_acceleration",
 )
 
 

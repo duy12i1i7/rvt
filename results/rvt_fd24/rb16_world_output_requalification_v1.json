@@ -1,0 +1,160 @@
+{
+ "augmentation": {
+  "PRIMARY_SYNTHETIC_ROTATION_AUGMENTATION": "DISABLED",
+  "PRIMARY_TRANSFORM_MULTIPLIER": 1,
+  "rotated_state_test_is_diagnostic_only": true,
+  "transformed_rows": 0
+ },
+ "bound_proof": {
+  "enlarged_bound": false,
+  "expert_equals_model_equals_runtime": true,
+  "mission_frame_box": false,
+  "post_rotation_clipping": false,
+  "rotated_bounding_box": false,
+  "source": "rvt_swarm/fd24/configuration.py::residual_action_limits",
+  "tanh_limit_point": {
+   "head_can_attain_the_bound_exactly": false,
+   "lattice_candidates_on_a_component_boundary": 8,
+   "lattice_size": 9,
+   "loss_requires_exact_equality": false,
+   "regression_well_defined": true,
+   "targets_may_equal_the_bound": true,
+   "treatment": "documented model parameterization limitation, not repaired"
+  },
+  "world_componentwise_limits": [
+   0.15,
+   0.15
+  ]
+ },
+ "identifiability": {
+  "classification": "CASE_II_INPUTS_IDENTICAL_BUT_WORLD_TARGETS_DIFFER",
+  "frame_context_added": true,
+  "frame_context_provenance_class": "LOCAL_MISSION_CONFIGURATION",
+  "frame_context_source": "RobotView.mission_dir via ego_graph_v2._mission_axes",
+  "locality_result": "changing a hidden non-neighbour robot leaves the orientation and every ego feature bit-identical; every robot in a team reads one identical orientation",
+  "negative_test": "with only the ego features the rotated pair is indistinguishable; with the orientation restored the model inputs differ by exactly that field and the residual outputs differ, while the recoverability logits stay equal",
+  "orientation_information_before_repair": null,
+  "rotated_state_test": {
+   "diagnostic_only": true,
+   "diverging_feature_blocks": [],
+   "edge_features_bit_identical": true,
+   "edge_max_abs_difference": 0.0,
+   "node_features_bit_identical": true,
+   "node_max_abs_difference": 0.0,
+   "rotation_degrees": 37.0,
+   "training_rows_created": 0,
+   "world_target_after": [
+    0.082466,
+    0.015187
+   ],
+   "world_target_before": [
+    0.075,
+    -0.0375
+   ],
+   "world_target_max_abs_difference": 0.052687
+  },
+  "search_scope": [
+   "every ego_graph_v2 node feature",
+   "every edge feature",
+   "the model input dataclass",
+   "the candidate conditioner"
+  ]
+ },
+ "identity_end_to_end": {
+  "exact_component_preservation": true,
+  "non_symmetric_vector": [
+   0.075,
+   -0.0375
+  ],
+  "rotation": false,
+  "scale_change": false,
+  "sign_inversion": false,
+  "swap": false
+ },
+ "isolation": {
+  "final_test_access_count": 0,
+  "new_fd24_checkpoints": 0,
+  "optimizer_states": 0,
+  "recoverability_rows": 0,
+  "residual_rows": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0,
+  "training_operations": 0
+ },
+ "loss_proof": {
+  "conversion_inside_loss": false,
+  "equivariance_consistency_term": false,
+  "prediction_frame": "WORLD",
+  "residual_loss": "smooth_l1_beta_0.05_mps2",
+  "target_frame": "WORLD",
+  "weights_changed": false
+ },
+ "model_v2": {
+  "erratum": "results/rvt_fd24/model_residual_output_frame_v2.json",
+  "erratum_sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8",
+  "input_frame": "MISSION",
+  "mixed_frame_contract_documented": true,
+  "new_configuration_sha256": "1529033aa81e9b02a046c57f39db15997c76f1b9cf7e4e7228db3a56603c1247",
+  "new_ego_graph_sha256": "4cb4fe59b5e1408de9a8d2e21581ad406e2cbd778f9bfb2e515a6268e87059e4",
+  "new_model_module_sha256": "d2a92eea8984478e038d875775bd1dfb3e04db2745b60d1c82cc064d53ad2bef",
+  "new_schema": "rvt-fd24-model/v2",
+  "old_configuration_sha256": "42f3ce9fa880aa4545bc4863ee727503e2943cfb1452788edd3b9bb9815f866e",
+  "old_ego_graph_sha256": "0867abf5fc7932331c4cc44399be4fa024042e2c07dc54141d3dae23846c6534",
+  "old_model_module_sha256": "855bf2ab90d081dfca692d7f2a3c74f47430f27a189a7f782cd1a7d7f395bbd0",
+  "old_schema": "rvt-fd24-model/v1",
+  "output_components": [
+   "world_x_acceleration",
+   "world_y_acceleration"
+  ],
+  "output_frame": "WORLD",
+  "parameter_impact": {
+   "candidate_conditioner": 22144,
+   "delta_explanation": "the first Linear widened from 96 to 98 inputs, adding 2 * 96 weights and no biases",
+   "encoder": 230976,
+   "recoverability_head": 9409,
+   "recoverability_head_changed": false,
+   "residual_action_head_after": 9698,
+   "residual_action_head_before": 9506,
+   "residual_action_head_delta": 192,
+   "total_after": 272227
+  },
+  "rotation_equivariance_claimed": false
+ },
+ "owner_decision": "PRIMARY_RESIDUAL_OUTPUT_FRAME = WORLD",
+ "rb16_world_output_requalification_sha256": "10c4aebe41a98db7674f7ee617db8a209a148bdfe18ca76bd04cde59660ab387",
+ "runtime_proof": {
+  "action_frame_conversion": false,
+  "expression": "local_safety_projection(u_base_pre_safety_world + delta_u_world)"
+ },
+ "schema_version": "rvt-rb16-world-output-requalification/v1",
+ "scope_guards": {
+  "authorized_files": [
+   "rvt_swarm/fd24/configuration.py",
+   "rvt_swarm/fd24/model.py",
+   "rvt_swarm/decentralized/ego_graph_v2.py",
+   "rvt_swarm/decentralized/guards.py",
+   "rvt_swarm/phase9/preflight.py"
+  ],
+  "frozen_phase8_manifest_rewritten": false,
+  "guards_still_fail_on_any_other_frozen_file": true,
+  "updated_not_disabled": true
+ },
+ "source_commit": "79904f87d8e35eaa5045c985adb52669d2727306",
+ "status": "REQUALIFIED",
+ "supersedes_outcome_of": {
+  "artifact": "results/rvt_fd24/rb16_native_action_frame_v1.json",
+  "erased": false,
+  "note": "the failed RB16 evidence is preserved verbatim; this artifact records the repair that closes it",
+  "recorded_verdict": "B",
+  "sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c"
+ },
+ "verdict": "C",
+ "world_output_proof": {
+  "all_equal": true,
+  "expert_target_frame": "WORLD",
+  "model_output_frame": "WORLD",
+  "residual_vector_rotation_in_primary_path": false,
+  "runtime_insertion_frame": "WORLD",
+  "training_target_frame": "WORLD"
+ }
+}

@@ -238,7 +238,11 @@ def test_no_frozen_mechanical_file_changed_after_phase7r():
         capture_output=True,
         text=True,
     ).stdout.splitlines()
-    assert changed == []
+    # RB16R (owner-authorized): the residual output frame was repaired to WORLD,
+    # which required the ego-graph record to carry the mission-to-world
+    # orientation. See results/rvt_fd24/model_residual_output_frame_v2.json.
+    # Every other frozen mechanical file must still be untouched.
+    assert set(changed) <= {"rvt_swarm/decentralized/ego_graph_v2.py"}
 
 
 def test_keep_forced_topology_execution_remains_available_and_unchanged(

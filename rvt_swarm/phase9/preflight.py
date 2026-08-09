@@ -34,6 +34,39 @@ from .common import (
 )
 
 
+def _model_frame_erratum(root: Path) -> Dict[str, str] | None:
+    """The RB16R model-frame erratum, if one has been recorded.
+
+    The frozen Phase-9 protocol records the historical `rvt-fd24-model/v1`
+    declaration. RB16R repaired the residual output frame to WORLD, which
+    necessarily moves the model schema version. The supersession is data, not a
+    hardcoded string: preflight admits the new version only because an erratum
+    artifact says so, and the frozen protocol is never rewritten.
+    """
+    path = root / "results/rvt_fd24/model_residual_output_frame_v2.json"
+    if not path.exists():
+        return None
+    erratum = json.loads(path.read_text(encoding="ascii"))
+    return {
+        "artifact": "results/rvt_fd24/model_residual_output_frame_v2.json",
+        "historical_schema_version":
+            erratum["historical_declaration"]["model_schema_version"],
+        "current_schema_version": erratum["current_declaration"]["model_schema_version"],
+        "sha256": erratum["model_residual_output_frame_v2_sha256"],
+    }
+
+
+def _model_schema_admitted(root: Path, recorded: str) -> bool:
+    if recorded == FD24_MODEL_SCHEMA_VERSION:
+        return True
+    erratum = _model_frame_erratum(root)
+    return bool(
+        erratum
+        and recorded == erratum["historical_schema_version"]
+        and FD24_MODEL_SCHEMA_VERSION == erratum["current_schema_version"]
+    )
+
+
 def _check(name: str, passed: bool, expected: object, observed: object) -> Dict[str, object]:
     return {
         "name": name,
@@ -145,13 +178,14 @@ def build_preflight_audit(root: Path) -> Dict[str, object]:
         ),
         _check(
             "model_schema",
-            protocol["model"]["schema_version"] == FD24_MODEL_SCHEMA_VERSION
+            _model_schema_admitted(root, protocol["model"]["schema_version"])
             and protocol["model"]["config_sha256"]
             == canonical_model_config_hash(FD24ModelConfig()),
             protocol["model"],
             {
                 "schema_version": FD24_MODEL_SCHEMA_VERSION,
                 "config_sha256": canonical_model_config_hash(FD24ModelConfig()),
+                "superseded_by": _model_frame_erratum(root),
             },
         ),
     ]

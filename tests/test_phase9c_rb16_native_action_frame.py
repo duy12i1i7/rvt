@@ -99,17 +99,32 @@ def test_axis_convention_is_recorded_on_both_sides() -> None:
     assert convention["model_side"]["component_0"] == "mission longitudinal acceleration"
     assert convention["model_side"]["component_1"] == "mission lateral acceleration"
     assert convention["agree"] is False
-    assert tuple(RB16["robot_local_action_components"]) == ROBOT_LOCAL_ACTION_COMPONENTS
+    # RB16 recorded the historical declaration; RB16R replaced it with WORLD.
+    assert tuple(RB16["robot_local_action_components"]) != ROBOT_LOCAL_ACTION_COMPONENTS
+    erratum = json.loads((ROOT / "model_residual_output_frame_v2.json").read_text())
+    assert tuple(RB16["robot_local_action_components"]) == tuple(
+        erratum["historical_declaration"]["robot_local_action_components"])
 
 
 # ---------------------------------------------------------------------------
 # RB16-1/6 -- the frame conflict itself
 # ---------------------------------------------------------------------------
-def test_the_model_output_frame_is_declared_mission_not_world() -> None:
-    """The blocking finding. Closing it requires an owner decision, not an edit."""
-    assert ROBOT_LOCAL_ACTION_COMPONENTS == ("mission_longitudinal_acceleration",
-                                             "mission_lateral_acceleration")
-    assert RB16["model_output_frame"] == "MISSION"
+def test_the_model_output_frame_conflict_is_recorded_and_repaired() -> None:
+    """RB16 found MISSION; RB16R repaired it to WORLD by owner decision.
+
+    The failed audit is preserved verbatim -- it still records MISSION -- and the
+    live declaration is now WORLD. The two are reconciled only by the erratum.
+    """
+    erratum = json.loads(
+        (ROOT / "model_residual_output_frame_v2.json").read_text())
+    assert RB16["model_output_frame"] == "MISSION"          # preserved evidence
+    assert tuple(erratum["historical_declaration"][
+        "robot_local_action_components"]) == ("mission_longitudinal_acceleration",
+                                              "mission_lateral_acceleration")
+    assert ROBOT_LOCAL_ACTION_COMPONENTS == ("world_x_acceleration",
+                                             "world_y_acceleration")
+    assert erratum["current_declaration"]["declared_output_frame"] == "WORLD"
+    assert erratum["historical_declaration"]["rewritten"] is False
     assert RB16["expert_target_frame"] == "WORLD"
     assert RB16["frame_conflict"]["conflict"] is True
     assert RB16["verdict"] == "B"
@@ -365,12 +380,21 @@ def test_upstream_authority_is_unchanged() -> None:
         "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf")
     assert upstream["rb15_residual_expert_binding_v2_sha256"] == BINDING_V2[
         "rb15_residual_expert_binding_v2_sha256"]
+    # The three model-side files were changed by the owner-authorized RB16R
+    # repair. RB16 pinned their pre-repair digests; the erratum records the
+    # post-repair ones. Everything else RB16 pinned must still match exactly.
+    erratum = json.loads((ROOT / "model_residual_output_frame_v2.json").read_text())
+    authorized = {row["file"]: row["sha256"]
+                  for row in erratum["authorized_frozen_file_changes"]}
     for name, digest in (("rvt_swarm/fd24/model.py", upstream["model_module_sha256"]),
                          ("rvt_swarm/fd24/configuration.py",
                           upstream["model_configuration_sha256"]),
                          ("rvt_swarm/decentralized/ego_graph_v2.py",
                           upstream["ego_graph_v2_sha256"])):
-        assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == digest
+        current = hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest()
+        if current != digest:
+            assert name in authorized, name
+            assert authorized[name] == current, name
 
 
 def test_final_test_and_n24_remain_sealed() -> None:

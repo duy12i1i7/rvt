@@ -286,6 +286,7 @@ class RobotLocalEgoGraph:
     edge_feature_valid_mask: torch.Tensor
     edge_valid_mask: torch.Tensor
     edge_type: torch.Tensor
+    mission_orientation_cos_sin: Tuple[float, float] = (1.0, 0.0)
     root_index: int = 0
 
     def __post_init__(self) -> None:
@@ -827,6 +828,7 @@ def build_robot_local_ego_graph(
         edge_feature_valid_mask=edge_feature_mask,
         edge_valid_mask=torch.ones((len(edge_rows),), dtype=torch.bool),
         edge_type=torch.tensor(edge_types, dtype=torch.int64),
+        mission_orientation_cos_sin=axes[0],
     )
 
 
@@ -964,6 +966,7 @@ def _graph_payload_without_hash(graph: RobotLocalEgoGraph) -> Dict[str, object]:
             "committed_topology_id": graph.committed_topology_id,
             "candidate_topology_id": graph.candidate_topology_id,
             "root_index": graph.root_index,
+            "mission_orientation_cos_sin": list(graph.mission_orientation_cos_sin),
             "node_source_key": list(graph.node_source_key),
         },
         "tensors": {
@@ -1051,7 +1054,7 @@ def load_robot_local_ego_graph(
             "observer_robot_id", "observer_role_id",
             "observation_timestamp_seconds", "lifecycle_id",
             "committed_topology_id", "candidate_topology_id", "root_index",
-            "node_source_key",
+            "mission_orientation_cos_sin", "node_source_key",
         },
         "graph.metadata",
     )
@@ -1078,6 +1081,8 @@ def load_robot_local_ego_graph(
             committed_topology_id=int(metadata["committed_topology_id"]),
             candidate_topology_id=int(metadata["candidate_topology_id"]),
             root_index=int(metadata["root_index"]),
+            mission_orientation_cos_sin=tuple(
+                float(item) for item in metadata["mission_orientation_cos_sin"]),
             node_source_key=tuple(str(item) for item in metadata["node_source_key"]),
             node_x=torch.tensor(tensors["node_x"], dtype=torch.float32),
             node_feature_valid_mask=torch.tensor(tensors["node_feature_valid_mask"], dtype=torch.bool),

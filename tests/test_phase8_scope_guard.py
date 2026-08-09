@@ -7,6 +7,19 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "d24a0f674c1e75df293e4524f020acc49d4e2f35"
 
 
+# RB16R (owner-authorized, phase PHASE 5R / RB16R): the residual model output
+# frame was repaired from the historical mission-named declaration to WORLD.
+# The declaration, its supersession and the evidence live in
+# results/rvt_fd24/model_residual_output_frame_v2.json. The guard keeps its
+# force: every OTHER frozen mechanical file must still be untouched.
+RB16R_AUTHORIZED_FILES = {
+    "rvt_swarm/decentralized/ego_graph_v2.py",
+    "rvt_swarm/fd24/model.py",
+    "rvt_swarm/fd24/configuration.py",
+    "rvt_swarm/decentralized/guards.py",
+}
+
+
 def test_phase8_changes_no_frozen_mechanical_implementation():
     frozen = (
         "rvt_swarm/topology_registry.py",
@@ -26,7 +39,7 @@ def test_phase8_changes_no_frozen_mechanical_implementation():
         ["git", "diff", "--name-only", BASE, "--", *frozen],
         cwd=ROOT, check=True, capture_output=True, text=True,
     ).stdout.splitlines()
-    assert changed == []
+    assert set(changed) <= RB16R_AUTHORIZED_FILES
 
 
 def test_online_scope_manifest_is_bitwise_unchanged():

@@ -42,9 +42,9 @@ from .configuration import (
 )
 
 
-FD24_MODEL_SCHEMA_VERSION = "rvt-fd24-model/v1"
-FD24_MODEL_INPUT_SCHEMA_VERSION = "rvt-fd24-model-input/v1"
-FD24_MODEL_OUTPUT_SCHEMA_VERSION = "rvt-fd24-model-output/v1"
+FD24_MODEL_SCHEMA_VERSION = "rvt-fd24-model/v2"
+FD24_MODEL_INPUT_SCHEMA_VERSION = "rvt-fd24-model-input/v2"
+FD24_MODEL_OUTPUT_SCHEMA_VERSION = "rvt-fd24-model-output/v2"
 FD24_TOPOLOGY_VOCABULARY: Tuple[Tuple[int, str], ...] = (
     (PRIMARY_TOPOLOGY_IDS[0], "KEEP"),
     (PRIMARY_TOPOLOGY_IDS[1], "COMPACT"),
@@ -85,6 +85,10 @@ class FD24LocalModelBatch:
     graph_batch: BatchedRobotLocalEgoGraphs
     runtime_config_sha256_by_graph: Tuple[str, ...]
     graph_fingerprint_by_graph: Tuple[str, ...]
+    # RB16R: (cos, sin) of the mission-to-world orientation, one row per graph.
+    # It comes from the same `_mission_axes` transform the ego-graph builder uses
+    # and is what makes a WORLD residual output identifiable.
+    mission_orientation_cos_sin: torch.Tensor = None  # type: ignore[assignment]
 
     def __post_init__(self) -> None:
         if self.schema_version != FD24_MODEL_INPUT_SCHEMA_VERSION:
@@ -106,6 +110,18 @@ class FD24LocalModelBatch:
             raise FD24ModelContractError("node feature-validity mask is missing")
         if batch.edge_feature_valid_mask.shape != batch.edge_attr.shape:
             raise FD24ModelContractError("edge feature-validity mask is missing")
+        orientation = self.mission_orientation_cos_sin
+        if not isinstance(orientation, torch.Tensor):
+            raise FD24ModelContractError(
+                "the WORLD residual output requires a declared mission orientation")
+        graphs = len(self.graph_fingerprint_by_graph)
+        if orientation.shape != (graphs, 2):
+            raise FD24ModelContractError("mission orientation shape is invalid")
+        if not bool(torch.isfinite(orientation).all()):
+            raise FD24ModelContractError("mission orientation must be finite")
+        norms = torch.linalg.vector_norm(orientation, dim=1)
+        if not bool((norms - 1.0).abs().max() < 1e-6):
+            raise FD24ModelContractError("mission orientation must be a unit vector")
         if batch.node_feature_valid_mask.dtype != torch.bool:
             raise FD24ModelContractError("node feature-validity mask must be Boolean")
         if batch.edge_feature_valid_mask.dtype != torch.bool:
@@ -191,6 +207,9 @@ def prepare_fd24_model_batch(
             graph.runtime_config_sha256 for graph in ordered
         ),
         graph_fingerprint_by_graph=tuple(graph.fingerprint() for graph in ordered),
+        mission_orientation_cos_sin=torch.tensor(
+            [list(graph.mission_orientation_cos_sin) for graph in ordered],
+            dtype=torch.float32),
     )
 
 
@@ -488,19 +507,37 @@ class FD24RecoverabilityHead(nn.Module):
         return self.network(conditioned).squeeze(-1)
 
 
+MISSION_ORIENTATION_CONTEXT_DIM = 2
+
+
 class FD24ResidualActionHead(nn.Module):
-    """Raw robot-local residual; bounding is applied by the parent model."""
+    """Raw robot-local residual in the WORLD frame; the parent applies the bound.
+
+    RB16R: the encoder is mission-frame, so the conditioned representation alone
+    is provably invariant to a rigid rotation of the scene while the WORLD target
+    is not. The head therefore also receives the mission-to-world orientation
+    `(cos, sin)` -- the same `_mission_axes` quantity the ego-graph builder
+    already computes from the robot's own `RobotView.mission_dir`. Nothing else
+    in the architecture sees it.
+    """
 
     def __init__(self, hidden_dimension: int, action_dimension: int) -> None:
         super().__init__()
         self.network = nn.Sequential(
-            nn.Linear(hidden_dimension, hidden_dimension),
+            nn.Linear(hidden_dimension + MISSION_ORIENTATION_CONTEXT_DIM,
+                      hidden_dimension),
             nn.ReLU(),
             nn.Linear(hidden_dimension, action_dimension),
         )
 
-    def forward(self, conditioned: torch.Tensor) -> torch.Tensor:
-        return self.network(conditioned)
+    def forward(self, conditioned: torch.Tensor,
+                mission_orientation_cos_sin: torch.Tensor) -> torch.Tensor:
+        if mission_orientation_cos_sin.shape != (conditioned.shape[0],
+                                                 MISSION_ORIENTATION_CONTEXT_DIM):
+            raise FD24ModelContractError(
+                "residual head requires one mission orientation per row")
+        return self.network(torch.cat(
+            [conditioned, mission_orientation_cos_sin.to(conditioned.dtype)], dim=-1))
 
 
 def bounded_residual_action(
@@ -579,7 +616,8 @@ class RVTFD24LocalModel(nn.Module):
         conditioned = self.conditioned_representation(local_batch)
         logits = self.recoverability_head(conditioned)
         probability = torch.sigmoid(logits)
-        raw_residual = self.residual_action_head(conditioned)
+        raw_residual = self.residual_action_head(
+            conditioned, local_batch.mission_orientation_cos_sin)
         residual = bounded_residual_action(
             raw_residual, self.residual_action_limits
         )

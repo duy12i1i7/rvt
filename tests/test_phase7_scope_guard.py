@@ -22,6 +22,19 @@ PHASE7_MODULES = (
 )
 
 
+# RB16R (owner-authorized, phase PHASE 5R / RB16R): the residual model output
+# frame was repaired from the historical mission-named declaration to WORLD.
+# The declaration, its supersession and the evidence live in
+# results/rvt_fd24/model_residual_output_frame_v2.json. The guard keeps its
+# force: every OTHER frozen mechanical file must still be untouched.
+RB16R_AUTHORIZED_FILES = {
+    "rvt_swarm/decentralized/ego_graph_v2.py",
+    "rvt_swarm/fd24/model.py",
+    "rvt_swarm/fd24/configuration.py",
+    "rvt_swarm/decentralized/guards.py",
+}
+
+
 def test_frozen_phase6_implementation_files_are_unchanged():
     frozen = (
         "rvt_swarm/topology_registry.py",
@@ -37,7 +50,7 @@ def test_frozen_phase6_implementation_files_are_unchanged():
         ["git", "diff", "--name-only", BASELINE, "--", *frozen],
         cwd=ROOT, check=True, capture_output=True, text=True,
     ).stdout.strip()
-    assert changed == ""
+    assert set(filter(None, changed.splitlines())) <= RB16R_AUTHORIZED_FILES
 
 
 def test_phase7_runtime_imports_no_training_or_learned_model_module():
