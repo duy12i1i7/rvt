@@ -98,6 +98,161 @@ def _all_pass(checks: Iterable[Dict[str, object]]) -> bool:
     return all(bool(item["passed"]) for item in checks)
 
 
+RESIDUAL_V2_REQUIRED_CONTRACTS = {
+    "residual_runtime_composite": (
+        "results/rvt_fd24/residual_runtime_composite_v1.json",
+        "residual_runtime_composite_sha256"),
+    "rb17_generation_contract_composite": (
+        "results/rvt_fd24/rb17_generation_contract_composite_v1.json",
+        "rb17_generation_contract_composite_sha256"),
+    "scientific_row_identity": (
+        "results/rvt_fd24/residual_scientific_row_identity_v2.json",
+        "residual_scientific_row_identity_v2_sha256"),
+    "candidate_evaluation_identity": (
+        "results/rvt_fd24/residual_candidate_evaluation_identity_v2.json",
+        "residual_candidate_evaluation_identity_v2_sha256"),
+    "execution_attempt_identity": (
+        "results/rvt_fd24/residual_execution_attempt_identity_v1.json",
+        "residual_execution_attempt_identity_v1_sha256"),
+    "disposition_contract": (
+        "results/rvt_fd24/residual_generation_disposition_contract_v1.json",
+        "residual_generation_disposition_contract_v1_sha256"),
+    "supervision_row_schema": (
+        "results/rvt_fd24/residual_supervision_row_schema_v2.json",
+        "residual_supervision_row_schema_v2_sha256"),
+    "generation_budget_v2": (
+        "results/rvt_fd24/generation_budget_v2.json", "generation_budget_v2_sha256"),
+    "residual_job_manifest_v2": (
+        "results/rvt_fd24/residual_job_manifest_v2.json",
+        "residual_job_manifest_v2_sha256"),
+}
+
+
+def residual_v2_contract_checks(root: Path) -> list:
+    """RB17-26 -- validate the versioned Residual V2 contracts.
+
+    Parsing them is not authorization. These checks exist to *reject* stale or
+    incompatible contracts: a historical mission-frame model declaration
+    presented as current, a supervision schema that drops the orientation
+    context, a WORLD/model frame mismatch, the superseded residual job identity,
+    the historical 1800-second timeout presented as authoritative for V2, a
+    candidate count other than nine, synthetic augmentation, or a disposition
+    vocabulary the generator does not implement.
+    """
+    from ..fd24.configuration import ROBOT_LOCAL_ACTION_COMPONENTS
+    from ..fd24.model import FD24_MODEL_INPUT_SCHEMA_VERSION, FD24_MODEL_SCHEMA_VERSION
+    from ..phase9c_rb.generation_contract import (
+        DISPOSITIONS, EMITS_TARGET_ROW, NO_ELIGIBLE_ACTION, SCIENTIFIC_ROW_KEY,
+    )
+
+    checks: list = []
+    documents: Dict[str, Dict[str, object]] = {}
+    for name, (relative, hash_field) in RESIDUAL_V2_REQUIRED_CONTRACTS.items():
+        path = root / relative
+        if not path.exists():
+            checks.append(_check(f"residual_v2_contract_present:{name}", False,
+                                 relative, "missing"))
+            continue
+        document = json.loads(path.read_text(encoding="ascii"))
+        documents[name] = document
+        checks.append(_check(f"residual_v2_contract_hash:{name}",
+                             verify_canonical_hash(document, hash_field),
+                             True, verify_canonical_hash(document, hash_field)))
+    if len(documents) != len(RESIDUAL_V2_REQUIRED_CONTRACTS):
+        return checks
+
+    row_schema = documents["supervision_row_schema"]
+    budget = documents["generation_budget_v2"]
+    manifest = documents["residual_job_manifest_v2"]
+    disposition = documents["disposition_contract"]
+    row_identity = documents["scientific_row_identity"]
+
+    # the model must not be presented under its historical mission declaration
+    pins = row_schema["model_schema_pins"]
+    checks.append(_check(
+        "residual_v2_model_frame_is_world",
+        pins["model_schema_version"] == FD24_MODEL_SCHEMA_VERSION
+        and pins["model_input_schema_version"] == FD24_MODEL_INPUT_SCHEMA_VERSION
+        and tuple(pins["output_components"]) == ROBOT_LOCAL_ACTION_COMPONENTS
+        and not any("mission" in name for name in pins["output_components"]),
+        {"model_schema_version": FD24_MODEL_SCHEMA_VERSION,
+         "output_components": list(ROBOT_LOCAL_ACTION_COMPONENTS)},
+        pins))
+
+    # the orientation context must survive serialization
+    added = row_schema["added_fields"]
+    checks.append(_check(
+        "residual_v2_orientation_context_present",
+        "mission_orientation_cos_sin" in added
+        and added["mission_orientation_cos_sin"]["shape"] == [2]
+        and added["mission_orientation_cos_sin"][
+            "recomputed_from_layout_ids_at_training_time"] is False
+        and row_schema["model_input_reconstruction"]["all_preserved"] is True,
+        "mission_orientation_cos_sin[2] preserved", sorted(added)))
+
+    # the target must stay WORLD on both sides
+    target = row_schema["target_field"]
+    checks.append(_check(
+        "residual_v2_target_frame_world",
+        target["frame"] == "WORLD" and target["shape"] == [2]
+        and target["units"] == "meters_per_second_squared"
+        and not any(target["round_trip"].values()),
+        {"frame": "WORLD", "shape": [2]}, target))
+
+    # the superseded residual job identity must not be current
+    checks.append(_check(
+        "residual_v2_row_identity_excludes_candidate_index",
+        row_identity["candidate_index_in_identity"] is False
+        and "candidate_index" not in SCIENTIFIC_ROW_KEY
+        and tuple(row_identity["key_fields"]) == SCIENTIFIC_ROW_KEY,
+        list(SCIENTIFIC_ROW_KEY), row_identity["key_fields"]))
+
+    # the historical timeout must not be presented as authoritative for V2
+    timeout = budget["timeout"]
+    checks.append(_check(
+        "residual_v2_timeout_not_stale",
+        timeout["historical_value_authoritative_for_v2"] is False
+        and timeout["RESIDUAL_V2_GENERATION_TIMEOUT"]
+        == "PENDING_RB21_PERFORMANCE_QUALIFICATION"
+        and timeout["replacement_chosen_in_rb17"] is False,
+        "PENDING_RB21_PERFORMANCE_QUALIFICATION", timeout))
+
+    additions = budget["residual_v2_additions"]
+    checks.append(_check(
+        "residual_v2_candidate_count",
+        additions["residual_candidate_count"] == 9
+        and additions["stored_residual_supervision_upper_cap"] == 536000
+        and additions["candidate_evaluation_compute_upper_bound"] == 536000 * 9,
+        {"candidates": 9, "rows": 536000, "evaluations": 4824000}, additions))
+
+    checks.append(_check(
+        "residual_v2_no_synthetic_augmentation",
+        json.loads((root / "results/rvt_fd24/rb16_world_output_requalification_v1.json")
+                   .read_text(encoding="ascii"))["augmentation"][
+            "PRIMARY_SYNTHETIC_ROTATION_AUGMENTATION"] == "DISABLED",
+        "DISABLED", "checked"))
+
+    checks.append(_check(
+        "residual_v2_disposition_vocabulary",
+        tuple(disposition["dispositions"]) == DISPOSITIONS
+        and disposition["emits_target_row"] == dict(EMITS_TARGET_ROW)
+        and disposition["no_eligible_action"]["target_rows"] == 0
+        and disposition["no_eligible_action"]["counts_in_denominator"] is True
+        and EMITS_TARGET_ROW[NO_ELIGIBLE_ACTION] is False,
+        list(DISPOSITIONS), disposition["dispositions"]))
+
+    checks.append(_check(
+        "residual_v2_generation_not_authorized",
+        budget["generation_authorized"] is False
+        and manifest["official_scientific_execution_status"]
+        == "NOT_AUTHORIZED_PENDING_RB18_RB21"
+        and manifest["official_job_records_emitted"] == 0,
+        "NOT_AUTHORIZED_PENDING_RB18_RB21",
+        manifest["official_scientific_execution_status"]))
+
+    return checks
+
+
 def build_preflight_audit(root: Path) -> Dict[str, object]:
     """Verify Phase 8 without opening the sealed final-test split manifest."""
     protocol_path = root / "results/rvt_fd24/experiment_protocol_manifest.json"
@@ -218,6 +373,8 @@ def build_preflight_audit(root: Path) -> Dict[str, object]:
         expected = protocol["hashed_protocol_documents"][name]["sha256"]
         observed = file_sha256(root / relative_path)
         checks.append(_check(f"frozen_document:{name}", observed == expected, expected, observed))
+
+    checks.extend(residual_v2_contract_checks(root))
 
     final_access = _audit_runtime_access(
         root / "results/rvt_fd24/final_test_access_audit.jsonl"

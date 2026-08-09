@@ -1,0 +1,111 @@
+{
+ "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+ "components": [
+  {
+   "role": "residual expert V2 specification",
+   "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf",
+   "state": "CURRENT"
+  },
+  {
+   "role": "residual-label contract composite V2",
+   "sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad",
+   "state": "CURRENT"
+  },
+  {
+   "role": "RB-15 V2 producer binding",
+   "sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24",
+   "state": "CURRENT"
+  },
+  {
+   "role": "RB-16 frame-conflict audit",
+   "sha256": "de697d1253081b907afc3e3e5e275527c0c0f80ac873b140d84e30737478963c",
+   "state": "SUPERSEDED_EVIDENCE",
+   "superseded_by": "rb16_world_output_requalification_v1.json"
+  },
+  {
+   "role": "model residual output-frame repair",
+   "sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8",
+   "state": "CURRENT"
+  },
+  {
+   "role": "RB-16 requalification",
+   "sha256": "10c4aebe41a98db7674f7ee617db8a209a148bdfe18ca76bd04cde59660ab387",
+   "state": "CURRENT"
+  },
+  {
+   "role": "scientific row identity V2",
+   "sha256": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20",
+   "state": "CURRENT"
+  },
+  {
+   "role": "candidate evaluation identity V2",
+   "sha256": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef",
+   "state": "CURRENT"
+  },
+  {
+   "role": "execution attempt identity V1",
+   "sha256": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923",
+   "state": "CURRENT"
+  },
+  {
+   "role": "generation disposition contract V1",
+   "sha256": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6",
+   "state": "CURRENT"
+  },
+  {
+   "role": "residual supervision row schema V2",
+   "sha256": "ecf9ebbd0f8f350df0a2daa44f0d3096874b20b5d7952734b43377abde423a30",
+   "state": "CURRENT"
+  },
+  {
+   "role": "generation budget V2",
+   "sha256": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+   "state": "CURRENT",
+   "supersedes_for_residual_v2_only": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e"
+  },
+  {
+   "role": "residual job manifest V2",
+   "sha256": "878a81c9a83fa0a390ac8c5f508baeb53b4964398575624066c5d1fb72fff10b",
+   "state": "CURRENT"
+  },
+  {
+   "role": "proposed residual job identity (RB15 input)",
+   "sha256": "2b0923cd5f2ca2f1b6c1f45183e0386f292e18667cd5d1f910517217c402bef4",
+   "state": "FOLDED_IN"
+  },
+  {
+   "role": "generation budget addendum (RB15 proposal)",
+   "sha256": "9b0dcdf4f149f59c2bb194e9f9cf7f31c56586e5ef040dfe95270c49a0979177",
+   "state": "FOLDED_IN"
+  }
+ ],
+ "generation_authorized": false,
+ "historical_artifacts_rewritten": false,
+ "isolation": {
+  "final_test_access_count": 0,
+  "new_fd24_checkpoints": 0,
+  "optimizer_states": 0,
+  "recoverability_rows": 0,
+  "residual_rows": 0,
+  "scientific_shards": 0,
+  "study_a_n24_access_count": 0,
+  "training_operations": 0
+ },
+ "next_phase": "RB-18 structural canary, on explicit owner instruction",
+ "provenance_root_consumed": {
+  "artifact": "results/rvt_fd24/residual_runtime_composite_v1.json",
+  "chain": [
+   "Residual Expert V2",
+   "RB15 producer",
+   "failed RB16 evidence",
+   "WORLD-frame model repair",
+   "successful RB16 requalification"
+  ],
+  "sha256": "24c65a41855a2ffe9345755f0630dfe707e9446065d7cef8516f8f1e89cb19ff"
+ },
+ "purpose": "the single generation-readiness root. RB-18 and later phases consume this instead of assembling old hashes by hand.",
+ "rb17_generation_contract_composite_sha256": "bba1aee0430bc540f20d010b923696b5b1c51d4bfb1d92d2fa21daf2e6242da8",
+ "schema_version": "rvt-rb17-generation-contract-composite/v1",
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "CURRENT"
+}

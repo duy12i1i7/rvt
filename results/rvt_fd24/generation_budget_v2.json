@@ -1,0 +1,67 @@
+{
+ "addendum_superseded": {
+  "artifact": "results/rvt_fd24/proposed_generation_budget_addendum_v2.json",
+  "sha256": "9b0dcdf4f149f59c2bb194e9f9cf7f31c56586e5ef040dfe95270c49a0979177",
+  "state": "FOLDED_INTO_THIS_BUDGET"
+ },
+ "chunking": {
+  "chunk_size_frozen": false,
+  "reason": "operational, selected later by performance qualification without changing scientific identities, candidate identities, matched randomness, labels or dataset content",
+  "rows_per_job_frozen": false,
+  "rows_per_worker_frozen": false
+ },
+ "extends": {
+  "artifact": "results/rvt_fd24/datasets/generation_budget_v1.json",
+  "overwritten": false,
+  "schema_version": "rvt-generation-budget/v1",
+  "sha256": "3853b8ad4484d733de9be7d0e27bf273f33e14054f3089f6b5454cc17815846e"
+ },
+ "generation_authorized": false,
+ "generation_budget_v2_sha256": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3",
+ "performance_provenance": {
+  "candidate_evaluations": 90,
+  "distribution": {
+   "count": 90,
+   "maximum": 8.990364,
+   "mean": 1.593423,
+   "median": 0.333563,
+   "minimum": 0.252298,
+   "p90": 3.768343,
+   "p95": 8.823311
+  },
+  "expert_decisions": 10,
+  "mean_seconds_per_candidate_continuation": 1.593423,
+  "performance_status": "QUALIFIED_FOR_JOB_BUDGET_DESIGN",
+  "projected_single_worker_days": 88.97,
+  "promoted_to_a_capacity_guarantee": false,
+  "sha256": "c09f7d20a6844cae13cd022604fe6e94b745596616a034c6285f13593f9523f4",
+  "source": "results/rvt_fd24/rb15_v2_canary_v1.json",
+  "state": "INPUT_TO_RB21"
+ },
+ "preserved_scientific_source_counts": {
+  "candidate_replica_rollouts": 42840,
+  "decision_events": 15300,
+  "dense_residual_action_records": 536000,
+  "recoverability_robot_candidate_records": 332900,
+  "source_episodes": 3120
+ },
+ "residual_v2_additions": {
+  "candidate_evaluation_compute_upper_bound": 4824000,
+  "compute_bound_is_not_a_row_count": true,
+  "model_v2_frame_context_field": "mission_orientation_cos_sin",
+  "model_v2_frame_context_required": true,
+  "nine_candidates_do_not_create_nine_rows": true,
+  "no_eligible_disposition_semantics": "results/rvt_fd24/residual_generation_disposition_contract_v1.json",
+  "residual_candidate_count": 9,
+  "stored_residual_supervision_upper_cap": 536000
+ },
+ "schema_version": "rvt-generation-budget/v2",
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "VERSIONED_NOT_AUTHORIZED",
+ "timeout": {
+  "RESIDUAL_V2_GENERATION_TIMEOUT": "PENDING_RB21_PERFORMANCE_QUALIFICATION",
+  "historical_residual_action_cell_generation_job_seconds": 1800,
+  "historical_value_authoritative_for_v2": false,
+  "replacement_chosen_in_rb17": false
+ }
+}

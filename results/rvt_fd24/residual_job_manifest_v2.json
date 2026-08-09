@@ -1,0 +1,85 @@
+{
+ "final_test_job_construction": "prohibited",
+ "historical_manifest": {
+  "mutated": false,
+  "path": "results/rvt_fd24/datasets/phase9_job_manifest.json",
+  "sha256": "9d094d7dca34e2daf8edc05c018d0372d7c4d2219a710032a6b066be494ea49f"
+ },
+ "official_job_records_emitted": 0,
+ "official_scientific_execution_status": "NOT_AUTHORIZED_PENDING_RB18_RB21",
+ "references": {
+  "candidate_evaluation_identity": {
+   "path": "results/rvt_fd24/residual_candidate_evaluation_identity_v2.json",
+   "sha256": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef"
+  },
+  "disposition_contract": {
+   "path": "results/rvt_fd24/residual_generation_disposition_contract_v1.json",
+   "sha256": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6"
+  },
+  "et_timing_addendum": {
+   "path": "results/rvt_fd24/source_event_timing_addendum_v1.json",
+   "sha256": "fba87e4374f4a7b8c97e5435e148345ad5611223f663e6050967efe9aa0989c5"
+  },
+  "execution_attempt_identity": {
+   "path": "results/rvt_fd24/residual_execution_attempt_identity_v1.json",
+   "sha256": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923"
+  },
+  "generation_budget_v2": {
+   "path": "results/rvt_fd24/generation_budget_v2.json",
+   "sha256": "fbdf3b5e8c7607e9381337295d598244fb76e8b1dc855566c7bb23b00809d3f3"
+  },
+  "headroom_authority": {
+   "path": "results/rvt_fd24/headroom_authority_record_v1.json",
+   "sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509"
+  },
+  "model_residual_output_frame_v2": {
+   "path": "results/rvt_fd24/model_residual_output_frame_v2.json",
+   "sha256": "3786f9925a8373abb384955d6e34fa781caf9616d04e1f8cdce69ca0c9f1e6b8"
+  },
+  "model_v2_input_schema": {
+   "model_input_schema_version": "rvt-fd24-model-input/v2",
+   "model_schema_version": "rvt-fd24-model/v2"
+  },
+  "proposed_job_identity_input": {
+   "path": "results/rvt_fd24/residual_generation_job_identity_v2.json",
+   "sha256": "2b0923cd5f2ca2f1b6c1f45183e0386f292e18667cd5d1f910517217c402bef4"
+  },
+  "rb15_binding": {
+   "path": "results/rvt_fd24/rb15_residual_expert_binding_v2.json",
+   "sha256": "9edc8cc8d46b94c76f0fa8e3a2ea07b7bff06fd9d5cfe5f5cb26565170af3f24"
+  },
+  "rb16_world_output_requalification": {
+   "path": "results/rvt_fd24/rb16_world_output_requalification_v1.json",
+   "sha256": "10c4aebe41a98db7674f7ee617db8a209a148bdfe18ca76bd04cde59660ab387"
+  },
+  "residual_expert_spec_v2": {
+   "path": "results/rvt_fd24/residual_expert_spec_v2.json",
+   "sha256": "e3a3093038b31f7f8c11d56be224929c9eccc27e6bde2fa47c5c6c644b7f3fbf"
+  },
+  "residual_label_contract_composite_v2": {
+   "path": "results/rvt_fd24/residual_label_contract_composite_v2.json",
+   "sha256": "8921424d0342e26a7a22da4ca042543a8eb08c2dc310f5f5639b70678ceb08ad"
+  },
+  "residual_runtime_composite": {
+   "path": "results/rvt_fd24/residual_runtime_composite_v1.json",
+   "sha256": "24c65a41855a2ffe9345755f0630dfe707e9446065d7cef8516f8f1e89cb19ff"
+  },
+  "scientific_row_identity": {
+   "path": "results/rvt_fd24/residual_scientific_row_identity_v2.json",
+   "sha256": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20"
+  },
+  "source_scientific_protocol": {
+   "path": "results/rvt_fd24/executable_scientific_protocol_v1.json",
+   "sha256": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a"
+  },
+  "supervision_row_schema": {
+   "path": "results/rvt_fd24/residual_supervision_row_schema_v2.json",
+   "sha256": "ecf9ebbd0f8f350df0a2daa44f0d3096874b20b5d7952734b43377abde423a30"
+  }
+ },
+ "residual_job_manifest_v2_sha256": "878a81c9a83fa0a390ac8c5f508baeb53b4964398575624066c5d1fb72fff10b",
+ "schema_version": "rvt-residual-job-manifest/v2",
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "NOT_AUTHORIZED_PENDING_RB18_RB21",
+ "study_a_n24_jobs": 0
+}

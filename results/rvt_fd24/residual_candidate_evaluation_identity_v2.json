@@ -1,0 +1,27 @@
+{
+ "candidate_count": 9,
+ "candidate_index_range": [
+  0,
+  8
+ ],
+ "canonicalization": "sha256 over canonical_json_bytes of the key mapping",
+ "extends": "residual_scientific_row_id",
+ "identity_class": "B_COUNTERFACTUAL_CANDIDATE_EVALUATION",
+ "implementation_sha256": "cf5c9c88f0555e124c83ccb72fc374debf7980ac4f39f5e4f77408eb6978fa08",
+ "key_fields": [
+  "residual_scientific_row_id",
+  "candidate_index",
+  "replica_index",
+  "matched_stream_identity_sha256"
+ ],
+ "nine_distinct_proof": {
+  "candidate_evaluations": 9,
+  "distinct_evaluation_ids": 9
+ },
+ "residual_candidate_evaluation_identity_v2_sha256": "d334260157831f157cd5817cc5ae1e266eec59d69c9c6d5bf8cec6dc7301f6ef",
+ "schema_version": "rvt-residual-candidate-evaluation-identity/v2",
+ "selected_candidate_index_is_supervision_provenance_not_identity": true,
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "source_of_truth": "the implemented RB-15 V2 producer: nine independent counterfactual continuations per decision, one matched exogenous stream identity shared by all nine",
+ "status": "FROZEN_PRE_DATA"
+}

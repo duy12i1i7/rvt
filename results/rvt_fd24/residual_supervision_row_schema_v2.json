@@ -1,0 +1,99 @@
+{
+ "added_fields": {
+  "ego_graph_record_sha256": {
+   "meaning": "content hash of the serialized robot-local ego-graph record",
+   "why": "the features the model consumes come from that record"
+  },
+  "mission_orientation_cos_sin": {
+   "introduces_new_scientific_information": false,
+   "meaning": "(cos theta_mission_to_world, sin theta_mission_to_world)",
+   "provenance": "LOCAL_MISSION_CONFIGURATION",
+   "read_from_hidden_simulator_state": false,
+   "recomputed_from_layout_ids_at_training_time": false,
+   "shape": [
+    2
+   ],
+   "source": "RobotLocalEgoGraph.mission_orientation_cos_sin",
+   "units": "dimensionless_unit_vector"
+  }
+ },
+ "candidate_audit_sidecar": {
+  "changes_the_scientific_objective": false,
+  "decision": "B_GENERATION_AUDIT_SIDECAR",
+  "keyed_by": "candidate_evaluation_id",
+  "rationale": "embedding nine LocalActionEvaluation records would bloat every training row for information the model never consumes; regenerating them on demand would require re-running nine full counterfactual continuations. A sidecar keyed by candidate evaluation id preserves 'why this candidate won' at audit cost instead of training cost.",
+  "reproducibility_preserved": true
+ },
+ "extends_frozen": {
+  "dataclass": "rvt_swarm/phase8/targets.py::DenseActionSample",
+  "modified": false,
+  "schema_version": "rvt-dense-action-sample/v1",
+  "sha256": "b9f4f74c57ee6f231c736736efb19459917c64a0f0eb0f880e439ecbb010b83c"
+ },
+ "implementation_sha256": "cf5c9c88f0555e124c83ccb72fc374debf7980ac4f39f5e4f77408eb6978fa08",
+ "model_input_reconstruction": {
+  "all_preserved": true,
+  "ego_feature_schema_sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+  "ego_graph_schema_version": "rvt-ego-graph/v2",
+  "required": [
+   "mission-frame node features",
+   "mission-frame edge features",
+   "ego graph structure",
+   "candidate and topology context",
+   "mission_orientation_cos_sin",
+   "WORLD residual target"
+  ]
+ },
+ "model_schema_pins": {
+  "historical_v1_rewritten": false,
+  "incompatible_schema_load": "reject",
+  "model_input_schema_version": "rvt-fd24-model-input/v2",
+  "model_output_schema_version": "rvt-fd24-model-output/v2",
+  "model_schema_version": "rvt-fd24-model/v2",
+  "output_components": [
+   "world_x_acceleration",
+   "world_y_acceleration"
+  ]
+ },
+ "orientation_head_isolation_evidence": {
+  "recoverability_invariant": true,
+  "residual_differs": true
+ },
+ "orientation_round_trip_evidence": {
+  "orientation_exact": true,
+  "record_sha256_stable": true,
+  "recoverability_identical": true,
+  "residual_identical": true
+ },
+ "residual_supervision_row_schema_v2_sha256": "ecf9ebbd0f8f350df0a2daa44f0d3096874b20b5d7952734b43377abde423a30",
+ "schema_version": "rvt-residual-supervision-row/v2",
+ "selected_candidate_provenance": {
+  "fields": [
+   "selected_candidate_index",
+   "selected_candidate_evaluation_id",
+   "residual_expert_spec_sha256",
+   "selector_sha256",
+   "decision_snapshot_sha256",
+   "matched_stream_identity_sha256"
+  ],
+  "nine_candidate_records_in_the_training_row": false,
+  "sufficient_to_audit_selection": true
+ },
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "FROZEN_PRE_DATA_ADDITIVE_BINDING",
+ "target_field": {
+  "frame": "WORLD",
+  "name": "residual_target_world_acceleration",
+  "round_trip": {
+   "component_swap": false,
+   "rotation": false,
+   "scaling": false,
+   "sign_change": false
+  },
+  "shape": [
+   2
+  ],
+  "units": "meters_per_second_squared"
+ },
+ "why_a_binding_is_required": "the frozen dense row references its features only by feature_sha256 and carries no frame context, so it alone cannot reconstruct a model V2 input"
+}

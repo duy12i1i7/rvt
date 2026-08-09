@@ -1,0 +1,75 @@
+{
+ "counts_in_scientific_denominator": {
+  "EXECUTION_INVALID": true,
+  "INFRASTRUCTURE_FAILURE": false,
+  "LABELED": true,
+  "NO_ELIGIBLE_ACTION": true
+ },
+ "dispositions": [
+  "LABELED",
+  "NO_ELIGIBLE_ACTION",
+  "EXECUTION_INVALID",
+  "INFRASTRUCTURE_FAILURE"
+ ],
+ "emits_target_row": {
+  "EXECUTION_INVALID": false,
+  "INFRASTRUCTURE_FAILURE": false,
+  "LABELED": true,
+  "NO_ELIGIBLE_ACTION": false
+ },
+ "hard_distinctions": [
+  "NO_ELIGIBLE_ACTION != EXECUTION_INVALID",
+  "NO_ELIGIBLE_ACTION != INFRASTRUCTURE_FAILURE",
+  "EXECUTION_INVALID != INFRASTRUCTURE_FAILURE"
+ ],
+ "implementation_sha256": "cf5c9c88f0555e124c83ccb72fc374debf7980ac4f39f5e4f77408eb6978fa08",
+ "no_eligible_action": {
+  "counts_in_denominator": true,
+  "definition": "all nine candidates fail the frozen selector eligibility conjunction",
+  "evidence": {
+   "all_safety_infeasible": true,
+   "candidates_evaluated": 9,
+   "counts": {
+    "attempted_expert_decision_states": 1,
+    "execution_invalid_states": 0,
+    "infrastructure_failures": 0,
+    "labeled_states": 0,
+    "no_eligible_states": 1,
+    "target_rows_emitted": 0
+   },
+   "counts_consistent": true,
+   "disposition": "NO_ELIGIBLE_ACTION",
+   "selector_error": "local action search has no eligible robot-local candidate",
+   "target_rows": 0
+  },
+  "forbidden_conversions": [
+   "zero residual target",
+   "clipped target",
+   "rotated target",
+   "base-action target",
+   "arbitrary fallback"
+  ],
+  "historical_alignment": "preserve_base_and_failure_metadata_no_target_row_keep_invalid_denominator_no_replacement",
+  "is_a_valid_generation_disposition": true,
+  "observed_in_rb15_canary": 1,
+  "target_rows": 0
+ },
+ "no_separate_valid_method_failure_category": {
+  "frozen_reference": "legitimate_negative_label",
+  "reason": "a valid task failure is already a legitimate negative *label* under the frozen invalid_record_contract, not a residual disposition; adding a category for it would be an unnecessary distinction"
+ },
+ "reported_counters": [
+  "attempted_expert_decision_states",
+  "labeled_states",
+  "no_eligible_states",
+  "execution_invalid_states",
+  "infrastructure_failures",
+  "target_rows_emitted"
+ ],
+ "residual_generation_disposition_contract_v1_sha256": "a89da469367d0e5c0a25c2026a0f2a69481640c76f90e262ac61e61d44989cf6",
+ "rows_may_be_fewer_than_attempted_states": true,
+ "schema_version": "rvt-residual-generation-disposition/v1",
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "FROZEN_PRE_DATA",
+ "survivorship_bias_prevented": true
+}

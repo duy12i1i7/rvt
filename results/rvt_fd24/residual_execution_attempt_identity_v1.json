@@ -1,0 +1,61 @@
+{
+ "chunk_size_frozen": false,
+ "duplicates": {
+  "candidate_evaluation": "deduplicate by the deterministic candidate evaluation id; audit records are idempotent",
+  "execution_attempt": "expected and permitted; a repeated attempt must not create a duplicate scientific sample",
+  "historical_policy_preserved": "reject",
+  "scientific_row": "reject: two rows with one residual_scientific_row_id are a duplicate scientific sample",
+  "weakened_scientific_duplicate_detection": false
+ },
+ "evidence": {
+  "execution_ids_differ": true,
+  "identical_after_canonical_sort": true,
+  "partition_a_row_ids": [
+   "481147fd25e2c83697a5e6cb57cd1f4389b344bbef8c443f585fbb299f14ce5b",
+   "b92fe12768f4362b0b44d42a47e392ed05401e4f9d6ca1dc53721a2e9dfa0349",
+   "65190afe8c8d9f1b1fcba6ccce2e6cbf015bf574efd4e31523aa03c17c5ec465"
+  ]
+ },
+ "identity_class": "C_EXECUTION_ATTEMPT_OR_CHUNK",
+ "implementation_sha256": "cf5c9c88f0555e124c83ccb72fc374debf7980ac4f39f5e4f77408eb6978fa08",
+ "key_fields": [
+  "chunk_id",
+  "worker_id",
+  "attempt_index",
+  "task_range"
+ ],
+ "may_change_later_without_scientific_effect": [
+  "rows per job",
+  "workers",
+  "chunk size",
+  "scheduling order"
+ ],
+ "may_not_affect": [
+  "scientific row identity",
+  "candidate utility",
+  "selected target",
+  "matched streams"
+ ],
+ "principle": "SCIENTIFIC IDENTITY IS INDEPENDENT OF EXECUTION CHUNKING",
+ "purely_operational": true,
+ "residual_execution_attempt_identity_v1_sha256": "edf1f71ea74ebb1bea144f7f754f647969c59af165b82ae6bf40134cf759b923",
+ "retry": {
+  "evidence": {
+   "attempt_ids_differ": true,
+   "candidate_ids_stable": true,
+   "matched_streams_stable": true,
+   "scientific_row_id_stable": true,
+   "target_stable": true
+  },
+  "maximum_infrastructure_retries": 1,
+  "outcome_rule": "canonically identical output, or provenance validation failure; never a second scientific sample",
+  "randomness_resampled_on_retry": false,
+  "replay_rule": "an infrastructure retry replays the same scientific row identity, the same nine candidate evaluation identities, the same snapshot and the same matched streams, in the same candidate order",
+  "scientific_denominator_delta": 0,
+  "semantic_generation_retries": 0
+ },
+ "rows_per_job_frozen": false,
+ "schema_version": "rvt-residual-execution-attempt-identity/v1",
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "FROZEN_PRE_DATA"
+}

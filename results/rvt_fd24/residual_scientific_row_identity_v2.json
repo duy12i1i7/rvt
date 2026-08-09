@@ -1,0 +1,43 @@
+{
+ "candidate_index_in_identity": false,
+ "canonicalization": "sha256 over canonical_json_bytes of the key mapping, using the repository canonical JSON encoder",
+ "example_row_id": "481147fd25e2c83697a5e6cb57cd1f4389b344bbef8c443f585fbb299f14ce5b",
+ "execution_dimension_in_identity": false,
+ "extra_field_policy": "reject",
+ "field_provenance": {
+  "episode_id": "generation_budget_v1.json#dense_row_contract.canonical_order",
+  "family": "generation_budget_v1.json#job_identity_contract.residual_cell",
+  "graph_fingerprint": "generation_budget_v1.json#dense_row_contract.canonical_order",
+  "layout_sha256": "generation_budget_v1.json#job_identity_contract.residual_cell",
+  "residual_expert_spec_sha256": "results/rvt_fd24/residual_expert_spec_v2.json; a different label contract is a different label for the same state",
+  "robot_id": "generation_budget_v1.json#dense_row_contract.canonical_order",
+  "split": "generation_budget_v1.json#job_identity_contract.residual_cell",
+  "study": "generation_budget_v1.json#job_identity_contract.residual_cell",
+  "team_size": "generation_budget_v1.json#job_identity_contract.residual_cell",
+  "timestep": "generation_budget_v1.json#dense_row_contract.canonical_order",
+  "topology_id": "generation_budget_v1.json#dense_row_contract.canonical_order"
+ },
+ "identity_class": "A_SCIENTIFIC_RESIDUAL_ROW",
+ "implementation": "rvt_swarm/phase9c_rb/generation_contract.py",
+ "implementation_sha256": "cf5c9c88f0555e124c83ccb72fc374debf7980ac4f39f5e4f77408eb6978fa08",
+ "key_fields": [
+  "study",
+  "split",
+  "family",
+  "layout_sha256",
+  "team_size",
+  "episode_id",
+  "timestep",
+  "robot_id",
+  "topology_id",
+  "graph_fingerprint",
+  "residual_expert_spec_sha256"
+ ],
+ "replica_index_in_identity": false,
+ "represents": "the result of expert selection for one legitimate dense decision state, robot and topology context",
+ "residual_scientific_row_identity_v2_sha256": "f77cc03653a0982ff3c79a1d2772e6193bc26d34df750e29b342d479a918cc20",
+ "schema_version": "rvt-residual-scientific-row-identity/v2",
+ "source_commit": "cecbf5dee2216d358963d357e75f4ba6f8ccf867",
+ "status": "FROZEN_PRE_DATA",
+ "why_no_candidate_index": "the nine candidates are how the expert decides, not nine scientific observations; including it would multiply the dataset ninefold"
+}
