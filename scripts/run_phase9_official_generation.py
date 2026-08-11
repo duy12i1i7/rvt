@@ -13,11 +13,7 @@ from rvt_swarm.phase9g0r.compiler import (
     compile_recoverability_tasks,
     compile_residual_tasks,
 )
-from rvt_swarm.phase9g0r.producer import (
-    plan_residual_retained_states,
-    produce_recoverability_event,
-    produce_residual_state,
-)
+from rvt_swarm.phase9g0p.executor import execute_recoverability, execute_residual
 from rvt_swarm.phase8.common import sha256_document
 from rvt_swarm.phase9g0r.preflight import validate_authorization_scope
 from rvt_swarm.phase9g0r.writer import CanonicalGenerationWriter
@@ -50,6 +46,12 @@ def main() -> None:
     parser.add_argument("--authorization-scope-sha256", required=True)
     parser.add_argument("--authorization-scope", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
+    parser.add_argument("--operational-profile", type=Path)
+    parser.add_argument("--operational-profile-sha256")
+    parser.add_argument("--workers", type=int)
+    parser.add_argument("--numeric-threads", type=int)
+    parser.add_argument("--chunk-size", type=int)
+    parser.add_argument("--infrastructure-timeout-seconds", type=float)
     parser.add_argument("--resolve-only", action="store_true")
     args = parser.parse_args()
 
@@ -69,6 +71,42 @@ def main() -> None:
     from rvt_swarm.phase9g0r.compiler import JOB_MANIFEST_SHA256
     if args.job_manifest_sha256 != JOB_MANIFEST_SHA256:
         raise SystemExit("official job manifest binding mismatch")
+
+    operational = None
+    supplied_operational_arguments = (
+        args.operational_profile,
+        args.operational_profile_sha256,
+        args.workers,
+        args.numeric_threads,
+        args.chunk_size,
+        args.infrastructure_timeout_seconds,
+    )
+    if any(value is not None for value in supplied_operational_arguments):
+        if any(value is None for value in supplied_operational_arguments):
+            raise SystemExit("operational profile arguments must be supplied together")
+        operational_document = json.loads(
+            args.operational_profile.read_text(encoding="ascii")
+        )
+        supplied_hash = str(
+            operational_document.pop("phase9g0p_operational_contract_sha256", "")
+        )
+        if supplied_hash != args.operational_profile_sha256 or (
+            sha256_document(operational_document) != supplied_hash
+        ):
+            raise SystemExit("operational profile artifact hash mismatch")
+        operational = dict(operational_document["profiles"][args.branch])
+        expected = {
+            "workers": int(args.workers),
+            "numeric_threads": int(args.numeric_threads),
+            "chunk_size_atomic_units": int(args.chunk_size),
+            "infrastructure_timeout_seconds": float(
+                args.infrastructure_timeout_seconds
+            ),
+        }
+        if any(operational.get(key) != value for key, value in expected.items()):
+            raise SystemExit("branch operational profile binding mismatch")
+        if int(args.chunk_size) != 1:
+            raise SystemExit("qualified production executor requires atomic chunk size 1")
 
     tasks = (
         compile_recoverability_tasks(root, study=args.study, split=args.split)
@@ -91,6 +129,8 @@ def main() -> None:
         "authorization_scope_sha256": args.authorization_scope_sha256,
         "writer_root": str(args.writer_root),
         "scientific_execution": not args.resolve_only,
+        "operational_profile": operational,
+        "operational_profile_sha256": args.operational_profile_sha256,
     }
     scope = json.loads(args.authorization_scope.read_text(encoding="ascii"))
     supplied_scope_hash = str(scope.pop("phase9_authorization_scope_sha256", ""))
@@ -112,28 +152,33 @@ def main() -> None:
     if args.resolve_only:
         print(json.dumps(resolution, sort_keys=True))
         return
+    if operational is None:
+        raise SystemExit("official execution requires the qualified operational profile")
     writer = CanonicalGenerationWriter(
         args.writer_root,
         mode=args.mode,
         official_execution_authorized=execution_authorized,
     )
     if args.branch == "recoverability":
-        for task in tasks:
-            produce_recoverability_event(root, task, writer=writer)
+        execution = execute_recoverability(
+            root,
+            tasks,
+            writer,
+            workers=int(args.workers),
+            timeout_seconds=float(args.infrastructure_timeout_seconds),
+        )
     else:
-        for task in tasks:
-            retained = plan_residual_retained_states(root, task.source)
-            for robot_id, timesteps in retained.items():
-                for timestep in timesteps:
-                    produce_residual_state(
-                        root,
-                        task.source,
-                        robot_id=robot_id,
-                        timestep=timestep,
-                        source_commit=args.source_commit,
-                        scientific_addendum_sha256=args.scientific_addendum_sha256,
-                        writer=writer,
-                    )
+        execution = execute_residual(
+            root,
+            tasks,
+            writer,
+            workers=int(args.workers),
+            timeout_seconds=float(args.infrastructure_timeout_seconds),
+            source_commit=args.source_commit,
+            scientific_addendum_sha256=args.scientific_addendum_sha256,
+        )
+    resolution["execution_summary"] = execution
+    print(json.dumps(resolution, sort_keys=True))
 
 
 if __name__ == "__main__":

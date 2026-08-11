@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from rvt_swarm.phase9g0p.benchmark import _scientific_projection, distribution
+from rvt_swarm.phase9g0p.preflight import EXPECTED_PROFILES
 from rvt_swarm.phase9g0r.contracts import (
     CandidateAggregateDisposition,
     Phase9G0RContractError,
@@ -138,3 +139,20 @@ def test_frozen_benchmark_manifests_exclude_sealed_scopes() -> None:
             "final_test_accesses": 0,
             "study_a_n24_accesses": 0,
         }
+
+
+def test_predeclared_production_profiles_are_branch_specific() -> None:
+    assert EXPECTED_PROFILES["recoverability"] == {
+        "profile_id": "PROFILE_RECOVERABILITY_V1",
+        "workers": 12,
+        "numeric_threads": 1,
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 60.0,
+    }
+    assert EXPECTED_PROFILES["residual"] == {
+        "profile_id": "PROFILE_RESIDUAL_V2_V1",
+        "workers": 8,
+        "numeric_threads": 1,
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 360.0,
+    }
