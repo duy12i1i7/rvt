@@ -1,0 +1,8 @@
+{
+  "candidate_pair_transaction_sha256": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+  "ego_payload_binding_sha256": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+  "mapping": "source event -> candidate aggregate -> N robot-local rows; both candidates atomically form 2*N rows",
+  "phase9_recoverability_row_binding_sha256": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142",
+  "row_identity_contract_sha256": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d",
+  "schema_version": "rvt-recoverability-row-binding/v1"
+}

@@ -1,0 +1,44 @@
+{
+  "contract_hashes": {
+    "candidate_pair_transaction": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+    "communication_config_hash": "fcca7874958457414f05a64519a1ad3d2cb6036b0385de663eed73b5a15c569a",
+    "lifecycle_config_hash": "750e6c576ac89c91c0028051e8a1684e4db7abe4419b0be1c42a7958b3b454a6",
+    "official_rollout_configuration": "4fda39e64d34ffb57ee76016bcf6218b3eddbfc8835c73d4a5181c77acd78fd2",
+    "recoverability_ego_payload_binding": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+    "recoverability_row_binding": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142",
+    "recoverability_row_identity": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d",
+    "residual_dense_state_retention": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef"
+  },
+  "historical_9g0_binding_map_sha256": "3ca4b7108372d4ab89a862f8d6ed222242385a6ea480f398245a8c88b68b5d20",
+  "historical_9g0_evidence_commit": "9a4197b2182b667bc848c0e4100da0f4491e549a",
+  "matched_randomness_authority_preserved": "87e206d22d3b3e893bc2c34ac87e97ceb5d9cb66e23d26456791bad552bcf851",
+  "owner_decisions": {
+    "1_recoverability_row_identity": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d",
+    "2_recoverability_ego_payload": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+    "3_official_rollout_configuration": "4fda39e64d34ffb57ee76016bcf6218b3eddbfc8835c73d4a5181c77acd78fd2",
+    "4_lifecycle_and_communication": {
+      "communication": "fcca7874958457414f05a64519a1ad3d2cb6036b0385de663eed73b5a15c569a",
+      "lifecycle": "750e6c576ac89c91c0028051e8a1684e4db7abe4419b0be1c42a7958b3b454a6"
+    },
+    "5_candidate_pair_transaction": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+    "6_residual_universe_and_retention": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef"
+  },
+  "phase": "PHASE_9G0_R",
+  "phase9_predata_generation_scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+  "pre_addendum_isolation": {
+    "final_test_accesses": 0,
+    "official_rows": 0,
+    "official_scientific_data": 0,
+    "official_staging_writes": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "prospective_freeze_proof": "All owner decisions were recorded before any official run ID, official row, official staging write, sealed access, or training operation.",
+  "schema_version": "rvt-phase9-predata-generation-scientific-addendum/v1",
+  "scientific_roots": {
+    "rb19": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "status": "OWNER_DECISIONS_FROZEN_PROSPECTIVELY"
+}

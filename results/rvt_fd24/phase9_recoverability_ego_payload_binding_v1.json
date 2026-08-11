@@ -1,0 +1,32 @@
+{
+  "authoritative_builder": "rvt_swarm.decentralized.ego_graph_v2.build_robot_local_ego_graph",
+  "authoritative_graph_schema": "rvt-ego-graph/v2",
+  "authoritative_model_path": "rvt_swarm.fd24.model",
+  "authoritative_serialization": "rvt-ego-graph-serialization/v1",
+  "candidate_conditioning": "candidate_topology_id is a separate row field; exact candidate-conditioned tensors remain by value",
+  "edge_feature_dimension": 19,
+  "excluded": [
+    "explicit candidate_topology_id",
+    "Target V4 label",
+    "worker/chunk/retry metadata",
+    "operational timing metadata"
+  ],
+  "fingerprint": "SHA-256 of canonical payload after removing content_sha256 and explicit metadata.candidate_topology_id",
+  "included": [
+    "schema and normalization versions",
+    "feature schema and topology registry hashes",
+    "runtime configuration hash",
+    "units",
+    "observer/root and local mission metadata",
+    "mission_orientation_cos_sin",
+    "node_x and all node masks/kinds/source keys",
+    "edge_index, edge_attr and all edge masks/types"
+  ],
+  "locality": "one RobotView plus one robot-local topology slice; no global pooled graph",
+  "node_feature_dimension": 35,
+  "owner_decision": 2,
+  "payload_semantics": "canonical RobotLocalEgoGraph serialization by value",
+  "phase9_recoverability_ego_payload_binding_sha256": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+  "schema_version": "rvt-recoverability-ego-payload-binding/v1",
+  "source_file_sha256": "4cb4fe59b5e1408de9a8d2e21581ad406e2cbd778f9bfb2e515a6268e87059e4"
+}

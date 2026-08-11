@@ -1,0 +1,40 @@
+{
+  "authoritative_references": {
+    "executable_protocol": "8da0b94e5ae83cf35ea38c38504d11d6e6fdce6da09766bf8cb14c4cc252158a",
+    "rb19_generation_provenance": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "canonicalization": "existing project canonical JSON",
+  "digest": "SHA-256 over canonical scientific configuration bundle",
+  "owner_decision": 3,
+  "phase9_official_rollout_configuration_sha256": "4fda39e64d34ffb57ee76016bcf6218b3eddbfc8835c73d4a5181c77acd78fd2",
+  "preimage_fields": [
+    "study/split/family/layout_sha256/team_size",
+    "episode_id and decision event/timestep",
+    "candidate topology and scientific replica identity",
+    "matched disturbance seed and stream identity",
+    "source-policy contract",
+    "topology-registry contract",
+    "base-controller contract",
+    "transition/execution protocol contract",
+    "safety contract",
+    "simulator/runtime integration configuration",
+    "Target V4 contract",
+    "lifecycle configuration hash",
+    "communication configuration hash"
+  ],
+  "prohibited_operational_fields": [
+    "attempt_index",
+    "chunk_id",
+    "chunk_size",
+    "docker_path",
+    "infrastructure_retry_state",
+    "output_directory",
+    "timeout",
+    "wall_clock_timestamp",
+    "worker_count",
+    "worker_id"
+  ],
+  "scheduling_invariance": true,
+  "schema_version": "rvt-official-rollout-configuration/v1"
+}

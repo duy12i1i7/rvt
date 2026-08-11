@@ -1,0 +1,37 @@
+{
+  "canonicalization": "existing project canonical JSON: ASCII, sorted keys, compact separators, no NaN",
+  "digest": "SHA-256 over canonical JSON",
+  "identity_fields_in_order": [
+    "schema",
+    "study",
+    "split",
+    "family",
+    "layout_sha256",
+    "team_size",
+    "episode_id",
+    "timestep",
+    "robot_id",
+    "candidate_topology_id",
+    "graph_fingerprint",
+    "target_v4_contract_sha256",
+    "recoverability_row_binding_spec_sha256"
+  ],
+  "label_semantics": "observed label is excluded from scientific input identity",
+  "owner_decision": 1,
+  "phase9_recoverability_row_identity_sha256": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d",
+  "prohibited_fields": [
+    "attempt_index",
+    "chunk_id",
+    "execution_order",
+    "filesystem_path",
+    "infrastructure_retry_metadata",
+    "label",
+    "label_value",
+    "replica_index",
+    "timeout",
+    "wall_clock_time",
+    "worker_id"
+  ],
+  "replica_semantics": "replicas determine aggregate label but never row identity",
+  "schema_version": "rvt-recoverability-row-identity/v1"
+}

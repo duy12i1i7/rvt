@@ -1,0 +1,70 @@
+{
+  "cap_proof": {
+    "authoritative_budget_artifact": "results/rvt_fd24/datasets/generation_budget_v1.json",
+    "authoritative_dense_state_cap": 536000,
+    "excluded_scopes": [
+      "study_a_n24_evaluation",
+      "final_test"
+    ],
+    "included_datasets": [
+      {
+        "dataset_id": "study_a_train",
+        "k16_upper_bound": 180480,
+        "robot_episodes": 11280
+      },
+      {
+        "dataset_id": "study_a_validation",
+        "k16_upper_bound": 45120,
+        "robot_episodes": 2820
+      },
+      {
+        "dataset_id": "study_b_train",
+        "k16_upper_bound": 227200,
+        "robot_episodes": 14200
+      },
+      {
+        "dataset_id": "study_b_validation",
+        "k16_upper_bound": 68160,
+        "robot_episodes": 4260
+      }
+    ],
+    "passes": true,
+    "remaining_capacity": 15040,
+    "retention_k": 16,
+    "smallest_k_satisfying_cap": 16,
+    "strict_upper_bound": 520960,
+    "total_authorized_robot_episodes": 32560
+  },
+  "eligibility": [
+    "initialization completed successfully",
+    "source runtime state scientifically valid",
+    "episode not at frozen terminal condition",
+    "valid robot-local decision input",
+    "authoritative base action computable",
+    "authoritative local safety context constructible",
+    "Residual Expert V2 snapshot/counterfactual producer callable without invented state"
+  ],
+  "existing_runtime_enable_predicate": "none beyond active valid local action pipeline",
+  "original_timestep_preserved": true,
+  "owner_decisions": [
+    6,
+    "6B"
+  ],
+  "phase9_residual_dense_state_retention_sha256": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef",
+  "prohibited_filters": [
+    "future outcome",
+    "zero residual winner",
+    "eventual label",
+    "candidate utility",
+    "future collision",
+    "future success",
+    "class balance",
+    "difficulty",
+    "bottleneck-only"
+  ],
+  "retention_formula": "index_j = floor(j*(M-1)/(K-1)), j=0..K-1, integer arithmetic",
+  "retention_k": 16,
+  "sampling_unit": "robot within source episode",
+  "schema_version": "rvt-residual-dense-retention/v1",
+  "universe_schema_version": "rvt-residual-dense-state-universe/v1"
+}

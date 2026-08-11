@@ -1,0 +1,43 @@
+{
+  "excluded_operational_fields": [
+    "hostname",
+    "runtime timestamp",
+    "Python repr/address",
+    "worker",
+    "chunk",
+    "retry",
+    "filesystem path"
+  ],
+  "field_provenance": {
+    "derived_behavior": "DERIVATION_VERSION in the canonical lifecycle payload",
+    "runtime_sections": "RuntimeConfig.for_team_size(N), rvt_swarm/runtime_configuration.py",
+    "transition_protocol_runtime_options": "SimulatorEpisodeSession._initialize_robots"
+  },
+  "owner_decision": 4,
+  "phase9_lifecycle_config_hash_sha256": "750e6c576ac89c91c0028051e8a1684e4db7abe4419b0be1c42a7958b3b454a6",
+  "preimage": {
+    "runtime_sections": [
+      "physical",
+      "mission",
+      "formation",
+      "sensing",
+      "protocol",
+      "controller",
+      "safety"
+    ],
+    "transition_protocol_runtime_options": {
+      "transition_protocol_v1_enabled": true
+    }
+  },
+  "qualified_team_size_hashes": {
+    "12": "d4c7e8baffdd57b70fb66b9c87447c0f961044f8aa5eecc2975380e7c3a64ecc",
+    "16": "4d20cea2237ebbbda38b22082c69e0cc53e4ffb0a8ee69ee90d6fef504a3d9ac",
+    "24": "776298015631eebb6c91fe8e38443606e115362be9c64cabd9da63ef2aaee529",
+    "5": "7bf917c4cb3bcf9329f0be2075691abbad8a7ad06ad55bb20bd9d223c72ca9ab",
+    "6": "1bffef2132f55949ce776482846dd08e398114473c2e53aae13e3a538512a19f",
+    "8": "d4e78a2aed036aa2d53d8e2c7ed305967479a83e5047c7ea52e2ec611efcb679"
+  },
+  "runtime_configuration_source_sha256": "3d8ae86eaf95e31f6f5bc907221dde934234aa0076268cc7cafb6034c2fda616",
+  "schema_version": "rvt-lifecycle-config-hash/v1",
+  "unresolved_behavior_affecting_fields": []
+}

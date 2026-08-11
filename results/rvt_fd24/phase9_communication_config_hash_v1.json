@@ -1,0 +1,31 @@
+{
+  "consumer": "rvt_swarm.phase9c_rb.channel.build_channel",
+  "excluded_operational_fields": [
+    "hostname",
+    "runtime timestamp",
+    "Python repr/address",
+    "worker",
+    "chunk",
+    "retry",
+    "filesystem path"
+  ],
+  "field_provenance": {
+    "communication_seed": "phase9_job_manifest.source_episode_jobs[].seeds.communication",
+    "communication_stream_identity": "CounterStream(seed, STREAM_COMMUNICATION).identity()",
+    "compiled_communication_contract": "ScenarioRuntimeBinding.communication_contract",
+    "runtime_communication": "RuntimeConfig.for_team_size(N).communication"
+  },
+  "owner_decision": 4,
+  "phase9_communication_config_hash_sha256": "fcca7874958457414f05a64519a1ad3d2cb6036b0385de663eed73b5a15c569a",
+  "preimage_fields": [
+    "schema_version",
+    "runtime_configuration_schema_version",
+    "team_size",
+    "RuntimeConfig.communication complete source object",
+    "compiled layout communication contract",
+    "source-job communication seed",
+    "counter-keyed communication stream identity"
+  ],
+  "schema_version": "rvt-communication-config-hash/v1",
+  "unresolved_behavior_affecting_fields": []
+}

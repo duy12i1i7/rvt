@@ -1,0 +1,28 @@
+{
+  "candidate_order": [
+    "COMPACT",
+    "LINE"
+  ],
+  "candidate_topology_ids": [
+    5,
+    2
+  ],
+  "complete_row_count_formula": "2 * team_size",
+  "generation_invalid_disposition": "GENERATION_INVALID",
+  "infrastructure_failure_disposition": "INFRASTRUCTURE_FAILURE",
+  "labelable_dispositions": [
+    "RECOVERABLE_POSITIVE",
+    "VALID_TASK_NEGATIVE"
+  ],
+  "matrix": {
+    "both_labelable": "commit 2*N rows",
+    "either_generation_invalid": "commit zero rows and retain both candidate audits",
+    "infrastructure_unresolved": "no scientific reconciliation until retry/final infrastructure handling"
+  },
+  "owner_decision": 5,
+  "partial_candidate_publication": "PROHIBITED",
+  "phase9_recoverability_candidate_pair_transaction_sha256": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+  "publication_atomicity": "complete 2*N row set plus provenance is one scientific commit",
+  "reconciliation_boundary": "source decision event",
+  "schema_version": "rvt-recoverability-candidate-pair-transaction/v1"
+}
