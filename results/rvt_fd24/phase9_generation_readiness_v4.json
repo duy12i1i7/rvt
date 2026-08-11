@@ -1,0 +1,95 @@
+{
+  "closure_references": {
+    "command_plan": "473fc5243e3a11afbb44df868a0d3c814f7e534bb57439b85a2e79d27c4856f0",
+    "command_resolution": "bba0d1715edb0d3d70e578ee075bfb60db9557bb96f8d9ad8e1d61e87f3392dd",
+    "count_reconciliation": "92142cb60310c465fef451cb31442e82a10e9361e35c35fa09a53df5f7c624d9",
+    "generation_provenance": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+    "generator_contract": "2672a5624a4505aa668326d7e30000ec06b9f158c484b06044344ab783d404fb",
+    "matched_randomness": "d12d3f5c6ca933f58a7ded2c4a913f8dee165a6a3452a387c306e05208cf64a4",
+    "performance": "a547119da7290e96410869f4e8d4c419da7c8cd6028dfae760eb285648ae64dc",
+    "preflight": "9f9eac49248008e4183720945174d3193aac4e8238e6fd775bce8b66a30d3652",
+    "rb20_replay": "9ee47b513ff496691a833f7794d6b204980bbaf3c3dbfe0b6058f4a99e56de36",
+    "scientific_addendum": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "structural_canary": "a1b82be50179eb242035e9791d823b4a44cd8bbe6f173a4092dbc316c07205bd",
+    "target_validation": "eba4307a551ec0f439536d27ae3beedf69fa1408e2853ccd821319153c3a0447"
+  },
+  "executable_binding": {
+    "canonical_staging_writer": true,
+    "command_plan_executed": false,
+    "command_plan_resolutions": 8,
+    "docker_image": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+    "official_execution_authorized": false,
+    "real_recoverability_producer": true,
+    "real_residual_producer": true,
+    "source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_run_ids": 0,
+    "official_shards": 0,
+    "official_staging_writes": 0,
+    "optimizer_states": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "next_gate": "Run scoped RB21 performance requalification for the real production path, then obtain a new narrow authorization artifact before any official STAGING execution.",
+  "owner_addendum": {
+    "frozen_decisions": 6,
+    "official_rows_before_addendum": 0,
+    "prospective_before_official_labels": true,
+    "sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0"
+  },
+  "performance": {
+    "classification": "RB21_PRODUCTION_PATH_REQUALIFICATION_REQUIRED",
+    "full_worker_scaling_executed": false,
+    "rb21_w12_profile_authoritative": false,
+    "scientific_semantic_change": false
+  },
+  "phase9_generation_readiness_v4_sha256": "83d3f9b6178cf04834ca38ce9177bb9e5f58643919f5ca8bf61b599165136d3f",
+  "schema_version": "rvt-phase9-generation-readiness/v4",
+  "scientific_gates": {
+    "f1_through_f10_compiled": true,
+    "final_test_sealed": true,
+    "matched_randomness_groups": 21000,
+    "matched_randomness_mismatches": 0,
+    "residual_cap": 536000,
+    "residual_retention_k": 16,
+    "residual_strict_upper_bound": 520960,
+    "study_a_n24_sealed": true,
+    "study_a_train_validation_compiled": true,
+    "study_b_train_validation_including_n24_compiled": true,
+    "unresolved_owner_decisions": []
+  },
+  "status": "PRE_DATA_BINDING_CLOSED_PRODUCTION_PROFILE_REQUALIFICATION_REQUIRED",
+  "tests": {
+    "focused_required_regressions": {
+      "failed": 0,
+      "passed": 133,
+      "xfailed": 0
+    },
+    "local_complete_suite": {
+      "failed": 0,
+      "passed": 3040,
+      "seconds": 395.59,
+      "warnings": 1,
+      "xfailed": 0
+    },
+    "publication_required_xfailed": 0,
+    "target_complete_exact_image_suite": {
+      "failed": 0,
+      "passed": 3034,
+      "seconds": 360.95,
+      "warnings": 1,
+      "xfailed": 0
+    },
+    "target_final_evidence_tests": {
+      "failed": 0,
+      "passed": 6,
+      "xfailed": 0
+    }
+  },
+  "verdict": "C"
+}

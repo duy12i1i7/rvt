@@ -1,0 +1,104 @@
+{
+  "authorities": {
+    "candidate_pair_transaction": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+    "communication_configuration": "fcca7874958457414f05a64519a1ad3d2cb6036b0385de663eed73b5a15c569a",
+    "count_reconciliation": "92142cb60310c465fef451cb31442e82a10e9361e35c35fa09a53df5f7c624d9",
+    "lifecycle_configuration": "750e6c576ac89c91c0028051e8a1684e4db7abe4419b0be1c42a7958b3b454a6",
+    "matched_randomness_regression": "d12d3f5c6ca933f58a7ded2c4a913f8dee165a6a3452a387c306e05208cf64a4",
+    "negative_preflight": "9f9eac49248008e4183720945174d3193aac4e8238e6fd775bce8b66a30d3652",
+    "official_rollout_configuration": "4fda39e64d34ffb57ee76016bcf6218b3eddbfc8835c73d4a5181c77acd78fd2",
+    "performance_classification": "a547119da7290e96410869f4e8d4c419da7c8cd6028dfae760eb285648ae64dc",
+    "rb20_official_path_replay": "9ee47b513ff496691a833f7794d6b204980bbaf3c3dbfe0b6058f4a99e56de36",
+    "recoverability_ego_payload": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+    "recoverability_row_binding": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142",
+    "recoverability_row_identity": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d",
+    "residual_dense_retention": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef",
+    "scientific_addendum": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "structural_canary": "a1b82be50179eb242035e9791d823b4a44cd8bbe6f173a4092dbc316c07205bd"
+  },
+  "cli": "scripts/run_phase9_official_generation.py",
+  "container": {
+    "construction": "FROM qualified base plus committed executable source",
+    "qualified_base_image": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "scientific_execution_device": "CPU",
+    "superseding_execution_image": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c"
+  },
+  "executable_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "official_generation_executed": false,
+  "phase9_official_generator_contract_sha256": "2672a5624a4505aa668326d7e30000ec06b9f158c484b06044344ab783d404fb",
+  "provenance_class": "OFFICIAL_SCIENTIFIC_PRODUCER",
+  "recoverability": {
+    "aggregation": "all_success",
+    "candidates": [
+      "COMPACT",
+      "LINE"
+    ],
+    "entry_point": "rvt_swarm.phase9g0r.producer.produce_recoverability_event",
+    "generation_invalid_rows": 0,
+    "publication_unit": "one reconciled 2*N event transaction",
+    "replica_rule": "F8/F9=3; all other families=1"
+  },
+  "residual": {
+    "candidate_count": 9,
+    "dense_universe": "all valid active robot-local decision instants",
+    "dispositions": [
+      "LABELED",
+      "NO_ELIGIBLE_ACTION"
+    ],
+    "entry_point": "rvt_swarm.phase9g0r.producer.produce_residual_state",
+    "retention": "K=16 deterministic rational temporal positions per episode and robot"
+  },
+  "retry": {
+    "infrastructure_retries": 1,
+    "scientific_identity_changes_on_retry": false,
+    "semantic_retries": 0
+  },
+  "schema_version": "rvt-phase9-official-generator-contract/v2",
+  "status": "EXECUTABLE_PREPARED_OFFICIAL_EXECUTION_HELD",
+  "task_compiler": {
+    "authorized_study_splits": [
+      [
+        "study_a_zero_shot",
+        "train"
+      ],
+      [
+        "study_a_zero_shot",
+        "validation"
+      ],
+      [
+        "study_b_with_n24",
+        "train"
+      ],
+      [
+        "study_b_with_n24",
+        "validation"
+      ]
+    ],
+    "families": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "F10"
+    ],
+    "final_test": "REJECT_ONLY_SEALED",
+    "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+    "module": "rvt_swarm.phase9g0r.compiler",
+    "scheduling_fields_in_scientific_task_identity": [],
+    "study_a_n24": "REJECT_ONLY_SEALED"
+  },
+  "writer": {
+    "atomic_scientific_units": true,
+    "direct_final_writer": false,
+    "entry_point": "rvt_swarm.phase9g0r.writer.CanonicalGenerationWriter",
+    "modes": [
+      "DIAGNOSTIC",
+      "OFFICIAL_STAGING"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "credential_persisted": false,
+  "official_generation_executed": false,
+  "phase9g0r_target_exact_image_validation_sha256": "eba4307a551ec0f439536d27ae3beedf69fa1408e2853ccd821319153c3a0447",
+  "qualified_base_image": {
+    "digest": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "present_on_target": true
+  },
+  "reached": true,
+  "rejected_intermediate_image": {
+    "accepted_as_qualified": false,
+    "causes": [
+      "macOS AppleDouble metadata entered the build context",
+      "source tree was not writable by the runtime user",
+      "inherited Git metadata was not advanced to the new source commit"
+    ],
+    "digest": "sha256:b06dc8cbf1fb06329059102b9945ea173ecad404e48226db6a4971cdb62e87b6",
+    "failure_class": "IMAGE_CONSTRUCTION_ONLY",
+    "failures": 112
+  },
+  "schema_version": "rvt-phase9g0r-target-exact-image-validation/v1",
+  "scientific_path": "CPU_AUTHORITATIVE_UNCHANGED",
+  "status": "PASS",
+  "superseding_image": {
+    "appledouble_files": 0,
+    "base_digest": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+    "digest": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+    "git_head_exact": true,
+    "rvt_source_commit_environment_exact": true,
+    "source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+    "source_tree_writable_by_runtime_user": true,
+    "tag": "rvt-phase9g0r:8cf6448-v2"
+  },
+  "target_account": "avis\\avis",
+  "target_host": "100.71.102.9",
+  "training_executed": false,
+  "validation": {
+    "complete_exact_image_suite": {
+      "failed": 0,
+      "passed": 3034,
+      "seconds": 360.95,
+      "warnings": 1,
+      "xfailed": 0
+    },
+    "final_evidence_tests_inside_exact_image": {
+      "failed": 0,
+      "passed": 6,
+      "xfailed": 0
+    },
+    "post_repair_regression_subset": {
+      "failed": 0,
+      "passed": 149
+    }
+  },
+  "wrong_prior_address_used_as_evidence": false
+}

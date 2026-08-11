@@ -1,0 +1,16 @@
+{
+  "binding": {
+    "branch": "recoverability",
+    "docker_image": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+    "generation_provenance_root": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+    "split": "train",
+    "study": "study_b_with_n24"
+  },
+  "broad_authorization": false,
+  "official_generation_execution_authorized": false,
+  "phase9_authorization_scope_sha256": "0f53239100d92ef3486fcfbc1139fce6453fdddf024b3dc824d96ebb6f8753f0",
+  "schema_version": "rvt-phase9-authorization-scope/v2",
+  "state": "PREPARED_NOT_AUTHORIZED_DO_NOT_EXECUTE"
+}
