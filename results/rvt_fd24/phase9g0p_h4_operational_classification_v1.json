@@ -1,0 +1,21 @@
+{
+  "basis": {
+    "candidate_evaluation_upper_bound": 4688640,
+    "projected_cpu_hours": 4004.437666287403,
+    "projected_staging_requirement_bytes": 21579864179,
+    "projected_wall_hours_range": [
+      501.5881479301526,
+      1102.7652837320913
+    ],
+    "strict_attempt_upper_bound": 520960,
+    "target_storage_available_bytes": 422363889664
+  },
+  "candidate_count_changed": false,
+  "classification": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+  "feasibility_basis": "qualified resume/idempotency, bounded RAM and storage, and no frozen scientific contract change required",
+  "horizon_changed": false,
+  "k_changed": false,
+  "phase9g0p_h4_operational_classification_sha256": "9a7c4f30db07568fcd8b78037f1644fcfd090fa2331fc08225a06eb3bc89dff7",
+  "risk": "multi-week CPU-authoritative generation and heavy-tailed residual units",
+  "schema_version": "rvt-phase9g0p-h4-operational-classification/v1"
+}

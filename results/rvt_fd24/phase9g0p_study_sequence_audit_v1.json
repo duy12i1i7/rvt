@@ -1,0 +1,16 @@
+{
+  "contamination_risk": "human-visible Study B N24 outcomes before Study A checkpoint freeze could influence Study A zero-shot decisions",
+  "final_test_status": "SEALED_NOT_AUTHORIZED",
+  "phase9g0p_study_sequence_audit_sha256": "f15be6c4a2e8718fcc57eac75871f7aa9f30b671866047762429edbfbe2cbacc",
+  "required_sequence": [
+    "Study A train/validation generation",
+    "Study A model selection and checkpoint freeze",
+    "Study A N24 zero-shot evaluation and immutable recording",
+    "Study B train/validation generation or human-visible N24 inspection",
+    "final-test remains separately sealed"
+  ],
+  "schema_version": "rvt-phase9g0p-study-sequence-audit/v1",
+  "scientific_scope_changed": false,
+  "study_a_n24_status": "SEALED_NOT_AUTHORIZED",
+  "study_b_status": "HELD_SEQUENCE_NOT_AUTHORIZED"
+}

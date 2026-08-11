@@ -1,0 +1,152 @@
+{
+  "chunk_matrix_predeclaration_sha256": "d5ba4204842f1d20c013323ed4de2d09bf6b166ec4b6f9c3d8cb8fa888b0d678",
+  "official_staging_writes": 0,
+  "phase9g0p_chunk_scaling_sha256": "439bec73b362b5d3094e46742c69c8c7f4d1e033abeaed8a659b1f13bfd24b6c",
+  "recoverability": {
+    "entries": [
+      {
+        "atomic_units_per_second": 2.326856003326649,
+        "chunk_runtime_seconds": {
+          "max": 10.116872335987864,
+          "mean": 3.8031602954154855,
+          "median": 1.7929271924949717,
+          "n": 24,
+          "p90": 9.500874033401487,
+          "p95": 9.907141346643037
+        },
+        "chunk_size_atomic_units": 1,
+        "load_balance_maximum_to_mean_worker_load_ratio": 1.3300612582886966,
+        "peak_aggregate_rss_upper_bound_bytes": 3469393920,
+        "raw_target_result_sha256": "3433c6b815c785c81f6e87c3a0d365707f871ef14ac0459fa3867b156943f432",
+        "resume_granularity_atomic_units": 1,
+        "retry_blast_radius_atomic_units": 1,
+        "scheduler_parent_overhead_seconds": 0.046865890006301925,
+        "scientific_semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "wall_seconds": 10.314346897997893,
+        "workers": 12,
+        "writer_throughput_per_second": 111.12235302636864
+      },
+      {
+        "atomic_units_per_second": 1.2798727370999234,
+        "chunk_runtime_seconds": {
+          "max": 18.549275798985036,
+          "mean": 7.043485760664528,
+          "median": 3.4030206790048396,
+          "n": 12,
+          "p90": 17.208680904415086,
+          "p95": 17.85704932285298
+        },
+        "chunk_size_atomic_units": 2,
+        "load_balance_maximum_to_mean_worker_load_ratio": 2.633536352494163,
+        "peak_aggregate_rss_upper_bound_bytes": 3421593600,
+        "raw_target_result_sha256": "3f12dab1b96e22da9099a2d48faac6acec1c5ade36be74c2e976c9669d3b75f3",
+        "resume_granularity_atomic_units": 2,
+        "retry_blast_radius_atomic_units": 2,
+        "scheduler_parent_overhead_seconds": 0.050302396004553884,
+        "scientific_semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "wall_seconds": 18.751864388003014,
+        "workers": 12,
+        "writer_throughput_per_second": 108.63900940763598
+      },
+      {
+        "atomic_units_per_second": 0.730308329841578,
+        "chunk_runtime_seconds": {
+          "max": 32.68547552698874,
+          "mean": 13.562381835504008,
+          "median": 11.0275108969945,
+          "n": 6,
+          "p90": 26.06877092749346,
+          "p95": 29.3771232272411
+        },
+        "chunk_size_atomic_units": 4,
+        "load_balance_maximum_to_mean_worker_load_ratio": 2.4100099763762532,
+        "peak_aggregate_rss_upper_bound_bytes": 1721651200,
+        "raw_target_result_sha256": "fe31a19d365bb13ccb62bbfda17799f512ac382916345bcbe6ae523e752c94ae",
+        "resume_granularity_atomic_units": 4,
+        "retry_blast_radius_atomic_units": 4,
+        "scheduler_parent_overhead_seconds": 0.02837759500835091,
+        "scientific_semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "wall_seconds": 32.86283206602093,
+        "workers": 12,
+        "writer_throughput_per_second": 112.09975416349228
+      }
+    ],
+    "selected_chunk_size_atomic_units": 1,
+    "selection_reason": "chunk=1 has maximum throughput, best load balance, smallest retry blast radius and finest resume granularity",
+    "semantic_digest_equal_all_chunks": true
+  },
+  "residual": {
+    "entries": [
+      {
+        "atomic_units_per_second": 0.13122566809626518,
+        "chunk_runtime_seconds": {
+          "max": 141.6582415990124,
+          "mean": 27.675762538081035,
+          "median": 11.11808531099814,
+          "n": 25,
+          "p90": 76.26101047381526,
+          "p95": 117.01251633459455
+        },
+        "chunk_size_atomic_units": 1,
+        "load_balance_maximum_to_mean_worker_load_ratio": 1.6379182777461088,
+        "peak_aggregate_rss_upper_bound_bytes": 1715777536,
+        "raw_target_result_sha256": "ab51f6a796b15615829f7fe85519fae58d853e3856711a7bab2a6194c06748e1",
+        "resume_granularity_atomic_units": 1,
+        "retry_blast_radius_atomic_units": 1,
+        "scheduler_parent_overhead_seconds": 0.033414217992685735,
+        "scientific_semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "wall_seconds": 190.51150863000657,
+        "workers": 8,
+        "writer_throughput_per_second": 133.5224580347719
+      },
+      {
+        "atomic_units_per_second": 0.12328791389761837,
+        "chunk_runtime_seconds": {
+          "max": 154.02427688296302,
+          "mean": 53.06797921598907,
+          "median": 25.522431632998632,
+          "n": 13,
+          "p90": 137.24489822059988,
+          "p95": 145.3567818637879
+        },
+        "chunk_size_atomic_units": 2,
+        "load_balance_maximum_to_mean_worker_load_ratio": 1.7860896870359404,
+        "peak_aggregate_rss_upper_bound_bytes": 1710702592,
+        "raw_target_result_sha256": "6d78d1ab3948e7b7d397cdbf8cb08dc37e6afa85483a9a390f8a5f02b201a3bb",
+        "resume_granularity_atomic_units": 2,
+        "retry_blast_radius_atomic_units": 2,
+        "scheduler_parent_overhead_seconds": 0.032801329041831195,
+        "scientific_semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "wall_seconds": 202.77737865498057,
+        "workers": 8,
+        "writer_throughput_per_second": 147.12471381254883
+      },
+      {
+        "atomic_units_per_second": 0.11255704995708327,
+        "chunk_runtime_seconds": {
+          "max": 173.13961313199252,
+          "mean": 76.26691750789178,
+          "median": 32.510690027003875,
+          "n": 9,
+          "p90": 146.51382247521542,
+          "p95": 159.82671780360397
+        },
+        "chunk_size_atomic_units": 3,
+        "load_balance_maximum_to_mean_worker_load_ratio": 2.017937571996715,
+        "peak_aggregate_rss_upper_bound_bytes": 1708679168,
+        "raw_target_result_sha256": "c04fe17d6c97117082ea4f91883ff3f9fc0c664ddf9bb0cd435e5f6fa6185708",
+        "resume_granularity_atomic_units": 3,
+        "retry_blast_radius_atomic_units": 3,
+        "scheduler_parent_overhead_seconds": 0.0339342380175367,
+        "scientific_semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "wall_seconds": 222.10958806696,
+        "workers": 8,
+        "writer_throughput_per_second": 145.7631273544632
+      }
+    ],
+    "selected_chunk_size_atomic_units": 1,
+    "selection_reason": "chunk=1 has maximum throughput, lower p95/max chunk runtime, better load balance and minimum retry blast radius",
+    "semantic_digest_equal_all_chunks": true
+  },
+  "schema_version": "rvt-phase9g0p-chunk-scaling/v1"
+}

@@ -1,0 +1,79 @@
+{
+  "exact_authorized_task_counts_by_scope": {
+    "study_a_zero_shot/train": {
+      "candidate_aggregates": 12000,
+      "recoverability_events": 6000,
+      "recoverability_robot_candidate_row_capacity": 112800,
+      "replica_executions": 16800,
+      "residual_retained_state_strict_upper_bound": 180480,
+      "residual_robot_episodes": 11280,
+      "source_episodes": 1200
+    },
+    "study_a_zero_shot/validation": {
+      "candidate_aggregates": 3000,
+      "recoverability_events": 1500,
+      "recoverability_robot_candidate_row_capacity": 28200,
+      "replica_executions": 4200,
+      "residual_retained_state_strict_upper_bound": 45120,
+      "residual_robot_episodes": 2820,
+      "source_episodes": 300
+    },
+    "study_b_with_n24/train": {
+      "candidate_aggregates": 12000,
+      "recoverability_events": 6000,
+      "recoverability_robot_candidate_row_capacity": 142000,
+      "replica_executions": 16800,
+      "residual_retained_state_strict_upper_bound": 227200,
+      "residual_robot_episodes": 14200,
+      "source_episodes": 1200
+    },
+    "study_b_with_n24/validation": {
+      "candidate_aggregates": 3000,
+      "recoverability_events": 1500,
+      "recoverability_robot_candidate_row_capacity": 35500,
+      "replica_executions": 4200,
+      "residual_retained_state_strict_upper_bound": 68160,
+      "residual_robot_episodes": 4260,
+      "source_episodes": 360
+    }
+  },
+  "exact_authorized_totals": {
+    "candidate_aggregates": 30000,
+    "recoverability_events": 15000,
+    "recoverability_robot_candidate_row_capacity": 318500,
+    "replica_executions": 42000,
+    "residual_retained_state_strict_upper_bound": 520960,
+    "residual_robot_episodes": 32560,
+    "source_episodes": 3060
+  },
+  "index_and_manifest_bytes_are_negligible_relative_to_projected_records": true,
+  "official_data_generated": false,
+  "phase9g0p_storage_capacity_sha256": "ab651f5edb7746a282bb352d8d89c7056561bf0af8513dd727a7aeadf3a38ade",
+  "recoverability": {
+    "peak_ram_bytes": 3469393920,
+    "profile_id": "PROFILE_RECOVERABILITY_V1",
+    "projected_audit_bytes": 73545000,
+    "projected_cpu_hours": 31.684587878819446,
+    "projected_dataset_bytes_at_row_capacity": 4625244750,
+    "projected_wall_hours": 3.5813704506937136,
+    "staging_requirement_bytes_2x_plus_20_percent": 10337337450
+  },
+  "residual": {
+    "candidate_evaluations_upper_bound": 4688640,
+    "capacity_provisioning_attempt_projection": 520960,
+    "historical_536000_attempts_reused": false,
+    "peak_ram_bytes": 1715777536,
+    "profile_id": "PROFILE_RESIDUAL_V2_V1",
+    "projected_audit_bytes": 2946280087,
+    "projected_cpu_hours": 4004.437666287403,
+    "projected_dataset_bytes": 6862749085,
+    "projected_labeled_rows_from_frozen_benchmark_ratio": 479283,
+    "projected_no_eligible_audits_from_frozen_benchmark_ratio": 41677,
+    "projected_wall_hours_direct_small_manifest_conservative": 1102.7652837320913,
+    "projected_wall_hours_large_workload_cpu_balance": 501.5881479301526,
+    "retention_k": 16,
+    "staging_requirement_bytes_2x_plus_20_percent": 21579864179,
+    "strict_retained_state_upper_bound": 520960
+  },
+  "schema_version": "rvt-phase9g0p-storage-capacity/v1"
+}

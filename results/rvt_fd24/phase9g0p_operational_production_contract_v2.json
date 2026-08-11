@@ -1,0 +1,49 @@
+{
+  "common": {
+    "execution_code_commit": "6818d8aa07aeb55a43dc42741499d9a24d540332",
+    "finalization": "separate post-generation validated operation; direct FINAL prohibited",
+    "gpu_generation": false,
+    "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "qualified_base_image": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+    "recoverability_row_binding_sha256": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142",
+    "resume": "replay incomplete atomic units; canonical duplicates are no-ops",
+    "retry": "one byte-identical candidate retry plus durable run-level resume",
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+    "staging": "branch/study/split scoped OFFICIAL_STAGING namespace",
+    "target_host": "100.71.102.9",
+    "writer": "rvt_swarm.phase9g0r.writer.CanonicalGenerationWriter",
+    "writer_parent_process_only": true,
+    "wsl_distribution": "Ubuntu-24.04"
+  },
+  "evidence": {
+    "chunk_scaling_sha256": "439bec73b362b5d3094e46742c69c8c7f4d1e033abeaed8a659b1f13bfd24b6c",
+    "failure_resume_sha256": "d2b5e7d7d19888565242c30cb4975e91a3e4161f1d122dcdca020b8d241dbb30",
+    "gpu_execution_boundary_sha256": "5b9d2bc9ec52634e42a505f9aee441b4a711f4724c715e1886f44731762e4ebf",
+    "h4_classification_sha256": "9a7c4f30db07568fcd8b78037f1644fcfd090fa2331fc08225a06eb3bc89dff7",
+    "storage_capacity_sha256": "ab651f5edb7746a282bb352d8d89c7056561bf0af8513dd727a7aeadf3a38ade",
+    "timeout_derivation_sha256": "e78206fbc288757c5986dab4e7558f97a93deef1e90315cf887616c73d2da6fe",
+    "worker_scaling_sha256": "65b2f4bc77a3bf548c3bfedb30e764886a46267fe2a0f1ef6d52c6480ef07a88"
+  },
+  "official_execution_authorized": false,
+  "phase9g0p_operational_contract_sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12",
+  "profiles": {
+    "recoverability": {
+      "chunk_size_atomic_units": 1,
+      "infrastructure_timeout_seconds": 60.0,
+      "numeric_threads": 1,
+      "profile_id": "PROFILE_RECOVERABILITY_V1",
+      "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+      "workers": 12
+    },
+    "residual": {
+      "chunk_size_atomic_units": 1,
+      "infrastructure_timeout_seconds": 360.0,
+      "numeric_threads": 1,
+      "profile_id": "PROFILE_RESIDUAL_V2_V1",
+      "semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+      "workers": 8
+    }
+  },
+  "schema_version": "rvt-phase9g0p-operational-production-contract/v2"
+}

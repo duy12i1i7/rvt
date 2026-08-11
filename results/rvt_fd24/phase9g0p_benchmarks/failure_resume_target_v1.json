@@ -1,0 +1,89 @@
+{
+  "actual_official_producer_used": true,
+  "candidate_pair_partial_scientific_publications": 0,
+  "case_count": 8,
+  "cases": [
+    {
+      "case": "worker_dies_before_unit_completion",
+      "evidence": {
+        "published_records": 0,
+        "worker_exit_code": 81
+      },
+      "passed": true
+    },
+    {
+      "case": "worker_dies_after_compute_before_durable_ack",
+      "evidence": {
+        "computed_scientific_digest": "055e24b91945cca516c8361340fc48da37a63553049908f30c86db01f5956b97",
+        "published_records_before_replay": 0,
+        "replay_scientific_digest": "055e24b91945cca516c8361340fc48da37a63553049908f30c86db01f5956b97",
+        "worker_exit_code": 82
+      },
+      "passed": true
+    },
+    {
+      "case": "termination_between_chunks_then_resume",
+      "evidence": {
+        "baseline_pair_digest": "6349b95afc3664de98f93bdfd74a322e5fe28357ec1f5ec5d7eff85eba28cc58",
+        "candidate_pair_partially_published": false,
+        "resumed_pair_digest": "6349b95afc3664de98f93bdfd74a322e5fe28357ec1f5ec5d7eff85eba28cc58"
+      },
+      "passed": true
+    },
+    {
+      "case": "duplicate_task_submission",
+      "evidence": {
+        "durable_record_count": 1,
+        "first_duplicate_replay": false,
+        "second_duplicate_replay": true
+      },
+      "passed": true
+    },
+    {
+      "case": "partial_recoverability_row_set_and_audit_sidecar_resume",
+      "evidence": {
+        "actual_row_count": 10,
+        "expected_row_count": 10,
+        "orphan_partial_audit_was_never_published": true
+      },
+      "passed": true
+    },
+    {
+      "case": "partial_residual_row_resume",
+      "evidence": {
+        "disposition": "LABELED",
+        "durable_record_count": 1
+      },
+      "passed": true
+    },
+    {
+      "case": "writer_failure_then_resume",
+      "evidence": {
+        "durable_record_absent_after_failure": true,
+        "resume_duplicate_replay": false
+      },
+      "passed": true
+    },
+    {
+      "case": "residual_nine_candidate_exact_replay",
+      "evidence": {
+        "baseline_digest": "4d411c8d3c394719c6d24b24086302087d381ccb8b9329a803bacc81e434ab7f",
+        "candidate_evaluations": 9,
+        "replay_digest": "4d411c8d3c394719c6d24b24086302087d381ccb8b9329a803bacc81e434ab7f"
+      },
+      "passed": true
+    }
+  ],
+  "failures": 0,
+  "final_test_accesses": 0,
+  "mode": "DIAGNOSTIC",
+  "official_run_ids": 0,
+  "official_staging_writes": 0,
+  "passes": 8,
+  "phase9g0p_failure_resume_qualification_sha256": "d2b5e7d7d19888565242c30cb4975e91a3e4161f1d122dcdca020b8d241dbb30",
+  "recoverability_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+  "residual_partial_scientific_publications": 0,
+  "residual_scheduler_atomic_unit_id": "022798fbf5b1c992d79016653b1825ba7bc4f26227116495a2cec57af8ca10f3",
+  "schema_version": "rvt-phase9g0p-failure-resume-qualification/v1",
+  "study_a_n24_accesses": 0
+}

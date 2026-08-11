@@ -1,0 +1,27 @@
+{
+  "components": {
+    "ego_graph_construction": "CPU",
+    "fd24_model_forward_during_generation": "NOT_EXECUTED",
+    "future_fd24_training": "CUDA_PERMITTED_IN_SEPARATELY_QUALIFIED_TRAINING_IMAGE",
+    "local_safety_projection": "CPU",
+    "phase6_controller": "CPU",
+    "recoverability_counterfactual_generation": "CPU",
+    "residual_expert_v2_counterfactual_generation": "CPU",
+    "source_simulator": "CPU",
+    "target_v4": "CPU",
+    "transition_protocol": "CPU"
+  },
+  "gpu": {
+    "container_nvidia_smi_visible": true,
+    "generation_utilization": "NONE",
+    "model": "NVIDIA RTX 5000 Ada Generation",
+    "production_torch_cuda_available": false,
+    "production_torch_cuda_device_count": 0,
+    "uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a"
+  },
+  "phase9g0p_gpu_execution_boundary_sha256": "5b9d2bc9ec52634e42a505f9aee441b4a711f4724c715e1886f44731762e4ebf",
+  "recoverability_labels_are_simulator_target_v4_outputs_not_predictions": true,
+  "residual_labels_are_frozen_expert_selector_target_outputs_not_model_predictions": true,
+  "schema_version": "rvt-phase9g0p-gpu-execution-boundary/v1",
+  "scientific_generation_path_moved_to_cuda": false
+}

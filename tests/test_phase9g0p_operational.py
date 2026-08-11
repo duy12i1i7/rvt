@@ -8,7 +8,11 @@ from pathlib import Path
 import pytest
 
 from rvt_swarm.phase9g0p.benchmark import _scientific_projection, distribution
-from rvt_swarm.phase9g0p.preflight import EXPECTED_PROFILES
+from rvt_swarm.phase9g0p.preflight import (
+    EXPECTED_PROFILES,
+    positive_preflight,
+    run_negative_preflight,
+)
 from rvt_swarm.phase9g0r.contracts import (
     CandidateAggregateDisposition,
     Phase9G0RContractError,
@@ -156,3 +160,13 @@ def test_predeclared_production_profiles_are_branch_specific() -> None:
         "chunk_size_atomic_units": 1,
         "infrastructure_timeout_seconds": 360.0,
     }
+
+
+def test_operational_preflight_and_negative_matrix_close() -> None:
+    positive = positive_preflight(ROOT)
+    negative = run_negative_preflight(ROOT)
+    assert positive["status"] == "PASS"
+    assert positive["command_count"] == 8
+    assert positive["authorization_remains_false"] is True
+    assert negative["case_count"] >= 22
+    assert negative["escapes"] == 0

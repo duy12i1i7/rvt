@@ -1,0 +1,281 @@
+{
+  "all_commands_resolved": true,
+  "authorization_remains_false": true,
+  "commands_executed": 0,
+  "final_test_accesses": 0,
+  "negative_case_count": 22,
+  "negative_cases": [
+    {
+      "case": "old_diagnostic_docker_image",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "old_rb21_w12_residual_profile",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_recoverability_workers",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_residual_workers",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_numeric_threads",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_recoverability_chunk",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_residual_chunk",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_recoverability_timeout",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_residual_timeout",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_source_commit",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_staging_namespace",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "direct_final_write",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "missing_9g0r_addendum",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_row_identity_contract",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "operational_field_in_row_identity",
+      "exception_class": "Phase9G0RContractError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_matched_seed_binding",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "partial_candidate_pair_publication",
+      "exception_class": "Phase9G0RContractError",
+      "rejected": true
+    },
+    {
+      "case": "wrong_k_retention",
+      "exception_class": "Phase9G0RContractError",
+      "rejected": true
+    },
+    {
+      "case": "study_a_n24_enabled",
+      "exception_class": "PermissionError",
+      "rejected": true
+    },
+    {
+      "case": "final_test_enabled",
+      "exception_class": "PermissionError",
+      "rejected": true
+    },
+    {
+      "case": "broad_authorization_flag",
+      "exception_class": "Phase9G0PPreflightError",
+      "rejected": true
+    },
+    {
+      "case": "direct_final_writer",
+      "exception_class": "PermissionError",
+      "rejected": true
+    }
+  ],
+  "negative_escapes": 0,
+  "official_staging_writes": 0,
+  "phase9g0p_operational_preflight_sha256": "33533c3151a4bf467321b987b07c64ffcb3802cd20eb4ace6258d17ce1eb4a72",
+  "positive": {
+    "all_commands_resolve": true,
+    "authorization_remains_false": true,
+    "command_count": 8,
+    "command_plan_operational_addendum_sha256": "0bde430d679729faa22e06b50c45523166c7fbc55143d41d147da9f4acd6980f",
+    "operational_contract_sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12",
+    "phase9g0r": {
+      "canonical_artifacts": {
+        "candidate_pair": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+        "communication": "fcca7874958457414f05a64519a1ad3d2cb6036b0385de663eed73b5a15c569a",
+        "ego_payload": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+        "lifecycle": "750e6c576ac89c91c0028051e8a1684e4db7abe4419b0be1c42a7958b3b454a6",
+        "retention": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef",
+        "rollout_configuration": "4fda39e64d34ffb57ee76016bcf6218b3eddbfc8835c73d4a5181c77acd78fd2",
+        "row_identity": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d"
+      },
+      "compiled_counts": {
+        "candidate_aggregates": 30000,
+        "candidate_replica_executions": 42000,
+        "decision_events": 15000,
+        "final_test_tasks": 0,
+        "recoverability_robot_local_row_capacity": 318500,
+        "residual_candidate_evaluation_strict_upper_bound": 4688640,
+        "residual_retained_attempted_state_strict_upper_bound": 520960,
+        "residual_robot_episodes": 32560,
+        "source_episodes": 3060,
+        "study_a_n24_tasks": 0
+      },
+      "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+      "status": "PASS"
+    },
+    "status": "PASS"
+  },
+  "resolution_count": 8,
+  "resolutions": [
+    {
+      "command_id": "study_a_zero_shot-train-recoverability",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 60.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RECOVERABILITY_V1",
+        "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "workers": 12
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 6000
+    },
+    {
+      "command_id": "study_a_zero_shot-train-residual",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 360.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RESIDUAL_V2_V1",
+        "semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "workers": 8
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 1200
+    },
+    {
+      "command_id": "study_a_zero_shot-validation-recoverability",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 60.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RECOVERABILITY_V1",
+        "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "workers": 12
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 1500
+    },
+    {
+      "command_id": "study_a_zero_shot-validation-residual",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 360.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RESIDUAL_V2_V1",
+        "semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "workers": 8
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 300
+    },
+    {
+      "command_id": "study_b_with_n24-train-recoverability",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 60.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RECOVERABILITY_V1",
+        "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "workers": 12
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 6000
+    },
+    {
+      "command_id": "study_b_with_n24-train-residual",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 360.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RESIDUAL_V2_V1",
+        "semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "workers": 8
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 1200
+    },
+    {
+      "command_id": "study_b_with_n24-validation-recoverability",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 60.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RECOVERABILITY_V1",
+        "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+        "workers": 12
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 1500
+    },
+    {
+      "command_id": "study_b_with_n24-validation-residual",
+      "official_generation_execution_authorized": false,
+      "operational_profile": {
+        "chunk_size_atomic_units": 1,
+        "infrastructure_timeout_seconds": 360.0,
+        "numeric_threads": 1,
+        "profile_id": "PROFILE_RESIDUAL_V2_V1",
+        "semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+        "workers": 8
+      },
+      "resolved": true,
+      "scientific_execution": false,
+      "task_count": 360
+    }
+  ],
+  "schema_version": "rvt-phase9g0p-operational-preflight/v1",
+  "status": "PASS",
+  "study_a_n24_accesses": 0
+}

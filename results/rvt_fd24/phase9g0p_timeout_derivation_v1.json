@@ -1,0 +1,23 @@
+{
+  "legacy_1200_seconds_inherited": false,
+  "phase9g0p_timeout_derivation_sha256": "e78206fbc288757c5986dab4e7558f97a93deef1e90315cf887616c73d2da6fe",
+  "recoverability": {
+    "formula": "max(60 s floor, ceil(3 * observed_max / 60 s) * 60 s)",
+    "frozen_long_horizon_and_three_replica_cases_present": true,
+    "infrastructure_timeout_seconds": 60.0,
+    "observed_max_atomic_seconds": 10.116872335987864,
+    "observed_p95_atomic_seconds": 9.907141346643037,
+    "observed_p95_writer_seconds": 0.017052643757779148
+  },
+  "residual": {
+    "formula": "max(300 s floor, ceil(2.5 * observed_max / 60 s) * 60 s)",
+    "frozen_long_horizon_cases_present": true,
+    "infrastructure_timeout_seconds": 360.0,
+    "observed_max_atomic_seconds": 141.6582415990124,
+    "observed_p95_atomic_seconds": 117.01251633459455,
+    "observed_p95_writer_seconds": 0.009164561016950757
+  },
+  "schema_version": "rvt-phase9g0p-timeout-derivation/v1",
+  "timeout_is_infrastructure_only": true,
+  "timeout_never_maps_to_scientific_disposition": true
+}

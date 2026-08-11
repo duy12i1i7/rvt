@@ -1,0 +1,65 @@
+{
+  "broad_authorization": false,
+  "enabled_scope_count": 0,
+  "phase9g0p_scoped_authorization_proposal_sha256": "09b8988f9abd25f1971857aeab756a25ca93aff487bc2d7d6cf70e9e1a878222",
+  "schema_version": "rvt-phase9g0p-scoped-authorization-proposal/v1",
+  "scope_proposals": [
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_a_zero_shot-train-recoverability_v1.json",
+      "command_id": "study_a_zero_shot-train-recoverability",
+      "enabled": false,
+      "sha256": "b57cbc8aec21260486a7bd83600118376e03f5102ec8a6e04c6a412b47d0ad08"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_a_zero_shot-train-residual_v1.json",
+      "command_id": "study_a_zero_shot-train-residual",
+      "enabled": false,
+      "sha256": "826371f4caba6f668518c56ab6ba42df3aba7b107551a5136dc845f0657ec006"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_a_zero_shot-validation-recoverability_v1.json",
+      "command_id": "study_a_zero_shot-validation-recoverability",
+      "enabled": false,
+      "sha256": "75c52453a132d806bc292272c88cc1124b4c27f7174ce156619c2eb8f50d4861"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_a_zero_shot-validation-residual_v1.json",
+      "command_id": "study_a_zero_shot-validation-residual",
+      "enabled": false,
+      "sha256": "bcedda8fcc7ce8eb379936cc14993e059cca966b12c2b403c64075f799075a07"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_b_with_n24-train-recoverability_v1.json",
+      "command_id": "study_b_with_n24-train-recoverability",
+      "enabled": false,
+      "sha256": "35bb8e0917536e85cdc67f8120f4a18a2296d790b799a9b13fdba736dd2bf03c"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_b_with_n24-train-residual_v1.json",
+      "command_id": "study_b_with_n24-train-residual",
+      "enabled": false,
+      "sha256": "db21e7f7a9b3aaf78075f3d1bb406dbfd1616411aeb03b89a5914766f6d52d4b"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_b_with_n24-validation-recoverability_v1.json",
+      "command_id": "study_b_with_n24-validation-recoverability",
+      "enabled": false,
+      "sha256": "a137f4c71d45b4e443d72d0c17d4a802fe19b3131c1341ddf2ddd93b8c9ab845"
+    },
+    {
+      "artifact": "phase9g0p_authorization_scope_proposal_study_b_with_n24-validation-residual_v1.json",
+      "command_id": "study_b_with_n24-validation-residual",
+      "enabled": false,
+      "sha256": "b11ccd858c4c5630369dc4fc9a85451b5d898901a119465420131769f6897708"
+    }
+  ],
+  "statuses": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "RECOVERABILITY_GENERATION": "PROPOSED_SCOPED_NOT_AUTHORIZED",
+    "RESIDUAL_V2_GENERATION": "PROPOSED_SCOPED_NOT_AUTHORIZED",
+    "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+    "STUDY_A_TRAIN_VALIDATION": "PROPOSED_SCOPED_NOT_AUTHORIZED",
+    "STUDY_B": "HELD_SEQUENCE_NOT_AUTHORIZED"
+  },
+  "study_sequence_audit_sha256": "f15be6c4a2e8718fcc57eac75871f7aa9f30b671866047762429edbfbe2cbacc"
+}
