@@ -1,0 +1,43 @@
+{
+  "command_plan_v2": {
+    "created": false,
+    "executed": false,
+    "reason": "No executable producer may be prepared while required scientific derivations are unfrozen."
+  },
+  "current_provenance": {
+    "binding_map": "3ca4b7108372d4ab89a862f8d6ed222242385a6ea480f398245a8c88b68b5d20",
+    "matched_randomness_binding": "87e206d22d3b3e893bc2c34ac87e97ceb5d9cb66e23d26456791bad552bcf851",
+    "rb19": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "rb21": "b4333eca3ca00e4e2ecdd2c8ca68b7f7df9ad072468ab65699940dcc9329c5c0",
+    "startup_stop": "72cab4f2d195322703c1de5f636c89dc918085b880ab79806d4a0721bd0834be"
+  },
+  "generation_profile": {
+    "rb21_profile_authoritative_for_official_generator": false,
+    "status": "NOT_EVALUATED_NO_OFFICIAL_PRODUCER"
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_run_ids": 0,
+    "official_shards": 0,
+    "official_staging_writes": 0,
+    "optimizer_states": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "phase9_generation_readiness_v3_sha256": "bab7d1f1238aa61648d57b3c9930ac8974f1aba2c30977d33c19785a16b2fd74",
+  "schema_version": "rvt-phase9-generation-readiness/v3",
+  "status": "BLOCKED_NEW_SCIENTIFIC_DECISIONS_REQUIRED",
+  "unresolved_scientific_derivations": [
+    "recoverability scientific row ID",
+    "recoverability graph payload/content identity binding",
+    "official rollout configuration hash preimage",
+    "official lifecycle and communication trace hash preimages",
+    "paired candidate aggregate to row-set transaction",
+    "residual legitimate dense-state universe and per-episode retention rule"
+  ],
+  "verdict": "A"
+}

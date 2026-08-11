@@ -1,0 +1,241 @@
+{
+  "authoritative_roots": {
+    "rb19_current_provenance_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20_clean_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "rb21_operational_contract": "204a3954de7da3d496ccd6ca9fd57757710293b4911abc83bcffce795426414a",
+    "rb21_readiness_root": "b4333eca3ca00e4e2ecdd2c8ca68b7f7df9ad072468ab65699940dcc9329c5c0",
+    "rb21p_portability_artifact": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+    "rb21p_portability_root": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+    "startup_stop_artifact": "72cab4f2d195322703c1de5f636c89dc918085b880ab79806d4a0721bd0834be",
+    "startup_stop_commit": "9e3363edae42287b3ad04a039bc1bf495cce58a1",
+    "target_v4": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "binding_entries": [
+    {
+      "authoritative_source": "results/rvt_fd24/datasets/generation_budget_v1.json#job_identity_contract.source_episode and rvt_swarm.phase9b.identity.SourceEpisodeIdentity.job_id",
+      "derivation": "schema/study/split/family/layout_sha256/N/team/source_class/episode_index",
+      "exact_field": "source_episode_jobs[].job_id",
+      "frozen": true,
+      "name": "source_episode_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/datasets/phase9_job_manifest.json#source_episode_jobs",
+      "derivation": "copied from the canonical DatasetCell selected by dataset_id",
+      "exact_field": "study, split, family_id, layout_id, layout_sha256, team_size",
+      "frozen": true,
+      "name": "study_split_family_layout_team",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase9c.manifest._source_seeds and rvt_swarm.phase9b.identity.derive_generation_seed",
+      "derivation": "SHA-256 canonical payload for separate initial_condition, communication, dynamic_obstacle, and data_sampling namespaces; first four bytes big-endian",
+      "exact_field": "source_episode_jobs[].seeds",
+      "frozen": true,
+      "name": "source_episode_seed_ledger",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/datasets/generation_budget_v1.json#job_identity_contract.decision_event and rvt_swarm.phase9b.identity.DecisionEventIdentity.job_id",
+      "derivation": "source_episode_job_id/event-{event_slot_index}",
+      "exact_field": "decision_event_jobs[].job_id",
+      "frozen": true,
+      "name": "decision_event_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/datasets/phase9_job_manifest.json#decision_event_jobs and rvt_swarm.phase9b.identity.map_event_slots",
+      "derivation": "ceil(normalized_time*horizon/control_period) with the frozen four-slot or five-slot schedule",
+      "exact_field": "resolved_control_step, resolved_timestamp_seconds",
+      "frozen": true,
+      "name": "event_timestep",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.topology_registry.generate_persistent_roles and SimulatorEpisodeSession robot initialization",
+      "derivation": "canonical integer robot keys 0..team_size-1 receive persistent roles",
+      "exact_field": "robot_id",
+      "frozen": true,
+      "name": "robot_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/datasets/generation_budget_v1.json#candidate_topologies and CandidateReplicaIdentity.job_id",
+      "derivation": "decision_event_id/candidate-{COMPACT=5 or LINE=2}/replica-{index}",
+      "exact_field": "candidate_topology, replica_index, job_id",
+      "frozen": true,
+      "name": "candidate_and_replica_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase9c.manifest._replica_seeds",
+      "derivation": "counterfactual_rollout seed payload with candidate_topology=null and the frozen event plus replica identity",
+      "exact_field": "candidate_replica_jobs[].seeds.matched_disturbance_seed",
+      "frozen": true,
+      "name": "matched_disturbance_seed",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase9c_rb.streams.CounterStream and counterfactual.execute_candidate",
+      "derivation": "(sha256-canonical-counter-uint64/v1, matched_disturbance_seed, robot_acceleration:replica-{index})",
+      "exact_field": "disturbance_stream.identity()",
+      "frozen": true,
+      "name": "counterfactual_disturbance_stream_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.decentralized.ego_graph_v2 and RobotLocalEgoGraphRuntimeAdapter",
+      "derivation": "build from one RobotView, immutable local topology metadata, candidate topology, and observation step; fingerprint() hashes canonical graph tensors and metadata",
+      "exact_field": "RobotLocalEgoGraph.fingerprint()",
+      "frozen": true,
+      "name": "ego_graph_computation",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase8.targets.LocalViewRecoverabilitySample",
+      "derivation": "not defined: the V1 row has feature_sha256 but no graph fingerprint, serialized graph content hash, graph record reference, or row ID",
+      "exact_field": "recoverability scientific row identity and graph payload binding",
+      "frozen": false,
+      "name": "ego_graph_input_identity_in_recoverability_row",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/target_v4_execution_contract_v1.json and rvt_swarm.phase9c_rb.counterfactual.build_execution_summary",
+      "derivation": "evaluate the ten frozen predicates with generation-validity precedence",
+      "exact_field": "CandidateReplicaResult.disposition, label, failed_predicates",
+      "frozen": true,
+      "name": "target_v4_output",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase8.targets.evaluate_candidate_recoverability and generation_budget_v1.json#scenario_family_contract",
+      "derivation": "one replica except F8/F9 three replicas; label=1 only when every valid replica succeeds",
+      "exact_field": "CandidateRecoverabilityTarget.label, aggregation, replica_count, invalid",
+      "frozen": true,
+      "name": "recoverability_aggregate_label",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase8.targets.LocalViewRecoverabilitySample and docs/RVT_LOCAL_VIEW_TASK_LABEL_CONTRACT.md",
+      "derivation": "every robot at one event emits one local row for each candidate when the matched pair is valid",
+      "exact_field": "2*team_size planned_recoverability_record_capacity",
+      "frozen": true,
+      "name": "recoverability_row_multiplicity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "no committed recoverability row identity artifact or implementation found",
+      "derivation": "not defined; hashing all LocalViewRecoverabilitySample fields would include outcomes, while choosing a subset would create a new identity scheme",
+      "exact_field": "recoverability_scientific_row_id",
+      "frozen": false,
+      "name": "recoverability_training_row_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase8.targets.CounterfactualRolloutTrace",
+      "derivation": "not defined for official runtime; only the Phase-8 synthetic diagnostic constructs a rollout-config preimage",
+      "exact_field": "rollout_configuration_sha256",
+      "frozen": false,
+      "name": "official_rollout_configuration_hash",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase8.targets.CounterfactualRolloutTrace",
+      "derivation": "not defined for a SimulatorEpisodeSession snapshot",
+      "exact_field": "source_lifecycle_sha256 and communication_condition_sha256",
+      "frozen": false,
+      "name": "official_trace_lifecycle_and_communication_hashes",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "rvt_swarm.phase8.targets.joint_outcome_category and phase9b.policy.recoverability_emission",
+      "derivation": "not defined transactionally: two independently scheduled candidate atomic units must be joined before joint outcome and paired row emission",
+      "exact_field": "candidate_pair_group commit/reconciliation identity",
+      "frozen": false,
+      "name": "candidate_pair_to_training_rows_transaction",
+      "type": "SCIENTIFIC_AND_OPERATIONAL"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/residual_scientific_row_identity_v2.json and generation_contract.residual_scientific_row_id",
+      "derivation": "SHA-256 over the eleven frozen study/state/robot/topology/graph/spec fields",
+      "exact_field": "residual_scientific_row_id",
+      "frozen": true,
+      "name": "residual_attempted_state_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/residual_candidate_evaluation_identity_v2.json and generation_contract.candidate_evaluation_id",
+      "derivation": "residual row ID, candidate index, replica index, matched stream identity hash",
+      "exact_field": "candidate_evaluation_id",
+      "frozen": true,
+      "name": "residual_candidate_evaluation_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/residual_supervision_row_schema_v2.json and ResidualSupervisionRowV2",
+      "derivation": "canonical V2 payload for LABELED states only",
+      "exact_field": "ResidualSupervisionRowV2.canonical_sha256()",
+      "frozen": true,
+      "name": "residual_supervision_row_identity",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "generation_budget_v1.json#dense_row_contract and docs/RVT_DENSE_ACTION_DATA_CONTRACT.md",
+      "derivation": "not uniquely defined: quota and hash ranking are frozen, but the exact legitimate dense-state universe and deterministic enforcement of max 64 retained timesteps per episode are not",
+      "exact_field": "residual attempted-state task universe",
+      "frozen": false,
+      "name": "residual_dense_state_enumeration",
+      "type": "SCIENTIFIC"
+    },
+    {
+      "authoritative_source": "results/rvt_fd24/residual_generation_disposition_contract_v1.json",
+      "derivation": "LABELED, NO_ELIGIBLE_ACTION, EXECUTION_INVALID, or INFRASTRUCTURE_FAILURE with explicit denominator and row-emission rules",
+      "exact_field": "disposition",
+      "frozen": true,
+      "name": "residual_disposition",
+      "type": "SCIENTIFIC_AND_OPERATIONAL"
+    },
+    {
+      "authoritative_source": "generation_budget_v1.json#retry_contract and rb21_target_operational_execution_contract_v2.json",
+      "derivation": "one infrastructure retry, zero semantic retries, unchanged scientific identity and streams",
+      "exact_field": "attempt_index and infrastructure failure reason",
+      "frozen": true,
+      "name": "infrastructure_failure_retry_semantics",
+      "type": "OPERATIONAL"
+    }
+  ],
+  "diff_audit": {
+    "base": "c4009ecadbca3c2c4ce30a30c2f90278ae5184fc",
+    "current_startup_state": "9e3363edae42287b3ad04a039bc1bf495cce58a1",
+    "files": [
+      {
+        "classification": "DOCUMENTATION",
+        "path": "docs/PHASE9_OFFICIAL_GENERATION_STARTUP_STOP.md"
+      },
+      {
+        "classification": "ARTIFACT",
+        "path": "results/rvt_fd24/phase9_official_generation_startup_block_v1.json"
+      }
+    ],
+    "scientific_runtime_mutations": 0,
+    "unexplained_mutations": 0
+  },
+  "hard_stop": {
+    "code": "UNFROZEN_OFFICIAL_ROW_AND_DENSE_STATE_DERIVATIONS",
+    "frozen_entries": 18,
+    "unfrozen_entries": 6
+  },
+  "isolation": {
+    "final_test_accesses": 0,
+    "official_rows": 0,
+    "official_run_ids": 0,
+    "official_shards": 0,
+    "official_staging_writes": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "phase9_official_binding_map_sha256": "3ca4b7108372d4ab89a862f8d6ed222242385a6ea480f398245a8c88b68b5d20",
+  "schema_version": "rvt-phase9-official-binding-map/v1",
+  "status": "BLOCKED_NEW_SCIENTIFIC_DERIVATIONS_REQUIRED",
+  "verdict": "A"
+}

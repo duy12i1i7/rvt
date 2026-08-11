@@ -1,0 +1,70 @@
+{
+  "authoritative_implementation": {
+    "manifest_builder": "rvt_swarm.phase9c.manifest._replica_seeds",
+    "seed_derivation": "rvt_swarm.phase9b.identity.derive_generation_seed",
+    "stream_binding": "rvt_swarm.phase9c_rb.counterfactual.execute_candidate",
+    "stream_identity": "rvt_swarm.phase9c_rb.streams.CounterStream.identity"
+  },
+  "candidate_replica_job_seed": {
+    "candidate_topology": "candidate topology value",
+    "role": "candidate-specific job identity seed"
+  },
+  "invariance_proof": {
+    "candidate_pair_seed_mismatches": 0,
+    "chunk_id_in_payload": false,
+    "execution_order_in_payload": false,
+    "f8_f9_bad_six_rollout_groups": 0,
+    "f8_f9_events_checked": 3000,
+    "f8_f9_replica_seed_distinctness_failures": 0,
+    "nonsealed_candidate_comparison_groups_checked": 21000,
+    "retry_attempt_in_payload": false,
+    "worker_id_in_payload": false
+  },
+  "matched_disturbance_seed": {
+    "canonical_payload_fields": [
+      "seed_namespace",
+      "seed_namespace_root",
+      "seed_derivation_version",
+      "generation_budget_schema",
+      "study",
+      "split",
+      "scenario_family",
+      "layout_sha256",
+      "team_size",
+      "source_trajectory_class",
+      "episode_index",
+      "event_slot_index",
+      "candidate_topology",
+      "replica_index"
+    ],
+    "candidate_topology": null,
+    "digest": "SHA-256 first four bytes big-endian",
+    "namespace": "counterfactual_rollout",
+    "namespace_root": 8106,
+    "role": "same disturbance realization for COMPACT and LINE in one event/replica comparison"
+  },
+  "phase9_matched_randomness_binding_sha256": "87e206d22d3b3e893bc2c34ac87e97ceb5d9cb66e23d26456791bad552bcf851",
+  "replica_stream_identity": {
+    "identity_tuple": [
+      "sha256-canonical-counter-uint64/v1",
+      "matched_disturbance_seed",
+      "robot_acceleration:replica-{replica_index}"
+    ],
+    "replicas_by_family": {
+      "F1": 1,
+      "F10": 1,
+      "F2": 1,
+      "F3": 1,
+      "F4": 1,
+      "F5": 1,
+      "F6": 1,
+      "F7": 1,
+      "F8": 3,
+      "F9": 3
+    }
+  },
+  "schema_version": "rvt-phase9-matched-randomness-binding/v1",
+  "scientific_changes": false,
+  "status": "RESOLVED_FROZEN_AUTHORITY",
+  "verification_scope": "all nonsealed candidate-replica jobs in the committed Phase-9 manifest"
+}
