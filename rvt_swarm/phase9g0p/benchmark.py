@@ -202,9 +202,20 @@ def _aggregate_rss(units: Sequence[Mapping[str, Any]]) -> Mapping[str, Any]:
 def _base_result(
     *, branch: str, manifest: Mapping[str, Any], workers: int,
     chunk_size: int, wall_seconds: float, units: Sequence[Mapping[str, Any]],
-    planning_seconds: float,
+    planning_seconds: float, executor_seconds: float,
 ) -> dict[str, Any]:
     total_cpu = sum(float(unit["cpu_seconds"]) for unit in units)
+    worker_load_seconds: dict[int, float] = {}
+    for unit in units:
+        pid = int(unit["worker_pid"])
+        worker_load_seconds[pid] = (
+            worker_load_seconds.get(pid, 0.0) + float(unit["wall_seconds"])
+        )
+    chunk_runtime_seconds = [
+        sum(float(unit["wall_seconds"]) for unit in units[index:index + chunk_size])
+        for index in range(0, len(units), chunk_size)
+    ]
+    maximum_worker_load = max(worker_load_seconds.values())
     manifest_hash_field = (
         "phase9g0p_recoverability_benchmark_manifest_sha256"
         if branch == "recoverability"
@@ -220,12 +231,35 @@ def _base_result(
         "numeric_environment": _numeric_environment(),
         "benchmark_manifest_sha256": str(manifest[manifest_hash_field]),
         "wall_seconds": wall_seconds,
+        "executor_seconds": executor_seconds,
         "source_planning_seconds": planning_seconds,
+        "scheduler_parent_overhead_seconds": max(
+            0.0, executor_seconds - maximum_worker_load
+        ),
         "worker_cpu_seconds": total_cpu,
         "average_worker_cpu_cores": total_cpu / wall_seconds,
         "atomic_unit_latency_seconds": distribution(
             float(unit["wall_seconds"]) for unit in units
         ),
+        "chunk_runtime_seconds": distribution(chunk_runtime_seconds),
+        "load_balance": {
+            "worker_load_seconds": {
+                str(pid): value for pid, value in sorted(worker_load_seconds.items())
+            },
+            "maximum_to_mean_worker_load_ratio": (
+                maximum_worker_load / statistics.fmean(worker_load_seconds.values())
+            ),
+        },
+        "atomic_unit_observations": [
+            {
+                "scheduler_atomic_unit_id": str(unit["scheduler_atomic_unit_id"]),
+                "worker_pid": int(unit["worker_pid"]),
+                "wall_seconds": float(unit["wall_seconds"]),
+                "cpu_seconds": float(unit["cpu_seconds"]),
+                "peak_rss_bytes": int(unit["peak_rss_bytes"]),
+            }
+            for unit in units
+        ],
         "memory": _aggregate_rss(units),
         "worker_pids": sorted({int(unit["worker_pid"]) for unit in units}),
         "sealed_scope": {
@@ -265,8 +299,10 @@ def run_recoverability(
             str(item["scheduler_atomic_unit_id"]),
         ))
     started = perf_counter()
+    executor_started = perf_counter()
     with ProcessPoolExecutor(max_workers=workers, initializer=_configure_worker) as pool:
         units = list(pool.map(_recoverability_worker, jobs, chunksize=chunk_size))
+    executor_seconds = perf_counter() - executor_started
     writer = CanonicalGenerationWriter(diagnostic_root, mode=DIAGNOSTIC)
     by_event: dict[str, dict[int, Mapping[str, Any]]] = {}
     for unit in units:
@@ -332,6 +368,7 @@ def run_recoverability(
         wall_seconds=wall_seconds,
         units=units,
         planning_seconds=0.0,
+        executor_seconds=executor_seconds,
     )
     result.update({
         "counts": {
@@ -411,8 +448,10 @@ def run_residual(
             str(item["scheduler_atomic_unit_id"]),
         ))
     started = perf_counter()
+    executor_started = perf_counter()
     with ProcessPoolExecutor(max_workers=workers, initializer=_configure_worker) as pool:
         units = list(pool.map(_residual_worker, jobs, chunksize=chunk_size))
+    executor_seconds = perf_counter() - executor_started
     writer = CanonicalGenerationWriter(diagnostic_root, mode=DIAGNOSTIC)
     writer_seconds = []
     for unit in units:
@@ -449,6 +488,7 @@ def run_residual(
         wall_seconds=wall_seconds,
         units=units,
         planning_seconds=planning_seconds,
+        executor_seconds=executor_seconds,
     )
     result.update({
         "counts": {
