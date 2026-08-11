@@ -1,0 +1,29 @@
+{
+  "official_staging_writes": 0,
+  "phase9g0p_chunk_matrix_predeclaration_sha256": "d5ba4204842f1d20c013323ed4de2d09bf6b166ec4b6f9c3d8cb8fa888b0d678",
+  "predeclared_before_chunk_benchmark_results": true,
+  "recoverability": {
+    "atomic_unit": "one source event x one candidate topology x all frozen replicas",
+    "candidate_pair_publication_remains_event_level_all_or_none": true,
+    "chunk_matrix_atomic_units": [
+      1,
+      2,
+      4
+    ],
+    "selected_workers": 12
+  },
+  "residual": {
+    "atomic_unit": "one retained robot state x all nine candidates",
+    "chunk_matrix_atomic_units": [
+      1,
+      2,
+      3
+    ],
+    "nine_candidate_unit_is_never_split": true,
+    "selected_workers": 8
+  },
+  "schema_version": "rvt-phase9g0p-chunk-matrix-predeclaration/v1",
+  "scientific_semantic_digest_must_equal_selected_worker_chunk1": true,
+  "selection_rule": "select the smallest chunk within 2% of maximum throughput unless a larger chunk materially improves scheduler overhead without tail, load-balance, resume-granularity or retry-blast-radius regression",
+  "worker_scaling_sha256": "65b2f4bc77a3bf548c3bfedb30e764886a46267fe2a0f1ef6d52c6480ef07a88"
+}
