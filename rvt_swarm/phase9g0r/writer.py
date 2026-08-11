@@ -45,18 +45,49 @@ class CanonicalGenerationWriter:
     def increments_official_counters(self) -> bool:
         return self.mode == OFFICIAL_STAGING
 
-    def _write(self, relative: Path, document: Mapping[str, Any]) -> Path:
+    @staticmethod
+    def _durable_audit(audit: Mapping[str, Any]) -> Mapping[str, Any]:
+        """Exclude nondeterministic operational telemetry from scientific records."""
+        return {
+            str(key): value
+            for key, value in audit.items()
+            if str(key) != "operational_timing"
+        }
+
+    def _write(self, relative: Path, document: Mapping[str, Any]) -> tuple[Path, bool]:
         destination = self.root / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         body = json.loads(json.dumps(document, allow_nan=False, sort_keys=True))
         payload = attach_canonical_hash(body, "canonical_record_sha256")
+        if destination.exists():
+            existing = json.loads(destination.read_text(encoding="ascii"))
+            if existing != payload:
+                raise Phase9G0RContractError(
+                    "duplicate scientific identity has different canonical content"
+                )
+            return destination, True
         temporary = destination.with_suffix(destination.suffix + ".partial")
-        temporary.write_text(
-            json.dumps(payload, allow_nan=False, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n",
-            encoding="ascii",
+        serialized = (
+            json.dumps(
+                payload,
+                allow_nan=False,
+                ensure_ascii=True,
+                separators=(",", ":"),
+                sort_keys=True,
+            )
+            + "\n"
         )
+        with temporary.open("w", encoding="ascii") as stream:
+            stream.write(serialized)
+            stream.flush()
+            os.fsync(stream.fileno())
         os.replace(temporary, destination)
-        return destination
+        directory_fd = os.open(destination.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory_fd)
+        finally:
+            os.close(directory_fd)
+        return destination, False
 
     def write_recoverability_transaction(
         self,
@@ -74,7 +105,7 @@ class CanonicalGenerationWriter:
             "expected_row_count": reconciliation.expected_row_count,
             "actual_row_count": reconciliation.actual_row_count,
             "rows": list(reconciliation.rows),
-            "audit": dict(audit),
+            "audit": self._durable_audit(audit),
             "scientific_completion_marker": bool(
                 reconciliation.scientifically_reconciled
                 and (
@@ -83,13 +114,16 @@ class CanonicalGenerationWriter:
                 )
             ),
         }
-        path = self._write(
+        path, duplicate_replay = self._write(
             Path("recoverability") / f"event-{event_key}.json", transaction
         )
         return {
             "path": str(path),
             "canonical_sha256": sha256_document(transaction),
-            "official_counter_delta": 1 if self.increments_official_counters else 0,
+            "official_counter_delta": (
+                1 if self.increments_official_counters and not duplicate_replay else 0
+            ),
+            "duplicate_replay": duplicate_replay,
         }
 
     def write_residual_attempt(
@@ -110,16 +144,19 @@ class CanonicalGenerationWriter:
             "residual_scientific_row_id": scientific_row_id,
             "disposition": disposition,
             "row": row,
-            "audit": dict(audit),
+            "audit": self._durable_audit(audit),
             "scientific_completion_marker": disposition in {
                 "LABELED", "NO_ELIGIBLE_ACTION", "EXECUTION_INVALID"
             },
         }
-        path = self._write(
+        path, duplicate_replay = self._write(
             Path("residual") / f"state-{scientific_row_id}.json", document
         )
         return {
             "path": str(path),
             "canonical_sha256": sha256_document(document),
-            "official_counter_delta": 1 if self.increments_official_counters else 0,
+            "official_counter_delta": (
+                1 if self.increments_official_counters and not duplicate_replay else 0
+            ),
+            "duplicate_replay": duplicate_replay,
         }

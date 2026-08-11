@@ -6,6 +6,7 @@ import json
 import math
 from dataclasses import asdict
 from pathlib import Path
+from time import perf_counter
 from typing import Any, Mapping, Optional, Sequence, Tuple
 
 from ..decentralized.ego_graph_runtime_adapter import RobotLocalEgoGraphRuntimeAdapter
@@ -231,111 +232,192 @@ def _joint_category(compact_label: int, line_label: int) -> str:
     }[(compact_label, line_label)]
 
 
-def produce_recoverability_event(
+def produce_recoverability_candidate(
     root: Path,
     task: OfficialDecisionEventTask,
+    candidate: int,
+) -> Mapping[str, Any]:
+    """Execute one scheduler-atomic candidate aggregate with all replicas."""
+    if candidate not in (COMPACT, LINE):
+        raise OfficialProducerError("recoverability candidate must be COMPACT or LINE")
+    started = perf_counter()
+    session = _run_source_to_step(root, task.source, task.resolved_control_step)
+    source_event_seconds = perf_counter() - started
+
+    if session.termination is not None and session.control_step < task.resolved_control_step:
+        disposition = CandidateAggregateDisposition(
+            task.event_id, candidate, GENERATION_INVALID, None,
+            task.replicas_per_candidate,
+        )
+        return {
+            "schema_version": "rvt-official-recoverability-candidate-result/v1",
+            "decision_event_id": task.event_id,
+            "candidate_topology_id": candidate,
+            "team_size": task.source.team_size,
+            "source_terminated_before_event": True,
+            "termination": asdict(session.termination),
+            "source_snapshot_sha256": None,
+            "graphs": [],
+            "rollout_configuration_sha256_by_replica": [],
+            "disposition": asdict(disposition),
+            "candidate_audit": None,
+            "operational_timing": {
+                "source_event_seconds": source_event_seconds,
+                "graph_serialization_seconds": 0.0,
+                "replica_rollout_seconds": [],
+                "candidate_total_seconds": perf_counter() - started,
+            },
+        }
+
+    source = snapshot(session)
+    graph_started = perf_counter()
+    graphs = []
+    for robot in session.robots:
+        view = session._build_robot_view(robot)
+        graph = RobotLocalEgoGraphRuntimeAdapter(
+            session.runtime_config, robot.local_topology_metadata
+        ).build(view, candidate, session.control_step)
+        payload, separated_candidate = recoverability_ego_payload(graph)
+        if separated_candidate != candidate:
+            raise OfficialProducerError("ego graph candidate separation failed")
+        validate_recoverability_ego_payload(payload)
+        graphs.append({
+            "robot_id": int(payload["metadata"]["observer_robot_id"]),
+            "graph_payload": payload,
+            "graph_fingerprint": recoverability_graph_fingerprint(payload),
+        })
+    graph_seconds = perf_counter() - graph_started
+
+    replicas = []
+    rollout_hashes = []
+    replica_seconds = []
+    candidate_audit: Mapping[str, Any]
+    disposition: CandidateAggregateDisposition
+    for replica_job in task.replica_jobs(candidate):
+        kwargs = _rollout_kwargs(task, session, candidate, replica_job)
+        rollout_payload = official_rollout_configuration_payload(**kwargs)
+        validate_official_rollout_configuration_payload(
+            rollout_payload,
+            expected_lifecycle_config_sha256=kwargs["lifecycle_config_sha256"],
+            expected_communication_config_sha256=kwargs[
+                "communication_config_sha256"
+            ],
+        )
+        rollout_hash = sha256_document(rollout_payload)
+        rollout_hashes.append(rollout_hash)
+        replica_started = perf_counter()
+        result, attempt_audit = _execute_candidate_with_one_infrastructure_retry(
+            source, candidate, replica_job
+        )
+        replica_seconds.append(perf_counter() - replica_started)
+        if result is not None:
+            replicas.append({
+                **asdict(result),
+                "rollout_configuration_sha256": rollout_hash,
+                "matched_disturbance_seed": int(
+                    dict(replica_job["seeds"])["matched_disturbance_seed"]
+                ),
+                "infrastructure_attempts": list(attempt_audit),
+            })
+        else:
+            disposition = CandidateAggregateDisposition(
+                task.event_id, candidate, INFRASTRUCTURE_FAILURE, None,
+                task.replicas_per_candidate,
+            )
+            candidate_audit = {
+                "candidate_topology_id": candidate,
+                "infrastructure_failure": "RETRY_EXHAUSTED",
+                "infrastructure_attempts": list(attempt_audit),
+                "replicas": replicas,
+            }
+            break
+    else:
+        disposition = _candidate_disposition(task.event_id, candidate, replicas)
+        candidate_audit = {
+            "candidate_topology_id": candidate,
+            "aggregate": asdict(disposition),
+            "replicas": replicas,
+        }
+
+    return {
+        "schema_version": "rvt-official-recoverability-candidate-result/v1",
+        "decision_event_id": task.event_id,
+        "candidate_topology_id": candidate,
+        "team_size": task.source.team_size,
+        "source_terminated_before_event": False,
+        "termination": None,
+        "source_snapshot_sha256": source.canonical_hash,
+        "graphs": graphs,
+        "rollout_configuration_sha256_by_replica": rollout_hashes,
+        "disposition": asdict(disposition),
+        "candidate_audit": candidate_audit,
+        "operational_timing": {
+            "source_event_seconds": source_event_seconds,
+            "graph_serialization_seconds": graph_seconds,
+            "replica_rollout_seconds": replica_seconds,
+            "candidate_total_seconds": perf_counter() - started,
+        },
+    }
+
+
+def reconcile_recoverability_candidate_results(
+    root: Path,
+    task: OfficialDecisionEventTask,
+    compact_result: Mapping[str, Any],
+    line_result: Mapping[str, Any],
     *,
     writer: Optional[CanonicalGenerationWriter] = None,
 ) -> Mapping[str, Any]:
-    """Execute both matched candidate aggregates and reconcile one 2*N row set."""
-    session = _run_source_to_step(root, task.source, task.resolved_control_step)
+    """Reconcile two scheduler units into the frozen event-level transaction."""
+    reconcile_started = perf_counter()
+    by_candidate = {
+        int(compact_result["candidate_topology_id"]): compact_result,
+        int(line_result["candidate_topology_id"]): line_result,
+    }
+    if set(by_candidate) != {COMPACT, LINE}:
+        raise OfficialProducerError("candidate pair must contain COMPACT and LINE")
+    for candidate, result in by_candidate.items():
+        if result["decision_event_id"] != task.event_id:
+            raise OfficialProducerError("candidate result crosses decision events")
+        if int(result["team_size"]) != task.source.team_size:
+            raise OfficialProducerError("candidate result team size changed")
+        if int(result["candidate_topology_id"]) != candidate:
+            raise OfficialProducerError("candidate result identity changed")
+    terminated = {
+        bool(result["source_terminated_before_event"])
+        for result in by_candidate.values()
+    }
+    if len(terminated) != 1:
+        raise OfficialProducerError("candidate source-event availability diverged")
+    snapshots = {
+        result["source_snapshot_sha256"] for result in by_candidate.values()
+    }
+    if len(snapshots) != 1:
+        raise OfficialProducerError("candidate source snapshots diverged")
+    for replica_index in range(task.replicas_per_candidate):
+        compact_seed = int(
+            dict(task.replica_jobs(COMPACT)[replica_index]["seeds"])[
+                "matched_disturbance_seed"
+            ]
+        )
+        line_seed = int(
+            dict(task.replica_jobs(LINE)[replica_index]["seeds"])[
+                "matched_disturbance_seed"
+            ]
+        )
+        if compact_seed != line_seed:
+            raise OfficialProducerError("matched candidate disturbance seeds diverge")
+
     row_binding = json.loads(
         (root / "results/rvt_fd24/phase9_recoverability_row_binding_v1.json")
         .read_text(encoding="ascii")
     )
     row_binding_sha = str(row_binding["phase9_recoverability_row_binding_sha256"])
-
-    if session.termination is not None and session.control_step < task.resolved_control_step:
-        compact_disposition = CandidateAggregateDisposition(
-            task.event_id, COMPACT, GENERATION_INVALID, None, task.replicas_per_candidate
-        )
-        line_disposition = CandidateAggregateDisposition(
-            task.event_id, LINE, GENERATION_INVALID, None, task.replicas_per_candidate
-        )
-        reconciliation = reconcile_candidate_pair(
-            compact_disposition, line_disposition, team_size=task.source.team_size
-        )
-        audit = {
-            "source_terminated_before_event": True,
-            "termination": asdict(session.termination),
-            "candidate_audits": [],
-        }
-        write_result = None if writer is None else writer.write_recoverability_transaction(
-            reconciliation, audit
-        )
-        return {"reconciliation": asdict(reconciliation), "audit": audit, "write": write_result}
-
-    source = snapshot(session)
-    graphs: dict[int, list[tuple[Mapping[str, Any], str]]] = {COMPACT: [], LINE: []}
-    for candidate in (COMPACT, LINE):
-        for robot in session.robots:
-            view = session._build_robot_view(robot)
-            graph = RobotLocalEgoGraphRuntimeAdapter(
-                session.runtime_config, robot.local_topology_metadata
-            ).build(view, candidate, session.control_step)
-            payload, separated_candidate = recoverability_ego_payload(graph)
-            if separated_candidate != candidate:
-                raise OfficialProducerError("ego graph candidate separation failed")
-            validate_recoverability_ego_payload(payload)
-            graphs[candidate].append((payload, recoverability_graph_fingerprint(payload)))
-
-    candidate_audits = []
-    dispositions: dict[int, CandidateAggregateDisposition] = {}
-    rollout_hashes: dict[int, list[str]] = {COMPACT: [], LINE: []}
-    for candidate in (COMPACT, LINE):
-        replicas = []
-        for replica_job in task.replica_jobs(candidate):
-            kwargs = _rollout_kwargs(task, session, candidate, replica_job)
-            rollout_payload = official_rollout_configuration_payload(**kwargs)
-            validate_official_rollout_configuration_payload(
-                rollout_payload,
-                expected_lifecycle_config_sha256=kwargs["lifecycle_config_sha256"],
-                expected_communication_config_sha256=kwargs[
-                    "communication_config_sha256"
-                ],
-            )
-            rollout_hash = sha256_document(rollout_payload)
-            rollout_hashes[candidate].append(rollout_hash)
-            result, attempt_audit = _execute_candidate_with_one_infrastructure_retry(
-                source, candidate, replica_job
-            )
-            if result is not None:
-                replicas.append({
-                    **asdict(result),
-                    "rollout_configuration_sha256": rollout_hash,
-                    "matched_disturbance_seed": int(
-                        dict(replica_job["seeds"])["matched_disturbance_seed"]
-                    ),
-                    "infrastructure_attempts": list(attempt_audit),
-                })
-            else:
-                dispositions[candidate] = CandidateAggregateDisposition(
-                    task.event_id, candidate, INFRASTRUCTURE_FAILURE, None,
-                    task.replicas_per_candidate,
-                )
-                candidate_audits.append({
-                    "candidate_topology_id": candidate,
-                    "infrastructure_failure": "RETRY_EXHAUSTED",
-                    "infrastructure_attempts": list(attempt_audit),
-                    "replicas": replicas,
-                })
-                break
-        else:
-            dispositions[candidate] = _candidate_disposition(
-                task.event_id, candidate, replicas
-            )
-            candidate_audits.append({
-                "candidate_topology_id": candidate,
-                "aggregate": asdict(dispositions[candidate]),
-                "replicas": replicas,
-            })
-
-    for replica_index in range(task.replicas_per_candidate):
-        compact_seed = int(dict(task.replica_jobs(COMPACT)[replica_index]["seeds"])["matched_disturbance_seed"])
-        line_seed = int(dict(task.replica_jobs(LINE)[replica_index]["seeds"])["matched_disturbance_seed"])
-        if compact_seed != line_seed:
-            raise OfficialProducerError("matched candidate disturbance seeds diverge")
-
+    dispositions = {
+        candidate: CandidateAggregateDisposition(**dict(result["disposition"]))
+        for candidate, result in by_candidate.items()
+    }
+    row_started = perf_counter()
     rows: dict[int, list[Mapping[str, Any]]] = {COMPACT: [], LINE: []}
     if all(dispositions[c].disposition in {
         "RECOVERABLE_POSITIVE", "VALID_TASK_NEGATIVE"
@@ -345,8 +427,11 @@ def produce_recoverability_event(
             int(dispositions[LINE].aggregate_label),
         )
         for candidate in (COMPACT, LINE):
-            for graph_payload, graph_fingerprint in graphs[candidate]:
-                robot_id = int(graph_payload["metadata"]["observer_robot_id"])
+            result = by_candidate[candidate]
+            for graph in result["graphs"]:
+                robot_id = int(graph["robot_id"])
+                graph_payload = graph["graph_payload"]
+                graph_fingerprint = str(graph["graph_fingerprint"])
                 key = {
                     "schema": "rvt-recoverability-row-identity/v1",
                     "study": task.source.study,
@@ -374,10 +459,12 @@ def produce_recoverability_event(
                     "target_v4_aggregate_disposition": dispositions[candidate].disposition,
                     "target_v4_contract_sha256": TARGET_V4_SHA256,
                     "replica_count": dispositions[candidate].replica_count,
-                    "rollout_configuration_sha256_by_replica": rollout_hashes[candidate],
+                    "rollout_configuration_sha256_by_replica": result[
+                        "rollout_configuration_sha256_by_replica"
+                    ],
                     "joint_outcome_category": joint,
                 })
-
+    row_seconds = perf_counter() - row_started
     reconciliation = reconcile_candidate_pair(
         dispositions[COMPACT],
         dispositions[LINE],
@@ -385,18 +472,55 @@ def produce_recoverability_event(
         compact_rows=rows[COMPACT],
         line_rows=rows[LINE],
     )
-    audit = {
-        "source_terminated_before_event": False,
-        "source_snapshot_sha256": source.canonical_hash,
-        "decision_event_id": task.event_id,
-        "decision_timestep": task.resolved_control_step,
-        "candidate_audits": candidate_audits,
-        "row_binding_spec_sha256": row_binding_sha,
+    reconcile_seconds = perf_counter() - reconcile_started - row_seconds
+    candidate_audits = [
+        by_candidate[candidate]["candidate_audit"]
+        for candidate in (COMPACT, LINE)
+        if by_candidate[candidate]["candidate_audit"] is not None
+    ]
+    if next(iter(terminated)):
+        audit = {
+            "source_terminated_before_event": True,
+            "termination": by_candidate[COMPACT]["termination"],
+            "candidate_audits": candidate_audits,
+        }
+    else:
+        audit = {
+            "source_terminated_before_event": False,
+            "source_snapshot_sha256": next(iter(snapshots)),
+            "decision_event_id": task.event_id,
+            "decision_timestep": task.resolved_control_step,
+            "candidate_audits": candidate_audits,
+            "row_binding_spec_sha256": row_binding_sha,
+        }
+    audit["operational_timing"] = {
+        "candidate": {
+            str(candidate): by_candidate[candidate]["operational_timing"]
+            for candidate in (COMPACT, LINE)
+        },
+        "row_expansion_seconds": row_seconds,
+        "candidate_pair_reconciliation_seconds": reconcile_seconds,
     }
+    writer_started = perf_counter()
     write_result = None if writer is None else writer.write_recoverability_transaction(
         reconciliation, audit
     )
+    audit["operational_timing"]["writer_seconds"] = perf_counter() - writer_started
     return {"reconciliation": asdict(reconciliation), "audit": audit, "write": write_result}
+
+
+def produce_recoverability_event(
+    root: Path,
+    task: OfficialDecisionEventTask,
+    *,
+    writer: Optional[CanonicalGenerationWriter] = None,
+) -> Mapping[str, Any]:
+    """Execute both scheduler units and reconcile one frozen 2*N row set."""
+    compact = produce_recoverability_candidate(root, task, COMPACT)
+    line = produce_recoverability_candidate(root, task, LINE)
+    return reconcile_recoverability_candidate_results(
+        root, task, compact, line, writer=writer
+    )
 
 
 def residual_decision_eligible(
@@ -455,7 +579,10 @@ def produce_residual_state(
     scientific_addendum_sha256: str,
     writer: Optional[CanonicalGenerationWriter] = None,
 ) -> Mapping[str, Any]:
+    started = perf_counter()
     session = _run_source_to_step(root, task, timestep)
+    source_event_seconds = perf_counter() - started
+    local_started = perf_counter()
     eligible, reason = residual_decision_eligible(session, robot_id)
     if not eligible or session.control_step != int(timestep):
         raise OfficialProducerError(f"retained residual state is unavailable: {reason}")
@@ -466,6 +593,7 @@ def produce_residual_state(
         session.runtime_config, robot.local_topology_metadata
     ).build(view, robot.committed_topology, session.control_step)
     graph_fingerprint = graph.fingerprint()
+    local_input_graph_seconds = perf_counter() - local_started
     row_key = {
         "study": task.study,
         "split": task.split,
@@ -480,7 +608,10 @@ def produce_residual_state(
         "residual_expert_spec_sha256": RESIDUAL_EXPERT_SPEC_SHA256,
     }
     row_id = residual_scientific_row_id(row_key)
+    expert_started = perf_counter()
     result = evaluate_residual_expert_v2(session, robot_id)
+    residual_expert_seconds = perf_counter() - expert_started
+    sidecar_started = perf_counter()
     candidate_sidecars = []
     candidate_ids = []
     stream_hashes = []
@@ -506,6 +637,7 @@ def produce_residual_state(
             "control_intervals": candidate.trace.control_intervals,
             "matched_stream_identity_sha256": stream_hash,
         })
+    sidecar_serialization_seconds = perf_counter() - sidecar_started
 
     row_payload: Optional[Mapping[str, Any]] = None
     disposition = LABELED if result.target is not None else NO_ELIGIBLE_ACTION
@@ -572,11 +704,28 @@ def produce_residual_state(
         "result_digest": canonical_result_digest(result),
         "selector_error": result.selector_error,
         "selected_candidate_index": result.selected_index,
+        "operational_timing": {
+            "source_event_seconds": source_event_seconds,
+            "local_input_graph_seconds": local_input_graph_seconds,
+            "residual_expert_total_seconds": residual_expert_seconds,
+            "candidate_continuation_seconds": [
+                float(candidate.seconds) for candidate in result.candidates
+            ],
+            "utility_selector_target_seconds": max(
+                0.0,
+                float(result.seconds)
+                - sum(float(candidate.seconds) for candidate in result.candidates),
+            ),
+            "sidecar_serialization_seconds": sidecar_serialization_seconds,
+        },
     }
+    writer_started = perf_counter()
     write_result = None if writer is None else writer.write_residual_attempt(
         scientific_row_id=row_id,
         disposition=disposition,
         row=row_payload,
         audit=audit,
     )
+    audit["operational_timing"]["writer_seconds"] = perf_counter() - writer_started
+    audit["operational_timing"]["unit_total_seconds"] = perf_counter() - started
     return {"row": row_payload, "audit": audit, "write": write_result}
