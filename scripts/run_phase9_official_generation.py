@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -22,7 +23,10 @@ from rvt_swarm.phase9g0r.preflight import validate_authorization_scope
 from rvt_swarm.phase9g0r.writer import CanonicalGenerationWriter
 
 
-def _source_is_ancestor(root: Path, source_commit: str) -> bool:
+def _source_binding_matches(root: Path, source_commit: str) -> bool:
+    image_commit = os.environ.get("RVT_SOURCE_COMMIT")
+    if image_commit is not None:
+        return image_commit == source_commit
     return subprocess.run(
         ["git", "merge-base", "--is-ancestor", source_commit, "HEAD"],
         cwd=root,
@@ -50,8 +54,8 @@ def main() -> None:
     args = parser.parse_args()
 
     root = args.root.resolve()
-    if not _source_is_ancestor(root, args.source_commit):
-        raise SystemExit("source commit is not an ancestor of this checkout")
+    if not _source_binding_matches(root, args.source_commit):
+        raise SystemExit("source commit does not match the immutable execution source")
     for name, value in (
         ("scientific addendum", args.scientific_addendum_sha256),
         ("job manifest", args.job_manifest_sha256),

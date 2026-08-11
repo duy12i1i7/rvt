@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import inspect
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -278,11 +279,11 @@ def test_positive_and_negative_preflight_have_zero_escapes() -> None:
 def test_command_resolve_binds_manifest_and_narrow_authorization(
     tmp_path,
 ) -> None:
-    source_commit = subprocess.check_output(
-        ["git", "rev-parse", "9f33bda26af6ccce3f196a7a69ba0942e9785d86"],
-        cwd=ROOT,
-        text=True,
-    ).strip()
+    source_commit = os.environ.get("RVT_SOURCE_COMMIT")
+    if source_commit is None:
+        source_commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+        ).strip()
     docker_image = (
         "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b"
     )
