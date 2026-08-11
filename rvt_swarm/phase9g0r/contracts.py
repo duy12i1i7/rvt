@@ -168,6 +168,47 @@ def recoverability_graph_fingerprint(graph_payload: Mapping[str, Any]) -> str:
     return sha256_document(dict(graph_payload))
 
 
+def validate_recoverability_ego_payload(graph_payload: Mapping[str, Any]) -> None:
+    required = {
+        "serialization_version",
+        "schema_version",
+        "normalization_version",
+        "feature_schema_sha256",
+        "topology_registry_schema_version",
+        "runtime_config_sha256",
+        "units",
+        "metadata",
+        "tensors",
+    }
+    _require_exact_fields(graph_payload, tuple(required), kind="recoverability ego payload")
+    metadata = graph_payload["metadata"]
+    tensors = graph_payload["tensors"]
+    if not isinstance(metadata, Mapping) or not isinstance(tensors, Mapping):
+        raise Phase9G0RContractError("ego payload metadata/tensors must be objects")
+    if "candidate_topology_id" in metadata:
+        raise Phase9G0RContractError("candidate topology ID entered graph payload")
+    forbidden = {"global_centroid", "global_graph", "full_swarm_state"}
+    if forbidden.intersection(metadata) or forbidden.intersection(tensors):
+        raise Phase9G0RContractError("global graph content is prohibited")
+    expected_tensors = {
+        "node_x", "node_feature_valid_mask", "node_valid_mask", "node_kind",
+        "edge_index", "edge_attr", "edge_feature_valid_mask", "edge_valid_mask",
+        "edge_type",
+    }
+    if set(tensors) != expected_tensors:
+        raise Phase9G0RContractError("ego payload omits authoritative tensor content")
+    node_x = tensors["node_x"]
+    edge_attr = tensors["edge_attr"]
+    if not isinstance(node_x, list) or not node_x:
+        raise Phase9G0RContractError("ego payload must contain a robot-local root node")
+    if any(not isinstance(row, list) or len(row) != NODE_FEATURE_DIM for row in node_x):
+        raise Phase9G0RContractError("ego payload node feature dimension changed")
+    if not isinstance(edge_attr, list) or any(
+        not isinstance(row, list) or len(row) != EDGE_FEATURE_DIM for row in edge_attr
+    ):
+        raise Phase9G0RContractError("ego payload edge feature dimension changed")
+
+
 def restore_recoverability_ego_graph(
     graph_payload: Mapping[str, Any],
     candidate_topology_id: int,
@@ -330,6 +371,61 @@ def official_rollout_configuration_sha256(**kwargs: Any) -> str:
     if PROHIBITED_OPERATIONAL_ROLLOUT_FIELDS.intersection(kwargs):
         raise Phase9G0RContractError("operational fields entered rollout configuration")
     return sha256_document(official_rollout_configuration_payload(**kwargs))
+
+
+def validate_official_rollout_configuration_payload(
+    payload: Mapping[str, Any],
+    *,
+    expected_lifecycle_config_sha256: Optional[str] = None,
+    expected_communication_config_sha256: Optional[str] = None,
+) -> None:
+    if payload.get("schema_version") != OFFICIAL_ROLLOUT_CONFIG_SCHEMA_VERSION:
+        raise Phase9G0RContractError("official rollout schema mismatch")
+
+    def keys(value: Any) -> set[str]:
+        if isinstance(value, Mapping):
+            result = {str(name) for name in value}
+            for item in value.values():
+                result.update(keys(item))
+            return result
+        if isinstance(value, (list, tuple)):
+            result: set[str] = set()
+            for item in value:
+                result.update(keys(item))
+            return result
+        return set()
+
+    prohibited = PROHIBITED_OPERATIONAL_ROLLOUT_FIELDS.intersection(keys(payload))
+    if prohibited:
+        raise Phase9G0RContractError(
+            f"operational fields entered rollout payload: {sorted(prohibited)}"
+        )
+    hashes = {
+        "layout_sha256": payload.get("layout_sha256"),
+        "lifecycle_config_sha256": payload.get("lifecycle_config_sha256"),
+        "communication_config_sha256": payload.get("communication_config_sha256"),
+    }
+    references = payload.get("scientific_contract_references")
+    integration = payload.get("physical_integration")
+    if not isinstance(references, Mapping) or not isinstance(integration, Mapping):
+        raise Phase9G0RContractError("rollout scientific references are incomplete")
+    hashes.update({str(name): value for name, value in references.items()})
+    hashes["runtime_configuration_sha256"] = integration.get(
+        "runtime_configuration_sha256"
+    )
+    if any(len(str(value)) != 64 for value in hashes.values()):
+        raise Phase9G0RContractError("rollout payload contains a malformed contract hash")
+    if (
+        expected_lifecycle_config_sha256 is not None
+        and payload["lifecycle_config_sha256"] != expected_lifecycle_config_sha256
+    ):
+        raise Phase9G0RContractError("rollout lifecycle hash does not match authority")
+    if (
+        expected_communication_config_sha256 is not None
+        and payload["communication_config_sha256"]
+        != expected_communication_config_sha256
+    ):
+        raise Phase9G0RContractError("rollout communication hash does not match authority")
 
 
 def retained_dense_state_indices(
