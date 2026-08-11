@@ -1,0 +1,30 @@
+{
+  "classification": "RB21_PRODUCTION_PATH_REQUALIFICATION_REQUIRED",
+  "diagnostic_timing_only": {
+    "recoverability_atomic_wall_seconds": [
+      1.0992214580000002,
+      11.538677125,
+      8.397828708,
+      8.828114917,
+      1.8580736660000028,
+      1.387559041000003
+    ],
+    "residual_atomic_wall_seconds": [
+      2.592006249999997,
+      11.136285874999999
+    ]
+  },
+  "full_worker_scaling_executed": false,
+  "official_staging_writes": 0,
+  "phase9g0r_performance_classification_sha256": "a547119da7290e96410869f4e8d4c419da7c8cd6028dfae760eb285648ae64dc",
+  "rb21_profile": {
+    "authoritative_for_official_production": false,
+    "chunk_size": 1,
+    "numeric_threads_per_worker": 1,
+    "timeout_seconds": 1200,
+    "workers": 12
+  },
+  "reason": "The real producer adds F1-F10 task compilation, per-event 2*N row materialization, candidate-pair reconciliation, dense-state retention, and canonical publication units that were absent from the RB21 benchmark.",
+  "schema_version": "rvt-phase9g0r-performance-classification/v1",
+  "scientific_semantics_changed": false
+}

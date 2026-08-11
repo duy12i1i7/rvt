@@ -1,0 +1,13 @@
+{
+  "authority": "rvt_swarm.phase9c.manifest._replica_seeds",
+  "candidate_pair_seed_mismatches": 0,
+  "comparison_groups": 21000,
+  "f8_f9_events": 3000,
+  "f8_f9_three_distinct_seed_failures": 0,
+  "official_rows": 0,
+  "phase9g0r_matched_randomness_regression_sha256": "d12d3f5c6ca933f58a7ded2c4a913f8dee165a6a3452a387c306e05208cf64a4",
+  "schema_version": "rvt-phase9g0r-matched-randomness-regression/v1",
+  "sealed_accesses": 0,
+  "status": "PASS",
+  "worker_chunk_retry_order_in_scientific_seed_payload": false
+}

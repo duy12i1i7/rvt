@@ -1,0 +1,38 @@
+{
+  "cap_pass": true,
+  "equations": {
+    "candidate_aggregates": "2 * source_events",
+    "no_eligible_actions": "count(retained attempts with NO_ELIGIBLE_ACTION disposition)",
+    "recoverability_robot_local_row_capacity": "sum(2 * N over source events)",
+    "replica_executions": "sum(2 * replicas_per_candidate over source events)",
+    "residual_candidate_evaluations": "9 * residual_retained_attempted_states",
+    "residual_eligible_dense_states": "measured only during authorized execution; not inferred from manifest",
+    "residual_labeled_rows": "count(retained attempts with LABELED disposition)",
+    "residual_retained_attempted_states": "sum(min(16, eligible_count) per episode and robot)",
+    "source_episodes": "count(nonsealed authorized source_episode_jobs)",
+    "source_events": "count(nonsealed authorized decision_event_jobs)"
+  },
+  "manifest_level_counts": {
+    "candidate_aggregates": 30000,
+    "candidate_replica_executions": 42000,
+    "decision_events": 15000,
+    "final_test_tasks": 0,
+    "recoverability_robot_local_row_capacity": 318500,
+    "residual_candidate_evaluation_strict_upper_bound": 4688640,
+    "residual_retained_attempted_state_strict_upper_bound": 520960,
+    "residual_robot_episodes": 32560,
+    "source_episodes": 3060,
+    "study_a_n24_tasks": 0
+  },
+  "phase9g0r_count_reconciliation_sha256": "92142cb60310c465fef451cb31442e82a10e9361e35c35fa09a53df5f7c624d9",
+  "remaining_capacity": 15040,
+  "runtime_only_counts": {
+    "no_eligible_actions": 0,
+    "residual_eligible_dense_states": "NOT_EXECUTED_OFFICIAL_DATA_ZERO",
+    "residual_labeled_rows": 0,
+    "residual_retained_attempted_states": "NOT_EXECUTED_OFFICIAL_DATA_ZERO"
+  },
+  "schema_version": "rvt-phase9g0r-count-reconciliation/v1",
+  "strict_residual_cap": 536000,
+  "strict_upper_bound": 520960
+}

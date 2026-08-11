@@ -1,0 +1,187 @@
+{
+  "negative": {
+    "case_count": 30,
+    "cases": [
+      {
+        "case": "old_selector_only_plan",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "benchmark_only_official_execution",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "missing_scientific_addendum",
+        "exception_class": "FileNotFoundError",
+        "rejected": true
+      },
+      {
+        "case": "wrong_row_id_spec",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "row_id_contains_label",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "row_id_contains_worker",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "row_id_contains_chunk",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "row_id_contains_retry",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "graph_fingerprint_omits_payload",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "global_graph_payload",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "wrong_rollout_hash",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "operational_field_in_rollout",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "wrong_lifecycle_hash",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "wrong_communication_hash",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "partial_compact_line_publication",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "wrong_replica_seed",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "worker_derived_seed",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "chunk_derived_seed",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "retry_derived_seed",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "unsupported_family",
+        "exception_class": "OfficialTaskCompilerError",
+        "rejected": true
+      },
+      {
+        "case": "study_a_n24_access",
+        "exception_class": "PermissionError",
+        "rejected": true
+      },
+      {
+        "case": "final_test_access",
+        "exception_class": "PermissionError",
+        "rejected": true
+      },
+      {
+        "case": "residual_retention_k_not_16",
+        "exception_class": "Phase9G0RContractError",
+        "rejected": true
+      },
+      {
+        "case": "label_dependent_retention",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "random_residual_retention",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "residual_cap_overflow",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "direct_final_writer",
+        "exception_class": "PermissionError",
+        "rejected": true
+      },
+      {
+        "case": "wrong_docker_image",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "broad_authorization",
+        "exception_class": "Phase9G0RPreflightError",
+        "rejected": true
+      },
+      {
+        "case": "official_writer_without_authorization",
+        "exception_class": "PermissionError",
+        "rejected": true
+      }
+    ],
+    "escapes": 0
+  },
+  "official_staging_writes": 0,
+  "phase9g0r_preflight_sha256": "9f9eac49248008e4183720945174d3193aac4e8238e6fd775bce8b66a30d3652",
+  "positive": {
+    "canonical_artifacts": {
+      "candidate_pair": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+      "communication": "fcca7874958457414f05a64519a1ad3d2cb6036b0385de663eed73b5a15c569a",
+      "ego_payload": "d7a67ad1e420e3eac7bcb222b04a03c206bae72422381d3945f47adec66c81b1",
+      "lifecycle": "750e6c576ac89c91c0028051e8a1684e4db7abe4419b0be1c42a7958b3b454a6",
+      "retention": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef",
+      "rollout_configuration": "4fda39e64d34ffb57ee76016bcf6218b3eddbfc8835c73d4a5181c77acd78fd2",
+      "row_identity": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d"
+    },
+    "compiled_counts": {
+      "candidate_aggregates": 30000,
+      "candidate_replica_executions": 42000,
+      "decision_events": 15000,
+      "final_test_tasks": 0,
+      "recoverability_robot_local_row_capacity": 318500,
+      "residual_candidate_evaluation_strict_upper_bound": 4688640,
+      "residual_retained_attempted_state_strict_upper_bound": 520960,
+      "residual_robot_episodes": 32560,
+      "source_episodes": 3060,
+      "study_a_n24_tasks": 0
+    },
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "status": "PASS"
+  },
+  "schema_version": "rvt-phase9g0r-preflight/v1",
+  "status": "PASS"
+}
