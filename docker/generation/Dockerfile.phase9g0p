@@ -1,0 +1,20 @@
+ARG QUALIFIED_BASE_IMAGE=sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c
+FROM ${QUALIFIED_BASE_IMAGE}
+
+USER root
+
+ARG RVT_SOURCE_COMMIT=UNSET
+
+LABEL org.opencontainers.image.title="RVT-Swarm Phase 9G0-P production generation"
+LABEL org.opencontainers.image.revision="${RVT_SOURCE_COMMIT}"
+LABEL rvt.phase9g0p.qualified-base="sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c"
+
+COPY --chown=root:root . /opt/rvt
+
+RUN test "${RVT_SOURCE_COMMIT}" != "UNSET" \
+    && test "$(git -C /opt/rvt rev-parse HEAD)" = "${RVT_SOURCE_COMMIT}" \
+    && chmod -R go-w /opt/rvt
+
+USER rvt
+
+CMD ["python", "-m", "pytest", "-q"]
