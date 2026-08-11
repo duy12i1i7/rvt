@@ -1,0 +1,412 @@
+{
+  "counts": {
+    "candidate_aggregates": 24,
+    "events": 12,
+    "prospective_robot_candidate_row_capacity": 260,
+    "replica_executions": 40
+  },
+  "coverage": {
+    "contains_changed_topology_sources": true,
+    "contains_f8_f9_three_replica_aggregates": true,
+    "contains_prior_positive_and_valid_negative_coverage_cases": true,
+    "families": [
+      "F1",
+      "F10",
+      "F2",
+      "F5",
+      "F8",
+      "F9"
+    ],
+    "selection_uses_timing_or_runtime_results": false,
+    "team_sizes": [
+      5,
+      8,
+      12,
+      16
+    ]
+  },
+  "events": [
+    {
+      "candidate_pair_expected_rows": 10,
+      "coverage_intent": [
+        "positive coverage",
+        "short continuation"
+      ],
+      "decision_timestep": 60,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F1",
+      "replicas_per_candidate": 1,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 5
+    },
+    {
+      "candidate_pair_expected_rows": 10,
+      "coverage_intent": [
+        "fixed COMPACT source"
+      ],
+      "decision_timestep": 60,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F1",
+      "replicas_per_candidate": 1,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S1_ALWAYS_COMPACT/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 5
+    },
+    {
+      "candidate_pair_expected_rows": 16,
+      "coverage_intent": [
+        "valid negative coverage",
+        "long continuation"
+      ],
+      "decision_timestep": 80,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F2",
+      "replicas_per_candidate": 1,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 8
+    },
+    {
+      "candidate_pair_expected_rows": 16,
+      "coverage_intent": [
+        "fixed COMPACT source"
+      ],
+      "decision_timestep": 80,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F2",
+      "replicas_per_candidate": 1,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S1_ALWAYS_COMPACT/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 8
+    },
+    {
+      "candidate_pair_expected_rows": 16,
+      "coverage_intent": [
+        "changed topology"
+      ],
+      "decision_timestep": 120,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F5",
+      "replicas_per_candidate": 1,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 8
+    },
+    {
+      "candidate_pair_expected_rows": 16,
+      "coverage_intent": [
+        "transition source"
+      ],
+      "decision_timestep": 120,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F5",
+      "replicas_per_candidate": 1,
+      "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S4_FROZEN_TRANSITION_PROTOCOL/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 8
+    },
+    {
+      "candidate_pair_expected_rows": 24,
+      "coverage_intent": [
+        "communication degraded",
+        "three replicas"
+      ],
+      "decision_timestep": 120,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F8",
+      "replicas_per_candidate": 3,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 12
+    },
+    {
+      "candidate_pair_expected_rows": 24,
+      "coverage_intent": [
+        "three replicas"
+      ],
+      "decision_timestep": 120,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F8",
+      "replicas_per_candidate": 3,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 12
+    },
+    {
+      "candidate_pair_expected_rows": 32,
+      "coverage_intent": [
+        "dynamic obstacle",
+        "three replicas"
+      ],
+      "decision_timestep": 100,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F9",
+      "replicas_per_candidate": 3,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 16
+    },
+    {
+      "candidate_pair_expected_rows": 32,
+      "coverage_intent": [
+        "three replicas"
+      ],
+      "decision_timestep": 100,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F9",
+      "replicas_per_candidate": 3,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S1_ALWAYS_COMPACT/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 16
+    },
+    {
+      "candidate_pair_expected_rows": 32,
+      "coverage_intent": [
+        "additional family"
+      ],
+      "decision_timestep": 60,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F10",
+      "replicas_per_candidate": 1,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 16
+    },
+    {
+      "candidate_pair_expected_rows": 32,
+      "coverage_intent": [
+        "additional family",
+        "transition source"
+      ],
+      "decision_timestep": 60,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0",
+      "event_slot_index": 0,
+      "family": "F10",
+      "replicas_per_candidate": 1,
+      "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-0",
+      "split": "train",
+      "study": "study_a_zero_shot",
+      "team_size": 16
+    }
+  ],
+  "frozen_before_performance_observation": true,
+  "handoff_commit": "1676427c92d111c0aa7aebb2fe9e2cc035297605",
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "mode": "DIAGNOSTIC",
+  "official_staging_writes": 0,
+  "phase9g0p_recoverability_benchmark_manifest_sha256": "d320028934fe36787ec2742c6958cd66bc1146b2b0783e9577ed3983320cdb5c",
+  "qualified_image_at_predeclaration": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+  "scheduler_atomic_unit": "one source event x one candidate topology x all required replicas",
+  "scheduler_units": [
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "d49ac6045369eeadc71008c8ec4c3b07d22d459b2e06c6b82479267cdfd531db",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "afe8f7a99e7d77ff86ac7ff05207b4a73106805936b1e8429df220331e0f2b69",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "02fb15e030562cbe5574ec8f2b053f0f7e9bda50409f99fa1e8a86d2b6159545",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "8a95bd7504a424c4830c7b92e75eea3c7e02a2ac1116184000603854850dad4b",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "f4026cedd4d03af2b5bfaa5c2999ad762e4a88c6685fadcbfc248ca9aff307d0",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "d6eb13f1e24fc46ce081a16ea964ade72a57e32dc9dfa779943f888a61a285cb",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "ee30d70612cc2e0a6c3ec04b2a6556e709dda29ea8e250aae513d83bdd479791",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "352b823dab1adf4a098a1e67a0c1a747cdf411b8acb02a07de5d6974f62573af",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "74ec741091de19493d19e8c3af6a4d057226567a2e3b833839368e2dcb32f142",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "cff7d903e4e157e2943c85d20cf13e9f48a64da23fcb81bc86701176ad50d046",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "d17f9aeaae5d908aff358ba8207d412f80a08a38e37618426702a0fed7b6f69a",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "a4db150af9793497c0685e7c6838c8a2d0d9e916de0c41744cf4f4fee1cd1c05",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "088c4ac1d778cecb83630ea57650617de76d7a6d38f8678ae3ca80ff85fd5ed3",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "04ff66a3007d50b490da273846cd50ab828482915e192ef71f8b97444b1e8d2f",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "4ad01a87f68ca1ae14270cb30a8285588a332bdbae04f9795dcf5c484ffd1a62",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "66faedf9f2b7c7cfd3a605c009b038ba1ce372cb65355ad637ef519d3d1bd1bf",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "4a0b0ecc3b97eefb075fe6c7df66eda4f0d89541e02579d11d9f7a7fcb1df90f",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "8d30e43b6528d27385db6f80d9d4f637fc9341a4aad205eef203d4eed4a7efe8",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "5d2710e26e54521046213c4036ee90e6c5abb0bfdf4928a5a0f824cfeded90da",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "replicas_per_candidate": 3,
+      "scheduler_atomic_unit_id": "276541ba9e98b49304579bb3bcd40ca7eb748fa0c7b1ddd88c93daea07dddef2",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S1_ALWAYS_COMPACT/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "a777365e9e2127bb83b099bb7bff48edfe67bf6901167088c30eec61ddaf7b90",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "ca2b3db09e3b3ef5b3dc304d0633144465e26cb869a11b439d4ea56c4dcc9f59",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "7e8ab8efa2ccd5f5a3902fcf5e1f7f599ef8f65e765e696ad433c75c05f1705a",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "8688c5230c4e856e2e71fc2817e54ab45a286295d434b9e7cb49858555bcbac2",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F10/a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-0"
+    }
+  ],
+  "schema_version": "rvt-phase9g0p-recoverability-benchmark-manifest/v1",
+  "scientific_publication_unit": "one complete COMPACT/LINE event pair",
+  "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0
+  }
+}

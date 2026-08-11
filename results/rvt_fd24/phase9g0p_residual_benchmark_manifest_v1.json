@@ -1,0 +1,376 @@
+{
+  "counts": {
+    "candidate_evaluations": 225,
+    "retained_state_units": 25,
+    "source_episodes": 5
+  },
+  "coverage": {
+    "contains_communication_degraded": true,
+    "contains_dynamic_obstacle": true,
+    "contains_prior_labeled_and_no_eligible_coverage": true,
+    "families": [
+      "F1",
+      "F2",
+      "F5",
+      "F8",
+      "F9"
+    ],
+    "retained_positions": [
+      0,
+      7,
+      15
+    ],
+    "selection_uses_timing_or_candidate_utilities": false,
+    "team_sizes": [
+      5,
+      8,
+      12,
+      16
+    ]
+  },
+  "frozen_before_performance_observation": true,
+  "handoff_commit": "1676427c92d111c0aa7aebb2fe9e2cc035297605",
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "mode": "DIAGNOSTIC",
+  "official_staging_writes": 0,
+  "phase9g0p_residual_benchmark_manifest_sha256": "da329a0f23e90a27ccf1f8911a4f08c2c0f87a482335750f13cd50b893fd60e8",
+  "qualified_image_at_predeclaration": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+  "scheduler_atomic_unit": "one retained robot decision state x all nine residual candidates",
+  "scheduler_units": [
+    {
+      "candidate_evaluations": 9,
+      "family": "F1",
+      "retained_position": 0,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "0d3d700a3c65d9aedb670a507c65a343c3af61464ef5b89c3d69ced3dc64e1f4",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 5,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F1",
+      "retained_position": 15,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "022798fbf5b1c992d79016653b1825ba7bc4f26227116495a2cec57af8ca10f3",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 5,
+      "timestep": 94
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F1",
+      "retained_position": 0,
+      "robot_id": 4,
+      "scheduler_atomic_unit_id": "582ffcf0b4094c802dc02c889826db84a6b8742e537e510db9d38e39fc951f08",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 5,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F1",
+      "retained_position": 15,
+      "robot_id": 4,
+      "scheduler_atomic_unit_id": "235c6f1960ec46f310063d77b816343d36a748756bfccc7ef69b8c3ff446bb42",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 5,
+      "timestep": 94
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F2",
+      "retained_position": 0,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "72818423270c722628e08f8a9f217abd6abe7f7698017a2c16a2ffda5ee718f6",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 8,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F2",
+      "retained_position": 15,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "df8f60f073feb30dd8412911825a5503d48e9b2e53f7ca797dbd8cd326c0c770",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 8,
+      "timestep": 218
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F2",
+      "retained_position": 0,
+      "robot_id": 7,
+      "scheduler_atomic_unit_id": "e8ad72a815adf6866bf92f6bb85b10f7edfef23721aef00ae5402adb40151311",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 8,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F2",
+      "retained_position": 15,
+      "robot_id": 7,
+      "scheduler_atomic_unit_id": "0c3579dce04accfe2bb288d9382dde7ff3090b85c374cce724842553b3b712c5",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 8,
+      "timestep": 218
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F5",
+      "retained_position": 0,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "7505e15ffaf517c7247c1f889b84ba4b95bca593c37ddfe1a577d77e9554bd63",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 8,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F5",
+      "retained_position": 15,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "5e98d0d24cf496680cb576544843940287a4872fc9e2b17f9c2b148db3f4e80b",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 8,
+      "timestep": 94
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F5",
+      "retained_position": 0,
+      "robot_id": 3,
+      "scheduler_atomic_unit_id": "fed0b75fd5bc1b15da038dc7ff21aebd6240b6279e733f5c12e31af5a73beadf",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 8,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F5",
+      "retained_position": 7,
+      "robot_id": 3,
+      "scheduler_atomic_unit_id": "bb77feb792f511f8b1c3c56df8d02c7875a28e41ccf918c46861c4e14aaf2f67",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 8,
+      "timestep": 43
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F5",
+      "retained_position": 15,
+      "robot_id": 3,
+      "scheduler_atomic_unit_id": "bfdd88ebe65a4cbf4310678bd407c1e25e20954246387a2e00fbd08c42bdc047",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 8,
+      "timestep": 94
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F8",
+      "retained_position": 0,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "cf79c92c64f27a03f8716bc374bdec30ac70727a65afe9a053f9b3021d881e10",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F8",
+      "retained_position": 7,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "5afb61b5aff5f32d8294b763391a207ffae70adf62c306cf44c7ed52aaa09ddf",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12,
+      "timestep": 49
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F8",
+      "retained_position": 15,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "bb61932cd5ee602b7388cca450e2860a0a92eb500e7b8b13ef61d624dd94403f",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12,
+      "timestep": 106
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F8",
+      "retained_position": 0,
+      "robot_id": 11,
+      "scheduler_atomic_unit_id": "4ae934e99b7280f3dbfc86687291f20055d72f651f5f2ab23d7bf7620196b747",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F8",
+      "retained_position": 7,
+      "robot_id": 11,
+      "scheduler_atomic_unit_id": "53551a999a9dbff7216e229aab002b170ca83ab58e898fce75d2e5300fcaebcc",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12,
+      "timestep": 49
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F8",
+      "retained_position": 15,
+      "robot_id": 11,
+      "scheduler_atomic_unit_id": "a8c3b8efe35f7a28d9a9d627c3aec0bec22f9724708b5243d48b0fec592e101f",
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12,
+      "timestep": 106
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F9",
+      "retained_position": 0,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "43589ec01ac4dea27c4be7a573948e426879327daec81336194062ce9c4f3e9d",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F9",
+      "retained_position": 7,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "e1bb6bfb8f20ff7610d0daedc2514411d1f2a9fc01e1045ad3e0d382c96e6f2f",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16,
+      "timestep": 13
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F9",
+      "retained_position": 15,
+      "robot_id": 0,
+      "scheduler_atomic_unit_id": "c1755e508d75b6caf82eb61c732854ce80a21bc84f10de69b489b77e30344dff",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16,
+      "timestep": 29
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F9",
+      "retained_position": 0,
+      "robot_id": 15,
+      "scheduler_atomic_unit_id": "563e63de3f6123a5beec98a54aa6e7e4fbc116748fb6a2d1feba960dc9276b48",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16,
+      "timestep": 0
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F9",
+      "retained_position": 7,
+      "robot_id": 15,
+      "scheduler_atomic_unit_id": "2142e403dcf5b8998cb1183950e2c8ab9fa9152b741cd1d7840433add8fc8e7e",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16,
+      "timestep": 13
+    },
+    {
+      "candidate_evaluations": 9,
+      "family": "F9",
+      "retained_position": 15,
+      "robot_id": 15,
+      "scheduler_atomic_unit_id": "528a5d3c3af9db15149ed5c8b39815a9b4c284fe99de6b54ea828f50299b0f60",
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16,
+      "timestep": 29
+    }
+  ],
+  "schema_version": "rvt-phase9g0p-residual-benchmark-manifest/v1",
+  "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0
+  },
+  "source_episodes": [
+    {
+      "coverage_intent": [
+        "short and long retained positions"
+      ],
+      "family": "F1",
+      "retention_k": 16,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 5
+    },
+    {
+      "coverage_intent": [
+        "additional family"
+      ],
+      "family": "F2",
+      "retention_k": 16,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 8
+    },
+    {
+      "coverage_intent": [
+        "LABELED and prior natural NO_ELIGIBLE_ACTION coverage"
+      ],
+      "family": "F5",
+      "retention_k": 16,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926/N8/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 8
+    },
+    {
+      "coverage_intent": [
+        "communication degraded",
+        "tail coverage"
+      ],
+      "family": "F8",
+      "retention_k": 16,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f/N12/S1_ALWAYS_COMPACT/episode-0",
+      "team_size": 12
+    },
+    {
+      "coverage_intent": [
+        "dynamic obstacle",
+        "tail coverage"
+      ],
+      "family": "F9",
+      "retention_k": 16,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "team_size": 16
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "final_test_accesses": 0,
+  "frozen_before_performance_observation": true,
+  "manifest_creation_uses_performance_results": false,
+  "official_scientific_data_generated": false,
+  "phase9g0p_production_benchmark_manifest_root_sha256": "29599014e65ee12a9b10cb754be8cdf345cd046512eafd337eebe319983c97d0",
+  "recoverability_manifest_sha256": "d320028934fe36787ec2742c6958cd66bc1146b2b0783e9577ed3983320cdb5c",
+  "residual_manifest_sha256": "da329a0f23e90a27ccf1f8911a4f08c2c0f87a482335750f13cd50b893fd60e8",
+  "schema_version": "rvt-phase9g0p-production-benchmark-manifest-root/v1",
+  "study_a_n24_accesses": 0
+}
