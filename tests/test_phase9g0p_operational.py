@@ -170,3 +170,20 @@ def test_operational_preflight_and_negative_matrix_close() -> None:
     assert positive["authorization_remains_false"] is True
     assert negative["case_count"] >= 22
     assert negative["escapes"] == 0
+
+
+def test_phase9g0p_readiness_is_c_and_preserves_zero_isolation() -> None:
+    readiness = json.loads((
+        ROOT / "results/rvt_fd24/phase9_production_performance_readiness_v1.json"
+    ).read_text(encoding="ascii"))
+    expected = readiness.pop("phase9_production_performance_readiness_sha256")
+    from rvt_swarm.phase8.common import sha256_document
+
+    assert sha256_document(readiness) == expected
+    assert readiness["verdict"] == "C"
+    assert readiness["status"] == "READY_FOR_EXPLICIT_SCOPED_OWNER_AUTHORIZATION"
+    assert readiness["authorization"]["authorization_remains_false"] is True
+    assert readiness["preflight"]["negative_escapes"] == 0
+    assert readiness["tests"]["local_complete_suite"]["passed"] == 3048
+    assert readiness["tests"]["target_clean_detached_complete_suite"]["passed"] == 3048
+    assert all(value == 0 for value in readiness["isolation"].values())

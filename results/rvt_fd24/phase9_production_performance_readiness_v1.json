@@ -1,0 +1,109 @@
+{
+  "authorization": {
+    "authorization_remains_false": true,
+    "commands_executed": false,
+    "enabled_scope_count": 0,
+    "proposal_sha256": "09b8988f9abd25f1971857aeab756a25ca93aff487bc2d7d6cf70e9e1a878222"
+  },
+  "branch_readiness": {
+    "recoverability": "READY_FOR_EXPLICIT_OWNER_AUTHORIZATION",
+    "residual": "READY_WITH_OPERATIONAL_RISK_FOR_EXPLICIT_OWNER_AUTHORIZATION"
+  },
+  "failure_resume": {
+    "candidate_pair_partial_publications": 0,
+    "case_count": 8,
+    "failures": 0,
+    "passes": 8,
+    "residual_partial_publications": 0
+  },
+  "h4": "H4_OPERATIONAL_RISK_BUT_FEASIBLE",
+  "identity": {
+    "operational_execution_commit": "6818d8aa07aeb55a43dc42741499d9a24d540332",
+    "phase9g0p_evidence_commit": "2787c32abdf2c3265ffd7442e1f3684ba7dc1794",
+    "phase9g0r_evidence_commit": "1676427c92d111c0aa7aebb2fe9e2cc035297605",
+    "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  },
+  "isolation": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "official_recoverability_rows": 0,
+    "official_residual_rows": 0,
+    "official_run_ids": 0,
+    "official_shards": 0,
+    "official_staging_writes": 0,
+    "optimizer_states": 0,
+    "study_a_n24_accesses": 0,
+    "training_operations": 0
+  },
+  "phase": "PHASE_9G0_P",
+  "phase9_production_performance_readiness_sha256": "32a061e5f5c2566613765dfbe78ee81328c9f931942622abf7299e7f56baeb15",
+  "preflight": {
+    "command_resolutions": 8,
+    "negative_case_count": 22,
+    "negative_escapes": 0,
+    "positive_checks_passed": true,
+    "status": "PASS"
+  },
+  "profiles": {
+    "recoverability": {
+      "chunk_size_atomic_units": 1,
+      "infrastructure_timeout_seconds": 60.0,
+      "numeric_threads": 1,
+      "profile_id": "PROFILE_RECOVERABILITY_V1",
+      "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+      "workers": 12
+    },
+    "residual": {
+      "chunk_size_atomic_units": 1,
+      "infrastructure_timeout_seconds": 360.0,
+      "numeric_threads": 1,
+      "profile_id": "PROFILE_RESIDUAL_V2_V1",
+      "semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+      "workers": 8
+    }
+  },
+  "schema_version": "rvt-phase9-production-performance-readiness/v1",
+  "semantic_digest": {
+    "recoverability_low_equals_selected": true,
+    "residual_low_equals_selected": true
+  },
+  "status": "READY_FOR_EXPLICIT_SCOPED_OWNER_AUTHORIZATION",
+  "tests": {
+    "discarded_read_only_harness_run": {
+      "cause": "EROFS in tests that intentionally inject temporary modules",
+      "failed": 27,
+      "passed": 3021,
+      "scientific_or_product_failure": false,
+      "used_for_verdict": false
+    },
+    "local_complete_suite": {
+      "failed": 0,
+      "passed": 3048,
+      "publication_required_xfailed": 0,
+      "seconds": 390.86,
+      "warnings": 1
+    },
+    "target_clean_detached_complete_suite": {
+      "commit": "2787c32abdf2c3265ffd7442e1f3684ba7dc1794",
+      "failed": 0,
+      "passed": 3048,
+      "publication_required_xfailed": 0,
+      "warnings": 1
+    }
+  },
+  "validated_roots": {
+    "command_plan_v2": "473fc5243e3a11afbb44df868a0d3c814f7e534bb57439b85a2e79d27c4856f0",
+    "generation_provenance_v2": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+    "generation_readiness_v4": "83d3f9b6178cf04834ca38ce9177bb9e5f58643919f5ca8bf61b599165136d3f",
+    "official_generator_contract": "2672a5624a4505aa668326d7e30000ec06b9f158c484b06044344ab783d404fb",
+    "phase9g0_startup_stop_binding_map": "3ca4b7108372d4ab89a862f8d6ed222242385a6ea480f398245a8c88b68b5d20",
+    "phase9g0r_scientific_addendum": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "rb19_scientific_root": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+    "rb20_clean_detached_reproduction": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "rb21_target_operational_readiness": "b4333eca3ca00e4e2ecdd2c8ca68b7f7df9ad072468ab65699940dcc9329c5c0",
+    "rb21p_portability_requalification": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176"
+  },
+  "verdict": "C",
+  "verdict_text": "Actual official production producers are operationally qualified."
+}
