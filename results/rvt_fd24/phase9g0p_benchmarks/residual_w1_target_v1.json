@@ -1,0 +1,156 @@
+{
+  "atomic_unit_latency_seconds": {
+    "max": 134.49454841698753,
+    "mean": 25.829375892522513,
+    "median": 10.22733403602615,
+    "n": 25,
+    "p90": 70.66900021438487,
+    "p95": 110.33163499359493
+  },
+  "average_worker_cpu_cores": 0.9302342801939774,
+  "benchmark_manifest_sha256": "da329a0f23e90a27ccf1f8911a4f08c2c0f87a482335750f13cd50b893fd60e8",
+  "branch": "residual",
+  "chunk_size_atomic_units": 1,
+  "counts": {
+    "candidate_evaluations": 225,
+    "labeled_rows": 23,
+    "no_eligible_audits": 2,
+    "retained_state_units": 25,
+    "source_episodes_planned": 5
+  },
+  "memory": {
+    "peak_aggregate_rss_upper_bound_bytes": 215203840,
+    "peak_rss_by_worker_pid_bytes": {
+      "7": 215203840
+    },
+    "worker_count_observed": 1
+  },
+  "mode": "DIAGNOSTIC",
+  "numeric_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "nested_oversubscription_permitted": false,
+    "torch_interop_threads_parent": 24,
+    "torch_intraop_threads_parent": 1,
+    "worker_numeric_threads": 1
+  },
+  "official_staging_writes": 0,
+  "phase9g0p_compact_benchmark_result_sha256": "f898f1207ec400ec6a321cf01b1a2d0ce8af85bccfd46ad99902768ce79331b1",
+  "raw_target_result_sha256": "62f1b5c0c501b0341dce0ea6933b2fc528c599dd8261a1da60a35cc9a5739d62",
+  "schema_version": "rvt-phase9g0p-production-benchmark-result/v1",
+  "scientific_semantic_digest": "7e8c9136e280025ba219716162c879f9d84d8b3998cf366de59ac5b7e11b97db",
+  "scientific_semantic_projection_embedded": false,
+  "scientific_semantic_projection_reconstructable": true,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0
+  },
+  "source_planning_seconds": 48.035871503001545,
+  "stage_seconds": {
+    "dense_state_universe_and_k16_retention": {
+      "max": 48.035871503001545,
+      "mean": 48.035871503001545,
+      "median": 48.035871503001545,
+      "n": 1,
+      "p90": 48.035871503001545,
+      "p95": 48.035871503001545
+    },
+    "full_nine_candidate_unit": {
+      "max": 134.48733115402865,
+      "mean": 23.642803373284405,
+      "median": 4.938225298014004,
+      "n": 25,
+      "p90": 70.65872974119266,
+      "p95": 110.32432981039733
+    },
+    "local_input_graph": {
+      "max": 0.030635535978944972,
+      "mean": 0.009502011281438173,
+      "median": 0.00671474399860017,
+      "n": 25,
+      "p90": 0.01697923499741592,
+      "p95": 0.019549462205031884
+    },
+    "per_candidate_continuation": {
+      "max": 23.881853725994006,
+      "mean": 2.626511751337934,
+      "median": 0.547452669008635,
+      "n": 225,
+      "p90": 7.872153595398412,
+      "p95": 11.8579698828049
+    },
+    "sidecar_serialization": {
+      "max": 9.69340035226196e-05,
+      "mean": 7.403884315863251e-05,
+      "median": 7.38070229999721e-05,
+      "n": 25,
+      "p90": 7.79532187152654e-05,
+      "p95": 9.094720589928324e-05
+    },
+    "source_event": {
+      "max": 11.28238177098683,
+      "mean": 2.1764091305213515,
+      "median": 0.9270799770019948,
+      "n": 25,
+      "p90": 7.692947077000281,
+      "p95": 10.547711289388817
+    },
+    "utility_selector_target": {
+      "max": 0.013051137939328328,
+      "mean": 0.004095260559115559,
+      "median": 0.003020085016032681,
+      "n": 25,
+      "p90": 0.006797839794307948,
+      "p95": 0.007444451807532458
+    },
+    "writer": {
+      "max": 0.01719357300316915,
+      "mean": 0.00764301504008472,
+      "median": 0.007211394986370578,
+      "n": 25,
+      "p90": 0.008807848603464664,
+      "p95": 0.009423216187860815
+    }
+  },
+  "storage": {
+    "benchmark_manifest_bytes": 16221,
+    "no_eligible_audit_bytes": {
+      "max": 6132.0,
+      "mean": 6127.5,
+      "median": 6127.5,
+      "n": 2,
+      "p90": 6131.1,
+      "p95": 6131.55
+    },
+    "residual_nine_candidate_sidecar_bytes": {
+      "max": 5204.0,
+      "mean": 5164.96,
+      "median": 5177.0,
+      "n": 25,
+      "p90": 5198.4,
+      "p95": 5202.8
+    },
+    "residual_row_bytes": {
+      "max": 62787.0,
+      "mean": 14318.782608695652,
+      "median": 9360.0,
+      "n": 23,
+      "p90": 33907.00000000001,
+      "p95": 39677.7
+    }
+  },
+  "throughput": {
+    "atomic_units_per_second": 0.03602411337406992,
+    "candidate_evaluations_per_second": 0.32421702036662925,
+    "prospective_scientific_rows_per_second": 0.033142184304144326,
+    "writer_attempts_per_second": 130.83841844551904
+  },
+  "wall_seconds": 693.979605837987,
+  "worker_cpu_seconds": 645.563619106,
+  "worker_pids": [
+    7
+  ],
+  "workers": 1
+}

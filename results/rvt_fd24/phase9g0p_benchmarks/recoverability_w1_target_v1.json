@@ -1,0 +1,155 @@
+{
+  "atomic_unit_latency_seconds": {
+    "max": 8.741492811997887,
+    "mean": 3.228406126581831,
+    "median": 1.4686192699882668,
+    "n": 24,
+    "p90": 8.116784884300433,
+    "p95": 8.629871527614885
+  },
+  "average_worker_cpu_cores": 0.9975096442202673,
+  "benchmark_manifest_sha256": "d320028934fe36787ec2742c6958cd66bc1146b2b0783e9577ed3983320cdb5c",
+  "branch": "recoverability",
+  "chunk_size_atomic_units": 1,
+  "counts": {
+    "candidate_aggregates": 24,
+    "events": 12,
+    "prospective_scientific_rows": 52,
+    "replica_executions": 8
+  },
+  "memory": {
+    "peak_aggregate_rss_upper_bound_bytes": 293670912,
+    "peak_rss_by_worker_pid_bytes": {
+      "7": 293670912
+    },
+    "worker_count_observed": 1
+  },
+  "mode": "DIAGNOSTIC",
+  "numeric_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "nested_oversubscription_permitted": false,
+    "torch_interop_threads_parent": 24,
+    "torch_intraop_threads_parent": 1,
+    "worker_numeric_threads": 1
+  },
+  "official_staging_writes": 0,
+  "phase9g0p_compact_benchmark_result_sha256": "c18f717fea2ddefe8c326d5db66fc87c5111431251c2fd1abb6e475acf26961d",
+  "raw_target_result_sha256": "8973078d562ff5d3d0d98d6618aa2381537e61cda94a3ab38dfbf797eb9d05b2",
+  "schema_version": "rvt-phase9g0p-production-benchmark-result/v1",
+  "scientific_semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+  "scientific_semantic_projection_embedded": false,
+  "scientific_semantic_projection_reconstructable": true,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0
+  },
+  "source_planning_seconds": 0.0,
+  "stage_seconds": {
+    "candidate_pair_reconciliation": {
+      "max": 0.02128288199310191,
+      "mean": 0.0033687864197418094,
+      "median": 9.934099216479808e-05,
+      "n": 12,
+      "p90": 0.009954772799392234,
+      "p95": 0.015420055798313107
+    },
+    "graph_serialization": {
+      "max": 0.050824789999751374,
+      "mean": 0.01030839445835833,
+      "median": 0.0,
+      "n": 24,
+      "p90": 0.038778579499921764,
+      "p95": 0.04896126160165293
+    },
+    "replica_rollout": {
+      "max": 7.605643554998096,
+      "mean": 2.589801925878419,
+      "median": 0.6668535200005863,
+      "n": 8,
+      "p90": 7.586954314500327,
+      "p95": 7.596298934749211
+    },
+    "row_expansion": {
+      "max": 0.00014058200758881867,
+      "mean": 3.994724829681218e-05,
+      "median": 1.4045072020962834e-06,
+      "n": 12,
+      "p90": 0.00012594240834005178,
+      "p95": 0.0001331025589024648
+    },
+    "source_event": {
+      "max": 8.127111227979185,
+      "mean": 2.3540968862107547,
+      "median": 1.1715684599912493,
+      "n": 24,
+      "p90": 7.6716512627142945,
+      "p95": 8.02979862376087
+    },
+    "writer": {
+      "max": 0.019780550996074453,
+      "mean": 0.008338642583112232,
+      "median": 0.005923924996750429,
+      "n": 12,
+      "p90": 0.013106671001878567,
+      "p95": 0.01621151244908105
+    }
+  },
+  "storage": {
+    "benchmark_manifest_bytes": 25581,
+    "candidate_aggregate_audit_bytes": {
+      "max": 1084.0,
+      "mean": 1004.25,
+      "median": 994.0,
+      "n": 8,
+      "p90": 1021.6999999999999,
+      "p95": 1052.85
+    },
+    "ego_graph_payload_bytes": {
+      "max": 29833.0,
+      "mean": 13064.23076923077,
+      "median": 8483.0,
+      "n": 52,
+      "p90": 29775.7,
+      "p95": 29800.1
+    },
+    "pair_transaction_metadata_bytes": {
+      "max": 1117.0,
+      "mean": 1086.75,
+      "median": 1079.0,
+      "n": 12,
+      "p90": 1109.5,
+      "p95": 1113.7
+    },
+    "recoverability_row_bytes": {
+      "max": 31291.0,
+      "mean": 14521.961538461539,
+      "median": 9944.5,
+      "n": 52,
+      "p90": 31233.7,
+      "p95": 31258.1
+    },
+    "replica_audit_bytes": {
+      "max": 725.0,
+      "mean": 645.625,
+      "median": 634.0,
+      "n": 8,
+      "p90": 662.0,
+      "p95": 693.5
+    }
+  },
+  "throughput": {
+    "atomic_units_per_second": 0.3090990321808911,
+    "prospective_scientific_rows_per_second": 0.669714569725264,
+    "replica_executions_per_second": 0.10303301072696369,
+    "writer_transactions_per_second": 119.92359548126475
+  },
+  "wall_seconds": 77.64501826700871,
+  "worker_cpu_seconds": 77.45165454700002,
+  "worker_pids": [
+    7
+  ],
+  "workers": 1
+}

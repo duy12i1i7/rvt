@@ -1,0 +1,49 @@
+{
+  "chunk_size_during_worker_scaling": 1,
+  "headroom_contract": {
+    "cpu_worker_ceiling": 22,
+    "logical_cpus_reserved_for_wsl_docker_writer": 2,
+    "memory_available_for_workers_bytes": 23101194240,
+    "memory_headroom_bytes": 8589934592
+  },
+  "numeric_threads_per_worker": 1,
+  "phase9g0p_worker_matrix_predeclaration_sha256": "982519ec3f3a9f9f78127863364fb8e566d0b0f0c2a59520a7e2d50e71ef01d0",
+  "predeclared_before_worker_scaling_results": true,
+  "recoverability": {
+    "effective_worker_ceiling": 22,
+    "matrix_rationale": "24 atomic units permit direct half/quarter occupancy observations; W=22 preserves two logical CPUs for WSL, Docker and the parent writer",
+    "memory_worker_ceiling": 78,
+    "profile_id": "PROFILE_RECOVERABILITY_V1",
+    "w1_peak_rss_bytes": 293670912,
+    "worker_matrix": [
+      1,
+      6,
+      12,
+      18,
+      22
+    ]
+  },
+  "residual": {
+    "effective_worker_ceiling": 22,
+    "matrix_rationale": "25 heavy-tailed atomic units require denser low/mid concurrency observations and retain W=22 as the CPU-headroom ceiling",
+    "memory_worker_ceiling": 107,
+    "profile_id": "PROFILE_RESIDUAL_V2_V1",
+    "w1_peak_rss_bytes": 215203840,
+    "worker_matrix": [
+      1,
+      4,
+      8,
+      12,
+      18,
+      22
+    ]
+  },
+  "schema_version": "rvt-phase9g0p-worker-matrix-predeclaration/v1",
+  "scientific_semantic_digest_must_equal_w1": true,
+  "selection_uses_worker_scaling_results": false,
+  "target_environment_sha256": "915d6cd5d699d7f0e308da6144e3206bdf63fd0b54fa53c4cd00084b5cfce501",
+  "w1_evidence": {
+    "recoverability_compact_result_sha256": "c18f717fea2ddefe8c326d5db66fc87c5111431251c2fd1abb6e475acf26961d",
+    "residual_compact_result_sha256": "f898f1207ec400ec6a321cf01b1a2d0ce8af85bccfd46ad99902768ce79331b1"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "docker": {
+    "api_version": "1.55",
+    "cpu_quota": "max 100000",
+    "desktop_version": "4.80.0",
+    "engine_client_version": "29.6.1",
+    "engine_server_version": "29.6.1",
+    "memory_limit": "max",
+    "overlay_available_bytes": 422363889664,
+    "swap_limit": "max",
+    "visible_cpuset": "0-23"
+  },
+  "execution_commit": "b4d2eec40da8ec0c554e397c08eaf2245c1b3d90",
+  "gpu": {
+    "container_nvidia_smi_visible": true,
+    "driver_version": "536.96",
+    "generation_cpu_authoritative": true,
+    "generation_pytorch_cuda_available": false,
+    "generation_pytorch_cuda_device_count": 0,
+    "model": "NVIDIA RTX 5000 Ada Generation",
+    "uuid": "GPU-262a5f7e-fa85-a213-98ed-2761941b4e9a",
+    "vram_mib": 32760
+  },
+  "images": {
+    "qualified_phase9g0r_base": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c",
+    "updated_image_parent_is_exact_qualified_base": true,
+    "updated_phase9g0p_execution_image": "sha256:a1051285a9eb5c314c0d200287bcd04097a1d30d7ebda41a9045ec63225b365a"
+  },
+  "phase9g0p_target_environment_sha256": "915d6cd5d699d7f0e308da6144e3206bdf63fd0b54fa53c4cd00084b5cfce501",
+  "schema_version": "rvt-phase9g0p-target-environment/v1",
+  "target_host": "100.71.102.9",
+  "windows": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 9 285K",
+    "logical_cpus": 24,
+    "physical_cores": 24,
+    "physical_memory_bytes": 68053331968
+  },
+  "wsl": {
+    "available_memory_bytes_before_benchmark": 31691128832,
+    "distribution": "Ubuntu-24.04",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "root_filesystem_available_bytes": 1024089227264,
+    "root_filesystem_bytes": 1081101176832,
+    "swap_bytes": 8589934592,
+    "visible_logical_cpus": 24,
+    "visible_memory_bytes": 33323397120
+  }
+}
