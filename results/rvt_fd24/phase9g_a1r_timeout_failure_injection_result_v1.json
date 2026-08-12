@@ -1,0 +1,62 @@
+{
+  "forced_timeout": {
+    "accepted_scientific_dispositions": 0,
+    "candidate_aggregates_modified": 0,
+    "candidate_pair_transactions": 0,
+    "container_exit_code": 137,
+    "file_hashes": {
+      "container_exit_code.txt": "e3b9c2844b5a5c2677b3a2279db2ec8487491dd9a23d6b22fac153391b3bb63c",
+      "container_id.txt": "ed78969fe9c0dc21e0d3fc36d6e7bfbc77b54b88e5417f19b03da86f0e88b2fc",
+      "container_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "container_stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "partial_candidate_pair_commits": 0,
+    "result_artifact_present": false,
+    "scientific_rows": 0,
+    "target_namespace_complete_inventory": [
+      "container_exit_code.txt",
+      "container_id.txt",
+      "container_stderr.txt",
+      "container_stdout.txt"
+    ],
+    "timeout_seconds": 5.0,
+    "writer_namespace_present": false
+  },
+  "infrastructure_only_proof": {
+    "normal_completion_under_qualified_timeout": true,
+    "only_infrastructure_metadata_may_differ": true,
+    "timeout_can_create_scientific_disposition": false,
+    "timeout_can_create_scientific_row": false,
+    "timeout_can_partially_publish_pair": false
+  },
+  "manifest_sha256": "e066aa1077313aca0649577e6703f606bd2357cf74ed5072d199e8c756aa299d",
+  "official_staging_writes": 0,
+  "phase9g_a1r_timeout_failure_injection_result_sha256": "7bfdb926f5726b20af3c2acddadaa65e5aa386fc7a493548598bade0ea45d254",
+  "qualified_timeout": {
+    "candidate_aggregates": 2,
+    "candidate_pair_transactions": 1,
+    "events": 1,
+    "partial_candidate_pair_commits": 0,
+    "prospective_scientific_rows": 0,
+    "reference_scientific_semantic_digest": "59b01656157e7855427f5516a1ca27d2a94cfa2afca61f64ac827385e8d443a9",
+    "result_file_sha256": "a5869044ae300ba185eb4dbe9bb01e1bb99310f3113a479ccaa93b61b0e73d40",
+    "scientific_completion_marker": true,
+    "scientific_semantic_digest": "59b01656157e7855427f5516a1ca27d2a94cfa2afca61f64ac827385e8d443a9",
+    "scientifically_reconciled": true,
+    "semantic_digest_equal": true,
+    "timeout_seconds": 243,
+    "transaction_actual_row_count": 0,
+    "transaction_file_sha256": "565c3abbda711bf8da741b49e7bf6b95d2474e32adb28608060c806c22b2beae",
+    "transaction_status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+    "wall_seconds": 175.3587372789998
+  },
+  "schema_version": "rvt-phase9g-a1r-timeout-failure-injection-result/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "PASS"
+}

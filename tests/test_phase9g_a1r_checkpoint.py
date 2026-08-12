@@ -310,3 +310,30 @@ def test_timeout_failure_injection_is_exact_pair_and_non_official() -> None:
     }
     assert manifest["official_staging_writes_permitted"] == 0
     assert all(value == 0 for value in manifest["sealed_scope"].values())
+
+
+def test_failure_injection_proves_timeout_is_infrastructure_only() -> None:
+    result = _canonical(
+        "phase9g_a1r_timeout_failure_injection_result_v1.json",
+        "phase9g_a1r_timeout_failure_injection_result_sha256",
+    )
+    assert result["status"] == "PASS"
+    forced = result["forced_timeout"]
+    assert forced["accepted_scientific_dispositions"] == 0
+    assert forced["candidate_aggregates_modified"] == 0
+    assert forced["candidate_pair_transactions"] == 0
+    assert forced["scientific_rows"] == 0
+    assert forced["partial_candidate_pair_commits"] == 0
+    assert forced["result_artifact_present"] is False
+    assert forced["writer_namespace_present"] is False
+    assert result["qualified_timeout"]["timeout_seconds"] == 243
+    assert result["qualified_timeout"]["candidate_pair_transactions"] == 1
+    assert result["qualified_timeout"]["scientific_completion_marker"] is True
+    assert result["qualified_timeout"]["semantic_digest_equal"] is True
+    assert result["infrastructure_only_proof"] == {
+        "normal_completion_under_qualified_timeout": True,
+        "only_infrastructure_metadata_may_differ": True,
+        "timeout_can_create_scientific_disposition": False,
+        "timeout_can_create_scientific_row": False,
+        "timeout_can_partially_publish_pair": False,
+    }
