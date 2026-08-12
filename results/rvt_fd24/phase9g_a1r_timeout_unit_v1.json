@@ -1,0 +1,81 @@
+{
+  "attempt_boundaries": [
+    {
+      "attempt": "train-attempt-001",
+      "durable_event_prefix_count_at_stop": 127,
+      "next_ordered_candidate_topology_id": 5,
+      "next_ordered_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+      "scientific_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d"
+    },
+    {
+      "attempt": "train-attempt-002",
+      "durable_event_prefix_count_at_stop": 127,
+      "next_ordered_candidate_topology_id": 5,
+      "next_ordered_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+      "scientific_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d"
+    }
+  ],
+  "both_timeouts_same_scientific_atomic_unit": true,
+  "durable_event_prefix_count": 127,
+  "evidence_method": {
+    "canonical_task_metadata_used": true,
+    "log_text_used_to_select_identity": false,
+    "traceback_used_only_to_confirm_infrastructure_failure_class": true
+  },
+  "executor_order_contract": "decision-event manifest order; within each event COMPACT then LINE",
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "operational_stop_sha256": "20b7a1dfa75a4bc8bd68eaa08d00eeb9058415c88b823266ab560d7e707795a8",
+  "phase9g_a1r_timeout_unit_sha256": "8ef0891feca775fe424b58dddbe926b412bf5cb746ca804da33773e66e1425b8",
+  "run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+  "schema_version": "rvt-phase9g-a1r-timeout-unit/v1",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "staging_checkpoint_sha256": "9012344ea59b0e415809ff76753b7374e60533c6320dd94dee1f0c43e2a5d5ab",
+  "status": "RESOLVED_FROM_CANONICAL_TASK_ORDER",
+  "timed_out_unit": {
+    "candidate_topology_id": 5,
+    "candidate_topology_name": "COMPACT",
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+    "decision_timestamp_seconds": 60.0,
+    "decision_timestep": 400,
+    "episode_horizon_seconds": 120.0,
+    "episode_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1",
+    "episode_index": 1,
+    "event_slot_index": 2,
+    "family": "F2",
+    "layout_id": "train-f2-01",
+    "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+    "matched_disturbance_seed_identities": [
+      3531133071
+    ],
+    "replica_identities": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-5/replica-0"
+    ],
+    "replica_indices": [
+      0
+    ],
+    "scientific_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d",
+    "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+    "source_seeds": {
+      "communication": 2477680437,
+      "data_sampling": 505889372,
+      "dynamic_obstacle": 572034016,
+      "initial_condition": 504851405
+    },
+    "split": "train",
+    "study": "study_a_zero_shot",
+    "team_size": 12
+  },
+  "timeout_scientific_effect_audit": {
+    "GENERATION_INVALID_created": false,
+    "VALID_TASK_NEGATIVE_created": false,
+    "candidate_aggregate_modified": false,
+    "partial_candidate_pair_rows_created": false,
+    "scientific_state": "UNRESOLVED",
+    "scientific_training_row_created": false
+  }
+}
