@@ -202,3 +202,52 @@ def test_initial_incomplete_long_tail_selection_is_excluded() -> None:
     assert defect["claimed_layout_sha256"] != defect["required_layout_sha256"]
     assert defect["may_participate_in_timeout_derivation"] is False
     assert defect["official_staging_effect"] == 0
+
+
+def test_authoritative_long_tail_profiles_preserve_science_and_cover_replicas() -> None:
+    profiles = [
+        _canonical(
+            f"phase9g_a1r_long_tail/{name}.json",
+            "phase9g0p_benchmark_result_sha256",
+        )
+        for name in ("w1", "w12")
+    ]
+    assert [profile["workers"] for profile in profiles] == [1, 12]
+    assert all(profile["chunk_size_atomic_units"] == 1 for profile in profiles)
+    assert profiles[0]["scientific_semantic_digest"] == profiles[1][
+        "scientific_semantic_digest"
+    ]
+    assert all(profile["counts"]["candidate_aggregates"] == 18 for profile in profiles)
+    assert all(profile["counts"]["replica_executions"] == 6 for profile in profiles)
+    assert profiles[1]["atomic_unit_latency_seconds"]["max"] > 60.0
+    assert profiles[1]["stage_seconds"]["replica_rollout"]["max"] > 0.0
+    assert profiles[1]["stage_seconds"]["writer"]["max"] < 0.1
+    assert profiles[1]["stage_seconds"]["candidate_pair_reconciliation"][
+        "max"
+    ] < 0.1
+
+
+def test_timed_out_candidate_matches_isolated_and_both_worker_profiles() -> None:
+    timeout = _canonical(
+        "phase9g_a1r_timeout_unit_v1.json",
+        "phase9g_a1r_timeout_unit_sha256",
+    )["timed_out_unit"]
+    isolated = _canonical(
+        "phase9g_a1r_timeout_replays/replay-1.json",
+        "phase9g_a1r_timeout_diagnostic_replay_sha256",
+    )
+    expected_digest = isolated["scientific_semantic_digest"]
+    for name in ("w1", "w12"):
+        result = _canonical(
+            f"phase9g_a1r_long_tail/{name}.json",
+            "phase9g0p_benchmark_result_sha256",
+        )
+        event = next(
+            item for item in result["scientific_semantic_projection"]
+            if item["task"]["event_id"] == timeout["decision_event_id"]
+        )
+        candidate = next(
+            item for item in event["candidates"]
+            if item["candidate_topology_id"] == timeout["candidate_topology_id"]
+        )
+        assert _sha(candidate) == expected_digest
