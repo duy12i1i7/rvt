@@ -26,12 +26,20 @@ SELECTIONS = (
     ("F8", "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
      12, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
      ("three_replicas", "long_horizon", "late_event")),
+    ("F8", "034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f",
+     12, "S0_SCRIPTED_DIAGNOSTIC", 0, 0,
+     ("three_replicas", "historical_production_benchmark_class",
+      "per_replica_timing_coverage")),
     ("F9", "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
      16, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
      ("three_replicas", "dynamic_obstacle", "long_horizon", "late_event")),
     ("F9", "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
      16, "S4_FROZEN_TRANSITION_PROTOCOL", 1, 4,
      ("three_replicas", "changed_topology", "long_horizon", "late_event")),
+    ("F9", "afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1",
+     16, "S0_SCRIPTED_DIAGNOSTIC", 0, 0,
+     ("three_replicas", "historical_production_benchmark_class",
+      "per_replica_timing_coverage")),
 )
 
 
@@ -87,7 +95,7 @@ def main() -> None:
                 "scientific_publication_boundary": task.event_id,
             })
     document = {
-        "schema_version": "rvt-phase9g-a1r-long-tail-manifest/v1",
+        "schema_version": "rvt-phase9g-a1r-long-tail-manifest/v2",
         "selection_key_fields": [
             "family", "layout_sha256", "team_size", "source_class",
             "episode_index", "event_slot_index",
@@ -107,7 +115,7 @@ def main() -> None:
         "workers_to_compare": [1, 12],
         "numeric_threads": 1,
         "chunk_size_atomic_units": 1,
-        "diagnostic_profile_watchdog_seconds": 1800.0,
+        "diagnostic_profile_watchdog_seconds": len(events) * 300.0,
         "diagnostic_profile_watchdog_derivation": {
             "formula": "event_count * isolated_diagnostic_watchdog_seconds",
             "event_count": len(events),

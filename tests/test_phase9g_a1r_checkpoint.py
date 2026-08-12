@@ -137,16 +137,16 @@ def test_isolated_replays_complete_deterministically_after_old_timeout() -> None
 
 def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> None:
     manifest = _canonical(
-        "phase9g_a1r_long_tail_manifest_v2.json",
+        "phase9g_a1r_long_tail_manifest_v3.json",
         "phase9g0p_recoverability_benchmark_manifest_sha256",
     )
     assert manifest["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
     assert manifest["predeclared_before_measurement"] is True
-    assert manifest["event_count"] == 6
-    assert manifest["scheduler_atomic_unit_count"] == 12
+    assert manifest["event_count"] == 8
+    assert manifest["scheduler_atomic_unit_count"] == 16
     assert manifest["workers_to_compare"] == [1, 12]
     assert manifest["chunk_size_atomic_units"] == 1
-    assert manifest["diagnostic_profile_watchdog_seconds"] == 1800.0
+    assert manifest["diagnostic_profile_watchdog_seconds"] == 2400.0
     assert manifest["diagnostic_profile_watchdog_derivation"][
         "production_authority"
     ] is False
@@ -159,6 +159,7 @@ def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> No
         "long_horizon",
         "three_replicas",
         "changed_topology",
+        "per_replica_timing_coverage",
     } <= intents
     assert all(value == 0 for value in manifest["sealed_scope"].values())
     timeout = _canonical(
