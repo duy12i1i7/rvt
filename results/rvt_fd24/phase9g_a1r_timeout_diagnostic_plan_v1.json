@@ -1,0 +1,70 @@
+{
+  "diagnostic_watchdog_seconds": 300.0,
+  "isolated_workers": 1,
+  "mode": "NON_OFFICIAL_DIAGNOSTIC",
+  "numeric_threads": 1,
+  "official_staging_writes_permitted": 0,
+  "phase9g_a1r_timeout_diagnostic_plan_sha256": "293d11c69ec0392804a1ae8c62448b2e0b5b8c3287083d1502ba6c2816971288",
+  "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "qualified_closure_commit": "6bcfc0e058603abf41d8cc26ad9586dc34941784",
+  "repeat_count": 2,
+  "required_comparisons": [
+    "scientific_semantic_digest",
+    "replica_output_digest",
+    "target_v4_input_digest",
+    "target_v4_output_digest"
+  ],
+  "schema_version": "rvt-phase9g-a1r-timeout-diagnostic-plan/v1",
+  "scientific_atomic_unit": {
+    "candidate_topology_id": 5,
+    "candidate_topology_name": "COMPACT",
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+    "decision_timestamp_seconds": 60.0,
+    "decision_timestep": 400,
+    "episode_horizon_seconds": 120.0,
+    "episode_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1",
+    "episode_index": 1,
+    "event_slot_index": 2,
+    "family": "F2",
+    "layout_id": "train-f2-01",
+    "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+    "matched_disturbance_seed_identities": [
+      3531133071
+    ],
+    "replica_identities": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-5/replica-0"
+    ],
+    "replica_indices": [
+      0
+    ],
+    "scientific_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d",
+    "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+    "source_seeds": {
+      "communication": 2477680437,
+      "data_sampling": 505889372,
+      "dynamic_obstacle": 572034016,
+      "initial_condition": 504851405
+    },
+    "split": "train",
+    "study": "study_a_zero_shot",
+    "team_size": 12
+  },
+  "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "stop_evidence_commit": "f5d81ac46a71c8f6ef5351ca3e993496e34e9cc4",
+  "target_host": "100.71.102.9",
+  "watchdog_derivation": {
+    "diagnostic_multiplier": 5.0,
+    "formula": "old_timeout_seconds * diagnostic_multiplier",
+    "old_timeout_seconds": 60.0,
+    "production_authority": false,
+    "purpose": "distinguish a terminating long tail from a hang without preselecting a replacement production timeout",
+    "result_seconds": 300.0
+  }
+}

@@ -90,3 +90,18 @@ def test_timeout_attempts_resolve_to_one_unpublished_atomic_unit() -> None:
     }
     assert timeout["evidence_method"]["canonical_task_metadata_used"] is True
     assert timeout["evidence_method"]["log_text_used_to_select_identity"] is False
+
+
+def test_timeout_diagnostic_plan_is_predeclared_and_non_official() -> None:
+    plan = _canonical(
+        "phase9g_a1r_timeout_diagnostic_plan_v1.json",
+        "phase9g_a1r_timeout_diagnostic_plan_sha256",
+    )
+    assert plan["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
+    assert plan["official_staging_writes_permitted"] == 0
+    assert plan["isolated_workers"] == 1
+    assert plan["numeric_threads"] == 1
+    assert plan["repeat_count"] == 2
+    assert plan["diagnostic_watchdog_seconds"] == 300.0
+    assert plan["watchdog_derivation"]["production_authority"] is False
+    assert all(value == 0 for value in plan["sealed_scope"].values())
