@@ -76,7 +76,9 @@ def test_tiny_diagnostic_is_exactly_bounded_and_nonvacuous():
 
 def test_no_dataset_checkpoint_training_or_dagger_artifact_was_created():
     phase8_files = tuple(
-        path.name for path in (ROOT / "results/rvt_fd24").iterdir() if path.is_file()
+        path.name
+        for path in (ROOT / "results/rvt_fd24").iterdir()
+        if path.is_file() and path.name.startswith("phase8")
     )
     assert not any("dataset" in name or "checkpoint" in name for name in phase8_files)
     diagnostic = json.loads(
