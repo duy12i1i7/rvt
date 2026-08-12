@@ -1,0 +1,25 @@
+{
+  "authorization_class": "AUTHORIZED_STUDY_A_TRAIN_VALIDATION_ONLY",
+  "binding": {
+    "branch": "recoverability",
+    "docker_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "generation_provenance_root": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+    "split": "train",
+    "study": "study_a_zero_shot"
+  },
+  "broad_authorization": false,
+  "official_generation_execution_authorized": true,
+  "owner_authorization_timestamp_utc": "2026-08-12T04:20:40Z",
+  "phase": "PHASE_9G_A1",
+  "phase9_authorization_scope_sha256": "77319fcfd8822f56763ed09b7e9c71c3dcc851ea810165d301acacc2388d773a",
+  "schema_version": "rvt-phase9g-a1-authorization-scope/v1",
+  "scientific_outcomes_present": false,
+  "sealed_exclusions": [
+    "study_a_n24_zero_shot",
+    "study_b",
+    "final_test",
+    "training"
+  ]
+}

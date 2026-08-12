@@ -1,0 +1,110 @@
+{
+  "authorization_source": {
+    "kind": "EXPLICIT_OWNER_INSTRUCTION",
+    "sha256": "2e04c8ba238a4921fe231181130fc4367348696c52f9eb952ddb8be63b510b66"
+  },
+  "authorized_scope_artifacts": [
+    {
+      "artifact": "phase9g_a1_authorization_scope_study_a_zero_shot-train-recoverability_v1.json",
+      "branch": "recoverability",
+      "command_id": "study_a_zero_shot-train-recoverability",
+      "sha256": "77319fcfd8822f56763ed09b7e9c71c3dcc851ea810165d301acacc2388d773a",
+      "split": "train",
+      "study": "study_a_zero_shot"
+    },
+    {
+      "artifact": "phase9g_a1_authorization_scope_study_a_zero_shot-train-residual_v1.json",
+      "branch": "residual",
+      "command_id": "study_a_zero_shot-train-residual",
+      "sha256": "314ae3b9b33967a2eadcfb5e4ad363f33b50077a6c89c001aa18e71f2e5101ec",
+      "split": "train",
+      "study": "study_a_zero_shot"
+    },
+    {
+      "artifact": "phase9g_a1_authorization_scope_study_a_zero_shot-validation-recoverability_v1.json",
+      "branch": "recoverability",
+      "command_id": "study_a_zero_shot-validation-recoverability",
+      "sha256": "9a1e7d7fee28d74c8411e1b162066e34ed08b4e52156d859afe71088ad869c6b",
+      "split": "validation",
+      "study": "study_a_zero_shot"
+    },
+    {
+      "artifact": "phase9g_a1_authorization_scope_study_a_zero_shot-validation-residual_v1.json",
+      "branch": "residual",
+      "command_id": "study_a_zero_shot-validation-residual",
+      "sha256": "afb97569794f566fcb2569275e2aef41ae6e3caf7d61dbb99a1586fd87399ad7",
+      "split": "validation",
+      "study": "study_a_zero_shot"
+    }
+  ],
+  "broad_authorization": false,
+  "enabled_scope_count": 4,
+  "frozen_bindings": {
+    "candidate_pair_transaction": {
+      "artifact": "phase9_recoverability_candidate_pair_transaction_v1.json",
+      "sha256": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0"
+    },
+    "generation_provenance": {
+      "artifact": "phase9_current_generation_provenance_v2.json",
+      "sha256": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c"
+    },
+    "generation_readiness": {
+      "artifact": "phase9_production_performance_readiness_v1.json",
+      "sha256": "32a061e5f5c2566613765dfbe78ee81328c9f931942622abf7299e7f56baeb15"
+    },
+    "matched_randomness": {
+      "artifact": "phase9_matched_randomness_binding_v1.json",
+      "sha256": "87e206d22d3b3e893bc2c34ac87e97ceb5d9cb66e23d26456791bad552bcf851"
+    },
+    "official_command_plan": {
+      "artifact": "phase9_official_command_plan_v2_operational_addendum_v1.json",
+      "sha256": "0bde430d679729faa22e06b50c45523166c7fbc55143d41d147da9f4acd6980f"
+    },
+    "operational_production_contract": {
+      "artifact": "phase9g0p_operational_production_contract_v2.json",
+      "sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12"
+    },
+    "phase9g_a1_prestart": {
+      "artifact": "phase9g_a1_prestart_v1.json",
+      "sha256": "78b99edcfe3d1a653a6575edab8a7084e03e1d1b063c7a92f82b713ee7e03715"
+    },
+    "predata_scientific_addendum": {
+      "artifact": "phase9_predata_generation_scientific_addendum_v1.json",
+      "sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0"
+    },
+    "recoverability_row_binding": {
+      "artifact": "phase9_recoverability_row_binding_v1.json",
+      "sha256": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142"
+    },
+    "recoverability_row_identity": {
+      "artifact": "phase9_recoverability_row_identity_v1.json",
+      "sha256": "6d3a6a99911af30fb9c61e466fa83f5f7fd344af298179ce0202fa13f15c429d"
+    },
+    "residual_dense_state_retention": {
+      "artifact": "phase9_residual_dense_state_retention_v1.json",
+      "sha256": "9d50442a015bc146336c83e1163efa7cb45cc4729c3e4ffee8c21757c901e5ef"
+    }
+  },
+  "owner_authorization_timestamp_utc": "2026-08-12T04:20:40Z",
+  "phase": "PHASE_9G_A1",
+  "phase9g_a1_owner_authorization_sha256": "cc42e48fd7b557a53bb2e8f385e0dda776c4c0a9c8ec719c040476d5d9c06a99",
+  "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "required_branch_order": [
+    "recoverability",
+    "residual"
+  ],
+  "residual_start_gate": "recoverability completed, reconciled, finalized, with zero unresolved failures and zero seal violations",
+  "schema_version": "rvt-phase9g-a1-owner-authorization/v1",
+  "scientific_outcomes_present": false,
+  "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "scope_status": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "RECOVERABILITY_GENERATION": "AUTHORIZED_STUDY_A_TRAIN_VALIDATION_ONLY",
+    "RESIDUAL_V2_GENERATION": "AUTHORIZED_STUDY_A_TRAIN_VALIDATION_ONLY",
+    "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+    "STUDY_A_TRAIN_VALIDATION": "AUTHORIZED",
+    "STUDY_B": "NOT_AUTHORIZED",
+    "TRAINING": "NOT_AUTHORIZED"
+  },
+  "source_evidence_commit": "6bcfc0e26c4b327ba63f2844eaa02d30d56903ba"
+}
