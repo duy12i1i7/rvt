@@ -1,0 +1,68 @@
+{
+  "amendment_scope": "RECOVERABILITY_ONLY",
+  "continuation_wrapper": {
+    "artifact": "run_phase9g_a1r_recoverability_continuation.py",
+    "file_sha256": "d6ec90d4e7483afb8129fcc80ac4b03bad69495752e02e1c6152f023e760eed1",
+    "qualification_commit": "96dfab986082d2a987f488634e7c32f192aa37cd",
+    "scientific_functions_reused_from_image": [
+      "produce_recoverability_candidate",
+      "reconcile_recoverability_candidate_results",
+      "CanonicalGenerationWriter.write_recoverability_transaction"
+    ]
+  },
+  "evidence": {
+    "failure_injection_sha256": "7bfdb926f5726b20af3c2acddadaa65e5aa386fc7a493548598bade0ea45d254",
+    "resume_identity_tests": "tests/test_phase9g_a1r_continuation.py",
+    "scientific_semantic_equality": true,
+    "timeout_derivation_sha256": "d34c724f87c1da835c1a9df642becaad09aa4bb62b3764478f5d22856908c18c"
+  },
+  "field_changes": [
+    {
+      "classification": "OPERATIONAL_INFRASTRUCTURE_ONLY",
+      "field": "profiles.recoverability.infrastructure_timeout_seconds",
+      "new": 243,
+      "old": 60.0
+    },
+    {
+      "classification": "OPERATIONAL_EXACT_RESUME_ENFORCEMENT",
+      "field": "common.resume.scheduler_selection",
+      "new": "exclude durable completed candidate-pair event identities before scheduling; schedule unresolved identities only",
+      "old": "canonical duplicate replay is a no-op"
+    }
+  ],
+  "frozen_science_changed": false,
+  "official_resume_permitted_after_preflight": true,
+  "parent_contract": {
+    "artifact": "phase9g0p_operational_production_contract_v2.json",
+    "sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12",
+    "status": "SUPERSEDED_FOR_RECOVERABILITY_TIMEOUT_ONLY"
+  },
+  "phase": "PHASE_9G_A1R",
+  "phase9g_a1r_operational_contract_amendment_sha256": "1821badc6b09c2417a3fff98bb2f97673a69cdeff002b9ac1a64fac927d806e8",
+  "preserved_fields": {
+    "candidate_pair_publication_boundary": "one complete decision event",
+    "candidate_scheduler_atomic_unit": "one candidate aggregate containing all replicas",
+    "chunk_size_atomic_units": 1,
+    "numeric_threads": 1,
+    "workers": 12
+  },
+  "recoverability_profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads": 1,
+    "old_infrastructure_timeout_seconds": 60.0,
+    "profile_id": "PROFILE_RECOVERABILITY_A1R_V1",
+    "workers": 12
+  },
+  "residual_profile_changed": false,
+  "schema_version": "rvt-phase9g-a1r-operational-contract-amendment/v1",
+  "unchanged_scientific_bindings": {
+    "gpu_generation": false,
+    "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "recoverability_row_binding_sha256": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142",
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+    "writer": "rvt_swarm.phase9g0r.writer.CanonicalGenerationWriter",
+    "writer_parent_process_only": true
+  }
+}

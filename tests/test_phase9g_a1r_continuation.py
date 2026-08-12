@@ -19,6 +19,21 @@ from scripts.run_phase9g_a1r_recoverability_continuation import (
 )
 
 
+ROOT = Path(__file__).resolve().parents[1]
+RESULTS = ROOT / "results/rvt_fd24"
+
+
+def _canonical(name: str, field: str):
+    path = RESULTS / name
+    document = json.loads(path.read_text(encoding="ascii"))
+    body = dict(document)
+    expected = body.pop(field)
+    from rvt_swarm.phase8.common import sha256_document
+
+    assert sha256_document(body) == expected
+    return document
+
+
 def _task(event_id: str) -> OfficialDecisionEventTask:
     source = OfficialSourceTask(
         job_id=f"source-{event_id}",
@@ -120,3 +135,74 @@ def test_out_of_scope_event_blocks_resume(tmp_path: Path) -> None:
     _write_transaction(root, "event-outside")
     with pytest.raises(ContinuationError, match="out-of-scope"):
         completed_event_ids(root, (_task("event-a"),))
+
+
+def test_operational_amendment_changes_only_timeout_and_resume_selection() -> None:
+    amendment = _canonical(
+        "phase9g_a1r_operational_contract_amendment_v1.json",
+        "phase9g_a1r_operational_contract_amendment_sha256",
+    )
+    assert amendment["amendment_scope"] == "RECOVERABILITY_ONLY"
+    assert amendment["recoverability_profile"] == {
+        "profile_id": "PROFILE_RECOVERABILITY_A1R_V1",
+        "workers": 12,
+        "numeric_threads": 1,
+        "chunk_size_atomic_units": 1,
+        "old_infrastructure_timeout_seconds": 60.0,
+        "infrastructure_timeout_seconds": 243,
+    }
+    assert {item["field"] for item in amendment["field_changes"]} == {
+        "profiles.recoverability.infrastructure_timeout_seconds",
+        "common.resume.scheduler_selection",
+    }
+    assert amendment["residual_profile_changed"] is False
+    assert amendment["frozen_science_changed"] is False
+
+
+def test_authorization_continuation_is_narrower_than_parent() -> None:
+    authorization = _canonical(
+        "phase9g_a1r_authorization_continuation_v1.json",
+        "phase9g_a1r_authorization_continuation_sha256",
+    )
+    assert authorization["authorized_scope"] == {
+        "study": "study_a_zero_shot",
+        "splits": ["train", "validation"],
+        "branch": "recoverability",
+        "operation": "OFFICIAL_STAGING_CONTINUATION",
+        "train_before_validation": True,
+    }
+    assert authorization["parent_authorization"][
+        "binds_old_operational_contract"
+    ] is True
+    assert authorization["broadens_parent_scientific_scope"] is False
+    assert authorization["scope_status"]["RESIDUAL_V2"] == (
+        "NOT_AUTHORIZED_IN_PHASE_9G_A1R"
+    )
+    assert authorization["scope_status"]["TRAINING"] == "NOT_AUTHORIZED"
+
+
+def test_successor_run_reuses_same_dataset_and_exact_prefix() -> None:
+    run = _canonical(
+        "phase9g_a1r_continuation_run_identity_v1.json",
+        "phase9g_a1r_continuation_run_identity_sha256",
+    )
+    assert run["logically_independent_dataset"] is False
+    assert run["same_staging_namespace_as_parent"] is True
+    assert run["scientific_row_identity_includes_run_id"] is False
+    assert run["initial_staging_checkpoint"]["completed_train_events"] == 127
+    assert run["initial_staging_checkpoint"]["scientific_rows"] == 318
+    assert run["frozen_universe"] == {
+        "train_events": 6000,
+        "train_candidate_aggregates": 12000,
+        "validation_events": 1500,
+        "validation_candidate_aggregates": 3000,
+        "total_events": 7500,
+        "total_candidate_aggregates": 15000,
+        "initial_unresolved_train_events": 5873,
+    }
+    assert run["resume_semantics"]["existing_rows_reemitted"] == 0
+    assert run["resume_semantics"][
+        "completed_candidate_pair_transactions_rescheduled"
+    ] == 0
+    assert run["required_order"] == ["train", "validation", "stop"]
+    assert all(value == 0 for value in run["sealed_scope"].values())

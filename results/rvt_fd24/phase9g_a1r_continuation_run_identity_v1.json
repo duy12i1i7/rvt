@@ -1,0 +1,69 @@
+{
+  "authorization_continuation_sha256": "fc83e2ff0671edba662852d68515bd28cba31cfb214e728afaa857a0f7164e9a",
+  "created_at_utc": "2026-08-12T06:17:20Z",
+  "frozen_universe": {
+    "initial_unresolved_train_events": 5873,
+    "total_candidate_aggregates": 15000,
+    "total_events": 7500,
+    "train_candidate_aggregates": 12000,
+    "train_events": 6000,
+    "validation_candidate_aggregates": 3000,
+    "validation_events": 1500
+  },
+  "identity_class": "OPERATIONAL_SUCCESSOR_CONTINUATION_NOT_SCIENTIFIC",
+  "initial_staging_checkpoint": {
+    "artifact": "phase9g_a1r_staging_checkpoint_v1.json",
+    "checkpoint_preimage_sha256": "b1fc6c7ddc238c5cbb961f191ad6e48c6e05f0d985d80548d4ee4ac2fa1d2f5e",
+    "completed_train_candidate_aggregates": 254,
+    "completed_train_events": 127,
+    "scientific_rows": 318,
+    "sha256": "9012344ea59b0e415809ff76753b7374e60533c6320dd94dee1f0c43e2a5d5ab"
+  },
+  "logically_independent_dataset": false,
+  "operational_amendment_sha256": "1821badc6b09c2417a3fff98bb2f97673a69cdeff002b9ac1a64fac927d806e8",
+  "operational_profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads": 1,
+    "old_infrastructure_timeout_seconds": 60.0,
+    "profile_id": "PROFILE_RECOVERABILITY_A1R_V1",
+    "workers": 12
+  },
+  "parent_run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+  "parent_run_identity_sha256": "a3c6dfcd9e85c955a3e2edb10a65110b6dc611dc8e6e1b7cf3dcaa1047448da6",
+  "phase": "PHASE_9G_A1R",
+  "phase9g_a1r_continuation_run_identity_sha256": "98be39bf8653ea683aa6a948bb9419deb5c64b67c1e15a5b7215807a5b43f129",
+  "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "required_order": [
+    "train",
+    "validation",
+    "stop"
+  ],
+  "resume_semantics": {
+    "completed_candidate_pair_transactions_rescheduled": 0,
+    "existing_rows_reemitted": 0,
+    "infrastructure_continuation": true,
+    "schedule_only_unresolved_event_identities": true,
+    "scientific_retry_count": 0,
+    "timed_out_atomic_unit_eligible_for_exact_retry": true
+  },
+  "run_id": "phase9g-a1r-study-a-train-validation-recoverability-continuation-20260812T061720Z",
+  "same_staging_namespace_as_parent": true,
+  "schema_version": "rvt-phase9g-a1r-continuation-run-identity/v1",
+  "scientific_dataset_lineage_id": "phase9g-a1-study-a-train-validation-recoverability-v1",
+  "scientific_row_identity_includes_run_id": false,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "state_at_creation": "CREATED_NOT_STARTED",
+  "successor_required_reason": "parent run identity immutably binds the superseded 60 s profile",
+  "writer_namespaces": {
+    "train": "/rvt-data/staging/study_a_zero_shot-train-recoverability",
+    "validation": "/rvt-data/staging/study_a_zero_shot-validation-recoverability"
+  }
+}

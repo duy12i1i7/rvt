@@ -1,0 +1,65 @@
+{
+  "authorization_source": {
+    "kind": "EXPLICIT_OWNER_INSTRUCTION_IN_CURRENT_TASK",
+    "semantic_statement": {
+      "authorization": "operational-only Recoverability timeout requalification and exact official Study-A train then validation continuation",
+      "phase": "PHASE_9G_A1R",
+      "preserve_existing_staging_rows": 318,
+      "prohibited": [
+        "Residual V2",
+        "training",
+        "Study A N24",
+        "Study B",
+        "final test"
+      ]
+    },
+    "semantic_statement_sha256": "ccd162efcfc4bf5a93ca237bca0f93742d5d13add0c75562a84fa0a1f1fc04ac"
+  },
+  "authorized_scope": {
+    "branch": "recoverability",
+    "operation": "OFFICIAL_STAGING_CONTINUATION",
+    "splits": [
+      "train",
+      "validation"
+    ],
+    "study": "study_a_zero_shot",
+    "train_before_validation": true
+  },
+  "bindings": {
+    "generation_provenance_root": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+    "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+    "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  },
+  "broadens_parent_scientific_scope": false,
+  "created_at_utc": "2026-08-12T06:17:20Z",
+  "operational_amendment_sha256": "1821badc6b09c2417a3fff98bb2f97673a69cdeff002b9ac1a64fac927d806e8",
+  "parent_authorization": {
+    "artifact": "phase9g_a1_owner_authorization_v1.json",
+    "binds_old_operational_contract": true,
+    "sha256": "cc42e48fd7b557a53bb2e8f385e0dda776c4c0a9c8ec719c040476d5d9c06a99"
+  },
+  "phase": "PHASE_9G_A1R",
+  "phase9g_a1r_authorization_continuation_sha256": "fc83e2ff0671edba662852d68515bd28cba31cfb214e728afaa857a0f7164e9a",
+  "schema_version": "rvt-phase9g-a1r-authorization-continuation/v1",
+  "scientific_outcomes_present_in_authorization": false,
+  "scope_artifacts": {
+    "train": {
+      "artifact": "phase9g_a1_authorization_scope_study_a_zero_shot-train-recoverability_v1.json",
+      "sha256": "77319fcfd8822f56763ed09b7e9c71c3dcc851ea810165d301acacc2388d773a"
+    },
+    "validation": {
+      "artifact": "phase9g_a1_authorization_scope_study_a_zero_shot-validation-recoverability_v1.json",
+      "sha256": "9a1e7d7fee28d74c8411e1b162066e34ed08b4e52156d859afe71088ad869c6b"
+    }
+  },
+  "scope_status": {
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "RECOVERABILITY_STUDY_A_TRAIN_VALIDATION": "AUTHORIZED_CONTINUATION",
+    "RESIDUAL_V2": "NOT_AUTHORIZED_IN_PHASE_9G_A1R",
+    "STUDY_A_N24": "SEALED_NOT_AUTHORIZED",
+    "STUDY_B": "NOT_AUTHORIZED",
+    "TRAINING": "NOT_AUTHORIZED"
+  }
+}
