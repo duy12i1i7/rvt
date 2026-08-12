@@ -1,0 +1,57 @@
+{
+  "authorization": {
+    "artifact": "phase9g_a1_owner_authorization_v1.json",
+    "commit": "51973e460e7396ba6a3dad74d6c7df4031ddb52b",
+    "sha256": "cc42e48fd7b557a53bb2e8f385e0dda776c4c0a9c8ec719c040476d5d9c06a99"
+  },
+  "command_ids": [
+    "study_a_zero_shot-train-recoverability",
+    "study_a_zero_shot-validation-recoverability"
+  ],
+  "created_at_utc": "2026-08-12T04:23:59Z",
+  "generation_provenance_root": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+  "identity_class": "OPERATIONAL_NOT_SCIENTIFIC",
+  "initial_counters": {
+    "final_test_accesses": 0,
+    "official_staging_writes": 0,
+    "scientific_rows": 0,
+    "shards": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "label_branch": "recoverability",
+  "operational_profile": {
+    "artifact": "phase9g0p_operational_production_contract_v2.json",
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 60.0,
+    "numeric_threads": 1,
+    "profile_id": "PROFILE_RECOVERABILITY_V1",
+    "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+    "sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12",
+    "workers": 12
+  },
+  "phase": "PHASE_9G_A1",
+  "phase9g_a1_recoverability_run_identity_sha256": "a3c6dfcd9e85c955a3e2edb10a65110b6dc611dc8e6e1b7cf3dcaa1047448da6",
+  "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+  "schema_version": "rvt-phase9g-a1-operational-run-identity/v1",
+  "scientific_row_identity_includes_run_id": false,
+  "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "sealed_scopes": {
+    "final_test": "SEALED_NOT_AUTHORIZED",
+    "study_a_n24_zero_shot": "SEALED_NOT_AUTHORIZED",
+    "study_b": "NOT_AUTHORIZED",
+    "training": "NOT_AUTHORIZED"
+  },
+  "splits": [
+    "train",
+    "validation"
+  ],
+  "state_at_creation": "CREATED_NOT_STARTED",
+  "study": "study_a_zero_shot",
+  "writer_namespaces": {
+    "train": "/rvt-data/staging/study_a_zero_shot-train-recoverability",
+    "validation": "/rvt-data/staging/study_a_zero_shot-validation-recoverability"
+  }
+}

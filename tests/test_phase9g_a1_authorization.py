@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shlex
 from pathlib import Path
 
 from rvt_swarm.phase8.common import sha256_document
@@ -81,3 +82,49 @@ def test_every_enabled_scope_is_canonical_and_exactly_bound() -> None:
             "final_test",
             "training",
         }
+
+
+def test_recoverability_run_identity_is_operational_and_separate() -> None:
+    run = _canonical(
+        "phase9g_a1_recoverability_run_identity_v1.json",
+        "phase9g_a1_recoverability_run_identity_sha256",
+    )
+    assert run["identity_class"] == "OPERATIONAL_NOT_SCIENTIFIC"
+    assert run["scientific_row_identity_includes_run_id"] is False
+    assert run["label_branch"] == "recoverability"
+    assert run["splits"] == ["train", "validation"]
+    assert set(run["initial_counters"].values()) == {0}
+    assert run["operational_profile"]["workers"] == 12
+    assert run["operational_profile"]["numeric_threads"] == 1
+    assert run["operational_profile"]["chunk_size_atomic_units"] == 1
+    assert run["operational_profile"]["infrastructure_timeout_seconds"] == 60.0
+
+
+def test_command_activation_changes_only_owner_placeholders() -> None:
+    activation = _canonical(
+        "phase9g_a1_recoverability_command_activation_v1.json",
+        "phase9g_a1_recoverability_command_activation_sha256",
+    )
+    assert activation["command_count"] == 2
+    assert activation["sealed_scope_commands_activated"] == 0
+    assert activation["allowed_activation_options"] == [
+        "--authorization-scope-sha256",
+        "--authorization-scope",
+        "--run-id",
+    ]
+    for command in activation["commands"]:
+        original = shlex.split(command["base_official_command"])
+        activated = command["official_command_argv"]
+        changed_value_indices = {
+            original.index(item["option"]) + 1
+            for item in command["activation_changes"]
+        }
+        assert len(original) == len(activated)
+        assert {
+            item["option"] for item in command["activation_changes"]
+        } == set(activation["allowed_activation_options"])
+        assert all(
+            old == new or index in changed_value_indices
+            for index, (old, new) in enumerate(zip(original, activated))
+        )
+        assert command["resolve_command_argv"] == activated + ["--resolve-only"]
