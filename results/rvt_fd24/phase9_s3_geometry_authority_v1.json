@@ -1,0 +1,154 @@
+{
+  "case_evaluation": {
+    "CASE_I": {
+      "reason": "Width is unsigned, but the observed value is invariant to lateral-axis and token-order reversal; this is not a signed orientation defect.",
+      "selected": false
+    },
+    "CASE_II": {
+      "reason": "The frozen quantity is not defined as signed.",
+      "selected": false
+    },
+    "CASE_III": {
+      "reason": "Independent analytic reconstruction gives a valid 1.361 m passage; the source geometry satisfies frozen validity rules.",
+      "selected": false
+    },
+    "CASE_IV": {
+      "reason": "Opposite-component pairing semantics are absent from frozen authority.",
+      "selected": true
+    }
+  },
+  "classification": "CASE_IV",
+  "diagnostic_rule_promoted_to_science": false,
+  "frozen_identity": {
+    "a1r_commit": "a943ca391fb5feb5c8e90a693f763cc47c4d4e2b",
+    "qualified_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  },
+  "missing_scientific_definition": "The frozen authority does not define how S3 reconstructs an opposite-boundary pair from anonymous local support discs when samples from one curved physical boundary component lie on both signs of the ego mission normal. It also does not select between treating that observation as UNKNOWN and introducing a component-reconstruction or identity rule.",
+  "phase9_s3_geometry_authority_sha256": "6f31a44b4ac514d0019f9b55d01ff8827e16f6423c978da283215322fc18f20f",
+  "relevant_sources": [
+    {
+      "authority_scope": "Frozen S3 purpose, local inputs, output rules, and width statistic.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "c80f2a8d1fb608c27f5ec8d68d40eb88563a98e944cf84f8fc0d983086f8a8c5",
+      "path": "results/rvt_fd24/source_policy_contracts_v1.json"
+    },
+    {
+      "authority_scope": "Frozen prose rule that contradictory data is UNKNOWN.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "c2ed62debeac38b2bb1aaefdb6168443db54d4cdb38be77263128a9127e221b6",
+      "path": "docs/PHASE8E_SOURCE_POLICY_EXECUTION_CONTRACTS.md"
+    },
+    {
+      "authority_scope": "Frozen analytic geometry and local support-disc sensor conversion.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "342ae8b901315df2d178d7c8a0d2bdbfa8a659c99cfae1774d6d4211519ce770",
+      "path": "results/rvt_fd24/executable_scientific_protocol_v1.json"
+    },
+    {
+      "authority_scope": "Frozen S3/S4 local evidence and event timing semantics.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "c7f0b3e9d75740706c6f1c21299ac59ef38bf7964f97b9cccdfded012880b875",
+      "path": "results/rvt_fd24/source_event_timing_addendum_v1.json"
+    },
+    {
+      "authority_scope": "Executable totality guard and S3 decision output semantics.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "8a2590c16a8250d6a03946d79b8a638919dd200614e32c79fb1b3710a4b53738",
+      "path": "rvt_swarm/phase8e/protocol.py"
+    },
+    {
+      "authority_scope": "Current executable width estimator; implementation is not authority to fill a specification gap.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "d0c8392b4a1f9ba842465b55a157d265ca1f4f034b652608b19a829e01a96451",
+      "path": "rvt_swarm/phase9c_rb/policies.py"
+    },
+    {
+      "authority_scope": "Current analytic corridor and support-disc construction.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "7dfd0127cc25a253caf7dc6b333bea26b1312c5a66343231dbace72133e54645",
+      "path": "rvt_swarm/phase9c_rb/world.py"
+    },
+    {
+      "authority_scope": "Frozen task identity and authorized manifest compilation.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "f8a73826655de529511266fc8a9c7597a9b98a9c01b54c51d425d8e9bc310c2f",
+      "path": "rvt_swarm/phase9g0r/compiler.py"
+    },
+    {
+      "authority_scope": "Qualified source-session and candidate-production execution path.",
+      "classification": "CURRENT_AUTHORITATIVE",
+      "file_sha256": "6fdc2bb50d812546b70ccfe27719c3339837c16b6c7d0652617c727df40fd019",
+      "path": "rvt_swarm/phase9g0r/producer.py"
+    },
+    {
+      "authority_scope": "Immutable evidence of the production hard stop; not new S3 science.",
+      "classification": "HISTORICAL",
+      "file_sha256": "140234630806a963967a8e5c1ca2530f68487839d78d65a05d3d02182dcd40c5",
+      "path": "results/rvt_fd24/phase9g_a1r_continuation_stop_audit_v1.json"
+    },
+    {
+      "authority_scope": "Reference-host measurement; evidence, not scientific authority.",
+      "classification": "DIAGNOSTIC",
+      "file_sha256": "da6b22f53fe0da8849670ac2bd03674d7dff17a3b9a1515156b6e05a9c3b9fd6",
+      "path": "results/rvt_fd24/phase9_s3_width_derivation_reference_v1.json"
+    },
+    {
+      "authority_scope": "Qualified-image reproduction; evidence, not scientific authority.",
+      "classification": "DIAGNOSTIC",
+      "file_sha256": "ef58021eced70ee2a13afe3ea47b2e1917a3f009cab2b1318a3e7d536f2e80a6",
+      "path": "results/rvt_fd24/phase9_s3_width_derivation_docker_v1.json"
+    }
+  ],
+  "runtime_information_loss": {
+    "blocked_pair": [
+      "corridor-0-left-4",
+      "corridor-0-left-3"
+    ],
+    "blocked_pair_same_physical_component": true,
+    "component_identity_available_to_s3": false,
+    "robot_view_token": "ego-relative (dx, dy, radius) only",
+    "world_support_identity": "corridor primitive, physical boundary side, and arc index"
+  },
+  "s3_executable_contract": {
+    "definition": "frozen deployable robot-local geometric topology selector",
+    "direct_consumer": "Phase-7 transition intent origination",
+    "downstream_consumers": [
+      "source episode state and event timing",
+      "counterfactual source snapshot",
+      "candidate rollout controller and local safety trajectory",
+      "Target V4 predicates and aggregate disposition",
+      "ego-graph payload, row identity, and label through the resulting trajectory"
+    ],
+    "identifier": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+    "inputs": [
+      "own state",
+      "fresh one-hop messages",
+      "ego-relative obstacle support discs",
+      "mission direction",
+      "local COMPACT and LINE role metadata",
+      "local lifecycle state"
+    ],
+    "outputs": [
+      "HOLD_INSUFFICIENT_EVIDENCE",
+      "HOLD_UNKNOWN",
+      "HOLD_COMPACT",
+      "HOLD_LINE",
+      "REQUEST_LINE",
+      "REQUEST_COMPACT"
+    ],
+    "purpose": "Originate COMPACT/LINE requests from persistent local geometric evidence while retaining Phase-7 readiness, agreement, confirmation, profile, abort, rearm, controller, and safety semantics.",
+    "target_v4_direct_width_input": false
+  },
+  "schema_version": "rvt-phase9-s3-geometry-authority/v1",
+  "scientific_writes": 0,
+  "status": "SCIENTIFIC_DEFINITION_INCOMPLETE",
+  "superseded_rule_adopted": false,
+  "width_semantics": {
+    "authoritative_quantity": "minimum free inner-surface separation from paired left/right boundary supports in the role-dependent lookahead sector",
+    "category": "UNSIGNED_LOCAL_FREE_SPACE_SPAN",
+    "contradictory_or_incomplete_observation_rule": "HOLD_UNKNOWN",
+    "negative_value_executable_totality_rule": "reject as ValueError; the total decision contract accepts only finite nonnegative measured width",
+    "negative_value_mathematically_permitted": false
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "blocking_classification": "CASE_IV",
+  "closure_sha256": "bd757731f150df704085eef3ac6ceb49a5740300415faaeaaf510cf06938496b",
+  "may_resume_official_recoverability": false,
+  "new_image": null,
+  "new_image_required_now": false,
+  "official_operations": {
+    "generation_resumes": 0,
+    "residual_starts": 0,
+    "training_operations": 0,
+    "validation_starts": 0
+  },
+  "old_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "owner_decision_sha256": "f0613c95981ed6f948c4a894e0c42e38cec0bdf372e588b5c1986617682479b6",
+  "phase9_s3_generation_readiness_sha256": "28a50928afbbf3ce1f07d1d83aeb1d8b8c753638f693ef5261ee8b8b68019306",
+  "readiness": "BLOCKED_SCIENTIFIC_OWNER_DECISION",
+  "required_next_authority": "explicit owner scientific decision/addendum",
+  "schema_version": "rvt-phase9-s3-generation-readiness/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+  "staging_read_only": true,
+  "staging_rows": 342
+}

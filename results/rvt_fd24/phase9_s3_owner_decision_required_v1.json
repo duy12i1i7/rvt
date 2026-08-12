@@ -1,0 +1,56 @@
+{
+  "alternatives": [
+    {
+      "current_official_rows_proven_affected": 0,
+      "definition": "When the local supports selected by the current statistic cannot constitute a nonnegative opposite-boundary span, classify the local observation as contradictory/incomplete and emit HOLD_UNKNOWN.",
+      "future_effect": "Curved F3/F4 S3 robots may hold rather than originate a transition until a complete noncontradictory pair becomes locally observable.",
+      "id": "A_CONTRADICTORY_PAIR_IS_UNKNOWN",
+      "implementation_class": "NEW_SCIENTIFIC_RULE",
+      "scientific_interpretation_changes": true,
+      "sensor_schema_change": false
+    },
+    {
+      "current_official_rows_proven_affected": 0,
+      "definition": "Define a deterministic robot-local clustering rule over observed support discs and compute span only between distinct reconstructed boundary components.",
+      "future_effect": "Curved F3/F4 S3 evidence may become usable; clustering, occlusion, circle interaction, and tie semantics must be frozen explicitly.",
+      "id": "B_LOCAL_SUPPORT_COMPONENT_RECONSTRUCTION",
+      "implementation_class": "NEW_SCIENTIFIC_RULE",
+      "scientific_interpretation_changes": true,
+      "sensor_schema_change": false
+    },
+    {
+      "current_official_rows_proven_affected": 0,
+      "definition": "Extend local obstacle support tokens with an opaque deterministic component identity and pair supports only across distinct components.",
+      "future_effect": "Pairing is explicit, but the robot-local sensor interface, graph provenance, and portability qualification must be amended.",
+      "id": "C_LOCAL_BOUNDARY_COMPONENT_IDENTITY",
+      "implementation_class": "NEW_SCIENTIFIC_RULE_AND_INPUT_CONTRACT_CHANGE",
+      "scientific_interpretation_changes": true,
+      "sensor_schema_change": true
+    }
+  ],
+  "classification": "CASE_IV",
+  "constraints": {
+    "existing_342_rows_remain_read_only": true,
+    "no_implementation_before_owner_decision": true,
+    "no_outcome_dependent_rule": true,
+    "no_sealed_domain_access": true,
+    "physical_geometry_must_remain_unchanged": true
+  },
+  "existing_row_effect_basis": {
+    "negative_widths_in_committed_dependency_cone": 0,
+    "note": "Counts apply to narrowly scoped rules that activate only for the newly identified ambiguous/contradictory pair class.",
+    "potentially_affected": 0,
+    "proven_affected": 0,
+    "rows": 342
+  },
+  "missing_definition": "The frozen authority does not define how S3 reconstructs an opposite-boundary pair from anonymous local support discs when samples from one curved physical boundary component lie on both signs of the ego mission normal. It also does not select between treating that observation as UNKNOWN and introducing a component-reconstruction or identity rule.",
+  "phase9_s3_owner_decision_required_sha256": "f0613c95981ed6f948c4a894e0c42e38cec0bdf372e588b5c1986617682479b6",
+  "recommended_option": {
+    "basis": "It reuses the already-frozen UNKNOWN behavior and changes the smallest scientific surface, but it is still an owner decision and is not implemented.",
+    "id": "A_CONTRADICTORY_PAIR_IS_UNKNOWN",
+    "implemented": false
+  },
+  "schema_version": "rvt-phase9-s3-owner-decision-required/v1",
+  "scientific_writes": 0,
+  "status": "OWNER_SCIENTIFIC_DECISION_REQUIRED"
+}

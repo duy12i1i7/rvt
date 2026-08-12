@@ -1,0 +1,38 @@
+{
+  "all_dependent_replays_exact": true,
+  "classification_counts": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254
+  },
+  "current_preservation": {
+    "rows_compacted": 0,
+    "rows_deduplicated": 0,
+    "rows_deleted": 0,
+    "rows_regenerated": 0,
+    "rows_rewritten": 0,
+    "staging_remains_read_only": true
+  },
+  "data_action": "OWNER_DECISION_REQUIRED",
+  "data_action_explanation": "No existing row is potentially or proven affected, so all 342 remain preserved official evidence. CASE IV prevents a final continuation/data policy from being asserted before the owner selects future S3 semantics.",
+  "dependency_audit_sha256": "10a5db0e85894646ec21c040b676546714ceb139bc7e1ab05eb40f99a74024d3",
+  "dependent_source_replay_count": 12,
+  "dependent_transaction_count": 60,
+  "negative_width_in_committed_dependency_cone": false,
+  "phase9_s3_official_data_impact_sha256": "681f6f3585a7ed3e17bafd9049d0e611af4735da33a95a9dd76334535d58c8bb",
+  "schema_version": "rvt-phase9-s3-official-data-impact/v1",
+  "scientific_rows": 342,
+  "scientific_writes": 0,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+  "status": "ALL_EXISTING_ROWS_EXACTLY_AUDITED",
+  "transaction_count": 210,
+  "transaction_level_rebuild_plan_required_now": false
+}

@@ -1,0 +1,45 @@
+{
+  "generation_gate": "BLOCKED_SCIENTIFIC_OWNER_DECISION",
+  "historical_miss_analysis": {
+    "mechanical_tests": "Pure S3 totality tests used hand-selected nonnegative widths; geometry tests did not execute the runtime estimator over curved support samples.",
+    "new_combination_revealed_by_official_order": "F3/train-f3-01/N12/S3",
+    "phase9g0p_benchmark": "Used F1/F2/F5/F8/F9/F10; it did not include F3/F4 S3 runtime geometry.",
+    "phase9g0r_canary": "Covered F1/F2/F5/F8/F9/F10 and all N classes, but omitted F3/F4; its transition-protocol cases were not curved S3 geometry.",
+    "preflight": "Validated authority, provenance, structure, and pure contracts, but did not enumerate S3 runtime geometry over authorized curved layouts.",
+    "rb20_replay": "Four frozen cases covered F1/S1, F9/S0, F8/S1, and F5/S1; none exercised S3 or curved F3/F4 support pairing."
+  },
+  "new_fail_fast_coverage": [
+    {
+      "covers": "exact F3 N12 source validity path and deterministic early exception",
+      "test": "test_blocked_source_reproduces_before_official_event"
+    },
+    {
+      "covers": "negative geometry, frame reversal, selected component identity",
+      "test": "test_width_trace_is_binary64_exact_and_not_orientation_sign_defect"
+    },
+    {
+      "covers": "F3/F4, N5/N6/N8/N12/N16, positive/negative/unknown classes",
+      "test": "test_population_covers_curved_families_and_multiple_team_sizes"
+    },
+    {
+      "covers": "positive diagnostic geometry and token ordering invariance",
+      "test": "test_positive_straight_control_keeps_unsigned_span"
+    },
+    {
+      "covers": "prestart refusal before production work",
+      "test": "test_generation_readiness_is_blocked_until_owner_decision"
+    }
+  ],
+  "official_staging_writes": 0,
+  "phase9_s3_expanded_preflight_coverage_sha256": "8e8aa761e9458856bdfe74d4321a5e93a0cc896340701833f6760ab8cc94577f",
+  "population_evidence_sha256": "82bb879ee193430130ed4cd24313f491c826bdc3629873c506fb24628782f3f2",
+  "schema_version": "rvt-phase9-s3-expanded-preflight-coverage/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "DECLARED_AND_GENERATION_BLOCKING"
+}

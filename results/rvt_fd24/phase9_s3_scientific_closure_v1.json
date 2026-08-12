@@ -1,0 +1,58 @@
+{
+  "classification": "CASE_IV",
+  "data_action": "OWNER_DECISION_REQUIRED",
+  "evidence": {
+    "expanded_preflight_coverage_sha256": "8e8aa761e9458856bdfe74d4321a5e93a0cc896340701833f6760ab8cc94577f",
+    "geometry_authority_sha256": "6f31a44b4ac514d0019f9b55d01ff8827e16f6423c978da283215322fc18f20f",
+    "official_data_impact_sha256": "681f6f3585a7ed3e17bafd9049d0e611af4735da33a95a9dd76334535d58c8bb",
+    "owner_decision_sha256": "f0613c95981ed6f948c4a894e0c42e38cec0bdf372e588b5c1986617682479b6",
+    "population_audit_sha256": "82bb879ee193430130ed4cd24313f491c826bdc3629873c506fb24628782f3f2",
+    "staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "staging_dependency_audit_sha256": "10a5db0e85894646ec21c040b676546714ceb139bc7e1ab05eb40f99a74024d3",
+    "width_derivation_sha256": "2fafc2a24402c61afecf68df701df3cac474652b519599ecee96575dcc5133ee"
+  },
+  "existing_rows_preserved": 342,
+  "existing_rows_proven_affected": 0,
+  "identity": {
+    "a1r_commit": "a943ca391fb5feb5c8e90a693f763cc47c4d4e2b",
+    "branch": "research/rvt-phase9g-a1s3-scientific-closure-v1",
+    "new_image": null,
+    "old_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "source_code_changed": false
+  },
+  "isolation": {
+    "final_test_accesses": 0,
+    "official_generation_resumed": false,
+    "official_staging_writes": 0,
+    "recoverability_validation_started": false,
+    "residual_v2_started": false,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "phase9_s3_scientific_closure_sha256": "bd757731f150df704085eef3ac6ceb49a5740300415faaeaaf510cf06938496b",
+  "repair": {
+    "candidate_topology_semantics_changed": false,
+    "executable_conformance_repair_available_from_frozen_authority": false,
+    "implemented": false,
+    "matched_randomness_changed": false,
+    "model_input_semantics_changed": false,
+    "physical_geometry_changed": false,
+    "required_before_continuation": true,
+    "row_identity_rules_changed": false,
+    "target_v4_contract_changed": false,
+    "would_be_new_science": true
+  },
+  "schema_version": "rvt-phase9-s3-scientific-closure/v1",
+  "status": "STOPPED_FOR_OWNER_SCIENTIFIC_DECISION",
+  "timeout_and_performance": {
+    "chunk": 1,
+    "numeric_threads": 1,
+    "qualified_timeout_seconds": 243,
+    "qualified_workers": 12,
+    "reason": "No source or scientific workload change was implemented.",
+    "reopened": false
+  },
+  "verdict": "A",
+  "verdict_text": "S3 remains scientifically under-specified and requires an explicit owner decision."
+}

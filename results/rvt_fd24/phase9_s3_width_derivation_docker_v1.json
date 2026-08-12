@@ -1,0 +1,1071 @@
+{
+  "blocked_task": {
+    "candidate_topology_id": 5,
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+    "decision_timestamp_seconds": 13.5,
+    "decision_timestep": 90,
+    "episode_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0",
+    "family": "F3",
+    "layout_id": "train-f3-01",
+    "layout_sha256": "59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1",
+    "matched_stream_identities": [
+      1313388664
+    ],
+    "replica_identities": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0/candidate-5/replica-0"
+    ],
+    "scientific_atomic_unit_id": "7d7f2859e7f863031676d5c972dca4e03a4a5dd84ba438cdc7753bb26896b65b",
+    "scientific_episode_seeds": {
+      "communication": 1781318376,
+      "data_sampling": 1073029205,
+      "dynamic_obstacle": 976299567,
+      "initial_condition": 808463837
+    },
+    "source_task_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0",
+    "split": "train",
+    "study": "study_a_zero_shot",
+    "team_size": 12
+  },
+  "call_audit": {
+    "calls": [
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 0,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 1,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 2,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 3,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 4,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 5,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 6,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 7,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 8,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 9,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 10,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 0,
+        "evidence_duration_seconds": 0.15,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": 0.6039603158578516,
+        "robot_id": 11,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.0
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 0,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 1,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 2,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 3,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 4,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 5,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 6,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 7,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 8,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 9,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 10,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 1,
+        "evidence_duration_seconds": 0.3,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": 0.6039603158578516,
+        "robot_id": 11,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.15
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 0,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 1,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 2,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 3,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 4,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 5,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 6,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 7,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 8,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 9,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 10,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 2,
+        "evidence_duration_seconds": 0.44999999999999996,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": 0.6039603158578516,
+        "robot_id": 11,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.3
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 0,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 1,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 2,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 3,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 4,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": true,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 5,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 6,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": false,
+        "complete_open_observation": false,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": null,
+        "robot_id": 7,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      },
+      {
+        "committed_topology": 5,
+        "compact_required_width_meters": 1.3,
+        "complete_observation": true,
+        "complete_open_observation": false,
+        "control_step": 3,
+        "evidence_duration_seconds": 0.6,
+        "evidence_persistence_seconds": 0.45,
+        "line_required_width_meters": 0.39999999999999997,
+        "measured_width_meters": -0.6143634774571596,
+        "robot_id": 8,
+        "spacing_margin_meters": 0.05,
+        "time_seconds": 0.44999999999999996
+      }
+    ],
+    "negative_calls_before_exception": 7,
+    "s3_calls_before_exception": 45
+  },
+  "coordinate_frames": {
+    "mission": {
+      "lateral_axis": [
+        -0.032160022728736394,
+        0.9994827326863067
+      ],
+      "longitudinal_axis": [
+        0.9994827326863067,
+        0.032160022728736394
+      ],
+      "mission_normal_definition": "(-tangent_y,tangent_x)",
+      "mission_tangent_definition": "(goal-start)/norm(goal-start)",
+      "origin_meters": [
+        -6.0,
+        -0.19306
+      ],
+      "right_handed": true,
+      "selector_left_definition": "nonnegative ego lateral projection",
+      "selector_right_definition": "negative ego lateral projection"
+    },
+    "world": {
+      "x_axis": [
+        1.0,
+        0.0
+      ],
+      "y_axis": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "direct_operands": {
+    "lookahead_distance": {
+      "binary64_big_endian_hex": "4004851eb851eb86",
+      "coordinate_frame": "mission longitudinal axis",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "0x1.4851eb851eb86p+1",
+      "signed": false,
+      "source_contract": "RuntimeConfig.derived.lookahead_distance_meters",
+      "unit": "meters",
+      "value": 2.5650000000000004
+    },
+    "measured_width": {
+      "binary64_big_endian_hex": "bfe3a8dd98712174",
+      "coordinate_frame": "ego-relative mission lateral projection",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "-0x1.3a8dd98712174p-1",
+      "signed": true,
+      "source_contract": "LocalGeometricSelectorPolicy.observe left+right",
+      "unit": "meters",
+      "value": -0.6143634774571596
+    },
+    "selected_left_inner": {
+      "binary64_big_endian_hex": "bfd25388c7d663b8",
+      "coordinate_frame": "ego-relative mission lateral axis",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "-0x1.25388c7d663b8p-2",
+      "signed": true,
+      "source_contract": "abs(left lateral projection)-support radius",
+      "unit": "meters",
+      "value": -0.2863485290086447
+    },
+    "selected_left_lateral_offset": {
+      "binary64_big_endian_hex": "3fb04b767a400ab6",
+      "coordinate_frame": "ego-relative mission lateral axis",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "0x1.04b767a400ab6p-4",
+      "signed": true,
+      "source_contract": "corridor-0-left-4",
+      "unit": "meters",
+      "value": 0.06365147099135524
+    },
+    "selected_left_radius": {
+      "binary64_big_endian_hex": "3fd6666666666666",
+      "coordinate_frame": "Euclidean support disc",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "0x1.6666666666666p-2",
+      "signed": false,
+      "source_contract": "static_obstacle_contract.sensor_conversion",
+      "unit": "meters",
+      "value": 0.35
+    },
+    "selected_right_inner": {
+      "binary64_big_endian_hex": "bfd4fe32690bdf2f",
+      "coordinate_frame": "ego-relative mission lateral axis",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "-0x1.4fe32690bdf2fp-2",
+      "signed": true,
+      "source_contract": "abs(right lateral projection)-support radius",
+      "unit": "meters",
+      "value": -0.3280149484485148
+    },
+    "selected_right_lateral_offset": {
+      "binary64_big_endian_hex": "bf96833fd5a87374",
+      "coordinate_frame": "ego-relative mission lateral axis",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "-0x1.6833fd5a87374p-6",
+      "signed": true,
+      "source_contract": "corridor-0-left-3",
+      "unit": "meters",
+      "value": -0.021985051551485182
+    },
+    "selected_right_radius": {
+      "binary64_big_endian_hex": "3fd6666666666666",
+      "coordinate_frame": "Euclidean support disc",
+      "data_type": "IEEE-754 binary64 / Python float",
+      "float_hex": "0x1.6666666666666p-2",
+      "signed": false,
+      "source_contract": "static_obstacle_contract.sensor_conversion",
+      "unit": "meters",
+      "value": 0.35
+    }
+  },
+  "execution_environment": "QUALIFIED_PRODUCTION_DOCKER_LINUX_X86_64",
+  "failure_call": {
+    "committed_topology_id": 5,
+    "compact_required_width_meters": 1.3,
+    "evidence_duration_seconds": 0.6,
+    "evidence_persistence_seconds": 0.45,
+    "exception_class": "ValueError",
+    "exception_message": "S3 measured width must be finite and nonnegative",
+    "line_required_width_meters": 0.39999999999999997,
+    "robot_id": 8,
+    "robot_position_meters": [
+      -4.572611905422656,
+      0.35657832675107254
+    ],
+    "robot_velocity_meters_per_second": [
+      0.2948459370377719,
+      0.020190553605097514
+    ],
+    "role_id": "role-0008",
+    "session_control_step": 3,
+    "session_time_seconds": 0.44999999999999996,
+    "spacing_margin_meters": 0.05
+  },
+  "formula": {
+    "admission": "0 <= longitudinal <= derived_lookahead",
+    "inner_surface_projection": "abs(lateral_offset) - support_radius",
+    "lateral_offset": "dot(ego_support_center, mission_normal)",
+    "left": "minimum inner_surface_projection where lateral_offset >= 0",
+    "longitudinal": "dot(ego_support_center, mission_tangent)",
+    "measured_width": "left + right",
+    "right": "minimum inner_surface_projection where lateral_offset < 0"
+  },
+  "mode": "NON_OFFICIAL_READ_ONLY_DIAGNOSTIC",
+  "observable_supports": [
+    {
+      "absolute_lateral_projection_meters": 0.27889461918000646,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.07110538081999351,
+      "lateral_projection_meters": -0.27889461918000646,
+      "longitudinal_projection_meters": 1.5316549616498745,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        1.5398319438941082,
+        -0.22949229773029783
+      ],
+      "selector_side": "right",
+      "source_key": "corridor-0-left-0"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.193258096637166,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.15674190336283397,
+      "lateral_projection_meters": -0.193258096637166,
+      "longitudinal_projection_meters": 1.6902067871161663,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        1.695547683172172,
+        -0.1388010418507486
+      ],
+      "selector_side": "right",
+      "source_key": "corridor-0-left-1"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.1076215740943256,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.24237842590567438,
+      "lateral_projection_meters": -0.1076215740943256,
+      "longitudinal_projection_meters": 1.8487586125824587,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        1.8512634224502365,
+        -0.04810978597119936
+      ],
+      "selector_side": "right",
+      "source_key": "corridor-0-left-2"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.021985051551485182,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.3280149484485148,
+      "lateral_projection_meters": -0.021985051551485182,
+      "longitudinal_projection_meters": 2.0073104380487505,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.0069791617283004,
+        0.04258146990834988
+      ],
+      "selector_side": "right",
+      "source_key": "corridor-0-left-3"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.06365147099135524,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.2863485290086447,
+      "lateral_projection_meters": 0.06365147099135524,
+      "longitudinal_projection_meters": 2.165862263515043,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.1626949010063647,
+        0.13327272578789912
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-4"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.1492879935341957,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.20071200646580428,
+      "lateral_projection_meters": 0.1492879935341957,
+      "longitudinal_projection_meters": 2.324414088981334,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.3184106402844287,
+        0.2239639816674484
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-5"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.23492451607703607,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.1150754839229639,
+      "lateral_projection_meters": 0.23492451607703607,
+      "longitudinal_projection_meters": 2.4829659144476257,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.4741263795624926,
+        0.3146552375469976
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-6"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.32056103861987656,
+      "admitted_by_lookahead": false,
+      "inner_surface_projection_meters": -0.02943896138012342,
+      "lateral_projection_meters": 0.32056103861987656,
+      "longitudinal_projection_meters": 2.641517739913918,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.629842118840557,
+        0.4053464934265469
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-7"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.40619756116271694,
+      "admitted_by_lookahead": false,
+      "inner_surface_projection_meters": 0.05619756116271696,
+      "lateral_projection_meters": 0.40619756116271694,
+      "longitudinal_projection_meters": 2.80006956538021,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.785557858118621,
+        0.49603774930609607
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-8"
+    },
+    {
+      "absolute_lateral_projection_meters": 0.4918340837055573,
+      "admitted_by_lookahead": false,
+      "inner_surface_projection_meters": 0.14183408370555733,
+      "lateral_projection_meters": 0.4918340837055573,
+      "longitudinal_projection_meters": 2.9586213908465018,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.941273597396685,
+        0.5867290051856453
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-9"
+    }
+  ],
+  "official_staging_writes": 0,
+  "phase9_s3_width_derivation_sha256": "e6be7b37fe94a249c3d79c41fcae46f09c3ba3c55dbdd5a9c6a771b4be5815eb",
+  "physical_geometry": {
+    "active_world_x_slab_meters": [
+      -2.5,
+      2.5
+    ],
+    "centerline_control_points_meters": [
+      [
+        -2.5,
+        -0.755
+      ],
+      [
+        0.0,
+        0.755
+      ],
+      [
+        2.5,
+        0.5208583333333333
+      ]
+    ],
+    "classification": "A_PHYSICALLY_POSITIVE_WIDTH_FEASIBLE",
+    "entry_aperture_meters": 1.3610000000000002,
+    "exit_aperture_meters": 1.361,
+    "half_width_meters": 0.6805,
+    "independent_physical_free_width_meters": 1.361,
+    "negative_boundary_control_points_meters": [
+      [
+        -2.148173931275908,
+        -1.3374934912650531
+      ],
+      [
+        0.15181433615057732,
+        0.09165042599006701
+      ],
+      [
+        2.4365443336548593,
+        -0.1566766313797021
+      ]
+    ],
+    "positive_boundary_control_points_meters": [
+      [
+        -2.851826068724092,
+        -0.17250650873494688
+      ],
+      [
+        -0.15181433615057732,
+        1.418349574009933
+      ],
+      [
+        2.5634556663451407,
+        1.1983932980463687
+      ]
+    ],
+    "primitive_index": 0,
+    "primitive_type": "polyline_corridor",
+    "robot_euclidean_surface_distance_meters": 2.072611905422656,
+    "source_layout_file": "results/rvt_fd24/layout_execution_specifications/train/train-f3-01.json",
+    "source_layout_file_sha256": "ad53cb79f55cbdae4b90519a168737d0531826ad4edb756ac09a2d9f6bdcfeaa"
+  },
+  "platform": {
+    "machine": "x86_64",
+    "python": "3.9.6",
+    "system": "Linux"
+  },
+  "representational_ordering_tests": {
+    "bit_equal": true,
+    "mission_lateral_axis_reversed": true,
+    "original_width_meters": -0.6143634774571596,
+    "physical_geometry_changed": false,
+    "reversed_left_source_key": "corridor-0-left-3",
+    "reversed_observable_support_count": 10,
+    "reversed_right_source_key": "corridor-0-left-4",
+    "reversed_width_meters": -0.6143634774571596,
+    "sign_changed": false,
+    "token_iteration_reversed": true
+  },
+  "schema_version": "rvt-phase9-s3-width-derivation/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "selected_supports": {
+    "euclidean_center_separation_meters": 0.18020070852225856,
+    "euclidean_surface_separation_meters": -0.5197992914777414,
+    "left": {
+      "absolute_lateral_projection_meters": 0.06365147099135524,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.2863485290086447,
+      "lateral_projection_meters": 0.06365147099135524,
+      "longitudinal_projection_meters": 2.165862263515043,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.1626949010063647,
+        0.13327272578789912
+      ],
+      "selector_side": "left",
+      "source_key": "corridor-0-left-4"
+    },
+    "right": {
+      "absolute_lateral_projection_meters": 0.021985051551485182,
+      "admitted_by_lookahead": true,
+      "inner_surface_projection_meters": -0.3280149484485148,
+      "lateral_projection_meters": -0.021985051551485182,
+      "longitudinal_projection_meters": 2.0073104380487505,
+      "radius_meters": 0.35,
+      "relative_center_meters": [
+        2.0069791617283004,
+        0.04258146990834988
+      ],
+      "selector_side": "right",
+      "source_key": "corridor-0-left-3"
+    },
+    "same_compiled_boundary_side": true
+  }
+}
