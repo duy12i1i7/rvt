@@ -170,6 +170,18 @@ def main() -> None:
     cpu_core_seconds = 0.0
     last_sample = time.monotonic()
     monitor_started = _timestamp()
+    if output.exists():
+        try:
+            previous = json.loads(output.read_text(encoding="ascii"))
+            body = dict(previous)
+            expected_hash = str(body.pop("phase9g_a1_progress_sha256", ""))
+            if sha256_document(body) == expected_hash:
+                cpu_core_seconds = float(
+                    previous["operational"]["cpu_core_seconds_sampled"]
+                )
+                monitor_started = str(previous["monitor_started_at_utc"])
+        except (KeyError, OSError, TypeError, ValueError):
+            pass
 
     while True:
         for split in SPLITS:
