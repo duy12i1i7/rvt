@@ -1,0 +1,149 @@
+{
+  "authoritative_manifest_sha256": "dedd10c302e1f04e7664506b49dfbc1408315ee5a3ad666462afad085fe2ca1e",
+  "manifest_file_sha256": "55130eb0acf5a631ec129c0e576d60a38497f9dfaef9c4e31dffa9f775ea3ee8",
+  "n_candidate_aggregates": 18,
+  "n_events": 9,
+  "phase9g_a1r_long_tail_summary_sha256": "902122b233a204b910e2770962dcc19d38304da7259a354da74258a02d35b341",
+  "profiles": {
+    "w1": {
+      "atomic_unit_latency_seconds": {
+        "max": 87.57973924599992,
+        "mean": 16.91107691844445,
+        "median": 8.099483266000334,
+        "n": 18,
+        "p90": 46.05297240180029,
+        "p95": 87.13902123555049
+      },
+      "candidate_pair_reconciliation_seconds": {
+        "max": 0.034261092999258835,
+        "mean": 0.003922037999877325,
+        "median": 0.00010970500079565682,
+        "n": 9,
+        "p90": 0.00705716899992695,
+        "p95": 0.02065913099959288
+      },
+      "chunk": 1,
+      "counts": {
+        "candidate_aggregates": 18,
+        "events": 9,
+        "prospective_scientific_rows": 10,
+        "replica_executions": 6
+      },
+      "graph_serialization_seconds": {
+        "max": 0.039487725000071805,
+        "mean": 0.0036532171666800017,
+        "median": 0.0,
+        "n": 18,
+        "p90": 0.007881055200050488,
+        "p95": 0.028252815150153748
+      },
+      "numeric_threads": 1,
+      "peak_aggregate_rss_upper_bound_bytes": 294772736,
+      "per_replica_latency_seconds": {
+        "max": 5.4106779220001044,
+        "mean": 3.3954039805001535,
+        "median": 3.223138212500089,
+        "n": 6,
+        "p90": 4.906086011000298,
+        "p95": 5.158381966500201
+      },
+      "raw_file_sha256": "8be303a210381a14c9d845d3854aac958067658c2344c36bdf9bd524d39545a9",
+      "scientific_semantic_digest": "e438b55dfd4b5416e6781c0ef92b7ae1e800f6c8a33d10fb7db2cae912c8e95d",
+      "source_event_seconds": {
+        "max": 87.57961559600062,
+        "mean": 15.775259190888947,
+        "median": 3.935596065500249,
+        "n": 18,
+        "p90": 46.052808878300354,
+        "p95": 87.13881259745013
+      },
+      "wall_seconds": 304.5425914389998,
+      "workers": 1,
+      "writer_seconds": {
+        "max": 0.028721219000544806,
+        "mean": 0.009675505888986259,
+        "median": 0.007217225000204053,
+        "n": 9,
+        "p90": 0.01229364540031384,
+        "p95": 0.02050743220042931
+      }
+    },
+    "w12": {
+      "atomic_unit_latency_seconds": {
+        "max": 91.66861692299972,
+        "mean": 18.60234273433328,
+        "median": 10.080622197000139,
+        "n": 18,
+        "p90": 49.38761136099988,
+        "p95": 91.40867982209974
+      },
+      "candidate_pair_reconciliation_seconds": {
+        "max": 0.03514595000069676,
+        "mean": 0.004022472000239456,
+        "median": 0.00010924700109171681,
+        "n": 9,
+        "p90": 0.007245413199962065,
+        "p95": 0.021195681600329395
+      },
+      "chunk": 1,
+      "counts": {
+        "candidate_aggregates": 18,
+        "events": 9,
+        "prospective_scientific_rows": 10,
+        "replica_executions": 6
+      },
+      "graph_serialization_seconds": {
+        "max": 0.10443471600046905,
+        "mean": 0.0076304874445061914,
+        "median": 0.0,
+        "n": 18,
+        "p90": 0.009874217400192743,
+        "p95": 0.043642156700616296
+      },
+      "numeric_threads": 1,
+      "peak_aggregate_rss_upper_bound_bytes": 3404492800,
+      "per_replica_latency_seconds": {
+        "max": 5.761249616999521,
+        "mean": 4.002059831500143,
+        "median": 3.8483447960002195,
+        "n": 6,
+        "p90": 5.625961033999829,
+        "p95": 5.693605325499675
+      },
+      "raw_file_sha256": "f72eb44c5bc80f4497e07f4b26be605ca4fa3c2ca03b0fab7ef833f03cdabb3d",
+      "scientific_semantic_digest": "e438b55dfd4b5416e6781c0ef92b7ae1e800f6c8a33d10fb7db2cae912c8e95d",
+      "source_event_seconds": {
+        "max": 91.66837654399933,
+        "mean": 17.256230667722168,
+        "median": 4.785092864499802,
+        "n": 18,
+        "p90": 49.38737974299988,
+        "p95": 91.40843927989954
+      },
+      "wall_seconds": 91.84118450000005,
+      "workers": 12,
+      "writer_seconds": {
+        "max": 0.03116952299933473,
+        "mean": 0.010413820555388358,
+        "median": 0.00768359399990004,
+        "n": 9,
+        "p90": 0.01423681339983887,
+        "p95": 0.02270316819958679
+      }
+    }
+  },
+  "schema_version": "rvt-phase9g-a1r-long-tail-summary/v1",
+  "semantic_digest_equal": true,
+  "superseded_diagnostic_sets_preserved": [
+    "phase9g_a1r_long_tail_manifest_selection_defect_v1.json",
+    "phase9g_a1r_long_tail_manifest_v2.json",
+    "phase9g_a1r_long_tail_manifest_v3.json"
+  ],
+  "w12_causes_pathological_tail": false,
+  "worker_profile_decision": {
+    "chunk": 1,
+    "numeric_threads": 1,
+    "scoped_worker_matrix_required": false,
+    "workers": 12
+  }
+}

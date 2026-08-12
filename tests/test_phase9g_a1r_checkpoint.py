@@ -251,3 +251,62 @@ def test_timed_out_candidate_matches_isolated_and_both_worker_profiles() -> None
             if item["candidate_topology_id"] == timeout["candidate_topology_id"]
         )
         assert _sha(candidate) == expected_digest
+
+
+def test_timeout_derivation_uses_tail_structure_and_not_mean() -> None:
+    cause = _canonical(
+        "phase9g_a1r_timeout_root_cause_v1.json",
+        "phase9g_a1r_timeout_root_cause_sha256",
+    )
+    summary = _canonical(
+        "phase9g_a1r_long_tail_summary_v1.json",
+        "phase9g_a1r_long_tail_summary_sha256",
+    )
+    derivation = _canonical(
+        "phase9g_a1r_timeout_derivation_v1.json",
+        "phase9g_a1r_timeout_derivation_sha256",
+    )
+    assert cause["classification"] == "LEGITIMATE_LONG_TAIL"
+    assert cause["both_observed_timeouts_same_atomic_unit"] is True
+    assert summary["semantic_digest_equal"] is True
+    assert summary["worker_profile_decision"] == {
+        "workers": 12,
+        "numeric_threads": 1,
+        "chunk": 1,
+        "scoped_worker_matrix_required": False,
+    }
+    assert derivation["old_timeout_seconds"] == 60.0
+    assert derivation["new_qualified_timeout_seconds"] == 243
+    assert derivation["derived_from_mean"] is False
+    assert derivation["copied_from_residual_timeout"] is False
+    assert derivation["maximum_frozen_structure"] == {
+        "maximum_authorized_team_size": 16,
+        "long_tail_observation_team_size": 12,
+        "maximum_replicas_per_candidate": 3,
+        "maximum_horizon_seconds_represented": 180.0,
+        "maximum_decision_timestep_represented": 1080,
+        "study_a_n24_excluded": True,
+    }
+
+
+def test_timeout_failure_injection_is_exact_pair_and_non_official() -> None:
+    manifest = _canonical(
+        "phase9g_a1r_timeout_failure_injection_manifest_v1.json",
+        "phase9g0p_recoverability_benchmark_manifest_sha256",
+    )
+    timeout = _canonical(
+        "phase9g_a1r_timeout_unit_v1.json",
+        "phase9g_a1r_timeout_unit_sha256",
+    )["timed_out_unit"]
+    assert manifest["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
+    assert manifest["forced_timeout_seconds"] == 5.0
+    assert manifest["proposed_timeout_seconds"] == 243
+    assert manifest["event_count"] == 1
+    assert manifest["scheduler_atomic_unit_count"] == 2
+    assert manifest["events"][0]["event_id"] == timeout["decision_event_id"]
+    assert {unit["candidate_topology_id"] for unit in manifest["scheduler_units"]} == {
+        2,
+        5,
+    }
+    assert manifest["official_staging_writes_permitted"] == 0
+    assert all(value == 0 for value in manifest["sealed_scope"].values())

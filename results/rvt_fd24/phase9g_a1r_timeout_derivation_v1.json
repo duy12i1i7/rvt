@@ -1,0 +1,49 @@
+{
+  "authoritative_profile": "W12_PRODUCTION_EQUIVALENT",
+  "copied_from_residual_timeout": false,
+  "derived_from_mean": false,
+  "evidence_hashes": {
+    "diagnostic_plan": "293d11c69ec0392804a1ae8c62448b2e0b5b8c3287083d1502ba6c2816971288",
+    "long_tail": "902122b233a204b910e2770962dcc19d38304da7259a354da74258a02d35b341",
+    "root_cause": "7b6723bf1c1788140cf19671a140ca882ac7a13ec723f2124d965862acd668cf",
+    "staging_checkpoint": "9012344ea59b0e415809ff76753b7374e60533c6320dd94dee1f0c43e2a5d5ab"
+  },
+  "formula": {
+    "measured_envelope": "source_max + max_replicas*per_replica_max + graph_max + result_serialization_max + reconciliation_max + writer_max",
+    "measured_envelope_seconds": 109.12290378799844,
+    "normalization": "ceil to whole infrastructure-watchdog second",
+    "observed_w12_to_w1_atomic_max_ratio": 1.0466874840254397,
+    "operational_safety_margin_multiplier": 1.25,
+    "raw_result_seconds": 242.49534175110765,
+    "team_size_scaling": "(N_max / N_long_tail)^2",
+    "team_size_scaling_value": 1.7777777777777777
+  },
+  "maximum_frozen_structure": {
+    "long_tail_observation_team_size": 12,
+    "maximum_authorized_team_size": 16,
+    "maximum_decision_timestep_represented": 1080,
+    "maximum_horizon_seconds_represented": 180.0,
+    "maximum_replicas_per_candidate": 3,
+    "study_a_n24_excluded": true
+  },
+  "new_qualified_timeout_seconds": 243,
+  "observations_seconds": {
+    "candidate_pair_reconciliation_max": 0.03514595000069676,
+    "graph_serialization_max": 0.10443471600046905,
+    "isolated_atomic_unit_max": 87.86436630800017,
+    "per_replica_max": 5.761249616999521,
+    "result_serialization_max": 2.8204000045661815e-05,
+    "source_event_max": 91.66837654399933,
+    "targeted_atomic_unit_max": 91.66861692299972,
+    "targeted_atomic_unit_median": 10.080622197000139,
+    "targeted_atomic_unit_p90": 49.38761136099988,
+    "targeted_atomic_unit_p95": 91.40867982209974,
+    "writer_max": 0.03116952299933473
+  },
+  "old_timeout_seconds": 60.0,
+  "old_timeout_status": "SUPERSEDED_HISTORICAL_EVIDENCE",
+  "phase9g_a1r_timeout_derivation_sha256": "d34c724f87c1da835c1a9df642becaad09aa4bb62b3764478f5d22856908c18c",
+  "qualification_pending_failure_injection": true,
+  "schema_version": "rvt-phase9g-a1r-timeout-derivation/v1",
+  "scientific_parameter": false
+}

@@ -1,0 +1,128 @@
+{
+  "chunk_size_atomic_units": 1,
+  "event_count": 1,
+  "events": [
+    {
+      "candidate_replica_jobs": [
+        {
+          "candidate_topology": 5,
+          "dataset_id": "study_a_train",
+          "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+          "family_id": "F2",
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-5/replica-0",
+          "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+          "protocol_reference_id": "phase8-plus-phase9b-frozen",
+          "replica_index": 0,
+          "sealed": false,
+          "seeds": {
+            "candidate_replica_job_seed": 3360875607,
+            "matched_disturbance_seed": 3531133071
+          },
+          "split": "train",
+          "status": "PLANNED",
+          "study": "study_a_zero_shot",
+          "team_size": 12
+        },
+        {
+          "candidate_topology": 2,
+          "dataset_id": "study_a_train",
+          "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+          "family_id": "F2",
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-2/replica-0",
+          "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+          "protocol_reference_id": "phase8-plus-phase9b-frozen",
+          "replica_index": 0,
+          "sealed": false,
+          "seeds": {
+            "candidate_replica_job_seed": 2409777803,
+            "matched_disturbance_seed": 3531133071
+          },
+          "split": "train",
+          "status": "PLANNED",
+          "study": "study_a_zero_shot",
+          "team_size": 12
+        }
+      ],
+      "coverage_intent": [
+        "exact_timed_out_structural_unit",
+        "same_family_team_size"
+      ],
+      "decision_timestep": 400,
+      "episode_index": 1,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+      "event_slot_index": 2,
+      "family": "F2",
+      "horizon_seconds": 120.0,
+      "replicas_per_candidate": 1,
+      "resolved_control_step": 400,
+      "resolved_timestamp_seconds": 60.0,
+      "source": {
+        "dataset_id": "study_a_train",
+        "episode_index": 1,
+        "family": "F2",
+        "horizon_seconds": 120.0,
+        "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1",
+        "layout_id": "train-f2-01",
+        "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+        "layout_source_split": "train",
+        "seeds": {
+          "communication": 2477680437,
+          "data_sampling": 505889372,
+          "dynamic_obstacle": 572034016,
+          "initial_condition": 504851405
+        },
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "split": "train",
+        "study": "study_a_zero_shot",
+        "team_size": 12
+      },
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "source_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1",
+      "team_size": 12
+    }
+  ],
+  "expected_forced_timeout": {
+    "accepted_scientific_dispositions": 0,
+    "partial_candidate_pair_commits": 0,
+    "scientific_rows": 0
+  },
+  "expected_proposed_timeout": {
+    "candidate_pair_completion": true,
+    "scientific_semantic_digest_equal_reference": true
+  },
+  "forced_timeout_basis": "below the 87.2 s minimum repeated isolated completion time",
+  "forced_timeout_seconds": 5.0,
+  "mode": "NON_OFFICIAL_DIAGNOSTIC",
+  "numeric_threads": 1,
+  "official_staging_writes_permitted": 0,
+  "phase9g0p_recoverability_benchmark_manifest_sha256": "e066aa1077313aca0649577e6703f606bd2357cf74ed5072d199e8c756aa299d",
+  "proposed_timeout_seconds": 243,
+  "reference_watchdog_seconds": 300.0,
+  "scheduler_atomic_unit_count": 2,
+  "scheduler_units": [
+    {
+      "candidate_topology_id": 5,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2"
+    },
+    {
+      "candidate_topology_id": 2,
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+      "replicas_per_candidate": 1,
+      "scheduler_atomic_unit_id": "4b3e785e69fe2bf607877ee5247f1ebbf0816de5b71f6af7bdd16cda66947fcf",
+      "scientific_publication_boundary": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2"
+    }
+  ],
+  "schema_version": "rvt-phase9g-a1r-timeout-failure-injection-manifest/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "timeout_derivation_sha256": "d34c724f87c1da835c1a9df642becaad09aa4bb62b3764478f5d22856908c18c",
+  "workers": 1
+}

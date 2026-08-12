@@ -1,0 +1,112 @@
+{
+  "both_observed_timeouts_same_atomic_unit": true,
+  "classification": "LEGITIMATE_LONG_TAIL",
+  "excluded_classifications": {
+    "OPERATIONAL_DEADLOCK_OR_HANG": "unit terminated twice below the predeclared 300 s ceiling",
+    "RESOURCE_STARVATION": "W12/W1 max ratio remained bounded and both semantic digests matched",
+    "UNKNOWN": "repeatable termination and exact cause were observed",
+    "WRITER_SERIALIZATION_STALL": "timeout occurred during source replay before writer/reconciliation"
+  },
+  "isolated_replays": [
+    {
+      "average_cpu_cores": 0.9996233284277708,
+      "cpu_seconds": 87.83127029900001,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "peak_rss_bytes": 600416256,
+      "replay_index": 1,
+      "replica_rollout_seconds": [],
+      "result_serialization_seconds": 2.7835000764753204e-05,
+      "scientific_semantic_digest": "d3741e6ea0a27739b105f1b5e0bfa5786b768fd9c762690cbd0cb605919e3d45",
+      "source_event_seconds": 87.86425224400045,
+      "target_v4_evaluation_seconds": [],
+      "wall_seconds": 87.86436630800017
+    },
+    {
+      "average_cpu_cores": 0.9997235238007276,
+      "cpu_seconds": 87.191593253,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "peak_rss_bytes": 600600576,
+      "replay_index": 2,
+      "replica_rollout_seconds": [],
+      "result_serialization_seconds": 2.8204000045661815e-05,
+      "scientific_semantic_digest": "d3741e6ea0a27739b105f1b5e0bfa5786b768fd9c762690cbd0cb605919e3d45",
+      "source_event_seconds": 87.21559150600024,
+      "target_v4_evaluation_seconds": [],
+      "wall_seconds": 87.21570632000021
+    }
+  ],
+  "official_staging_effect_from_timeout": {
+    "GENERATION_INVALID_created": false,
+    "VALID_TASK_NEGATIVE_created": false,
+    "candidate_aggregate_modified": false,
+    "partial_candidate_pair_rows_created": false,
+    "scientific_state": "UNRESOLVED",
+    "scientific_training_row_created": false
+  },
+  "old_infrastructure_timeout_seconds": 60.0,
+  "phase9g_a1r_timeout_root_cause_sha256": "7b6723bf1c1788140cf19671a140ca882ac7a13ec723f2124d965862acd668cf",
+  "production_equivalent_exact_unit": {
+    "cpu_seconds": 91.655906575,
+    "peak_rss_bytes": 281534464,
+    "scheduler_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d",
+    "wall_seconds": 91.66861692299972,
+    "worker_pid": 7
+  },
+  "schema_version": "rvt-phase9g-a1r-timeout-root-cause/v1",
+  "scientific_atomic_unit": {
+    "candidate_topology_id": 5,
+    "candidate_topology_name": "COMPACT",
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+    "decision_timestamp_seconds": 60.0,
+    "decision_timestep": 400,
+    "episode_horizon_seconds": 120.0,
+    "episode_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1",
+    "episode_index": 1,
+    "event_slot_index": 2,
+    "family": "F2",
+    "layout_id": "train-f2-01",
+    "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+    "matched_disturbance_seed_identities": [
+      3531133071
+    ],
+    "replica_identities": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-5/replica-0"
+    ],
+    "replica_indices": [
+      0
+    ],
+    "scientific_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d",
+    "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+    "source_seeds": {
+      "communication": 2477680437,
+      "data_sampling": 505889372,
+      "dynamic_obstacle": 572034016,
+      "initial_condition": 504851405
+    },
+    "split": "train",
+    "study": "study_a_zero_shot",
+    "team_size": 12
+  },
+  "semantic_digest_equal_across_repeated_w1_and_w12": true,
+  "termination_facts": {
+    "cause": "GOAL_COMPLETE",
+    "planned_event_control_step": 400,
+    "replica_rollouts_executed": 0,
+    "source_terminated_before_event": true,
+    "target_v4_evaluations_executed": 0,
+    "termination_control_step": 383,
+    "writer_involved_in_atomic_timeout": false
+  }
+}
