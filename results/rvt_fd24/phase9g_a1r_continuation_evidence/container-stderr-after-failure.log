@@ -1,0 +1,43 @@
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/concurrent/futures/process.py", line 243, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/opt/rvt/rvt_swarm/phase9g0p/benchmark.py", line 85, in _recoverability_worker
+    result = produce_recoverability_candidate(Path(root_value), task, candidate)
+  File "/opt/rvt/rvt_swarm/phase9g0r/producer.py", line 244, in produce_recoverability_candidate
+    session = _run_source_to_step(root, task.source, task.resolved_control_step)
+  File "/opt/rvt/rvt_swarm/phase9g0r/producer.py", line 138, in _run_source_to_step
+    session.step()
+  File "/opt/rvt/rvt_swarm/phase9c_rb/session.py", line 482, in step
+    self.source_policy.observe(self, robot, view, controller_input)
+  File "/opt/rvt/rvt_swarm/phase9c_rb/policies.py", line 239, in observe
+    decision = s3_local_geometric_decision(
+  File "/opt/rvt/rvt_swarm/phase8e/protocol.py", line 1002, in s3_local_geometric_decision
+    raise ValueError("S3 measured width must be finite and nonnegative")
+ValueError: S3 measured width must be finite and nonnegative
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/rvt/rvt_swarm/phase9g0p/executor.py", line 60, in _bounded_ordered_results
+    yield future.result(timeout=timeout_seconds)
+  File "/usr/local/lib/python3.9/concurrent/futures/_base.py", line 438, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.9/concurrent/futures/_base.py", line 390, in __get_result
+    raise self._exception
+ValueError: S3 measured width must be finite and nonnegative
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/continuation/scripts/run_phase9g_a1r_recoverability_continuation.py", line 450, in <module>
+    main()
+  File "/continuation/scripts/run_phase9g_a1r_recoverability_continuation.py", line 429, in main
+    execution = execute_unresolved(
+  File "/continuation/scripts/run_phase9g_a1r_recoverability_continuation.py", line 159, in execute_unresolved
+    units = (next(results), next(results))
+  File "/opt/rvt/rvt_swarm/phase9g0p/executor.py", line 67, in _bounded_ordered_results
+    raise ProductionInfrastructureError(
+rvt_swarm.phase9g0p.executor.ProductionInfrastructureError: worker failed before durable unit acknowledgement

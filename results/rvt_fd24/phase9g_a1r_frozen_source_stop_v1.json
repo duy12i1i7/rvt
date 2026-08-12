@@ -1,0 +1,82 @@
+{
+  "classification": "FROZEN_SCIENTIFIC_SOURCE_DEFECT",
+  "diagnostic_reproduction": {
+    "candidate_independent_source_failure": true,
+    "candidate_topology_ids": [
+      5,
+      5,
+      2
+    ],
+    "exception_equal_across_replays": true,
+    "measured_width_meters": -0.6143634774571596,
+    "predeclared_plan_sha256": "cb88006759ff971250b477683728fcd7e315bd8935cbf64dbfb92d36325c5c45",
+    "replay_count": 3,
+    "replay_sha256": [
+      "28f4f96958ca9267a684e08104ab5ff9f727175ad11f5539ff21b29b98d64aeb",
+      "ef0aeda7d5c9b2a6ff3962f7c571c63620564995ab760b2e64198c4213b30930",
+      "d5af539d8faf0cda3dc24699a129e6d803b0c3bcc3fde30489b0499c1508ba7b"
+    ],
+    "wall_seconds": [
+      0.09189577399956761,
+      0.09220152200032317,
+      0.0920942680004373
+    ]
+  },
+  "evidence_hashes": {
+    "continuation_stop_audit": "90aa05f702479051f3f021e4668432c712a067c8e5d127cd6cce96d179ed0a28",
+    "worker_failure_identity": "ba8813627d012cd89bf41845eae8dc51a5c041cc1ea6b29cb9a7ee8cc07d257e"
+  },
+  "excluded_operational_causes": {
+    "candidate_specific_counterfactual": true,
+    "infrastructure_timeout": true,
+    "scheduler_cancellation": true,
+    "worker_count_starvation": true,
+    "writer_or_serialization_stall": true
+  },
+  "official_failure": {
+    "candidate_topology_id": 5,
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+    "decision_timestamp_seconds": 13.5,
+    "decision_timestep": 90,
+    "episode_index": 0,
+    "event_slot_index": 0,
+    "exception_class": "ValueError",
+    "exception_message": "S3 measured width must be finite and nonnegative",
+    "family": "F3",
+    "layout_sha256": "59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1",
+    "matched_disturbance_seed_identities": [
+      1313388664
+    ],
+    "scientific_atomic_unit_id": "7d7f2859e7f863031676d5c972dca4e03a4a5dd84ba438cdc7753bb26896b65b",
+    "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+    "team_size": 12
+  },
+  "phase9g_a1r_frozen_source_stop_sha256": "e1efaf9feb39b35155e2b575b5bc1e2e50e91fd9cf6ad6b32c79583e0b29d1e1",
+  "schema_version": "rvt-phase9g-a1r-frozen-source-stop/v1",
+  "scientific_effect": {
+    "candidate_pair_transaction_created": false,
+    "candidate_result_created": false,
+    "official_staging_writes_from_diagnostics": 0,
+    "partial_candidate_pair_transaction_created": false,
+    "scientific_disposition_created": false,
+    "scientific_retry_count": 0,
+    "scientific_row_created": false
+  },
+  "scope_decision": {
+    "automatic_scientific_repair_permitted": false,
+    "frozen_science_changed_in_phase9g_a1r": false,
+    "official_recoverability_complete": false,
+    "residual_started": false,
+    "training_operations": 0
+  },
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "CONFIRMED_FROZEN_SOURCE_EXCEPTION",
+  "verdict": "A",
+  "verdict_text": "Recoverability continuation requires changing frozen science."
+}

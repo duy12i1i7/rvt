@@ -1,0 +1,47 @@
+{
+  "candidate_result_created": false,
+  "candidate_topology_id": 5,
+  "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+  "first_negative_measured_width_call": {
+    "committed_topology": 5,
+    "compact_required_width_meters": 1.3,
+    "complete_observation": true,
+    "complete_open_observation": false,
+    "evidence_duration_seconds": 0.15,
+    "evidence_persistence_seconds": 0.45,
+    "line_required_width_meters": 0.39999999999999997,
+    "measured_width_meters": -0.6143634774571596,
+    "spacing_margin_meters": 0.05
+  },
+  "mode": "NON_OFFICIAL_DIAGNOSTIC",
+  "negative_measured_width_call_count": 7,
+  "official_staging_writes": 0,
+  "phase9g_a1r_worker_failure_diagnostic_replay_sha256": "28f4f96958ca9267a684e08104ab5ff9f727175ad11f5539ff21b29b98d64aeb",
+  "replay_index": 1,
+  "resources": {
+    "major_page_faults_delta": 0,
+    "minor_page_faults_delta": 23,
+    "peak_rss_bytes": 600076288
+  },
+  "s3_call_count_before_termination": 45,
+  "schema_version": "rvt-phase9g-a1r-worker-failure-diagnostic-replay/v1",
+  "scientific_atomic_unit_id": "7d7f2859e7f863031676d5c972dca4e03a4a5dd84ba438cdc7753bb26896b65b",
+  "scientific_disposition_created": false,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "termination": {
+    "exception_class": "ValueError",
+    "exception_message": "S3 measured width must be finite and nonnegative",
+    "kind": "EXCEPTION",
+    "traceback": "Traceback (most recent call last):\n  File \"/continuation/scripts/run_phase9g_a1r_worker_failure_replay.py\", line 96, in main\n    result = produce_recoverability_candidate(root, task, candidate)\n  File \"/opt/rvt/rvt_swarm/phase9g0r/producer.py\", line 244, in produce_recoverability_candidate\n    session = _run_source_to_step(root, task.source, task.resolved_control_step)\n  File \"/opt/rvt/rvt_swarm/phase9g0r/producer.py\", line 138, in _run_source_to_step\n    session.step()\n  File \"/opt/rvt/rvt_swarm/phase9c_rb/session.py\", line 482, in step\n    self.source_policy.observe(self, robot, view, controller_input)\n  File \"/opt/rvt/rvt_swarm/phase9c_rb/policies.py\", line 239, in observe\n    decision = s3_local_geometric_decision(\n  File \"/continuation/scripts/run_phase9g_a1r_worker_failure_replay.py\", line 79, in observed_s3\n    return original(committed_topology, **kwargs)\n  File \"/opt/rvt/rvt_swarm/phase8e/protocol.py\", line 1002, in s3_local_geometric_decision\n    raise ValueError(\"S3 measured width must be finite and nonnegative\")\nValueError: S3 measured width must be finite and nonnegative\n"
+  },
+  "timing": {
+    "cpu_seconds": 0.09190694200000005,
+    "wall_seconds": 0.09189577399956761
+  }
+}

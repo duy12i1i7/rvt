@@ -228,3 +228,120 @@ def test_resume_preflight_passes_with_zero_escapes() -> None:
     sealed = dict(preflight["sealed_domains"])
     assert sealed.pop("study_a_n24_all_manifest_jobs_sealed") is True
     assert all(value == 0 for value in sealed.values())
+
+
+def test_worker_failure_identity_has_no_scientific_effect() -> None:
+    failure = _canonical(
+        "phase9g_a1r_worker_failure_identity_v1.json",
+        "phase9g_a1r_worker_failure_identity_sha256",
+    )
+    unit = failure["failed_atomic_unit"]
+    assert unit["scientific_atomic_unit_id"] == (
+        "7d7f2859e7f863031676d5c972dca4e03a4a5dd84ba438cdc7753bb26896b65b"
+    )
+    assert unit["family"] == "F3"
+    assert unit["team_size"] == 12
+    assert unit["source_class"] == "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR"
+    assert unit["decision_timestep"] == 90
+    assert unit["candidate_topology_id"] == 5
+    effect = failure["failure"]
+    assert effect["exception_message"] == (
+        "S3 measured width must be finite and nonnegative"
+    )
+    assert effect["candidate_result_created"] is False
+    assert effect["scientific_disposition_created"] is False
+    assert effect["scientific_row_created"] is False
+    assert effect["candidate_pair_transaction_created"] is False
+    assert effect["partial_candidate_pair_transaction_created"] is False
+
+
+def test_worker_failure_replays_are_deterministic_and_nonofficial() -> None:
+    replays = [
+        _canonical(
+            f"phase9g_a1r_worker_failure_replays/replay-{index}.json",
+            "phase9g_a1r_worker_failure_diagnostic_replay_sha256",
+        )
+        for index in (1, 2, 3)
+    ]
+    assert [item["candidate_topology_id"] for item in replays] == [5, 5, 2]
+    assert {
+        item["first_negative_measured_width_call"]["measured_width_meters"]
+        for item in replays
+    } == {-0.6143634774571596}
+    assert {
+        item["termination"]["exception_message"] for item in replays
+    } == {"S3 measured width must be finite and nonnegative"}
+    assert all(item["mode"] == "NON_OFFICIAL_DIAGNOSTIC" for item in replays)
+    assert all(item["candidate_result_created"] is False for item in replays)
+    assert all(
+        item["scientific_disposition_created"] is False for item in replays
+    )
+    assert all(item["official_staging_writes"] == 0 for item in replays)
+    assert all(
+        all(value == 0 for value in item["sealed_scope"].values())
+        for item in replays
+    )
+
+
+def test_continuation_stop_audit_preserves_exact_durable_boundary() -> None:
+    stop = _canonical(
+        "phase9g_a1r_continuation_stop_audit_v1.json",
+        "phase9g_a1r_continuation_stop_audit_sha256",
+    )
+    assert stop["status"] == "STOPPED_FROZEN_SOURCE_EXCEPTION"
+    assert stop["verdict"] == "A"
+    progress = stop["official_progress"]
+    assert progress["train_events_completed"] == 210
+    assert progress["validation_events_completed"] == 0
+    assert progress["candidate_aggregates_completed"] == 420
+    assert progress["scientific_rows"] == 342
+    assert progress["initial_rows_reused"] == 318
+    assert progress["new_rows_committed"] == 24
+    assert progress["aggregate_dispositions"] == {
+        "GENERATION_INVALID": 380,
+        "RECOVERABLE_POSITIVE": 30,
+        "VALID_TASK_NEGATIVE": 10,
+    }
+    assert progress["duplicate_scientific_row_identities"] == 0
+    assert progress["partial_candidate_pair_publications"] == 0
+    assert progress["unresolved_worker_failures"] == 1
+    monitoring = progress["operational_monitoring"]
+    assert monitoring["telemetry_events"] == 83
+    assert monitoring["candidate_aggregates"] == 166
+    assert monitoring["observed_peak_worker_rss_bytes"] == 294920192
+    assert monitoring["separate_writer_latency_available"] is False
+    timeout = stop["timeout_requalification_outcome"]
+    assert timeout["previously_timed_out_unit_completed_officially"] is True
+    assert timeout["new_timeout_exceeded"] is False
+    assert timeout["timeout_semantics_remain_infrastructure_only"] is True
+    assert stop["data_integrity"]["all_initial_rows_preserved"] is True
+    assert stop["data_integrity"]["all_transactions_complete"] is True
+    assert stop["downstream"]["final_dataset_manifest_created"] is False
+    assert stop["downstream"]["residual_started"] is False
+    assert stop["downstream"]["training_operations"] == 0
+    assert all(value == 0 for value in stop["sealed_domains"].values())
+
+
+def test_frozen_source_stop_summary_binds_verdict_a() -> None:
+    summary = _canonical(
+        "phase9g_a1r_frozen_source_stop_v1.json",
+        "phase9g_a1r_frozen_source_stop_sha256",
+    )
+    assert summary["classification"] == "FROZEN_SCIENTIFIC_SOURCE_DEFECT"
+    assert summary["diagnostic_reproduction"]["replay_count"] == 3
+    assert summary["diagnostic_reproduction"][
+        "candidate_independent_source_failure"
+    ] is True
+    assert summary["scientific_effect"] == {
+        "candidate_result_created": False,
+        "scientific_disposition_created": False,
+        "scientific_row_created": False,
+        "candidate_pair_transaction_created": False,
+        "partial_candidate_pair_transaction_created": False,
+        "official_staging_writes_from_diagnostics": 0,
+        "scientific_retry_count": 0,
+    }
+    assert summary["verdict"] == "A"
+    assert summary["scope_decision"]["frozen_science_changed_in_phase9g_a1r"] is False
+    assert summary["scope_decision"]["residual_started"] is False
+    assert summary["scope_decision"]["training_operations"] == 0
