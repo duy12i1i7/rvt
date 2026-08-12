@@ -137,16 +137,16 @@ def test_isolated_replays_complete_deterministically_after_old_timeout() -> None
 
 def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> None:
     manifest = _canonical(
-        "phase9g_a1r_long_tail_manifest_v3.json",
+        "phase9g_a1r_long_tail_manifest_v4.json",
         "phase9g0p_recoverability_benchmark_manifest_sha256",
     )
     assert manifest["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
     assert manifest["predeclared_before_measurement"] is True
-    assert manifest["event_count"] == 8
-    assert manifest["scheduler_atomic_unit_count"] == 16
+    assert manifest["event_count"] == 9
+    assert manifest["scheduler_atomic_unit_count"] == 18
     assert manifest["workers_to_compare"] == [1, 12]
     assert manifest["chunk_size_atomic_units"] == 1
-    assert manifest["diagnostic_profile_watchdog_seconds"] == 2400.0
+    assert manifest["diagnostic_profile_watchdog_seconds"] == 2700.0
     assert manifest["diagnostic_profile_watchdog_derivation"][
         "production_authority"
     ] is False
@@ -160,6 +160,7 @@ def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> No
         "three_replicas",
         "changed_topology",
         "per_replica_timing_coverage",
+        "actual_per_replica_timing_coverage",
     } <= intents
     assert all(value == 0 for value in manifest["sealed_scope"].values())
     timeout = _canonical(
@@ -174,6 +175,21 @@ def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> No
     assert exact["source"]["layout_sha256"] == timeout["timed_out_unit"][
         "layout_sha256"
     ]
+    replica_event = next(
+        event for event in manifest["events"]
+        if "actual_per_replica_timing_coverage" in event["coverage_intent"]
+    )
+    checkpoint = _canonical(
+        "phase9g_a1r_staging_checkpoint_v1.json",
+        "phase9g_a1r_staging_checkpoint_sha256",
+    )
+    official = next(
+        item for item in checkpoint["transaction_descriptors"]
+        if item["decision_event_id"] == replica_event["event_id"]
+    )
+    assert official["candidate_pair_status"] == (
+        "SCIENTIFICALLY_RECONCILED_LABELABLE"
+    )
 
 
 def test_initial_incomplete_long_tail_selection_is_excluded() -> None:

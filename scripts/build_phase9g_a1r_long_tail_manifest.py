@@ -30,6 +30,10 @@ SELECTIONS = (
      12, "S0_SCRIPTED_DIAGNOSTIC", 0, 0,
      ("three_replicas", "historical_production_benchmark_class",
       "per_replica_timing_coverage")),
+    ("F8", "034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f",
+     5, "S0_SCRIPTED_DIAGNOSTIC", 0, 0,
+     ("three_replicas", "completed_official_prefix_labelable_class",
+      "actual_per_replica_timing_coverage")),
     ("F9", "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
      16, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
      ("three_replicas", "dynamic_obstacle", "long_horizon", "late_event")),
@@ -95,7 +99,7 @@ def main() -> None:
                 "scientific_publication_boundary": task.event_id,
             })
     document = {
-        "schema_version": "rvt-phase9g-a1r-long-tail-manifest/v2",
+        "schema_version": "rvt-phase9g-a1r-long-tail-manifest/v3",
         "selection_key_fields": [
             "family", "layout_sha256", "team_size", "source_class",
             "episode_index", "event_slot_index",
@@ -107,7 +111,9 @@ def main() -> None:
         "branch": "recoverability",
         "selection_rule": (
             "metadata-only structural coverage; no outcome or runtime from this "
-            "set participated in selection"
+            "set participated in initial selection; v4 adds one completed-prefix "
+            "labelable F8 class after earlier structural F8/F9 cases proved "
+            "scientifically unavailable before replica rollout"
         ),
         "event_count": len(events),
         "scheduler_atomic_unit_count": len(units),
