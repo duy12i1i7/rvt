@@ -127,7 +127,9 @@ def _completed_duplicate_count(audit_root: Path) -> int:
 
 def _timeout_count(audit_root: Path) -> int:
     count = 0
-    for path in audit_root.glob("*-recoverability.stderr.log"):
+    paths = list(audit_root.glob("*-recoverability.stderr.log"))
+    paths.extend((audit_root / "attempts").glob("*/stderr.log"))
+    for path in paths:
         text = path.read_text(encoding="ascii", errors="replace").lower()
         count += text.count("exceeded infrastructure timeout")
     return count
@@ -302,6 +304,9 @@ def main() -> None:
                 "robot_candidate_rows_emitted": rows,
                 "infrastructure_failures": infrastructure_failures,
                 "retries": retries,
+                "run_level_resumes": len(list(
+                    (audit_root / "attempts").glob("*/lifecycle.json")
+                )),
                 "timeouts": _timeout_count(audit_root),
                 "duplicate_detections": _completed_duplicate_count(audit_root),
                 "duplicate_scientific_row_identities": duplicate_row_ids,

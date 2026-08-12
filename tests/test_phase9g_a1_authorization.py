@@ -128,3 +128,33 @@ def test_command_activation_changes_only_owner_placeholders() -> None:
             for index, (old, new) in enumerate(zip(original, activated))
         )
         assert command["resolve_command_argv"] == activated + ["--resolve-only"]
+
+
+def test_operational_stop_is_canonical_and_keeps_all_closed_domains_zero() -> None:
+    stop = _canonical(
+        "phase9g_a1_operational_stop_v1.json",
+        "phase9g_a1_operational_stop_sha256",
+    )
+    assert stop["status"] == "STOPPED_UNRESOLVED_OPERATIONAL_TIMEOUT"
+    assert stop["verdict"] == "D"
+    assert stop["attempt_count"] == 2
+    assert stop["run_level_resume_count"] == 1
+    assert stop["infrastructure_timeouts"] == 2
+    assert stop["unresolved_infrastructure_failures"] == 1
+    assert stop["datasets"]["recoverability_finalized"] is False
+    assert stop["datasets"]["residual_finalized"] is False
+    assert set(stop["sealed_domains"].values()) == {0}
+    assert stop["training"] == {
+        "training_operations": 0,
+        "checkpoints": 0,
+        "optimizer_states": 0,
+        "hp_trials": 0,
+        "class_weighting": "NOT_SELECTED",
+    }
+    observed = stop["partial_staging_audit"]["observed"]
+    assert observed["decision_events_completed"] == 127
+    assert observed["scientific_rows"] == 318
+    assert observed["partial_candidate_pair_publications"] == 0
+    assert observed["duplicate_scientific_identities"] == 0
+    assert observed["hash_failures"] == 0
+    assert observed["schema_failures"] == 0

@@ -1,0 +1,221 @@
+{
+  "attempt_count": 2,
+  "attempts": [
+    {
+      "attempt": "train-attempt-001",
+      "completed_at_utc": "2026-08-12T04:35:22Z",
+      "exit_code": 1,
+      "failure_class": "ProductionInfrastructureError",
+      "infrastructure_timeout_count": 1,
+      "lifecycle_sha256": "c71a1683254737a38c0b5693a11b5e62a585cfc7a077adc27542316d57fe3359",
+      "scientific_disposition_emitted_for_timeout": false,
+      "started_at_utc": "2026-08-12T04:32:15Z",
+      "state": "FAILED",
+      "wall_seconds": 187.52361359899987
+    },
+    {
+      "attempt": "train-attempt-002",
+      "completed_at_utc": "2026-08-12T04:43:48Z",
+      "exit_code": 1,
+      "failure_class": "ProductionInfrastructureError",
+      "infrastructure_timeout_count": 1,
+      "lifecycle_sha256": "10c5e542fbdfce994582998aaeebabc3e4f10b53c05985d07518b37bc59ae7ad",
+      "scientific_disposition_emitted_for_timeout": false,
+      "started_at_utc": "2026-08-12T04:40:42Z",
+      "state": "FAILED",
+      "wall_seconds": 186.23652041800005
+    }
+  ],
+  "authorization": {
+    "artifact": "phase9g_a1_owner_authorization_v1.json",
+    "exact_scope": {
+      "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+      "RECOVERABILITY_GENERATION": "AUTHORIZED_STUDY_A_TRAIN_VALIDATION_ONLY",
+      "RESIDUAL_V2_GENERATION": "AUTHORIZED_STUDY_A_TRAIN_VALIDATION_ONLY",
+      "STUDY_A_N24_ZERO_SHOT": "SEALED_NOT_AUTHORIZED",
+      "STUDY_A_TRAIN_VALIDATION": "AUTHORIZED",
+      "STUDY_B": "NOT_AUTHORIZED",
+      "TRAINING": "NOT_AUTHORIZED"
+    },
+    "sha256": "cc42e48fd7b557a53bb2e8f385e0dda776c4c0a9c8ec719c040476d5d9c06a99"
+  },
+  "branch_state": {
+    "recoverability_train": "INCOMPLETE_OPERATIONAL_FAILURE",
+    "recoverability_validation": "NOT_STARTED_HARD_GATE",
+    "residual_train": "NOT_STARTED_RECOVERABILITY_HARD_GATE",
+    "residual_validation": "NOT_STARTED_RECOVERABILITY_HARD_GATE"
+  },
+  "classification": {
+    "confirmed_operational_profile_failure": true,
+    "dataset_integrity_inconsistency": false,
+    "failure_cause": "qualified Recoverability executor/profile combination repeatedly exceeded its 60-second infrastructure timeout at the same frozen full-production atomic boundary",
+    "new_scientific_specification_problem": false,
+    "scientific_semantic_inconsistency": false
+  },
+  "command_activation_sha256": "d3fd9486ca16f6746ef238b598816524e2a1c15ec1992fe5f1d800a59107e814",
+  "datasets": {
+    "official_indexes": 0,
+    "official_shards": 0,
+    "recoverability_dataset_manifest_sha256": null,
+    "recoverability_finalized": false,
+    "residual_dataset_manifest_sha256": null,
+    "residual_finalized": false
+  },
+  "generation_provenance_root": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+  "infrastructure_timeouts": 2,
+  "operational": {
+    "durable_duplicate_detection_count_unavailable_after_aborted_summary": true,
+    "expected_idempotent_replay_events_in_attempt_2": 127,
+    "final_progress_sha256": "20a6707346f95f3768c9c33b67125c3b793b75f64e1f175e71894b93472238de",
+    "sampled_cpu_core_seconds": 2864.334342056505,
+    "sampled_cpu_hours": 0.7956484283490293,
+    "staging_sealed_read_only": true,
+    "staging_storage_bytes": 5599596,
+    "unexpected_duplicate_scientific_identities": 0,
+    "wall_seconds": 373.7601340169999
+  },
+  "operational_profile": {
+    "artifact": "phase9g0p_operational_production_contract_v2.json",
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 60.0,
+    "numeric_threads": 1,
+    "profile_id": "PROFILE_RECOVERABILITY_V1",
+    "semantic_digest": "c1690c89f737678de83fe36041f6433d909aa36415b7442146bc5c8afa3ed033",
+    "sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12",
+    "workers": 12
+  },
+  "partial_staging_audit": {
+    "expected": {
+      "candidate_aggregates": 15000,
+      "decision_events": 7500,
+      "replica_executions": 21000,
+      "source_episodes": 1500
+    },
+    "next_incomplete_atomic_boundary": {
+      "candidate_topology_inferred_from_traceback": "COMPACT",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+      "episode_index": 1,
+      "event_index": 127,
+      "event_slot_index": 2,
+      "family": "F2",
+      "inference_basis": "127 ordered event transactions were durable and the traceback stopped at compact = next(results) for the following event",
+      "resolved_control_step": 400,
+      "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12
+    },
+    "observed": {
+      "GENERATION_INVALID_aggregates": 216,
+      "RECOVERABLE_POSITIVE_aggregates": 29,
+      "VALID_TASK_NEGATIVE_aggregates": 9,
+      "candidate_aggregates_completed": 254,
+      "candidate_infrastructure_failure_attempts": 0,
+      "candidate_internal_retries": 0,
+      "candidate_pair_invalid_events": 108,
+      "candidate_pair_valid_events": 19,
+      "decision_events_completed": 127,
+      "duplicate_scientific_identities": 0,
+      "hash_failures": 0,
+      "partial_candidate_pair_publications": 0,
+      "replica_executions_completed": 50,
+      "schema_failures": 0,
+      "scientific_rows": 318,
+      "seal_violations": 0,
+      "source_episodes_completed": 25,
+      "unresolved_durable_transactions": 0
+    },
+    "row_distribution": [
+      {
+        "candidate_topology_id": 2,
+        "family": "F1",
+        "label": 0,
+        "rows": 8,
+        "split": "train",
+        "team_size": 8
+      },
+      {
+        "candidate_topology_id": 2,
+        "family": "F1",
+        "label": 1,
+        "rows": 88,
+        "split": "train",
+        "team_size": 8
+      },
+      {
+        "candidate_topology_id": 5,
+        "family": "F1",
+        "label": 0,
+        "rows": 8,
+        "split": "train",
+        "team_size": 8
+      },
+      {
+        "candidate_topology_id": 5,
+        "family": "F1",
+        "label": 1,
+        "rows": 88,
+        "split": "train",
+        "team_size": 8
+      },
+      {
+        "candidate_topology_id": 2,
+        "family": "F2",
+        "label": 1,
+        "rows": 48,
+        "split": "train",
+        "team_size": 12
+      },
+      {
+        "candidate_topology_id": 5,
+        "family": "F2",
+        "label": 0,
+        "rows": 48,
+        "split": "train",
+        "team_size": 12
+      },
+      {
+        "candidate_topology_id": 2,
+        "family": "F8",
+        "label": 1,
+        "rows": 15,
+        "split": "train",
+        "team_size": 5
+      },
+      {
+        "candidate_topology_id": 5,
+        "family": "F8",
+        "label": 0,
+        "rows": 15,
+        "split": "train",
+        "team_size": 5
+      }
+    ]
+  },
+  "phase": "PHASE_9G_A1",
+  "phase9g_a1_operational_stop_sha256": "20b7a1dfa75a4bc8bd68eaa08d00eeb9058415c88b823266ab560d7e707795a8",
+  "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "required_next_action": "separate owner-authorized operational requalification of the full Recoverability production atomic-unit latency envelope; do not reinterpret the timeout as science and do not start Residual",
+  "run_identity": {
+    "run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+    "scientific_row_identity_includes_run_id": false,
+    "sha256": "a3c6dfcd9e85c955a3e2edb10a65110b6dc611dc8e6e1b7cf3dcaa1047448da6"
+  },
+  "run_level_resume_count": 1,
+  "schema_version": "rvt-phase9g-a1-operational-stop/v1",
+  "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0
+  },
+  "status": "STOPPED_UNRESOLVED_OPERATIONAL_TIMEOUT",
+  "training": {
+    "checkpoints": 0,
+    "class_weighting": "NOT_SELECTED",
+    "hp_trials": 0,
+    "optimizer_states": 0,
+    "training_operations": 0
+  },
+  "unresolved_infrastructure_failures": 1,
+  "verdict": "D",
+  "verdict_text": "Official Study A generation remains incomplete after the qualified 60-second Recoverability infrastructure timeout repeated on exact resume."
+}
