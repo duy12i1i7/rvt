@@ -1,0 +1,25 @@
+{
+  "cause": "the initial metadata selection key omitted layout_sha256 and a dictionary collision selected another F2/N12 layout",
+  "claimed_exact_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+  "claimed_layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+  "corrective_action": "predeclare v2 using family, layout_sha256, team size, source class, episode and event slot as the complete selection key",
+  "excluded_measurements": {
+    "w1": {
+      "file_sha256": "4fc9d05f8f9b90528e9a199824d693831d663bb20b5e1ba165b66010dc5acf5c",
+      "scientific_semantic_digest": "8cfe28bea7a5e91b5ebfe923e3f784fd523d7e687308bad3e79b1ed21544e3bc"
+    },
+    "w12": {
+      "file_sha256": "5cb847aa2b61eaea2b7f9b75c68bc6d4e97920f053d4181b876f21257b541544",
+      "scientific_semantic_digest": "8cfe28bea7a5e91b5ebfe923e3f784fd523d7e687308bad3e79b1ed21544e3bc"
+    }
+  },
+  "manifest_file_sha256": "a9d4459386ee37857a800d7cbe4f034994200ab90cf9872c4813dfbac75300e2",
+  "may_participate_in_timeout_derivation": false,
+  "official_staging_effect": 0,
+  "phase9g_a1r_diagnostic_selection_defect_sha256": "5a8fee0a5ccefb897403891a9d6ed348bb4b965b51474ebc844747c83771ad6d",
+  "required_exact_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+  "required_layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+  "schema_version": "rvt-phase9g-a1r-diagnostic-selection-defect/v1",
+  "scope": "NON_OFFICIAL_DIAGNOSTIC_ONLY",
+  "status": "INVALID_DIAGNOSTIC_SELECTION_EXCLUDED"
+}

@@ -1,0 +1,1434 @@
+{
+  "atomic_unit_latency_seconds": {
+    "max": 27.528283231000387,
+    "mean": 7.500506420583406,
+    "median": 3.225233132499852,
+    "n": 12,
+    "p90": 25.616356698999795,
+    "p95": 27.502260118500043
+  },
+  "atomic_unit_observations": [
+    {
+      "cpu_seconds": 27.474053292,
+      "peak_rss_bytes": 281214976,
+      "scheduler_atomic_unit_id": "78e29dd4b6ad7494490bea0fe13829619593074ed2424c408d87e91667893a74",
+      "wall_seconds": 27.480968480999763,
+      "worker_pid": 7
+    },
+    {
+      "cpu_seconds": 27.525013683,
+      "peak_rss_bytes": 281223168,
+      "scheduler_atomic_unit_id": "dea1f85c5988267244346e86a52ee7bd3e73aad5ff4e599ca6a45401185e3b9c",
+      "wall_seconds": 27.528283231000387,
+      "worker_pid": 10
+    },
+    {
+      "cpu_seconds": 1.245388682,
+      "peak_rss_bytes": 281022464,
+      "scheduler_atomic_unit_id": "86f59c1436fc90a1d32f726b11a9328048946c7906f6b09d50b9ca12071b77af",
+      "wall_seconds": 1.2455322310006522,
+      "worker_pid": 11
+    },
+    {
+      "cpu_seconds": 1.246326694,
+      "peak_rss_bytes": 281038848,
+      "scheduler_atomic_unit_id": "1c41390810227c9498f0504394f864d3228ea311b853716be08604ebe8f8aa0c",
+      "wall_seconds": 1.246471752000616,
+      "worker_pid": 12
+    },
+    {
+      "cpu_seconds": 4.389798644000001,
+      "peak_rss_bytes": 280981504,
+      "scheduler_atomic_unit_id": "a7ba0cd3570cdce9d63441b0cac58ae9aa38b60ae1e65b4b3e50f1614c79b2c8",
+      "wall_seconds": 4.390353817999312,
+      "worker_pid": 13
+    },
+    {
+      "cpu_seconds": 4.3719036749999995,
+      "peak_rss_bytes": 280981504,
+      "scheduler_atomic_unit_id": "5a92678cd7202d58cd962340f561416a4cd422bf18f53b6bc8327961e2f2f1d1",
+      "wall_seconds": 4.372415587999967,
+      "worker_pid": 14
+    },
+    {
+      "cpu_seconds": 8.785441345999999,
+      "peak_rss_bytes": 281104384,
+      "scheduler_atomic_unit_id": "0c399cbbaba00c75b0e4df63813bd3076722e4cf3189df6099c96d8e9d2aa113",
+      "wall_seconds": 8.788123983000332,
+      "worker_pid": 15
+    },
+    {
+      "cpu_seconds": 8.833806177000001,
+      "peak_rss_bytes": 281104384,
+      "scheduler_atomic_unit_id": "fd5c16a766300397176784eaacea9f89177e2d8220c954c4caa4e5b096de98a7",
+      "wall_seconds": 8.834850661000019,
+      "worker_pid": 16
+    },
+    {
+      "cpu_seconds": 2.047934846,
+      "peak_rss_bytes": 281153536,
+      "scheduler_atomic_unit_id": "79b14f81ca5059792dc309cac47303bba0090e4d15e341164bee3fe1b775a2b7",
+      "wall_seconds": 2.0481719029994565,
+      "worker_pid": 17
+    },
+    {
+      "cpu_seconds": 2.077808919,
+      "peak_rss_bytes": 281128960,
+      "scheduler_atomic_unit_id": "63b0b99fb5d1010468da0fc2db91e6b3c3a3070d07bae4fa91ffdcfb5ae8fd6f",
+      "wall_seconds": 2.0780506769997373,
+      "worker_pid": 18
+    },
+    {
+      "cpu_seconds": 1.0105871899999999,
+      "peak_rss_bytes": 280965120,
+      "scheduler_atomic_unit_id": "b3f86afef9ac7d2573c597bac95a1fed4337711ceade90637fa69514da92cb33",
+      "wall_seconds": 1.0107161260002613,
+      "worker_pid": 19
+    },
+    {
+      "cpu_seconds": 0.982015268,
+      "peak_rss_bytes": 280965120,
+      "scheduler_atomic_unit_id": "6d09da1ccff472865796504cfaba4db0f8e93858bb708e2e221097f4ce98ff28",
+      "wall_seconds": 0.9821385960003681,
+      "worker_pid": 20
+    }
+  ],
+  "average_worker_cpu_cores": 3.2584006419337816,
+  "benchmark_manifest_sha256": "e154c84cbadf87d16dbe1fc50f7f6b1a98e954c24639c697a1574556863d2078",
+  "branch": "recoverability",
+  "chunk_runtime_seconds": {
+    "max": 27.528283231000387,
+    "mean": 7.500506420583406,
+    "median": 3.225233132499852,
+    "n": 12,
+    "p90": 25.616356698999795,
+    "p95": 27.502260118500043
+  },
+  "chunk_size_atomic_units": 1,
+  "counts": {
+    "candidate_aggregates": 12,
+    "events": 6,
+    "prospective_scientific_rows": 0,
+    "replica_executions": 0
+  },
+  "executor_seconds": 27.574663286999566,
+  "load_balance": {
+    "maximum_to_mean_worker_load_ratio": 3.6701899428357767,
+    "worker_load_seconds": {
+      "10": 27.528283231000387,
+      "11": 1.2455322310006522,
+      "12": 1.246471752000616,
+      "13": 4.390353817999312,
+      "14": 4.372415587999967,
+      "15": 8.788123983000332,
+      "16": 8.834850661000019,
+      "17": 2.0481719029994565,
+      "18": 2.0780506769997373,
+      "19": 1.0107161260002613,
+      "20": 0.9821385960003681,
+      "7": 27.480968480999763
+    }
+  },
+  "memory": {
+    "peak_aggregate_rss_upper_bound_bytes": 3372883968,
+    "peak_rss_by_worker_pid_bytes": {
+      "10": 281223168,
+      "11": 281022464,
+      "12": 281038848,
+      "13": 280981504,
+      "14": 280981504,
+      "15": 281104384,
+      "16": 281104384,
+      "17": 281153536,
+      "18": 281128960,
+      "19": 280965120,
+      "20": 280965120,
+      "7": 281214976
+    },
+    "worker_count_observed": 12
+  },
+  "mode": "DIAGNOSTIC",
+  "numeric_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "nested_oversubscription_permitted": false,
+    "torch_interop_threads_parent": 24,
+    "torch_intraop_threads_parent": 1,
+    "worker_numeric_threads": 1
+  },
+  "official_staging_writes": 0,
+  "phase9g0p_benchmark_result_sha256": "1ca0677ccda3775fcafc35524f765b21c4e0c5be44ca51fe75faa868e852a9d1",
+  "scheduler_parent_overhead_seconds": 0.046380055999179604,
+  "schema_version": "rvt-phase9g0p-production-benchmark-result/v1",
+  "scientific_semantic_digest": "8cfe28bea7a5e91b5ebfe923e3f784fd523d7e687308bad3e79b1ed21544e3bc",
+  "scientific_semantic_projection": [
+    {
+      "candidates": [
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 5,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 5,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 1
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 378,
+            "detail": "",
+            "time_seconds": 56.699999999999996
+          }
+        },
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 2,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 2,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 1
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 378,
+            "detail": "",
+            "time_seconds": 56.699999999999996
+          }
+        }
+      ],
+      "task": {
+        "candidate_replica_jobs": [
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+            "family_id": "F2",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-5/replica-0",
+            "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 3233675836,
+              "matched_disturbance_seed": 1283122474
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+            "family_id": "F2",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2/candidate-2/replica-0",
+            "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2264989215,
+              "matched_disturbance_seed": 1283122474
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          }
+        ],
+        "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+        "event_slot_index": 2,
+        "replicas_per_candidate": 1,
+        "resolved_control_step": 400,
+        "resolved_timestamp_seconds": 60.0,
+        "source": {
+          "dataset_id": "study_a_train",
+          "episode_index": 1,
+          "family": "F2",
+          "horizon_seconds": 120.0,
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1",
+          "layout_id": "train-f2-00",
+          "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+          "layout_source_split": "train",
+          "seeds": {
+            "communication": 1967062472,
+            "data_sampling": 1448869633,
+            "dynamic_obstacle": 1124002264,
+            "initial_condition": 2630935675
+          },
+          "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+          "split": "train",
+          "study": "study_a_zero_shot",
+          "team_size": 12
+        }
+      },
+      "transaction": {
+        "audit": {
+          "candidate_audits": [],
+          "source_terminated_before_event": true,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 378,
+            "detail": "",
+            "time_seconds": 56.699999999999996
+          }
+        },
+        "reconciliation": {
+          "actual_row_count": 0,
+          "audit_dispositions": [
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 5,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 1
+            },
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 2,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 1
+            }
+          ],
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+          "expected_row_count": 24,
+          "rows": [],
+          "schema_version": "rvt-recoverability-candidate-pair-transaction/v1",
+          "scientifically_reconciled": true,
+          "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+          "training_rows_committable": false
+        }
+      }
+    },
+    {
+      "candidates": [
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 5,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 5,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 1
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 26,
+            "detail": "robots 5-6",
+            "time_seconds": 3.9
+          }
+        },
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 2,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 2,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 1
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 26,
+            "detail": "robots 5-6",
+            "time_seconds": 3.9
+          }
+        }
+      ],
+      "task": {
+        "candidate_replica_jobs": [
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+            "family_id": "F2",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2/candidate-5/replica-0",
+            "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 3868854267,
+              "matched_disturbance_seed": 3010739821
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+            "family_id": "F2",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2/candidate-2/replica-0",
+            "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2443406350,
+              "matched_disturbance_seed": 3010739821
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          }
+        ],
+        "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+        "event_slot_index": 2,
+        "replicas_per_candidate": 1,
+        "resolved_control_step": 400,
+        "resolved_timestamp_seconds": 60.0,
+        "source": {
+          "dataset_id": "study_a_train",
+          "episode_index": 0,
+          "family": "F2",
+          "horizon_seconds": 120.0,
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+          "layout_id": "train-f2-00",
+          "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+          "layout_source_split": "train",
+          "seeds": {
+            "communication": 1577505203,
+            "data_sampling": 1953147906,
+            "dynamic_obstacle": 2797806974,
+            "initial_condition": 208464885
+          },
+          "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+          "split": "train",
+          "study": "study_a_zero_shot",
+          "team_size": 12
+        }
+      },
+      "transaction": {
+        "audit": {
+          "candidate_audits": [],
+          "source_terminated_before_event": true,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 26,
+            "detail": "robots 5-6",
+            "time_seconds": 3.9
+          }
+        },
+        "reconciliation": {
+          "actual_row_count": 0,
+          "audit_dispositions": [
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 5,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 1
+            },
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 2,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 1
+            }
+          ],
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-2",
+          "expected_row_count": 24,
+          "rows": [],
+          "schema_version": "rvt-recoverability-candidate-pair-transaction/v1",
+          "scientifically_reconciled": true,
+          "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+          "training_rows_committable": false
+        }
+      }
+    },
+    {
+      "candidates": [
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 5,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 5,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 1
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 95,
+            "detail": "",
+            "time_seconds": 14.25
+          }
+        },
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 2,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 2,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 1
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 95,
+            "detail": "",
+            "time_seconds": 14.25
+          }
+        }
+      ],
+      "task": {
+        "candidate_replica_jobs": [
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+            "family_id": "F5",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4/candidate-5/replica-0",
+            "layout_sha256": "9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1986767194,
+              "matched_disturbance_seed": 670406362
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+            "family_id": "F5",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4/candidate-2/replica-0",
+            "layout_sha256": "9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1586710854,
+              "matched_disturbance_seed": 670406362
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          }
+        ],
+        "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+        "event_slot_index": 4,
+        "replicas_per_candidate": 1,
+        "resolved_control_step": 1080,
+        "resolved_timestamp_seconds": 162.0,
+        "source": {
+          "dataset_id": "study_a_train",
+          "episode_index": 0,
+          "family": "F5",
+          "horizon_seconds": 180.0,
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0",
+          "layout_id": "train-f5-00",
+          "layout_sha256": "9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0",
+          "layout_source_split": "train",
+          "seeds": {
+            "communication": 3108021150,
+            "data_sampling": 618871215,
+            "dynamic_obstacle": 1867749382,
+            "initial_condition": 4277862066
+          },
+          "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+          "split": "train",
+          "study": "study_a_zero_shot",
+          "team_size": 12
+        }
+      },
+      "transaction": {
+        "audit": {
+          "candidate_audits": [],
+          "source_terminated_before_event": true,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 95,
+            "detail": "",
+            "time_seconds": 14.25
+          }
+        },
+        "reconciliation": {
+          "actual_row_count": 0,
+          "audit_dispositions": [
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 5,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 1
+            },
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 2,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 1
+            }
+          ],
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F5/9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0/N12/S4_FROZEN_TRANSITION_PROTOCOL/episode-0/event-4",
+          "expected_row_count": 24,
+          "rows": [],
+          "schema_version": "rvt-recoverability-candidate-pair-transaction/v1",
+          "scientifically_reconciled": true,
+          "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+          "training_rows_committable": false
+        }
+      }
+    },
+    {
+      "candidates": [
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 5,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 5,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 3
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 114,
+            "detail": "",
+            "time_seconds": 17.099999999999998
+          }
+        },
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 2,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 2,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 3
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 12,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 114,
+            "detail": "",
+            "time_seconds": 17.099999999999998
+          }
+        }
+      ],
+      "task": {
+        "candidate_replica_jobs": [
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F8",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-5/replica-0",
+            "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1465258880,
+              "matched_disturbance_seed": 818846602
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F8",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-5/replica-1",
+            "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 1,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2588965170,
+              "matched_disturbance_seed": 169074531
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F8",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-5/replica-2",
+            "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 2,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1046232498,
+              "matched_disturbance_seed": 1090764579
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F8",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-2/replica-0",
+            "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 764213979,
+              "matched_disturbance_seed": 818846602
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F8",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-2/replica-1",
+            "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 1,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2875453151,
+              "matched_disturbance_seed": 169074531
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F8",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-2/replica-2",
+            "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 2,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2369381525,
+              "matched_disturbance_seed": 1090764579
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 12
+          }
+        ],
+        "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+        "event_slot_index": 4,
+        "replicas_per_candidate": 3,
+        "resolved_control_step": 1080,
+        "resolved_timestamp_seconds": 162.0,
+        "source": {
+          "dataset_id": "study_a_train",
+          "episode_index": 0,
+          "family": "F8",
+          "horizon_seconds": 180.0,
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+          "layout_id": "train-f8-01",
+          "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+          "layout_source_split": "train",
+          "seeds": {
+            "communication": 549463932,
+            "data_sampling": 2388641927,
+            "dynamic_obstacle": 4280795509,
+            "initial_condition": 2799924504
+          },
+          "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+          "split": "train",
+          "study": "study_a_zero_shot",
+          "team_size": 12
+        }
+      },
+      "transaction": {
+        "audit": {
+          "candidate_audits": [],
+          "source_terminated_before_event": true,
+          "termination": {
+            "cause": "GOAL_COMPLETE",
+            "control_step": 114,
+            "detail": "",
+            "time_seconds": 17.099999999999998
+          }
+        },
+        "reconciliation": {
+          "actual_row_count": 0,
+          "audit_dispositions": [
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 5,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 3
+            },
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 2,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 3
+            }
+          ],
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+          "expected_row_count": 24,
+          "rows": [],
+          "schema_version": "rvt-recoverability-candidate-pair-transaction/v1",
+          "scientifically_reconciled": true,
+          "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+          "training_rows_committable": false
+        }
+      }
+    },
+    {
+      "candidates": [
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 5,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 5,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 3
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 16,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 33,
+            "detail": "robots 11-12",
+            "time_seconds": 4.95
+          }
+        },
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 2,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 2,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 3
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 16,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 33,
+            "detail": "robots 11-12",
+            "time_seconds": 4.95
+          }
+        }
+      ],
+      "task": {
+        "candidate_replica_jobs": [
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-5/replica-0",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 3214738029,
+              "matched_disturbance_seed": 2155455213
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-5/replica-1",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 1,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2865669519,
+              "matched_disturbance_seed": 1629508924
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-5/replica-2",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 2,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 530942931,
+              "matched_disturbance_seed": 1562864985
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-2/replica-0",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1824221630,
+              "matched_disturbance_seed": 2155455213
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-2/replica-1",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 1,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1513412502,
+              "matched_disturbance_seed": 1629508924
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4/candidate-2/replica-2",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 2,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 3355800866,
+              "matched_disturbance_seed": 1562864985
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          }
+        ],
+        "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+        "event_slot_index": 4,
+        "replicas_per_candidate": 3,
+        "resolved_control_step": 900,
+        "resolved_timestamp_seconds": 135.0,
+        "source": {
+          "dataset_id": "study_a_train",
+          "episode_index": 0,
+          "family": "F9",
+          "horizon_seconds": 150.0,
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+          "layout_id": "train-f9-01",
+          "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+          "layout_source_split": "train",
+          "seeds": {
+            "communication": 2436885750,
+            "data_sampling": 4263044116,
+            "dynamic_obstacle": 1063499011,
+            "initial_condition": 3485155070
+          },
+          "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+          "split": "train",
+          "study": "study_a_zero_shot",
+          "team_size": 16
+        }
+      },
+      "transaction": {
+        "audit": {
+          "candidate_audits": [],
+          "source_terminated_before_event": true,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 33,
+            "detail": "robots 11-12",
+            "time_seconds": 4.95
+          }
+        },
+        "reconciliation": {
+          "actual_row_count": 0,
+          "audit_dispositions": [
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 5,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 3
+            },
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 2,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 3
+            }
+          ],
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S0_SCRIPTED_DIAGNOSTIC/episode-0/event-4",
+          "expected_row_count": 32,
+          "rows": [],
+          "schema_version": "rvt-recoverability-candidate-pair-transaction/v1",
+          "scientifically_reconciled": true,
+          "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+          "training_rows_committable": false
+        }
+      }
+    },
+    {
+      "candidates": [
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 5,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 5,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 3
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 16,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 30,
+            "detail": "robot 13 dynamic",
+            "time_seconds": 4.5
+          }
+        },
+        {
+          "candidate_audit": null,
+          "candidate_topology_id": 2,
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+          "disposition": {
+            "aggregate_label": null,
+            "candidate_topology_id": 2,
+            "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "disposition": "GENERATION_INVALID",
+            "replica_count": 3
+          },
+          "graphs": [],
+          "rollout_configuration_sha256_by_replica": [],
+          "schema_version": "rvt-official-recoverability-candidate-result/v1",
+          "source_snapshot_sha256": null,
+          "source_terminated_before_event": true,
+          "team_size": 16,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 30,
+            "detail": "robot 13 dynamic",
+            "time_seconds": 4.5
+          }
+        }
+      ],
+      "task": {
+        "candidate_replica_jobs": [
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4/candidate-5/replica-0",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 2089957501,
+              "matched_disturbance_seed": 2636910327
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4/candidate-5/replica-1",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 1,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 975939055,
+              "matched_disturbance_seed": 1342750867
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 5,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4/candidate-5/replica-2",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 2,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 1423404702,
+              "matched_disturbance_seed": 1480723908
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4/candidate-2/replica-0",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 0,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 914933791,
+              "matched_disturbance_seed": 2636910327
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4/candidate-2/replica-1",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 1,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 3300390519,
+              "matched_disturbance_seed": 1342750867
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          },
+          {
+            "candidate_topology": 2,
+            "dataset_id": "study_a_train",
+            "decision_event_job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+            "family_id": "F9",
+            "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4/candidate-2/replica-2",
+            "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+            "protocol_reference_id": "phase8-plus-phase9b-frozen",
+            "replica_index": 2,
+            "sealed": false,
+            "seeds": {
+              "candidate_replica_job_seed": 4142801285,
+              "matched_disturbance_seed": 1480723908
+            },
+            "split": "train",
+            "status": "PLANNED",
+            "study": "study_a_zero_shot",
+            "team_size": 16
+          }
+        ],
+        "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+        "event_slot_index": 4,
+        "replicas_per_candidate": 3,
+        "resolved_control_step": 900,
+        "resolved_timestamp_seconds": 135.0,
+        "source": {
+          "dataset_id": "study_a_train",
+          "episode_index": 1,
+          "family": "F9",
+          "horizon_seconds": 150.0,
+          "job_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1",
+          "layout_id": "train-f9-01",
+          "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+          "layout_source_split": "train",
+          "seeds": {
+            "communication": 345877350,
+            "data_sampling": 4144616943,
+            "dynamic_obstacle": 3579694710,
+            "initial_condition": 2275968336
+          },
+          "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+          "split": "train",
+          "study": "study_a_zero_shot",
+          "team_size": 16
+        }
+      },
+      "transaction": {
+        "audit": {
+          "candidate_audits": [],
+          "source_terminated_before_event": true,
+          "termination": {
+            "cause": "COLLISION",
+            "control_step": 30,
+            "detail": "robot 13 dynamic",
+            "time_seconds": 4.5
+          }
+        },
+        "reconciliation": {
+          "actual_row_count": 0,
+          "audit_dispositions": [
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 5,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 3
+            },
+            {
+              "aggregate_label": null,
+              "candidate_topology_id": 2,
+              "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+              "disposition": "GENERATION_INVALID",
+              "replica_count": 3
+            }
+          ],
+          "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F9/24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4/N16/S4_FROZEN_TRANSITION_PROTOCOL/episode-1/event-4",
+          "expected_row_count": 32,
+          "rows": [],
+          "schema_version": "rvt-recoverability-candidate-pair-transaction/v1",
+          "scientifically_reconciled": true,
+          "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+          "training_rows_committable": false
+        }
+      }
+    }
+  ],
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0
+  },
+  "source_planning_seconds": 0.0,
+  "stage_seconds": {
+    "candidate_pair_reconciliation": {
+      "max": 0.000260598999375361,
+      "mean": 0.00012560133321433872,
+      "median": 0.00010062299952551257,
+      "n": 6,
+      "p90": 0.0001846259997364541,
+      "p95": 0.00022261249955590756
+    },
+    "graph_serialization": {
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "n": 12,
+      "p90": 0.0,
+      "p95": 0.0
+    },
+    "replica_rollout": {
+      "n": 0
+    },
+    "row_expansion": {
+      "max": 2.998000127263367e-06,
+      "mean": 1.6216666457088043e-06,
+      "median": 1.346500084764557e-06,
+      "n": 6,
+      "p90": 2.313499862793833e-06,
+      "p95": 2.6557499950286e-06
+    },
+    "source_event": {
+      "max": 27.528050095999788,
+      "mean": 7.500263340416875,
+      "median": 3.225011442000323,
+      "n": 12,
+      "p90": 25.616046022899905,
+      "p95": 27.50197737679982
+    },
+    "writer": {
+      "max": 0.009675264999714273,
+      "mean": 0.007048397166727227,
+      "median": 0.0066877170002044295,
+      "n": 6,
+      "p90": 0.008325099499870703,
+      "p95": 0.009000182249792488
+    }
+  },
+  "storage": {
+    "benchmark_manifest_bytes": 44758,
+    "candidate_aggregate_audit_bytes": {
+      "n": 0
+    },
+    "ego_graph_payload_bytes": {
+      "n": 0
+    },
+    "pair_transaction_metadata_bytes": {
+      "max": 1114.0,
+      "mean": 1100.0,
+      "median": 1093.0,
+      "n": 6,
+      "p90": 1114.0,
+      "p95": 1114.0
+    },
+    "recoverability_row_bytes": {
+      "n": 0
+    },
+    "replica_audit_bytes": {
+      "n": 0
+    }
+  },
+  "throughput": {
+    "atomic_units_per_second": 0.4345013182725859,
+    "prospective_scientific_rows_per_second": 0.0,
+    "replica_executions_per_second": 0.0,
+    "writer_transactions_per_second": 141.87622750894565
+  },
+  "wall_seconds": 27.617867875999764,
+  "worker_cpu_seconds": 89.990078416,
+  "worker_pids": [
+    7,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "workers": 12
+}

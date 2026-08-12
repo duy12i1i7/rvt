@@ -14,17 +14,23 @@ from rvt_swarm.topology_registry import COMPACT, LINE
 
 
 SELECTIONS = (
-    ("F2", 12, "S0_SCRIPTED_DIAGNOSTIC", 1, 2,
+    ("F2", "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+     12, "S0_SCRIPTED_DIAGNOSTIC", 1, 2,
      ("exact_timed_out_structural_unit", "same_family_team_size")),
-    ("F2", 12, "S0_SCRIPTED_DIAGNOSTIC", 0, 2,
+    ("F2", "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+     12, "S0_SCRIPTED_DIAGNOSTIC", 0, 2,
      ("same_family_team_size", "matched_event_boundary_other_seed")),
-    ("F5", 12, "S4_FROZEN_TRANSITION_PROTOCOL", 0, 4,
+    ("F5", "9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0",
+     12, "S4_FROZEN_TRANSITION_PROTOCOL", 0, 4,
      ("changed_topology", "long_horizon", "late_event")),
-    ("F8", 12, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
+    ("F8", "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+     12, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
      ("three_replicas", "long_horizon", "late_event")),
-    ("F9", 16, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
+    ("F9", "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+     16, "S0_SCRIPTED_DIAGNOSTIC", 0, 4,
      ("three_replicas", "dynamic_obstacle", "long_horizon", "late_event")),
-    ("F9", 16, "S4_FROZEN_TRANSITION_PROTOCOL", 1, 4,
+    ("F9", "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+     16, "S4_FROZEN_TRANSITION_PROTOCOL", 1, 4,
      ("three_replicas", "changed_topology", "long_horizon", "late_event")),
 )
 
@@ -41,6 +47,7 @@ def main() -> None:
     by_key = {
         (
             task.source.family,
+            task.source.layout_sha256,
             task.source.team_size,
             task.source.source_class,
             task.source.episode_index,
@@ -50,8 +57,9 @@ def main() -> None:
     }
     events = []
     units = []
-    for family, team_size, source_class, episode, slot, intent in SELECTIONS:
-        key = family, team_size, source_class, episode, slot
+    for (family, layout_sha256, team_size, source_class, episode, slot,
+         intent) in SELECTIONS:
+        key = family, layout_sha256, team_size, source_class, episode, slot
         task = by_key.get(key)
         if task is None:
             raise ValueError(f"predeclared long-tail task is unavailable: {key}")
@@ -80,6 +88,10 @@ def main() -> None:
             })
     document = {
         "schema_version": "rvt-phase9g-a1r-long-tail-manifest/v1",
+        "selection_key_fields": [
+            "family", "layout_sha256", "team_size", "source_class",
+            "episode_index", "event_slot_index",
+        ],
         "mode": "NON_OFFICIAL_DIAGNOSTIC",
         "predeclared_before_measurement": True,
         "study": "study_a_zero_shot",

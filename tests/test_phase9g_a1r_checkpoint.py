@@ -137,7 +137,7 @@ def test_isolated_replays_complete_deterministically_after_old_timeout() -> None
 
 def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> None:
     manifest = _canonical(
-        "phase9g_a1r_long_tail_manifest_v1.json",
+        "phase9g_a1r_long_tail_manifest_v2.json",
         "phase9g0p_recoverability_benchmark_manifest_sha256",
     )
     assert manifest["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
@@ -161,3 +161,27 @@ def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> No
         "changed_topology",
     } <= intents
     assert all(value == 0 for value in manifest["sealed_scope"].values())
+    timeout = _canonical(
+        "phase9g_a1r_timeout_unit_v1.json",
+        "phase9g_a1r_timeout_unit_sha256",
+    )
+    exact = next(
+        event for event in manifest["events"]
+        if "exact_timed_out_structural_unit" in event["coverage_intent"]
+    )
+    assert exact["event_id"] == timeout["timed_out_unit"]["decision_event_id"]
+    assert exact["source"]["layout_sha256"] == timeout["timed_out_unit"][
+        "layout_sha256"
+    ]
+
+
+def test_initial_incomplete_long_tail_selection_is_excluded() -> None:
+    defect = _canonical(
+        "phase9g_a1r_diagnostic_selection_defect_v1.json",
+        "phase9g_a1r_diagnostic_selection_defect_sha256",
+    )
+    assert defect["status"] == "INVALID_DIAGNOSTIC_SELECTION_EXCLUDED"
+    assert defect["claimed_exact_event_id"] != defect["required_exact_event_id"]
+    assert defect["claimed_layout_sha256"] != defect["required_layout_sha256"]
+    assert defect["may_participate_in_timeout_derivation"] is False
+    assert defect["official_staging_effect"] == 0
