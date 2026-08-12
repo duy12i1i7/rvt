@@ -1,0 +1,68 @@
+{
+  "active_or_stopped_phase9g_containers": [],
+  "checkout_commit": "6bcfc0e26c4b327ba63f2844eaa02d30d56903ba",
+  "checkout_status_porcelain": "",
+  "deploy_file_sha256": {
+    "results/rvt_fd24/phase9g_a1r_authorization_continuation_v1.json": "d5e9d33d37def62c07fd01ebdfbf4144e08491725487a3c6287f0865e864df00",
+    "results/rvt_fd24/phase9g_a1r_continuation_run_identity_v1.json": "735970ff44b828e92e1413d3de11499da827a97a0bf3fe4542b3faeb6fc8e80e",
+    "results/rvt_fd24/phase9g_a1r_operational_contract_amendment_v1.json": "cae44502b90c5c10dcd8bcba4565c1e8fa1b2f9c1cded8af79042550755f816c",
+    "results/rvt_fd24/phase9g_a1r_staging_checkpoint_v1.json": "082b01565dcf0e6ef2ba773b43492c3bc13e15a52a8151a22cab55802d124ade",
+    "scripts/run_phase9g_a1r_recoverability_continuation.py": "d6ec90d4e7483afb8129fcc80ac4b03bad69495752e02e1c6152f023e760eed1"
+  },
+  "frozen_manifest_scope": {
+    "decision_event_count_metadata_only": 15300,
+    "final_test_jobs_present": false,
+    "final_test_processes_started": 0,
+    "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+    "residual_processes_started": 0,
+    "source_job_count_metadata_only": 3120,
+    "study_a_n24_all_sealed": true,
+    "study_a_n24_source_job_count": 60,
+    "study_b_processes_started": 0,
+    "training_processes_started": 0
+  },
+  "hostname": "avis",
+  "phase9g_a1r_target_preflight_observation_sha256": "cbf2ae84b2ef0ac0612ae336076af7c7b8ec3525af129136ed081739544649aa",
+  "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "production_image_env": [
+    "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "LANG=C.UTF-8",
+    "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+    "PYTHON_VERSION=3.9.6",
+    "PYTHON_PIP_VERSION=21.2.4",
+    "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/c20b0cfd643cd4a19246ccf204e2997af70f6b21/public/get-pip.py",
+    "PYTHON_GET_PIP_SHA256=fa6f3fb93cce234cd4e8dd2beb54a51ab9c247653b52855a48dd44e6b21ff28b",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "PYTHONUNBUFFERED=1",
+    "PYTHONHASHSEED=0",
+    "PYTHONPATH=/opt/rvt",
+    "MPLBACKEND=Agg",
+    "OMP_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "MKL_CBWR=COMPATIBLE",
+    "OPENBLAS_NUM_THREADS=1",
+    "NUMEXPR_NUM_THREADS=1",
+    "RVT_FD24_NUMERICAL_EXECUTION_PROFILE=FD24_NUMERICAL_EXECUTION_PROFILE_V1",
+    "RVT_SOURCE_COMMIT=8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  ],
+  "production_image_expected": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "schema_version": "rvt-phase9g-a1r-target-preflight-observation/v1",
+  "staging": {
+    "train_exists": true,
+    "train_mode": "dr-xr-xr-x",
+    "train_partial_files": 0,
+    "train_transaction_files": 127,
+    "train_writable": false,
+    "validation_exists": false,
+    "validation_transaction_files": 0,
+    "validation_writable": false
+  },
+  "status": "PASS_READ_ONLY_OBSERVATION",
+  "storage": {
+    "free_bytes": 1023612841984,
+    "total_bytes": 1081101176832,
+    "used_bytes": 2495979520
+  },
+  "target_endpoint": "100.71.102.9",
+  "wsl_distribution": "Ubuntu-24.04"
+}

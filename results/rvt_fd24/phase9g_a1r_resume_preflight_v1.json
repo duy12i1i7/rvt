@@ -1,0 +1,96 @@
+{
+  "official_resume_authorized": true,
+  "phase9g_a1r_resume_preflight_sha256": "83ab166490a064bdf6a7eb8e41533fd215010158689f264e6e9efd4ac2442b12",
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads": 1,
+    "old_infrastructure_timeout_seconds": 60.0,
+    "profile_id": "PROFILE_RECOVERABILITY_A1R_V1",
+    "workers": 12
+  },
+  "resume_boundary": {
+    "chunk_size_atomic_units": 1,
+    "completed_event_identities_reused": 127,
+    "existing_rows_reemitted": 0,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads": 1,
+    "official_generation_execution_authorized": true,
+    "scientific_retry_count": 0,
+    "total_event_identities": 6000,
+    "unresolved_event_identities_scheduled": 5873,
+    "workers": 12
+  },
+  "run_lineage": {
+    "authorization_continuation_sha256": "fc83e2ff0671edba662852d68515bd28cba31cfb214e728afaa857a0f7164e9a",
+    "continuation_run_id": "phase9g-a1r-study-a-train-validation-recoverability-continuation-20260812T061720Z",
+    "logically_independent_dataset": false,
+    "operational_amendment_sha256": "1821badc6b09c2417a3fff98bb2f97673a69cdeff002b9ac1a64fac927d806e8",
+    "parent_run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+    "run_identity_sha256": "98be39bf8653ea683aa6a948bb9419deb5c64b67c1e15a5b7215807a5b43f129",
+    "same_staging_namespace": true
+  },
+  "schema_version": "rvt-phase9g-a1r-resume-preflight/v1",
+  "scientific_bindings": {
+    "frozen_science_changed": false,
+    "generation_provenance_root": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+    "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+    "scientific_addendum_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+    "source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  },
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_a_n24_all_manifest_jobs_sealed": true,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "staging": {
+    "checkpoint_exact_recheck": true,
+    "checkpoint_preimage_sha256": "b1fc6c7ddc238c5cbb961f191ad6e48c6e05f0d985d80548d4ee4ac2fa1d2f5e",
+    "duplicate_rows": 0,
+    "initial_completed_atomic_units": 254,
+    "initial_rows": 318,
+    "initial_transactions": 127,
+    "partial_files": 0,
+    "partial_transactions": 0,
+    "read_only_during_preflight": true
+  },
+  "staging_write_permission_transition": {
+    "authorized_after_this_gate": true,
+    "occurred_before_preflight": false,
+    "scope": "existing Study-A train Recoverability staging directory only"
+  },
+  "status": "PASS_ZERO_ESCAPES",
+  "storage_free_bytes": 1023612841984,
+  "target": {
+    "active_phase_containers": 0,
+    "continuation_wrapper_sha256": "d6ec90d4e7483afb8129fcc80ac4b03bad69495752e02e1c6152f023e760eed1",
+    "endpoint": "100.71.102.9",
+    "hostname": "avis",
+    "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "qualified_checkout_clean": true,
+    "qualified_checkout_commit": "6bcfc0e26c4b327ba63f2844eaa02d30d56903ba",
+    "wsl_distribution": "Ubuntu-24.04"
+  },
+  "tests": {
+    "focused": {
+      "command": "PYTHONPATH=. pytest -q tests/test_phase9g_a1r_checkpoint.py tests/test_phase9g_a1r_continuation.py tests/test_phase9c_timeout_path.py tests/test_phase9g0p_operational.py tests/test_phase9g0r_official_binding.py tests/test_phase9g_a1_authorization.py tests/test_phase9_preflight.py",
+      "errors": 0,
+      "failed": 0,
+      "log_file_sha256": "2497ae37b923dfb4b541f804d56e801e485b598676818e52eb3329a474a16825",
+      "passed": 63,
+      "publication_required_xfailed": 0
+    },
+    "full_suite": {
+      "command": "PYTHONPATH=. pytest -q",
+      "errors": 0,
+      "failed": 0,
+      "log_file_sha256": "ac93fd525792042041283347d29348daa8d1713b837850abc19e6481c0a74e22",
+      "passed": 3080,
+      "publication_required_xfailed": 0
+    }
+  },
+  "timeout_failure_injection_sha256": "7bfdb926f5726b20af3c2acddadaa65e5aa386fc7a493548598bade0ea45d254"
+}

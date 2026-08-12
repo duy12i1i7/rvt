@@ -206,3 +206,25 @@ def test_successor_run_reuses_same_dataset_and_exact_prefix() -> None:
     ] == 0
     assert run["required_order"] == ["train", "validation", "stop"]
     assert all(value == 0 for value in run["sealed_scope"].values())
+
+
+def test_resume_preflight_passes_with_zero_escapes() -> None:
+    preflight = _canonical(
+        "phase9g_a1r_resume_preflight_v1.json",
+        "phase9g_a1r_resume_preflight_sha256",
+    )
+    assert preflight["status"] == "PASS_ZERO_ESCAPES"
+    assert preflight["official_resume_authorized"] is True
+    assert preflight["staging"]["read_only_during_preflight"] is True
+    assert preflight["staging"]["checkpoint_exact_recheck"] is True
+    assert preflight["staging"]["initial_rows"] == 318
+    assert preflight["resume_boundary"]["completed_event_identities_reused"] == 127
+    assert preflight["resume_boundary"]["unresolved_event_identities_scheduled"] == 5873
+    assert preflight["resume_boundary"]["existing_rows_reemitted"] == 0
+    assert preflight["tests"]["focused"]["passed"] == 63
+    assert preflight["tests"]["full_suite"]["passed"] == 3080
+    assert preflight["tests"]["full_suite"]["failed"] == 0
+    assert preflight["tests"]["full_suite"]["publication_required_xfailed"] == 0
+    sealed = dict(preflight["sealed_domains"])
+    assert sealed.pop("study_a_n24_all_manifest_jobs_sealed") is True
+    assert all(value == 0 for value in sealed.values())
