@@ -1,0 +1,49 @@
+{
+  "candidate_topology_id": 5,
+  "completion_disposition": {
+    "aggregate_label": null,
+    "candidate_topology_id": 5,
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+    "disposition": "GENERATION_INVALID",
+    "replica_count": 1
+  },
+  "diagnostic_plan_sha256": "293d11c69ec0392804a1ae8c62448b2e0b5b8c3287083d1502ba6c2816971288",
+  "diagnostic_watchdog_seconds": 300.0,
+  "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F2/b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847/N12/S0_SCRIPTED_DIAGNOSTIC/episode-1/event-2",
+  "mode": "NON_OFFICIAL_DIAGNOSTIC",
+  "official_staging_writes": 0,
+  "phase9g_a1r_timeout_diagnostic_replay_sha256": "a08ea2e2133fb4d10b658882e6e9fb6806f34f19114e74d7c7ae3963fedd04f3",
+  "replay_index": 1,
+  "replica_output_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "resources": {
+    "involuntary_context_switches_delta": 216,
+    "major_page_faults_delta": 0,
+    "minor_page_faults_delta": 37,
+    "peak_rss_bytes": 600416256
+  },
+  "schema_version": "rvt-phase9g-a1r-timeout-diagnostic-replay/v1",
+  "scientific_atomic_unit_id": "5d4f5bbe58cb8ae44b664da9cba4a50e4a462cab8bb05b638982486785b7bc1d",
+  "scientific_semantic_digest": "d3741e6ea0a27739b105f1b5e0bfa5786b768fd9c762690cbd0cb605919e3d45",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "serialized_result_bytes": 1061,
+  "source_terminated_before_event": true,
+  "target_v4_input_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "target_v4_observations": [],
+  "target_v4_output_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "timing": {
+    "atomic_unit_wall_seconds": 87.86436630800017,
+    "average_cpu_cores": 0.9996233284277708,
+    "graph_serialization_seconds": 0.0,
+    "process_cpu_seconds": 87.83127029900001,
+    "replica_rollout_seconds": [],
+    "result_serialization_seconds": 2.7835000764753204e-05,
+    "source_event_seconds": 87.86425224400045,
+    "target_v4_evaluation_seconds": []
+  }
+}

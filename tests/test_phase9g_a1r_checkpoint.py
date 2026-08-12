@@ -105,3 +105,55 @@ def test_timeout_diagnostic_plan_is_predeclared_and_non_official() -> None:
     assert plan["diagnostic_watchdog_seconds"] == 300.0
     assert plan["watchdog_derivation"]["production_authority"] is False
     assert all(value == 0 for value in plan["sealed_scope"].values())
+
+
+def test_isolated_replays_complete_deterministically_after_old_timeout() -> None:
+    replays = [
+        _canonical(
+            f"phase9g_a1r_timeout_replays/replay-{index}.json",
+            "phase9g_a1r_timeout_diagnostic_replay_sha256",
+        )
+        for index in (1, 2)
+    ]
+    for replay in replays:
+        assert replay["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
+        assert replay["official_staging_writes"] == 0
+        assert replay["timing"]["atomic_unit_wall_seconds"] > 60.0
+        assert replay["timing"]["atomic_unit_wall_seconds"] < 300.0
+        assert replay["timing"]["replica_rollout_seconds"] == []
+        assert replay["timing"]["target_v4_evaluation_seconds"] == []
+        assert replay["completion_disposition"]["disposition"] == (
+            "GENERATION_INVALID"
+        )
+        assert replay["source_terminated_before_event"] is True
+    for field in (
+        "scientific_semantic_digest",
+        "replica_output_digest",
+        "target_v4_input_digest",
+        "target_v4_output_digest",
+    ):
+        assert replays[0][field] == replays[1][field]
+
+
+def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> None:
+    manifest = _canonical(
+        "phase9g_a1r_long_tail_manifest_v1.json",
+        "phase9g0p_recoverability_benchmark_manifest_sha256",
+    )
+    assert manifest["mode"] == "NON_OFFICIAL_DIAGNOSTIC"
+    assert manifest["predeclared_before_measurement"] is True
+    assert manifest["event_count"] == 6
+    assert manifest["scheduler_atomic_unit_count"] == 12
+    assert manifest["workers_to_compare"] == [1, 12]
+    assert manifest["chunk_size_atomic_units"] == 1
+    intents = {
+        intent for event in manifest["events"] for intent in event["coverage_intent"]
+    }
+    assert {
+        "exact_timed_out_structural_unit",
+        "same_family_team_size",
+        "long_horizon",
+        "three_replicas",
+        "changed_topology",
+    } <= intents
+    assert all(value == 0 for value in manifest["sealed_scope"].values())
