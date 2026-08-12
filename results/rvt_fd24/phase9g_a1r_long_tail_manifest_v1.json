@@ -2,6 +2,14 @@
   "branch": "recoverability",
   "candidate_pair_count": 6,
   "chunk_size_atomic_units": 1,
+  "diagnostic_profile_watchdog_derivation": {
+    "event_count": 6,
+    "formula": "event_count * isolated_diagnostic_watchdog_seconds",
+    "isolated_diagnostic_watchdog_seconds": 300.0,
+    "production_authority": false,
+    "result_seconds": 1800.0
+  },
+  "diagnostic_profile_watchdog_seconds": 1800.0,
   "event_count": 6,
   "events": [
     {
@@ -710,7 +718,7 @@
   "mode": "NON_OFFICIAL_DIAGNOSTIC",
   "numeric_threads": 1,
   "official_staging_writes_permitted": 0,
-  "phase9g0p_recoverability_benchmark_manifest_sha256": "5712c4b41133cdf4e527f2c4cd92f2201cdc3374aaca84f5a901ecd768e0b4db",
+  "phase9g0p_recoverability_benchmark_manifest_sha256": "e154c84cbadf87d16dbe1fc50f7f6b1a98e954c24639c697a1574556863d2078",
   "predeclared_before_measurement": true,
   "production_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
   "scheduler_atomic_unit_count": 12,

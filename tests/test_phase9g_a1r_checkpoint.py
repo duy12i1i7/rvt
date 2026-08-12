@@ -146,6 +146,10 @@ def test_long_tail_set_was_predeclared_with_required_structural_coverage() -> No
     assert manifest["scheduler_atomic_unit_count"] == 12
     assert manifest["workers_to_compare"] == [1, 12]
     assert manifest["chunk_size_atomic_units"] == 1
+    assert manifest["diagnostic_profile_watchdog_seconds"] == 1800.0
+    assert manifest["diagnostic_profile_watchdog_derivation"][
+        "production_authority"
+    ] is False
     intents = {
         intent for event in manifest["events"] for intent in event["coverage_intent"]
     }
