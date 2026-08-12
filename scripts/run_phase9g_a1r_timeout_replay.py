@@ -79,7 +79,7 @@ def main() -> None:
             root, study=str(unit["study"]), split=str(unit["split"])
         )
     }
-    event_id = str(unit["event_id"])
+    event_id = str(unit["decision_event_id"])
     if event_id not in tasks:
         raise ValueError("predeclared event is absent from the canonical compiler")
     task = tasks[event_id]
