@@ -1,0 +1,76 @@
+{
+  "durable_boundary": {
+    "duplicate_scientific_identities": 0,
+    "initial_events_reused": 127,
+    "new_events_committed": 83,
+    "partial_candidate_pair_publications": 0,
+    "status_events_completed_this_continuation": 83,
+    "total_durable_candidate_aggregates": 420,
+    "total_durable_events": 210
+  },
+  "evidence_method": {
+    "canonical_task_metadata_used": true,
+    "durable_completion_markers_used": true,
+    "log_text_used_to_select_identity": false,
+    "ordered_candidate_scheduler_contract_used": true
+  },
+  "failed_atomic_unit": {
+    "candidate_topology_id": 5,
+    "candidate_topology_name": "COMPACT",
+    "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+    "decision_timestamp_seconds": 13.5,
+    "decision_timestep": 90,
+    "episode_horizon_seconds": 135.0,
+    "episode_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0",
+    "episode_index": 0,
+    "event_slot_index": 0,
+    "family": "F3",
+    "layout_id": "train-f3-01",
+    "layout_sha256": "59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1",
+    "matched_disturbance_seed_identities": [
+      1313388664
+    ],
+    "replica_count": 1,
+    "replica_identities": [
+      "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0/candidate-5/replica-0"
+    ],
+    "scientific_atomic_unit_id": "7d7f2859e7f863031676d5c972dca4e03a4a5dd84ba438cdc7753bb26896b65b",
+    "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+    "source_seeds": {
+      "communication": 1781318376,
+      "data_sampling": 1073029205,
+      "dynamic_obstacle": 976299567,
+      "initial_condition": 808463837
+    },
+    "split": "train",
+    "study": "study_a_zero_shot",
+    "team_size": 12
+  },
+  "failure": {
+    "candidate_pair_transaction_created": false,
+    "candidate_result_created": false,
+    "exception_class": "ValueError",
+    "exception_message": "S3 measured width must be finite and nonnegative",
+    "partial_candidate_pair_transaction_created": false,
+    "scientific_disposition_created": false,
+    "scientific_retry_count": 0,
+    "scientific_row_created": false,
+    "source_stage": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR.observe"
+  },
+  "official_status": {
+    "failure_class": "ProductionInfrastructureError",
+    "failure_message": "worker failed before durable unit acknowledgement",
+    "maximum_atomic_unit_wall_seconds": 93.44187716799934,
+    "qualified_timeout_seconds": 243.0,
+    "state": "FAILED"
+  },
+  "phase9g_a1r_worker_failure_identity_sha256": "ba8813627d012cd89bf41845eae8dc51a5c041cc1ea6b29cb9a7ee8cc07d257e",
+  "schema_version": "rvt-phase9g-a1r-worker-failure-identity/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  }
+}
