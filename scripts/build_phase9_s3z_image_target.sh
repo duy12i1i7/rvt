@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-source_commit="20bfa1bfdc311f67075327418595441b101bc8de"
+source_commit="${1:?usage: build_phase9_s3z_image_target.sh SOURCE_COMMIT}"
 old_image="sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4"
 tag="rvt-phase9g-a1s3z:${source_commit:0:8}"
 parent_tag="rvt-phase9g-a1s3z-parent:88ecf1aa"
