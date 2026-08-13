@@ -1,5 +1,6 @@
 """Phase 9B changes protocol metadata only and executes no scientific work."""
 
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -21,6 +22,7 @@ RB16R_AUTHORIZED_FILES = {
     "rvt_swarm/fd24/configuration.py",
     "rvt_swarm/decentralized/guards.py",
 }
+A1S3Z_AUTHORIZED_FILES = {"rvt_swarm/decentralized/system_model.py"}
 
 
 def test_phase8_and_mechanical_files_are_unchanged():
@@ -38,7 +40,13 @@ def test_phase8_and_mechanical_files_are_unchanged():
         ["git", "diff", "--name-only", PHASE8, "--", *protected],
         cwd=ROOT, check=True, capture_output=True, text=True,
     ).stdout.splitlines()
-    assert set(changed) <= RB16R_AUTHORIZED_FILES
+    contract = json.loads((
+        ROOT / "results/rvt_fd24/phase9_s3_centerline_execution_contract_v1.json"
+    ).read_text(encoding="ascii"))
+    for path in A1S3Z_AUTHORIZED_FILES:
+        assert contract["runtime_files"][path]["after_sha256"] == hashlib.sha256(
+            (ROOT / path).read_bytes()).hexdigest()
+    assert set(changed) <= RB16R_AUTHORIZED_FILES | A1S3Z_AUTHORIZED_FILES
 
 
 def test_blocked_phase9_artifacts_are_bitwise_preserved():

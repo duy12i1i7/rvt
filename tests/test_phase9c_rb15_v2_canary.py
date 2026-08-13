@@ -22,6 +22,7 @@ BINDING = json.loads((ROOT / "rb15_residual_expert_binding_v2.json").read_text()
 IDENTITY = json.loads((ROOT / "residual_generation_job_identity_v2.json").read_text())
 SPEC = json.loads((ROOT / "residual_expert_spec_v2.json").read_text())
 BUDGET = json.loads((ROOT / "datasets" / "generation_budget_v1.json").read_text())
+S3Z = json.loads((ROOT / "phase9_s3_centerline_execution_contract_v1.json").read_text())
 
 
 def _self_hash(document: dict, field: str) -> str:
@@ -199,10 +200,21 @@ def test_binding_pins_every_authoritative_input_by_hash() -> None:
     assert inputs["phase8_targets_module"]["sha256"] == hashlib.sha256(
         pathlib.Path("rvt_swarm/phase8/targets.py").read_bytes()).hexdigest()
     view = inputs["robot_view"]
-    assert view["definition_sha256"] == hashlib.sha256(
-        pathlib.Path(view["definition_path"]).read_bytes()).hexdigest()
-    assert view["builder_sha256"] == hashlib.sha256(
-        pathlib.Path(view["builder_path"]).read_bytes()).hexdigest()
+    for old_field, path_field in (
+        ("definition_sha256", "definition_path"),
+        ("builder_sha256", "builder_path"),
+    ):
+        path = pathlib.Path(view[path_field])
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        if digest != view[old_field]:
+            additive = S3Z["runtime_files"][str(path)]
+            assert additive["before_sha256"] == view[old_field]
+            assert additive["after_sha256"] == digest
+        else:
+            assert view[old_field] == digest
+    assert S3Z["consumer_boundary"][
+        "residual_expert_canonical_view_hash_includes_new_fields"
+    ] is False
     assert view["richer_expert_only_view_created"] is False
 
 

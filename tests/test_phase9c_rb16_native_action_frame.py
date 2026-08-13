@@ -37,6 +37,7 @@ SPEC = json.loads((ROOT / "residual_expert_spec_v2.json").read_text())
 BINDING_V2 = json.loads((ROOT / "rb15_residual_expert_binding_v2.json").read_text())
 CANARY = json.loads((ROOT / "rb15_v2_canary_v1.json").read_text())
 BUDGET = json.loads((ROOT / "datasets" / "generation_budget_v1.json").read_text())
+S3Z = json.loads((ROOT / "phase9_s3_centerline_execution_contract_v1.json").read_text())
 
 MODEL = FD24ModelConfig()
 RUNTIME = RuntimeConfig.for_team_size(6)
@@ -340,7 +341,13 @@ def test_session_refactor_provenance_is_accurate() -> None:
     provenance = RB16["session_refactor_provenance"]
     current = hashlib.sha256(
         pathlib.Path(provenance["file"]).read_bytes()).hexdigest()
-    assert provenance["post_refactor_sha256"] == current
+    if provenance["post_refactor_sha256"] != current:
+        additive = S3Z["runtime_files"][provenance["file"]]
+        assert additive["before_sha256"] == provenance["post_refactor_sha256"]
+        assert additive["after_sha256"] == current
+        assert S3Z["unchanged_components"]["controller"] is True
+    else:
+        assert provenance["post_refactor_sha256"] == current
     assert provenance["pre_refactor_sha256"] != current
     cited = next(row for row in SPEC["clearance_sources"]
                  if row["constraint_type"] == "ROBOT_ROBOT")

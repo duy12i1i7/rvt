@@ -1,0 +1,82 @@
+{
+  "addendum_commit": "295722307412a85cba5506fb2abc62dcf23a99f3",
+  "binding": "ADDITIVE",
+  "consumer_boundary": {
+    "controller_input_schema_changed": false,
+    "ego_graph_schema_changed": false,
+    "frame_absent_for_other_source_policies": true,
+    "frame_populated_for": [
+      "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "S4_FROZEN_TRANSITION_PROTOCOL"
+    ],
+    "residual_expert_canonical_view_hash_includes_new_fields": false
+  },
+  "exact_arithmetic_order": "dot((robot_position + support_offset) - c_world, n)",
+  "image_lineage": {
+    "qualified_candidate_image": "sha256:c2f8734403f6422c10e04531529458e7826c175cbec0933c5b7d936cebedf39f",
+    "qualified_parent_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "rejected_candidate_image": "sha256:88f4d7d833ec7166d3b946b31cae5fa8b6499e06e38370b9cb9f83bfacd29810",
+    "rejected_reason": "S4 delegated S3 evidence without receiving its frame"
+  },
+  "initial_repair_commit": "74de65a81f3aa897be326e57de29297f5cc237e4",
+  "numerical_epsilon": null,
+  "official_operations": {
+    "generation_resumed": false,
+    "residual_started": false,
+    "staging_writes": 0,
+    "training_operations": 0,
+    "validation_started": false
+  },
+  "phase": "PHASE_9G_A1S3Z",
+  "phase9_s3_centerline_execution_contract_sha256": "5275349528c1a8a7e419eb266d56c4736113b2c0deb2c4f86f94acc2dd08ae67",
+  "pipeline": [
+    "range-gated ego-relative support tokens",
+    "qualified compiled local reference frame c,t,n",
+    "exact binary64 signed free-surface coordinate",
+    "CENTERLINE_NEUTRAL exclusion from boundary extrema",
+    "nearest strict NEG/POS opposing-boundary pair",
+    "existing HOLD_UNKNOWN disposition when a side is missing"
+  ],
+  "prior_opposing_boundary_addendum_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+  "qualified_repair_commit": "20bfa1bfdc311f67075327418595441b101bc8de",
+  "runtime_files": {
+    "rvt_swarm/decentralized/system_model.py": {
+      "after_sha256": "d5181f39fc33fe4b2af1b3e2d317a09550c6b93fba335f4ba06eccaf86c66804",
+      "before_sha256": "d62c0983234f26d6e73db1377e069a751310cc7950e1b5102b683a9c20d41607",
+      "change": "two optional S3 local-frame fields on RobotView"
+    },
+    "rvt_swarm/phase9c_rb/policies.py": {
+      "after_sha256": "4bf1e02b85f62276ba664ed0fee2e6611298819aa07732826c9e2e7bc64aaece",
+      "before_sha256": "d0c8392b4a1f9ba842465b55a157d265ca1f4f034b652608b19a829e01a96451",
+      "change": "replace same-side estimator with owner-qualified pairing"
+    },
+    "rvt_swarm/phase9c_rb/s3_geometry.py": {
+      "after_sha256": "26a02c881c458863ae10e8429a43fccfee658f5dbca8dd8d80377b245c5d3b34",
+      "before_sha256": null,
+      "change": "new pure opposing-boundary and exact-zero implementation"
+    },
+    "rvt_swarm/phase9c_rb/session.py": {
+      "after_sha256": "48013629dad2c484b8a9e6c5287ad71a8bc5f270695ef5e201cf67e7eba4a43e",
+      "before_sha256": "9a88932f69f6cba6eddd698af6a60840e12ed416e25c9eaad1b4286e31d2c342",
+      "change": "populate the frame only for S3 and S4 S3-evidence consumers"
+    },
+    "rvt_swarm/phase9c_rb/world.py": {
+      "after_sha256": "5fe877dc444fa85b6a3882a0cfa6c1421e34e832e2a51f434735fc7dd3b8f454",
+      "before_sha256": "7dfd0127cc25a253caf7dc6b333bea26b1312c5a66343231dbace72133e54645",
+      "change": "expose only the qualified local reference frame"
+    }
+  },
+  "schema_version": "rvt-phase9-s3-centerline-execution-contract/v1",
+  "scientific_addendum_sha256": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+  "unchanged_components": {
+    "collision_geometry": true,
+    "controller": true,
+    "local_safety_projection": true,
+    "matched_randomness": true,
+    "model": true,
+    "residual_expert": true,
+    "row_identity_contract": true,
+    "target_v4": true,
+    "transition_protocol": true
+  }
+}

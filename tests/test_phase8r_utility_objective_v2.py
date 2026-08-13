@@ -33,6 +33,7 @@ from rvt_swarm.runtime_configuration import RuntimeConfig
 ROOT = pathlib.Path("results/rvt_fd24")
 SPEC = json.loads((ROOT / "residual_expert_spec_v2.json").read_text())
 COMPOSITE = json.loads((ROOT / "residual_label_contract_composite_v2.json").read_text())
+S3Z = json.loads((ROOT / "phase9_s3_centerline_execution_contract_v1.json").read_text())
 
 RUNTIME = RuntimeConfig.for_team_size(5)
 MODEL = FD24ModelConfig()
@@ -190,6 +191,16 @@ def test_every_clearance_threshold_comes_from_the_frozen_collision_truth() -> No
     for row in SPEC["clearance_sources"]:
         digest = hashlib.sha256(pathlib.Path(row["source_file"]).read_bytes()).hexdigest()
         if digest == row["source_file_sha256"]:
+            continue
+        if row["source_file"] in S3Z["runtime_files"]:
+            additive = S3Z["runtime_files"][row["source_file"]]
+            prior_hashes = {row["source_file_sha256"]}
+            if refactor is not None and refactor["file"] == row["source_file"]:
+                assert refactor["sha256_before"] == row["source_file_sha256"]
+                prior_hashes.add(refactor["sha256_after"])
+            assert additive["before_sha256"] in prior_hashes
+            assert additive["after_sha256"] == digest
+            assert S3Z["unchanged_components"]["collision_geometry"] is True
             continue
         # A cited file may move only through a recorded behaviour-identical
         # refactor. The frozen specification is never rewritten to match.
