@@ -191,6 +191,15 @@ def main() -> None:
         })
 
     if any(record["source_exception"] for record in source_records):
+        print(json.dumps({
+            "source_exceptions": [
+                {
+                    "source_task_id": record["source_task_id"],
+                    "source_exception": record["source_exception"],
+                }
+                for record in source_records if record["source_exception"]
+            ]
+        }, sort_keys=True))
         raise ValueError("committed dependency source replay failed")
     if (totals["decision_differences"] or totals["physical_pair_differences"]
             or totals["centerline_neutral_supports"]):

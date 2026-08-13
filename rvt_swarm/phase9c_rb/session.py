@@ -44,7 +44,7 @@ from ..utils import soft_clip
 from .binding import ScenarioRuntimeBinding
 from .channel import build_channel, CommunicationChannel
 from .dynamics import build_dynamic_world, DynamicWorld
-from .policies import S3
+from .policies import S3, S4
 from .streams import (
     STREAM_INITIAL_POSITION, STREAM_INITIAL_VELOCITY, STREAM_ROBOT_ACCELERATION,
     STREAM_S5_ACCELERATION, CounterStream,
@@ -362,7 +362,7 @@ class SimulatorEpisodeSession:
                      for offset, radius, _ in self.static_world.observable_tokens(
                          robot.position, float(self.runtime_config.sensing.obstacle_sensing_range_meters))]
         s3_center = s3_normal = None
-        if getattr(self.source_policy, "policy_id", None) == S3:
+        if getattr(self.source_policy, "policy_id", None) in (S3, S4):
             s3_center, s3_normal = self.static_world.s3_local_reference_frame(
                 robot.position, self.mission_origin, self.mission_direction)
 
