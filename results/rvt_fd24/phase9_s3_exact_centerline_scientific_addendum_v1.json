@@ -1,0 +1,81 @@
+{
+  "authorization": {
+    "implementation_authorized": true,
+    "official_generation_resume_authorized": false,
+    "scope_if_separately_authorized_later": "Study A Recoverability TRAIN continuation only"
+  },
+  "binding": "ADDITIVE_DO_NOT_REWRITE_HISTORICAL_ROOTS",
+  "identity": {
+    "a1r_evidence_commit": "a943ca391fb5feb5c8e90a693f763cc47c4d4e2b",
+    "a1s3_evidence_commit": "2d21f402ec286bde0f44494f612a2b83e2087184",
+    "a1s3_report_commit": "5b0a439b739cdfd229aa1f124bdb4ed01bc65126",
+    "a1s3r_evidence_commit": "7079a23bab9a5eed4c4e864988c0139d937009d4",
+    "a1s3r_report_commit": "eb71541eb8d611c350aa856f9da28165757f3e6c",
+    "official_staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "prior_owner_rule": "rvt-s3-opposing-boundary-pairing/v1",
+    "qualified_pre_repair_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4"
+  },
+  "mandatory_provenance": {
+    "class_balance_used": false,
+    "downstream_evaluation_used": false,
+    "existing_row_classification": {
+      "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+      "POTENTIALLY_AFFECTED": 0,
+      "PROVEN_AFFECTED": 0,
+      "UNAFFECTED": 254
+    },
+    "four_exact_zero_cases_discovered_during_pre_resume_qualification": true,
+    "historical_roots_rewritten": false,
+    "model_results_used": false,
+    "official_generation_had_begun_before_discovery": true,
+    "official_rows_already_existed": 342,
+    "official_staging_read_only_during_qualification": true,
+    "owner_rule_basis": "local geometric meaning only",
+    "target_v4_success_rate_used": false
+  },
+  "owner_rule": {
+    "centerline_neutral_eligible_for_d_neg": false,
+    "centerline_neutral_eligible_for_d_pos": false,
+    "clamping_permitted": false,
+    "exact_zero_classification": "CENTERLINE_NEUTRAL",
+    "isclose_permitted": false,
+    "negative_side": "finite d_k < 0.0",
+    "negative_zero_classification": "CENTERLINE_NEUTRAL",
+    "nonfinite_handling": "use existing fail-closed numerical validity guards",
+    "numerical_epsilon": null,
+    "perturbation_permitted": false,
+    "positive_side": "finite d_k > 0.0",
+    "positive_zero_classification": "CENTERLINE_NEUTRAL",
+    "rounding_permitted": false,
+    "signbit_used_for_zero_side_assignment": false,
+    "signed_coordinate": "d_k = dot(p_k-c,n)",
+    "snapping_permitted": false
+  },
+  "pairing_after_classification": {
+    "missing_side": "use existing authoritative HOLD_UNKNOWN/source-validity disposition; fail closed if no existing rule applies",
+    "negative_selection": "d_neg = max({d_k | d_k < 0})",
+    "positive_selection": "d_pos = min({d_k | d_k > 0})",
+    "same_side_pair_permitted": false,
+    "tie": "use frozen canonical physical identity; fail closed as S3_SUPPORT_TIE_UNDERSPECIFIED if a physically distinct tie affects execution",
+    "width": "S3_width = d_pos-d_neg"
+  },
+  "phase": "PHASE_9G_A1S3Z",
+  "phase9_s3_exact_centerline_scientific_addendum_sha256": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+  "physical_scene_rule": {
+    "centerline_neutral_means_ignore_object": false,
+    "collision_geometry_changed": false,
+    "controller_observation_changed": false,
+    "physical_primitive_removed": false,
+    "safety_geometry_changed": false,
+    "scope": "S3 opposing-boundary pairing only",
+    "target_v4_physical_execution_changed": false
+  },
+  "schema_version": "rvt-s3-exact-centerline-support/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  }
+}
