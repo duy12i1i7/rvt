@@ -1,0 +1,49 @@
+{
+  "authorization_continuation_sha256": "6bb55ef39de6f78a81ced45e9bfa960daf72acb650e432e690a16e019a61e2ae",
+  "authorization_scope_sha256": "c64e728d978a27aaf5f46e662f1262e5f05846705299665e5dea012b2b7886f5",
+  "created_at_utc": "2026-08-13T11:23:33Z",
+  "current_root_validation_sha256": "72e445f815a7cb76ef8b9cf14bf57b4da0f1422d03962015fea74ff4e31dae17",
+  "frozen_train_universe": {
+    "candidate_aggregates": 12000,
+    "decision_events": 6000,
+    "initial_unresolved_events": 5790,
+    "source_episodes": 1200
+  },
+  "identity_class": "OPERATIONAL_SUCCESSOR_CONTINUATION_NOT_SCIENTIFIC",
+  "initial_staging_checkpoint": {
+    "artifact": "phase9g_a1c_staging_precheck_v1.json",
+    "completed_train_events": 210,
+    "scientific_rows": 342,
+    "sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f"
+  },
+  "logically_independent_dataset": false,
+  "original_run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+  "parent_run_id": "phase9g-a1r-study-a-train-validation-recoverability-continuation-20260812T061720Z",
+  "phase": "PHASE_9G_A1C",
+  "phase9g_a1c_continuation_run_identity_sha256": "96219238a0827d498e317a42e3b8995bd41ee722dbd8808433b84fc69c9d4234",
+  "required_order": [
+    "train",
+    "stop_before_validation"
+  ],
+  "resume_semantics": {
+    "completed_event_transactions_rescheduled": 0,
+    "existing_rows_reemitted": 0,
+    "operational_continuation_only": true,
+    "scientific_retry_count": 0
+  },
+  "run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "same_staging_namespace_as_parent": true,
+  "schema_version": "rvt-phase9g-a1c-continuation-run-identity/v1",
+  "scientific_dataset_lineage_id": "phase9g-a1-study-a-train-validation-recoverability-v1",
+  "scientific_row_identity_includes_run_id": false,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "recoverability_validation_operations": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "successor_required_reason": "qualified image and executable-source binding changed after S3Z",
+  "writer_namespace": "staging/study_a_zero_shot-train-recoverability"
+}

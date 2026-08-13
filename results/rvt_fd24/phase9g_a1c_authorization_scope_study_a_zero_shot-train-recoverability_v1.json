@@ -1,0 +1,27 @@
+{
+  "authorization_class": "AUTHORIZED_STUDY_A_RECOVERABILITY_TRAIN_CONTINUATION_ONLY",
+  "binding": {
+    "branch": "recoverability",
+    "docker_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+    "generation_provenance_root": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+    "scientific_addendum_sha256": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+    "source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+    "split": "train",
+    "study": "study_a_zero_shot"
+  },
+  "broad_authorization": false,
+  "official_generation_execution_authorized": true,
+  "owner_authorization_timestamp_utc": "2026-08-13T11:23:33Z",
+  "phase": "PHASE_9G_A1C",
+  "phase9_authorization_scope_sha256": "c64e728d978a27aaf5f46e662f1262e5f05846705299665e5dea012b2b7886f5",
+  "schema_version": "rvt-phase9g-a1c-authorization-scope/v1",
+  "scientific_outcomes_present": false,
+  "sealed_exclusions": [
+    "recoverability_validation",
+    "residual_v2",
+    "training",
+    "study_a_n24_zero_shot",
+    "study_b",
+    "final_test"
+  ]
+}

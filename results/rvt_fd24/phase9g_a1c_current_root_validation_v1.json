@@ -1,0 +1,98 @@
+{
+  "current_scientific_provenance_root": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+  "evidence_commit": "af5c083e58476f5bd8a08710ce567176108e8f06",
+  "executable_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "historical_roots_rewritten": false,
+  "phase": "PHASE_9G_A1C",
+  "phase9g_a1c_current_root_validation_sha256": "72e445f815a7cb76ef8b9cf14bf57b4da0f1422d03962015fea74ff4e31dae17",
+  "production_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+  "schema_version": "rvt-phase9g-a1c-current-root-validation/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "PASS",
+  "validated_roots": [
+    {
+      "artifact": "rb19_current_generation_provenance_v1.json",
+      "canonical_hash_field": "rb19_current_generation_provenance_sha256",
+      "canonical_sha256": "e8317ad3e9facc76511098503cdad55dfc065dedd8fc2b530a2b25845c3f5571",
+      "file_sha256": "2bae0837aaba8bf1e341c493fc95e640404f8ea156a8cd3de6678d462c7fa57e"
+    },
+    {
+      "artifact": "rb20_clean_detached_reproduction_v1.json",
+      "canonical_hash_field": "rb20_clean_detached_reproduction_sha256",
+      "canonical_sha256": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+      "file_sha256": "c15d6cf61868dc3815349dfdf0283bb00dd0fe1af36e6fc9b2d3b35f9e4793ff"
+    },
+    {
+      "artifact": "rb21_portability_requalification_v1.json",
+      "canonical_hash_field": "rb21_portability_requalification_sha256",
+      "canonical_sha256": "fcc218e4bc88546240789043aa9e160d1fa39b82701637ebd6af19f2f8dcc176",
+      "file_sha256": "8397f33d208d1ba022c9b65c7f5bb35b75162dc1a05c0c3c3a5193706a082fe7"
+    },
+    {
+      "artifact": "rb21_cross_platform_numeric_portability_v1.json",
+      "canonical_hash_field": "rb21_cross_platform_numeric_portability_sha256",
+      "canonical_sha256": "0330c25a436a42422d8f8d07ae3426c930628f32bcd2a0d58ca8204874290900",
+      "file_sha256": "135de54c3063e6827f7e17601fe8be69ffb76581975178640c2627c9522ec9a3"
+    },
+    {
+      "artifact": "phase9_predata_generation_scientific_addendum_v1.json",
+      "canonical_hash_field": "phase9_predata_generation_scientific_addendum_sha256",
+      "canonical_sha256": "523d865cf04b7a5bd2a9cec8cb9a105fd5ef1f1476f6acec34e8cd47cf0dcad0",
+      "file_sha256": "a02ab215dd8c33b2a21cb83c19cda73ced2e4bb221e9fc74894a95a0885cc26c"
+    },
+    {
+      "artifact": "phase9g0p_operational_production_contract_v2.json",
+      "canonical_hash_field": "phase9g0p_operational_contract_sha256",
+      "canonical_sha256": "1a4e0fcbe49b94c3375125d0ef8421e7129b801491cec309e49ce4bc24adcc12",
+      "file_sha256": "5e761ca1f54c2fbceca0c5040669bc28f5929d421e652483222fd569d02f3a95"
+    },
+    {
+      "artifact": "phase9g_a1r_operational_contract_amendment_v1.json",
+      "canonical_hash_field": "phase9g_a1r_operational_contract_amendment_sha256",
+      "canonical_sha256": "1821badc6b09c2417a3fff98bb2f97673a69cdeff002b9ac1a64fac927d806e8",
+      "file_sha256": "cae44502b90c5c10dcd8bcba4565c1e8fa1b2f9c1cded8af79042550755f816c"
+    },
+    {
+      "artifact": "phase9_s3_geometry_authority_v1.json",
+      "canonical_hash_field": "phase9_s3_geometry_authority_sha256",
+      "canonical_sha256": "6f31a44b4ac514d0019f9b55d01ff8827e16f6423c978da283215322fc18f20f",
+      "file_sha256": "93382b1a4137c6d55b9cd8f92469afd4b6a56c58b0cfd3308bd2bb07bb33a214"
+    },
+    {
+      "artifact": "phase9_s3_opposing_boundary_scientific_addendum_v1.json",
+      "canonical_hash_field": "phase9_s3_opposing_boundary_scientific_addendum_sha256",
+      "canonical_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+      "file_sha256": "78725c00b1ad89eb3364017ce7ebcdd9e67f65e8ac1f968a65d121794ed86664"
+    },
+    {
+      "artifact": "phase9_s3_exact_centerline_scientific_addendum_v1.json",
+      "canonical_hash_field": "phase9_s3_exact_centerline_scientific_addendum_sha256",
+      "canonical_sha256": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+      "file_sha256": "30d9dca6815bba0250df9be5be30e9a22441b1983b2afa48d320f8201706177a"
+    },
+    {
+      "artifact": "phase9_s3_final_resume_readiness_v1.json",
+      "canonical_hash_field": "phase9_s3_final_resume_readiness_sha256",
+      "canonical_sha256": "a7118241538639b4da657f5aceff89bdfe9c64be62f22a21221b221016637d6c",
+      "file_sha256": "132812c875fda940e120fbcc7041460a006b0c4575e9df5a59779b21f8cf21bb"
+    },
+    {
+      "artifact": "phase9_current_generation_provenance_v3.json",
+      "canonical_hash_field": "phase9_current_generation_provenance_v3_sha256",
+      "canonical_sha256": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+      "file_sha256": "ccfd4a83d47db7eafbf9246b310d6f3818b4e5c72028c98c39c0f4630d4c5f09"
+    },
+    {
+      "artifact": "phase9_generation_readiness_v5.json",
+      "canonical_hash_field": "phase9_generation_readiness_v5_sha256",
+      "canonical_sha256": "3a0890c84da624229d2efde6be335bb8868a1805a95e9584e077c39463464d3c",
+      "file_sha256": "e9d2b8be8c06c7ba9afb52a06fa08f0593f260a15048fb5702c5c55fff001c42"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+host=avis
+staging_mode=555
+transactions=210
+partials=0
+phase_containers=0
+validation_staging=ABSENT

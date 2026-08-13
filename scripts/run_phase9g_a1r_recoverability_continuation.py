@@ -123,6 +123,7 @@ def execute_unresolved(
     telemetry_path: Path,
     status_path: Path,
     status: dict[str, Any],
+    status_hash_field: str = "phase9g_a1r_continuation_status_sha256",
 ) -> Mapping[str, Any]:
     jobs = (
         (
@@ -228,7 +229,7 @@ def execute_unresolved(
                     "updated_at_utc": _timestamp(),
                 })
                 _atomic_write(
-                    status_path, status, "phase9g_a1r_continuation_status_sha256"
+                    status_path, status, status_hash_field
                 )
     except BaseException as exc:
         status.update({
@@ -244,7 +245,7 @@ def execute_unresolved(
             "wall_seconds": perf_counter() - started,
             "updated_at_utc": _timestamp(),
         })
-        _atomic_write(status_path, status, "phase9g_a1r_continuation_status_sha256")
+        _atomic_write(status_path, status, status_hash_field)
         raise
     return {
         "events": events,
