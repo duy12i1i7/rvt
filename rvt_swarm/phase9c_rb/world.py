@@ -315,6 +315,50 @@ class StaticWorld:
                     and ymin + radius <= position[1] <= ymax - radius)
 
     # -- sensor conversion -------------------------------------------------
+    def s3_local_reference_frame(self, position: Vec2, mission_origin: Vec2,
+                                 mission_direction: Vec2) -> Tuple[Vec2, Vec2]:
+        """Return the owner-qualified local S3 center and oriented normal.
+
+        The return value exposes only a local frame, never corridor width,
+        slab extent, layout identity, or collision geometry.  The nearest
+        compiled centerline segment is selected canonically.  Layouts without
+        a corridor use the compiled mission reference line.
+        """
+        candidates: List[Tuple[float, int, int, Vec2, Vec2]] = []
+        for corridor in self.corridors:
+            points = corridor.centerline_meters
+            for segment_index in range(len(points) - 1):
+                start, end = points[segment_index], points[segment_index + 1]
+                dx, dy = end[0] - start[0], end[1] - start[1]
+                denominator = dx * dx + dy * dy
+                if denominator <= 0.0:
+                    raise ValueError("compiled corridor segment must be nondegenerate")
+                u = ((position[0] - start[0]) * dx
+                     + (position[1] - start[1]) * dy) / denominator
+                u = 0.0 if u < 0.0 else (1.0 if u > 1.0 else u)
+                center = (start[0] + u * dx, start[1] + u * dy)
+                distance_squared = ((position[0] - center[0]) ** 2
+                                    + (position[1] - center[1]) ** 2)
+                length = math.sqrt(denominator)
+                tangent = (dx / length, dy / length)
+                if (tangent[0] * mission_direction[0]
+                        + tangent[1] * mission_direction[1]) < 0.0:
+                    tangent = (-tangent[0], -tangent[1])
+                candidates.append((distance_squared, corridor.primitive_index,
+                                   segment_index, center, tangent))
+        if candidates:
+            _, _, _, center, tangent = min(
+                candidates, key=lambda item: (item[0], item[1], item[2]))
+        else:
+            tangent = tuple(map(float, mission_direction))
+            delta = (position[0] - mission_origin[0],
+                     position[1] - mission_origin[1])
+            longitudinal = delta[0] * tangent[0] + delta[1] * tangent[1]
+            center = (mission_origin[0] + longitudinal * tangent[0],
+                      mission_origin[1] + longitudinal * tangent[1])
+        normal = (-tangent[1], tangent[0])
+        return center, normal
+
     def observable_tokens(self, position: Vec2, sensing_range: float
                           ) -> Tuple[Tuple[Vec2, float, str], ...]:
         """Ego-relative `(relative_center, radius, source_key)` within `R_obs`.

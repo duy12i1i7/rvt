@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import inspect
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -281,7 +282,7 @@ def test_no_runtime_repair_image_performance_or_resume_was_performed() -> None:
     assert not any(readiness["sealed_scope"].values())
 
 
-def test_pre_repair_runtime_files_remain_byte_identical_to_s3_authority_audit() -> None:
+def test_pre_repair_authority_hashes_remain_historical_evidence() -> None:
     authority = _canonical(
         "phase9_s3_geometry_authority_v1.json",
         "phase9_s3_geometry_authority_sha256",
@@ -289,8 +290,16 @@ def test_pre_repair_runtime_files_remain_byte_identical_to_s3_authority_audit() 
     for source in authority["relevant_sources"]:
         if source["classification"] != "CURRENT_AUTHORITATIVE":
             continue
-        path = ROOT / source["path"]
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == source["file_sha256"]
+        payload = subprocess.run(
+            [
+                "git", "show",
+                f"eb71541eb8d611c350aa856f9da28165757f3e6c:{source['path']}",
+            ],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout
+        assert hashlib.sha256(payload).hexdigest() == source["file_sha256"]
 
 
 def test_final_closure_is_verdict_a_and_fully_isolated() -> None:

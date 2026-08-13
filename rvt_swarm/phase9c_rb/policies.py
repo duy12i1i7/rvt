@@ -16,6 +16,7 @@ from typing import Dict, Mapping, Optional, Sequence, Tuple
 
 from ..phase8e.protocol import s3_local_geometric_decision
 from ..topology_registry import COMPACT, LINE
+from .s3_geometry import measure_s3_opposing_boundaries
 
 Vec2 = Tuple[float, float]
 
@@ -211,36 +212,26 @@ class LocalGeometricSelectorPolicy(SourcePolicy):
 
     def observe(self, session, robot, view, controller_input) -> None:
         lookahead = float(self.runtime_config.derived.lookahead_distance_meters)
-        direction = view.mission_dir
-        lateral = (-direction[1], direction[0])
-
-        left = right = None
-        complete_open = True
-        for (ox, oy, radius) in view.obstacles:
-            longitudinal = ox * direction[0] + oy * direction[1]
-            offset = ox * lateral[0] + oy * lateral[1]
-            if not (0.0 <= longitudinal <= lookahead):
-                continue
-            complete_open = False
-            inner = abs(offset) - radius
-            if offset >= 0.0:
-                left = inner if left is None else min(left, inner)
-            else:
-                right = inner if right is None else min(right, inner)
-
-        width: Optional[float] = None
-        complete_observation = complete_open or (left is not None and right is not None)
-        if left is not None and right is not None:
-            width = left + right
+        if (view.s3_frame_center_world_meters is None
+                or view.s3_frame_normal is None):
+            raise ValueError("S3 requires the qualified local reference frame")
+        measurement = measure_s3_opposing_boundaries(
+            view.obstacles,
+            mission_direction=view.mission_dir,
+            support_origin_world_meters=view.position,
+            local_frame_center_world_meters=view.s3_frame_center_world_meters,
+            local_frame_normal=view.s3_frame_normal,
+            lookahead_distance_meters=lookahead,
+        )
 
         elapsed = self.evidence_seconds.get(robot.robot_id, 0.0) + session.control_period
         self.evidence_seconds[robot.robot_id] = elapsed
 
         decision = s3_local_geometric_decision(
             robot.committed_topology,
-            measured_width_meters=width,
-            complete_open_observation=complete_open,
-            complete_observation=complete_observation,
+            measured_width_meters=measurement.measured_width_meters,
+            complete_open_observation=measurement.complete_open_observation,
+            complete_observation=measurement.complete_observation,
             line_required_width_meters=self._required_width(session, robot, LINE),
             compact_required_width_meters=self._required_width(session, robot, COMPACT),
             spacing_margin_meters=float(self.runtime_config.formation.spacing_margin_meters),

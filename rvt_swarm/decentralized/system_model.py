@@ -368,6 +368,8 @@ class RobotView:
     mission_dir: Tuple[float, float]
     neighbours: Sequence["NeighbourRecord"] = field(default_factory=tuple)
     obstacles: Sequence[Tuple[float, float, float]] = field(default_factory=tuple)
+    s3_frame_center_world_meters: Optional[Tuple[float, float]] = None
+    s3_frame_normal: Optional[Tuple[float, float]] = None
 
     def neighbour_ids(self) -> Tuple[int, ...]:
         return tuple(nb.robot_id for nb in self.neighbours)

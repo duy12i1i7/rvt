@@ -110,7 +110,7 @@ def test_width_trace_is_binary64_exact_and_not_orientation_sign_defect() -> None
     }
 
 
-def test_blocked_source_reproduces_before_official_event() -> None:
+def test_historical_blocked_source_evidence_is_preserved() -> None:
     task = next(
         task for task in compile_recoverability_tasks(
             ROOT, study="study_a_zero_shot", split="train"
@@ -119,16 +119,12 @@ def test_blocked_source_reproduces_before_official_event() -> None:
     assert task.source.family == "F3"
     assert task.source.team_size == 12
     assert task.resolved_control_step == 90
-    session = build_source_session(ROOT, task.source)
-    session.step()
-    session.step()
-    session.step()
-    with pytest.raises(
-        ValueError, match="S3 measured width must be finite and nonnegative"
-    ):
-        session.step()
-    assert session.control_step == 3
-    assert session.time_seconds == pytest.approx(0.45)
+    width = _canonical(
+        "phase9_s3_width_derivation_v1.json",
+        "phase9_s3_width_derivation_closure_sha256",
+    )
+    assert width["failure_call"]["session_control_step"] == 3
+    assert width["direct_operands"]["measured_width"]["value"] < 0.0
 
 
 def test_positive_straight_control_keeps_unsigned_span() -> None:
