@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-image="sha256:88f4d7d833ec7166d3b946b31cae5fa8b6499e06e38370b9cb9f83bfacd29810"
-source_commit="74de65a81f3aa897be326e57de29297f5cc237e4"
-scratch="/home/avis/rvt-data/audit/phase9g-a1s3z-qualification-v1"
+image="sha256:c2f8734403f6422c10e04531529458e7826c175cbec0933c5b7d936cebedf39f"
+source_commit="20bfa1bfdc311f67075327418595441b101bc8de"
+scratch="/home/avis/rvt-data/audit/phase9g-a1s3z-qualification-v2"
 
 if [[ -e "$scratch" ]]; then
   echo "refusing to overwrite immutable A1S3Z audit namespace: $scratch" >&2

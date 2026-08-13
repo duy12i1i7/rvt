@@ -1,0 +1,111 @@
+{
+  "candidate_aggregate_count": 12,
+  "event_count": 6,
+  "events": [
+    {
+      "candidate_topologies": [
+        5,
+        6
+      ],
+      "classification": "NORMAL_S3",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "decision_timestep": 60,
+      "family": "F1",
+      "replicas_per_candidate": 1,
+      "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "team_size": 8
+    },
+    {
+      "candidate_topologies": [
+        5,
+        6
+      ],
+      "classification": "OLD_NEGATIVE_F3",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "decision_timestep": 90,
+      "family": "F3",
+      "replicas_per_candidate": 1,
+      "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "team_size": 12
+    },
+    {
+      "candidate_topologies": [
+        5,
+        6
+      ],
+      "classification": "OLD_NEGATIVE_F4",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F4/27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab/N5/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "decision_timestep": 100,
+      "family": "F4",
+      "replicas_per_candidate": 1,
+      "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "team_size": 5
+    },
+    {
+      "candidate_topologies": [
+        5,
+        6
+      ],
+      "classification": "CENTERLINE_F6_TRAIN_00",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "decision_timestep": 87,
+      "family": "F6",
+      "replicas_per_candidate": 1,
+      "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "team_size": 16
+    },
+    {
+      "candidate_topologies": [
+        5,
+        6
+      ],
+      "classification": "CENTERLINE_F6_TRAIN_01",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "decision_timestep": 87,
+      "family": "F6",
+      "replicas_per_candidate": 1,
+      "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+      "team_size": 16
+    },
+    {
+      "candidate_topologies": [
+        5,
+        6
+      ],
+      "classification": "NON_S3_CONTROL",
+      "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "decision_timestep": 60,
+      "family": "F1",
+      "replicas_per_candidate": 1,
+      "source_class": "S1_ALWAYS_COMPACT",
+      "team_size": 8
+    }
+  ],
+  "official_staging_mount": false,
+  "phase": "PHASE_9G_A1S3Z",
+  "phase9_s3z_performance_manifest_sha256": "d9b87d2bdc4cd7428d845c6145c4d6e98013c4fa3bda07210ced82e8d818e76d",
+  "predeclared_before_measurement": true,
+  "producer": "rvt_swarm.phase9g0r.producer.produce_recoverability_candidate",
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "residual_operations": 0,
+  "schema_version": "rvt-phase9-s3z-performance-manifest/v1",
+  "scientific_scope": "Study A Recoverability TRAIN diagnostic only",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "selection_balance": {
+    "new_centerline_f6_n16": 2,
+    "non_s3_control": 1,
+    "normal_s3": 1,
+    "old_negative_f3_f4": 2
+  },
+  "writer_mode": "DIAGNOSTIC"
+}
