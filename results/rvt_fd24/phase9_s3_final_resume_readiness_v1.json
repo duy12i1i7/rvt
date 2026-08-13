@@ -1,0 +1,87 @@
+{
+  "executable_implementation_qualified": true,
+  "existing_data": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254,
+    "rows": 342
+  },
+  "future_authorization_proposal_sha256": "ecd4b5f06dc699bf8f97048d06585f03c07b2be6ca147d7242dc19615bde38ae",
+  "official_data_action": "RETAIN_ALL_342",
+  "official_resume_authorized_now": false,
+  "official_resume_performed": false,
+  "performance": {
+    "classification": "RECOVERABILITY_PROFILE_REMAINS_QUALIFIED",
+    "maximum_timeout_utilization": 0.0121985951399262,
+    "profile": {
+      "chunk_size_atomic_units": 1,
+      "infrastructure_timeout_seconds": 243,
+      "numeric_threads_per_worker": 1,
+      "workers": 12
+    }
+  },
+  "phase": "PHASE_9G_A1S3Z",
+  "phase9_s3_final_resume_readiness_sha256": "a7118241538639b4da657f5aceff89bdfe9c64be62f22a21221b221016637d6c",
+  "population_guard": {
+    "centerline_neutral_present_but_opposing_pair_resolvable": 0,
+    "escapes": 0,
+    "fail_closed_categories": [
+      "missing_side_unresolved",
+      "tie_unresolved"
+    ],
+    "handled_existing_incomplete_observation_as_hold_unknown": 1952,
+    "handled_existing_source_invalid": 5,
+    "missing_side_unresolved": 0,
+    "normal_opposing_pair": 318,
+    "tie_unresolved": 0
+  },
+  "provenance_sha256": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+  "residual_v2_started": false,
+  "schema_version": "rvt-phase9-s3-final-resume-readiness/v1",
+  "scientific_semantics_closed": true,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "QUALIFIED_AWAITING_SEPARATE_OWNER_AUTHORIZATION",
+  "study_a_recoverability_train_may_be_separately_authorized": true,
+  "target": {
+    "checkpoint_unchanged": true,
+    "image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+    "status": "PASS"
+  },
+  "tests": {
+    "failed": 0,
+    "local_complete_suite": {
+      "failed": 0,
+      "log_file_sha256": "d0095597064ed6fc575e39a92e5942e4c953a27806f1ae30bc190590d58f9a67",
+      "passed": 3127,
+      "seconds": 385.89,
+      "warnings": 1,
+      "xfailed_publication_required": 0
+    },
+    "publication_required_xfailed": 0,
+    "target_exact_image_complete_suite": {
+      "failed": 0,
+      "log_file_sha256": "b92402b2e0652a6ad1b53d38bf410a95bb183e0a272a4c50645862a766241548",
+      "passed": 3118,
+      "seconds": 378.9,
+      "warnings": 1,
+      "xfailed_publication_required": 0
+    },
+    "target_exact_image_focused_suite": {
+      "failed": 0,
+      "log_file_sha256": "e620ab26db0a2c4cb2e48272d5eb49ecfb2861a563fd056271efd6834822ae2f",
+      "passed": 125,
+      "seconds": 61.05,
+      "warnings": 1,
+      "xfailed_publication_required": 0
+    }
+  },
+  "training_operations": 0,
+  "verdict": "C"
+}

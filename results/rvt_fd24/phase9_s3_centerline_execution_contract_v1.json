@@ -13,10 +13,13 @@
   },
   "exact_arithmetic_order": "dot((robot_position + support_offset) - c_world, n)",
   "image_lineage": {
-    "qualified_candidate_image": "sha256:c2f8734403f6422c10e04531529458e7826c175cbec0933c5b7d936cebedf39f",
+    "environment_lineage": "qualified production image rebuilt from the immutable parent with exact A1S3Z source and unchanged runtime dependencies",
+    "final_qualification_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+    "final_qualified_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
     "qualified_parent_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
     "rejected_candidate_image": "sha256:88f4d7d833ec7166d3b946b31cae5fa8b6499e06e38370b9cb9f83bfacd29810",
-    "rejected_reason": "S4 delegated S3 evidence without receiving its frame"
+    "rejected_reason": "S4 delegated S3 evidence without receiving its frame",
+    "runtime_benchmark_image": "sha256:c2f8734403f6422c10e04531529458e7826c175cbec0933c5b7d936cebedf39f"
   },
   "initial_repair_commit": "74de65a81f3aa897be326e57de29297f5cc237e4",
   "numerical_epsilon": null,
@@ -28,7 +31,7 @@
     "validation_started": false
   },
   "phase": "PHASE_9G_A1S3Z",
-  "phase9_s3_centerline_execution_contract_sha256": "5275349528c1a8a7e419eb266d56c4736113b2c0deb2c4f86f94acc2dd08ae67",
+  "phase9_s3_centerline_execution_contract_sha256": "8b52c88efbcf8d750d964f57573edf9e82a9757aebc082ef6bf15e931dba1041",
   "pipeline": [
     "range-gated ego-relative support tokens",
     "qualified compiled local reference frame c,t,n",

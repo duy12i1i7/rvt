@@ -1,0 +1,58 @@
+{
+  "centerline_neutral_support_count": 0,
+  "combined_owner_rules": [
+    "rvt-s3-opposing-boundary-pairing/v1",
+    "rvt-s3-exact-centerline-support/v1"
+  ],
+  "decision_difference_count": 0,
+  "dependent_transaction_count": 60,
+  "mode": "NON_OFFICIAL_READ_ONLY_DIAGNOSTIC_REPLAY",
+  "official_data_action": "RETAIN_ALL_342",
+  "official_staging_writes": 0,
+  "phase": "PHASE_9G_A1S3Z",
+  "phase9_s3_existing_data_requalification_closure_sha256": "75a4ae8875eddae03bea06b09a9567cca926b03a1e161fd7a37c6c962ed1debb",
+  "physical_pair_difference_count": 0,
+  "provenance_payloads_rewritten": 0,
+  "raw_evidence": {
+    "qualified_docker": {
+      "artifact": "phase9_s3_existing_data_requalification_docker_v2.json",
+      "canonical_sha256": "12df7a7fcd2091eadde730c108843ea531b8242e1a2821e1e41e38c3f4b6bc63",
+      "file_sha256": "94fe03dae74fad2aaf1edb4539a10553a6c5d5b24c1d235877200600d010977b",
+      "image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+      "source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e"
+    },
+    "reference": {
+      "artifact": "phase9_s3_existing_data_requalification_reference_v2.json",
+      "canonical_sha256": "4f265feef6925eef4629304b33ae911eb204ab9dfdf74185e050169899767054",
+      "file_sha256": "9e37ef080b9122c9c9beff2da340faa4d6f5e50db16e0230bca0baffc321b811"
+    }
+  },
+  "reference_docker_semantic_exact": true,
+  "row_classification_counts": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254
+  },
+  "row_count": 342,
+  "row_ids_changed": 0,
+  "rows_rebuilt": 0,
+  "s3_call_count": 6485,
+  "schema_version": "rvt-phase9-s3-existing-data-requalification-closure/v2",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "semantic_conclusion": {
+    "all_s3_decisions_exact": true,
+    "all_selected_physical_pairs_equivalent": true,
+    "existing_rows_changed": 0,
+    "source_trajectory_semantic_projection_exact_by_induction": true
+  },
+  "semantic_projection_sha256": "709a9dd0af12a8d27a5b188233d3f2a2bf3acaedd07956a283a427f461b9f828",
+  "staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+  "status": "PASS"
+}

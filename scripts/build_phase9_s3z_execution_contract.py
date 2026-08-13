@@ -105,8 +105,18 @@ def main() -> None:
                 "sha256:88f4d7d833ec7166d3b946b31cae5fa8b6499e06e38370b9cb9f83bfacd29810"
             ),
             "rejected_reason": "S4 delegated S3 evidence without receiving its frame",
-            "qualified_candidate_image": (
+            "runtime_benchmark_image": (
                 "sha256:c2f8734403f6422c10e04531529458e7826c175cbec0933c5b7d936cebedf39f"
+            ),
+            "final_qualification_source_commit": (
+                "848e8b352a91e95af777ebbeccd5fbb43d53777e"
+            ),
+            "final_qualified_image": (
+                "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90"
+            ),
+            "environment_lineage": (
+                "qualified production image rebuilt from the immutable parent "
+                "with exact A1S3Z source and unchanged runtime dependencies"
             ),
         },
         "official_operations": {

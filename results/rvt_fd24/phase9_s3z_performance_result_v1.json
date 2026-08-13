@@ -1,0 +1,337 @@
+{
+  "candidate_aggregate_wall_seconds": {
+    "max": 2.9642586190020666,
+    "mean": 1.2677076020008826,
+    "median": 0.9648314704973018,
+    "n": 12,
+    "p90": 2.6462980871932817,
+    "p95": 2.8705217862472634
+  },
+  "candidate_pair_reconciliation_wall_seconds": {
+    "max": 0.02611696299572941,
+    "mean": 0.012677752665088823,
+    "median": 0.006848200500826351,
+    "n": 6,
+    "p90": 0.02485749149491312,
+    "p95": 0.025487227245321264
+  },
+  "failures": 0,
+  "image": "sha256:c2f8734403f6422c10e04531529458e7826c175cbec0933c5b7d936cebedf39f",
+  "manifest_sha256": "d9b87d2bdc4cd7428d845c6145c4d6e98013c4fa3bda07210ced82e8d818e76d",
+  "maximum_timeout_utilization": 0.0121985951399262,
+  "mode": "NON_OFFICIAL_RECOVERABILITY_DIAGNOSTIC",
+  "official_staging_mounted": false,
+  "official_staging_writes": 0,
+  "per_replica_rollout_wall_seconds": {
+    "max": 2.3184090690047015,
+    "mean": 1.3491177900032199,
+    "median": 1.3440431545022875,
+    "n": 4,
+    "p90": 2.303771874605445,
+    "p95": 2.3110904718050733
+  },
+  "performance_classification": "RECOVERABILITY_PROFILE_REMAINS_QUALIFIED",
+  "phase9_s3z_performance_result_sha256": "a55a2b151a5d289925c4414e75f9dc3f4b40d6b519a9bf4e0aaa85afc4045069",
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "reconciliations": [
+    {
+      "classification": "NORMAL_S3",
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "official_counter_delta": 0,
+      "prospective_rows": 16,
+      "status": "SCIENTIFICALLY_RECONCILED_LABELABLE",
+      "wall_seconds": 0.02611696299572941
+    },
+    {
+      "classification": "OLD_NEGATIVE_F3",
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "official_counter_delta": 0,
+      "prospective_rows": 0,
+      "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "wall_seconds": 0.006986499996855855
+    },
+    {
+      "classification": "OLD_NEGATIVE_F4",
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F4/27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab/N5/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "official_counter_delta": 0,
+      "prospective_rows": 0,
+      "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "wall_seconds": 0.006326072994852439
+    },
+    {
+      "classification": "CENTERLINE_F6_TRAIN_00",
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "official_counter_delta": 0,
+      "prospective_rows": 0,
+      "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "wall_seconds": 0.006709901004796848
+    },
+    {
+      "classification": "CENTERLINE_F6_TRAIN_01",
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "official_counter_delta": 0,
+      "prospective_rows": 0,
+      "status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "wall_seconds": 0.006329059004201554
+    },
+    {
+      "classification": "NON_S3_CONTROL",
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "official_counter_delta": 0,
+      "prospective_rows": 16,
+      "status": "SCIENTIFICALLY_RECONCILED_LABELABLE",
+      "wall_seconds": 0.02359801999409683
+    }
+  ],
+  "residual_operations": 0,
+  "scheduler_wall_seconds": 3.0149766779941274,
+  "schema_version": "rvt-phase9-s3z-performance-result/v1",
+  "scientific_semantic_digest": "d8dcb62900d4e36d63ae68e7b0605b50e17eb04bcf3b7a2d021806335164c689",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "source_commit": "20bfa1bfdc311f67075327418595441b101bc8de",
+  "source_event_wall_seconds": {
+    "max": 1.318313380004838,
+    "mean": 0.7997216432498438,
+    "median": 0.7368767274965649,
+    "n": 12,
+    "p90": 1.2605602151001223,
+    "p95": 1.3045111965519027
+  },
+  "timeouts": 0,
+  "units": [
+    {
+      "candidate_topology_id": 5,
+      "classification": "NORMAL_S3",
+      "cpu_seconds": 1.0498188689999999,
+      "disposition": {
+        "aggregate_label": 1,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+        "disposition": "RECOVERABLE_POSITIVE",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "peak_rss_bytes": 294326272,
+      "replica_rollout_seconds": [
+        0.38997578200360294
+      ],
+      "scheduler_atomic_unit_id": "51ab3bae24868263710217a906c4a067079a2d00cf3879f15383fd3e4cec0b0e",
+      "source_event_seconds": 0.6036500790069113,
+      "wall_seconds": 1.0499295729969162
+    },
+    {
+      "candidate_topology_id": 2,
+      "classification": "NORMAL_S3",
+      "cpu_seconds": 2.959119445,
+      "disposition": {
+        "aggregate_label": 1,
+        "candidate_topology_id": 2,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+        "disposition": "RECOVERABLE_POSITIVE",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "peak_rss_bytes": 294510592,
+      "replica_rollout_seconds": [
+        2.2696184210071806
+      ],
+      "scheduler_atomic_unit_id": "7ac7d87f6c7a7c76e24de7e9ea270285ae51ed8b77951e1100411d148b154faa",
+      "source_event_seconds": 0.6417092449992197,
+      "wall_seconds": 2.9642586190020666
+    },
+    {
+      "candidate_topology_id": 5,
+      "classification": "OLD_NEGATIVE_F3",
+      "cpu_seconds": 0.962747465,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "peak_rss_bytes": 281190400,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "7d7f2859e7f863031676d5c972dca4e03a4a5dd84ba438cdc7753bb26896b65b",
+      "source_event_seconds": 0.9625900899991393,
+      "wall_seconds": 0.9628148649935611
+    },
+    {
+      "candidate_topology_id": 2,
+      "classification": "OLD_NEGATIVE_F3",
+      "cpu_seconds": 0.9667796759999999,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 2,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F3/59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1/N12/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "peak_rss_bytes": 281190400,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "b91d920ea9f1a9a678b457b1da0d371ea27af99362c099dfc8367d0e76557df5",
+      "source_event_seconds": 0.9666356420057127,
+      "wall_seconds": 0.9668480760010425
+    },
+    {
+      "candidate_topology_id": 5,
+      "classification": "OLD_NEGATIVE_F4",
+      "cpu_seconds": 1.3184359259999998,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F4/27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab/N5/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F4/27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab/N5/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "peak_rss_bytes": 281018368,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "08b63e05047d0281c459c512ece35d8ad2ad0c2055a9dd469c226a4f34a5a284",
+      "source_event_seconds": 1.318313380004838,
+      "wall_seconds": 1.3185287459928077
+    },
+    {
+      "candidate_topology_id": 2,
+      "classification": "OLD_NEGATIVE_F4",
+      "cpu_seconds": 1.293342532,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 2,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F4/27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab/N5/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F4/27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab/N5/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-0/event-0",
+      "peak_rss_bytes": 281018368,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "6703de2b8449e8692197af9e4e29f1e5be657ef8cc0f761428d2478c898c4dcf",
+      "source_event_seconds": 1.293218500999501,
+      "wall_seconds": 1.2934331639989978
+    },
+    {
+      "candidate_topology_id": 5,
+      "classification": "CENTERLINE_F6_TRAIN_00",
+      "cpu_seconds": 0.7538238599999999,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "peak_rss_bytes": 280846336,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "a0f5786143bab39daa8e30a53831b6849447cdac092bcdab4d2156c5bbc928e0",
+      "source_event_seconds": 0.7536285329988459,
+      "wall_seconds": 0.7538769160019001
+    },
+    {
+      "candidate_topology_id": 2,
+      "classification": "CENTERLINE_F6_TRAIN_00",
+      "cpu_seconds": 0.788616034,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 2,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "peak_rss_bytes": 280846336,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "ba1a1cc9bfa0b8990b17ca47a65500379edddedafa8ed2301dacfa8c963b3caf",
+      "source_event_seconds": 0.7884214079967933,
+      "wall_seconds": 0.7886711520113749
+    },
+    {
+      "candidate_topology_id": 5,
+      "classification": "CENTERLINE_F6_TRAIN_01",
+      "cpu_seconds": 0.7185393010000001,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "peak_rss_bytes": 280907776,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "90d1af5b0f4b0abc5042640bf559fae70c60b117174d231f2eed252bfc4e735e",
+      "source_event_seconds": 0.7182932699943194,
+      "wall_seconds": 0.7185884010104928
+    },
+    {
+      "candidate_topology_id": 2,
+      "classification": "CENTERLINE_F6_TRAIN_01",
+      "cpu_seconds": 0.720364621,
+      "disposition": {
+        "aggregate_label": null,
+        "candidate_topology_id": 2,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+        "disposition": "GENERATION_INVALID",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F6/728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826/N16/S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR/episode-1/event-0",
+      "peak_rss_bytes": 280907776,
+      "replica_rollout_seconds": [],
+      "scheduler_atomic_unit_id": "41741e7b459a1c131ebcb28d2dad3749b957bb3fe034666d2e66ac54b03741fc",
+      "source_event_seconds": 0.7201249219942838,
+      "wall_seconds": 0.7204148660093779
+    },
+    {
+      "candidate_topology_id": 5,
+      "classification": "NON_S3_CONTROL",
+      "cpu_seconds": 0.881213226,
+      "disposition": {
+        "aggregate_label": 1,
+        "candidate_topology_id": 5,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+        "disposition": "RECOVERABLE_POSITIVE",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "peak_rss_bytes": 294367232,
+      "replica_rollout_seconds": [
+        0.4184678879973944
+      ],
+      "scheduler_atomic_unit_id": "29835fa97f1a1294622ff898f1990b1a450f20e8aa64f8d2e80033c72a6539b8",
+      "source_event_seconds": 0.4090292879991466,
+      "wall_seconds": 0.8812988319987198
+    },
+    {
+      "candidate_topology_id": 2,
+      "classification": "NON_S3_CONTROL",
+      "cpu_seconds": 2.793592574,
+      "disposition": {
+        "aggregate_label": 1,
+        "candidate_topology_id": 2,
+        "decision_event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+        "disposition": "RECOVERABLE_POSITIVE",
+        "replica_count": 1
+      },
+      "event_id": "rvt-generation-job-identity/v1/source_episode/study_a_zero_shot/train/F1/c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2/N8/S1_ALWAYS_COMPACT/episode-0/event-0",
+      "peak_rss_bytes": 294518784,
+      "replica_rollout_seconds": [
+        2.3184090690047015
+      ],
+      "scheduler_atomic_unit_id": "8d32c0ee6542e59cae21c39050606a207a0b770fd4a72ff27a71f8a59de8e795",
+      "source_event_seconds": 0.4210453609994147,
+      "wall_seconds": 2.793828013993334
+    }
+  ]
+}

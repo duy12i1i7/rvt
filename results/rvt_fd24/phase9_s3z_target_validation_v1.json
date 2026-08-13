@@ -1,0 +1,63 @@
+{
+  "image_digest_exact": true,
+  "image_git_tree_clean": true,
+  "image_revision_label_exact": true,
+  "new_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+  "official_operations": {
+    "generation_resumed": false,
+    "official_staging_writes": 0,
+    "residual_v2_started": false,
+    "training_operations": 0,
+    "validation_started": false
+  },
+  "official_staging": {
+    "candidate_pair_transactions": 210,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "checkpoint_unchanged": true,
+    "directory_mode_octal": "0555",
+    "mount_mode": "READ_ONLY",
+    "partial_transactions": 0,
+    "scientific_rows": 342
+  },
+  "old_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "original_target_checkout": {
+    "clean": true,
+    "commit": "6bcfc0e26c4b327ba63f2844eaa02d30d56903ba",
+    "modified": false
+  },
+  "phase9_s3z_target_validation_sha256": "f9ea7d7a4d46a60584df2a4af9b2dd2bae7aac608163d33d1443f71ff61172c6",
+  "schema_version": "rvt-phase9-s3z-target-validation/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0
+  },
+  "source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "status": "PASS",
+  "target": "100.71.102.9",
+  "tests": {
+    "complete_writable_exact_image_copy": {
+      "failed": 0,
+      "log_file_sha256": "b92402b2e0652a6ad1b53d38bf410a95bb183e0a272a4c50645862a766241548",
+      "passed": 3118,
+      "seconds": 378.9,
+      "warnings": 1,
+      "xfailed_publication_required": 0
+    },
+    "focused": {
+      "failed": 0,
+      "log_file_sha256": "e620ab26db0a2c4cb2e48272d5eb49ecfb2861a563fd056271efd6834822ae2f",
+      "passed": 125,
+      "seconds": 61.05,
+      "warnings": 1,
+      "xfailed_publication_required": 0
+    },
+    "immutable_source_tree_attempt": {
+      "accepted_as_scientific_suite": false,
+      "classification": "TEST_SETUP_ONLY_PERMISSION_DENIED",
+      "failed": 27,
+      "passed": 3091,
+      "reason": "27 tests create temporary injected modules under the source tree; the image source is intentionally immutable"
+    }
+  }
+}

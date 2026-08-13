@@ -1,0 +1,9 @@
+........................................................................ [ 57%]
+.....................................................                    [100%]
+=============================== warnings summary ===============================
+../../usr/local/lib/python3.9/site-packages/_pytest/cacheprovider.py:475
+  /usr/local/lib/python3.9/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path /opt/rvt/.pytest_cache/v/cache/nodeids: [Errno 13] Permission denied: '/opt/rvt/pytest-cache-files-d0agivrh'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+125 passed, 1 warning in 61.05s (0:01:01)

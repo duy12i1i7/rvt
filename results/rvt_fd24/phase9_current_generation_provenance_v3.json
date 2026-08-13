@@ -1,0 +1,40 @@
+{
+  "addendum_commit": "295722307412a85cba5506fb2abc62dcf23a99f3",
+  "authorities": {
+    "execution_contract": "8b52c88efbcf8d750d964f57573edf9e82a9757aebc082ef6bf15e931dba1041",
+    "existing_data_requalification": "75a4ae8875eddae03bea06b09a9567cca926b03a1e161fd7a37c6c962ed1debb",
+    "performance": "a55a2b151a5d289925c4414e75f9dc3f4b40d6b519a9bf4e0aaa85afc4045069",
+    "population_requalification": "cf496a27e36d9c929d038422e312b7d55d88df62d55237dbd992c9e4264f4103",
+    "regression": "6d5f93b865a6130de499f2d227c42a0acafed01a44320d9104bd9ac3060a5c66",
+    "replay": "fdc3fc58b6c1e6a11b9e1816d945001244a8a466ef6f6ff853897ba609c1e06c",
+    "scientific_addendum": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+    "target_validation": "f9ea7d7a4d46a60584df2a4af9b2dd2bae7aac608163d33d1443f71ff61172c6"
+  },
+  "binding": "ADDITIVE",
+  "historical_roots_rewritten": false,
+  "image_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "new_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+  "official_prefix": {
+    "action": "RETAIN_ALL_342",
+    "candidate_pair_transactions": 210,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "scientific_rows": 342,
+    "writes_during_phase": 0
+  },
+  "old_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "parent_v2_sha256": "452ea2d37b8a9b09db88f337423bc6ee9261863ca22fe609293fa11e2acb486c",
+  "phase": "PHASE_9G_A1S3Z",
+  "phase9_current_generation_provenance_v3_sha256": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+  "prior_a1s3r_evidence_commit": "7079a23bab9a5eed4c4e864988c0139d937009d4",
+  "prior_a1s3r_report_commit": "eb71541eb8d611c350aa856f9da28165757f3e6c",
+  "repair_commit": "20bfa1bfdc311f67075327418595441b101bc8de",
+  "schema_version": "rvt-phase9-current-generation-provenance/v3",
+  "scientific_semantics_changed_beyond_owner_addenda": false,
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  }
+}

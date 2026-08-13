@@ -1,0 +1,26 @@
+{
+  "existing_staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+  "explicitly_unauthorized": [
+    "Recoverability validation before TRAIN completion and reconciliation",
+    "Residual V2",
+    "Study A N24",
+    "Study B",
+    "final test",
+    "training"
+  ],
+  "official_resume_performed_by_this_phase": false,
+  "owner_signature": null,
+  "parent_run_id": "phase9g-a1-study-a-train-validation-recoverability-20260812T042359Z",
+  "phase9_s3z_future_continuation_authorization_proposal_sha256": "ecd4b5f06dc699bf8f97048d06585f03c07b2be6ca147d7242dc19615bde38ae",
+  "required_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+  "required_profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "required_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "schema_version": "rvt-phase9-s3z-future-authorization-proposal/v1",
+  "scope_if_separately_authorized": "Study A Recoverability TRAIN continuation only",
+  "status": "PROPOSED_NOT_AUTHORIZED"
+}

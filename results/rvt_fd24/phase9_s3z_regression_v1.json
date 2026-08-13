@@ -1,0 +1,198 @@
+{
+  "candidate_pair_and_target_v4": {
+    "covered_by_focused_and_complete_test_suites": true,
+    "unexplained_semantic_mismatches": 0
+  },
+  "diagnostic_runtime_conformance": {
+    "authorization_scope_broadened": false,
+    "rb20_residual_candidate_evaluations": 36,
+    "scientific_rows": 0
+  },
+  "matched_randomness": {
+    "authority": "rvt_swarm.phase9c.manifest._replica_seeds",
+    "candidate_pair_seed_mismatches": 0,
+    "comparison_groups": 21000,
+    "f8_f9_events": 3000,
+    "f8_f9_three_distinct_seed_failures": 0,
+    "official_rows": 0,
+    "schema_version": "rvt-phase9g0r-matched-randomness-regression/v1",
+    "sealed_accesses": 0,
+    "status": "PASS",
+    "worker_chunk_retry_order_in_scientific_seed_payload": false
+  },
+  "mode": "NON_OFFICIAL_RUNTIME_CONFORMANCE_DIAGNOSTIC",
+  "official_operations": {
+    "official_residual_v2_started": false,
+    "official_staging_writes": 0,
+    "recoverability_generation_resumed": false,
+    "training_operations": 0
+  },
+  "official_producer_canary": {
+    "artifact": "phase9_s3z_performance_result_v1.json",
+    "candidate_aggregates": 12,
+    "scope": "Recoverability-only diagnostic producer",
+    "semantic_mismatches": 0
+  },
+  "phase9_s3z_regression_sha256": "6d5f93b865a6130de499f2d227c42a0acafed01a44320d9104bd9ac3060a5c66",
+  "rb20": {
+    "counts": {
+      "recoverability_rollouts": 14,
+      "residual_candidate_evaluations": 36,
+      "scientific_identity_mismatches": 0,
+      "semantic_mismatches": 0,
+      "source_episodes": 4
+    },
+    "final_test_access_count": 0,
+    "identity_mismatches": [],
+    "mismatches": [],
+    "official_rows": 0,
+    "rb20_authority_sha256": "8c55f4ef40be509dc6e0bc678467873e5ebd0ce60d0195a2227555676114b95a",
+    "recoverability": [
+      {
+        "aggregate_labels": {
+          "2": 1,
+          "5": 1
+        },
+        "candidate_rollouts": 2,
+        "case_id": "c1-f1-n6-stable",
+        "exact": true
+      },
+      {
+        "aggregate_labels": {
+          "2": 1,
+          "5": 0
+        },
+        "candidate_rollouts": 6,
+        "case_id": "c2-f9-n12-dynamic",
+        "exact": true
+      },
+      {
+        "aggregate_labels": {
+          "2": 0,
+          "5": 1
+        },
+        "candidate_rollouts": 6,
+        "case_id": "c3-f8-n5-degraded",
+        "exact": true
+      }
+    ],
+    "residual": [
+      {
+        "candidate_evaluations": 9,
+        "case_id": "c1-f1-n6-stable",
+        "checks": {
+          "candidate_ids": true,
+          "candidate_records": true,
+          "disposition": true,
+          "graph_fingerprint": true,
+          "matched_stream_identity": true,
+          "result_digest": true,
+          "robot_view": true,
+          "selected_candidate": true,
+          "selector_error": true,
+          "snapshot": true,
+          "target_world": true
+        },
+        "exact": true
+      },
+      {
+        "candidate_evaluations": 9,
+        "case_id": "c2-f9-n12-dynamic",
+        "checks": {
+          "candidate_ids": true,
+          "candidate_records": true,
+          "disposition": true,
+          "graph_fingerprint": true,
+          "matched_stream_identity": true,
+          "result_digest": true,
+          "robot_view": true,
+          "selected_candidate": true,
+          "selector_error": true,
+          "snapshot": true,
+          "target_world": true
+        },
+        "exact": true
+      },
+      {
+        "candidate_evaluations": 9,
+        "case_id": "c3-f8-n5-degraded",
+        "checks": {
+          "candidate_ids": true,
+          "candidate_records": true,
+          "disposition": true,
+          "graph_fingerprint": true,
+          "matched_stream_identity": true,
+          "result_digest": true,
+          "robot_view": true,
+          "selected_candidate": true,
+          "selector_error": true,
+          "snapshot": true,
+          "target_world": true
+        },
+        "exact": true
+      },
+      {
+        "candidate_evaluations": 9,
+        "case_id": "c4-f5-n8-noeligible",
+        "checks": {
+          "candidate_ids": true,
+          "candidate_records": true,
+          "disposition": true,
+          "graph_fingerprint": true,
+          "matched_stream_identity": true,
+          "result_digest": true,
+          "robot_view": true,
+          "selected_candidate": true,
+          "selector_error": true,
+          "snapshot": true,
+          "target_world": true
+        },
+        "exact": true
+      }
+    ],
+    "schema_version": "rvt-rb21p-rb20-semantic-replay/v1",
+    "source_episodes": [
+      {
+        "case_id": "c1-f1-n6-stable",
+        "control_step": 20,
+        "exact": true,
+        "expected_snapshot_sha256": "b472654c93d0d5c791a08c49da5059e0aa2f8770b20c58be6ac9ad0d93da3ebd",
+        "snapshot_sha256": "b472654c93d0d5c791a08c49da5059e0aa2f8770b20c58be6ac9ad0d93da3ebd",
+        "termination": null
+      },
+      {
+        "case_id": "c2-f9-n12-dynamic",
+        "control_step": 25,
+        "exact": true,
+        "expected_snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+        "snapshot_sha256": "2a34ef031ac62da22d3a5163a44a411957a0fa5503629b954bb8b00c11070370",
+        "termination": null
+      },
+      {
+        "case_id": "c3-f8-n5-degraded",
+        "control_step": 20,
+        "exact": true,
+        "expected_snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+        "snapshot_sha256": "f9402d73da3222ec22d5340884be6cbf87ed4c721524682471cbc068a09b6bc0",
+        "termination": null
+      },
+      {
+        "case_id": "c4-f5-n8-noeligible",
+        "control_step": 40,
+        "exact": true,
+        "expected_snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+        "snapshot_sha256": "cff81c4b67cc93f17de057053bdb5e30bea500dd2bf87242a030eb6095dd9c04",
+        "termination": null
+      }
+    ],
+    "study_a_n24_access_count": 0
+  },
+  "schema_version": "rvt-phase9-s3z-regression/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0
+  },
+  "source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "status": "PASS"
+}
