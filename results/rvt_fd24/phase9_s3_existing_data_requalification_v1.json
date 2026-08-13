@@ -1,0 +1,48 @@
+{
+  "centerline_degenerate_support_count": 0,
+  "decision_difference_count": 0,
+  "dependent_row_count": 88,
+  "dependent_transaction_count": 60,
+  "maximum_width_absolute_difference_meters": 6.661338147750939e-16,
+  "official_data_action": "RETAIN_ALL_342",
+  "official_staging_writes": 0,
+  "phase9_s3_existing_data_requalification_sha256": "4ae7d50f7dc09a6b96623b9b48af2da3e010d695c419c198d8991882f574e34e",
+  "physical_pair_difference_count": 0,
+  "provenance_payloads_rewritten": 0,
+  "raw_evidence": {
+    "qualified_docker": "397ea2fba7b899b4e24f11e20010f2d643040747b95228216c04600a9d2cf863",
+    "reference": "2c3205ea26a1f96216e79d60584f556a74d981263d8270be02d2f86b4efe4cd2"
+  },
+  "reference_docker_semantic_exact": true,
+  "row_classification_counts": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254
+  },
+  "row_count": 342,
+  "row_ids_changed": 0,
+  "rows_rebuilt": 0,
+  "s3_call_count": 6485,
+  "schema_version": "rvt-phase9-s3-existing-data-requalification/v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "semantic_conclusion": {
+    "all_s3_decisions_exact": true,
+    "binary64_width_identity_required_for_existing_rows": false,
+    "binary64_width_note": "Equivalent frame translation arithmetic changes some last bits; width is not serialized and every threshold decision is exact.",
+    "existing_rows_changed": 0,
+    "historical_physical_pairs_equivalent_to_owner_rule": true,
+    "source_trajectory_semantic_projection_exact_by_induction": true
+  },
+  "semantic_projection_sha256": "c45c4bb738dea00f386080038cf20712e7c513684f03ebf4ea57d5ad540c9005",
+  "source_replay_count": 12,
+  "staging_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+  "status": "RETAIN_ALL_342",
+  "width_bit_difference_count": 1137
+}

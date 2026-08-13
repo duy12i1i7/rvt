@@ -1,0 +1,31 @@
+{
+  "equivalent_representation_tie_observations": 229,
+  "executable_new_path_tested": false,
+  "historical_implementation": {
+    "actual_defect": "same physical boundary crossed signs of the robot-relative mission normal; token permutation did not repair the pair",
+    "scalar_token_permutation_susceptibility": false
+  },
+  "observations_tested": 2270,
+  "orders": [
+    "runtime",
+    "canonical_identity",
+    "reversed"
+  ],
+  "orders_per_observation": 3,
+  "phase9_s3_token_order_invariance_sha256": "b0e33e78099b41810190decba6c06ff6674faf73f84535f3920c65dd2a1152c1",
+  "physically_distinct_equal_distance_ties": 0,
+  "reason": "No executable path may be implemented before degeneracy closure.",
+  "rotation_invariance": {
+    "diagnostic_transform_contract": "rotate p,c,t,n consistently",
+    "formula": "dot(R(p-c),Rn)=dot(p-c,n) for orthonormal R",
+    "physical_width_preserved": true
+  },
+  "schema_version": "rvt-phase9-s3-token-order-invariance/v1",
+  "scientific_addendum_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+  "semantic_projection_mismatches": 0,
+  "status": "DIAGNOSTIC_OWNER_RULE_PROJECTION_PASS",
+  "translation_invariance": {
+    "exact_algebraic": true,
+    "formula": "dot((p+a)-(c+a),n)=dot(p-c,n)"
+  }
+}

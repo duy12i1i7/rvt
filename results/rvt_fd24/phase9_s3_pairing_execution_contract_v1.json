@@ -1,0 +1,25 @@
+{
+  "controller_changed": false,
+  "event_timing_changed": false,
+  "executable_repair_implemented": false,
+  "geometry_changed": false,
+  "graph_schema_changed": false,
+  "matched_randomness_changed": false,
+  "model_changed": false,
+  "phase9_s3_pairing_execution_contract_sha256": "5816c29235dd6fdde7404d9789f0848ffbe08b0e1fd0ba18aebcff26bb011764",
+  "proposed_non_degenerate_pipeline": [
+    "authoritative anonymous local support set",
+    "existing authoritative local corridor/reference frame c,t,n",
+    "signed free-space-facing support coordinates d_k",
+    "nearest strictly negative and strictly positive coordinates",
+    "width d_pos-d_neg"
+  ],
+  "row_identity_contract_changed": false,
+  "runtime_files_changed": [],
+  "safety_changed": false,
+  "schema_version": "rvt-phase9-s3-pairing-execution-contract/v1",
+  "scientific_addendum_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+  "status": "NOT_EXECUTABLE_CENTERLINE_DEGENERACY_UNDERSPECIFIED",
+  "target_v4_changed": false,
+  "unresolved_totality_input": "d_k == 0.0"
+}

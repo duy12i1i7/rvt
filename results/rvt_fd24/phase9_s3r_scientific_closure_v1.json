@@ -1,0 +1,21 @@
+{
+  "classification": "S3_CENTERLINE_DEGENERACY_UNDERSPECIFIED",
+  "isolation": {
+    "final_test_accesses": 0,
+    "official_generation_resumed": false,
+    "official_staging_writes": 0,
+    "recoverability_validation_started": false,
+    "residual_v2_started": false,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "new_image_built": false,
+  "official_data_action": "RETAIN_ALL_342",
+  "phase9_s3r_scientific_closure_sha256": "db5578bb22c8e39987bb7a0c31d5f436b1643cb7da924465b7ff50b4f5ce2778",
+  "readiness_sha256": "58b6aa14364f6aeb958bf1c7304a61ca958788f43c27fdda0316917bcd7a0ec4",
+  "schema_version": "rvt-phase9-s3r-scientific-closure/v1",
+  "source_code_changed": false,
+  "status": "STOPPED_FOR_OWNER_SCIENTIFIC_DECISION",
+  "verdict": "A"
+}

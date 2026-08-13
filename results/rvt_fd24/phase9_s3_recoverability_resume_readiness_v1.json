@@ -1,0 +1,40 @@
+{
+  "blocked_task_replay_sha256": "9b0166d2edc9e6923f3c8665326d084d44564d84091b0a62c3191167158f9f7a",
+  "blocking_code": "S3_CENTERLINE_DEGENERACY_UNDERSPECIFIED",
+  "existing_data_requalification_sha256": "4ae7d50f7dc09a6b96623b9b48af2da3e010d695c419c198d8991882f574e34e",
+  "new_image_qualification_sha256": "abd70941618b9537ffd1b3c3ff1b1729d72b3576d3e07fb709553a537181459f",
+  "official_data_action": "RETAIN_ALL_342",
+  "official_operations": {
+    "generation_resumes": 0,
+    "official_staging_writes": 0,
+    "residual_starts": 0,
+    "training_operations": 0,
+    "validation_starts": 0
+  },
+  "pairing_execution_contract_sha256": "5816c29235dd6fdde7404d9789f0848ffbe08b0e1fd0ba18aebcff26bb011764",
+  "phase9_s3_recoverability_resume_readiness_sha256": "58b6aa14364f6aeb958bf1c7304a61ca958788f43c27fdda0316917bcd7a0ec4",
+  "population_requalification_sha256": "f03ac6df5d9bcdf42914d20d8a08b74cd64f09d4e60e5fa9d3c060ddbcd55045",
+  "production_impact_sha256": "31eb7669cb18fc0b15c327747f3d291626920bd223c8622bd69a4654e9175daa",
+  "readiness": "BLOCKED_SCIENTIFIC_OWNER_DECISION",
+  "resume_authorization_executed": false,
+  "resume_authorization_prepared": false,
+  "resume_lineage": {
+    "completed_rows": 342,
+    "completed_train_events": 210,
+    "completed_transactions_preserved": true,
+    "total_train_events": 6000,
+    "unresolved_tasks_scheduled": false
+  },
+  "schema_version": "rvt-phase9-s3-recoverability-resume-readiness/v1",
+  "scientific_addendum_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "token_order_invariance_sha256": "b0e33e78099b41810190decba6c06ff6674faf73f84535f3920c65dd2a1152c1",
+  "verdict": "A",
+  "verdict_text": "The owner pairing rule reveals another still-unfrozen scientific ambiguity."
+}

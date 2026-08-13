@@ -1,0 +1,17 @@
+{
+  "performance_requalification_run": false,
+  "phase9_s3_production_impact_sha256": "31eb7669cb18fc0b15c327747f3d291626920bd223c8622bd69a4654e9175daa",
+  "production_path_diagnostics_run": 0,
+  "profile": {
+    "chunk": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads": 1,
+    "workers": 12
+  },
+  "profile_classification": "SUSPENDED_NOT_REQUALIFIED_FOR_S3R",
+  "reason": "Performance measurement cannot qualify a scientifically incomplete executable path.",
+  "runtime_source_changed": false,
+  "schema_version": "rvt-phase9-s3-production-impact/v1",
+  "status": "NOT_MEASURED_SCIENTIFIC_GATE_BLOCKED",
+  "timeout_changed": false
+}

@@ -1,0 +1,80 @@
+{
+  "identity": {
+    "previous_s3_evidence_commit": "2d21f402ec286bde0f44494f612a2b83e2087184",
+    "previous_s3_report_commit": "5b0a439b739cdfd229aa1f124bdb4ed01bc65126",
+    "qualified_pre_repair_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+    "scientific_source_commit": "8cf64481cd17b2c44f7007d3722a8110e53cae46"
+  },
+  "mandatory_provenance": {
+    "binding": "additive",
+    "blocked_s3_transaction_committed_scientific_rows": 0,
+    "class_balance_used_to_select_rule": false,
+    "dependency_audit_potentially_affected_rows": 0,
+    "dependency_audit_proven_affected_rows": 0,
+    "downstream_results_used_to_select_rule": false,
+    "historical_scientific_roots_rewritten": false,
+    "model_performance_used_to_select_rule": false,
+    "official_generation_had_begun_before_discovery": true,
+    "official_rows_already_existed": 342,
+    "owner_decision_basis": "local physical geometry and anonymous support semantics only",
+    "target_v4_outcomes_used_to_select_rule": false
+  },
+  "newly_exposed_ambiguity": {
+    "affected_observations": 4,
+    "code": "S3_CENTERLINE_DEGENERACY_UNDERSPECIFIED",
+    "description": "Authorized F6 S3 observations contain the anonymous circle-0 central-blocker token exactly on the authoritative mission reference centerline: d_k is +0.0 and is neither d_k<0 nor d_k>0.",
+    "existing_boundary_on_centerline_validity_rule": null,
+    "existing_geometry_epsilon": null,
+    "new_tolerance_invented": false,
+    "owner_instruction_requires_stop": true
+  },
+  "owner_rule": {
+    "abs_previous_width_permitted": false,
+    "clamp_permitted": false,
+    "independence": [
+      "family identity",
+      "team size",
+      "robot ID",
+      "candidate topology",
+      "Target V4 outcome",
+      "recoverability label",
+      "future trajectory",
+      "worker",
+      "chunk",
+      "retry",
+      "token enumeration order"
+    ],
+    "local_frame": {
+      "c": "authoritative local corridor/reference center point at S3",
+      "n": "authoritative local normal associated with t",
+      "new_independent_frame_definition_permitted": false,
+      "t": "authoritative oriented local corridor tangent or mission tangent"
+    },
+    "negative_selection": "d_neg = max({d_k | d_k < 0})",
+    "negative_side": "d_k < 0",
+    "numerical_epsilon": null,
+    "positive_selection": "d_pos = min({d_k | d_k > 0})",
+    "positive_side": "d_k > 0",
+    "same_side_pair_permitted": false,
+    "scope": "anonymous S3 support pairing only",
+    "signed_coordinate": "d_k = dot(p_k-c,n)",
+    "width": "S3_width = d_pos-d_neg"
+  },
+  "phase": "PHASE_9G_A1S3R",
+  "phase9_s3_opposing_boundary_scientific_addendum_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+  "schema_version": "rvt-s3-opposing-boundary-pairing/v1",
+  "scientific_status": {
+    "implementation_authorized": false,
+    "pairing_rule_non_degenerate_domain_closed": true,
+    "required_next_input": "owner rule for an anonymous support whose authoritative signed coordinate is exactly zero, including whether circle centers are passage-boundary candidates",
+    "total_s3_pairing_contract_closed": false
+  },
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "OWNER_RULE_FROZEN_BUT_NOT_EXECUTABLE"
+}

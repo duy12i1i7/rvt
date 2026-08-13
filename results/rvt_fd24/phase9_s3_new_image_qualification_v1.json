@@ -1,0 +1,11 @@
+{
+  "dockerfile_environment_lineage": null,
+  "new_image": null,
+  "old_image": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+  "phase9_s3_new_image_qualification_sha256": "abd70941618b9537ffd1b3c3ff1b1729d72b3576d3e07fb709553a537181459f",
+  "reason": "No executable scientific repair was permitted.",
+  "schema_version": "rvt-phase9-s3-new-image-qualification/v1",
+  "source_commit_for_new_image": null,
+  "status": "NOT_BUILT_SCIENTIFIC_GATE_BLOCKED",
+  "target_exact_commit_verification": false
+}
