@@ -1,0 +1,99 @@
+{
+  "attempt": {
+    "classification": "OPERATIONAL_DEPLOYMENT_IMPORT_BINDING",
+    "container": "phase9g-a1c-recoverability-train-attempt-1-failed",
+    "exception": "TypeError: execute_unresolved() got an unexpected keyword argument 'status_hash_field'",
+    "exit_code": 1,
+    "failure_point": "after authority/checkpoint validation and before execute_unresolved",
+    "number": 1,
+    "root_cause": "working directory /opt/rvt preceded /a1c on sys.path, so the image copy of the helper module was imported"
+  },
+  "phase": "PHASE_9G_A1C",
+  "phase9g_a1c_startup_requalification_sha256": "03349fe3c99890da953839a5ac51fc80e5736f471187355af5b697dd2d54f068",
+  "raw_evidence": {
+    "container-inspect.json": {
+      "bytes": 15260,
+      "file_sha256": "d1a0eca1b7aca1978d2016e65def9a796124bdaa97a9d24b3f834cf960ae80e3"
+    },
+    "container.stderr.log": {
+      "bytes": 361,
+      "file_sha256": "f373ee877a7fb38705485592b79765eaf769160839fd5c2cb4fe72688eacc48b"
+    },
+    "container.stdout.log": {
+      "bytes": 0,
+      "file_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "module-provenance-after.json": {
+      "bytes": 436,
+      "file_sha256": "ecd0526d6278162ea17a719a063d394618b87d38440d1d6bd868706db7d76354"
+    },
+    "module-provenance-before.json": {
+      "bytes": 372,
+      "file_sha256": "1eee90c69c5baf5d4d1d1f5b1dcdeefe6abd5e060a9d0e403db428efdbfac99e"
+    },
+    "train-continuation-status.json": {
+      "bytes": 2519,
+      "file_sha256": "dae72c2eeba65101f99d06f6c2692095d5d087ae5465cb364f65ad0f8a8da2b8"
+    }
+  },
+  "repair": {
+    "authorization_scope_changed": false,
+    "classification": "LAUNCH_BINDING_ONLY",
+    "deployed_package_marker": {
+      "content_bytes": 0,
+      "existing_repository_file": true,
+      "path": "/a1c/scripts/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "module_after": {
+      "module_file": "/a1c/scripts/run_phase9g_a1r_recoverability_continuation.py",
+      "signature": "(root: 'Path', tasks: 'Sequence[OfficialDecisionEventTask]', writer: 'CanonicalGenerationWriter', *, workers: 'int', timeout_seconds: 'float', telemetry_path: 'Path', status_path: 'Path', status: 'dict[str, Any]', status_hash_field: 'str' = 'phase9g_a1r_continuation_status_sha256') -> 'Mapping[str, Any]'",
+      "status_hash_field_present": true
+    },
+    "module_before": {
+      "module_file": "/opt/rvt/scripts/run_phase9g_a1r_recoverability_continuation.py",
+      "signature": "(root: 'Path', tasks: 'Sequence[OfficialDecisionEventTask]', writer: 'CanonicalGenerationWriter', *, workers: 'int', timeout_seconds: 'float', telemetry_path: 'Path', status_path: 'Path', status: 'dict[str, Any]') -> 'Mapping[str, Any]'",
+      "status_hash_field_present": false
+    },
+    "operational_wrapper_bytes_changed": false,
+    "profile_changed": false,
+    "scientific_source_image_changed": false,
+    "working_directory": {
+      "new": "/a1c",
+      "old": "/opt/rvt"
+    }
+  },
+  "required_retry_preconditions": {
+    "chunk_size": 1,
+    "exact_checkpoint_revalidation": true,
+    "numeric_threads": 1,
+    "resolve_only_under_repaired_working_directory": true,
+    "same_run_id": true,
+    "same_unresolved_identity_set": true,
+    "timeout_seconds": 243,
+    "workers": 12
+  },
+  "schema_version": "rvt-phase9g-a1c-startup-requalification/v1",
+  "scientific_effect": {
+    "candidate_aggregates_started": 0,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "checkpoint_unchanged": true,
+    "partial_transactions_after_failure": 0,
+    "scientific_retries": 0,
+    "scientific_rows_written": 0,
+    "scientific_semantics_changed": false,
+    "scientific_transactions_written": 0,
+    "scientific_units_started": 0,
+    "staging_rows_after_failure": 342,
+    "staging_transactions_after_failure": 210
+  },
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "recoverability_validation_operations": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "PASS_OPERATIONAL_RETRY_PERMITTED"
+}

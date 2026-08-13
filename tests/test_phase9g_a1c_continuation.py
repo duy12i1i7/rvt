@@ -133,3 +133,33 @@ def test_current_roots_and_staging_checkpoint_are_canonical() -> None:
     assert checkpoint["prefix"]["train_events"] == 210
     assert checkpoint["prefix"]["scientific_rows"] == 342
     assert checkpoint["prefix"]["partial_candidate_pair_publications"] == 0
+
+
+def test_attempt1_startup_requalification_has_no_scientific_effect() -> None:
+    document = _canonical(
+        "phase9g_a1c_startup_requalification_v1.json",
+        "phase9g_a1c_startup_requalification_sha256",
+    )
+    assert document["status"] == "PASS_OPERATIONAL_RETRY_PERMITTED"
+    assert document["attempt"]["classification"] == (
+        "OPERATIONAL_DEPLOYMENT_IMPORT_BINDING"
+    )
+    assert document["scientific_effect"] == {
+        "scientific_units_started": 0,
+        "candidate_aggregates_started": 0,
+        "scientific_transactions_written": 0,
+        "scientific_rows_written": 0,
+        "scientific_retries": 0,
+        "scientific_semantics_changed": False,
+        "staging_transactions_after_failure": 210,
+        "staging_rows_after_failure": 342,
+        "partial_transactions_after_failure": 0,
+        "checkpoint_unchanged": True,
+        "checkpoint_sha256": (
+            "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f"
+        ),
+    }
+    assert document["repair"]["module_before"]["status_hash_field_present"] is False
+    assert document["repair"]["module_after"]["status_hash_field_present"] is True
+    assert document["repair"]["scientific_source_image_changed"] is False
+    assert document["repair"]["operational_wrapper_bytes_changed"] is False
