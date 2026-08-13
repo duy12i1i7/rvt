@@ -1,0 +1,109 @@
+{
+  "audit_hashes": {
+    "quality": "1f3945d99a16e2c4b81e6eda24c2765efb3a504e819ac8753536ea71a2f71bf8",
+    "reconciliation": "0fee89cc1ed36a213588f8b9b5965cf0668e860402bae0c74509a0021d0c73fa"
+  },
+  "audit_sidecar_count": 6000,
+  "class_weighting": "NOT_SELECTED",
+  "completion_state": "COMPLETE",
+  "dataset_id": "phase9g-a1-study-a-train-recoverability-v1",
+  "dataset_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "existing_342_row_lineage": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "rows_regenerated": 0,
+    "rows_retained": 342
+  },
+  "generation_provenance_root": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+  "integrity": {
+    "duplicate_scientific_identities": 0,
+    "hash_failures": 0,
+    "partial_candidate_pair_publications": 0,
+    "schema_failures": 0,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "unexpected_duplicates": 0,
+    "unresolved_infrastructure_failures": 0
+  },
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "label_branch": "recoverability",
+  "parent_run_id": "phase9g-a1r-study-a-train-validation-recoverability-continuation-20260812T061720Z",
+  "production_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+  "row_indexes": [
+    {
+      "content_sha256": "eca7c9aad527b398a760ee2158bdbad8b81c0e27566eda07e72d365d46c3e023",
+      "entry_count": 8340,
+      "path": "indexes/train-recoverability-row-index.jsonl"
+    }
+  ],
+  "run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "run_identity_sha256": "96219238a0827d498e317a42e3b8995bd41ee722dbd8808433b84fc69c9d4234",
+  "schema_version": "rvt-phase9g-a1c-recoverability-train-dataset-manifest/v1",
+  "scientific_dataset_lineage_id": "phase9g-a1-study-a-train-validation-recoverability-v1",
+  "scientific_row_count": 8340,
+  "scientific_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "sealed_domains": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "optimizer_states": 0,
+    "recoverability_validation_operations": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "shards": [
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "29d7009f747e1db5bb4251e0230acb7d3602550e41a8c70b049a02ad87ca9977",
+      "path": "shards/train-recoverability-00000.jsonl",
+      "row_count": 2048,
+      "split": "train"
+    },
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "3f5a2315f697c0b0b424dfbf2c2107df13730730fce09cbf3a206ef73cbffc9a",
+      "path": "shards/train-recoverability-00001.jsonl",
+      "row_count": 2048,
+      "split": "train"
+    },
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "4d0ea84a0d7dde818bda6652ac5e1137d999f25b70d810df4d093d15b0d595c5",
+      "path": "shards/train-recoverability-00002.jsonl",
+      "row_count": 2048,
+      "split": "train"
+    },
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "f5d2833e41b58c589fb3ccd13fdefdc0b1e9474546e3fe85caaea05af58aabca",
+      "path": "shards/train-recoverability-00003.jsonl",
+      "row_count": 2048,
+      "split": "train"
+    },
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "883e86308d87e562eec04de6ec2dc62c711a2c5ceefe65f92a2ea84289226dd6",
+      "path": "shards/train-recoverability-00004.jsonl",
+      "row_count": 148,
+      "split": "train"
+    }
+  ],
+  "splits": [
+    "train"
+  ],
+  "status": "VALID_FROZEN_TRAIN_ONLY",
+  "study": "study_a_zero_shot",
+  "transaction_count": 6000,
+  "transaction_indexes": [
+    {
+      "content_sha256": "759fa128acf0007c8ec111f8c620cd3afc48d84a87e8af196dfffbe181f62e10",
+      "entry_count": 6000,
+      "path": "indexes/train-recoverability-transaction-index.jsonl"
+    }
+  ],
+  "validation_included": false
+}

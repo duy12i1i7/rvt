@@ -1,0 +1,2794 @@
+{
+  "dataset": {
+    "dataset_id": "phase9g-a1-study-a-train-recoverability-v1",
+    "manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "postfinal_validation_sha256": "ae67a6d1856e74e45685bc898341877afec83a7c9396c21406df81a4f8457e13",
+    "scientific_rows": 8340,
+    "seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+    "shards": 5,
+    "storage_bytes": 248814238,
+    "transactions": 6000
+  },
+  "descriptive_distribution": {
+    "by_candidate_topology": [
+      {
+        "GENERATION_INVALID": 5557,
+        "RECOVERABLE_POSITIVE": 237,
+        "VALID_TASK_NEGATIVE": 206,
+        "candidate_topology": "COMPACT"
+      },
+      {
+        "GENERATION_INVALID": 5557,
+        "RECOVERABLE_POSITIVE": 295,
+        "VALID_TASK_NEGATIVE": 148,
+        "candidate_topology": "LINE"
+      }
+    ],
+    "by_family": [
+      {
+        "GENERATION_INVALID": 926,
+        "RECOVERABLE_POSITIVE": 191,
+        "VALID_TASK_NEGATIVE": 83,
+        "dropped": 463,
+        "family": "F1",
+        "retained": 137
+      },
+      {
+        "GENERATION_INVALID": 1140,
+        "RECOVERABLE_POSITIVE": 13,
+        "VALID_TASK_NEGATIVE": 47,
+        "dropped": 570,
+        "family": "F10",
+        "retained": 30
+      },
+      {
+        "GENERATION_INVALID": 1120,
+        "RECOVERABLE_POSITIVE": 41,
+        "VALID_TASK_NEGATIVE": 39,
+        "dropped": 560,
+        "family": "F2",
+        "retained": 40
+      },
+      {
+        "GENERATION_INVALID": 1186,
+        "RECOVERABLE_POSITIVE": 0,
+        "VALID_TASK_NEGATIVE": 14,
+        "dropped": 593,
+        "family": "F3",
+        "retained": 7
+      },
+      {
+        "GENERATION_INVALID": 1200,
+        "RECOVERABLE_POSITIVE": 0,
+        "VALID_TASK_NEGATIVE": 0,
+        "dropped": 600,
+        "family": "F4",
+        "retained": 0
+      },
+      {
+        "GENERATION_INVALID": 1150,
+        "RECOVERABLE_POSITIVE": 29,
+        "VALID_TASK_NEGATIVE": 21,
+        "dropped": 575,
+        "family": "F5",
+        "retained": 25
+      },
+      {
+        "GENERATION_INVALID": 1136,
+        "RECOVERABLE_POSITIVE": 0,
+        "VALID_TASK_NEGATIVE": 64,
+        "dropped": 568,
+        "family": "F6",
+        "retained": 32
+      },
+      {
+        "GENERATION_INVALID": 960,
+        "RECOVERABLE_POSITIVE": 190,
+        "VALID_TASK_NEGATIVE": 50,
+        "dropped": 480,
+        "family": "F7",
+        "retained": 120
+      },
+      {
+        "GENERATION_INVALID": 1180,
+        "RECOVERABLE_POSITIVE": 9,
+        "VALID_TASK_NEGATIVE": 11,
+        "dropped": 590,
+        "family": "F8",
+        "retained": 10
+      },
+      {
+        "GENERATION_INVALID": 1116,
+        "RECOVERABLE_POSITIVE": 59,
+        "VALID_TASK_NEGATIVE": 25,
+        "dropped": 558,
+        "family": "F9",
+        "retained": 42
+      }
+    ],
+    "by_team_size": [
+      {
+        "GENERATION_INVALID": 2254,
+        "RECOVERABLE_POSITIVE": 92,
+        "VALID_TASK_NEGATIVE": 54,
+        "dropped": 1127,
+        "retained": 73,
+        "team_size": 12
+      },
+      {
+        "GENERATION_INVALID": 2202,
+        "RECOVERABLE_POSITIVE": 62,
+        "VALID_TASK_NEGATIVE": 136,
+        "dropped": 1101,
+        "retained": 99,
+        "team_size": 16
+      },
+      {
+        "GENERATION_INVALID": 2220,
+        "RECOVERABLE_POSITIVE": 130,
+        "VALID_TASK_NEGATIVE": 50,
+        "dropped": 1110,
+        "retained": 90,
+        "team_size": 5
+      },
+      {
+        "GENERATION_INVALID": 2212,
+        "RECOVERABLE_POSITIVE": 128,
+        "VALID_TASK_NEGATIVE": 60,
+        "dropped": 1106,
+        "retained": 94,
+        "team_size": 6
+      },
+      {
+        "GENERATION_INVALID": 2226,
+        "RECOVERABLE_POSITIVE": 120,
+        "VALID_TASK_NEGATIVE": 54,
+        "dropped": 1113,
+        "retained": 87,
+        "team_size": 8
+      }
+    ],
+    "class_weighting": "NOT_SELECTED",
+    "complete_cross_breakdown_artifact_sha256": "374849cc99d08ed9a6f90e95169fdf574f130fa09780ead03a707787376f2658",
+    "scientific_invalid_reason_distribution": [
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 9,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 2,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F1",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 12,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 4,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 8,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 8,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 19,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 19,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 8,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 8,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 14,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 3,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 12,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 3,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 1,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F10",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 5,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 12,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 10,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 8,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 5,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 12,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 12,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 3,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 9,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 3,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 4,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F2",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 17,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 17,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 19,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F3",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F4",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 14,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 4,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 12,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 15,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 5,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F5",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 18,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 18,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 10,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F6",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 5,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 12,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 2,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 3,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 1,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 2,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F7",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 8,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 8,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 15,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 5,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 15,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 5,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 5,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 13,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 15,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 10,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 5,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 5,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F8",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      },
+      {
+        "count": 16,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 5
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 5
+      },
+      {
+        "count": 16,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 6
+      },
+      {
+        "count": 16,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 6
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 6
+      },
+      {
+        "count": 13,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 8
+      },
+      {
+        "count": 16,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 8
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 8
+      },
+      {
+        "count": 10,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 6,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 12
+      },
+      {
+        "count": 10,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 6,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 12
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 12
+      },
+      {
+        "count": 15,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 1,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S0_SCRIPTED_DIAGNOSTIC",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S1_ALWAYS_COMPACT",
+        "team_size": 16
+      },
+      {
+        "count": 15,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 2,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+        "source_class": "S2_ALWAYS_LINE",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S4_FROZEN_TRANSITION_PROTOCOL",
+        "team_size": 16
+      },
+      {
+        "count": 20,
+        "family": "F9",
+        "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+        "source_class": "S5_BOUNDED_PERTURBATION",
+        "team_size": 16
+      }
+    ]
+  },
+  "downstream": {
+    "recoverability_validation_started": false,
+    "residual_v2_started": false,
+    "training_operations": 0
+  },
+  "existing_data": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254,
+    "regenerated": 0,
+    "retained": 342
+  },
+  "identity": {
+    "authority_commit": "869db24fac87b24b60a95fd192a6a75a63fc0ed0",
+    "authorization_continuation_sha256": "6bb55ef39de6f78a81ced45e9bfa960daf72acb650e432e690a16e019a61e2ae",
+    "evidence_commit_at_authorization": "af5c083e58476f5bd8a08710ce567176108e8f06",
+    "executable_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+    "initial_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "production_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+    "startup_requalification_commit": "982349d92863a0a3c5a6bcdce25332877df27be0"
+  },
+  "integrity": {
+    "duplicate_scientific_identities": 0,
+    "hash_failures": 0,
+    "partial_candidate_pair_publications": 0,
+    "schema_failures": 0,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "unaccounted_events": 0,
+    "unexpected_duplicate_transactions": 0,
+    "unresolved_infrastructure_failures": 0
+  },
+  "parent_run_id": "phase9g-a1r-study-a-train-validation-recoverability-continuation-20260812T061720Z",
+  "phase": "PHASE_9G_A1C",
+  "phase9g_a1c_train_closure_sha256": "10a3c7a6b9058bfc0d513dc2a0c598c6aa0c4ffde9dfd92641fe44f139988e88",
+  "prestart": {
+    "checkpoint_exact": true,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "duplicates": 0,
+    "events": 210,
+    "partial_transactions": 0,
+    "s3_unresolved_ambiguities": 0,
+    "scientific_rows": 342
+  },
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "s3": {
+    "complete_train_candidate_aggregates": 2000,
+    "complete_train_candidate_pair_distribution": {
+      "DROPPED_NONPUBLISHED": 955,
+      "RETAINED": 45
+    },
+    "complete_train_decision_events": 1000,
+    "complete_train_source_instances": 200,
+    "continuation_remaining_counter_levels": {
+      "centerline_neutral_support_observations": 2,
+      "hold_unknown_robot_observations": 1518,
+      "participating_support_observations": 3921,
+      "resolved_opposing_pairs": 248,
+      "robot_local_s3_observations": 1766,
+      "source_invalid_instances": 4,
+      "source_s3_instances": 194,
+      "support_ties_resolved_by_frozen_identity": 177,
+      "unresolved_s3_ambiguities": 0
+    },
+    "unresolved_ambiguities": 0
+  },
+  "schema_version": "rvt-phase9g-a1c-train-closure/v1",
+  "sealed_domains": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "optimizer_states": 0,
+    "recoverability_validation_operations": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "COMPLETE_STOPPED_BEFORE_VALIDATION",
+  "tests": {
+    "dataset_validator": "PASS",
+    "postrun_complete_suite": {
+      "failed": 0,
+      "log_file_sha256": "05b50e652b1dfc310a4800902db1dfe1294d0020350b226132e5c2fcd4d606b0",
+      "passed": 3136,
+      "publication_required_xfailed": 0,
+      "seconds": 387.04,
+      "warnings": 1
+    },
+    "prestart_complete_suite": {
+      "failed": 0,
+      "log_file_sha256": "070f5d0bafc58bde46580e475893fcde14259ccc5dfc373066870d25816df544",
+      "passed": 3132,
+      "publication_required_xfailed": 0,
+      "seconds": 381.75,
+      "warnings": 1
+    }
+  },
+  "train_execution": {
+    "candidate_aggregates": 12000,
+    "candidate_cpu_hours_a1c": 8.08706466858641,
+    "candidate_dispositions": {
+      "GENERATION_INVALID": 11114,
+      "RECOVERABLE_POSITIVE": 532,
+      "VALID_TASK_NEGATIVE": 354
+    },
+    "candidate_pair_dropped_events": 5557,
+    "candidate_pair_retained_events": 443,
+    "duplicates": 0,
+    "events": 6000,
+    "historical_infrastructure_timeouts_before_a1c": 2,
+    "infrastructure_timeouts_during_a1c": 0,
+    "maximum_atomic_unit_wall_seconds": 67.67367183999158,
+    "partial_transactions": 0,
+    "replica_executions": 1094,
+    "sampled_cpu_hours_accumulated_lineage": 9.108526638930854,
+    "scientific_retries": 0,
+    "scientific_rows": 8340,
+    "source_episodes": 1200,
+    "startup_launch_failures_before_scientific_execution": 1,
+    "wall_seconds_a1c": 2891.101980314008,
+    "wall_seconds_accumulated_observed_lineage": 3381.3100735490075,
+    "writer_failures": 0
+  },
+  "verdict": "C",
+  "verdict_text": "Study-A Recoverability TRAIN completed, reconciled and finalized successfully; validation may be separately authorized."
+}

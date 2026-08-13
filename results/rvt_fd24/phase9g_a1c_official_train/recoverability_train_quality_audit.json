@@ -1,0 +1,1611 @@
+{
+  "aggregate_dispositions": {
+    "GENERATION_INVALID": 11114,
+    "RECOVERABLE_POSITIVE": 532,
+    "VALID_TASK_NEGATIVE": 354
+  },
+  "candidate_pair_distribution": [
+    {
+      "events": 96,
+      "family": "F1",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 24,
+      "family": "F1",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 96,
+      "family": "F1",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 24,
+      "family": "F1",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 94,
+      "family": "F1",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 26,
+      "family": "F1",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 97,
+      "family": "F1",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 23,
+      "family": "F1",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 80,
+      "family": "F1",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 40,
+      "family": "F1",
+      "state": "RETAINED",
+      "team_size": 16
+    },
+    {
+      "events": 110,
+      "family": "F10",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 10,
+      "family": "F10",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 112,
+      "family": "F10",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 8,
+      "family": "F10",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 112,
+      "family": "F10",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 8,
+      "family": "F10",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 116,
+      "family": "F10",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 4,
+      "family": "F10",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F10",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 110,
+      "family": "F2",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 10,
+      "family": "F2",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 110,
+      "family": "F2",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 10,
+      "family": "F2",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 111,
+      "family": "F2",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 9,
+      "family": "F2",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 109,
+      "family": "F2",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 11,
+      "family": "F2",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F2",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 120,
+      "family": "F3",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 114,
+      "family": "F3",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 6,
+      "family": "F3",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 119,
+      "family": "F3",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 1,
+      "family": "F3",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 120,
+      "family": "F3",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F3",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 112,
+      "family": "F5",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 8,
+      "family": "F5",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 115,
+      "family": "F5",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 5,
+      "family": "F5",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 116,
+      "family": "F5",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 4,
+      "family": "F5",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 116,
+      "family": "F5",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 4,
+      "family": "F5",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 116,
+      "family": "F5",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 4,
+      "family": "F5",
+      "state": "RETAINED",
+      "team_size": 16
+    },
+    {
+      "events": 118,
+      "family": "F6",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 2,
+      "family": "F6",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 116,
+      "family": "F6",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 4,
+      "family": "F6",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 116,
+      "family": "F6",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 4,
+      "family": "F6",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 118,
+      "family": "F6",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 2,
+      "family": "F6",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 100,
+      "family": "F6",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 20,
+      "family": "F6",
+      "state": "RETAINED",
+      "team_size": 16
+    },
+    {
+      "events": 96,
+      "family": "F7",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 24,
+      "family": "F7",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 97,
+      "family": "F7",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 23,
+      "family": "F7",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 96,
+      "family": "F7",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 24,
+      "family": "F7",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 99,
+      "family": "F7",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 21,
+      "family": "F7",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 92,
+      "family": "F7",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 28,
+      "family": "F7",
+      "state": "RETAINED",
+      "team_size": 16
+    },
+    {
+      "events": 116,
+      "family": "F8",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 4,
+      "family": "F8",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 114,
+      "family": "F8",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 6,
+      "family": "F8",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 120,
+      "family": "F8",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 120,
+      "family": "F8",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F8",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 112,
+      "family": "F9",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 5
+    },
+    {
+      "events": 8,
+      "family": "F9",
+      "state": "RETAINED",
+      "team_size": 5
+    },
+    {
+      "events": 112,
+      "family": "F9",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 6
+    },
+    {
+      "events": 8,
+      "family": "F9",
+      "state": "RETAINED",
+      "team_size": 6
+    },
+    {
+      "events": 109,
+      "family": "F9",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 8
+    },
+    {
+      "events": 11,
+      "family": "F9",
+      "state": "RETAINED",
+      "team_size": 8
+    },
+    {
+      "events": 112,
+      "family": "F9",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 12
+    },
+    {
+      "events": 8,
+      "family": "F9",
+      "state": "RETAINED",
+      "team_size": 12
+    },
+    {
+      "events": 113,
+      "family": "F9",
+      "state": "DROPPED_NONPUBLISHED",
+      "team_size": 16
+    },
+    {
+      "events": 7,
+      "family": "F9",
+      "state": "RETAINED",
+      "team_size": 16
+    }
+  ],
+  "candidate_pair_dropped_events": 5557,
+  "candidate_pair_retained_events": 443,
+  "class_weighting": "NOT_SELECTED",
+  "descriptive_only": true,
+  "invalid_event_distribution": [
+    {
+      "events": 96,
+      "family": "F1",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 96,
+      "family": "F1",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 94,
+      "family": "F1",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 97,
+      "family": "F1",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 80,
+      "family": "F1",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 110,
+      "family": "F10",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 112,
+      "family": "F10",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 112,
+      "family": "F10",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 116,
+      "family": "F10",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F10",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 110,
+      "family": "F2",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 110,
+      "family": "F2",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 111,
+      "family": "F2",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 109,
+      "family": "F2",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F2",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 120,
+      "family": "F3",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 114,
+      "family": "F3",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 119,
+      "family": "F3",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 120,
+      "family": "F3",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F3",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F4",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 112,
+      "family": "F5",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 115,
+      "family": "F5",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 116,
+      "family": "F5",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 116,
+      "family": "F5",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 116,
+      "family": "F5",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 118,
+      "family": "F6",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 116,
+      "family": "F6",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 116,
+      "family": "F6",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 118,
+      "family": "F6",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 100,
+      "family": "F6",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 96,
+      "family": "F7",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 97,
+      "family": "F7",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 96,
+      "family": "F7",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 99,
+      "family": "F7",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 92,
+      "family": "F7",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 116,
+      "family": "F8",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 114,
+      "family": "F8",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 120,
+      "family": "F8",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 120,
+      "family": "F8",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 120,
+      "family": "F8",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    },
+    {
+      "events": 112,
+      "family": "F9",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 5
+    },
+    {
+      "events": 112,
+      "family": "F9",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 6
+    },
+    {
+      "events": 109,
+      "family": "F9",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 8
+    },
+    {
+      "events": 112,
+      "family": "F9",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 12
+    },
+    {
+      "events": 113,
+      "family": "F9",
+      "reason": "UNKNOWN_FROZEN_GENERATION_INVALID",
+      "team_size": 16
+    }
+  ],
+  "phase9g_a1c_recoverability_train_quality_audit_sha256": "1f3945d99a16e2c4b81e6eda24c2765efb3a504e819ac8753536ea71a2f71bf8",
+  "row_distribution": [
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 1,
+      "rows": 120,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 1,
+      "rows": 120,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 1,
+      "rows": 144,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 0,
+      "rows": 24,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 1,
+      "rows": 120,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 0,
+      "rows": 8,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 1,
+      "rows": 200,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 0,
+      "rows": 24,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 1,
+      "rows": 184,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 0,
+      "rows": 156,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 1,
+      "rows": 120,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 0,
+      "rows": 24,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 1,
+      "rows": 252,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F1",
+      "label": 0,
+      "rows": 640,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 0,
+      "rows": 320,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F1",
+      "label": 1,
+      "rows": 320,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 0,
+      "rows": 50,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F10",
+      "label": 0,
+      "rows": 50,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 0,
+      "rows": 12,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 1,
+      "rows": 36,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F10",
+      "label": 0,
+      "rows": 48,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 0,
+      "rows": 24,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 1,
+      "rows": 40,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F10",
+      "label": 0,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 0,
+      "rows": 24,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F10",
+      "label": 1,
+      "rows": 24,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F10",
+      "label": 0,
+      "rows": 48,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 0,
+      "rows": 5,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 1,
+      "rows": 45,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 0,
+      "rows": 45,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 1,
+      "rows": 5,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 0,
+      "rows": 12,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 1,
+      "rows": 48,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 0,
+      "rows": 42,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 1,
+      "rows": 18,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 0,
+      "rows": 8,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 1,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 0,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 1,
+      "rows": 8,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 0,
+      "rows": 36,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F2",
+      "label": 1,
+      "rows": 96,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 0,
+      "rows": 96,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F2",
+      "label": 1,
+      "rows": 36,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F3",
+      "label": 0,
+      "rows": 36,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F3",
+      "label": 0,
+      "rows": 36,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F3",
+      "label": 0,
+      "rows": 8,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F3",
+      "label": 0,
+      "rows": 8,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F5",
+      "label": 1,
+      "rows": 40,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 0,
+      "rows": 40,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F5",
+      "label": 1,
+      "rows": 30,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 0,
+      "rows": 18,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 1,
+      "rows": 12,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F5",
+      "label": 0,
+      "rows": 8,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F5",
+      "label": 1,
+      "rows": 24,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 1,
+      "rows": 32,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F5",
+      "label": 0,
+      "rows": 48,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 1,
+      "rows": 48,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F5",
+      "label": 0,
+      "rows": 64,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 0,
+      "rows": 16,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F5",
+      "label": 1,
+      "rows": 48,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F6",
+      "label": 0,
+      "rows": 10,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F6",
+      "label": 0,
+      "rows": 10,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F6",
+      "label": 0,
+      "rows": 24,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F6",
+      "label": 0,
+      "rows": 24,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F6",
+      "label": 0,
+      "rows": 32,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F6",
+      "label": 0,
+      "rows": 32,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F6",
+      "label": 0,
+      "rows": 24,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F6",
+      "label": 0,
+      "rows": 24,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F6",
+      "label": 0,
+      "rows": 320,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F6",
+      "label": 0,
+      "rows": 320,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 1,
+      "rows": 120,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 0,
+      "rows": 20,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 1,
+      "rows": 100,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 1,
+      "rows": 138,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 0,
+      "rows": 24,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 1,
+      "rows": 114,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 1,
+      "rows": 192,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 0,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 1,
+      "rows": 128,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 0,
+      "rows": 60,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 1,
+      "rows": 192,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 0,
+      "rows": 60,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 1,
+      "rows": 192,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 0,
+      "rows": 192,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F7",
+      "label": 1,
+      "rows": 256,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 0,
+      "rows": 192,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F7",
+      "label": 1,
+      "rows": 256,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F8",
+      "label": 1,
+      "rows": 20,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F8",
+      "label": 0,
+      "rows": 20,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F8",
+      "label": 0,
+      "rows": 6,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F8",
+      "label": 1,
+      "rows": 30,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F8",
+      "label": 0,
+      "rows": 36,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 1,
+      "rows": 40,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 1,
+      "rows": 40,
+      "team_size": 5
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 1,
+      "rows": 48,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 0,
+      "rows": 18,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 1,
+      "rows": 30,
+      "team_size": 6
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 0,
+      "rows": 24,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 1,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 0,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 1,
+      "rows": 24,
+      "team_size": 8
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 1,
+      "rows": 96,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 0,
+      "rows": 48,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 1,
+      "rows": 48,
+      "team_size": 12
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 0,
+      "rows": 16,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 2,
+      "family": "F9",
+      "label": 1,
+      "rows": 96,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 0,
+      "rows": 96,
+      "team_size": 16
+    },
+    {
+      "candidate_topology_id": 5,
+      "family": "F9",
+      "label": 1,
+      "rows": 16,
+      "team_size": 16
+    }
+  ],
+  "run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "s3": {
+    "centerline_neutral_support_observations": 2,
+    "hold_unknown_robot_observations": 1518,
+    "participating_support_observations": 3921,
+    "remaining_prestart_guard_sha256": "2b2bae12fc3bbba11e2a5758dafb13adc74ce4991c5f0246f2735ae82c37ab76",
+    "resolved_opposing_pairs": 248,
+    "robot_local_s3_observations": 1766,
+    "source_invalid_instances": 4,
+    "source_s3_instances": 194,
+    "support_ties_resolved_by_frozen_identity": 177,
+    "unresolved_s3_ambiguities": 0
+  },
+  "schema_version": "rvt-phase9g-a1c-recoverability-train-quality-audit/v1",
+  "scientific_rows": 8340
+}

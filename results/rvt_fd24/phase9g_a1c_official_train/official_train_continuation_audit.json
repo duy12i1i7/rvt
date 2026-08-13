@@ -1,0 +1,168 @@
+{
+  "complete_train": {
+    "candidate_aggregates": 12000,
+    "candidate_dispositions": {
+      "GENERATION_INVALID": 11114,
+      "RECOVERABLE_POSITIVE": 532,
+      "VALID_TASK_NEGATIVE": 354
+    },
+    "candidate_pair_dropped_events": 5557,
+    "candidate_pair_retained_events": 443,
+    "events": 6000,
+    "replica_executions": 1094,
+    "scientific_rows": 8340,
+    "source_episodes": 1200
+  },
+  "continuation_execution": {
+    "candidate_aggregates": 11580,
+    "candidate_cpu_hours": 8.08706466858641,
+    "candidate_dispositions": {
+      "GENERATION_INVALID": 10734,
+      "RECOVERABLE_POSITIVE": 502,
+      "VALID_TASK_NEGATIVE": 344
+    },
+    "candidate_pair_states": {
+      "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID": 5367,
+      "SCIENTIFICALLY_RECONCILED_LABELABLE": 423
+    },
+    "candidate_runtime": {
+      "maximum_seconds": 67.67367183999158,
+      "median_seconds": 0.8808433329977561,
+      "n": 11580,
+      "p90_seconds": 6.410154933403828,
+      "p95_seconds": 10.64680497324516
+    },
+    "duplicate_replays": 0,
+    "events": 5790,
+    "infrastructure_retries": 0,
+    "infrastructure_timeouts": 0,
+    "maximum_atomic_unit_wall_seconds": 67.67367183999158,
+    "official_transactions_written": 5790,
+    "partial_transactions": 0,
+    "peak_worker_rss_bytes": 295702528,
+    "reconciliation_writer_runtime": {
+      "maximum_seconds": 0.17351639800472185,
+      "median_seconds": 0.011114515000372194,
+      "n": 5790,
+      "p90_seconds": 0.0210469398953137,
+      "p95_seconds": 0.028973972244421033
+    },
+    "replica_executions": 1042,
+    "replica_runtime": {
+      "maximum_seconds": 34.443263244989794,
+      "median_seconds": 1.3672071195032913,
+      "n": 1042,
+      "p90_seconds": 11.75456359798845,
+      "p95_seconds": 21.38883815809311
+    },
+    "scientific_rows": 7998,
+    "wall_seconds": 2891.101980314008,
+    "writer_failures": 0
+  },
+  "dataset": {
+    "dataset_id": "phase9g-a1-study-a-train-recoverability-v1",
+    "manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "postfinal_validation_sha256": "ae67a6d1856e74e45685bc898341877afec83a7c9396c21406df81a4f8457e13",
+    "seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+    "shards": 5,
+    "storage_bytes": 248814238,
+    "validation_included": false
+  },
+  "downstream": {
+    "recoverability_validation_started": false,
+    "residual_v2_started": false,
+    "training_operations": 0
+  },
+  "existing_342_row_lineage": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "rows_regenerated": 0,
+    "rows_retained": 342
+  },
+  "identity": {
+    "authority_commit": "869db24fac87b24b60a95fd192a6a75a63fc0ed0",
+    "authorization_continuation_sha256": "6bb55ef39de6f78a81ced45e9bfa960daf72acb650e432e690a16e019a61e2ae",
+    "evidence_commit_at_authorization": "af5c083e58476f5bd8a08710ce567176108e8f06",
+    "executable_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+    "initial_checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "production_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+    "startup_requalification_commit": "982349d92863a0a3c5a6bcdce25332877df27be0"
+  },
+  "integrity": {
+    "GENERATION_INVALID_aggregates": 11114,
+    "RECOVERABLE_POSITIVE_aggregates": 532,
+    "VALID_TASK_NEGATIVE_aggregates": 354,
+    "candidate_aggregates": 12000,
+    "candidate_pair_dropped_events": 5557,
+    "candidate_pair_retained_events": 443,
+    "decision_events": 6000,
+    "duplicate_scientific_identities": 0,
+    "hash_failures": 0,
+    "infrastructure_failure_attempts": 0,
+    "infrastructure_retries": 0,
+    "partial_candidate_pair_publications": 0,
+    "replica_executions": 1094,
+    "schema_failures": 0,
+    "scientific_rows": 8340,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "source_episodes_completed": 1200,
+    "timeouts_during_a1c": 0,
+    "unaccounted_events": 0,
+    "unexpected_duplicate_transactions": 0,
+    "unresolved_infrastructure_failures": 0,
+    "writer_failures": 0
+  },
+  "parent_run_id": "phase9g-a1r-study-a-train-validation-recoverability-continuation-20260812T061720Z",
+  "phase": "PHASE_9G_A1C",
+  "phase9g_a1c_official_train_continuation_audit_sha256": "33f65d63e70008254faaf6d76bca097e089bf563b04cba8416477710c83f0063",
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "raw_telemetry": {
+    "bytes": 11875937,
+    "file_sha256": "83a120f5da31febd2e31bb5bb312a4484c4cca963492c7eeedda8d4d02b512aa",
+    "jsonl_records": 5790,
+    "target_path": "/rvt-data/audit/phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z/train-operational-telemetry.jsonl"
+  },
+  "resume": {
+    "existing_rows_reemitted": 0,
+    "initial_completed_events_reused": 210,
+    "initial_scientific_rows_reused": 342,
+    "official_producer_scientific_execution_attempts": 1,
+    "scientific_retries": 0,
+    "startup_launch_failures_before_scientific_execution": 1,
+    "unresolved_events_scheduled": 5790
+  },
+  "run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "s3": {
+    "centerline_neutral_support_observations": 2,
+    "counter_semantics": "remaining authorized TRAIN source trace-prefix guard carried through production status; denominator levels are distinct",
+    "hold_unknown_robot_observations": 1518,
+    "participating_support_observations": 3921,
+    "resolved_opposing_pairs": 248,
+    "robot_local_s3_observations": 1766,
+    "source_invalid_instances": 4,
+    "source_s3_instances": 194,
+    "support_ties_resolved_by_frozen_identity": 177,
+    "unresolved_s3_ambiguities": 0
+  },
+  "schema_version": "rvt-phase9g-a1c-official-train-continuation-audit/v1",
+  "sealed_domains": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "optimizer_states": 0,
+    "recoverability_validation_operations": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "PASS"
+}

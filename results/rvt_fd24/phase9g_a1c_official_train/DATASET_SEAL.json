@@ -1,0 +1,8 @@
+{
+  "dataset_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "dataset_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+  "further_staging_writes_permitted": false,
+  "recoverability_validation_authorized": false,
+  "schema_version": "rvt-phase9g-a1c-train-dataset-seal/v1",
+  "sealed_at_utc": "2026-08-13T12:52:31Z"
+}

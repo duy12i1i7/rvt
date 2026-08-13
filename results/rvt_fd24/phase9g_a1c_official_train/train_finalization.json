@@ -1,0 +1,16 @@
+{
+  "audit_sidecar_count": 6000,
+  "dataset_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "dataset_path": "/rvt-data/final/phase9g-a1-study-a-train-recoverability-v1",
+  "dataset_storage_bytes": 248814238,
+  "finalization_wall_seconds": 1.8763684930017916,
+  "index_count": 2,
+  "phase9g_a1c_recoverability_train_finalization_sha256": "4f70569eb23ee3cad2ae53d1c9cb491196f104b2b14baac95980e4acc3f94b77",
+  "run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "schema_version": "rvt-phase9g-a1c-recoverability-train-finalization/v1",
+  "scientific_row_count": 8340,
+  "shard_count": 5,
+  "staging_sealed_read_only": true,
+  "status": "FINALIZED",
+  "validation_started": false
+}

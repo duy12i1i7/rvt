@@ -163,3 +163,104 @@ def test_attempt1_startup_requalification_has_no_scientific_effect() -> None:
     assert document["repair"]["module_after"]["status_hash_field_present"] is True
     assert document["repair"]["scientific_source_image_changed"] is False
     assert document["repair"]["operational_wrapper_bytes_changed"] is False
+
+
+def test_official_train_completion_reconciles_and_stops_before_validation() -> None:
+    audit = _canonical(
+        "phase9g_a1c_official_train/official_train_continuation_audit.json",
+        "phase9g_a1c_official_train_continuation_audit_sha256",
+    )
+    reconciliation = _canonical(
+        "phase9g_a1c_official_train/train_reconciliation.json",
+        "phase9g_a1c_recoverability_train_reconciliation_sha256",
+    )
+    assert audit["status"] == "PASS"
+    assert audit["complete_train"] == {
+        "source_episodes": 1200,
+        "events": 6000,
+        "candidate_aggregates": 12000,
+        "replica_executions": 1094,
+        "scientific_rows": 8340,
+        "candidate_pair_retained_events": 443,
+        "candidate_pair_dropped_events": 5557,
+        "candidate_dispositions": {
+            "GENERATION_INVALID": 11114,
+            "RECOVERABLE_POSITIVE": 532,
+            "VALID_TASK_NEGATIVE": 354,
+        },
+    }
+    observed = reconciliation["observed"]
+    assert observed["unresolved_infrastructure_failures"] == 0
+    assert observed["unexpected_duplicate_transactions"] == 0
+    assert observed["duplicate_scientific_identities"] == 0
+    assert observed["partial_candidate_pair_publications"] == 0
+    assert observed["hash_failures"] == 0
+    assert observed["schema_failures"] == 0
+    assert observed["seed_mismatches"] == 0
+    assert observed["seal_violations"] == 0
+    assert audit["downstream"] == {
+        "recoverability_validation_started": False,
+        "residual_v2_started": False,
+        "training_operations": 0,
+    }
+
+
+def test_final_train_dataset_manifest_and_independent_validation_pass() -> None:
+    manifest = _canonical(
+        "phase9g_a1c_official_train/dataset_manifest.json",
+        "dataset_manifest_sha256",
+    )
+    seal = _canonical(
+        "phase9g_a1c_official_train/DATASET_SEAL.json",
+        "dataset_seal_sha256",
+    )
+    validation = _canonical(
+        "phase9g_a1c_official_train/postfinal_dataset_validation.json",
+        "phase9g_a1c_postfinal_dataset_validation_sha256",
+    )
+    assert manifest["status"] == "VALID_FROZEN_TRAIN_ONLY"
+    assert manifest["splits"] == ["train"]
+    assert manifest["validation_included"] is False
+    assert manifest["scientific_row_count"] == 8340
+    assert manifest["transaction_count"] == 6000
+    assert sum(item["row_count"] for item in manifest["shards"]) == 8340
+    assert seal["dataset_manifest_sha256"] == manifest["dataset_manifest_sha256"]
+    assert seal["further_staging_writes_permitted"] is False
+    assert seal["recoverability_validation_authorized"] is False
+    assert validation["status"] == "PASS"
+    assert validation["validated"]["transaction_hardlink_matches"] == 6000
+    assert validation["validated"]["unique_scientific_row_ids"] == 8340
+    assert all(value == 0 for value in manifest["integrity"].values())
+    assert all(value == 0 for value in manifest["sealed_domains"].values())
+
+
+def test_descriptive_quality_audit_uses_exact_repository_dispositions() -> None:
+    quality = _canonical(
+        "phase9g_a1c_official_train/train_data_quality_audit.json",
+        "phase9g_a1c_train_data_quality_audit_sha256",
+    )
+    assert quality["status"] == "PASS_DESCRIPTIVE_ONLY"
+    assert quality["totals"] == {
+        "source_episodes": 1200,
+        "decision_events": 6000,
+        "candidate_aggregates": 12000,
+        "RECOVERABLE_POSITIVE": 532,
+        "VALID_TASK_NEGATIVE": 354,
+        "GENERATION_INVALID": 11114,
+        "candidate_pair_retained_events": 443,
+        "candidate_pair_dropped_nonpublished_events": 5557,
+        "scientific_rows": 8340,
+    }
+    reasons = {}
+    for record in quality["scientific_invalid_reason_distribution"]:
+        reasons[record["reason"]] = reasons.get(record["reason"], 0) + record["count"]
+    assert reasons == {
+        "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION": 3517,
+        "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE": 1920,
+        "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID": 120,
+    }
+    assert quality["s3"]["complete_train_source_instances"] == 200
+    assert quality["s3"]["complete_train_decision_events"] == 1000
+    assert quality["s3"]["unresolved_ambiguities"] == 0
+    assert quality["class_weighting"] == "NOT_SELECTED"
+    assert quality["descriptive_only"] is True

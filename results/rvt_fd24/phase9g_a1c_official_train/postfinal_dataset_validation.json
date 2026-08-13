@@ -1,0 +1,70 @@
+{
+  "class_weighting": "NOT_SELECTED",
+  "dataset_id": "phase9g-a1-study-a-train-recoverability-v1",
+  "dataset_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "dataset_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+  "dataset_storage_bytes": 248814238,
+  "existing_342_row_lineage": {
+    "DEPENDENCY_PRESENT_BUT_VALUE_VALID": 88,
+    "POTENTIALLY_AFFECTED": 0,
+    "PROVEN_AFFECTED": 0,
+    "UNAFFECTED": 254,
+    "checkpoint_sha256": "72cde9c6923f7eba0e6cbc9d18cb44d68fde7933a65907ad5501cf893df3001f",
+    "rows_regenerated": 0,
+    "rows_retained": 342
+  },
+  "phase": "PHASE_9G_A1C",
+  "phase9g_a1c_postfinal_dataset_validation_sha256": "ae67a6d1856e74e45685bc898341877afec83a7c9396c21406df81a4f8457e13",
+  "quality_audit_sha256": "1f3945d99a16e2c4b81e6eda24c2765efb3a504e819ac8753536ea71a2f71bf8",
+  "reconciliation_sha256": "0fee89cc1ed36a213588f8b9b5965cf0668e860402bae0c74509a0021d0c73fa",
+  "residual_started": false,
+  "schema_version": "rvt-phase9g-a1c-postfinal-dataset-validation/v1",
+  "sealed_domains": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "optimizer_states": 0,
+    "recoverability_validation_operations": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "staging": {
+    "directory_mode_octal": "0o555",
+    "partial_files": 0,
+    "writable_files": 0
+  },
+  "status": "PASS",
+  "training_operations": 0,
+  "transaction_status_distribution": {
+    "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID": 5557,
+    "SCIENTIFICALLY_RECONCILED_LABELABLE": 443
+  },
+  "validated": {
+    "canonical_jsonl_rows": 8340,
+    "canonical_transaction_records": 6000,
+    "duplicates": 0,
+    "graph_fingerprint_failures": 0,
+    "partial_pair_publications": 0,
+    "published_file_hash_failures": 0,
+    "row_identity_failures": 0,
+    "row_index_entries": 8340,
+    "schema_failures": 0,
+    "scientific_rows": 8340,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "shard_row_counts": [
+      2048,
+      2048,
+      2048,
+      2048,
+      148
+    ],
+    "shards": 5,
+    "transaction_hardlink_matches": 6000,
+    "transaction_hash_failures": 0,
+    "transactions": 6000,
+    "unique_scientific_row_ids": 8340
+  },
+  "validation_started": false
+}
