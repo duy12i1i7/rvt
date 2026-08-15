@@ -1,0 +1,52 @@
+{
+  "authorization_scope_sha256": "307d33d2aa03f737e1433f05efd755fbbeb44d0d437d219b6cb484bd8e928dbb",
+  "authorization_source": {
+    "instruction_file_sha256": "d27c8768e00e10fae8c3d2ce48406d61d751b88ce01ccbb43a16696d15434112",
+    "kind": "EXPLICIT_OWNER_INSTRUCTION_IN_CURRENT_TASK"
+  },
+  "authorized_scope": {
+    "branch": "recoverability",
+    "operation": "OFFICIAL_VALIDATION_STAGING_AND_FINALIZATION",
+    "splits": [
+      "validation"
+    ],
+    "study": "study_a_zero_shot"
+  },
+  "bindings": {
+    "evidence_commit": "2f47af531b6b584d9b36c9a38681d20305783e9b",
+    "executable_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+    "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+    "operational_amendment_sha256": "1821badc6b09c2417a3fff98bb2f97673a69cdeff002b9ac1a64fac927d806e8",
+    "production_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+    "scientific_addendum_sha256": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+    "scientific_provenance_root": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+    "train_closure_sha256": "10a3c7a6b9058bfc0d513dc2a0c598c6aa0c4ffde9dfd92641fe44f139988e88",
+    "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "train_seal_precheck_sha256": "4986ef4563bed20b0bf1fac79acc3e082958a329878f1870d2f4c9962d231f3e",
+    "train_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+    "validation_task_manifest_sha256": "9ace9d39b45805a547b57e5439bbfde1194c40e443bbb17888348a903d9e14ff"
+  },
+  "broadens_scientific_scope": false,
+  "created_at_utc": "2026-08-15T16:30:05Z",
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_owner_authorization_sha256": "8f5c0cf0b011cd7ad05098618cf3d2bf98450d01995f712b39b1cc793902002b",
+  "qualified_profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "schema_version": "rvt-phase9g-a1v-owner-authorization/v1",
+  "scientific_outcomes_present_in_authorization": false,
+  "scope_status": {
+    "CLASS_WEIGHT_SELECTION": "NOT_AUTHORIZED",
+    "FINAL_TEST": "SEALED_NOT_AUTHORIZED",
+    "HYPERPARAMETER_SEARCH": "NOT_AUTHORIZED",
+    "RECOVERABILITY_TRAIN_MODIFICATION": "NOT_AUTHORIZED",
+    "RECOVERABILITY_VALIDATION": "AUTHORIZED",
+    "RESIDUAL_V2": "NOT_AUTHORIZED",
+    "STUDY_A_N24": "SEALED_NOT_AUTHORIZED",
+    "STUDY_B": "NOT_AUTHORIZED",
+    "TRAINING": "NOT_AUTHORIZED"
+  }
+}

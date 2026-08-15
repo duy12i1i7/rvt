@@ -1,0 +1,6 @@
+case	exit_code
+wrong_workers	1
+wrong_timeout	1
+wrong_scope_hash	1
+wrong_source	1
+nonempty_namespace	1

@@ -1,0 +1,99 @@
+[
+    {
+        "Id": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+        "RepoTags": [
+            "rvt-phase9g-a1s3z:848e8b35"
+        ],
+        "RepoDigests": [
+            "rvt-phase9g-a1s3z@sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-08-13T10:37:00.52728137Z",
+        "Config": {
+            "User": "rvt",
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568",
+                "PYTHON_VERSION=3.9.6",
+                "PYTHON_PIP_VERSION=21.2.4",
+                "PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/c20b0cfd643cd4a19246ccf204e2997af70f6b21/public/get-pip.py",
+                "PYTHON_GET_PIP_SHA256=fa6f3fb93cce234cd4e8dd2beb54a51ab9c247653b52855a48dd44e6b21ff28b",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "PYTHONHASHSEED=0",
+                "PYTHONPATH=/opt/rvt",
+                "MPLBACKEND=Agg",
+                "OMP_NUM_THREADS=1",
+                "MKL_NUM_THREADS=1",
+                "MKL_CBWR=COMPATIBLE",
+                "OPENBLAS_NUM_THREADS=1",
+                "NUMEXPR_NUM_THREADS=1",
+                "RVT_FD24_NUMERICAL_EXECUTION_PROFILE=FD24_NUMERICAL_EXECUTION_PROFILE_V1",
+                "RVT_SOURCE_COMMIT=848e8b352a91e95af777ebbeccd5fbb43d53777e"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "pytest",
+                "-q"
+            ],
+            "WorkingDir": "/opt/rvt",
+            "Labels": {
+                "org.opencontainers.image.base.digest": "sha256:30e6dea61d67eb255e814996cf737140a3b47eac62fb74ecf303df58e280138b",
+                "org.opencontainers.image.revision": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+                "org.opencontainers.image.source": "https://github.com/duy12i1i7/rvt",
+                "org.opencontainers.image.title": "RVT-Swarm Phase 9G-A1S3Z generation",
+                "rvt.phase9g.a1s3z.qualified-parent": "sha256:88ecf1aac7cd95b5ba50811950090c13f78362274e5c5cdaeafaafde29a115f4",
+                "rvt.phase9g0p.qualified-base": "sha256:5e13c21aaa20f2ac02eff36172aea467720b9c925d13882708e3e90686655d9c"
+            },
+            "ArgsEscaped": true
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 1570479403,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:300b011056d9e8d428afaedc3e4f5f1925db833c60bae3dd777fb71fea1ef3ba",
+                "sha256:47828d33305deccc412a9cf22d25624e2b96457314291c17d3e93c774969234d",
+                "sha256:060ba47b239b74c6be0dd595d3edce6116a7c29d095434dae4d52634551bb72d",
+                "sha256:0d7236651d288b335e5c503c580cc55b323f901efd09de31d694e51895594686",
+                "sha256:80a33d6e92727fb9931e95e577d3eeee1c9f3b7e5de90a6771e6ac1caeb2dd34",
+                "sha256:990351578394f387c32a56ef38d3f07848050a16e59037696e27211b6ee723f0",
+                "sha256:8b1b543c70f65ff59ca5c5b3f15b7d436ea7f549e4090a87696fcdfd7f07b83b",
+                "sha256:cf0a5ebb848fdce1bdc2759e996d8870756f39b22d382d80ebaf0d305d58bfa6",
+                "sha256:2ff22128d8214be72d2028c82707bc97d7fe26359cd808f8168ef9d43ab69ab4",
+                "sha256:fead8c5f845cdbbf70889e2c90108b236c83f5725cb6da66a755ab987f14c010",
+                "sha256:d66e217b17ade38c41e8de3ca75e9f8c0083b16e5019972ae0809d34787653fd",
+                "sha256:3861c39e6c4520bff789e0df607ce64018630293394e2f136c53734efd674f81",
+                "sha256:399325eaf1c343fbb7316fc04ccaf4e42a76f8f55a3daf6e2049a58043e9eed7",
+                "sha256:054b3027f3e507f810ec8a29fff60db67ef406e7a010f2514185ac904a241b56",
+                "sha256:3a7d650ac0b5588591c6f02a81030137081819e54cd3e5f53163bc8e54130953",
+                "sha256:84587175e8a717ee90299646cf2b9f414b0b6055bf2d73c2f975f17bd4df0ff2",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:cbeb70054b4db60fcb239cbb8f4a2fcb780f55e492fd4fc8b57457bcf5e92f6c",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:c1d0dc7fdec4b5d89772898d2e00f8ae8ae400003d45ea8986b2dede1f93c632",
+                "sha256:6ff7919506fef594d0ca75dc165bfa1e483399963b116319303d568b0f678297",
+                "sha256:bbbe2275a744b787c11f05882d48b86a66fb0534a75b6e8042374b63ff2fe54b"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-08-13T10:37:08.99157325Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "5coyvh7wh0m0p5aqhgmiyp612",
+                    "CreatedAt": "2026-08-13T10:37:10.596524901Z"
+                }
+            ]
+        }
+    }
+]

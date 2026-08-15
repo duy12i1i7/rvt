@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 232, in <module>
+    main()
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 73, in main
+    raise ContinuationError("execution profile differs from qualified profile")
+scripts.run_phase9g_a1r_recoverability_continuation.ContinuationError: execution profile differs from qualified profile

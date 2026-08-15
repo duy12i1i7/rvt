@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 232, in <module>
+    main()
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 54, in main
+    raise ContinuationError("scientific source binding mismatch")
+scripts.run_phase9g_a1r_recoverability_continuation.ContinuationError: scientific source binding mismatch

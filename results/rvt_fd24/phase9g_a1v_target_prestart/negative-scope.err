@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 232, in <module>
+    main()
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 104, in main
+    raise ContinuationError("authorization scope CLI hash mismatch")
+scripts.run_phase9g_a1r_recoverability_continuation.ContinuationError: authorization scope CLI hash mismatch

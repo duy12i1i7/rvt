@@ -1,0 +1,15 @@
+{
+  "deploy_files": 15,
+  "host": "avis",
+  "running_phase9_containers": 0,
+  "target_host": "100.71.102.9",
+  "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "train_partials": 0,
+  "train_scientific_rows": 8340,
+  "train_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+  "train_staging_mode": "0o555",
+  "train_staging_writable_files": 0,
+  "train_transactions": 6000,
+  "validation_final_exists": false,
+  "validation_staging_exists": false
+}

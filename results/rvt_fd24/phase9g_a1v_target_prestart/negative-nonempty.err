@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 232, in <module>
+    main()
+  File "/a1v/scripts/run_phase9g_a1v_recoverability_validation.py", line 152, in main
+    raise ContinuationError("VALIDATION namespace contains preexisting content")
+scripts.run_phase9g_a1r_recoverability_continuation.ContinuationError: VALIDATION namespace contains preexisting content

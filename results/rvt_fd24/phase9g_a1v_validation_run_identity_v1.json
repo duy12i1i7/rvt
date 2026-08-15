@@ -1,0 +1,33 @@
+{
+  "authorization_scope_sha256": "307d33d2aa03f737e1433f05efd755fbbeb44d0d437d219b6cb484bd8e928dbb",
+  "authorization_sha256": "8f5c0cf0b011cd7ad05098618cf3d2bf98450d01995f712b39b1cc793902002b",
+  "created_at_utc": "2026-08-15T16:30:05Z",
+  "final_dataset_id": "phase9g-a1-study-a-validation-recoverability-v1",
+  "frozen_validation_universe": {
+    "candidate_aggregates": 3000,
+    "candidate_replica_slots": 4200,
+    "decision_events": 1500,
+    "source_episodes": 300
+  },
+  "identity_class": "OFFICIAL_DISTINCT_VALIDATION_RUN",
+  "parent_run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_validation_run_identity_sha256": "7f1da8b7b5d17e7e199d89a42f435e4b14819372edebe2b551d312a9518058f5",
+  "run_id": "phase9g-a1v-study-a-validation-recoverability-20260815T163005Z",
+  "schema_version": "rvt-phase9g-a1v-validation-run-identity/v1",
+  "scientific_dataset_lineage_id": "phase9g-a1-study-a-train-validation-recoverability-v1",
+  "sealed_scope": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "recoverability_train_modifications": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "shared_mutable_indexes_with_train": false,
+  "train_namespace": "final/phase9g-a1-study-a-train-recoverability-v1",
+  "train_namespace_mutable": false,
+  "validation_task_manifest_sha256": "9ace9d39b45805a547b57e5439bbfde1194c40e443bbb17888348a903d9e14ff",
+  "writer_namespace": "staging/study_a_zero_shot-validation-recoverability"
+}

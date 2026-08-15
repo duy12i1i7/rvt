@@ -1,0 +1,30 @@
+{
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_train_seal_precheck_sha256": "4986ef4563bed20b0bf1fac79acc3e082958a329878f1870d2f4c9962d231f3e",
+  "schema_version": "rvt-phase9g-a1v-train-seal-precheck/v1",
+  "status": "PASS_IMMUTABLE",
+  "train_accounting": {
+    "GENERATION_INVALID": 11114,
+    "RECOVERABLE_POSITIVE": 532,
+    "VALID_TASK_NEGATIVE": 354,
+    "candidate_aggregates": 12000,
+    "candidate_pair_dropped_events": 5557,
+    "candidate_pair_retained_events": 443,
+    "decision_events": 6000,
+    "duplicate_scientific_identities": 0,
+    "partial_candidate_pair_publications": 0,
+    "scientific_rows": 8340,
+    "source_episodes": 1200,
+    "unresolved_infrastructure_failures": 0
+  },
+  "train_closure_sha256": "10a3c7a6b9058bfc0d513dc2a0c598c6aa0c4ffde9dfd92641fe44f139988e88",
+  "train_dataset_id": "phase9g-a1-study-a-train-recoverability-v1",
+  "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "train_namespace_mutation_authorized": false,
+  "train_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+  "validated_files": {
+    "manifest_file_sha256": "1680f4caa8b62399091d0d953848aa520bc80d017d3e2ff8b5231777f202afb9",
+    "seal_file_sha256": "12a492e010d8c57c63008add97d3f86ddd54276b02f9629e587a17dafb37be0a"
+  },
+  "validation_rows_append_to_train": false
+}
