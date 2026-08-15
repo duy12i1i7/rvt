@@ -196,3 +196,135 @@ def test_a1v_runner_rejects_nonempty_validation_namespace(tmp_path: Path) -> Non
     (writer / "unexpected").write_text("x", encoding="ascii")
     # The full binding path is exercised above; this directly protects the first-run boundary.
     assert any(writer.rglob("*"))
+
+
+def _official(name: str, field: str) -> dict:
+    return _canonical(f"phase9g_a1v_official_validation/{name}", field)
+
+
+def test_a1v_official_validation_accounting_reconciles() -> None:
+    audit = _official(
+        "official_completion_audit.json",
+        "phase9g_a1v_official_completion_audit_sha256",
+    )
+    counts = audit["scientific_accounting"]
+    assert audit["status"] == "PASS_COMPLETE_STOPPED"
+    assert counts == {
+        "source_episodes": 300,
+        "decision_events": 1500,
+        "candidate_aggregates": 3000,
+        "replica_executions": 316,
+        "RECOVERABLE_POSITIVE": 154,
+        "VALID_TASK_NEGATIVE": 86,
+        "GENERATION_INVALID": 2760,
+        "candidate_pair_retained_events": 120,
+        "candidate_pair_dropped_events": 1380,
+        "scientific_rows": 2294,
+    }
+    assert 154 + 86 + 2760 == 3000
+    assert 120 + 1380 == 1500
+    assert all(value == 0 for value in audit["infrastructure_accounting"].values())
+    assert all(value == 0 for value in audit["integrity"].values())
+
+
+def test_a1v_validation_dataset_is_distinct_sealed_and_validated() -> None:
+    manifest = _official("validation_dataset_manifest.json", "dataset_manifest_sha256")
+    seal = _official("VALIDATION_DATASET_SEAL.json", "dataset_seal_sha256")
+    validation = _official(
+        "postfinal_dataset_validation.json",
+        "phase9g_a1v_postfinal_dataset_validation_sha256",
+    )
+    assert manifest["status"] == "VALID_FROZEN_VALIDATION_ONLY"
+    assert manifest["splits"] == ["validation"]
+    assert manifest["train_included"] is False
+    assert manifest["scientific_row_count"] == 2294
+    assert manifest["transaction_count"] == 1500
+    assert manifest["physical_namespace_separate_from_train"] is True
+    assert manifest["mutable_indexes_shared_with_train"] is False
+    assert manifest["class_weighting"] == "NOT_SELECTED"
+    assert seal["dataset_manifest_sha256"] == manifest["dataset_manifest_sha256"]
+    assert seal["further_staging_writes_permitted"] is False
+    assert validation["status"] == "PASS"
+    assert validation["validated"]["transaction_hardlink_matches"] == 1500
+    assert validation["validated"]["unique_scientific_row_ids"] == 2294
+
+
+def test_a1v_split_isolation_and_invalid_reason_separation_pass() -> None:
+    isolation = _official(
+        "recoverability_split_isolation_audit.json",
+        "phase9g_a1v_recoverability_split_isolation_audit_sha256",
+    )
+    invalid = _official(
+        "recoverability_invalid_reason_audit.json",
+        "phase9g_a1v_recoverability_invalid_reason_audit_sha256",
+    )
+    assert isolation["status"] == "PASS"
+    assert isolation["source_episode_id_overlap"] == 0
+    assert isolation["decision_event_id_overlap"] == 0
+    assert isolation["scientific_row_id_overlap"] == 0
+    assert isolation["prohibited_layout_identity_overlap"] == 0
+    assert isolation["intentionally_shared_structural_template_count"] == 300
+    assert invalid["status"] == "PASS_SCIENTIFIC_INFRASTRUCTURE_SEPARATION"
+    assert invalid["infrastructure_conditions_classified_as_scientific_invalid"] == 0
+    assert invalid["timeouts_misclassified"] == 0
+    assert invalid["worker_crashes_misclassified"] == 0
+    assert invalid["writer_failures_misclassified"] == 0
+    assert invalid["scheduler_failures_misclassified"] == 0
+
+
+def test_a1v_coverage_is_descriptive_and_class_weight_remains_unselected() -> None:
+    coverage = _official(
+        "recoverability_coverage_audit.json",
+        "phase9g_a1v_recoverability_coverage_audit_sha256",
+    )
+    balance = _official(
+        "recoverability_class_balance_audit.json",
+        "phase9g_a1v_recoverability_class_balance_audit_sha256",
+    )
+    assert coverage["status"] == "PASS_DESCRIPTIVE_ONLY"
+    assert coverage["overall_classification"] == "COVERAGE_STRUCTURALLY_MISSING"
+    assert coverage["scientific_validity_redefined"] is False
+    assert coverage["class_weighting"] == "NOT_SELECTED"
+    validation_families = {
+        item["family"]: item for item in coverage["splits"]["validation"]["family_coverage"]
+    }
+    assert validation_families["F3"]["retained_candidate_pairs"] == 0
+    assert validation_families["F4"]["retained_candidate_pairs"] == 0
+    assert validation_families["F8"]["retained_candidate_pairs"] == 4
+    assert balance["status"] == "PASS_DESCRIPTIVE_ONLY"
+    assert balance["class_weighting"] == "NOT_SELECTED"
+    assert balance["sampling_changed"] is False
+
+
+def test_a1v_combined_root_is_referential_and_readiness_stops_before_training() -> None:
+    root = _official(
+        "combined_dataset_root_manifest.json",
+        "combined_recoverability_dataset_root_sha256",
+    )
+    seal = _official(
+        "COMBINED_DATASET_ROOT_SEAL.json",
+        "combined_recoverability_dataset_root_seal_sha256",
+    )
+    validation = _official(
+        "combined_root_validation.json",
+        "phase9g_a1v_combined_root_validation_sha256",
+    )
+    readiness = _official(
+        "next_phase_readiness.json",
+        "phase9g_a1v_next_phase_readiness_sha256",
+    )
+    assert root["status"] == "COMPLETE_REFERENTIAL_ROOT"
+    assert root["physical_files_merged"] is False
+    assert root["mutable_namespace"] is False
+    assert root["class_weighting"] == "NOT_SELECTED"
+    assert seal["combined_recoverability_dataset_root_sha256"] == root["combined_recoverability_dataset_root_sha256"]
+    assert seal["class_weighting_selected"] is False
+    assert validation["status"] == "PASS"
+    assert readiness["status"] == "READY_FOR_EXPLICIT_PRETRAINING_COVERAGE_CLASS_WEIGHT_DECISION"
+    assert readiness["coverage_classification"] == "COVERAGE_STRUCTURALLY_MISSING"
+    assert readiness["residual_v2_started"] is False
+    assert readiness["training_operations"] == 0
+    assert readiness["hyperparameter_trials"] == 0
+    assert readiness["study_a_n24_accesses"] == 0
+    assert readiness["study_b_accesses"] == 0
+    assert readiness["final_test_accesses"] == 0

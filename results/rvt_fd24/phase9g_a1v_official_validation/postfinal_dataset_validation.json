@@ -1,0 +1,52 @@
+{
+  "class_weighting": "NOT_SELECTED",
+  "dataset_id": "phase9g-a1-study-a-validation-recoverability-v1",
+  "dataset_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+  "dataset_seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f",
+  "dataset_storage_bytes": 75475044,
+  "hyperparameter_trials": 0,
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_postfinal_dataset_validation_sha256": "02cb7dd0c44ae7c0feba4ad74aa7ed194815c0b054e7aa1d7b833b334bad4f9b",
+  "residual_started": false,
+  "schema_version": "rvt-phase9g-a1v-postfinal-dataset-validation/v1",
+  "split_isolation": {
+    "separate_final_namespaces": true,
+    "shared_mutable_indexes": false,
+    "train_validation_decision_event_id_overlap": 0,
+    "train_validation_scientific_row_id_overlap": 0
+  },
+  "staging": {
+    "directory_mode_octal": "0o555",
+    "partial_files": 0,
+    "writable_files": 0
+  },
+  "status": "PASS",
+  "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "train_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+  "training_operations": 0,
+  "transaction_status_distribution": {
+    "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID": 1380,
+    "SCIENTIFICALLY_RECONCILED_LABELABLE": 120
+  },
+  "validated": {
+    "duplicates": 0,
+    "graph_fingerprint_failures": 0,
+    "partial_pair_publications": 0,
+    "published_file_hash_failures": 0,
+    "row_identity_failures": 0,
+    "row_index_entries": 2294,
+    "schema_failures": 0,
+    "scientific_rows": 2294,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "shard_row_counts": [
+      2048,
+      246
+    ],
+    "shards": 2,
+    "transaction_hardlink_matches": 1500,
+    "transaction_hash_failures": 0,
+    "transactions": 1500,
+    "unique_scientific_row_ids": 2294
+  }
+}

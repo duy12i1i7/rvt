@@ -1,0 +1,110 @@
+{
+  "authority_commit": "b5e5de5",
+  "combined_root": {
+    "manifest_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "seal_sha256": "4fd9dda517eb5deed890ed5ac8ab5cc64841ab6c0a0a7a4047dd7b569cfb1f17",
+    "validation_sha256": "2512735b75c47194e0b4127c67703885920430cfa5d648128bf0e9e71413f3c0"
+  },
+  "container": {
+    "exit_code": 0,
+    "image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+    "inspect_file_sha256": "c8e84b97c55e2206335a40906b9e4fd4173d76e08d7c6bdc16b1800c32324510",
+    "nano_cpus": 12000000000,
+    "network_mode": "none",
+    "read_only_root_filesystem": true,
+    "running_phase9_containers_at_closure": 0
+  },
+  "dataset": {
+    "finalization_sha256": "6620a452e8fe0d91a6755201789cb951eb2eae166624b494b3c95ae690e877b1",
+    "manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+    "postfinal_validation_sha256": "02cb7dd0c44ae7c0feba4ad74aa7ed194815c0b054e7aa1d7b833b334bad4f9b",
+    "reconciliation_sha256": "816a4343037c1de7273485b9548301cb50079f45d58c713f6089ca877dfe526a",
+    "seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f",
+    "staging_mode_octal": "0o555",
+    "staging_writable_files": 0,
+    "storage_bytes": 75475044
+  },
+  "downstream": {
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "optimizer_states": 0,
+    "residual_v2_started": false,
+    "training_operations": 0
+  },
+  "infrastructure_accounting": {
+    "duplicates": 0,
+    "failure_attempts": 0,
+    "partial_publications": 0,
+    "retries": 0,
+    "timeouts": 0,
+    "unresolved_failures": 0,
+    "writer_failures": 0
+  },
+  "integrity": {
+    "duplicate_scientific_identities": 0,
+    "hash_failures": 0,
+    "infrastructure_timeouts": 0,
+    "partial_candidate_pair_publications": 0,
+    "schema_failures": 0,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "unaccounted_events": 0,
+    "unexpected_duplicate_transactions": 0,
+    "unresolved_infrastructure_failures": 0,
+    "writer_failures": 0
+  },
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_official_completion_audit_sha256": "427045cbfde3beec399f47e73de6df8951d27a2014db1f8beb7fdee368cd6af4",
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "run_id": "phase9g-a1v-study-a-validation-recoverability-20260815T163005Z",
+  "schema_version": "rvt-phase9g-a1v-official-completion-audit/v1",
+  "scientific_accounting": {
+    "GENERATION_INVALID": 2760,
+    "RECOVERABLE_POSITIVE": 154,
+    "VALID_TASK_NEGATIVE": 86,
+    "candidate_aggregates": 3000,
+    "candidate_pair_dropped_events": 1380,
+    "candidate_pair_retained_events": 120,
+    "decision_events": 1500,
+    "replica_executions": 316,
+    "scientific_rows": 2294,
+    "source_episodes": 300
+  },
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0
+  },
+  "status": "PASS_COMPLETE_STOPPED",
+  "telemetry": {
+    "candidate_atomic_units": 3000,
+    "candidate_cpu_hours": 2.5253111189863895,
+    "candidate_wall_seconds": {
+      "max": 68.83491000102367,
+      "median": 0.9149399390153121,
+      "p90": 8.27378881278564,
+      "p95": 13.200255378516157
+    },
+    "file_sha256": "21feb1d38efb8db3fc59d25112a630fbf719db00063fd20c600c98b61338c76f",
+    "file_size_bytes": 3099676,
+    "official_wall_seconds": 949.1813275879831,
+    "records": 1500,
+    "target_path": "/rvt-data/audit/phase9g-a1v-study-a-validation-recoverability-20260815T163005Z/validation-operational-telemetry.jsonl",
+    "writer_wall_seconds": {
+      "max": 0.14882786496309564,
+      "median": 0.010404575994471088,
+      "p90": 0.020356909499969336,
+      "p95": 0.029947610991075593
+    }
+  },
+  "train_immutable": {
+    "manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "modified": false,
+    "seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5"
+  }
+}

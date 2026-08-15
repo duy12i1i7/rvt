@@ -1,0 +1,86 @@
+{
+  "audit_hashes": {
+    "quality": "85a501abb833707fcc760107cf53085c19c898cd7d9a6e5aa133605b1a827fe8",
+    "reconciliation": "816a4343037c1de7273485b9548301cb50079f45d58c713f6089ca877dfe526a"
+  },
+  "audit_sidecar_count": 1500,
+  "class_weighting": "NOT_SELECTED",
+  "completion_state": "COMPLETE",
+  "dataset_id": "phase9g-a1-study-a-validation-recoverability-v1",
+  "dataset_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+  "generation_provenance_root": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+  "integrity": {
+    "duplicate_scientific_identities": 0,
+    "hash_failures": 0,
+    "partial_candidate_pair_publications": 0,
+    "schema_failures": 0,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "unexpected_duplicates": 0,
+    "unresolved_infrastructure_failures": 0
+  },
+  "job_manifest_sha256": "801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+  "label_branch": "recoverability",
+  "mutable_indexes_shared_with_train": false,
+  "parent_run_id": "phase9g-a1c-study-a-train-recoverability-continuation-20260813T112333Z",
+  "physical_namespace_separate_from_train": true,
+  "production_image": "sha256:8e26da918841eb146529bbb4ff95f3a55acf9793dcbc534f44dce0700d183a90",
+  "row_indexes": [
+    {
+      "content_sha256": "136257d5cb718aef66db8a7e351578cd6eca0c2361887f09420d90b6e0e9335e",
+      "entry_count": 2294,
+      "path": "indexes/validation-recoverability-row-index.jsonl"
+    }
+  ],
+  "run_id": "phase9g-a1v-study-a-validation-recoverability-20260815T163005Z",
+  "run_identity_sha256": "7f1da8b7b5d17e7e199d89a42f435e4b14819372edebe2b551d312a9518058f5",
+  "schema_version": "rvt-phase9g-a1v-validation-dataset-manifest/v1",
+  "scientific_dataset_lineage_id": "phase9g-a1-study-a-train-validation-recoverability-v1",
+  "scientific_row_count": 2294,
+  "scientific_source_commit": "848e8b352a91e95af777ebbeccd5fbb43d53777e",
+  "sealed_domains": {
+    "checkpoints": 0,
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "optimizer_states": 0,
+    "recoverability_train_modifications": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "shards": [
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "b76b9d20115330ad43872dc4c633a1d125603afed3aef12beb6e7b795bb9d526",
+      "path": "shards/validation-recoverability-00000.jsonl",
+      "row_count": 2048,
+      "split": "validation"
+    },
+    {
+      "completion_state": "COMPLETE",
+      "content_sha256": "e8bd8544db5eaa077d5f2ea740f322ae7adaaee73b3cfee7dea1369d4493a519",
+      "path": "shards/validation-recoverability-00001.jsonl",
+      "row_count": 246,
+      "split": "validation"
+    }
+  ],
+  "splits": [
+    "validation"
+  ],
+  "status": "VALID_FROZEN_VALIDATION_ONLY",
+  "study": "study_a_zero_shot",
+  "train_included": false,
+  "train_reference": {
+    "manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5"
+  },
+  "transaction_count": 1500,
+  "transaction_indexes": [
+    {
+      "content_sha256": "be79d3892ab88d60ee58e8d72648c0a193913ce09a6ad90a6d0af8d7869279be",
+      "entry_count": 1500,
+      "path": "indexes/validation-recoverability-transaction-index.jsonl"
+    }
+  ]
+}

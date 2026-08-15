@@ -1,0 +1,21 @@
+{
+  "class_weighting": "NOT_SELECTED",
+  "combined_dataset_root_seal_sha256": "4fd9dda517eb5deed890ed5ac8ab5cc64841ab6c0a0a7a4047dd7b569cfb1f17",
+  "combined_dataset_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+  "directory_mode_octal": "0o555",
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_combined_root_validation_sha256": "2512735b75c47194e0b4127c67703885920430cfa5d648128bf0e9e71413f3c0",
+  "referential_files": 2,
+  "residual_started": false,
+  "schema_version": "rvt-phase9g-a1v-combined-root-validation/v1",
+  "scientific_invalid_infrastructure_misclassifications": 0,
+  "sealed_domain_accesses": 0,
+  "split_identity_overlaps": 0,
+  "status": "PASS",
+  "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+  "train_seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+  "training_operations": 0,
+  "validation_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+  "validation_seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f",
+  "writable_files": 0
+}

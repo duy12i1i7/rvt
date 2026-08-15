@@ -1,0 +1,43 @@
+{
+  "infrastructure": {
+    "duplicates": 0,
+    "partial_publications": 0,
+    "retries": 0,
+    "timeouts": 0,
+    "unresolved_failures": 0,
+    "writer_failures": 0
+  },
+  "manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_validation_generation_audit_sha256": "b0d2be0199449b83931011e853d2a08a4385ebdd87c7841bbb81c66291da513e",
+  "profile": {
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "run_id": "phase9g-a1v-study-a-validation-recoverability-20260815T163005Z",
+  "schema_version": "rvt-phase9g-a1v-validation-generation-audit/v1",
+  "seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "recoverability_train_modifications": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "status": "PASS",
+  "validation": {
+    "GENERATION_INVALID": 2760,
+    "RECOVERABLE_POSITIVE": 154,
+    "VALID_TASK_NEGATIVE": 86,
+    "candidate_aggregates": 3000,
+    "candidate_pair_dropped_events": 1380,
+    "candidate_pair_retained_events": 120,
+    "decision_events": 1500,
+    "scientific_rows": 2294,
+    "source_episodes": 300
+  }
+}

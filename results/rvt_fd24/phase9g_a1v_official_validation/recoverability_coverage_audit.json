@@ -1,0 +1,523 @@
+{
+  "class_weighting": "NOT_SELECTED",
+  "descriptive_only": true,
+  "flag_policy": {
+    "MISSING_RETAINED_N_COVERAGE": "at least one authorized N has zero retained events",
+    "ONLY_ONE_OR_ZERO_TARGET_CLASSES": "positive or negative aggregate count equals zero",
+    "VERY_SMALL_RETAINED_EVENT_COUNT_1_TO_4": "retained event count is one through four",
+    "ZERO_RETAINED_PAIRS": "retained event count equals zero"
+  },
+  "overall_classification": "COVERAGE_STRUCTURALLY_MISSING",
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_recoverability_coverage_audit_sha256": "ff9da7831cf0dc68fe1d343155b4483c87e1656b55bfd88d66930e40e66589a0",
+  "schema_version": "rvt-phase9g-a1v-recoverability-coverage-audit/v1",
+  "scientific_validity_redefined": false,
+  "splits": {
+    "train": {
+      "family_coverage": [
+        {
+          "descriptive_flags": [],
+          "family": "F1",
+          "generation_invalid_aggregates": 926,
+          "negative_aggregates": 83,
+          "positive_aggregates": 191,
+          "retained_candidate_pairs": 137,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 2776,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F2",
+          "generation_invalid_aggregates": 1120,
+          "negative_aggregates": 39,
+          "positive_aggregates": 41,
+          "retained_candidate_pairs": 40,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12
+          ],
+          "scientific_rows": 628,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [
+            "ONLY_ONE_OR_ZERO_TARGET_CLASSES",
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F3",
+          "generation_invalid_aggregates": 1186,
+          "negative_aggregates": 14,
+          "positive_aggregates": 0,
+          "retained_candidate_pairs": 7,
+          "retained_team_sizes": [
+            6,
+            8
+          ],
+          "scientific_rows": 88,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [
+            "ZERO_RETAINED_PAIRS",
+            "ONLY_ONE_OR_ZERO_TARGET_CLASSES",
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F4",
+          "generation_invalid_aggregates": 1200,
+          "negative_aggregates": 0,
+          "positive_aggregates": 0,
+          "retained_candidate_pairs": 0,
+          "retained_team_sizes": [],
+          "scientific_rows": 0,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F5",
+          "generation_invalid_aggregates": 1150,
+          "negative_aggregates": 21,
+          "positive_aggregates": 29,
+          "retained_candidate_pairs": 25,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 428,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [
+            "ONLY_ONE_OR_ZERO_TARGET_CLASSES"
+          ],
+          "family": "F6",
+          "generation_invalid_aggregates": 1136,
+          "negative_aggregates": 64,
+          "positive_aggregates": 0,
+          "retained_candidate_pairs": 32,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 820,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F7",
+          "generation_invalid_aggregates": 960,
+          "negative_aggregates": 50,
+          "positive_aggregates": 190,
+          "retained_candidate_pairs": 120,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 2300,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F8",
+          "generation_invalid_aggregates": 1180,
+          "negative_aggregates": 11,
+          "positive_aggregates": 9,
+          "retained_candidate_pairs": 10,
+          "retained_team_sizes": [
+            5,
+            6
+          ],
+          "scientific_rows": 112,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F9",
+          "generation_invalid_aggregates": 1116,
+          "negative_aggregates": 25,
+          "positive_aggregates": 59,
+          "retained_candidate_pairs": 42,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 768,
+          "source_events": 600
+        },
+        {
+          "descriptive_flags": [
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F10",
+          "generation_invalid_aggregates": 1140,
+          "negative_aggregates": 47,
+          "positive_aggregates": 13,
+          "retained_candidate_pairs": 30,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12
+          ],
+          "scientific_rows": 420,
+          "source_events": 600
+        }
+      ],
+      "team_size_coverage": [
+        {
+          "generation_invalid_aggregates": 2220,
+          "negative_aggregates": 50,
+          "positive_aggregates": 130,
+          "retained_candidate_pairs": 90,
+          "scientific_rows": 900,
+          "source_events": 1200,
+          "team_size": 5
+        },
+        {
+          "generation_invalid_aggregates": 2212,
+          "negative_aggregates": 60,
+          "positive_aggregates": 128,
+          "retained_candidate_pairs": 94,
+          "scientific_rows": 1128,
+          "source_events": 1200,
+          "team_size": 6
+        },
+        {
+          "generation_invalid_aggregates": 2226,
+          "negative_aggregates": 54,
+          "positive_aggregates": 120,
+          "retained_candidate_pairs": 87,
+          "scientific_rows": 1392,
+          "source_events": 1200,
+          "team_size": 8
+        },
+        {
+          "generation_invalid_aggregates": 2254,
+          "negative_aggregates": 54,
+          "positive_aggregates": 92,
+          "retained_candidate_pairs": 73,
+          "scientific_rows": 1752,
+          "source_events": 1200,
+          "team_size": 12
+        },
+        {
+          "generation_invalid_aggregates": 2202,
+          "negative_aggregates": 136,
+          "positive_aggregates": 62,
+          "retained_candidate_pairs": 99,
+          "scientific_rows": 3168,
+          "source_events": 1200,
+          "team_size": 16
+        }
+      ],
+      "topology_coverage": [
+        {
+          "candidate_topology": "COMPACT",
+          "generation_invalid_aggregates": 5557,
+          "negative_aggregates": 206,
+          "positive_aggregates": 237
+        },
+        {
+          "candidate_topology": "LINE",
+          "generation_invalid_aggregates": 5557,
+          "negative_aggregates": 148,
+          "positive_aggregates": 295
+        }
+      ],
+      "totals": {
+        "GENERATION_INVALID": 11114,
+        "RECOVERABLE_POSITIVE": 532,
+        "VALID_TASK_NEGATIVE": 354,
+        "candidate_aggregates": 12000,
+        "candidate_pair_dropped_events": 5557,
+        "candidate_pair_retained_events": 443,
+        "decision_events": 6000,
+        "scientific_rows": 8340,
+        "source_episodes": 1200
+      }
+    },
+    "validation": {
+      "family_coverage": [
+        {
+          "descriptive_flags": [],
+          "family": "F1",
+          "generation_invalid_aggregates": 242,
+          "negative_aggregates": 8,
+          "positive_aggregates": 50,
+          "retained_candidate_pairs": 29,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 524,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F2",
+          "generation_invalid_aggregates": 272,
+          "negative_aggregates": 13,
+          "positive_aggregates": 15,
+          "retained_candidate_pairs": 14,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 284,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [
+            "ZERO_RETAINED_PAIRS",
+            "ONLY_ONE_OR_ZERO_TARGET_CLASSES",
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F3",
+          "generation_invalid_aggregates": 300,
+          "negative_aggregates": 0,
+          "positive_aggregates": 0,
+          "retained_candidate_pairs": 0,
+          "retained_team_sizes": [],
+          "scientific_rows": 0,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [
+            "ZERO_RETAINED_PAIRS",
+            "ONLY_ONE_OR_ZERO_TARGET_CLASSES",
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F4",
+          "generation_invalid_aggregates": 300,
+          "negative_aggregates": 0,
+          "positive_aggregates": 0,
+          "retained_candidate_pairs": 0,
+          "retained_team_sizes": [],
+          "scientific_rows": 0,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F5",
+          "generation_invalid_aggregates": 286,
+          "negative_aggregates": 7,
+          "positive_aggregates": 7,
+          "retained_candidate_pairs": 7,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 116,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [
+            "ONLY_ONE_OR_ZERO_TARGET_CLASSES",
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F6",
+          "generation_invalid_aggregates": 286,
+          "negative_aggregates": 14,
+          "positive_aggregates": 0,
+          "retained_candidate_pairs": 7,
+          "retained_team_sizes": [
+            6,
+            8,
+            16
+          ],
+          "scientific_rows": 188,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F7",
+          "generation_invalid_aggregates": 238,
+          "negative_aggregates": 14,
+          "positive_aggregates": 48,
+          "retained_candidate_pairs": 31,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 572,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [
+            "VERY_SMALL_RETAINED_EVENT_COUNT_1_TO_4",
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F8",
+          "generation_invalid_aggregates": 292,
+          "negative_aggregates": 5,
+          "positive_aggregates": 3,
+          "retained_candidate_pairs": 4,
+          "retained_team_sizes": [
+            5,
+            6,
+            8
+          ],
+          "scientific_rows": 48,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [],
+          "family": "F9",
+          "generation_invalid_aggregates": 270,
+          "negative_aggregates": 10,
+          "positive_aggregates": 20,
+          "retained_candidate_pairs": 15,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12,
+            16
+          ],
+          "scientific_rows": 348,
+          "source_events": 150
+        },
+        {
+          "descriptive_flags": [
+            "MISSING_RETAINED_N_COVERAGE"
+          ],
+          "family": "F10",
+          "generation_invalid_aggregates": 274,
+          "negative_aggregates": 15,
+          "positive_aggregates": 11,
+          "retained_candidate_pairs": 13,
+          "retained_team_sizes": [
+            5,
+            6,
+            8,
+            12
+          ],
+          "scientific_rows": 214,
+          "source_events": 150
+        }
+      ],
+      "team_size_coverage": [
+        {
+          "generation_invalid_aggregates": 554,
+          "negative_aggregates": 12,
+          "positive_aggregates": 34,
+          "retained_candidate_pairs": 23,
+          "scientific_rows": 230,
+          "source_events": 300,
+          "team_size": 5
+        },
+        {
+          "generation_invalid_aggregates": 556,
+          "negative_aggregates": 10,
+          "positive_aggregates": 34,
+          "retained_candidate_pairs": 22,
+          "scientific_rows": 264,
+          "source_events": 300,
+          "team_size": 6
+        },
+        {
+          "generation_invalid_aggregates": 552,
+          "negative_aggregates": 15,
+          "positive_aggregates": 33,
+          "retained_candidate_pairs": 24,
+          "scientific_rows": 384,
+          "source_events": 300,
+          "team_size": 8
+        },
+        {
+          "generation_invalid_aggregates": 546,
+          "negative_aggregates": 23,
+          "positive_aggregates": 31,
+          "retained_candidate_pairs": 27,
+          "scientific_rows": 648,
+          "source_events": 300,
+          "team_size": 12
+        },
+        {
+          "generation_invalid_aggregates": 552,
+          "negative_aggregates": 26,
+          "positive_aggregates": 22,
+          "retained_candidate_pairs": 24,
+          "scientific_rows": 768,
+          "source_events": 300,
+          "team_size": 16
+        }
+      ],
+      "topology_coverage": [
+        {
+          "candidate_topology": "COMPACT",
+          "generation_invalid_aggregates": 1380,
+          "negative_aggregates": 56,
+          "positive_aggregates": 64
+        },
+        {
+          "candidate_topology": "LINE",
+          "generation_invalid_aggregates": 1380,
+          "negative_aggregates": 30,
+          "positive_aggregates": 90
+        }
+      ],
+      "totals": {
+        "GENERATION_INVALID": 2760,
+        "RECOVERABLE_POSITIVE": 154,
+        "VALID_TASK_NEGATIVE": 86,
+        "candidate_aggregates": 3000,
+        "candidate_pair_dropped_events": 1380,
+        "candidate_pair_retained_events": 120,
+        "decision_events": 1500,
+        "scientific_rows": 2294,
+        "source_episodes": 300
+      }
+    }
+  },
+  "statistical_unit": {
+    "clustering_structure": [
+      "split",
+      "layout_sha256",
+      "source_episode_id",
+      "decision_event_id"
+    ],
+    "robot_local_rows_statistically_independent": false,
+    "train_independent_retained_source_events": 443,
+    "train_scientific_rows": 8340,
+    "validation_independent_retained_source_events": 120,
+    "validation_scientific_rows": 2294
+  },
+  "status": "PASS_DESCRIPTIVE_ONLY"
+}

@@ -1,0 +1,22 @@
+{
+  "decision_event_id_overlap": 0,
+  "intentionally_shared_structural_template_count": 300,
+  "intentionally_shared_structural_template_definition": [
+    "family",
+    "team_size",
+    "source_class"
+  ],
+  "layout_identity_contract": [
+    "layout_source_split",
+    "layout_sha256"
+  ],
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_recoverability_split_isolation_audit_sha256": "621d739c7c0d9bb3ea853e6e1956ceb8012e931040ef1cd56ecef2ba7f992a7b",
+  "prohibited_layout_identity_overlap": 0,
+  "schema_version": "rvt-phase9g-a1v-recoverability-split-isolation-audit/v1",
+  "scientific_row_id_overlap": 0,
+  "shared_mutable_indexes": false,
+  "source_episode_id_overlap": 0,
+  "status": "PASS",
+  "train_validation_files_physically_separate": true
+}

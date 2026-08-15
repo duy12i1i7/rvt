@@ -1,0 +1,10 @@
+{
+  "dataset_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+  "dataset_seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f",
+  "further_staging_writes_permitted": false,
+  "recoverability_train_mutation_permitted": false,
+  "residual_v2_authorized": false,
+  "schema_version": "rvt-phase9g-a1v-validation-dataset-seal/v1",
+  "sealed_at_utc": "2026-08-15T17:10:01Z",
+  "training_authorized": false
+}

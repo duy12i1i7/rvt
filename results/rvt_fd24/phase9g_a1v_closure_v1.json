@@ -1,0 +1,148 @@
+{
+  "authority_commit": "b5e5de5",
+  "class_balance": {
+    "audit_sha256": "1b924752088e94727137e26d9d0d46e4d4475fee6675023b661dc0d71898e59e",
+    "class_weighting": "NOT_SELECTED",
+    "train_aggregate": {
+      "invalid": 11114,
+      "negative": 354,
+      "positive": 532
+    },
+    "train_robot_local_rows": {
+      "negative": 3866,
+      "positive": 4474
+    },
+    "validation_aggregate": {
+      "invalid": 2760,
+      "negative": 86,
+      "positive": 154
+    },
+    "validation_robot_local_rows": {
+      "negative": 932,
+      "positive": 1362
+    }
+  },
+  "combined_root": {
+    "manifest_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "physical_files_merged": false,
+    "seal_sha256": "4fd9dda517eb5deed890ed5ac8ab5cc64841ab6c0a0a7a4047dd7b569cfb1f17",
+    "validation_sha256": "2512735b75c47194e0b4127c67703885920430cfa5d648128bf0e9e71413f3c0"
+  },
+  "coverage": {
+    "audit_sha256": "ff9da7831cf0dc68fe1d343155b4483c87e1656b55bfd88d66930e40e66589a0",
+    "classification": "COVERAGE_STRUCTURALLY_MISSING",
+    "descriptive_only": true,
+    "scientific_validity_redefined": false
+  },
+  "downstream": {
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "optimizer_states": 0,
+    "residual_v2_started": false,
+    "training_operations": 0
+  },
+  "integrity": {
+    "duplicate_scientific_identities": 0,
+    "hash_failures": 0,
+    "infrastructure_timeouts": 0,
+    "partial_candidate_pair_publications": 0,
+    "schema_failures": 0,
+    "seal_violations": 0,
+    "seed_mismatches": 0,
+    "unaccounted_events": 0,
+    "unexpected_duplicate_transactions": 0,
+    "unresolved_infrastructure_failures": 0,
+    "writer_failures": 0
+  },
+  "invalid_reasons": {
+    "audit_sha256": "81ca8978f523d8f62ea12948e4eee00cc41ef36801e24adad1dfbc8e9d6d3d93",
+    "infrastructure_misclassifications": 0,
+    "train": {
+      "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION": 3517,
+      "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE": 1920,
+      "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID": 120
+    },
+    "validation": {
+      "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION": 796,
+      "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE": 554,
+      "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID": 30
+    }
+  },
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_closure_sha256": "38b5d409e5287914e01383ccf3f5a5fb1e52a6bb57d25ff3e7d0c25f19df25c9",
+  "run_id": "phase9g-a1v-study-a-validation-recoverability-20260815T163005Z",
+  "schema_version": "rvt-phase9g-a1v-closure/v1",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0
+  },
+  "split_isolation": {
+    "decision_event_id_overlap": 0,
+    "intentionally_shared_structural_template_count": 300,
+    "prohibited_layout_identity_overlap": 0,
+    "scientific_row_id_overlap": 0,
+    "source_episode_id_overlap": 0
+  },
+  "statistical_unit": {
+    "clustering_structure": [
+      "split",
+      "layout_sha256",
+      "source_episode_id",
+      "decision_event_id"
+    ],
+    "robot_local_rows_statistically_independent": false,
+    "train_independent_retained_source_events": 443,
+    "train_scientific_rows": 8340,
+    "validation_independent_retained_source_events": 120,
+    "validation_scientific_rows": 2294
+  },
+  "status": "COMPLETE_STOPPED_BEFORE_RESIDUAL_AND_TRAINING",
+  "tests": {
+    "failed": 0,
+    "log_file_sha256": "d71d3ed76e933ff0c8407038477c2f1a0eebf1e54795c7ed34ac8c8665ce088f",
+    "passed": 3149,
+    "publication_required_xfailed": 0,
+    "seconds": 373.55,
+    "warnings": 1
+  },
+  "train": {
+    "GENERATION_INVALID": 11114,
+    "RECOVERABLE_POSITIVE": 532,
+    "VALID_TASK_NEGATIVE": 354,
+    "candidate_aggregates": 12000,
+    "candidate_pair_dropped_events": 5557,
+    "candidate_pair_retained_events": 443,
+    "decision_events": 6000,
+    "manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "scientific_rows": 8340,
+    "seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5",
+    "source_episodes": 1200
+  },
+  "validation": {
+    "GENERATION_INVALID": 2760,
+    "RECOVERABLE_POSITIVE": 154,
+    "VALID_TASK_NEGATIVE": 86,
+    "candidate_aggregates": 3000,
+    "candidate_cpu_hours": 2.5253111189863895,
+    "candidate_pair_dropped_events": 1380,
+    "candidate_pair_retained_events": 120,
+    "decision_events": 1500,
+    "duplicates": 0,
+    "failure_attempts": 0,
+    "manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+    "partial_publications": 0,
+    "replica_executions": 316,
+    "retries": 0,
+    "scientific_rows": 2294,
+    "seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f",
+    "source_episodes": 300,
+    "storage_bytes": 75475044,
+    "timeouts": 0,
+    "unresolved_failures": 0,
+    "wall_seconds": 949.1813275879831,
+    "writer_failures": 0
+  },
+  "verdict": "C",
+  "verdict_text": "Study-A Recoverability TRAIN and VALIDATION are finalized and reconciled; the complete Recoverability dataset is ready for the explicit pre-training coverage/class-weight decision phase."
+}

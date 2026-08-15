@@ -1,0 +1,11 @@
+{
+  "class_weighting_selected": false,
+  "combined_recoverability_dataset_root_seal_sha256": "4fd9dda517eb5deed890ed5ac8ab5cc64841ab6c0a0a7a4047dd7b569cfb1f17",
+  "combined_recoverability_dataset_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+  "residual_v2_authorized": false,
+  "schema_version": "rvt-phase9g-a1v-combined-recoverability-root-seal/v1",
+  "sealed_at_utc": "2026-08-15T17:15:04Z",
+  "train_dataset_mutation_permitted": false,
+  "training_authorized": false,
+  "validation_dataset_mutation_permitted": false
+}

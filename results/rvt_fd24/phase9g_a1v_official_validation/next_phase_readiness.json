@@ -1,0 +1,20 @@
+{
+  "class_weighting": "NOT_SELECTED",
+  "combined_dataset_root_seal_sha256": "4fd9dda517eb5deed890ed5ac8ab5cc64841ab6c0a0a7a4047dd7b569cfb1f17",
+  "combined_dataset_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+  "coverage_classification": "COVERAGE_STRUCTURALLY_MISSING",
+  "coverage_warnings_are_descriptive": true,
+  "final_test_accesses": 0,
+  "hyperparameter_trials": 0,
+  "model_checkpoints": 0,
+  "optimizer_states": 0,
+  "phase": "PHASE_9G_A1V",
+  "phase9g_a1v_next_phase_readiness_sha256": "9ba0fbaf23a812dad66da907badd0ea22edc295c5aef1211b4a25b2271a136b3",
+  "residual_v2_started": false,
+  "schema_version": "rvt-phase9g-a1v-next-phase-readiness/v1",
+  "scientific_validity": "PASS",
+  "status": "READY_FOR_EXPLICIT_PRETRAINING_COVERAGE_CLASS_WEIGHT_DECISION",
+  "study_a_n24_accesses": 0,
+  "study_b_accesses": 0,
+  "training_operations": 0
+}

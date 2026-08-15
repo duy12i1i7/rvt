@@ -1,0 +1,52 @@
+{
+  "class_weighting": "NOT_SELECTED",
+  "combined_recoverability_dataset_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+  "dataset_root_id": "phase9g-a1-study-a-recoverability-train-validation-root-v1",
+  "generation_audits": {
+    "class_balance": "1b924752088e94727137e26d9d0d46e4d4475fee6675023b661dc0d71898e59e",
+    "coverage": "ff9da7831cf0dc68fe1d343155b4483c87e1656b55bfd88d66930e40e66589a0",
+    "invalid_reasons": "81ca8978f523d8f62ea12948e4eee00cc41ef36801e24adad1dfbc8e9d6d3d93",
+    "split_isolation": "621d739c7c0d9bb3ea853e6e1956ceb8012e931040ef1cd56ecef2ba7f992a7b",
+    "validation_generation": "b0d2be0199449b83931011e853d2a08a4385ebdd87c7841bbb81c66291da513e"
+  },
+  "generation_provenance_root": "9f209cd4b5ae591b2f576a085bcbdb6b7d30a7f3fecb9840d6e0eb56bb03adc8",
+  "mutable_namespace": false,
+  "physical_files_merged": false,
+  "schema_version": "rvt-phase9g-a1v-combined-recoverability-dataset-root/v1",
+  "scientific_contracts": {
+    "candidate_pair_transaction_sha256": "c66a5b75c04fc8a9f38f9f3ea809824d697482826de85b5b4eefcfef9ffe1ca0",
+    "matched_randomness_authority_sha256": "87e206d22d3b3e893bc2c34ac87e97ceb5d9cb66e23d26456791bad552bcf851",
+    "row_identity_bound_by_split": true,
+    "s3_exact_centerline_addendum_sha256": "d216217b3a3dfead5e3249cbf57317a71aa1c479acc840994eec9ff1616da23b",
+    "s3_final_readiness_sha256": "a7118241538639b4da657f5aceff89bdfe9c64be62f22a21221b221016637d6c",
+    "s3_opposing_boundary_addendum_sha256": "a5e7fa9ce92ba7fb449a76406da47cc00dd4a39ddee2e108a62a969589b5f6d3",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "recoverability_train_modifications": 0,
+    "residual_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "splits": {
+    "train": {
+      "dataset_id": "phase9g-a1-study-a-train-recoverability-v1",
+      "manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+      "retained_source_events": 443,
+      "scientific_rows": 8340,
+      "seal_sha256": "5b9e6726b548722ee651eefa7106662e2b119147d9b0c31ec4d4cbe0a1de58f5"
+    },
+    "validation": {
+      "dataset_id": "phase9g-a1-study-a-validation-recoverability-v1",
+      "manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+      "retained_source_events": 120,
+      "scientific_rows": 2294,
+      "seal_sha256": "c7583b124c573c52b57cd91dc1b54aff8fc02b33cf0a15d5449936a8d540637f"
+    }
+  },
+  "status": "COMPLETE_REFERENTIAL_ROOT",
+  "study": "study_a_zero_shot"
+}
