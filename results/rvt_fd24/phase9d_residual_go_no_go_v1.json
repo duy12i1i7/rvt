@@ -1,0 +1,8 @@
+{
+  "decision": "HOLD_RESIDUAL_PENDING_RECOVERABILITY_SCIENTIFIC_DECISION",
+  "phase": "PHASE_9D_R",
+  "phase9d_residual_go_no_go_sha256": "63b663db34f73b25f7110cdf6fb434d90f115f3483dd85d66ee2bdc9b46b8fe3",
+  "reason": "H1 is not identifiable under the current frozen training gate; optional H4 expenditure is not justified before that blocker is resolved by owner-authorized scientific scope action.",
+  "residual_generation_operations": 0,
+  "schema_version": "rvt-phase9d-r-residual-go-no-go/v1"
+}

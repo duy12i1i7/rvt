@@ -1,0 +1,236 @@
+{
+  "anti_concentration_gate": "No one family or N may contribute more than half of the pooled gain.",
+  "authorities": {
+    "baselines": {
+      "file_sha256": "81818646c153436a5268a08ff1ee7cd79e8711fbaefe1fede3435591000b8b41",
+      "path": "docs/RVT_BASELINE_FAIRNESS_CONTRACT.md"
+    },
+    "checkpoint_selection": {
+      "file_sha256": "d45404deed2e771908ee2c85e924c5a1a18d6bfde0ba09935d61137f7f9f7ba1",
+      "path": "docs/RVT_CHECKPOINT_SELECTION_CONTRACT.md"
+    },
+    "hypothesis": {
+      "file_sha256": "678ae987174e89254c2fef88d617cdca16db2122738decd10c522b937231ed0f",
+      "path": "docs/RVT_FD24_RESEARCH_QUESTIONS_AND_HYPOTHESES.md"
+    },
+    "label_audit_gates": {
+      "file_sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d",
+      "path": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md"
+    },
+    "loss": {
+      "file_sha256": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e",
+      "path": "docs/RVT_FD24_LOSS_CONTRACT.md"
+    },
+    "sampling": {
+      "file_sha256": "593bdb4662a10d955e5d7277ac066ac5c357c1097ce28643e9e9745d433cceb9",
+      "path": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md"
+    },
+    "scenario_families": {
+      "file_sha256": "5c8f986014de94a6d169eb5e58bf4c4e56eca6d8abe677004a109c1b8eaa99b5",
+      "path": "docs/RVT_FD24_SCENARIO_FAMILY_CONTRACT.md"
+    },
+    "statistics": {
+      "file_sha256": "cc7506c5b4ba716d6372b865e69ed6171f2af5fbec27ada26970ae4c3f38ad4a",
+      "path": "docs/RVT_STATISTICAL_ANALYSIS_CONTRACT.md"
+    }
+  },
+  "candidate_topology_scope": [
+    "COMPACT",
+    "LINE"
+  ],
+  "collision_gate": {
+    "absolute_degradation_maximum": 0.01,
+    "collision_free_point_estimate_minimum": 0.95
+  },
+  "failed_predeclared_gate_count": 1,
+  "failed_predeclared_gates": [
+    4
+  ],
+  "h1_exact_statement": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+  "label_audit_gates": [
+    {
+      "evidence": "Both candidates have positive and negative aggregates in TRAIN and VALIDATION.",
+      "gate": 1,
+      "status": "PASS"
+    },
+    {
+      "gate": 2,
+      "status": "PASS",
+      "train_decisive": {
+        "COMPACT_ONLY_SUCCESS": 70,
+        "LINE_ONLY_SUCCESS": 128,
+        "minimum_each": 50
+      },
+      "validation_decisive": {
+        "COMPACT_ONLY_SUCCESS": 20,
+        "LINE_ONLY_SUCCESS": 46,
+        "minimum_each": 20
+      }
+    },
+    {
+      "candidate_positive_rates": {
+        "train": {
+          "COMPACT": {
+            "negative": 206,
+            "positive": 237,
+            "positive_rate": 0.5349887133182845
+          },
+          "LINE": {
+            "negative": 148,
+            "positive": 295,
+            "positive_rate": 0.6659142212189616
+          }
+        },
+        "validation": {
+          "COMPACT": {
+            "negative": 56,
+            "positive": 64,
+            "positive_rate": 0.5333333333333333
+          },
+          "LINE": {
+            "negative": 30,
+            "positive": 90,
+            "positive_rate": 0.75
+          }
+        }
+      },
+      "gate": 3,
+      "permitted_interval": [
+        0.1,
+        0.9
+      ],
+      "status": "PASS"
+    },
+    {
+      "failures": [
+        {
+          "family": "F1",
+          "required_minimum": 30,
+          "retained_validation_events": 29
+        },
+        {
+          "family": "F2",
+          "required_minimum": 30,
+          "retained_validation_events": 14
+        },
+        {
+          "family": "F3",
+          "required_minimum": 30,
+          "retained_validation_events": 0
+        },
+        {
+          "family": "F4",
+          "required_minimum": 30,
+          "retained_validation_events": 0
+        },
+        {
+          "family": "F5",
+          "required_minimum": 30,
+          "retained_validation_events": 7
+        },
+        {
+          "family": "F6",
+          "required_minimum": 30,
+          "retained_validation_events": 7
+        },
+        {
+          "family": "F8",
+          "required_minimum": 30,
+          "retained_validation_events": 4
+        },
+        {
+          "family": "F9",
+          "required_minimum": 30,
+          "retained_validation_events": 15
+        },
+        {
+          "family": "F10",
+          "required_minimum": 30,
+          "retained_validation_events": 13
+        }
+      ],
+      "gate": 4,
+      "passing_families": [
+        "F7"
+      ],
+      "required_minimum_retained_validation_events_per_primary_family": 30,
+      "status": "FAIL"
+    },
+    {
+      "gate": 5,
+      "status": "PASS",
+      "study_a_train_n24_rows": 0
+    },
+    {
+      "clarification": "Source termination before a scheduled event is GENERATION_INVALID denominator evidence, not an executed invalid rollout.",
+      "gate": 6,
+      "invalid_target_v4_rollout_replicas": 0,
+      "status": "PASS"
+    },
+    {
+      "gate": 7,
+      "maximum_stochastic_label_instability": 0.0,
+      "permitted_maximum": 0.1,
+      "status": "PASS"
+    },
+    {
+      "gate": 8,
+      "joint_category_js_divergence_base2": 0.017157656137630577,
+      "maximum_candidate_positive_rate_difference": 0.0840857787810384,
+      "maximum_permitted_js_divergence": 0.15,
+      "maximum_permitted_rate_difference": 0.15,
+      "status": "PASS"
+    },
+    {
+      "duplicate_geometry_overlap": 0,
+      "event_split_overlap": 0,
+      "gate": 9,
+      "status": "PASS"
+    }
+  ],
+  "minimum_label_support_was_predeclared": true,
+  "per_family_effect_claim_predeclared": false,
+  "phase": "PHASE_9D_R",
+  "phase9d_h1_requirement_map_sha256": "be093dd40d63d985b317de83bf5644fb8fc0db00f7131713d5b2159052486f14",
+  "pooled_primary_comparisons_predeclared": true,
+  "post_hoc_minimum_rules_added": [],
+  "primary_baseline_comparisons": [
+    "FULL_BASE_METHOD_VS_LOCAL_GEOMETRIC_SELECTOR",
+    "FULL_BASE_METHOD_VS_DIRECT_CLASSIFIER",
+    "FULL_BASE_METHOD_VS_STRONGEST_FIXED_DEPLOYABLE_BASELINE"
+  ],
+  "primary_evaluation_unit": "PAIRED_EPISODE",
+  "primary_metric": "EPISODE_TASK_SUCCESS",
+  "required_families": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10"
+  ],
+  "required_study_a_training_team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16
+  ],
+  "schema_version": "rvt-phase9d-r-h1-requirement-map/v1",
+  "status": "FROZEN_REQUIREMENT_RECOVERED",
+  "supervised_training_and_evaluation_mask": {
+    "excluded_dispositions": [
+      "GENERATION_INVALID"
+    ],
+    "generation_invalid_mapped_to_label_zero": false,
+    "included_dispositions": [
+      "RECOVERABLE_POSITIVE",
+      "VALID_TASK_NEGATIVE"
+    ],
+    "invalid_events_retained_as_denominator_audit_evidence": true
+  }
+}

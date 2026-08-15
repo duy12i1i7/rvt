@@ -1,0 +1,12 @@
+{
+  "blocking_gate": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES_GATE_4",
+  "decision": "RECOVERABILITY_TRAINING_BLOCKED",
+  "hyperparameter_trials": 0,
+  "model_checkpoints": 0,
+  "optimizer_states": 0,
+  "phase": "PHASE_9D_R",
+  "phase9d_training_readiness_sha256": "021c625ca02394f1e4aa890f93f4200ad086857c8b0e47dff40d5305430067d8",
+  "reason": "Nine of ten primary families contain fewer than 30 retained VALIDATION decision events.",
+  "schema_version": "rvt-phase9d-r-training-readiness/v1",
+  "training_operations": 0
+}

@@ -1,0 +1,46 @@
+{
+  "artifact_hashes": {
+    "adequacy": "9616d3b9ca02e282204350d15f4a3843afa8f28db5cc1d4c83769e2cd3e4e15a",
+    "class_balance": "32912450682040d0e6c7ffdedeec180e2357803bff0221ab7c301eda064e8dfa",
+    "class_weight": "433983b13cf133cfaaa73e8e49b3353c64913e0bbb3a8d9e9a6f21b52f9ad3d0",
+    "coverage_cube": "828d51c50cd3c49b743d4ae9f04004147b961d1128424619537d2d80018455e6",
+    "h1_identifiability": "d0ffb9f414861dad849ba59505368fa678da6b9972f1fa059763bbd6dcf8b0f2",
+    "h1_requirements": "be093dd40d63d985b317de83bf5644fb8fc0db00f7131713d5b2159052486f14",
+    "input_integrity": "c305b868bcbf1369b7c6f5ad924dd8261f0c8c3d99c12a399bc4ce0ac5e2341b",
+    "invalid_reasons": "484b7260d52f44ac79db6efd08a58ca8328de0a1197f1aa30d9386d6bdf5325c",
+    "missing_cells": "4e510552ae95d580c9b64dd5c23fb32f8e1c926f92906180a7de6dcaef8811b0",
+    "residual": "63b663db34f73b25f7110cdf6fb434d90f115f3483dd85d66ee2bdc9b46b8fe3",
+    "split_consistency": "93e228b64c9ff217383f1b8ece1a55cecbc798ae6b1ea23e1da4575bb01e5d78",
+    "statistical_unit": "65609bb7b133ca10d9050e17c94d3b0bcdb6c7d84961ede1be77369a3d850eb2",
+    "training": "021c625ca02394f1e4aa890f93f4200ad086857c8b0e47dff40d5305430067d8"
+  },
+  "audit_source_commit": "d24f6b43aaf841534d9993e9286d05dbab1c9fc3",
+  "branch": "research/rvt-phase9d-r-recoverability-data-audit-v1",
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "coverage_status": "COVERAGE_STRUCTURALLY_MISSING",
+  "dataset_adequacy": "RECOVERABILITY_DATASET_INADEQUATE_FOR_FROZEN_H1",
+  "dataset_roots": {
+    "combined_recoverability_dataset_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "validation_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e"
+  },
+  "input_closure_commit": "6ce4a37f195875e6568e2bbed2d1e2dfea103946",
+  "isolation": {
+    "final_test_dataset_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_dataset_mutations": 0,
+    "optimizer_states": 0,
+    "residual_generation_operations": 0,
+    "study_a_n24_dataset_accesses": 0,
+    "study_b_dataset_accesses": 0,
+    "training_operations": 0
+  },
+  "phase": "PHASE_9D_R",
+  "phase9d_r_closure_sha256": "3bbb9b95e5d9083840308a34f547d1f941abd38f0968578888d7c496200791ad",
+  "residual_decision": "HOLD_RESIDUAL_PENDING_RECOVERABILITY_SCIENTIFIC_DECISION",
+  "schema_version": "rvt-phase9d-r-closure/v1",
+  "status": "COMPLETE_STOPPED_BEFORE_RESIDUAL_AND_TRAINING",
+  "training_decision": "RECOVERABILITY_TRAINING_BLOCKED",
+  "verdict": "C"
+}

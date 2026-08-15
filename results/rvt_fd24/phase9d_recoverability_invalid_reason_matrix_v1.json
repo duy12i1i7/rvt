@@ -1,0 +1,1938 @@
+{
+  "cells": [
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 192,
+      "invalid_source_events": 96,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 192,
+          "invalid_source_events": 96,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 192,
+      "invalid_source_events": 96,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 192,
+          "invalid_source_events": 96,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 188,
+      "invalid_source_events": 94,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 178,
+          "invalid_source_events": 89,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 194,
+      "invalid_source_events": 97,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 30,
+          "invalid_source_events": 15,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 164,
+          "invalid_source_events": 82,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 160,
+      "invalid_source_events": 80,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 220,
+      "invalid_source_events": 110,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 140,
+          "invalid_source_events": 70,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 80,
+          "invalid_source_events": 40,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 220,
+      "invalid_source_events": 110,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 140,
+          "invalid_source_events": 70,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 80,
+          "invalid_source_events": 40,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 222,
+      "invalid_source_events": 111,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 62,
+          "invalid_source_events": 31,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 218,
+      "invalid_source_events": 109,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 170,
+          "invalid_source_events": 85,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 228,
+      "invalid_source_events": 114,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 228,
+          "invalid_source_events": 114,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 238,
+      "invalid_source_events": 119,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 238,
+          "invalid_source_events": 119,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+          "scientific_cause_class": "SOURCE_INITIALIZATION_VALIDITY"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 224,
+      "invalid_source_events": 112,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 64,
+          "invalid_source_events": 32,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 230,
+      "invalid_source_events": 115,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 70,
+          "invalid_source_events": 35,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 80,
+          "invalid_source_events": 40,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 152,
+          "invalid_source_events": 76,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 90,
+          "invalid_source_events": 45,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 142,
+          "invalid_source_events": 71,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 148,
+          "invalid_source_events": 74,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 84,
+          "invalid_source_events": 42,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 236,
+      "invalid_source_events": 118,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 236,
+          "invalid_source_events": 118,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 232,
+          "invalid_source_events": 116,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 232,
+          "invalid_source_events": 116,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 236,
+      "invalid_source_events": 118,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 236,
+          "invalid_source_events": 118,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 200,
+      "invalid_source_events": 100,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 200,
+          "invalid_source_events": 100,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 192,
+      "invalid_source_events": 96,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 192,
+          "invalid_source_events": 96,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 194,
+      "invalid_source_events": 97,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 184,
+          "invalid_source_events": 92,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 192,
+      "invalid_source_events": 96,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 192,
+          "invalid_source_events": 96,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 198,
+      "invalid_source_events": 99,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 138,
+          "invalid_source_events": 69,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 184,
+      "invalid_source_events": 92,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 50,
+          "invalid_source_events": 25,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 134,
+          "invalid_source_events": 67,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 72,
+          "invalid_source_events": 36,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 228,
+      "invalid_source_events": 114,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 218,
+          "invalid_source_events": 109,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 50,
+          "invalid_source_events": 25,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 190,
+          "invalid_source_events": 95,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 20,
+          "invalid_source_events": 10,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 220,
+          "invalid_source_events": 110,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 224,
+      "invalid_source_events": 112,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 64,
+          "invalid_source_events": 32,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 224,
+      "invalid_source_events": 112,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 64,
+          "invalid_source_events": 32,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 218,
+      "invalid_source_events": 109,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 160,
+          "invalid_source_events": 80,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 58,
+          "invalid_source_events": 29,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 224,
+      "invalid_source_events": 112,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 200,
+          "invalid_source_events": 100,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 24,
+          "invalid_source_events": 12,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 226,
+      "invalid_source_events": 113,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 220,
+          "invalid_source_events": 110,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 6,
+          "invalid_source_events": 3,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 220,
+      "invalid_source_events": 110,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 196,
+          "invalid_source_events": 98,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 24,
+          "invalid_source_events": 12,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 224,
+      "invalid_source_events": 112,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 176,
+          "invalid_source_events": 88,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 224,
+      "invalid_source_events": 112,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 212,
+          "invalid_source_events": 106,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 12,
+          "invalid_source_events": 6,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 232,
+      "invalid_source_events": 116,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 230,
+          "invalid_source_events": 115,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 2,
+          "invalid_source_events": 1,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 240,
+      "invalid_source_events": 120,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 240,
+          "invalid_source_events": 120,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "TRAIN",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 48,
+      "invalid_source_events": 24,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 48,
+      "invalid_source_events": 24,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 46,
+      "invalid_source_events": 23,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 46,
+          "invalid_source_events": 23,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 50,
+      "invalid_source_events": 25,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F1",
+      "generation_invalid_candidate_aggregates": 50,
+      "invalid_source_events": 25,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 48,
+      "invalid_source_events": 24,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 20,
+          "invalid_source_events": 10,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 28,
+          "invalid_source_events": 14,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F2",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F3",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F4",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+          "scientific_cause_class": "SOURCE_INITIALIZATION_VALIDITY"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 56,
+          "invalid_source_events": 28,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 20,
+          "invalid_source_events": 10,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 38,
+          "invalid_source_events": 19,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 58,
+          "invalid_source_events": 29,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F5",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 20,
+          "invalid_source_events": 10,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 38,
+          "invalid_source_events": 19,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 58,
+          "invalid_source_events": 29,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 58,
+          "invalid_source_events": 29,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F6",
+      "generation_invalid_candidate_aggregates": 50,
+      "invalid_source_events": 25,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 50,
+          "invalid_source_events": 25,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 48,
+      "invalid_source_events": 24,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 48,
+      "invalid_source_events": 24,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 48,
+      "invalid_source_events": 24,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 42,
+      "invalid_source_events": 21,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 42,
+          "invalid_source_events": 21,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F7",
+      "generation_invalid_candidate_aggregates": 52,
+      "invalid_source_events": 26,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 20,
+          "invalid_source_events": 10,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 32,
+          "invalid_source_events": 16,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 46,
+          "invalid_source_events": 23,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 10,
+          "invalid_source_events": 5,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 48,
+          "invalid_source_events": 24,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 58,
+      "invalid_source_events": 29,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 58,
+          "invalid_source_events": 29,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F8",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 50,
+          "invalid_source_events": 25,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 6,
+          "invalid_source_events": 3,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F9",
+      "generation_invalid_candidate_aggregates": 46,
+      "invalid_source_events": 23,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 6,
+          "invalid_source_events": 3,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 54,
+      "invalid_source_events": 27,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 46,
+          "invalid_source_events": 23,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 8,
+          "invalid_source_events": 4,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 5
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 56,
+      "invalid_source_events": 28,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 16,
+          "invalid_source_events": 8,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 6
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 52,
+      "invalid_source_events": 26,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 40,
+          "invalid_source_events": 20,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 12,
+          "invalid_source_events": 6,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 8
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 52,
+      "invalid_source_events": 26,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 50,
+          "invalid_source_events": 25,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        },
+        {
+          "generation_invalid_candidate_aggregates": 2,
+          "invalid_source_events": 1,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_GOAL_COMPLETE_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 12
+    },
+    {
+      "denominator_level": "SOURCE_DECISION_EVENT_AND_CANDIDATE_AGGREGATE",
+      "family": "F10",
+      "generation_invalid_candidate_aggregates": 60,
+      "invalid_source_events": 30,
+      "reason_distribution": [
+        {
+          "generation_invalid_candidate_aggregates": 60,
+          "invalid_source_events": 30,
+          "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+          "scientific_cause_class": "EVENT_STATE_SOURCE_COLLISION_BEFORE_SCHEDULED_EVENT"
+        }
+      ],
+      "split": "VALIDATION",
+      "team_size": 16
+    }
+  ],
+  "infrastructure_misclassification_count": 0,
+  "phase": "PHASE_9D_R",
+  "phase9d_recoverability_invalid_reason_matrix_sha256": "484b7260d52f44ac79db6efd08a58ca8328de0a1197f1aa30d9386d6bdf5325c",
+  "s3_hold_unknown_invalid_events": 0,
+  "schema_version": "rvt-phase9d-r-recoverability-invalid-reason-matrix/v1",
+  "split_reason_totals_in_source_events": [
+    {
+      "count": 3517,
+      "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+      "split": "TRAIN"
+    },
+    {
+      "count": 1920,
+      "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+      "split": "TRAIN"
+    },
+    {
+      "count": 120,
+      "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+      "split": "TRAIN"
+    },
+    {
+      "count": 796,
+      "reason": "SOURCE_TERMINATED_BEFORE_EVENT:COLLISION",
+      "split": "VALIDATION"
+    },
+    {
+      "count": 554,
+      "reason": "SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE",
+      "split": "VALIDATION"
+    },
+    {
+      "count": 30,
+      "reason": "SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID",
+      "split": "VALIDATION"
+    }
+  ],
+  "status": "PASS_SCIENTIFIC_INFRASTRUCTURE_SEPARATION",
+  "target_v4_generation_invalid_events": 0,
+  "transition_execution_invalid_events": 0
+}

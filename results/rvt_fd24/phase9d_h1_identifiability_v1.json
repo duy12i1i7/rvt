@@ -1,0 +1,39 @@
+{
+  "candidate_label_availability": {
+    "direct_classifier": "Both decisive directions exist in both splits and ties can be masked, but comparison remains blocked because the Recoverability checkpoint is ineligible.",
+    "fixed_baselines": "No supervised Recoverability label is required for execution.",
+    "local_geometric_selector": "No supervised Recoverability label is required for execution.",
+    "recoverability_model": "Candidate-specific positive and valid-negative labels exist globally for both candidates, but primary-family validation support fails the frozen minimum."
+  },
+  "comparisons": [
+    {
+      "classification": "NOT_IDENTIFIABLE_FROM_CURRENT_DATA",
+      "comparison": "FULL_BASE_METHOD_VS_LOCAL_GEOMETRIC_SELECTOR",
+      "evaluation_unit": "PAIRED_EPISODE",
+      "reason": "The learned Recoverability method cannot produce a protocol-eligible checkpoint while predeclared label-audit gate 4 fails.",
+      "scope": "PRIMARY_H1_OR_PRIMARY_RQ1_SUPPORT"
+    },
+    {
+      "classification": "NOT_IDENTIFIABLE_FROM_CURRENT_DATA",
+      "comparison": "FULL_BASE_METHOD_VS_DIRECT_CLASSIFIER",
+      "evaluation_unit": "PAIRED_EPISODE",
+      "reason": "The learned Recoverability method cannot produce a protocol-eligible checkpoint while predeclared label-audit gate 4 fails.",
+      "scope": "PRIMARY_H1_OR_PRIMARY_RQ1_SUPPORT"
+    },
+    {
+      "classification": "NOT_IDENTIFIABLE_FROM_CURRENT_DATA",
+      "comparison": "FULL_BASE_METHOD_VS_STRONGEST_FIXED_DEPLOYABLE_BASELINE",
+      "evaluation_unit": "PAIRED_EPISODE",
+      "reason": "The learned Recoverability method cannot produce a protocol-eligible checkpoint while predeclared label-audit gate 4 fails.",
+      "scope": "PRIMARY_H1_OR_PRIMARY_RQ1_SUPPORT"
+    }
+  ],
+  "new_hypothesis_created": false,
+  "phase": "PHASE_9D_R",
+  "phase9d_h1_identifiability_sha256": "d0ffb9f414861dad849ba59505368fa678da6b9972f1fa059763bbd6dcf8b0f2",
+  "primary_scope_missing_coverage": true,
+  "same_hidden_subset_rule": "Recoverability and direct-classifier label metrics must use the same retained candidate-pair events; invalid events remain audit denominators and never become label zero.",
+  "schema_version": "rvt-phase9d-r-h1-identifiability/v1",
+  "secondary_diagnostic_missing_coverage": true,
+  "status": "NOT_IDENTIFIABLE_UNDER_CURRENT_FROZEN_GATE"
+}

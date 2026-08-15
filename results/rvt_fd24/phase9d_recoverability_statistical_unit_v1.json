@@ -1,0 +1,83 @@
+{
+  "clustering_keys": [
+    "split",
+    "layout_sha256",
+    "source_episode_id",
+    "decision_event_id"
+  ],
+  "dataset_counts": {
+    "train": {
+      "retained_source_events": 443,
+      "robot_local_rows": 8340
+    },
+    "validation": {
+      "retained_source_events": 120,
+      "robot_local_rows": 2294
+    }
+  },
+  "denominator_levels": [
+    "SOURCE_EPISODE",
+    "SOURCE_DECISION_EVENT",
+    "CANDIDATE_AGGREGATE",
+    "RETAINED_CANDIDATE_PAIR",
+    "ROBOT_LOCAL_SCIENTIFIC_ROW"
+  ],
+  "frozen_recoverability_reduction": "Average equally over COMPACT/LINE and robots within a decision, then over decision events.",
+  "future_metric_bootstrap_unit": "PAIRED_EPISODE_WITH_LAYOUT_CLUSTER_SENSITIVITY",
+  "implementation_status": "Training has not started; any future loader/loss must preserve decision-event grouping and the frozen reduction.",
+  "loss_authority": "docs/RVT_FD24_LOSS_CONTRACT.md",
+  "n_dependent_weighting_intended": false,
+  "phase": "PHASE_9D_R",
+  "phase9d_recoverability_statistical_unit_sha256": "65609bb7b133ca10d9050e17c94d3b0bcdb6c7d84961ede1be77369a3d850eb2",
+  "raw_row_mean_permitted": false,
+  "robot_local_rows_statistically_independent": false,
+  "schema_version": "rvt-phase9d-r-recoverability-statistical-unit/v1",
+  "status": "FROZEN_EVENT_EQUAL_WEIGHT",
+  "team_size_weight_audit": [
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.2,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.1,
+      "naive_row_mean_relative_event_weight_vs_N5": 1.0,
+      "rows_per_retained_event": 10,
+      "team_size": 5
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.16666666666666666,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.08333333333333333,
+      "naive_row_mean_relative_event_weight_vs_N5": 1.2,
+      "rows_per_retained_event": 12,
+      "team_size": 6
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.125,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.0625,
+      "naive_row_mean_relative_event_weight_vs_N5": 1.6,
+      "rows_per_retained_event": 16,
+      "team_size": 8
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.08333333333333333,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.041666666666666664,
+      "naive_row_mean_relative_event_weight_vs_N5": 2.4,
+      "rows_per_retained_event": 24,
+      "team_size": 12
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.0625,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.03125,
+      "naive_row_mean_relative_event_weight_vs_N5": 3.2,
+      "rows_per_retained_event": 32,
+      "team_size": 16
+    }
+  ]
+}

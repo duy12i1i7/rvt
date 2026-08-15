@@ -1,0 +1,31 @@
+{
+  "authority_rule": "No class weighting, focal term, or oversampling before the label audit; no post-audit formula or imbalance threshold was predeclared.",
+  "decision": "NONE_UNWEIGHTED_BCE",
+  "family_weighting": false,
+  "frozen_protocol_authority": "docs/RVT_FD24_LOSS_CONTRACT.md",
+  "oversampling": false,
+  "phase": "PHASE_9D_R",
+  "phase9d_recoverability_class_weight_decision_sha256": "433983b13cf133cfaaa73e8e49b3353c64913e0bbb3a8d9e9a6f21b52f9ad3d0",
+  "rationale": [
+    "The valid aggregate imbalance is moderate and has the same positive-majority direction in both splits.",
+    "Class weighting cannot repair missing family/N support.",
+    "No frozen threshold or formula requires weighting.",
+    "Post-hoc resampling or family/N balancing would change the observed training distribution and remains forbidden."
+  ],
+  "schema_version": "rvt-phase9d-r-recoverability-class-weight-decision/v1",
+  "selection_authority": "Explicit owner-authorized Phase 9D-R post-generation descriptive audit and contract freeze.",
+  "status": "SELECTED",
+  "synthetic_rows": false,
+  "team_size_weighting": false,
+  "train_candidate_aggregate_balance": {
+    "negative": 354,
+    "positive": 532,
+    "positive_fraction_among_valid": 0.600451467268623
+  },
+  "undersampling": false,
+  "validation_candidate_aggregate_balance": {
+    "negative": 86,
+    "positive": 154,
+    "positive_fraction_among_valid": 0.6416666666666667
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "classification": "RECOVERABILITY_DATASET_INADEQUATE_FOR_FROZEN_H1",
+  "dataset_integrity_valid": true,
+  "dataset_repair_authorized": false,
+  "executable_or_manifest_defect": false,
+  "phase": "PHASE_9D_R",
+  "phase9d_recoverability_dataset_adequacy_sha256": "9616d3b9ca02e282204350d15f4a3843afa8f28db5cc1d4c83769e2cd3e4e15a",
+  "reason": "Predeclared Recoverability label-audit gate 4 fails in primary H1 family coverage, so no protocol-eligible Recoverability checkpoint can be trained from the current immutable dataset.",
+  "schema_version": "rvt-phase9d-r-recoverability-dataset-adequacy/v1",
+  "status": "CLOSED"
+}
