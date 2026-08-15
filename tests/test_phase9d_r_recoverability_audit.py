@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -23,6 +24,12 @@ from scripts.build_phase9d_r_recoverability_audit import (
     _canonical,
     _summaries,
 )
+from scripts.validate_phase9d_r_recoverability_audit import (
+    FILES,
+    Phase9DRValidationError,
+    validate,
+)
+from rvt_swarm.phase8.common import attach_canonical_hash
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -220,3 +227,46 @@ def test_canonical_validator_rejects_tampering(tmp_path: Path) -> None:
     path.write_text(json.dumps(document), encoding="ascii")
     with pytest.raises(Phase9DRAuditError, match="canonical hash mismatch"):
         _canonical(path, "phase9d_r_dataset_readonly_audit_sha256")
+
+
+def test_canonical_closure_artifacts_validate() -> None:
+    result = validate(ROOT)
+    assert result["status"] == "PASS"
+    assert result["validated_artifact_count"] == 14
+    assert result["verdict"] == "C"
+
+
+def artifact_fixture(tmp_path: Path) -> Path:
+    (tmp_path / "results/rvt_fd24").mkdir(parents=True)
+    (tmp_path / "docs").mkdir()
+    for filename, _ in FILES.values():
+        shutil.copy2(ROOT / "results/rvt_fd24" / filename, tmp_path / "results/rvt_fd24" / filename)
+    shutil.copy2(
+        ROOT / "docs/PHASE9D_R_RECOVERABILITY_DATASET_ADEQUACY_REPORT.md",
+        tmp_path / "docs/PHASE9D_R_RECOVERABILITY_DATASET_ADEQUACY_REPORT.md",
+    )
+    return tmp_path
+
+
+def test_validator_rejects_rehashed_n24_coverage_escape(tmp_path: Path) -> None:
+    root = artifact_fixture(tmp_path)
+    path = root / "results/rvt_fd24/phase9d_recoverability_coverage_cube_v1.json"
+    document = json.loads(path.read_text(encoding="ascii"))
+    document.pop("phase9d_recoverability_coverage_cube_sha256")
+    document["authorized_team_sizes"].append(24)
+    document = attach_canonical_hash(document, "phase9d_recoverability_coverage_cube_sha256")
+    path.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="ascii")
+    with pytest.raises(Phase9DRValidationError, match="coverage axes"):
+        validate(root)
+
+
+def test_validator_rejects_rehashed_training_operation_escape(tmp_path: Path) -> None:
+    root = artifact_fixture(tmp_path)
+    path = root / "results/rvt_fd24/phase9d_r_closure_v1.json"
+    document = json.loads(path.read_text(encoding="ascii"))
+    document.pop("phase9d_r_closure_sha256")
+    document["isolation"]["training_operations"] = 1
+    document = attach_canonical_hash(document, "phase9d_r_closure_sha256")
+    path.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="ascii")
+    with pytest.raises(Phase9DRValidationError, match="closure identity or isolation"):
+        validate(root)

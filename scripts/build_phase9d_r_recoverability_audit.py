@@ -530,6 +530,12 @@ def _build_h1_requirements(
         "pooled_primary_comparisons_predeclared": True,
         "anti_concentration_gate": "No one family or N may contribute more than half of the pooled gain.",
         "minimum_label_support_was_predeclared": True,
+        "supervised_training_and_evaluation_mask": {
+            "included_dispositions": ["RECOVERABLE_POSITIVE", "VALID_TASK_NEGATIVE"],
+            "excluded_dispositions": ["GENERATION_INVALID"],
+            "generation_invalid_mapped_to_label_zero": False,
+            "invalid_events_retained_as_denominator_audit_evidence": True,
+        },
         "label_audit_gates": [
             {"gate": 1, "status": "PASS", "evidence": "Both candidates have positive and negative aggregates in TRAIN and VALIDATION."},
             {
@@ -811,8 +817,10 @@ No post-hoc minimum count or percentage was introduced.
 
 - TRAIN source events: collision={invalid_totals.get(('TRAIN', 'SOURCE_TERMINATED_BEFORE_EVENT:COLLISION'), 0)}, goal-complete={invalid_totals.get(('TRAIN', 'SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE'), 0)}, initialization-invalid={invalid_totals.get(('TRAIN', 'SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID'), 0)}.
 - VALIDATION source events: collision={invalid_totals.get(('VALIDATION', 'SOURCE_TERMINATED_BEFORE_EVENT:COLLISION'), 0)}, goal-complete={invalid_totals.get(('VALIDATION', 'SOURCE_TERMINATED_BEFORE_EVENT:GOAL_COMPLETE'), 0)}, initialization-invalid={invalid_totals.get(('VALIDATION', 'SOURCE_TERMINATED_BEFORE_EVENT:INITIALIZATION_INVALID'), 0)}.
+- GENERATION_INVALID candidate aggregates: TRAIN=11,114; VALIDATION=2,760.
 - Transition/Target-V4/S3 generation-invalid events: 0/0/0.
 - Infrastructure conditions misclassified as scientific invalid: NO.
+- Only positive and valid-negative rows enter supervised BCE; GENERATION_INVALID is never mapped to label 0.
 
 ## Statistical Unit
 
@@ -830,6 +838,16 @@ No post-hoc minimum count or percentage was introduced.
 - VALIDATION rows: positive={class_balance['robot_local_row_level']['validation']['positive']}, negative={class_balance['robot_local_row_level']['validation']['negative']}.
 - Decisive TRAIN events COMPACT-only/LINE-only: 70/128.
 - Decisive VALIDATION events COMPACT-only/LINE-only: 20/46.
+
+### By Candidate Topology
+
+TRAIN:
+
+{_table(class_balance['by_dimension']['candidate_topology']['train'], 'candidate_topology')}
+
+VALIDATION:
+
+{_table(class_balance['by_dimension']['candidate_topology']['validation'], 'candidate_topology')}
 
 ## Class Weight
 
