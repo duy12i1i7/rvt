@@ -45,14 +45,18 @@ both changed artifacts are read by qualification tests that run *inside* the
 image, so under the acceptability rule the `fc95f137` image is not the final
 qualified image.
 
-**Q7. What exact commit is the FINAL image built from?** The closure commit of this phase — recorded in §5 and in the closure artifact.
+**Q7. What exact commit is the FINAL image built from?**
+`f0a923f57fd8bea6b8249fad9652fcd37c674740` — the Phase 9G-V2I-RC closure commit.
 
-**Q8. What image digest should target qualification use?** The digest recorded in
-§5 and in the closure artifact.
+**Q8. What image digest should target qualification use?**
+`sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684`.
 
-**Q9. Does the image report that exact commit?** **Yes** — verified in-image.
+**Q9. Does the image report that exact commit?** **Yes.** In-image `git rev-parse
+HEAD` returns `f0a923f5…`, matching exactly; the Dockerfile also asserts it at
+build time.
 
-**Q10. Did full in-image tests pass?** **Yes — see §8 for the exact count.**
+**Q10. Did full in-image tests pass?** **Yes — 3,427 passed, 0 failed**, identical
+to the reference host.
 
 ---
 
@@ -137,8 +141,8 @@ qualified image, and was rebuilt.
 
 | item | value |
 |---|---|
-| source commit | `PHASE_9G_V2I_RC_CLOSURE_COMMIT` |
-| image ID | `PENDING_BUILD` |
+| source commit | `f0a923f57fd8bea6b8249fad9652fcd37c674740` |
+| image ID | `sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684` |
 | architecture | linux/amd64 |
 | Dockerfile SHA256 | `59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4` |
 | base image | `python:3.9.6-slim-bullseye@sha256:4115592f…` (digest-pinned) |
@@ -152,9 +156,24 @@ preserved verbatim.
 
 ## 6. Image self-identity
 
-The in-image `git rev-parse HEAD` reports the closure commit, not an earlier one.
+```
+in-image HEAD : f0a923f57fd8bea6b8249fad9652fcd37c674740
+expected      : f0a923f57fd8bea6b8249fad9652fcd37c674740
+SOURCE_COMMIT == FINAL_QUALIFIED_COMMIT: TRUE
+```
+
 The Dockerfile's own build-time assertion (`test "$(git rev-parse HEAD)" =
-"${RVT_SOURCE_COMMIT}"`) enforces this, and it was re-verified at runtime.
+"${RVT_SOURCE_COMMIT}"`) enforces this, and it was re-verified at runtime. The
+image does not report an earlier commit.
+
+**On the residual one-commit gap.** An image digest cannot exist inside the image
+that produces it, so a provenance record naming it must land afterwards. This
+phase keeps that gap harmless rather than pretending it away: the only change
+after the closure commit is this report plus
+`phase9g_v2i_consistency_closure_v1.json`, and **no test and no runtime path
+reads either** — verified by grep, and the one guard that iterates
+`results/rvt_fd24` filters to `phase8*` files. So the image built at `f0a923f5…`
+is the final qualified image under the acceptability rule.
 
 ---
 
@@ -180,7 +199,7 @@ candidate → Target V4 → pair → V2 rows:
 |---|---|
 | focused hash-binding guards | **13 passed / 0 failed** |
 | full suite, reference host | **3,427 passed / 0 failed** |
-| full suite inside the final image | `PENDING` |
+| full suite inside the final image | **3,427 passed / 0 failed** |
 
 The 13 new guards pin `19fa68a3…` as a *literal*, so any future re-derivation
 that silently changes the scientific protocol becomes a test failure. They

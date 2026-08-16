@@ -14,7 +14,11 @@
       "source_event_identity": true
     }
   },
+  "architecture": "linux/amd64",
   "authorizes_official_generation": false,
+  "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+  "base_image_digest_pinned": true,
+  "built_from": "clean git clone at the closure commit, not a worktree",
   "canary": {
     "episodes": 3,
     "events": 12,
@@ -208,10 +212,26 @@
     "test_changes": 0,
     "why": "the two changed canonical artifacts are read by qualification tests that run inside the image, so under the acceptability rule the fc95f137 image is not the final qualified image even though it is executably equivalent"
   },
-  "final_image": null,
-  "final_image_source_commit": null,
+  "debian_snapshot": "20260220T214329Z",
+  "debian_snapshot_archives": [
+    "https://snapshot.debian.org/archive/debian/20260220T214329Z",
+    "https://snapshot.debian.org/archive/debian-security/20260220T214329Z"
+  ],
+  "dockerfile_sha256": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
+  "final_image": "sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+  "final_image_source_commit": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
   "final_scientific_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
-  "full_suite_inside_image": null,
+  "full_suite_inside_image": {
+    "failed": 0,
+    "invocation": "rvt-test -q",
+    "passed": 3427,
+    "seconds": 747.26
+  },
+  "full_suite_reference_host": {
+    "failed": 0,
+    "passed": 3427,
+    "seconds": 393.61
+  },
   "hash_role_registry": [
     {
       "class": "SCIENTIFIC",
@@ -331,16 +351,25 @@
       "where_used": "V1 row identity, unchanged"
     }
   ],
-  "image_build": "PENDING_FINAL_CLOSURE_COMMIT_BUILD",
-  "image_embedded_revision": null,
+  "image_build": "SUCCEEDED",
+  "image_embedded_revision": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
+  "image_reports_final_commit": true,
+  "installed_package_versions": {
+    "build-essential": "12.9",
+    "ca-certificates": "20230311+deb12u1~deb11u1",
+    "git": "1:2.30.2-1+deb11u5"
+  },
   "manifest_binding": {
     "both_bind_frozen_protocol": true,
     "executed": false,
     "train_source_episodes": 1200,
     "validation_source_episodes": 300
   },
+  "package_versions_changed": 0,
   "phase": "PHASE_9G_V2I_RC",
-  "phase9g_v2i_consistency_closure_sha256": "ba487a3b4a01162372059286097efdd6f0d82c56afd27b6adf7d7c2d503d8e00",
+  "phase9g_v2i_consistency_closure_sha256": "c37fa4117e9ef15321e920998c864cc96bce5915d2e511fc19c2bb7b6d251ce6",
+  "post_closure_provenance_only_commit_permitted": "the image digest cannot exist inside the image that produces it; the only repository change after the closure commit is this provenance record and report text, neither of which is read by any test or by runtime",
+  "python_version": "3.9.6",
   "row_identity_v2": {
     "binds_frozen_protocol_exactly": true,
     "binds_row_binding_contract": true,
@@ -386,6 +415,13 @@
     ],
     "schema": "rvt-recoverability-source-event-identity/v2"
   },
+  "superseded_images": [
+    {
+      "image_id": "sha256:4ce3ff6b6a7c59614a09ef2acdd676462fc1174ddd2aef6faeaa0cb34257cc5e",
+      "reason": "executably equivalent, but predates two canonical artifacts that qualification tests read inside the image",
+      "source_commit": "fc95f13714c63c65701dfba28b520a6787ed909d"
+    }
+  ],
   "target_access_method_required": "configured SSH key for the Windows account; no password is accepted, requested or recorded",
   "target_status": "TARGET_REQUALIFICATION_PENDING"
 }
