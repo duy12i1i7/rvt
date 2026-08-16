@@ -1,0 +1,391 @@
+{
+  "ambiguity_1_resolution": {
+    "answer": "the Recoverability Row Binding V2 *contract* hash -- an additive operational-provenance object that declares the V2 row field set and its owner authorization. It is NOT the source-acquisition protocol hash and never substitutes for it.",
+    "frozen_protocol_independently_bound": true,
+    "question": "what is 98f18a94...?",
+    "row_binding_embeds_frozen_protocol": true,
+    "row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+    "substitution_defect_present": false,
+    "verified_bindings": {
+      "candidate_task_event_id": true,
+      "official_manifest_train": true,
+      "official_manifest_validation": true,
+      "row_identity_v2": true,
+      "source_event_identity": true
+    }
+  },
+  "authorizes_official_generation": false,
+  "canary": {
+    "episodes": 3,
+    "events": 12,
+    "fake_generation_invalid": 0,
+    "frozen_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "identities_already_excluded": true,
+    "official_namespace_written": false,
+    "partial_publications": 0,
+    "provenance_class": "V2I_QUALIFICATION_CANARY_NON_OFFICIAL",
+    "records": [
+      {
+        "M": 10,
+        "episode_id": "v2i-canary/source_episode/study_a_zero_shot/train/F1/bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+        "events": [
+          {
+            "event_id": "e2d65418be3e4008fb976d80f6ba1cf4be3bd820e8cbd8d4c1f610b0955dcb69",
+            "expected": 10,
+            "fake_invalid": 0,
+            "realized_source_timestep": 0,
+            "rows": 10,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "94f097778b738055835cec9ad0efadef9a25785a91368cb4933d13e12c10743c",
+            "expected": 10,
+            "fake_invalid": 0,
+            "realized_source_timestep": 20,
+            "rows": 10,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "96fc06836f85dd073955e0c7108271fe57aa5c1349ece1eeb137551b7bf122be",
+            "expected": 10,
+            "fake_invalid": 0,
+            "realized_source_timestep": 40,
+            "rows": 10,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "521a5dfbb7258da05fa2eec155353cc3c767cd13a39acc11f6ff257177b0aeef",
+            "expected": 10,
+            "fake_invalid": 0,
+            "realized_source_timestep": 60,
+            "rows": 10,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "5d2982a00a0d17c0b3dcb1fdb084e2b1e7092fa48e456534cb438b55963f14a4",
+            "expected": 10,
+            "fake_invalid": 0,
+            "realized_source_timestep": 90,
+            "rows": 10,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          }
+        ],
+        "family": "F1",
+        "replicas_per_candidate": 1,
+        "selected": 5,
+        "team_size": 5
+      },
+      {
+        "M": 4,
+        "episode_id": "v2i-canary/source_episode/study_a_zero_shot/train/F3/74ccfe4ffa6d49b7ef89e87ee53833f3d20d37e7fc40b05b3658523724996570/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+        "events": [
+          {
+            "event_id": "c4dbcab5735254499e19ec9a200ef7aeeb0fab969729e7da72f188402833e1a1",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 0,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "71f5a58809cf214d12c64007b3fa0bfa585d2b35cd740853db6856f4246bed14",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 10,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "85e078592503a34116ea1db538d74449475cd4e019f92890f707ba3e83773748",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 20,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "e10966b42a026a132175d18f882447169efa5f4ea1955346d5e28cc5bb0580dc",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 30,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          }
+        ],
+        "family": "F3",
+        "replicas_per_candidate": 1,
+        "selected": 4,
+        "team_size": 8
+      },
+      {
+        "M": 3,
+        "episode_id": "v2i-canary/source_episode/study_a_zero_shot/train/F8/f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254/N8/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+        "events": [
+          {
+            "event_id": "7f2c506a357e184a78a20690cd92ce801f0f982e3eef409922f875b5becf3adc",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 0,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "3c0eb66efe0e61b9c1b84e886ae9b530e2367c4a6b6c8e639495d98c4b021253",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 10,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          },
+          {
+            "event_id": "5ec407c2831b25e0944d35b7f7cb255f465c980cd1b44d87074acdc32547cae7",
+            "expected": 16,
+            "fake_invalid": 0,
+            "realized_source_timestep": 20,
+            "rows": 16,
+            "status": "SCIENTIFICALLY_RECONCILED_LABELABLE"
+          }
+        ],
+        "family": "F8",
+        "replicas_per_candidate": 3,
+        "selected": 3,
+        "team_size": 8
+      }
+    ],
+    "row_binding_v2_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+    "rows_not_binding_frozen_protocol": 0,
+    "rows_published": 162,
+    "split": "v2i_canary",
+    "study": "study_a_v2i_canary"
+  },
+  "closed_scopes": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "official_train": 0,
+    "official_v2_rows": 0,
+    "official_validation": 0,
+    "residual": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training": 0,
+    "v1_mutations": 0
+  },
+  "commit_consistency": {
+    "canonical_artifact_changes": 2,
+    "contract_changes": 0,
+    "diff": [
+      {
+        "classification": "REPORT_ONLY",
+        "consumed_by_python_runtime": false,
+        "consumed_by_qualification_tests": false,
+        "path": "docs/PHASE9G_V2I_RECOVERABILITY_V2_PRODUCTION_IMPLEMENTATION_REPORT.md",
+        "status": "M"
+      },
+      {
+        "classification": "CANONICAL_ARTIFACT",
+        "consumed_by_python_runtime": false,
+        "consumed_by_qualification_tests": true,
+        "path": "results/rvt_fd24/phase9g_v2i_docker_reproducibility_repair_v1.json",
+        "status": "M"
+      },
+      {
+        "classification": "CANONICAL_ARTIFACT",
+        "consumed_by_python_runtime": false,
+        "consumed_by_qualification_tests": true,
+        "path": "results/rvt_fd24/phase9g_v2i_next_generation_readiness_v1.json",
+        "status": "M"
+      }
+    ],
+    "diff_file_count": 3,
+    "docker_environment_changes": 0,
+    "generation_runtime_changes": 0,
+    "phase_9g_v2i_closure_commit": "feaf4a8a4bf8ab1522a659b89f0078bd2451ec80",
+    "previous_image_executably_equivalent": true,
+    "previous_image_is_final_qualified_image": false,
+    "previous_image_source_commit": "fc95f13714c63c65701dfba28b520a6787ed909d",
+    "report_only_changes": 1,
+    "scientific_runtime_changes": 0,
+    "test_changes": 0,
+    "why": "the two changed canonical artifacts are read by qualification tests that run inside the image, so under the acceptability rule the fc95f137 image is not the final qualified image even though it is executably equivalent"
+  },
+  "final_image": null,
+  "final_image_source_commit": null,
+  "final_scientific_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "full_suite_inside_image": null,
+  "hash_role_registry": [
+    {
+      "class": "SCIENTIFIC",
+      "name": "recoverability_source_acquisition_protocol_v2_FROZEN",
+      "preimage_artifact": "results/rvt_fd24/phase9d_h1r_od_source_acquisition_protocol_v2_frozen.json#acquisition_protocol",
+      "sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "where_embedded": [
+        "V2 source-event identity preimage",
+        "Row Identity V2 preimage",
+        "V2 source manifest root",
+        "V2SourceAcquisition.protocol_sha256",
+        "row-binding V2 contract (by reference)"
+      ],
+      "where_used": "the frozen K=5 REALIZED_TRAJECTORY_UNIFORM_K acquisition contract"
+    },
+    {
+      "class": "SCIENTIFIC_HISTORICAL",
+      "name": "recoverability_source_acquisition_protocol_v2_DESIGN",
+      "preimage_artifact": "results/rvt_fd24/phase9d_h1r_source_acquisition_protocol_v2.json#acquisition_protocol",
+      "sha256": "f2ef1791f2374899250b64fe9b0de39e8c194df5d9951fa818b08bc55bacb77e",
+      "where_embedded": [
+        "frozen protocol object field design_protocol_sha256"
+      ],
+      "where_used": "the Phase 9D-H1R design object, superseded by the frozen object"
+    },
+    {
+      "class": "OPERATIONAL_PROVENANCE_ADDITIVE",
+      "name": "recoverability_row_binding_v2_spec",
+      "preimage_artifact": "rvt_swarm/phase9g0r/contracts_v2.py::recoverability_row_binding_v2_spec()",
+      "sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+      "where_embedded": [
+        "Row Identity V2 preimage (own field)",
+        "V2 source manifest root"
+      ],
+      "where_used": "declares the V2 row identity field set and its owner authorization"
+    },
+    {
+      "class": "SCIENTIFIC",
+      "name": "target_v4_execution_contract",
+      "preimage_artifact": "results/rvt_fd24/target_v4_execution_contract_v1.json",
+      "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+      "where_embedded": [
+        "Row Identity V1 preimage",
+        "Row Identity V2 preimage",
+        "V2 source manifest root"
+      ],
+      "where_used": "candidate disposition and label semantics"
+    },
+    {
+      "class": "SCIENTIFIC_AUTHORITY",
+      "name": "owner_sampling_resolution",
+      "preimage_artifact": "results/rvt_fd24/phase9d_h1r_owner_sampling_resolution_v1.json",
+      "sha256": "ae7b0bff48bbfd9eb5d6a01bd143ee9695051f06360c9b469f2d0c9399da3b05",
+      "where_embedded": [
+        "phase provenance only"
+      ],
+      "where_used": "OD-1: supersedes the 70/30 clause for Recoverability V2"
+    },
+    {
+      "class": "CANONICAL_ARTIFACT",
+      "name": "frozen_protocol_artifact",
+      "preimage_artifact": "results/rvt_fd24/phase9d_h1r_od_source_acquisition_protocol_v2_frozen.json",
+      "sha256": "4d196451de3669af098977be6269128f3dc02a2dc3eeec7a148b8b5a6b6f69d2",
+      "where_embedded": [
+        "phase provenance only"
+      ],
+      "where_used": "the committed wrapper carrying the frozen protocol object"
+    },
+    {
+      "class": "CANONICAL_ARTIFACT",
+      "name": "v2_executable_binding",
+      "preimage_artifact": "results/rvt_fd24/phase9g_v2i_recoverability_v2_executable_binding_v1.json",
+      "sha256": "147bc6cc14f9f8619dbddcb041de92f38e6a8f0d92c379c06536c56fb3ff708e",
+      "where_embedded": [
+        "phase provenance only"
+      ],
+      "where_used": "records that V2 is bound to the production executable path"
+    },
+    {
+      "class": "CANONICAL_ARTIFACT",
+      "name": "row_identity_v2_contract",
+      "preimage_artifact": "results/rvt_fd24/phase9g_v2i_recoverability_row_identity_v2_contract_v1.json",
+      "sha256": "9dcde635fa5c73b14d1bb423183bf18d9e5b49fcb7a25ab58893a5b41cc44f5a",
+      "where_embedded": [
+        "phase provenance only"
+      ],
+      "where_used": "committed record of the Row Identity V2 contract"
+    },
+    {
+      "class": "GENERATION_RUNTIME",
+      "name": "v2_source_manifest_train",
+      "preimage_artifact": "compile_recoverability_v2_source_manifest(train)",
+      "sha256": "c3f205381f8c1622102dc6a89e8254b4d0c6a6dc86491f9a5758be141f1b94e6",
+      "where_embedded": [
+        "dry-compiled only; never executed"
+      ],
+      "where_used": "future official TRAIN manifest root"
+    },
+    {
+      "class": "GENERATION_RUNTIME",
+      "name": "v2_source_manifest_validation",
+      "preimage_artifact": "compile_recoverability_v2_source_manifest(validation)",
+      "sha256": "80b133519112a06a7b735247fcf0a210047d3658a15cddc2c738d7bd864fa252",
+      "where_embedded": [
+        "dry-compiled only; never executed"
+      ],
+      "where_used": "future official VALIDATION manifest root"
+    },
+    {
+      "class": "SCIENTIFIC_HISTORICAL",
+      "name": "recoverability_row_binding_v1_spec",
+      "preimage_artifact": "results/rvt_fd24/phase9_recoverability_row_binding_v1.json",
+      "sha256": "90ebdba981997ea43176d5ab49c6ad72306445d6054b5ce742cfad3abfebb142",
+      "where_embedded": [
+        "Row Identity V1 preimage"
+      ],
+      "where_used": "V1 row identity, unchanged"
+    }
+  ],
+  "image_build": "PENDING_FINAL_CLOSURE_COMMIT_BUILD",
+  "image_embedded_revision": null,
+  "manifest_binding": {
+    "both_bind_frozen_protocol": true,
+    "executed": false,
+    "train_source_episodes": 1200,
+    "validation_source_episodes": 300
+  },
+  "phase": "PHASE_9G_V2I_RC",
+  "phase9g_v2i_consistency_closure_sha256": "ba487a3b4a01162372059286097efdd6f0d82c56afd27b6adf7d7c2d503d8e00",
+  "row_identity_v2": {
+    "binds_frozen_protocol_exactly": true,
+    "binds_row_binding_contract": true,
+    "binds_target_v4": true,
+    "example_preimage": "{\"candidate_topology_id\":5,\"episode_id\":\"rvt-generation-job-identity/v1/source_episode/example/episode-0\",\"family\":\"F3\",\"graph_fingerprint\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"layout_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"realized_source_timestep\":60,\"recoverability_row_binding_v2_spec_sha256\":\"98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8\",\"robot_id\":2,\"schema\":\"rvt-recoverability-row-identity/v2\",\"source_acquisition_protocol_sha256\":\"19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d\",\"split\":\"train\",\"study\":\"study_a_zero_shot\",\"target_v4_contract_sha256\":\"54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee\",\"team_size\":8}",
+    "example_row_id": "ccd8a64c5ef247f429a446b8e9bd80ca8262d32760113d944ae12e247591b447",
+    "fields": [
+      "schema",
+      "study",
+      "split",
+      "family",
+      "layout_sha256",
+      "team_size",
+      "episode_id",
+      "realized_source_timestep",
+      "robot_id",
+      "candidate_topology_id",
+      "graph_fingerprint",
+      "target_v4_contract_sha256",
+      "source_acquisition_protocol_sha256",
+      "recoverability_row_binding_v2_spec_sha256"
+    ],
+    "operational_fields_excluded": true,
+    "schema": "rvt-recoverability-row-identity/v2"
+  },
+  "schema_version": "rvt-phase9g-v2i-consistency-closure/v1",
+  "science_reopened": false,
+  "source_event_identity": {
+    "binds_frozen_protocol_exactly": true,
+    "example_event_id": "8cb5518f05f1e88ad8fa946720d471e01c2f534d60d6ec1dce950b530c5bc95a",
+    "example_preimage": "{\"episode_id\":\"rvt-generation-job-identity/v1/source_episode/example/episode-0\",\"family\":\"F3\",\"layout_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"realized_source_timestep\":60,\"schema_version\":\"rvt-recoverability-source-event-identity/v2\",\"source_acquisition_protocol_sha256\":\"19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d\",\"source_state_fingerprint\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"split\":\"train\",\"study\":\"study_a_zero_shot\",\"team_size\":8}",
+    "fields": [
+      "schema_version",
+      "study",
+      "split",
+      "family",
+      "layout_sha256",
+      "team_size",
+      "episode_id",
+      "realized_source_timestep",
+      "source_state_fingerprint",
+      "source_acquisition_protocol_sha256"
+    ],
+    "schema": "rvt-recoverability-source-event-identity/v2"
+  },
+  "target_access_method_required": "configured SSH key for the Windows account; no password is accepted, requested or recorded",
+  "target_status": "TARGET_REQUALIFICATION_PENDING"
+}
