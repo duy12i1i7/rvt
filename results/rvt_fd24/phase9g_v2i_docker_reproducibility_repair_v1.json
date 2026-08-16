@@ -44,22 +44,35 @@
       "PYTHONPATH": "/opt/rvt",
       "RVT_FD24_NUMERICAL_EXECUTION_PROFILE": "FD24_NUMERICAL_EXECUTION_PROFILE_V1"
     },
-    "image_id": "sha256:da5b98b6fba7b103f5d9ae099e984b40f1b8a9074c88a0142a5529c52c1ead50",
+    "full_suite_inside_image": {
+      "failed": 0,
+      "invocation": "rvt-test -q",
+      "passed": 3414,
+      "seconds": 740.34
+    },
+    "image_id": "sha256:4ce3ff6b6a7c59614a09ef2acdd676462fc1174ddd2aef6faeaa0cb34257cc5e",
     "installed_package_versions": {
       "build-essential": "12.9",
       "ca-certificates": "20230311+deb12u1~deb11u1",
       "git": "1:2.30.2-1+deb11u5"
     },
     "installed_pins_match_frozen_pins": true,
+    "note": "the only repository change after this commit is documentation and provenance text; no code, test or contract changed",
     "numpy_version": "2.0.2",
     "python_version": "3.9.6",
-    "revision_label": "9c738b75c0975c06ec7648abb15984a4f34d84e0",
+    "qualified_at_commit": "fc95f13714c63c65701dfba28b520a6787ed909d",
+    "revision_label": "fc95f13714c63c65701dfba28b520a6787ed909d",
+    "superseded_build": {
+      "image_id": "sha256:da5b98b6fba7b103f5d9ae099e984b40f1b8a9074c88a0142a5529c52c1ead50",
+      "reason": "built before the a1v sys.executable test fix",
+      "revision": "9c738b75c0975c06ec7648abb15984a4f34d84e0"
+    },
     "torch_version": "2.8.0+cpu"
   },
   "image_build": "SUCCEEDED",
   "immutable_references_only": true,
   "owner_clause": "I25",
-  "phase9g_v2i_docker_reproducibility_repair_sha256": "28f214c5d5380d7f741283b27498a31c4a26dfa8c3d934c73bb341f62fefaffe",
+  "phase9g_v2i_docker_reproducibility_repair_sha256": "c204856398307f01a98d29fc9e518f655545cd7a8801e2d5b790bf56c956adfa",
   "problem": {
     "cause": "the Dockerfile pinned exact apt versions against the mutable Debian bullseye suites, which roll forward; bullseye-security now serves 20250419~deb12u1~deb11u1",
     "classification": "OPERATIONAL_REPRODUCIBILITY_DEFECT",

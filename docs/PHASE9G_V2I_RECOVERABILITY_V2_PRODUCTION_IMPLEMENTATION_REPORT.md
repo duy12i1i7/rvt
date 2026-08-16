@@ -16,10 +16,11 @@ access, so remote requalification remains **TARGET_REQUALIFICATION_PENDING**.
 |---|---|
 | start commit | `92ff458772ec0654b88f5985e1ca70bf81c66602` — verified, clean |
 | implementation commit | `9c738b75c0975c06ec7648abb15984a4f34d84e0` |
+| qualified-image commit | `fc95f13714c63c65701dfba28b520a6787ed909d` |
 | branch | `research/rvt-phase9g-v2i-production-implementation-v1` |
 | V2 protocol SHA256 | `19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d` |
 | Row Binding V2 SHA256 | `98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8` |
-| production image | `sha256:da5b98b6fba7b103f5d9ae099e984b40f1b8a9074c88a0142a5529c52c1ead50` |
+| production image | `sha256:4ce3ff6b6a7c59614a09ef2acdd676462fc1174ddd2aef6faeaa0cb34257cc5e` |
 
 All four handoff authority hashes were re-verified from the artifacts before any
 code was written.
@@ -233,10 +234,13 @@ never run in the canonical environment. It was introduced by commit `6ce4a37`,
 not by this phase, and is fixed by using `sys.executable`; nothing it asserts
 changed.
 
-**Image**: `sha256:da5b98b6fba7b103f5d9ae099e984b40f1b8a9074c88a0142a5529c52c1ead50`,
-`linux/amd64`, revision label `9c738b75…`, Python 3.9.6, numpy 2.0.2,
+**Image**: `sha256:4ce3ff6b6a7c59614a09ef2acdd676462fc1174ddd2aef6faeaa0cb34257cc5e`,
+`linux/amd64`, revision label `fc95f137…`, Python 3.9.6, numpy 2.0.2,
 torch 2.8.0+cpu, with `PYTHONPATH=/opt/rvt`, `PYTHONHASHSEED=0` and all numeric
-thread caps set.
+thread caps set. An earlier build at `9c738b75…`
+(`sha256:da5b98b6…`) is superseded: it predates the a1v `sys.executable` fix. The
+only repository change after the qualified-image commit is this document and the
+provenance text recording it — no code, test or contract differs.
 
 ---
 
