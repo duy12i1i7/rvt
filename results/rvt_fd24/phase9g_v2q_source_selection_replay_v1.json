@@ -1,0 +1,2445 @@
+{
+  "K": 5,
+  "acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "all_q8_invariants_pass": true,
+  "episodes": 50,
+  "fabricated_states": 0,
+  "families": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10"
+  ],
+  "m_zero_episodes": 1,
+  "per_episode": [
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F1/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F1",
+      "layout_sha256": "78e2d0ef31ec57fb0d34127cd7ee61b578ae0de40f774e9a526ba6eb2205c013",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "f920fbd4daacd58f73c0f54acc1e89d721922635f0095f4fdc708f79bca6b1c3",
+        "f5289928e417015c256045af619d3e399cdc2f42cfe8dd01a00dba9e7dd6512d",
+        "d1a62a0a1c1d850116fcc042984471af362db5a7e24ba9f43a9e8049c33a3e79",
+        "c36a8d1044ef95de9dbb5a7c83fc413cb20ccea21f710dc13d3b280ee00d293a",
+        "363f434ca5d5531074e1af7cfffc1d3e8f5beb5e560b2a7d4ca233d627e53dbf"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "7b78083bb0ab4c2f333cb4c9e078b0a9738915ccac582ce3df95e7fc36bb3752",
+        "4c50c5977773f02e4f63806cec68a2f294941f42c78d1efd36ed4ee178beb673",
+        "e2023a211224104d226f3bd3a6a37bc7f9b2e18ffb698a25d413b11aa7699c9a",
+        "5348afde73365ce6d288d749a901310ff932cef0be43da82911677044e986e2d",
+        "c8ccd9711354ca1af752ed62ef273534ff1a6341d05395b96c6e9871643bef30"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 5,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F1/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F1",
+      "layout_sha256": "78e2d0ef31ec57fb0d34127cd7ee61b578ae0de40f774e9a526ba6eb2205c013",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "66ee8c72d6e80348421ee4394c05f89e1e4fe11d971a67f6abeb5568519077dd",
+        "e532cbfee196a0f817952f5b0772a3ec4498b3a31595a4689d8f592dda8f90b4",
+        "f8bfe8f7c74041606912f98bf7c5c1ffbbc1f1d069dd28e54732656abfeb5a63",
+        "e75af97602a1fee35f960d5886e793005de0ab7f7ca9acc4d65d08d4efb73b3e",
+        "530c6ae0e054b24733c39c76cab98bd5553f5ea597f955f574b27052a35d21d1"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "179f4b78fd40bda6c1df1055b8142d56ed25e46018bdd84b51379642cd172290",
+        "94c558b523dbdd26e6901ab3dce085b0a298453c05c617fe5673a423398ffa28",
+        "da12e428f908dd5449869514f2bb3255c64b471fd85f2037140e02edd21a45d1",
+        "0bd4b7b73d28abff8d6dc3ad24b88546b10db08af45afc555dda2133453b6e70",
+        "523dc12825fb399c232fe80b63741e25f60513f4012772a708adf986063867f4"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 6,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F1/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F1",
+      "layout_sha256": "78e2d0ef31ec57fb0d34127cd7ee61b578ae0de40f774e9a526ba6eb2205c013",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "b8d1b870615f179a0c153a760ffb131965627fb2d1055cad62f719de74961a4a",
+        "aa671d6f2139c3bb88e6d6b711d92a111496873948d54b4611f1b0718df27dc6",
+        "d5e4a7908812c177206fe4e43aa0cc0ca4fe8105cb07e2cb597c2e736692409f",
+        "03706fe64d66ade7269d165af74ba30574ba8c770e0dd6bedddaa49a648a5d1b",
+        "23ab57390dc8c982f9b7d9cd40c08a0705df4fd10ae3bd1c4650c6c20246339b"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "9d109605d0d596b390c6bdae6af201f0bd6fc58deb1775939cda8a4cd709fffe",
+        "0f44c0e4ae4ecd0d50a56ed2e43545a5624c97cd4c2c8feb6331d46f3da68ef1",
+        "cbdee5b1964b4c404881a02f191d5da17d710e894368145677ed0b7e17053d0a",
+        "c5afadd46247a921c8c8a494a6eaec5747db2ca27d25b82d1ad010f2a108bc99",
+        "4bc8e8aa3130bcc688f5f3e34c323370439b08677703c4ff793cde56259a090a"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 8,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F1/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F1",
+      "layout_sha256": "78e2d0ef31ec57fb0d34127cd7ee61b578ae0de40f774e9a526ba6eb2205c013",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "031bf9e0a743dd2b53099dd32c66d56229afffe73d683eaf58660bbf9749f53c",
+        "4f01c580ba3f35294b90d6b2847c91b90b9a98730aa3fe274b90e6372e272b62",
+        "36bbc56e9fe6ea09858461ad65544f03fc46bb773cfc4da826f34653358d3307",
+        "5c63cc754e88b2f27d30779fdaa2b251441b74b9a85eece9f92aac9e09b5065d",
+        "cd2fa211fb774c7021f62386d3dd7e8bd5bf3764d28d3652dc00a7a4b9a71015"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "2e7b75bc80752a540b06f177b59d57ed516ad2153d0f700a4650011663eed5f6",
+        "3271f900757ec904b13b6b7187b05c5ec2c66ae85e11325e98b45616e4c23a52",
+        "7e845947dd5fdfd287badee95e11caa7ebbf04e18172ba37b52627586f39b8b3",
+        "25e617f500922af2ba0762f8493909cd8adc57d019fccdc153b199a4b168d304",
+        "deb1c65b29cf1c38c01c14fcf2530bc2d0cefac22c53ca670b3a4e381b9e854e"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 12,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F1/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F1",
+      "layout_sha256": "78e2d0ef31ec57fb0d34127cd7ee61b578ae0de40f774e9a526ba6eb2205c013",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "182015b791c563cfc4f15f5aafb561e352d91633b0ec2f51565b904fa1664132",
+        "d3ef0433a83743ec886166d503030ce6995d48faddcae9616ef194367b4ad842",
+        "43b46b5dce4ad96cf9d9d98d1f6acfeb9e15c0ba012a57c63a2273b0487085bf",
+        "6bc964fb967db5be0c57f7dbc0d9587234db141c35c71f1d5549b6c1bb886084",
+        "bc0f15631938f79ea60b86baa103feed692b2ddcd2c09a2603f32531311be88d"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "e325a4bd3b0604832ccd70bde32370fa13d45a3b633a0bfebb8cc1c6ff5de87e",
+        "14cd1ba2337189abefb92f270b72aec0a2a17fe5b14b3749c8b28a2588decab0",
+        "d56794d9d7b14c7a8200cf60cd698767942703f0f3bbcdd375a8b0b64481c7e8",
+        "6fc87e9d3f31b3faa94c5c5f6465ccfdaa0db21a1780e5be9e88de036ab74e18",
+        "6fa8e7868bb0b23b5690167c49409765c804b99a9f200f736ca8b90d4828e145"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 16,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F10/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F10",
+      "layout_sha256": "46879449f3034613774937e5643d2a7c5137f0f2d6415edd8aa68ed81b0972dc",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "0a62b486846afd13b78e07b30bfb4f1ff08b26bd5a315df2e0dc6aa82c17838e",
+        "305d5b1ccc2953ab95c9a2496508a1788b1dfc41b45c64fe509ea9f8fa215e53",
+        "af665a11bfbf556a01f35f0b674248266a33d248e5df5bd1b74e4ea86bc8fa04"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "b985ecc88139acc06d50ce8eb17f866f9ed03e94793ca3e063d81cf51f2a371b",
+        "71fdac2c0c5d45d280dea2c3962460258e706c5822b7e97b6a62cf72ac47e1d7",
+        "4b10e722f06d6156e08139c47ebece04da055d98d6839b3b1994fbfddce55847"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 29
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F10/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F10",
+      "layout_sha256": "46879449f3034613774937e5643d2a7c5137f0f2d6415edd8aa68ed81b0972dc",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "7f2cea63288e7868eeb47864a9dcbfece6f3fedf194fb40aebcd20bd47cad594",
+        "1cfa41ce1e73c2c66febee833d69f871e1f26e14654e7a4edb91a8ee2e3f19ca",
+        "7b00d4426e54692cf5c094a7e499478bf1cbac25c7d89190d2257fcbe6dcb4e4",
+        "8ab9f84d70776ae90c86c5e0baa01e8b2c47a4c35bb360b96c8b6414e250db5d"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "74ce2ed2baa234ad3fe18111685bd2402ec3d9e231969f8b05e73f8ae806508a",
+        "9879375f1f0d1f13ba0e602648164924ca6820fbe677e3686cee87db756394f7",
+        "4cf1f07bc933650113bde4311b16aa236e9d11fe90cc2e925c892191b0de5826",
+        "fc378eec6b1eeea0cd7b15960fcf79678329856a7ba77d815a508d9aa3e3e5a5"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 6,
+      "terminal_control_step": 31
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F10/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F10",
+      "layout_sha256": "46879449f3034613774937e5643d2a7c5137f0f2d6415edd8aa68ed81b0972dc",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "af8808d8c23ca18650e72f5c6de379deb793e41e4d0ebb95329d10b045dd7bf3",
+        "c6a3a3f2b0c88bca86678ccd6760f4723cb03ef7eb28c3fae81ec1f508db138a",
+        "5a62221d08b2744b05463db06f0e4bf63bfba02b9aed75c8f89910f69e4d6469"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "3673745283027ff235e8472e1a16dd9edd5b95e21d3fc29f36bc0f7955926df0",
+        "37b7272f800c238f4a6b8327fdf759a2b6cd1031009b02b4caf9135614faba53",
+        "b4df24d3f6ed1b36c3b36f0de23af7787cf833a1cdd9ea1bd822de7d9a68f2ae"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 8,
+      "terminal_control_step": 28
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F10/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F10",
+      "layout_sha256": "46879449f3034613774937e5643d2a7c5137f0f2d6415edd8aa68ed81b0972dc",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "8aa872941829daa7cd124a727a6fceca34d5d7697aefe896afb46107c2421218",
+        "5e074084b88203e8f6506c4e64cdc13c8028d4e37970351d9dbfbfaf7656399c",
+        "e64f613946208ed8ae7aed1de27ba0f5c0cc5a952f4f425bc5f49445d445e633"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "86bfd03e1d478361ec500c5a1263b991db74da38da56160ddeb4783ecea55399",
+        "79fadb547c53f325627301a3dc192bc47330a2e74f00492c6010478263c4ee37",
+        "04f353eb758ee14a32d2dab954e1c31ad8088f163f051cda3eb5864df3476cfc"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 12,
+      "terminal_control_step": 21
+    },
+    {
+      "M": 2,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F10/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F10",
+      "layout_sha256": "46879449f3034613774937e5643d2a7c5137f0f2d6415edd8aa68ed81b0972dc",
+      "selected_count": 2,
+      "selected_event_ids": [
+        "d1af4b1f6a57885d89df40ead06585ea5bce76b565e195b2f037eaef37afc043",
+        "3a48be2cc7cd747c429148e27c76b36430254411228381464f0aa9fb5d380bd4"
+      ],
+      "selected_indices": [
+        0,
+        1
+      ],
+      "selected_state_fingerprints": [
+        "4fc0ee1468964cbd68349902b4df4ad075f26d6cf1741f7be6f9479671ce28e5",
+        "42901a25bf6f70b23578ab9937c0e019fa53f464837b01158939f2001fd4b970"
+      ],
+      "selected_timesteps": [
+        0,
+        10
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 16,
+      "terminal_control_step": 14
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F2/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F2",
+      "layout_sha256": "9ef6b7aabd516582b86a51c6addc088e322382616b3437d4ef4ac05f81141d81",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "2dd2d781a024de11242ddf2f1e9079abfa9bc60b856da202fe0eb7ff14965e83",
+        "7986f53ec67d6a20695b538bdd01333fc3a2fcf9576370c7005e028847e7c8a7",
+        "04d07d921ba51070e79c230e63cf5a5cb919abb7ab925f7f38462fc8db678fca",
+        "9391cc80e0eb705a2a8571013aef7c6c08445c50acd2b755226e6f996d6f5e70"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "cfb2c4a84def658931016f09b876cb9cd21878c9032a1e0102ee5d065823db37",
+        "710ad77e67a22907de5873b921e344eda02f61686ac0ad642d32ba46e3aa8e21",
+        "f77a2c740889ec4164d7e4a205d29155b3a7dbad901410aae876cdfb85360971",
+        "3ffc99aeda397ab9fd5e878301f7aad5c8f41fc83673e1164a1c19e86c109f10"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 36
+    },
+    {
+      "M": 5,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F2/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F2",
+      "layout_sha256": "9ef6b7aabd516582b86a51c6addc088e322382616b3437d4ef4ac05f81141d81",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "c1c7f30ee322370e056e2312aa090d8d4027af00b99c424489e49deeff5d9f61",
+        "0435c043dbe9e4fbc4a012d51dc537e51751e9ad7462483f353b8ce86756293e",
+        "e3b02a03b26ee6c690476cb95aa4ae895c5d2c3aee9c176639aa0daa0a9a3d78",
+        "e847d7c3391fb30a2aa629cadb1a413b8b457e068e5989989a07e9ad8e14ef5c",
+        "fb79ab53387c4a29caebc3aa284cec396a99e69ee9f098afb018774a7427259f"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_state_fingerprints": [
+        "83d4825718655f64907b190537e1cd5398367c7f57e0df4625e701e07e060864",
+        "11a97c381707064d6c166e81db2f3b69881eb26109c59aa7135fb0816bc30bd3",
+        "0f2d020f2a21a6e9203fca7caf245bd06159b5cab53f8c117d1b53807298b8e7",
+        "b98ccc1063c0cd447726c2431b3ec1fd628367f495c250ceb371a5d8038ddcd4",
+        "5db54b7c2fff6f45804e4c1b2b2e54cf02a0095e2ded40c72fe1b2d5ec788ef1"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 6,
+      "terminal_control_step": 45
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F2/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F2",
+      "layout_sha256": "9ef6b7aabd516582b86a51c6addc088e322382616b3437d4ef4ac05f81141d81",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "7f005f080cb4e7131f7e61216cec4eeea11f1a5a61cefda57f8e5de4e6b5a375",
+        "6bce6467858b5b3c791afa6902f1b35f528bc95abbd9ca2f525071b816200d26",
+        "acfb64e7c70adee14b72144eed5a026985ff4d562b92d0a273919c8f467df62c"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "45a892f6787e9205423ed93bd1e8e039d3ea1404965a14e79ed017778c3937ac",
+        "11cb6d7fce527b2afc732b818ef122d53ba63a9330551a19862b237b294d6afb",
+        "ec1377d6d570e0cb817202881aa02aa33f8a0ed19239a06f2daff2d2b89b4a4a"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 8,
+      "terminal_control_step": 28
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F2/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F2",
+      "layout_sha256": "9ef6b7aabd516582b86a51c6addc088e322382616b3437d4ef4ac05f81141d81",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "7c889ee4ad1ecabee28416e4c6c652a462d110f616882fba7484327a19b6b503",
+        "183a2a476a6f36e01408c599b47a1349c5fe357e0edca8167a44d13a7f3705c6",
+        "a258ecb1e78d5bf49b760cd4fb578bbab621b8f7895f0eeec03e94421c3fbe0d",
+        "33583f9c9539d29eab649faabf6aca5ce3ee94e35cb87e434716f510788de1bb",
+        "1934a739ec227a77035912f89433827d6df2df0c77fcb6f49e6f61433f88e32f"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "15acbdcefffa0a35ff43b31b5e085067960f8474633d096c82bfb5d1c1eb5cb7",
+        "e6407f7ec3256e0f51eebca7160236c485e04ee2b27f627e87784c606b058f74",
+        "6f26669ca622afad9c7ed25266f95fb758885361ade1c0840fa35ff73f93ae39",
+        "2279a775ef1ce0f96038f8bf9eb13f136ae3d50e351c409e4924007fd1aad187",
+        "c8cad910c4a55d0aa01c48809f4e4f02e0fde736d848e88dd03356ca1a37cb7e"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 12,
+      "terminal_control_step": 95
+    },
+    {
+      "M": 7,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F2/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F2",
+      "layout_sha256": "9ef6b7aabd516582b86a51c6addc088e322382616b3437d4ef4ac05f81141d81",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "818973c0ecc78db02222e19848c347f9ee8ba3820bc0e21f76eeaf230ffd6f27",
+        "7da0861b06f59f6dac5d89b2c80b1beca71ff0391b97c67c5ee86e2e2944a9f4",
+        "9466c41733003ae2d538ae5fcefe0c36f68290d6a08c56fc812e1f9e47416371",
+        "5594ec9cb3e28b247f2b366f522f1c5204fa0e739e1aa6da099b8dc5156c84c4",
+        "1e37dca23d85eb4e6287f0698ffe3fb3bb2dbe8ba718cdf395e69d64d4c91d6a"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ],
+      "selected_state_fingerprints": [
+        "58fff54d6a5be56c994947c62b81c61df0daf81a43a814fc16099a18fb4b2507",
+        "59d57d75967ae30d6c5974ac9ece4d9cbc0c16415fd219108606416c166747c3",
+        "a5bf47dcb202d4aa78dd9cfc618f23153a57a4826a87c02a0fcfbbfe94df90d6",
+        "79e0d2522bbd822fca641307052ade9767add95abed3690119ded60d504792fa",
+        "35cf6b65b823517dbb79325555f3aa2532eddabf26763a1346a05cacf4f02f09"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        30,
+        40,
+        60
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 16,
+      "terminal_control_step": 62
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F3/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F3",
+      "layout_sha256": "0802448d316a5c16462788708407b8ab263a871020b019b03507cd0f4c353834",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "f2a47b37a34443a348a5f95536da667cf0ba449a746557f98c1b8ed3df112bf8",
+        "8c052a5fd9f04185472b879712c3791836278b815b3a15b10653c4d5bf6d4124",
+        "0016f47cab80f5648f20143c139767be32df5bd547baa7f15dcde28219f5692b"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "69f0bf6a48b942b4d2577ba26a8bd1371df050eb55a6cad14c40f40f8663eafb",
+        "975d4fabb5ff825594949dc88c099e0563035095cda14db720b4a60145bf44ff",
+        "8c6aa04aed4e258f4f06d48ac615ad9df3a8780f7bc8a71f570fd44db02a134d"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 25
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F3/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F3",
+      "layout_sha256": "0802448d316a5c16462788708407b8ab263a871020b019b03507cd0f4c353834",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "589147be0923d4dbacc0c5a726d88ef4ae525c90bc9644789ccca73f525548f7",
+        "7956008da45269700cd4b4c9d90054ad90eb425e409868f01c2017faf3bc53bf",
+        "5991a73127e5e787af77a14f542fc23c5508851a9bf83c3cd03587da1ffd00e9"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "92daaf607d768a366329bc147d07862943a2ad3bb9bd8f185a3d8cfcb33024f0",
+        "6fbbef9a2ea8668afd02dc7ec2fc2309d173cfdceafb8cc684ab2bcb4baacc3c",
+        "366d2564be77c36b3782167f5cc16676e3b200c5ec8eb3e87a5fc3807023cfa3"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 6,
+      "terminal_control_step": 27
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F3/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F3",
+      "layout_sha256": "0802448d316a5c16462788708407b8ab263a871020b019b03507cd0f4c353834",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "a9cbc5bfe5a86a8cb0d69dc0550c69f81e728dc7bcdc4c4e8b7efc024dbaa9c6",
+        "abea9359c6911fec58ede156345887a5d5154658e7b8ec3f7989f42be68a380c",
+        "65ee2d9ea0f62a66cfc61bea1fc29227bd2edfde6ffc0d552ef08be8977949c4",
+        "9ad9f03252cd8614669991d2eae875696fea2475c8db3244536f52a6d04ebd41"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "e2d10b9ca9dd071c84192145da1a851de9a0691694e39360a17f840aa14638b5",
+        "f86b81e78e5ffbb3443b13c5f2e126d788f32cb3515ccbccc7703abfd5999560",
+        "8c8d149c9f6ea1ebb6eece8987c2e9ca044123ca0c40a622e3e418fd4126abd4",
+        "4041a9729117dc3d16e286eac9bc5ba890860478ad474728a07f496a7573f693"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 8,
+      "terminal_control_step": 31
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F3/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F3",
+      "layout_sha256": "0802448d316a5c16462788708407b8ab263a871020b019b03507cd0f4c353834",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "cf3af87f3800c0263709c1177b2c03ef5f114c4dfcfd887058f79e42253fe813",
+        "57eefa8964786d67ff57fbca2a2ed6f4f362e76e256b1c7b54e6fbab5832a1a9",
+        "d669cfc72df935bfc42b309abfa05ce3ea4974939e7afa1adf85bc145c067831"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "3a5a7482afd19a479d3dcdc6ad94a37d956b817cab0e5b31446e98816d343c1a",
+        "24888f1b965b998fcd300ede1e2bd0d4bb4790fea4a1a9ad109767fefc02eaff",
+        "f23b728cc5b524ae7f0a05c544486720c4b9c94feaf6895fad3ccdc2854c3f67"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 12,
+      "terminal_control_step": 23
+    },
+    {
+      "M": 1,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F3/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F3",
+      "layout_sha256": "0802448d316a5c16462788708407b8ab263a871020b019b03507cd0f4c353834",
+      "selected_count": 1,
+      "selected_event_ids": [
+        "10bfe1421917eef11088258d1116cfc7f672c4e49f7b8657af730a128105846b"
+      ],
+      "selected_indices": [
+        0
+      ],
+      "selected_state_fingerprints": [
+        "b15c18f83ee808d537c9dbc41299d77326d4640ce0ff63c4b7011d92da33f94b"
+      ],
+      "selected_timesteps": [
+        0
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 16,
+      "terminal_control_step": 7
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F4/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F4",
+      "layout_sha256": "2772243980ed1d75734987ae9fa7284bc15df0b25a7f831979c9d30698788da8",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "08abea7bbee26e6391ad59e6ccb3da0a5336751cb9fa9b2b5a35749a6af3d3b6",
+        "d6ece18c0278d5dfb26ab7e67987a74174e1f33362f71e0eaea4239825973fe3",
+        "2aa2538202f7537e0660976400c71007d32b2242f4b5582ce728eeff94efbcd4",
+        "047f4af1a2726d5b62b04dcdc995d5ab7b0ed64778931e6dce803c3bedd07999"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "a6deecfa02f6e6e756cd81afdd4389e4930c94a254543fccbdf1ec4d5f0d0ddd",
+        "bf29fcf9c0782cfdcb0d245f40a93194ff004ad8b235940bf160c2398ee0abc0",
+        "536b60ffad7240c052efedf77f85be37d32eb612f37ecb079c366cef4de44cc0",
+        "6d1a127358faed26d54ec602454650e09458c3297b94efec05d9f8f8d9c97029"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 30
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F4/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F4",
+      "layout_sha256": "2772243980ed1d75734987ae9fa7284bc15df0b25a7f831979c9d30698788da8",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "00dad8677ee129659a968480bfe1598eef9914fa76dcac087a738e24f433723b",
+        "091cd6ba00cfbb6898ac95d14643c22aa826da129e8fd7377c101d4478001ebd",
+        "2b9bfd4ec948165ee056bd5c3a18877b351facb0edd2eaabcc28fbe03a86fb0b"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "bb2282f9935042f615dfa9a8b0a1db7b209952f5677416fa51cb1a16bbc71c22",
+        "56cf431acc1faf04a5758a82254f8b22e47fd3c632809c4e46604cd34d5577bc",
+        "bb7d17e048278c39d2fb9cfc8af446707875b75d409318424f5513f423184cec"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 6,
+      "terminal_control_step": 27
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F4/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F4",
+      "layout_sha256": "2772243980ed1d75734987ae9fa7284bc15df0b25a7f831979c9d30698788da8",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "9fe047bc08dad7b3374f9f2de6fa2b30fb7700dcd4fa59c1c4534f3bb1b1e7bf",
+        "d222cab1084678815c1386c411fc7ccd310c1ee37e1cb082c8540818675db49c",
+        "a62fc45b911ccb090c784e03d9dffa5fa4f22657811b15428eccf68f02a5cfaf"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "30e3da6c27549dee3768ff98164eb105e2e7700110d34a2697166f4e170312f8",
+        "6b5680a0aa4b71a8626e8deb662ef9da3e6bf8c84bb26e05c7389c5ac0beecca",
+        "1befa7b7e5db6821cf805f46ca2da3eb6e23e3f64f3c0a53e705ed637e70445b"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 8,
+      "terminal_control_step": 25
+    },
+    {
+      "M": 2,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F4/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F4",
+      "layout_sha256": "2772243980ed1d75734987ae9fa7284bc15df0b25a7f831979c9d30698788da8",
+      "selected_count": 2,
+      "selected_event_ids": [
+        "397cf01e82ae19d22261a26fc9370aa65e39c16ff144949790e17080f2e0f3de",
+        "1d34fafb867bb5b46c7fed2646049e828fd9ea1449c5fea7b335016fdc184e17"
+      ],
+      "selected_indices": [
+        0,
+        1
+      ],
+      "selected_state_fingerprints": [
+        "5a929a801f4479868ad9ef4c1d214d01316759fb1c33be555a2f88cafd713e36",
+        "11c4458201184fcd76d85c388d088371fa2e1fd0ff243cd5afffb5f05bde087f"
+      ],
+      "selected_timesteps": [
+        0,
+        10
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 12,
+      "terminal_control_step": 16
+    },
+    {
+      "M": 0,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F4/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F4",
+      "layout_sha256": "2772243980ed1d75734987ae9fa7284bc15df0b25a7f831979c9d30698788da8",
+      "selected_count": 0,
+      "selected_event_ids": [],
+      "selected_indices": [],
+      "selected_state_fingerprints": [],
+      "selected_timesteps": [],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "INITIALIZATION_INVALID",
+      "team_size": 16,
+      "terminal_control_step": 0
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F5/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F5",
+      "layout_sha256": "a86998716f4d6e6c366ad5762489430dbe748d68b496f7ba552819f994271a15",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "27dde988c1264f9fb179030cd831e540ce513d34013439a8026db6cd18a5b025",
+        "1218e8708a5ee03b8603606726e63042bebfad964dd341caec88daefab1999bd",
+        "81d9a41b798f218353881daed8ee374819ef487123efeeb92bbec45a8e2266f0"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "63074dd2b40fe57c91580adebc1b31d2f7e219bb976470ea1b0380603ba3bbb5",
+        "2cbe4069f193e065f7ea968b7de9827cc4f94e91360c1209e10e7f2f827145a6",
+        "a6d2130ddbd146a818146e7036d4ef16034d122485bf59bd78d75c0f5de86660"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 20
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F5/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F5",
+      "layout_sha256": "a86998716f4d6e6c366ad5762489430dbe748d68b496f7ba552819f994271a15",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "13409459dd14628640bd029852ba07abff0f6daaa1b7a28278b8427cfe69705d",
+        "0722260859ecfe0c05763943276fa9b4d29f606c979691d0c4a0bf4681626616",
+        "1bd0087382d46b787d588b8c19ae6340f61c384e268ded3075ad290b387657ea",
+        "21118940f7135aba354e8eb66173e5909992f23a79041116016f63f63859e0ce",
+        "b507bac09b52282b46eb167bbbea256badd59e323bd11ea129dd4598500df036"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "61593fed7dbc5eb148dacbc5ea46d9b9b47b948b6dfc86ba38ab0297a6d90196",
+        "fe3006a3be8e22f49d514349e480f5c12df4d1bd590da64b1418781b111eb156",
+        "bd769c8aef772ab9a9f14c043678fd7b0bf96165d2e634f87568f0f5285a0a87",
+        "15e858455900c87aace684bf9b18523e1f0bef931152a908126efcf248c6abcb",
+        "97baf3f919c7706a891bb2c9291159f077dad8d99495d43d8c4aaaf34e7b92a5"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 6,
+      "terminal_control_step": 95
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F5/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F5",
+      "layout_sha256": "a86998716f4d6e6c366ad5762489430dbe748d68b496f7ba552819f994271a15",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "bde63f397ec9cda59bd7ada1b6c15b09676422f9080416b2899732b2c7006d5e",
+        "576b31f49957a8abef4f12b8eecbf2108d14ada45849bf50d572a2db7e4dcaac",
+        "5ed7e01d542b9c3e5a54d369277cc3180b1d03abe281ad6780d31f792022a39a",
+        "23525b09780c6fa5d4057bf4bd60abf5c58773caaf56cdc7efd4f16c23efcbc3",
+        "a891e1072e7eb7434c5f5cf4eca86ba77f32cab0d50b1b32fe827ca65b5c5b5f"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "b0bd9f35eb7e199c338d5115d036a14dd9192ee7f25cbec983d409039399cd7e",
+        "5b3def3e5d6a09403a86ceb644d34aae4204589f58eec0217cc7b96b8ab2a510",
+        "d6a52951412ef47aff2ac0e61d9d0bfde90f7b8f7c3b9185ed0cd199e01cf4f4",
+        "786080f7f66860e2722ae32d11771fcc4e38c0a838333f1fa48a84c4e6ad8470",
+        "e536269160b25508c4d0267632553ad17dbb23a6b07e629cb6dc0bf651f2d440"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 8,
+      "terminal_control_step": 95
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F5/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F5",
+      "layout_sha256": "a86998716f4d6e6c366ad5762489430dbe748d68b496f7ba552819f994271a15",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "1997b6cfe02ff4fa111fef2fb90208eb654923b3cdea0b73fbd36153402b0c7f",
+        "e0baeedd6e1ef96007d923083b0f6e2d7385ce023fae398c30b56e0a6c7ffb56",
+        "94712e6ce2412ce56b01a1f1801a25ec25798d6c1dd491eadc9a7143d7f0e821",
+        "c63cb0be6ba21020e5f133aaa3da7c721e8e417a6b1c4002de35fd9ae12774ec",
+        "21d38592e625c137efdc758037325494321f1f3baa63c663bb89bd6e0a3b131e"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "85afcf855b8a35daa23b4c9e8badb4562e6e5ce33f886ebeeee305e127bd942f",
+        "58785671ee763d61635c7cdfee7334721b373400616f8dc3f84293230f10c365",
+        "edfbd80429f7820da1084193ea73da56fa6dc7532df624c54b3009f1117abf1d",
+        "0d8204e335eeabd5457df2dbce8856984c2a320635a38ca55a52a56432cadcde",
+        "d0548b2f7684d320eb9ffb1df12b54725c8f7ff6dd5448946c7d5dd87e4bca46"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 12,
+      "terminal_control_step": 95
+    },
+    {
+      "M": 9,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F5/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F5",
+      "layout_sha256": "a86998716f4d6e6c366ad5762489430dbe748d68b496f7ba552819f994271a15",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "9cf037642d4a33c3bb6a1f7f49bae7e28bed06944f61dad435a368de2e11e9ec",
+        "34a7d2c8305947f92e2c8d476361b8b2d63eaa0d7b799cb165d841c35435440b",
+        "5316d79f054485f4e1f8e3d1a48363c1e4bdd2cf387480fcc515cbfc1ec52ae8",
+        "01c8b56e07c964b6ed975043d8b1609d6eceade82ad325371ac4089e906c3576",
+        "e7d9802f4e17f6064c2aa9e151e8a77b7efe0d6fd7518af52ea016cc4091b60c"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        8
+      ],
+      "selected_state_fingerprints": [
+        "81b19f05c208b335ebfb4af546c932a8cc642ae5d556fa9d2a64f7428c2e12a2",
+        "9d9d3eaa51af4d7466d26053ea2557c5cfb6c3cfa6b38c6573ed37c939380d6a",
+        "81d2badb63cb5d7b34729a7a83c7764cdb4ae30f62ee485f6ab41df6720d4064",
+        "5edab0b3d9b9175c2e3864f516573fcfbaaaf755fef3457faccaa6ec2f6f0d13",
+        "609d8d3188a1c04522aee5d0526bbe7c1998424e9bde5c3568ed47e985b82717"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        80
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 16,
+      "terminal_control_step": 81
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F6/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F6",
+      "layout_sha256": "c6815f59ba5f2bb63046b23f045190a63d991ba2750f0d746bd003e89859a0fa",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "a7df1102a8b9805e360864a52114ea0117983154e306614abc2d4eea8b0c2001",
+        "027aa12a7a61887e1c0d08d1d5a94809ce23a187fde4a870488b1d207745a715",
+        "4436f0615017fd862539e50887b4262bc20d0fcc83dfbb64e099000f9a9698f9",
+        "5e6e783f5b2e0249871666d946b7a6c737670a5aa2be2aa9e0712f71543ad73f"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "dc1a06961ab572e19f9f1fca70c20e3bcfe4114cae639666cdcab54ac1a25ca5",
+        "85858667f9ef0b6c2fc4b5bea8ea82653df8558131d2a155714c472252a0a4c1",
+        "d7e7388aefc77e46e96dd5789c79609f6f9426d09dc2cb91917a8c715eda2c15",
+        "de3aa95c97b8f886e742c3e6c19dbb0fd2b37789464d127aac3fbd98a2a7c070"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 39
+    },
+    {
+      "M": 5,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F6/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F6",
+      "layout_sha256": "c6815f59ba5f2bb63046b23f045190a63d991ba2750f0d746bd003e89859a0fa",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "508f8875a0f8f0fabd58f2bc206765f063d80cd23a464c9aed841803d3d03b85",
+        "a5ad6babbc312258f35302905c1b38a01bf7f3078bf8595fec0f9d7502c5cfde",
+        "fc148e0064899da56d28c649bb5760604ae5347da4436cc1f0feecef5357150c",
+        "160e6a710b9743d27ae76d02eb65276f50a0f2000cab244362e9b9f76db61df4",
+        "2c9c979fb2549b2f1e5f36de6b031f09fc3c0971d5aec28f58b333777ff5fff6"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_state_fingerprints": [
+        "ba584ea2110038f3f8bcfd2f67e444aeecb1408391c192ede252ea4491d91a41",
+        "90a86b0f63d032dc95c6329bee332a139df08c040d3f04e07d415019b6099333",
+        "60fa296c53b2a07e0b935241a2870c5714b4a2d592cb8bab471d4cec3f8a2f1b",
+        "0c1bb6c1281c1a944d4f05de9b21c30194662a53d5623d1e7f0254c905514c5f",
+        "3c321e4324c069418fa7ed079a1967fabfbb7df351a606f6c7c1d44d41c44b2e"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 6,
+      "terminal_control_step": 41
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F6/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F6",
+      "layout_sha256": "c6815f59ba5f2bb63046b23f045190a63d991ba2750f0d746bd003e89859a0fa",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "10504b3dea356ba1fcd76320648aa968287b6ef786aa398b27bd81e3267f63ab",
+        "94a577ea57368ff6618dea22f7828742e091d12b48daa55f15e17145b2a883b6",
+        "2259811ce1653d6f2ac30c1afd463e44e23db03dde26b490bf781b1f991082de",
+        "65003c71a4d1b707471ee5c17f2b819011e660396b2f7c8b019ee637e2b0959b"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "dee60b016dcf5ace42322425990dac97c90fedfcfa75552dba60c4150d79fa93",
+        "919da1a512c8769675e98a0df6ea4ac837ba3914fe0701974e1ac255047e1126",
+        "2e5324a0fd361a2926d87985859914e808a8ab53469c605ce3220fcfbcbdb1d4",
+        "eef457411c4f69a81254bb34f821708dd9fac84e5411683dc84784b634f987f4"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 8,
+      "terminal_control_step": 38
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F6/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F6",
+      "layout_sha256": "c6815f59ba5f2bb63046b23f045190a63d991ba2750f0d746bd003e89859a0fa",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "531c523f5b9f43f9f0324ce1451b4261d89107c67a7cb311b2f4383ad6e71d77",
+        "cdb8fc42469649f2e4c460ce4f5a52cb3e3172797755aec8a71f1946e1975e6e",
+        "c4f736647602aa7a5fd69018dab02806b68229dec3420b9a86268396aa4de727",
+        "ba32b61ae0730ffe8312bdf0296a616f01bafe43f09f14d7e2bb4cffafa1fc82"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "dd4ace0c67c98102d06c8856de6e4a28814c3b0bc2c03ff69094d3225ee611d9",
+        "800e69e8f67b32da5ecf217787bb0492cca67367c83e2f165b0ac0c4bb9fed6c",
+        "c362aed28be7c86b319fd0b2c5b9786045978d882749fcf334a9086b5a50f906",
+        "3b615cf7e584b9b54fc3f0cd547739c8ce475f116aaf6af901c2f3256ef3607c"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 12,
+      "terminal_control_step": 31
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F6/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F6",
+      "layout_sha256": "c6815f59ba5f2bb63046b23f045190a63d991ba2750f0d746bd003e89859a0fa",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "8cda652476653875b1bd10ccbb10d8c0d718910e3559b3259eb394b7f82dd92d",
+        "26a4b0322451f59efe97ed4428be2156fff853feb3fa6c78e6f5f299cd568f6d",
+        "e0044fede54bdc8a02f738113f3fd28eb9ca58e166a08af7df6764221348b0f7"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "badcf41de29f2886596b94e30523a15b36cd96ff263c83b7b8f236b15fd30d79",
+        "327cafe86604d6e7a897ff25411e3e31163409753bbe1eb35f28e123f65880c4",
+        "cefc2cc60261dc1f11bf0702c42661fef6efbd51efa01fadcea6d6c0d8823e11"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 16,
+      "terminal_control_step": 25
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F7/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F7",
+      "layout_sha256": "719701a425a97aa11a1a7ce711e4f009f38c92b74eb65edc311d4933e6a969d4",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "d8a188a02bae72f7e86c0a54a56d7cc1a11fe3351b82c663bc7af24c8726fbee",
+        "1b04fd469b627011e5dfc630eb4d83f7dcc802ba33ede837a94059bab6bbc1ff",
+        "5258e1b71c587a4df57b4779cb7e88ffef670e7021740bbd98c987a709c0760c",
+        "4983ed8f1988f6062ce9a400c4415606c0d1505b48d3c70fc58165afe0656331",
+        "f13d81258440c3dace78227b77f6ff0e36add44b0fc838224ab12f9fa6eb984a"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "49b7cd89372d36b342b6ddea42f5efe42e6284a36098fb8bcebba44689d8a72f",
+        "8a47ed343bd7caab9293b012d5aea2f300d8829d8bbad15e113f378b5b521d4b",
+        "ec354384120026f815fcdb7aa3ea6c0eeb59e474140b04a30ef858fac6175bd5",
+        "e661c1d10b74bd3ce602b1698c02a73f147c1ed412b36bb4705d4009b7a7820e",
+        "42ddde77911922e3ca4046fcdaac712e1c14f43fa5af0e493a2ebfe9b44ea4e2"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 5,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F7/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F7",
+      "layout_sha256": "719701a425a97aa11a1a7ce711e4f009f38c92b74eb65edc311d4933e6a969d4",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "307c6839fa801e6bf47be44d8b9d01753ad03a0f1ebebcdde9b5ce536a933efb",
+        "c3b1ae0b7a9fbcb4393c2a06caf0abafb74f27b1a9dbc99eb9ad1d775b180a0f",
+        "9803b7e842fc05bebe75a18808658ec75c4fa3edd28dd2ac7f4d8a4fe32db1d9",
+        "7ef3d18f0f39fce94952f12218be6ac89316b6704653a02b1320792713ae643d",
+        "90856c2a29abad90bcbb6b47745861fe54d57a46651b320acf4f28eaaa75e6aa"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "418182580b9e29468a0a1994d42b65683bf3b265b4c037f30eb3952c01dedd8f",
+        "6e07afdb6607ef147e0426c2ea5393964ab107c231738b0324ccc001fdff955e",
+        "4e3fc79c87f8a054fbf2cb652fb1920c380d9f321653cc7f68ef7a03509434ae",
+        "02d1c52d7c0f1da2c674164baf64f5b859607f0c1d4313e3a2cd0658a68ab063",
+        "f540596cf7d37366f0626344fb358b4fa0c88d81417626abf49c2860b213ff6f"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 6,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F7/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F7",
+      "layout_sha256": "719701a425a97aa11a1a7ce711e4f009f38c92b74eb65edc311d4933e6a969d4",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "4d07d4e27ba5f7fd91c7fcf1b11cbf2c3c51404313f752aace2d55532cce4461",
+        "bc24a66dec8237afe4cc12ad2a18e43c329f4ab8db8938dabd66ea45328ff28c",
+        "30bcae8bd6a5f7d16ea46b36a7dcf630f0b54d97604739942ac60ff1bb5bfe8c",
+        "3ae2d453ce78b6f5826c6793741777c6ca98424ca7c32360f4e1e54b3ed2707b",
+        "0b914ff7ecaa4a028dbae34cf85abbd93d1b67cf4c28cc1a4e32090ff64f3c92"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "4cbfcada6b65c3409c41300c0effdef85b87d2e6d6e3099f0da2a3918dd51dc0",
+        "24c1b7853a96fc9859cd7fac8fd88f1c180f9d3670d62ec53a526456ce208aeb",
+        "d2f1f2cac28b2538daa04aa4f2740775cb0b7eddc70fd1e6ff9c0f430858e8bf",
+        "d6ddac09e3b4a941dc7d215b94452567cd0d1de5f6c2849e53f9be95fc417110",
+        "ba37d6c0ef413ad4a53590be3a7d0cd065dfa9f2955f9d4802e1105054662bd5"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 8,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F7/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F7",
+      "layout_sha256": "719701a425a97aa11a1a7ce711e4f009f38c92b74eb65edc311d4933e6a969d4",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "c4b081370f3177f2094e52ab2c9d766177c39416394d08209d1ec62552e3d984",
+        "c22f70335fec5b1a0aba5c7154ad669e985f36e670a34821bdc6da09453f1d7e",
+        "a3e81194a8e2e91ad52be56c78b7e4881c870c7607a6daf57c9fe41795fbed0f",
+        "c7773d695a34cd86de953ba959c744424d7571401c89cb006d70f1ec7eb6a5f7",
+        "7132c51ab72466edf73e9d34effa637431d782681bc574bf72c256b061eaa821"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "2030304c6cc31e85438242f80d22327fce1cda04e9a405da30b365a5ed4f19aa",
+        "805c050f5bf1125784d0d590aaf9c84c23a8251d5db78136a9c569dbda4a8f9e",
+        "37b5e9631d20f20983c716aed7f6b30e820e25169bc0879e38d3c51d9bf13093",
+        "0a7638ccc357ea2f47766532d7fca90bb113d8ad10469e8bd9dae9796af974d9",
+        "b3a1a9a2a0ca26c31dcc224768fc9c9e2d76502423870fbc334139f817934836"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 12,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 10,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F7/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F7",
+      "layout_sha256": "719701a425a97aa11a1a7ce711e4f009f38c92b74eb65edc311d4933e6a969d4",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "e19f204e3d3b1fd8b39c79a680a4f9cd9333652b390b1ea424d002fe9dbd2bd5",
+        "13ca29661fc1be179add94753230a8327ff8386e28b3127d507960d6ca5d0d54",
+        "3ecdbfd229b3c920efe3244474c71011110db7934e21b08e7c1c954a26dc840e",
+        "34e40344aec7a6d90099f37f161ab36857f9735fb9eaa5e18f30bde73ee6dde3",
+        "0c8dc5cf4043f3b724b634cdc92a7507a6242cc85b134299417750dacd39fca1"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        4,
+        6,
+        9
+      ],
+      "selected_state_fingerprints": [
+        "fa4abcc8f4624b0db7daa9b79bcd0df5f90c29413bf33b59d1dac1255fdc148d",
+        "99daa5dc5bf008be87695571dcb13d8b449b2f9d47d441d2bcb850ce89d7536c",
+        "af022a5bc3f4485f952a423b8a9d03bab39ebb73ebb023227af48c6c03bdf4de",
+        "59d22a135e9574644a2a47a608b734c44be7e66404d17553a0b7783512cf56c0",
+        "aed4ad9e99635a4bba4755d78ce2849343da293c314d74eae847577bbba36c7e"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 16,
+      "terminal_control_step": 94
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F8/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F8",
+      "layout_sha256": "5953d41f6c509864b6a388697ba119da0b26887902ba21068ae45e6b110e24d6",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "175caf82f7f4cc754554418d7f2378976a741ba29edd267cb2e03faad0f72615",
+        "e75b9f24f059afcbb5574a337dff7b1a687d17e6d500d7fbae7a4065a7d20aa5",
+        "0d0c5d005d21e0ab585ecbe9cf774da8829444051e439246fef08529de639680",
+        "239e25ed1c6fed041467ce665818fbdef5dfd2bf14a94cb52e0c03629c54c7dd"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "543042a0016c1da82b9388c3a8128515c63c79f13b86c49c435b65237c125e70",
+        "12afce3523b4342b3ad281344523fd94a60e2929bd070abe95e389c82a976498",
+        "12fb9ed40c16cde9f3a65f64c089f68eab513c66e5385ff6bfe73f8e5cdaadac",
+        "27d8596414b5098baa05023c9015cff213a46b58bed9d5df29f516fde96d3918"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 36
+    },
+    {
+      "M": 11,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F8/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F8",
+      "layout_sha256": "5953d41f6c509864b6a388697ba119da0b26887902ba21068ae45e6b110e24d6",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "3cd82d6abe428db9addbb35c6c3482bdeab419d0fe7ffb71ac48623d40a32886",
+        "420569b43d57ce36606771b2abb225517608d4a96e9d20c3e8403d81b4db68f4",
+        "11cdde6dcc35beaf566e9e3209de0f764f22576491ee225389a5fd9121df728c",
+        "2f145dd5a7474a36935fdb0405c6e5fadc65033ef30b6f5c4bec5d77f051573a",
+        "421db0f808b77b577fd29e8f9bcd6e036b163bfd634f0ed15f430cfb1dad98f9"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        5,
+        7,
+        10
+      ],
+      "selected_state_fingerprints": [
+        "bfb74cc620f077129ff7abe79f14997a8a0abce0d0d6c322309c8b611ea68a38",
+        "dd6fb4e8ee4fc39374a81bbf345cbb0e696f1507f17387102aae79880ac729b0",
+        "5eb000dad66e2853491ebac357ce42709e16df8772c093eb3e43c30c72e894a2",
+        "e0b30cf8b58700951e647c5af3da3691bb049b6f6e148e3a0d00919ea05a54be",
+        "1c06407714bcc844021ced121e4aef9d19a5b77ae4ea2fccac9aeb046eab362e"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        50,
+        70,
+        100
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 6,
+      "terminal_control_step": 107
+    },
+    {
+      "M": 11,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F8/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F8",
+      "layout_sha256": "5953d41f6c509864b6a388697ba119da0b26887902ba21068ae45e6b110e24d6",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "1cd575b999061fe7486d8b66134ed8db1033583741638dec6ec4f7b43289efa4",
+        "06497e771914ed9de143ebb62cfade36d0f9dea90fab8bbf2f34ea70e3af90e4",
+        "f414548c1e72ed42b7d1807c9c24560fae7e21df7b9a77bb1d2fd983e55525cf",
+        "f0c131ca33179b8832a46cff45497e2b9156c92d83d232711bc64ae7a220d488",
+        "43c82c7879f9d85d648030cb6613177ecee9a9474da0a0ea9e45009a4f50fd08"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        5,
+        7,
+        10
+      ],
+      "selected_state_fingerprints": [
+        "38078a9ee447d6988dc5e4a5a02cb3362e68e647551ba99508770803b55af2c1",
+        "2d485a1cefeba02d1875301b92d108fd2f4391733dcaa9b815ca1f6ed139afeb",
+        "ec8e2b8077c319ef69c730172d463d0831085be1b32dfad4444634d49ebd3218",
+        "5588b11f275c89fa02c06e481b63071eab674317926073cfe8520cd8b205f14e",
+        "abf88c6c7e4b3b4f44e9e66113f58df402f236769e9c74cf054ca7fafdbb3fb0"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        50,
+        70,
+        100
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 8,
+      "terminal_control_step": 107
+    },
+    {
+      "M": 11,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F8/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F8",
+      "layout_sha256": "5953d41f6c509864b6a388697ba119da0b26887902ba21068ae45e6b110e24d6",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "78580dd6425d272fad39d1a13a740eca47a387366e97301032f0d0612d4b9dcb",
+        "bab39978e1a563b999e4ecc83aed317922d35fedf3c8d21a3bfc8502c621f509",
+        "babcff340a15d2383a2c7c8017d3053da9d8b00565db211db26a59da3bd99886",
+        "b472dbb942bb08d5a8817778c0272726f6103de8fc9557b9b4752a0c9df876e0",
+        "bd1c3c876d67580df54d727dd91f4df706382dbb40b9064551a3cfcc5a8561d8"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        5,
+        7,
+        10
+      ],
+      "selected_state_fingerprints": [
+        "3671c382fa27ad5616c3e424c6b64a6c11842f0de835718d1467bf615d67170b",
+        "0f03b05b4a4afd321c725208aafba3d231d47614cf3e474b3d1a7a59b7f2f930",
+        "3b1c710f898c1f164feed7755283884e28595dc08587a9603f915c19324dd2f4",
+        "a599a4eb14c0dd771ec55f933bca733f2981bf9767c5ffef53be081e850a6d09",
+        "d58f0733ce7a43bc9ac7e11f30426ea437cfd89cad13f3e8b1ff401a18169981"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        50,
+        70,
+        100
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 12,
+      "terminal_control_step": 107
+    },
+    {
+      "M": 11,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F8/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F8",
+      "layout_sha256": "5953d41f6c509864b6a388697ba119da0b26887902ba21068ae45e6b110e24d6",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "f8b2ad00ae400dee4df68360d625f5a715cf19038cdcdc2b945e34fa472adc9d",
+        "e3d44f20ed838d8da9160c0a886d27e29278be959696ecba98ddcea6b09ce125",
+        "f972641fac4ed05cf25ea1fdb707b4784964dc7a3fd21ea4da279c0717064638",
+        "dd873a0b905ed675ae6cfc7c903ca3eeffee3b89c3826bd29d775b30f554da23",
+        "9068fc0d8115db750fe27e18e555ee19ba4257cb6833c40fd80690e78ad0b22a"
+      ],
+      "selected_indices": [
+        0,
+        2,
+        5,
+        7,
+        10
+      ],
+      "selected_state_fingerprints": [
+        "ca6c133d8a98ce891ec382b1e6771abbd8b6702e2423ed0932844bfe5af8bb2b",
+        "fe20d36cacacf45e08115c05083c40f9b478cf2ebddf72b116cba0bb30b9a355",
+        "3ea8e2c0602b966ba3fa99262593a31101351bbfb785f7352d383f0cf10207a9",
+        "3ec302faab79df6dbae77b8460bdc3677a3f3c2bc62f909fce9bd03897f3a9d8",
+        "fa5fb23a809e8e2278bfcc7b1adef69bf874843ae917ed9f6f68f3e5642e8e27"
+      ],
+      "selected_timesteps": [
+        0,
+        20,
+        50,
+        70,
+        100
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "GOAL_COMPLETE",
+      "team_size": 16,
+      "terminal_control_step": 107
+    },
+    {
+      "M": 5,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F9/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F9",
+      "layout_sha256": "2d54072ed41e7c2365c6abbac3de8b43ce8ea1ddb5efb012f021750da0b2ad3b",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "eb23f1a73cf3fd29f6694e434b7c5efc7033a8ff19989f44d6bc557a1bbc6e99",
+        "e74af40f8b150213f9ad10f6449ce0df32772b4545ff8f6c1972135d78b66447",
+        "81d9bd33e84f0d1a037b2250dc21e3b2f00a661930ef1c8939f6106e8cf9cf40",
+        "3b226d9ccac544a88c79b0c2ab400e7b692c39ba009dcf7fcc9d9be543770d11",
+        "5eac278d37d51ca1532542a12c6e5475d3cd55c9a92c0573a54f93a3500be6db"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_state_fingerprints": [
+        "f26ad47ac42ba557ac6ebbd4c1f28ea0511e519207725bc12a3b52209690b4be",
+        "62418fa677992e4dc62de3332da75b6d946217da20aff3bb6a93b4d429968ade",
+        "4730a5c0727cc5d18820130f9f401ecfc733625efb2c9f288d6220a1c86faf5f",
+        "5b72b69170dd623ac2495c2c5738e67a55b5e6cb805909002991749265e2d7eb",
+        "73d3c5fb560f08075fe132ee4f4f31523a0a3736d1d70d15b395260d1076975f"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 5,
+      "terminal_control_step": 40
+    },
+    {
+      "M": 5,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F9/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F9",
+      "layout_sha256": "2d54072ed41e7c2365c6abbac3de8b43ce8ea1ddb5efb012f021750da0b2ad3b",
+      "selected_count": 5,
+      "selected_event_ids": [
+        "29b2072da7aca015b53594cb2540b68441ae8e938c3cbb82baa7f658a3499a97",
+        "b7a0b38d7c4fac35806c7633454f0717db3e3da52764d7a6d62875910c34a6c8",
+        "65ba0749afc39a47cd4ce7b2a88e8ace5d71fbd52f61e9e8f59fa23a73a43ab6",
+        "1cd149dfdf7aa0957f62623b461b192594241e016f60d0264c001a36f45785d5",
+        "4df8ccfd6b27f0a5a85c76cfab36581866c41abc433911fbfc4df1b7a06a82ba"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_state_fingerprints": [
+        "554fc7f73b8182b38a2454f98e89281eeaa3f79f692b9f8bf214c800d37c9082",
+        "a009226c5c50850eb23a7fc199ba6fa5f40f681244950a2a906a3d7348f0dfe3",
+        "c50b6e9a089a456160a8cb3aee7f7645fca8f19368009e77a4e575e3dc5d27a6",
+        "cf7cb8f1523969df6b02637f0aa3c570426dfafe5d39036b54a11c4a04b51de1",
+        "b34c507e102572f6af253e3b5630971c4c347cc24a5b84d5389d1442caf838f7"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 6,
+      "terminal_control_step": 41
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F9/N8/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F9",
+      "layout_sha256": "2d54072ed41e7c2365c6abbac3de8b43ce8ea1ddb5efb012f021750da0b2ad3b",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "7c1e643581d8d37e08fad544ec8c52185518776dfb379862ce0bbef0caf7653b",
+        "4ba4bb6be61082bbc8789bea18a6e2908dc3aa07d5fd912150afbdf5c6f65c41",
+        "132e519eb5f064f63de03c2919048e23ab889b9d25150a8dc2fde1eb96916c4a",
+        "e445614450fce5e03df94ca7ead5ca6770df678dfb80f9b4fcc2bd83ab0613e1"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "7535b33a1d2c66490f153ec634a6b87611c312fd97d47efecdbdd25be73617e2",
+        "a31457ee5858194f08c818ad3625eaddd9a915e420c56c59a7b1ceed54880cb1",
+        "412e97949c9f52ba9a7956fdf6b7badb022ff3a4a1be72afe953bccb9d85ed68",
+        "3b8044cf77486f6234e9f11b2d9602db822d72e7237a9c66c42a37980323f5d7"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 8,
+      "terminal_control_step": 37
+    },
+    {
+      "M": 4,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F9/N12/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F9",
+      "layout_sha256": "2d54072ed41e7c2365c6abbac3de8b43ce8ea1ddb5efb012f021750da0b2ad3b",
+      "selected_count": 4,
+      "selected_event_ids": [
+        "7467fea4e71cc16e2ef628450bb6befba1a6be21b231274a0d84d6b7fc626b25",
+        "cec66acdfcd9caa0f33d04b5bcad196c91a7a6a9ac15a6e39654a18e6bc43258",
+        "3f9b778bb2fdad7c7e014c61fe971174ba763adc56678dc6b96a2858b9f2add8",
+        "409f9674542000c3b0ceb94ffb5bc5f7872b3ed5e53424f80208a9b456584650"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_state_fingerprints": [
+        "01218c95b0e50d30affe65729f38e96451adc8d2ae01f2a8b7733b2f9be04955",
+        "a7fb964dd4ffea787289d7ed5e99a6c0dbd391273f78df4b6e5cb5b479abbd1e",
+        "f282078a19bd974db3053f3b10de63098b20e395569685e13a79f5721edfc093",
+        "8c23ee5d1b9accca46136841d84f6fbfcea9ba76fd2efa7a4479a6cea175bed9"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 12,
+      "terminal_control_step": 30
+    },
+    {
+      "M": 3,
+      "all_checks_pass": true,
+      "checks": {
+        "all_selected_are_realized": true,
+        "first_included": true,
+        "last_included": true,
+        "m_above_k_uses_formula": true,
+        "m_at_most_k_keeps_all": true,
+        "m_zero_gives_zero_events": true,
+        "never_exceeds_k": true,
+        "no_duplicates": true,
+        "no_fabricated_state": true,
+        "spacing_respected": true
+      },
+      "episode_id": "qual-canary/F9/N16/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F9",
+      "layout_sha256": "2d54072ed41e7c2365c6abbac3de8b43ce8ea1ddb5efb012f021750da0b2ad3b",
+      "selected_count": 3,
+      "selected_event_ids": [
+        "c86c08e6fe137d92bb33dd5943ed8dd62c70966c19ce67e47740ee8be5c80009",
+        "e39e7da725df5dbbdcc5d24778003c696a47fbb337fbccb759e1b05b17060a5d",
+        "b35d1eb4e5693697fb277cf813d44c80e89dcb3db159e7bcee78ba34f850ae9e"
+      ],
+      "selected_indices": [
+        0,
+        1,
+        2
+      ],
+      "selected_state_fingerprints": [
+        "94dc80f7471ea134a86e110617ade52e1d587db971d3cb88a2d0735fb5f4b341",
+        "f8f1d806fb0a86d56dda51170b0a794ab00333b44c33e58e5fd4e6c3e1ed6712",
+        "2ef966e346921fdf77cc896fb7dfb43af074773a7107c7662415567765aa93a4"
+      ],
+      "selected_timesteps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "source_termination_reason": "COLLISION",
+      "team_size": 16,
+      "terminal_control_step": 26
+    }
+  ],
+  "phase9g_v2q_source_selection_replay_sha256": "74e03858c0f183f0a9aa72b5758800a81a7ee3e17d5298890144be0a3addfe24",
+  "provenance_class": "QUALIFICATION_CANARY_NON_OFFICIAL",
+  "reference_environment_only": true,
+  "rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+  "schema_version": "rvt-phase9g-v2q-source-selection-replay/v1",
+  "selected_states_total": 201,
+  "target_host_replay": "NOT_RUN_TARGET_UNREACHABLE",
+  "team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16
+  ],
+  "worker_invariance": {
+    "digest_reverse_order": "550b1bb4586405629d3e88eaf99d48b8cdcfa5fe7ceaf737739fa647a5b118b9",
+    "digest_w1": "550b1bb4586405629d3e88eaf99d48b8cdcfa5fe7ceaf737739fa647a5b118b9",
+    "digest_w12": "550b1bb4586405629d3e88eaf99d48b8cdcfa5fe7ceaf737739fa647a5b118b9",
+    "order_invariant": true,
+    "w12_seconds": 16.96,
+    "w1_equals_w12": true,
+    "w1_seconds": 76.47
+  }
+}

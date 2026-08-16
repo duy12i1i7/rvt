@@ -1,0 +1,46 @@
+{
+  "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+  "base_image_digest_resolvable": true,
+  "builder": "docker buildx (Docker Desktop 4.55.0, Engine 29.1.3)",
+  "dockerfile": {
+    "path": "docker/generation/Dockerfile",
+    "sha256": "7bc931e328cd61dd9fe814986db494a58b0cc09b993df5803d5e318b627a68a7"
+  },
+  "failure": {
+    "classification": "OPERATIONAL_REPRODUCIBILITY_DEFECT",
+    "exit_code": 100,
+    "message": "E: Version '20230311+deb12u1~deb11u1' for 'ca-certificates' was not found",
+    "observed_ca_certificates_versions": [
+      "20250419~deb12u1~deb11u1 (bullseye-security)",
+      "20210119 (bullseye)"
+    ],
+    "packages_still_available": {
+      "build-essential=12.9": true,
+      "ca-certificates=20230311+deb12u1~deb11u1": false,
+      "git=1:2.30.2-1+deb11u5": true
+    },
+    "root_cause": "the qualified Dockerfile pins exact apt package versions against the mutable Debian bullseye-security suite. ca-certificates has since been superseded there: the pinned 20230311+deb12u1~deb11u1 no longer exists and the suite now offers 20250419~deb12u1~deb11u1",
+    "scientific_impact": "none: no scientific code or contract is involved",
+    "stage": "apt-get install (Dockerfile line 25)"
+  },
+  "image_digest": null,
+  "image_id": null,
+  "older_image_reuse_prohibited_by": "Q3",
+  "older_image_reused": false,
+  "phase9g_v2q_image_qualification_sha256": "d00c427d1aba964cf9bbd7624a4fcc4c46ce07dec27c00eb2fc38ffa679d34cf",
+  "reference_suite_inside_image": "NOT_RUN_IMAGE_UNAVAILABLE",
+  "remediation_not_applied": "relaxing or re-pinning the apt version, or switching to snapshot.debian.org, would change the repository-authoritative qualified environment definition. Q2/Q3 require the authoritative definition, so no change was made",
+  "requested_platform": "linux/amd64",
+  "requirements_lock": {
+    "path": "docker/generation/requirements.lock.txt",
+    "sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac"
+  },
+  "run_tests_wrapper": {
+    "path": "docker/generation/run-tests.sh",
+    "sha256": "64e46fdc9c9d1f44898b213d06e587d17a9ec6d119185d1684ae434920fe86a1"
+  },
+  "schema_version": "rvt-phase9g-v2q-image-qualification/v1",
+  "source_commit": "6098615b354b2f3b6d41e41e3d4beb8d4c5a4694",
+  "status": "FAILED_IMAGE_NOT_REBUILDABLE",
+  "target_suite_inside_image": "NOT_RUN_IMAGE_UNAVAILABLE"
+}

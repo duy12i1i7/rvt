@@ -1,0 +1,40 @@
+{
+  "candidate": {
+    "candidate_pair_seconds_max": 36.5368,
+    "candidate_pair_seconds_mean": 6.4283,
+    "events": 41,
+    "replica_rollouts": 118
+  },
+  "measured_on": "REFERENCE_HOST_ONLY",
+  "official_projection": {
+    "basis": "H1R committed source-only yield 4.1933 events/episode plus reference-host candidate timing; NOT target-host measured",
+    "budget_altered_by_throughput": false,
+    "is_an_estimate": true,
+    "projected_train_candidate_aggregates": 10063.9,
+    "projected_train_cpu_hours": 8.99,
+    "projected_train_selected_events": 5032.0,
+    "projected_train_wall_hours_at_12_workers": 0.75,
+    "projected_validation_candidate_aggregates": 2516.0,
+    "projected_validation_selected_events": 1258.0,
+    "train_source_episodes": 1200,
+    "validation_source_episodes": 300
+  },
+  "phase9g_v2q_performance_and_cost_projection_sha256": "480a06a36352067e3858d8599db83b1f6b73b03eb222c936ed485586a1a47da7",
+  "reference_host": {
+    "platform": "macOS 26.5, Apple M4 Pro, 8P+4E cores, 24 GiB",
+    "python": "3.9.6",
+    "workers_used": {
+      "stage_a": 12,
+      "stage_b": 10
+    }
+  },
+  "schema_version": "rvt-phase9g-v2q-performance-and-cost-projection/v1",
+  "source_only": {
+    "episodes": 50,
+    "selection_overhead_is_negligible": true,
+    "selection_seconds_mean": 6.76e-06,
+    "universe_seconds_max": 13.3485,
+    "universe_seconds_mean": 1.7567
+  },
+  "target_host_measurement": "NOT_RUN_TARGET_UNREACHABLE"
+}

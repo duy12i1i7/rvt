@@ -1,0 +1,45 @@
+{
+  "findings": [
+    {
+      "conflicts_with": "frozen V2 protocol 19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "consequence": "official generation launched today would reproduce exactly the V1 acquisition that Phase 9D-R2 proved infeasible",
+      "evidence": "rvt_swarm/phase9g0r/compiler.py:compile_recoverability_tasks builds OfficialDecisionEventTask from manifest['decision_event_jobs'], each carrying a precomputed resolved_control_step read from the frozen V1 job manifest 801fe4e2bd694da0dda7c310226906e59d9bc5435d657fab2e3f132432aa2dc3",
+      "id": "V2Q-F1",
+      "severity": "BLOCKING",
+      "title": "production compiler still schedules V1 nominal-horizon events"
+    },
+    {
+      "conflicts_with": "results/rvt_fd24/phase9d_h1r_owner_sampling_resolution_v1.json#generation_invalid_semantics",
+      "consequence": "this is precisely the V1 accounting failure the owner prohibited: a source state that never existed must be NOT_A_REALIZED_SOURCE_STATE, never GENERATION_INVALID",
+      "evidence": "rvt_swarm/phase9g0r/producer.py:247 -- when session.termination is not None and session.control_step < task.resolved_control_step, the candidate result is emitted with disposition GENERATION_INVALID and source_terminated_before_event = true",
+      "id": "V2Q-F2",
+      "severity": "BLOCKING",
+      "title": "production producer assigns GENERATION_INVALID to an unreached source state"
+    },
+    {
+      "conflicts_with": "Q14",
+      "consequence": "Q14 cannot be satisfied. A V2 row and a V1 row for the same realized coordinate would carry the same scientific row identity, so V1/V2 separation rests on namespace discipline alone rather than on identity",
+      "evidence": "rvt_swarm/phase9g0r/contracts.py:RECOVERABILITY_ROW_IDENTITY_FIELDS has thirteen fields and no slot for a source-acquisition protocol hash; recoverability_scientific_row_id rejects any extra field",
+      "id": "V2Q-F3",
+      "requires": "an owner-approved additive change to the frozen row binding contract",
+      "severity": "BLOCKING",
+      "title": "row identity cannot bind the V2 acquisition protocol hash"
+    }
+  ],
+  "phase9g_v2q_executable_binding_gap_sha256": "964e3641bb6042598508d0b37a65b155470769db350411df8c24025b531ab7a5",
+  "production_modules_referencing_phase9d_h1r": 0,
+  "remediation_is_implementation_only": true,
+  "required_before_official_v2": [
+    "a V2 decision-event compiler that enumerates the realized universe per source episode and applies REALIZED_TRAJECTORY_UNIFORM_K with K=5",
+    "a producer path that consumes a V2-selected realized state instead of re-running the source to a scheduled step",
+    "removal of the unreached-state GENERATION_INVALID branch from the V2 path, replaced by NOT_A_REALIZED_SOURCE_STATE accounting",
+    "an owner-approved additive row/event binding that carries the V2 acquisition protocol hash"
+  ],
+  "schema_version": "rvt-phase9g-v2q-executable-binding-gap/v1",
+  "science_change_required": false,
+  "science_undefined": false,
+  "status": "V2_NOT_BOUND_TO_THE_PRODUCTION_EXECUTABLE_PATH",
+  "summary": "the frozen Recoverability Source-Acquisition Protocol V2 has no executable binding in the production generation path. The protocol object, its selection semantics and its identity contract are implemented and tested in rvt_swarm/phase9d_h1r, but no production module references that package",
+  "v2_acquisition_module_conforms_to_frozen_protocol": true,
+  "v2_acquisition_module_evidence": "the executable frozen_acquisition_protocol_v2() object is byte-identical to the committed artifact and hashes to 19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d"
+}

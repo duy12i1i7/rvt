@@ -1,0 +1,315 @@
+{
+  "candidate_aggregates_attempted": 82,
+  "candidate_blindness": {
+    "candidate_execution_order_invariant": true,
+    "selection_finalized_before_any_candidate_executed": true,
+    "selection_unchanged_after_candidates": true
+  },
+  "duplicate_row_ids": 0,
+  "episodes": 10,
+  "events": 41,
+  "f8_f9_three_replicas": true,
+  "generation_invalid_aggregates": 0,
+  "generation_invalid_semantics": {
+    "every_generation_invalid_followed_an_attempted_rollout": true,
+    "note": "under V2 selection no unreached state can enter the candidate stage, so the count is structurally zero",
+    "unreached_state_produced_generation_invalid": 0
+  },
+  "labelable_pairs": 41,
+  "negative_aggregates": 56,
+  "official_namespace_written": false,
+  "other_families_one_replica": true,
+  "partial_publications": 0,
+  "per_family": [
+    {
+      "M": 10,
+      "dispositions": [
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        }
+      ],
+      "events": 5,
+      "expected_rows": 50,
+      "family": "F1",
+      "replicas_required": 1,
+      "rows": 50,
+      "team_size": 5
+    },
+    {
+      "M": 5,
+      "dispositions": [
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 5,
+      "expected_rows": 60,
+      "family": "F2",
+      "replicas_required": 1,
+      "rows": 60,
+      "team_size": 6
+    },
+    {
+      "M": 4,
+      "dispositions": [
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 4,
+      "expected_rows": 64,
+      "family": "F3",
+      "replicas_required": 1,
+      "rows": 64,
+      "team_size": 8
+    },
+    {
+      "M": 2,
+      "dispositions": [
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 2,
+      "expected_rows": 48,
+      "family": "F4",
+      "replicas_required": 1,
+      "rows": 48,
+      "team_size": 12
+    },
+    {
+      "M": 9,
+      "dispositions": [
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 5,
+      "expected_rows": 160,
+      "family": "F5",
+      "replicas_required": 1,
+      "rows": 160,
+      "team_size": 16
+    },
+    {
+      "M": 4,
+      "dispositions": [
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 4,
+      "expected_rows": 40,
+      "family": "F6",
+      "replicas_required": 1,
+      "rows": 40,
+      "team_size": 5
+    },
+    {
+      "M": 10,
+      "dispositions": [
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        }
+      ],
+      "events": 5,
+      "expected_rows": 60,
+      "family": "F7",
+      "replicas_required": 1,
+      "rows": 60,
+      "team_size": 6
+    },
+    {
+      "M": 11,
+      "dispositions": [
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "RECOVERABLE_POSITIVE"
+        }
+      ],
+      "events": 5,
+      "expected_rows": 80,
+      "family": "F8",
+      "replicas_required": 3,
+      "rows": 80,
+      "team_size": 8
+    },
+    {
+      "M": 4,
+      "dispositions": [
+        {
+          "2": "RECOVERABLE_POSITIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 4,
+      "expected_rows": 96,
+      "family": "F9",
+      "replicas_required": 3,
+      "rows": 96,
+      "team_size": 12
+    },
+    {
+      "M": 2,
+      "dispositions": [
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        },
+        {
+          "2": "VALID_TASK_NEGATIVE",
+          "5": "VALID_TASK_NEGATIVE"
+        }
+      ],
+      "events": 2,
+      "expected_rows": 64,
+      "family": "F10",
+      "replicas_required": 1,
+      "rows": 64,
+      "team_size": 16
+    }
+  ],
+  "phase9g_v2q_candidate_canary_audit_sha256": "e54a639ed08da9e7880a94c69a79d3a6077bbbae1c6033a08aa94b65b32820b6",
+  "positive_aggregates": 26,
+  "provenance_class": "QUALIFICATION_CANARY_NON_OFFICIAL",
+  "replica_rollouts": 118,
+  "rows_published": 722,
+  "schema_version": "rvt-phase9g-v2q-candidate-canary-audit/v1",
+  "timeout": {
+    "exceeded": false,
+    "maximum_observed_candidate_pair_seconds": 36.537,
+    "measured_on": "reference host, not the qualified target",
+    "reference_infrastructure_timeout_seconds": 243.0,
+    "timeout_changed": false,
+    "timeout_misclassified_as_scientific_outcome": 0,
+    "utilization": 0.1504
+  },
+  "two_n_publication_verified": true
+}

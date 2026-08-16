@@ -1,0 +1,87 @@
+{
+  "blocked_by": [
+    "the source-episode manifest compiles, but no V2 decision-event compiler exists (V2Q-F1), so the official event universe cannot be produced"
+  ],
+  "executed": false,
+  "materialized_candidate_results": 0,
+  "phase9g_v2q_official_manifest_dry_compile_sha256": "a024d7493fd3c3aa2891cb8ffaba1cfdb292e9ec9ddfc65db277d370c8ddb3d8",
+  "schema_version": "rvt-phase9g-v2q-official-manifest-dry-compile/v1",
+  "splits": {
+    "train": {
+      "authorizes_official_generation": false,
+      "budget_exact": true,
+      "design_pilot_or_canary_overlap": 0,
+      "duplicate_identities": 0,
+      "families": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10"
+      ],
+      "final_test_episodes": 0,
+      "frozen_budget": 1200,
+      "frozen_decision_event_cap": 6000,
+      "manifest_sha256": "e5492102c26d9e451255d004a1ed4a0a6f0cb0495358cb1f4237bfda31fea699",
+      "maximum_selected_source_events": 6000,
+      "n24_episodes": 0,
+      "protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "saturates_cap": true,
+      "source_episodes": 1200,
+      "study_b_episodes": 0,
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ],
+      "v1_rows_reused": 0
+    },
+    "validation": {
+      "authorizes_official_generation": false,
+      "budget_exact": true,
+      "design_pilot_or_canary_overlap": 0,
+      "duplicate_identities": 0,
+      "families": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10"
+      ],
+      "final_test_episodes": 0,
+      "frozen_budget": 300,
+      "frozen_decision_event_cap": 1500,
+      "manifest_sha256": "9cb438cac36421845c5420a7a56fbcb18552dd399dc18ff0735a633f007d1590",
+      "maximum_selected_source_events": 1500,
+      "n24_episodes": 0,
+      "protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "saturates_cap": true,
+      "source_episodes": 300,
+      "study_b_episodes": 0,
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ],
+      "v1_rows_reused": 0
+    }
+  },
+  "train_first_authorization_boundary": {
+    "reason": "Q24 -- validation receives separate authorization after TRAIN closes",
+    "validation_generation_permitted_now": false
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "artifacts": {
+    "canary_exclusion": {
+      "path": "results/rvt_fd24/phase9g_v2q_qualification_canary_exclusion_set_v1.json",
+      "sha256": "2df1d2a98e01b29524aa89424f568e7a0523b6aee940e5f9a115aa3544b90d08"
+    },
+    "candidate": {
+      "path": "results/rvt_fd24/phase9g_v2q_candidate_canary_audit_v1.json",
+      "sha256": "e54a639ed08da9e7880a94c69a79d3a6077bbbae1c6033a08aa94b65b32820b6"
+    },
+    "dry_compile": {
+      "path": "results/rvt_fd24/phase9g_v2q_official_manifest_dry_compile_v1.json",
+      "sha256": "a024d7493fd3c3aa2891cb8ffaba1cfdb292e9ec9ddfc65db277d370c8ddb3d8"
+    },
+    "gap": {
+      "path": "results/rvt_fd24/phase9g_v2q_executable_binding_gap_v1.json",
+      "sha256": "964e3641bb6042598508d0b37a65b155470769db350411df8c24025b531ab7a5"
+    },
+    "image": {
+      "path": "results/rvt_fd24/phase9g_v2q_image_qualification_v1.json",
+      "sha256": "d00c427d1aba964cf9bbd7624a4fcc4c46ce07dec27c00eb2fc38ffa679d34cf"
+    },
+    "performance": {
+      "path": "results/rvt_fd24/phase9g_v2q_performance_and_cost_projection_v1.json",
+      "sha256": "480a06a36352067e3858d8599db83b1f6b73b03eb222c936ed485586a1a47da7"
+    },
+    "replay": {
+      "path": "results/rvt_fd24/phase9g_v2q_source_selection_replay_v1.json",
+      "sha256": "74e03858c0f183f0a9aa72b5758800a81a7ee3e17d5298890144be0a3addfe24"
+    }
+  },
+  "blocking_findings": [
+    "V2Q-F1",
+    "V2Q-F2",
+    "V2Q-F3"
+  ],
+  "closed_scopes": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_recoverability_v2_rows": 0,
+    "official_recoverability_v2_train_runs": 0,
+    "official_recoverability_v2_validation_runs": 0,
+    "optimizer_states": 0,
+    "residual_v2_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v1_mutations": 0
+  },
+  "frozen_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "input_identity": {
+    "branch": "research/rvt-phase9g-v2q-production-qualification-v1",
+    "h1r_od_commit": "6098615b354b2f3b6d41e41e3d4beb8d4c5a4694"
+  },
+  "not_qualified": {
+    "executable_v2_binding": "ABSENT",
+    "production_failure_resume": "NOT_APPLICABLE_NO_V2_PRODUCTION_PATH",
+    "production_image_rebuild": "FAILED_PINNED_APT_VERSION_GONE",
+    "reference_suite_inside_image": "NOT_RUN",
+    "reference_vs_target_replay": "NOT_RUN",
+    "row_identity_binds_v2_protocol_hash": false,
+    "target_host_execution": "NOT_RUN_UNREACHABLE",
+    "target_performance": "NOT_RUN"
+  },
+  "official_train_generation_authorized": false,
+  "phase": "PHASE_9G_V2Q",
+  "phase9g_v2q_train_generation_readiness_sha256": "ad3d228f445968bd54537cb67148a1c8547683d5d61525610bce57d0228f32d3",
+  "protocol_verified_against_artifact": true,
+  "qualified": {
+    "candidate_blindness": true,
+    "candidate_science_from_v2_selected_states": true,
+    "f8_f9_replica_rule": true,
+    "source_acquisition_semantics": true,
+    "two_n_pair_publication": true,
+    "worker_and_order_invariance": true
+  },
+  "recommendation": "DO_NOT_AUTHORIZE_OFFICIAL_GENERATION",
+  "schema_version": "rvt-phase9g-v2q-train-generation-readiness/v1",
+  "verdict": "D"
+}
