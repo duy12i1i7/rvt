@@ -343,6 +343,112 @@ def acquisition_protocol_v2_sha256(protocol: Optional[Mapping[str, Any]] = None)
 
 
 # ---------------------------------------------------------------------------
+# Phase 9D-H1R-OD -- the owner-resolved, frozen protocol object
+# ---------------------------------------------------------------------------
+FROZEN_ACQUISITION_SCHEMA_VERSION = "rvt-recoverability-source-acquisition/v2-frozen"
+
+#: The historical clause the owner has now superseded, quoted exactly.
+SUPERSEDED_SAMPLING_CLAUSE = {
+    "authority": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md",
+    "clause": "Sampling is 70% event-balanced and 30% trajectory-uniform.",
+    "status": "SUPERSEDED_FOR_RECOVERABILITY_V2",
+    "scope": "Recoverability source-state acquisition only",
+    "why_non_operational": [
+        "'event-balanced' has no executable candidate-blind definition anywhere in "
+        "the frozen tree",
+        "V1 never operationalized it: the realized generator used fixed fractions of "
+        "the nominal family horizon, which is a trajectory-uniform rule on a planned "
+        "horizon, not a 70/30 mixture",
+        "results/rvt_fd24/datasets/phase9_generation_budget.json already recorded "
+        "BLOCKED_PROTOCOL_INCOMPLETENESS with "
+        "'decision_event_episode_layout_seed_timestamp_mapping' listed as a missing "
+        "required declaration",
+        "the only reading the same document supports -- balancing decisive, "
+        "both-success and both-fail states -- requires COMPACT/LINE candidate "
+        "outcomes",
+        "using candidate outcomes to choose source states violates the frozen "
+        "candidate-blind acquisition requirement and makes sampling circular",
+    ],
+    "post_hoc_meaning_invented": False,
+    "superseded_prospectively": True,
+    "superseded_before": ["fresh official V2 TRAIN", "fresh official V2 VALIDATION",
+                          "Study-A N24", "Study-B", "final test", "model training"],
+    "superseded_after": "V1 was classified PILOT_DESIGN_DIAGNOSTIC by Phase 9D-R",
+}
+
+#: The keys that carry executable selection semantics. The owner resolution must
+#: not change any of them -- it resolves an authority question, not the rule.
+SELECTION_SEMANTICS_KEYS: Tuple[str, ...] = (
+    "rule", "K", "selection_formula", "empty_universe_behaviour",
+    "small_universe_behaviour", "fabrication_permitted", "minimum_spacing_seconds",
+    "control_period_seconds", "spacing_control_steps", "include_initial_state",
+    "universe_definition", "terminal_causes_with_realized_step",
+    "terminal_causes_without_realized_step", "candidate_blind",
+    "prohibited_selection_inputs", "permitted_selection_inputs",
+    "not_a_realized_source_state_is_not_generation_invalid",
+    "uses_future_source_trajectory_length", "uses_future_candidate_outcome",
+)
+
+
+def selection_semantics(protocol: Mapping[str, Any]) -> Dict[str, Any]:
+    """The rule-bearing subset of a protocol object, for equality proofs."""
+    missing = [name for name in SELECTION_SEMANTICS_KEYS if name not in protocol]
+    if missing:
+        raise AcquisitionError(f"protocol is missing selection semantics {missing}")
+    return {name: protocol[name] for name in SELECTION_SEMANTICS_KEYS}
+
+
+def frozen_acquisition_protocol_v2(
+    *, owner_resolution_id: str = "OD-1",
+    design_protocol_sha256: Optional[str] = None,
+) -> Dict[str, Any]:
+    """The final, owner-resolved Recoverability source-acquisition protocol.
+
+    Identical selection semantics to `acquisition_protocol_v2()` -- provable via
+    `selection_semantics()` -- plus the supersession record that makes it
+    freezable. Official V2 generation binds to *this* object's hash.
+    """
+    design = acquisition_protocol_v2()
+    frozen = dict(design)
+    frozen.update({
+        "schema_version": FROZEN_ACQUISITION_SCHEMA_VERSION,
+        "status": "FROZEN",
+        "owner_decision": {
+            "id": owner_resolution_id,
+            "decision": "SUPERSEDE_70_30_CLAUSE_FOR_RECOVERABILITY_V2",
+            "resolved": True,
+            "prospective": True,
+            "adaptive_change_after_freeze_permitted": False,
+            "may_not_be_revised_using": [
+                "future V2 positive/negative balance", "candidate validity",
+                "family performance", "validation score", "H1 metric",
+                "training quality",
+            ],
+        },
+        "superseded_sampling_clause": SUPERSEDED_SAMPLING_CLAUSE,
+        "h1_meaning_unchanged": True,
+        "source_acquisition_v2_prospectively_amended": True,
+        "unchanged_by_this_amendment": [
+            "candidate topology", "Recoverability definition", "Target V4",
+            "success/failure definition", "evaluation metric", "baseline definition",
+            "paired comparison", "candidate rollout", "candidate-pair atomicity",
+            "matched randomness", "F8/F9 three-replica all-success aggregation",
+            "safety", "class weighting", "adequacy gate",
+        ],
+        "design_protocol_sha256": design_protocol_sha256 or sha256_document(design),
+        "selection_semantics_identical_to_design_protocol": True,
+        "authorizes_official_generation": False,
+    })
+    return frozen
+
+
+def frozen_acquisition_protocol_v2_sha256(
+    protocol: Optional[Mapping[str, Any]] = None,
+) -> str:
+    return sha256_document(dict(protocol or frozen_acquisition_protocol_v2()))
+
+
+# ---------------------------------------------------------------------------
 # V2 event identity
 # ---------------------------------------------------------------------------
 SOURCE_EVENT_KEY: Tuple[str, ...] = (

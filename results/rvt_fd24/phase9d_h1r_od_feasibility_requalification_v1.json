@@ -1,0 +1,165 @@
+{
+  "K": 5,
+  "K_tuned": false,
+  "adequacy_gate": 30,
+  "all_families_have_nonzero_support": true,
+  "by_family": [
+    {
+      "M_at_or_above_K": 29,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "family": "F1",
+      "meets_gate": true,
+      "projected_retained_validation_events": 88.8,
+      "projected_validation_selected_events": 148.0,
+      "selected_per_episode": 4.9333,
+      "selected_v2_states": 148,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 18,
+      "M_below_K": 12,
+      "M_zero": 0,
+      "family": "F2",
+      "meets_gate": true,
+      "projected_retained_validation_events": 78.0,
+      "projected_validation_selected_events": 130.0,
+      "selected_per_episode": 4.3333,
+      "selected_v2_states": 130,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 8,
+      "M_below_K": 22,
+      "M_zero": 0,
+      "family": "F3",
+      "meets_gate": true,
+      "projected_retained_validation_events": 61.2,
+      "projected_validation_selected_events": 102.0,
+      "selected_per_episode": 3.4,
+      "selected_v2_states": 102,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 2,
+      "M_below_K": 22,
+      "M_zero": 6,
+      "family": "F4",
+      "meets_gate": true,
+      "projected_retained_validation_events": 48.0,
+      "projected_validation_selected_events": 80.0,
+      "selected_per_episode": 2.6667,
+      "selected_v2_states": 80,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 26,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "family": "F5",
+      "meets_gate": true,
+      "projected_retained_validation_events": 85.2,
+      "projected_validation_selected_events": 142.0,
+      "selected_per_episode": 4.7333,
+      "selected_v2_states": 142,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 13,
+      "M_below_K": 17,
+      "M_zero": 0,
+      "family": "F6",
+      "meets_gate": true,
+      "projected_retained_validation_events": 76.8,
+      "projected_validation_selected_events": 128.0,
+      "selected_per_episode": 4.2667,
+      "selected_v2_states": 128,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 29,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "family": "F7",
+      "meets_gate": true,
+      "projected_retained_validation_events": 88.8,
+      "projected_validation_selected_events": 148.0,
+      "selected_per_episode": 4.9333,
+      "selected_v2_states": 148,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 24,
+      "M_below_K": 6,
+      "M_zero": 0,
+      "family": "F8",
+      "meets_gate": true,
+      "projected_retained_validation_events": 85.2,
+      "projected_validation_selected_events": 142.0,
+      "selected_per_episode": 4.7333,
+      "selected_v2_states": 142,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 17,
+      "M_below_K": 13,
+      "M_zero": 0,
+      "family": "F9",
+      "meets_gate": true,
+      "projected_retained_validation_events": 79.2,
+      "projected_validation_selected_events": 132.0,
+      "selected_per_episode": 4.4,
+      "selected_v2_states": 132,
+      "source_episodes": 30
+    },
+    {
+      "M_at_or_above_K": 6,
+      "M_below_K": 24,
+      "M_zero": 0,
+      "family": "F10",
+      "meets_gate": true,
+      "projected_retained_validation_events": 63.6,
+      "projected_validation_selected_events": 106.0,
+      "selected_per_episode": 3.5333,
+      "selected_v2_states": 106,
+      "source_episodes": 30
+    }
+  ],
+  "conclusion": "every primary family retains nonzero realized source-state support and clears the unchanged >=30 gate under the fixed frozen source-episode budget",
+  "design_pilot_episodes_per_family": 30,
+  "evidence_reused_not_regenerated": true,
+  "families_below_gate": [],
+  "new_outcome_informed_search_performed": false,
+  "official_validation_episodes_per_family": 30,
+  "phase9d_h1r_od_feasibility_requalification_sha256": "1fb39024d452f389e677595ab44e0cc76d0c48452ac120653f3ec1257bfd3f62",
+  "pilot_matches_official_validation_episode_density": true,
+  "retention_assumption": 0.6,
+  "rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+  "schema_version": "rvt-phase9d-h1r-od-feasibility-requalification/v1",
+  "source_evidence": {
+    "path": "results/rvt_fd24/phase9d_h1r_source_only_feasibility_v1.json",
+    "sha256": "a37f78ac779405817904aca190ad71eea13b36955ef968ae0175cd9927e69570"
+  },
+  "structurally_empty_cells": [
+    {
+      "M": 0,
+      "episodes": 6,
+      "family": "F4",
+      "team_size": 16,
+      "termination": "INITIALIZATION_INVALID"
+    }
+  ],
+  "worst_family": {
+    "M_at_or_above_K": 2,
+    "M_below_K": 22,
+    "M_zero": 6,
+    "family": "F4",
+    "meets_gate": true,
+    "projected_retained_validation_events": 48.0,
+    "projected_validation_selected_events": 80.0,
+    "selected_per_episode": 2.6667,
+    "selected_v2_states": 80,
+    "source_episodes": 30
+  },
+  "worst_family_margin_over_gate": 1.6
+}

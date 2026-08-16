@@ -1,0 +1,124 @@
+{
+  "acquisition_protocol": {
+    "K": 5,
+    "K_is_a_maximum_not_a_quota": true,
+    "authorizes_official_generation": false,
+    "candidate_blind": true,
+    "control_period_seconds": 0.15,
+    "design_protocol_sha256": "f2ef1791f2374899250b64fe9b0de39e8c194df5d9951fa818b08bc55bacb77e",
+    "empty_universe_behaviour": "M = 0 emits zero recoverability source events",
+    "fabrication_permitted": false,
+    "h1_meaning_unchanged": true,
+    "include_initial_state": true,
+    "minimum_spacing_seconds": 1.5,
+    "not_a_realized_source_state_is_not_generation_invalid": true,
+    "owner_decision": {
+      "adaptive_change_after_freeze_permitted": false,
+      "decision": "SUPERSEDE_70_30_CLAUSE_FOR_RECOVERABILITY_V2",
+      "id": "OD-1",
+      "may_not_be_revised_using": [
+        "future V2 positive/negative balance",
+        "candidate validity",
+        "family performance",
+        "validation score",
+        "H1 metric",
+        "training quality"
+      ],
+      "prospective": true,
+      "resolved": true
+    },
+    "permitted_selection_inputs": [
+      "realized control step",
+      "realized time",
+      "source termination cause",
+      "realized universe size M",
+      "frozen control period",
+      "frozen minimum spacing"
+    ],
+    "prohibited_selection_inputs": [
+      "compact_outcome",
+      "line_outcome",
+      "target_v4_outcome",
+      "recoverability_label",
+      "candidate_validity",
+      "pair_retention",
+      "model_output",
+      "class_distribution",
+      "h1_performance"
+    ],
+    "rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+    "schema_version": "rvt-recoverability-source-acquisition/v2-frozen",
+    "selection_formula": "idx_j = floor(j * (M - 1) / (K - 1)) for j in 0..K-1",
+    "selection_semantics_identical_to_design_protocol": true,
+    "small_universe_behaviour": "1 <= M <= K retains every realized eligible state",
+    "source_acquisition_v2_prospectively_amended": true,
+    "spacing_control_steps": 10,
+    "status": "FROZEN",
+    "superseded_sampling_clause": {
+      "authority": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md",
+      "clause": "Sampling is 70% event-balanced and 30% trajectory-uniform.",
+      "post_hoc_meaning_invented": false,
+      "scope": "Recoverability source-state acquisition only",
+      "status": "SUPERSEDED_FOR_RECOVERABILITY_V2",
+      "superseded_after": "V1 was classified PILOT_DESIGN_DIAGNOSTIC by Phase 9D-R",
+      "superseded_before": [
+        "fresh official V2 TRAIN",
+        "fresh official V2 VALIDATION",
+        "Study-A N24",
+        "Study-B",
+        "final test",
+        "model training"
+      ],
+      "superseded_prospectively": true,
+      "why_non_operational": [
+        "'event-balanced' has no executable candidate-blind definition anywhere in the frozen tree",
+        "V1 never operationalized it: the realized generator used fixed fractions of the nominal family horizon, which is a trajectory-uniform rule on a planned horizon, not a 70/30 mixture",
+        "results/rvt_fd24/datasets/phase9_generation_budget.json already recorded BLOCKED_PROTOCOL_INCOMPLETENESS with 'decision_event_episode_layout_seed_timestamp_mapping' listed as a missing required declaration",
+        "the only reading the same document supports -- balancing decisive, both-success and both-fail states -- requires COMPACT/LINE candidate outcomes",
+        "using candidate outcomes to choose source states violates the frozen candidate-blind acquisition requirement and makes sampling circular"
+      ]
+    },
+    "terminal_causes_with_realized_step": [
+      "COLLISION",
+      "WORLD_BOUNDARY_EXIT",
+      "PERSISTENT_DEADLOCK",
+      "GOAL_COMPLETE",
+      "HORIZON_COMPLETE"
+    ],
+    "terminal_causes_without_realized_step": [
+      "NUMERICAL_INVALID",
+      "INITIALIZATION_INVALID"
+    ],
+    "unchanged_by_this_amendment": [
+      "candidate topology",
+      "Recoverability definition",
+      "Target V4",
+      "success/failure definition",
+      "evaluation metric",
+      "baseline definition",
+      "paired comparison",
+      "candidate rollout",
+      "candidate-pair atomicity",
+      "matched randomness",
+      "F8/F9 three-replica all-success aggregation",
+      "safety",
+      "class weighting",
+      "adequacy gate"
+    ],
+    "universe_definition": "realized control steps on the frozen minimum-spacing grid, from a validly initialized episode, excluding any step aborted before integration",
+    "uses_future_candidate_outcome": false,
+    "uses_future_source_trajectory_length": true
+  },
+  "acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "authorizes_official_generation": false,
+  "binding_note": "official Recoverability V2 generation must bind to acquisition_protocol_sha256 in this artifact",
+  "design_protocol_object_sha256": "f2ef1791f2374899250b64fe9b0de39e8c194df5d9951fa818b08bc55bacb77e",
+  "owner_resolution_id": "OD-1",
+  "phase9d_h1r_od_source_acquisition_protocol_v2_frozen_sha256": "4d196451de3669af098977be6269128f3dc02a2dc3eeec7a148b8b5a6b6f69d2",
+  "schema_version": "rvt-phase9d-h1r-od-frozen-source-acquisition-protocol/v2",
+  "selection_semantics_digest": "da3f2ce9d681787e1e496c26bdb83dd4acb0fb3a772a3a1ce5a7ab3989496576",
+  "selection_semantics_unchanged_from_design": true,
+  "status": "FROZEN",
+  "supersedes_clause": "Sampling is 70% event-balanced and 30% trajectory-uniform.",
+  "supersession_status": "SUPERSEDED_FOR_RECOVERABILITY_V2"
+}

@@ -1,0 +1,68 @@
+{
+  "K": 5,
+  "adequacy_threshold": 30,
+  "adequacy_threshold_unchanged": true,
+  "artifacts": {
+    "frozen_protocol": {
+      "path": "results/rvt_fd24/phase9d_h1r_od_source_acquisition_protocol_v2_frozen.json",
+      "sha256": "4d196451de3669af098977be6269128f3dc02a2dc3eeec7a148b8b5a6b6f69d2"
+    },
+    "owner_resolution": {
+      "path": "results/rvt_fd24/phase9d_h1r_owner_sampling_resolution_v1.json",
+      "sha256": "ae7b0bff48bbfd9eb5d6a01bd143ee9695051f06360c9b469f2d0c9399da3b05"
+    },
+    "requalification": {
+      "path": "results/rvt_fd24/phase9d_h1r_od_feasibility_requalification_v1.json",
+      "sha256": "1fb39024d452f389e677595ab44e0cc76d0c48452ac120653f3ec1257bfd3f62"
+    }
+  },
+  "candidate_blind": true,
+  "design_pilot_exclusion_active": true,
+  "design_pilot_exclusion_set_sha256": "ccf88d2f48e8c90ab7be7a6471066778faebd3aeac69dff6575551f48e7117a2",
+  "fixed_train_source_budget": 1200,
+  "fixed_validation_source_budget": 300,
+  "h1_meaning_unchanged": true,
+  "input_identity": {
+    "branch": "research/rvt-phase9d-h1r-recoverability-protocol-v2-v1",
+    "h1r_commit": "22159b13283974a5fd6f34eba91f88544e141bf2",
+    "r2_audit_commit": "92668d29c5ea765fc9c1c3ecea23fdc60200b5e6"
+  },
+  "official_generation_started": false,
+  "official_v2_generation_authorized": false,
+  "owner_decision_resolved": true,
+  "phase": "PHASE_9D_H1R_OD",
+  "phase9d_h1r_v2_generation_readiness_v2_sha256": "8719f528f365ccfade9655cb33c6f5d260a6c740658e26af9d98e6ff57fd9c63",
+  "projected_worst_family": "F4",
+  "projected_worst_family_validation_support": 48.0,
+  "recommendation": "AUTHORIZE_FRESH_RECOVERABILITY_V2_GENERATION",
+  "recommendation_scope": "fresh official Recoverability V2 TRAIN and VALIDATION only, bound to acquisition protocol 19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d, under separate explicit owner authorization. Study-A N24, Study B, final test, Residual V2 and training remain unauthorized.",
+  "residual_v2_authorized": false,
+  "rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+  "schema_version": "rvt-phase9d-h1r-v2-generation-readiness/v2",
+  "sealed_domain_counters": {
+    "final_test_dataset_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_v2_candidate_rollouts": 0,
+    "official_v2_recoverability_rows": 0,
+    "optimizer_states": 0,
+    "residual_v2_generation_operations": 0,
+    "study_a_n24_dataset_accesses": 0,
+    "study_b_dataset_accesses": 0,
+    "training_operations": 0,
+    "v1_dataset_mutations": 0
+  },
+  "source_acquisition_protocol_v2_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "supersedes": {
+    "artifact": "results/rvt_fd24/phase9d_h1r_v2_generation_readiness_v1.json",
+    "previous_verdict": "A",
+    "rewritten": false,
+    "sha256": "4933095d8a687b452d4bfacf131d29ddbd0f2968853c4a688676c413a0a4c9f0"
+  },
+  "train_maximum_selected_events": 6000,
+  "training_authorized": false,
+  "v1_reused": false,
+  "validation_maximum_selected_events": 1500,
+  "verdict": "C",
+  "worst_family_margin_over_gate": 1.6
+}

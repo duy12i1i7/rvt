@@ -15,6 +15,12 @@ candidate execution, no label, no authorization and no official generation.
 from .acquisition_v2 import (  # noqa: F401
     DEFAULT_K,
     DESIGN_PILOT_STUDY,
+    FROZEN_ACQUISITION_SCHEMA_VERSION,
+    SELECTION_SEMANTICS_KEYS,
+    SUPERSEDED_SAMPLING_CLAUSE,
+    frozen_acquisition_protocol_v2,
+    frozen_acquisition_protocol_v2_sha256,
+    selection_semantics,
     FIRST_K_ELIGIBLE,
     FIXED_SOURCE_TIME_STRIDE,
     MINIMUM_SPACING_CONTROL_STEPS,
@@ -40,4 +46,10 @@ from .exclusion import (  # noqa: F401
     assert_not_design_pilot_identity,
     design_pilot_identity,
     load_exclusion_set,
+)
+from .manifest_v2 import (  # noqa: F401
+    FROZEN_DECISION_EVENT_CAP,
+    FROZEN_SOURCE_EPISODE_BUDGET,
+    ManifestCompilationError,
+    compile_v2_source_manifest,
 )

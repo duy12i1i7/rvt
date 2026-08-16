@@ -1,0 +1,173 @@
+{
+  "adequacy_gate": {
+    "authority": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md gate 4",
+    "difficult_families_removed": false,
+    "lowered": false,
+    "required_minimum_retained_validation_events_per_primary_family": 30,
+    "retained_redefined": false
+  },
+  "authorizes_official_generation": false,
+  "candidate_blindness": {
+    "candidate_blind": true,
+    "selection_is_a_pure_function_of": [
+      "M",
+      "K"
+    ],
+    "universe_influenced_by_compact_or_line": false,
+    "universe_influenced_by_recoverability_label": false,
+    "universe_influenced_by_target_v4": false
+  },
+  "design_pilot_exclusion": {
+    "design_pilot_regenerated": false,
+    "excluded_identity_count": 300,
+    "exclusion_set_sha256": "ccf88d2f48e8c90ab7be7a6471066778faebd3aeac69dff6575551f48e7117a2",
+    "manifest_compilation_fails_closed_on_overlap": true,
+    "permanent": true
+  },
+  "fixed_source_budget": {
+    "actual_selected_may_be_lower_when_M_below_K": true,
+    "authority": "results/rvt_fd24/datasets/generation_budget_v1.json",
+    "authority_sha256": "e12e42052fd48a6647b4b7fdac77db3a20340d550617ff196fb40b7541da5492",
+    "confirmed_from_committed_authority": true,
+    "extra_episodes_when_M_below_K": false,
+    "frozen_decision_event_caps": {
+      "train": 6000,
+      "validation": 1500
+    },
+    "k_saturates_frozen_caps_exactly": true,
+    "outcome_dependent_stopping": false,
+    "replenish_missing_events": false,
+    "train_maximum_selected_events": 6000,
+    "train_source_episodes": 1200,
+    "validation_maximum_selected_events": 1500,
+    "validation_source_episodes": 300
+  },
+  "frozen_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "generation_invalid_semantics": {
+    "generation_invalid_requires_an_actually_attempted_candidate_rollout": true,
+    "generation_invalid_requires_an_existing_selected_source_snapshot": true,
+    "m_zero_episode_contributes_fake_candidate_invalids": 0,
+    "m_zero_episode_contributes_fake_events": 0,
+    "m_zero_episode_contributes_selected_events": 0,
+    "unreached_future_source_state_disposition": "NOT_A_REALIZED_SOURCE_STATE",
+    "unreached_future_source_state_is_generation_invalid": false
+  },
+  "h1": {
+    "h1_exact_statement": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+    "h1_meaning_unchanged": true,
+    "primary_evaluation_unit": "PAIRED_EPISODE",
+    "primary_metric": "EPISODE_TASK_SUCCESS",
+    "source_acquisition_v2_prospectively_amended": true,
+    "unchanged": [
+      "candidate topology",
+      "Recoverability definition",
+      "Target V4",
+      "success/failure definition",
+      "evaluation metric",
+      "baseline definition",
+      "paired comparison",
+      "candidate rollout",
+      "candidate-pair atomicity",
+      "matched randomness",
+      "F8/F9 three-replica all-success aggregation",
+      "safety",
+      "class weighting",
+      "adequacy gate"
+    ]
+  },
+  "historical_clause": {
+    "authority": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md",
+    "authority_file_sha256": "593bdb4662a10d955e5d7277ac066ac5c357c1097ce28643e9e9745d433cceb9",
+    "authority_file_sha256_matches_h1_requirement_map": true,
+    "clause": "Sampling is 70% event-balanced and 30% trajectory-uniform.",
+    "incompleteness_authority": {
+      "missing_declaration": "decision_event_episode_layout_seed_timestamp_mapping",
+      "path": "results/rvt_fd24/datasets/phase9_generation_budget.json",
+      "status": "BLOCKED_PROTOCOL_INCOMPLETENESS"
+    },
+    "post_hoc_meaning_invented": false,
+    "scope": "Recoverability source-state acquisition only",
+    "status": "SUPERSEDED_FOR_RECOVERABILITY_V2",
+    "superseded_after": "V1 was classified PILOT_DESIGN_DIAGNOSTIC by Phase 9D-R",
+    "superseded_before": [
+      "fresh official V2 TRAIN",
+      "fresh official V2 VALIDATION",
+      "Study-A N24",
+      "Study-B",
+      "final test",
+      "model training"
+    ],
+    "superseded_prospectively": true,
+    "why_non_operational": [
+      "'event-balanced' has no executable candidate-blind definition anywhere in the frozen tree",
+      "V1 never operationalized it: the realized generator used fixed fractions of the nominal family horizon, which is a trajectory-uniform rule on a planned horizon, not a 70/30 mixture",
+      "results/rvt_fd24/datasets/phase9_generation_budget.json already recorded BLOCKED_PROTOCOL_INCOMPLETENESS with 'decision_event_episode_layout_seed_timestamp_mapping' listed as a missing required declaration",
+      "the only reading the same document supports -- balancing decisive, both-success and both-fail states -- requires COMPACT/LINE candidate outcomes",
+      "using candidate outcomes to choose source states violates the frozen candidate-blind acquisition requirement and makes sampling circular"
+    ]
+  },
+  "owner_decision": {
+    "decision": "SUPERSEDE_70_30_CLAUSE_FOR_RECOVERABILITY_V2",
+    "disguised_as_original_v1_rule": false,
+    "post_hoc_meaning_for_event_balanced_invented": false,
+    "prohibited_event_balancing_inputs": [
+      "recoverability label",
+      "COMPACT outcome",
+      "LINE outcome",
+      "both-success",
+      "both-fail",
+      "decisive outcome",
+      "candidate validity",
+      "Target V4 result",
+      "model prediction",
+      "class balance",
+      "pair retention"
+    ],
+    "recorded_as": "V2_PROTOCOL_AMENDMENT"
+  },
+  "owner_decision_id": "OD-1",
+  "phase": "PHASE_9D_H1R_OD",
+  "phase9d_h1r_owner_sampling_resolution_sha256": "ae7b0bff48bbfd9eb5d6a01bd143ee9695051f06360c9b469f2d0c9399da3b05",
+  "predecessor": {
+    "branch": "research/rvt-phase9d-h1r-recoverability-protocol-v2-v1",
+    "h1r_budget_sha256": "c72bea0bcd196d2cd0b5bde93f86b8218227f5cd1b2363edf49c669951f65136",
+    "h1r_commit": "22159b13283974a5fd6f34eba91f88544e141bf2",
+    "h1r_design_protocol_artifact_sha256": "a339279e989ce9200b93ffe33ef4216acbccf34df81d71dcef4259b66af90d4e",
+    "h1r_design_protocol_object_sha256": "f2ef1791f2374899250b64fe9b0de39e8c194df5d9951fa818b08bc55bacb77e",
+    "h1r_feasibility_sha256": "a37f78ac779405817904aca190ad71eea13b36955ef968ae0175cd9927e69570",
+    "h1r_readiness_v1_sha256": "4933095d8a687b452d4bfacf131d29ddbd0f2968853c4a688676c413a0a4c9f0",
+    "h1r_rule_comparison_sha256": "a3694a3ba176aa667c6cb807d1cd6369eee650120be50e0adcfb981becb7d37f",
+    "h1r_verdict": "A",
+    "historical_evidence_rewritten": false,
+    "r2_audit_commit": "92668d29c5ea765fc9c1c3ecea23fdc60200b5e6"
+  },
+  "resolution_is_prospective": true,
+  "resolved": true,
+  "schema_version": "rvt-phase9d-h1r-owner-sampling-resolution/v1",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0
+  },
+  "v1_data_policy": {
+    "classification": "PILOT_DESIGN_DIAGNOSTIC",
+    "combined_recoverability_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "deleted": false,
+    "manifests_and_seals_preserved_permanently": true,
+    "merged_into_v2_confirmatory_data": false,
+    "mutated": false,
+    "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "validation_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e"
+  },
+  "v2_acquisition_rule": {
+    "K": 5,
+    "M_above_K": "select exactly K states including the first and last",
+    "M_at_most_K": "select every realized eligible state",
+    "M_zero": "select zero Recoverability events; never fabricate",
+    "adaptive_replacement_permitted": false,
+    "deterministic": true,
+    "formula": "idx_j = floor(j * (M - 1) / 4) for j = 0,1,2,3,4",
+    "rule": "REALIZED_TRAJECTORY_UNIFORM_K"
+  }
+}
