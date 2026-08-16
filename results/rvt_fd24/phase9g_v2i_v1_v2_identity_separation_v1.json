@@ -1,0 +1,40 @@
+{
+  "equivalent_scientific_state": {
+    "candidate_topology_id": 5,
+    "episode_id": "episode-0",
+    "family": "F3",
+    "graph_fingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "layout_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "robot_id": 2,
+    "split": "train",
+    "study": "study_a_zero_shot",
+    "team_size": 8
+  },
+  "identities_differ": true,
+  "operational_dimensions_tested": [
+    "worker",
+    "chunk",
+    "attempt",
+    "retry",
+    "iteration order"
+  ],
+  "phase9g_v2i_v1_v2_identity_separation_sha256": "4ac826085c7bb141b17b9a37c9b2e1f934cbb63f28c3ab778aaee8b8eeecafa8",
+  "reason_they_cannot_collide": "the V2 identity uses a different schema string, replaces `timestep` with `realized_source_timestep`, and additionally binds source_acquisition_protocol_sha256 and the V2 row-binding spec",
+  "schema_version": "rvt-phase9g-v2i-v1-v2-identity-separation/v1",
+  "source_event_identity_fields": [
+    "schema_version",
+    "study",
+    "split",
+    "family",
+    "layout_sha256",
+    "team_size",
+    "episode_id",
+    "realized_source_timestep",
+    "source_state_fingerprint",
+    "source_acquisition_protocol_sha256"
+  ],
+  "v1_row_id": "a6c74da81f36e64d0da34a615094d6093c3e390ea60d48dfc435a970ec9f887c",
+  "v2_invariant_to_key_order": true,
+  "v2_invariant_to_operational_context": true,
+  "v2_row_id": "85d20fa246955d7c7c96519f4426e8c17493a65fe23f3b12d1aac6b3c6fc3d41"
+}

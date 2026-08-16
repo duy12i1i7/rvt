@@ -22,7 +22,17 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update \
+# Phase 9G-V2I reproducibility repair. The three package pins below are
+# unchanged; they simply stopped resolving because the live bullseye mirrors
+# roll forward (ca-certificates moved to 20250419~deb12u1~deb11u1). They are
+# retrieved unaltered from an immutable Debian snapshot instead, so the image
+# is defined by immutable references rather than rolling repository state.
+ARG DEBIAN_SNAPSHOT=20260220T214329Z
+
+RUN printf 'deb [check-valid-until=no] https://snapshot.debian.org/archive/debian/%s bullseye main\ndeb [check-valid-until=no] https://snapshot.debian.org/archive/debian-security/%s bullseye-security main\ndeb [check-valid-until=no] https://snapshot.debian.org/archive/debian/%s bullseye-updates main\n' \
+        "${DEBIAN_SNAPSHOT}" "${DEBIAN_SNAPSHOT}" "${DEBIAN_SNAPSHOT}" \
+        > /etc/apt/sources.list \
+    && apt-get -o Acquire::Check-Valid-Until=false update \
     && apt-get install --yes --no-install-recommends \
         build-essential=12.9 \
         ca-certificates=20230311+deb12u1~deb11u1 \

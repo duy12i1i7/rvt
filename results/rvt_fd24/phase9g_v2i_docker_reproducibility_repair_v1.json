@@ -1,0 +1,44 @@
+{
+  "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+  "base_image_digest_pinned": true,
+  "context_contamination_found": "a stale macOS CMakeCache.txt under third_party/Python-RVO2/build entered the build context and broke the pyrvo2 wheel; it is untracked host dirt, not a repository defect",
+  "dockerfile_sha256_after": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
+  "dockerfile_sha256_before": "7bc931e328cd61dd9fe814986db494a58b0cc09b993df5803d5e318b627a68a7",
+  "dockerignore_change": "added third_party/**/build and *.egg-info; these paths are untracked host build output and never present in a clean checkout, so a clean-checkout image is unchanged",
+  "dockerignore_sha256": "9a9a777a03b4f3f43ac986b68cd44ec6f08e93d27597b3f1c4226bb72bd9a394",
+  "image_build": "PENDING_CLEAN_CHECKOUT_BUILD",
+  "immutable_references_only": true,
+  "owner_clause": "I25",
+  "phase9g_v2i_docker_reproducibility_repair_sha256": "0d79f0d399b2cf33b8be5308fc0cd60fbf01bee657f095f9deaec3155c46fa92",
+  "problem": {
+    "cause": "the Dockerfile pinned exact apt versions against the mutable Debian bullseye suites, which roll forward; bullseye-security now serves 20250419~deb12u1~deb11u1",
+    "classification": "OPERATIONAL_REPRODUCIBILITY_DEFECT",
+    "scientific_impact": "none",
+    "symptom": "E: Version '20230311+deb12u1~deb11u1' for 'ca-certificates' was not found"
+  },
+  "repaired": true,
+  "requirements_lock_changed": false,
+  "requirements_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+  "resolution": {
+    "archives": [
+      "https://snapshot.debian.org/archive/debian/20260220T214329Z",
+      "https://snapshot.debian.org/archive/debian-security/20260220T214329Z"
+    ],
+    "debian_snapshot": "20260220T214329Z",
+    "exact_historical_package_obtained": true,
+    "method": "immutable Debian snapshot pin",
+    "package_file": "ca-certificates_20230311+deb12u1~deb11u1_all.deb",
+    "package_sha1": "128f98420f0138f754a27a471985478d17fe5bef",
+    "package_size_bytes": 168944,
+    "package_versions_changed": 0,
+    "repinned_to_newer_version": false,
+    "snapshot_archive_name": "debian-security",
+    "verified_resolution": {
+      "build-essential": "12.9",
+      "ca-certificates": "20230311+deb12u1~deb11u1",
+      "git": "1:2.30.2-1+deb11u5"
+    }
+  },
+  "schema_version": "rvt-phase9g-v2i-docker-reproducibility-repair/v1",
+  "status": "REPAIRED"
+}

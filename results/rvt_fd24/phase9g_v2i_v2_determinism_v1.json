@@ -1,0 +1,800 @@
+{
+  "digest_reverse": "05a4f6ebf214223226ee5471aa496bd3b92db473c859528d2b29af741d9c8679",
+  "digest_w1": "05a4f6ebf214223226ee5471aa496bd3b92db473c859528d2b29af741d9c8679",
+  "digest_w12": "05a4f6ebf214223226ee5471aa496bd3b92db473c859528d2b29af741d9c8679",
+  "episodes": 20,
+  "measured_on": "REFERENCE_HOST",
+  "order_invariant": true,
+  "orders_compared": [
+    "forward",
+    "reverse"
+  ],
+  "phase9g_v2i_v2_determinism_sha256": "a8c76b5284ff009faa13d560ddbdb5c97b0907d11134923a0ceb5be0133708e4",
+  "records": [
+    {
+      "M": 10,
+      "acquisition_sha256": "9c21e0e02057e2c1ec01c16c7499a1b929131eca9f5d02811e234629e723069a",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F1/4e9d418dcbc740182e458de45506ac03bc6a2608980fcc34ad24f3278aafcdff/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F1",
+      "seconds": 0.359,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "cf47f44d1f7f6aa829fc8d6084d39673b894d7a068bf37ef168ca5115cf69031",
+        "79fb59ccbf5482f308c626499f000f07b78d8126aa947095d1456181ebfa77a6",
+        "fdd27b9f1f7775cf7498e5b0b5e088a6b0bf9b10842d0e21d27777f9b807f14c",
+        "306a8eac035b45c8ab20b28bd6310496074473e4b15d300a52b88e5b44a27d8b",
+        "8dda9ae90a57052776369e11f2af18affec9975c91c26475ba1b54f6f2dbfa59"
+      ],
+      "selected_fingerprints": [
+        "ff8a86b2cd32d8fdab5fed7103724ad18007a4b41f05d66e78e9c6364682f2c4",
+        "9b77469482c39562a75fb18366b6c938913c0d3a224284b9402adfa89b8325b9",
+        "0cf30f8183833fc0d1f11e76b535da162b4ef3d7bed09cd89b7a6c2729879dab",
+        "f5cc6b9ed72a3c6f2fde9526fa05b51012cb117acc8bdbdee4ccde667deb987f",
+        "8a62a8151114a38de7ac765ab21e47ba795c44c9f4537cbfce0b1ae626c37fc3"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 95
+    },
+    {
+      "M": 10,
+      "acquisition_sha256": "70742444eb3755b4d25ee0dc3baedff7cadefad6be3ce8b04fdef11263f5239c",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F1/4e9d418dcbc740182e458de45506ac03bc6a2608980fcc34ad24f3278aafcdff/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F1",
+      "seconds": 1.467,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "e1ada2a8f24fdd377dd001ecc34ad660cfa83c54e4210dda0d3a4becee7ea516",
+        "bf2b184711fcceb401f4b1a26bd0c03e8d00e028c116c9cf324312231176b925",
+        "eea604ac87795bb586d3f13f607b25dc94665226d2964495722d3be79fa4c1bb",
+        "a699fa17c4eabe56429693683d74c647391e9bba99db28519cf5aade3f9ba392",
+        "a365235303b373954113ec59046e037a51d1e5dd561dd78ddad3b7b2b8eac986"
+      ],
+      "selected_fingerprints": [
+        "787194df12dc23500e46c4a9c1f38b450912153c1713ce182e4fb3ac3fd11089",
+        "a3b6d39d8136f47d241de789aa39e88631080f110425d1be74e38504a04e6952",
+        "299c9b7c9d29488a681a4b9a26b64175be77c956f20b5bb4126c2cfa12ca8667",
+        "c1e0b75d4d9c12dde2f3f01f92ecd6c4c9ebe66f9fa53e0d7f8df20e958d6f7b",
+        "3dd4b0b0b1cd4daef94d3d2e90a4139bf6237b304c5c033cee920825d62d7215"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        20,
+        40,
+        60,
+        90
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 94
+    },
+    {
+      "M": 11,
+      "acquisition_sha256": "7aec981208349673dff2fce6dc0bcd2a234482f31f9f3f0b8cd69982fd15cc34",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F10/0a722f717fb762d7837db373a38af31b86e624f41f53ae29b44f83e73c8fc451/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F10",
+      "seconds": 1.2,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "ce446f6ce0bc98f517a03a11a31bfb57f76c71e4324c3547cb32abe725b82fbf",
+        "757946548332b1100244e8a47e393777f8d4990c92ed119eaee8edbfff73c3dc",
+        "c9277bb70a8d78df3bbc96ba4175d587e78feb657b20e57da5059c92b17221ed",
+        "a98293e37a89033c18edb44ab12fcc02757f9f5e97c63fb2d3a6127a7de11139",
+        "1a94b199d241911c8aadf26b2f83c2fc04a8da1d056736bfdf0f1900aa4bcf66"
+      ],
+      "selected_fingerprints": [
+        "32193ac2ba23892eae8addb56f2cafc0c5246643231c1a4a6a3171e2dbcdd0f5",
+        "ba08f55f9dcc6f35e335f1ef0a4ab93df7a940e032d4275662b7b97c333b96e7",
+        "0f01d079ece735fce4b6e140baa695436ed0374145a762317bf5de1af5140b65",
+        "7fb8e5a6086fc4459b64348538bd11f754e2879fa4a276c0c55478568aa138bd",
+        "048c751df46ee8db39edd118edb1725e57be100ab4971cefb05b8112be9a1de3"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        20,
+        50,
+        70,
+        100
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 102
+    },
+    {
+      "M": 3,
+      "acquisition_sha256": "3f9c0e0cc74fe95219d9a6f69ee0124c4940b15c309ec3c3d08dfcb5bc47186e",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F10/0a722f717fb762d7837db373a38af31b86e624f41f53ae29b44f83e73c8fc451/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F10",
+      "seconds": 1.16,
+      "selected_count": 3,
+      "selected_event_ids": [
+        "89a5f4fb53903d91ce900f370b75e4ff276d8b5cba4ff91db938fe0e4c3bc07f",
+        "73ca31b6b843f34b4384fc1062f465ebd20ddd166fbff7a1c3b327fb87682cec",
+        "475d7fceec120805a71d8b26c8a894e522cc4b6128bbc81cc3e433ab1ec77723"
+      ],
+      "selected_fingerprints": [
+        "ccaa8d0928d284a19238689b712d98084d3d48b7cc2a696170084b4c97d92d82",
+        "dbfe6f6fd4e8bd20478e2032a557e509bc5c302f789838eac1019a63587f86c8",
+        "7dcd3171e7034b14d08ab6bce63c91db0aa02aa32a6594728714c3dae7170949"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 29
+    },
+    {
+      "M": 18,
+      "acquisition_sha256": "b8203041961e5d725c931d19e1cd7d36d777a487e1c616fc7d78ee4ef0bfb01b",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F2/e4ce488109ab6d4a3b777ec72a42cd4297c41f7165cae7873ea56fbe1fa9ad7d/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F2",
+      "seconds": 4.079,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "c9439e57d636cc0b78cacea6ea1a65f383e4d130cce3c362bc12e7978f57b449",
+        "9597baeab84ae98e189a62cccd64fcd02dfee3aa6ea5f294eb8f0465ed21a7b8",
+        "5d7aa832291f6905a406fb67aca0cac13ae14936b2b1c7f6dd58bba8e7704351",
+        "e2611286ff1885d076c10850b6acbc3c6dae2f7502bad496a6c075825db91426",
+        "217bc6d1066465484cb2deb8994ce19e7435b5ad570b5c1048bbfa6a1570d74f"
+      ],
+      "selected_fingerprints": [
+        "4e39a9d532680f861d7da7b18ccda5882eaed0137b97d095964098228441af0d",
+        "dfb489e38051514d95234a2b8bd5b5b9875f80df769d91e614d7eb9f936d12b7",
+        "83cca0918d0dc95440657b79ec8d1d7c6d5ffe4309f11ae6f959f91b31eb6159",
+        "cc857f6deb2a3a6e6232c71f3ce2044701c06e359c99ff773a6211f181f5e916",
+        "afa520e0dda9002b2f2248b337ad3e6c91ee8f7db81d7bbbe3632273d5b35562"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        40,
+        80,
+        120,
+        170
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 171
+    },
+    {
+      "M": 39,
+      "acquisition_sha256": "428c8b9d364b3b8aff51bbd318a69dad1a77e196fcf7d4c9f67bcbb944c2f819",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F2/e4ce488109ab6d4a3b777ec72a42cd4297c41f7165cae7873ea56fbe1fa9ad7d/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F2",
+      "seconds": 31.182,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "558f3c6b3ff38f7b59d92f0e08a73e88195754696f87b41efaa2b03bc1b77931",
+        "20515b79ea728f8a1c7654756534ff07bc2da47d2185086dacbf7fb82afb130f",
+        "892a724d3f65760867ef265a8d2edf45c58b423f6dffeb58dcd8510795656d42",
+        "d19014e05409f63ec6c760fdc4075c514c5ca8bc18037bd6fec6487413c6161e",
+        "7c740c42cdb1654c6b94f01945073586ee1c012a42d9c419458a0d0c4aae39b6"
+      ],
+      "selected_fingerprints": [
+        "ad035822e992fac7130c44a601cacd4929fdd365fc786b245864b0429693ddb7",
+        "4cd4185908322af453302d9cd9f0286221e711e880863a43d8cdfcaaca5e840c",
+        "e2be306e3044f3f1528ac90914b1202db3474f637c58197310bfc7b880a9258c",
+        "f6154d4fc788a21cfb3d0369ce9f5cfe5496bad804d9ed92bd36c3f478ad09b4",
+        "9694e7baa3698d457e24d5bd88b5bed10c0807cae6289b278241477d97950353"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        90,
+        190,
+        280,
+        380
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 380
+    },
+    {
+      "M": 8,
+      "acquisition_sha256": "2039f50a83f3d3f45cb6d88bc2296c2d8712447e6f8c987409fb28b291e0b352",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F3/e9e50671cd70c6bb840eedbab71eb6266accd369a7404da8aa36bf2b60c057e7/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F3",
+      "seconds": 0.914,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "bd1c5fab6e041e7d88895813b3cc703309b2a8c1cfddf9a455a6dd12c79b51d9",
+        "020dd3545b552eb0214f7902dd754c7403a3583c9b01022c66aa070c1bea2bdf",
+        "e2a11d679907d9aaed31bcf9e102215d5bf701f0a571ac96ecfbb3f952819923",
+        "9b758aaabe1df6cdd4baf246342e2158a591c1783911b3cdcfdd190aed5af2f2",
+        "fdb0b138ea926b2e1415a46916a2f7e9e32da76aa165aaf88864cd7a9b567967"
+      ],
+      "selected_fingerprints": [
+        "548fda97d9d7910f003d93e0c833aadc4fd54a2db05a409e6295c11e5ce753cf",
+        "8c7bf11855549852639fd934c08301476c1fb21374fa136e3f645d3fb2552cfa",
+        "097e4c39c97bb9c60e208da2d9982b227797a29f4d3aee93638a6da070b98f51",
+        "28efee750cf79a993ef6bc1733a77b715a969106804a49a7a7e08e55636a71bd",
+        "ad8bb9ce5600b0cc89d051acd66436d8f0bd31c1c4321b72c636d3a4a640da83"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        10,
+        30,
+        50,
+        70
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 76
+    },
+    {
+      "M": 4,
+      "acquisition_sha256": "6c6d4c97bf6331aa5dbc3944f058db9583567745de02a6de66bd72d5e5b4f8bd",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F3/e9e50671cd70c6bb840eedbab71eb6266accd369a7404da8aa36bf2b60c057e7/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F3",
+      "seconds": 1.718,
+      "selected_count": 4,
+      "selected_event_ids": [
+        "82f370f4bf1e7fa90c77a7aafd19a7f37f26a0cfdcaa6925452a27d3259e3741",
+        "7805c1197c0afa3080b44009742d0f6f347b1d8c1ff8c6a27cf030e4a3e1d49f",
+        "a99e4f0eead1c38e8bd90bf6a2c92c4bfa3784160ca8dbb08cd0ecf53039776e",
+        "321ffa4109d9eeae49beb705255dd0e60ad5a2fbd31ef2f33b28389f589ac951"
+      ],
+      "selected_fingerprints": [
+        "353093d38bb80241f192215fe0abe4cbce0bb23ce04970c6a71783a35533c9f5",
+        "ac76a629fa3c7db0093e285ac67d1c31a777bc4ba9a2f72f2c581bcf0aef733e",
+        "7ba5f4c7f352f3d83d38c311f14ed38ed5b673d04d19d2caf69c940e39ae72cf",
+        "8fc6e898aa21e01f9d066cb23e9b0a6fcd952890df9382f1f8d9c4ab4ef19158"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 31
+    },
+    {
+      "M": 4,
+      "acquisition_sha256": "7b6d0c3f7b12097c295f7e5718a4d28b16f90a5db57e52009ddc5bb849f7f6fe",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F4/36bf7c8d274d452fda42f2a96fd032721453aac0d153be79a3e808364fbd2f57/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F4",
+      "seconds": 0.501,
+      "selected_count": 4,
+      "selected_event_ids": [
+        "012fc010c280af6966283ded4ea6b460c83d320741f22b3f9df44a14b6c7f30d",
+        "c70655fa291448a1f5656756acda80207981e4b97df000ac0707ff7671b6387c",
+        "d3ed23a0ef37b2cfa936728a6cb06fe363c35d04d8c1093ad9d7950f9d1ff473",
+        "92ff2e4c44eb6cf9b63e5a8bfa78e0e918df0d9b0addf720931a17917213c7de"
+      ],
+      "selected_fingerprints": [
+        "c6fe9fdeececae7d455c85edc13231ef14cf3ead330b7a2e3cde431c04b0ccef",
+        "7b1b6668938ce4d38357002da16373679c9f7594a54b3641e059582d323e200a",
+        "e25e1d63c1a01c16b18178740b49f5ca5de35f44d492250b43f94330f888541b",
+        "3be68c6c87db63727b6107470d1212a3e0d7ee79d421013a2ad1e7a95f96f6e0"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 37
+    },
+    {
+      "M": 3,
+      "acquisition_sha256": "4ac231ca0a35319373fb4db2a87e47fcbd9b6050d79e77fb8c3aaa6012d0d8bb",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F4/36bf7c8d274d452fda42f2a96fd032721453aac0d153be79a3e808364fbd2f57/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F4",
+      "seconds": 1.784,
+      "selected_count": 3,
+      "selected_event_ids": [
+        "e936f061fb77c1b8ee97f81c302c27ab5585c472dd881b625a657f60e3ec0149",
+        "7a125423dd94fc2716b0ed6a301cc9a6bdf0036bec3cf63e4b3e393eab2e3da3",
+        "eee16c12489aaf993fb6549e6cd630af68e42aeba30cb96bb12f2f4ff0d98df6"
+      ],
+      "selected_fingerprints": [
+        "91cbfd6fcd605b79f864ea846da15242ddc99db0572c75516f1523fafdfb4159",
+        "21e33cdcad47f191439f7945c74149433e1dec5e90d486d2503faba6b0cd1c15",
+        "fcaeb6d56e12cb87bf764a7757a3f4481451cc228549eaba8225c3398c7e2077"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 29
+    },
+    {
+      "M": 20,
+      "acquisition_sha256": "90a35cac6a260efac0f9d92d76e1d23be457b57738fee5375be4792801730157",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F5/b830a39030226ab74946fe3025524b37c6767bf239ed42879ec5f61fc489a6e6/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F5",
+      "seconds": 4.09,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "4de2048755ebdeebb422be024c3746f45616850cbe7f89b160368961da23eb53",
+        "9173ace15caa484b7222e22dc9f93ac86cc3d5a84d7366d5e4424dd29eb1c129",
+        "ff23d0eeebb67282528c31980b62fa69eeb2ef5a36a561c0eca148730e71f5d3",
+        "e5cb9257591c3f63ad09ea91cc5fff8c5018f6cc51706ce7e0829ac2499d446e",
+        "e2205df860a4899a8275415fe1a8365b4c2a61621b7a3155dc4cbc70270d1591"
+      ],
+      "selected_fingerprints": [
+        "3f82d50de8c77c097e0ac6d3dc768122a3e34e1385de73acdeb159e1f8bddf90",
+        "7b9e08efdbe36daf4120acf2f6ae744dd962a93d68cad3149a4901ed2055bf4d",
+        "5c5dd054e7a2d80a405ae4c8309af87ac9a921720e97c9fe0bb5c6402a8e2ef5",
+        "f0eb6b5f343a6118fb571098eb42294af7e1fb9e7d445ba1f292574564831b06",
+        "ec5a5e5c38e2eef0eb0ee812534cec76ec401eef74bfbf4847eb0cb4042c2ec7"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        40,
+        90,
+        140,
+        190
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 197
+    },
+    {
+      "M": 14,
+      "acquisition_sha256": "92ed9c7ec8f891d1b3e41c374913bffcacef4a22951360a744d1c677feca0bc6",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F5/b830a39030226ab74946fe3025524b37c6767bf239ed42879ec5f61fc489a6e6/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F5",
+      "seconds": 7.912,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "d9d94773cf337a106c86108061398a6aed5491c1123f4e800f74b5dbee26f2b9",
+        "046166fea94543545c3551c5cb1d504e18f0ddcc3dc475974179f2080a0bee3b",
+        "421a6a50db9a84776137e834df8a97b56a287ea2fa04a4600bba9848da82d607",
+        "b760802ecc7f71a62aea7389d1f76780ecb4b8df8e306455081662e4cf299d6e",
+        "2c12e7fe0af3543fa138f5d92af5791ab934435bb625df4f988af511d3c990d7"
+      ],
+      "selected_fingerprints": [
+        "05e39794cd174944a2755083203ba70cb7fe08d044aed77a43e132ed3a74b701",
+        "de7bd49fd4d7a6b3f96fd9f5f04e6dac1e280cdea9654ead47ded567d759314d",
+        "03ed19a607bcb96259f1d920b9d09ceccf77db6c31c00d9dea243e774f31f43e",
+        "43ce1901d7273a73d6720c8f86253490094a3a529f7643d91c5a6e2e76c0ff14",
+        "6ea62fd429a9932a7e9af5408d9ee5a191eda949fc419d5e848438ddf1eda908"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        30,
+        60,
+        90,
+        130
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 134
+    },
+    {
+      "M": 7,
+      "acquisition_sha256": "935cb9cef090a6e1bcf09f08698635b0f38015eb7262a8f2d15a00e6fa5a2b55",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F6/2cc9b33d27f96ed2ec6fdfe3085280d0fd77be0f2539b4f000d24b3ca494e13a/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F6",
+      "seconds": 0.329,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "6b5892cf28d81193d6dcab90df02ca96faa44cf9f7775d8fdab11b081bfbf8bf",
+        "f759c4d5ac4a3c7e3bb021514f36c2cc7f888bd7853d4379f632b06585c0d745",
+        "4841f941fcaf118b2674e311314687eb981c698b5865ea8c0cbdeab2aec81bbc",
+        "3dffc70287f73ea6edb27b777b2a8fb0f6efc95005b1ee84e1b0165be4de474f",
+        "61699bf66468978846d5afd97d7eb2f72306d5c5f8afd5806815a492fdfc16d6"
+      ],
+      "selected_fingerprints": [
+        "16823026e5aa6e790bf1674c1647803386a21c7ee2d4f983ce7ce7ac007f8336",
+        "4a5a9c9eda50c2044a42f8e054e9be278a697f374c7febdbf1ddb8208118ba22",
+        "b866ca39fe635f392323bed0bea2a74af001d3c54cc4715bbdb0c2e38ef623e6",
+        "b25cda1bc6cc5b086c896f4444c3612b33708c140e19d034ae30a5542a3929ec",
+        "31838bb20ea8d971bd71b1cc17169bc727c8b05ce3753e6ff2bb25becda15a67"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        10,
+        30,
+        40,
+        60
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 63
+    },
+    {
+      "M": 6,
+      "acquisition_sha256": "01dbab24a8e0da8542dbc6ff4c0cb9226198a36cdd4a592b6650eee95553452a",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F6/2cc9b33d27f96ed2ec6fdfe3085280d0fd77be0f2539b4f000d24b3ca494e13a/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F6",
+      "seconds": 1.499,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "6cc926dc6091d3a55efe40525985c835a2e33d4b93b306ca8b0bf96963e790a0",
+        "34c4b16428cc35a992bea96bd12185c92e9f5db8c756dfc5f60239d25b48e35b",
+        "e93c0faa63f738dec40afda1afb3b4c7162279c7b381d1e7bc8ad68816ec5d41",
+        "16dd5157e20b7990922c1d2211bc1b8ec2a9d8f15b83ddb42a502ff6399adc95",
+        "340bbef616264241da0657f81fca6bfbdd931d8dfc7fcfb4b2660cd1305bb8c0"
+      ],
+      "selected_fingerprints": [
+        "6115e79f16706cd6211fda4ee59a8e3e91f344a3484914ab69acdbf45e2af038",
+        "243866d10973f21e93fe83abaa3f845464f55f9aa1ebee7441a5233746fae831",
+        "3b4eb42608aff2990cea2a5338930c2a161c08f4eaa0f619ad5cbe0501ce7ccb",
+        "bd5b6e3b1cbfa71616ad6a5f7eb63cc26bc1f84c3973370c6cbcdd3ed7537c1d",
+        "c5e8ee5527ffae08a3b96e1ba7956aaa8fd06839aad091d83fcfb2c02fe4bd95"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20,
+        30,
+        50
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 54
+    },
+    {
+      "M": 17,
+      "acquisition_sha256": "33202ba2e718ab84a409c519f98433c554efdb2e46f5db6ae363b0fc3ea9e211",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F7/b4e4798cb1dfbefad0385523426efd921c576f28ac846f414341a69954858c39/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F7",
+      "seconds": 0.855,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "01e55fbdf6ba1a430c30a86c2aaa2036f27c1f34110a5379b81a6ef3526ccd51",
+        "a2cc1c5a9285f37625e4e6eaa391d1e8e5c843cc8da2fd7e3d9681a1f80b8c6c",
+        "d252e532a88725ec812bda5aadad9b4c8e4791af43c4650162a38a4a29eabd4c",
+        "77e8d10e656cb6cb63eb245d5acaa6180567410237d63fbc67bcfa706d886d74",
+        "16907e79a991aa47377bc3c34ed559fb5a842db51a0bf35b35ad54ac6963a912"
+      ],
+      "selected_fingerprints": [
+        "aea0a67858f860680aa53d986d24154c50e31e38ca3d00777d48a6e4d6eac474",
+        "07d3f9bf6612396fbd5534a3520327042dfbc2be0e838dfb394127586682f90b",
+        "beb5717ac5cbaa39560ac8ff6f0a008bfa8964c0123ec9f3581d7a9fe3a06572",
+        "5caa63dcfc382b2d7ba4689ea5cb37a604f2b6b224248163e26e02320d874dd9",
+        "32904ff52039c20cdeb62e83f661703f032473acc9f8b16a49f04f8943dd8828"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        40,
+        80,
+        120,
+        160
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 163
+    },
+    {
+      "M": 6,
+      "acquisition_sha256": "3655ac638076a5bcf0ed67083b7a90a99887bb052e93e6dd4e4f4191317fed5c",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F7/b4e4798cb1dfbefad0385523426efd921c576f28ac846f414341a69954858c39/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F7",
+      "seconds": 1.944,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "2a2f6bd45d15b74f772e8436326f15a46f8a5eebffe33b816bd455480e60fdbb",
+        "80199485c5e15ca447c0504e7df481e299756332f1c2fb7e67e4bb2219ab62ca",
+        "79e7243b501049d4f973b15c5ac598af9bf1d199a15f80fb8015d1faa859388a",
+        "b2e83c05da662c21b41070f062825a72049f393dab86fc2a05bcb2859e6b7453",
+        "9ca8127b559caf969f42478f83f973fb55970c175a39732fcc47a17afb6ebd0b"
+      ],
+      "selected_fingerprints": [
+        "8f6817dcdb964cbbaae53d22e7821c7e4dd489c6cd6230edd2942737376a05d2",
+        "06e1ef9ded1e826b4a014f92916efe100270dcfa8df447201595b62c56a31178",
+        "5b06632925557dacb49fd4b93121048a2663080008d90296b85d086226f13c51",
+        "9b2eace6e617d684b6e26a0bfd3744cea2023e5abb33f366461e6cd591f77ac3",
+        "b1befb1a908bca4cf4819331ae4c5efa0f404625bc2a54b42b7605084ea7c3cd"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20,
+        30,
+        50
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 57
+    },
+    {
+      "M": 18,
+      "acquisition_sha256": "7224d16ec73becea22ef550ac60bf56dd5338bc7e934450853469f1a328c8241",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F8/a3b054baa63f374920206fa3fe37443e8f4f0bfed876b90bb617073217a58eae/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F8",
+      "seconds": 6.358,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "fff4395b5acb2ac545ce958ca0eb0854fc3015fa4c7ea1864c9d571f027d09df",
+        "b1610be580f54a8a1edca448d3df481efdd80e75753869c00b5bf61fa2098307",
+        "1c1a356696a4609839da51ff8b9a91564ad4ea5099d3cc8e94f0ee6aad8da2b1",
+        "ded5becfa6dacaa8e05a3a789732463e4ee9b1adcb01dff2135e48861d427e03",
+        "e7abe8583ca4b9e83f48ecce38dcf7143678e1f9635d6fdb82a5bea56d52c13c"
+      ],
+      "selected_fingerprints": [
+        "67146fbfc233166630b986cfd5d884c2c22073b4d681466057b132514bfb53df",
+        "73fb64e267ebff5b54dccd324ae314e895b55fb8af7231220c2595183c0bfa7e",
+        "177b773b1b45ea7f6851d2cf0bd07a0116d5a48ec024648995b33a2cd725ee2e",
+        "2925ae9e8d21699eedf399493b0ae7a67b76c7b109eed419d6e31568bdfec742",
+        "a8d530a892254055ce9ca1b3afc8792bf50d201d67f190adb118804276451a52"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        40,
+        80,
+        120,
+        170
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 179
+    },
+    {
+      "M": 12,
+      "acquisition_sha256": "877d38bdaaa0d93c30fe6686f1bf3f7ed15584a4cb929ea262898136a6d4b5a5",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F8/a3b054baa63f374920206fa3fe37443e8f4f0bfed876b90bb617073217a58eae/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F8",
+      "seconds": 9.979,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "60d0a88e592c8acf23b6a9cddc893fa1ead8a8c27fc8c71d6fd04710b5dc8d83",
+        "b8fa5dc385b7478b9dafedc33738b99aeed8d9a7ec33132663cf2d47b9418d51",
+        "3e347585a16364937205c0e0c4e0d8d4dc820839558d1f31a0a3559a1d7e1dc5",
+        "961f3bd79c0528444e270bded0ba67cb1db213ca4e2273890a05d186686d8e17",
+        "c3249130011463e604eb852d1f9da01a193f59d78040d71aef075221267f2c13"
+      ],
+      "selected_fingerprints": [
+        "dcded3a83be5bfe4babac639803980c3be2c59b23ae2686085d95890f56c3334",
+        "cea99d42b37c0b63c03d35f20105c41cef78e93a76f406d03b8c0ccd6d82f583",
+        "2c369cad67a96aea1326a080db155f382286d489bf3cfbf5e10d5281fd8c8600",
+        "d50f03d767047438979ac8a13c73dcc977091003a89a7c7197f92897c2ea8c84",
+        "0a9433a5d409d3d0b002a156e6cb7eb30af568d3f115e002bbc5f50707a9e2d5"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        20,
+        50,
+        80,
+        110
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 116
+    },
+    {
+      "M": 23,
+      "acquisition_sha256": "a29a5bac04ddd5c459b8806b2a116ae8c98b72c387df5ad6c44f964b7af419aa",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F9/b9bb29cd55544b7cb946110b349bbfd8b737ec5d04978b57cef598a5803aa924/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F9",
+      "seconds": 1.344,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "c10b1be7c9411be92fb67dec874c6916e705188ff7f3c317c48384550e77f54d",
+        "47a888cbc01d02d3ddbae5389ec42b07cf2d4e69b2568a8ee5dd597cec0650d2",
+        "af749ae83210194e0cb4f89469bad678488a0e833bba5c0509097d40286fe9b4",
+        "21654cd52a75e235fd1e62e72471d76aeeeb8b3e672db7403c2350fc618262d7",
+        "05f197708bb9b41736fd821b1e99fcb91dde1b7ff7e979d1fef25100aaf95c04"
+      ],
+      "selected_fingerprints": [
+        "38f2bd1694f1958adb382743063e32815a1b7dcd381db74f148b6922829c1757",
+        "1a09db26211b3f4258d923d53e9320b5daea0c1f841b559767391c7638539450",
+        "8db742f55e6587161b1e2ac5d3e74e2ec883aa6216da2cd8df4ccbda2b8ad163",
+        "b4e14ef224db34da05d128d41ae5324b79b72d0b282ca5a513e17a511915c54b",
+        "ca5231cae26cf51e90e0fe3e2f7a1492a9c18363eda96fea292691cec0ee9fa4"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        50,
+        110,
+        160,
+        220
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 5,
+      "terminal_cause": "GOAL_COMPLETE",
+      "terminal_control_step": 229
+    },
+    {
+      "M": 6,
+      "acquisition_sha256": "28faf9dd62a1c3187e33084387e1b1b733b4d48a8e66b513ba13ed00c3f5f45a",
+      "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F9/b9bb29cd55544b7cb946110b349bbfd8b737ec5d04978b57cef598a5803aa924/N12/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+      "family": "F9",
+      "seconds": 1.644,
+      "selected_count": 5,
+      "selected_event_ids": [
+        "880461049585d1e7d4332087818d8a3b2a07c310bb45bedb8bf6a9f9135e3a77",
+        "5b3f7afc1a7a47a672939a2af1a1d430d2fab330438b778225a9ee286c8b5e97",
+        "8913e08cfda18367dcdcb9e907dc7d823597f0192adf44c44785dc714d659c25",
+        "4f969e50c5bcd5cfc01d48feae90026a94ec9cb5b09356b2a8ea19aaddb9a6dc",
+        "36bb496020cdbb23f5535f3ecd16726b406587096ddd151f3e0df461bb8823aa"
+      ],
+      "selected_fingerprints": [
+        "4ffe14363aee3a914f298ea466b98bb03ce43d3fcd5d9992a41afeaeeb8e3aed",
+        "6ffcc64d9355336e1e5665754864be32556974bb96dc325f51ea7055cd5e6177",
+        "5dee501323dee8ab444f76c326a152cf7dfcbd4086b9f3b43a6bb4453dcf364a",
+        "15943d313ca39606492557dbace1a722baa0ccaf73e5098c7a66123ad802470e",
+        "c7cfea665e3f0c9ad413edb8661765b44a7733a33d2a3907d0a7ed4bd4b45ffd"
+      ],
+      "selected_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "selected_steps": [
+        0,
+        10,
+        20,
+        30,
+        50
+      ],
+      "source_policy": "S0_SCRIPTED_DIAGNOSTIC",
+      "team_size": 12,
+      "terminal_cause": "COLLISION",
+      "terminal_control_step": 50
+    }
+  ],
+  "schema_version": "rvt-phase9g-v2i-v2-determinism/v1",
+  "threads_per_worker": 1,
+  "w12_seconds": 32.35,
+  "w1_equals_w12": true,
+  "w1_seconds": 70.49,
+  "workers_compared": [
+    1,
+    12
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "authorizes_official_generation": false,
+  "candidate_blind": true,
+  "candidate_outcome_in_acquisition": false,
+  "candidate_science_unchanged": {
+    "candidate_aggregation": "unchanged all_success",
+    "compact_line_execution": "produce_recoverability_candidate (V1 module, reused verbatim)",
+    "matched_randomness": "unchanged frozen derive_generation_seed PRF; the matched disturbance seed still omits candidate topology so COMPACT and LINE share a realization",
+    "pair_atomicity": "unchanged reconcile_candidate_pair",
+    "replica_rules": "unchanged (F8/F9 = 3, others = 1)",
+    "target_v4": "unchanged",
+    "two_n_publication": "unchanged"
+  },
+  "closes_v2q_findings": [
+    "V2Q-F1",
+    "V2Q-F2",
+    "V2Q-F3"
+  ],
+  "module_sha256": {
+    "compiler": "a358e046ba540d03a3b09d46676a912f201cc1997289eeaf536a01590e51635b",
+    "contracts": "5729ef287d5e98fb301a44efb1a4e0d8f681a089f09bbbaf42578d46426a2676",
+    "producer": "95418230c53943fb1477e59c35a617953bee0e0b55b331119bb1a4c0a67a0709"
+  },
+  "modules": {
+    "compiler": "rvt_swarm/phase9g0r/compiler_v2.py",
+    "contracts": "rvt_swarm/phase9g0r/contracts_v2.py",
+    "producer": "rvt_swarm/phase9g0r/producer_v2.py"
+  },
+  "phase9g_v2i_recoverability_v2_executable_binding_sha256": "147bc6cc14f9f8619dbddcb041de92f38e6a8f0d92c379c06536c56fb3ff708e",
+  "protocol_version": "RECOVERABILITY_V2",
+  "schema_version": "rvt-phase9g-v2i-recoverability-v2-executable-binding/v1",
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "stages": {
+    "candidate_results_can_modify_stage_a": false,
+    "stage_a": "execute_v2_source_acquisition -- runs the source episode, enumerates the realized eligible universe, applies REALIZED_TRAJECTORY_UNIFORM_K with K=5, freezes the record",
+    "stage_a_immutable_before_stage_b": true,
+    "stage_b": "compile_recoverability_v2_candidate_tasks + produce_recoverability_v2_event"
+  },
+  "status": "V2_BOUND_TO_THE_PRODUCTION_EXECUTABLE_PATH",
+  "unrealized_state_behaviour": {
+    "v1": "historical GENERATION_INVALID branch preserved for replay",
+    "v2": "unreachable by construction; the producer raises rather than publishing if it is ever reached",
+    "v2_fake_generation_invalid_emitted": 0
+  },
+  "v1_compatibility": {
+    "dispatch": "produce_recoverability_event_by_protocol(protocol_version=...)",
+    "protocol_versions": [
+      "RECOVERABILITY_V1",
+      "RECOVERABILITY_V2"
+    ],
+    "v1_compiler_modified": false,
+    "v1_generation_invalid_accounting_modified": false,
+    "v1_manifests_modified": false,
+    "v1_producer_modified": false,
+    "v1_row_identity_modified": false
+  },
+  "v1_resolved_control_step_consumed": false
+}

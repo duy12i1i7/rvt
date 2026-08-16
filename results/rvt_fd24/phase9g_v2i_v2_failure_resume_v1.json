@@ -1,0 +1,26 @@
+{
+  "M": 8,
+  "candidate_tasks": 5,
+  "completed_units_recomputed_as_new_identities": 0,
+  "completed_units_skipped_on_resume": 2,
+  "duplicate_ledger_appends": 0,
+  "duplicate_row_ids": 0,
+  "episode_id": "v2i-canary/source_episode/study_a_zero_shot/validation/F3/e9e50671cd70c6bb840eedbab71eb6266accd369a7404da8aa36bf2b60c057e7/N5/S0_SCRIPTED_DIAGNOSTIC/episode-0",
+  "family": "F3",
+  "interrupted_after_events": 2,
+  "official_namespace_written": false,
+  "pair_atomicity_preserved": true,
+  "partial_publications": 0,
+  "phase9g_v2i_v2_failure_resume_sha256": "f431d25c2e18f9a6ab023417934500e6ab29c3684a9c4f0cd6852d78a30f20a8",
+  "provenance_class": "V2I_QUALIFICATION_CANARY_NON_OFFICIAL",
+  "replay_of_completed_unit": {
+    "ledger_appended": false,
+    "row_ids_identical": true
+  },
+  "resumed_pending_units": 3,
+  "rows_published": 50,
+  "schema_version": "rvt-phase9g-v2i-v2-failure-resume/v1",
+  "stage_a_acquisition_sha256": "2039f50a83f3d3f45cb6d88bc2296c2d8712447e6f8c987409fb28b291e0b352",
+  "stage_a_idempotent": true,
+  "team_size": 5
+}

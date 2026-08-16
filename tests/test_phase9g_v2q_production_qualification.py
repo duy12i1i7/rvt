@@ -66,17 +66,32 @@ def test_artifact_hashes_canonically(name: str) -> None:
 # ---------------------------------------------------------------------------
 # the three blocking findings, pinned against the live source
 # ---------------------------------------------------------------------------
-def test_no_production_module_binds_the_v2_acquisition_package() -> None:
-    """V2Q-F1/F2/F3 rest on this. If it ever becomes false, the gap artifact and
-    the readiness verdict must be revisited."""
-    offenders = []
-    for package in ("phase9g0r", "phase9"):
-        for path in (pathlib.Path("rvt_swarm") / package).rglob("*.py"):
-            if "phase9d_h1r" in path.read_text(encoding="utf-8"):
-                offenders.append(str(path))
-    assert offenders == [], (
-        "a production module now references the V2 acquisition package; "
-        "phase9g_v2q_executable_binding_gap_v1.json is stale")
+def test_v2q_binding_gap_was_closed_by_phase_9g_v2i() -> None:
+    """This assertion was inverted by Phase 9G-V2I, which is the point.
+
+    In V2Q no production module bound the V2 acquisition package, and this test
+    pinned that. V2I implemented the binding, so the tripwire now asserts the
+    transition instead: the historical V2Q finding is preserved unchanged, and
+    production really does bind the frozen protocol now.
+    """
+    binders = sorted(
+        str(path)
+        for package in ("phase9g0r", "phase9")
+        for path in (pathlib.Path("rvt_swarm") / package).rglob("*.py")
+        if "phase9d_h1r" in path.read_text(encoding="utf-8"))
+    assert binders, "Phase 9G-V2I must bind the V2 acquisition package"
+    assert "rvt_swarm/phase9g0r/compiler_v2.py" in binders
+
+    # the historical V2Q finding stays exactly as recorded
+    gap = load("gap")
+    assert gap["production_modules_referencing_phase9d_h1r"] == 0
+    assert [f["id"] for f in gap["findings"]] == ["V2Q-F1", "V2Q-F2", "V2Q-F3"]
+
+    closed = json.loads(
+        (ROOT / "phase9g_v2i_recoverability_v2_executable_binding_v1.json")
+        .read_text(encoding="ascii"))
+    assert closed["status"] == "V2_BOUND_TO_THE_PRODUCTION_EXECUTABLE_PATH"
+    assert closed["closes_v2q_findings"] == ["V2Q-F1", "V2Q-F2", "V2Q-F3"]
 
 
 def test_production_compiler_still_reads_v1_scheduled_events() -> None:
@@ -292,14 +307,29 @@ def test_image_qualification_records_its_failure_without_reusing_an_old_image() 
         "packages_still_available"]["ca-certificates=20230311+deb12u1~deb11u1"] is False
 
 
-def test_dockerfile_was_not_modified_to_force_a_build() -> None:
+def test_dockerfile_pins_are_unchanged_after_the_snapshot_repair() -> None:
+    """V2Q recorded the Dockerfile hash to prove no pin was relaxed to force a
+    build. Phase 9G-V2I repaired reproducibility under owner clause I25 by
+    pinning an immutable Debian snapshot, so the file hash moved -- but every
+    package version pin must still be byte-identical."""
     from rvt_swarm.phase8.common import file_sha256
-    image = load("image")
-    assert image["dockerfile"]["sha256"] == \
-        file_sha256(pathlib.Path("docker/generation/Dockerfile"))
     text = pathlib.Path("docker/generation/Dockerfile").read_text()
-    assert "ca-certificates=20230311+deb12u1~deb11u1" in text
+    for pin in ("build-essential=12.9",
+                "ca-certificates=20230311+deb12u1~deb11u1",
+                "git=1:2.30.2-1+deb11u5"):
+        assert pin in text, f"package pin {pin} was altered"
     assert "PYTHONPATH=/opt/rvt" in text
+    assert "snapshot.debian.org" in text
+
+    repair = json.loads(
+        (ROOT / "phase9g_v2i_docker_reproducibility_repair_v1.json")
+        .read_text(encoding="ascii"))
+    assert repair["resolution"]["package_versions_changed"] == 0
+    assert repair["resolution"]["repinned_to_newer_version"] is False
+    assert repair["resolution"]["exact_historical_package_obtained"] is True
+    assert repair["dockerfile_sha256_before"] == load("image")["dockerfile"]["sha256"]
+    assert repair["dockerfile_sha256_after"] == \
+        file_sha256(pathlib.Path("docker/generation/Dockerfile"))
 
 
 # ---------------------------------------------------------------------------

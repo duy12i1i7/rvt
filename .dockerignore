@@ -6,3 +6,5 @@ __pycache__
 .ruff_cache
 results/**/tmp*
 results/**/staging*
+third_party/**/build
+third_party/**/*.egg-info

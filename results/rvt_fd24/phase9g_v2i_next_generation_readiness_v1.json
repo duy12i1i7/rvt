@@ -1,0 +1,87 @@
+{
+  "artifacts": {
+    "binding": {
+      "path": "results/rvt_fd24/phase9g_v2i_recoverability_v2_executable_binding_v1.json",
+      "sha256": "147bc6cc14f9f8619dbddcb041de92f38e6a8f0d92c379c06536c56fb3ff708e"
+    },
+    "canary": {
+      "path": "results/rvt_fd24/phase9g_v2i_v2_end_to_end_canary_v1.json",
+      "sha256": "a2dccbb968412576b516c5d849cfa373e0e5ad23a4ed0d535ebfae7026352589"
+    },
+    "determinism": {
+      "path": "results/rvt_fd24/phase9g_v2i_v2_determinism_v1.json",
+      "sha256": "a8c76b5284ff009faa13d560ddbdb5c97b0907d11134923a0ceb5be0133708e4"
+    },
+    "docker": {
+      "path": "results/rvt_fd24/phase9g_v2i_docker_reproducibility_repair_v1.json",
+      "sha256": "0d79f0d399b2cf33b8be5308fc0cd60fbf01bee657f095f9deaec3155c46fa92"
+    },
+    "manifest": {
+      "path": "results/rvt_fd24/phase9g_v2i_v2_manifest_dry_compile_v1.json",
+      "sha256": "3ea293ff430fc04c045429ecf5db31dd8d6492d6d1c10ff2eee5acd1605b9c15"
+    },
+    "resume": {
+      "path": "results/rvt_fd24/phase9g_v2i_v2_failure_resume_v1.json",
+      "sha256": "f431d25c2e18f9a6ab023417934500e6ab29c3684a9c4f0cd6852d78a30f20a8"
+    },
+    "row_identity": {
+      "path": "results/rvt_fd24/phase9g_v2i_recoverability_row_identity_v2_contract_v1.json",
+      "sha256": "9dcde635fa5c73b14d1bb423183bf18d9e5b49fcb7a25ab58893a5b41cc44f5a"
+    },
+    "separation": {
+      "path": "results/rvt_fd24/phase9g_v2i_v1_v2_identity_separation_v1.json",
+      "sha256": "4ac826085c7bb141b17b9a37c9b2e1f934cbb63f28c3ab778aaee8b8eeecafa8"
+    }
+  },
+  "closed_scopes": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_v2_train_rows": 0,
+    "official_v2_validation_rows": 0,
+    "optimizer_states": 0,
+    "residual_rows": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v1_mutations": 0
+  },
+  "implemented": {
+    "docker_reproducibility_repair": true,
+    "protocol_version_dispatch": true,
+    "row_identity_v2": true,
+    "v2_compiler": true,
+    "v2_manifest_format": true,
+    "v2_producer": true,
+    "v2_source_acquisition": true
+  },
+  "input_identity": {
+    "branch": "research/rvt-phase9g-v2i-production-implementation-v1",
+    "start_commit": "92ff458772ec0654b88f5985e1ca70bf81c66602"
+  },
+  "next_phase": "rerun Phase 9G-V2Q final qualification once target-host access is configured",
+  "official_generation_started": false,
+  "official_v2_generation_authorized": false,
+  "phase": "PHASE_9G_V2I",
+  "phase9g_v2i_next_generation_readiness_sha256": "d006cc976af45794282487242f0e8982ff8fe133ae37cbd95021bc012efd491b",
+  "production_profile_unchanged": {
+    "chunk_size": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads": 1,
+    "workers": 12
+  },
+  "protocol_version": "RECOVERABILITY_V2",
+  "recommendation": "DO_NOT_AUTHORIZE_OFFICIAL_GENERATION",
+  "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+  "schema_version": "rvt-phase9g-v2i-next-generation-readiness/v1",
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "target_blocker": "no configured key-based access; credentials are never requested, guessed or embedded",
+  "target_status": "TARGET_REQUALIFICATION_PENDING",
+  "v1_replayable": true,
+  "v2q_findings_closed": [
+    "V2Q-F1",
+    "V2Q-F2",
+    "V2Q-F3"
+  ],
+  "verdict": "C"
+}

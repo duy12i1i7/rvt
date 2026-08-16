@@ -1,0 +1,109 @@
+{
+  "candidate_results_materialized": 0,
+  "excluded_identities_loaded": 350,
+  "exclusion_sets_enforced": [
+    "results/rvt_fd24/phase9d_h1r_design_pilot_exclusion_set_v1.json",
+    "results/rvt_fd24/phase9g_v2q_qualification_canary_exclusion_set_v1.json"
+  ],
+  "executed": false,
+  "phase9g_v2i_v2_manifest_dry_compile_sha256": "3ea293ff430fc04c045429ecf5db31dd8d6492d6d1c10ff2eee5acd1605b9c15",
+  "schema_version": "rvt-phase9g-v2i-v2-manifest-dry-compile/v1",
+  "splits": {
+    "train": {
+      "K": 5,
+      "acquisition_rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+      "adaptive_refill_permitted": false,
+      "authorizes_official_generation": false,
+      "families": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10"
+      ],
+      "final_test_episodes": 0,
+      "frozen_source_episode_budget": 1200,
+      "maximum_is_a_cap_not_a_target": true,
+      "maximum_selected_source_events": 6000,
+      "n24_episodes": 0,
+      "outcome_dependent_stopping_permitted": false,
+      "realized_event_count_is_emergent": true,
+      "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+      "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "source_episodes": 1200,
+      "source_policies": [
+        "S0_SCRIPTED_DIAGNOSTIC",
+        "S1_ALWAYS_COMPACT",
+        "S2_ALWAYS_LINE",
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "S4_FROZEN_TRANSITION_PROTOCOL",
+        "S5_BOUNDED_PERTURBATION"
+      ],
+      "study_b_episodes": 0,
+      "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ],
+      "v2_source_manifest_sha256": "c3f205381f8c1622102dc6a89e8254b4d0c6a6dc86491f9a5758be141f1b94e6"
+    },
+    "validation": {
+      "K": 5,
+      "acquisition_rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+      "adaptive_refill_permitted": false,
+      "authorizes_official_generation": false,
+      "families": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10"
+      ],
+      "final_test_episodes": 0,
+      "frozen_source_episode_budget": 300,
+      "maximum_is_a_cap_not_a_target": true,
+      "maximum_selected_source_events": 1500,
+      "n24_episodes": 0,
+      "outcome_dependent_stopping_permitted": false,
+      "realized_event_count_is_emergent": true,
+      "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+      "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "source_episodes": 300,
+      "source_policies": [
+        "S0_SCRIPTED_DIAGNOSTIC",
+        "S1_ALWAYS_COMPACT",
+        "S2_ALWAYS_LINE",
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+        "S4_FROZEN_TRANSITION_PROTOCOL",
+        "S5_BOUNDED_PERTURBATION"
+      ],
+      "study_b_episodes": 0,
+      "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+      "team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ],
+      "v2_source_manifest_sha256": "80b133519112a06a7b735247fcf0a210047d3658a15cddc2c738d7bd864fa252"
+    }
+  },
+  "train_first_boundary": {
+    "reason": "TRAIN closes first; VALIDATION receives separate authorization",
+    "validation_generation_permitted_now": false
+  }
+}
