@@ -1,15 +1,65 @@
 {
   "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
   "base_image_digest_pinned": true,
+  "build_context_findings": [
+    {
+      "classification": "UNTRACKED_HOST_BUILD_DIRT",
+      "id": "V2I-D1",
+      "issue": "stale macOS CMakeCache.txt under third_party/Python-RVO2/build entered the build context and broke the pyrvo2 wheel",
+      "repository_defect": false,
+      "resolution": "excluded in .dockerignore; a clean-checkout image is unchanged"
+    },
+    {
+      "classification": "BUILD_PROCEDURE",
+      "id": "V2I-D2",
+      "issue": "a build from a git worktree fails the Dockerfile's own git rev-parse HEAD assertion because a worktree .git is a pointer file",
+      "repository_defect": false,
+      "resolution": "authoritative image built from a clean clone"
+    },
+    {
+      "classification": "PRE_EXISTING_REPOSITORY_TEST_DEFECT",
+      "id": "V2I-D3",
+      "introduced_by_commit": "6ce4a37",
+      "introduced_by_this_phase": false,
+      "issue": "tests/test_phase9g_a1v_validation.py hard-coded ROOT/.venv/bin/python, the only such occurrence in the suite, so it could never run inside the qualified image",
+      "repository_defect": true,
+      "resolution": "use sys.executable, matching every other subprocess test; nothing asserted was changed"
+    }
+  ],
   "context_contamination_found": "a stale macOS CMakeCache.txt under third_party/Python-RVO2/build entered the build context and broke the pyrvo2 wheel; it is untracked host dirt, not a repository defect",
   "dockerfile_sha256_after": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
   "dockerfile_sha256_before": "7bc931e328cd61dd9fe814986db494a58b0cc09b993df5803d5e318b627a68a7",
   "dockerignore_change": "added third_party/**/build and *.egg-info; these paths are untracked host build output and never present in a clean checkout, so a clean-checkout image is unchanged",
   "dockerignore_sha256": "9a9a777a03b4f3f43ac986b68cd44ec6f08e93d27597b3f1c4226bb72bd9a394",
-  "image_build": "PENDING_CLEAN_CHECKOUT_BUILD",
+  "image": {
+    "architecture": "linux/amd64",
+    "built_from": "clean git clone at the exact source commit",
+    "environment": {
+      "MKL_CBWR": "COMPATIBLE",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0",
+      "PYTHONPATH": "/opt/rvt",
+      "RVT_FD24_NUMERICAL_EXECUTION_PROFILE": "FD24_NUMERICAL_EXECUTION_PROFILE_V1"
+    },
+    "image_id": "sha256:da5b98b6fba7b103f5d9ae099e984b40f1b8a9074c88a0142a5529c52c1ead50",
+    "installed_package_versions": {
+      "build-essential": "12.9",
+      "ca-certificates": "20230311+deb12u1~deb11u1",
+      "git": "1:2.30.2-1+deb11u5"
+    },
+    "installed_pins_match_frozen_pins": true,
+    "numpy_version": "2.0.2",
+    "python_version": "3.9.6",
+    "revision_label": "9c738b75c0975c06ec7648abb15984a4f34d84e0",
+    "torch_version": "2.8.0+cpu"
+  },
+  "image_build": "SUCCEEDED",
   "immutable_references_only": true,
   "owner_clause": "I25",
-  "phase9g_v2i_docker_reproducibility_repair_sha256": "0d79f0d399b2cf33b8be5308fc0cd60fbf01bee657f095f9deaec3155c46fa92",
+  "phase9g_v2i_docker_reproducibility_repair_sha256": "28f214c5d5380d7f741283b27498a31c4a26dfa8c3d934c73bb341f62fefaffe",
   "problem": {
     "cause": "the Dockerfile pinned exact apt versions against the mutable Debian bullseye suites, which roll forward; bullseye-security now serves 20250419~deb12u1~deb11u1",
     "classification": "OPERATIONAL_REPRODUCIBILITY_DEFECT",

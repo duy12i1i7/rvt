@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -157,7 +158,7 @@ def test_a1v_runner_resolves_exact_empty_validation_boundary(tmp_path: Path) -> 
         "phase9g_a1r_operational_contract_amendment_sha256",
     )
     command = [
-        str(ROOT / ".venv/bin/python"),
+        sys.executable,
         str(ROOT / "scripts/run_phase9g_a1v_recoverability_validation.py"),
         "--root", str(ROOT),
         "--writer-root", str(tmp_path / "staging/study_a_zero_shot-validation-recoverability"),

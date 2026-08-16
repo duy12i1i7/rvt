@@ -14,7 +14,7 @@
     },
     "docker": {
       "path": "results/rvt_fd24/phase9g_v2i_docker_reproducibility_repair_v1.json",
-      "sha256": "0d79f0d399b2cf33b8be5308fc0cd60fbf01bee657f095f9deaec3155c46fa92"
+      "sha256": "28f214c5d5380d7f741283b27498a31c4a26dfa8c3d934c73bb341f62fefaffe"
     },
     "manifest": {
       "path": "results/rvt_fd24/phase9g_v2i_v2_manifest_dry_compile_v1.json",
@@ -63,7 +63,7 @@
   "official_generation_started": false,
   "official_v2_generation_authorized": false,
   "phase": "PHASE_9G_V2I",
-  "phase9g_v2i_next_generation_readiness_sha256": "d006cc976af45794282487242f0e8982ff8fe133ae37cbd95021bc012efd491b",
+  "phase9g_v2i_next_generation_readiness_sha256": "626e2e9ecfc102f0658ea02d4c8cf50e6c5877dd476f9111d9cc38698a66be07",
   "production_profile_unchanged": {
     "chunk_size": 1,
     "infrastructure_timeout_seconds": 243.0,
