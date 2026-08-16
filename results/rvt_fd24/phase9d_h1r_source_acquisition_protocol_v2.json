@@ -1,0 +1,176 @@
+{
+  "acquisition_protocol": {
+    "K": 5,
+    "K_is_a_maximum_not_a_quota": true,
+    "authorizes_official_generation": false,
+    "candidate_blind": true,
+    "control_period_seconds": 0.15,
+    "empty_universe_behaviour": "M = 0 emits zero recoverability source events",
+    "fabrication_permitted": false,
+    "include_initial_state": true,
+    "minimum_spacing_seconds": 1.5,
+    "not_a_realized_source_state_is_not_generation_invalid": true,
+    "permitted_selection_inputs": [
+      "realized control step",
+      "realized time",
+      "source termination cause",
+      "realized universe size M",
+      "frozen control period",
+      "frozen minimum spacing"
+    ],
+    "prohibited_selection_inputs": [
+      "compact_outcome",
+      "line_outcome",
+      "target_v4_outcome",
+      "recoverability_label",
+      "candidate_validity",
+      "pair_retention",
+      "model_output",
+      "class_distribution",
+      "h1_performance"
+    ],
+    "rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+    "schema_version": "rvt-recoverability-source-acquisition/v2",
+    "selection_formula": "idx_j = floor(j * (M - 1) / (K - 1)) for j in 0..K-1",
+    "small_universe_behaviour": "1 <= M <= K retains every realized eligible state",
+    "spacing_control_steps": 10,
+    "terminal_causes_with_realized_step": [
+      "COLLISION",
+      "WORLD_BOUNDARY_EXIT",
+      "PERSISTENT_DEADLOCK",
+      "GOAL_COMPLETE",
+      "HORIZON_COMPLETE"
+    ],
+    "terminal_causes_without_realized_step": [
+      "NUMERICAL_INVALID",
+      "INITIALIZATION_INVALID"
+    ],
+    "universe_definition": "realized control steps on the frozen minimum-spacing grid, from a validly initialized episode, excluding any step aborted before integration",
+    "uses_future_candidate_outcome": false,
+    "uses_future_source_trajectory_length": true
+  },
+  "acquisition_protocol_sha256": "f2ef1791f2374899250b64fe9b0de39e8c194df5d9951fa818b08bc55bacb77e",
+  "authorizes_official_generation": false,
+  "candidate_blindness": {
+    "future_dependence_audit": {
+      "distinction": "the rule reads how long the realized SOURCE trajectory turned out to be. It never reads what COMPACT or LINE did from any state, and no candidate rollout exists when selection runs. This is retrospective over source execution, blind over candidate outcome.",
+      "uses_future_candidate_outcome": false,
+      "uses_future_source_trajectory_length": true
+    },
+    "permitted_selection_inputs": [
+      "realized control step",
+      "realized time",
+      "source termination cause",
+      "realized universe size M",
+      "frozen control period",
+      "frozen minimum spacing"
+    ],
+    "prohibited_selection_inputs": [
+      "compact_outcome",
+      "line_outcome",
+      "target_v4_outcome",
+      "recoverability_label",
+      "candidate_validity",
+      "pair_retention",
+      "model_output",
+      "class_distribution",
+      "h1_performance"
+    ],
+    "proof": [
+      "no selection function accepts a candidate, label or model argument",
+      "selection is a pure function of M and K alone",
+      "`recoverability_source_event_id_v2` raises on every forbidden field",
+      "the pilot executed zero candidate rollouts"
+    ]
+  },
+  "determinism": {
+    "identical_M": 300,
+    "identical_event_ids": 300,
+    "identical_fingerprints": 300,
+    "identical_indices": 300,
+    "replay_episodes": 300
+  },
+  "event_identity": {
+    "additive": true,
+    "forbidden_fields": [
+      "worker",
+      "worker_id",
+      "chunk",
+      "chunk_id",
+      "retry",
+      "attempt",
+      "attempt_index",
+      "wall_clock",
+      "seconds",
+      "timestamp",
+      "candidate_topology",
+      "candidate_result",
+      "compact_outcome",
+      "line_outcome",
+      "aggregate_label",
+      "label",
+      "disposition",
+      "target_v4_disposition",
+      "model_prediction",
+      "model_output",
+      "pair_retained"
+    ],
+    "key": [
+      "schema_version",
+      "study",
+      "split",
+      "family",
+      "layout_sha256",
+      "team_size",
+      "episode_id",
+      "realized_source_timestep",
+      "source_state_fingerprint",
+      "source_acquisition_protocol_sha256"
+    ],
+    "rewrites_v1_row_identity": false,
+    "row_binding_compatibility": "additive: the V2 source-event identity replaces only the event coordinate that V1 built before execution. Robot-local row identity, candidate identity, the 2N publication contract and event clustering for event-equal weighting are untouched.",
+    "schema_version": "rvt-recoverability-source-event-identity/v2"
+  },
+  "frozen": false,
+  "implementation": {
+    "competing_state_semantics_created": false,
+    "module": "rvt_swarm/phase9d_h1r/acquisition_v2.py",
+    "selection": "select(REALIZED_TRAJECTORY_UNIFORM_K, universe, K)",
+    "source_state_representation": "the existing canonical execution state; the fingerprint is `phase9c_rb.counterfactual.canonical_execution_hash`, the same canonical form `snapshot()` hashes, so a V2 event points at exactly the state the frozen snapshot machinery restores",
+    "universe_enumerator": "enumerate_realized_source_universe"
+  },
+  "input_identity": {
+    "branch": "research/rvt-phase9d-h1r-recoverability-protocol-v2-v1",
+    "design_commit_parent": "92668d29c5ea765fc9c1c3ecea23fdc60200b5e6",
+    "r2_audit_commit": "92668d29c5ea765fc9c1c3ecea23fdc60200b5e6"
+  },
+  "phase9d_h1r_source_acquisition_protocol_v2_sha256": "a339279e989ce9200b93ffe33ef4216acbccf34df81d71dcef4259b66af90d4e",
+  "schema_version": "rvt-phase9d-h1r-source-acquisition-protocol/v2",
+  "source_state_lifecycle": {
+    "M_semantics": "M is the number of realized eligible source states on the frozen spacing grid for one realized source episode",
+    "eligibility": [
+      "the episode initialized validly",
+      "the control step was actually attained: step() advanced the clock rather than aborting before integration",
+      "the step lies on the frozen minimum-spacing grid"
+    ],
+    "frozen_inputs_reused": {
+      "K_used": 5,
+      "control_period_seconds": 0.15,
+      "maximum_events_per_episode_frozen_cap": 12,
+      "minimum_temporal_spacing_seconds": 1.5
+    },
+    "snapshot_boundary": "post-step. COLLISION, WORLD_BOUNDARY_EXIT, PERSISTENT_DEADLOCK, GOAL_COMPLETE and HORIZON_COMPLETE are detected after integration and after the clock advanced, so the terminal step itself is a realized source state. R2 verified this directly and refuted the event-vs-terminal ordering hypothesis.",
+    "terminal_causes_with_realized_step": [
+      "COLLISION",
+      "WORLD_BOUNDARY_EXIT",
+      "PERSISTENT_DEADLOCK",
+      "GOAL_COMPLETE",
+      "HORIZON_COMPLETE"
+    ],
+    "terminal_causes_without_realized_step": [
+      "NUMERICAL_INVALID",
+      "INITIALIZATION_INVALID"
+    ]
+  },
+  "status": "PROSPECTIVE_DESIGN_PENDING_OWNER_DECISION"
+}

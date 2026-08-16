@@ -1,0 +1,100 @@
+{
+  "K": 5,
+  "candidate_outcomes_used": false,
+  "class_balance_used": false,
+  "compared_on": "SOURCE_ONLY_PROPERTIES",
+  "episodes": 300,
+  "phase9d_h1r_source_acquisition_rule_comparison_sha256": "a3694a3ba176aa667c6cb807d1cd6369eee650120be50e0adcfb981becb7d37f",
+  "qualitative": {
+    "FIRST_K_ELIGIBLE": {
+      "determinism": "DETERMINISTIC",
+      "early_termination_sensitivity": "LOW",
+      "fixed_budget_predictability": "HIGH",
+      "h1_compatibility": "compatible but systematically biased to episode openings, which no frozen authority requests",
+      "implementation_complexity": "LOWEST",
+      "trajectory_coverage": "POOR -- concentrates on the first 6 s"
+    },
+    "FIXED_SOURCE_TIME_STRIDE": {
+      "determinism": "DETERMINISTIC",
+      "early_termination_sensitivity": "HIGH",
+      "fixed_budget_predictability": "LOW -- yield collapses on short episodes",
+      "h1_compatibility": "compatible but reintroduces the V1 failure mode in a family-independent form",
+      "implementation_complexity": "LOW",
+      "trajectory_coverage": "POOR on short episodes, absent below one stride"
+    },
+    "REALIZED_LEGACY_STAGE_ONLY": {
+      "determinism": "DETERMINISTIC",
+      "early_termination_sensitivity": "EXTREME -- this is the measured V1 failure",
+      "fixed_budget_predictability": "VERY LOW",
+      "h1_compatibility": "compatible in principle, infeasible in practice",
+      "implementation_complexity": "MODERATE",
+      "trajectory_coverage": "NEARLY NONE -- almost every retained event is the 0.1H slot"
+    },
+    "REALIZED_TRAJECTORY_UNIFORM_K": {
+      "determinism": "DETERMINISTIC",
+      "early_termination_sensitivity": "LOWEST -- a short episode still contributes every realized state",
+      "fixed_budget_predictability": "HIGH -- yield is min(M, K) exactly",
+      "h1_compatibility": "compatible: H1 is a pooled paired-episode task success claim with no per-stage or per-position component",
+      "implementation_complexity": "LOW -- one floor-index formula",
+      "trajectory_coverage": "BEST -- first and last realized eligible states always included"
+    }
+  },
+  "recoverability_labels_used": false,
+  "rules": {
+    "FIRST_K_ELIGIBLE": {
+      "episodes_with_zero_yield": 6,
+      "expected_selected_states_per_episode": 4.1933,
+      "families_with_zero_events": [],
+      "family_coverage": 10,
+      "mean_progress_span_fraction": 0.646687,
+      "mean_selected_on_early_terminating_episodes": 3.648,
+      "mean_temporal_span_fraction": 0.601014,
+      "selected_events_total": 1258,
+      "team_size_coverage": 5
+    },
+    "FIXED_SOURCE_TIME_STRIDE": {
+      "episodes_with_zero_yield": 6,
+      "expected_selected_states_per_episode": 1.3333,
+      "families_with_zero_events": [],
+      "family_coverage": 10,
+      "mean_progress_span_fraction": 0.159776,
+      "mean_selected_on_early_terminating_episodes": 1,
+      "mean_temporal_span_fraction": 0.175643,
+      "selected_events_total": 400,
+      "team_size_coverage": 5
+    },
+    "REALIZED_LEGACY_STAGE_ONLY": {
+      "episodes_with_zero_yield": 203,
+      "expected_selected_states_per_episode": 0.4267,
+      "families_with_zero_events": [
+        "F4"
+      ],
+      "family_coverage": 9,
+      "mean_progress_span_fraction": 0.169881,
+      "mean_selected_on_early_terminating_episodes": 0.0615,
+      "mean_temporal_span_fraction": 0.090892,
+      "selected_events_total": 128,
+      "team_size_coverage": 5
+    },
+    "REALIZED_TRAJECTORY_UNIFORM_K": {
+      "episodes_with_zero_yield": 6,
+      "expected_selected_states_per_episode": 4.1933,
+      "families_with_zero_events": [],
+      "family_coverage": 10,
+      "mean_progress_span_fraction": 1.031666,
+      "mean_selected_on_early_terminating_episodes": 3.648,
+      "mean_temporal_span_fraction": 0.894603,
+      "selected_events_total": 1258,
+      "team_size_coverage": 5
+    }
+  },
+  "schema_version": "rvt-phase9d-h1r-source-acquisition-rule-comparison/v1",
+  "selected_rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+  "selection_rationale": "UNIFORM_K and FIRST_K yield the same number of events by construction (min(M, K)), so the choice between them is decided purely by trajectory coverage, which is a source-only property: UNIFORM_K spans a mean 0.895 of the realized trajectory against FIRST_K's 0.601. No label, class balance or candidate outcome entered this comparison.",
+  "v1_failure_reproduced": {
+    "interpretation": "the pilot independently reproduces the V1 acquisition yield without using any V1 data",
+    "legacy_rule_events_per_episode": 0.4267,
+    "v1_observed_train_events_per_episode": 0.3692,
+    "v1_observed_validation_events_per_episode": 0.4
+  }
+}

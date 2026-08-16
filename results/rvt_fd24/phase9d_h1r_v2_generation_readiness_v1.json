@@ -1,0 +1,234 @@
+{
+  "artifacts": {
+    "budget": {
+      "path": "results/rvt_fd24/phase9d_h1r_v2_budget_design_v1.json",
+      "sha256": "c72bea0bcd196d2cd0b5bde93f86b8218227f5cd1b2363edf49c669951f65136"
+    },
+    "comparison": {
+      "path": "results/rvt_fd24/phase9d_h1r_source_acquisition_rule_comparison_v1.json",
+      "sha256": "a3694a3ba176aa667c6cb807d1cd6369eee650120be50e0adcfb981becb7d37f"
+    },
+    "exclusion": {
+      "path": "results/rvt_fd24/phase9d_h1r_design_pilot_exclusion_set_v1.json",
+      "sha256": "ccf88d2f48e8c90ab7be7a6471066778faebd3aeac69dff6575551f48e7117a2"
+    },
+    "feasibility": {
+      "path": "results/rvt_fd24/phase9d_h1r_source_only_feasibility_v1.json",
+      "sha256": "a37f78ac779405817904aca190ad71eea13b36955ef968ae0175cd9927e69570"
+    },
+    "protocol": {
+      "path": "results/rvt_fd24/phase9d_h1r_source_acquisition_protocol_v2.json",
+      "sha256": "a339279e989ce9200b93ffe33ef4216acbccf34df81d71dcef4259b66af90d4e"
+    }
+  },
+  "compute_estimate": {
+    "candidate_rollout": {
+      "cost_direction_note": "the V1 unit cost is an over-estimate for V2: every V1 realized state sat at 0.1H with almost the whole horizon left to roll out, whereas V2 selects states across the trajectory, and a later state has less remaining horizon",
+      "projected_candidate_aggregates": 12579.9,
+      "projected_cpu_hours": 129.98,
+      "projected_source_events": 6289.9,
+      "projected_wall_hours_at_12_workers": 10.83,
+      "timeout_headroom": 3.59,
+      "v1_actually_attempted_aggregates": 1126,
+      "v1_maximum_atomic_unit_wall_seconds": 67.67367183999158,
+      "v1_measured_cpu_seconds_per_attempted_aggregate": 37.195
+    },
+    "qualified_profile": {
+      "chunk_size_atomic_units": 1,
+      "infrastructure_timeout_seconds": 243.0,
+      "numeric_threads": 1,
+      "profile_id": "PROFILE_RECOVERABILITY_V1",
+      "source": "results/rvt_fd24/phase9g0p_operational_production_contract_v2.json amended by results/rvt_fd24/phase9g_a1r_operational_contract_amendment_v1.json (60.0 -> 243.0)",
+      "workers": 12
+    },
+    "source_only_acquisition": {
+      "measured_cpu_seconds_per_episode": 3.7887,
+      "measured_on": "the design-pilot host, not the qualified target host",
+      "projected_cpu_hours": 1.579,
+      "projected_wall_hours_at_12_workers": 0.132,
+      "source_episodes": 1500
+    },
+    "storage": {
+      "assessment": "storage is not a binding constraint at this scale",
+      "basis": "V1 published 10634 rows from 563 retained pairs; V2 projects roughly an order of magnitude more retained pairs",
+      "projected_v2_scientific_rows_order_of_magnitude": "1e5",
+      "shard_byte_sizes_not_in_repository": true,
+      "v1_train_scientific_rows": 8340,
+      "v1_validation_scientific_rows": 2294
+    }
+  },
+  "downstream": {
+    "checkpoints": 0,
+    "hyperparameter_search": 0,
+    "official_v2_generation": "NO",
+    "residual_v2": "NO",
+    "training_operations": 0
+  },
+  "frozen_and_not_reopened": {
+    "adequacy_gate_minimum_retained_validation_events_per_family": 30,
+    "candidate_pair_all_or_none_publication": "UNCHANGED",
+    "class_weighting": "NONE_UNWEIGHTED_BCE",
+    "compact_semantics": "UNCHANGED",
+    "event_equal_scientific_weighting": "UNCHANGED",
+    "f8_f9_replica_rule": "3_MATCHED_REPLICAS_ALL_SUCCESS",
+    "line_semantics": "UNCHANGED",
+    "matched_randomness": "UNCHANGED",
+    "safety": "UNCHANGED",
+    "target_v4_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "topology_transition_science": "UNCHANGED"
+  },
+  "h1_authority": {
+    "conclusion": "REPLACING THE SLOTS IS AN ACQUISITION CHANGE, NOT AN H1 CHANGE",
+    "decision_state_slots_are_data_sampling_times": true,
+    "evidence": [
+      "results/rvt_fd24/source_event_timing_addendum_v1.json#event_slot_distinction.statement declares the Phase 9 decision-state slots to be DATA SAMPLING TIMES, explicitly not source-policy transition event times",
+      "results/rvt_fd24/phase9d_r2_recoverability_causal_summary_v1.json and docs/PHASE9D_R2_RECOVERABILITY_CAUSAL_AUDIT.md establish that event-0..event-4 are time-based slots at 0.10/0.30/0.50/0.70/0.90 of the nominal family horizon, not progress-, geometry- or event-predicate-based stages",
+      "results/rvt_fd24/phase9d_h1_requirement_map_v1.json records H1 as a pooled paired-episode task-success claim with per_family_effect_claim_predeclared = false",
+      "S0..S5 are the six source-policy classes, a separate axis from the five decision-state slots"
+    ],
+    "h1_exact_statement": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+    "per_family_effect_claim_predeclared": false,
+    "primary_evaluation_unit": "PAIRED_EPISODE",
+    "primary_families": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "F10"
+    ],
+    "primary_metric": "EPISODE_TASK_SUCCESS",
+    "s0_s4_are_semantic_h1_stages": false
+  },
+  "input_identity": {
+    "branch": "research/rvt-phase9d-h1r-recoverability-protocol-v2-v1",
+    "head": "92668d29c5ea765fc9c1c3ecea23fdc60200b5e6",
+    "r2_audit_commit": "92668d29c5ea765fc9c1c3ecea23fdc60200b5e6",
+    "r2_verdict": "CATEGORY_B_SOURCE_EVENT_ACQUISITION_DESIGN_FAILURE"
+  },
+  "isolation": {
+    "final_test_dataset_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_v2_candidate_rollouts": 0,
+    "official_v2_recoverability_rows": 0,
+    "optimizer_states": 0,
+    "residual_v2_generation_operations": 0,
+    "study_a_n24_dataset_accesses": 0,
+    "study_b_dataset_accesses": 0,
+    "training_operations": 0,
+    "v1_dataset_mutations": 0
+  },
+  "official_v2_generation_authorized": false,
+  "owner_decisions_required": [
+    {
+      "authority": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md line 13; rvt_swarm/phase9/budget.py#_known_study_a_bounds; results/rvt_fd24/datasets/phase9_generation_budget.json (status BLOCKED_PROTOCOL_INCOMPLETENESS, with 'decision_event_episode_layout_seed_timestamp_mapping' listed as a missing required declaration)",
+      "id": "OD-1",
+      "options": [
+        "A: declare the 70/30 mixture superseded for Recoverability V2 and freeze 100 percent realized-trajectory-uniform acquisition",
+        "B: define 'event-balanced' operationally against the frozen source-only event vocabulary (local_constriction, local_opening, externally_forced_diagnostic) in results/rvt_fd24/source_event_timing_addendum_v1.json, then re-run this feasibility study against the mixed rule",
+        "C: keep the mixture as written and accept that Recoverability V2 acquisition cannot be frozen"
+      ],
+      "question": "The frozen sampling authority declares that sampling is 70 percent event-balanced and 30 percent trajectory-uniform. 'Event-balanced' is never operationally defined anywhere in the frozen tree, V1 never implemented it, and the proposed V2 rule is 100 percent trajectory-uniform. How should the mixture be resolved?",
+      "recommendation_basis": "V1 already behaved as a pure trajectory-uniform sampler on the nominal horizon, so option A changes no realized behaviour except the horizon it is uniform over; but this is a scientific authority change and is the owner's to make.",
+      "recommended_by_analysis": "A",
+      "resolved_by_this_phase": false,
+      "why_not_resolvable_here": "the only reading of 'event-balanced' that the same document supports - balancing decisive, both-success and both-fail states - is a candidate-OUTCOME category, which this phase forbids as an acquisition input and which would make acquisition circular. The only candidate-blind reading - balancing source-observable local topology events - is a definition that does not exist in the frozen tree and would have to be invented."
+    },
+    {
+      "authority": "results/rvt_fd24/source_policy_contracts_v1.json#common_contract.decision_state_sampling",
+      "id": "OD-2",
+      "options": [
+        "A: record the clause as superseded for Recoverability V2",
+        "B: retain the clause and abandon V2 acquisition"
+      ],
+      "question": "The frozen source-policy common contract states 'use only predeclared Phase 9B slots that occur while the episode is active; never move or replace an unavailable slot'. V2 replaces predeclared slots with realized-state enumeration. Confirm this clause is superseded for V2.",
+      "recommended_by_analysis": "A",
+      "resolved_by_this_phase": false,
+      "why_not_resolvable_here": "this clause is exactly the mechanism R2 proved infeasible, and the phase brief authorizes replacing the acquisition mechanism - but the clause sits inside a hash-frozen contract, so its supersession must be recorded by the owner rather than assumed."
+    },
+    {
+      "authority": "no frozen authority defines a warm-up or first-eligible control step for decision-state sampling",
+      "id": "OD-3",
+      "options": [
+        "A: include step 0 (as implemented)",
+        "B: exclude step 0 and re-run feasibility"
+      ],
+      "question": "Should the initial realized state (control step 0) be eligible? V2 includes it because it is a realized, candidate-neutral state and no frozen authority places a lower bound on event time.",
+      "recommended_by_analysis": "A",
+      "resolved_by_this_phase": false,
+      "why_not_resolvable_here": "excluding it would be a new scientific threshold, which this phase must not invent"
+    },
+    {
+      "authority": "docs/RVT_DECISION_STATE_SAMPLING_PROTOCOL.md: 'Family and team budgets are uniform before the label audit'",
+      "id": "OD-4",
+      "options": [
+        "A: accept - episode budgets stay uniform, realized counts differ by physics",
+        "B: investigate F4/N16 initialization as a separate scenario-validity phase"
+      ],
+      "question": "F4 at N=16 fails initialization validity under all six source policies on layout train-f4-00, so that family/team cell is structurally empty under every acquisition rule. Accept the non-uniform realized distribution, or treat it as a scenario defect to repair upstream?",
+      "recommended_by_analysis": "B as a separate phase; A meanwhile",
+      "resolved_by_this_phase": false,
+      "why_not_resolvable_here": "repairing scenario geometry is outside acquisition and would change the source domain"
+    }
+  ],
+  "phase": "PHASE_9D_H1R",
+  "phase9d_h1r_v2_generation_readiness_sha256": "4933095d8a687b452d4bfacf131d29ddbd0f2968853c4a688676c413a0a4c9f0",
+  "r2_causal_conclusion": {
+    "candidate_pair_reconciliation": "CONFORMANT",
+    "event_vs_terminal_ordering_defect": "REFUTED",
+    "genuine_attempted_candidate_generation_invalid": 0,
+    "infrastructure_contamination": 0,
+    "partner_only_pair_loss": 0,
+    "source": "results/rvt_fd24/phase9d_r2_recoverability_causal_summary_v1.json",
+    "train_dropped_events_total": 5557,
+    "train_dropped_events_with_no_source_snapshot": 5557,
+    "validation_dropped_events_total": 1380,
+    "validation_dropped_events_with_no_source_snapshot": 1380
+  },
+  "recommendation": "DO_NOT_AUTHORIZE_V2_GENERATION",
+  "residual_v2_authorized": false,
+  "schema_version": "rvt-phase9d-h1r-v2-generation-readiness/v1",
+  "training_authorized": false,
+  "v1_data_policy": {
+    "classification": "PILOT_DESIGN_DIAGNOSTIC",
+    "mutated": false,
+    "official_v2_generated_fresh": true,
+    "reused_as_confirmatory_h1_evidence": false
+  },
+  "v1_dataset_roots": {
+    "combined_recoverability_root_sha256": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "train_manifest_sha256": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "validation_manifest_sha256": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e"
+  },
+  "v1_failure": {
+    "denominator_problem": "V1 built every event identity before its source episode ran and counted an unreachable identity as a candidate-stage invalid. The 11114 TRAIN and 2760 VALIDATION 'invalid aggregates' were wrapper accounting for source states that never existed.",
+    "planned_train_events": 6000,
+    "planned_validation_events": 1500,
+    "realized_train_events": 443,
+    "realized_validation_events": 120
+  },
+  "v2_accounting_vocabulary": {
+    "candidate_stage_outcomes": [
+      "CANDIDATE_AGGREGATE_ATTEMPTED",
+      "CANDIDATE_AGGREGATE_LABELABLE",
+      "GENERATION_INVALID",
+      "PAIR_RETAINED",
+      "PAIR_DROPPED",
+      "ROBOT_LOCAL_ROWS_PUBLISHED"
+    ],
+    "rule": "a source state that never existed is NOT_A_REALIZED_SOURCE_STATE and is never reported as candidate GENERATION_INVALID",
+    "source_stage_outcomes": [
+      "SOURCE_EPISODE_SCHEDULED",
+      "SOURCE_EPISODE_REALIZED",
+      "NOT_A_REALIZED_SOURCE_STATE",
+      "ELIGIBLE_SOURCE_STATE",
+      "SELECTED_SOURCE_EVENT"
+    ]
+  },
+  "verdict": "A"
+}

@@ -1,0 +1,92 @@
+{
+  "adequacy_gate": {
+    "authority": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md gate 4",
+    "lowered": false,
+    "required_minimum_retained_validation_events_per_primary_family": 30
+  },
+  "family_budgets_uniform": true,
+  "family_specific_budgets_proposed": false,
+  "measured_source_only_yield_per_episode": {
+    "F1": 4.9333,
+    "F10": 3.5333,
+    "F2": 4.3333,
+    "F3": 3.4,
+    "F4": 2.6667,
+    "F5": 4.7333,
+    "F6": 4.2667,
+    "F7": 4.9333,
+    "F8": 4.7333,
+    "F9": 4.4
+  },
+  "options": [
+    {
+      "changes_frozen_budget": false,
+      "episodes_per_family": 30,
+      "margin_over_gate": 1.6,
+      "minimum_projected": 48.0,
+      "option": "KEEP_FROZEN_VALIDATION_EPISODE_BUDGET",
+      "projected_retained_events_per_family": {
+        "F1": 88.8,
+        "F10": 63.6,
+        "F2": 78.0,
+        "F3": 61.2,
+        "F4": 48.0,
+        "F5": 85.2,
+        "F6": 76.8,
+        "F7": 88.8,
+        "F8": 85.2,
+        "F9": 79.2
+      },
+      "validation_source_episodes": 300
+    },
+    {
+      "changes_frozen_budget": true,
+      "episodes_per_family": 45,
+      "margin_over_gate": 2.4,
+      "minimum_projected": 72.0,
+      "option": "ENLARGE_VALIDATION_EPISODE_BUDGET_BY_MARGIN",
+      "projected_retained_events_per_family": {
+        "F1": 133.2,
+        "F10": 95.4,
+        "F2": 117.0,
+        "F3": 91.8,
+        "F4": 72.0,
+        "F5": 127.8,
+        "F6": 115.2,
+        "F7": 133.2,
+        "F8": 127.8,
+        "F9": 118.8
+      },
+      "requires_owner_approval": true,
+      "validation_source_episodes": 450
+    }
+  ],
+  "phase9d_h1r_v2_budget_design_sha256": "c72bea0bcd196d2cd0b5bde93f86b8218227f5cd1b2363edf49c669951f65136",
+  "predeclared_assumptions": {
+    "budget_margin": 1.5,
+    "candidate_retention_given_realization": 0.6,
+    "declared_before_pilot_aggregates_were_inspected": true,
+    "v1_observed_retention_given_realization": 1.0,
+    "why_conservative": "V1 retained 443/443 TRAIN and 120/120 VALIDATION pairs given a realized snapshot, but every V1 realized state sat at 0.1H. V2 states span the whole trajectory, including terminal steps, from which no candidate rollout has yet been run. The haircut is a budgeting margin and is never an acquisition input."
+  },
+  "realized_distribution_note": "episode budgets stay uniform across family and team size. The realized event counts still differ by family because trajectories differ - that is physics, not a budget change. One cell is structurally empty: F4 at N=16 fails initialization validity under all six source policies on layout train-f4-00, so it contributes zero source states under every acquisition rule.",
+  "schema_version": "rvt-phase9d-h1r-v2-budget-design/v1",
+  "status": "PROPOSED_PENDING_OWNER_DECISION",
+  "stopping_rule": {
+    "forbidden": [
+      "generate until 30 events are retained",
+      "generate until class balance is good"
+    ],
+    "outcome_dependent_stopping_permitted": false,
+    "rule": "FIXED_PREDECLARED_SOURCE_EPISODE_BUDGET"
+  },
+  "train_budget": {
+    "changes_frozen_budget": false,
+    "frozen_source_episodes": 1200,
+    "projected_selected_events": 5032.0
+  },
+  "worst_family": {
+    "family": "F4",
+    "yield_per_episode": 2.6667
+  }
+}
