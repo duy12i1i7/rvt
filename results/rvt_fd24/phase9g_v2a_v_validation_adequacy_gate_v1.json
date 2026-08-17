@@ -1,0 +1,103 @@
+{
+  "all_primary_families_pass": true,
+  "episodes_added_for_weak_families": 0,
+  "evaluated_after_full_manifest": true,
+  "gate": "RETAINED_VALIDATION_SOURCE_EVENTS_PER_PRIMARY_FAMILY",
+  "gate_authority": "results/rvt_fd24/phase9d_h1_requirement_map_v1.json and phase9d_h1r_owner_sampling_resolution_v1.json: required_minimum_retained_validation_events_per_primary_family = 30",
+  "gate_unchanged": true,
+  "h1r_prospective_worst_family_projection": {
+    "family": "F4",
+    "projected_retained_validation_events": 48.0,
+    "projection_conservative": true,
+    "realized_retained_validation_events": 77
+  },
+  "m_zero_episodes_replaced": 0,
+  "minimum": 30,
+  "outcome_dependent_stopping_used": false,
+  "per_family": [
+    {
+      "family": "F1",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 147
+    },
+    {
+      "family": "F2",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 128
+    },
+    {
+      "family": "F3",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 111
+    },
+    {
+      "family": "F4",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 77
+    },
+    {
+      "family": "F5",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 146
+    },
+    {
+      "family": "F6",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 131
+    },
+    {
+      "family": "F7",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 147
+    },
+    {
+      "family": "F8",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 147
+    },
+    {
+      "family": "F9",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 138
+    },
+    {
+      "family": "F10",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 113
+    }
+  ],
+  "phase9g_v2a_v_validation_adequacy_gate_sha256": "c3fed6bc589aa111dfade0488fc847c92110c5dcdedd2bfbe61c61e3ca3b3f45",
+  "primary_families": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10"
+  ],
+  "replenishment_performed": false,
+  "schema_version": "rvt-phase9g-v2a-v-adequacy-gate/v1",
+  "unit": "RETAINED_SOURCE_EVENT_PAIR",
+  "unit_is_not_candidate_aggregates": true,
+  "unit_is_not_robot_rows": true,
+  "worst_family": {
+    "family": "F4",
+    "minimum": 30,
+    "passes": true,
+    "retained_source_events": 77
+  }
+}

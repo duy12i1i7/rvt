@@ -1,0 +1,1035 @@
+{
+  "adequacy_gate": {
+    "all_primary_families_pass": true,
+    "episodes_added_for_weak_families": 0,
+    "evaluated_after_full_manifest": true,
+    "gate": "RETAINED_VALIDATION_SOURCE_EVENTS_PER_PRIMARY_FAMILY",
+    "minimum": 30,
+    "outcome_dependent_stopping_used": false,
+    "per_family": [
+      {
+        "family": "F1",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 147
+      },
+      {
+        "family": "F2",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 128
+      },
+      {
+        "family": "F3",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 111
+      },
+      {
+        "family": "F4",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 77
+      },
+      {
+        "family": "F5",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 146
+      },
+      {
+        "family": "F6",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 131
+      },
+      {
+        "family": "F7",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 147
+      },
+      {
+        "family": "F8",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 147
+      },
+      {
+        "family": "F9",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 138
+      },
+      {
+        "family": "F10",
+        "minimum": 30,
+        "passes": true,
+        "retained_source_events": 113
+      }
+    ],
+    "primary_families": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "F10"
+    ],
+    "unit": "RETAINED_SOURCE_EVENT_PAIR",
+    "unit_is_not_candidate_aggregates": true,
+    "unit_is_not_robot_rows": true,
+    "worst_family": {
+      "family": "F4",
+      "minimum": 30,
+      "passes": true,
+      "retained_source_events": 77
+    }
+  },
+  "authorization": "OWNER: AUTHORIZE_OFFICIAL_RECOVERABILITY_V2_VALIDATION (VALIDATION only, exactly 300 source episodes)",
+  "closed_scopes": {
+    "additional_train_rows": 0,
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "optimizer_states": 0,
+    "residual_rows": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v1_mutations": 0
+  },
+  "composite_validation_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+  "comprehensive_exclusion_union_sha256": "89a1839ce8087015040f44f903745e5e4b8f16a34ca9407879c7bdc1dfe67ab5",
+  "comprehensive_exclusion_union_size": 380,
+  "dataset_manifest_sha256": "0307028ef3cba85d6d4fe5996e2613795234f86b296d60e65cd5b0a48d7c9221",
+  "execution_host": {
+    "architecture": "linux/amd64",
+    "docker_engine": "29.6.1",
+    "host": "100.71.102.9",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "os": "Windows 11 Pro 10.0.26200.9168",
+    "visible_cpus": 24,
+    "wsl_distribution": "Ubuntu-24.04"
+  },
+  "family_by_n": {
+    "F1/N12": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 56,
+      "eligible_states": 53,
+      "positive": 33,
+      "replica_executions": 56,
+      "retained_pair_events": 28,
+      "rows": 672,
+      "selected_events": 28,
+      "source_episodes": 6,
+      "valid_negative": 23
+    },
+    "F1/N16": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 58,
+      "eligible_states": 54,
+      "positive": 26,
+      "replica_executions": 58,
+      "retained_pair_events": 29,
+      "rows": 928,
+      "selected_events": 29,
+      "source_episodes": 6,
+      "valid_negative": 32
+    },
+    "F1/N5": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 65,
+      "positive": 53,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 300,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 7
+    },
+    "F1/N6": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 66,
+      "positive": 53,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 360,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 7
+    },
+    "F1/N8": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 71,
+      "positive": 49,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 480,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 11
+    },
+    "F10/N12": {
+      "M_at_or_above_K": 1,
+      "M_below_K": 5,
+      "M_zero": 0,
+      "candidate_aggregates": 40,
+      "eligible_states": 62,
+      "positive": 7,
+      "replica_executions": 40,
+      "retained_pair_events": 20,
+      "rows": 480,
+      "selected_events": 20,
+      "source_episodes": 6,
+      "valid_negative": 33
+    },
+    "F10/N16": {
+      "M_at_or_above_K": 0,
+      "M_below_K": 6,
+      "M_zero": 0,
+      "candidate_aggregates": 30,
+      "eligible_states": 15,
+      "replica_executions": 30,
+      "retained_pair_events": 15,
+      "rows": 480,
+      "selected_events": 15,
+      "source_episodes": 6,
+      "valid_negative": 30
+    },
+    "F10/N5": {
+      "M_at_or_above_K": 4,
+      "M_below_K": 2,
+      "M_zero": 0,
+      "candidate_aggregates": 56,
+      "eligible_states": 44,
+      "positive": 9,
+      "replica_executions": 56,
+      "retained_pair_events": 28,
+      "rows": 280,
+      "selected_events": 28,
+      "source_episodes": 6,
+      "valid_negative": 47
+    },
+    "F10/N6": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 50,
+      "positive": 18,
+      "replica_executions": 52,
+      "retained_pair_events": 26,
+      "rows": 312,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 34
+    },
+    "F10/N8": {
+      "M_at_or_above_K": 3,
+      "M_below_K": 3,
+      "M_zero": 0,
+      "candidate_aggregates": 48,
+      "eligible_states": 55,
+      "positive": 13,
+      "replica_executions": 48,
+      "retained_pair_events": 24,
+      "rows": 384,
+      "selected_events": 24,
+      "source_episodes": 6,
+      "valid_negative": 35
+    },
+    "F2/N12": {
+      "M_at_or_above_K": 4,
+      "M_below_K": 2,
+      "M_zero": 0,
+      "candidate_aggregates": 54,
+      "eligible_states": 102,
+      "positive": 24,
+      "replica_executions": 54,
+      "retained_pair_events": 27,
+      "rows": 648,
+      "selected_events": 27,
+      "source_episodes": 6,
+      "valid_negative": 30
+    },
+    "F2/N16": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 46,
+      "eligible_states": 33,
+      "positive": 11,
+      "replica_executions": 46,
+      "retained_pair_events": 23,
+      "rows": 736,
+      "selected_events": 23,
+      "source_episodes": 6,
+      "valid_negative": 35
+    },
+    "F2/N5": {
+      "M_at_or_above_K": 3,
+      "M_below_K": 3,
+      "M_zero": 0,
+      "candidate_aggregates": 54,
+      "eligible_states": 49,
+      "positive": 16,
+      "replica_executions": 54,
+      "retained_pair_events": 27,
+      "rows": 270,
+      "selected_events": 27,
+      "source_episodes": 6,
+      "valid_negative": 38
+    },
+    "F2/N6": {
+      "M_at_or_above_K": 3,
+      "M_below_K": 3,
+      "M_zero": 0,
+      "candidate_aggregates": 54,
+      "eligible_states": 52,
+      "positive": 20,
+      "replica_executions": 54,
+      "retained_pair_events": 27,
+      "rows": 324,
+      "selected_events": 27,
+      "source_episodes": 6,
+      "valid_negative": 34
+    },
+    "F2/N8": {
+      "M_at_or_above_K": 3,
+      "M_below_K": 3,
+      "M_zero": 0,
+      "candidate_aggregates": 48,
+      "eligible_states": 46,
+      "positive": 14,
+      "replica_executions": 48,
+      "retained_pair_events": 24,
+      "rows": 384,
+      "selected_events": 24,
+      "source_episodes": 6,
+      "valid_negative": 34
+    },
+    "F3/N12": {
+      "M_at_or_above_K": 0,
+      "M_below_K": 6,
+      "M_zero": 0,
+      "candidate_aggregates": 38,
+      "eligible_states": 19,
+      "replica_executions": 38,
+      "retained_pair_events": 19,
+      "rows": 456,
+      "selected_events": 19,
+      "source_episodes": 6,
+      "valid_negative": 38
+    },
+    "F3/N16": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 36,
+      "eligible_states": 18,
+      "replica_executions": 36,
+      "retained_pair_events": 18,
+      "rows": 576,
+      "selected_events": 18,
+      "source_episodes": 6,
+      "valid_negative": 36
+    },
+    "F3/N5": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 32,
+      "replica_executions": 52,
+      "retained_pair_events": 26,
+      "rows": 260,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 52
+    },
+    "F3/N6": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 32,
+      "replica_executions": 52,
+      "retained_pair_events": 26,
+      "rows": 312,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 52
+    },
+    "F3/N8": {
+      "M_at_or_above_K": 0,
+      "M_below_K": 6,
+      "M_zero": 0,
+      "candidate_aggregates": 44,
+      "eligible_states": 22,
+      "replica_executions": 44,
+      "retained_pair_events": 22,
+      "rows": 352,
+      "selected_events": 22,
+      "source_episodes": 6,
+      "valid_negative": 44
+    },
+    "F4/N12": {
+      "M_at_or_above_K": 0,
+      "M_below_K": 6,
+      "M_zero": 0,
+      "candidate_aggregates": 26,
+      "eligible_states": 13,
+      "replica_executions": 26,
+      "retained_pair_events": 13,
+      "rows": 312,
+      "selected_events": 13,
+      "source_episodes": 6,
+      "valid_negative": 26
+    },
+    "F4/N16": {
+      "M_at_or_above_K": 0,
+      "M_below_K": 0,
+      "M_zero": 6,
+      "eligible_states": 0,
+      "selected_events": 0,
+      "source_episodes": 6
+    },
+    "F4/N5": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 50,
+      "eligible_states": 28,
+      "replica_executions": 50,
+      "retained_pair_events": 25,
+      "rows": 250,
+      "selected_events": 25,
+      "source_episodes": 6,
+      "valid_negative": 50
+    },
+    "F4/N6": {
+      "M_at_or_above_K": 0,
+      "M_below_K": 6,
+      "M_zero": 0,
+      "candidate_aggregates": 40,
+      "eligible_states": 20,
+      "replica_executions": 40,
+      "retained_pair_events": 20,
+      "rows": 240,
+      "selected_events": 20,
+      "source_episodes": 6,
+      "valid_negative": 40
+    },
+    "F4/N8": {
+      "M_at_or_above_K": 1,
+      "M_below_K": 5,
+      "M_zero": 0,
+      "candidate_aggregates": 38,
+      "eligible_states": 19,
+      "replica_executions": 38,
+      "retained_pair_events": 19,
+      "rows": 304,
+      "selected_events": 19,
+      "source_episodes": 6,
+      "valid_negative": 38
+    },
+    "F5/N12": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 65,
+      "positive": 27,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 720,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 33
+    },
+    "F5/N16": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 58,
+      "eligible_states": 55,
+      "positive": 21,
+      "replica_executions": 58,
+      "retained_pair_events": 29,
+      "rows": 928,
+      "selected_events": 29,
+      "source_episodes": 6,
+      "valid_negative": 37
+    },
+    "F5/N5": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 63,
+      "positive": 16,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 300,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 44
+    },
+    "F5/N6": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 77,
+      "positive": 32,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 360,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 28
+    },
+    "F5/N8": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 54,
+      "eligible_states": 55,
+      "positive": 19,
+      "replica_executions": 54,
+      "retained_pair_events": 27,
+      "rows": 432,
+      "selected_events": 27,
+      "source_episodes": 6,
+      "valid_negative": 35
+    },
+    "F6/N12": {
+      "M_at_or_above_K": 1,
+      "M_below_K": 5,
+      "M_zero": 0,
+      "candidate_aggregates": 50,
+      "eligible_states": 26,
+      "replica_executions": 50,
+      "retained_pair_events": 25,
+      "rows": 600,
+      "selected_events": 25,
+      "source_episodes": 6,
+      "valid_negative": 50
+    },
+    "F6/N16": {
+      "M_at_or_above_K": 1,
+      "M_below_K": 5,
+      "M_zero": 0,
+      "candidate_aggregates": 42,
+      "eligible_states": 103,
+      "replica_executions": 42,
+      "retained_pair_events": 21,
+      "rows": 672,
+      "selected_events": 21,
+      "source_episodes": 6,
+      "valid_negative": 42
+    },
+    "F6/N5": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 58,
+      "eligible_states": 35,
+      "replica_executions": 58,
+      "retained_pair_events": 29,
+      "rows": 290,
+      "selected_events": 29,
+      "source_episodes": 6,
+      "valid_negative": 58
+    },
+    "F6/N6": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 37,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 360,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 60
+    },
+    "F6/N8": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 36,
+      "replica_executions": 52,
+      "retained_pair_events": 26,
+      "rows": 416,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 52
+    },
+    "F7/N12": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 113,
+      "positive": 37,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 720,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 23
+    },
+    "F7/N16": {
+      "M_at_or_above_K": 4,
+      "M_below_K": 2,
+      "M_zero": 0,
+      "candidate_aggregates": 54,
+      "eligible_states": 47,
+      "positive": 34,
+      "replica_executions": 54,
+      "retained_pair_events": 27,
+      "rows": 864,
+      "selected_events": 27,
+      "source_episodes": 6,
+      "valid_negative": 20
+    },
+    "F7/N5": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 72,
+      "positive": 50,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 300,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 10
+    },
+    "F7/N6": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 74,
+      "positive": 51,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 360,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 9
+    },
+    "F7/N8": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 82,
+      "positive": 47,
+      "replica_executions": 60,
+      "retained_pair_events": 30,
+      "rows": 480,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 13
+    },
+    "F8/N12": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 68,
+      "positive": 26,
+      "replica_executions": 180,
+      "retained_pair_events": 30,
+      "rows": 720,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 34
+    },
+    "F8/N16": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 68,
+      "positive": 26,
+      "replica_executions": 180,
+      "retained_pair_events": 30,
+      "rows": 960,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 34
+    },
+    "F8/N5": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 58,
+      "eligible_states": 73,
+      "positive": 23,
+      "replica_executions": 174,
+      "retained_pair_events": 29,
+      "rows": 290,
+      "selected_events": 29,
+      "source_episodes": 6,
+      "valid_negative": 35
+    },
+    "F8/N6": {
+      "M_at_or_above_K": 5,
+      "M_below_K": 1,
+      "M_zero": 0,
+      "candidate_aggregates": 56,
+      "eligible_states": 66,
+      "positive": 23,
+      "replica_executions": 168,
+      "retained_pair_events": 28,
+      "rows": 336,
+      "selected_events": 28,
+      "source_episodes": 6,
+      "valid_negative": 33
+    },
+    "F8/N8": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 79,
+      "positive": 28,
+      "replica_executions": 180,
+      "retained_pair_events": 30,
+      "rows": 480,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 32
+    },
+    "F9/N12": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 57,
+      "positive": 7,
+      "replica_executions": 156,
+      "retained_pair_events": 26,
+      "rows": 624,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 45
+    },
+    "F9/N16": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 165,
+      "positive": 9,
+      "replica_executions": 156,
+      "retained_pair_events": 26,
+      "rows": 832,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 43
+    },
+    "F9/N5": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 58,
+      "positive": 33,
+      "replica_executions": 180,
+      "retained_pair_events": 30,
+      "rows": 300,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 27
+    },
+    "F9/N6": {
+      "M_at_or_above_K": 6,
+      "M_below_K": 0,
+      "M_zero": 0,
+      "candidate_aggregates": 60,
+      "eligible_states": 54,
+      "positive": 28,
+      "replica_executions": 180,
+      "retained_pair_events": 30,
+      "rows": 360,
+      "selected_events": 30,
+      "source_episodes": 6,
+      "valid_negative": 32
+    },
+    "F9/N8": {
+      "M_at_or_above_K": 2,
+      "M_below_K": 4,
+      "M_zero": 0,
+      "candidate_aggregates": 52,
+      "eligible_states": 66,
+      "positive": 17,
+      "replica_executions": 156,
+      "retained_pair_events": 26,
+      "rows": 416,
+      "selected_events": 26,
+      "source_episodes": 6,
+      "valid_negative": 35
+    }
+  },
+  "label_distribution_by_family": {
+    "F1": {
+      "COMPACT_negative": 12,
+      "COMPACT_positive": 135,
+      "LINE_negative": 68,
+      "LINE_positive": 79
+    },
+    "F10": {
+      "COMPACT_negative": 113,
+      "LINE_negative": 66,
+      "LINE_positive": 47
+    },
+    "F2": {
+      "COMPACT_negative": 94,
+      "COMPACT_positive": 34,
+      "LINE_negative": 77,
+      "LINE_positive": 51
+    },
+    "F3": {
+      "COMPACT_negative": 111,
+      "LINE_negative": 111
+    },
+    "F4": {
+      "COMPACT_negative": 77,
+      "LINE_negative": 77
+    },
+    "F5": {
+      "COMPACT_negative": 59,
+      "COMPACT_positive": 87,
+      "LINE_negative": 118,
+      "LINE_positive": 28
+    },
+    "F6": {
+      "COMPACT_negative": 131,
+      "LINE_negative": 131
+    },
+    "F7": {
+      "COMPACT_negative": 28,
+      "COMPACT_positive": 119,
+      "LINE_negative": 47,
+      "LINE_positive": 100
+    },
+    "F8": {
+      "COMPACT_negative": 43,
+      "COMPACT_positive": 104,
+      "LINE_negative": 125,
+      "LINE_positive": 22
+    },
+    "F9": {
+      "COMPACT_negative": 124,
+      "COMPACT_positive": 14,
+      "LINE_negative": 58,
+      "LINE_positive": 80
+    }
+  },
+  "manifest_sha256": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+  "operational_measurements": {
+    "disk_used_after_run": "6.1G of 1007G",
+    "events_over_200s": 0,
+    "events_over_243s": 0,
+    "max_event_cell": "F8/N16",
+    "max_event_seconds": 169.86,
+    "median_event_seconds": 4.81,
+    "p95_event_seconds": 69.6,
+    "p99_event_seconds": 143.99,
+    "stage_a_cpu_seconds": 822.7,
+    "stage_a_wall_seconds": 158.0,
+    "stage_b_cpu_seconds": 19594.0,
+    "stage_b_wall_seconds": 1677.7,
+    "swap_used_gb": 0,
+    "wsl_ram_gb": 31,
+    "wsl_visible_cpus": 24
+  },
+  "operations": {
+    "infrastructure_retries": 0,
+    "infrastructure_timeout_seconds": 243.0,
+    "maximum_event_seconds": 169.858,
+    "timeout_exceeded_events": 0,
+    "timeout_retries": 0,
+    "unresolved_infrastructure_failures": 0
+  },
+  "pair_transactions": {
+    "dropped_events": 0,
+    "partial_publications": 0,
+    "retained_events": 1285
+  },
+  "phase": "PHASE_9G_V2A_V",
+  "phase9g_v2a_v_official_validation_closure_sha256": "7ab512027749396686997e8b573487b473c7999fed9f4e11d4e8df827e0f10a6",
+  "production_profile": {
+    "chunk_size": 1,
+    "cpu_authoritative": true,
+    "gpu_generation": false,
+    "infrastructure_retry_limit": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "semantic_retries": 0,
+    "workers": 12
+  },
+  "qualified_image_digest": "sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+  "qualified_image_source_commit": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
+  "recommendation": "AUTHORIZE_COMBINED_RECOVERABILITY_V2_TRAIN_VALIDATION_AUDIT",
+  "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+  "replica_policy": {
+    "by_family": {
+      "F1": {
+        "1": 147
+      },
+      "F10": {
+        "1": 113
+      },
+      "F2": {
+        "1": 128
+      },
+      "F3": {
+        "1": 111
+      },
+      "F4": {
+        "1": 77
+      },
+      "F5": {
+        "1": 146
+      },
+      "F6": {
+        "1": 131
+      },
+      "F7": {
+        "1": 147
+      },
+      "F8": {
+        "3": 147
+      },
+      "F9": {
+        "3": 138
+      }
+    },
+    "f8_exactly_three_replicas": true,
+    "f9_exactly_three_replicas": true
+  },
+  "resume_idempotence": {
+    "alternate_scientific_ids": 0,
+    "resumes_performed": 0,
+    "stage_a_distinct_episodes": 300,
+    "stage_a_duplicates": 0,
+    "stage_a_records": 300,
+    "stage_b_distinct_events": 1285,
+    "stage_b_duplicates": 0,
+    "stage_b_events_equal_stage_a_selection": true,
+    "stage_b_records": 1285
+  },
+  "roots": {
+    "candidate_evaluation_root": "53a2b2316c0cc0a3fd2920155c70b732b28a176a106fe9cca2368d7d6569b3b8",
+    "manifest_root": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+    "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "pair_transaction_root": "0d014f0a548b756ac6220997cb292f96afbedd33f3ea7da9351de042dee71ed8",
+    "row_dataset_root": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+    "stage_a_root": "5a0f6fada073d6bdb8ca740433d785aed55728f550695d5d626d15c1c85a611e"
+  },
+  "row_payload_storage": "/home/avis/rvt-official-v2-validation/rows",
+  "rows": {
+    "distinct_row_ids": 23220,
+    "duplicate_row_ids": 0,
+    "duplicate_row_ids_with_conflicting_payload": 0,
+    "event_identity_recomputation_mismatches": 0,
+    "expected_rows_exact_2N_sum": 23220,
+    "row_count_matches_exact_2N": true,
+    "rows_published": 23220,
+    "validation_failure_total": 0,
+    "validation_failures": {}
+  },
+  "schema_version": "rvt-official-v2-validation-closure/v1",
+  "scientific_row_count": 23220,
+  "shard_count": 12,
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "stage_a": {
+    "episodes_with_M_at_or_above_K": 179,
+    "episodes_with_M_below_K": 115,
+    "episodes_with_M_zero": 6,
+    "fabricated_source_states": 0,
+    "selected_source_events": 1285,
+    "source_episodes": 300,
+    "total_eligible_states": 2714
+  },
+  "stage_a_root_sha256": "5a0f6fada073d6bdb8ca740433d785aed55728f550695d5d626d15c1c85a611e",
+  "stage_b": {
+    "actual_generation_invalid": 0,
+    "all_selected_events_executed": true,
+    "candidate_aggregates_attempted": 2570,
+    "candidate_replica_executions": 3710,
+    "events_executed": 1285,
+    "fake_generation_invalid": 0,
+    "positives": 900,
+    "raw_compact": {
+      "RECOVERABLE_POSITIVE": 493,
+      "VALID_TASK_NEGATIVE": 792
+    },
+    "raw_line": {
+      "RECOVERABLE_POSITIVE": 407,
+      "VALID_TASK_NEGATIVE": 878
+    },
+    "selected_source_events": 1285,
+    "valid_negatives": 1670
+  },
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "total_bytes": 445716747,
+  "train_immutability": {
+    "composite_train_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "shards_verified": "44/44",
+    "train_files_on_target_unchanged": true,
+    "train_row_dataset_root": "c91414f52543d2b0b40c4349000072e1674fc948454e63810ea7d3a66a6287a9",
+    "train_rows": 90294,
+    "verified_after_run": true,
+    "verified_before_run": true
+  },
+  "v1_immutability": {
+    "combined": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "train": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "validation": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+    "verified_unchanged": true
+  },
+  "v1_relation": {
+    "constructive_collision_probe_errors": 0,
+    "constructive_collision_probe_rows": 5000,
+    "method": "for each published V2 row, the V1 row identity was rebuilt over exactly the same scientific content and hashed with the V1 identity function; no V1-form id equals any V2 id.",
+    "v1_events_reused": 0,
+    "v1_rows_mutated": 0,
+    "v1_rows_read": 0,
+    "v1_rows_reused": 0,
+    "v1_style_ids_colliding_with_v2_ids": 0
+  },
+  "verdict": "C",
+  "zero_positive_families": [
+    "F3",
+    "F4",
+    "F6"
+  ]
+}

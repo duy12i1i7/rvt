@@ -1,0 +1,119 @@
+{
+ "class_weighting": "NONE_UNWEIGHTED_BCE",
+ "completion_state": "COMPLETE",
+ "composite_validation_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+ "comprehensive_exclusion_union_sha256": "89a1839ce8087015040f44f903745e5e4b8f16a34ca9407879c7bdc1dfe67ab5",
+ "dataset_id": "phase9g-v2a-v-study-a-validation-recoverability-v2",
+ "dataset_manifest_sha256": "0307028ef3cba85d6d4fe5996e2613795234f86b296d60e65cd5b0a48d7c9221",
+ "official_v2_validation_manifest_sha256": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+ "production_profile": {
+  "chunk_size": 1,
+  "cpu_authoritative": true,
+  "gpu_generation": false,
+  "infrastructure_retry_limit": 1,
+  "infrastructure_timeout_seconds": 243.0,
+  "numeric_threads_per_worker": 1,
+  "semantic_retries": 0,
+  "workers": 12
+ },
+ "protocol_version": "RECOVERABILITY_V2",
+ "qualified_image_digest": "sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+ "qualified_image_source_commit": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
+ "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+ "retained_pair_events": 1285,
+ "roots": {
+  "candidate_evaluation_root": "53a2b2316c0cc0a3fd2920155c70b732b28a176a106fe9cca2368d7d6569b3b8",
+  "manifest_root": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+  "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "pair_transaction_root": "0d014f0a548b756ac6220997cb292f96afbedd33f3ea7da9351de042dee71ed8",
+  "row_dataset_root": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+  "stage_a_root": "5a0f6fada073d6bdb8ca740433d785aed55728f550695d5d626d15c1c85a611e"
+ },
+ "schema_version": "rvt-official-v2-validation-dataset-manifest/v1",
+ "scientific_row_count": 23220,
+ "selected_source_events": 1285,
+ "shard_count": 12,
+ "shards": [
+  {
+   "bytes": 46639432,
+   "content_sha256": "5b318e62a96169c1a7807f96777f922b98629277cb301a819b3f166b31697dd3",
+   "path": "rows/validation-recoverability-00000.jsonl",
+   "row_count": 2062
+  },
+  {
+   "bytes": 36743963,
+   "content_sha256": "9cf196fc727fb94c2884fd0887f2d86728c377c95fd2e0fb043352b60a48f0db",
+   "path": "rows/validation-recoverability-00001.jsonl",
+   "row_count": 2060
+  },
+  {
+   "bytes": 31477139,
+   "content_sha256": "2ba0f46c4dd90ef912860958b720e6ae15d5867c441f52af04ced54920eb1cb4",
+   "path": "rows/validation-recoverability-00002.jsonl",
+   "row_count": 2054
+  },
+  {
+   "bytes": 27865669,
+   "content_sha256": "20081dd0c853dee39ecc6ce56566639ba2ea1adc0805e83c45dfa14b4ce31be1",
+   "path": "rows/validation-recoverability-00003.jsonl",
+   "row_count": 2058
+  },
+  {
+   "bytes": 57055912,
+   "content_sha256": "0702868a952f5c18404a77345e05287d4960fffc61ea3c07ea60602259bb2e7c",
+   "path": "rows/validation-recoverability-00004.jsonl",
+   "row_count": 2048
+  },
+  {
+   "bytes": 32334779,
+   "content_sha256": "39c0d9229b1413564237823f8664ed912bfe014cb9fcc8649dbca6a4939cecc2",
+   "path": "rows/validation-recoverability-00005.jsonl",
+   "row_count": 2050
+  },
+  {
+   "bytes": 37362310,
+   "content_sha256": "c395e40a4d88b3c8581f9ca387999408cb26c3eedd6cb369abe925304986a43f",
+   "path": "rows/validation-recoverability-00006.jsonl",
+   "row_count": 2052
+  },
+  {
+   "bytes": 45962219,
+   "content_sha256": "9743919da8887b050aae506b336626012095f3fd698335b88de379cf358115f5",
+   "path": "rows/validation-recoverability-00007.jsonl",
+   "row_count": 2048
+  },
+  {
+   "bytes": 37067362,
+   "content_sha256": "78a3024879d2b410f7974b6a83faca50782b70f8c3ecbe3564e8c65f9475f655",
+   "path": "rows/validation-recoverability-00008.jsonl",
+   "row_count": 2070
+  },
+  {
+   "bytes": 43930283,
+   "content_sha256": "9812328368606cfb22487c7b7c85d14234866e876343086b4eed59bd5160d212",
+   "path": "rows/validation-recoverability-00009.jsonl",
+   "row_count": 2062
+  },
+  {
+   "bytes": 42147246,
+   "content_sha256": "402d270dbc2aafc02052d099d339f2cc44cdf92b9ed9c58edc03b7a083dc8b6f",
+   "path": "rows/validation-recoverability-00010.jsonl",
+   "row_count": 2056
+  },
+  {
+   "bytes": 7130433,
+   "content_sha256": "aa3534f02268c301ea937b3625f79a7db715d6ca16d3c382e9f932519134d7d0",
+   "path": "rows/validation-recoverability-00011.jsonl",
+   "row_count": 600
+  }
+ ],
+ "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+ "source_episodes": 300,
+ "split": "validation",
+ "status": "VALID_FROZEN_VALIDATION_ONLY",
+ "study": "study_a_zero_shot",
+ "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+ "total_bytes": 445716747,
+ "train_included": false,
+ "training_authorized": false
+}

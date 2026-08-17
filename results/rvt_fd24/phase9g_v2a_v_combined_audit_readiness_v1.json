@@ -1,0 +1,53 @@
+{
+  "carry_forward": {
+    "F4_N16_STRUCTURAL_SOURCE_EMPTY": "prospectively predicted in H1R; 24/24 M=0 in TRAIN and 6/6 M=0 in VALIDATION, contributing zero events and zero rows",
+    "SCENARIO_MANIFEST_VS_MID_TRAJECTORY_TENSION": "the scenario manifest declares LINE_ONLY_SUCCESS for F3/F4 and COMPACT_ONLY_SUCCESS/BOTH_SUCCESS for F6, while official mid-trajectory Recoverability labels are zero-positive for F3/F4/F6 on both candidate topologies in TRAIN and now independently in VALIDATION; carried forward unmodified for the combined audit",
+    "TRAINING_PIPELINE_NOT_V2_READY": "no module reads the V2 row schema; an additive V2 loader enforcing decision-event grouping and the frozen event-equal reduction is required before any training",
+    "VALIDATION_OPERATIONAL_LONG_TAIL_WARNING": "recorded but did not materialise: the realized VALIDATION maximum event was 169.86 s against the unchanged 243 s timeout"
+  },
+  "hyperparameter_search_authorized": false,
+  "next_authorized_step": "AUTHORIZE_COMBINED_RECOVERABILITY_V2_TRAIN_VALIDATION_AUDIT",
+  "official_v2_train": {
+    "audit_classification": "TRAIN_DATASET_ADEQUATE_WITH_DECLARED_STRUCTURAL_CELLS",
+    "audited": true,
+    "composite_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "dataset_manifest_sha256": "cbb8906c75311c53dd203501542ee3a9a77f84e9e92391c27997dee0c4229ef6",
+    "retained_pair_events": 5032,
+    "rows": 90294,
+    "selected_events": 5032,
+    "source_episodes": 1200
+  },
+  "official_v2_validation": {
+    "adequacy_gate_passed": true,
+    "composite_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "dataset_manifest_sha256": "0307028ef3cba85d6d4fe5996e2613795234f86b296d60e65cd5b0a48d7c9221",
+    "retained_pair_events": 1285,
+    "rows": 23220,
+    "selected_events": 1285,
+    "source_episodes": 300
+  },
+  "phase9g_v2a_v_combined_audit_readiness_sha256": "1523b3e2b31f967e6f27a6034eee6683fc5256aa60b3192fd3fd8c545f2c4312",
+  "residual_v2_authorized": false,
+  "schema_version": "rvt-phase9g-v2a-v-combined-audit-readiness/v1",
+  "sealed_domain_counters": {
+    "final_test_dataset_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_v2_train_mutations": 0,
+    "optimizer_states": 0,
+    "residual_v2_generation_operations": 0,
+    "study_a_n24_dataset_accesses": 0,
+    "study_b_dataset_accesses": 0,
+    "training_operations": 0,
+    "v1_dataset_mutations": 0
+  },
+  "split_separation_verified": {
+    "exclusion_union_overlap": 0,
+    "layout_id_overlap": 0,
+    "layout_sha256_overlap": 0,
+    "train_layouts": 20,
+    "train_validation_identity_overlap": 0,
+    "validation_layouts": 10
+  },
+  "training_authorized": false
+}

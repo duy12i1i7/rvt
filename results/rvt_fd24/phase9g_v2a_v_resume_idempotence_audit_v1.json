@@ -1,0 +1,17 @@
+{
+  "alternate_scientific_ids": 0,
+  "alternate_scientific_ids_created": 0,
+  "duplicates_published": 0,
+  "phase9g_v2a_v_resume_idempotence_audit_sha256": "eebd069e5698fe0185b42a9e119a19bb20cc5ea57c718c63fb971fc701be6fca",
+  "resumable_at_scientific_identity": true,
+  "resume_skips_completed_identities": true,
+  "resumes_performed": 0,
+  "schema_version": "rvt-phase9g-v2a-v-resume-idempotence/v1",
+  "stage_a_distinct_episodes": 300,
+  "stage_a_duplicates": 0,
+  "stage_a_records": 300,
+  "stage_b_distinct_events": 1285,
+  "stage_b_duplicates": 0,
+  "stage_b_events_equal_stage_a_selection": true,
+  "stage_b_records": 1285
+}

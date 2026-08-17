@@ -1,0 +1,81 @@
+{
+  "actual_generation_invalid": 0,
+  "by_family": {
+    "F1": {
+      "COMPACT_negative": 12,
+      "COMPACT_positive": 135,
+      "LINE_negative": 68,
+      "LINE_positive": 79
+    },
+    "F10": {
+      "COMPACT_negative": 113,
+      "LINE_negative": 66,
+      "LINE_positive": 47
+    },
+    "F2": {
+      "COMPACT_negative": 94,
+      "COMPACT_positive": 34,
+      "LINE_negative": 77,
+      "LINE_positive": 51
+    },
+    "F3": {
+      "COMPACT_negative": 111,
+      "LINE_negative": 111
+    },
+    "F4": {
+      "COMPACT_negative": 77,
+      "LINE_negative": 77
+    },
+    "F5": {
+      "COMPACT_negative": 59,
+      "COMPACT_positive": 87,
+      "LINE_negative": 118,
+      "LINE_positive": 28
+    },
+    "F6": {
+      "COMPACT_negative": 131,
+      "LINE_negative": 131
+    },
+    "F7": {
+      "COMPACT_negative": 28,
+      "COMPACT_positive": 119,
+      "LINE_negative": 47,
+      "LINE_positive": 100
+    },
+    "F8": {
+      "COMPACT_negative": 43,
+      "COMPACT_positive": 104,
+      "LINE_negative": 125,
+      "LINE_positive": 22
+    },
+    "F9": {
+      "COMPACT_negative": 124,
+      "COMPACT_positive": 14,
+      "LINE_negative": 58,
+      "LINE_positive": 80
+    }
+  },
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "class_weights_selected_from_outcomes": false,
+  "compact": {
+    "RECOVERABLE_POSITIVE": 493,
+    "VALID_TASK_NEGATIVE": 792
+  },
+  "descriptive_only": true,
+  "dispositions_reconcile_against_aggregates": true,
+  "fake_generation_invalid": 0,
+  "line": {
+    "RECOVERABLE_POSITIVE": 407,
+    "VALID_TASK_NEGATIVE": 878
+  },
+  "phase9g_v2a_v_candidate_disposition_summary_sha256": "10c1b23f5698b3df99cb45dffa0b5613aa921bb89da6b23eba085b17fd481ee0",
+  "positives": 900,
+  "schema_version": "rvt-phase9g-v2a-v-candidate-disposition/v1",
+  "source_states_not_realized_producing_aggregates": 0,
+  "valid_negatives": 1670,
+  "zero_positive_families": [
+    "F3",
+    "F4",
+    "F6"
+  ]
+}

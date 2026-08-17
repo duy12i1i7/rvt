@@ -1,0 +1,52 @@
+{
+  "aggregates_equal_two_E": true,
+  "all_selected_events_executed": true,
+  "candidate_aggregates_attempted": 2570,
+  "candidate_evaluation_root": "53a2b2316c0cc0a3fd2920155c70b732b28a176a106fe9cca2368d7d6569b3b8",
+  "candidate_replica_executions": 3710,
+  "events_executed": 1285,
+  "ledger_location": "/home/avis/rvt-official-v2-validation/rows/../stage_b/candidate_ledger.jsonl",
+  "matched_randomness": true,
+  "phase9g_v2a_v_candidate_execution_ledger_sha256": "b0cc9b698d4557c60f8ec72850c4b0799a64e6f0817d91aa061145b820eebe32",
+  "replica_policy": {
+    "by_family": {
+      "F1": {
+        "1": 147
+      },
+      "F10": {
+        "1": 113
+      },
+      "F2": {
+        "1": 128
+      },
+      "F3": {
+        "1": 111
+      },
+      "F4": {
+        "1": 77
+      },
+      "F5": {
+        "1": 146
+      },
+      "F6": {
+        "1": 131
+      },
+      "F7": {
+        "1": 147
+      },
+      "F8": {
+        "3": 147
+      },
+      "F9": {
+        "3": 138
+      }
+    },
+    "f8_exactly_three_replicas": true,
+    "f9_exactly_three_replicas": true
+  },
+  "schema_version": "rvt-phase9g-v2a-v-candidate-execution-ledger/v1",
+  "selected_source_events": 1285,
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "train_label_frequencies_consulted": false
+}

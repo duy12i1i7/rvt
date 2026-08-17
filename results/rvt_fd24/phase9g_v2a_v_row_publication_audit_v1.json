@@ -1,0 +1,33 @@
+{
+  "accounting_uses_exact_per_event_2N_not_average_N": true,
+  "checks_applied_to_every_row": [
+    "row schema rvt-recoverability-scientific-row/v2",
+    "identity schema rvt-recoverability-row-identity/v2",
+    "source_acquisition_protocol_sha256 exact",
+    "recoverability_row_binding_v2_spec_sha256 exact",
+    "target_v4_contract_sha256 exact",
+    "candidate topology in {COMPACT, LINE}",
+    "64-hex graph fingerprint",
+    "identity field set exactly the fourteen V2 fields",
+    "no operational metadata in scientific identity",
+    "row id recomputed from its own identity and matched"
+  ],
+  "distinct_row_ids": 23220,
+  "duplicate_row_ids": 0,
+  "duplicate_row_ids_with_conflicting_payload": 0,
+  "event_identity_recomputation_mismatches": 0,
+  "expected_rows_exact_2N_sum": 23220,
+  "phase9g_v2a_v_row_publication_audit_sha256": "bc4bd26c70cafa2419ce3ba394ef56232c3b0a0376b5142aa9d85565f2233438",
+  "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+  "row_count_matches_exact_2N": true,
+  "row_dataset_root": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+  "row_payload_storage": "/home/avis/rvt-official-v2-validation/rows",
+  "rows_published": 23220,
+  "schema_version": "rvt-phase9g-v2a-v-row-publication-audit/v1",
+  "shard_count": 12,
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "total_bytes": 445716747,
+  "validation_failure_total": 0,
+  "validation_failures": {}
+}

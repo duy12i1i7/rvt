@@ -1,0 +1,31 @@
+{
+  "events_over_200s": 0,
+  "families_or_N_skipped": 0,
+  "headroom_fraction_under_timeout": 0.301,
+  "infrastructure_condition_converted_to_scientific_label": false,
+  "infrastructure_retries": 0,
+  "infrastructure_retry_limit": 1,
+  "infrastructure_timeout_seconds": 243.0,
+  "maximum_event_cell": "F8/N16",
+  "maximum_event_seconds": 169.858,
+  "median_event_seconds": 4.81,
+  "operational_ledger_empty": true,
+  "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "p95_event_seconds": 69.6,
+  "p99_event_seconds": 143.99,
+  "phase9g_v2a_v_timeout_retry_ledger_sha256": "1fda6fb61d41e9df45cfd7f9c2013c4b99c474d69bbcde729cd589730badf027",
+  "retry_limit_authority": "results/rvt_fd24/rb21_target_operational_execution_contract_v2.json infrastructure_retry_limit = 1, semantic_retries = 0",
+  "schema_version": "rvt-phase9g-v2a-v-timeout-retry-ledger/v1",
+  "scientific_workload_reduced": false,
+  "timeout_changed_during_run": false,
+  "timeout_exceeded_events": 0,
+  "timeout_increased_preemptively": false,
+  "timeout_retries": 0,
+  "train_comparison": {
+    "long_tail_warning_status": "VALIDATION_OPERATIONAL_LONG_TAIL_WARNING remains recorded; the realized VALIDATION maximum is lower than TRAIN's, so the warning did not materialise into any timeout.",
+    "train_headroom_fraction": 0.1477,
+    "train_maximum_event_seconds": 207.1,
+    "validation_maximum_event_seconds": 169.858
+  },
+  "unresolved_infrastructure_failures": 0
+}

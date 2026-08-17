@@ -1,0 +1,10 @@
+{
+  "atomicity_rule": "both candidate aggregates labelable -> exactly 2*N rows; either actually-attempted candidate GENERATION_INVALID -> 0 rows for the pair",
+  "dropped_pair_events": 0,
+  "pair_transaction_root": "0d014f0a548b756ac6220997cb292f96afbedd33f3ea7da9351de042dee71ed8",
+  "partial_publications": 0,
+  "phase9g_v2a_v_pair_transaction_ledger_sha256": "972df59371de6de244cb02579d1f79e22560ba5acdefecabe46d144e914cfff4",
+  "retained_pair_events": 1285,
+  "retained_plus_dropped_equals_events": true,
+  "schema_version": "rvt-phase9g-v2a-v-pair-transaction-ledger/v1"
+}
