@@ -1,0 +1,56 @@
+{
+  "adequacy_classification": "TRAIN_DATASET_ADEQUATE_WITH_DECLARED_STRUCTURAL_CELLS",
+  "authoritative_ordering": "TRAIN audit -> fresh V2 VALIDATION -> combined adequacy audit -> training/HP",
+  "closed_scopes": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "labels_created": 0,
+    "residual": 0,
+    "rows_modified": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training": 0,
+    "validation_execution": 0
+  },
+  "composite_train_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+  "dataset_manifest_sha256": "cbb8906c75311c53dd203501542ee3a9a77f84e9e92391c27997dee0c4229ef6",
+  "declared_structural_cells": {
+    "one_sided_cells": 15,
+    "one_sided_families": [
+      "F3",
+      "F4",
+      "F6"
+    ],
+    "structurally_empty": [
+      "F4/N16"
+    ]
+  },
+  "families_at_risk_note": "F3/F4/F6 produce events but no positives; the >=30 gate counts retained events, not positives, so TRAIN evidence does not show any family structurally incapable of meeting it",
+  "families_structurally_incapable_of_meeting_validation_gate": [],
+  "frozen_gates_applicable_to_train": {
+    "gate1_each_candidate_both_classes": true,
+    "gate2_decisive_minimum_50": true,
+    "gate3_positive_rate_in_range": true,
+    "gate4_is_a_validation_gate_not_train": true
+  },
+  "h1_compatibility": {
+    "h1_exact_statement": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+    "per_family_effect_claim_predeclared": false,
+    "pooled_claim": true,
+    "primary_evaluation_unit": "PAIRED_EPISODE",
+    "reason": "H1 is pooled over paired episodes with no predeclared per-family effect claim; one-class families are negative-heavy training regions, not an H1 blocker",
+    "zero_positive_families_make_h1_untestable": false
+  },
+  "integrity_clean": true,
+  "label_defect_detected": false,
+  "phase": "PHASE_9D_V2T",
+  "phase9d_v2t_train_dataset_readiness_sha256": "7d94d9b4710b25d085090dfa86d45dcb6d5f9724c83aca6fd38911f894dc367b",
+  "recommendation": "AUTHORIZE_OFFICIAL_RECOVERABILITY_V2_VALIDATION",
+  "schema_valid": true,
+  "schema_version": "rvt-phase9d-v2t-train-readiness/v1",
+  "source_acquisition_bias_detected": false,
+  "training_pipeline_status": "TRAINING_PIPELINE_NOT_V2_READY",
+  "training_recommended_now": false,
+  "validation_gate_note": "TRAIN support does not and cannot demonstrate the >=30 retained VALIDATION events per primary family gate",
+  "verdict": "C"
+}

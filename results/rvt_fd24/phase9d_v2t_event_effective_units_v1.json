@@ -1,0 +1,30 @@
+{
+  "clustering_keys": [
+    "split",
+    "layout_sha256",
+    "source_episode_id",
+    "decision_event_id"
+  ],
+  "counts": {
+    "candidate_aggregates": 10064,
+    "candidate_replica_executions": 14452,
+    "retained_candidate_pair_events": 5032,
+    "robot_local_rows": 90294,
+    "selected_source_events": 5032,
+    "source_episodes": 1200
+  },
+  "denominator_levels": [
+    "SOURCE_EPISODE",
+    "SOURCE_DECISION_EVENT",
+    "CANDIDATE_AGGREGATE",
+    "RETAINED_CANDIDATE_PAIR",
+    "ROBOT_LOCAL_SCIENTIFIC_ROW"
+  ],
+  "effective_independent_unit": "SOURCE_DECISION_EVENT nested in SOURCE_EPISODE",
+  "nesting": "robot rows nested in candidate topology, nested in source event, nested in source episode, nested in layout/split",
+  "phase9d_v2t_event_effective_units_sha256": "b9644a4c7df8545bfb41afdc16eb2f86850d1058de284d7b746aacfb42480216",
+  "raw_row_mean_permitted": false,
+  "robot_local_rows_statistically_independent": false,
+  "row_count_is_not_effective_sample_size": true,
+  "schema_version": "rvt-phase9d-v2t-effective-units/v1"
+}

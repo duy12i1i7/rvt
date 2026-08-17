@@ -1,0 +1,27 @@
+{
+  "classification": "VALIDATION_OPERATIONAL_LONG_TAIL_WARNING",
+  "count": 5032,
+  "event_seconds_max": 207.134,
+  "event_seconds_median": 4.217,
+  "event_seconds_min": 0.239,
+  "event_seconds_p95": 63.573,
+  "event_seconds_p99": 139.06,
+  "events_over_243s": 0,
+  "frozen_operational_requirement_violated": false,
+  "headroom_fraction": 0.14759670781893008,
+  "infrastructure_retries": 0,
+  "infrastructure_timeout_seconds": 243.0,
+  "phase9d_v2t_timeout_tail_sha256": "8a3c4c2ca21505aea86b91547c9a43aaac632d598306854aea58ece87583d69a",
+  "schema_version": "rvt-phase9d-v2t-timeout-tail/v1",
+  "scientific_failure": false,
+  "timeout_changed": false,
+  "timeout_retries": 0,
+  "unresolved": 0,
+  "worst_event": {
+    "event_id": "f81cfa40e88d10162e8d2d074309be12860cd9db798430de2624adba33b416e1",
+    "family": "F2",
+    "replicas": 1,
+    "seconds": 207.134,
+    "team_size": 12
+  }
+}

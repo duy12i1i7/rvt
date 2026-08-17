@@ -1,0 +1,86 @@
+{
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "data_modified": 0,
+  "dry_test": {
+    "N16": {
+      "frozen_event_weight": 1.0,
+      "naive_row_mean_relative": 3.2,
+      "per_candidate": 0.5,
+      "per_robot_row": 0.03125,
+      "rows_per_event": 32
+    },
+    "N5": {
+      "frozen_event_weight": 1.0,
+      "naive_row_mean_relative": 1.0,
+      "per_candidate": 0.5,
+      "per_robot_row": 0.1,
+      "rows_per_event": 10
+    },
+    "frozen_rule_equalises_events": true,
+    "naive_row_mean_would_overweight_N16_by": 3.2
+  },
+  "frozen_reduction": "Average equally over COMPACT/LINE and robots within a decision, then over decision events.",
+  "frozen_status": "FROZEN_EVENT_EQUAL_WEIGHT",
+  "implementation_status": "Training has not started; any future loader/loss must preserve decision-event grouping and the frozen reduction.",
+  "is_a_dataset_defect": false,
+  "loss_authority": "docs/RVT_FD24_LOSS_CONTRACT.md",
+  "n_dependent_weighting_intended": false,
+  "phase9d_v2t_event_equal_weighting_sha256": "128032688cf9ccbc36ad553e8d5f1bc9802dc670444a36884a6e358ddfb24132",
+  "raw_row_mean_permitted": false,
+  "remediation": "an additive V2 loader that groups by decision_event_id and applies the frozen reduction; recommended for the training phase, not this audit",
+  "result": "TRAINING_PIPELINE_NOT_V2_READY",
+  "schema_version": "rvt-phase9d-v2t-event-equal-weighting/v1",
+  "team_size_weight_audit": [
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.2,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.1,
+      "naive_row_mean_relative_event_weight_vs_N5": 1.0,
+      "rows_per_retained_event": 10,
+      "team_size": 5
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.16666666666666666,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.08333333333333333,
+      "naive_row_mean_relative_event_weight_vs_N5": 1.2,
+      "rows_per_retained_event": 12,
+      "team_size": 6
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.125,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.0625,
+      "naive_row_mean_relative_event_weight_vs_N5": 1.6,
+      "rows_per_retained_event": 16,
+      "team_size": 8
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.08333333333333333,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.041666666666666664,
+      "naive_row_mean_relative_event_weight_vs_N5": 2.4,
+      "rows_per_retained_event": 24,
+      "team_size": 12
+    },
+    {
+      "frozen_event_averaged_effective_event_weight": 1.0,
+      "frozen_within_candidate_weight_per_robot_row": 0.0625,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.03125,
+      "naive_row_mean_relative_event_weight_vs_N5": 3.2,
+      "rows_per_retained_event": 32,
+      "team_size": 16
+    }
+  ],
+  "v2_loader_exists": false,
+  "v2_loader_search": [
+    "rvt_swarm/dataset.py",
+    "rvt_swarm/train.py",
+    "no module reads rvt-recoverability-scientific-row/v2"
+  ]
+}

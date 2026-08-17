@@ -1,0 +1,65 @@
+{
+  "authority_review": {
+    "artifact_requiring_fresh_validation_identities": null,
+    "fresh_means": "freshly generated rows, never fresh source-episode identities",
+    "h1r_budget_option_selected": "KEEP_FROZEN_VALIDATION_EPISODE_BUDGET (30 episodes per family) with feasibility projected against exactly those episodes",
+    "merged_into_v2_confirmatory_data": false,
+    "official_v2_generated_fresh": true,
+    "reused_as_confirmatory_h1_evidence": false,
+    "v1_classification": "PILOT_DESIGN_DIAGNOSTIC",
+    "v2_validation_may_reuse_v1_validation_source_identities": true
+  },
+  "design_independence": {
+    "acquisition_is_candidate_blind": true,
+    "design_pilot_excluded": true,
+    "v1_validation_outcomes_used_for": "diagnosis that acquisition was infeasible, not for choosing K or the selection rule",
+    "v2_rule_designed_on": "a separate 300-episode design pilot in study_a_design_pilot, permanently excluded"
+  },
+  "hygiene_result": "CLEAN",
+  "phase9d_v2t_future_validation_split_hygiene_sha256": "37956b409db141df0b4cb32bf4a30df6fe5835f85d7cde9768b28de498785cbe",
+  "prospective_validation_manifest": {
+    "authorizes_official_generation": false,
+    "families": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "F10"
+    ],
+    "final_test_episodes": 0,
+    "maximum_selected_source_events": 1500,
+    "n24_episodes": 0,
+    "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "source_episodes": 300,
+    "study_b_episodes": 0,
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "team_sizes": [
+      5,
+      6,
+      8,
+      12,
+      16
+    ],
+    "v2_source_manifest_sha256": "80b133519112a06a7b735247fcf0a210047d3658a15cddc2c738d7bd864fa252"
+  },
+  "repair_required": false,
+  "schema_version": "rvt-phase9d-v2t-future-validation-hygiene/v1",
+  "train_validation_leakage": {
+    "episode_id_overlap": 0,
+    "episode_identity_overlap": 0,
+    "layout_id_overlap": 0,
+    "layout_sha256_overlap": 0,
+    "seed_tuple_overlap": 0,
+    "train_layouts": 20,
+    "validation_intersect_exclusion_union": 0,
+    "validation_layouts": 10
+  },
+  "validation_executed": false,
+  "validation_labels_inspected": false
+}

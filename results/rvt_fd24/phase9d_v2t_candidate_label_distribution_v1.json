@@ -1,0 +1,302 @@
+{
+  "by_family": {
+    "F1": {
+      "COMPACT_RECOVERABLE_POSITIVE": 539,
+      "COMPACT_VALID_TASK_NEGATIVE": 54,
+      "LINE_RECOVERABLE_POSITIVE": 328,
+      "LINE_VALID_TASK_NEGATIVE": 265,
+      "events": 593,
+      "selected_events": 593,
+      "source_episodes": 120
+    },
+    "F10": {
+      "COMPACT_VALID_TASK_NEGATIVE": 439,
+      "LINE_RECOVERABLE_POSITIVE": 94,
+      "LINE_VALID_TASK_NEGATIVE": 345,
+      "events": 439,
+      "selected_events": 439,
+      "source_episodes": 120
+    },
+    "F2": {
+      "COMPACT_RECOVERABLE_POSITIVE": 42,
+      "COMPACT_VALID_TASK_NEGATIVE": 455,
+      "LINE_RECOVERABLE_POSITIVE": 206,
+      "LINE_VALID_TASK_NEGATIVE": 291,
+      "events": 497,
+      "selected_events": 497,
+      "source_episodes": 120
+    },
+    "F3": {
+      "COMPACT_VALID_TASK_NEGATIVE": 423,
+      "LINE_VALID_TASK_NEGATIVE": 423,
+      "events": 423,
+      "selected_events": 423,
+      "source_episodes": 120
+    },
+    "F4": {
+      "COMPACT_VALID_TASK_NEGATIVE": 324,
+      "LINE_VALID_TASK_NEGATIVE": 324,
+      "events": 324,
+      "selected_events": 324,
+      "source_episodes": 120
+    },
+    "F5": {
+      "COMPACT_RECOVERABLE_POSITIVE": 260,
+      "COMPACT_VALID_TASK_NEGATIVE": 296,
+      "LINE_RECOVERABLE_POSITIVE": 73,
+      "LINE_VALID_TASK_NEGATIVE": 483,
+      "events": 556,
+      "selected_events": 556,
+      "source_episodes": 120
+    },
+    "F6": {
+      "COMPACT_VALID_TASK_NEGATIVE": 519,
+      "LINE_VALID_TASK_NEGATIVE": 519,
+      "events": 519,
+      "selected_events": 519,
+      "source_episodes": 120
+    },
+    "F7": {
+      "COMPACT_RECOVERABLE_POSITIVE": 471,
+      "COMPACT_VALID_TASK_NEGATIVE": 113,
+      "LINE_RECOVERABLE_POSITIVE": 395,
+      "LINE_VALID_TASK_NEGATIVE": 189,
+      "events": 584,
+      "selected_events": 584,
+      "source_episodes": 120
+    },
+    "F8": {
+      "COMPACT_RECOVERABLE_POSITIVE": 401,
+      "COMPACT_VALID_TASK_NEGATIVE": 166,
+      "LINE_RECOVERABLE_POSITIVE": 50,
+      "LINE_VALID_TASK_NEGATIVE": 517,
+      "events": 567,
+      "selected_events": 567,
+      "source_episodes": 120
+    },
+    "F9": {
+      "COMPACT_RECOVERABLE_POSITIVE": 55,
+      "COMPACT_VALID_TASK_NEGATIVE": 475,
+      "LINE_RECOVERABLE_POSITIVE": 254,
+      "LINE_VALID_TASK_NEGATIVE": 276,
+      "events": 530,
+      "selected_events": 530,
+      "source_episodes": 120
+    }
+  },
+  "by_selection_ordinal": {
+    "0": {
+      "RECOVERABLE_POSITIVE": 783,
+      "VALID_TASK_NEGATIVE": 1569,
+      "events": 1176,
+      "families": 10,
+      "team_sizes": 5
+    },
+    "1": {
+      "RECOVERABLE_POSITIVE": 668,
+      "VALID_TASK_NEGATIVE": 1672,
+      "events": 1170,
+      "families": 10,
+      "team_sizes": 5
+    },
+    "2": {
+      "RECOVERABLE_POSITIVE": 647,
+      "VALID_TASK_NEGATIVE": 1569,
+      "events": 1108,
+      "families": 10,
+      "team_sizes": 5
+    },
+    "3": {
+      "RECOVERABLE_POSITIVE": 637,
+      "VALID_TASK_NEGATIVE": 1157,
+      "events": 897,
+      "families": 10,
+      "team_sizes": 5
+    },
+    "4": {
+      "RECOVERABLE_POSITIVE": 433,
+      "VALID_TASK_NEGATIVE": 929,
+      "events": 681,
+      "families": 10,
+      "team_sizes": 5
+    }
+  },
+  "by_source_policy": {
+    "S0_SCRIPTED_DIAGNOSTIC": {
+      "RECOVERABLE_POSITIVE": 562,
+      "VALID_TASK_NEGATIVE": 1224,
+      "events": 893,
+      "selected_events": 893,
+      "source_episodes": 200
+    },
+    "S1_ALWAYS_COMPACT": {
+      "RECOVERABLE_POSITIVE": 500,
+      "VALID_TASK_NEGATIVE": 1084,
+      "events": 792,
+      "selected_events": 792,
+      "source_episodes": 200
+    },
+    "S2_ALWAYS_LINE": {
+      "RECOVERABLE_POSITIVE": 541,
+      "VALID_TASK_NEGATIVE": 1191,
+      "events": 866,
+      "selected_events": 866,
+      "source_episodes": 200
+    },
+    "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+      "RECOVERABLE_POSITIVE": 520,
+      "VALID_TASK_NEGATIVE": 1154,
+      "events": 837,
+      "selected_events": 837,
+      "source_episodes": 200
+    },
+    "S4_FROZEN_TRANSITION_PROTOCOL": {
+      "RECOVERABLE_POSITIVE": 515,
+      "VALID_TASK_NEGATIVE": 1165,
+      "events": 840,
+      "selected_events": 840,
+      "source_episodes": 200
+    },
+    "S5_BOUNDED_PERTURBATION": {
+      "RECOVERABLE_POSITIVE": 530,
+      "VALID_TASK_NEGATIVE": 1078,
+      "events": 804,
+      "selected_events": 804,
+      "source_episodes": 200
+    }
+  },
+  "by_team_size": {
+    "12": {
+      "COMPACT_RECOVERABLE_POSITIVE": 375,
+      "COMPACT_VALID_TASK_NEGATIVE": 571,
+      "LINE_RECOVERABLE_POSITIVE": 158,
+      "LINE_VALID_TASK_NEGATIVE": 788,
+      "events": 946,
+      "selected_events": 946,
+      "source_episodes": 240
+    },
+    "16": {
+      "COMPACT_RECOVERABLE_POSITIVE": 349,
+      "COMPACT_VALID_TASK_NEGATIVE": 483,
+      "LINE_RECOVERABLE_POSITIVE": 54,
+      "LINE_VALID_TASK_NEGATIVE": 778,
+      "events": 832,
+      "selected_events": 832,
+      "source_episodes": 240
+    },
+    "5": {
+      "COMPACT_RECOVERABLE_POSITIVE": 259,
+      "COMPACT_VALID_TASK_NEGATIVE": 856,
+      "LINE_RECOVERABLE_POSITIVE": 443,
+      "LINE_VALID_TASK_NEGATIVE": 672,
+      "events": 1115,
+      "selected_events": 1115,
+      "source_episodes": 240
+    },
+    "6": {
+      "COMPACT_RECOVERABLE_POSITIVE": 393,
+      "COMPACT_VALID_TASK_NEGATIVE": 709,
+      "LINE_RECOVERABLE_POSITIVE": 435,
+      "LINE_VALID_TASK_NEGATIVE": 667,
+      "events": 1102,
+      "selected_events": 1102,
+      "source_episodes": 240
+    },
+    "8": {
+      "COMPACT_RECOVERABLE_POSITIVE": 392,
+      "COMPACT_VALID_TASK_NEGATIVE": 645,
+      "LINE_RECOVERABLE_POSITIVE": 310,
+      "LINE_VALID_TASK_NEGATIVE": 727,
+      "events": 1037,
+      "selected_events": 1037,
+      "source_episodes": 240
+    }
+  },
+  "candidate_positive_rate": {
+    "COMPACT": 0.35135135135135137,
+    "LINE": 0.27821939586645467
+  },
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "class_weights_selected": false,
+  "compact": {
+    "RECOVERABLE_POSITIVE": 1768,
+    "VALID_TASK_NEGATIVE": 3264
+  },
+  "frozen_gates_applied": {
+    "gate1_each_candidate_both_classes": true,
+    "gate2_train_decisive_minimum_50": {
+      "COMPACT_ONLY_SUCCESS": 1105,
+      "LINE_ONLY_SUCCESS": 737,
+      "meets_minimum_50_each": true
+    },
+    "gate3_positive_rate_within_0.10_0.90": true
+  },
+  "joint_by_family": {
+    "F1": {
+      "BOTH_FAIL": 25,
+      "BOTH_SUCCESS": 299,
+      "COMPACT_ONLY_SUCCESS": 240,
+      "LINE_ONLY_SUCCESS": 29
+    },
+    "F10": {
+      "BOTH_FAIL": 345,
+      "LINE_ONLY_SUCCESS": 94
+    },
+    "F2": {
+      "BOTH_FAIL": 259,
+      "BOTH_SUCCESS": 10,
+      "COMPACT_ONLY_SUCCESS": 32,
+      "LINE_ONLY_SUCCESS": 196
+    },
+    "F3": {
+      "BOTH_FAIL": 423
+    },
+    "F4": {
+      "BOTH_FAIL": 324
+    },
+    "F5": {
+      "BOTH_FAIL": 229,
+      "BOTH_SUCCESS": 6,
+      "COMPACT_ONLY_SUCCESS": 254,
+      "LINE_ONLY_SUCCESS": 67
+    },
+    "F6": {
+      "BOTH_FAIL": 519
+    },
+    "F7": {
+      "BOTH_FAIL": 22,
+      "BOTH_SUCCESS": 304,
+      "COMPACT_ONLY_SUCCESS": 167,
+      "LINE_ONLY_SUCCESS": 91
+    },
+    "F8": {
+      "BOTH_FAIL": 127,
+      "BOTH_SUCCESS": 11,
+      "COMPACT_ONLY_SUCCESS": 390,
+      "LINE_ONLY_SUCCESS": 39
+    },
+    "F9": {
+      "BOTH_FAIL": 254,
+      "BOTH_SUCCESS": 33,
+      "COMPACT_ONLY_SUCCESS": 22,
+      "LINE_ONLY_SUCCESS": 221
+    }
+  },
+  "joint_categories": {
+    "BOTH_FAIL": 2527,
+    "BOTH_SUCCESS": 663,
+    "COMPACT_ONLY_SUCCESS": 1105,
+    "LINE_ONLY_SUCCESS": 737
+  },
+  "line": {
+    "RECOVERABLE_POSITIVE": 1400,
+    "VALID_TASK_NEGATIVE": 3632
+  },
+  "note": "NO_POSTHOC_LABEL_BALANCE_GATE_AUTHORIZED beyond the frozen label-audit gates",
+  "overall_positive_aggregates": 3168,
+  "overall_positive_rate": 0.314785373608903,
+  "overall_valid_negative_aggregates": 6896,
+  "phase9d_v2t_candidate_label_distribution_sha256": "8397661fe88ab2ee892bf4c6ec23c865406b59215c2ee7de63fa6ee22d57dd45",
+  "posthoc_label_balance_gate_authorized": false,
+  "schema_version": "rvt-phase9d-v2t-candidate-labels/v1"
+}

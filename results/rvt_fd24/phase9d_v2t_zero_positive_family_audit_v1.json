@@ -1,0 +1,346 @@
+{
+  "classification": {
+    "F3": "SCENARIO_STRUCTURALLY_NONRECOVERABLE",
+    "F4": "SCENARIO_STRUCTURALLY_NONRECOVERABLE",
+    "F6": "SCENARIO_STRUCTURALLY_NONRECOVERABLE"
+  },
+  "declared_scenario_expectations": {
+    "F3": [
+      "LINE_ONLY_SUCCESS"
+    ],
+    "F4": [
+      "LINE_ONLY_SUCCESS"
+    ],
+    "F6": [
+      "COMPACT_ONLY_SUCCESS",
+      "BOTH_SUCCESS"
+    ]
+  },
+  "evidence": {
+    "both_topologies_negative": true,
+    "coverage_all_N": true,
+    "coverage_all_selection_ordinals": true,
+    "coverage_all_source_policies": true,
+    "downstream_goal_complete_failure_rate": {
+      "F1/COMPACT": [
+        0,
+        20
+      ],
+      "F1/LINE": [
+        2,
+        20
+      ],
+      "F3/COMPACT": [
+        10,
+        10
+      ],
+      "F3/LINE": [
+        10,
+        10
+      ],
+      "F4/COMPACT": [
+        16,
+        16
+      ],
+      "F4/LINE": [
+        16,
+        16
+      ],
+      "F6/COMPACT": [
+        15,
+        15
+      ],
+      "F6/LINE": [
+        15,
+        15
+      ]
+    },
+    "generation_invalid": 0,
+    "positive_rate_flat_across_selection_ordinals": true,
+    "safety_infeasible_replica_rate": {
+      "F1/COMPACT": [
+        0,
+        20
+      ],
+      "F1/LINE": [
+        15,
+        20
+      ],
+      "F3/COMPACT": [
+        10,
+        10
+      ],
+      "F3/LINE": [
+        10,
+        10
+      ],
+      "F4/COMPACT": [
+        16,
+        16
+      ],
+      "F4/LINE": [
+        16,
+        16
+      ],
+      "F6/COMPACT": [
+        15,
+        15
+      ],
+      "F6/LINE": [
+        15,
+        15
+      ]
+    },
+    "selected_events": {
+      "F3": 423,
+      "F4": 324,
+      "F6": 519
+    },
+    "v1_independent_agreement": {
+      "F3": {
+        "negative": 14,
+        "positive": 0,
+        "retained": 7
+      },
+      "F4": {
+        "negative": 0,
+        "positive": 0,
+        "retained": 0
+      },
+      "F6": {
+        "negative": 64,
+        "positive": 0,
+        "retained": 32
+      }
+    },
+    "v1_used_a_different_acquisition_rule": true
+  },
+  "expectation_tension_explanation": "expected_headroom_categories describe episode-level feasibility from the start under a fixed topology. Recoverability requires completing the task from a REALIZED mid-trajectory decision state. V2 samples uniformly across the whole realized trajectory, so many selected states are already safety-infeasible; 100 percent of sampled F3/F4/F6 replicas were safety-infeasible and every one failed downstream_goal_complete.",
+  "expectation_tension_recorded": true,
+  "families_with_zero_positive_aggregates": [
+    "F3",
+    "F4",
+    "F6"
+  ],
+  "phase9d_v2t_zero_positive_family_audit_sha256": "d9f5f33168248d77b619ba33935b6f56ec3e29c6149ae1c3669db26a22a12406",
+  "positive_control_family": "F1",
+  "positive_control_result": {
+    "F1_COMPACT_dispositions": {
+      "RECOVERABLE_POSITIVE": 20
+    },
+    "F1_LINE_dispositions": {
+      "RECOVERABLE_POSITIVE": 14,
+      "VALID_TASK_NEGATIVE": 6
+    },
+    "label_path_produces_positives": true
+  },
+  "replay_diagnostic": {
+    "F1/COMPACT": {
+      "created_lifecycle": 0,
+      "dispositions": {
+        "RECOVERABLE_POSITIVE": 20
+      },
+      "events": 20,
+      "failed_predicates": {},
+      "labels": {
+        "1": 20
+      },
+      "replicas": 20,
+      "safety_infeasible": 0,
+      "safety_solver_failure": 0,
+      "termination": {
+        "GOAL_COMPLETE": 20
+      }
+    },
+    "F1/LINE": {
+      "created_lifecycle": 20,
+      "dispositions": {
+        "RECOVERABLE_POSITIVE": 14,
+        "VALID_TASK_NEGATIVE": 6
+      },
+      "events": 20,
+      "failed_predicates": {
+        "candidate_commitment_valid": 4,
+        "collision_free_complete_horizon": 2,
+        "downstream_goal_complete": 2,
+        "protocol_resolved": 6,
+        "safety_projection_resolved": 2,
+        "target_metric_v3_dwell_complete": 6,
+        "transition_execution_valid": 4
+      },
+      "labels": {
+        "0": 6,
+        "1": 14
+      },
+      "replicas": 20,
+      "safety_infeasible": 15,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 2,
+        "GOAL_COMPLETE": 18
+      }
+    },
+    "F3/COMPACT": {
+      "created_lifecycle": 0,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 10
+      },
+      "events": 10,
+      "failed_predicates": {
+        "collision_free_complete_horizon": 10,
+        "downstream_goal_complete": 10,
+        "protocol_resolved": 3,
+        "safety_projection_resolved": 10,
+        "target_metric_v3_dwell_complete": 10
+      },
+      "labels": {
+        "0": 10
+      },
+      "replicas": 10,
+      "safety_infeasible": 10,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 10
+      }
+    },
+    "F3/LINE": {
+      "created_lifecycle": 7,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 10
+      },
+      "events": 10,
+      "failed_predicates": {
+        "candidate_commitment_valid": 10,
+        "collision_free_complete_horizon": 10,
+        "downstream_goal_complete": 10,
+        "protocol_resolved": 10,
+        "safety_projection_resolved": 10,
+        "target_metric_v3_dwell_complete": 10,
+        "transition_execution_valid": 10
+      },
+      "labels": {
+        "0": 10
+      },
+      "replicas": 10,
+      "safety_infeasible": 10,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 10
+      }
+    },
+    "F4/COMPACT": {
+      "created_lifecycle": 0,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 16
+      },
+      "events": 16,
+      "failed_predicates": {
+        "collision_free_complete_horizon": 16,
+        "downstream_goal_complete": 16,
+        "safety_projection_resolved": 12
+      },
+      "labels": {
+        "0": 16
+      },
+      "replicas": 16,
+      "safety_infeasible": 16,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 16
+      }
+    },
+    "F4/LINE": {
+      "created_lifecycle": 16,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 16
+      },
+      "events": 16,
+      "failed_predicates": {
+        "candidate_commitment_valid": 16,
+        "collision_free_complete_horizon": 16,
+        "downstream_goal_complete": 16,
+        "protocol_resolved": 12,
+        "safety_projection_resolved": 9,
+        "target_metric_v3_dwell_complete": 16,
+        "transition_execution_valid": 16
+      },
+      "labels": {
+        "0": 16
+      },
+      "replicas": 16,
+      "safety_infeasible": 16,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 16
+      }
+    },
+    "F6/COMPACT": {
+      "created_lifecycle": 0,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 15
+      },
+      "events": 15,
+      "failed_predicates": {
+        "candidate_commitment_valid": 7,
+        "collision_free_complete_horizon": 11,
+        "downstream_goal_complete": 15,
+        "no_irreversible_progress_loss": 4,
+        "protocol_resolved": 7,
+        "safety_projection_resolved": 11,
+        "target_metric_v3_dwell_complete": 7,
+        "transition_execution_valid": 7
+      },
+      "labels": {
+        "0": 15
+      },
+      "replicas": 15,
+      "safety_infeasible": 15,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 11,
+        "HORIZON_COMPLETE": 4
+      }
+    },
+    "F6/LINE": {
+      "created_lifecycle": 8,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 15
+      },
+      "events": 15,
+      "failed_predicates": {
+        "candidate_commitment_valid": 4,
+        "collision_free_complete_horizon": 9,
+        "downstream_goal_complete": 15,
+        "no_irreversible_progress_loss": 6,
+        "protocol_resolved": 15,
+        "safety_projection_resolved": 9,
+        "target_metric_v3_dwell_complete": 15,
+        "transition_execution_valid": 4
+      },
+      "labels": {
+        "0": 15
+      },
+      "replicas": 15,
+      "safety_infeasible": 15,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 9,
+        "HORIZON_COMPLETE": 6
+      }
+    },
+    "_episodes_sampled_per_family": {
+      "F1": 4,
+      "F3": 4,
+      "F4": 4,
+      "F6": 4
+    }
+  },
+  "rows_modified": 0,
+  "ruled_out": {
+    "INSUFFICIENT_COVERAGE": "423/324/519 events spanning all N, all six source policies and all five selection ordinals",
+    "LABEL_IMPLEMENTATION_DEFECT": "the F1 positive control yields 20/20 COMPACT positives through the identical frozen code path and GENERATION_INVALID is 0",
+    "SOURCE_ACQUISITION_BIAS": "V1 independently produced zero positives for F3 and F6 under nominal-horizon sampling; positive rate is flat across V2 selection ordinals"
+  },
+  "schema_version": "rvt-phase9d-v2t-zero-positive-family/v1",
+  "target_v4_modified": false
+}

@@ -1,0 +1,24 @@
+{
+  "phase9d_v2t_v1_v2_separation_sha256": "759775c84e046f5a33f766d0d95fdf5940f556de7ddb9b4ca6ec7ee643c4458e",
+  "row_id_collision_possible": false,
+  "row_id_collision_reason": "the V2 identity uses a different schema string, replaces timestep with realized_source_timestep and additionally binds the acquisition protocol and the V2 row-binding contract",
+  "schema_version": "rvt-phase9d-v2t-v1-v2-separation/v1",
+  "source_episode_reuse": {
+    "authorised": true,
+    "authority": "results/rvt_fd24/datasets/generation_budget_v1.json fixes the 1200 TRAIN and 300 VALIDATION source-episode budget; the owner resolution changes acquisition, not the budget",
+    "distinction": "SOURCE_EPISODE reuse is authorised; ROW/EVENT reuse is not and did not occur",
+    "train_overlap_with_v1_source_episodes": 1200,
+    "v1_mutated": false,
+    "v1_rows_merged": false
+  },
+  "v1_roots": {
+    "combined": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "train": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "validation": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+    "verified_unchanged": true
+  },
+  "v1_row_schema": "rvt-recoverability-scientific-row/v1",
+  "v1_rows_present_in_v2_dataset": 0,
+  "v2_row_identity_schema": "rvt-recoverability-row-identity/v2",
+  "v2_row_schema": "rvt-recoverability-scientific-row/v2"
+}
