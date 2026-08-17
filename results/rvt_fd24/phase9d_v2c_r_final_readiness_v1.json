@@ -1,0 +1,198 @@
+{
+  "R12_R16_schema": {
+    "combined_rows": 113514,
+    "edge_dimension_uniform": true,
+    "node_dimension_uniform": true,
+    "non_finite_feature": 0,
+    "row_identity_failure": 0,
+    "schema_mismatch": 0
+  },
+  "R14_shard_integrity": {
+    "sealed_dataset_integrity_failure": false,
+    "train_shards_verified": 44,
+    "validation_byte_mismatches": 0,
+    "validation_shards_verified": 12
+  },
+  "R18_scenario_semantics": {
+    "classification": {
+      "F3": "LEGITIMATE_STRUCTURAL_ONE_CLASS_REGION_COMPATIBLE_WITH_H1",
+      "F4": "LEGITIMATE_STRUCTURAL_ONE_CLASS_REGION_COMPATIBLE_WITH_H1",
+      "F6": "LEGITIMATE_STRUCTURAL_ONE_CLASS_REGION_COMPATIBLE_WITH_H1"
+    },
+    "confirming_evidence": [
+      "VALIDATION F3/F4/F6 fail downstream_goal_complete in 100% of replayed replicas on both candidate topologies with 100% safety infeasibility, reproducing the TRAIN mechanism on disjoint layouts",
+      "the VALIDATION F1 positive control yields 16/18 COMPACT and 7/18 LINE positives through the identical frozen code path",
+      "the 15 cells where both candidates are zero-positive are identical cell-for-cell in TRAIN and VALIDATION"
+    ],
+    "gate7_failure_is_unrelated_to_this_question": true,
+    "new_measurements_confirm_rather_than_disturb_it": true,
+    "reopened": false,
+    "statement": "H2_EPISODE_HEADROOM != H1_MID_TRAJECTORY_RECOVERABILITY_LABEL",
+    "why_unrelated": "gate 7 constrains replica-to-replica label agreement within a candidate aggregate and can only be evaluated on F8 and F9, the two families that run three replicas. F3, F4 and F6 run a single replica and are not measurable by it. The failing cell is F9/LINE, a family with a healthy positive rate."
+  },
+  "R20_training_pipeline": {
+    "hyperparameter_trials": 0,
+    "loader_implemented_in_this_phase": false,
+    "note": "moot for now: a failed frozen gate blocks training regardless of loader readiness",
+    "probe_models": 0,
+    "reconfirmed_at_commit": "e7c3e33aa43ac46b075ddd448b3629eb8e3b3b0b",
+    "status": "TRAINING_PIPELINE_NOT_V2_READY",
+    "training_operations": 0
+  },
+  "R22_no_data_mutation": {
+    "new_official_rows": 0,
+    "train_file_count_after": 61,
+    "train_file_count_before": 61,
+    "train_namespace_mutation": 0,
+    "train_seal_unchanged": true,
+    "train_shard_count_after": 44,
+    "train_shard_count_before": 44,
+    "validation_file_count_after": 23,
+    "validation_file_count_before": 23,
+    "validation_namespace_mutation": 0,
+    "validation_seal_unchanged": true,
+    "validation_shard_count_after": 12,
+    "validation_shard_count_before": 12
+  },
+  "R23_sealed_domains": {
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "new_official_rows": 0,
+    "optimizer_states": 0,
+    "residual_generation_operations": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v1_dataset_mutations": 0
+  },
+  "R2_gate7": {
+    "cells_evaluated": 8,
+    "census_complete": true,
+    "determinism_perfect": true,
+    "failing_cells": [
+      {
+        "candidate": "LINE",
+        "excess_unstable_aggregates": 6,
+        "family": "F9",
+        "instability_rate": 0.11132075,
+        "permitted_unstable_aggregates": 53,
+        "replica_executions": 1590,
+        "split": "train",
+        "stochastic_candidate_aggregates": 530,
+        "unstable_aggregates": 59
+      }
+    ],
+    "maximum_stochastic_label_instability": 0.11132075,
+    "result": "FAIL",
+    "threshold": 0.1
+  },
+  "R4_gate8": {
+    "jensen_shannon_divergence_base2": 0.004546838319,
+    "maximum_candidate_positive_rate_difference": 0.038512121643,
+    "result": "PASS"
+  },
+  "R7_R8_joint_outcomes": {
+    "combined": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 3080,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 831,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 1430,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 976
+    },
+    "decisive_events": {
+      "combined": 2406,
+      "train": 1842,
+      "validation": 564
+    },
+    "train": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 2527,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 663,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 1105,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 737
+    },
+    "validation": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 553,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 168,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 325,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 239
+    }
+  },
+  "final_dataset_classification": "RECOVERABILITY_V2_DATASET_ADEQUATE_WITH_DECLARED_STRUCTURAL_REGIONS",
+  "final_dataset_classification_scope": "this classification describes the dataset's scientific structure: the seals, accounting, split hygiene, schema, adequacy gate and the structural one-class regions are all sound. It is NOT a training authorization: frozen label-audit gate 7 fails, and the gate document states that a failed gate blocks training.",
+  "gate_summary": {
+    "every_gate_measured": true,
+    "failing": [
+      7
+    ],
+    "not_evaluated": [],
+    "passing": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ],
+    "total": 9
+  },
+  "handoff_commit": "e7c3e33aa43ac46b075ddd448b3629eb8e3b3b0b",
+  "measurements_completed": [
+    "gate 7 stochastic label instability, full F8/F9 census in both splits",
+    "gate 8 rate component and exact base-2 Jensen-Shannon divergence",
+    "VALIDATION Target V4 failure-predicate decomposition with F1 control",
+    "VALIDATION exact joint Recoverability outcome counts",
+    "VALIDATION feature dimensions and finite/mask verification",
+    "VALIDATION and TRAIN graph and design distributions",
+    "byte-level verification of all 12 VALIDATION shards and all 44 TRAIN shards",
+    "row dataset roots recomputed for both splits from the sealed row bytes",
+    "row-identity-level split leakage across all eight identity axes"
+  ],
+  "outstanding_measurements": [],
+  "phase": "PHASE_9D_V2C_R",
+  "phase9d_v2c_r_final_readiness_sha256": "2b2fcc31220cacf0ce7152d82a5d29314abdd88f3e4e054b0c63cdb71e97b9d8",
+  "purpose": "complete only the measurements that were missing when the production target became unreachable during Phase 9D-V2C",
+  "recommendation": "DO_NOT_TRAIN",
+  "schema_version": "rvt-phase9d-v2c-r-final-readiness/v1",
+  "supersedes": {
+    "additive_only": true,
+    "historical_artifacts_rewritten": 0,
+    "phase": "PHASE_9D_V2C",
+    "previous_recommendation": "AUDIT_INCOMPLETE",
+    "previous_verdict": "E"
+  },
+  "target": {
+    "execution": "inside the exact qualified image sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+    "host": "100.71.102.9",
+    "image_rebuilt": false,
+    "official_mounts": "read-only",
+    "reachable": true,
+    "resume_script_write_targets": "a single separate output mount; TRAIN and VALIDATION are bind-mounted :ro so a write is impossible at the container boundary as well as absent from the code",
+    "resume_scripts_inspected_before_execution": true
+  },
+  "training_authorized_by_this_phase": false,
+  "verdict": "A",
+  "verdict_text": "The missing measurements expose a frozen gate failure. Completing the Phase 9D-V2C measurement gap resolved eight of the nine frozen Recoverability label-audit gates in favour of the dataset, but frozen gate 7 -- stochastic label instability at most 0.10 per family/candidate -- fails in TRAIN F9/LINE at 59/530 = 0.11132075. The measurement is a full census, the replay reproduced every sealed label and disposition exactly, and gate 7 carries no scientific-scope escape clause.",
+  "what_this_does_and_does_not_mean": {
+    "does_mean": "a predeclared data-quality gate that had never been evaluated for V2 is now evaluated and does not hold, so training is blocked until the owner decides how to proceed under the frozen rules",
+    "does_not_invalidate": [
+      "the sealed datasets, which verify byte-for-byte with 0 mismatches",
+      "the combined arithmetic, which reconciles exactly",
+      "the validation adequacy gate, which passes for all ten primary families",
+      "the resolved F3/F4/F6 scenario semantics, which the new measurements independently confirm"
+    ],
+    "forbidden_responses": [
+      "tuning the 0.10 threshold",
+      "reinterpreting the instability definition",
+      "excluding F9 or the LINE candidate",
+      "regenerating or resampling F9",
+      "treating the VALIDATION F9/LINE pass at 0.058 as sufficient"
+    ],
+    "owner_options_not_exercised_here": [
+      "accept the frozen gate outcome and treat H1 Recoverability training as blocked",
+      "authorize a separate phase to investigate the F9/LINE stochastic mechanism under the frozen contracts",
+      "authorize a predeclared amendment to the gate, which would itself require owner scientific authority and must not be decided from this result"
+    ]
+  }
+}

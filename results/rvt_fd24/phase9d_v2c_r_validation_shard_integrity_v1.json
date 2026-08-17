@@ -1,0 +1,68 @@
+{
+  "R15_row_root_algorithm": {
+    "algorithm": "sha256_document(sorted(scientific_row_id))",
+    "authority": "recomputed by streaming every sealed shard; matches the algorithm used by the sealing phases",
+    "shard_hash_aggregation_used": false,
+    "train_row_root_declared": "c91414f52543d2b0b40c4349000072e1674fc948454e63810ea7d3a66a6287a9",
+    "train_row_root_matches": true,
+    "train_row_root_recomputed": "c91414f52543d2b0b40c4349000072e1674fc948454e63810ea7d3a66a6287a9",
+    "validation_row_root_declared": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+    "validation_row_root_matches": true,
+    "validation_row_root_recomputed": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22"
+  },
+  "expected_train_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+  "expected_validation_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+  "measured_in_image": true,
+  "mounts": "TRAIN and VALIDATION mounted read-only; output written to a separate mount",
+  "phase9d_v2c_r_validation_shard_integrity_sha256": "d7327dffc9c38636d8593251f39dd1a7e408217527c5b42b79ef87032cad947f",
+  "schema_version": "rvt-phase9d-v2c-r-shard-integrity/v1",
+  "sealed_dataset_integrity_failure": false,
+  "train_reverification": {
+    "bytes_counted": 1674191736,
+    "composite_seal_matches": true,
+    "composite_seal_recomputed": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "roots_match": {
+      "candidate_evaluation_root": true,
+      "manifest_root": true,
+      "operational_ledger_root": true,
+      "pair_transaction_root": true,
+      "row_dataset_root": true,
+      "stage_a_root": true
+    },
+    "rows_counted": 90294,
+    "shard_failures": [],
+    "shards_declared": 44,
+    "shards_verified": 44
+  },
+  "validation": {
+    "byte_mismatches": 0,
+    "bytes_counted": 445716747,
+    "bytes_declared": 445716747,
+    "composite_seal_declared": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "composite_seal_matches": true,
+    "composite_seal_recomputed": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "dataset_manifest_self_hash_ok": true,
+    "manifest_self_hash_ok": true,
+    "roots_match": {
+      "candidate_evaluation_root": true,
+      "manifest_root": true,
+      "operational_ledger_root": true,
+      "pair_transaction_root": true,
+      "row_dataset_root": true,
+      "stage_a_root": true
+    },
+    "roots_recomputed": {
+      "candidate_evaluation_root": "53a2b2316c0cc0a3fd2920155c70b732b28a176a106fe9cca2368d7d6569b3b8",
+      "manifest_root": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+      "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "pair_transaction_root": "0d014f0a548b756ac6220997cb292f96afbedd33f3ea7da9351de042dee71ed8",
+      "row_dataset_root": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+      "stage_a_root": "5a0f6fada073d6bdb8ca740433d785aed55728f550695d5d626d15c1c85a611e"
+    },
+    "rows_counted": 23220,
+    "rows_declared": 23220,
+    "shard_failures": [],
+    "shards_declared": 12,
+    "shards_verified": 12
+  }
+}

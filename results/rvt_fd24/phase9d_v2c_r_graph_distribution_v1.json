@@ -1,0 +1,814 @@
+{
+  "candidate_topology": {
+    "balanced_in_both_splits": true,
+    "train": {
+      "2": 45147,
+      "5": 45147
+    },
+    "validation": {
+      "2": 11610,
+      "5": 11610
+    }
+  },
+  "descriptive_only": true,
+  "design": {
+    "train": {
+      "eligible_per_episode_max": 87,
+      "eligible_per_episode_mean": 8.4133,
+      "family": {
+        "F1": 120,
+        "F10": 120,
+        "F2": 120,
+        "F3": 120,
+        "F4": 120,
+        "F5": 120,
+        "F6": 120,
+        "F7": 120,
+        "F8": 120,
+        "F9": 120
+      },
+      "selection_ordinal": {
+        "0": 1176,
+        "1": 1170,
+        "2": 1108,
+        "3": 897,
+        "4": 681
+      },
+      "source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": 200,
+        "S1_ALWAYS_COMPACT": 200,
+        "S2_ALWAYS_LINE": 200,
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": 200,
+        "S4_FROZEN_TRANSITION_PROTOCOL": 200,
+        "S5_BOUNDED_PERTURBATION": 200
+      },
+      "team_size": {
+        "12": 240,
+        "16": 240,
+        "5": 240,
+        "6": 240,
+        "8": 240
+      },
+      "terminal_cause": {
+        "COLLISION": 710,
+        "GOAL_COMPLETE": 458,
+        "HORIZON_COMPLETE": 8,
+        "INITIALIZATION_INVALID": 24
+      }
+    },
+    "validation": {
+      "eligible_per_episode_max": 87,
+      "eligible_per_episode_mean": 9.0467,
+      "family": {
+        "F1": 30,
+        "F10": 30,
+        "F2": 30,
+        "F3": 30,
+        "F4": 30,
+        "F5": 30,
+        "F6": 30,
+        "F7": 30,
+        "F8": 30,
+        "F9": 30
+      },
+      "selection_ordinal": {
+        "0": 294,
+        "1": 293,
+        "2": 281,
+        "3": 238,
+        "4": 179
+      },
+      "source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": 50,
+        "S1_ALWAYS_COMPACT": 50,
+        "S2_ALWAYS_LINE": 50,
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": 50,
+        "S4_FROZEN_TRANSITION_PROTOCOL": 50,
+        "S5_BOUNDED_PERTURBATION": 50
+      },
+      "team_size": {
+        "12": 60,
+        "16": 60,
+        "5": 60,
+        "6": 60,
+        "8": 60
+      },
+      "terminal_cause": {
+        "COLLISION": 160,
+        "GOAL_COMPLETE": 133,
+        "HORIZON_COMPLETE": 1,
+        "INITIALIZATION_INVALID": 6
+      }
+    }
+  },
+  "graph": {
+    "train": {
+      "edge_count_distribution": {
+        "0": 15974,
+        "10": 6128,
+        "100": 136,
+        "102": 212,
+        "104": 188,
+        "106": 276,
+        "108": 170,
+        "110": 178,
+        "112": 134,
+        "114": 146,
+        "116": 48,
+        "118": 110,
+        "12": 3592,
+        "120": 96,
+        "122": 154,
+        "124": 58,
+        "126": 76,
+        "128": 238,
+        "130": 162,
+        "132": 132,
+        "134": 64,
+        "136": 90,
+        "138": 58,
+        "14": 10144,
+        "140": 76,
+        "142": 14,
+        "16": 3672,
+        "18": 5792,
+        "2": 516,
+        "20": 2022,
+        "22": 5188,
+        "24": 2116,
+        "26": 2572,
+        "28": 1056,
+        "30": 812,
+        "32": 908,
+        "34": 676,
+        "36": 702,
+        "38": 780,
+        "4": 400,
+        "40": 1100,
+        "42": 674,
+        "44": 506,
+        "46": 800,
+        "48": 900,
+        "50": 1008,
+        "52": 586,
+        "54": 1718,
+        "56": 712,
+        "58": 1218,
+        "6": 1630,
+        "60": 606,
+        "62": 1244,
+        "64": 548,
+        "66": 704,
+        "68": 536,
+        "70": 440,
+        "72": 526,
+        "74": 522,
+        "76": 492,
+        "78": 498,
+        "8": 5204,
+        "80": 274,
+        "82": 396,
+        "84": 282,
+        "86": 326,
+        "88": 282,
+        "90": 206,
+        "92": 104,
+        "94": 142,
+        "96": 82,
+        "98": 162
+      },
+      "edge_mask_occupancy": 1.0,
+      "mean_degree": 2.9594,
+      "mean_edge_count": 25.429,
+      "mean_node_count": 13.7145,
+      "node_count_distribution": {
+        "1": 15974,
+        "10": 5792,
+        "11": 2022,
+        "12": 5188,
+        "13": 2116,
+        "14": 2572,
+        "15": 1056,
+        "16": 812,
+        "17": 908,
+        "18": 676,
+        "19": 702,
+        "2": 516,
+        "20": 780,
+        "21": 1100,
+        "22": 674,
+        "23": 506,
+        "24": 800,
+        "25": 900,
+        "26": 1008,
+        "27": 586,
+        "28": 1718,
+        "29": 712,
+        "3": 400,
+        "30": 1218,
+        "31": 606,
+        "32": 1244,
+        "33": 548,
+        "34": 704,
+        "35": 536,
+        "36": 440,
+        "37": 526,
+        "38": 522,
+        "39": 492,
+        "4": 1630,
+        "40": 498,
+        "41": 274,
+        "42": 396,
+        "43": 282,
+        "44": 326,
+        "45": 282,
+        "46": 206,
+        "47": 104,
+        "48": 142,
+        "49": 82,
+        "5": 5204,
+        "50": 162,
+        "51": 136,
+        "52": 212,
+        "53": 188,
+        "54": 276,
+        "55": 170,
+        "56": 178,
+        "57": 134,
+        "58": 146,
+        "59": 48,
+        "6": 6128,
+        "60": 110,
+        "61": 96,
+        "62": 154,
+        "63": 58,
+        "64": 76,
+        "65": 238,
+        "66": 162,
+        "67": 132,
+        "68": 64,
+        "69": 90,
+        "7": 3592,
+        "70": 58,
+        "71": 76,
+        "72": 14,
+        "8": 10144,
+        "9": 3672
+      },
+      "node_mask_occupancy": 1.0
+    },
+    "validation": {
+      "edge_count_distribution": {
+        "0": 3946,
+        "10": 1566,
+        "100": 30,
+        "102": 58,
+        "104": 50,
+        "106": 62,
+        "108": 46,
+        "110": 70,
+        "112": 64,
+        "114": 40,
+        "116": 22,
+        "118": 32,
+        "12": 870,
+        "120": 22,
+        "122": 46,
+        "124": 32,
+        "126": 36,
+        "128": 74,
+        "130": 38,
+        "132": 42,
+        "134": 24,
+        "136": 32,
+        "138": 20,
+        "14": 2692,
+        "140": 16,
+        "142": 6,
+        "16": 732,
+        "18": 1508,
+        "2": 154,
+        "20": 502,
+        "22": 1282,
+        "24": 486,
+        "26": 754,
+        "28": 238,
+        "30": 160,
+        "32": 196,
+        "34": 176,
+        "36": 202,
+        "38": 208,
+        "4": 62,
+        "40": 308,
+        "42": 112,
+        "44": 150,
+        "46": 204,
+        "48": 310,
+        "50": 282,
+        "52": 126,
+        "54": 518,
+        "56": 150,
+        "58": 302,
+        "6": 396,
+        "60": 154,
+        "62": 330,
+        "64": 200,
+        "66": 248,
+        "68": 114,
+        "70": 128,
+        "72": 166,
+        "74": 100,
+        "76": 112,
+        "78": 90,
+        "8": 1486,
+        "80": 110,
+        "82": 66,
+        "84": 80,
+        "86": 98,
+        "88": 76,
+        "90": 72,
+        "92": 36,
+        "94": 28,
+        "96": 20,
+        "98": 52
+      },
+      "edge_mask_occupancy": 1.0,
+      "mean_degree": 2.9873,
+      "mean_edge_count": 26.5201,
+      "mean_node_count": 14.26,
+      "node_count_distribution": {
+        "1": 3946,
+        "10": 1508,
+        "11": 502,
+        "12": 1282,
+        "13": 486,
+        "14": 754,
+        "15": 238,
+        "16": 160,
+        "17": 196,
+        "18": 176,
+        "19": 202,
+        "2": 154,
+        "20": 208,
+        "21": 308,
+        "22": 112,
+        "23": 150,
+        "24": 204,
+        "25": 310,
+        "26": 282,
+        "27": 126,
+        "28": 518,
+        "29": 150,
+        "3": 62,
+        "30": 302,
+        "31": 154,
+        "32": 330,
+        "33": 200,
+        "34": 248,
+        "35": 114,
+        "36": 128,
+        "37": 166,
+        "38": 100,
+        "39": 112,
+        "4": 396,
+        "40": 90,
+        "41": 110,
+        "42": 66,
+        "43": 80,
+        "44": 98,
+        "45": 76,
+        "46": 72,
+        "47": 36,
+        "48": 28,
+        "49": 20,
+        "5": 1486,
+        "50": 52,
+        "51": 30,
+        "52": 58,
+        "53": 50,
+        "54": 62,
+        "55": 46,
+        "56": 70,
+        "57": 64,
+        "58": 40,
+        "59": 22,
+        "6": 1566,
+        "60": 32,
+        "61": 22,
+        "62": 46,
+        "63": 32,
+        "64": 36,
+        "65": 74,
+        "66": 38,
+        "67": 42,
+        "68": 24,
+        "69": 32,
+        "7": 870,
+        "70": 20,
+        "71": 16,
+        "72": 6,
+        "8": 2692,
+        "9": 732
+      },
+      "node_mask_occupancy": 1.0
+    }
+  },
+  "label_rate_by_selection_ordinal": {
+    "train": {
+      "0": {
+        "RECOVERABLE_POSITIVE": 783,
+        "VALID_TASK_NEGATIVE": 1569,
+        "events": 1176,
+        "families": 10,
+        "team_sizes": 5
+      },
+      "1": {
+        "RECOVERABLE_POSITIVE": 668,
+        "VALID_TASK_NEGATIVE": 1672,
+        "events": 1170,
+        "families": 10,
+        "team_sizes": 5
+      },
+      "2": {
+        "RECOVERABLE_POSITIVE": 647,
+        "VALID_TASK_NEGATIVE": 1569,
+        "events": 1108,
+        "families": 10,
+        "team_sizes": 5
+      },
+      "3": {
+        "RECOVERABLE_POSITIVE": 637,
+        "VALID_TASK_NEGATIVE": 1157,
+        "events": 897,
+        "families": 10,
+        "team_sizes": 5
+      },
+      "4": {
+        "RECOVERABLE_POSITIVE": 433,
+        "VALID_TASK_NEGATIVE": 929,
+        "events": 681,
+        "families": 10,
+        "team_sizes": 5
+      }
+    },
+    "validation": {
+      "0": {
+        "COMPACT": {
+          "negative": 182,
+          "positive": 112,
+          "rate": 0.380952
+        },
+        "LINE": {
+          "negative": 180,
+          "positive": 114,
+          "rate": 0.387755
+        }
+      },
+      "1": {
+        "COMPACT": {
+          "negative": 208,
+          "positive": 85,
+          "rate": 0.290102
+        },
+        "LINE": {
+          "negative": 192,
+          "positive": 101,
+          "rate": 0.34471
+        }
+      },
+      "2": {
+        "COMPACT": {
+          "negative": 185,
+          "positive": 96,
+          "rate": 0.341637
+        },
+        "LINE": {
+          "negative": 202,
+          "positive": 79,
+          "rate": 0.281139
+        }
+      },
+      "3": {
+        "COMPACT": {
+          "negative": 131,
+          "positive": 107,
+          "rate": 0.44958
+        },
+        "LINE": {
+          "negative": 159,
+          "positive": 79,
+          "rate": 0.331933
+        }
+      },
+      "4": {
+        "COMPACT": {
+          "negative": 86,
+          "positive": 93,
+          "rate": 0.519553
+        },
+        "LINE": {
+          "negative": 145,
+          "positive": 34,
+          "rate": 0.189944
+        }
+      }
+    }
+  },
+  "label_rate_by_source_policy": {
+    "train": {
+      "S0_SCRIPTED_DIAGNOSTIC": {
+        "RECOVERABLE_POSITIVE": 562,
+        "VALID_TASK_NEGATIVE": 1224,
+        "events": 893,
+        "selected_events": 893,
+        "source_episodes": 200
+      },
+      "S1_ALWAYS_COMPACT": {
+        "RECOVERABLE_POSITIVE": 500,
+        "VALID_TASK_NEGATIVE": 1084,
+        "events": 792,
+        "selected_events": 792,
+        "source_episodes": 200
+      },
+      "S2_ALWAYS_LINE": {
+        "RECOVERABLE_POSITIVE": 541,
+        "VALID_TASK_NEGATIVE": 1191,
+        "events": 866,
+        "selected_events": 866,
+        "source_episodes": 200
+      },
+      "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+        "RECOVERABLE_POSITIVE": 520,
+        "VALID_TASK_NEGATIVE": 1154,
+        "events": 837,
+        "selected_events": 837,
+        "source_episodes": 200
+      },
+      "S4_FROZEN_TRANSITION_PROTOCOL": {
+        "RECOVERABLE_POSITIVE": 515,
+        "VALID_TASK_NEGATIVE": 1165,
+        "events": 840,
+        "selected_events": 840,
+        "source_episodes": 200
+      },
+      "S5_BOUNDED_PERTURBATION": {
+        "RECOVERABLE_POSITIVE": 530,
+        "VALID_TASK_NEGATIVE": 1078,
+        "events": 804,
+        "selected_events": 804,
+        "source_episodes": 200
+      }
+    },
+    "validation": {
+      "S0_SCRIPTED_DIAGNOSTIC": {
+        "COMPACT": {
+          "negative": 164,
+          "positive": 66,
+          "rate": 0.286957
+        },
+        "LINE": {
+          "negative": 135,
+          "positive": 95,
+          "rate": 0.413043
+        }
+      },
+      "S1_ALWAYS_COMPACT": {
+        "COMPACT": {
+          "negative": 110,
+          "positive": 99,
+          "rate": 0.473684
+        },
+        "LINE": {
+          "negative": 159,
+          "positive": 50,
+          "rate": 0.239234
+        }
+      },
+      "S2_ALWAYS_LINE": {
+        "COMPACT": {
+          "negative": 162,
+          "positive": 60,
+          "rate": 0.27027
+        },
+        "LINE": {
+          "negative": 117,
+          "positive": 105,
+          "rate": 0.472973
+        }
+      },
+      "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+        "COMPACT": {
+          "negative": 121,
+          "positive": 90,
+          "rate": 0.42654
+        },
+        "LINE": {
+          "negative": 157,
+          "positive": 54,
+          "rate": 0.255924
+        }
+      },
+      "S4_FROZEN_TRANSITION_PROTOCOL": {
+        "COMPACT": {
+          "negative": 111,
+          "positive": 100,
+          "rate": 0.473934
+        },
+        "LINE": {
+          "negative": 161,
+          "positive": 50,
+          "rate": 0.236967
+        }
+      },
+      "S5_BOUNDED_PERTURBATION": {
+        "COMPACT": {
+          "negative": 124,
+          "positive": 78,
+          "rate": 0.386139
+        },
+        "LINE": {
+          "negative": 149,
+          "positive": 53,
+          "rate": 0.262376
+        }
+      }
+    }
+  },
+  "label_rate_by_team_size": {
+    "train": {
+      "12": {
+        "COMPACT": {
+          "negative": 571,
+          "positive": 375,
+          "rate": 0.396406
+        },
+        "LINE": {
+          "negative": 788,
+          "positive": 158,
+          "rate": 0.167019
+        }
+      },
+      "16": {
+        "COMPACT": {
+          "negative": 483,
+          "positive": 349,
+          "rate": 0.419471
+        },
+        "LINE": {
+          "negative": 778,
+          "positive": 54,
+          "rate": 0.064904
+        }
+      },
+      "5": {
+        "COMPACT": {
+          "negative": 856,
+          "positive": 259,
+          "rate": 0.232287
+        },
+        "LINE": {
+          "negative": 672,
+          "positive": 443,
+          "rate": 0.397309
+        }
+      },
+      "6": {
+        "COMPACT": {
+          "negative": 709,
+          "positive": 393,
+          "rate": 0.356624
+        },
+        "LINE": {
+          "negative": 667,
+          "positive": 435,
+          "rate": 0.394737
+        }
+      },
+      "8": {
+        "COMPACT": {
+          "negative": 645,
+          "positive": 392,
+          "rate": 0.378014
+        },
+        "LINE": {
+          "negative": 727,
+          "positive": 310,
+          "rate": 0.298939
+        }
+      }
+    },
+    "validation": {
+      "12": {
+        "COMPACT": {
+          "negative": 133,
+          "positive": 115,
+          "rate": 0.46371
+        },
+        "LINE": {
+          "negative": 202,
+          "positive": 46,
+          "rate": 0.185484
+        }
+      },
+      "16": {
+        "COMPACT": {
+          "negative": 110,
+          "positive": 108,
+          "rate": 0.495413
+        },
+        "LINE": {
+          "negative": 199,
+          "positive": 19,
+          "rate": 0.087156
+        }
+      },
+      "5": {
+        "COMPACT": {
+          "negative": 217,
+          "positive": 67,
+          "rate": 0.235915
+        },
+        "LINE": {
+          "negative": 151,
+          "positive": 133,
+          "rate": 0.46831
+        }
+      },
+      "6": {
+        "COMPACT": {
+          "negative": 181,
+          "positive": 96,
+          "rate": 0.34657
+        },
+        "LINE": {
+          "negative": 148,
+          "positive": 129,
+          "rate": 0.465704
+        }
+      },
+      "8": {
+        "COMPACT": {
+          "negative": 151,
+          "positive": 107,
+          "rate": 0.414729
+        },
+        "LINE": {
+          "negative": 178,
+          "positive": 80,
+          "rate": 0.310078
+        }
+      }
+    }
+  },
+  "new_statistical_gates_created": 0,
+  "notes": [
+    "mean node count 13.71 (TRAIN) vs 14.26 (VALIDATION) and mean degree 2.96 vs 2.99; mask occupancy is 1.0 in both splits",
+    "candidate topology rows are exactly balanced in both splits",
+    "row-identity overlap between the splits is 0 across all eight identity axes, including scientific row ids"
+  ],
+  "phase9d_v2c_r_graph_distribution_sha256": "5a78d3bb7dbd017ddcd875b53657d005d7d769a5fea5735ab0b6616bdb47f798",
+  "schema_version": "rvt-phase9d-v2c-r-graph-distribution/v1",
+  "split_hygiene_measured": {
+    "acquisition_sha256": {
+      "overlap": 0,
+      "train": 1200,
+      "validation": 300
+    },
+    "episode_id": {
+      "overlap": 0,
+      "train": 1200,
+      "validation": 300
+    },
+    "event_id": {
+      "overlap": 0,
+      "train": 5032,
+      "validation": 1285
+    },
+    "layout_id": {
+      "overlap": 0,
+      "train": 20,
+      "validation": 10
+    },
+    "layout_sha256": {
+      "overlap": 0,
+      "train": 20,
+      "validation": 10
+    },
+    "row_ids": {
+      "overlap": 0,
+      "train": 90294,
+      "validation": 23220
+    },
+    "seed_streams": {
+      "overlap": 0,
+      "train": 1200,
+      "validation": 300
+    },
+    "source_fingerprints": {
+      "overlap": 0,
+      "train": 5032,
+      "validation": 1285
+    }
+  },
+  "structural_incompatibility_found": false
+}

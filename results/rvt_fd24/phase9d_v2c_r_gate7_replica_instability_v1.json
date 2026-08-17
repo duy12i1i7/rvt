@@ -1,0 +1,171 @@
+{
+  "R3_replica_arithmetic": {
+    "approximation_used": false,
+    "combined": {
+      "computed": 18162,
+      "declared": 18162,
+      "matches": true
+    },
+    "definition": "replica executions = single-replica aggregates x 1 + three-replica aggregates x 3",
+    "train": {
+      "computed": 14452,
+      "declared": 14452,
+      "matches": true,
+      "single_replica_aggregates": 7870,
+      "three_replica_aggregates": 2194
+    },
+    "validation": {
+      "computed": 3710,
+      "declared": 3710,
+      "matches": true,
+      "single_replica_aggregates": 2000,
+      "three_replica_aggregates": 570
+    }
+  },
+  "authority": {
+    "file": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+    "implementation": "scripts/audit_phase9d_r_dataset_readonly.py -- a candidate aggregate is UNSTABLE when its replica labels are not all equal (len(set(replica_labels)) > 1); the denominator is aggregates with more than one replica (stochastic_aggregate_totals); the reported statistic is the maximum rate over (family, candidate)",
+    "implementation_sha256": "7871e65703e542d4c1dde6b26315814cb010e33c8f15509a4fc12c621b719de3",
+    "pre_data_status": "frozen before any Recoverability V2 row existed",
+    "sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d"
+  },
+  "cells_evaluated": 8,
+  "census_complete": true,
+  "cross_checks": {
+    "denominator_equals_selected_events_for_the_family": true,
+    "replay_reproduced_every_sealed_label": true,
+    "replica_executions_equal_three_times_aggregates": true
+  },
+  "definition": "stochastic label instability is at most 0.10 per family/candidate",
+  "definition_reinterpreted": false,
+  "determinism": {
+    "all_replayed_aggregate_labels_match_the_sealed_ledger": true,
+    "all_replayed_dispositions_match_the_sealed_ledger": true,
+    "train": {
+      "aggregate_disposition_mismatches": 0,
+      "aggregate_label_mismatches": 0,
+      "aggregates_compared_against_sealed_ledger": 2194,
+      "events_absent_from_sealed_ledger": 0
+    },
+    "validation": {
+      "aggregate_disposition_mismatches": 0,
+      "aggregate_label_mismatches": 0,
+      "aggregates_compared_against_sealed_ledger": 570,
+      "events_absent_from_sealed_ledger": 0
+    }
+  },
+  "escape_clause_note": "gate 3 carries 'or a scientific-scope review explicitly justifies failure'; gate 7 carries no such clause. The gate document states that a failed gate blocks training.",
+  "failing_cell_count": 1,
+  "failing_cells": [
+    {
+      "candidate": "LINE",
+      "excess_unstable_aggregates": 6,
+      "family": "F9",
+      "instability_rate": 0.11132075,
+      "permitted_unstable_aggregates": 53,
+      "replica_executions": 1590,
+      "split": "train",
+      "stochastic_candidate_aggregates": 530,
+      "unstable_aggregates": 59
+    }
+  ],
+  "gate_has_a_scientific_scope_escape_clause": false,
+  "gate_id": 7,
+  "margin": -0.01132075,
+  "maximum_stochastic_label_instability": 0.11132075,
+  "measurement": "full census of every F8 and F9 candidate aggregate in both sealed splits, replayed through the frozen Target V4 pipeline; no sampling",
+  "mechanism_observation": "TRAIN F9/COMPACT has a positive rate of 0.1038 and zero replica disagreement, while TRAIN F9/LINE has a positive rate of 0.4792 and 0.1113 disagreement. F9 is the dynamic-local-obstacle family, whose moving obstacle is the intended stochastic element, and a candidate whose outcome sits near an even split is where all-success aggregation is most sensitive to replica variation. This is an observation about where the failure sits, not a justification for it and not a proposed remedy.",
+  "note": "Only F8 and F9 carry more than one replica, so they are the only cells the gate can constrain. Seven of the eight measured cells are inside the threshold; TRAIN F9/LINE is not, at 59/530 = 0.11132075 against a permitted 0.10, i.e. six aggregates beyond the 53 the threshold allows.",
+  "per_family_candidate": [
+    {
+      "candidate": "COMPACT",
+      "family": "F8",
+      "instability_rate": 0.07231041,
+      "replica_executions": 1701,
+      "split": "train",
+      "stochastic_candidate_aggregates": 567,
+      "unstable_aggregates": 41
+    },
+    {
+      "candidate": "LINE",
+      "family": "F8",
+      "instability_rate": 0.0617284,
+      "replica_executions": 1701,
+      "split": "train",
+      "stochastic_candidate_aggregates": 567,
+      "unstable_aggregates": 35
+    },
+    {
+      "candidate": "COMPACT",
+      "family": "F9",
+      "instability_rate": 0.0,
+      "replica_executions": 1590,
+      "split": "train",
+      "stochastic_candidate_aggregates": 530,
+      "unstable_aggregates": 0
+    },
+    {
+      "candidate": "LINE",
+      "family": "F9",
+      "instability_rate": 0.11132075,
+      "replica_executions": 1590,
+      "split": "train",
+      "stochastic_candidate_aggregates": 530,
+      "unstable_aggregates": 59
+    },
+    {
+      "candidate": "COMPACT",
+      "family": "F8",
+      "instability_rate": 0.05442177,
+      "replica_executions": 441,
+      "split": "validation",
+      "stochastic_candidate_aggregates": 147,
+      "unstable_aggregates": 8
+    },
+    {
+      "candidate": "LINE",
+      "family": "F8",
+      "instability_rate": 0.02040816,
+      "replica_executions": 441,
+      "split": "validation",
+      "stochastic_candidate_aggregates": 147,
+      "unstable_aggregates": 3
+    },
+    {
+      "candidate": "COMPACT",
+      "family": "F9",
+      "instability_rate": 0.0,
+      "replica_executions": 414,
+      "split": "validation",
+      "stochastic_candidate_aggregates": 138,
+      "unstable_aggregates": 0
+    },
+    {
+      "candidate": "LINE",
+      "family": "F9",
+      "instability_rate": 0.05797101,
+      "replica_executions": 414,
+      "split": "validation",
+      "stochastic_candidate_aggregates": 138,
+      "unstable_aggregates": 8
+    }
+  ],
+  "permitted_maximum": 0.1,
+  "phase9d_v2c_r_gate7_replica_instability_sha256": "04af59aee935e8b789a1534fb9e515ea4b6a40e33eff4a90542cd2ee883e3d6f",
+  "read_only": {
+    "manifests_modified": 0,
+    "official_mounts": "read-only",
+    "rows_written": 0,
+    "seals_modified": 0
+  },
+  "result": "FAIL",
+  "schema_version": "rvt-phase9d-v2c-r-gate7/v1",
+  "scientific_statistic": "maximum over (family, candidate) of unstable_aggregates / stochastic_aggregates",
+  "splits": [
+    "train",
+    "validation"
+  ],
+  "threshold": 0.1,
+  "threshold_tuned": false,
+  "unit": "candidate aggregate with more than one replica"
+}

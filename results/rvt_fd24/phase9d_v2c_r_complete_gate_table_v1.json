@@ -1,0 +1,205 @@
+{
+  "authority": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+  "authority_sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d",
+  "every_gate_measured": true,
+  "gates": [
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": {
+        "COMPACT": {
+          "negative": 4056,
+          "positive": 2261
+        },
+        "LINE": {
+          "negative": 4510,
+          "positive": 1807
+        }
+      },
+      "definition": "each candidate has both positive and negative examples in train and validation",
+      "gate_id": 1,
+      "measurement_source": "sealed candidate ledgers",
+      "result": "PASS",
+      "threshold": ">=1 each",
+      "train": {
+        "COMPACT": {
+          "negative": 3264,
+          "positive": 1768
+        },
+        "LINE": {
+          "negative": 3632,
+          "positive": 1400
+        }
+      },
+      "validation": {
+        "COMPACT": {
+          "negative": 792,
+          "positive": 493
+        },
+        "LINE": {
+          "negative": 878,
+          "positive": 407
+        }
+      }
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": {
+        "COMPACT_ONLY_SUCCESS": 1430,
+        "LINE_ONLY_SUCCESS": 976
+      },
+      "definition": "train contains at least 50 and validation at least 20 events for each decisive category",
+      "gate_id": 2,
+      "measurement_source": "exact paired candidate labels per sealed event (no longer a lower bound)",
+      "result": "PASS",
+      "threshold": "train >=50, validation >=20",
+      "train": {
+        "COMPACT_ONLY_SUCCESS": 1105,
+        "LINE_ONLY_SUCCESS": 737
+      },
+      "validation": {
+        "COMPACT_ONLY_SUCCESS": 325,
+        "LINE_ONLY_SUCCESS": 239
+      }
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": {
+        "COMPACT": 0.357923,
+        "LINE": 0.286054
+      },
+      "definition": "each candidate positive rate lies in [0.10, 0.90]",
+      "gate_id": 3,
+      "measurement_source": "sealed candidate ledgers",
+      "result": "PASS",
+      "threshold": "[0.10, 0.90]",
+      "train": {
+        "COMPACT": 0.351351,
+        "LINE": 0.278219
+      },
+      "validation": {
+        "COMPACT": 0.383658,
+        "LINE": 0.316732
+      }
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": "n/a",
+      "definition": "validation contains at least 30 events from every primary family used for checkpoint selection",
+      "gate_id": 4,
+      "measurement_source": "sealed pair transactions",
+      "minimum_count": 77,
+      "minimum_family": "F4",
+      "result": "PASS",
+      "threshold": ">=30",
+      "train": "n/a",
+      "validation": {
+        "F1": 147,
+        "F10": 113,
+        "F2": 128,
+        "F3": 111,
+        "F4": 77,
+        "F5": 146,
+        "F6": 131,
+        "F7": 147,
+        "F8": 147,
+        "F9": 138
+      }
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": 0,
+      "definition": "Study A training labels contain zero N=24 rows",
+      "gate_id": 5,
+      "measurement_source": "frozen manifests, team sizes [5,6,8,12,16]",
+      "result": "PASS",
+      "threshold": "0",
+      "train": 0,
+      "validation": 0
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": 0.0,
+      "definition": "invalid rollout rate below 0.02 overall and below 0.05 in every family",
+      "gate_id": 6,
+      "measurement_source": "sealed candidate ledgers, 0 GENERATION_INVALID",
+      "result": "PASS",
+      "threshold": "<0.02 overall, <0.05 per family",
+      "train": 0.0,
+      "validation": 0.0
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": "maximum over both splits = 0.11132075",
+      "definition": "stochastic label instability is at most 0.10 per family/candidate",
+      "gate_id": 7,
+      "measurement_source": "full frozen replay census of every F8/F9 candidate aggregate in both splits",
+      "result": "FAIL",
+      "threshold": "<=0.10",
+      "train": {
+        "F8/COMPACT": 0.07231041,
+        "F8/LINE": 0.0617284,
+        "F9/COMPACT": 0.0,
+        "F9/LINE": 0.11132075
+      },
+      "validation": {
+        "F8/COMPACT": 0.05442177,
+        "F8/LINE": 0.02040816,
+        "F9/COMPACT": 0.0,
+        "F9/LINE": 0.05797101
+      }
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": {
+        "jensen_shannon_divergence_base2": 0.004546838319,
+        "maximum_candidate_positive_rate_difference": 0.038512121643
+      },
+      "definition": "absolute train/validation candidate-positive-rate difference at most 0.15 and joint-category Jensen-Shannon divergence at most 0.15",
+      "gate_id": 8,
+      "measurement_source": "exact joint-category counts from both sealed splits, frozen JS implementation",
+      "result": "PASS",
+      "threshold": "rate <=0.15 and JS(base 2) <=0.15",
+      "train": "n/a",
+      "validation": "n/a"
+    },
+    {
+      "authority": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+      "combined": {
+        "acquisition_sha256": 0,
+        "episode_id": 0,
+        "event_id": 0,
+        "layout_id": 0,
+        "layout_sha256": 0,
+        "row_ids": 0,
+        "seed_streams": 0,
+        "source_fingerprints": 0
+      },
+      "definition": "event split leakage and duplicate geometry leakage are zero",
+      "gate_id": 9,
+      "measurement_source": "measured identity intersections across all eight axes including scientific row ids",
+      "result": "PASS",
+      "threshold": "0",
+      "train": "n/a",
+      "validation": "n/a"
+    }
+  ],
+  "gates_failing": [
+    7
+  ],
+  "gates_not_evaluated": [],
+  "gates_passing": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "new_gates_invented": 0,
+  "phase9d_v2c_r_complete_gate_table_sha256": "3461a1b032b83e9a612e93f85050d589b5f7620101f7fc032f39ff02ee77ce5e",
+  "posthoc_threshold_added": 0,
+  "schema_version": "rvt-phase9d-v2c-r-complete-gate-table/v1",
+  "total_gates": 9
+}

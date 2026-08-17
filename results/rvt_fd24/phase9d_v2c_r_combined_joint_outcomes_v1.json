@@ -1,0 +1,182 @@
+{
+  "combined": {
+    "counts": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 3080,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 831,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 1430,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 976
+    },
+    "events": 6317,
+    "fractions": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 0.48757322,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0.13154979,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0.22637328,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0.15450372
+    }
+  },
+  "combined_equals_train_plus_validation": true,
+  "combined_events_equal_retained_pairs": true,
+  "decisive_events": {
+    "combined": 2406,
+    "train": 1842,
+    "validation": 564
+  },
+  "distinct_from_scenario_headroom_categories": true,
+  "naming_authority": "rvt_swarm/phase8/targets.py joint_outcome_category and rvt_swarm/phase9g0r/producer.py _joint_category",
+  "phase9d_v2c_r_combined_joint_outcomes_sha256": "1a1b2325671822c4a1e2e1950d47bd55fdc32f275550dbf89b575a954364f3ef",
+  "schema_version": "rvt-phase9d-v2c-r-combined-joint-outcomes/v1",
+  "train": {
+    "by_family": {
+      "F1": {
+        "BOTH_FAIL": 25,
+        "BOTH_SUCCESS": 299,
+        "COMPACT_ONLY_SUCCESS": 240,
+        "LINE_ONLY_SUCCESS": 29
+      },
+      "F10": {
+        "BOTH_FAIL": 345,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 94
+      },
+      "F2": {
+        "BOTH_FAIL": 259,
+        "BOTH_SUCCESS": 10,
+        "COMPACT_ONLY_SUCCESS": 32,
+        "LINE_ONLY_SUCCESS": 196
+      },
+      "F3": {
+        "BOTH_FAIL": 423,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F4": {
+        "BOTH_FAIL": 324,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F5": {
+        "BOTH_FAIL": 229,
+        "BOTH_SUCCESS": 6,
+        "COMPACT_ONLY_SUCCESS": 254,
+        "LINE_ONLY_SUCCESS": 67
+      },
+      "F6": {
+        "BOTH_FAIL": 519,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F7": {
+        "BOTH_FAIL": 22,
+        "BOTH_SUCCESS": 304,
+        "COMPACT_ONLY_SUCCESS": 167,
+        "LINE_ONLY_SUCCESS": 91
+      },
+      "F8": {
+        "BOTH_FAIL": 127,
+        "BOTH_SUCCESS": 11,
+        "COMPACT_ONLY_SUCCESS": 390,
+        "LINE_ONLY_SUCCESS": 39
+      },
+      "F9": {
+        "BOTH_FAIL": 254,
+        "BOTH_SUCCESS": 33,
+        "COMPACT_ONLY_SUCCESS": 22,
+        "LINE_ONLY_SUCCESS": 221
+      }
+    },
+    "counts": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 2527,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 663,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 1105,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 737
+    },
+    "events": 5032,
+    "fractions": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 0.50218601,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0.13175676,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0.21959459,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0.14646264
+    }
+  },
+  "validation": {
+    "by_family": {
+      "F1": {
+        "BOTH_FAIL": 5,
+        "BOTH_SUCCESS": 72,
+        "COMPACT_ONLY_SUCCESS": 63,
+        "LINE_ONLY_SUCCESS": 7
+      },
+      "F10": {
+        "BOTH_FAIL": 66,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 47
+      },
+      "F2": {
+        "BOTH_FAIL": 47,
+        "BOTH_SUCCESS": 4,
+        "COMPACT_ONLY_SUCCESS": 30,
+        "LINE_ONLY_SUCCESS": 47
+      },
+      "F3": {
+        "BOTH_FAIL": 111,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F4": {
+        "BOTH_FAIL": 77,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F5": {
+        "BOTH_FAIL": 34,
+        "BOTH_SUCCESS": 3,
+        "COMPACT_ONLY_SUCCESS": 84,
+        "LINE_ONLY_SUCCESS": 25
+      },
+      "F6": {
+        "BOTH_FAIL": 131,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F7": {
+        "BOTH_FAIL": 3,
+        "BOTH_SUCCESS": 75,
+        "COMPACT_ONLY_SUCCESS": 44,
+        "LINE_ONLY_SUCCESS": 25
+      },
+      "F8": {
+        "BOTH_FAIL": 27,
+        "BOTH_SUCCESS": 6,
+        "COMPACT_ONLY_SUCCESS": 98,
+        "LINE_ONLY_SUCCESS": 16
+      },
+      "F9": {
+        "BOTH_FAIL": 52,
+        "BOTH_SUCCESS": 8,
+        "COMPACT_ONLY_SUCCESS": 6,
+        "LINE_ONLY_SUCCESS": 72
+      }
+    },
+    "counts": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 553,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 168,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 325,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 239
+    },
+    "events": 1285,
+    "fractions": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 0.43035019,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0.1307393,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0.25291829,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0.18599222
+    }
+  }
+}

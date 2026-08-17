@@ -1,0 +1,153 @@
+{
+  "by_family": {
+    "F1": {
+      "BOTH_FAIL": 5,
+      "BOTH_SUCCESS": 72,
+      "COMPACT_ONLY_SUCCESS": 63,
+      "LINE_ONLY_SUCCESS": 7
+    },
+    "F10": {
+      "BOTH_FAIL": 66,
+      "BOTH_SUCCESS": 0,
+      "COMPACT_ONLY_SUCCESS": 0,
+      "LINE_ONLY_SUCCESS": 47
+    },
+    "F2": {
+      "BOTH_FAIL": 47,
+      "BOTH_SUCCESS": 4,
+      "COMPACT_ONLY_SUCCESS": 30,
+      "LINE_ONLY_SUCCESS": 47
+    },
+    "F3": {
+      "BOTH_FAIL": 111,
+      "BOTH_SUCCESS": 0,
+      "COMPACT_ONLY_SUCCESS": 0,
+      "LINE_ONLY_SUCCESS": 0
+    },
+    "F4": {
+      "BOTH_FAIL": 77,
+      "BOTH_SUCCESS": 0,
+      "COMPACT_ONLY_SUCCESS": 0,
+      "LINE_ONLY_SUCCESS": 0
+    },
+    "F5": {
+      "BOTH_FAIL": 34,
+      "BOTH_SUCCESS": 3,
+      "COMPACT_ONLY_SUCCESS": 84,
+      "LINE_ONLY_SUCCESS": 25
+    },
+    "F6": {
+      "BOTH_FAIL": 131,
+      "BOTH_SUCCESS": 0,
+      "COMPACT_ONLY_SUCCESS": 0,
+      "LINE_ONLY_SUCCESS": 0
+    },
+    "F7": {
+      "BOTH_FAIL": 3,
+      "BOTH_SUCCESS": 75,
+      "COMPACT_ONLY_SUCCESS": 44,
+      "LINE_ONLY_SUCCESS": 25
+    },
+    "F8": {
+      "BOTH_FAIL": 27,
+      "BOTH_SUCCESS": 6,
+      "COMPACT_ONLY_SUCCESS": 98,
+      "LINE_ONLY_SUCCESS": 16
+    },
+    "F9": {
+      "BOTH_FAIL": 52,
+      "BOTH_SUCCESS": 8,
+      "COMPACT_ONLY_SUCCESS": 6,
+      "LINE_ONLY_SUCCESS": 72
+    }
+  },
+  "by_family_named": {
+    "F1": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 5,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 72,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 63,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 7
+    },
+    "F10": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 66,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 47
+    },
+    "F2": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 47,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 4,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 30,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 47
+    },
+    "F3": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 111,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0
+    },
+    "F4": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 77,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0
+    },
+    "F5": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 34,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 3,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 84,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 25
+    },
+    "F6": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 131,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0
+    },
+    "F7": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 3,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 75,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 44,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 25
+    },
+    "F8": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 27,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 6,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 98,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 16
+    },
+    "F9": {
+      "RECOVERABILITY_EVENT_BOTH_FAIL": 52,
+      "RECOVERABILITY_EVENT_BOTH_SUCCESS": 8,
+      "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 6,
+      "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 72
+    }
+  },
+  "counts": {
+    "RECOVERABILITY_EVENT_BOTH_FAIL": 553,
+    "RECOVERABILITY_EVENT_BOTH_SUCCESS": 168,
+    "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 325,
+    "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 239
+  },
+  "estimated_from_marginals": false,
+  "events": 1285,
+  "events_equal_retained_pairs": true,
+  "fractions": {
+    "RECOVERABILITY_EVENT_BOTH_FAIL": 0.43035019,
+    "RECOVERABILITY_EVENT_BOTH_SUCCESS": 0.1307393,
+    "RECOVERABILITY_EVENT_COMPACT_ONLY_SUCCESS": 0.25291829,
+    "RECOVERABILITY_EVENT_LINE_ONLY_SUCCESS": 0.18599222
+  },
+  "measured_from": "paired candidate Target V4 labels on the same sealed source event, read from the VALIDATION candidate ledger; NOT estimated from marginals",
+  "naming": "these are OBSERVED Recoverability decision-event outcome categories, not scenario-manifest headroom categories",
+  "phase9d_v2c_r_validation_joint_outcomes_sha256": "da6790ec28fe293dc64f8a5ad0ccbe9e170e58878c756696c8d33a8fb11985fd",
+  "schema_version": "rvt-phase9d-v2c-r-validation-joint-outcomes/v1",
+  "supersedes_prior_lower_bounds": {
+    "artifact": "results/rvt_fd24/phase9d_v2c_candidate_decisiveness_v1.json",
+    "bounds_held": true,
+    "measured_COMPACT_ONLY": 325,
+    "measured_LINE_ONLY": 239,
+    "prior_COMPACT_ONLY_lower_bound": 216,
+    "prior_LINE_ONLY_lower_bound": 130
+  }
+}

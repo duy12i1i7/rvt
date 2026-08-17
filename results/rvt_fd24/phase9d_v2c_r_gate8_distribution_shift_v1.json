@@ -1,0 +1,108 @@
+{
+  "R6_per_family_shift_remains_descriptive": {
+    "converted_into_a_gate": false,
+    "descriptive_values": {
+      "F10_LINE": 0.2018,
+      "F2_COMPACT": 0.1811
+    },
+    "predeclared_per_family_label_rate_gate_exists": false,
+    "searched": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md, results/rvt_fd24/phase9d_h1_requirement_map_v1.json"
+  },
+  "authority": {
+    "file": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+    "implementation_authority": [
+      {
+        "file": "scripts/audit_phase9d_r_dataset_readonly.py",
+        "sha256": "7871e65703e542d4c1dde6b26315814cb010e33c8f15509a4fc12c621b719de3"
+      },
+      {
+        "file": "scripts/build_phase9d_r_recoverability_audit.py",
+        "sha256": "cdea067ee3c2b71ea14d4340fd315fbf747b5b2c375e0f5cc2090df9c293ece7"
+      }
+    ],
+    "pre_data_status": "frozen before any Recoverability V2 row existed; the gate document hash matches the value recorded in results/rvt_fd24/phase9d_h1_requirement_map_v1.json",
+    "sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d"
+  },
+  "components": 2,
+  "definition": "absolute train/validation candidate-positive-rate difference is at most 0.15 and joint-category Jensen-Shannon divergence is at most 0.15",
+  "divergence_component": {
+    "category_order_frozen": [
+      "BOTH_SUCCESS",
+      "COMPACT_ONLY_SUCCESS",
+      "LINE_ONLY_SUCCESS",
+      "BOTH_FAIL"
+    ],
+    "formula": "JS = 0.5*KL(p||m) + 0.5*KL(q||m), m = (p+q)/2",
+    "implementation_recovered_from": "scripts/build_phase9d_r_recoverability_audit.py::_js_divergence",
+    "jensen_shannon_divergence_base2": 0.004546838319,
+    "library_default_used": false,
+    "logarithm_base": 2,
+    "margin_ratio": 32.99,
+    "maximum_permitted_js_divergence": 0.15,
+    "normalization": "each distribution normalised by its own event total",
+    "p_train": [
+      0.131756756757,
+      0.219594594595,
+      0.14646263911,
+      0.502186009539
+    ],
+    "q_validation": [
+      0.130739299611,
+      0.252918287938,
+      0.185992217899,
+      0.430350194553
+    ],
+    "result": "PASS",
+    "smoothing_convention": "NONE; terms with p_i == 0 are skipped, matching the frozen implementation",
+    "statistic": "Jensen-Shannon divergence between the TRAIN and VALIDATION joint-category distributions",
+    "train_counts": {
+      "BOTH_FAIL": 2527,
+      "BOTH_SUCCESS": 663,
+      "COMPACT_ONLY_SUCCESS": 1105,
+      "LINE_ONLY_SUCCESS": 737
+    },
+    "unit": "Recoverability decision event",
+    "validation_counts": {
+      "BOTH_FAIL": 553,
+      "BOTH_SUCCESS": 168,
+      "COMPACT_ONLY_SUCCESS": 325,
+      "LINE_ONLY_SUCCESS": 239
+    }
+  },
+  "gate_id": 8,
+  "gate_result": "PASS",
+  "no_posthoc_dimension_added_to_the_decision": true,
+  "phase9d_v2c_r_gate8_distribution_shift_sha256": "fbf665e613a5df9ed8817d8100f0e92b16c1251c5ee912f5f4c36f20ee94b5f6",
+  "prior_descriptive_values_recomputed_not_accepted": {
+    "agree": true,
+    "note": "the prior values were the two per-candidate differences; the frozen gate statistic is their maximum, 0.038512",
+    "prior_reported": [
+      0.032,
+      0.039
+    ],
+    "recomputed": [
+      0.032306,
+      0.038512
+    ]
+  },
+  "rate_component": {
+    "maximum_candidate_positive_rate_difference": 0.038512121643,
+    "maximum_permitted_rate_difference": 0.15,
+    "per_candidate_absolute_difference": {
+      "COMPACT": 0.032306236197,
+      "LINE": 0.038512121643
+    },
+    "result": "PASS",
+    "statistic": "max over {COMPACT, LINE} of |train positive_rate - validation positive_rate|",
+    "train_positive_rate": {
+      "COMPACT": 0.351351351351,
+      "LINE": 0.278219395866
+    },
+    "unit": "candidate aggregate",
+    "validation_positive_rate": {
+      "COMPACT": 0.383657587549,
+      "LINE": 0.31673151751
+    }
+  },
+  "schema_version": "rvt-phase9d-v2c-r-gate8/v1"
+}

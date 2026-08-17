@@ -1,0 +1,778 @@
+{
+  "R10_mechanism_comparison": {
+    "families": [
+      "F3",
+      "F4",
+      "F6"
+    ],
+    "same_mechanism_repeats_independently": true,
+    "statement": "in VALIDATION, F3/F4/F6 fail downstream_goal_complete in 100% of replayed replicas on both candidate topologies with 100% safety infeasibility at the decision state, reproducing the TRAIN mechanism on disjoint layouts",
+    "train": {
+      "F3": {
+        "downstream_goal_complete_failure_rate": [
+          10,
+          10
+        ],
+        "safety_infeasible_replica_rate": [
+          10,
+          10
+        ]
+      },
+      "F4": {
+        "downstream_goal_complete_failure_rate": [
+          16,
+          16
+        ],
+        "safety_infeasible_replica_rate": [
+          16,
+          16
+        ]
+      },
+      "F6": {
+        "downstream_goal_complete_failure_rate": [
+          15,
+          15
+        ],
+        "safety_infeasible_replica_rate": [
+          15,
+          15
+        ]
+      }
+    },
+    "validation": {
+      "F3/COMPACT": {
+        "downstream_goal_complete_failures": 13,
+        "positives": 0,
+        "replicas": 13,
+        "safety_infeasible": 13
+      },
+      "F3/LINE": {
+        "downstream_goal_complete_failures": 13,
+        "positives": 0,
+        "replicas": 13,
+        "safety_infeasible": 13
+      },
+      "F4/COMPACT": {
+        "downstream_goal_complete_failures": 10,
+        "positives": 0,
+        "replicas": 10,
+        "safety_infeasible": 10
+      },
+      "F4/LINE": {
+        "downstream_goal_complete_failures": 10,
+        "positives": 0,
+        "replicas": 10,
+        "safety_infeasible": 10
+      },
+      "F6/COMPACT": {
+        "downstream_goal_complete_failures": 17,
+        "positives": 0,
+        "replicas": 17,
+        "safety_infeasible": 17
+      },
+      "F6/LINE": {
+        "downstream_goal_complete_failures": 17,
+        "positives": 0,
+        "replicas": 17,
+        "safety_infeasible": 17
+      }
+    }
+  },
+  "R11_f10_compact": {
+    "frozen_gates_checked": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "joint_train": {
+      "BOTH_FAIL": 345,
+      "BOTH_SUCCESS": 0,
+      "COMPACT_ONLY_SUCCESS": 0,
+      "LINE_ONLY_SUCCESS": 94
+    },
+    "joint_validation": {
+      "BOTH_FAIL": 66,
+      "BOTH_SUCCESS": 0,
+      "COMPACT_ONLY_SUCCESS": 0,
+      "LINE_ONLY_SUCCESS": 47
+    },
+    "measured_headroom_agreement": "headroom_requalification_v6 records F10 as BOTH_FAIL 12 + LINE_ONLY_SUCCESS 3, i.e. no COMPACT_ONLY or BOTH_SUCCESS cell, which is exactly the observed candidate asymmetry",
+    "mechanism": "F10/COMPACT reaches GOAL_COMPLETE in a minority of replayed replicas yet is still a valid task negative, because the Target V4 conjunction additionally requires target_metric_v3_dwell_complete and safety_projection_resolved, which fail; safety infeasibility at the decision state is 100%",
+    "positive_per_family_requirement_invented": false,
+    "predicate_decomposition_train": {
+      "created_lifecycle": 1,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 15
+      },
+      "events": 15,
+      "failed_predicates": {
+        "candidate_commitment_valid": 7,
+        "collision_free_complete_horizon": 12,
+        "downstream_goal_complete": 12,
+        "protocol_resolved": 3,
+        "safety_projection_resolved": 10,
+        "target_metric_v3_dwell_complete": 7,
+        "transition_execution_valid": 7
+      },
+      "labels": {
+        "0": 15
+      },
+      "replicas": 15,
+      "safety_infeasible": 15,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 12,
+        "GOAL_COMPLETE": 3
+      }
+    },
+    "predicate_decomposition_validation": {
+      "created_lifecycle": 1,
+      "dispositions": {
+        "VALID_TASK_NEGATIVE": 14
+      },
+      "events": 14,
+      "failed_predicates": {
+        "candidate_commitment_valid": 4,
+        "collision_free_complete_horizon": 10,
+        "downstream_goal_complete": 10,
+        "protocol_resolved": 5,
+        "safety_projection_resolved": 10,
+        "target_metric_v3_dwell_complete": 4,
+        "transition_execution_valid": 4
+      },
+      "labels": {
+        "0": 14
+      },
+      "replicas": 14,
+      "safety_infeasible": 14,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 10,
+        "GOAL_COMPLETE": 4
+      }
+    },
+    "train_line_negative": 345,
+    "train_line_positive": 94,
+    "train_negative": 439,
+    "train_positive": 0,
+    "validation_line_negative": 66,
+    "validation_line_positive": 47,
+    "validation_negative": 113,
+    "validation_positive": 0,
+    "violates_an_existing_frozen_gate": false
+  },
+  "R14_positive_control": {
+    "F1_COMPACT": {
+      "created_lifecycle": 0,
+      "dispositions": {
+        "RECOVERABLE_POSITIVE": 16,
+        "VALID_TASK_NEGATIVE": 2
+      },
+      "events": 18,
+      "failed_predicates": {
+        "candidate_commitment_valid": 2,
+        "collision_free_complete_horizon": 2,
+        "downstream_goal_complete": 2,
+        "protocol_resolved": 2,
+        "safety_projection_resolved": 2,
+        "transition_execution_valid": 2
+      },
+      "labels": {
+        "0": 2,
+        "1": 16
+      },
+      "replicas": 18,
+      "safety_infeasible": 2,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 2,
+        "GOAL_COMPLETE": 16
+      }
+    },
+    "F1_LINE": {
+      "created_lifecycle": 16,
+      "dispositions": {
+        "RECOVERABLE_POSITIVE": 7,
+        "VALID_TASK_NEGATIVE": 11
+      },
+      "events": 18,
+      "failed_predicates": {
+        "candidate_commitment_valid": 3,
+        "collision_free_complete_horizon": 8,
+        "downstream_goal_complete": 8,
+        "protocol_resolved": 11,
+        "safety_projection_resolved": 8,
+        "target_metric_v3_dwell_complete": 11,
+        "transition_execution_valid": 3
+      },
+      "labels": {
+        "0": 11,
+        "1": 7
+      },
+      "replicas": 18,
+      "safety_infeasible": 15,
+      "safety_solver_failure": 0,
+      "termination": {
+        "COLLISION": 8,
+        "GOAL_COMPLETE": 10
+      }
+    },
+    "control_family": "F1",
+    "label_path_produces_positives_in_validation": true,
+    "split": "validation",
+    "tuning_performed": false
+  },
+  "phase9d_v2c_r_validation_target_v4_predicates_sha256": "ec2ce9d266531df43a1f91fb750c2f3ac85593885533edda4106e1ea8ec78796",
+  "predicate_names_are_repository_authoritative": true,
+  "predicate_source": "rvt_swarm/phase9c_rb/counterfactual.py CandidateReplicaResult.failed_predicates",
+  "relabelling_performed": 0,
+  "rows_written": 0,
+  "schema_version": "rvt-phase9d-v2c-r-validation-target-v4-predicates/v1",
+  "train_reference": {
+    "F10": {
+      "by_cell": {
+        "F10/COMPACT": {
+          "created_lifecycle": 1,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 15
+          },
+          "events": 15,
+          "failed_predicates": {
+            "candidate_commitment_valid": 7,
+            "collision_free_complete_horizon": 12,
+            "downstream_goal_complete": 12,
+            "protocol_resolved": 3,
+            "safety_projection_resolved": 10,
+            "target_metric_v3_dwell_complete": 7,
+            "transition_execution_valid": 7
+          },
+          "labels": {
+            "0": 15
+          },
+          "replicas": 15,
+          "safety_infeasible": 15,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 12,
+            "GOAL_COMPLETE": 3
+          }
+        },
+        "F10/LINE": {
+          "created_lifecycle": 8,
+          "dispositions": {
+            "RECOVERABLE_POSITIVE": 4,
+            "VALID_TASK_NEGATIVE": 11
+          },
+          "events": 15,
+          "failed_predicates": {
+            "candidate_commitment_valid": 4,
+            "collision_free_complete_horizon": 11,
+            "downstream_goal_complete": 11,
+            "protocol_resolved": 8,
+            "safety_projection_resolved": 8,
+            "target_metric_v3_dwell_complete": 8,
+            "transition_execution_valid": 4
+          },
+          "labels": {
+            "0": 11,
+            "1": 4
+          },
+          "replicas": 15,
+          "safety_infeasible": 15,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 11,
+            "GOAL_COMPLETE": 4
+          }
+        }
+      },
+      "determinism": {
+        "aggregate_disposition_mismatches": 0,
+        "aggregate_label_mismatches": 0,
+        "aggregates_compared_against_sealed_ledger": 30,
+        "events_absent_from_sealed_ledger": 0
+      },
+      "episodes_replayed": 4
+    },
+    "F1_F3_F4_F6": {
+      "artifact": "results/rvt_fd24/phase9d_v2t_zero_positive_family_audit_v1.json",
+      "replay_diagnostic": {
+        "F1/COMPACT": {
+          "created_lifecycle": 0,
+          "dispositions": {
+            "RECOVERABLE_POSITIVE": 20
+          },
+          "events": 20,
+          "failed_predicates": {},
+          "labels": {
+            "1": 20
+          },
+          "replicas": 20,
+          "safety_infeasible": 0,
+          "safety_solver_failure": 0,
+          "termination": {
+            "GOAL_COMPLETE": 20
+          }
+        },
+        "F1/LINE": {
+          "created_lifecycle": 20,
+          "dispositions": {
+            "RECOVERABLE_POSITIVE": 14,
+            "VALID_TASK_NEGATIVE": 6
+          },
+          "events": 20,
+          "failed_predicates": {
+            "candidate_commitment_valid": 4,
+            "collision_free_complete_horizon": 2,
+            "downstream_goal_complete": 2,
+            "protocol_resolved": 6,
+            "safety_projection_resolved": 2,
+            "target_metric_v3_dwell_complete": 6,
+            "transition_execution_valid": 4
+          },
+          "labels": {
+            "0": 6,
+            "1": 14
+          },
+          "replicas": 20,
+          "safety_infeasible": 15,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 2,
+            "GOAL_COMPLETE": 18
+          }
+        },
+        "F3/COMPACT": {
+          "created_lifecycle": 0,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 10
+          },
+          "events": 10,
+          "failed_predicates": {
+            "collision_free_complete_horizon": 10,
+            "downstream_goal_complete": 10,
+            "protocol_resolved": 3,
+            "safety_projection_resolved": 10,
+            "target_metric_v3_dwell_complete": 10
+          },
+          "labels": {
+            "0": 10
+          },
+          "replicas": 10,
+          "safety_infeasible": 10,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 10
+          }
+        },
+        "F3/LINE": {
+          "created_lifecycle": 7,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 10
+          },
+          "events": 10,
+          "failed_predicates": {
+            "candidate_commitment_valid": 10,
+            "collision_free_complete_horizon": 10,
+            "downstream_goal_complete": 10,
+            "protocol_resolved": 10,
+            "safety_projection_resolved": 10,
+            "target_metric_v3_dwell_complete": 10,
+            "transition_execution_valid": 10
+          },
+          "labels": {
+            "0": 10
+          },
+          "replicas": 10,
+          "safety_infeasible": 10,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 10
+          }
+        },
+        "F4/COMPACT": {
+          "created_lifecycle": 0,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 16
+          },
+          "events": 16,
+          "failed_predicates": {
+            "collision_free_complete_horizon": 16,
+            "downstream_goal_complete": 16,
+            "safety_projection_resolved": 12
+          },
+          "labels": {
+            "0": 16
+          },
+          "replicas": 16,
+          "safety_infeasible": 16,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 16
+          }
+        },
+        "F4/LINE": {
+          "created_lifecycle": 16,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 16
+          },
+          "events": 16,
+          "failed_predicates": {
+            "candidate_commitment_valid": 16,
+            "collision_free_complete_horizon": 16,
+            "downstream_goal_complete": 16,
+            "protocol_resolved": 12,
+            "safety_projection_resolved": 9,
+            "target_metric_v3_dwell_complete": 16,
+            "transition_execution_valid": 16
+          },
+          "labels": {
+            "0": 16
+          },
+          "replicas": 16,
+          "safety_infeasible": 16,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 16
+          }
+        },
+        "F6/COMPACT": {
+          "created_lifecycle": 0,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 15
+          },
+          "events": 15,
+          "failed_predicates": {
+            "candidate_commitment_valid": 7,
+            "collision_free_complete_horizon": 11,
+            "downstream_goal_complete": 15,
+            "no_irreversible_progress_loss": 4,
+            "protocol_resolved": 7,
+            "safety_projection_resolved": 11,
+            "target_metric_v3_dwell_complete": 7,
+            "transition_execution_valid": 7
+          },
+          "labels": {
+            "0": 15
+          },
+          "replicas": 15,
+          "safety_infeasible": 15,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 11,
+            "HORIZON_COMPLETE": 4
+          }
+        },
+        "F6/LINE": {
+          "created_lifecycle": 8,
+          "dispositions": {
+            "VALID_TASK_NEGATIVE": 15
+          },
+          "events": 15,
+          "failed_predicates": {
+            "candidate_commitment_valid": 4,
+            "collision_free_complete_horizon": 9,
+            "downstream_goal_complete": 15,
+            "no_irreversible_progress_loss": 6,
+            "protocol_resolved": 15,
+            "safety_projection_resolved": 9,
+            "target_metric_v3_dwell_complete": 15,
+            "transition_execution_valid": 4
+          },
+          "labels": {
+            "0": 15
+          },
+          "replicas": 15,
+          "safety_infeasible": 15,
+          "safety_solver_failure": 0,
+          "termination": {
+            "COLLISION": 9,
+            "HORIZON_COMPLETE": 6
+          }
+        },
+        "_episodes_sampled_per_family": {
+          "F1": 4,
+          "F3": 4,
+          "F4": 4,
+          "F6": 4
+        }
+      },
+      "sha256": "d9f5f33168248d77b619ba33935b6f56ec3e29c6149ae1c3669db26a22a12406"
+    }
+  },
+  "validation": {
+    "by_cell": {
+      "F1/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "RECOVERABLE_POSITIVE": 16,
+          "VALID_TASK_NEGATIVE": 2
+        },
+        "events": 18,
+        "failed_predicates": {
+          "candidate_commitment_valid": 2,
+          "collision_free_complete_horizon": 2,
+          "downstream_goal_complete": 2,
+          "protocol_resolved": 2,
+          "safety_projection_resolved": 2,
+          "transition_execution_valid": 2
+        },
+        "labels": {
+          "0": 2,
+          "1": 16
+        },
+        "replicas": 18,
+        "safety_infeasible": 2,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 2,
+          "GOAL_COMPLETE": 16
+        }
+      },
+      "F1/LINE": {
+        "created_lifecycle": 16,
+        "dispositions": {
+          "RECOVERABLE_POSITIVE": 7,
+          "VALID_TASK_NEGATIVE": 11
+        },
+        "events": 18,
+        "failed_predicates": {
+          "candidate_commitment_valid": 3,
+          "collision_free_complete_horizon": 8,
+          "downstream_goal_complete": 8,
+          "protocol_resolved": 11,
+          "safety_projection_resolved": 8,
+          "target_metric_v3_dwell_complete": 11,
+          "transition_execution_valid": 3
+        },
+        "labels": {
+          "0": 11,
+          "1": 7
+        },
+        "replicas": 18,
+        "safety_infeasible": 15,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 8,
+          "GOAL_COMPLETE": 10
+        }
+      },
+      "F10/COMPACT": {
+        "created_lifecycle": 1,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 14
+        },
+        "events": 14,
+        "failed_predicates": {
+          "candidate_commitment_valid": 4,
+          "collision_free_complete_horizon": 10,
+          "downstream_goal_complete": 10,
+          "protocol_resolved": 5,
+          "safety_projection_resolved": 10,
+          "target_metric_v3_dwell_complete": 4,
+          "transition_execution_valid": 4
+        },
+        "labels": {
+          "0": 14
+        },
+        "replicas": 14,
+        "safety_infeasible": 14,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 10,
+          "GOAL_COMPLETE": 4
+        }
+      },
+      "F10/LINE": {
+        "created_lifecycle": 6,
+        "dispositions": {
+          "RECOVERABLE_POSITIVE": 6,
+          "VALID_TASK_NEGATIVE": 8
+        },
+        "events": 14,
+        "failed_predicates": {
+          "candidate_commitment_valid": 7,
+          "collision_free_complete_horizon": 8,
+          "downstream_goal_complete": 8,
+          "protocol_resolved": 8,
+          "safety_projection_resolved": 8,
+          "target_metric_v3_dwell_complete": 8,
+          "transition_execution_valid": 7
+        },
+        "labels": {
+          "0": 8,
+          "1": 6
+        },
+        "replicas": 14,
+        "safety_infeasible": 14,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 8,
+          "GOAL_COMPLETE": 6
+        }
+      },
+      "F3/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 13
+        },
+        "events": 13,
+        "failed_predicates": {
+          "collision_free_complete_horizon": 13,
+          "downstream_goal_complete": 13,
+          "protocol_resolved": 7,
+          "safety_projection_resolved": 7,
+          "target_metric_v3_dwell_complete": 13
+        },
+        "labels": {
+          "0": 13
+        },
+        "replicas": 13,
+        "safety_infeasible": 13,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 13
+        }
+      },
+      "F3/LINE": {
+        "created_lifecycle": 6,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 13
+        },
+        "events": 13,
+        "failed_predicates": {
+          "candidate_commitment_valid": 13,
+          "collision_free_complete_horizon": 13,
+          "downstream_goal_complete": 13,
+          "protocol_resolved": 13,
+          "safety_projection_resolved": 4,
+          "target_metric_v3_dwell_complete": 13,
+          "transition_execution_valid": 13
+        },
+        "labels": {
+          "0": 13
+        },
+        "replicas": 13,
+        "safety_infeasible": 13,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 13
+        }
+      },
+      "F4/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 10
+        },
+        "events": 10,
+        "failed_predicates": {
+          "collision_free_complete_horizon": 10,
+          "downstream_goal_complete": 10,
+          "protocol_resolved": 5,
+          "safety_projection_resolved": 10,
+          "target_metric_v3_dwell_complete": 6
+        },
+        "labels": {
+          "0": 10
+        },
+        "replicas": 10,
+        "safety_infeasible": 10,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 10
+        }
+      },
+      "F4/LINE": {
+        "created_lifecycle": 5,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 10
+        },
+        "events": 10,
+        "failed_predicates": {
+          "candidate_commitment_valid": 10,
+          "collision_free_complete_horizon": 10,
+          "downstream_goal_complete": 10,
+          "protocol_resolved": 10,
+          "safety_projection_resolved": 9,
+          "target_metric_v3_dwell_complete": 10,
+          "transition_execution_valid": 10
+        },
+        "labels": {
+          "0": 10
+        },
+        "replicas": 10,
+        "safety_infeasible": 10,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 10
+        }
+      },
+      "F6/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 17
+        },
+        "events": 17,
+        "failed_predicates": {
+          "candidate_commitment_valid": 3,
+          "collision_free_complete_horizon": 17,
+          "downstream_goal_complete": 17,
+          "protocol_resolved": 5,
+          "safety_projection_resolved": 17,
+          "target_metric_v3_dwell_complete": 3,
+          "transition_execution_valid": 3
+        },
+        "labels": {
+          "0": 17
+        },
+        "replicas": 17,
+        "safety_infeasible": 17,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 17
+        }
+      },
+      "F6/LINE": {
+        "created_lifecycle": 11,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 17
+        },
+        "events": 17,
+        "failed_predicates": {
+          "candidate_commitment_valid": 7,
+          "collision_free_complete_horizon": 14,
+          "downstream_goal_complete": 17,
+          "no_irreversible_progress_loss": 3,
+          "protocol_resolved": 13,
+          "safety_projection_resolved": 14,
+          "target_metric_v3_dwell_complete": 17,
+          "transition_execution_valid": 7
+        },
+        "labels": {
+          "0": 17
+        },
+        "replicas": 17,
+        "safety_infeasible": 17,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 14,
+          "HORIZON_COMPLETE": 3
+        }
+      }
+    },
+    "candidate_aggregates_replayed": 144,
+    "determinism": {
+      "aggregate_disposition_mismatches": 0,
+      "aggregate_label_mismatches": 0,
+      "aggregates_compared_against_sealed_ledger": 144,
+      "events_absent_from_sealed_ledger": 0
+    },
+    "episodes_replayed": 20
+  }
+}

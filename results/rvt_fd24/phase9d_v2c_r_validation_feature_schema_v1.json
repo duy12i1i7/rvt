@@ -1,0 +1,72 @@
+{
+  "R16_combined": {
+    "candidate_topology_encoding_error": 0,
+    "edge_dimension_uniform_across_both_splits": true,
+    "expected_rows": 113514,
+    "node_dimension_uniform_across_both_splits": true,
+    "non_finite_feature": 0,
+    "row_identity_failure": 0,
+    "rows": 113514,
+    "rows_match_expected": true,
+    "schema_mismatch": 0,
+    "single_feature_schema_hash_across_both_splits": true,
+    "unexpected_empty_graph": 0,
+    "zero_edge_rows_are_contract_valid": true,
+    "zero_node_rows": 0
+  },
+  "earlier_wrong_key_bug_repeated": false,
+  "frozen_edge_dim": 19,
+  "frozen_node_dim": 35,
+  "phase9d_v2c_r_validation_feature_schema_sha256": "dbcd51dae237c59ff2cd8dbb124f6b7b8b308533e77ce71a595b6388a3f6018e",
+  "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+  "schema_version": "rvt-phase9d-v2c-r-validation-feature-schema/v1",
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "tensor_access_path": "graph_payload['tensors']",
+  "train": {
+    "distinct_feature_schema_hashes": {
+      "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b": 90294
+    },
+    "edge_feature_dimensions": {
+      "19": 74320
+    },
+    "mask_length_violations": 0,
+    "node_feature_dimensions": {
+      "35": 90294
+    },
+    "non_finite_values": 0,
+    "row_validation_failure_total": 0,
+    "rows": 90294,
+    "rows_by_candidate_topology": {
+      "2": 45147,
+      "5": 45147
+    }
+  },
+  "validation": {
+    "candidate_groups": 2570,
+    "distinct_feature_schema_hashes": {
+      "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b": 23220
+    },
+    "duplicate_row_ids": 0,
+    "edge_feature_dimensions": {
+      "19": 19274
+    },
+    "edge_mask_occupancy": 1.0,
+    "groups_with_wrong_row_count": 0,
+    "mask_length_violations": 0,
+    "node_feature_dimensions": {
+      "35": 23220
+    },
+    "node_mask_occupancy": 1.0,
+    "non_finite_values": 0,
+    "row_validation_failure_total": 0,
+    "row_validation_failures": {},
+    "rows": 23220,
+    "rows_by_candidate_topology": {
+      "2": 11610,
+      "5": 11610
+    },
+    "rows_with_zero_edges": 3946,
+    "rows_with_zero_nodes": 0
+  }
+}
