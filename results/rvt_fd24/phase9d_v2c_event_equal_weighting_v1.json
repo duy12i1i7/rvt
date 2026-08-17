@@ -1,0 +1,91 @@
+{
+  "authority": "results/rvt_fd24/phase9d_recoverability_statistical_unit_v1.json and docs/RVT_FD24_LOSS_CONTRACT.md",
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "combined_demonstration": [
+    {
+      "frozen_event_weight_per_event": 1.0,
+      "frozen_share_of_total_scientific_weight": 0.221466,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.1,
+      "naive_relative_event_weight_vs_N5": 1.0,
+      "naive_row_mean_distortion_factor": 0.556495,
+      "naive_row_mean_share_of_total_weight": 0.123245,
+      "retained_events": 1399,
+      "rows": 13990,
+      "rows_per_event": 10,
+      "team_size": 5
+    },
+    {
+      "frozen_event_weight_per_event": 1.0,
+      "frozen_share_of_total_scientific_weight": 0.2183,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.08333333,
+      "naive_relative_event_weight_vs_N5": 1.2,
+      "naive_row_mean_distortion_factor": 0.667794,
+      "naive_row_mean_share_of_total_weight": 0.145779,
+      "retained_events": 1379,
+      "rows": 16548,
+      "rows_per_event": 12,
+      "team_size": 6
+    },
+    {
+      "frozen_event_weight_per_event": 1.0,
+      "frozen_share_of_total_scientific_weight": 0.205002,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.0625,
+      "naive_relative_event_weight_vs_N5": 1.6,
+      "naive_row_mean_distortion_factor": 0.890392,
+      "naive_row_mean_share_of_total_weight": 0.182533,
+      "retained_events": 1295,
+      "rows": 20720,
+      "rows_per_event": 16,
+      "team_size": 8
+    },
+    {
+      "frozen_event_weight_per_event": 1.0,
+      "frozen_share_of_total_scientific_weight": 0.189014,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.04166667,
+      "naive_relative_event_weight_vs_N5": 2.4,
+      "naive_row_mean_distortion_factor": 1.335589,
+      "naive_row_mean_share_of_total_weight": 0.252445,
+      "retained_events": 1194,
+      "rows": 28656,
+      "rows_per_event": 24,
+      "team_size": 12
+    },
+    {
+      "frozen_event_weight_per_event": 1.0,
+      "frozen_share_of_total_scientific_weight": 0.166218,
+      "frozen_within_event_weight_per_candidate": 0.5,
+      "frozen_within_event_weight_per_robot_candidate_row": 0.03125,
+      "naive_relative_event_weight_vs_N5": 3.2,
+      "naive_row_mean_distortion_factor": 1.780785,
+      "naive_row_mean_share_of_total_weight": 0.295999,
+      "retained_events": 1050,
+      "rows": 33600,
+      "rows_per_event": 32,
+      "team_size": 16
+    }
+  ],
+  "frozen_reduction": "Average equally over COMPACT/LINE and robots within a decision, then over decision events.",
+  "frozen_status": "FROZEN_EVENT_EQUAL_WEIGHT",
+  "headline": "A raw row mean would give one N=16 decision event 3.2x the scientific weight of one N=5 decision event, and would shift 19.3% of total weight from N=5/6/8 to N=12/16. The frozen reduction gives every retained decision event weight 1.0 regardless of N.",
+  "loss_contract_sha256": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e",
+  "model_training_performed": false,
+  "n_dependent_weighting_intended": false,
+  "phase9d_v2c_event_equal_weighting_sha256": "7fba2eb563779297ba4a20d1b4d6ab7bca0e14e202ab99a3d789d2b6d11ecad4",
+  "raw_row_mean_permitted": false,
+  "representative_events": {
+    "N16": {
+      "per_robot_candidate_row_weight": 0.03125,
+      "rows_per_retained_event": 32
+    },
+    "N5": {
+      "per_robot_candidate_row_weight": 0.1,
+      "rows_per_retained_event": 10
+    }
+  },
+  "robot_local_rows_statistically_independent": false,
+  "schema_version": "rvt-phase9d-v2c-event-equal-weighting/v1"
+}

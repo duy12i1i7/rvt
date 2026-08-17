@@ -1,0 +1,143 @@
+{
+  "informative_events_evidence": "TRAIN alone contains 1,105 COMPACT_ONLY_SUCCESS and 737 LINE_ONLY_SUCCESS decision events, so candidate-conditioned outcomes genuinely differ and a candidate-conditioned predictor has signal to learn.",
+  "informative_events_exist": true,
+  "naming_warning": "These four names are OBSERVED JOINT RECOVERABILITY OUTCOME categories computed by joint_outcome_category from two Target V4 candidate aggregate labels at one decision event. They are NOT the scenario-manifest headroom categories of the same name, which describe a layout x team-size cell under fixed-topology whole-episode qualification. The repository schema does not equate them.",
+  "phase9d_v2c_candidate_decisiveness_sha256": "bd5d8ce18fd4ecf3fee3ec88fe5fb3d58defa2255e9e5b3617dab8fca946ca91",
+  "schema_version": "rvt-phase9d-v2c-candidate-decisiveness/v1",
+  "train": {
+    "decisive_total": 1842,
+    "events": 5032,
+    "joint_by_family": {
+      "F1": {
+        "BOTH_FAIL": 25,
+        "BOTH_SUCCESS": 299,
+        "COMPACT_ONLY_SUCCESS": 240,
+        "LINE_ONLY_SUCCESS": 29
+      },
+      "F10": {
+        "BOTH_FAIL": 345,
+        "LINE_ONLY_SUCCESS": 94
+      },
+      "F2": {
+        "BOTH_FAIL": 259,
+        "BOTH_SUCCESS": 10,
+        "COMPACT_ONLY_SUCCESS": 32,
+        "LINE_ONLY_SUCCESS": 196
+      },
+      "F3": {
+        "BOTH_FAIL": 423
+      },
+      "F4": {
+        "BOTH_FAIL": 324
+      },
+      "F5": {
+        "BOTH_FAIL": 229,
+        "BOTH_SUCCESS": 6,
+        "COMPACT_ONLY_SUCCESS": 254,
+        "LINE_ONLY_SUCCESS": 67
+      },
+      "F6": {
+        "BOTH_FAIL": 519
+      },
+      "F7": {
+        "BOTH_FAIL": 22,
+        "BOTH_SUCCESS": 304,
+        "COMPACT_ONLY_SUCCESS": 167,
+        "LINE_ONLY_SUCCESS": 91
+      },
+      "F8": {
+        "BOTH_FAIL": 127,
+        "BOTH_SUCCESS": 11,
+        "COMPACT_ONLY_SUCCESS": 390,
+        "LINE_ONLY_SUCCESS": 39
+      },
+      "F9": {
+        "BOTH_FAIL": 254,
+        "BOTH_SUCCESS": 33,
+        "COMPACT_ONLY_SUCCESS": 22,
+        "LINE_ONLY_SUCCESS": 221
+      }
+    },
+    "joint_categories": {
+      "BOTH_FAIL": 2527,
+      "BOTH_SUCCESS": 663,
+      "COMPACT_ONLY_SUCCESS": 1105,
+      "LINE_ONLY_SUCCESS": 737
+    },
+    "source": "results/rvt_fd24/phase9d_v2t_candidate_label_distribution_v1.json"
+  },
+  "validation": {
+    "complete_joint_distribution": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+    "fully_determined_families": {
+      "F10": {
+        "BOTH_FAIL": 66,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 47
+      },
+      "F3": {
+        "BOTH_FAIL": 111,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F4": {
+        "BOTH_FAIL": 77,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      },
+      "F6": {
+        "BOTH_FAIL": 131,
+        "BOTH_SUCCESS": 0,
+        "COMPACT_ONLY_SUCCESS": 0,
+        "LINE_ONLY_SUCCESS": 0
+      }
+    },
+    "note": "four of ten validation families have a candidate with zero positives, so their joint distribution is exactly determined by the committed marginals; the remaining six require the per-event candidate ledger on the target.",
+    "undetermined_from_marginals": {
+      "F1": {
+        "both_success_lower_bound": 67,
+        "both_success_upper_bound": 79,
+        "compact_positive": 135,
+        "events": 147,
+        "line_positive": 79
+      },
+      "F2": {
+        "both_success_lower_bound": 0,
+        "both_success_upper_bound": 34,
+        "compact_positive": 34,
+        "events": 128,
+        "line_positive": 51
+      },
+      "F5": {
+        "both_success_lower_bound": 0,
+        "both_success_upper_bound": 28,
+        "compact_positive": 87,
+        "events": 146,
+        "line_positive": 28
+      },
+      "F7": {
+        "both_success_lower_bound": 72,
+        "both_success_upper_bound": 100,
+        "compact_positive": 119,
+        "events": 147,
+        "line_positive": 100
+      },
+      "F8": {
+        "both_success_lower_bound": 0,
+        "both_success_upper_bound": 22,
+        "compact_positive": 104,
+        "events": 147,
+        "line_positive": 22
+      },
+      "F9": {
+        "both_success_lower_bound": 0,
+        "both_success_upper_bound": 14,
+        "compact_positive": 14,
+        "events": 138,
+        "line_positive": 80
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "authorised_next_step": "AUTHORIZE_RECOVERABILITY_V2_TRAINING_PIPELINE_IMPLEMENTATION",
+  "evidence": {
+    "all_three_are_generation_or_contract_modules_not_loaders": true,
+    "existing_loader": {
+      "consumes_v2_rows": false,
+      "expects_grouping_fields": [
+        "episode_group",
+        "decision_event_group",
+        "layout_group",
+        "candidate_pair_group"
+      ],
+      "module": "rvt_swarm/phase9c/loader.py",
+      "reason": "the V2 row carries a 14-field scientific_identity and a graph_payload; it does not carry the V1 grouping metadata fields or the V1 protocol/budget hashes the V1 loader requires",
+      "validates_schema": "rvt-recoverability-scientific-row/v1 era records via validate_recoverability_record"
+    },
+    "hyperparameter_trials_performed": 0,
+    "modules_referencing_the_v2_row_schema": [
+      "rvt_swarm/phase9d_h1r/acquisition_v2.py",
+      "rvt_swarm/phase9g0r/contracts_v2.py",
+      "rvt_swarm/phase9g0r/producer_v2.py"
+    ],
+    "training_operations_performed": 0
+  },
+  "model_training_authorised_by_this_phase": false,
+  "phase9d_v2c_training_pipeline_readiness_sha256": "536988da76179756535ebf84437b33bf927d768de79e77d2cbf313db4b4a5e23",
+  "reaudited_at_commit": "ae45f954750657e594a04341a98f7f267028b8b3",
+  "required_additive_loader": {
+    "must_be_additive": true,
+    "must_not_modify_v1_loader": true,
+    "name": "RECOVERABILITY_V2_TRAINING_DATA_LOADER",
+    "qualification_requirements": [
+      "byte-level replay: loading the sealed TRAIN and VALIDATION datasets must reproduce the committed row dataset roots",
+      "a numeric test proving one N=5 event and one N=16 event receive equal scientific weight",
+      "a fail-closed test for a partial event, a missing candidate and a wrong robot count",
+      "a determinism test: same seed, same group order"
+    ],
+    "requirements": [
+      "read rvt-recoverability-scientific-row/v2 rows and validate the rvt-recoverability-row-identity/v2 fourteen-field identity",
+      "verify source_acquisition_protocol_sha256 == 19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d on every row",
+      "verify target_v4_contract_sha256 == 54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee on every row",
+      "verify recoverability_row_binding_v2_spec_sha256 == 98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8 on every row",
+      "group rows by decision event, keyed by (episode_id, realized_source_timestep); never emit a partial event",
+      "within an event, group by candidate topology and require both COMPACT and LINE to be present",
+      "within a candidate, group by robot_id and require exactly N rows",
+      "apply the frozen reduction: average equally over COMPACT/LINE and robots within a decision, then over decision events; a raw row mean is prohibited",
+      "emit no class weight, focal term or rare-class oversampling; class weighting stays NONE_UNWEIGHTED_BCE",
+      "batch as 16 decision-event groups per the hyperparameter budget, never as a flat row batch",
+      "enforce split boundaries: a loader instance opens exactly one split and refuses rows whose identity split differs",
+      "refuse any row whose schema_version is the V1 row schema; no V1/V2 mixing in one dataset or batch",
+      "deterministic shuffling seeded from a declared seed, shuffling decision-event groups rather than rows",
+      "exclude GENERATION_INVALID dispositions from the supervised mask and retain them as denominator evidence, never relabelled to 0",
+      "refuse N=24, Study-B and final-test identities fail-closed"
+    ]
+  },
+  "schema_version": "rvt-phase9d-v2c-training-pipeline-readiness/v1",
+  "status": "TRAINING_PIPELINE_NOT_V2_READY"
+}

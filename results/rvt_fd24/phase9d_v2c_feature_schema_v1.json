@@ -1,0 +1,61 @@
+{
+  "combined_dimension_uniformity_blocker": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+  "combined_dimension_uniformity_verified_across_both_splits": false,
+  "combined_rows_expected": 113514,
+  "dimension_authority": "rvt_swarm/decentralized/ego_graph_v2.py EGO_GRAPH_FEATURE_SCHEMA_SHA256, recorded in results/rvt_fd24/phase9d_v2t_feature_schema_audit_v1.json",
+  "frozen_edge_dim": 19,
+  "frozen_node_dim": 35,
+  "phase9d_v2c_feature_schema_sha256": "c61273c210ded905578455a809aa4f058af5dd3fe49c995ce466a47d90011c54",
+  "schema_version": "rvt-phase9d-v2c-feature-schema/v1",
+  "train": {
+    "candidate_topology_counts": {
+      "2": 45147,
+      "5": 45147
+    },
+    "edge_feature_dims": {
+      "19": 74320
+    },
+    "ego_schema_versions": {
+      "rvt-ego-graph/v2": 90294
+    },
+    "feature_schema_hashes": 1,
+    "mask_length_violations": 0,
+    "node_feature_dims": {
+      "35": 90294
+    },
+    "nonfinite_values": 0,
+    "normalization_versions": {
+      "rvt-ego-normalization/v1": 90294
+    },
+    "payload_validation_failures": 0,
+    "row_identity_validation_failures": 0,
+    "row_schema_versions": {
+      "rvt-recoverability-scientific-row/v2": 90294
+    },
+    "rows": 90294,
+    "rows_with_zero_edges": 15974,
+    "unit_orientation_rows": 90294,
+    "v1_schema_mixing": false,
+    "zero_edge_rows_are_contract_valid": true
+  },
+  "validation": {
+    "checks_applied_at_generation": [
+      "row schema rvt-recoverability-scientific-row/v2",
+      "identity schema rvt-recoverability-row-identity/v2",
+      "source_acquisition_protocol_sha256 exact",
+      "recoverability_row_binding_v2_spec_sha256 exact",
+      "target_v4_contract_sha256 exact",
+      "candidate topology in {COMPACT, LINE}",
+      "64-hex graph fingerprint",
+      "identity field set exactly the fourteen V2 fields",
+      "no operational metadata in scientific identity",
+      "row id recomputed from its own identity and matched"
+    ],
+    "every_row_revalidated_in_image_at_generation": true,
+    "node_edge_dimension_histogram": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+    "nonfinite_scan": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+    "row_validation_failure_total_recorded_at_generation": 0,
+    "row_validation_failures_recorded_at_generation": {},
+    "rows": 23220
+  }
+}

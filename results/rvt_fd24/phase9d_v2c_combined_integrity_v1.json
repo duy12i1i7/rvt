@@ -1,0 +1,67 @@
+{
+  "frozen_contracts": {
+    "identical_in_both_splits": true,
+    "qualified_image_digest": "sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+    "qualified_image_source_commit": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
+    "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "phase9d_v2c_combined_integrity_sha256": "e5ec4596989ae1257467fbe4a8bb79f8f4d99fc11cefae498afa36d61ca1f6d8",
+  "schema_version": "rvt-phase9d-v2c-combined-integrity/v1",
+  "scope": "committed-artifact chain verification. Shard-byte verification requires the retained row payloads on the production target and is recorded separately.",
+  "train": {
+    "composite_seal_declared": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "composite_seal_matches_expected": true,
+    "composite_seal_recomputed": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "dataset_manifest_roots_equal_closure_roots": true,
+    "declared_bytes": 1674191736,
+    "declared_rows": 90294,
+    "every_shard_hash_is_full_64_hex": true,
+    "manifest_root_equals_frozen_manifest_hash": true,
+    "roots": {
+      "candidate_evaluation_root": "ea1f92b79f0c88cea41847d5e82dbf62c4f842af7d6092dd131b430d943dc50b",
+      "manifest_root": "6be6785cef93964b7a2ded21e36a0ae2738dee1e9bc8dfc11715e49516979114",
+      "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "pair_transaction_root": "0ca651b133ac95e338faa4849031d62cac173675b011115eb664bd0841771fcb",
+      "row_dataset_root": "c91414f52543d2b0b40c4349000072e1674fc948454e63810ea7d3a66a6287a9",
+      "stage_a_root": "06a4b428b26241dcb536dfc11bb9edaecbf699ed2a3441fadb98fbb3b115cb02"
+    },
+    "shard_byte_sum": 1674191736,
+    "shard_count": 44,
+    "shard_row_count_sum": 90294,
+    "shard_sums_reconcile": true
+  },
+  "v1_immutability": {
+    "combined_root": "7e583ef98184767edfb95387ecc23d2ab266e2137db28a9fbb3badccaa495672",
+    "combined_unchanged": true,
+    "train_manifest": "4ac3d2cb65a8b5d656a5d982b344466868f8deaa8cef2b93af7ce824e9387caf",
+    "train_unchanged": true,
+    "v1_artifacts_mutated": 0,
+    "v1_rows_merged_into_v2": 0,
+    "validation_manifest": "c991aa3016b38b524a14d9b7037b63d97c2cbbb7d92279fc5a297b9c55d4989e",
+    "validation_unchanged": true
+  },
+  "validation": {
+    "composite_seal_declared": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "composite_seal_matches_expected": true,
+    "composite_seal_recomputed": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "dataset_manifest_roots_equal_closure_roots": true,
+    "declared_bytes": 445716747,
+    "declared_rows": 23220,
+    "every_shard_hash_is_full_64_hex": true,
+    "manifest_root_equals_frozen_manifest_hash": true,
+    "roots": {
+      "candidate_evaluation_root": "53a2b2316c0cc0a3fd2920155c70b732b28a176a106fe9cca2368d7d6569b3b8",
+      "manifest_root": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+      "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "pair_transaction_root": "0d014f0a548b756ac6220997cb292f96afbedd33f3ea7da9351de042dee71ed8",
+      "row_dataset_root": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+      "stage_a_root": "5a0f6fada073d6bdb8ca740433d785aed55728f550695d5d626d15c1c85a611e"
+    },
+    "shard_byte_sum": 445716747,
+    "shard_count": 12,
+    "shard_row_count_sum": 23220,
+    "shard_sums_reconcile": true
+  }
+}

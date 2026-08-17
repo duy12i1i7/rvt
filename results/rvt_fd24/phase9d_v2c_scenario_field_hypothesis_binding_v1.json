@@ -1,0 +1,85 @@
+{
+  "C12_no_cross_hypothesis_confusion": {
+    "proof": [
+      "DIFFERENT UNIT: the headroom category is a property of a (layout, team_size) cell; the Recoverability label is a property of a (decision event, candidate topology) pair.",
+      "DIFFERENT INITIAL CONDITION: headroom is evaluated from the nominal scenario initial condition; Recoverability is evaluated from a realized state at control step t>0 selected by REALIZED_TRAJECTORY_UNIFORM_K.",
+      "DIFFERENT POLICY CLASS: headroom qualification runs always COMPACT, always LINE and the scripted oracle; Recoverability source states are reached under S0-S5, of which S3, S4 and S5 are not fixed-topology.",
+      "DIFFERENT TEMPORAL SCOPE: headroom asks whether a topology held for the whole episode completes the task; Recoverability asks whether committing to a topology from this state completes the remainder.",
+      "NO SHARED CODE PATH: the recoverability generator, acquisition and compiler never read a headroom category."
+    ],
+    "statement": "H2_EPISODE_HEADROOM != H1_MID_TRAJECTORY_RECOVERABILITY_LABEL",
+    "the_tension_is_explained_not_erased": true
+  },
+  "C28_h2_protection": {
+    "h2_empirically_confirmed": false,
+    "h2_genuine_headroom_cells": 7,
+    "h2_headroom_cells_by_family": {
+      "F5": 1,
+      "F9": 6
+    },
+    "h2_remains_falsifiable": true,
+    "headroom_categories_modified": false,
+    "measured_headroom_authority_preserved": "results/rvt_fd24/headroom_requalification_v6.json",
+    "scenario_declarations_rewritten": 0,
+    "scenario_geometry_modified": false,
+    "statement": "H2 is neither weakened nor strengthened by this audit. Its family eligibility comes from the measured headroom requalification, which this phase leaves untouched."
+  },
+  "binding": [
+    {
+      "field": "ScenarioFamily.expected_headroom_categories",
+      "object": "layout x team-size scenario cell",
+      "primary_hypothesis": "H2",
+      "used_as_an_H1_label_gate": false,
+      "values_include": [
+        "LINE_ONLY_SUCCESS",
+        "COMPACT_ONLY_SUCCESS",
+        "BOTH_SUCCESS",
+        "BOTH_FAIL",
+        "RECONFIGURATION_REQUIRED",
+        "INVALID_OR_AMBIGUOUS"
+      ],
+      "why": "H2 is scoped to 'predeclared families with genuine topology headroom'; that phrase is the scenario headroom category"
+    },
+    {
+      "field": "ScenarioLayout.diagnostic_headroom_by_team_size",
+      "object": "layout x team-size scenario cell",
+      "primary_hypothesis": "H2",
+      "used_as_an_H1_label_gate": false
+    },
+    {
+      "field": "joint_outcome_category / _joint_category",
+      "gate": "label audit gate 2, decisive-category minimums",
+      "object": "Recoverability decision event",
+      "primary_hypothesis": "H1",
+      "used_as_an_H1_label_gate": true,
+      "values": [
+        "COMPACT_ONLY_SUCCESS",
+        "LINE_ONLY_SUCCESS",
+        "BOTH_SUCCESS",
+        "BOTH_FAIL"
+      ]
+    },
+    {
+      "field": "Target V4 candidate aggregate label",
+      "object": "candidate commitment at one realized decision state",
+      "primary_hypothesis": "H1",
+      "used_as_an_H1_label_gate": true
+    }
+  ],
+  "hypotheses": {
+    "H1": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+    "H2": "Online COMPACT/LINE reconfiguration improves episode task success by at least 0.10 absolute over each fixed topology in predeclared families with genuine topology headroom.",
+    "H3": "The decentralized full method retains at least 0.85 of centralized diagnostic task success, with collision-free degradation no greater than 0.01.",
+    "H4": "bounded robot-local residual-action head (optional)",
+    "H5": "N=24 zero-shot generalization (optional)",
+    "H6": "separate N=24-trained checkpoint (optional)"
+  },
+  "hypothesis_authority": {
+    "file": "docs/RVT_FD24_RESEARCH_QUESTIONS_AND_HYPOTHESES.md",
+    "matches_h1_requirement_map_declared_hash": true,
+    "sha256": "678ae987174e89254c2fef88d617cdca16db2122738decd10c522b937231ed0f"
+  },
+  "name": "SCENARIO_FIELD_TO_HYPOTHESIS_BINDING_V1",
+  "phase9d_v2c_scenario_field_hypothesis_binding_sha256": "0794c3c276bb519bb815412931f3f841890b25afeb7b1bf0c71229362c98b942",
+  "schema_version": "rvt-phase9d-v2c-scenario-field-hypothesis-binding/v1"
+}

@@ -1,0 +1,294 @@
+{
+  "authority": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+  "authority_hash_matches_h1_requirement_map": true,
+  "authority_sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d",
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "gates": [
+    {
+      "combined": {
+        "COMPACT": {
+          "negative": 4056,
+          "positive": 2261
+        },
+        "LINE": {
+          "negative": 4510,
+          "positive": 1807
+        }
+      },
+      "gate": 1,
+      "result": "PASS",
+      "text": "each candidate has both positive and negative examples in train and validation",
+      "train": {
+        "COMPACT": {
+          "negative": 3264,
+          "positive": 1768
+        },
+        "LINE": {
+          "negative": 3632,
+          "positive": 1400
+        }
+      },
+      "validation": {
+        "COMPACT": {
+          "negative": 792,
+          "positive": 493
+        },
+        "LINE": {
+          "negative": 878,
+          "positive": 407
+        }
+      }
+    },
+    {
+      "gate": 2,
+      "result": "PASS",
+      "text": "train contains at least 50 and validation at least 20 events for each decisive category",
+      "train": {
+        "COMPACT_ONLY_SUCCESS": 1105,
+        "LINE_ONLY_SUCCESS": 737,
+        "minimum": 50,
+        "result": "PASS"
+      },
+      "validation": {
+        "COMPACT_ONLY_SUCCESS_lower_bound": 216,
+        "LINE_ONLY_SUCCESS_lower_bound": 130,
+        "exact_counts_for_four_families": {
+          "F10": {
+            "BOTH_FAIL": 66,
+            "BOTH_SUCCESS": 0,
+            "COMPACT_ONLY_SUCCESS": 0,
+            "LINE_ONLY_SUCCESS": 47
+          },
+          "F3": {
+            "BOTH_FAIL": 111,
+            "BOTH_SUCCESS": 0,
+            "COMPACT_ONLY_SUCCESS": 0,
+            "LINE_ONLY_SUCCESS": 0
+          },
+          "F4": {
+            "BOTH_FAIL": 77,
+            "BOTH_SUCCESS": 0,
+            "COMPACT_ONLY_SUCCESS": 0,
+            "LINE_ONLY_SUCCESS": 0
+          },
+          "F6": {
+            "BOTH_FAIL": 131,
+            "BOTH_SUCCESS": 0,
+            "COMPACT_ONLY_SUCCESS": 0,
+            "LINE_ONLY_SUCCESS": 0
+          }
+        },
+        "exact_totals": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+        "method": "for one family with E events, cp COMPACT positives and lp LINE positives, BOTH_SUCCESS <= min(cp, lp), so COMPACT_ONLY_SUCCESS >= max(0, cp - lp) and LINE_ONLY_SUCCESS >= max(0, lp - cp). Summing these per-family lower bounds decides the gate without the exact joint split.",
+        "minimum": 20,
+        "per_family_lower_bounds": {
+          "F1": {
+            "COMPACT_ONLY_SUCCESS_at_least": 56,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 135,
+            "events": 147,
+            "exact": false,
+            "line_positive": 79
+          },
+          "F10": {
+            "COMPACT_ONLY_SUCCESS_at_least": 0,
+            "LINE_ONLY_SUCCESS_at_least": 47,
+            "compact_positive": 0,
+            "events": 113,
+            "exact": true,
+            "line_positive": 47
+          },
+          "F2": {
+            "COMPACT_ONLY_SUCCESS_at_least": 0,
+            "LINE_ONLY_SUCCESS_at_least": 17,
+            "compact_positive": 34,
+            "events": 128,
+            "exact": false,
+            "line_positive": 51
+          },
+          "F3": {
+            "COMPACT_ONLY_SUCCESS_at_least": 0,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 0,
+            "events": 111,
+            "exact": true,
+            "line_positive": 0
+          },
+          "F4": {
+            "COMPACT_ONLY_SUCCESS_at_least": 0,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 0,
+            "events": 77,
+            "exact": true,
+            "line_positive": 0
+          },
+          "F5": {
+            "COMPACT_ONLY_SUCCESS_at_least": 59,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 87,
+            "events": 146,
+            "exact": false,
+            "line_positive": 28
+          },
+          "F6": {
+            "COMPACT_ONLY_SUCCESS_at_least": 0,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 0,
+            "events": 131,
+            "exact": true,
+            "line_positive": 0
+          },
+          "F7": {
+            "COMPACT_ONLY_SUCCESS_at_least": 19,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 119,
+            "events": 147,
+            "exact": false,
+            "line_positive": 100
+          },
+          "F8": {
+            "COMPACT_ONLY_SUCCESS_at_least": 82,
+            "LINE_ONLY_SUCCESS_at_least": 0,
+            "compact_positive": 104,
+            "events": 147,
+            "exact": false,
+            "line_positive": 22
+          },
+          "F9": {
+            "COMPACT_ONLY_SUCCESS_at_least": 0,
+            "LINE_ONLY_SUCCESS_at_least": 66,
+            "compact_positive": 14,
+            "events": 138,
+            "exact": false,
+            "line_positive": 80
+          }
+        },
+        "result": "PASS"
+      }
+    },
+    {
+      "combined": {
+        "COMPACT": 0.357923,
+        "LINE": 0.286054
+      },
+      "gate": 3,
+      "interval": [
+        0.1,
+        0.9
+      ],
+      "result": "PASS",
+      "text": "each candidate positive rate lies in [0.10, 0.90]",
+      "train": {
+        "COMPACT": 0.351351,
+        "LINE": 0.278219
+      },
+      "validation": {
+        "COMPACT": 0.383658,
+        "LINE": 0.316732
+      }
+    },
+    {
+      "gate": 4,
+      "minimum": 30,
+      "minimum_count": 77,
+      "minimum_family": "F4",
+      "note": "this is the single gate that FAILED under V1 and that the V2 acquisition redesign was authorised to address",
+      "result": "PASS",
+      "text": "validation contains at least 30 events from every primary family used for checkpoint selection",
+      "validation": {
+        "F1": 147,
+        "F10": 113,
+        "F2": 128,
+        "F3": 111,
+        "F4": 77,
+        "F5": 146,
+        "F6": 131,
+        "F7": 147,
+        "F8": 147,
+        "F9": 138
+      }
+    },
+    {
+      "gate": 5,
+      "n24_rows": 0,
+      "result": "PASS",
+      "text": "Study A training labels contain zero N=24 rows",
+      "train_team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ],
+      "validation_team_sizes": [
+        5,
+        6,
+        8,
+        12,
+        16
+      ]
+    },
+    {
+      "combined_invalid_rate": 0.0,
+      "gate": 6,
+      "maximum_family_invalid_rate": 0.0,
+      "result": "PASS",
+      "text": "invalid rollout rate below 0.02 overall and below 0.05 in every family",
+      "train_actual_generation_invalid": 0,
+      "validation_actual_generation_invalid": 0
+    },
+    {
+      "aggregation": "frozen all-success",
+      "gate": 7,
+      "measurement": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+      "replicas_per_candidate": 3,
+      "result": "NOT_EVALUATED",
+      "stochastic_families": [
+        "F8",
+        "F9"
+      ],
+      "text": "stochastic label instability is at most 0.10 per family/candidate"
+    },
+    {
+      "candidate_positive_rate_difference": {
+        "COMPACT": 0.032306,
+        "LINE": 0.038512,
+        "maximum_permitted": 0.15,
+        "result": "PASS"
+      },
+      "gate": 8,
+      "joint_category_js_divergence": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+      "result": "RATE_COMPONENT_PASS_DIVERGENCE_COMPONENT_NOT_EVALUATED",
+      "text": "absolute train/validation candidate-positive-rate difference at most 0.15 and joint-category Jensen-Shannon divergence at most 0.15"
+    },
+    {
+      "duplicate_source_identities": 0,
+      "exclusion_union_overlap": 0,
+      "gate": 9,
+      "layout_id_overlap": 0,
+      "layout_sha256_overlap": 0,
+      "official_train_identity_overlap": 0,
+      "result": "IDENTITY_LEVEL_PASS_ROW_LEVEL_NOT_REEVALUATED",
+      "row_id_level_event_leakage": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+      "text": "event split leakage and duplicate geometry leakage are zero"
+    }
+  ],
+  "gates_failing": [],
+  "gates_fully_passing": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "gates_not_fully_evaluated_in_this_phase": [
+    7,
+    8,
+    9
+  ],
+  "new_gates_invented": 0,
+  "phase9d_v2c_predeclared_gate_audit_sha256": "03aa74e81a33d06cf9a582b8c4e4620f559e684f6210f381ba2a47f567da4eba",
+  "posthoc_gate_added": false,
+  "schema_version": "rvt-phase9d-v2c-predeclared-gate-audit/v1"
+}

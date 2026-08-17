@@ -1,0 +1,138 @@
+{
+  "design_balance": {
+    "design_is_uniform_in_both_splits": true,
+    "family_episodes_per_split": {
+      "train": 120,
+      "validation": 30
+    },
+    "policy_episodes_per_split": {
+      "train": 200,
+      "validation": 50
+    },
+    "source_policies": 6,
+    "team_size_episodes_per_split": {
+      "train": 240,
+      "validation": 60
+    },
+    "train_validation_episode_ratio": 4.0
+  },
+  "label_rate": {
+    "compact": {
+      "absolute_difference": 0.032306,
+      "train": 0.351351,
+      "validation": 0.383658
+    },
+    "frozen_gate_8_maximum": 0.15,
+    "line": {
+      "absolute_difference": 0.038512,
+      "train": 0.278219,
+      "validation": 0.316732
+    },
+    "within_frozen_gate": true
+  },
+  "major_structural_mismatch_found": false,
+  "major_structural_mismatch_notes": [
+    "the largest per-family per-candidate rate difference is F10/LINE at 0.2018 and F2/COMPACT at 0.1811; the frozen gate 8 is a POOLED candidate-rate gate, which passes at 0.0323 and 0.0385, and no per-family threshold is predeclared, so these are recorded descriptively rather than adjudicated",
+    "COMPACT positive rate rises with N (0.232 at N=5 to 0.420 at N=16) while LINE positive rate falls (0.397 to 0.065) in TRAIN; this is a physically coherent chain-length effect present by design in both splits, not a split defect"
+  ],
+  "no_significance_threshold_invented": true,
+  "node_edge_degree_distributions": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+  "per_family_candidate_rate_differences": {
+    "F1": {
+      "COMPACT": 0.00943,
+      "LINE": 0.015705
+    },
+    "F10": {
+      "COMPACT": 0.0,
+      "LINE": 0.201806
+    },
+    "F2": {
+      "COMPACT": 0.181118,
+      "LINE": 0.016049
+    },
+    "F3": {
+      "COMPACT": 0.0,
+      "LINE": 0.0
+    },
+    "F4": {
+      "COMPACT": 0.0,
+      "LINE": 0.0
+    },
+    "F5": {
+      "COMPACT": 0.128265,
+      "LINE": 0.060486
+    },
+    "F6": {
+      "COMPACT": 0.0,
+      "LINE": 0.0
+    },
+    "F7": {
+      "COMPACT": 0.003017,
+      "LINE": 0.003902
+    },
+    "F8": {
+      "COMPACT": 0.000252,
+      "LINE": 0.061476
+    },
+    "F9": {
+      "COMPACT": 0.002324,
+      "LINE": 0.100465
+    }
+  },
+  "phase9d_v2c_train_validation_shift_sha256": "455a576785882a5c247b1442ed23899934c17f3fee421d830c5c87c041a310af",
+  "realized_structure": {
+    "eligible_states_per_episode": {
+      "train": 8.4133,
+      "validation": 9.0467
+    },
+    "m_at_or_above_k_episode_fraction": {
+      "train": 0.5675,
+      "validation": 0.596667
+    },
+    "m_below_k_episode_fraction": {
+      "train": 0.4125,
+      "validation": 0.383333
+    },
+    "m_zero_episode_fraction": {
+      "train": 0.02,
+      "validation": 0.02
+    },
+    "rows_per_retained_event": {
+      "train": 17.944,
+      "validation": 18.07
+    },
+    "selected_events_per_episode": {
+      "train": 4.1933,
+      "validation": 4.2833
+    }
+  },
+  "schema_version": "rvt-phase9d-v2c-train-validation-shift/v1",
+  "selection_ordinal_distribution_validation": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+  "structural_categories_repeat": {
+    "compact_zero_positive_families_train": [
+      "F3",
+      "F4",
+      "F6",
+      "F10"
+    ],
+    "compact_zero_positive_families_validation": [
+      "F3",
+      "F4",
+      "F6",
+      "F10"
+    ],
+    "exact_structural_replication": true,
+    "structurally_empty_cell_train": "F4/N16",
+    "structurally_empty_cell_validation": "F4/N16",
+    "zero_positive_families_train": [
+      "F3",
+      "F4",
+      "F6"
+    ],
+    "zero_positive_families_validation": [
+      "F3",
+      "F4",
+      "F6"
+    ]
+  }
+}

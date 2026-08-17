@@ -1,0 +1,178 @@
+{
+  "C19_class_balance": {
+    "class_weighting": "NONE_UNWEIGHTED_BCE",
+    "class_weighting_selected_from_data": false,
+    "combined_positive_rate": 0.321988,
+    "positive_aggregates": 4068,
+    "posthoc_combined_class_balance_gate_authorized": false,
+    "statement": "NO_POSTHOC_COMBINED_CLASS_BALANCE_GATE_AUTHORIZED",
+    "total": 12634,
+    "valid_negative_aggregates": 8566
+  },
+  "C4_effective_scientific_sample_size": {
+    "authority": "results/rvt_fd24/phase9d_recoverability_statistical_unit_v1.json",
+    "clustering_keys": [
+      "split",
+      "layout_sha256",
+      "source_episode_id",
+      "decision_event_id"
+    ],
+    "hierarchy": [
+      {
+        "combined": 1500,
+        "level": "SOURCE_EPISODE",
+        "train": 1200,
+        "validation": 300
+      },
+      {
+        "combined": 12810,
+        "level": "ELIGIBLE_REALIZED_SOURCE_STATE",
+        "train": 10096,
+        "validation": 2714
+      },
+      {
+        "combined": 6317,
+        "level": "SELECTED_SOURCE_DECISION_EVENT",
+        "train": 5032,
+        "validation": 1285
+      },
+      {
+        "combined": 6317,
+        "level": "RETAINED_CANDIDATE_PAIR_EVENT",
+        "train": 5032,
+        "validation": 1285
+      },
+      {
+        "combined": 12634,
+        "level": "CANDIDATE_AGGREGATE",
+        "train": 10064,
+        "validation": 2570
+      },
+      {
+        "combined": 18162,
+        "level": "CANDIDATE_REPLICA_EXECUTION",
+        "train": 14452,
+        "validation": 3710
+      },
+      {
+        "combined": 113514,
+        "level": "ROBOT_LOCAL_SCIENTIFIC_ROW",
+        "train": 90294,
+        "validation": 23220
+      }
+    ],
+    "primary_clustered_unit": "SOURCE_DECISION_EVENT",
+    "raw_row_mean_permitted": false,
+    "robot_local_rows_statistically_independent": false,
+    "row_to_event_inflation_factor": 17.9696,
+    "warning": "the 113,514 robot-local rows are NOT independent observations"
+  },
+  "aggregates_equal_two_E": {
+    "combined": true,
+    "train": true,
+    "validation": true
+  },
+  "all_expected_identities_hold": true,
+  "combined": {
+    "M_at_or_above_K": 860,
+    "M_below_K": 610,
+    "M_zero": 30,
+    "candidate_aggregates": 12634,
+    "dropped_pair_events": 0,
+    "eligible_states": 12810,
+    "generation_invalid": 0,
+    "positive": 4068,
+    "replica_executions": 18162,
+    "retained_pair_events": 6317,
+    "rows": 113514,
+    "selected_events": 6317,
+    "source_episodes": 1500,
+    "valid_negative": 8566
+  },
+  "dispositions_reconcile": {
+    "combined": true,
+    "train": true,
+    "validation": true
+  },
+  "expected_identities": {
+    "candidate_aggregates": 12634,
+    "positive": 4068,
+    "replica_executions": 18162,
+    "rows": 113514,
+    "selected_events": 6317,
+    "source_episodes": 1500,
+    "valid_negative": 8566
+  },
+  "identity_checks": {
+    "candidate_aggregates": {
+      "expected": 12634,
+      "matches": true,
+      "recomputed": 12634
+    },
+    "positive": {
+      "expected": 4068,
+      "matches": true,
+      "recomputed": 4068
+    },
+    "replica_executions": {
+      "expected": 18162,
+      "matches": true,
+      "recomputed": 18162
+    },
+    "rows": {
+      "expected": 113514,
+      "matches": true,
+      "recomputed": 113514
+    },
+    "selected_events": {
+      "expected": 6317,
+      "matches": true,
+      "recomputed": 6317
+    },
+    "source_episodes": {
+      "expected": 1500,
+      "matches": true,
+      "recomputed": 1500
+    },
+    "valid_negative": {
+      "expected": 8566,
+      "matches": true,
+      "recomputed": 8566
+    }
+  },
+  "phase9d_v2c_combined_accounting_sha256": "a9f1009436cc11db15c2b721d15d66fad56a94bbac202cf329ff303b16540cfe",
+  "recomputed_from": "per-cell family x N tables in the two sealed closure artifacts, summed independently of the reported totals",
+  "schema_version": "rvt-phase9d-v2c-combined-accounting/v1",
+  "train": {
+    "M_at_or_above_K": 681,
+    "M_below_K": 495,
+    "M_zero": 24,
+    "candidate_aggregates": 10064,
+    "dropped_pair_events": 0,
+    "eligible_states": 10096,
+    "generation_invalid": 0,
+    "positive": 3168,
+    "replica_executions": 14452,
+    "retained_pair_events": 5032,
+    "rows": 90294,
+    "selected_events": 5032,
+    "source_episodes": 1200,
+    "valid_negative": 6896
+  },
+  "validation": {
+    "M_at_or_above_K": 179,
+    "M_below_K": 115,
+    "M_zero": 6,
+    "candidate_aggregates": 2570,
+    "dropped_pair_events": 0,
+    "eligible_states": 2714,
+    "generation_invalid": 0,
+    "positive": 900,
+    "replica_executions": 3710,
+    "retained_pair_events": 1285,
+    "rows": 23220,
+    "selected_events": 1285,
+    "source_episodes": 300,
+    "valid_negative": 1670
+  }
+}

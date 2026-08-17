@@ -1,0 +1,338 @@
+{
+  "C14_positive_control": {
+    "additional_validation_control": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+    "control_family": "F1",
+    "control_is_already_committed_and_frozen": true,
+    "label_path_produces_positives": true,
+    "new_scientific_rows": 0,
+    "train_control_result": {
+      "F1_COMPACT_dispositions": {
+        "RECOVERABLE_POSITIVE": 20
+      },
+      "F1_LINE_dispositions": {
+        "RECOVERABLE_POSITIVE": 14,
+        "VALID_TASK_NEGATIVE": 6
+      },
+      "label_path_produces_positives": true
+    },
+    "tuning_performed": false
+  },
+  "mechanism_repeats_independently": {
+    "label_level_replication_is_exact": true,
+    "train_evidence": "F3/F4/F6 fail downstream_goal_complete in 100% of audited replicas with 100% safety infeasibility at the decision state, on both candidate topologies",
+    "validation_evidence_label_level": {
+      "F3": {
+        "COMPACT_positive": 0,
+        "LINE_positive": 0,
+        "events": 111
+      },
+      "F4": {
+        "COMPACT_positive": 0,
+        "LINE_positive": 0,
+        "events": 77
+      },
+      "F6": {
+        "COMPACT_positive": 0,
+        "LINE_positive": 0,
+        "events": 131
+      }
+    },
+    "validation_evidence_predicate_level": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out)."
+  },
+  "phase9d_v2c_target_v4_failure_decomposition_sha256": "cc97b33ae64d80be086d503a45790245ccab9f92be6d3dc978bc373eedfeca8b",
+  "predicate_names_are_the_repository_names": true,
+  "predicate_source": "rvt_swarm/phase9c_rb/counterfactual.py CandidateReplicaResult.failed_predicates",
+  "relabelling_performed": 0,
+  "schema_version": "rvt-phase9d-v2c-target-v4-failure-decomposition/v1",
+  "train": {
+    "downstream_goal_complete_failure_rate": {
+      "F1/COMPACT": [
+        0,
+        20
+      ],
+      "F1/LINE": [
+        2,
+        20
+      ],
+      "F3/COMPACT": [
+        10,
+        10
+      ],
+      "F3/LINE": [
+        10,
+        10
+      ],
+      "F4/COMPACT": [
+        16,
+        16
+      ],
+      "F4/LINE": [
+        16,
+        16
+      ],
+      "F6/COMPACT": [
+        15,
+        15
+      ],
+      "F6/LINE": [
+        15,
+        15
+      ]
+    },
+    "generation_invalid": 0,
+    "positive_control_family": "F1",
+    "positive_control_result": {
+      "F1_COMPACT_dispositions": {
+        "RECOVERABLE_POSITIVE": 20
+      },
+      "F1_LINE_dispositions": {
+        "RECOVERABLE_POSITIVE": 14,
+        "VALID_TASK_NEGATIVE": 6
+      },
+      "label_path_produces_positives": true
+    },
+    "replay_diagnostic": {
+      "F1/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "RECOVERABLE_POSITIVE": 20
+        },
+        "events": 20,
+        "failed_predicates": {},
+        "labels": {
+          "1": 20
+        },
+        "replicas": 20,
+        "safety_infeasible": 0,
+        "safety_solver_failure": 0,
+        "termination": {
+          "GOAL_COMPLETE": 20
+        }
+      },
+      "F1/LINE": {
+        "created_lifecycle": 20,
+        "dispositions": {
+          "RECOVERABLE_POSITIVE": 14,
+          "VALID_TASK_NEGATIVE": 6
+        },
+        "events": 20,
+        "failed_predicates": {
+          "candidate_commitment_valid": 4,
+          "collision_free_complete_horizon": 2,
+          "downstream_goal_complete": 2,
+          "protocol_resolved": 6,
+          "safety_projection_resolved": 2,
+          "target_metric_v3_dwell_complete": 6,
+          "transition_execution_valid": 4
+        },
+        "labels": {
+          "0": 6,
+          "1": 14
+        },
+        "replicas": 20,
+        "safety_infeasible": 15,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 2,
+          "GOAL_COMPLETE": 18
+        }
+      },
+      "F3/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 10
+        },
+        "events": 10,
+        "failed_predicates": {
+          "collision_free_complete_horizon": 10,
+          "downstream_goal_complete": 10,
+          "protocol_resolved": 3,
+          "safety_projection_resolved": 10,
+          "target_metric_v3_dwell_complete": 10
+        },
+        "labels": {
+          "0": 10
+        },
+        "replicas": 10,
+        "safety_infeasible": 10,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 10
+        }
+      },
+      "F3/LINE": {
+        "created_lifecycle": 7,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 10
+        },
+        "events": 10,
+        "failed_predicates": {
+          "candidate_commitment_valid": 10,
+          "collision_free_complete_horizon": 10,
+          "downstream_goal_complete": 10,
+          "protocol_resolved": 10,
+          "safety_projection_resolved": 10,
+          "target_metric_v3_dwell_complete": 10,
+          "transition_execution_valid": 10
+        },
+        "labels": {
+          "0": 10
+        },
+        "replicas": 10,
+        "safety_infeasible": 10,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 10
+        }
+      },
+      "F4/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 16
+        },
+        "events": 16,
+        "failed_predicates": {
+          "collision_free_complete_horizon": 16,
+          "downstream_goal_complete": 16,
+          "safety_projection_resolved": 12
+        },
+        "labels": {
+          "0": 16
+        },
+        "replicas": 16,
+        "safety_infeasible": 16,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 16
+        }
+      },
+      "F4/LINE": {
+        "created_lifecycle": 16,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 16
+        },
+        "events": 16,
+        "failed_predicates": {
+          "candidate_commitment_valid": 16,
+          "collision_free_complete_horizon": 16,
+          "downstream_goal_complete": 16,
+          "protocol_resolved": 12,
+          "safety_projection_resolved": 9,
+          "target_metric_v3_dwell_complete": 16,
+          "transition_execution_valid": 16
+        },
+        "labels": {
+          "0": 16
+        },
+        "replicas": 16,
+        "safety_infeasible": 16,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 16
+        }
+      },
+      "F6/COMPACT": {
+        "created_lifecycle": 0,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 15
+        },
+        "events": 15,
+        "failed_predicates": {
+          "candidate_commitment_valid": 7,
+          "collision_free_complete_horizon": 11,
+          "downstream_goal_complete": 15,
+          "no_irreversible_progress_loss": 4,
+          "protocol_resolved": 7,
+          "safety_projection_resolved": 11,
+          "target_metric_v3_dwell_complete": 7,
+          "transition_execution_valid": 7
+        },
+        "labels": {
+          "0": 15
+        },
+        "replicas": 15,
+        "safety_infeasible": 15,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 11,
+          "HORIZON_COMPLETE": 4
+        }
+      },
+      "F6/LINE": {
+        "created_lifecycle": 8,
+        "dispositions": {
+          "VALID_TASK_NEGATIVE": 15
+        },
+        "events": 15,
+        "failed_predicates": {
+          "candidate_commitment_valid": 4,
+          "collision_free_complete_horizon": 9,
+          "downstream_goal_complete": 15,
+          "no_irreversible_progress_loss": 6,
+          "protocol_resolved": 15,
+          "safety_projection_resolved": 9,
+          "target_metric_v3_dwell_complete": 15,
+          "transition_execution_valid": 4
+        },
+        "labels": {
+          "0": 15
+        },
+        "replicas": 15,
+        "safety_infeasible": 15,
+        "safety_solver_failure": 0,
+        "termination": {
+          "COLLISION": 9,
+          "HORIZON_COMPLETE": 6
+        }
+      },
+      "_episodes_sampled_per_family": {
+        "F1": 4,
+        "F3": 4,
+        "F4": 4,
+        "F6": 4
+      }
+    },
+    "safety_infeasible_replica_rate": {
+      "F1/COMPACT": [
+        0,
+        20
+      ],
+      "F1/LINE": [
+        15,
+        20
+      ],
+      "F3/COMPACT": [
+        10,
+        10
+      ],
+      "F3/LINE": [
+        10,
+        10
+      ],
+      "F4/COMPACT": [
+        16,
+        16
+      ],
+      "F4/LINE": [
+        16,
+        16
+      ],
+      "F6/COMPACT": [
+        15,
+        15
+      ],
+      "F6/LINE": [
+        15,
+        15
+      ]
+    },
+    "sha256": "d9f5f33168248d77b619ba33935b6f56ec3e29c6149ae1c3669db26a22a12406",
+    "source": "results/rvt_fd24/phase9d_v2t_zero_positive_family_audit_v1.json"
+  },
+  "validation": {
+    "command_that_would_produce_it": "run scratchpad/v2c_replay.py inside sha256:2949628f... with REPLAY_SRC=/rvt-data/validation, REPLAY_FAMILIES=F1,F3,F4,F6, read-only mounts",
+    "measurement": "NOT_MEASURED_IN_THIS_PHASE: the retained row payloads and stage ledgers live on the production target 100.71.102.9, which was unreachable for the whole measurement window of this phase (SSH and ICMP both time out).",
+    "rows_that_would_be_written": 0,
+    "would_be_read_only": true
+  }
+}

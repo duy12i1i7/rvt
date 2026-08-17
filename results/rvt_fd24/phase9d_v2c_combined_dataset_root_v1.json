@@ -1,0 +1,75 @@
+{
+  "K": 5,
+  "acquisition_rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "combined": {
+    "candidate_aggregates": 12634,
+    "positive_aggregates": 4068,
+    "replica_executions": 18162,
+    "retained_pair_events": 6317,
+    "rows": 113514,
+    "selected_events": 6317,
+    "shards": 56,
+    "source_episodes": 1500,
+    "valid_negative_aggregates": 8566
+  },
+  "combined_development_dataset_root_sha256": "0a76ee0ea37b6f7c1c3c15966ae6d7b685c0bb8bcbbcd8717bb0922905b4b731",
+  "event_weighting": "FROZEN_EVENT_EQUAL_WEIGHT",
+  "name": "OFFICIAL_RECOVERABILITY_V2_COMBINED_DEVELOPMENT_DATASET_ROOT_V1",
+  "phase9d_v2c_combined_dataset_root_sha256": "c146cfa8adbf6f94dca34580b5894671b655da20ed2b5164cd93c950b599ac4f",
+  "qualified_image_digest": "sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+  "qualified_image_source_commit": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
+  "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+  "references_only_does_not_rewrite": true,
+  "schema_version": "rvt-recoverability-v2-combined-development-dataset-root/v1",
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "split_policy": {
+    "authority": "docs/LAYOUT_SPLIT_PROTOCOL.md and results/rvt_fd24/splits/{train,validation}_layouts.json",
+    "final_test_included": false,
+    "layout_overlap": 0,
+    "n24_included": false,
+    "source_episode_identity_overlap": 0,
+    "study_b_included": false,
+    "train_layouts": 20,
+    "validation_layouts": 10
+  },
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "train": {
+    "composite_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "dataset_manifest_sha256": "cbb8906c75311c53dd203501542ee3a9a77f84e9e92391c27997dee0c4229ef6",
+    "manifest_sha256": "6be6785cef93964b7a2ded21e36a0ae2738dee1e9bc8dfc11715e49516979114",
+    "retained_pair_events": 5032,
+    "roots": {
+      "candidate_evaluation_root": "ea1f92b79f0c88cea41847d5e82dbf62c4f842af7d6092dd131b430d943dc50b",
+      "manifest_root": "6be6785cef93964b7a2ded21e36a0ae2738dee1e9bc8dfc11715e49516979114",
+      "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "pair_transaction_root": "0ca651b133ac95e338faa4849031d62cac173675b011115eb664bd0841771fcb",
+      "row_dataset_root": "c91414f52543d2b0b40c4349000072e1674fc948454e63810ea7d3a66a6287a9",
+      "stage_a_root": "06a4b428b26241dcb536dfc11bb9edaecbf699ed2a3441fadb98fbb3b115cb02"
+    },
+    "rows": 90294,
+    "selected_events": 5032,
+    "shards": 44,
+    "source_episodes": 1200
+  },
+  "training_authorized": false,
+  "underlying_datasets_mutated": 0,
+  "validation": {
+    "composite_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "dataset_manifest_sha256": "0307028ef3cba85d6d4fe5996e2613795234f86b296d60e65cd5b0a48d7c9221",
+    "manifest_sha256": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+    "retained_pair_events": 1285,
+    "roots": {
+      "candidate_evaluation_root": "53a2b2316c0cc0a3fd2920155c70b732b28a176a106fe9cca2368d7d6569b3b8",
+      "manifest_root": "ce67634dba2b4c4b893938be768a4047d2ac7aaa03bfa67e64db21abd6fa12f1",
+      "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "pair_transaction_root": "0d014f0a548b756ac6220997cb292f96afbedd33f3ea7da9351de042dee71ed8",
+      "row_dataset_root": "28d52af90b67e0e1e6a6099dca8db53776987e4079c81644ddfb0d229db8de22",
+      "stage_a_root": "5a0f6fada073d6bdb8ca740433d785aed55728f550695d5d626d15c1c85a611e"
+    },
+    "rows": 23220,
+    "selected_events": 1285,
+    "shards": 12,
+    "source_episodes": 300
+  }
+}

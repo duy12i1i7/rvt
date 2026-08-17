@@ -1,0 +1,105 @@
+{
+  "checkpoint_selection": {
+    "authority": "docs/RVT_CHECKPOINT_SELECTION_CONTRACT.md",
+    "checkpoint_every_steps": 1000,
+    "eligibility": [
+      "at least 120 closed-loop validation episodes",
+      "at least 10 episodes per primary family",
+      "no invalid run",
+      "collision-free point estimate at least 0.95",
+      "degradation no greater than 0.01 from the paired base-controller reference"
+    ],
+    "lexicographic_rule": [
+      "satisfy the collision constraint",
+      "maximize episode task success",
+      "minimize recoverability Brier score",
+      "maximize decisive-state candidate ranking accuracy",
+      "maximize required transition completion",
+      "choose the earlier optimizer step"
+    ],
+    "n24_excluded_from_study_a_selection": true,
+    "not_selected_from_training_loss": true,
+    "schema": "rvt-checkpoint-selection/v1",
+    "sha256": "d45404deed2e771908ee2c85e924c5a1a18d6bfde0ba09935d61137f7f9f7ba1",
+    "tie_band_task_success": 0.005
+  },
+  "execution_counters": {
+    "dagger_rounds": 0,
+    "final_test_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "optimizer_states": 0,
+    "training_operations": 0
+  },
+  "hyperparameter_budget": {
+    "authority": "docs/RVT_FD24_HYPERPARAMETER_BUDGET.md",
+    "batch": "16 decision-event groups plus at most 256 grouped action rows",
+    "dagger_rounds_allowed_after_seed_zero": 2,
+    "dagger_rounds_run_so_far": 0,
+    "dropout": 0.0,
+    "early_stopping": "8 validations without 0.002 task-success improvement",
+    "gradient_norm_clip": 1.0,
+    "learning_rates": [
+      0.0001,
+      0.0003,
+      0.001
+    ],
+    "loss_weight_choices": "the two frozen loss-contract tuples",
+    "maximum_searched_configurations": 12,
+    "maximum_steps": 50000,
+    "model_seeds": [
+      11,
+      29,
+      47
+    ],
+    "optimizer": "AdamW",
+    "seed_zero": "mechanical dry run only",
+    "sha256": "a8701aaa82ee0007aa56a4e2bcac8e18f8d6176af41f24ce466cfd6b97d1ba62",
+    "validation_every_steps": 1000,
+    "warmup_steps": 2000,
+    "weight_decay": [
+      0,
+      0.0001
+    ]
+  },
+  "loss_contract": {
+    "L_rec": "binary cross-entropy with logits, no class weighting, focal term or oversampling before the label audit",
+    "authority": "docs/RVT_FD24_LOSS_CONTRACT.md",
+    "event_weighting": "Recoverability is averaged equally over COMPACT/LINE and robots within one decision, then over decision events.",
+    "form": "L = lambda_rec*L_rec + lambda_res*L_res + lambda_mag*L_mag + lambda_consistency*L_consistency",
+    "invalid_rows": "masked and counted, never relabelled",
+    "permitted_weight_tuples": [
+      [
+        1.0,
+        0.5,
+        0.01,
+        0.0
+      ],
+      [
+        1.0,
+        1.0,
+        0.05,
+        0.0
+      ]
+    ],
+    "sha256": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e"
+  },
+  "phase9d_v2c_model_training_contract_snapshot_sha256": "d25e8e89a139454ba1095e5183c7568a93a1a5dcfb3b23ef7c0f5c089fa033a2",
+  "primary_evaluation": {
+    "anti_concentration_gate": "No one family or N may contribute more than half of the pooled gain.",
+    "collision_gate": {
+      "absolute_degradation_maximum": 0.01,
+      "collision_free_point_estimate_minimum": 0.95
+    },
+    "h1_exact_statement": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+    "primary_baseline_comparisons": [
+      "FULL_BASE_METHOD_VS_LOCAL_GEOMETRIC_SELECTOR",
+      "FULL_BASE_METHOD_VS_DIRECT_CLASSIFIER",
+      "FULL_BASE_METHOD_VS_STRONGEST_FIXED_DEPLOYABLE_BASELINE"
+    ],
+    "primary_evaluation_unit": "PAIRED_EPISODE",
+    "primary_metric": "EPISODE_TASK_SUCCESS"
+  },
+  "schema_version": "rvt-phase9d-v2c-model-training-contract-snapshot/v1",
+  "status": "SNAPSHOT_ONLY_NOT_EXECUTED"
+}

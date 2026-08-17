@@ -1,0 +1,156 @@
+{
+  "C24_validation_independence": {
+    "class_weighting_selected_from_outcomes": false,
+    "commits_after_the_validation_closure_commit": 0,
+    "contamination_found": false,
+    "gates_applied_are_all_predeclared": true,
+    "hyperparameter_search_performed": false,
+    "model_selection_performed": false,
+    "new_gates_invented": 0,
+    "note": "this audit read VALIDATION outcomes, which is exactly the role the frozen ordering assigns to a development split. It applied only predeclared gates and changed no scientific parameter.",
+    "protocol_redesigned_after_seeing_validation_outcomes": false,
+    "scientific_parameters_tuned_against_validation_outcomes": false,
+    "training_performed": false,
+    "validation_remains_eligible_for_development_and_model_selection": true
+  },
+  "C25_sealed_domains": {
+    "final_test_dataset_accesses": 0,
+    "hyperparameter_trials": 0,
+    "model_checkpoints": 0,
+    "official_v2_train_mutations": 0,
+    "official_v2_validation_mutations": 0,
+    "optimizer_states": 0,
+    "residual_v2_generation_operations": 0,
+    "sealed_information_influenced_this_audit": false,
+    "study_a_n24_dataset_accesses": 0,
+    "study_b_dataset_accesses": 0,
+    "training_operations": 0,
+    "v1_dataset_mutations": 0
+  },
+  "C26_h1_scientific_testability": {
+    "assessment": "H1 IS SCIENTIFICALLY TESTABLE ON THIS DATASET, subject to closing the measurement gap recorded below.",
+    "both_candidate_classes_exist_globally": true,
+    "candidate_conditioned_differences_exist": true,
+    "decisive_events_train": {
+      "COMPACT_ONLY_SUCCESS": 1105,
+      "LINE_ONLY_SUCCESS": 737
+    },
+    "decisive_events_validation_lower_bound": {
+      "COMPACT_ONLY_SUCCESS": 216,
+      "LINE_ONLY_SUCCESS": 130
+    },
+    "independent_event_level_units": {
+      "combined_retained_events": 6317,
+      "train_retained_events": 5032,
+      "unit": "SOURCE_DECISION_EVENT",
+      "validation_retained_events": 1285
+    },
+    "inputs_valid_train": true,
+    "inputs_valid_validation_recorded_at_generation": true,
+    "no_label_implementation_defect": true,
+    "split_clean": true,
+    "structural_one_class_families_violate_a_frozen_claim": false,
+    "validation_family_gate_passes": true
+  },
+  "C27_zero_positive_family_final_classification": {
+    "F3": "LEGITIMATE_STRUCTURAL_ONE_CLASS_REGION_COMPATIBLE_WITH_H1",
+    "F4": "LEGITIMATE_STRUCTURAL_ONE_CLASS_REGION_COMPATIBLE_WITH_H1",
+    "F6": "LEGITIMATE_STRUCTURAL_ONE_CLASS_REGION_COMPATIBLE_WITH_H1",
+    "classification_letter": "A",
+    "evidence": [
+      "MEASURED PRE-DATA HEADROOM AGREES. The executable headroom requalification v6 (AUTHORITATIVE_PRE_DATA_HEADROOM, 150 cells, 450 policy executions, detached-reproduced with 0 category mismatches) measured F3 = BOTH_FAIL 15/15, F4 = BOTH_FAIL 12 + INVALID 3, F6 = BOTH_FAIL 15/15. v2 and v3 agree. No requalification at any version ever measured a LINE_ONLY_SUCCESS cell in F3 or F4.",
+      "EXACT INDEPENDENT REPLICATION. TRAIN and VALIDATION both report zero positive aggregates on both candidate topologies for F3, F4 and F6, on fully disjoint layout sets (20 vs 10, overlap 0) and disjoint source episodes.",
+      "POSITIVE CONTROL. The committed F1 control produced 20/20 COMPACT positives through the identical frozen Target V4 code path, so the label path is not degenerate.",
+      "ACQUISITION BIAS RULED OUT. The TRAIN positive rate is flat across all six source policies (0.3065-0.3296) and across all five selection ordinals (0.2855-0.3551); there is no late-ordinal collapse and no policy dependence.",
+      "NO FROZEN GATE IS VIOLATED. No gate in docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md and no field in the H1 requirement map requires any family to contain positive Recoverability labels. All three families clear gate 4 comfortably (F3 111, F4 77, F6 131 against a minimum of 30).",
+      "GENERATION INVALID IS ZERO. 0 actual and 0 fake GENERATION_INVALID in both splits, so the negatives are scientific VALID_TASK_NEGATIVE, not masked failures."
+    ],
+    "incorporates_train_evidence": true,
+    "incorporates_validation_evidence": true,
+    "rejected_alternatives": {
+      "B_SCENARIO_MANIFEST_CONFLICT_BLOCKS_H1": "rejected: the scenario declaration is a per-family design target and the repository froze the principle 'category follows outcomes, not family name' with a test, plus the F5 precedent. The measured headroom authority already records BOTH_FAIL.",
+      "C_SOURCE_ACQUISITION_BIAS_BLOCKS_H1": "rejected: flat positive rate across policies and ordinals, plus agreement with an episode-level qualification that does not use the V2 acquisition rule at all.",
+      "D_LABEL_IMPLEMENTATION_DEFECT_BLOCKS_H1": "rejected: the F1 positive control succeeds through the identical code path and GENERATION_INVALID is zero.",
+      "E_INSUFFICIENT_EVIDENCE_OWNER_DECISION_REQUIRED": "rejected for the classification itself: four independent lines of committed evidence agree. Note this is separate from the measurement gap recorded below, which does not bear on F3/F4/F6."
+    }
+  },
+  "C29_dataset_adequacy_finding": "RECOVERABILITY_V2_DATASET_ADEQUATE_WITH_DECLARED_STRUCTURAL_REGIONS",
+  "C29_finding_is_provisional_on": [
+    "label audit gate 7 (stochastic label instability per family/candidate) has NOT been evaluated for V2 in any phase",
+    "label audit gate 8 joint-category Jensen-Shannon divergence component has NOT been evaluated for the V2 combined dataset",
+    "the VALIDATION-side feature-dimension histogram, graph structural distributions, exact joint-category counts and Target V4 failure predicate decomposition were not measured in this phase",
+    "shard-byte verification of both sealed datasets was not re-performed in this phase"
+  ],
+  "C30_training_next_step_boundary": {
+    "model_training_performed_in_this_phase": false,
+    "not_recommended": "START_MODEL_TRAINING",
+    "qualified_v2_training_loader_exists": false,
+    "recommended_next_authorization": "AUTHORIZE_RECOVERABILITY_V2_TRAINING_PIPELINE_IMPLEMENTATION"
+  },
+  "C32_residual_ordering": {
+    "authority_releasing_residual_before_recoverability_training_found": false,
+    "residual_generation_operations": 0,
+    "residual_v2_status": "HOLD",
+    "statement": "no committed authority states that combined Recoverability adequacy alone releases Residual V2. Every readiness artifact that mentions it records residual_v2_authorized = false. Residual therefore stays on HOLD."
+  },
+  "cell_classification_counts": {
+    "train": {
+      "EXPECTED_STRUCTURAL_SOURCE_EMPTY": 1,
+      "LEGITIMATE_ONE_CLASS_REGION": 15,
+      "NORMAL_MIXED_LABEL": 34
+    },
+    "validation": {
+      "EXPECTED_STRUCTURAL_SOURCE_EMPTY": 1,
+      "LEGITIMATE_ONE_CLASS_REGION": 15,
+      "NORMAL_MIXED_LABEL": 34
+    }
+  },
+  "combined_arithmetic_all_identities_hold": true,
+  "combined_development_dataset_root": "0a76ee0ea37b6f7c1c3c15966ae6d7b685c0bb8bcbbcd8717bb0922905b4b731",
+  "gate_summary": {
+    "failing": [],
+    "fully_passing": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "not_fully_evaluated": [
+      7,
+      8,
+      9
+    ]
+  },
+  "handoff_commit": "ae45f954750657e594a04341a98f7f267028b8b3",
+  "outstanding_work": {
+    "blocker": "production target 100.71.102.9 unreachable (SSH and ICMP both time out)",
+    "estimated_effort": "one detached container run per script on the target",
+    "everything_outstanding_is_measurement_not_analysis": true,
+    "prepared_scripts": [
+      "scratchpad/v2c_audit.py -- streams both sealed datasets read-only and produces C1, C5, C15, C17, C22 and C23",
+      "scratchpad/v2c_replay.py -- frozen read-only replay diagnostic for C13 and C14"
+    ],
+    "tasks": [
+      "C1: recompute all 56 shard content hashes and both row dataset roots from the sealed row bytes",
+      "C5: per-cell COMPACT/LINE positive and negative counts for both splits",
+      "C13/C14: frozen replay failure-predicate decomposition for VALIDATION F3/F4/F6 with the F1 positive control",
+      "C17: exact VALIDATION joint-category counts",
+      "C18 gate 7: stochastic label instability per family and candidate over the F8/F9 three-replica aggregates",
+      "C18 gate 8: joint-category Jensen-Shannon divergence between TRAIN and VALIDATION",
+      "C18 gate 9: row-identity-level leakage check across the two splits",
+      "C22: VALIDATION node and edge feature dimension histograms and non-finite scan",
+      "C23: VALIDATION node count, edge count, degree and selection-ordinal distributions"
+    ]
+  },
+  "phase": "PHASE_9D_V2C",
+  "phase9d_v2c_final_readiness_sha256": "51f8e53dcee3e65e7705bfa458ce0fef144261e6960c6676c52be12a369002a5",
+  "recommendation": "AUDIT_INCOMPLETE",
+  "scenario_authority_conflict": false,
+  "schema_version": "rvt-phase9d-v2c-final-readiness/v1",
+  "validation_gate_minimum_count": 77,
+  "validation_gate_minimum_family": "F4",
+  "verdict": "E",
+  "verdict_text": "Audit incomplete. Every scientific question this phase poses is answered from committed authority and the F3/F4/F6 scenario tension is resolved, but the production target holding the sealed row payloads and stage ledgers was unreachable for the entire measurement window, so several required recomputations from the actual data, and frozen label-audit gate 7 in particular, could not be performed. Verdict C would assert adequacy 'under all frozen criteria', which is not yet established."
+}

@@ -1,0 +1,200 @@
+{
+  "C10_decisive_semantic_conflict_test": {
+    "but_the_stronger_result": "for F3/F4/F6 this coexistence argument is not even required: the measured episode-level headroom is BOTH_FAIL, so the two authorities agree directly.",
+    "coexistence_proof": "An episode may carry LINE headroom from its nominal initial condition and still reach, later on its realized trajectory, states from which neither candidate commitment completes the task under Target V4. The frozen authority supports the distinction because the headroom category is defined over a fixed policy run from the scenario start while the Recoverability label is defined over a candidate commitment from a realized mid-trajectory state reached under one of six source policies, three of which are not fixed-topology.",
+    "evidence": [
+      "no frozen gate in RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md requires any family to contain positive Recoverability labels",
+      "the H1 requirement map lists no per-family positive requirement",
+      "the recoverability generator never reads a headroom category",
+      "the headroom protocol defines the category over fixed-topology whole-episode qualification runs, not over sampled states"
+    ],
+    "is_line_only_success_a_decision_state_label_expectation": false,
+    "returns_RECOVERABILITY_SCENARIO_AUTHORITY_CONFLICT": false
+  },
+  "answer": "TWO_DISTINCT_OBJECTS_SHARE_THE_VOCABULARY",
+  "answer_maps_to_offered_interpretations": "A for the scenario-headroom object (episode-level, fixed topology from the nominal start), and C for the per-family declaration in scenario.py, which is a generator/design target that the executable requalification supersedes. Explicitly NOT B: no authority makes a scenario headroom category a Recoverability decision-state label expectation.",
+  "decisive_finding": {
+    "F3": {
+      "declared": [
+        "LINE_ONLY_SUCCESS"
+      ],
+      "measured_line_only_cells": 0,
+      "measured_v6": {
+        "BOTH_FAIL": 15
+      }
+    },
+    "F4": {
+      "declared": [
+        "LINE_ONLY_SUCCESS"
+      ],
+      "measured_line_only_cells": 0,
+      "measured_v6": {
+        "BOTH_FAIL": 12,
+        "INVALID_OR_AMBIGUOUS": 3
+      }
+    },
+    "F6": {
+      "declared": [
+        "COMPACT_ONLY_SUCCESS",
+        "BOTH_SUCCESS"
+      ],
+      "measured_compact_only_or_both_success_cells": 0,
+      "measured_v6": {
+        "BOTH_FAIL": 15
+      }
+    },
+    "independent_confirmations": {
+      "headroom_requalification_v2": {
+        "F3": "BOTH_FAIL 3/3",
+        "F4": "BOTH_FAIL 3/3",
+        "F6": "BOTH_FAIL 3/3"
+      },
+      "headroom_requalification_v3": {
+        "F3": "BOTH_FAIL 12 + INVALID 3",
+        "F4": "BOTH_FAIL 6 + INVALID 9",
+        "F6": "BOTH_FAIL 12 + INVALID 3"
+      },
+      "headroom_requalification_v6_authoritative": {
+        "F3": "BOTH_FAIL 15",
+        "F4": "BOTH_FAIL 12 + INVALID 3",
+        "F6": "BOTH_FAIL 15"
+      }
+    },
+    "statement": "The executable, detached-reproduced headroom requalification measured F3 and F6 as BOTH_FAIL in 15/15 cells and F4 as BOTH_FAIL in 12/15 with 3 INVALID_OR_AMBIGUOUS. No requalification at any version ever measured a LINE_ONLY_SUCCESS cell in F3 or F4. The episode-level measured authority therefore already agrees with the mid-trajectory Recoverability result, and it did so before any Recoverability V2 row existed."
+  },
+  "declared_is_not_measured": {
+    "documented_precedent": {
+      "declared_family_category": "RECONFIGURATION_REQUIRED",
+      "executable_category_by_cell": [
+        "LINE_ONLY_SUCCESS"
+      ],
+      "family": "F5",
+      "reason": "fixed LINE completes the task, which the frozen definition excludes from RECONFIGURATION_REQUIRED",
+      "resolution": "the declaration was retained and the measurement governs; the declaration was not rewritten",
+      "test": "tests/test_phase8e_hr_headroom_requalification.py::test_f5_no_longer_carries_the_universal_necessity_claim"
+    },
+    "frozen_principle": "category follows outcomes, not family name",
+    "test": "tests/test_phase8e_hr_headroom_requalification.py::test_category_follows_outcomes_not_family_name",
+    "test_sha256": "e5bc7852a8b9d5696c4ae2ea8d3beac17896a33d0faf188335c587228c7cef51"
+  },
+  "measured_headroom_authority": {
+    "artifact": "results/rvt_fd24/headroom_requalification_v6.json",
+    "category_mismatches": 0,
+    "cells": 150,
+    "cells_reproduced_exactly": 150,
+    "detached_reproduction": "results/rvt_fd24/headroom_v6_detached_reproduction_v1.json",
+    "per_family_measured": {
+      "F1": {
+        "BOTH_SUCCESS": 6,
+        "COMPACT_ONLY_SUCCESS": 9
+      },
+      "F10": {
+        "BOTH_FAIL": 12,
+        "LINE_ONLY_SUCCESS": 3
+      },
+      "F2": {
+        "BOTH_FAIL": 7,
+        "BOTH_SUCCESS": 1,
+        "COMPACT_ONLY_SUCCESS": 1,
+        "LINE_ONLY_SUCCESS": 6
+      },
+      "F3": {
+        "BOTH_FAIL": 15
+      },
+      "F4": {
+        "BOTH_FAIL": 12,
+        "INVALID_OR_AMBIGUOUS": 3
+      },
+      "F5": {
+        "BOTH_FAIL": 4,
+        "BOTH_SUCCESS": 3,
+        "COMPACT_ONLY_SUCCESS": 1,
+        "LINE_ONLY_SUCCESS": 6,
+        "RECONFIGURATION_REQUIRED": 1
+      },
+      "F6": {
+        "BOTH_FAIL": 15
+      },
+      "F7": {
+        "BOTH_SUCCESS": 6,
+        "COMPACT_ONLY_SUCCESS": 9
+      },
+      "F8": {
+        "BOTH_SUCCESS": 13,
+        "LINE_ONLY_SUCCESS": 2
+      },
+      "F9": {
+        "BOTH_FAIL": 3,
+        "LINE_ONLY_SUCCESS": 6,
+        "RECONFIGURATION_REQUIRED": 6
+      }
+    },
+    "policy_executions": 450,
+    "predates_all_recoverability_v2_data": true,
+    "promotion_record": "results/rvt_fd24/headroom_authority_record_v1.json",
+    "promotion_record_sha256": "fafe1460c69ef37ca9134c2fc17721adddda92607e3e4e3c084d6a29d9dab509",
+    "sha256": "d044d6b99d7a2bbb83565b121d188a35e335bfd856e3eb0e885823ca1a6742ef",
+    "status": "AUTHORITATIVE_PRE_DATA_HEADROOM",
+    "unit_of_analysis": "layout x team-size cell"
+  },
+  "object_1_scenario_headroom_category": {
+    "bound_hypothesis": "H2",
+    "declared_by": [
+      {
+        "file": "rvt_swarm/phase8/scenario.py",
+        "file_sha256": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+        "kind": "per-family DESIGN DECLARATION",
+        "symbol": "ScenarioFamily.expected_headroom_categories"
+      },
+      {
+        "file": "rvt_swarm/phase8/scenario.py",
+        "kind": "per-cell GENERATED DECLARATION",
+        "symbol": "ScenarioLayout.diagnostic_headroom_by_team_size / ScenarioLayout.headroom_for(team_size)"
+      }
+    ],
+    "name": "SCENARIO_HEADROOM_CATEGORY",
+    "qualification_policies": {
+      "file": "docs/RVT_FD24_SCENARIO_FAMILY_CONTRACT.md",
+      "implication": "fixed topology held for the whole episode from the nominal scenario initial condition",
+      "sha256": "5c8f986014de94a6d169eb5e58bf4c4e56eca6d8abe677004a109c1b8eaa99b5",
+      "text": "Qualification uses always COMPACT, always LINE and the frozen scripted COMPACT/LINE transition oracle."
+    },
+    "semantics_authority": {
+      "assignment": "Every layout/team-size cell is assigned by frozen diagnostic policies before model training",
+      "definition": "LINE_ONLY_SUCCESS: always LINE succeeds and always COMPACT fails",
+      "file": "docs/RVT_FD24_SCENARIO_HEADROOM_PROTOCOL.md",
+      "sha256": "c7bf60eedb5219973613907089d468a4b29e04016aeea52372dd353c38cbc5f1",
+      "success_meaning": "the complete task-level recoverability conditions, not immediate clearance"
+    },
+    "unit": "layout x team-size cell"
+  },
+  "object_2_joint_recoverability_outcome": {
+    "bound_hypothesis": "H1",
+    "computed_by": [
+      {
+        "file": "rvt_swarm/phase8/targets.py",
+        "file_sha256": "184f464b77a550d400a3784b9d2bd8db892496cde8a3bb33c87148c0846bc809",
+        "symbol": "joint_outcome_category(compact_target, line_target)"
+      },
+      {
+        "file": "rvt_swarm/phase9g0r/producer.py",
+        "file_sha256": "6fdc2bb50d812546b70ccfe27719c3339837c16b6c7d0652617c727df40fd019",
+        "symbol": "_joint_category(compact_label, line_label)"
+      }
+    ],
+    "inputs": "the two Target V4 candidate aggregate labels at ONE realized decision state reached under a source policy",
+    "name": "JOINT_RECOVERABILITY_OUTCOME_CATEGORY",
+    "test_evidence": "tests/test_recoverability_target_v4.py::test_joint_outcome_preserves_all_four_categories",
+    "unit": "one Recoverability decision event",
+    "used_by_gate": "RVT_RECOVERABILITY_LABEL_AUDIT_GATES gate 2 (decisive category counts)"
+  },
+  "phase9d_v2c_scenario_semantic_authority_sha256": "c17cedc9779a1671ac3c5ff302fbe15f7399842157ea1994e35a0010d99325f2",
+  "question": "What scientific object does LINE_ONLY_SUCCESS describe?",
+  "schema_version": "rvt-phase9d-v2c-scenario-semantic-authority/v1",
+  "the_two_objects_are_not_coupled": {
+    "code_search": "grep for 'headroom' across rvt_swarm/phase9g0r, rvt_swarm/phase9d_h1r, rvt_swarm/phase9b, rvt_swarm/phase9c",
+    "distinct_signatures": "headroom_for(team_size) takes a team size on a layout; joint_outcome_category requires two candidate targets sharing one decision_event_id",
+    "hits_in_recoverability_generation_or_acquisition_code": 0,
+    "no_authority_asserts_headroom_equals_joint_outcome": true
+  }
+}
