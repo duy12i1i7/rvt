@@ -1,0 +1,315 @@
+{
+  "class_weighting": "NONE_UNWEIGHTED_BCE",
+  "completion_state": "COMPLETE",
+  "composite_train_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+  "comprehensive_exclusion_union_sha256": "8b5ae40a00a9dc8709b6fab825495792c1091927818b2a7f68f714679f120905",
+  "dataset_id": "phase9g-v2a-t-study-a-train-recoverability-v2",
+  "dataset_manifest_sha256": "cbb8906c75311c53dd203501542ee3a9a77f84e9e92391c27997dee0c4229ef6",
+  "official_v2_train_manifest_sha256": "6be6785cef93964b7a2ded21e36a0ae2738dee1e9bc8dfc11715e49516979114",
+  "production_profile": {
+    "chunk_size": 1,
+    "cpu_authoritative": true,
+    "gpu_generation": false,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "protocol_version": "RECOVERABILITY_V2",
+  "qualified_image_digest": "sha256:2949628f6eb57abafe680687b677958c7cc52bffab84545514a48d84a936c684",
+  "qualified_image_source_commit": "f0a923f57fd8bea6b8249fad9652fcd37c674740",
+  "recoverability_row_binding_v2_spec_sha256": "98f18a94c6a69d27a4cbf38169ca15e998ce4b4adfbba9a48cb1b3233391adf8",
+  "retained_pair_events": 5032,
+  "roots": {
+    "candidate_evaluation_root": "ea1f92b79f0c88cea41847d5e82dbf62c4f842af7d6092dd131b430d943dc50b",
+    "manifest_root": "6be6785cef93964b7a2ded21e36a0ae2738dee1e9bc8dfc11715e49516979114",
+    "operational_ledger_root": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "pair_transaction_root": "0ca651b133ac95e338faa4849031d62cac173675b011115eb664bd0841771fcb",
+    "row_dataset_root": "c91414f52543d2b0b40c4349000072e1674fc948454e63810ea7d3a66a6287a9",
+    "stage_a_root": "06a4b428b26241dcb536dfc11bb9edaecbf699ed2a3441fadb98fbb3b115cb02"
+  },
+  "schema_version": "rvt-official-v2-train-dataset-manifest/v1",
+  "scientific_row_count": 90294,
+  "selected_source_events": 5032,
+  "shard_count": 44,
+  "shard_storage": {
+    "committed_to_repository": false,
+    "host": "AVIS target, WSL2 Ubuntu-24.04",
+    "path": "/home/avis/rvt-official-v2-train/rows",
+    "reason": "row payloads carry full ego-graph tensors (1.67 GB); the repository holds manifests, shard content hashes and audits, matching the V1 pattern"
+  },
+  "shards": [
+    {
+      "bytes": 32373315,
+      "content_sha256": "4f399db014e82a93ca80e528f5c0a97a67f5f125e20b0d22da73dd68e3737db6",
+      "path": "rows/train-recoverability-00000.jsonl",
+      "row_count": 2058
+    },
+    {
+      "bytes": 42208585,
+      "content_sha256": "6b33d341f2e9baf0e8c24f278e70cea7262122c0ed3759d0c134abea18bdfeaf",
+      "path": "rows/train-recoverability-00001.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 45226856,
+      "content_sha256": "c568f4a9e8f3046a8e85d4377e3228f8da156d5676d348b637c60a28efc7d37f",
+      "path": "rows/train-recoverability-00002.jsonl",
+      "row_count": 2056
+    },
+    {
+      "bytes": 35111693,
+      "content_sha256": "ea69022c3471e69240df73378ae97712d6218f0226181af68c43760dfa772680",
+      "path": "rows/train-recoverability-00003.jsonl",
+      "row_count": 2078
+    },
+    {
+      "bytes": 21188119,
+      "content_sha256": "0d2a14634b403b496756e1dbbc28f731b5bb8aa2483ccc2ee65596fae2957693",
+      "path": "rows/train-recoverability-00004.jsonl",
+      "row_count": 2060
+    },
+    {
+      "bytes": 37219798,
+      "content_sha256": "5d5f600cd821b7aa8b46541d9e3720d738819e67442f4efe0c34a47147d40ce6",
+      "path": "rows/train-recoverability-00005.jsonl",
+      "row_count": 2050
+    },
+    {
+      "bytes": 32263428,
+      "content_sha256": "e11e68cef9738ae787ea9f3c994a73bf768c2eba5df8876e7d016a115afe133d",
+      "path": "rows/train-recoverability-00006.jsonl",
+      "row_count": 2062
+    },
+    {
+      "bytes": 34713615,
+      "content_sha256": "33fb9c84b7dd3a1fc047ea051309d0097aa00bf7e6f0eda64cf44d201157c0a2",
+      "path": "rows/train-recoverability-00007.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 35171665,
+      "content_sha256": "23d16b38a489062423f2c1fb203ebf665459076cfa85830af2cf3741221711ad",
+      "path": "rows/train-recoverability-00008.jsonl",
+      "row_count": 2076
+    },
+    {
+      "bytes": 29947902,
+      "content_sha256": "d9aff9dc0c14ace0346f125156474016289816714caf7eb245c3aa358196bc78",
+      "path": "rows/train-recoverability-00009.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 37418480,
+      "content_sha256": "45de1f8b80529951b95f0d1de6dc9d0c964aba7c4fb25c1e9c2f3286fa1b0762",
+      "path": "rows/train-recoverability-00010.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 47943606,
+      "content_sha256": "a543c641843e5d1b2d23a47245cb9e07e9c070b34ffc43e1695651842513d0dc",
+      "path": "rows/train-recoverability-00011.jsonl",
+      "row_count": 2064
+    },
+    {
+      "bytes": 40687993,
+      "content_sha256": "62122a0d139ed7586306a2af946248e0b1da428f7268e17ea15d95db73593100",
+      "path": "rows/train-recoverability-00012.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 21084450,
+      "content_sha256": "890131f0969a452a80613b4ca2d6a76baf5c9f850528a5e79884ebd7880b0e39",
+      "path": "rows/train-recoverability-00013.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 21059807,
+      "content_sha256": "71bb9c420bf9bac2e17ed928511b5a735021f8a2a9d54d2aee15f60df3b8bb35",
+      "path": "rows/train-recoverability-00014.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 36277414,
+      "content_sha256": "3a26cf75464c4d1164d1c0f08e3a2d1229e5f73f48fc5e0dd0a5093868e14dd1",
+      "path": "rows/train-recoverability-00015.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 37089713,
+      "content_sha256": "77fb5bc87a72faf62b35071c23f506d3e335466e80801884e395d21528bf5d2c",
+      "path": "rows/train-recoverability-00016.jsonl",
+      "row_count": 2050
+    },
+    {
+      "bytes": 29754784,
+      "content_sha256": "5b48ee7f58082f19ef4f39f75de1a4dda2b78a5c208f9a26cde669bb739ce971",
+      "path": "rows/train-recoverability-00017.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 22623504,
+      "content_sha256": "d068de9a36fdcd6e136f33eb4694c8b1217adf89894af6f50befe0b300cd4185",
+      "path": "rows/train-recoverability-00018.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 53528206,
+      "content_sha256": "0e8acde431410d741697acd3b282bf09a74e9d9d95a7191217615abfa62fba7d",
+      "path": "rows/train-recoverability-00019.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 47116548,
+      "content_sha256": "487a4ab92fa0837d3253f660ca5fb87931a63aece0cd4be6c848d05857d4d14c",
+      "path": "rows/train-recoverability-00020.jsonl",
+      "row_count": 2056
+    },
+    {
+      "bytes": 56753329,
+      "content_sha256": "dee8ec8b7d6262d7131534fa7699d952493520a6b69669db93779613b168a797",
+      "path": "rows/train-recoverability-00021.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 57160327,
+      "content_sha256": "33f49a6d99b86fca5b57a22504f90afcc23227b974069f6dc3043a5fd32aea46",
+      "path": "rows/train-recoverability-00022.jsonl",
+      "row_count": 2060
+    },
+    {
+      "bytes": 46185024,
+      "content_sha256": "b4be60e63d3e32748f445ff4c9daf4dfad3f307b4922e67b1a9d2f6c6ffcc16e",
+      "path": "rows/train-recoverability-00023.jsonl",
+      "row_count": 2056
+    },
+    {
+      "bytes": 27885397,
+      "content_sha256": "cb8fdb568663c6f1323670380e6c35ffc2609549b5f0e1223844aaab24687cc9",
+      "path": "rows/train-recoverability-00024.jsonl",
+      "row_count": 2056
+    },
+    {
+      "bytes": 35035498,
+      "content_sha256": "fd325eb8c5e7a966aeb7e2a7f0b2b4fc671e2254b28f737648be5d4fdabf049d",
+      "path": "rows/train-recoverability-00025.jsonl",
+      "row_count": 2064
+    },
+    {
+      "bytes": 34276879,
+      "content_sha256": "f31864be4e6633beb826eb87e81dee48ec882938694385994532c9ac52057dad",
+      "path": "rows/train-recoverability-00026.jsonl",
+      "row_count": 2058
+    },
+    {
+      "bytes": 32287686,
+      "content_sha256": "88529a90d09d74f0e3480867900e6734670c1ea93d8a17c9e46dbe05faf63cbe",
+      "path": "rows/train-recoverability-00027.jsonl",
+      "row_count": 2068
+    },
+    {
+      "bytes": 69092266,
+      "content_sha256": "9435ec70ac83fd32cb4fa2e5b961e4d661779f1898838fff02d87e666851d0a5",
+      "path": "rows/train-recoverability-00028.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 61335187,
+      "content_sha256": "ecc0b4786a32092ce23742572e319af6ecef43bb29cb671686ebe44298dc8273",
+      "path": "rows/train-recoverability-00029.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 24321065,
+      "content_sha256": "e21fa98201caaa1af81e8c1c56a15404bdb8b945ec7050e619b3a41700c144ce",
+      "path": "rows/train-recoverability-00030.jsonl",
+      "row_count": 2056
+    },
+    {
+      "bytes": 25740460,
+      "content_sha256": "520f10085d7bacdc01fc6c764d12f10dd20005b81958c23224c55b48c8dc6db7",
+      "path": "rows/train-recoverability-00031.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 32560225,
+      "content_sha256": "837708ad97581f8289e253749e9046ff51ea10d29ed3baef97c590a0f6622454",
+      "path": "rows/train-recoverability-00032.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 75725555,
+      "content_sha256": "8c5ac43b39d35543cfa206fb1e2868707a6aacbf912f608eec2dc9bb3752be55",
+      "path": "rows/train-recoverability-00033.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 22101300,
+      "content_sha256": "e605640f104a1046f3376a77d69d9529e8bd42ee1115c6aa52dadcfe55bd8236",
+      "path": "rows/train-recoverability-00034.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 26633521,
+      "content_sha256": "62a39a692167880dda74b81a11545fbb1d943e0a7af660e4962479350fda62d4",
+      "path": "rows/train-recoverability-00035.jsonl",
+      "row_count": 2054
+    },
+    {
+      "bytes": 50042140,
+      "content_sha256": "913748021dbe1d0ead3c9860043169d9b95f32f39f4c9ccc65563c327ec58e26",
+      "path": "rows/train-recoverability-00036.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 26088006,
+      "content_sha256": "c2b73a5ef78b31a2f00475778eb5101f4c4fe0dae19612660f5367ea1fb6af20",
+      "path": "rows/train-recoverability-00037.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 25751030,
+      "content_sha256": "4109e3a66ada502092528864deb2545fff08cab75b138ca263d73d9e1e487a02",
+      "path": "rows/train-recoverability-00038.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 50665398,
+      "content_sha256": "15647d3d16ee6b8755de9b0dec67c4c3ae82a66fd608c20c7b85d29f3f7baa4e",
+      "path": "rows/train-recoverability-00039.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 33732366,
+      "content_sha256": "9f33813565353916709811f091e82c411742d88640a44c5bfdf0d385d8d54609",
+      "path": "rows/train-recoverability-00040.jsonl",
+      "row_count": 2056
+    },
+    {
+      "bytes": 42012278,
+      "content_sha256": "92cf5dd94cd421cabd8f5e197a07139a4e17a0b2a26d7316b6723bc21649de1a",
+      "path": "rows/train-recoverability-00041.jsonl",
+      "row_count": 2048
+    },
+    {
+      "bytes": 57369186,
+      "content_sha256": "fd6726ca9276d80e5ad171a13503faf8a1e98601e0525f370c4f7517513b419d",
+      "path": "rows/train-recoverability-00042.jsonl",
+      "row_count": 2052
+    },
+    {
+      "bytes": 21428132,
+      "content_sha256": "609c6d260b16b61f75c86ffef62cbfbf0b92476b9bb56a3c7a311300b2a580ce",
+      "path": "rows/train-recoverability-00043.jsonl",
+      "row_count": 1960
+    }
+  ],
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "source_episodes": 1200,
+  "split": "train",
+  "status": "VALID_FROZEN_TRAIN_ONLY",
+  "study": "study_a_zero_shot",
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "total_bytes": 1674191736,
+  "training_authorized": false,
+  "validation_included": false
+}

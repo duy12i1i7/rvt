@@ -1,0 +1,27 @@
+{
+  "blocking_failures": {},
+  "checks": {
+    "duplicate_source_identities": 0,
+    "exclusion_union_overlap": 0,
+    "families_complete": true,
+    "final_test_episodes": 0,
+    "image_digest_exact": true,
+    "n24_episodes": 0,
+    "protocol_hash_exact": true,
+    "row_binding_v2_hash_exact": true,
+    "source_episodes_exactly_1200": true,
+    "split_is_train": true,
+    "study_b_episodes": 0,
+    "target_v4_hash_exact": true,
+    "team_sizes_authorized": true,
+    "validation_identities_present": 0
+  },
+  "decision": "GO",
+  "manifest_sha256": "6be6785cef93964b7a2ded21e36a0ae2738dee1e9bc8dfc11715e49516979114",
+  "official_v2_train_prelaunch_sha256": "8ba356692892967be6d17c9a08ca6a1f57a79c003411ae6102a72bbbcee54446",
+  "schema_version": "rvt-official-v2-train-prelaunch-go-nogo/v1",
+  "v1_mutations": 0,
+  "v1_overlap_interpretation": "expected and correct. The frozen source-episode budget is shared: generation_budget_v1.json fixes 1200 Study-A TRAIN source episodes and the owner resolution changes acquisition, not the episode budget. The freshness requirement in the owner resolution is merged_into_v2_confirmatory_data = false, which concerns rows and datasets, not source-episode identities. V2 rows are generated fresh into a new namespace and no V1 row is reused.",
+  "v1_rows_reused": 0,
+  "v1_source_episode_identity_overlap": 1200
+}
