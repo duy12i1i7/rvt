@@ -1,0 +1,116 @@
+{
+  "FULL_ROOTS_RECOVERED": {
+    "exclusion_union_outer_artifact_sha256": "d39febcb3aa9c0cedce92560cf3fff68a5891b60e9d9273c8376b57b64fcacb9",
+    "layout_registry_outer_artifact_sha256": "b3a98bf6c60d201c635a49056fb42fc400fd0406d8f7cdf5ec1d66db36825614",
+    "note": "the phase prompt quoted abbreviations that correspond to the OUTER artifact hashes, not the INNER manifest roots. Both are recorded here in full so machine-readable authority is never abbreviated or conflated.",
+    "official_v3_train_manifest_dry_final_sha256": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+    "official_v3_validation_manifest_dry_final_sha256": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+    "prompt_abbreviations_mapped": {
+      "5494914e...": "inner registry root, confirmed",
+      "72f88a62...": "OUTER validation-manifest artifact hash; the inner manifest root is 431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+      "ffb1fe33...": "OUTER train-manifest artifact hash; the inner manifest root is 6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd"
+    },
+    "train_manifest_outer_artifact_sha256": "ffb1fe3363908369096f4fd8463fe3a8cd5434cb0a4d48d5a39382df7ced4898",
+    "v3_comprehensive_development_exclusion_union_v2_sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+    "validation_manifest_outer_artifact_sha256": "72f88a6269358063047bf43edfb304f23e3a26d62bacdb2be07a01cc9c836076"
+  },
+  "I28_dry_manifest_verification": {
+    "dry_only": true,
+    "train": {
+      "episodes_per_layout": 60.0,
+      "executed": 0,
+      "layouts": 20,
+      "offsets": [
+        0.22,
+        0.54
+      ],
+      "rows": 0,
+      "source_episodes": 1200
+    },
+    "validation": {
+      "episodes_per_layout": 30.0,
+      "executed": 0,
+      "layouts": 10,
+      "offsets": [
+        0.65
+      ],
+      "rows": 0,
+      "source_episodes": 300
+    }
+  },
+  "bindings": [
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_v3f_probabilistic_target_contract_v1.json",
+      "planned_implementation_module": "rvt_swarm/phase9g0r/contracts_v3.py (NOT YET WRITTEN)",
+      "planned_test_binding": "tests/test_phase9g_v3i_q_* (NOT YET WRITTEN)",
+      "scientific_concept": "probabilistic target p(x, tau)",
+      "sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6"
+    },
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_v3f_replica_protocol_v1.json",
+      "planned_implementation_module": "rvt_swarm/phase9g0r/compiler_v3.py (NOT YET WRITTEN)",
+      "planned_test_binding": "replica arithmetic tests",
+      "scientific_concept": "replica protocol, R per family",
+      "sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a"
+    },
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_v3f_row_binding_v1.json",
+      "planned_implementation_module": "rvt_swarm/phase9g0r/contracts_v3.py (NOT YET WRITTEN)",
+      "planned_test_binding": "V1/V2/V3 collision tests",
+      "scientific_concept": "row identity and binding",
+      "sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c"
+    },
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_v3f_training_loss_contract_v1.json",
+      "planned_implementation_module": "rvt_swarm/fd24/loss_v3.py (NOT YET WRITTEN)",
+      "planned_test_binding": "N/R invariance and R=1 BCE equivalence",
+      "scientific_concept": "event-equal grouped Bernoulli loss",
+      "sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11"
+    },
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_v3f_brier_metric_contract_v1.json",
+      "planned_implementation_module": "rvt_swarm/fd24/metrics_v3.py (NOT YET WRITTEN)",
+      "planned_test_binding": "the mandatory p=0.5, k=1, R=3 -> 0.25 anti-shortcut regression",
+      "scientific_concept": "event-equal replica-normalized Brier",
+      "sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04"
+    },
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_v3f_l_layout_split_registry_v2.json",
+      "planned_implementation_module": "V3 compiler registry dispatch (NOT YET WRITTEN)",
+      "planned_test_binding": "superseded-registry fail-closed guard",
+      "scientific_concept": "final layout split authority",
+      "sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+    },
+    {
+      "frozen_artifact": "results/rvt_fd24/phase9d_h1r_od_source_acquisition_protocol_v2_frozen.json",
+      "planned_implementation_module": "reuse rvt_swarm/phase9d_h1r/acquisition_v2.py unchanged",
+      "planned_test_binding": "K=5 selection-rule recomputation",
+      "scientific_concept": "source acquisition, unchanged",
+      "sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d"
+    },
+    {
+      "frozen_artifact": "Target V4 execution contract",
+      "planned_implementation_module": "reuse rvt_swarm/phase8/targets.py unchanged",
+      "planned_test_binding": "V2 replay regression",
+      "scientific_concept": "per-replica outcome, unchanged",
+      "sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+    }
+  ],
+  "frozen_contracts_verified_exact": true,
+  "handoff_commit": "6bc983431a885993302f8dd18a1b8eea33d4a7a5",
+  "historical_v2_gate7": {
+    "modified": false,
+    "observed": "59 / 530",
+    "status": "FAILED_FOR_V2",
+    "still_exceeds": true,
+    "threshold": 0.1,
+    "v3_applicability": "NOT_APPLICABLE_TO_V3_PROBABILISTIC_TARGET",
+    "value": 0.11132075471698114
+  },
+  "no_code_written": true,
+  "phase": "PHASE_9G_V3I_Q",
+  "phase9g_v3i_q_implementation_binding_sha256": "b232a0e6d1c5d425b2136408348bd8e1c4ec714b2549598a003f46786e5e9b0f",
+  "reason_no_code": "I10 requires resolving replica-invalidity semantics before implementation; see the owner-decision artifact",
+  "schema_version": "rvt-phase9g-v3i-q-implementation-binding/v1"
+}

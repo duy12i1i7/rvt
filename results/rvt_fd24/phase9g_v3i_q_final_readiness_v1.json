@@ -1,0 +1,51 @@
+{
+  "I53_official_manifest_protection": {
+    "official_v3_scientific_rows": 0,
+    "official_v3_target_v4_evaluations": 0,
+    "official_v3_train_source_episodes_executed": 0,
+    "official_v3_validation_source_episodes_executed": 0,
+    "qualification_identities_created": 0
+  },
+  "I54_sealed_domains": {
+    "final_test_accesses": 0,
+    "sealed_outcomes_enumerated": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0
+  },
+  "STOP_TOKEN": "V3_REPLICA_INVALIDITY_SEMANTICS_OWNER_DECISION_REQUIRED",
+  "code_written": 0,
+  "frozen_contracts_modified": 0,
+  "gate7_modified": 0,
+  "handoff_commit": "6bc983431a885993302f8dd18a1b8eea33d4a7a5",
+  "hp_trials": 0,
+  "images_built": 0,
+  "models_trained": 0,
+  "modules_created": 0,
+  "next_phase_requires": "an owner decision on V3 replica-invalidity semantics, recorded as a frozen contract, after which this implementation and qualification phase can run unchanged in every other respect",
+  "phase": "PHASE_9G_V3I_Q",
+  "phase9g_v3i_q_final_readiness_sha256": "f6252c4f753d7825ff65aa2406160ad1fc981fd1bb251fb68237aa7519d47682",
+  "recommendation": "DO_NOT_GENERATE_OFFICIAL_V3_DATA",
+  "schema_version": "rvt-phase9g-v3i-q-final-readiness/v1",
+  "stopped_at_gate": "I10",
+  "v2_modified": 0,
+  "verdict": "D",
+  "verdict_text": "Implementation and qualification are incomplete because gate I10 could not be closed from repository authority. The frozen V3 contracts do not state how the supervision observation (k, R) is constructed when a required replica is scientifically invalid, one of the three candidate readings is blocked by a frozen contract, and the remaining two are materially different. I10 directs a stop rather than a guess.",
+  "why_not_started": "every one of those depends on the (k, R) construction rule. Implementing and qualifying on a guessed rule would produce a reference semantic digest and a production image that the owner's answer could invalidate.",
+  "work_completed": [
+    "I0 clean handoff verified",
+    "I1 implementation-binding table with every full frozen hash",
+    "I1 correction: the prompt's TRAIN and VALIDATION abbreviations name OUTER artifact hashes, not inner manifest roots; both recorded",
+    "I10 exhaustive search of all V3D and V3F authority for required-replica invalidity semantics",
+    "I28 dry verification of both frozen manifests",
+    "historical V2 gate-7 failure reverified"
+  ],
+  "work_not_started": [
+    "I2-I9 additive V3 implementation",
+    "I11-I17 pair transaction, row binding, writer, loader, loss",
+    "I20-I22 Brier implementation",
+    "I26-I27 registry and split guards",
+    "I29-I38 qualification canary",
+    "I41-I44 image build and reference qualification",
+    "I45-I52 Windows target qualification"
+  ]
+}

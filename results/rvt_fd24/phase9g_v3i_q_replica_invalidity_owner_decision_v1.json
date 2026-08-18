@@ -1,0 +1,96 @@
+{
+  "STOP_TOKEN": "V3_REPLICA_INVALIDITY_SEMANTICS_OWNER_DECISION_REQUIRED",
+  "agent_recommendation": {
+    "authority_to_select": "OWNER",
+    "preferred": "A",
+    "rationale": "it is the only reading that neither contradicts a frozen contract nor injects a non-observation into the likelihood, and it inherits the pair atomicity the project has used since V1. Gate S8 already bounds how often this can cost an event.",
+    "selected_by_agent": false
+  },
+  "candidate_readings": [
+    {
+      "against": "V3 deliberately replaced the all-success aggregation, so the transfer of this rule is asserted nowhere",
+      "consequence": "the entire decision event is dropped, losing both candidates' evidence",
+      "id": "A",
+      "name": "CANDIDATE_NOT_LABELABLE",
+      "rule": "any required replica invalid -> the candidate has no supervision -> the pair publishes 0 robot rows",
+      "structurally_blocked": false,
+      "supported_by": [
+        "historical Target V4 aggregation: invalid = not all(valid); label = int(not invalid and all(outcomes))",
+        "the frozen rollout protocol: 'numerical invalidity sets invalid and blocks the row'",
+        "gate D4 pair atomicity"
+      ]
+    },
+    {
+      "also_against": "the replica protocol sets adaptive_replication = DISABLED and R_expansion_permitted = false",
+      "blocked_by": "the frozen row-binding contract states: 'R is bound through recoverability_replica_protocol_v3_sha256, not through an outcome payload field. The protocol fixes R per family, so identity determines R without recording it.' A data-dependent R makes identity no longer determine R, contradicting a frozen contract.",
+      "id": "B",
+      "name": "SHRINK_R_TO_VALID_REPLICAS",
+      "rule": "R := number of scientifically valid replicas; k over those",
+      "structurally_blocked": true
+    },
+    {
+      "against": "the frozen loss is -[k log p + (R-k) log(1-p)] / R, so the (R-k) term would treat a NON-OBSERVATION as a Bernoulli failure. That silently converts invalidity into evidence of failure, which the rollout protocol forbids for numerical invalidity and which I37 forbids for infrastructure failure.",
+      "consequence": "the event is retained but its likelihood is biased toward failure",
+      "id": "C",
+      "name": "KEEP_R_COUNT_K_OVER_VALID_ONLY",
+      "rule": "R stays at the protocol value; k counts successes among the valid replicas only",
+      "structurally_blocked": false
+    }
+  ],
+  "gate": "I10",
+  "guessed": false,
+  "infrastructure_failure_is_separate": {
+    "handling": "frozen operational retry and resume",
+    "rule": "a required replica that did not execute because of timeout, worker crash, serialization or transport failure is NOT a Bernoulli failure observation and is NOT scientific invalidity",
+    "unaffected_by_this_decision": true
+  },
+  "phase9g_v3i_q_replica_invalidity_owner_decision_sha256": "7ae11f1d8f4b0c13b847ab2df5475a5446bea77479aba918ea38e77451c6d254",
+  "phase_directive": "I10 states: 'If this behavior is NOT frozen clearly enough: STOP with V3_REPLICA_INVALIDITY_SEMANTICS_OWNER_DECISION_REQUIRED. Do not guess.'",
+  "question": "when a REQUIRED candidate replica carries a genuine scientific GENERATION_INVALID disposition, how is the V3 supervision observation (k, R) constructed?",
+  "schema_version": "rvt-phase9g-v3i-q-replica-invalidity-decision/v1",
+  "what_the_owner_must_state": [
+    "the rule for constructing (k, R) when a required replica is scientifically invalid",
+    "whether the affected candidate's pair publishes rows",
+    "whether such events count toward the gate S4 retained-event minimum",
+    "whether a new or amended frozen contract records the rule, and which contract hash changes as a result"
+  ],
+  "what_v3_authority_DOES_NOT_freeze": "the construction of (k, R) when fewer than R required replicas are scientifically valid. The replica protocol contains no statement about invalid replicas at all.",
+  "what_v3_authority_DOES_freeze": [
+    {
+      "artifact": "probabilistic target contract",
+      "covers": "patterns 001..110, i.e. DISAGREEMENT among VALID replicas",
+      "field": "mixed_outcomes.is_generation_invalid = false",
+      "item": "mixed replica outcomes are valid supervision"
+    },
+    {
+      "artifact": "gate registry",
+      "gate": "D3",
+      "item": "fake GENERATION_INVALID from nonexistent source states",
+      "threshold": 0
+    },
+    {
+      "artifact": "gate registry",
+      "gate": "D4",
+      "item": "partial candidate-pair publication",
+      "threshold": 0
+    },
+    {
+      "artifact": "gate registry",
+      "gate": "S8",
+      "implication": "invalid rollouts are EXPECTED to occur and be counted, so this is not a hypothetical case",
+      "item": "invalid rollout rate is bounded",
+      "threshold": "below 0.02 overall and below 0.05 per family"
+    },
+    {
+      "artifact": "row binding, F6 supervision record",
+      "implication": "a per-replica invalid disposition is representable, but nothing states how it flows into (k, R)",
+      "item": "replica_dispositions are stored"
+    }
+  ],
+  "why_this_cannot_be_guessed": [
+    "reading B is blocked by a frozen contract, so the choice is between A and C",
+    "A and C differ materially: A drops the event entirely, C retains it with a downward-biased likelihood",
+    "the difference is not cosmetic -- it changes both the retained event count that gate S4 measures and the supervision signal that the loss consumes",
+    "building the compiler, producer, supervision writer and qualification canary on a guessed rule would produce an image and a reference semantic digest that the owner's answer could invalidate"
+  ]
+}
