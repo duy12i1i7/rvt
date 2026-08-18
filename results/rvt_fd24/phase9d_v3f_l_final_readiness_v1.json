@@ -1,0 +1,82 @@
+{
+  "L18_no_outcome_access": {
+    "fully_prospective": true,
+    "v3_labels_observed": 0,
+    "v3_replica_rollouts": 0,
+    "v3_scientific_rows": 0,
+    "v3_selected_source_events": 0,
+    "v3_source_episodes_executed": 0,
+    "v3_target_v4_evaluations": 0
+  },
+  "L1_preservation": {
+    "gate7_modified": false,
+    "gate7_observed": "59 / 530 = 0.11132075471698113",
+    "gate7_result": "FAIL",
+    "gate7_still_exceeds_threshold": true,
+    "gate7_threshold": 0.1,
+    "non_layout_contracts_changed": 0,
+    "v2_train_seal_unchanged": true,
+    "v2_validation_seal_unchanged": true
+  },
+  "compute_plan_unchanged": true,
+  "disjointness": {
+    "all_disjoint": true,
+    "axes": 27
+  },
+  "final_capacity": {
+    "intended_design_restored": true,
+    "train_episodes_per_layout_max": 60,
+    "train_episodes_per_layout_mean": 60.0,
+    "train_episodes_per_layout_min": 60,
+    "train_episodes_per_layout_uniform": true,
+    "v3_train_layouts": 20,
+    "v3_train_offsets": [
+      0.22,
+      0.54
+    ],
+    "v3_validation_layouts": 10,
+    "v3_validation_offsets": [
+      0.65
+    ],
+    "validation_episodes_per_layout_mean": 30.0
+  },
+  "handoff_commit": "c04de8c39a44645a5098a90da1dfe7779c2dc044",
+  "new_roots": {
+    "v3_exclusion_union_v2_sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+    "v3_train_manifest_dry_final_sha256": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+    "v3_validation_manifest_dry_final_sha256": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2"
+  },
+  "not_authorized": "V3 DATA GENERATION",
+  "phase": "PHASE_9D_V3F_L",
+  "phase9d_v3f_l_final_readiness_sha256": "f97a98c69d0fd7922ae54e85dfa98b9a57c532c0b254f838b55ca0c3a67980b5",
+  "planned_replica_rollouts": 21000,
+  "recommendation": "AUTHORIZE_RECOVERABILITY_V3_IMPLEMENTATION_AND_QUALIFICATION",
+  "reserve_and_forbidden": {
+    "final_identities_enumerated": 0,
+    "forbidden_official_membership": 0,
+    "forbidden_offsets": [
+      0.76,
+      0.87
+    ],
+    "reserve_official_train_membership": 0,
+    "reserve_official_validation_membership": 0,
+    "reserve_offset": 0.33
+  },
+  "schema_version": "rvt-phase9d-v3f-l-final-readiness/v1",
+  "scope": "LAYOUT_CAPACITY_ONLY",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "final_test_identities_enumerated": 0,
+    "gate7_modifications": 0,
+    "hyperparameter_trials": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v2_mutations": 0,
+    "v3_code_implemented": 0,
+    "v3_rows_generated": 0
+  },
+  "verdict": "A",
+  "verdict_text": "The prospective V3 layout-capacity amendment is clean: 20 TRAIN and 10 VALIDATION layouts are frozen, every disjointness axis returns zero, no non-layout science changed, the planned scientific budget is identical, and V3 is ready for implementation and qualification."
+}

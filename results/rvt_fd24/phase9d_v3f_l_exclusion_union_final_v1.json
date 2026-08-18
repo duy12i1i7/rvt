@@ -1,0 +1,34 @@
+{
+  "difference_reason": "none -- the development identity set is unchanged. The union is re-emitted only because the V3 manifests it must be proved against have new roots; no development identity was added or removed.",
+  "excluded_identities_sorted_sha256": "0d84f74b091d7f4ffdbe44eff2a5a561ef5947149508c54fcc3a5eae41925f70",
+  "excluded_identity_count": 1880,
+  "membership_changed_from_v1": false,
+  "name": "V3_COMPREHENSIVE_DEVELOPMENT_EXCLUSION_UNION_V2",
+  "phase9d_v3f_l_exclusion_union_final_sha256": "d39febcb3aa9c0cedce92560cf3fff68a5891b60e9d9273c8376b57b64fcacb9",
+  "requirement_met": true,
+  "schema_version": "rvt-v3-comprehensive-development-exclusion-union/v2",
+  "sources": [
+    {
+      "domain": "V2 official TRAIN",
+      "identities": 1200
+    },
+    {
+      "domain": "V2 official VALIDATION",
+      "identities": 300
+    },
+    {
+      "domain": "V2 comprehensive development exclusion union",
+      "identities": 380
+    }
+  ],
+  "supersedes": {
+    "identities": 1880,
+    "name": "V3_COMPREHENSIVE_DEVELOPMENT_EXCLUSION_UNION_V1",
+    "preserved": true,
+    "sha256": "0d0d95359a75600b0e7df318606735b6ab69f76390a7f501d73c70e17f457971"
+  },
+  "v3_comprehensive_development_exclusion_union_v2_sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d",
+  "v3_train_intersection": 0,
+  "v3_train_vs_v3_validation_intersection": 0,
+  "v3_validation_intersection": 0
+}

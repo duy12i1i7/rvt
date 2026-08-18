@@ -1,0 +1,57 @@
+{
+  "L17_h1": {
+    "comparator_set_unchanged": true,
+    "effect_threshold_unchanged": true,
+    "h1_altered_by_layout_diversity": false,
+    "h1_owner_rewording_required": false,
+    "primary_metric_unchanged": true,
+    "why": "H1 constrains selection quality and episode task success against two named comparators. The number of distinct TRAIN geometries is a data-design property that affects how well a model may generalize, not what the hypothesis claims."
+  },
+  "any_non_layout_contract_changed": false,
+  "new_or_recomputed_roots": {
+    "disjointness_audit": "recomputed",
+    "final_readiness": "recomputed",
+    "v3_comprehensive_development_exclusion_union_v2_sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+    "v3_train_manifest_dry_final_sha256": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+    "v3_validation_manifest_dry_final_sha256": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2"
+  },
+  "phase9d_v3f_l_contract_impact_sha256": "54da5cb3d2a4b2f569471b7a07fb5a7d4b09eaebb7798502d0be04b5b85d916a",
+  "row_binding_analysis": {
+    "answered_from": "the frozen contract's own row_identity_fields, not from an assumption",
+    "consequence": "changing which layouts a split contains does NOT invalidate the row-binding hash. A row identity is pinned to the specific geometry it was built from, so adding fresh geometries creates new row identities without disturbing the contract that defines them.",
+    "embeds_layout_registry_hash": false,
+    "embeds_layout_sha256": true,
+    "guessed": false,
+    "question": "does the row binding embed the LAYOUT REGISTRY hash, or only layout_sha256?",
+    "row_identity_fields": [
+      "schema",
+      "study",
+      "split",
+      "family",
+      "layout_sha256",
+      "team_size",
+      "episode_id",
+      "realized_source_timestep",
+      "robot_id",
+      "candidate_topology_id",
+      "graph_fingerprint",
+      "source_acquisition_protocol_sha256",
+      "target_v4_contract_sha256",
+      "recoverability_probabilistic_target_v3_sha256",
+      "recoverability_replica_protocol_v3_sha256",
+      "recoverability_row_binding_v3_spec_sha256"
+    ]
+  },
+  "schema_version": "rvt-phase9d-v3f-l-contract-impact/v1",
+  "unchanged_scientific_contracts": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "validation_manifest_recomputed_reason": "its layout set is unchanged, but it now cites the V2 registry root, so its manifest hash necessarily changes"
+}

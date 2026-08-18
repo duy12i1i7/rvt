@@ -100,7 +100,11 @@ def test_artifact_exists_and_self_verifies(name):
 
 
 def test_all_eighteen_required_artifacts_exist():
-    assert len(sorted(RESULTS.glob("phase9d_v3f_*.json"))) == 18
+    # exclude the later phase9d_v3f_l_* layout-capacity addendum, which shares
+    # this glob prefix but belongs to Phase 9D-V3F-L
+    own = [path for path in RESULTS.glob("phase9d_v3f_*.json")
+           if not path.name.startswith("phase9d_v3f_l_")]
+    assert len(own) == 18
 
 
 @pytest.mark.parametrize("name,field", [

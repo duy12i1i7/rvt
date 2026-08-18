@@ -1,0 +1,59 @@
+{
+  "combined": {
+    "estimated_total_cpu_hours": 31.95,
+    "estimated_wall_hours_at_12_workers": 2.66,
+    "maximum_candidate_aggregates": 15000,
+    "maximum_candidate_replica_rollouts": 21000,
+    "maximum_selected_events": 7500,
+    "source_episodes": 1500
+  },
+  "generation_performed": 0,
+  "layout_diversity_used_to_change_operational_parameters": false,
+  "operational_parameters_unchanged": {
+    "chunk_size": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads": 1,
+    "replica_counts": {
+      "F8": 3,
+      "F9": 3,
+      "others": 1
+    },
+    "source_budget": {
+      "train": 1200,
+      "validation": 300
+    },
+    "workers": 12
+  },
+  "phase9d_v3f_l_compute_budget_final_sha256": "51e142b23d3486399ed10c9208dc3a4dc189dff84b7fa2941a8d765283559697",
+  "planned_total_unchanged": true,
+  "planning_only": true,
+  "previous_planned_total_replica_rollouts": 21000,
+  "schema_version": "rvt-phase9d-v3f-l-compute-budget/v1",
+  "v3_train": {
+    "episodes_R1": 960,
+    "episodes_R3": 240,
+    "estimated_stage_a_cpu_hours": 0.914,
+    "estimated_stage_b_cpu_hours": 24.65,
+    "estimated_total_cpu_hours": 25.56,
+    "estimated_wall_hours_at_12_workers": 2.13,
+    "layouts": 20,
+    "maximum_candidate_aggregates": 12000,
+    "maximum_candidate_replica_rollouts": 16800,
+    "maximum_selected_events": 6000,
+    "source_episodes": 1200
+  },
+  "v3_validation": {
+    "episodes_R1": 240,
+    "episodes_R3": 60,
+    "estimated_stage_a_cpu_hours": 0.229,
+    "estimated_stage_b_cpu_hours": 6.16,
+    "estimated_total_cpu_hours": 6.39,
+    "estimated_wall_hours_at_12_workers": 0.53,
+    "layouts": 10,
+    "maximum_candidate_aggregates": 3000,
+    "maximum_candidate_replica_rollouts": 4200,
+    "maximum_selected_events": 1500,
+    "source_episodes": 300
+  },
+  "why_unchanged": "a layout-diversity change redistributes the same 1200 TRAIN and 300 VALIDATION source episodes across more distinct geometries. Family and N distributions, the K = 5 selection cap, the two-candidate rule and the replica protocol are all untouched, so every planned cap is identical."
+}

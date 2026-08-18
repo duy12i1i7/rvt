@@ -1,0 +1,42 @@
+{
+  "affects_held_out_property": false,
+  "affects_scientific_budget": false,
+  "is_outcome_tuning": false,
+  "owner_decision": {
+    "add_train_only_variant": 0.22,
+    "expected_train_layouts": 20,
+    "expected_validation_layouts": 10,
+    "forbidden_offsets": [
+      0.76,
+      0.87
+    ],
+    "reserve_offsets": [
+      0.33
+    ],
+    "v3_train_offsets": [
+      0.22,
+      0.54
+    ],
+    "v3_validation_offsets": [
+      0.65
+    ]
+  },
+  "owner_rationale": [
+    "restore the prospectively intended Study-A TRAIN layout diversity of 20 layouts",
+    "retain 10 held-out VALIDATION layouts",
+    "keep the source budget unchanged at 1200 TRAIN and 300 VALIDATION episodes"
+  ],
+  "phase9d_v3f_l_owner_layout_addendum_sha256": "120dd57dcb27e29fcdb17fdcb959e75380361b58ee64bc47261487c4d4e2080a",
+  "previous_v3f_assignment_preserved_as": "SUPERSEDED_PRE_GENERATION_CAPACITY_VERSION",
+  "previous_v3f_registry_sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+  "previous_version_pretended_never_to_have_existed": false,
+  "prospective": true,
+  "schema_version": "rvt-phase9d-v3f-l-owner-layout-addendum/v1",
+  "scope": "LAYOUT_CAPACITY_ONLY -- no scientific target, replica, row, loss or metric decision is reopened",
+  "supersedes_phase": "PHASE_9D_V3F layout capacity assignment only",
+  "why_not_outcome_tuning": [
+    "no V3 outcome exists: 0 episodes executed, 0 rollouts, 0 rows, 0 labels observed",
+    "the decision is taken before V3 implementation, qualification, generation, training and any validation outcome",
+    "it changes only how many distinct geometries the fixed episode budget is spread across, not what is measured"
+  ]
+}

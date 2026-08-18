@@ -1,0 +1,56 @@
+{
+  "authoritative_inputs_for_v3_implementation": {
+    "exclusion_union": {
+      "identities": 1880,
+      "sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d"
+    },
+    "layout_split_registry": {
+      "artifact": "results/rvt_fd24/phase9d_v3f_l_layout_split_registry_v2.json",
+      "name": "V3_LAYOUT_SPLIT_REGISTRY_V2",
+      "sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+    },
+    "train_manifest": {
+      "artifact": "results/rvt_fd24/phase9d_v3f_l_train_manifest_dry_final_v1.json",
+      "layouts": 20,
+      "sha256": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+      "source_episodes": 1200
+    },
+    "validation_manifest": {
+      "artifact": "results/rvt_fd24/phase9d_v3f_l_validation_manifest_dry_final_v1.json",
+      "layouts": 10,
+      "sha256": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+      "source_episodes": 300
+    }
+  },
+  "fail_closed_requirement": {
+    "mechanism": "compare the registry hash carried by the manifest against the authoritative v3_layout_split_registry_v2_sha256 and raise rather than warn",
+    "must_not_silently_downgrade": true,
+    "must_not_silently_upgrade": true,
+    "rule": "the executable V3 implementation MUST refuse to begin official generation if handed the superseded 10-layout TRAIN registry or any manifest citing it"
+  },
+  "implemented_in_this_phase": 0,
+  "phase9d_v3f_l_implementation_handoff_sha256": "85b88843a6616c6a01d64d552e5bb9c25f337b8c4960c8ea81766a2b1bc5c3d7",
+  "schema_version": "rvt-phase9d-v3f-l-implementation-handoff/v1",
+  "split_authority_requirement": {
+    "rule": "the dataset split MUST be read from the manifest's v3_split field and the registry membership, never parsed from layout_id",
+    "worked_hazard": "V3 TRAIN legitimately contains both validation-f1-01 and train-f1-02"
+  },
+  "superseded_inputs_that_must_be_refused": [
+    {
+      "name": "V3_LAYOUT_SPLIT_REGISTRY_V1",
+      "reason": "10-layout TRAIN capacity version",
+      "sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae"
+    },
+    {
+      "artifact": "results/rvt_fd24/phase9d_v3f_train_manifest_dry_v1.json",
+      "name": "V3F train manifest dry v1",
+      "reason": "built on the superseded 10-layout TRAIN registry"
+    },
+    {
+      "artifact": "results/rvt_fd24/phase9d_v3f_validation_manifest_dry_v1.json",
+      "name": "V3F validation manifest dry v1",
+      "reason": "cites the superseded registry root"
+    }
+  ],
+  "unchanged_implementation_requirements": "results/rvt_fd24/phase9d_v3f_implementation_requirements_v1.json remains authoritative for the nine additive capabilities I1-I9"
+}

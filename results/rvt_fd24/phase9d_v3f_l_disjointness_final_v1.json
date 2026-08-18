@@ -1,0 +1,209 @@
+{
+  "all_disjoint": true,
+  "axes": [
+    {
+      "axis": "v3_train vs v3_validation (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v3_validation (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v3_validation (layout_sha256)",
+      "left": 20,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_train vs v3_validation (layout_id)",
+      "left": 20,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_train vs v3_validation (seed/stream identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v2_train (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_train vs v2_validation (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_validation vs v2_train (identity)",
+      "left": 300,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_validation vs v2_validation (identity)",
+      "left": 300,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v2_train (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_train vs v2_validation (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_validation vs v2_train (episode_id)",
+      "left": 300,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_validation vs v2_validation (episode_id)",
+      "left": 300,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v2_train (layout_sha256)",
+      "left": 20,
+      "overlap": 0,
+      "right": 20
+    },
+    {
+      "axis": "v3_train vs v2_validation (layout_sha256)",
+      "left": 20,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_validation vs v2_train (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 20
+    },
+    {
+      "axis": "v3_validation vs v2_validation (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_train vs v2_train (layout_id)",
+      "left": 20,
+      "overlap": 0,
+      "right": 20
+    },
+    {
+      "axis": "v3_train vs v2_validation (layout_id)",
+      "left": 20,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_validation vs v2_train (layout_id)",
+      "left": 10,
+      "overlap": 0,
+      "right": 20
+    },
+    {
+      "axis": "v3_validation vs v2_validation (layout_id)",
+      "left": 10,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_train vs development exclusion union (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_validation vs development exclusion union (identity)",
+      "left": 300,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_train vs development exclusion union (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_validation vs development exclusion union (episode_id)",
+      "left": 300,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_train vs RESERVE offset 0.33 (layout_sha256)",
+      "left": 20,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_validation vs RESERVE offset 0.33 (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 10
+    }
+  ],
+  "axes_with_nonzero_overlap": [],
+  "covered_development_domains": {
+    "h1r_pilot": "inside the V2 comprehensive union",
+    "qualification_canary_identities": "inside the V2 comprehensive union",
+    "v2_dataset_audits": "read-only over sealed V2 data; created no scientific identity",
+    "v2_gate7_forensic_identities": "the forensic replay drew only from official V2 TRAIN and VALIDATION identities, both covered above, and published 0 rows",
+    "v2_train": "compiled from the frozen job manifest",
+    "v2_validation": "compiled from the frozen job manifest",
+    "v2i_canaries": "inside the V2 comprehensive union",
+    "v2i_rc_canaries": "inside the V2 comprehensive union",
+    "v2q_canaries": "inside the V2 comprehensive union",
+    "v2qr_canaries": "inside the V2 comprehensive union",
+    "v3d_design_evidence": "analysis over committed artifacts only; executed no scientific identity"
+  },
+  "identity_key": [
+    "study",
+    "split",
+    "family",
+    "team_size",
+    "layout_id",
+    "source_policy",
+    "episode_id",
+    "seed_identity"
+  ],
+  "phase9d_v3f_l_disjointness_final_sha256": "0e08c393e8279a94b641c8a466e5df6671e755397e1c92420c5e483362ebb4a1",
+  "schema_version": "rvt-phase9d-v3f-l-disjointness/v1",
+  "sealed_final_domain": {
+    "final_test_identities_enumerated": 0,
+    "final_test_outcomes_inspected": 0,
+    "near_final_variant_official_v3_membership": 0,
+    "proof_mechanism": "generate_layouts raises PermissionError for final_test without sealed authorization and derive_seed refuses final-test derivation. The V3 offsets 0.22, 0.54 and 0.65 are separated from the final-test base offset 0.79 by the generator's own arithmetic."
+  },
+  "stronger_than_previous_audit": {
+    "added": [
+      "layout_id axes across every split pair",
+      "seed/stream identity between the two V3 splits",
+      "RESERVE offset 0.33 exclusion from both V3 splits"
+    ],
+    "current_axes": 27,
+    "previous_axes": 19
+  },
+  "total_axes": 27
+}

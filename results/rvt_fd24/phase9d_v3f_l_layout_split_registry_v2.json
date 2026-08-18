@@ -1,0 +1,612 @@
+{
+  "L8_split_authority_rule": {
+    "regression_test": "tests/test_phase9d_v3f_l_layout_capacity.py",
+    "split_is_determined_by": [
+      "study",
+      "split",
+      "manifest identity",
+      "layout registry membership"
+    ],
+    "split_is_never_determined_by": [
+      "layout_id prefix",
+      "layout_id substring",
+      "the string 'train'",
+      "the string 'validation'",
+      "generator_split_namespace"
+    ],
+    "worked_hazard": "V3 TRAIN contains layout validation-f1-01 (from offset 0.54) alongside train-f1-02 (from offset 0.22). A string parser would classify the first as VALIDATION and the second as TRAIN; both are TRAIN."
+  },
+  "additive": true,
+  "assignment": {
+    "FORBIDDEN": {
+      "final_identities_enumerated": 0,
+      "official_v3_membership": 0,
+      "offsets": [
+        0.76,
+        0.87
+      ],
+      "reason": "0.76 sits approximately 0.03 from the final-test base offset 0.79 and 0.87 crosses it; both remain forbidden"
+    },
+    "RESERVE": {
+      "layout_ids": [
+        "train-f1-03",
+        "train-f10-03",
+        "train-f2-03",
+        "train-f3-03",
+        "train-f4-03",
+        "train-f5-03",
+        "train-f6-03",
+        "train-f7-03",
+        "train-f8-03",
+        "train-f9-03"
+      ],
+      "layouts": 10,
+      "official_train_membership": 0,
+      "official_validation_membership": 0,
+      "offsets": [
+        0.33
+      ],
+      "rule": "UNUSED_RESERVE -- must not be included for extra diversity"
+    },
+    "TRAIN": {
+      "layout_ids": [
+        "train-f1-02",
+        "train-f10-02",
+        "train-f2-02",
+        "train-f3-02",
+        "train-f4-02",
+        "train-f5-02",
+        "train-f6-02",
+        "train-f7-02",
+        "train-f8-02",
+        "train-f9-02",
+        "validation-f1-01",
+        "validation-f10-01",
+        "validation-f2-01",
+        "validation-f3-01",
+        "validation-f4-01",
+        "validation-f5-01",
+        "validation-f6-01",
+        "validation-f7-01",
+        "validation-f8-01",
+        "validation-f9-01"
+      ],
+      "layouts": 20,
+      "offsets": [
+        0.22,
+        0.54
+      ]
+    },
+    "VALIDATION": {
+      "layout_ids": [
+        "validation-f1-02",
+        "validation-f10-02",
+        "validation-f2-02",
+        "validation-f3-02",
+        "validation-f4-02",
+        "validation-f5-02",
+        "validation-f6-02",
+        "validation-f7-02",
+        "validation-f8-02",
+        "validation-f9-02"
+      ],
+      "layouts": 10,
+      "offsets": [
+        0.65
+      ]
+    }
+  },
+  "frozen_v2_scenario_code_modified": false,
+  "generator_authority": "rvt_swarm/phase8/scenario.py",
+  "generator_sha256": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+  "generator_split_offsets": {
+    "final_test": 0.79,
+    "train": 0.0,
+    "validation": 0.43
+  },
+  "generator_unchanged": true,
+  "layout_records": {
+    "RESERVE": [
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F1",
+        "generation_seed_commitment": "ce10ad1ffee01dde4953359850de040e3de25a3182c0fcdecd42638b67759d72",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "6b65015ae1f781426db4992dfb621dd5145caa6e647a2bcad639cd33fd2cb146",
+        "layout_id": "train-f1-03",
+        "layout_sha256": "6b65015ae1f781426db4992dfb621dd5145caa6e647a2bcad639cd33fd2cb146",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "51ca41ac2fac3ade31af3428fcc633ae7b74805902d13e801430a26919b13333",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 120.0,
+        "family": "F2",
+        "generation_seed_commitment": "be7d1155ef1df33d5aae1b02bed336e4c259741a0335360772732f18631812ce",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "bd90ac960bacbdebb222f63cbb7dc3b7b40aaea25d118754eba29116a1b26475",
+        "layout_id": "train-f2-03",
+        "layout_sha256": "bd90ac960bacbdebb222f63cbb7dc3b7b40aaea25d118754eba29116a1b26475",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "2b6c7e771aaad087c722ccc0e8e7b91a21439b8140fded5c4ece4802ebfef0ef",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 135.0,
+        "family": "F3",
+        "generation_seed_commitment": "a93a2064b694b5c0ffad1eb25beb103a9a11f271bc6a360b2282018cece4587e",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "3482a5f607b836b0363f2a18b7cc905b819fd6470ecaa2c54c3381467c65d587",
+        "layout_id": "train-f3-03",
+        "layout_sha256": "3482a5f607b836b0363f2a18b7cc905b819fd6470ecaa2c54c3381467c65d587",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "2482cda39c4df9e36ce90b83bf3065c7e7d60a581eff49b3820af199f44a4bf9",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F4",
+        "generation_seed_commitment": "63b4f353ce36089e7997c43e3cbdfecea90af7e4fff0ccb0d422c58bf01a034d",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "32bc8a6bc060192bd64117b72a7eba91d25b336a8e26f7b0e9c0482b5fcf1547",
+        "layout_id": "train-f4-03",
+        "layout_sha256": "32bc8a6bc060192bd64117b72a7eba91d25b336a8e26f7b0e9c0482b5fcf1547",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "107723bca76c78407a939d09a8526052927b4bea7f9aa4c59ff580228908af71",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F5",
+        "generation_seed_commitment": "d4a3d63b1d481520a69e0d08470245ec32219e7974f34c46c1285d171537e3e0",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "d091acf3a4554f30f71a20852329244b1066ba642ef39cce5f10a05b100cbe4e",
+        "layout_id": "train-f5-03",
+        "layout_sha256": "d091acf3a4554f30f71a20852329244b1066ba642ef39cce5f10a05b100cbe4e",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "540ccdccadc897e84dae73e8f3fb1b0fb2006ffd66e3e83512a4c5dba7d14ee7",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 130.0,
+        "family": "F6",
+        "generation_seed_commitment": "7ec3d1657207fee7993779e959bd0a0ebd7c6ca78d6f367866b53c74a03655c6",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "162537f3204f6017931dcbd3f8871e7318c6bca6346d1c7ea540c69d74eee8e2",
+        "layout_id": "train-f6-03",
+        "layout_sha256": "162537f3204f6017931dcbd3f8871e7318c6bca6346d1c7ea540c69d74eee8e2",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "7d95d680e5a46d5eb3dbddda3eeaf18e76f89c2334763d2b19b58a6b53a48a9a",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 110.0,
+        "family": "F7",
+        "generation_seed_commitment": "18eab848c8ad2d52a53253754d1b84496442e983668baba8751f390c9de76feb",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "ce4205cc363e9f2f197c0e6cd0e435547db64f8a233877049df5640f8cb74a0f",
+        "layout_id": "train-f7-03",
+        "layout_sha256": "ce4205cc363e9f2f197c0e6cd0e435547db64f8a233877049df5640f8cb74a0f",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "043edc7e6aa1b161b34f87bf010b843d54249b75d7dc6675355490cb17e5f6bd",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F8",
+        "generation_seed_commitment": "164b800340c3c654b71858a5be3350c65c24b3f7b759f86560cdfcbf354fa33a",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "4eeb24f37d7f3c738d59537aca4a2d6d86b8394a47864b247da2dd5b2be5a623",
+        "layout_id": "train-f8-03",
+        "layout_sha256": "4eeb24f37d7f3c738d59537aca4a2d6d86b8394a47864b247da2dd5b2be5a623",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "83fb74368eb4c96f1eaa9616cd94e7bf3cb528dc2868c1f41bb6b67335928d3b",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F9",
+        "generation_seed_commitment": "6dfff92ec089849bb38716f616d70523b8318cdaa1093cda0d217b73ef24fac8",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "4e0889c9de9379b5daa789b247d9d307d57f2cf43303249eab93817ef97b4302",
+        "layout_id": "train-f9-03",
+        "layout_sha256": "4e0889c9de9379b5daa789b247d9d307d57f2cf43303249eab93817ef97b4302",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "c9ef7b0d0b640c30864adb247fc1ba1655c4627bd15945ff94a053a2121b4b97",
+        "variant_index": 3
+      },
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F10",
+        "generation_seed_commitment": "a52101bd8bc2ae9cf893e92edd76d1f1461ab7458afa92675b3ff8a916c95672",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "40ef21bc5c376445e38d665803f4465fb0764f96acba645f0a381e45d9772068",
+        "layout_id": "train-f10-03",
+        "layout_sha256": "40ef21bc5c376445e38d665803f4465fb0764f96acba645f0a381e45d9772068",
+        "offset": 0.33,
+        "parameter_tuple_sha256": "0a8321fab0b8f04bce5e4073139eb4532cfa1d0876760d401571d33314502319",
+        "variant_index": 3
+      }
+    ],
+    "TRAIN": [
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F1",
+        "generation_seed_commitment": "a7032b879cca703c6bc7c4f367a05707d09ec8fd854502ed57cf37f06878fbc8",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "91bed98922e18e31044f2ccc81056464ce2dc700c249ce6f17cae72acf7114e5",
+        "layout_id": "validation-f1-01",
+        "layout_sha256": "91bed98922e18e31044f2ccc81056464ce2dc700c249ce6f17cae72acf7114e5",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "b921ae27097434d8c48b20e68bd47b6225322b2be29cf94775a9ffeb1c948db4",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 120.0,
+        "family": "F2",
+        "generation_seed_commitment": "7795ffe28f965a55ecda4dd42ede62e220322370641ea80d0524200eb6067cfc",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "1e52acd7bca02655d411cf7b50fc1b408542190313e072b1e0ed0015ce907389",
+        "layout_id": "validation-f2-01",
+        "layout_sha256": "1e52acd7bca02655d411cf7b50fc1b408542190313e072b1e0ed0015ce907389",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "af7903216745aa93622c53fb2d514c66cc2362c6244fda543f3b605b49180a8a",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 135.0,
+        "family": "F3",
+        "generation_seed_commitment": "f53189a3902d631e4610ccc2c90f0273c8494647fe5bc13519fd97c50319704b",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "e78746bdde73f71a2f63a4afa2eb6342ac6390005b65c7e1bbcf9b1fd7af9699",
+        "layout_id": "validation-f3-01",
+        "layout_sha256": "e78746bdde73f71a2f63a4afa2eb6342ac6390005b65c7e1bbcf9b1fd7af9699",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "3210165ce64c9bc58c9f1fbcb68526fc0e619a612ccc893d7434fed73416e988",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F4",
+        "generation_seed_commitment": "cff8b19b3daac929911d1c642dfa0826852e1113abbf5c6579040575d37ed6b2",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "a8906d149318c67109fbe3e6b5580681326c496c1ee2b485f07363aa65cae77c",
+        "layout_id": "validation-f4-01",
+        "layout_sha256": "a8906d149318c67109fbe3e6b5580681326c496c1ee2b485f07363aa65cae77c",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "b355324be70a69303a9fe7bd8dd584803ec7bf73ad88e656531c073985edaaaa",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F5",
+        "generation_seed_commitment": "bfdca5553ed9fbe5c1dbda10e93a751ad9ca310f75561175a6e683ee8cde1ee7",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "b3d355153cc489ffc8c752339f03a89881303c81942e4158372681b887835cbc",
+        "layout_id": "validation-f5-01",
+        "layout_sha256": "b3d355153cc489ffc8c752339f03a89881303c81942e4158372681b887835cbc",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "876836a9d1068d7f5ad6a2d839ddad63c1ab273305f6fe8b61d8fed60a9e06c1",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 130.0,
+        "family": "F6",
+        "generation_seed_commitment": "25bd2e2c46d7826f06fc31e5e462ba2cb5b456c67503b17e63a4611a0fc822c5",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "2d49db8d8cd54d77103c18ef1f4201dcfbcfb195fb41fa206e7c3fd1a046875c",
+        "layout_id": "validation-f6-01",
+        "layout_sha256": "2d49db8d8cd54d77103c18ef1f4201dcfbcfb195fb41fa206e7c3fd1a046875c",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "2321c3403309ee66357c7491201d2421f74f5f378440c8a161d0c75465128413",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 110.0,
+        "family": "F7",
+        "generation_seed_commitment": "1fa2e69cdeb77fed72c7cb08b89970ee3d1caf676d3305e2d90c617d0ebe213b",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "92c3c6d26605c78ef24867beadedf4ddebc1a7ac32cbe0f25eee7fc93a1d1aa6",
+        "layout_id": "validation-f7-01",
+        "layout_sha256": "92c3c6d26605c78ef24867beadedf4ddebc1a7ac32cbe0f25eee7fc93a1d1aa6",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "980197c3ff6b136e748368da1df3ac5256bda5af2f6e49fc117a0fc7c2c6b3cd",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F8",
+        "generation_seed_commitment": "6de6d7f3387edd6a8f8d68b75100d08223dc0297083008e69c69bd95669db1f9",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "37a6ad334d3ac5c4fe3537c6295fe51afa03d8c069f393846b6085dd5dea6d97",
+        "layout_id": "validation-f8-01",
+        "layout_sha256": "37a6ad334d3ac5c4fe3537c6295fe51afa03d8c069f393846b6085dd5dea6d97",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "08f346244c2cbb88aac7949845e8d3c34be86eb2243cdf721cef8ae8f0cf1928",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F9",
+        "generation_seed_commitment": "adefdbeab1c89ed9ab721de724bc2c11fde9f21fd72400bc788f311ef9fa2f5e",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "4052960bf3f85aa60f785dc3d36a84f52ac6d515931f9bbcdf1e242bc07910d9",
+        "layout_id": "validation-f9-01",
+        "layout_sha256": "4052960bf3f85aa60f785dc3d36a84f52ac6d515931f9bbcdf1e242bc07910d9",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "e256bd2e9b4e2c27a60acc237c48fb561eef2ac99b1dfaf96543d0a29ebbe2d7",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F10",
+        "generation_seed_commitment": "fce367c37319bc17996ce4abae572c7fdebe044cde715ac7f256c09daa992bab",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "762beb45a32cc8240a1d390d34a13ced84fe848257bc4cd55ea52d127ec71356",
+        "layout_id": "validation-f10-01",
+        "layout_sha256": "762beb45a32cc8240a1d390d34a13ced84fe848257bc4cd55ea52d127ec71356",
+        "offset": 0.54,
+        "parameter_tuple_sha256": "d0160e4b2292fc6ab2df08b078813d04c364c07243c35a3b14dccdc56737aa7c",
+        "variant_index": 1
+      },
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F1",
+        "generation_seed_commitment": "81b51ee602a9dfffe32f773dbf3f9c395a3d0f314a1b351da64d76a1a721ad57",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "10764946fa2bc5c66bb38ef1c149ddc45761172df02a7b3d1ff014592b02e563",
+        "layout_id": "train-f1-02",
+        "layout_sha256": "10764946fa2bc5c66bb38ef1c149ddc45761172df02a7b3d1ff014592b02e563",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "0133c8634eba547d62b3eca243adfe41ebb016578dab09e074e2e7cc6ad7d2d8",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 120.0,
+        "family": "F2",
+        "generation_seed_commitment": "03b838e1df50d450bb3fb8cd8e15414eece3e80c4951b6923ba538f211f97f81",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "a239127f73772a4091a5b4e9095b5049a957b4b5719c10a83e1aec72f93e54ca",
+        "layout_id": "train-f2-02",
+        "layout_sha256": "a239127f73772a4091a5b4e9095b5049a957b4b5719c10a83e1aec72f93e54ca",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "7ff1d1bc66b02bb1e91fdc3232074f859ca8e9eabdcd11666f6e4db2318fb354",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 135.0,
+        "family": "F3",
+        "generation_seed_commitment": "da8b49ad32aab81dcc6ea360670251277545b1564ab17ae4bf5acbf6a9c9ea0f",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "198166d2b8f623cc678063a49cf87a6798287e90246da2e27b9bfd739f2b5be3",
+        "layout_id": "train-f3-02",
+        "layout_sha256": "198166d2b8f623cc678063a49cf87a6798287e90246da2e27b9bfd739f2b5be3",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "763738fe05ba0e64d782a5697b6bd34bfc1afd870d8b89a219c90323f0976c15",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F4",
+        "generation_seed_commitment": "63d2f802a96fdb22310654746d12215271d3b1779411ddff65c2c9069331a590",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "9bc14f64459257eb15a0b4acc23d6b9164f5758a12351f8ff2315303aeac40fb",
+        "layout_id": "train-f4-02",
+        "layout_sha256": "9bc14f64459257eb15a0b4acc23d6b9164f5758a12351f8ff2315303aeac40fb",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "83d4ead38160f0f18d49fb445571170f41ff2a8aa48e5aef52d16fcfb4737e84",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F5",
+        "generation_seed_commitment": "8165d820d25bdbb60ba6adec9a60e56a4d39ff8a874953bc55e5d5d4125e7c4d",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "ba6058cd142e8b7f8cc23f9b9fd69068ddb3a52b12572f4903b8a30d449afc9a",
+        "layout_id": "train-f5-02",
+        "layout_sha256": "ba6058cd142e8b7f8cc23f9b9fd69068ddb3a52b12572f4903b8a30d449afc9a",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "0810e901b6e8d51d99098fe2c2fb7b11e9ffddcd57f79c3b88ee2244ff5157ac",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 130.0,
+        "family": "F6",
+        "generation_seed_commitment": "69e693da20b31dad5cb9b540607906ca624909a4b84c22eb0f7eaf2cb942a340",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "045e3b4d14b8d86d11711d02eabcd0eeb11f2d91f5d624d148c3ad24bfe5126c",
+        "layout_id": "train-f6-02",
+        "layout_sha256": "045e3b4d14b8d86d11711d02eabcd0eeb11f2d91f5d624d148c3ad24bfe5126c",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "5784fcad4c2358e338851af97a7c9330b70ff32c7c888d9e0d1eb0afd4be204d",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 110.0,
+        "family": "F7",
+        "generation_seed_commitment": "de1cf76983ce9f5829b9af6c70750af5149772debba579db800c90daa4cb9535",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "fc6de124fc9e309cc17dc6cc90aacb24427e4e3428175894bf2f1e69463102d2",
+        "layout_id": "train-f7-02",
+        "layout_sha256": "fc6de124fc9e309cc17dc6cc90aacb24427e4e3428175894bf2f1e69463102d2",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "f3f39cfaa8493fde80e68a6c53fb0a60c044333153a10e0641acc9d0018025b0",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F8",
+        "generation_seed_commitment": "db892e9c0162cc578fe771a8055206e926ee965fbadbd0c1272bd5c423f49664",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "8534209624238065db4cd75530576542157d2d07df217eb625e164b5bbef1a30",
+        "layout_id": "train-f8-02",
+        "layout_sha256": "8534209624238065db4cd75530576542157d2d07df217eb625e164b5bbef1a30",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "5a2cbbba17e8dd664fe7960e753cc4174498b3bcb9c8ac8922029c82b05a9a2c",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F9",
+        "generation_seed_commitment": "21caee1e459f880f65f2a3c1e5addebafb809ff1f6842f4b2465edfdd3521bce",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "f4ba9743533fd6e8fbfade33a984c64741158c8dbfb68d877b411f191cf8c2bc",
+        "layout_id": "train-f9-02",
+        "layout_sha256": "f4ba9743533fd6e8fbfade33a984c64741158c8dbfb68d877b411f191cf8c2bc",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "46a34e8b21542d87c75a142fca918cd5bdd488a2357931161afd3e031749f6f7",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F10",
+        "generation_seed_commitment": "40d99bb9cd91b080a6b97cbb89a773cf615b840eb85b447d5870cbbc9b1cb011",
+        "generator_split_namespace": "train",
+        "geometry_sha256": "f5e8f514c1f421568131c169ccb269891e13e0b060697b217f8193eb15c0e1f4",
+        "layout_id": "train-f10-02",
+        "layout_sha256": "f5e8f514c1f421568131c169ccb269891e13e0b060697b217f8193eb15c0e1f4",
+        "offset": 0.22,
+        "parameter_tuple_sha256": "347c9e88108e11f1443e513d478972a9d23aac8bacf646b5bf40cbf2562e6ab1",
+        "variant_index": 2
+      }
+    ],
+    "VALIDATION": [
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F1",
+        "generation_seed_commitment": "e051dba16991ed190d7d27190d6a640cee0ef062e7255e915709b4edda86f309",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "f208b20ada5a2ff1d891f80c7eaa90951cb9a9ad73dd0315b25cb5898f212c6e",
+        "layout_id": "validation-f1-02",
+        "layout_sha256": "f208b20ada5a2ff1d891f80c7eaa90951cb9a9ad73dd0315b25cb5898f212c6e",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "6dd41b654f746cedd0fd5a63f523fe0038c64aa207cc8b4e8016011135734fc0",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 120.0,
+        "family": "F2",
+        "generation_seed_commitment": "736a6e7bfbab34d338c5aaabc04bf9f1b786aca2525f2af6ba3a15512377fba6",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "f6458ebc902ac9c87b44395462789aab56e28c35ad3cd928898e1394ca3f00e3",
+        "layout_id": "validation-f2-02",
+        "layout_sha256": "f6458ebc902ac9c87b44395462789aab56e28c35ad3cd928898e1394ca3f00e3",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "1fcc03874d69c8353aae20654c7cc53ae0a5a530b661d5dea751dfa205e909d0",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 135.0,
+        "family": "F3",
+        "generation_seed_commitment": "66212e78d952f7f1a24ab96936e750b676a0a5a110081491b49356a488f278be",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "740c1b4a5c080a3c1342619f29252ff17ee135020d8bbca17bdcffc4b2474f1d",
+        "layout_id": "validation-f3-02",
+        "layout_sha256": "740c1b4a5c080a3c1342619f29252ff17ee135020d8bbca17bdcffc4b2474f1d",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "c73ae01d08615edd0e6567a6a1072a1c45e0ad8baef077ecc2bf6956bada1613",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F4",
+        "generation_seed_commitment": "af1fc10616f09f89ea78207189ece96e19d782abb0ff6fdaa10062fc3f0e9fad",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "67296fcf8253b0c378ea95cec1f3937a6410c0a567350577521c4d31bcfc5f84",
+        "layout_id": "validation-f4-02",
+        "layout_sha256": "67296fcf8253b0c378ea95cec1f3937a6410c0a567350577521c4d31bcfc5f84",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "68ecd26d1a260cd3a50cf13f0d0d897ff2aebd40402f6e88a292f08743b2d35e",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F5",
+        "generation_seed_commitment": "03919ec8025640ee1f231e791e314a01be0ad140bfccdaddc3cc874f959fbe7a",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "e5cd04058f04bea02360c2192fd38a77168ea1ef7d543a223730eba617aa15f2",
+        "layout_id": "validation-f5-02",
+        "layout_sha256": "e5cd04058f04bea02360c2192fd38a77168ea1ef7d543a223730eba617aa15f2",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "ce9fa0a264ecd2e50903d9f77055480ec869003cc5965c2c4320d4688b6366d1",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 130.0,
+        "family": "F6",
+        "generation_seed_commitment": "8cacffcebc6509cadcf20ae1d406303caa6de58b6bdcf302b5107cf5de685bc9",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "86f1f10044cad110e49ac6543c785d391b84edc3e7f8b8b84f11ece50b831d61",
+        "layout_id": "validation-f6-02",
+        "layout_sha256": "86f1f10044cad110e49ac6543c785d391b84edc3e7f8b8b84f11ece50b831d61",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "0a04c636133abb18145dd73fa945f2ab5ac80dc1734c0f508aba4e64e37d1381",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 110.0,
+        "family": "F7",
+        "generation_seed_commitment": "8bea35995069b8a486975164bba4bb65ac5cb285447a9fd12641a395dfc23766",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "f38c40fc724869f494763cf53e1bb332a6cfe5117ca000fc9bc0779a9aa66e0b",
+        "layout_id": "validation-f7-02",
+        "layout_sha256": "f38c40fc724869f494763cf53e1bb332a6cfe5117ca000fc9bc0779a9aa66e0b",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "c3e312f8f87151f6d40ecbacd0765eb86fa01f634ba461b801a4919ba4ddbaaa",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 180.0,
+        "family": "F8",
+        "generation_seed_commitment": "469d04ba2c16f3ffb93ddbd9e29e99c94036859cd38344fe6b348b0231e086a9",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "9f4a9ca0ccadddbd6359a3c5dd0dc58cd1346900a304f5b6be763484b98a4a2f",
+        "layout_id": "validation-f8-02",
+        "layout_sha256": "9f4a9ca0ccadddbd6359a3c5dd0dc58cd1346900a304f5b6be763484b98a4a2f",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "3238736974c6d69016b4e852e0cb9fab2bd9988767e90a9cf98049919adb2c97",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 150.0,
+        "family": "F9",
+        "generation_seed_commitment": "e618bea3a465095a24d8bd19d339043bd31f1791eaaeee1dd6cfd5df49ca9e7f",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "bf79c1df612817da50a34cf9e24a8d64831467a3ea3a2f8086911647680936d9",
+        "layout_id": "validation-f9-02",
+        "layout_sha256": "bf79c1df612817da50a34cf9e24a8d64831467a3ea3a2f8086911647680936d9",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "624c7b198a23ee9134bf645cb7a30a6ad94a2d83f8ba5cfbe3abe771bc66579c",
+        "variant_index": 2
+      },
+      {
+        "episode_horizon_seconds": 90.0,
+        "family": "F10",
+        "generation_seed_commitment": "5833225a7643975cca151cd732194d98a142b7e6d3b3162f39401e72e7a57e4e",
+        "generator_split_namespace": "validation",
+        "geometry_sha256": "3479eb0152d4c88b48ad64dea9782a4353f83bd446e329e6d1e1a88e25e4a7e1",
+        "layout_id": "validation-f10-02",
+        "layout_sha256": "3479eb0152d4c88b48ad64dea9782a4353f83bd446e329e6d1e1a88e25e4a7e1",
+        "offset": 0.65,
+        "parameter_tuple_sha256": "c9049ac4a5f839d736e4bf2d11c37cc41fd69e887405e9272e3b77dea8b4881f",
+        "variant_index": 2
+      }
+    ]
+  },
+  "name": "V3_LAYOUT_SPLIT_REGISTRY_V2",
+  "offset_formula": "offset = _SPLIT_OFFSETS[generator_split] + 0.11 * variant_index",
+  "phase9d_v3f_l_layout_split_registry_sha256": "b3a98bf6c60d201c635a49056fb42fc400fd0406d8f7cdf5ec1d66db36825614",
+  "schema_version": "rvt-v3-layout-split-registry/v2",
+  "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_GENERATION",
+  "supersedes": {
+    "artifact": "results/rvt_fd24/phase9d_v3f_layout_split_registry_v1.json",
+    "deleted": false,
+    "name": "V3_LAYOUT_SPLIT_REGISTRY_V1",
+    "preserved": true,
+    "reason": "the V1 assignment gave TRAIN only 10 layouts because both authorized offsets were validation-style variants; the owner has since authorized train-split offset 0.22",
+    "rewritten_in_place": false,
+    "sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+    "status": "SUPERSEDED_PRE_GENERATION_CAPACITY_VERSION"
+  },
+  "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+}
