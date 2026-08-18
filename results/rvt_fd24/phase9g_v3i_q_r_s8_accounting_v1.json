@@ -1,0 +1,56 @@
+{
+  "canary_measurement": {
+    "censored_rollouts_remain_in_denominator": true,
+    "denominator": 94,
+    "family_rates": {
+      "F1": 0.0,
+      "F8": 0.0,
+      "F9": 0.0
+    },
+    "gate": "S8",
+    "infrastructure_unresolved_excluded_from_denominator": 0,
+    "maximum_family_rate": 0.05,
+    "maximum_family_rate_observed": 0.0,
+    "maximum_overall_rate": 0.02,
+    "numerator": 0,
+    "overall_rate": 0.0,
+    "result": "PASS",
+    "schema_version": "rvt-recoverability-s8-invalid-rate/v3",
+    "unit": "executed required Target-V4 replica rollout"
+  },
+  "carried_into_v3_by": "results/rvt_fd24/phase9d_v3f_gate_registry_v1.json",
+  "censored_events_hidden_from_s8": 0,
+  "denominator": "executed required Target-V4 replica rollouts",
+  "frozen_threshold_text": "invalid rollout rate is below 0.02 overall and below 0.05 in every family",
+  "gate": "S8",
+  "hidden_denominator_changes": 0,
+  "implementation": "rvt_swarm/phase9g0r/contracts_v3.py::S8InvalidRateAccounting",
+  "inequalities_are_strict": true,
+  "infrastructure_failures_excluded_until_resolved_and_executed": true,
+  "maximum_family_rate": 0.05,
+  "maximum_overall_rate": 0.02,
+  "numerator": "executed required Target-V4 replica rollouts whose scientific disposition is GENERATION_INVALID",
+  "phase9g_v3i_q_r_s8_accounting_sha256": "4c3b3d7617f4c1d1ffca63de3cc627f37cc7e434ac47e9166157183e05aa8732",
+  "schema_version": "rvt-phase9g-v3i-q-r-s8-accounting/v1",
+  "scientific_invalid_rollouts_remain_in_the_denominator": true,
+  "synthetic_qualification": {
+    "boundary_case_is_a_failure": {
+      "overall_rate": 0.02,
+      "result": "FAIL",
+      "why": "the frozen wording is 'below 0.02', not 'at most'"
+    },
+    "exact_fraction_case": {
+      "denominator": 200,
+      "numerator": 3,
+      "overall_rate": 0.015,
+      "result": "PASS"
+    },
+    "infrastructure_excluded_case": {
+      "excluded_from_denominator": 1
+    }
+  },
+  "threshold_authority": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md gate 6",
+  "threshold_authority_sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d",
+  "tuned": false,
+  "unit": "replica rollout"
+}

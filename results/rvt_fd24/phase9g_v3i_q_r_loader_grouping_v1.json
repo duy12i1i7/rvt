@@ -1,0 +1,44 @@
+{
+  "R26_invalid_events": {
+    "audit_records_remain_available_for_s8": true,
+    "loss_or_brier_from_an_incomplete_valid_replica_subset": 0,
+    "masked_training_rows_created": 0,
+    "present_in_loader_membership": false
+  },
+  "R27_determinism": {
+    "frozen_shuffle_depends_on_hash_randomization_or_worker_count": false,
+    "frozen_shuffle_is_reproducible": true,
+    "grouping_identical_under_every_ordering": true,
+    "mechanism": "order is derived by sorting a canonical digest of (seed, decision_event_id)",
+    "membership_identical_under_every_ordering": true,
+    "ordering_may_differ": true,
+    "orderings_compared": [
+      "sequential",
+      "reversed",
+      "frozen shuffle seed 11",
+      "batched, 4 events per batch"
+    ]
+  },
+  "R28_model_head": {
+    "already_candidate_conditioned_scalar_logit_per_robot_local_graph": true,
+    "architecture_preserved": true,
+    "existing_head": "rvt_swarm/fd24/model.py::FD24RecoverabilityHead",
+    "new_model_parameters_added": 0,
+    "training_performed": 0,
+    "v3_probability": "sigmoid(logit)"
+  },
+  "grouping": "decision event -> candidate topology -> N robot-local graph observations, plus the candidate supervision (k, R)",
+  "module": "rvt_swarm/fd24/loader_v3.py",
+  "phase9g_v3i_q_r_loader_grouping_sha256": "a92e5eaeeb12ed39eb5727e212ee1e0fbbde29b1604e35d4867957c3fb43d73f",
+  "refuses": [
+    "a group whose candidate count is not exactly two",
+    "a candidate whose row count is not N",
+    "a V2-schema row",
+    "a row from another split",
+    "a transaction that does not bind the invalidity contract",
+    "a non-labelable pair"
+  ],
+  "robot_rows_are_independent_training_units": false,
+  "schema_version": "rvt-phase9g-v3i-q-r-loader-grouping/v1",
+  "training_performed": 0
+}

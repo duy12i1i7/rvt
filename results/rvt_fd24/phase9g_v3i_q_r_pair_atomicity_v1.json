@@ -1,0 +1,29 @@
+{
+  "R32_row_accounting": {
+    "canary_rows_per_event_observed": {
+      "10": 9,
+      "12": 5,
+      "24": 5
+    },
+    "canary_team_sizes": [
+      5,
+      6,
+      12
+    ],
+    "invalid_pair": 0,
+    "labelable_event": "2 * N",
+    "never": "2 * N * R"
+  },
+  "atomic_under_resume_and_failure": true,
+  "audit_evidence_retained_for_invalid_pairs": true,
+  "partial_publication": 0,
+  "phase9g_v3i_q_r_pair_atomicity_sha256": "f25ab731d32871b604934b287279b83f71c70e5f3ecc7a0228618ef732360a91",
+  "placeholder_rows": 0,
+  "precedence": "infrastructure before scientific invalidity, because an unresolved candidate has not yet produced the disposition invalidity would be read from",
+  "rule": "publish 2 * N robot-local rows iff COMPACT and LINE are both scientifically labelable; otherwise publish 0",
+  "schema_version": "rvt-phase9g-v3i-q-r-pair-atomicity/v1",
+  "semantically_duplicate_status_invented": 0,
+  "status_authority": "rvt_swarm/phase9g0r/contracts.py::reconcile_candidate_pair -- the existing string, not a new one",
+  "status_when_infrastructure": "PENDING_INFRASTRUCTURE_RESOLUTION",
+  "status_when_invalid": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID"
+}

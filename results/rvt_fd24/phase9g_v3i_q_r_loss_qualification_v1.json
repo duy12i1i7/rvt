@@ -1,0 +1,63 @@
+{
+  "R21_weight_invariance": {
+    "N_weighting": 0,
+    "R_weighting": 0,
+    "claim": "W(N=5,R=1) = W(N=16,R=1) = W(N=5,R=3) = W(N=16,R=3)",
+    "identical_logits_and_identical_k_over_R_give_an_identical_event_loss": true,
+    "verified": true
+  },
+  "R22_R1_bce_equivalence": {
+    "R=1,k=0": "BCE target 0",
+    "R=1,k=1": "BCE target 1",
+    "equality": "exact, bit-identical to F.binary_cross_entropy_with_logits",
+    "preserves_deterministic_family_semantics": true
+  },
+  "aggregation_order": [
+    "per robot-local row within one (event, candidate)",
+    "mean over the N robots",
+    "mean over the two candidates, 0.5 each",
+    "one complete decision event carries scientific weight 1",
+    "unweighted mean over decision events"
+  ],
+  "clamping_required": false,
+  "class_weighting": "NONE",
+  "contract": "FROZEN_EVENT_EQUAL_WEIGHT_V3",
+  "contract_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+  "division_by_R": "MANDATORY",
+  "formula": "L_robot = -[k log p + (R-k) log(1-p)] / R",
+  "maximum_deviation_from_the_reference_formula": 1.11e-16,
+  "module": "rvt_swarm/fd24/loss_v3.py",
+  "per_replica_masking": "refused at the interface",
+  "phase9g_v3i_q_r_loss_qualification_sha256": "6da117fad6acecfe361980ace1c607ff5c8fdef0f10dcf53d7a662dc8de8a02e",
+  "positive_class_weight": "NONE",
+  "reference_formula_fixtures_float64": {
+    "k=0,R=1": {
+      "reference": "0.9130152523999526",
+      "stable": "0.9130152523999526"
+    },
+    "k=0,R=3": {
+      "reference": "0.9130152523999526",
+      "stable": "0.9130152523999526"
+    },
+    "k=1,R=1": {
+      "reference": "0.5130152523999526",
+      "stable": "0.5130152523999526"
+    },
+    "k=1,R=3": {
+      "reference": "0.7796819190666193",
+      "stable": "0.7796819190666193"
+    },
+    "k=2,R=3": {
+      "reference": "0.6463485857332859",
+      "stable": "0.646348585733286"
+    },
+    "k=3,R=3": {
+      "reference": "0.5130152523999526",
+      "stable": "0.5130152523999526"
+    }
+  },
+  "schema_version": "rvt-phase9g-v3i-q-r-loss-qualification/v1",
+  "stable_implementation": "BCEWithLogits(z, k/R)",
+  "stochastic_family_reweighting": "NONE",
+  "why": "torch evaluates binary_cross_entropy_with_logits in a log-sum-exp-stable way, so no clamp of p away from 0 or 1 is needed; the loss stays finite at logits of +/- 80"
+}

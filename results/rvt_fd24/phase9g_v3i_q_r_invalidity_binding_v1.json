@@ -1,0 +1,54 @@
+{
+  "binding_rule_recovered_verbatim": "an object MUST bind recoverability_v3_required_replica_invalidity_contract_v1_sha256 if and only if the invalidity rule determines that object's CONTENT or its ADMISSIBILITY",
+  "binding_widened_or_narrowed_by_intuition": false,
+  "binds": [
+    {
+      "implementation": "rvt_swarm/phase9g0r/contracts_v3.py::V3CandidateSupervision.as_dict",
+      "object": "candidate supervision provenance"
+    },
+    {
+      "implementation": "rvt_swarm/phase9g0r/contracts_v3.py::V3PairTransaction.as_dict",
+      "object": "pair transaction provenance"
+    },
+    {
+      "implementation": "rvt_swarm/phase9g0r/writer_v3.py::build_v3_dataset_manifest",
+      "object": "dataset manifest"
+    },
+    {
+      "implementation": "rvt_swarm/phase9g0r/writer_v3.py::seal_v3_dataset",
+      "object": "dataset seal"
+    }
+  ],
+  "contract_name": "RECOVERABILITY_V3_REQUIRED_REPLICA_INVALIDITY_CONTRACT_V1",
+  "does_not_bind": [
+    {
+      "object": "official rollout configuration",
+      "reason": "fixed before any disposition exists"
+    },
+    {
+      "object": "candidate task identity",
+      "reason": "outcome-independent and never mutated after the fact"
+    },
+    {
+      "object": "Row Identity V3",
+      "reason": "the rule decides whether a row exists, not what it is; the hash is in PROHIBITED_ROW_IDENTITY_V3_FIELDS so it cannot be added by accident"
+    }
+  ],
+  "fail_closed": {
+    "function": "rvt_swarm/phase9g0r/contracts_v3.py::require_invalidity_contract",
+    "infers_the_rule_from_observed_data": false,
+    "raises_rather_than_warns": true,
+    "refuses": [
+      "missing",
+      "empty",
+      "any other digest"
+    ],
+    "silently_defaults_to_a_rule": false
+  },
+  "invalidity_contract_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "phase9g_v3i_q_r_invalidity_binding_sha256": "17a4e8a2994c34f47cf81e98fa9d02fda122b2a98ea9029710b7dc5ebd5fea26",
+  "recovered_from": "results/rvt_fd24/phase9d_v3f_i_provenance_binding_v1.json",
+  "row_binding_v3_modified": false,
+  "row_identity_field_count": 16,
+  "schema_version": "rvt-phase9g-v3i-q-r-invalidity-binding/v1"
+}

@@ -1,0 +1,35 @@
+{
+  "R53": {
+    "official_v3_rows": 0,
+    "official_v3_selected_source_states_generated": 0,
+    "official_v3_target_v4_evaluations": 0,
+    "official_v3_train_source_episodes_executed": 0,
+    "official_v3_validation_source_episodes_executed": 0,
+    "qualification_identities_overlapping_official_manifests": 0
+  },
+  "R54_sealed_domains": {
+    "final_test_access": 0,
+    "hp_trials": 0,
+    "study_a_n24_access": 0,
+    "study_b_access": 0,
+    "training": 0
+  },
+  "frozen_v3_science_modified": 0,
+  "historical_gate_7_modified": 0,
+  "official_manifests_remain_dry": {
+    "v3_train": {
+      "executed": 0,
+      "generated": 0,
+      "rows": 0
+    },
+    "v3_validation": {
+      "executed": 0,
+      "generated": 0,
+      "rows": 0
+    }
+  },
+  "phase9g_v3i_q_r_official_data_protection_sha256": "073910fd82cd193c68dd6f137cea7de2187c4077410418b85533d11a12c9ea9b",
+  "qualification_execution_was_on": "study_a_v3_qualification_canary / v3_qualification_canary identities only",
+  "schema_version": "rvt-phase9g-v3i-q-r-official-data-protection/v1",
+  "v2_modified": 0
+}

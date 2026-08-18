@@ -1,0 +1,51 @@
+{
+  "R45_access": {
+    "command": "ssh -o BatchMode=yes 'avis\\avis'@100.71.102.9",
+    "credential_material_recorded": "none",
+    "password_requested_or_used": false,
+    "passwordless": true
+  },
+  "R47_in_image_self_identity": {
+    "all_recomputed_from_artifacts_inside_the_image": true,
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+    "source_commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+  },
+  "R48_full_suite_in_image_on_target": {
+    "failed": 0,
+    "matches_canonical_host_count": true,
+    "passed": 4265,
+    "second_run": {
+      "failed": 0,
+      "passed": 4265,
+      "seconds": 375.94
+    },
+    "seconds": 374.49
+  },
+  "observed": {
+    "cpus": 24,
+    "docker_platform": "linux/amd64",
+    "docker_server": "29.6.1",
+    "memory_gib_total": 31,
+    "whoami": "avis\\avis",
+    "windows_version": "Microsoft Windows [Version 10.0.26200.9168]",
+    "wsl_arch": "x86_64",
+    "wsl_distribution": "Ubuntu-24.04",
+    "wsl_kernel": "6.18.33.2-microsoft-standard-WSL2"
+  },
+  "observed_anomaly": {
+    "detail": "5 isolated runs of that test file (16 passed each) and 2 complete full-suite runs (4265 passed, 0 failed each) followed with no recurrence; the same test also passes repeatedly on the canonical host",
+    "disclosed_rather_than_omitted": true,
+    "event": "one earlier full-suite invocation inside the image terminated with a segmentation fault at tests/test_decentralized_runtime_integration.py::test_09_open_field_generates_far_fewer_epochs_than_a_corridor, about 3% into the run",
+    "memory_pressure": "none observed -- 22 GiB free of 31 GiB",
+    "reason": "the crash point is a pure-Python beacon-ingest loop in rvt_swarm/decentralized/comms.py with no recursion and no native call of its own, which makes it the place the interpreter happened to be rather than the cause",
+    "related_to_v3": false,
+    "reproduced": false,
+    "subsequent_clean_runs": 7
+  },
+  "phase9g_v3i_q_r_windows_target_sha256": "24b3264451291fd37e7bcd0cdaed9367b8bfc5dce10a8b417580056b14ba0a2e",
+  "schema_version": "rvt-phase9g-v3i-q-r-windows-target/v1"
+}

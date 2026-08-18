@@ -1,0 +1,36 @@
+{
+  "authoritative": {
+    "name": "V3_LAYOUT_SPLIT_REGISTRY_V2",
+    "reserve_layouts": 10,
+    "reserve_offsets": [
+      0.33
+    ],
+    "sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+    "train_layouts": 20,
+    "train_offsets": [
+      0.22,
+      0.54
+    ],
+    "validation_layouts": 10,
+    "validation_offsets": [
+      0.65
+    ]
+  },
+  "phase9g_v3i_q_r_registry_guard_sha256": "959f71d0618850e2f31cf9202610d3264b211413d28bf2fbd3c252e236d15689",
+  "schema_version": "rvt-phase9g-v3i-q-r-registry-guard/v1",
+  "superseded": {
+    "implementation": "rvt_swarm/phase9g0r/compiler_v3.py::assert_layout_registry_authoritative",
+    "name": "V3_LAYOUT_SPLIT_REGISTRY_V1",
+    "official_v3_code_behaviour": "HARD_FAIL",
+    "raises_rather_than_warns": true,
+    "sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+    "silently_downgrades": false,
+    "silently_upgrades": false,
+    "status": "SUPERSEDED_PRE_GENERATION_CAPACITY_VERSION"
+  },
+  "unknown_registry_behaviour": "HARD_FAIL",
+  "verified_by": [
+    "tests/test_phase9g_v3i_q_r_probabilistic_v3.py::test_superseded_registry_hard_fails",
+    "tests/test_phase9g_v3i_q_r_probabilistic_v3.py::test_an_unknown_registry_also_hard_fails"
+  ]
+}

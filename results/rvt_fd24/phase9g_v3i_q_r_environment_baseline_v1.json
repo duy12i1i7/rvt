@@ -1,0 +1,65 @@
+{
+  "BASELINE_TEST_FAILURE_NOT_ENVIRONMENT_ONLY": false,
+  "buried_under_later_v3_counts": false,
+  "canonical_environment_authority": {
+    "declares": "PYTHONPATH=/opt/rvt, WORKDIR /opt/rvt, PYTHONHASHSEED=0, OMP/MKL/OPENBLAS/NUMEXPR threads 1, MKL_CBWR=COMPATIBLE, RVT_FD24_NUMERICAL_EXECUTION_PROFILE_V1",
+    "image": "docker/generation/Dockerfile",
+    "pinned_by_test": "tests/test_phase9g_v2q_production_qualification.py asserts 'PYTHONPATH=/opt/rvt' appears in the Dockerfile"
+  },
+  "classification": "TOOL_ENVIRONMENT_ONLY",
+  "classification_conditions": {
+    "exact_tests_pass_in_the_canonical_environment": true,
+    "package_change_needed": false,
+    "science_change_needed": false,
+    "setup_py_or_pyproject_added": false,
+    "source_change_needed": false,
+    "test_assertions_changed": false
+  },
+  "count_reconciliation": "4265 is the suite at the final implementation commit beb65ba6, which is what the image contains and what both the host and the in-image target run report. 4316 is the same suite after this phase's 51 qualification-record tests were added; those tests assert over results/rvt_fd24 artifacts and contain no runtime code, so they postdate the image by construction.",
+  "failing_tests": [
+    "tests/test_phase9g0r_official_binding.py::test_command_resolve_binds_manifest_and_narrow_authorization",
+    "tests/test_phase9g_a1v_validation.py::test_a1v_runner_resolves_exact_empty_validation_boundary"
+  ],
+  "final_qualification_met_on_canonical_host": true,
+  "final_qualification_requirement": "0 failures",
+  "mechanism": "both tests spawn scripts/run_phase9_official_generation.py as a subprocess. The child interpreter puts the script's own directory on sys.path, not the repository root, so `import rvt_swarm` raises ModuleNotFoundError before the script executes a single line.",
+  "owner_freeze_commit_abbreviation_in_prompt": "ff22bd6",
+  "owner_freeze_commit_full_sha": "ff22bd6001722bcdc9f4147fb396b72b8e5c05cc",
+  "phase": "PHASE_9G_V3I_Q_R",
+  "phase9g_v3i_q_r_environment_baseline_sha256": "637c95b370c333e1822caf7ab3239948f96027cb054f6ce1c9e847601389faa1",
+  "prior_authority": {
+    "document": "docs/PHASE9D_H1R_OD_RECOVERABILITY_V2_OWNER_RESOLUTION_REPORT.md",
+    "phase": "PHASE_9D_H1R_OD",
+    "recorded": "the identical two failures, the identical mechanism, and the identical resolution: 3,251/2 without PYTHONPATH versus 3,253/0 in the qualified environment"
+  },
+  "question": "are the two failures reported by the owner-freeze phase TOOL_ENVIRONMENT_ONLY, or a real baseline defect?",
+  "runs": [
+    {
+      "commit": "ff22bd6001722bcdc9f4147fb396b72b8e5c05cc",
+      "failed": 2,
+      "invocation": "ordinary host, no PYTHONPATH",
+      "passed": 4144,
+      "reproduced_on_the_exact_owner_freeze_source_state": true
+    },
+    {
+      "commit": "ff22bd6001722bcdc9f4147fb396b72b8e5c05cc",
+      "failed": 0,
+      "invocation": "canonical environment, PYTHONPATH=/Users/udy/rvt",
+      "passed": 4146
+    },
+    {
+      "commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+      "failed": 0,
+      "invocation": "canonical environment, after V3 implementation",
+      "passed": 4265
+    },
+    {
+      "commit": "PHASE_CLOSURE",
+      "failed": 0,
+      "invocation": "canonical environment, phase closure (qualification artifacts and their 51 tests added after the image was built)",
+      "passed": 4316
+    }
+  ],
+  "schema_version": "rvt-phase9g-v3i-q-r-environment-baseline/v1",
+  "stop_commit_full_sha": "abab5f477340b7f10c042a66cdfc0adef6024258"
+}

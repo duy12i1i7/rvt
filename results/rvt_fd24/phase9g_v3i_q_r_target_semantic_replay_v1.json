@@ -1,0 +1,71 @@
+{
+  "R49_semantic_equality": {
+    "comparison_crosses_operating_system_and_cpu_architecture": true,
+    "identical": true,
+    "new_tolerance_introduced": false,
+    "reference_digest": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "reference_environment": "canonical host, macOS arm64, PYTHONPATH set",
+    "target_digest": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_environment": "the exact image, linux/amd64, Windows 11 Pro -> WSL2 Ubuntu-24.04 -> Docker 29.6.1"
+  },
+  "R50_w1_w12": {
+    "all_equal": true,
+    "reference": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_w1": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_w12": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340"
+  },
+  "R51_target_resume": {
+    "completed_before_failure": 2,
+    "decision_events": 5,
+    "duplicates": 0,
+    "early_abort_scientific_path": 0,
+    "episode_id": "v3-qual-canary/F1/N5/S1_ALWAYS_COMPACT/episode-0",
+    "family": "F1",
+    "identity_mismatch": 0,
+    "partial_supervised_rows": 0,
+    "recomputed_completed_identities": 0,
+    "resume_skipped_completed_identities": 2,
+    "resumed_events": 3,
+    "rows_after_resume": 50,
+    "rows_in_uninterrupted_run": 50,
+    "schema_version": "rvt-recoverability-v3-resume-qualification/v1",
+    "seed_substitution": 0,
+    "semantic_digest_matches_uninterrupted_run": true
+  },
+  "R52_numerical_fixtures": {
+    "bit_identical_mismatches": 0,
+    "brier_fixtures_compared": 18,
+    "float64_repr_compared_not_approximated": true,
+    "forbidden_shortcut_value": 0.027777777777777783,
+    "loss_fixtures_compared": 6,
+    "mandatory_brier_p05_k1_R3_reference": "0.25",
+    "mandatory_brier_p05_k1_R3_target": "0.25"
+  },
+  "phase9g_v3i_q_r_target_semantic_replay_sha256": "aaae4bbe9ba1f479cd157373091ef4bf897a1281270f76f83f0eb33b044bd303",
+  "schema_version": "rvt-phase9g-v3i-q-r-target-semantic-replay/v1",
+  "target_canary_counts": {
+    "decision_events": 19,
+    "disjointness_overlap": 0,
+    "episodes": 4,
+    "rows_published": 270,
+    "s8": {
+      "censored_rollouts_remain_in_denominator": true,
+      "denominator": 94,
+      "family_rates": {
+        "F1": 0.0,
+        "F8": 0.0,
+        "F9": 0.0
+      },
+      "gate": "S8",
+      "infrastructure_unresolved_excluded_from_denominator": 0,
+      "maximum_family_rate": 0.05,
+      "maximum_family_rate_observed": 0.0,
+      "maximum_overall_rate": 0.02,
+      "numerator": 0,
+      "overall_rate": 0.0,
+      "result": "PASS",
+      "schema_version": "rvt-recoverability-s8-invalid-rate/v3",
+      "unit": "executed required Target-V4 replica rollout"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "R29_dry_manifest_guards": {
+    "inner_root_and_outer_artifact_hash_are_distinct": true,
+    "scientific_execution": 0,
+    "v3_train": {
+      "episodes_per_layout": 60,
+      "executed": 0,
+      "generated": 0,
+      "layouts": 20,
+      "manifest_artifact_sha256": "ffb1fe3363908369096f4fd8463fe3a8cd5434cb0a4d48d5a39382df7ced4898",
+      "manifest_root_sha256": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+      "offsets": [
+        0.22,
+        0.54
+      ],
+      "rows": 0,
+      "source_episodes": 1200
+    },
+    "v3_validation": {
+      "episodes_per_layout": 30,
+      "executed": 0,
+      "generated": 0,
+      "layouts": 10,
+      "manifest_artifact_sha256": "72f88a6269358063047bf43edfb304f23e3a26d62bacdb2be07a01cc9c836076",
+      "manifest_root_sha256": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+      "offsets": [
+        0.65
+      ],
+      "rows": 0,
+      "source_episodes": 300
+    }
+  },
+  "R4_source_acquisition": {
+    "K": 5,
+    "candidate_blind": true,
+    "fabricated_future_source_state": 0,
+    "implementation": "the frozen V2 acquisition, aliased not copied",
+    "protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "rule": "REALIZED_TRAJECTORY_UNIFORM_K",
+    "selection": {
+      "1<=M<=5": "all",
+      "M=0": "zero events",
+      "M>5": "floor(j*(M-1)/4), j=0..4"
+    }
+  },
+  "R5_split_authority": {
+    "hazard_layouts_in_train": 10,
+    "regression_test": "tests/test_phase9g_v3i_q_r_probabilistic_v3.py::test_split_comes_from_membership_not_from_the_layout_id_string and ::test_a_string_parser_would_have_got_the_hazard_wrong",
+    "split_determined_by": [
+      "manifest v3_split",
+      "study",
+      "final registry membership"
+    ],
+    "split_never_inferred_from": [
+      "layout_id text"
+    ],
+    "worked_hazard": "validation-f1-01 is a TRAIN layout"
+  },
+  "R6_candidate_task_identity": {
+    "candidates_per_event": [
+      "COMPACT",
+      "LINE"
+    ],
+    "outcome_fields_in_identity": 0,
+    "outcome_independent": true
+  },
+  "forbidden_offsets": [
+    0.76,
+    0.87
+  ],
+  "forbidden_offsets_present": 0,
+  "module": "rvt_swarm/phase9g0r/compiler_v3.py",
+  "phase9g_v3i_q_r_compiler_qualification_sha256": "0b7c81343c7e696117a9c132e7f21c189c3cb5376157e3aafff7c03f66648666",
+  "reserve_offset_0_33": "UNUSED_RESERVE, absent from both splits",
+  "schema_version": "rvt-phase9g-v3i-q-r-compiler-qualification/v1"
+}

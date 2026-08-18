@@ -1,0 +1,37 @@
+{
+  "R34_replica_order_invariance": {
+    "R_identical": true,
+    "candidate_supervision_identical": true,
+    "k_identical": true,
+    "method": "permute the frozen replica-job order while keeping every replica identity",
+    "pair_disposition_identical": true,
+    "published_rows_identical": true,
+    "reference": true,
+    "scientific_digest_identical": true,
+    "target": true
+  },
+  "R35_candidate_order_invariance": {
+    "compared": [
+      "COMPACT then LINE",
+      "LINE then COMPACT"
+    ],
+    "digest_identical": true
+  },
+  "R36_worker_invariance": {
+    "all_identical": true,
+    "reference_w1": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "reference_w12": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_w1": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_w12": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "wall_time_may_differ": true,
+    "wall_time_seconds": {
+      "reference_w1": 222.46,
+      "reference_w12": 148.34,
+      "target_w1": 210.03,
+      "target_w12": 135.39
+    }
+  },
+  "phase9g_v3i_q_r_determinism_sha256": "d1b6ffae709457468678b878b886c5bd9a82754fce1b538e156b3bc1bcd4d3a0",
+  "reference_digest_sha256": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+  "schema_version": "rvt-phase9g-v3i-q-r-determinism/v1"
+}

@@ -1,0 +1,41 @@
+{
+  "canonical_host_suite": {
+    "failed": 0,
+    "passed": 4265
+  },
+  "full_suite_covers_v1_and_v2_replay": true,
+  "guards_reconciled_rather_than_suppressed": [
+    {
+      "assertion_weakened": false,
+      "guard": "strict decentralization audit",
+      "resolution": "the three offline training-side modules are declared in the existing OFFLINE_MODULES mechanism with stated reasons, exactly as `training` already is"
+    },
+    {
+      "assertion_strengthened": true,
+      "assertion_weakened": false,
+      "guard": "Phase 9 / 9B scope guards over rvt_swarm/fd24 and rvt_swarm/decentralized",
+      "resolution": "the single subset check was split into modifications, still bound by the older RB16R/A1S3Z authorizations only, and additions, bound by an explicit three-file V3 set"
+    }
+  ],
+  "historical_gate_7": {
+    "exact_decimal": "0.11132075471698114",
+    "marked_passed": false,
+    "modified": false,
+    "observed": "TRAIN F9/LINE 59/530",
+    "status": "FAILED_FOR_V2",
+    "still_exceeds": true,
+    "threshold": 0.1,
+    "threshold_changed": false,
+    "v3_applicability": "NOT_APPLICABLE_TO_V3_PROBABILISTIC_TARGET",
+    "value": 0.11132075471698114
+  },
+  "phase9g_v3i_q_r_v1_v2_regression_sha256": "334a3ef022413dd412c5e9f6fd737778a5f3e7548a160f1d775a6a96e4a44ed8",
+  "schema_version": "rvt-phase9g-v3i-q-r-v1-v2-regression/v1",
+  "v1_identity_recomputation_unchanged": true,
+  "v1_modules_modified": 0,
+  "v1_v2_modules_importing_v3": 0,
+  "v2_identity_recomputation_unchanged": true,
+  "v2_modules_modified": 0,
+  "v2_rows_modified": 0,
+  "v2_seals_modified": 0
+}

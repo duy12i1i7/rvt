@@ -1,0 +1,162 @@
+{
+  "R55_criteria": [
+    {
+      "criterion": "frozen hashes exact",
+      "met": true
+    },
+    {
+      "criterion": "invalidity contract exact",
+      "met": true
+    },
+    {
+      "criterion": "C7 no-early-abort implemented",
+      "met": true
+    },
+    {
+      "criterion": "superseded layout registry hard fails",
+      "met": true
+    },
+    {
+      "criterion": "20/10 final layout capacity exact",
+      "met": true
+    },
+    {
+      "criterion": "source acquisition exact",
+      "met": true
+    },
+    {
+      "criterion": "replica counts exact",
+      "met": true
+    },
+    {
+      "criterion": "matched randomness exact",
+      "met": true
+    },
+    {
+      "criterion": "all required replicas execute despite scientific invalidity",
+      "met": true
+    },
+    {
+      "criterion": "no invalid Y imputation",
+      "met": true
+    },
+    {
+      "criterion": "(k, R) only for fully valid required replica sets",
+      "met": true
+    },
+    {
+      "criterion": "mixed valid outcomes retained",
+      "met": true
+    },
+    {
+      "criterion": "pair atomicity exact",
+      "met": true
+    },
+    {
+      "criterion": "S8 accounting exact",
+      "met": true
+    },
+    {
+      "criterion": "row identity exact",
+      "met": true
+    },
+    {
+      "criterion": "V1/V2 unchanged",
+      "met": true
+    },
+    {
+      "criterion": "loader event grouped",
+      "met": true
+    },
+    {
+      "criterion": "event-equal N/R invariance proven",
+      "met": true
+    },
+    {
+      "criterion": "Brier exact",
+      "met": true
+    },
+    {
+      "criterion": "canonical host suite 0 failures",
+      "met": true
+    },
+    {
+      "criterion": "image suite 0 failures",
+      "met": true
+    },
+    {
+      "criterion": "reference canary clean",
+      "met": true
+    },
+    {
+      "criterion": "Windows target suite 0 failures",
+      "met": true
+    },
+    {
+      "criterion": "reference == target semantic digest",
+      "met": true
+    },
+    {
+      "criterion": "W1 == W12",
+      "met": true
+    },
+    {
+      "criterion": "failure/resume clean",
+      "met": true
+    },
+    {
+      "criterion": "official V3 data execution = 0",
+      "met": true
+    }
+  ],
+  "canary_semantic_digest_sha256": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+  "criteria_met": 27,
+  "criteria_total": 27,
+  "criteria_unmet": [],
+  "declared_limitations": [
+    "the reference host is arm64 and has no linux/amd64 Docker daemon, so the image was built once natively in the target's WSL2 Docker from a verified clean clone and never rebuilt. R46's save/transfer/load integrity check is therefore not applicable; exactness holds by identity instead, and the reference-versus-target semantic comparison is made between the canonical host environment and that image, which crosses both operating system and CPU architecture.",
+    "one earlier in-image full-suite invocation on target segfaulted at a pre-existing decentralized-runtime test. It did not reproduce in seven subsequent runs, including two complete full-suite runs at 4265/0. It is recorded rather than omitted.",
+    "the live qualification canary produced zero scientific GENERATION_INVALID replicas, so the invalidity semantics are established by the synthetic R13 matrix and by structural reuse of the frozen candidate producer rather than by an observed invalid rollout."
+  ],
+  "final_implementation_commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+  "hp_search_authorized": false,
+  "image_digest": "sha256:eaf52f7495f7eea1c1ae0392a4b688ce9918ecaee53d9be56ce1bb5b9518f169",
+  "implementation_closure_commit": "42d8012249a6773a9e047e4dc0098abdbb7ac3b6",
+  "invalidity_contract_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "owner_freeze_commit_full_sha": "ff22bd6001722bcdc9f4147fb396b72b8e5c05cc",
+  "phase": "PHASE_9G_V3I_Q_R",
+  "phase9g_v3i_q_r_final_readiness_sha256": "55bd93d60144cb49a49af2e9b4064c410af70625b8185cc2a6db278283f2a20a",
+  "recommendation": "AUTHORIZE_OFFICIAL_RECOVERABILITY_V3_TRAIN_GENERATION",
+  "recommendation_scope": "TRAIN ONLY",
+  "schema_version": "rvt-phase9g-v3i-q-r-final-readiness/v1",
+  "suite_results": {
+    "counts_agree_across_host_and_target": true,
+    "final_commit_canonical_host": {
+      "failed": 0,
+      "passed": 4265
+    },
+    "final_commit_in_image_on_windows_target": {
+      "failed": 0,
+      "passed": 4265,
+      "runs": 2
+    },
+    "owner_freeze_commit_canonical_environment": {
+      "failed": 0,
+      "passed": 4146
+    },
+    "owner_freeze_commit_ordinary_host": {
+      "classification": "TOOL_ENVIRONMENT_ONLY",
+      "failed": 2,
+      "passed": 4144
+    },
+    "phase_closure_canonical_host": {
+      "failed": 0,
+      "note": "adds this phase's 51 qualification-record tests, which postdate the image and contain no runtime code",
+      "passed": 4316
+    }
+  },
+  "training_authorized": false,
+  "validation_generation_authorized": false,
+  "verdict": "C",
+  "verdict_text": "Probabilistic Recoverability V3 is implemented additively against all frozen contracts, including required-replica invalidity and no-early-abort semantics; loss, Brier and event weighting are exact; V1 and V2 remain unchanged; the exact implementation image reproduces reference semantics on the Windows target; no official V3 data have been generated."
+}

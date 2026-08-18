@@ -1,0 +1,61 @@
+{
+  "R2_version_dispatch": {
+    "V1": {
+      "modified": false,
+      "path": "rvt_swarm/phase9g0r/compiler.py, producer.py, contracts.py"
+    },
+    "V2": {
+      "modified": false,
+      "path": "rvt_swarm/phase9g0r/compiler_v2.py, producer_v2.py, contracts_v2.py"
+    },
+    "V3": {
+      "additive": true,
+      "new": true,
+      "path": "rvt_swarm/phase9g0r/compiler_v3.py, producer_v3.py, contracts_v3.py, writer_v3.py, canary_v3.py"
+    },
+    "broad_refactor_avoided": true,
+    "training_side": [
+      "rvt_swarm/fd24/loss_v3.py",
+      "rvt_swarm/fd24/metrics_v3.py",
+      "rvt_swarm/fd24/loader_v3.py"
+    ],
+    "v1_v2_modules_importing_v3": 0
+  },
+  "branch": "research/rvt-phase9g-v3i-q-r-probabilistic-implementation-qualification-v1",
+  "final_implementation_commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+  "focused_tests": 119,
+  "frozen_hashes_verified_from_artifacts": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+  },
+  "implementation_closure_commit": "42d8012249a6773a9e047e4dc0098abdbb7ac3b6",
+  "modules_created": 8,
+  "official_v3_data_generated": 0,
+  "owner_freeze_commit_full_sha": "ff22bd6001722bcdc9f4147fb396b72b8e5c05cc",
+  "phase": "PHASE_9G_V3I_Q_R",
+  "phase9g_v3i_q_r_implementation_binding_sha256": "dd4623f5a7fc6fd08870fe79d3dd245ffd888bf7b69b0e48c3b902751443f648",
+  "reuse_rather_than_reimplementation": [
+    {
+      "reused": "rvt_swarm/phase9d_h1r/acquisition_v2.py",
+      "why": "Stage A is frozen unchanged for V3; a second implementation could drift"
+    },
+    {
+      "reused": "rvt_swarm/phase9g0r/producer.py::produce_recoverability_candidate",
+      "why": "it already executes every replica before aggregating, so owner-ratified C7 is structural rather than promised"
+    },
+    {
+      "reused": "rvt_swarm/phase8e/target.py::evaluate_target_v4",
+      "why": "the per-replica outcome contract is unchanged"
+    }
+  ],
+  "schema_version": "rvt-phase9g-v3i-q-r-implementation-binding/v1",
+  "tree_clean_at_branch_creation": true,
+  "verification_method": "both nesting levels recomputed: the inner contract root over the body, then the outer artifact hash over body plus inner"
+}

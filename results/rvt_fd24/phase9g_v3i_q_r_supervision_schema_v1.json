@@ -1,0 +1,47 @@
+{
+  "R": "the frozen replica count for the family, bound through the replica-protocol hash",
+  "R10_replica_evidence_persisted": [
+    "replica_evaluation_id",
+    "replica_index",
+    "matched_disturbance_seed",
+    "disposition",
+    "target_v4_label",
+    "termination_cause",
+    "failed_predicates",
+    "safety_infeasible_robots",
+    "safety_solver_failure_robots",
+    "created_lifecycle",
+    "control_steps",
+    "initial_clone_hash",
+    "final_state_hash",
+    "rollout_configuration_sha256"
+  ],
+  "R11_supervision_rule": {
+    "R_shrink": "FORBIDDEN",
+    "all_valid": "supervision = (k, R)",
+    "any_generation_invalid": "supervision = NONE",
+    "construction_of_a_record_from_an_invalid_candidate": "raises",
+    "partial_k": "FORBIDDEN"
+  },
+  "R33_mixed_outcome_marked_generation_invalid": 0,
+  "R33_mixed_outcome_remained_valid_supervision": true,
+  "binds_invalidity_contract": true,
+  "canary_k_R_distribution": {
+    "k=0,R=1": 1,
+    "k=0,R=3": 18,
+    "k=1,R=1": 9,
+    "k=2,R=3": 1,
+    "k=3,R=3": 9
+  },
+  "canary_mixed_0_lt_k_lt_R": 1,
+  "invalid_replica_target_v4_label": null,
+  "is_scientific_identity": false,
+  "k": "sum over required r of Y_r, only when every required replica is scientifically valid",
+  "k_over_R": "stored, descriptive only, never the training target",
+  "manufactured_bernoulli_outcomes": 0,
+  "mixed_valid_outcomes_are_supervision": true,
+  "observation": "(k, R)",
+  "phase9g_v3i_q_r_supervision_schema_sha256": "abe4bec7d9ca8199b9ed0742875e24797fb10cb5e878fac044e5219de3d293f6",
+  "record_schema": "rvt-recoverability-candidate-supervision/v3",
+  "schema_version": "rvt-phase9g-v3i-q-r-supervision-schema/v1"
+}

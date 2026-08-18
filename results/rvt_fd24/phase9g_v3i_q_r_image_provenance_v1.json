@@ -1,0 +1,46 @@
+{
+  "R46_transport": {
+    "builds_performed": 1,
+    "declared_limitation": true,
+    "note": "the reference host has no linux/amd64 Docker daemon available -- it is an arm64 machine -- so the image was built once, natively, in the target's WSL2 Docker from the clean clone and never rebuilt. Exactness therefore holds by identity rather than by a save/load transport check, and the reference-versus-target comparison is made between the canonical host environment and this image.",
+    "rebuilt_independently_on_target": false
+  },
+  "architecture": "amd64/linux",
+  "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+  "built_from": "a clean clone at the exact final implementation commit, materialized on the target from a verified git bundle",
+  "bundle_sha256": "48ea162b828fd1da4bf8d76988dbf0fe2025192472d7117a21bf55527e0b3763",
+  "bundle_sha256_local_equals_target": true,
+  "commit_read_from_inside_the_running_container": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+  "debian_snapshot": "20260220T214329Z",
+  "declared_revision_label": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+  "dependency_pins": {
+    "numpy": "2.0.2",
+    "pip": "26.0.1",
+    "python": "3.9.6",
+    "torch": "2.8.0+cpu"
+  },
+  "dockerfile": "docker/generation/Dockerfile",
+  "dockerfile_sha256": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
+  "environment": {
+    "MKL_CBWR": "COMPATIBLE",
+    "OMP_NUM_THREADS": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONPATH": "/opt/rvt",
+    "RVT_FD24_NUMERICAL_EXECUTION_PROFILE": "FD24_NUMERICAL_EXECUTION_PROFILE_V1"
+  },
+  "environment_exemptions_inside_the_image": 0,
+  "image_digest": "sha256:eaf52f7495f7eea1c1ae0392a4b688ce9918ecaee53d9be56ce1bb5b9518f169",
+  "image_tag": "rvt-v3i-rc:beb65ba6",
+  "in_image_full_suite": {
+    "failed": 0,
+    "passed": 4265,
+    "runs": 2
+  },
+  "package_upgrades": 0,
+  "phase9g_v3i_q_r_image_provenance_sha256": "ffa90c9a092ef2d451092417df69e858f394433687db25e9a0e50d6a0a853e05",
+  "requirements_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+  "root_fs_layers": 14,
+  "schema_version": "rvt-phase9g-v3i-q-r-image-provenance/v1",
+  "size_bytes": 630916878,
+  "source_commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be"
+}

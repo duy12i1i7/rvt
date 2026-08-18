@@ -1,0 +1,114 @@
+{
+  "N_weighting": 0,
+  "R24_mandatory_fixture": {
+    "R": 3,
+    "incorrect_shortcut_value": 0.027777777777777783,
+    "k": 1,
+    "observed": "0.25",
+    "p": 0.5,
+    "required": 0.25,
+    "separation": 0.2222222222222222
+  },
+  "R25_event_equal_reduction": [
+    "replica evidence -> robot metric",
+    "candidate mean over robots",
+    "event mean over the two candidates",
+    "split mean over events"
+  ],
+  "R_weighting": 0,
+  "all_required_k_R_fixtures": [
+    "(0,1)",
+    "(1,1)",
+    "(0,3)",
+    "(1,3)",
+    "(2,3)",
+    "(3,3)"
+  ],
+  "brier_over_a_valid_subset_of_an_invalid_candidate": "refused",
+  "closed_form": "p^2 - 2*p*(k/R) + k/R",
+  "closed_form_versus_literal_replica_definition": {
+    "p=0.1,k=0,R=1": {
+      "closed_form": "0.010000000000000002",
+      "literal": "0.010000000000000002"
+    },
+    "p=0.1,k=0,R=3": {
+      "closed_form": "0.010000000000000002",
+      "literal": "0.010000000000000002"
+    },
+    "p=0.1,k=1,R=1": {
+      "closed_form": "0.81",
+      "literal": "0.81"
+    },
+    "p=0.1,k=1,R=3": {
+      "closed_form": "0.27666666666666667",
+      "literal": "0.27666666666666667"
+    },
+    "p=0.1,k=2,R=3": {
+      "closed_form": "0.5433333333333333",
+      "literal": "0.5433333333333333"
+    },
+    "p=0.1,k=3,R=3": {
+      "closed_form": "0.81",
+      "literal": "0.81"
+    },
+    "p=0.5,k=0,R=1": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=0,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=1,R=1": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=1,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=2,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=3,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.73,k=0,R=1": {
+      "closed_form": "0.5328999999999999",
+      "literal": "0.5328999999999999"
+    },
+    "p=0.73,k=0,R=3": {
+      "closed_form": "0.5328999999999999",
+      "literal": "0.5328999999999999"
+    },
+    "p=0.73,k=1,R=1": {
+      "closed_form": "0.07289999999999996",
+      "literal": "0.0729"
+    },
+    "p=0.73,k=1,R=3": {
+      "closed_form": "0.3795666666666666",
+      "literal": "0.3795666666666666"
+    },
+    "p=0.73,k=2,R=3": {
+      "closed_form": "0.2262333333333333",
+      "literal": "0.22623333333333331"
+    },
+    "p=0.73,k=3,R=3": {
+      "closed_form": "0.07289999999999996",
+      "literal": "0.0729"
+    }
+  },
+  "contract": "EVENT_EQUAL_REPLICA_NORMALIZED_BRIER_V3",
+  "contract_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+  "forbidden_shortcut": "(p - k/R)^2",
+  "formula": "Brier_robot = (1/R) SUM_r (p - Y_r)^2",
+  "maximum_deviation_float64": 1.67e-16,
+  "module": "rvt_swarm/fd24/metrics_v3.py",
+  "phase9g_v3i_q_r_brier_qualification_sha256": "d719b23195f253e51b769e29941a3316153997b00efc0f5c48a8e8f09502284a",
+  "raw_row_mean_permitted": false,
+  "schema_version": "rvt-phase9g-v3i-q-r-brier-qualification/v1",
+  "shortcut_implemented_anywhere": false,
+  "why_the_closed_form_is_exact": "every Y_r is 0 or 1, so Y_r^2 = Y_r"
+}

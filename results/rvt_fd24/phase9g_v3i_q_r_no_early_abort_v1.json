@@ -1,0 +1,40 @@
+{
+  "canary_planned_versus_executed": {
+    "2_planned": {
+      "events": 5,
+      "executed": 2
+    },
+    "6_planned": {
+      "events": 14,
+      "executed": 6
+    }
+  },
+  "canary_shortfalls": 0,
+  "candidate_ordering_alters_total_execution": false,
+  "implementation": {
+    "runtime_check": "rvt_swarm/phase9g0r/producer_v3.py compares the executed rollout count against planned_required_replica_executions, which is 2 * R and depends on no outcome, and raises a C7 violation on any shortfall",
+    "structural_reason": "the V3 producer calls the frozen rvt_swarm/phase9g0r/producer.py::produce_recoverability_candidate, which iterates the complete replica-job tuple and only breaks on infrastructure retry exhaustion. Scientific invalidity has no branch that could stop it."
+  },
+  "invalid_at_replica_0_still_executes_R": true,
+  "invalid_at_replica_1_still_executes_R": true,
+  "invalid_at_replica_2_still_executes_R": true,
+  "invalidity_contract_hash_unchanged_by_ratification": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "owner_ratified_clause": "C7",
+  "phase9g_v3i_q_r_no_early_abort_sha256": "5d1b10bd37ba5596936cd177f0440f3fef31c370f5218cf0b2335a144202099c",
+  "planned_is_outcome_independent": true,
+  "reasons_recorded": [
+    "exact required-replica accounting",
+    "S8 denominator integrity",
+    "candidate-pair symmetry",
+    "matched-randomness accounting",
+    "no outcome-dependent compute path",
+    "reproducible audit semantics"
+  ],
+  "rule": "EARLY_ABORT_ON_SCIENTIFIC_INVALIDITY = FORBIDDEN",
+  "schema_version": "rvt-phase9g-v3i-q-r-no-early-abort/v1",
+  "statement": "once candidate evaluation begins, all frozen required replicas for COMPACT and for LINE execute, even after an earlier replica has returned GENERATION_INVALID",
+  "verified_by": [
+    "tests/test_phase9g_v3i_q_r_probabilistic_v3.py::test_matrix_5_and_6_every_required_replica_still_executes",
+    "tests/test_phase9g_v3i_q_r_probabilistic_v3.py::test_total_required_executions_do_not_depend_on_when_invalidity_appears"
+  ]
+}

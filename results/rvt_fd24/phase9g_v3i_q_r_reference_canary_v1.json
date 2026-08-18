@@ -1,0 +1,95 @@
+{
+  "R30_qualification_identities_only": {
+    "layouts": [
+      "train-f1-00",
+      "train-f8-00",
+      "train-f9-00"
+    ],
+    "overlap_with_official_v3_episode_identities": 0,
+    "overlap_with_official_v3_layout_geometries": 0,
+    "overlap_with_official_v3_layout_ids": 0,
+    "proved_before_execution": true,
+    "split": "v3_qualification_canary",
+    "study": "study_a_v3_qualification_canary",
+    "why_structurally_disjoint": "the final V3 registry contains only train-f*-02, validation-f*-01 and validation-f*-02; the offset-0.0 variants are not members at all"
+  },
+  "R31_coverage": {
+    "F8_present": true,
+    "F9_present": true,
+    "R1_family": "F1",
+    "both_candidates_every_event": true,
+    "families": [
+      "F1",
+      "F8",
+      "F9"
+    ],
+    "identities_chosen_by_desired_k": false,
+    "real_source_selection": true,
+    "real_target_v4_execution": true,
+    "replica_counts": [
+      1,
+      3
+    ],
+    "team_sizes": [
+      5,
+      6,
+      12
+    ]
+  },
+  "R32_row_accounting": {
+    "decision_events": 19,
+    "episodes": 4,
+    "invalid_pairs": 0,
+    "rows_from_invalid_pairs": 0,
+    "rows_per_event_is_2N": true,
+    "rows_per_event_is_2NR": false,
+    "rows_published": 270
+  },
+  "R33_mixed_outcome": {
+    "example": "k = 2 of R = 3",
+    "marked_generation_invalid_due_to_disagreement": 0,
+    "observed_0_lt_k_lt_R": 1,
+    "treated_as_valid_supervision": true
+  },
+  "R44_digest_covers": [
+    "source event identities",
+    "selected states",
+    "candidate evaluation identities",
+    "replica evaluation identities",
+    "matched streams",
+    "scientific dispositions",
+    "valid Y_r",
+    "candidate labelability",
+    "k",
+    "R",
+    "invalidity-contract hash",
+    "pair disposition",
+    "row IDs",
+    "supervision payload"
+  ],
+  "canary_semantic_digest_sha256": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+  "commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+  "invalidity_path_evidence": "the live canary produced no scientific invalid, so the invalidity semantics are proven by the synthetic R13 matrix and by the structural reuse of the frozen candidate producer, not by this canary",
+  "phase9g_v3i_q_r_reference_canary_sha256": "3a598852feb4a5c71fcd4ebb0d0cb327c473deb5ec56811e93aa2606d8f15ba7",
+  "s8": {
+    "censored_rollouts_remain_in_denominator": true,
+    "denominator": 94,
+    "family_rates": {
+      "F1": 0.0,
+      "F8": 0.0,
+      "F9": 0.0
+    },
+    "gate": "S8",
+    "infrastructure_unresolved_excluded_from_denominator": 0,
+    "maximum_family_rate": 0.05,
+    "maximum_family_rate_observed": 0.0,
+    "maximum_overall_rate": 0.02,
+    "numerator": 0,
+    "overall_rate": 0.0,
+    "result": "PASS",
+    "schema_version": "rvt-recoverability-s8-invalid-rate/v3",
+    "unit": "executed required Target-V4 replica rollout"
+  },
+  "schema_version": "rvt-phase9g-v3i-q-r-reference-canary/v1",
+  "scientific_invalid_replicas_observed": 0
+}

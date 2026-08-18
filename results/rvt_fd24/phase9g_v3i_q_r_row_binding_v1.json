@@ -1,0 +1,61 @@
+{
+  "R16_identity_separation": {
+    "collision_for_an_analogous_source_state": 0,
+    "v1_field_count": 13,
+    "v1_recomputation_unchanged": true,
+    "v2_field_count": 14,
+    "v2_recomputation_unchanged": true,
+    "v3_field_count": 16,
+    "why_no_collision": "the schema string differs and V3 additionally binds the probabilistic-target and replica-protocol hashes"
+  },
+  "R17_writer": {
+    "emits_rows_only_for_labelable_pairs": true,
+    "idempotent_on_replay": true,
+    "may_target_a_v1_or_v2_path": false,
+    "mixed_schema_shard": 0,
+    "namespace": "v3_recoverability",
+    "same_identity_different_payload": "raises",
+    "stores": [
+      "(k, R)",
+      "replica evidence",
+      "target hash",
+      "replica hash",
+      "invalidity-contract provenance"
+    ]
+  },
+  "R18_graph_input": {
+    "centralized_runtime_feature": 0,
+    "decentralization_guard_violations": 0,
+    "edge_features": 19,
+    "global_graph_pooling": 0,
+    "guard": "rvt_swarm/decentralized/guards.py::audit",
+    "joint_swarm_state": 0,
+    "leader_input": 0,
+    "node_features": 35
+  },
+  "field_count": 16,
+  "outcome_independent": true,
+  "phase9g_v3i_q_r_row_binding_sha256": "41415b397f2fec9dcb8a6e72fb6752228ebc1441558940519afa3fdaf81b08fc",
+  "prohibited_and_refused": [
+    "k",
+    "R",
+    "Y_r",
+    "k_over_R",
+    "label",
+    "outcome",
+    "aggregate_label",
+    "disposition",
+    "worker",
+    "retry",
+    "path",
+    "timestamp",
+    "replica_index",
+    "seconds",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256"
+  ],
+  "row_identity_schema": "rvt-recoverability-row-identity/v3",
+  "row_ids_for_invalid_pairs": 0,
+  "rows_exist_only_for_labelable_complete_pairs": true,
+  "schema_version": "rvt-phase9g-v3i-q-r-row-binding/v1",
+  "spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c"
+}
