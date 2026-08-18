@@ -1,0 +1,23 @@
+{
+  "FINAL_V3_EXECUTABLE_SOURCE_COMMIT": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "branch": "research/rvt-phase9g-v3i-q-p-final-image-provenance-v1",
+  "frozen_contracts": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+  },
+  "no_earlier_source_commit_is_acceptable_for_official_v3_generation": true,
+  "phase9g_v3i_q_p_final_source_identity_sha256": "73575737fe86f1b35177c0c4e338276d43f4c90c4526e6337163bb8386dc6043",
+  "schema_version": "rvt-phase9g-v3i-q-p-final-source-identity/v1",
+  "scientific_hash_changed": 0,
+  "superseded_layout_split_registry_v1_sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+  "tracked_files": 1719,
+  "tree_sha1": "70a697cb28dcabccb3d0dc74949158b39c1a149d",
+  "verified_both_nesting_levels": true
+}

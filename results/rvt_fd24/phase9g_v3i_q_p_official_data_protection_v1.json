@@ -1,0 +1,53 @@
+{
+  "P18": {
+    "official_v3_scientific_rows": 0,
+    "official_v3_target_v4_evaluations": 0,
+    "official_v3_train_source_episodes_executed": 0,
+    "official_v3_validation_source_episodes_executed": 0,
+    "qualification_canary_identities_overlapping_official_manifests": 0
+  },
+  "disjointness_overlap_detail": {
+    "episode_identity": 0,
+    "layout_geometry": 0,
+    "layout_id": 0
+  },
+  "executable_code_modified_by_this_phase": 0,
+  "historical_gate_7_modified": 0,
+  "implementation_semantics_modified": 0,
+  "manifests_remain_dry": {
+    "v3_train": {
+      "episodes_per_layout": 60,
+      "executed": 0,
+      "generated": 0,
+      "layouts": 20,
+      "offsets": [
+        0.22,
+        0.54
+      ],
+      "rows": 0,
+      "source_episodes": 1200
+    },
+    "v3_validation": {
+      "episodes_per_layout": 30,
+      "executed": 0,
+      "generated": 0,
+      "layouts": 10,
+      "offsets": [
+        0.65
+      ],
+      "rows": 0,
+      "source_episodes": 300
+    }
+  },
+  "phase9g_v3i_q_p_official_data_protection_sha256": "abd8d9e74367dcd4f95defce964bc69f005da6eae1ba69e683463ae4826f1bd5",
+  "schema_version": "rvt-phase9g-v3i-q-p-official-data-protection/v1",
+  "sealed_domains": {
+    "final_test_access": 0,
+    "hp_trials": 0,
+    "study_a_n24_access": 0,
+    "study_b_access": 0,
+    "training": 0
+  },
+  "v2_modified": 0,
+  "v3_science_modified": 0
+}

@@ -1,0 +1,22 @@
+{
+  "TARGET_RUNTIME_STABILITY_REQUALIFICATION_REQUIRED": false,
+  "classification": "TRANSIENT_NONREPRODUCED_RUNTIME_ANOMALY",
+  "cumulative_non_reproducing_runs": 13,
+  "erased": false,
+  "first_observed_in_phase": "PHASE_9G_V3I_Q_R",
+  "incident": "a single segmentation fault during one in-image full-suite invocation on the Windows target in Phase 9G-V3I-Q-R, at tests/test_decentralized_runtime_integration.py::test_09_open_field_generates_far_fewer_epochs_than_a_corridor",
+  "non_reproducing_runs_at_first_observation": 7,
+  "occurrences_at_first_observation": 1,
+  "phase9g_v3i_q_p_runtime_anomaly_status_sha256": "568931692aa37a4711d5aa316f4a3b70f2595c58acbb4d9cec0a22a53634d561",
+  "related_to_v3": false,
+  "retained_as": "operational history",
+  "schema_version": "rvt-phase9g-v3i-q-p-runtime-anomaly-status/v1",
+  "science_blocker": false,
+  "scientific_protocol_changed": 0,
+  "this_closure": {
+    "additional_in_image_executions": 5,
+    "detail": "one complete 4317/0 suite plus a 171-test focused run, a 256-test V1/V2 regression run, two canary passes (W1 and W12) and one resume qualification, all inside the final image with no recurrence",
+    "full_suite_runs_in_final_image": 1,
+    "reproduced": false
+  }
+}

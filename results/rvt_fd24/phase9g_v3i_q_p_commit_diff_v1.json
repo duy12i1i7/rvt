@@ -1,0 +1,172 @@
+{
+  "PREFERRED_RESULT_MET": true,
+  "classification_counts": {
+    "AUDIT_ARTIFACT": 23,
+    "BUILD_INPUT": 0,
+    "DEPENDENCY_INPUT": 0,
+    "OTHER": 0,
+    "REPORT": 1,
+    "RUNTIME_NONSCIENCE_CODE": 0,
+    "RUNTIME_SCIENCE_CODE": 0,
+    "TEST": 1
+  },
+  "commit_chain": {
+    "abbreviations_in_prompt": {
+      "42d8012": "42d8012249a6773a9e047e4dc0098abdbb7ac3b6",
+      "beb65ba": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+      "d635f17": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b"
+    },
+    "branch_head_at_handoff_was_the_closure": true,
+    "final_closure": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+    "implementation": "42d8012249a6773a9e047e4dc0098abdbb7ac3b6",
+    "previously_qualified_image_source": "beb65ba6eedcf0eebba07cde57a361b9956d15be"
+  },
+  "diff_range": "beb65ba6eedcf0eebba07cde57a361b9956d15be..d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "executable_or_build_inputs_changed_after_the_old_image": false,
+  "files": [
+    {
+      "change": "A",
+      "classification": "REPORT",
+      "path": "docs/PHASE9G_V3I_Q_R_PROBABILISTIC_IMPLEMENTATION_QUALIFICATION_RESUME.md"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_brier_qualification_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_compiler_qualification_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_determinism_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_environment_baseline_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_failure_resume_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_final_readiness_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_image_provenance_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_implementation_binding_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_invalidity_binding_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_loader_grouping_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_loss_qualification_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_no_early_abort_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_official_data_protection_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_pair_atomicity_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_reference_canary_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_registry_guard_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_replica_execution_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_row_binding_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_s8_accounting_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_supervision_schema_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_target_semantic_replay_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_v1_v2_regression_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "AUDIT_ARTIFACT",
+      "path": "results/rvt_fd24/phase9g_v3i_q_r_windows_target_v1.json"
+    },
+    {
+      "change": "A",
+      "classification": "TEST",
+      "path": "tests/test_phase9g_v3i_q_r_qualification_artifacts.py"
+    }
+  ],
+  "files_changed": 25,
+  "hidden": false,
+  "non_additive_changes": 0,
+  "phase": "PHASE_9G_V3I_Q_P",
+  "phase9g_v3i_q_p_commit_diff_sha256": "b50f85964a5d36b2eb567fe41a04d4e1a4bfdb87eacaedea329b12c68e052577",
+  "previous_image_qualification_incomplete": false,
+  "previous_image_qualification_status": "scientifically complete -- no executable, build or dependency input differs between the two commits -- but PROVENANCE incomplete, because the image source commit was not the final qualified closure commit. That distinction is what this phase eliminates.",
+  "schema_version": "rvt-phase9g-v3i-q-p-commit-diff/v1",
+  "surfaces_verified_unchanged": [
+    "rvt_swarm",
+    "scripts",
+    "docker",
+    "requirements.txt",
+    "docker/generation/requirements.lock.txt",
+    "third_party",
+    "setup.py",
+    "pyproject.toml",
+    "Makefile"
+  ]
+}

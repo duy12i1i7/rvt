@@ -1,0 +1,42 @@
+{
+  "P14_access": {
+    "command": "ssh -o BatchMode=yes 'avis\\avis'@100.71.102.9",
+    "credential_material_recorded": "none",
+    "password_requested_or_used": false,
+    "passwordless": true
+  },
+  "P14_environment": {
+    "architecture": "x86_64 / linux/amd64",
+    "cpus": 24,
+    "docker_api": "1.55",
+    "docker_cpus": 24,
+    "docker_server": "29.6.1",
+    "memory_available_gib": 28,
+    "memory_bytes": 33323393024,
+    "windows_version": "Microsoft Windows [Version 10.0.26200.9168]",
+    "wsl_distribution": "Ubuntu-24.04",
+    "wsl_kernel_reported_by_wsl": "6.18.33.2-2",
+    "wsl_kernel_uname": "6.18.33.2-microsoft-standard-WSL2",
+    "wsl_version": "2.7.10.0",
+    "wslg_version": "1.0.73.2"
+  },
+  "P15_full_suite": {
+    "failed": 0,
+    "passed": 4317,
+    "seconds": 375.79,
+    "wall_seconds": 379.25
+  },
+  "P16_semantic_replay": {
+    "identical": true,
+    "new_tolerance_introduced": false,
+    "reference_digest": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_digest": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_w1": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "target_w12": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+    "w1_equals_w12": true
+  },
+  "image_rebuilt_after_qualification": false,
+  "note": "the final image was built on this target, so the in-image reference run and the target run are one execution; the cross-platform comparison is against the canonical arm64 host",
+  "phase9g_v3i_q_p_target_qualification_sha256": "6cc0fd5394af5341a305729331c150c340f9c1ba2ab600991eb71d3f3b5d22ac",
+  "schema_version": "rvt-phase9g-v3i-q-p-target-qualification/v1"
+}

@@ -1,0 +1,26 @@
+{
+  "P13_v1_v2_regression_subset_in_image": {
+    "failed": 0,
+    "passed": 256
+  },
+  "P15_target_equivalence": "the image was built on the target and run there, so P7 and P15 are the same execution; it is recorded once rather than duplicated",
+  "P7_full_suite_in_final_image": {
+    "count_difference_explanation": "none required -- this narrow phase adds record-only tests AFTER the image was built, so the image carries exactly the closure suite",
+    "count_matches_expectation": true,
+    "environment_exemptions": 0,
+    "expected_closure_count": 4317,
+    "failed": 0,
+    "passed": 4317,
+    "seconds": 375.79,
+    "wall_seconds": 379.25
+  },
+  "P9_focused_invalidity_and_implementation_tests_in_image": {
+    "failed": 0,
+    "passed": 171
+  },
+  "image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+  "phase9g_v3i_q_p_final_image_suite_sha256": "89e77911095fe5afefd4c7af49c0dccb62d5a8c039f3908ddd635d2298a4b32f",
+  "runner": "docker/generation/run-tests.sh, which copies the root-owned /opt/rvt tree into a writable temp dir first",
+  "schema_version": "rvt-phase9g-v3i-q-p-final-image-suite/v1",
+  "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b"
+}

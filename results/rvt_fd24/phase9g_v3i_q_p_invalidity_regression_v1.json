@@ -1,0 +1,44 @@
+{
+  "P9_requirements": {
+    "all_required_replicas_execute": true,
+    "audit_evidence_retained": true,
+    "infrastructure_failure_remains_operational": true,
+    "no_Y_imputation": true,
+    "no_early_scientific_abort": true,
+    "no_replacement_replica": true,
+    "no_shrink_R": true,
+    "pair_invalid_yields_zero_supervised_rows": true,
+    "s8_accounting_exact": true
+  },
+  "censored_rollouts_remain_in_denominator": true,
+  "image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+  "infrastructure_excluded_until_executed": true,
+  "invalidity_contract_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "owner_frozen_matrix_executed_in_image": true,
+  "phase9g_v3i_q_p_invalidity_regression_sha256": "8d829b6c29504d66f6b8a637346aa0cf9adf270bed486a0c9e317e50ff83286b",
+  "s8_denominator": "executed required Target-V4 replica rollouts",
+  "s8_measured_in_image": {
+    "censored_rollouts_remain_in_denominator": true,
+    "denominator": 94,
+    "family_rates": {
+      "F1": 0.0,
+      "F8": 0.0,
+      "F9": 0.0
+    },
+    "gate": "S8",
+    "infrastructure_unresolved_excluded_from_denominator": 0,
+    "maximum_family_rate": 0.05,
+    "maximum_family_rate_observed": 0.0,
+    "maximum_overall_rate": 0.02,
+    "numerator": 0,
+    "overall_rate": 0.0,
+    "result": "PASS",
+    "schema_version": "rvt-recoverability-s8-invalid-rate/v3",
+    "unit": "executed required Target-V4 replica rollout"
+  },
+  "s8_numerator": "executed required Target-V4 replica rollouts disposed GENERATION_INVALID",
+  "schema_version": "rvt-phase9g-v3i-q-p-invalidity-regression/v1",
+  "semantics_changed_by_this_phase": 0,
+  "tests_failed": 0,
+  "tests_passed": 171
+}

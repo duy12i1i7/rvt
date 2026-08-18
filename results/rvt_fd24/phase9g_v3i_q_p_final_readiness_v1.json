@@ -1,0 +1,90 @@
+{
+  "FINAL_V3_EXECUTABLE_SOURCE_COMMIT": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "FINAL_V3_PRODUCTION_IMAGE_SHA256": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+  "P21_criteria": [
+    {
+      "criterion": "final image source commit == final closure commit",
+      "met": true
+    },
+    {
+      "criterion": "final image digest frozen",
+      "met": true
+    },
+    {
+      "criterion": "full in-image suite 0 failures",
+      "met": true
+    },
+    {
+      "criterion": "loss/Brier exact",
+      "met": true
+    },
+    {
+      "criterion": "invalidity semantics exact",
+      "met": true
+    },
+    {
+      "criterion": "S8 logic exact",
+      "met": true
+    },
+    {
+      "criterion": "V1/V2 unchanged",
+      "met": true
+    },
+    {
+      "criterion": "semantic canary digest exact",
+      "met": true
+    },
+    {
+      "criterion": "W1/W12 exact",
+      "met": true
+    },
+    {
+      "criterion": "failure/resume clean",
+      "met": true
+    },
+    {
+      "criterion": "target suite 0 failures",
+      "met": true
+    },
+    {
+      "criterion": "segfault not reproduced",
+      "met": true
+    },
+    {
+      "criterion": "official manifests untouched",
+      "met": true
+    }
+  ],
+  "canary_semantic_digest_sha256": "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340",
+  "criteria_met": 13,
+  "criteria_total": 13,
+  "criteria_unmet": [],
+  "declared_notes": [
+    "two builds were performed from the same commit; the first embedded 405 MB of git objects unreachable from that commit and was replaced for build-context hygiene, not for any executable or scientific difference. Both are recorded.",
+    "the final image was built on the Windows/WSL target because the reference host is arm64, which the phase explicitly permits; the cross-platform semantic comparison is therefore host-versus-image rather than image-versus-image.",
+    "the historical one-off segfault did not reproduce and is retained as TRANSIENT_NONREPRODUCED_RUNTIME_ANOMALY."
+  ],
+  "hp_search_authorized": false,
+  "phase": "PHASE_9G_V3I_Q_P",
+  "phase9g_v3i_q_p_final_readiness_sha256": "f0e0ff9779cf7539d4e6f019b93d180656e57bd02c4f60e52c3f6a45a2485736",
+  "pre_final_image": {
+    "authorized_for_official_v3_generation": false,
+    "image": "sha256:eaf52f7495f7eea1c1ae0392a4b688ce9918ecaee53d9be56ce1bb5b9518f169",
+    "source_commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+    "status": "PRE_FINAL_QUALIFICATION_IMAGE"
+  },
+  "production_profile": {
+    "changed": false,
+    "chunk": 1,
+    "numeric_threads_per_worker": 1,
+    "timeout_seconds": 243.0,
+    "workers": 12
+  },
+  "recommendation": "AUTHORIZE_OFFICIAL_RECOVERABILITY_V3_TRAIN_GENERATION",
+  "recommendation_scope": "TRAIN ONLY",
+  "schema_version": "rvt-phase9g-v3i-q-p-final-readiness/v1",
+  "training_authorized": false,
+  "validation_generation_authorized": false,
+  "verdict": "C",
+  "verdict_text": "The exact final implementation closure commit is built into one immutable linux/amd64 production image, all final suites, canaries, numerics and Windows-target checks pass, V1 and V2 remain unchanged, official V3 data remain untouched, and this exact image is ready for official V3 TRAIN generation."
+}

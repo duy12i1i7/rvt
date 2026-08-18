@@ -1,0 +1,108 @@
+{
+  "FINAL_V3_PRODUCTION_IMAGE_SHA256": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+  "P19_historical_image_status": {
+    "ambiguity_between_the_two": 0,
+    "final": {
+      "authorized_for_official_v3_generation": true,
+      "image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+      "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+      "status": "FINAL_V3_PRODUCTION_IMAGE"
+    },
+    "pre_final": {
+      "authorized_for_official_v3_generation": false,
+      "history_deleted": false,
+      "image": "sha256:eaf52f7495f7eea1c1ae0392a4b688ce9918ecaee53d9be56ce1bb5b9518f169",
+      "source_commit": "beb65ba6eedcf0eebba07cde57a361b9956d15be",
+      "status": "PRE_FINAL_QUALIFICATION_IMAGE",
+      "why": "its source commit is not the final qualified closure commit, even though no executable file differs"
+    }
+  },
+  "P20_production_profile": {
+    "authority": "results/rvt_fd24/phase9g0p_operational_production_contract_v2.json amended by results/rvt_fd24/phase9g_a1r_operational_contract_amendment_v1.json",
+    "changed_by_this_phase": false,
+    "chunk_size_atomic_units": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "profile_id": "PROFILE_RECOVERABILITY_V1",
+    "workers": 12
+  },
+  "architecture": "amd64/linux",
+  "build_attempts": [
+    {
+      "attempt": 1,
+      "authorized_for_official_science": false,
+      "clean_tree": true,
+      "image": "sha256:f1c55886734afbf94d6c05dce8cf2b28df422276afb2567e8fd93dfbbcf9eec0",
+      "reason": "the clone was made with a plain local `git clone`, which hardlinks the whole 545 MB object store of the target's main repository into the build context. The working tree was byte-identical at 244 MB and the image was scientifically correct, but .git carried about 405 MB of objects unreachable from this commit, so image content depended on clone mechanics rather than on the source commit.",
+      "size_bytes": 1054019016,
+      "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+      "status": "SUPERSEDED_BUILD_CONTEXT_HYGIENE"
+    },
+    {
+      "attempt": 2,
+      "authorized_for_official_science": true,
+      "clean_tree": true,
+      "image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+      "reason": "cloned with --no-local and garbage-collected before the build, so .git carries only history reachable from this commit; .git is 140 MB and the working tree is the same 244 MB",
+      "size_bytes": 630099921,
+      "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+      "status": "FINAL_V3_PRODUCTION_IMAGE"
+    }
+  ],
+  "build_context_proof": {
+    "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+    "bundle_integrity_verified": true,
+    "bundles_applied_in_order": [
+      {
+        "bundle": "v3.bundle",
+        "sha256": "93085c2a5a97dd2f7568e4323aeded8d05f61c0df9c563efcfca966a0bb3e46a"
+      },
+      {
+        "bundle": "v3b.bundle",
+        "sha256": "48ea162b828fd1da4bf8d76988dbf0fe2025192472d7117a21bf55527e0b3763"
+      },
+      {
+        "bundle": "v3final.bundle",
+        "sha256": "41cbeb0b8c31e64777b1a021c877e71aeb5fce8b3e8040e37f48351cf90f797f"
+      }
+    ],
+    "checkout_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+    "clean_tree": 0,
+    "debian_snapshot": "20260220T214329Z",
+    "dependency_pins": {
+      "numpy": "2.0.2",
+      "pip": "26.0.1",
+      "python": "3.9.6",
+      "torch": "2.8.0+cpu"
+    },
+    "dockerfile_sha256": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
+    "dockerignore_sha256": "9a9a777a03b4f3f43ac986b68cd44ec6f08e93d27597b3f1c4226bb72bd9a394",
+    "package_upgrades": 0,
+    "requirements_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+    "tracked_files": 1719,
+    "untracked_or_ignored_files_in_context": 0
+  },
+  "built_on": "the Windows/WSL2 target, which is the authoritative production machine; the reference host is arm64 and has no linux/amd64 daemon",
+  "declared_revision_label": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "environment": {
+    "MKL_CBWR": "COMPATIBLE",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONPATH": "/opt/rvt",
+    "RVT_FD24_NUMERICAL_EXECUTION_PROFILE": "FD24_NUMERICAL_EXECUTION_PROFILE_V1"
+  },
+  "image_tag": "rvt-v3-final:d635f17c-min",
+  "phase9g_v3i_q_p_final_image_provenance_sha256": "77e15694f0ff89d9fbe3a6702776b2c259aded0199f27ee7358de48264ab45b0",
+  "rebuilt_after_qualification": false,
+  "rebuilt_on_multiple_machines_to_compare_digests": false,
+  "root_fs_layers": 14,
+  "schema_version": "rvt-phase9g-v3i-q-p-final-image-provenance/v1",
+  "self_identity_matches": true,
+  "size_bytes": 630099921,
+  "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "source_commit_read_from_inside_the_running_image": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "why_two_builds_are_recorded": "the first was inspected, found to embed unreachable git objects, and replaced. Both are recorded rather than one being quietly discarded; neither differs in source commit or in any executable file."
+}
