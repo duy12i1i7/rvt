@@ -1,0 +1,45 @@
+{
+  "compatibility_findings": {
+    "collision_gate_unchanged": true,
+    "comparator_set_unchanged": true,
+    "effect_threshold_unchanged": true,
+    "only_the_supervision_signal_changes": true,
+    "primary_evaluation_unit_unchanged": true,
+    "primary_metric_unchanged": true
+  },
+  "drift_tripwire": "if a future phase makes calibration, NLL or Brier the HEADLINE claim rather than a selection diagnostic, that is hypothesis drift and must be declared to the owner at that time. This freeze does not do that: Brier enters only where the frozen checkpoint contract already placed it.",
+  "h1_authority": "docs/RVT_FD24_RESEARCH_QUESTIONS_AND_HYPOTHESES.md",
+  "h1_authority_sha256": "678ae987174e89254c2fef88d617cdca16db2122738decd10c522b937231ed0f",
+  "h1_exact_wording": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+  "h1_owner_rewording_required": false,
+  "h1_wording_changed": false,
+  "name": "H1_V3_SEMANTIC_COMPATIBILITY",
+  "phase9d_v3f_h1_compatibility_sha256": "b1ddc0823e49c51c61c8e10f11f49d3a188474b5a17ce403a807b65358b53544",
+  "schema_version": "rvt-phase9d-v3f-h1-compatibility/v1",
+  "three_layer_analysis": {
+    "layer_1_historical_h1_scientific_claim": {
+      "claim": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+      "comparators": [
+        "FULL_BASE_METHOD_VS_LOCAL_GEOMETRIC_SELECTOR",
+        "FULL_BASE_METHOD_VS_DIRECT_CLASSIFIER",
+        "FULL_BASE_METHOD_VS_STRONGEST_FIXED_DEPLOYABLE_BASELINE"
+      ],
+      "constrains_the_label_type": false,
+      "evaluation_unit": "PAIRED_EPISODE",
+      "quantified_object": "improvement in EPISODE_TASK_SUCCESS produced by a selection method",
+      "threshold": "0.08 absolute, plus the frozen collision gate"
+    },
+    "layer_2_historical_binary_implementation": {
+      "named_in_h1": false,
+      "status": "an implementation of the supervision signal",
+      "what_it_was": "Target V4 all-success aggregation over 3 matched replicas for F8/F9 and 1 elsewhere, producing a binary candidate label"
+    },
+    "layer_3_v3_probabilistic_implementation": {
+      "named_in_h1": false,
+      "produces_a_candidate_ordering": true,
+      "supports_the_same_selection_rule": true,
+      "what_it_is": "p(x, tau) supervised by (k, R) over the same unchanged per-replica Target V4 outcomes"
+    }
+  },
+  "verdict": "H1_PRESERVED_WITHOUT_REWORDING"
+}

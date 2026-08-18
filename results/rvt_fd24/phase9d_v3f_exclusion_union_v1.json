@@ -1,0 +1,31 @@
+{
+  "additive": true,
+  "excluded_identities_sorted_sha256": "0d84f74b091d7f4ffdbe44eff2a5a561ef5947149508c54fcc3a5eae41925f70",
+  "excluded_identity_count": 1880,
+  "name": "V3_COMPREHENSIVE_DEVELOPMENT_EXCLUSION_UNION_V1",
+  "phase9d_v3f_exclusion_union_sha256": "652af2d643c588063993185877b47d0be71e092b6fcaf66e8acd8b7c056476f5",
+  "purpose": "every identity that V3 official generation must never consume",
+  "requirement": "intersection = 0 for both frozen V3 manifests",
+  "requirement_met": true,
+  "schema_version": "rvt-v3-comprehensive-development-exclusion-union/v1",
+  "sources": [
+    {
+      "domain": "V2 official TRAIN",
+      "identities": 1200
+    },
+    {
+      "domain": "V2 official VALIDATION",
+      "identities": 300
+    },
+    {
+      "domain": "V2 comprehensive development exclusion union (design pilots, qualification and audit canaries)",
+      "identities": 380,
+      "reference": "results/rvt_fd24/phase9g_v2a_v_comprehensive_exclusion_union_v1.json",
+      "reference_sha256": "89a1839ce8087015040f44f903745e5e4b8f16a34ca9407879c7bdc1dfe67ab5"
+    }
+  ],
+  "v3_comprehensive_development_exclusion_union_sha256": "0d0d95359a75600b0e7df318606735b6ab69f76390a7f501d73c70e17f457971",
+  "v3_train_intersection": 0,
+  "v3_train_vs_v3_validation_intersection": 0,
+  "v3_validation_intersection": 0
+}

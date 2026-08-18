@@ -1,0 +1,121 @@
+{
+  "F5_event_and_candidate_provenance": {
+    "candidate_evaluation_identity": {
+      "fields": [
+        "candidate_event_id",
+        "candidate_topology_id",
+        "recoverability_replica_protocol_v3_sha256"
+      ],
+      "outcome_independent": true
+    },
+    "candidate_event_identity": {
+      "fields": [
+        "study",
+        "split",
+        "family",
+        "layout_sha256",
+        "team_size",
+        "episode_id",
+        "realized_source_timestep",
+        "source_state_fingerprint",
+        "source_acquisition_protocol_sha256"
+      ],
+      "outcome_independent": true,
+      "worker_order_retry_invariant": true
+    },
+    "replica_evaluation_identity": {
+      "fields": [
+        "candidate_evaluation_id",
+        "replica_index",
+        "matched_disturbance_stream_identity"
+      ],
+      "note": "replica_index and the frozen matched stream identity are permitted HERE because they describe the experiment performed, not its result",
+      "outcome_independent": true
+    }
+  },
+  "F6_supervision_record": {
+    "canonical_observation": "(k, R)",
+    "fields": [
+      "candidate_event_id",
+      "candidate_evaluation_id",
+      "candidate_topology",
+      "candidate_topology_id",
+      "R",
+      "k",
+      "replica_evaluation_ids",
+      "replica_target_v4_labels",
+      "replica_dispositions",
+      "k_over_R_derived_descriptive_only",
+      "recoverability_probabilistic_target_v3_sha256"
+    ],
+    "is_scientific_identity": false,
+    "k_over_R_is_descriptive_only": true,
+    "schema_version": "rvt-recoverability-candidate-supervision/v3",
+    "separation_rule": "the supervision payload is stored alongside, never inside, any identity whose outcome-independence is required"
+  },
+  "R_binding": "R is bound through recoverability_replica_protocol_v3_sha256, not through an outcome payload field. The protocol fixes R per family, so identity determines R without recording it.",
+  "additive": true,
+  "bound_contracts": {
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "name": "RECOVERABILITY_ROW_BINDING_V3",
+  "outcome_independence": "the row identity contains NO observed outcome. k, R and any derived fraction are supervision payload, never identity.",
+  "phase9d_v3f_row_binding_sha256": "59f410dbc209aab3cbdb6f7941a6e165ac3e01ee8855d15b123faed3da273f16",
+  "prohibited_identity_fields": [
+    "observed_k",
+    "observed_R_derived_fraction",
+    "k_over_R",
+    "label",
+    "outcome",
+    "aggregate_label",
+    "disposition",
+    "worker",
+    "worker_id",
+    "retry",
+    "retry_count",
+    "path",
+    "shard_path",
+    "timestamp",
+    "wall_time",
+    "chunk",
+    "chunk_index",
+    "execution_order",
+    "replica_index",
+    "seconds"
+  ],
+  "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+  "row_id_rule": "sha256_document over exactly the identity fields, sorted-key ASCII canonical JSON, following the V1 and V2 principle",
+  "row_identity_field_count": 16,
+  "row_identity_fields": [
+    "schema",
+    "study",
+    "split",
+    "family",
+    "layout_sha256",
+    "team_size",
+    "episode_id",
+    "realized_source_timestep",
+    "robot_id",
+    "candidate_topology_id",
+    "graph_fingerprint",
+    "source_acquisition_protocol_sha256",
+    "target_v4_contract_sha256",
+    "recoverability_probabilistic_target_v3_sha256",
+    "recoverability_replica_protocol_v3_sha256",
+    "recoverability_row_binding_v3_spec_sha256"
+  ],
+  "row_identity_schema_version": "rvt-recoverability-row-identity/v3",
+  "schema_version": "rvt-recoverability-row-binding/v3",
+  "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_GENERATION",
+  "supersedes_in_place": false,
+  "v2_row_identity_relation": {
+    "collision_possible": false,
+    "v2_field_count": 14,
+    "v2_rows_may_masquerade_as_v3": false,
+    "v2_schema": "rvt-recoverability-row-identity/v2",
+    "why": "the schema string differs and V3 additionally binds the probabilistic-target and replica-protocol hashes, so no V3 row id can equal a V2 row id"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "R3_precision_disclaimer": "R = 3 is NOT claimed to estimate any single event's probability precisely. Its role is repeated Bernoulli supervision across a large number of event-level observations.",
+  "R_expansion_permitted": false,
+  "adaptive_replication": "DISABLED",
+  "adaptive_replication_rationale": [
+    "simpler prospective scientific unit",
+    "exact fixed compute budget",
+    "preserves the matched COMPACT/LINE replica structure",
+    "avoids outcome-dependent stopping",
+    "avoids candidate-dependent sample counts",
+    "avoids additional identity complexity"
+  ],
+  "counter_stream_authority": {
+    "class": "rvt_swarm/phase9c_rb/streams.py::CounterStream",
+    "process_label": "robot_acceleration:replica-{replica_index}",
+    "retry_invariant": true,
+    "sha256": "08cbbec160c8f00aef51296d7a89764eb60d7b77d45663872c23ea89d0af00bd",
+    "stateless_pure_prf": true,
+    "worker_order_invariant": true
+  },
+  "family_stochastic_classification": {
+    "additional_stochastic_families_inferred": 0,
+    "authority": "rvt_swarm/phase9c_rb/counterfactual.py::replica_count_for_family",
+    "authority_text": "Frozen: three matched replicas for F8 and F9, one elsewhere",
+    "deterministic_families": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F10"
+    ],
+    "stochastic_families": [
+      "F8",
+      "F9"
+    ]
+  },
+  "iid_interpretation": "each replica index is an independent realization of the same frozen disturbance law; replicas are samples, not a fixed stress bank",
+  "matched_randomness": {
+    "candidate_specific_streams": "FORBIDDEN",
+    "implementation_authority": "rvt_swarm/phase9g0r/compiler_v2.py::_replica_jobs derives matched_disturbance_seed with candidate_topology=None",
+    "requirement": "disturbance_stream(COMPACT, r) == disturbance_stream(LINE, r) for every event and replica index r",
+    "runtime_guard": "rvt_swarm/phase9g0r/producer.py raises OfficialProducerError if matched seeds diverge"
+  },
+  "name": "RECOVERABILITY_REPLICA_PROTOCOL_V3",
+  "phase9d_v3f_replica_protocol_sha256": "0600aa721bc309423921e17e768263e12e09c45e141a26ca0144ce4847fc36de",
+  "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+  "replica_counts": {
+    "F1": 1,
+    "F10": 1,
+    "F2": 1,
+    "F3": 1,
+    "F4": 1,
+    "F5": 1,
+    "F6": 1,
+    "F7": 1,
+    "F8": 3,
+    "F9": 3
+  },
+  "replicas_per_candidate": true,
+  "schema_version": "rvt-recoverability-replica-protocol/v3",
+  "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_GENERATION"
+}

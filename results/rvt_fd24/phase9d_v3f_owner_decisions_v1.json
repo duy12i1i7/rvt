@@ -1,0 +1,326 @@
+{
+  "blocking_conflict_count": 0,
+  "blocking_conflicts": [],
+  "decisions": [
+    {
+      "blocking_conflict": false,
+      "decision": "1",
+      "historical_contract_affected": "none",
+      "new_contract_required": "RECOVERABILITY_PROBABILISTIC_TARGET_V3",
+      "note": "the disturbance contract defines an explicit uniform-disk law, so p(x,tau) is well defined relative to it",
+      "owner_selected_value": "V3 scientific target = PROBABILISTIC_RECOVERABILITY",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "2",
+      "historical_contract_affected": "Target V4 (referenced, not modified)",
+      "new_contract_required": "none",
+      "note": "V3 adds a supervision layer over repeated Target-V4 outcomes",
+      "owner_selected_value": "Target V4 unchanged as the per-replica outcome",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "3",
+      "historical_contract_affected": "none",
+      "new_contract_required": "supervision record schema",
+      "note": "the V2 aggregate all-success label is superseded for V3 only",
+      "owner_selected_value": "Observation is (k, R), not a binary aggregate",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "4",
+      "historical_contract_affected": "none",
+      "new_contract_required": "RECOVERABILITY_REPLICA_PROTOCOL_V3",
+      "note": "matches replica_count_for_family, the existing frozen classification",
+      "owner_selected_value": "R = 3 for F8/F9, R = 1 elsewhere",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "5",
+      "historical_contract_affected": "none",
+      "new_contract_required": "replica protocol field",
+      "note": "fixed R preserves the V2 structure and avoids outcome-dependent stopping",
+      "owner_selected_value": "ADAPTIVE_REPLICATION = DISABLED",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "6",
+      "historical_contract_affected": "none",
+      "new_contract_required": "replica protocol field",
+      "note": "already enforced by _replica_jobs and by an OfficialProducerError guard",
+      "owner_selected_value": "Matched COMPACT/LINE disturbance streams",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "7",
+      "historical_contract_affected": "none",
+      "new_contract_required": "target contract field",
+      "note": "the frozen rollout protocol already treats mixed as flagged-but-valid",
+      "owner_selected_value": "Mixed outcomes are supervision, not invalid",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "8",
+      "historical_contract_affected": "none",
+      "new_contract_required": "target contract field",
+      "note": "",
+      "owner_selected_value": "No abstention / boundary / three-state class",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "9",
+      "historical_contract_affected": "none",
+      "new_contract_required": "H1_V3_SEMANTIC_COMPATIBILITY",
+      "note": "H1 constrains selection quality and episode task success, not label type",
+      "owner_selected_value": "H1 preserved",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "10",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none -- referenced",
+      "note": "acquisition is candidate-blind and target-independent",
+      "owner_selected_value": "Source acquisition unchanged, reference the existing hash",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "11",
+      "historical_contract_affected": "none",
+      "new_contract_required": "fresh manifests",
+      "note": "",
+      "owner_selected_value": "Fully fresh V3 TRAIN and VALIDATION",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "12",
+      "historical_contract_affected": "none",
+      "new_contract_required": "V3 budget",
+      "note": "identical to the frozen V2 budget structure",
+      "owner_selected_value": "1200 TRAIN / 300 VALIDATION source episodes",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "13",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "matches STUDY_A_TRAINING_SIZES",
+      "owner_selected_value": "N = {5,6,8,12,16}; N24 sealed",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "14",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "matches required_families in the H1 requirement map",
+      "owner_selected_value": "F1-F10 retained, nothing removed",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "15",
+      "historical_contract_affected": "none",
+      "new_contract_required": "V3_LAYOUT_SPLIT_REGISTRY_V1",
+      "note": "these are validation-split variants 1 and 2, giving 10 layouts each, so 20 fresh layouts exist in total against the 30 the split task nominally asks for. See the layout split registry.",
+      "owner_selected_value": "Only offsets 0.54 and 0.65 authorized",
+      "repository_compatibility": "COMPATIBLE_WITH_A_DECLARED_CONSEQUENCE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "16",
+      "historical_contract_affected": "none",
+      "new_contract_required": "additive registry",
+      "note": "the registry references the unchanged generator",
+      "owner_selected_value": "Do not mutate frozen V2 scenario code",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "17",
+      "historical_contract_affected": "none",
+      "new_contract_required": "both dry manifests",
+      "note": "matches the Phase 9G-V2A-T precedent",
+      "owner_selected_value": "Freeze both splits before any generation",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "18",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "matches the frozen statistical-unit artifact",
+      "owner_selected_value": "Training unit = source decision event",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "19",
+      "historical_contract_affected": "none",
+      "new_contract_required": "V3 loss contract",
+      "note": "extends FROZEN_EVENT_EQUAL_WEIGHT to a grouped observation",
+      "owner_selected_value": "FROZEN_EVENT_EQUAL_WEIGHT_V3",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "20",
+      "historical_contract_affected": "docs/RVT_FD24_LOSS_CONTRACT.md L_rec",
+      "new_contract_required": "V3 loss contract",
+      "note": "L_rec is currently BCE with logits and no class weighting. For R = 1 the V3 term reduces EXACTLY to that BCE, so V3 generalizes rather than contradicts it; the R > 1 case is new and needs its own frozen contract.",
+      "owner_selected_value": "Replica-normalized grouped Bernoulli NLL",
+      "repository_compatibility": "COMPATIBLE_WITH_AN_ADDITIVE_LOSS_TERM"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "21",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "matches the frozen loss contract",
+      "owner_selected_value": "CLASS_WEIGHTING = NONE",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "22",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "",
+      "owner_selected_value": "Model output p_hat in (0,1)",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "23",
+      "historical_contract_affected": "docs/RVT_CHECKPOINT_SELECTION_CONTRACT.md",
+      "new_contract_required": "Brier contract",
+      "note": "the checkpoint contract already ranks by 'minimize recoverability Brier score' at lexicographic position 3, behind the collision constraint and episode task success. V3 specifies HOW Brier is aggregated; it does not promote Brier above task success.",
+      "owner_selected_value": "Primary selection metric = event-equal replica-normalized Brier",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "24",
+      "historical_contract_affected": "none",
+      "new_contract_required": "metric list",
+      "note": "",
+      "owner_selected_value": "Secondary metrics; calibration is not the H1 headline",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "25",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "",
+      "owner_selected_value": "No runtime probability threshold q in this phase",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "26",
+      "historical_contract_affected": "gate 7 preserved unchanged",
+      "new_contract_required": "V3 gate registry",
+      "note": "",
+      "owner_selected_value": "Historical Gate 7 RETIRED_FOR_V3_TARGET_SEMANTICS, never PASSED",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "27",
+      "historical_contract_affected": "none",
+      "new_contract_required": "gate registry",
+      "note": "",
+      "owner_selected_value": "V3 data-integrity gates D1-D10",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "28",
+      "historical_contract_affected": "none",
+      "new_contract_required": "gate registry",
+      "note": "",
+      "owner_selected_value": "V3 stochastic-science gates; no disagreement cap",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "29",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "",
+      "owner_selected_value": "No V2-derived numerical boundary gate",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "30",
+      "historical_contract_affected": "none",
+      "new_contract_required": "gate registry",
+      "note": "",
+      "owner_selected_value": "Model-performance gates kept separate",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "31",
+      "historical_contract_affected": "docs/RVT_FD24_HYPERPARAMETER_BUDGET.md",
+      "new_contract_required": "snapshot",
+      "note": "12 configurations, 50000 steps, seeds {11,29,47}, no class weighting",
+      "owner_selected_value": "Preserve the training budget",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "32",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "",
+      "owner_selected_value": "V2 TRAIN and VALIDATION development-only",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "33",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "",
+      "owner_selected_value": "Final test remains sealed and uninspected",
+      "repository_compatibility": "COMPATIBLE"
+    },
+    {
+      "blocking_conflict": false,
+      "decision": "34",
+      "historical_contract_affected": "none",
+      "new_contract_required": "none",
+      "note": "",
+      "owner_selected_value": "N24 / Study-B / final test = 0 access",
+      "repository_compatibility": "COMPATIBLE"
+    }
+  ],
+  "declared_consequences": [
+    {
+      "action_taken": "proceeded with the two authorized offsets exactly as instructed, and recorded the consequence",
+      "consequence": "V3 TRAIN receives 10 fresh layouts rather than the 20 V2 TRAIN used, because the two authorized offsets supply 10 layouts each and one must go to VALIDATION",
+      "decision": "15",
+      "materiality": "reduces TRAIN layout diversity; does NOT affect the held-out property, since V3 VALIDATION still has its own disjoint 10-layout pool",
+      "owner_option": "train-split variants 2 and 3 (offsets 0.22 and 0.33) are unused, sit far below the V2 validation offset 0.43 and far from the final-test offset 0.79. Authorizing either would restore 20 TRAIN layouts. They are NOT authorized and are NOT used."
+    }
+  ],
+  "h1_owner_rewording_required": false,
+  "phase9d_v3f_owner_decisions_sha256": "2beacba35a1cf713c22c5e72c5119474e1a11d0d29923541089dea33e1345223",
+  "schema_version": "rvt-phase9d-v3f-owner-decisions/v1",
+  "silent_overrides": 0,
+  "total_decisions": 34
+}

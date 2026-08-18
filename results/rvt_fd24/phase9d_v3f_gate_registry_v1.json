@@ -1,0 +1,159 @@
+{
+  "DATA_INTEGRITY": [
+    {
+      "gate": "scientific identity collisions",
+      "id": "D1",
+      "threshold": 0
+    },
+    {
+      "gate": "same-ID different-payload conflicts",
+      "id": "D2",
+      "threshold": 0
+    },
+    {
+      "gate": "fake GENERATION_INVALID from nonexistent source states",
+      "id": "D3",
+      "threshold": 0
+    },
+    {
+      "gate": "partial candidate-pair publication",
+      "id": "D4",
+      "threshold": 0
+    },
+    {
+      "gate": "candidate and replica accounting",
+      "id": "D5",
+      "threshold": "exact equality against the frozen replica protocol"
+    },
+    {
+      "gate": "matched COMPACT/LINE stochastic streams",
+      "id": "D6",
+      "threshold": "100%"
+    },
+    {
+      "gate": "deterministic replay mismatches",
+      "id": "D7",
+      "threshold": 0
+    },
+    {
+      "gate": "NaN or Inf model-input features",
+      "id": "D8",
+      "threshold": 0
+    },
+    {
+      "gate": "row, event, protocol and target hash recomputation failures",
+      "id": "D9",
+      "threshold": 0
+    },
+    {
+      "gate": "sealed split overlap violations",
+      "id": "D10",
+      "threshold": 0
+    }
+  ],
+  "HISTORICAL_V2_GATE_7": {
+    "erased": false,
+    "marked_passed": false,
+    "modified": false,
+    "preserved_in": [
+      "results/rvt_fd24/phase9d_v2c_r_gate7_replica_instability_v1.json",
+      "results/rvt_fd24/phase9d_v2g7_exact_cell_recount_v1.json",
+      "results/rvt_fd24/phase9d_v2g7_root_cause_v1.json"
+    ],
+    "reason": "cross-replica disagreement is now valid probabilistic supervision rather than evidence that binary labels are unsuitable. Retiring it for V3 is not the same as passing it for V2, and the V2 failure is preserved in all provenance.",
+    "status": "HISTORICAL",
+    "threshold_changed": false,
+    "v2_observed_value": "TRAIN F9/LINE 59/530 = 0.11132075471698113",
+    "v2_permitted_maximum": 0.1,
+    "v2_result": "FAILED_FOR_V2",
+    "v3_applicability": "NOT_APPLICABLE_TO_V3_PROBABILISTIC_TARGET"
+  },
+  "MODEL_PERFORMANCE": [
+    {
+      "applied": "after training, on validation",
+      "gate": "event-equal replica-normalized Brier",
+      "id": "M1",
+      "role": "primary model-selection metric"
+    },
+    {
+      "gate": "event-equal grouped Bernoulli NLL",
+      "id": "M2",
+      "role": "secondary diagnostic"
+    },
+    {
+      "binning_rule": "must be prospectively specified before evaluation",
+      "gate": "calibration / reliability",
+      "id": "M3",
+      "role": "secondary diagnostic"
+    },
+    {
+      "gate": "candidate ranking accuracy",
+      "id": "M4",
+      "role": "secondary diagnostic"
+    },
+    {
+      "gate": "episode task success against the H1 comparators and the frozen collision gate",
+      "id": "M5",
+      "role": "the H1 claim itself",
+      "threshold": "0.08 absolute, frozen"
+    }
+  ],
+  "SCIENTIFIC_DATA_ADEQUACY": [
+    {
+      "carried_from": "frozen H1 requirement map required_families",
+      "gate": "family coverage F1-F10",
+      "id": "S1",
+      "threshold": "all ten families present"
+    },
+    {
+      "gate": "candidate coverage",
+      "id": "S2",
+      "threshold": "both COMPACT and LINE evaluated at every retained event"
+    },
+    {
+      "gate": "source-event coverage",
+      "id": "S3",
+      "threshold": "every selected event executes both candidates"
+    },
+    {
+      "carried_from": "frozen label-audit gate 4, semantically unchanged by the target type",
+      "gate": "validation retained source-event pairs per primary family",
+      "id": "S4",
+      "threshold": ">= 30"
+    },
+    {
+      "gate": "candidate/topology nondegeneracy",
+      "id": "S5",
+      "threshold": "the pooled observation must not be constant across the split"
+    },
+    {
+      "carried_from": "frozen label-audit gate 9",
+      "gate": "split independence",
+      "id": "S6",
+      "threshold": "0 overlap on every identity axis"
+    },
+    {
+      "derived_from_v2_numbers": false,
+      "explicitly_not": "a minimum mixed-event percentage",
+      "gate": "stochastic supervision nondegeneracy",
+      "id": "S7",
+      "threshold": "both Target-V4 replica outcomes {0, 1} must occur in the pooled stochastic TRAIN domain"
+    },
+    {
+      "carried_from": "frozen label-audit gate 6",
+      "gate": "invalid rollout rate",
+      "id": "S8",
+      "threshold": "below 0.02 overall and below 0.05 per family"
+    }
+  ],
+  "categories_kept_separate": true,
+  "forbidden_gate": {
+    "gate": "maximum stochastic disagreement <= 0.10",
+    "reason": "mixed outcomes are expected V3 signal",
+    "status": "NOT CARRIED OVER TO V3"
+  },
+  "model_performance_gates_are_not_data_acceptance_gates": true,
+  "no_v2_derived_numerical_boundary_gate": true,
+  "phase9d_v3f_gate_registry_sha256": "08bf76259276ee97aecccb4e49147753c27be4a8c2818ab3e0fa0eb8548494c9",
+  "schema_version": "rvt-phase9d-v3f-gate-registry/v1"
+}

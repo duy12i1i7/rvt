@@ -1,0 +1,66 @@
+{
+  "F20_fresh_validation_protection": {
+    "canary_identities_must_be_disjoint_from_both_v3_manifests": true,
+    "official_v3_validation_generation_timing": "only after the authorized V3 TRAIN stage, per project ordering; the identity pool is nevertheless already frozen so the disjointness proof is prospective",
+    "outcomes_must_not_be_inspected_during": [
+      "implementation",
+      "qualification",
+      "V3 TRAIN audit",
+      "model architecture development",
+      "hyperparameter search"
+    ],
+    "qualification_must_use_dedicated_canary_identities": true,
+    "rationale": "freezing identities early makes the exclusion proof possible; protecting outcomes late makes confirmation credible. Both are required.",
+    "v3_validation_identity_pool_frozen_now": true
+  },
+  "ladder": [
+    {
+      "name": "implementation unit tests",
+      "requires": "every additive module covered, including fail-closed paths",
+      "step": 1
+    },
+    {
+      "name": "V2 replay regression",
+      "requires": "the V2 TRAIN and VALIDATION seals still reproduce byte-identically after the V3 code lands",
+      "step": 2
+    },
+    {
+      "name": "V3 candidate canary",
+      "requires": "a small set of DEDICATED canary identities, disjoint from both frozen V3 manifests, executed end to end",
+      "step": 3
+    },
+    {
+      "name": "replica arithmetic",
+      "requires": "replica executions equal the frozen protocol's prediction exactly, and k is bounded by R",
+      "step": 4
+    },
+    {
+      "name": "W1 / W12 invariance",
+      "requires": "identical scientific output at one and twelve workers",
+      "step": 5
+    },
+    {
+      "name": "candidate-order invariance",
+      "requires": "evaluating LINE before COMPACT changes nothing",
+      "step": 6
+    },
+    {
+      "name": "failure and resume",
+      "requires": "resume is exact at scientific identity with no duplicate or alternate identities",
+      "step": 7
+    },
+    {
+      "name": "local image qualification",
+      "requires": "the qualified image reproduces the canary",
+      "step": 8
+    },
+    {
+      "name": "Windows target qualification",
+      "requires": "reference-versus-target scientific invariance",
+      "step": 9
+    }
+  ],
+  "no_official_v3_generation_before_all_required_qualification_closes": true,
+  "phase9d_v3f_qualification_plan_sha256": "84f42a762605954be874bcb5629deebcc04e1b0c49edf5629e6b13ea5979942b",
+  "schema_version": "rvt-phase9d-v3f-qualification-plan/v1"
+}

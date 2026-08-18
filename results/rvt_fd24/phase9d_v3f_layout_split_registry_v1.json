@@ -1,0 +1,782 @@
+{
+  "CAPACITY_FINDING": {
+    "authorized_offsets": 2,
+    "declared_consequence": "V3 TRAIN carries 10 fresh layouts where V2 TRAIN carried 20, so TRAIN layout diversity halves. Episodes per TRAIN layout rise from 60 to 120.",
+    "does_not_affect": "the held-out property -- V3 VALIDATION retains its own 10 disjoint layouts, and TRAIN/VALIDATION layout overlap remains 0",
+    "layouts_per_offset": 10,
+    "mapping_invented_to_close_the_gap": false,
+    "owner_option_not_exercised": {
+      "effect_if_authorized": "would restore 20 fresh TRAIN layouts",
+      "status": "NOT AUTHORIZED by the owner and NOT used here",
+      "unused_safe_offsets": {
+        "train variant 2": 0.22,
+        "train variant 3": 0.33
+      },
+      "why_they_look_safe": "both sit far below the V2 validation offset 0.43 and far from the final-test offset 0.79, and neither is in use by V2"
+    },
+    "resolution": "the cleanest deterministic assignment using ONLY the two authorized variants is 10 TRAIN layouts and 10 VALIDATION layouts",
+    "shortfall": 10,
+    "split_task_nominal_request": {
+      "total": 30,
+      "train_layouts": 20,
+      "validation_layouts": 10
+    },
+    "total_fresh_layouts_available": 20
+  },
+  "NAMING_HAZARD": {
+    "issue": "V3 TRAIN layouts carry generator-namespace ids of the form validation-fN-01 because they are drawn from validation-split variant 1",
+    "mitigation": "every V3 manifest entry carries an explicit v3_split field and a generator_split_namespace field",
+    "rule": "layout_id is a GENERATOR-NAMESPACE string and must never be used to infer the V3 dataset split. The authoritative split label is the v3_split field in this registry and in the manifests."
+  },
+  "additive": true,
+  "assignment": [
+    {
+      "generator_split_namespace": "validation",
+      "layout_ids": [
+        "validation-f1-01",
+        "validation-f2-01",
+        "validation-f3-01",
+        "validation-f4-01",
+        "validation-f5-01",
+        "validation-f6-01",
+        "validation-f7-01",
+        "validation-f8-01",
+        "validation-f9-01",
+        "validation-f10-01"
+      ],
+      "layouts": 10,
+      "offset": 0.54,
+      "v3_split": "v3_train",
+      "variant_index": 1
+    },
+    {
+      "generator_split_namespace": "validation",
+      "layout_ids": [
+        "validation-f1-02",
+        "validation-f2-02",
+        "validation-f3-02",
+        "validation-f4-02",
+        "validation-f5-02",
+        "validation-f6-02",
+        "validation-f7-02",
+        "validation-f8-02",
+        "validation-f9-02",
+        "validation-f10-02"
+      ],
+      "layouts": 10,
+      "offset": 0.65,
+      "v3_split": "v3_validation",
+      "variant_index": 2
+    }
+  ],
+  "assignment_rationale": "the owner's stated preference, 0.54 to TRAIN and 0.65 to VALIDATION, is compatible with generator semantics: each (generator_split, variant_index) pair yields exactly one layout per family, so each authorized offset supplies exactly 10 layouts",
+  "authorized_offsets": [
+    0.54,
+    0.65
+  ],
+  "forbidden_offsets": {
+    "0.76": "approximately 0.03 from the final-test base offset 0.79; explicitly forbidden by the owner",
+    "0.87": "crosses the final-test offset"
+  },
+  "frozen_v2_scenario_code_modified": false,
+  "generator_authority": "rvt_swarm/phase8/scenario.py",
+  "generator_sha256": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+  "generator_split_offsets": {
+    "final_test": 0.79,
+    "train": 0.0,
+    "validation": 0.43
+  },
+  "generator_unchanged": true,
+  "layout_records": {
+    "v3_train": [
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_SUCCESS"
+          ],
+          [
+            6,
+            "BOTH_SUCCESS"
+          ],
+          [
+            8,
+            "BOTH_SUCCESS"
+          ],
+          [
+            12,
+            "BOTH_SUCCESS"
+          ],
+          [
+            16,
+            "BOTH_SUCCESS"
+          ],
+          [
+            24,
+            "BOTH_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 90.0,
+        "family": "F1",
+        "generation_seed_commitment": "a7032b879cca703c6bc7c4f367a05707d09ec8fd854502ed57cf37f06878fbc8",
+        "geometry_sha256": "91bed98922e18e31044f2ccc81056464ce2dc700c249ce6f17cae72acf7114e5",
+        "layout_id": "validation-f1-01",
+        "parameter_tuple_sha256": "b921ae27097434d8c48b20e68bd47b6225322b2be29cf94775a9ffeb1c948db4"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "LINE_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 120.0,
+        "family": "F2",
+        "generation_seed_commitment": "7795ffe28f965a55ecda4dd42ede62e220322370641ea80d0524200eb6067cfc",
+        "geometry_sha256": "1e52acd7bca02655d411cf7b50fc1b408542190313e072b1e0ed0015ce907389",
+        "layout_id": "validation-f2-01",
+        "parameter_tuple_sha256": "af7903216745aa93622c53fb2d514c66cc2362c6244fda543f3b605b49180a8a"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "LINE_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 135.0,
+        "family": "F3",
+        "generation_seed_commitment": "f53189a3902d631e4610ccc2c90f0273c8494647fe5bc13519fd97c50319704b",
+        "geometry_sha256": "e78746bdde73f71a2f63a4afa2eb6342ac6390005b65c7e1bbcf9b1fd7af9699",
+        "layout_id": "validation-f3-01",
+        "parameter_tuple_sha256": "3210165ce64c9bc58c9f1fbcb68526fc0e619a612ccc893d7434fed73416e988"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "LINE_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 150.0,
+        "family": "F4",
+        "generation_seed_commitment": "cff8b19b3daac929911d1c642dfa0826852e1113abbf5c6579040575d37ed6b2",
+        "geometry_sha256": "a8906d149318c67109fbe3e6b5580681326c496c1ee2b485f07363aa65cae77c",
+        "layout_id": "validation-f4-01",
+        "parameter_tuple_sha256": "b355324be70a69303a9fe7bd8dd584803ec7bf73ad88e656531c073985edaaaa"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            6,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            8,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            12,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            16,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            24,
+            "RECONFIGURATION_REQUIRED"
+          ]
+        ],
+        "episode_horizon_seconds": 180.0,
+        "family": "F5",
+        "generation_seed_commitment": "bfdca5553ed9fbe5c1dbda10e93a751ad9ca310f75561175a6e683ee8cde1ee7",
+        "geometry_sha256": "b3d355153cc489ffc8c752339f03a89881303c81942e4158372681b887835cbc",
+        "layout_id": "validation-f5-01",
+        "parameter_tuple_sha256": "876836a9d1068d7f5ad6a2d839ddad63c1ab273305f6fe8b61d8fed60a9e06c1"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "COMPACT_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 130.0,
+        "family": "F6",
+        "generation_seed_commitment": "25bd2e2c46d7826f06fc31e5e462ba2cb5b456c67503b17e63a4611a0fc822c5",
+        "geometry_sha256": "2d49db8d8cd54d77103c18ef1f4201dcfbcfb195fb41fa206e7c3fd1a046875c",
+        "layout_id": "validation-f6-01",
+        "parameter_tuple_sha256": "2321c3403309ee66357c7491201d2421f74f5f378440c8a161d0c75465128413"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_SUCCESS"
+          ],
+          [
+            6,
+            "BOTH_SUCCESS"
+          ],
+          [
+            8,
+            "BOTH_SUCCESS"
+          ],
+          [
+            12,
+            "BOTH_SUCCESS"
+          ],
+          [
+            16,
+            "BOTH_SUCCESS"
+          ],
+          [
+            24,
+            "BOTH_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 110.0,
+        "family": "F7",
+        "generation_seed_commitment": "1fa2e69cdeb77fed72c7cb08b89970ee3d1caf676d3305e2d90c617d0ebe213b",
+        "geometry_sha256": "92c3c6d26605c78ef24867beadedf4ddebc1a7ac32cbe0f25eee7fc93a1d1aa6",
+        "layout_id": "validation-f7-01",
+        "parameter_tuple_sha256": "980197c3ff6b136e748368da1df3ac5256bda5af2f6e49fc117a0fc7c2c6b3cd"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            6,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            8,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            12,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            16,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            24,
+            "RECONFIGURATION_REQUIRED"
+          ]
+        ],
+        "episode_horizon_seconds": 180.0,
+        "family": "F8",
+        "generation_seed_commitment": "6de6d7f3387edd6a8f8d68b75100d08223dc0297083008e69c69bd95669db1f9",
+        "geometry_sha256": "37a6ad334d3ac5c4fe3537c6295fe51afa03d8c069f393846b6085dd5dea6d97",
+        "layout_id": "validation-f8-01",
+        "parameter_tuple_sha256": "08f346244c2cbb88aac7949845e8d3c34be86eb2243cdf721cef8ae8f0cf1928"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_SUCCESS"
+          ],
+          [
+            6,
+            "BOTH_SUCCESS"
+          ],
+          [
+            8,
+            "BOTH_SUCCESS"
+          ],
+          [
+            12,
+            "BOTH_SUCCESS"
+          ],
+          [
+            16,
+            "BOTH_SUCCESS"
+          ],
+          [
+            24,
+            "BOTH_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 150.0,
+        "family": "F9",
+        "generation_seed_commitment": "adefdbeab1c89ed9ab721de724bc2c11fde9f21fd72400bc788f311ef9fa2f5e",
+        "geometry_sha256": "4052960bf3f85aa60f785dc3d36a84f52ac6d515931f9bbcdf1e242bc07910d9",
+        "layout_id": "validation-f9-01",
+        "parameter_tuple_sha256": "e256bd2e9b4e2c27a60acc237c48fb561eef2ac99b1dfaf96543d0a29ebbe2d7"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_FAIL"
+          ],
+          [
+            6,
+            "BOTH_FAIL"
+          ],
+          [
+            8,
+            "BOTH_FAIL"
+          ],
+          [
+            12,
+            "BOTH_FAIL"
+          ],
+          [
+            16,
+            "BOTH_FAIL"
+          ],
+          [
+            24,
+            "BOTH_FAIL"
+          ]
+        ],
+        "episode_horizon_seconds": 90.0,
+        "family": "F10",
+        "generation_seed_commitment": "fce367c37319bc17996ce4abae572c7fdebe044cde715ac7f256c09daa992bab",
+        "geometry_sha256": "762beb45a32cc8240a1d390d34a13ced84fe848257bc4cd55ea52d127ec71356",
+        "layout_id": "validation-f10-01",
+        "parameter_tuple_sha256": "d0160e4b2292fc6ab2df08b078813d04c364c07243c35a3b14dccdc56737aa7c"
+      }
+    ],
+    "v3_validation": [
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_SUCCESS"
+          ],
+          [
+            6,
+            "BOTH_SUCCESS"
+          ],
+          [
+            8,
+            "BOTH_SUCCESS"
+          ],
+          [
+            12,
+            "BOTH_SUCCESS"
+          ],
+          [
+            16,
+            "BOTH_SUCCESS"
+          ],
+          [
+            24,
+            "BOTH_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 90.0,
+        "family": "F1",
+        "generation_seed_commitment": "e051dba16991ed190d7d27190d6a640cee0ef062e7255e915709b4edda86f309",
+        "geometry_sha256": "f208b20ada5a2ff1d891f80c7eaa90951cb9a9ad73dd0315b25cb5898f212c6e",
+        "layout_id": "validation-f1-02",
+        "parameter_tuple_sha256": "6dd41b654f746cedd0fd5a63f523fe0038c64aa207cc8b4e8016011135734fc0"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "LINE_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 120.0,
+        "family": "F2",
+        "generation_seed_commitment": "736a6e7bfbab34d338c5aaabc04bf9f1b786aca2525f2af6ba3a15512377fba6",
+        "geometry_sha256": "f6458ebc902ac9c87b44395462789aab56e28c35ad3cd928898e1394ca3f00e3",
+        "layout_id": "validation-f2-02",
+        "parameter_tuple_sha256": "1fcc03874d69c8353aae20654c7cc53ae0a5a530b661d5dea751dfa205e909d0"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "LINE_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 135.0,
+        "family": "F3",
+        "generation_seed_commitment": "66212e78d952f7f1a24ab96936e750b676a0a5a110081491b49356a488f278be",
+        "geometry_sha256": "740c1b4a5c080a3c1342619f29252ff17ee135020d8bbca17bdcffc4b2474f1d",
+        "layout_id": "validation-f3-02",
+        "parameter_tuple_sha256": "c73ae01d08615edd0e6567a6a1072a1c45e0ad8baef077ecc2bf6956bada1613"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "LINE_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "LINE_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 150.0,
+        "family": "F4",
+        "generation_seed_commitment": "af1fc10616f09f89ea78207189ece96e19d782abb0ff6fdaa10062fc3f0e9fad",
+        "geometry_sha256": "67296fcf8253b0c378ea95cec1f3937a6410c0a567350577521c4d31bcfc5f84",
+        "layout_id": "validation-f4-02",
+        "parameter_tuple_sha256": "68ecd26d1a260cd3a50cf13f0d0d897ff2aebd40402f6e88a292f08743b2d35e"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            6,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            8,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            12,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            16,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            24,
+            "RECONFIGURATION_REQUIRED"
+          ]
+        ],
+        "episode_horizon_seconds": 180.0,
+        "family": "F5",
+        "generation_seed_commitment": "03919ec8025640ee1f231e791e314a01be0ad140bfccdaddc3cc874f959fbe7a",
+        "geometry_sha256": "e5cd04058f04bea02360c2192fd38a77168ea1ef7d543a223730eba617aa15f2",
+        "layout_id": "validation-f5-02",
+        "parameter_tuple_sha256": "ce9fa0a264ecd2e50903d9f77055480ec869003cc5965c2c4320d4688b6366d1"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            6,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            8,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            12,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            16,
+            "COMPACT_ONLY_SUCCESS"
+          ],
+          [
+            24,
+            "COMPACT_ONLY_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 130.0,
+        "family": "F6",
+        "generation_seed_commitment": "8cacffcebc6509cadcf20ae1d406303caa6de58b6bdcf302b5107cf5de685bc9",
+        "geometry_sha256": "86f1f10044cad110e49ac6543c785d391b84edc3e7f8b8b84f11ece50b831d61",
+        "layout_id": "validation-f6-02",
+        "parameter_tuple_sha256": "0a04c636133abb18145dd73fa945f2ab5ac80dc1734c0f508aba4e64e37d1381"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_SUCCESS"
+          ],
+          [
+            6,
+            "BOTH_SUCCESS"
+          ],
+          [
+            8,
+            "BOTH_SUCCESS"
+          ],
+          [
+            12,
+            "BOTH_SUCCESS"
+          ],
+          [
+            16,
+            "BOTH_SUCCESS"
+          ],
+          [
+            24,
+            "BOTH_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 110.0,
+        "family": "F7",
+        "generation_seed_commitment": "8bea35995069b8a486975164bba4bb65ac5cb285447a9fd12641a395dfc23766",
+        "geometry_sha256": "f38c40fc724869f494763cf53e1bb332a6cfe5117ca000fc9bc0779a9aa66e0b",
+        "layout_id": "validation-f7-02",
+        "parameter_tuple_sha256": "c3e312f8f87151f6d40ecbacd0765eb86fa01f634ba461b801a4919ba4ddbaaa"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            6,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            8,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            12,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            16,
+            "RECONFIGURATION_REQUIRED"
+          ],
+          [
+            24,
+            "RECONFIGURATION_REQUIRED"
+          ]
+        ],
+        "episode_horizon_seconds": 180.0,
+        "family": "F8",
+        "generation_seed_commitment": "469d04ba2c16f3ffb93ddbd9e29e99c94036859cd38344fe6b348b0231e086a9",
+        "geometry_sha256": "9f4a9ca0ccadddbd6359a3c5dd0dc58cd1346900a304f5b6be763484b98a4a2f",
+        "layout_id": "validation-f8-02",
+        "parameter_tuple_sha256": "3238736974c6d69016b4e852e0cb9fab2bd9988767e90a9cf98049919adb2c97"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_SUCCESS"
+          ],
+          [
+            6,
+            "BOTH_SUCCESS"
+          ],
+          [
+            8,
+            "BOTH_SUCCESS"
+          ],
+          [
+            12,
+            "BOTH_SUCCESS"
+          ],
+          [
+            16,
+            "BOTH_SUCCESS"
+          ],
+          [
+            24,
+            "BOTH_SUCCESS"
+          ]
+        ],
+        "episode_horizon_seconds": 150.0,
+        "family": "F9",
+        "generation_seed_commitment": "e618bea3a465095a24d8bd19d339043bd31f1791eaaeee1dd6cfd5df49ca9e7f",
+        "geometry_sha256": "bf79c1df612817da50a34cf9e24a8d64831467a3ea3a2f8086911647680936d9",
+        "layout_id": "validation-f9-02",
+        "parameter_tuple_sha256": "624c7b198a23ee9134bf645cb7a30a6ad94a2d83f8ba5cfbe3abe771bc66579c"
+      },
+      {
+        "diagnostic_headroom_by_team_size": [
+          [
+            5,
+            "BOTH_FAIL"
+          ],
+          [
+            6,
+            "BOTH_FAIL"
+          ],
+          [
+            8,
+            "BOTH_FAIL"
+          ],
+          [
+            12,
+            "BOTH_FAIL"
+          ],
+          [
+            16,
+            "BOTH_FAIL"
+          ],
+          [
+            24,
+            "BOTH_FAIL"
+          ]
+        ],
+        "episode_horizon_seconds": 90.0,
+        "family": "F10",
+        "generation_seed_commitment": "5833225a7643975cca151cd732194d98a142b7e6d3b3162f39401e72e7a57e4e",
+        "geometry_sha256": "3479eb0152d4c88b48ad64dea9782a4353f83bd446e329e6d1e1a88e25e4a7e1",
+        "layout_id": "validation-f10-02",
+        "parameter_tuple_sha256": "c9049ac4a5f839d736e4bf2d11c37cc41fd69e887405e9272e3b77dea8b4881f"
+      }
+    ]
+  },
+  "name": "V3_LAYOUT_SPLIT_REGISTRY_V1",
+  "offset_formula": "offset = _SPLIT_OFFSETS[generator_split] + 0.11 * variant_index",
+  "phase9d_v3f_layout_split_registry_sha256": "06a99292e08f606696269d1d3c7f62f6ae5318cbea9c35050e11ed4822d1b8c8",
+  "schema_version": "rvt-v3-layout-split-registry/v1",
+  "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_GENERATION",
+  "v3_layout_split_registry_sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae"
+}

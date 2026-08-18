@@ -1,0 +1,62 @@
+{
+  "all_capabilities_must_be_additive": true,
+  "capabilities": [
+    {
+      "id": "I1",
+      "name": "V3 compiler and manifest dispatch",
+      "requirement": "compile V3 source-episode tasks from the frozen dry manifests without touching the V2 compiler path; the V3 split label must come from the manifest, never inferred from the generator-namespace layout_id"
+    },
+    {
+      "id": "I2",
+      "name": "replica-level Target-V4 outcome preservation",
+      "requirement": "persist every per-replica Y_r, disposition, termination and failed-predicate set; V2 discarded these and the gate-7 forensics had to replay to recover them"
+    },
+    {
+      "id": "I3",
+      "name": "(k, R) aggregation",
+      "requirement": "compute k as the sum of per-replica Y_r and bind R from the frozen replica protocol, not from the observed record count"
+    },
+    {
+      "id": "I4",
+      "name": "V3 candidate supervision record",
+      "requirement": "emit the canonical supervision payload defined in the row-binding contract, stored alongside and never inside any outcome-independent identity"
+    },
+    {
+      "id": "I5",
+      "name": "V3 row identity",
+      "requirement": "implement rvt-recoverability-row-identity/v3 with exactly the sixteen declared fields and a fail-closed check against the prohibited list"
+    },
+    {
+      "id": "I6",
+      "name": "V3 dataset writer",
+      "requirement": "write to a V3-only namespace with its own manifest and seal; must refuse to write into any V2 path"
+    },
+    {
+      "id": "I7",
+      "name": "V3 dataset loader contract",
+      "requirement": "group by decision event, require both candidates, require exactly N robot rows per candidate, expose (k, R) per candidate, enforce the split boundary, refuse V2-schema rows, and shuffle event groups deterministically"
+    },
+    {
+      "id": "I8",
+      "name": "event-equal grouped Bernoulli loss interface",
+      "requirement": "implement the frozen loss with the mandatory 1/R normalization and a numerically stable formulation from logits"
+    },
+    {
+      "id": "I9",
+      "name": "event-equal Brier evaluator",
+      "requirement": "implement the frozen Brier aggregation order; a raw row mean must be impossible to express through the interface"
+    }
+  ],
+  "frozen_inputs_for_implementation": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "v3_layout_split_registry_sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae"
+  },
+  "implemented_in_this_phase": 0,
+  "phase9d_v3f_implementation_requirements_sha256": "ba25890ee1b87ddae71c77d4db4470538f488acd40b46e9f08503a7e47665065",
+  "schema_version": "rvt-phase9d-v3f-implementation-requirements/v1",
+  "v2_replay_must_remain_byte_identical": true
+}

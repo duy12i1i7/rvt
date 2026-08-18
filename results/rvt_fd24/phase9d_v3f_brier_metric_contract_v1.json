@@ -1,0 +1,54 @@
+{
+  "R1_reduction": "for R = 1 this is the ordinary Brier score (p - Y)^2",
+  "aggregation_order": [
+    "1. per robot-local row within one (event, candidate): the candidate formula above",
+    "2. average over the N robots within that candidate",
+    "3. average the two candidate values with weight 0.5 each",
+    "4. the event carries weight 1",
+    "5. average over events within the split"
+  ],
+  "authority": {
+    "ahead_of_it": [
+      "satisfy the collision constraint",
+      "maximize episode task success"
+    ],
+    "brier_does_not_outrank_task_success": true,
+    "checkpoint_contract": "docs/RVT_CHECKPOINT_SELECTION_CONTRACT.md",
+    "checkpoint_contract_sha256": "d45404deed2e771908ee2c85e924c5a1a18d6bfde0ba09935d61137f7f9f7ba1",
+    "lexicographic_position": 3,
+    "verified_text": "minimize recoverability Brier score"
+  },
+  "calibration_is_not_the_h1_headline": true,
+  "candidate_formula": "Brier_candidate = (1/R) * SUM_r (p - Y_r)^2",
+  "h1_headline_remains": "downstream candidate/topology selection and episode task success",
+  "name": "EVENT_EQUAL_REPLICA_NORMALIZED_BRIER_V3",
+  "phase9d_v3f_brier_metric_contract_sha256": "92cd6a288b9d59b02fe392e5a0b031234f4c9749e09446d06176bbd4eef74389",
+  "primary_validation_model_selection_metric": true,
+  "raw_row_mean_permitted": false,
+  "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+  "replica_normalization": "MANDATORY, mirroring the loss contract",
+  "schema_version": "rvt-recoverability-brier-metric/v3",
+  "secondary_metrics": [
+    {
+      "metric": "event-equal grouped Bernoulli NLL",
+      "role": "diagnostic"
+    },
+    {
+      "binning_rule": "MUST be prospectively specified before evaluation; not fixed in this phase",
+      "metric": "calibration / reliability curve",
+      "role": "diagnostic"
+    },
+    {
+      "depends_on": "the binning rule above",
+      "metric": "calibration error",
+      "role": "diagnostic"
+    },
+    {
+      "applicable_where": "events whose two candidates have different observed k/R",
+      "metric": "candidate ranking accuracy / pairwise ordering",
+      "role": "diagnostic"
+    }
+  ],
+  "split_level_aggregation": "unweighted mean over decision events",
+  "status": "PROSPECTIVELY_FROZEN"
+}

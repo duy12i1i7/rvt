@@ -1,0 +1,59 @@
+{
+  "development_versus_confirmatory": {
+    "confirmatory_evidence": [
+      "V3 VALIDATION",
+      "the sealed final test, if it remains unobserved"
+    ],
+    "development_evidence": [
+      "V2 TRAIN",
+      "V2 VALIDATION",
+      "all V2 audits and gate-7 forensics",
+      "V3 TRAIN"
+    ],
+    "labelling_required_in_every_table": true
+  },
+  "honest_statements_required": [
+    "a predeclared gate caught a real property of the data; this is evidence the protocol worked",
+    "p is defined relative to the frozen simulation disturbance law",
+    "V3 TRAIN carries 10 layouts where V2 TRAIN carried 20"
+  ],
+  "narrative_chain": [
+    {
+      "date_evidence": "gate specification commit c17081fe, 2026-08-03, fourteen days before official TRAIN generation",
+      "event": "V2 prospectively froze a binary robust recoverability target with all-success aggregation over three matched replicas",
+      "stage": 1
+    },
+    {
+      "event": "official V2 TRAIN and VALIDATION were generated and sealed",
+      "stage": 2
+    },
+    {
+      "event": "frozen label-audit gate 7 FAILED",
+      "must_be_reported": true,
+      "stage": 3,
+      "value": "TRAIN F9/LINE 59/530 = 0.11132075471698113 against a permitted 0.10"
+    },
+    {
+      "event": "read-only forensic diagnosis over a full census of all 1382 three-replica events",
+      "finding": "no implementation, randomness, provenance, replay or label defect",
+      "stage": 4
+    },
+    {
+      "event": "root cause classified INTRINSIC_STOCHASTIC_BOUNDARY_WITH_VALID_CURRENT_LABELS",
+      "mechanism": "target_metric_v3_dwell_complete flips in 59 of 59 unstable aggregates; F9 is the dynamic-obstacle family and F9/LINE sits near an even split",
+      "stage": 5
+    },
+    {
+      "event": "V3 probabilistic target frozen prospectively",
+      "key_point": "the target type was chosen from the disturbance semantics -- an explicitly specified uniform-disk law sampled iid per replica -- not from the failing statistic",
+      "stage": 6
+    },
+    {
+      "event": "fresh V3 TRAIN and fresh confirmatory V3 VALIDATION identities frozen before any generation",
+      "stage": 7
+    }
+  ],
+  "phase9d_v3f_publication_provenance_sha256": "a6549f1aea47d9241845de667d86cf3b6a8c8cb0fb47988b11b8d4846ae88b43",
+  "schema_version": "rvt-phase9d-v3f-publication-provenance/v1",
+  "v2_failure_hidden": false
+}

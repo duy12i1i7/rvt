@@ -1,0 +1,89 @@
+{
+  "F16_no_data_generation": {
+    "artifacts_are_dry_manifests_and_contracts_only": true,
+    "v3_candidate_rollouts": 0,
+    "v3_scientific_rows": 0,
+    "v3_selected_states_generated": 0,
+    "v3_source_episodes_executed": 0
+  },
+  "F17_historical_v2_immutability": {
+    "forensic_artifacts_verify": true,
+    "forensic_root_cause": "INTRINSIC_STOCHASTIC_BOUNDARY_WITH_VALID_CURRENT_LABELS",
+    "gate7_result": "FAIL",
+    "gate7_still_fail": true,
+    "gate7_threshold": 0.1,
+    "gate7_threshold_unchanged": true,
+    "v2_code_or_contract_needed_for_replay_mutated": false,
+    "v2_train_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "v2_train_seal_unchanged": true,
+    "v2_validation_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "v2_validation_seal_unchanged": true
+  },
+  "compute_plan": {
+    "estimated_total_cpu_hours": 31.95,
+    "estimated_wall_hours_at_12_workers": 2.66,
+    "maximum_candidate_aggregates": 15000,
+    "maximum_candidate_replica_rollouts": 21000,
+    "maximum_selected_events": 7500,
+    "source_episodes": 1500
+  },
+  "declared_consequence": {
+    "affects_held_out_property": false,
+    "cause": "only two layout offsets were authorized and one must serve VALIDATION",
+    "item": "V3 TRAIN layout diversity",
+    "owner_option": "authorizing train-split variant 2 (offset 0.22) or 3 (offset 0.33) would restore 20 TRAIN layouts; neither is authorized and neither was used",
+    "owner_option_recorded": true,
+    "v2_train_layouts": 20,
+    "v3_train_layouts": 10
+  },
+  "disjointness": {
+    "all_disjoint": true,
+    "axes_checked": 19,
+    "exclusion_union_identities": 1880,
+    "v3_train_intersection": 0,
+    "v3_validation_intersection": 0
+  },
+  "frozen_identity_pools": {
+    "both_frozen_before_generation": true,
+    "v3_train_layouts": 10,
+    "v3_train_source_episodes": 1200,
+    "v3_validation_layouts": 10,
+    "v3_validation_source_episodes": 300
+  },
+  "frozen_v3_contract_hashes": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "referenced_unchanged": {
+      "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+      "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+    },
+    "v3_comprehensive_development_exclusion_union_sha256": "0d0d95359a75600b0e7df318606735b6ab69f76390a7f501d73c70e17f457971",
+    "v3_layout_split_registry_sha256": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+    "v3_train_manifest_dry_sha256": "82b338e73438f5b82fa1522925fe7e31646471082abd17e49698c12ffd57121e",
+    "v3_validation_manifest_dry_sha256": "e6b41025fb607743d4ab98b868832a095692b8aebb0d411df53fe3fd81a75630"
+  },
+  "h1_owner_rewording_required": false,
+  "handoff_commit": "c1b2cce2eb45adcb547b0975a28ffaed5e55d239",
+  "not_authorized_by_this_verdict": "DATA GENERATION",
+  "phase": "PHASE_9D_V3F",
+  "phase9d_v3f_final_readiness_sha256": "81563e6cfad0659c492e8fd09916e2e4c1ee455889de3d3b93072d44c4d4ce6f",
+  "recommendation": "AUTHORIZE_RECOVERABILITY_V3_IMPLEMENTATION_AND_QUALIFICATION",
+  "schema_version": "rvt-phase9d-v3f-final-readiness/v1",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "final_test_identities_enumerated": 0,
+    "gate7_modifications": 0,
+    "hyperparameter_trials": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v2_mutations": 0,
+    "v3_code_implemented": 0,
+    "v3_rows_generated": 0
+  },
+  "verdict": "A",
+  "verdict_text": "Owner decisions are scientifically consistent with repository authority, all V3 scientific contracts and both fresh TRAIN and VALIDATION identity pools are prospectively frozen with an exhaustive disjointness proof, V2 history including the gate-7 failure is preserved unchanged, and V3 is ready for additive implementation and qualification."
+}

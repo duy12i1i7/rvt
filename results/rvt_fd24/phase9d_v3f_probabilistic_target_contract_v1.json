@@ -1,0 +1,79 @@
+{
+  "abstention": {
+    "ABSTENTION_TARGET": "NONE",
+    "BOUNDARY_CLASS": "NONE",
+    "THREE_STATE_TARGET": "NONE"
+  },
+  "disturbance_law": {
+    "SCOPE_LIMITATION": "p is defined RELATIVE TO this frozen simulation disturbance law only. No claim is made about any real-world disturbance population. Every report using p must state this.",
+    "application": "additive command disturbance BEFORE the unchanged safety projection",
+    "authority": "docs/PHASE8E_INITIALIZATION_AND_DISTURBANCE_CONTRACT.md",
+    "authority_sha256": "43901ce5faa908b64819728d0fba452844635bf62f6e8062bda50fd447c454d8",
+    "distribution": "uniform on a disk of radius 0.05 * a_max",
+    "iid_across_replicas": true,
+    "mapping": "r = r_max * sqrt(u_r), theta = 2*pi*u_theta",
+    "prf": "sha256-canonical-counter-uint64/v1 via counter_uniform",
+    "process": "counterfactual robot acceleration",
+    "refresh": "every control step, counter-key independent, keyed by (robot_id, control_step, radius|angle)"
+  },
+  "historical_relation": {
+    "supersedes_for_v3_only": "the V2 all-success binary aggregate",
+    "v2_contracts_modified": false,
+    "v2_data_relabelled": false
+  },
+  "mixed_outcomes": {
+    "discarded": false,
+    "filtered": false,
+    "is_abstain": false,
+    "is_generation_invalid": false,
+    "outcome_dependent_filtering_permitted": false,
+    "patterns": [
+      "001",
+      "010",
+      "100",
+      "011",
+      "101",
+      "110"
+    ],
+    "status": "VALID_SUPERVISION"
+  },
+  "model_output": {
+    "abstain_output": false,
+    "hard_class_output": false,
+    "per": "one robot-local graph and one candidate topology",
+    "range": "(0, 1)",
+    "symbol": "p_hat"
+  },
+  "name": "RECOVERABILITY_PROBABILISTIC_TARGET_V3",
+  "observation": {
+    "R": "the frozen replica count for the family and candidate",
+    "canonical_form": "(k, R)",
+    "derived_descriptive_value": "k / R, stored for convenience only",
+    "k": "sum over replicas r of Y_{e,tau,r}",
+    "not_a_hard_thresholded_p_estimate": true,
+    "not_a_three_state_class": true,
+    "not_an_abstention_label": true,
+    "not_an_all_success_binary_label": true
+  },
+  "per_replica_target": {
+    "contract": "Target V4, UNCHANGED",
+    "naming_rule": "the V3 aggregate is NEVER called Target V4",
+    "outcome": "Y_r in {0, 1} for replica r, determined by the unchanged full-task rollout contract",
+    "redefined_by_v3": false,
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "phase9d_v3f_probabilistic_target_contract_sha256": "8f3a3a7a8528f7f271901cf31822a9169982579c200a1c326714225c3461326d",
+  "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+  "runtime_threshold_frozen_here": false,
+  "schema_version": "rvt-recoverability-probabilistic-target/v3",
+  "scientific_quantity": {
+    "definition": "P(Target-V4 task-success outcome = 1 | robot-local scientific state x, candidate topology tau, frozen disturbance law D)",
+    "expectation_form": "p(x, tau) = E_D[ Y(x, tau, D) ]",
+    "support": "(0, 1) for model output; the observed fraction k/R lies in [0, 1]",
+    "symbol": "p(x, tau)"
+  },
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "source_acquisition_unchanged": true,
+  "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_GENERATION",
+  "supervision_weighting": "FROZEN_EVENT_EQUAL_WEIGHT_V3"
+}

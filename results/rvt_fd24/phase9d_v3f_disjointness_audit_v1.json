@@ -1,0 +1,150 @@
+{
+  "all_disjoint": true,
+  "axes": [
+    {
+      "axis": "v3_train vs v3_validation (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v3_validation (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v3_validation (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_train vs v2_train (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_train vs v2_validation (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_validation vs v2_train (identity)",
+      "left": 300,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_validation vs v2_validation (identity)",
+      "left": 300,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v2_train (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_train vs v2_validation (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_validation vs v2_train (episode_id)",
+      "left": 300,
+      "overlap": 0,
+      "right": 1200
+    },
+    {
+      "axis": "v3_validation vs v2_validation (episode_id)",
+      "left": 300,
+      "overlap": 0,
+      "right": 300
+    },
+    {
+      "axis": "v3_train vs v2_train (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 20
+    },
+    {
+      "axis": "v3_train vs v2_validation (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_validation vs v2_train (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 20
+    },
+    {
+      "axis": "v3_validation vs v2_validation (layout_sha256)",
+      "left": 10,
+      "overlap": 0,
+      "right": 10
+    },
+    {
+      "axis": "v3_train vs V2 development exclusion union (identity)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_validation vs V2 development exclusion union (identity)",
+      "left": 300,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_train vs V2 development exclusion union (episode_id)",
+      "left": 1200,
+      "overlap": 0,
+      "right": 380
+    },
+    {
+      "axis": "v3_validation vs V2 development exclusion union (episode_id)",
+      "left": 300,
+      "overlap": 0,
+      "right": 380
+    }
+  ],
+  "axes_with_nonzero_overlap": [],
+  "covered_development_domains": {
+    "h1r_design_pilots": "inside the V2 comprehensive union",
+    "v2_audit_replay_identities": "proved in Phase 9G-V2A-V to contribute zero NEW non-official identities; the V2T replay drew only from official V2 TRAIN, which is covered above",
+    "v2_train": "compiled from the frozen job manifest",
+    "v2_validation": "compiled from the frozen job manifest",
+    "v2i_canaries": "inside the V2 comprehensive union",
+    "v2i_rc_canaries": "inside the V2 comprehensive union",
+    "v2q_qualification_canaries": "inside the V2 comprehensive union",
+    "v2qr_target_canaries": "inside the V2 comprehensive union",
+    "v3d_design_diagnostics": "Phase 9D-V3D executed no scientific identity; it was analysis over committed artifacts only"
+  },
+  "identity_key": [
+    "study",
+    "split",
+    "family",
+    "team_size",
+    "layout_id",
+    "source_policy",
+    "episode_id",
+    "seed_identity"
+  ],
+  "phase9d_v3f_disjointness_audit_sha256": "deb2235c19bd5855c8bc6de8111d8cc8a032e1d554c6a4db4acd60f6b5e139e4",
+  "schema_version": "rvt-phase9d-v3f-disjointness/v1",
+  "sealed_final_domain": {
+    "final_identities_revealed": false,
+    "final_test_enumerated": false,
+    "final_test_identities_inspected": 0,
+    "proof_mechanism": "generate_layouts raises PermissionError for final_test without sealed authorization and derive_seed refuses final-test derivation, so V3 identities cannot collide with final-test identities without triggering those guards. The geometry offsets also separate them: V3 uses 0.54 and 0.65 against the final-test base 0.79."
+  },
+  "total_axes": 19
+}

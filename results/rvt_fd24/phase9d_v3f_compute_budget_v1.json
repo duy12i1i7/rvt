@@ -1,0 +1,64 @@
+{
+  "assumptions": [
+    "per-replica cost taken from the instrumented V2 VALIDATION run",
+    "caps assume K = 5 selection for every episode, which will not occur",
+    "no allowance for eligibility changes"
+  ],
+  "combined": {
+    "estimated_total_cpu_hours": 31.95,
+    "estimated_wall_hours_at_12_workers": 2.66,
+    "maximum_candidate_aggregates": 15000,
+    "maximum_candidate_replica_rollouts": 21000,
+    "maximum_selected_events": 7500,
+    "source_episodes": 1500
+  },
+  "generation_performed": 0,
+  "measured_basis": {
+    "cpu_seconds_per_replica_execution": 5.2814,
+    "cpu_seconds_per_source_episode": 2.7423,
+    "replica_executions": 3710,
+    "source": "results/rvt_fd24/phase9g_v2a_v_official_validation_closure_v1.json",
+    "source_episodes": 300,
+    "stage_a_cpu_seconds": 822.7,
+    "stage_b_cpu_seconds": 19594.0,
+    "workers": 12
+  },
+  "method": "caps only -- every source episode is assumed to yield the maximum K = 5 selected events. Actual counts will be lower wherever M < 5, so these are upper bounds and contain no outcome-dependent estimate.",
+  "phase9d_v3f_compute_budget_sha256": "1f727dd702045c1269b0fbcc9a41a3ab2598fcd2ae4c6c3a2a1b15e35230ccf9",
+  "planning_only": true,
+  "replica_plan_derivation": "R = 3 applies to F8 and F9 only, which are 2 of 10 families, so 20% of episodes carry three replicas per candidate",
+  "schema_version": "rvt-phase9d-v3f-compute-budget/v1",
+  "storage_estimate": {
+    "basis": "V2 produced 113514 rows in 2119908483 bytes",
+    "note": "row count depends on retained events and team size, not on replica count, so V3 storage is expected to be comparable",
+    "rows_scale_with_R": false
+  },
+  "v3_train": {
+    "episodes_R1": 960,
+    "episodes_R3": 240,
+    "estimated_stage_a_cpu_hours": 0.914,
+    "estimated_stage_b_cpu_hours": 24.65,
+    "estimated_total_cpu_hours": 25.56,
+    "estimated_wall_hours_at_12_workers": 2.13,
+    "maximum_candidate_aggregates": 12000,
+    "maximum_candidate_replica_rollouts": 16800,
+    "maximum_selected_events": 6000,
+    "maximum_selected_events_from_R1_families": 4800,
+    "maximum_selected_events_from_R3_families": 1200,
+    "source_episodes": 1200
+  },
+  "v3_validation": {
+    "episodes_R1": 240,
+    "episodes_R3": 60,
+    "estimated_stage_a_cpu_hours": 0.229,
+    "estimated_stage_b_cpu_hours": 6.16,
+    "estimated_total_cpu_hours": 6.39,
+    "estimated_wall_hours_at_12_workers": 0.53,
+    "maximum_candidate_aggregates": 3000,
+    "maximum_candidate_replica_rollouts": 4200,
+    "maximum_selected_events": 1500,
+    "maximum_selected_events_from_R1_families": 1200,
+    "maximum_selected_events_from_R3_families": 300,
+    "source_episodes": 300
+  }
+}

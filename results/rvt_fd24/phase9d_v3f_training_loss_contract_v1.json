@@ -1,0 +1,96 @@
+{
+  "aggregation_order": [
+    "1. compute the robot-local prediction term for each of the N robot rows within one (event, candidate)",
+    "2. average over the N robots",
+    "3. average the two candidate terms with weight 0.5 each",
+    "4. the complete event unit carries weight 1"
+  ],
+  "candidate_term": {
+    "R1_reduction": "for R = 1 this is exactly -[k*log p + (1-k)*log(1-p)], the ordinary Bernoulli BCE of the frozen loss contract",
+    "division_by_R": "MANDATORY",
+    "formula": "L_candidate = -[ k*log(p) + (R-k)*log(1-p) ] / R",
+    "numerical_safety": "p must be clamped away from 0 and 1, or computed from logits with a log-sum-exp-stable formulation; the implementation phase must specify which",
+    "why": "L_candidate is then the MEAN per-replica negative log likelihood, which is invariant to R. Without it an R = 3 candidate would contribute three times the gradient of an R = 1 candidate, and since F8 and F9 are the only multi-replica families this would silently up-weight exactly the two stochastic families."
+  },
+  "class_weighting": "NONE",
+  "dataset_term": "average over decision events",
+  "f9_upweighting": "NONE",
+  "implemented": false,
+  "invariance_proofs": {
+    "N_invariance": {
+      "claim": "total event weight does not depend on team size",
+      "counterexample_avoided": "a raw row mean would give N = 16 a weight of 32/10 = 3.2 relative to N = 5",
+      "proof": "step 2 divides by N, so the N robot rows contribute a mean, not a sum. An N = 16 event and an N = 5 event both emerge from step 2 with one value per candidate.",
+      "verified_in_worked_examples": true
+    },
+    "R_invariance": {
+      "claim": "total event weight does not depend on replica count",
+      "proof": "the candidate term divides by R, so k successes among R replicas contribute a mean per-replica log likelihood. An R = 3 candidate and an R = 1 candidate both emerge with one value.",
+      "verified_in_worked_examples": true
+    }
+  },
+  "name": "FROZEN_EVENT_EQUAL_WEIGHT_V3",
+  "phase9d_v3f_training_loss_contract_sha256": "562f6dce9c158e22632687d60dea3d2a68ee1e73bae8ca2578218a45d423b765",
+  "positive_class_weight": "NONE",
+  "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+  "relation_to_frozen_loss_contract": {
+    "L_rec_currently": "binary cross-entropy with logits, no class weighting, focal term or oversampling",
+    "authority": "docs/RVT_FD24_LOSS_CONTRACT.md",
+    "authority_sha256": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e",
+    "contradiction": false,
+    "v3_relation": "GENERALIZATION -- V3 reduces exactly to the frozen L_rec when R = 1, and extends it for R > 1"
+  },
+  "schema_version": "rvt-recoverability-training-loss/v3",
+  "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_TRAINING",
+  "stochastic_family_reweighting": "NONE",
+  "worked_examples": [
+    {
+      "R": 1,
+      "k": 1,
+      "p_hat": 0.7,
+      "per_candidate_loss_before_aggregation": 0.3566749439,
+      "rows_per_candidate": 5,
+      "step_1_robot_mean": "identical p_hat across robots in this worked example, so the robot mean equals the per-row value",
+      "step_2_candidate_mean": "0.5 * (COMPACT term + LINE term)",
+      "step_3_event_weight": 1.0,
+      "team_size": 5,
+      "total_event_weight": 1.0
+    },
+    {
+      "R": 1,
+      "k": 1,
+      "p_hat": 0.7,
+      "per_candidate_loss_before_aggregation": 0.3566749439,
+      "rows_per_candidate": 16,
+      "step_1_robot_mean": "identical p_hat across robots in this worked example, so the robot mean equals the per-row value",
+      "step_2_candidate_mean": "0.5 * (COMPACT term + LINE term)",
+      "step_3_event_weight": 1.0,
+      "team_size": 16,
+      "total_event_weight": 1.0
+    },
+    {
+      "R": 3,
+      "k": 3,
+      "p_hat": 0.7,
+      "per_candidate_loss_before_aggregation": 0.3566749439,
+      "rows_per_candidate": 5,
+      "step_1_robot_mean": "identical p_hat across robots in this worked example, so the robot mean equals the per-row value",
+      "step_2_candidate_mean": "0.5 * (COMPACT term + LINE term)",
+      "step_3_event_weight": 1.0,
+      "team_size": 5,
+      "total_event_weight": 1.0
+    },
+    {
+      "R": 3,
+      "k": 3,
+      "p_hat": 0.7,
+      "per_candidate_loss_before_aggregation": 0.3566749439,
+      "rows_per_candidate": 16,
+      "step_1_robot_mean": "identical p_hat across robots in this worked example, so the robot mean equals the per-row value",
+      "step_2_candidate_mean": "0.5 * (COMPACT term + LINE term)",
+      "step_3_event_weight": 1.0,
+      "team_size": 16,
+      "total_event_weight": 1.0
+    }
+  ]
+}
