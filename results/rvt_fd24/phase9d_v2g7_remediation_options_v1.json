@@ -1,0 +1,137 @@
+{
+  "CLEAN_PROSPECTIVE_REPAIR": [
+    "D",
+    "E"
+  ],
+  "G25_ranking_by_scientific_defensibility": [
+    {
+      "class": "CLEAN_PROSPECTIVE_REPAIR",
+      "option": "E",
+      "rank": 1,
+      "why": "preserves a binary target close to the current scientific meaning, gives the ambiguous region declared semantics instead of hiding it, and can be frozen prospectively and confirmed on fresh identities"
+    },
+    {
+      "class": "CLEAN_PROSPECTIVE_REPAIR",
+      "option": "D",
+      "rank": 2,
+      "why": "scientifically the most faithful description of stochastic families and already partly supported by the frozen checkpoint contract's Brier term, but it changes the loss, the metric set and the H1 framing, and costs the most compute"
+    },
+    {
+      "class": "mixed",
+      "option": "C",
+      "rank": 3,
+      "why": "useful only as a component of D or E; alone it provably worsens the failing statistic"
+    },
+    {
+      "class": "POSTHOC_SALVAGE",
+      "option": "A",
+      "rank": 4,
+      "why": "cheapest and least defensible; the amended threshold would sit just above the observed failure"
+    },
+    {
+      "class": "POSTHOC_SALVAGE",
+      "option": "B",
+      "rank": 5,
+      "why": "outcome-dependent filtering that also damages H1 and H2 scope"
+    }
+  ],
+  "POSTHOC_SALVAGE": [
+    "A",
+    "B"
+  ],
+  "none_implemented": true,
+  "options": [
+    {
+      "cheapest": true,
+      "class": "POSTHOC_SALVAGE",
+      "compute": "none",
+      "consequences": [
+        "the threshold would be selected after observing the failing result, which is the definition of a post-hoc gate amendment",
+        "V2 VALIDATION outcomes have also already been observed, so the amendment would be informed by both splits",
+        "it destroys the prospective-qualification claim for gate 7 and weakens the credibility of the other eight gates by association",
+        "any published threshold would visibly sit just above the observed failure, which is the least defensible possible justification",
+        "it does not change any label or any scientific fact; it only changes what the project declared acceptable in advance"
+      ],
+      "description": "raise the gate-7 threshold from 0.10 to some value >= 0.1113207547",
+      "fresh_validation_required": false,
+      "id": "A",
+      "name": "RETROACTIVE_THRESHOLD_CHANGE",
+      "publication_risk": "high",
+      "recommended_merely_because_cheap": false
+    },
+    {
+      "class": "POSTHOC_SALVAGE",
+      "compute": "none",
+      "fresh_validation_required": true,
+      "id": "B",
+      "impacts": {
+        "H1_scope": "narrowed or destroyed",
+        "H2_scope": "severely damaged if F9 is excluded",
+        "candidate_conditioned_learning": "destroyed if LINE is excluded",
+        "data_acquisition_neutrality": "violated",
+        "outcome_dependent_filtering": true,
+        "paper_claims": "not defensible as presented"
+      },
+      "name": "EXCLUDE_F9_OR_LINE_OR_THE_59_EVENTS",
+      "publication_risk": "very high",
+      "variants": {
+        "exclude_F9": "removes the only dynamic-obstacle family. F9 is a required family in the H1 requirement map and one of only two families carrying genuine measured H2 topology headroom (6 of the 7 headroom cells). It would gut H2 and narrow H1's declared scope.",
+        "exclude_LINE": "removes one of the two candidate topologies, which destroys candidate-conditioned learning outright. H1 is a candidate-conditioned claim; this is not a repair, it is abandonment.",
+        "exclude_the_59_events": "outcome-dependent filtering. The 59 are identified by their observed replica disagreement, so removing them conditions the dataset on the label outcome. It is only legitimate if a NEW prospectively frozen target explicitly defines such states as abstentions before they are observed."
+      }
+    },
+    {
+      "class": "depends on variant",
+      "compute": "linear in R across all F8/F9 events",
+      "fresh_validation_required": true,
+      "id": "C",
+      "name": "MORE_REPLICAS",
+      "operational_strengthening_vs_new_science": "only the first variant would be mere operational strengthening, and it is the one that provably fails",
+      "publication_risk": "low if declared prospectively",
+      "variants": {
+        "more_replicas_for_confidence_bound_robust_classification": "a NEW SCIENTIFIC TARGET as well, though it preserves a binary output. It changes how the label is derived.",
+        "more_replicas_to_estimate_a_probabilistic_target": "a NEW SCIENTIFIC TARGET, not operational strengthening. It changes what the label means.",
+        "same_binary_all_success_target_and_same_disagreement_gate": "MATHEMATICALLY_COUNTERPRODUCTIVE. Disagreement probability 1 - p^R - (1-p)^R is strictly increasing in R for every p in (0,1), so more replicas strictly worsen the gate-7 statistic. This variant cannot work."
+      }
+    },
+    {
+      "class": "CLEAN_PROSPECTIVE_REPAIR",
+      "compute": "high",
+      "considerations": {
+        "calibration": "becomes a first-class evaluation requirement",
+        "compatibility_with_H1": "H1 is about selection improving episode task success; a calibrated probability supports selection at least as well as a binary label, but the H1 statement and its 0.08 threshold would need re-examination rather than silent reuse",
+        "decentralized_runtime": "a probability is as deployable as a binary score for local ranking",
+        "evaluation_metrics": "Brier score already appears in the frozen checkpoint selection contract, which is a point in this option's favour",
+        "loss": "the frozen loss contract specifies BCE with logits and no class weighting; BCE against a soft target is a change to L_rec that must be prospectively frozen",
+        "model_output": "a scalar in [0,1] per candidate",
+        "replicas": "materially more than 3 are needed for a usable estimate; 3 gives only {0, 1/3, 2/3, 1}",
+        "sample_cost": "the dominant cost driver",
+        "scientific_interpretation": "directly expresses what the stochastic families actually produce, and makes the boundary region the signal rather than a quality defect"
+      },
+      "description": "target P(success | local state, candidate topology, disturbance distribution) instead of a binary all-success label over three replicas",
+      "designed_around_the_observed_threshold": false,
+      "fresh_validation_required": true,
+      "id": "D",
+      "name": "PROBABILISTIC_TARGET",
+      "publication_risk": "low"
+    },
+    {
+      "class": "CLEAN_PROSPECTIVE_REPAIR",
+      "compute": "moderate to high",
+      "considerations": {
+        "abstain_semantics": "would make the 59-type events a declared third class rather than silently dropped data, which is the only principled way to set them aside",
+        "closest_to_current_semantics": true,
+        "parameter_selection": "k, R and any confidence level must be motivated scientifically and frozen before generation, never chosen to make the current dataset pass",
+        "stability_gate": "a successor stability gate would need to be defined on the new target, since a disagreement-frequency gate remains R-sensitive"
+      },
+      "description": "a prospectively frozen robust binary target, for example a lower confidence bound on success probability, a predeclared k-of-R criterion, or robust-positive / robust-negative / ambiguous-abstain semantics",
+      "designed_around_the_observed_threshold": false,
+      "fresh_validation_required": true,
+      "id": "E",
+      "name": "ROBUST_BINARY_TARGET_V3",
+      "publication_risk": "low"
+    }
+  ],
+  "phase9d_v2g7_remediation_options_sha256": "045caa7a01fc9b44d85eeed1fa3f43ec6f17f2e9979dd3d2219bf340a010b255",
+  "schema_version": "rvt-phase9d-v2g7-remediation-options/v1"
+}

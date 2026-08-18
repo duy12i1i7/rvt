@@ -1,0 +1,69 @@
+{
+  "GATE7_IMPLEMENTATION_DEFECT": false,
+  "Q6_why_f9_compact_is_stable": {
+    "disturbance_applied_to_compact": true,
+    "disturbance_evidence": "0 of 530 TRAIN F9/COMPACT aggregates have identical replica final states; 127 of 530 even differ in control-step count",
+    "explanation": "the disturbance reaches COMPACT and perturbs its trajectory, but never flips its Target V4 outcome. COMPACT's outcomes are bimodal and far from the boundary (55 all-positive vs 475 all-negative, rate 0.1038), whereas F9/LINE sits near an even split (0.4792). An elongated LINE chain additionally has more exposed geometry for a moving obstacle to disrupt and must complete a topology transition. The asymmetry is physical, not procedural.",
+    "stream_mismatch_explains_it": false,
+    "train_f9_compact": "0/530",
+    "validation_f9_compact": "0/138"
+  },
+  "alternatives_excluded": {
+    "A_IMPLEMENTATION_OR_PROVENANCE_DEFECT": {
+      "evidence": [
+        "0 matched-stream mismatches over 4146 COMPACT/LINE replica pairs",
+        "0 matched-seed collisions among 4146 distinct draws",
+        "0 candidate job seeds shared across candidates",
+        "0 events with divergent initial_clone_hash across replicas",
+        "no replica index is a systematic dissenter: maximum chi-square 4.2034 on 2 df against a 5.991 critical value",
+        "CounterStream is a pure counter-based PRF, so worker order, scheduling and retry cannot affect any draw",
+        "the producer itself raises OfficialProducerError if COMPACT and LINE matched seeds ever diverge, and official generation completed without error"
+      ],
+      "excluded": true
+    },
+    "B_TARGET_LABEL_IMPLEMENTATION_DEFECT": {
+      "evidence": [
+        "0 all-success rule violations across all 2764 aggregates",
+        "every bit pattern maps to the label the frozen rule prescribes: 111 -> 1, everything else -> 0",
+        "0 replay label mismatches and 0 disposition mismatches against the sealed ledger"
+      ],
+      "excluded": true
+    },
+    "D_SOURCE_ACQUISITION_DEFECT": {
+      "evidence": [
+        "instability appears under all six source policies including the scripted diagnostic",
+        "the acquisition rule is candidate-blind and identical for F9/COMPACT, which shows zero instability on the same selected states",
+        "the ordinal gradient is a property of trajectory position, not of the selection rule, which samples ordinals uniformly by construction"
+      ],
+      "excluded": true
+    },
+    "E_GATE7_SCIENTIFIC_SEMANTIC_MISALIGNMENT": {
+      "excluded_as_primary": true,
+      "note": "under all-success aggregation the disagreement frequency is structurally largest in the informative decision-boundary region. That is a real consideration for designing a successor protocol, but this phase does not assert that the frozen gate is defective, and it is not used to justify changing it.",
+      "retained_as_secondary_design_consideration": true
+    },
+    "F_INSUFFICIENT_EVIDENCE": {
+      "evidence": "a full census of all 1382 three-replica events in both splits, with per-replica labels, predicates, seeds and state hashes",
+      "excluded": true
+    }
+  },
+  "classification_letter": "C",
+  "evidence_for_C": [
+    "the disturbance demonstrably perturbs every rollout: all 2764 aggregates show three distinct replica final_state_hash values from one shared initial_clone_hash",
+    "instability is broadly distributed across both TRAIN F9 layouts, all five team sizes, all six source policies and 48 of 120 episodes",
+    "it varies systematically and physically: rising with team size (0.0417 at N=6 to 0.1939 at N=12) and falling with selection ordinal (0.2667 at ordinal 0 to 0.0000 at ordinal 4), with unstable events sitting earlier in the trajectory (mean fraction 0.2478 vs 0.4652)",
+    "one physical mechanism dominates: target_metric_v3_dwell_complete fails in the dissenting negative replica in 59 of 59 unstable aggregates and in no positive replica of the same aggregate",
+    "the pattern split is two-sided and near balanced (27 one-success vs 32 two-success), which is boundary behaviour rather than a rare tail",
+    "F9 is the family whose dynamic obstacle is the intended stochastic element, and F9/LINE is the most evenly split cell in the dataset (254 all-positive vs 217 all-negative)",
+    "every mixed aggregate carries disposition VALID_TASK_NEGATIVE and label 0; there is no GENERATION_INVALID anywhere in the census",
+    "the frozen rollout protocol anticipates exactly this state: 'Mixed outcomes set the instability flag; numerical invalidity sets invalid and blocks the row'"
+  ],
+  "gate7_measurement_invalidated": false,
+  "phase9d_v2g7_root_cause_sha256": "a046e4767573baa7f416ab1b83c13d140071909bfedea0ce3997c82a81fcceac",
+  "primary_classification": "INTRINSIC_STOCHASTIC_BOUNDARY_WITH_VALID_CURRENT_LABELS",
+  "schema_version": "rvt-phase9d-v2g7-root-cause/v1",
+  "secondary_factors": [
+    "gate 7 can only be evaluated on F8 and F9, so the whole gate rests on the two families deliberately built to be stochastic",
+    "the failing cell exceeds the threshold by six aggregates out of 530"
+  ]
+}

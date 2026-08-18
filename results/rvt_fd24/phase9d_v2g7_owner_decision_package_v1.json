@@ -1,0 +1,69 @@
+{
+  "agent_recommendation_recorded_separately": true,
+  "agent_selected_a_decision": false,
+  "choices": [
+    {
+      "compute": "none",
+      "data_reusable": "all of it, as sealed evidence and for protocol development",
+      "fresh_validation_required": false,
+      "id": 1,
+      "must_be_regenerated": "nothing",
+      "name": "KEEP_FROZEN_V2_GATE7_AND_REJECT_CURRENT_DATA_FOR_TRAINING",
+      "publication": "strongest integrity story; but H1 Recoverability has no trained model, so the primary contribution is lost",
+      "risk": "the paper's central claim cannot be evaluated at all",
+      "scientific_rationale": "the gate was frozen 14 days before the data existed, the measurement is a full census with zero defects, and the frozen rule says a failed gate blocks training. Honouring it is the maximally defensible position.",
+      "what_changes": "nothing scientific; Recoverability V2 training is abandoned under this protocol",
+      "what_stays_frozen": "everything -- gate 7, Target V4, the acquisition protocol, both seals"
+    },
+    {
+      "compute": "none",
+      "data_reusable": "all of it, unchanged",
+      "fresh_validation_required": false,
+      "id": 2,
+      "label": "SCIENTIFICALLY WEAKER",
+      "must_be_regenerated": "nothing",
+      "name": "POSTHOC_AMEND_GATE7",
+      "publication": "must be reported transparently as a post-hoc amendment with the original failing value stated; it weakens every prospective-qualification claim, not only gate 7's",
+      "risk": "reviewers can see the amended threshold sits just above the observed failure",
+      "scientific_rationale": "the observed exceedance is six aggregates out of 530 and is statistically compatible with an underlying 0.10 (one-sided exact p = 0.2108). An owner may judge the frozen 0.10 to have been mis-specified.",
+      "what_changes": "the gate-7 threshold, chosen after seeing the failure",
+      "what_stays_frozen": "Target V4, acquisition, labels, seals"
+    },
+    {
+      "compute": "high -- a full regeneration of candidate execution, plus more replicas if the new target needs them",
+      "data_reusable": "source episodes, Stage-A snapshots and graph inputs are reusable; aggregate labels and labelled rows are not; the existing three replicas are a usable prefix only under explicit prospective authorization",
+      "fresh_validation_reason": "V2 VALIDATION outcomes informed this diagnosis, so they are development evidence and cannot serve as untouched confirmation for a protocol they helped shape",
+      "fresh_validation_required": true,
+      "id": 3,
+      "must_be_regenerated": "candidate rollouts and all labelled rows",
+      "name": "PROSPECTIVE_V3_STOCHASTIC_RECOVERABILITY_REPAIR",
+      "publication": "cleanest prospective story: a predeclared gate caught a real property of the data, the cause was diagnosed, and a better-specified successor was frozen in advance and confirmed on fresh identities",
+      "risk": "highest compute cost and schedule impact; the H1 statement and its 0.08 threshold may need re-examination rather than silent reuse",
+      "scientific_rationale": "the forensics show genuine two-sided stochastic boundary behaviour with valid labels and no defect. A successor target that represents that behaviour explicitly -- robust binary with an abstain class, or a calibrated probability -- addresses the cause rather than the symptom.",
+      "what_changes": "Target semantics, the rollout/aggregation contract, row identity, dataset namespace and seals; a successor stability gate defined on the new target",
+      "what_stays_frozen": "the source-acquisition protocol V2, the source episode budget, the split policy, the scenario families and layouts"
+    },
+    {
+      "compute": "unspecified",
+      "data_reusable": "unspecified",
+      "evidence_found": false,
+      "fresh_validation_required": null,
+      "id": 4,
+      "must_be_regenerated": "unspecified",
+      "name": "OTHER_EVIDENCE_SUPPORTED_REPAIR",
+      "publication": "unspecified",
+      "risk": "unspecified",
+      "scientific_rationale": "reserved. This phase found no repository evidence for a materially better option than 1, 2 or 3.",
+      "what_changes": "unspecified",
+      "what_stays_frozen": "unspecified"
+    }
+  ],
+  "constraints_binding_every_choice": [
+    "the historical V2 gate-7 verdict is FAIL and cannot be retroactively changed by any of these choices",
+    "no choice may be justified by the fact that it makes the existing dataset pass",
+    "final-test layouts and outcomes remain sealed and must not inform any successor design"
+  ],
+  "decision_is_the_owners": true,
+  "phase9d_v2g7_owner_decision_package_sha256": "04c2312122b68fa582658b052ac012865fa7dd8d791d1737ba399c59c4d93089",
+  "schema_version": "rvt-phase9d-v2g7-owner-decision-package/v1"
+}

@@ -1,0 +1,126 @@
+{
+  "by_cell": {
+    "train/F8/COMPACT": {
+      "predicates_failing_only_in_negative_replicas": {
+        "collision_free_complete_horizon": 22,
+        "downstream_goal_complete": 22,
+        "safety_projection_resolved": 29,
+        "target_metric_v3_dwell_complete": 1
+      },
+      "termination_by_label": {
+        "0|COLLISION": 35,
+        "0|GOAL_COMPLETE": 28,
+        "1|GOAL_COMPLETE": 60
+      },
+      "unstable_events": 41
+    },
+    "train/F8/LINE": {
+      "predicates_failing_only_in_negative_replicas": {
+        "candidate_commitment_valid": 7,
+        "collision_free_complete_horizon": 21,
+        "downstream_goal_complete": 21,
+        "protocol_resolved": 21,
+        "safety_projection_resolved": 24,
+        "target_metric_v3_dwell_complete": 27,
+        "transition_execution_valid": 7
+      },
+      "termination_by_label": {
+        "0|COLLISION": 27,
+        "0|GOAL_COMPLETE": 19,
+        "1|GOAL_COMPLETE": 59
+      },
+      "unstable_events": 35
+    },
+    "train/F9/LINE": {
+      "predicates_failing_only_in_negative_replicas": {
+        "candidate_commitment_valid": 9,
+        "collision_free_complete_horizon": 50,
+        "downstream_goal_complete": 50,
+        "protocol_resolved": 50,
+        "safety_projection_resolved": 50,
+        "target_metric_v3_dwell_complete": 59,
+        "transition_execution_valid": 9
+      },
+      "termination_by_label": {
+        "0|COLLISION": 70,
+        "0|GOAL_COMPLETE": 16,
+        "1|GOAL_COMPLETE": 91
+      },
+      "unstable_events": 59
+    },
+    "validation/F8/COMPACT": {
+      "predicates_failing_only_in_negative_replicas": {
+        "collision_free_complete_horizon": 3,
+        "downstream_goal_complete": 3,
+        "safety_projection_resolved": 5
+      },
+      "termination_by_label": {
+        "0|COLLISION": 4,
+        "0|GOAL_COMPLETE": 6,
+        "1|GOAL_COMPLETE": 14
+      },
+      "unstable_events": 8
+    },
+    "validation/F8/LINE": {
+      "predicates_failing_only_in_negative_replicas": {
+        "candidate_commitment_valid": 1,
+        "collision_free_complete_horizon": 2,
+        "downstream_goal_complete": 2,
+        "protocol_resolved": 2,
+        "safety_projection_resolved": 2,
+        "target_metric_v3_dwell_complete": 3,
+        "transition_execution_valid": 1
+      },
+      "termination_by_label": {
+        "0|COLLISION": 4,
+        "0|GOAL_COMPLETE": 1,
+        "1|GOAL_COMPLETE": 4
+      },
+      "unstable_events": 3
+    },
+    "validation/F9/LINE": {
+      "predicates_failing_only_in_negative_replicas": {
+        "collision_free_complete_horizon": 8,
+        "downstream_goal_complete": 8,
+        "protocol_resolved": 8,
+        "safety_projection_resolved": 8,
+        "target_metric_v3_dwell_complete": 8
+      },
+      "termination_by_label": {
+        "0|COLLISION": 12,
+        "1|GOAL_COMPLETE": 12
+      },
+      "unstable_events": 8
+    }
+  },
+  "failing_cell": {
+    "cell": "train/F9/LINE",
+    "interpretation": "one mechanism dominates. In all 59 unstable aggregates the final Metric V3 dwell fails in the dissenting negative replica and in none of the positive replicas. In 50 of them that co-occurs with a collision-terminated rollout; the remaining 9 reach GOAL_COMPLETE yet still miss the dwell. This is the dynamic obstacle disrupting the final formation dwell, not a label-code defect.",
+    "secondary_cluster": [
+      "downstream_goal_complete",
+      "safety_projection_resolved",
+      "collision_free_complete_horizon",
+      "protocol_resolved"
+    ],
+    "secondary_cluster_count": 50,
+    "universal_flip": "target_metric_v3_dwell_complete",
+    "universal_flip_count": 59,
+    "universal_flip_fraction": 1.0,
+    "unstable_events": 59
+  },
+  "method": "for each unstable aggregate, the predicates that fail in at least one NEGATIVE replica and in NO positive replica of the same aggregate",
+  "phase9d_v2g7_failure_predicate_audit_sha256": "7594536091d74d4c588b4a3185f7c991dcc59cbe8ddf4d5414d7fd486d5144f7",
+  "predicate_names_authority": "rvt_swarm/phase8/targets.py TaskRecoveryConditions",
+  "predicate_set": [
+    "collision_free_complete_horizon",
+    "no_persistent_deadlock",
+    "candidate_commitment_valid",
+    "transition_execution_valid",
+    "target_metric_v3_dwell_complete",
+    "downstream_goal_complete",
+    "protocol_resolved",
+    "safety_projection_resolved"
+  ],
+  "relabelling_performed": 0,
+  "schema_version": "rvt-phase9d-v2g7-failure-predicate/v1"
+}

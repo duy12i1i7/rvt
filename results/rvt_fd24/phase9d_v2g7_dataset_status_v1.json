@@ -1,0 +1,17 @@
+{
+  "blocked_because": "frozen gate 7 fails at TRAIN F9/LINE 59/530 = 0.1113207547 against a permitted 0.10",
+  "deletion_authorized": false,
+  "informative_because": [
+    "all seals, roots and 56 shards verify byte-for-byte",
+    "eight of nine frozen gates pass",
+    "the labels are valid under the frozen target: 0 GENERATION_INVALID, 0 all-success rule violations",
+    "it contains the only measured evidence of where F9/LINE's stochastic boundary lies, which any successor protocol must be designed against"
+  ],
+  "marked_adequate_for_training": false,
+  "measurement_invalidating_defect_found": false,
+  "phase9d_v2g7_dataset_status_sha256": "48ed824031f85ecdd5483bdcc0eb9b985944dc1e797590d72af562f6b6e834ad",
+  "retention": "retain sealed and unmodified",
+  "schema_version": "rvt-phase9d-v2g7-dataset-status/v1",
+  "scientific_status": "SCIENTIFICALLY_INFORMATIVE_FOR_PROTOCOL_DEVELOPMENT",
+  "training_status": "BLOCKED_FOR_TRAINING_UNDER_FROZEN_GATE7"
+}

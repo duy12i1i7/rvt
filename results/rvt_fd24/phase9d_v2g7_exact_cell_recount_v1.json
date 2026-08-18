@@ -1,0 +1,126 @@
+{
+  "aggregates_replayed": 2764,
+  "agreement": "exact",
+  "cells": [
+    {
+      "aggregates": 567,
+      "candidate": "COMPACT",
+      "family": "F8",
+      "instability_rate": 0.07231040564373897,
+      "result": "PASS",
+      "split": "train",
+      "stable_all_negative": 125,
+      "stable_all_positive": 401,
+      "threshold": 0.1,
+      "unstable": 41
+    },
+    {
+      "aggregates": 567,
+      "candidate": "LINE",
+      "family": "F8",
+      "instability_rate": 0.06172839506172839,
+      "result": "PASS",
+      "split": "train",
+      "stable_all_negative": 482,
+      "stable_all_positive": 50,
+      "threshold": 0.1,
+      "unstable": 35
+    },
+    {
+      "aggregates": 530,
+      "candidate": "COMPACT",
+      "family": "F9",
+      "instability_rate": 0.0,
+      "result": "PASS",
+      "split": "train",
+      "stable_all_negative": 475,
+      "stable_all_positive": 55,
+      "threshold": 0.1,
+      "unstable": 0
+    },
+    {
+      "aggregates": 530,
+      "candidate": "LINE",
+      "family": "F9",
+      "instability_rate": 0.11132075471698114,
+      "result": "FAIL",
+      "split": "train",
+      "stable_all_negative": 217,
+      "stable_all_positive": 254,
+      "threshold": 0.1,
+      "unstable": 59
+    },
+    {
+      "aggregates": 147,
+      "candidate": "COMPACT",
+      "family": "F8",
+      "instability_rate": 0.05442176870748299,
+      "result": "PASS",
+      "split": "validation",
+      "stable_all_negative": 35,
+      "stable_all_positive": 104,
+      "threshold": 0.1,
+      "unstable": 8
+    },
+    {
+      "aggregates": 147,
+      "candidate": "LINE",
+      "family": "F8",
+      "instability_rate": 0.02040816326530612,
+      "result": "PASS",
+      "split": "validation",
+      "stable_all_negative": 122,
+      "stable_all_positive": 22,
+      "threshold": 0.1,
+      "unstable": 3
+    },
+    {
+      "aggregates": 138,
+      "candidate": "COMPACT",
+      "family": "F9",
+      "instability_rate": 0.0,
+      "result": "PASS",
+      "split": "validation",
+      "stable_all_negative": 124,
+      "stable_all_positive": 14,
+      "threshold": 0.1,
+      "unstable": 0
+    },
+    {
+      "aggregates": 138,
+      "candidate": "LINE",
+      "family": "F9",
+      "instability_rate": 0.057971014492753624,
+      "result": "PASS",
+      "split": "validation",
+      "stable_all_negative": 50,
+      "stable_all_positive": 80,
+      "threshold": 0.1,
+      "unstable": 8
+    }
+  ],
+  "failing_cells": [
+    {
+      "aggregates": 530,
+      "candidate": "LINE",
+      "family": "F9",
+      "instability_rate": 0.11132075471698114,
+      "result": "FAIL",
+      "split": "train",
+      "stable_all_negative": 217,
+      "stable_all_positive": 254,
+      "threshold": 0.1,
+      "unstable": 59
+    }
+  ],
+  "gate_result": "FAIL",
+  "maximum_instability_rate": 0.11132075471698114,
+  "method": "independent full-census forensic replay of every F8/F9 candidate aggregate in both sealed splits, recomputing the gate-7 statistic from per-replica labels rather than reusing the previous summary",
+  "phase9d_v2g7_exact_cell_recount_sha256": "10d6046b4f35b4fd241a694e4e7ed7c8f01d1ec46e7c8cd757b55a9000ef218f",
+  "previous_phase_value": 0.11132075,
+  "provenance_investigation_required": false,
+  "recomputed_value": 0.1113207547,
+  "reproduces_previous_phase": true,
+  "schema_version": "rvt-phase9d-v2g7-cell-recount/v1",
+  "threshold": 0.1
+}

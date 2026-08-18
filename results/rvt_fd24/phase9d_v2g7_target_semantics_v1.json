@@ -1,0 +1,45 @@
+{
+  "G12_gate7_alignment": {
+    "gate7_declared_misaligned": false,
+    "gate7_measures": "how often the anticipated instability flag fires",
+    "relationship": "Target V4 resolves an individual mixed aggregate; gate 7 bounds the population frequency of such aggregates. They are complementary, not redundant, and gate 7 is the binding constraint here.",
+    "structural_observation": "under all-success aggregation the disagreement frequency is largest exactly where per-event success probability is furthest from 0 and 1 -- that is, in the informative decision-boundary region a candidate-conditioned predictor most needs to learn. This is recorded as a design consideration for a prospective successor protocol, NOT as a claim that the frozen gate is defective and NOT as grounds to change it.",
+    "target_v4_already_handles_mixed_outcomes": true,
+    "target_v4_handling": "conservatively, by labelling the aggregate 0"
+  },
+  "aggregation": {
+    "implementation": "label = int(not invalid and all(outcomes)); unstable = len(set(outcomes)) > 1",
+    "instability_is_a_first_class_target_field": true,
+    "mixed_outcomes_block_the_row": false,
+    "only_numerical_invalidity_blocks_the_row": true,
+    "quoted_authority": "Aggregation is all-success: every valid replica must meet all V4 conditions. Mixed outcomes set the instability flag; numerical invalidity sets invalid and blocks the row.",
+    "rule": "ROLLOUT_AGGREGATION = 'all_success'"
+  },
+  "authority": {
+    "code": "rvt_swarm/phase8/targets.py",
+    "code_sha256": "184f464b77a550d400a3784b9d2bd8db892496cde8a3bb33c87148c0846bc809",
+    "protocol_doc": "docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md",
+    "protocol_doc_sha256": "bfbfac4bf0d8e4b34666f29c57f0e0c3f07fce0ff26d706d66b8ddd05712f18e",
+    "replica_rule": "rvt_swarm/phase9c_rb/counterfactual.py::replica_count_for_family -- 'Frozen: three matched replicas for F8 and F9, one elsewhere'"
+  },
+  "intended_target_v4_semantics": "ROBUST_RECOVERABILITY_UNDER_ALL_SAMPLED_DISTURBANCES",
+  "phase9d_v2g7_target_semantics_sha256": "d3cde43e7819925201625f90aeb132e35afafee54c1befeeb310ab7f1dbc1d6a",
+  "replica_count": {
+    "F8": 3,
+    "F9": 3,
+    "all_other_families": 1,
+    "constant": "STOCHASTIC_ROLLOUT_REPLICAS = 3"
+  },
+  "schema_version": "rvt-phase9d-v2g7-target-semantics/v1",
+  "semantics_evidence": "all-success requires every sampled disturbance realization to succeed, so a positive label asserts robustness across the sampled disturbance set, not an empirical success probability and not a single deterministic stress test",
+  "semantics_rejected": {
+    "DETERMINISTIC_STRESS_TEST": "rejected -- the disturbance is sampled, not fixed; every aggregate shows three distinct final states",
+    "EMPIRICAL_SUCCESS_PROBABILITY_PROXY": "rejected -- three replicas cannot estimate a probability and the label discards the count"
+  },
+  "why_three_replicas": {
+    "no_numerical_justification_for_the_value_3_is_recorded": true,
+    "note": "the repository fixes 3 as a frozen constant and does not record a power calculation or a derivation for that particular value. That is stated as a fact about the authority, not a criticism.",
+    "quoted_authority": "Deterministic families use one replica. F8 and F9 use three matched replicas with identical disturbance seeds for both candidates.",
+    "reason": "F8 (communication-degraded reconfiguration) and F9 (dynamic local obstacle) are the two families whose episode dynamics are stochastic by construction. The other eight families are deterministic, so one replica suffices."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "G22_validation_contamination": {
+    "conclusion_if_protocol_changes_because_of_observed_v2_results": "the existing V2 VALIDATION set MUST NOT be presented as an untouched confirmatory validation set for the revised protocol",
+    "final_test_layouts_must_not_be_used": true,
+    "fresh_identities_must_not_have_been_used_to_design_v3": true,
+    "fresh_independent_validation_identities_required": true,
+    "generated_in_this_phase": 0,
+    "official_v2_validation_outcomes_inspected_for": [
+      "dataset adequacy (Phase 9D-V2T carry-forward and 9D-V2C)",
+      "zero-positive family diagnosis (F3/F4/F6)",
+      "gate 7",
+      "gate 8",
+      "scenario-semantic reconciliation",
+      "this forensic phase"
+    ],
+    "reason": "its outcomes have informed the diagnosis that motivates the revision, so it is development evidence, not held-out confirmation",
+    "still_usable_as": "development / model-selection evidence under a clearly stated provenance note"
+  },
+  "G23_asset_reuse": [
+    {
+      "asset": "source episodes (1500 identities)",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "source episode identity is independent of the target",
+      "replica_count_change": "REUSABLE",
+      "target_semantics_change": "REUSABLE as identities, but a fresh confirmatory split needs identities not used to design the change"
+    },
+    {
+      "asset": "Stage-A selected source snapshots",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "acquisition is candidate-blind and target-independent; the protocol hash would be unchanged",
+      "replica_count_change": "REUSABLE",
+      "target_semantics_change": "REUSABLE"
+    },
+    {
+      "asset": "graph inputs (robot-local ego graphs)",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "inputs are a function of the source state and candidate topology only, not of the label",
+      "replica_count_change": "REUSABLE",
+      "target_semantics_change": "REUSABLE as inputs"
+    },
+    {
+      "asset": "candidate rollout replicas (the 18162 executions)",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "the three existing replicas are a valid prefix of a larger matched set only because the stream is a pure PRF indexed by replica_index; that must be prospectively authorized, never assumed",
+      "replica_count_change": "REUSABLE ONLY AS A PREFIX, and only if a prospective authorization says so and the identity contract permits it",
+      "target_semantics_change": "REUSABLE AS EVIDENCE, not as labels"
+    },
+    {
+      "asset": "aggregate labels",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "this is the asset that a semantics change invalidates",
+      "replica_count_change": "NOT REUSABLE -- an all-success label over 3 replicas is not the same object as one over R",
+      "target_semantics_change": "NOT REUSABLE -- they belong to Target V4"
+    },
+    {
+      "asset": "robot-local rows (113514)",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "rows bind the target contract hash in their identity",
+      "replica_count_change": "NOT REUSABLE AS LABELLED ROWS",
+      "target_semantics_change": "NOT REUSABLE AS LABELLED ROWS; the graph payload remains valid"
+    },
+    {
+      "asset": "TRAIN split",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "the split definition itself is sound; 8 of 9 gates pass",
+      "replica_count_change": "REUSABLE after re-execution",
+      "target_semantics_change": "REUSABLE as a development corpus after relabelling under the new target"
+    },
+    {
+      "asset": "VALIDATION split",
+      "gate_interpretation_change_only": "REUSABLE",
+      "note": "contamination is about the role, not the bytes",
+      "replica_count_change": "NOT REUSABLE AS CONFIRMATORY",
+      "target_semantics_change": "NOT REUSABLE AS CONFIRMATORY (see G22)"
+    }
+  ],
+  "G24_provenance_consequences": [
+    {
+      "new_dataset_namespace": false,
+      "new_manifest": false,
+      "new_rollout_configuration_hash": false,
+      "new_row_binding_contract_version": false,
+      "new_row_identity_version": false,
+      "new_source_acquisition_protocol_hash": false,
+      "new_target_contract_hash": false,
+      "new_train_seal": false,
+      "new_validation_seal": false,
+      "note": "no scientific identity changes; only the declared qualification status of the existing dataset would change, and the amendment itself must be recorded as an artifact",
+      "option": "A -- threshold change"
+    },
+    {
+      "new_dataset_namespace": true,
+      "new_manifest": true,
+      "new_rollout_configuration_hash": false,
+      "new_row_binding_contract_version": false,
+      "new_row_identity_version": false,
+      "new_source_acquisition_protocol_hash": true,
+      "new_target_contract_hash": false,
+      "new_train_seal": true,
+      "new_validation_seal": true,
+      "note": "any exclusion rule is part of acquisition or retention and must be hashed; a filtered dataset is a different dataset",
+      "option": "B -- exclusion"
+    },
+    {
+      "new_dataset_namespace": true,
+      "new_manifest": true,
+      "new_rollout_configuration_hash": true,
+      "new_row_binding_contract_version": true,
+      "new_row_identity_version": true,
+      "new_source_acquisition_protocol_hash": false,
+      "new_target_contract_hash": true,
+      "new_train_seal": true,
+      "new_validation_seal": true,
+      "note": "replica count is part of the aggregation contract",
+      "option": "C -- more replicas"
+    },
+    {
+      "new_dataset_namespace": true,
+      "new_manifest": true,
+      "new_rollout_configuration_hash": true,
+      "new_row_binding_contract_version": true,
+      "new_row_identity_version": true,
+      "new_source_acquisition_protocol_hash": false,
+      "new_target_contract_hash": true,
+      "new_train_seal": true,
+      "new_validation_seal": true,
+      "note": "also requires a new loss contract and new evaluation metrics",
+      "option": "D -- probabilistic target"
+    },
+    {
+      "new_dataset_namespace": true,
+      "new_manifest": true,
+      "new_rollout_configuration_hash": true,
+      "new_row_binding_contract_version": true,
+      "new_row_identity_version": true,
+      "new_source_acquisition_protocol_hash": false,
+      "new_target_contract_hash": true,
+      "new_train_seal": true,
+      "new_validation_seal": true,
+      "note": "an abstain class also changes the supervised mask contract",
+      "option": "E -- robust binary target V3"
+    }
+  ],
+  "mixed_scientific_semantics_under_one_dataset_identity": "PROHIBITED",
+  "phase9d_v2g7_v3_data_reuse_matrix_sha256": "e7ee21712811a17c7ef746913ea9f9440c554aa9adea382c115ff13f197286e4",
+  "schema_version": "rvt-phase9d-v2g7-v3-reuse-matrix/v1"
+}

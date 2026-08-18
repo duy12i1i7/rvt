@@ -1,0 +1,80 @@
+{
+  "G26_final_test_sealed": {
+    "final_test_layout_hashes_inspected": 0,
+    "final_test_outcomes_inspected": 0,
+    "final_test_statistics_accessed": 0,
+    "n24_sealed_evaluation_accessed": 0,
+    "study_b_accessed": 0,
+    "successor_protocol_designed_without_final_test_evidence": true
+  },
+  "G28_agent_recommendation": {
+    "agent_did_not_perform_it": true,
+    "owner_authorization_required": true,
+    "preferred_variant": "E -- robust binary Target V3 with declared abstain semantics",
+    "rationale": "the phase directs that where evidence shows genuine stochastic-boundary behaviour with no bug, a prospective scientific repair is preferred over moving the threshold just above the observed failure. That is exactly what the evidence shows.",
+    "recommended_name": "PROSPECTIVE_V3_STOCHASTIC_RECOVERABILITY_REPAIR",
+    "recommended_option": 3
+  },
+  "Q_answers": {
+    "Q10_would_more_replicas_reduce_the_metric": "NO -- disagreement probability 1 - p^R - (1-p)^R is strictly increasing in R for every p in (0,1); more replicas make gate 7 strictly harder to satisfy",
+    "Q11_invalid_data_or_valid_robust_negatives": "VALID ROBUST-NEGATIVE LABELS. All 154 mixed aggregates across both splits carry disposition VALID_TASK_NEGATIVE and label 0, there is no GENERATION_INVALID anywhere, and the frozen protocol states that mixed outcomes set the instability flag while only numerical invalidity blocks a row",
+    "Q12_is_gate7_aligned_with_target_v4": "COMPLEMENTARY, NOT REDUNDANT. Target V4 resolves an individual mixed aggregate conservatively; gate 7 bounds how often that happens. A structural tension exists -- disagreement is highest in the informative boundary region -- and is recorded as a design consideration for a successor protocol, not as a finding that the frozen gate is defective",
+    "Q13_can_v2_train_be_used_for_training_under_frozen_v2_rules": "NO",
+    "Q14_can_v2_validation_remain_confirmatory_if_science_changes": "NO -- its outcomes have been inspected repeatedly and informed this diagnosis, so under a revised protocol it is development evidence and fresh independent validation identities are required",
+    "Q15_cleanest_prospective_repair": "a prospectively frozen robust binary Target V3 with declared abstain semantics (option E), with a calibrated probabilistic target (option D) as the scientifically richer but costlier alternative",
+    "Q1_is_59_over_530_reproduced_exactly": "YES -- independent full-census forensic replay recomputed 59/530 = 0.1113207547 from per-replica labels",
+    "Q2_is_gate7_prospective_and_frozen": "YES -- specification commit c17081fe dated 2026-08-03, never modified since, 14 days before official TRAIN generation; implementation frozen 2026-08-16, 32 hours before",
+    "Q3_any_implementation_randomness_or_replay_defect": "NO",
+    "Q4_bit_pattern_counts_train_f9_line": {
+      "000": 217,
+      "001": 9,
+      "010": 8,
+      "011": 5,
+      "100": 10,
+      "101": 19,
+      "110": 8,
+      "111": 254
+    },
+    "Q5_which_predicate_flips": "target_metric_v3_dwell_complete, in 59 of 59 unstable aggregates; co-occurring with collision_free_complete_horizon, downstream_goal_complete, safety_projection_resolved and protocol_resolved in 50 of them",
+    "Q6_why_f9_compact_is_stable": "the disturbance is applied and perturbs every COMPACT rollout (0/530 identical final states) but never flips the outcome. COMPACT sits far from the decision boundary (positive rate 0.1038, 55 all-positive vs 475 all-negative) while LINE sits near an even split (0.4792), and an elongated LINE chain is more exposed to a moving obstacle and must also complete a transition",
+    "Q7_localized_or_distributed": "BROADLY DISTRIBUTED across both layouts, all five team sizes, all six source policies and 48 of 120 episodes, with systematic gradients in team size and selection ordinal",
+    "Q8_is_the_train_validation_difference_explainable": "YES -- 59/530 vs 8/138 differ by 0.0533 absolute, VALIDATION has one F9 layout against TRAIN's two and a quarter the sample, its exact 95% interval [0.0254, 0.1110] reaches the TRAIN point estimate, and the same structure (stable COMPACT, low-ordinal concentration, no instability at N=5/6) appears in both",
+    "Q9_what_does_inference_say_and_why_does_it_not_pass": "the one-sided exact test does not reject H0: p <= 0.10 (p = 0.2108) and the 95% interval lower bound is 0.0858, so the data are compatible with an underlying 0.10. Gate 7 nevertheless FAILS because it constrains the OBSERVED rate, not an inferred parameter, and 0.1113207547 > 0.10"
+  },
+  "dataset_scientific_status": "SCIENTIFICALLY_INFORMATIVE_FOR_PROTOCOL_DEVELOPMENT",
+  "dataset_training_status": "BLOCKED_FOR_TRAINING_UNDER_FROZEN_GATE7",
+  "final_root_cause_classification": "INTRINSIC_STOCHASTIC_BOUNDARY_WITH_VALID_CURRENT_LABELS",
+  "final_root_cause_letter": "C",
+  "handoff_commit": "764479f673f6f0f094ffe5a6f1899df317f724b5",
+  "no_mutation": {
+    "forensic_replay_rows_written_into_official_data": 0,
+    "official_mounts": "read-only",
+    "train_seal": "a966f318832fb60bd99acdfdff72f0c7011d730f3e0fb51494ce318210f39bba",
+    "train_shard_count": 44,
+    "validation_seal": "667b117555a65ad9da7f8e6e7f71b2cfb6843cc66d8e8c35eb68650b7818ca69",
+    "validation_shard_count": 12
+  },
+  "outstanding_measurement": [],
+  "phase": "PHASE_9D_V2G7",
+  "phase9d_v2g7_final_readiness_sha256": "1c959823e81e66d0a2b442199d4d46b15a049d7602d3f79237330632b863c7c2",
+  "schema_version": "rvt-phase9d-v2g7-final-readiness/v1",
+  "sealed_domains": {
+    "candidates_excluded": 0,
+    "families_excluded": 0,
+    "final_test_accesses": 0,
+    "gate7_modified": 0,
+    "hyperparameter_trials": 0,
+    "new_official_rows": 0,
+    "official_data_regenerated": 0,
+    "official_labels_changed": 0,
+    "residual_generation_operations": 0,
+    "rows_deleted": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "threshold_modified": 0,
+    "training_operations": 0
+  },
+  "v2_marked_pass": false,
+  "verdict": "B",
+  "verdict_text": "The Gate-7 failure is scientifically real. A full-census forensic replay reproduced 59/530 exactly, found no implementation, randomness, provenance, replay or label defect, and showed the instability to be genuine two-sided stochastic boundary behaviour in F9/LINE with valid robust-negative labels. Current V2 remains blocked for training and a prospective V3 repair is recommended."
+}

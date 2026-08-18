@@ -1,0 +1,890 @@
+{
+  "G10_train_validation": {
+    "absolute_rate_difference": 0.0533497402,
+    "precision_note": "VALIDATION has 138 F9/LINE aggregates against TRAIN's 530, so its estimate is far less precise; its exact 95% interval [0.025357, 0.111030] contains the TRAIN point estimate 0.111321 at its upper edge. The two are not in conflict.",
+    "relative_difference": 1.920283,
+    "shared_structure": [
+      "F9/COMPACT is perfectly stable in both splits (0/530 and 0/138)",
+      "instability concentrates at low selection ordinals in both",
+      "N=5 and N=6 contribute no unstable events in VALIDATION and the lowest rates in TRAIN"
+    ],
+    "structure_replicates": true,
+    "train_f9_line": {
+      "aggregates": 530,
+      "rate": 0.11132075471698114,
+      "unstable": 59
+    },
+    "train_layouts": 2,
+    "validation_does_not_override_train": true,
+    "validation_f9_line": {
+      "aggregates": 138,
+      "rate": 0.057971014492753624,
+      "unstable": 8
+    },
+    "validation_layouts": 1
+  },
+  "G9_conclusion": {
+    "cell": "train/F9/LINE",
+    "distribution": "BROADLY_DISTRIBUTED",
+    "evidence": [
+      "both F9 TRAIN layouts contain unstable events (22/261 and 37/269)",
+      "all five team sizes contain unstable events",
+      "all six source policies contain unstable events",
+      "48 of 120 episodes contain at least one unstable event"
+    ],
+    "physical_reading": "early decision states still face the moving obstacle, so the outcome is genuinely contingent on which disturbance realization occurs; later states are past the contested region and their outcomes are settled. Larger teams present a longer LINE chain for the obstacle to disrupt.",
+    "systematic_structure": [
+      "instability rises with team size: 0.0417 at N=6 to 0.1939 at N=12",
+      "instability falls with selection ordinal: 0.2667 at ordinal 0 to 0.0000 at ordinal 4",
+      "unstable events sit earlier in the trajectory: mean source-timestep fraction 0.2478 versus 0.4652 for all F9/LINE events"
+    ]
+  },
+  "by_cell": {
+    "train/F8/COMPACT": {
+      "aggregates": 567,
+      "by_layout_id": {
+        "train-f8-00": {
+          "rate": 0.076923,
+          "total": 286,
+          "unstable": 22
+        },
+        "train-f8-01": {
+          "rate": 0.067616,
+          "total": 281,
+          "unstable": 19
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.133333,
+          "total": 120,
+          "unstable": 16
+        },
+        "1": {
+          "rate": 0.091667,
+          "total": 120,
+          "unstable": 11
+        },
+        "2": {
+          "rate": 0.05042,
+          "total": 119,
+          "unstable": 6
+        },
+        "3": {
+          "rate": 0.053571,
+          "total": 112,
+          "unstable": 6
+        },
+        "4": {
+          "rate": 0.020833,
+          "total": 96,
+          "unstable": 2
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.066667,
+          "total": 90,
+          "unstable": 6
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.145833,
+          "total": 96,
+          "unstable": 14
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.042553,
+          "total": 94,
+          "unstable": 4
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.03125,
+          "total": 96,
+          "unstable": 3
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.095745,
+          "total": 94,
+          "unstable": 9
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.051546,
+          "total": 97,
+          "unstable": 5
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.077586,
+          "total": 116,
+          "unstable": 9
+        },
+        "16": {
+          "rate": 0.041667,
+          "total": 120,
+          "unstable": 5
+        },
+        "5": {
+          "rate": 0.174757,
+          "total": 103,
+          "unstable": 18
+        },
+        "6": {
+          "rate": 0.016949,
+          "total": 118,
+          "unstable": 2
+        },
+        "8": {
+          "rate": 0.063636,
+          "total": 110,
+          "unstable": 7
+        }
+      },
+      "distinct_episodes_total": 120,
+      "distinct_episodes_with_instability": 24,
+      "distinct_layouts_total": 2,
+      "distinct_layouts_with_instability": 2,
+      "source_timestep_fraction_mean_all": 0.446319,
+      "source_timestep_fraction_mean_unstable": 0.285721,
+      "unstable": 41
+    },
+    "train/F8/LINE": {
+      "aggregates": 567,
+      "by_layout_id": {
+        "train-f8-00": {
+          "rate": 0.076923,
+          "total": 286,
+          "unstable": 22
+        },
+        "train-f8-01": {
+          "rate": 0.046263,
+          "total": 281,
+          "unstable": 13
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.25,
+          "total": 120,
+          "unstable": 30
+        },
+        "1": {
+          "rate": 0.033333,
+          "total": 120,
+          "unstable": 4
+        },
+        "2": {
+          "rate": 0.008403,
+          "total": 119,
+          "unstable": 1
+        },
+        "3": {
+          "rate": 0.0,
+          "total": 112,
+          "unstable": 0
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 96,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.066667,
+          "total": 90,
+          "unstable": 6
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.041667,
+          "total": 96,
+          "unstable": 4
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.074468,
+          "total": 94,
+          "unstable": 7
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.0625,
+          "total": 96,
+          "unstable": 6
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.06383,
+          "total": 94,
+          "unstable": 6
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.061856,
+          "total": 97,
+          "unstable": 6
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.0,
+          "total": 116,
+          "unstable": 0
+        },
+        "16": {
+          "rate": 0.0,
+          "total": 120,
+          "unstable": 0
+        },
+        "5": {
+          "rate": 0.165049,
+          "total": 103,
+          "unstable": 17
+        },
+        "6": {
+          "rate": 0.110169,
+          "total": 118,
+          "unstable": 13
+        },
+        "8": {
+          "rate": 0.045455,
+          "total": 110,
+          "unstable": 5
+        }
+      },
+      "distinct_episodes_total": 120,
+      "distinct_episodes_with_instability": 32,
+      "distinct_layouts_total": 2,
+      "distinct_layouts_with_instability": 2,
+      "source_timestep_fraction_mean_all": 0.446319,
+      "source_timestep_fraction_mean_unstable": 0.049095,
+      "unstable": 35
+    },
+    "train/F9/COMPACT": {
+      "aggregates": 530,
+      "by_layout_id": {
+        "train-f9-00": {
+          "rate": 0.0,
+          "total": 261,
+          "unstable": 0
+        },
+        "train-f9-01": {
+          "rate": 0.0,
+          "total": 269,
+          "unstable": 0
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.0,
+          "total": 120,
+          "unstable": 0
+        },
+        "1": {
+          "rate": 0.0,
+          "total": 120,
+          "unstable": 0
+        },
+        "2": {
+          "rate": 0.0,
+          "total": 120,
+          "unstable": 0
+        },
+        "3": {
+          "rate": 0.0,
+          "total": 106,
+          "unstable": 0
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 64,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.0,
+          "total": 96,
+          "unstable": 0
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.0,
+          "total": 86,
+          "unstable": 0
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.0,
+          "total": 90,
+          "unstable": 0
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.0,
+          "total": 85,
+          "unstable": 0
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.0,
+          "total": 87,
+          "unstable": 0
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.0,
+          "total": 86,
+          "unstable": 0
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.0,
+          "total": 98,
+          "unstable": 0
+        },
+        "16": {
+          "rate": 0.0,
+          "total": 88,
+          "unstable": 0
+        },
+        "5": {
+          "rate": 0.0,
+          "total": 120,
+          "unstable": 0
+        },
+        "6": {
+          "rate": 0.0,
+          "total": 120,
+          "unstable": 0
+        },
+        "8": {
+          "rate": 0.0,
+          "total": 104,
+          "unstable": 0
+        }
+      },
+      "distinct_episodes_total": 120,
+      "distinct_episodes_with_instability": 0,
+      "distinct_layouts_total": 2,
+      "distinct_layouts_with_instability": 0,
+      "source_timestep_fraction_mean_all": 0.465192,
+      "unstable": 0
+    },
+    "train/F9/LINE": {
+      "aggregates": 530,
+      "by_layout_id": {
+        "train-f9-00": {
+          "rate": 0.084291,
+          "total": 261,
+          "unstable": 22
+        },
+        "train-f9-01": {
+          "rate": 0.137546,
+          "total": 269,
+          "unstable": 37
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.266667,
+          "total": 120,
+          "unstable": 32
+        },
+        "1": {
+          "rate": 0.083333,
+          "total": 120,
+          "unstable": 10
+        },
+        "2": {
+          "rate": 0.033333,
+          "total": 120,
+          "unstable": 4
+        },
+        "3": {
+          "rate": 0.122642,
+          "total": 106,
+          "unstable": 13
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 64,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.083333,
+          "total": 96,
+          "unstable": 8
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.197674,
+          "total": 86,
+          "unstable": 17
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.044444,
+          "total": 90,
+          "unstable": 4
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.105882,
+          "total": 85,
+          "unstable": 9
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.137931,
+          "total": 87,
+          "unstable": 12
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.104651,
+          "total": 86,
+          "unstable": 9
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.193878,
+          "total": 98,
+          "unstable": 19
+        },
+        "16": {
+          "rate": 0.159091,
+          "total": 88,
+          "unstable": 14
+        },
+        "5": {
+          "rate": 0.075,
+          "total": 120,
+          "unstable": 9
+        },
+        "6": {
+          "rate": 0.041667,
+          "total": 120,
+          "unstable": 5
+        },
+        "8": {
+          "rate": 0.115385,
+          "total": 104,
+          "unstable": 12
+        }
+      },
+      "distinct_episodes_total": 120,
+      "distinct_episodes_with_instability": 48,
+      "distinct_layouts_total": 2,
+      "distinct_layouts_with_instability": 2,
+      "source_timestep_fraction_mean_all": 0.465192,
+      "source_timestep_fraction_mean_unstable": 0.24781,
+      "unstable": 59
+    },
+    "validation/F8/COMPACT": {
+      "aggregates": 147,
+      "by_layout_id": {
+        "validation-f8-00": {
+          "rate": 0.054422,
+          "total": 147,
+          "unstable": 8
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.1,
+          "total": 30,
+          "unstable": 3
+        },
+        "1": {
+          "rate": 0.1,
+          "total": 30,
+          "unstable": 3
+        },
+        "2": {
+          "rate": 0.033333,
+          "total": 30,
+          "unstable": 1
+        },
+        "3": {
+          "rate": 0.034483,
+          "total": 29,
+          "unstable": 1
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 28,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.04,
+          "total": 25,
+          "unstable": 1
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.208333,
+          "total": 24,
+          "unstable": 5
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.0,
+          "total": 23,
+          "unstable": 0
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.08,
+          "total": 25,
+          "unstable": 2
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.133333,
+          "total": 30,
+          "unstable": 4
+        },
+        "16": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "5": {
+          "rate": 0.137931,
+          "total": 29,
+          "unstable": 4
+        },
+        "6": {
+          "rate": 0.0,
+          "total": 28,
+          "unstable": 0
+        },
+        "8": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        }
+      },
+      "distinct_episodes_total": 30,
+      "distinct_episodes_with_instability": 4,
+      "distinct_layouts_total": 1,
+      "distinct_layouts_with_instability": 1,
+      "source_timestep_fraction_mean_all": 0.449766,
+      "source_timestep_fraction_mean_unstable": 0.221638,
+      "unstable": 8
+    },
+    "validation/F8/LINE": {
+      "aggregates": 147,
+      "by_layout_id": {
+        "validation-f8-00": {
+          "rate": 0.020408,
+          "total": 147,
+          "unstable": 3
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.1,
+          "total": 30,
+          "unstable": 3
+        },
+        "1": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "2": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "3": {
+          "rate": 0.0,
+          "total": 29,
+          "unstable": 0
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 28,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.041667,
+          "total": 24,
+          "unstable": 1
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.086957,
+          "total": 23,
+          "unstable": 2
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "16": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "5": {
+          "rate": 0.0,
+          "total": 29,
+          "unstable": 0
+        },
+        "6": {
+          "rate": 0.071429,
+          "total": 28,
+          "unstable": 2
+        },
+        "8": {
+          "rate": 0.033333,
+          "total": 30,
+          "unstable": 1
+        }
+      },
+      "distinct_episodes_total": 30,
+      "distinct_episodes_with_instability": 3,
+      "distinct_layouts_total": 1,
+      "distinct_layouts_with_instability": 1,
+      "source_timestep_fraction_mean_all": 0.449766,
+      "source_timestep_fraction_mean_unstable": 0.0,
+      "unstable": 3
+    },
+    "validation/F9/COMPACT": {
+      "aggregates": 138,
+      "by_layout_id": {
+        "validation-f9-00": {
+          "rate": 0.0,
+          "total": 138,
+          "unstable": 0
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "1": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "2": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "3": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 18,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.0,
+          "total": 22,
+          "unstable": 0
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.0,
+          "total": 25,
+          "unstable": 0
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.0,
+          "total": 22,
+          "unstable": 0
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.0,
+          "total": 22,
+          "unstable": 0
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.0,
+          "total": 22,
+          "unstable": 0
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.0,
+          "total": 26,
+          "unstable": 0
+        },
+        "16": {
+          "rate": 0.0,
+          "total": 26,
+          "unstable": 0
+        },
+        "5": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "6": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "8": {
+          "rate": 0.0,
+          "total": 26,
+          "unstable": 0
+        }
+      },
+      "distinct_episodes_total": 30,
+      "distinct_episodes_with_instability": 0,
+      "distinct_layouts_total": 1,
+      "distinct_layouts_with_instability": 0,
+      "source_timestep_fraction_mean_all": 0.451015,
+      "unstable": 0
+    },
+    "validation/F9/LINE": {
+      "aggregates": 138,
+      "by_layout_id": {
+        "validation-f9-00": {
+          "rate": 0.057971,
+          "total": 138,
+          "unstable": 8
+        }
+      },
+      "by_selection_ordinal": {
+        "0": {
+          "rate": 0.166667,
+          "total": 30,
+          "unstable": 5
+        },
+        "1": {
+          "rate": 0.1,
+          "total": 30,
+          "unstable": 3
+        },
+        "2": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "3": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "4": {
+          "rate": 0.0,
+          "total": 18,
+          "unstable": 0
+        }
+      },
+      "by_source_policy": {
+        "S0_SCRIPTED_DIAGNOSTIC": {
+          "rate": 0.12,
+          "total": 25,
+          "unstable": 3
+        },
+        "S1_ALWAYS_COMPACT": {
+          "rate": 0.090909,
+          "total": 22,
+          "unstable": 2
+        },
+        "S2_ALWAYS_LINE": {
+          "rate": 0.04,
+          "total": 25,
+          "unstable": 1
+        },
+        "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR": {
+          "rate": 0.045455,
+          "total": 22,
+          "unstable": 1
+        },
+        "S4_FROZEN_TRANSITION_PROTOCOL": {
+          "rate": 0.0,
+          "total": 22,
+          "unstable": 0
+        },
+        "S5_BOUNDED_PERTURBATION": {
+          "rate": 0.045455,
+          "total": 22,
+          "unstable": 1
+        }
+      },
+      "by_team_size": {
+        "12": {
+          "rate": 0.192308,
+          "total": 26,
+          "unstable": 5
+        },
+        "16": {
+          "rate": 0.076923,
+          "total": 26,
+          "unstable": 2
+        },
+        "5": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "6": {
+          "rate": 0.0,
+          "total": 30,
+          "unstable": 0
+        },
+        "8": {
+          "rate": 0.038462,
+          "total": 26,
+          "unstable": 1
+        }
+      },
+      "distinct_episodes_total": 30,
+      "distinct_episodes_with_instability": 6,
+      "distinct_layouts_total": 1,
+      "distinct_layouts_with_instability": 1,
+      "source_timestep_fraction_mean_all": 0.451015,
+      "source_timestep_fraction_mean_unstable": 0.094163,
+      "unstable": 8
+    }
+  },
+  "descriptive_only": true,
+  "phase9d_v2g7_localization_sha256": "ce4d1bfbd0d11f0cc5193e760ac5ae522a60dafd09a2d3c8bd971df04e3bf8c8",
+  "post_hoc_subgroup_gates_created": 0,
+  "schema_version": "rvt-phase9d-v2g7-localization/v1"
+}

@@ -1,0 +1,12 @@
+{
+  "CROSS_REPLICA_STOCHASTIC_DISAGREEMENT": "PRESENT",
+  "REPLAY_DETERMINISM": "CONFIRMED",
+  "aggregate_disposition_mismatches": 0,
+  "aggregate_label_mismatches": 0,
+  "aggregates_compared": 2764,
+  "explanation": "the pipeline deterministically reproduces the same three different replica outcomes. Replay determinism means re-running yields identical results; cross-replica disagreement means the three matched disturbance realizations within one aggregate lead to different Target V4 outcomes. Both hold simultaneously and neither implies the other.",
+  "official_rows_created": 0,
+  "phase9d_v2g7_replay_determinism_sha256": "609c532d192874e8f4d2126387b41e8a021d0c49ea63408b565b3d0cc4618434",
+  "schema_version": "rvt-phase9d-v2g7-replay-determinism/v1",
+  "the_two_are_distinct": true
+}

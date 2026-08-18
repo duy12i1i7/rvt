@@ -1,0 +1,236 @@
+{
+  "G5_replica_index_audit": {
+    "any_cell_significant_at_0.05": false,
+    "by_cell": {
+      "train/F8/COMPACT": {
+        "chi_square_even_split_2df": 1.804878,
+        "replica_negative": {
+          "0": 145,
+          "1": 146,
+          "2": 147
+        },
+        "replica_positive": {
+          "0": 422,
+          "1": 421,
+          "2": 420
+        },
+        "replica_positive_rate": {
+          "0": 0.744268,
+          "1": 0.742504,
+          "2": 0.740741
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 10,
+          "1": 17,
+          "2": 14
+        },
+        "unique_dissents_total": 41
+      },
+      "train/F8/LINE": {
+        "chi_square_even_split_2df": 1.085714,
+        "replica_negative": {
+          "0": 499,
+          "1": 500,
+          "2": 493
+        },
+        "replica_positive": {
+          "0": 68,
+          "1": 67,
+          "2": 74
+        },
+        "replica_positive_rate": {
+          "0": 0.119929,
+          "1": 0.118166,
+          "2": 0.130511
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 14,
+          "1": 9,
+          "2": 12
+        },
+        "unique_dissents_total": 35
+      },
+      "train/F9/COMPACT": {
+        "chi_square_even_split_2df": 0.0,
+        "replica_negative": {
+          "0": 475,
+          "1": 475,
+          "2": 475
+        },
+        "replica_positive": {
+          "0": 55,
+          "1": 55,
+          "2": 55
+        },
+        "replica_positive_rate": {
+          "0": 0.103774,
+          "1": 0.103774,
+          "2": 0.103774
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        },
+        "unique_dissents_total": 0
+      },
+      "train/F9/LINE": {
+        "chi_square_even_split_2df": 4.20339,
+        "replica_negative": {
+          "0": 239,
+          "1": 255,
+          "2": 243
+        },
+        "replica_positive": {
+          "0": 291,
+          "1": 275,
+          "2": 287
+        },
+        "replica_positive_rate": {
+          "0": 0.549057,
+          "1": 0.518868,
+          "2": 0.541509
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 15,
+          "1": 27,
+          "2": 17
+        },
+        "unique_dissents_total": 59
+      },
+      "validation/F8/COMPACT": {
+        "chi_square_even_split_2df": 1.75,
+        "replica_negative": {
+          "0": 38,
+          "1": 39,
+          "2": 38
+        },
+        "replica_positive": {
+          "0": 109,
+          "1": 108,
+          "2": 109
+        },
+        "replica_positive_rate": {
+          "0": 0.741497,
+          "1": 0.734694,
+          "2": 0.741497
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 1,
+          "1": 4,
+          "2": 3
+        },
+        "unique_dissents_total": 8
+      },
+      "validation/F8/LINE": {
+        "chi_square_even_split_2df": 2.0,
+        "replica_negative": {
+          "0": 122,
+          "1": 124,
+          "2": 125
+        },
+        "replica_positive": {
+          "0": 25,
+          "1": 23,
+          "2": 22
+        },
+        "replica_positive_rate": {
+          "0": 0.170068,
+          "1": 0.156463,
+          "2": 0.14966
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 2,
+          "1": 0,
+          "2": 1
+        },
+        "unique_dissents_total": 3
+      },
+      "validation/F9/COMPACT": {
+        "chi_square_even_split_2df": 0.0,
+        "replica_negative": {
+          "0": 124,
+          "1": 124,
+          "2": 124
+        },
+        "replica_positive": {
+          "0": 14,
+          "1": 14,
+          "2": 14
+        },
+        "replica_positive_rate": {
+          "0": 0.101449,
+          "1": 0.101449,
+          "2": 0.101449
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        },
+        "unique_dissents_total": 0
+      },
+      "validation/F9/LINE": {
+        "chi_square_even_split_2df": 3.25,
+        "replica_negative": {
+          "0": 51,
+          "1": 56,
+          "2": 55
+        },
+        "replica_positive": {
+          "0": 87,
+          "1": 82,
+          "2": 83
+        },
+        "replica_positive_rate": {
+          "0": 0.630435,
+          "1": 0.594203,
+          "2": 0.601449
+        },
+        "significant_at_0.05": false,
+        "unique_dissent_count": {
+          "0": 5,
+          "1": 2,
+          "2": 1
+        },
+        "unique_dissents_total": 8
+      }
+    },
+    "conclusion": "no replica index systematically supplies the differing label in any cell; per-index positive rates are tightly clustered and the dissent counts are consistent with an even split",
+    "critical_value_2df_0.05": 5.991,
+    "maximum_chi_square": 4.20339
+  },
+  "G6_matched_randomness": {
+    "aggregates_total": 2764,
+    "aggregates_with_divergent_final_state": 2764,
+    "candidate_job_seeds_equal_across_candidates": 0,
+    "disturbance_demonstrably_applied": true,
+    "disturbance_evidence": "all 2764 aggregates show three distinct replica final_state_hash values while sharing one initial_clone_hash, so the disturbance perturbs every rollout including every F9/COMPACT one",
+    "events_checked": 1382,
+    "events_with_divergent_initial_clone_hash": 0,
+    "matched_contract": "rvt_swarm/phase9g0r/compiler_v2.py::_replica_jobs derives matched_disturbance_seed with candidate_topology=None, so COMPACT and LINE at the same replica index receive the identical stream; rvt_swarm/phase9g0r/producer.py additionally raises OfficialProducerError if they ever diverge",
+    "matched_seed_collisions": 0,
+    "matched_stream_mismatches": 0,
+    "per_replica_seed_note": "the frozen design gives each replica index its own matched seed (replica_index is part of the seed derivation) AND a distinct stream label; COMPACT and LINE share both at the same index",
+    "replica_seed_pairs": 4146,
+    "required_mismatches": 0,
+    "stream_construction": "CounterStream(matched_disturbance_seed, f'{STREAM_ROBOT_ACCELERATION}:replica-{i}') -- a pure counter-based PRF with no mutable state, so worker order, scheduling and retry cannot affect a draw"
+  },
+  "GATE7_IMPLEMENTATION_DEFECT": false,
+  "defect_classes_checked": {
+    "candidate_specific_stream_contamination": 0,
+    "retry_dependence": "structurally impossible (pure PRF); 0 retries occurred in official generation",
+    "seed_collision": 0,
+    "seed_order_bug": 0,
+    "worker_order_dependence": "structurally impossible (pure PRF)"
+  },
+  "phase9d_v2g7_random_stream_audit_sha256": "659e9677894ef2d9811ae2e8a11f6158218abb7bd23e4979494704a04a037e21",
+  "schema_version": "rvt-phase9d-v2g7-random-stream/v1"
+}

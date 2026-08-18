@@ -1,0 +1,78 @@
+{
+  "answer": "NO -- it makes the metric strictly worse",
+  "conclusion": "Under the existing gate-7 definition, more replicas can only raise the measured instability rate. 'Add replicas' is not a repair for this gate; it is a repair only in combination with a different target or a different stability statistic.",
+  "formula": "P(all agree) = p^R + (1-p)^R ; P(disagree) = 1 - p^R - (1-p)^R",
+  "homogeneous_p_implied_by_the_observed_rate": {
+    "all_projections_exceed_the_threshold": true,
+    "implied_p": 0.03859662,
+    "model_caveat": "a single shared p is a poor model: instability is concentrated in a minority of events, so the population is a mixture of near-deterministic events and a boundary subpopulation. The projection is illustrative, and the monotonicity result above does not depend on it.",
+    "observed_disagreement_at_R3": 0.1113207547,
+    "projection": {
+      "3": 0.11132075,
+      "5": 0.17864997,
+      "7": 0.24082915,
+      "9": 0.29830107
+    }
+  },
+  "monotonicity_proof": "d/dR [p^R + (1-p)^R] = p^R ln p + (1-p)^R ln(1-p). For p in (0,1) both logarithms are negative and both powers positive, so the derivative is strictly negative: agreement probability strictly decreases in R and disagreement strictly increases in R, for every p in (0,1).",
+  "official_protocol_changed": false,
+  "phase9d_v2g7_replica_count_analysis_sha256": "a8043c9e0b17e6c208d0a314d56cea298549c00f6dc55bc867434ec48ef0e73a",
+  "question": "can increasing the replica count fix gate 7 under its existing definition (unstable = not all replica labels equal)?",
+  "schema_version": "rvt-phase9d-v2g7-replica-count/v1",
+  "table": [
+    {
+      "R1": 0.0,
+      "R15": 0.53670877,
+      "R3": 0.1425,
+      "R5": 0.22621875,
+      "R7": 0.3016627,
+      "R9": 0.36975059,
+      "per_replica_success_probability": 0.05
+    },
+    {
+      "R1": 0.0,
+      "R15": 0.79410887,
+      "R3": 0.27,
+      "R5": 0.4095,
+      "R7": 0.521703,
+      "R9": 0.61257951,
+      "per_replica_success_probability": 0.1
+    },
+    {
+      "R1": 0.0,
+      "R15": 0.96481563,
+      "R3": 0.48,
+      "R5": 0.672,
+      "R7": 0.790272,
+      "R9": 0.86578176,
+      "per_replica_success_probability": 0.2
+    },
+    {
+      "R1": 0.0,
+      "R15": 0.99525242,
+      "R3": 0.63,
+      "R5": 0.8295,
+      "R7": 0.917427,
+      "R9": 0.95962671,
+      "per_replica_success_probability": 0.3
+    },
+    {
+      "R1": 0.0,
+      "R15": 0.99952874,
+      "R3": 0.72,
+      "R5": 0.912,
+      "R7": 0.970368,
+      "R9": 0.98966016,
+      "per_replica_success_probability": 0.4
+    },
+    {
+      "R1": 0.0,
+      "R15": 0.99993896,
+      "R3": 0.75,
+      "R5": 0.9375,
+      "R7": 0.984375,
+      "R9": 0.99609375,
+      "per_replica_success_probability": 0.5
+    }
+  ]
+}

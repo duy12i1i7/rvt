@@ -1,0 +1,53 @@
+{
+  "aggregation_across_cells": "maximum",
+  "authority_artifact": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md",
+  "authority_hash": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d",
+  "authority_text": "stochastic label instability is at most 0.10 per family/candidate",
+  "creation_chronology": {
+    "gate_document_commits_total": 1,
+    "gate_document_ever_modified": false,
+    "gate_is_prospective": true,
+    "gate_specification_commit": "c17081fe1cf58cc2d3f929e35ff4bca811c75c58",
+    "gate_specification_date": "2026-08-03T16:06:24+07:00",
+    "gate_specification_subject": "Freeze Phase 8 scientific experiment protocol",
+    "implementation_commit": "0ffa4d420203d73650ab7d6e4a7147418e7c1522",
+    "implementation_date": "2026-08-16T01:38:25+07:00",
+    "implementation_predates_official_train_by_hours": 32,
+    "official_v2_train_commit": "904d96d84a9ad04fee02bdafb8c0d0023369ec03",
+    "official_v2_train_date": "2026-08-17T10:05:01+07:00",
+    "official_v2_validation_commit": "ae45f954750657e594a04341a98f7f267028b8b3",
+    "official_v2_validation_date": "2026-08-17T11:43:19+07:00",
+    "specification_predates_official_train_by_days": 14
+  },
+  "denominator": "stochastic_aggregate_totals[(family, candidate)] -- the count of candidate aggregates with len(replicas) > 1",
+  "escape_clause_comparison": "gate 3 alone carries 'or a scientific-scope review explicitly justifies failure'; gate 7 does not",
+  "failure_consequence": "A failed gate blocks training; it does not authorize geometry, target or threshold tuning against model results.",
+  "gate_id": 7,
+  "gate_modified_in_this_phase": false,
+  "gate_reinterpreted_in_this_phase": false,
+  "implementation_artifacts": [
+    {
+      "path": "scripts/audit_phase9d_r_dataset_readonly.py",
+      "role": "computes replica_instability and stochastic_aggregate_totals per (family, candidate)",
+      "sha256": "7871e65703e542d4c1dde6b26315814cb010e33c8f15509a4fc12c621b719de3"
+    },
+    {
+      "path": "scripts/build_phase9d_r_recoverability_audit.py",
+      "role": "emits maximum_stochastic_label_instability with permitted_maximum 0.10",
+      "sha256": "cdea067ee3c2b71ea14d4340fd315fbf747b5b2c375e0f5cc2090df9c293ece7"
+    }
+  ],
+  "intended_scientific_rationale": "the frozen counterfactual rollout protocol anticipates mixed replica outcomes and flags them (docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md: 'Mixed outcomes set the instability flag'). Gate 7 is therefore a dataset-quality budget bounding how often that anticipated flag may fire, not a validity condition on individual labels.",
+  "name": "GATE7_AUTHORITY_REGISTRY_V1",
+  "numerator": "replica_instability[(family, candidate)] -- aggregates where len(set(replica_labels)) > 1",
+  "phase9d_v2g7_gate_authority_sha256": "8308f51561e4161289b42a1220d0eca24f9fc2c6ea436073ebf1566ef6a43b3b",
+  "rollout_protocol_authority": "docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md",
+  "rollout_protocol_hash": "bfbfac4bf0d8e4b34666f29c57f0e0c3f07fce0ff26d706d66b8ddd05712f18e",
+  "schema_version": "rvt-phase9d-v2g7-gate-authority/v1",
+  "scientific_escape_clause": null,
+  "scope": "per (family, candidate_topology) cell; only F8 and F9 carry three replicas, so only those four cells per split are constrained",
+  "splits_evaluated_independently": true,
+  "threshold": 0.1,
+  "threshold_direction": "at most",
+  "unit": "one candidate aggregate that carries more than one replica"
+}

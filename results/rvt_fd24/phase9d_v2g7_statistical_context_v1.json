@@ -1,0 +1,137 @@
+{
+  "CRITICAL": "Gate 7 is an EMPIRICAL DATASET GATE on the OBSERVED statistic, not a hypothesis test about an underlying parameter. The observed TRAIN F9/LINE value 0.1113207547 exceeds the frozen 0.10. Statistical non-significance does NOT convert V2 to PASS and is not used here to do so.",
+  "alpha": 0.05,
+  "by_cell": [
+    {
+      "aggregates": 567,
+      "candidate": "COMPACT",
+      "clopper_pearson_95_lower": 0.05238778,
+      "clopper_pearson_95_upper": 0.09682096,
+      "exact_one_sided_p_value_H0_p_le_0.10": 0.99081172,
+      "family": "F8",
+      "gate_result": "PASS",
+      "observed_rate": 0.07231040564373897,
+      "rejects_H0_at_0.05": false,
+      "split": "train",
+      "unstable": 41
+    },
+    {
+      "aggregates": 567,
+      "candidate": "LINE",
+      "clopper_pearson_95_lower": 0.04336905,
+      "clopper_pearson_95_upper": 0.08480671,
+      "exact_one_sided_p_value_H0_p_le_0.10": 0.9995282,
+      "family": "F8",
+      "gate_result": "PASS",
+      "observed_rate": 0.06172839506172839,
+      "rejects_H0_at_0.05": false,
+      "split": "train",
+      "unstable": 35
+    },
+    {
+      "aggregates": 530,
+      "candidate": "COMPACT",
+      "clopper_pearson_95_lower": 0.0,
+      "clopper_pearson_95_upper": 0.00693598,
+      "exact_one_sided_p_value_H0_p_le_0.10": 1.0,
+      "family": "F9",
+      "gate_result": "PASS",
+      "observed_rate": 0.0,
+      "rejects_H0_at_0.05": false,
+      "split": "train",
+      "unstable": 0
+    },
+    {
+      "aggregates": 530,
+      "candidate": "LINE",
+      "clopper_pearson_95_lower": 0.08582979,
+      "clopper_pearson_95_upper": 0.14123882,
+      "exact_one_sided_p_value_H0_p_le_0.10": 0.21082321,
+      "family": "F9",
+      "gate_result": "FAIL",
+      "observed_rate": 0.11132075471698114,
+      "rejects_H0_at_0.05": false,
+      "split": "train",
+      "unstable": 59
+    },
+    {
+      "aggregates": 147,
+      "candidate": "COMPACT",
+      "clopper_pearson_95_lower": 0.02378533,
+      "clopper_pearson_95_upper": 0.10441525,
+      "exact_one_sided_p_value_H0_p_le_0.10": 0.9831454,
+      "family": "F8",
+      "gate_result": "PASS",
+      "observed_rate": 0.05442176870748299,
+      "rejects_H0_at_0.05": false,
+      "split": "validation",
+      "unstable": 8
+    },
+    {
+      "aggregates": 147,
+      "candidate": "LINE",
+      "clopper_pearson_95_lower": 0.00422859,
+      "clopper_pearson_95_upper": 0.0584813,
+      "exact_one_sided_p_value_H0_p_le_0.10": 0.99997187,
+      "family": "F8",
+      "gate_result": "PASS",
+      "observed_rate": 0.02040816326530612,
+      "rejects_H0_at_0.05": false,
+      "split": "validation",
+      "unstable": 3
+    },
+    {
+      "aggregates": 138,
+      "candidate": "COMPACT",
+      "clopper_pearson_95_lower": 0.0,
+      "clopper_pearson_95_upper": 0.0263769,
+      "exact_one_sided_p_value_H0_p_le_0.10": 1.0,
+      "family": "F9",
+      "gate_result": "PASS",
+      "observed_rate": 0.0,
+      "rejects_H0_at_0.05": false,
+      "split": "validation",
+      "unstable": 0
+    },
+    {
+      "aggregates": 138,
+      "candidate": "LINE",
+      "clopper_pearson_95_lower": 0.02535717,
+      "clopper_pearson_95_upper": 0.11103023,
+      "exact_one_sided_p_value_H0_p_le_0.10": 0.97114549,
+      "family": "F9",
+      "gate_result": "PASS",
+      "observed_rate": 0.057971014492753624,
+      "rejects_H0_at_0.05": false,
+      "split": "validation",
+      "unstable": 8
+    }
+  ],
+  "failing_cell": {
+    "cell": "train/F9/LINE",
+    "clopper_pearson_95": [
+      0.08582979,
+      0.14123882
+    ],
+    "exact_one_sided_p_value": 0.21082321,
+    "observed": "59/530 = 0.1113207547",
+    "reading": "the data are statistically COMPATIBLE with an underlying instability probability of 0.10; the one-sided p-value is 0.2108 and the 95% interval lower bound 0.0858 lies below 0.10.",
+    "rejects_H0_at_0.05": false
+  },
+  "interval_method": "Clopper-Pearson exact interval, computed by bisection on the exact binomial CDF (no library default, no normal approximation, no continuity correction)",
+  "phase9d_v2g7_statistical_context_sha256": "d313c96beba9df885c014adeb59750973fcd1092eaaae29a935a0249b0c9249d",
+  "purpose": "DIAGNOSTIC CONTEXT ONLY -- informs prospective design, never the historical V2 gate verdict",
+  "retroactive_pass_asserted": false,
+  "schema_version": "rvt-phase9d-v2g7-statistical-context/v1",
+  "test_method": "exact one-sided binomial test, H0: p <= 0.10 against H1: p > 0.10, statistic P(X >= k | n, p = 0.10)",
+  "v2_gate_verdict_changed_by_this_analysis": false,
+  "validation_cell": {
+    "cell": "validation/F9/LINE",
+    "clopper_pearson_95": [
+      0.02535717,
+      0.11103023
+    ],
+    "interval_contains_the_train_point_estimate": true,
+    "observed": "8/138 = 0.0579710145"
+  }
+}

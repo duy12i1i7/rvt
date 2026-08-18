@@ -1,0 +1,171 @@
+{
+  "G14_aggregation_mapping": {
+    "generation_invalid_aggregates": 0,
+    "mapping": {
+      "000": 0,
+      "001": 0,
+      "010": 0,
+      "011": 0,
+      "100": 0,
+      "101": 0,
+      "110": 0,
+      "111": 1
+    },
+    "mixed_pattern_aggregates": 154,
+    "mixed_pattern_dispositions": {
+      "VALID_TASK_NEGATIVE": 154
+    },
+    "mixed_pattern_labels": {
+      "0": 154
+    },
+    "observed_violations": 0,
+    "rule": "all_success -- label = 1 iff every valid replica succeeds",
+    "rule_authority": "rvt_swarm/phase8/targets.py evaluate_candidate_recoverability, ROLLOUT_AGGREGATION = 'all_success'",
+    "verdict": "VALID_ROBUST_NEGATIVE_LABELS_WITH_MIXED_REPLICA_EVIDENCE",
+    "why": "the frozen rollout protocol states 'Mixed outcomes set the instability flag; numerical invalidity sets invalid and blocks the row'. Every mixed aggregate here carries disposition VALID_TASK_NEGATIVE and label 0, and no aggregate anywhere is GENERATION_INVALID. Mixed replica evidence is an anticipated, valid state of Target V4 -- not invalid data."
+  },
+  "by_cell": {
+    "train/F8/COMPACT": {
+      "one_success_two_failure": 22,
+      "patterns": {
+        "000": 125,
+        "001": 7,
+        "010": 9,
+        "011": 4,
+        "100": 6,
+        "101": 8,
+        "110": 7,
+        "111": 401
+      },
+      "two_success_one_failure": 19,
+      "unstable": 41
+    },
+    "train/F8/LINE": {
+      "one_success_two_failure": 11,
+      "patterns": {
+        "000": 482,
+        "001": 6,
+        "010": 1,
+        "011": 10,
+        "100": 4,
+        "101": 8,
+        "110": 6,
+        "111": 50
+      },
+      "two_success_one_failure": 24,
+      "unstable": 35
+    },
+    "train/F9/COMPACT": {
+      "one_success_two_failure": 0,
+      "patterns": {
+        "000": 475,
+        "001": 0,
+        "010": 0,
+        "011": 0,
+        "100": 0,
+        "101": 0,
+        "110": 0,
+        "111": 55
+      },
+      "two_success_one_failure": 0,
+      "unstable": 0
+    },
+    "train/F9/LINE": {
+      "one_success_two_failure": 27,
+      "patterns": {
+        "000": 217,
+        "001": 9,
+        "010": 8,
+        "011": 5,
+        "100": 10,
+        "101": 19,
+        "110": 8,
+        "111": 254
+      },
+      "two_success_one_failure": 32,
+      "unstable": 59
+    },
+    "validation/F8/COMPACT": {
+      "one_success_two_failure": 2,
+      "patterns": {
+        "000": 35,
+        "001": 1,
+        "010": 1,
+        "011": 1,
+        "100": 0,
+        "101": 3,
+        "110": 2,
+        "111": 104
+      },
+      "two_success_one_failure": 6,
+      "unstable": 8
+    },
+    "validation/F8/LINE": {
+      "one_success_two_failure": 2,
+      "patterns": {
+        "000": 122,
+        "001": 0,
+        "010": 0,
+        "011": 0,
+        "100": 2,
+        "101": 0,
+        "110": 1,
+        "111": 22
+      },
+      "two_success_one_failure": 1,
+      "unstable": 3
+    },
+    "validation/F9/COMPACT": {
+      "one_success_two_failure": 0,
+      "patterns": {
+        "000": 124,
+        "001": 0,
+        "010": 0,
+        "011": 0,
+        "100": 0,
+        "101": 0,
+        "110": 0,
+        "111": 14
+      },
+      "two_success_one_failure": 0,
+      "unstable": 0
+    },
+    "validation/F9/LINE": {
+      "one_success_two_failure": 4,
+      "patterns": {
+        "000": 50,
+        "001": 0,
+        "010": 0,
+        "011": 1,
+        "100": 4,
+        "101": 2,
+        "110": 1,
+        "111": 80
+      },
+      "two_success_one_failure": 4,
+      "unstable": 8
+    }
+  },
+  "coding": "bit i is replica i's Target V4 label; 1 = success, 0 = failure",
+  "failing_cell_detail": {
+    "cell": "train/F9/LINE",
+    "dominance": "two_success_one_failure",
+    "dominance_is_marginal": true,
+    "interpretation": "the 59 unstable aggregates split 27 one-success / 32 two-success, i.e. close to balanced. The instability is not a rare near-miss tail on one side; it is genuine two-sided boundary behaviour.",
+    "one_success_two_failure": 27,
+    "patterns": {
+      "000": 217,
+      "001": 9,
+      "010": 8,
+      "011": 5,
+      "100": 10,
+      "101": 19,
+      "110": 8,
+      "111": 254
+    },
+    "two_success_one_failure": 32,
+    "unstable_total": 59
+  },
+  "phase9d_v2g7_replica_pattern_audit_sha256": "cb07934a06c9b3740bf20b44defb31da3e16b27438b5d952e102b9612d006ecc",
+  "schema_version": "rvt-phase9d-v2g7-replica-pattern/v1"
+}
