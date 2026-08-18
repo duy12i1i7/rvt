@@ -23,6 +23,29 @@ RB16R_AUTHORIZED_FILES = {
 }
 A1S3Z_AUTHORIZED_FILES = {"rvt_swarm/decentralized/system_model.py"}
 
+# PHASE 9G-V3I-Q-R (owner-authorized): the phase authorizes "implement the V3
+# loader" and "implement the frozen loss and Brier metric", which necessarily
+# land in rvt_swarm/fd24. These three are ADDITIONS -- no pre-existing frozen
+# mechanical file is touched -- and the assertion below is split so that the
+# modification set stays bound by the older authorizations only. That makes the
+# guard strictly stronger here than the single subset check it replaces.
+V3I_Q_R_ADDED_FILES = {
+    "rvt_swarm/fd24/loss_v3.py",
+    "rvt_swarm/fd24/metrics_v3.py",
+    "rvt_swarm/fd24/loader_v3.py",
+}
+
+
+def _protected_changes(root, phase8, protected):
+    """Split the protected diff into additions and modifications."""
+    def names(diff_filter):
+        return set(subprocess.run(
+            ["git", "diff", "--name-only", f"--diff-filter={diff_filter}",
+             phase8, "--", *protected],
+            cwd=root, check=True, capture_output=True, text=True,
+        ).stdout.splitlines())
+    return names("A"), names("MRD")
+
 
 def test_phase9_changes_no_phase8_or_mechanical_files():
     protected = (
@@ -35,20 +58,15 @@ def test_phase9_changes_no_phase8_or_mechanical_files():
         "results/rvt_fd24/online_topology_scope.json",
         "results/rvt_fd24/splits",
     )
-    changed = subprocess.run(
-        ["git", "diff", "--name-only", PHASE8, "--", *protected],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.splitlines()
+    added, modified = _protected_changes(ROOT, PHASE8, protected)
     contract = json.loads((
         ROOT / "results/rvt_fd24/phase9_s3_centerline_execution_contract_v1.json"
     ).read_text(encoding="ascii"))
     for path in A1S3Z_AUTHORIZED_FILES:
         assert contract["runtime_files"][path]["after_sha256"] == hashlib.sha256(
             (ROOT / path).read_bytes()).hexdigest()
-    assert set(changed) <= RB16R_AUTHORIZED_FILES | A1S3Z_AUTHORIZED_FILES
+    assert modified <= RB16R_AUTHORIZED_FILES | A1S3Z_AUTHORIZED_FILES
+    assert added <= V3I_Q_R_ADDED_FILES
 
 
 def test_phase9_has_no_dataset_shards_or_training_state():

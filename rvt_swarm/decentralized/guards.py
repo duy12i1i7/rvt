@@ -139,6 +139,22 @@ OFFLINE_MODULES: Dict[str, str] = {
         "Offline Phase 7R forensic reconstruction, repaired matrix runner and "
         "report writer. Runtime actions still come from one local executor."
     ),
+    "loss_v3": (
+        "Offline Recoverability V3 training loss. It consumes the logits a "
+        "training step has already produced from robot-local ego graphs and "
+        "averages them; no robot computes a loss at runtime."
+    ),
+    "metrics_v3": (
+        "Offline Recoverability V3 Brier evaluator. It scores predictions "
+        "after the fact for checkpoint selection; no robot computes a metric "
+        "at runtime."
+    ),
+    "loader_v3": (
+        "Offline Recoverability V3 dataset loader. It groups already-written "
+        "supervised rows by decision event so a training step can batch them, "
+        "which is a disjoint union of robot-local graphs with no cross-robot "
+        "edges. No robot reads a dataset."
+    ),
 }
 
 # Parameter names that carry a SINGLE robot's ego-graph tensors. An ego graph
