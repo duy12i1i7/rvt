@@ -1,0 +1,223 @@
+{
+  "contract": {
+    "C10_audit_evidence_retention": {
+      "blocks_supervised_row_publication": true,
+      "erases_evidence": false,
+      "existing_precedent": "rvt_swarm/phase9c_rb/generation_contract.py::DispositionCounts -- 'Attempted decision states never vanish; that is the point.'",
+      "identity_mutation_after_invalidity": "FORBIDDEN",
+      "ledger_separation": "operational and audit ledgers remain separate from supervised row shards",
+      "must_retain": [
+        "source event identity",
+        "candidate-event identities",
+        "replica-evaluation identities",
+        "all executed replica dispositions",
+        "all valid Y_r values that did exist",
+        "which replica(s) were GENERATION_INVALID",
+        "Target-V4 predicate and provenance required by authority",
+        "matched stream identities",
+        "pair transaction disposition"
+      ],
+      "placeholder_supervised_rows": "FORBIDDEN",
+      "principle": "outcome does not alter identity"
+    },
+    "C11_infrastructure_scientific_separation": {
+      "conversion_of_infrastructure_failure_into_GENERATION_INVALID": "FORBIDDEN",
+      "conversion_of_infrastructure_failure_into_Y0": "FORBIDDEN",
+      "conversion_of_infrastructure_failure_into_non_labelability": "FORBIDDEN",
+      "existing_authority": [
+        "rvt_swarm/phase9c_rb/generation_contract.py::COUNTS_IN_SCIENTIFIC_DENOMINATOR -- INFRASTRUCTURE_FAILURE: False, 'not a scientific outcome; it is retried'",
+        "rvt_swarm/phase9g0r/contracts.py::reconcile_candidate_pair -- INFRASTRUCTURE_FAILURE yields PENDING_INFRASTRUCTURE_RESOLUTION with scientifically_reconciled = False, distinct from SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+        "rvt_swarm/phase9g0r/producer.py::_execute_candidate_with_one_infrastructure_retry -- one byte-identical replay of the same scientific call"
+      ],
+      "infrastructure_failure_yields": "no Bernoulli observation and no GENERATION_INVALID disposition",
+      "infrastructure_handling": "the frozen infrastructure retry/resume contract",
+      "out_of_scope": [
+        "timeout",
+        "worker crash",
+        "process death",
+        "serialization failure",
+        "network failure",
+        "transport failure",
+        "unexecuted scheduled work"
+      ],
+      "scope_of_this_contract": "a REQUIRED replica that was scientifically executed and returned GENERATION_INVALID",
+      "the_two_dispositions_must_never_be_merged": true
+    },
+    "C12_s8_relationship": {
+      "carried_into_v3_by": "results/rvt_fd24/phase9d_v3f_gate_registry_v1.json S8",
+      "censored_rollouts_remain_in_the_denominator": true,
+      "denominator": "executed required Target-V4 replica rollouts",
+      "frozen_threshold_text": "invalid rollout rate is below 0.02 overall and below 0.05 in every family",
+      "gate": "S8, invalid rollout rate",
+      "hidden_denominator_changes": "FORBIDDEN",
+      "numerator": "executed required Target-V4 replica rollouts whose disposition is GENERATION_INVALID",
+      "reinterpreting_invalid_rollouts_as_labels_to_improve_retention": "FORBIDDEN",
+      "retained": true,
+      "threshold_authority": "docs/RVT_RECOVERABILITY_LABEL_AUDIT_GATES.md gate 6",
+      "threshold_authority_sha256": "f9171f37d3402925d9f460e1b231cf0d433dce3fa3fa10bb9562208a6276fe5d",
+      "threshold_changed": false,
+      "unit": "replica rollout, NOT candidate aggregate and NOT source event",
+      "unit_authority": "results/rvt_fd24/phase9d_h1_requirement_map_v1.json gate 6 reports invalid_target_v4_rollout_replicas and clarifies that source termination before a scheduled event is denominator evidence, not an executed invalid rollout",
+      "weakened": false,
+      "why_s8_still_matters": "scientific-invalid candidate pairs are censored from supervised rows, so an excessive invalid rate would leave the supervised dataset no longer representative of the intended prospective source-event distribution"
+    },
+    "C13_invalidity_accounting": {
+      "hidden_denominator_changes": "FORBIDDEN",
+      "must_be_counted_separately": [
+        "required replica evaluations",
+        "scientifically valid replicas",
+        "GENERATION_INVALID replicas",
+        "candidate supervision records created",
+        "candidate supervision blocked",
+        "pair events retained",
+        "pair events dropped due to scientific invalidity",
+        "robot rows published"
+      ],
+      "per_cell_reporting": "for each family / candidate / N where feasible, also report the invalidity rate"
+    },
+    "C14_no_outcome_dependent_refill": {
+      "a_dropped_source_event_must_not_trigger": [
+        "replacement source episode",
+        "replacement selected source state",
+        "additional event",
+        "additional replica",
+        "budget refill"
+      ],
+      "official_source_episode_manifests_remain_fixed": true,
+      "train_source_episodes": 1200,
+      "validation_source_episodes": 300
+    },
+    "C15_unchanged_contracts": {
+      "hashes": {
+        "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+        "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+        "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+        "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+        "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+        "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+        "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+      },
+      "silent_mutation_of_any_listed_hash": "FORBIDDEN",
+      "this_contract_supplements_an_omitted_scientific_invalidity_semantic": true
+    },
+    "C1_required_replica_definition": {
+      "R_authority": "recoverability_replica_protocol_v3_sha256",
+      "R_is_never_read_from_the_observed_record_count": true,
+      "R_is_outcome_independent": true,
+      "R_values": {
+        "F1": 1,
+        "F10": 1,
+        "F2": 1,
+        "F3": 1,
+        "F4": 1,
+        "F5": 1,
+        "F6": 1,
+        "F7": 1,
+        "F8": 3,
+        "F9": 3
+      },
+      "definition": "for a candidate-event (e, tau) of family f, the required replicas are exactly the replica indices 0 .. R_f - 1 fixed by the frozen replica protocol"
+    },
+    "C2_scientific_validity_predicate_authority": {
+      "generation_invalid_causes": [
+        "INITIALIZATION_INVALID",
+        "GEOMETRY_INVALID",
+        "NUMERICAL_INVALID",
+        "SCHEDULE_INVALID",
+        "EXECUTOR_EXCEPTION"
+      ],
+      "generation_invalid_is_produced_when": "NOT (initialization_valid AND geometry_valid AND schedule_conformant AND executor_completed AND predicates.numerically_valid AND termination_cause NOT IN {INITIALIZATION_INVALID, GEOMETRY_INVALID, NUMERICAL_INVALID, SCHEDULE_INVALID, EXECUTOR_EXCEPTION})",
+      "implementation_authority": "rvt_swarm/phase8e/target.py::evaluate_target_v4",
+      "invalid_disposition": "GENERATION_INVALID",
+      "predicate": "replica_scientifically_valid(r) := evaluate_target_v4(summary_r).disposition != GENERATION_INVALID",
+      "predicate_redefined_by_this_contract": false,
+      "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+      "target_v4_label_for_generation_invalid": null,
+      "valid_dispositions": [
+        "RECOVERABLE_POSITIVE",
+        "VALID_TASK_NEGATIVE"
+      ]
+    },
+    "C3_candidate_labelability_rule": {
+      "consistency_with_the_frozen_probabilistic_target": "the frozen target contract already defines k as 'sum over replicas r of Y_{e,tau,r}' and R as 'the frozen replica count for the family and candidate'. This contract is the only rule under which that definition remains literally true for every published observation.",
+      "labelable": "for all required r: replica_scientifically_valid(r)",
+      "when_labelable": {
+        "R": "R_required",
+        "k": "SUM over required r of Y_r",
+        "supervision_exists": true
+      },
+      "when_not_labelable": {
+        "candidate_scientifically_labelable": false,
+        "k_R": "UNDEFINED",
+        "supervision_exists": false
+      }
+    },
+    "C4_non_imputation": {
+      "brier_over_a_valid_subset_of_an_invalid_candidate": "FORBIDDEN",
+      "intra_candidate_replica_masking_in_the_loss": "FORBIDDEN",
+      "invalid_counted_in_the_R_minus_k_term": "FORBIDDEN",
+      "invalid_is_not_Y0": true,
+      "invalid_is_not_Y1": true,
+      "invalid_is_not_an_ignorable_missing_observation": true,
+      "k_over_valid_replicas_only": "FORBIDDEN"
+    },
+    "C5_no_shrink_R": {
+      "R_effective_less_than_R_required": "FORBIDDEN",
+      "SHRINK_R_ON_INVALID": "FORBIDDEN",
+      "reasons": [
+        "the fixed replica protocol",
+        "adaptive_replication = DISABLED",
+        "outcome-independent scientific observation design",
+        "row and provenance semantics in which required R is determined by the frozen replica protocol, so identity determines R without recording it"
+      ]
+    },
+    "C6_no_replacement_replica": {
+      "reason": "outcome-dependent replication",
+      "reroll_until_valid": "FORBIDDEN",
+      "sample_replica_r_plus_R": "FORBIDDEN",
+      "seek_a_replacement_seed": "FORBIDDEN"
+    },
+    "C7_no_early_abort": {
+      "derived_from": [
+        "gate D5 -- candidate and replica accounting, exact equality against the frozen replica protocol",
+        "gate S2 -- both COMPACT and LINE evaluated at every retained event",
+        "gate S3 -- every selected event executes both candidates",
+        "gate S8 -- an aborted replica would silently shrink the invalid-rate denominator"
+      ],
+      "early_abort": "FORBIDDEN",
+      "matches_existing_behaviour": "rvt_swarm/phase9g0r/producer.py::_candidate_disposition aggregates over the complete replica sequence, and rvt_swarm/phase9g0r/producer_v2.py executes both candidates before reconciling",
+      "rule": "all R_required replicas of both candidates MUST still be executed even after a GENERATION_INVALID replica is observed"
+    },
+    "C8_pair_atomicity": {
+      "existing_authority": "rvt_swarm/phase9g0r/contracts.py::reconcile_candidate_pair already returns rows = () and training_rows_committable = False when either candidate aggregate is GENERATION_INVALID",
+      "gate": "D4, partial candidate-pair publication, threshold 0",
+      "publish_a_partial_robot_set": "FORBIDDEN",
+      "publish_the_other_candidate_alone": "FORBIDDEN",
+      "publishable_iff": "both candidates are scientifically labelable",
+      "rows_otherwise": 0,
+      "rows_when_publishable": "exactly 2 * N_event robot-local V3 rows",
+      "unit": "one selected source event e with candidates COMPACT and LINE"
+    },
+    "C9_audit_disposition": {
+      "alias_rule": "the owner explicitly permitted a repository-consistent equivalent; the existing frozen status string is adopted so no shipped V1/V2 code path has to change",
+      "is_a_recoverability_training_label": false,
+      "is_an_audit_disposition": true,
+      "must_never_appear_in_a_supervised_row": true,
+      "owner_suggested_alias": "PAIR_NOT_LABELABLE_SCIENTIFIC_INVALID",
+      "repository_consistent_status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "scientifically_reconciled": true,
+      "status_authority": "rvt_swarm/phase9g0r/contracts.py::reconcile_candidate_pair",
+      "training_rows_committable": false
+    },
+    "additive": true,
+    "authority": "OWNER decision recorded in PHASE_9D_V3F_I",
+    "name": "RECOVERABILITY_V3_REQUIRED_REPLICA_INVALIDITY_CONTRACT_V1",
+    "schema_version": "rvt-recoverability-required-replica-invalidity/v1",
+    "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_V3_GENERATION",
+    "supersedes_in_place": false
+  },
+  "phase": "PHASE_9D_V3F_I",
+  "phase9d_v3f_i_invalidity_contract_sha256": "69f4f3c4ad43e5db2a316401d2f4ae77597834b27030ab8b2b9e0fa2da1b4b26",
+  "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "schema_version": "rvt-phase9d-v3f-i-invalidity-contract/v1"
+}

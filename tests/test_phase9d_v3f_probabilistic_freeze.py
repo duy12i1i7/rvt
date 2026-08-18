@@ -99,11 +99,16 @@ def test_artifact_exists_and_self_verifies(name):
     assert verify_canonical_hash(document, hash_field(document)), name
 
 
+#: Later additive addenda share the phase9d_v3f_ glob prefix but belong to their
+#: own phases: _l_ is the V3F-L layout-capacity addendum and _i_ is the V3F-I
+#: required-replica invalidity addendum. Excluding them keeps this assertion on
+#: exactly the eighteen artifacts Phase 9D-V3F itself froze.
+_LATER_ADDENDUM_PREFIXES = ("phase9d_v3f_l_", "phase9d_v3f_i_")
+
+
 def test_all_eighteen_required_artifacts_exist():
-    # exclude the later phase9d_v3f_l_* layout-capacity addendum, which shares
-    # this glob prefix but belongs to Phase 9D-V3F-L
     own = [path for path in RESULTS.glob("phase9d_v3f_*.json")
-           if not path.name.startswith("phase9d_v3f_l_")]
+           if not path.name.startswith(_LATER_ADDENDUM_PREFIXES)]
     assert len(own) == 18
 
 

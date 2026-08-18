@@ -1,0 +1,102 @@
+{
+  "binding_rule": {
+    "authority": "results/rvt_fd24/phase9d_v3f_row_binding_v1.json -- 'the row identity contains NO observed outcome'",
+    "corollary": "objects whose content is fixed before any outcome is observed do not bind it, because the rule cannot change them",
+    "statement": "an object MUST bind recoverability_v3_required_replica_invalidity_contract_v1_sha256 if and only if the invalidity rule determines that object's CONTENT or its ADMISSIBILITY"
+  },
+  "invalidity_contract_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "objects": [
+    {
+      "binds_invalidity_contract": false,
+      "determined_by_the_invalidity_rule": false,
+      "implementation": "rvt_swarm/phase9g0r/contracts.py::official_rollout_configuration_payload",
+      "object": "official rollout configuration",
+      "scope": "one required replica execution",
+      "why": "the payload is the configuration of a rollout that is scheduled and executed identically under every candidate invalidity rule. It is fixed before the disposition exists, so the rule cannot change it. Binding it would make an execution configuration depend on a publication rule."
+    },
+    {
+      "binds_invalidity_contract": false,
+      "determined_by_the_invalidity_rule": false,
+      "implementation": "the compiled V3 candidate-event task and its replica jobs",
+      "object": "candidate task provenance",
+      "scope": "one candidate-event, outcome-independent",
+      "why": "candidate-event identity and replica-evaluation identity are declared outcome_independent = true in the frozen row binding, and the frozen owner decision requires that identities created before observing outcomes are never mutated. The same task is compiled whether or not a replica later returns GENERATION_INVALID."
+    },
+    {
+      "additive_field": "recoverability_v3_required_replica_invalidity_contract_v1_sha256",
+      "binds_invalidity_contract": true,
+      "determined_by_the_invalidity_rule": true,
+      "implementation": "the F6 supervision record, schema rvt-recoverability-candidate-supervision/v3",
+      "object": "candidate supervision provenance",
+      "scope": "one (event, candidate) observation (k, R)",
+      "why": "whether this record exists at all, and the rule under which k and R were formed, is exactly what the invalidity contract governs. The record is explicitly declared is_scientific_identity = false, so adding a bound contract hash is additive payload and touches no identity."
+    },
+    {
+      "additive_field": "recoverability_v3_required_replica_invalidity_contract_v1_sha256",
+      "binds_invalidity_contract": true,
+      "determined_by_the_invalidity_rule": true,
+      "implementation": "rvt_swarm/phase9g0r/contracts.py::CandidatePairReconciliation, schema rvt-recoverability-candidate-pair-transaction",
+      "object": "pair transaction provenance",
+      "scope": "one source event, both candidates",
+      "why": "the transaction's status, scientifically_reconciled flag and training_rows_committable flag ARE the invalidity rule applied. A reader must be able to tell which rule produced a SCIENTIFICALLY_RECONCILED_GENERATION_INVALID transaction."
+    },
+    {
+      "additive_field": "recoverability_v3_required_replica_invalidity_contract_v1_sha256",
+      "binds_invalidity_contract": true,
+      "determined_by_the_invalidity_rule": true,
+      "object": "V3 dataset manifest",
+      "scope": "one split",
+      "why": "the manifest declares the population of retained events and published rows. Censoring is a property of the population, not of any single row, so the manifest is the correct place for the rule that produced it. It must also carry the invalidity accounting required by C13."
+    },
+    {
+      "binds_invalidity_contract": true,
+      "determined_by_the_invalidity_rule": true,
+      "mechanism": "the seal covers the manifest; no separate field is required beyond the manifest binding, but the seal document must recompute and verify it",
+      "object": "V3 dataset seal",
+      "scope": "one split",
+      "why": "the seal must cover the manifest including the invalidity contract hash, so a dataset produced under a different censoring rule cannot masquerade as this one."
+    },
+    {
+      "binds_invalidity_contract": false,
+      "determined_by_the_invalidity_rule": false,
+      "frozen_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+      "must_change": false,
+      "object": "V3 row identity (RECOVERABILITY_ROW_BINDING_V3)",
+      "why": "see the row-identity determination below"
+    }
+  ],
+  "phase": "PHASE_9D_V3F_I",
+  "phase9d_v3f_i_provenance_binding_sha256": "ef3907c186fbf63f425a1354abf9e58c9f79257f1b1224adb446d24287e32fc1",
+  "placeholder_row_prohibition": {
+    "existing_precedent": "rvt_swarm/phase9g0r/writer.py refuses a row for any non-LABELED residual attempt, and reconcile_candidate_pair returns rows = () for the GENERATION_INVALID case",
+    "forbidden_inside_the_supervised_dataset": [
+      "rows with k = null",
+      "rows with label = null",
+      "rows with an invalid flag",
+      "partial robot sets",
+      "one candidate alone"
+    ],
+    "rule": "a non-labelable pair emits zero supervised robot-local rows"
+  },
+  "row_binding_v3_determination": {
+    "answer": "NO",
+    "case_AGAINST_changing_it": [
+      "rows exist only for labelable transactions, so no published row is ambiguous about invalidity",
+      "the invalidity rule determines WHETHER a row exists, not WHAT the row is; identity answers the second question",
+      "the frozen row binding requires identity to be outcome-independent, and non-labelability is observed only after outcomes exist",
+      "the two already-bound hashes -- probabilistic target and replica protocol -- fully determine the meaning of (k, R) under rule A",
+      "recoverability_row_binding_v3_spec_sha256 is itself one of the sixteen identity fields, so changing the spec would change every V3 row id and require a broader owner re-freeze of an already prospectively frozen contract",
+      "the censoring effect is a property of the published POPULATION, which the manifest and seal already carry"
+    ],
+    "conclusion": "row identity does not scientifically require the new hash. Row Binding V3 is left byte-for-byte unchanged, which is the preferred result the phase named and which identity authority independently supports.",
+    "question": "must RECOVERABILITY_ROW_BINDING_V3 change to bind the new invalidity contract hash?",
+    "row_binding_v3_modified": false,
+    "row_identity_field_count_unchanged": 16,
+    "stop_required": false,
+    "strongest_case_FOR_changing_it": {
+      "argument": "under a different invalidity rule the SAME row identity could carry a DIFFERENT (k, R) payload. For outcomes {Y0 = 1, INVALID, Y2 = 0} on an R = 3 candidate, rule C would publish k = 1, R = 3 while rule A publishes nothing. If the rule can change what (k, R) means, identity arguably must bind it, exactly as it already binds the probabilistic-target and replica-protocol hashes.",
+      "why_it_does_not_carry": "under the owner-selected rule A, (k, R) means precisely what the ALREADY-BOUND frozen probabilistic target contract says it means: k is the 'sum over replicas r of Y_{e,tau,r}' and R is 'the frozen replica count for the family and candidate'. Rule A is the only rule under which that frozen sentence is literally true of every published row. Rules B and C would have required amending the probabilistic target contract itself -- and that hash IS a row-identity field, so the identity would have changed through the existing binding, not through a new one."
+    }
+  },
+  "schema_version": "rvt-phase9d-v3f-i-provenance-binding/v1"
+}

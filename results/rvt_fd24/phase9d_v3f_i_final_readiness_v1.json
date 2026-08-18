@@ -1,0 +1,95 @@
+{
+  "A1_compatibility": {
+    "OWNER_DECISION_CONTRACT_CONFLICT": false,
+    "axes_audited": 9,
+    "conflicts": 0,
+    "independent_adversarial_scopes": 8,
+    "scopes_reporting_conflict": 0,
+    "tensions_examined": 6,
+    "tensions_surviving": 0
+  },
+  "A2_contract_frozen": {
+    "additive": true,
+    "clauses": 15,
+    "name": "RECOVERABILITY_V3_REQUIRED_REPLICA_INVALIDITY_CONTRACT_V1",
+    "sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75"
+  },
+  "A3_implementation_binding": {
+    "fail_closed_if_missing_or_wrong": true,
+    "implemented_in_this_phase": 0,
+    "phase_9g_v3i_q_must_bind": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75"
+  },
+  "A4_provenance": {
+    "binds_the_new_hash": [
+      "candidate supervision provenance",
+      "pair transaction provenance",
+      "V3 dataset manifest",
+      "V3 dataset seal"
+    ],
+    "does_not_bind_it": [
+      "official rollout configuration",
+      "candidate task provenance",
+      "V3 row identity"
+    ],
+    "row_binding_v3_modified": false,
+    "row_binding_v3_must_change": false,
+    "stop_for_row_binding_change_required": false
+  },
+  "A5_required_tests": {
+    "additional_assertions": 4,
+    "implemented_in_this_phase": 0,
+    "numbered_cases": 11
+  },
+  "A6_v2_history": {
+    "gate_7_marked_passed": false,
+    "gate_7_modified": false,
+    "gate_7_observed": "TRAIN F9/LINE 59/530",
+    "gate_7_status": "FAILED_FOR_V2",
+    "gate_7_still_exceeds": true,
+    "gate_7_threshold": 0.1,
+    "gate_7_threshold_changed": false,
+    "gate_7_v3_applicability": "NOT_APPLICABLE_TO_V3_PROBABILISTIC_TARGET",
+    "gate_7_value": 0.11132075471698114,
+    "v2_contracts_modified": 0,
+    "v2_rows_modified": 0,
+    "v2_train_seal_modified": false,
+    "v2_validation_seal_modified": false
+  },
+  "A7_no_scientific_execution": {
+    "final_test_accesses": 0,
+    "hp_trials": 0,
+    "images_built": 0,
+    "models_trained": 0,
+    "n24_accesses": 0,
+    "probabilistic_target_semantics_changed": 0,
+    "replica_counts_changed": 0,
+    "source_acquisition_modified": 0,
+    "study_b_accesses": 0,
+    "target_v4_modified": 0,
+    "v2_modified": 0,
+    "v3_candidate_rollouts_executed": 0,
+    "v3_rows": 0,
+    "v3_runtime_code_written": 0,
+    "v3_source_episodes_executed": 0,
+    "v3_target_v4_evaluations": 0
+  },
+  "branch": "research/rvt-phase9d-v3f-i-replica-invalidity-freeze-v1",
+  "data_generation_authorized": false,
+  "frozen_hashes_unchanged": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "handoff_commit_full_sha": "abab5f477340b7f10c042a66cdfc0adef6024258",
+  "phase": "PHASE_9D_V3F_I",
+  "phase9d_v3f_i_final_readiness_sha256": "c85440f6b487b9931a85322584dbefef15bbb50070c02635eb9cf86a52100ce2",
+  "recommendation": "RESUME_RECOVERABILITY_V3_IMPLEMENTATION_AND_QUALIFICATION",
+  "schema_version": "rvt-phase9d-v3f-i-final-readiness/v1",
+  "training_authorized": false,
+  "verdict": "A",
+  "verdict_text": "The owner-selected PAIR_NOT_LABELABLE semantics are compatible with frozen V3 science; the additive invalidity contract is prospectively frozen and Phase 9G-V3I-Q may resume implementation and qualification."
+}

@@ -1,0 +1,178 @@
+{
+  "OWNER_DECISION_CONTRACT_CONFLICT": false,
+  "axes": [
+    {
+      "axis": "Target V4",
+      "compatible": true,
+      "evidence": [
+        "rvt_swarm/phase8e/target.py::evaluate_target_v4 returns TargetV4EvaluationResult(GENERATION_INVALID, None, ...) -- the label is None, never 0 and never 1, so Target V4 itself already refuses to impute",
+        "results/rvt_fd24/target_v4_execution_contract_v1.json exception_policy: 'every exception becomes typed EXECUTOR_EXCEPTION; never an implicit label'"
+      ],
+      "mandates_a_different_behaviour": false,
+      "target_v4_modified": false
+    },
+    {
+      "axis": "V3 probabilistic target",
+      "compatible": true,
+      "evidence": [
+        "the frozen observation clause defines k as 'sum over replicas r of Y_{e,tau,r}' and R as 'the frozen replica count for the family and candidate'. Owner decision A is the only rule under which that sentence stays literally true for every published observation; readings B and C would have required amending this contract",
+        "per_replica_target.outcome: 'Y_r in {0, 1}' -- a GENERATION_INVALID replica has no Y_r, so it cannot enter the sum"
+      ],
+      "mandates_a_different_behaviour": false,
+      "target_contract_modified": false
+    },
+    {
+      "axis": "fixed replica protocol",
+      "compatible": true,
+      "evidence": [
+        "adaptive_replication = DISABLED and R_expansion_permitted = false directly support the bans on shrinking R and on replacement replicas",
+        "replica_counts fixes R per family independently of any outcome"
+      ],
+      "mandates_a_different_behaviour": false,
+      "replica_counts_modified": false
+    },
+    {
+      "axis": "row identity",
+      "compatible": true,
+      "evidence": [
+        "outcome_independence: 'the row identity contains NO observed outcome' -- non-labelability is observed only after outcomes exist, so it cannot enter identity",
+        "R_binding: 'R is bound through recoverability_replica_protocol_v3_sha256 ... identity determines R without recording it' -- preserved exactly, because R never varies"
+      ],
+      "mandates_a_different_behaviour": false,
+      "row_binding_v3_modified": false,
+      "row_binding_v3_must_change": false
+    },
+    {
+      "already_implemented_for_v1_v2": true,
+      "axis": "pair atomicity",
+      "compatible": true,
+      "evidence": [
+        "rvt_swarm/phase9g0r/contracts.py::reconcile_candidate_pair already returns status SCIENTIFICALLY_RECONCILED_GENERATION_INVALID with rows = () and training_rows_committable = False when either candidate aggregate is GENERATION_INVALID",
+        "rvt_swarm/phase9g0r/producer_v2.py computes labelable = all(item.disposition not in (GENERATION_INVALID,) and item.aggregate_label is not None ...) and builds rows only when labelable",
+        "gate D4, partial candidate-pair publication, threshold 0"
+      ],
+      "mandates_a_different_behaviour": false
+    },
+    {
+      "axis": "event-equal loss",
+      "compatible": true,
+      "evidence": [
+        "docs/RVT_FD24_LOSS_CONTRACT.md: 'Invalid rollout rows are masked and counted, never relabelled.' -- 'never relabelled' is the non-imputation rule verbatim and 'counted' is the S8 no-hidden-denominator rule",
+        "the frozen V3 loss contract records relation_to_frozen_loss_contract.contradiction = false and v3_relation = GENERALIZATION"
+      ],
+      "loss_contract_modified": false,
+      "mandates_a_different_behaviour": false
+    },
+    {
+      "axis": "Brier metric",
+      "brier_contract_modified": false,
+      "compatible": true,
+      "evidence": [
+        "Brier_candidate = (1/R) * SUM_r (p - Y_r)^2 presumes R valid Y_r; the owner decision guarantees exactly that for every candidate the metric is ever applied to",
+        "no clause requires a Brier term for every scheduled event"
+      ],
+      "mandates_a_different_behaviour": false
+    },
+    {
+      "axis": "S8 invalid-rate gate",
+      "compatible": true,
+      "evidence": [
+        "S8 bounds the invalid rate rather than forbidding invalidity, so the frozen gate set already presupposes that this case can occur",
+        "the owner decision explicitly retains S8 and forbids reinterpreting invalid rollouts as labels to improve retention"
+      ],
+      "gate_registry_modified": false,
+      "mandates_a_different_behaviour": false,
+      "threshold_changed": false
+    },
+    {
+      "axis": "historical V1/V2 validity semantics",
+      "compatible": true,
+      "evidence": [
+        "rvt_swarm/phase9c_rb/counterfactual.py::CandidateResult.aggregate_label returns None when any replica is GENERATION_INVALID",
+        "rvt_swarm/phase9g0r/contracts.py::CandidateAggregateDisposition.__post_init__ raises 'non-labelable aggregate must not carry a label'",
+        "rvt_swarm/phase9c_rb/generation_contract.py::COUNTS_IN_SCIENTIFIC_DENOMINATOR marks INFRASTRUCTURE_FAILURE False with the comment 'not a scientific outcome; it is retried', while EXECUTION_INVALID is True -- the owner's infrastructure/scientific separation and denominator rule, already frozen",
+        "rvt_swarm/phase9c_rb/generation_contract.py::DispositionCounts docstring: 'Attempted decision states never vanish; that is the point.'"
+      ],
+      "mandates_a_different_behaviour": false,
+      "relation": "the owner decision is the ALREADY-SHIPPED V1/V2 behaviour restated for a (k, R) observation, not a new rule",
+      "v1_v2_modified": false
+    }
+  ],
+  "blocking_conflicts": 0,
+  "conclusion": "the owner-selected PAIR_NOT_LABELABLE semantics are compatible with every frozen V3 contract, with Target V4, with the frozen loss and Brier contracts, with the V3 gate registry and with the already-shipped V1/V2 invalidity semantics. No frozen contract mandates a different behaviour, so no OWNER_DECISION_CONTRACT_CONFLICT is raised.",
+  "independent_adversarial_audit": {
+    "hard_conflicts_reported": 0,
+    "method": "eight independent read-only auditors, one per frozen scope, each instructed to REFUTE compatibility and to default to 'no conflict' unless able to quote text that mandates a different behaviour",
+    "scopes": [
+      "target-v4",
+      "v3-probabilistic-target",
+      "replica-protocol",
+      "row-binding",
+      "loss-and-brier",
+      "gates",
+      "historical-v1-v2",
+      "v3f-owner-decisions"
+    ],
+    "scopes_completed": 8,
+    "scopes_reporting_conflict_found": 0,
+    "tensions_reported": 6,
+    "tensions_surviving_verification": 0,
+    "tensions_verified_by_hand": 6,
+    "verification_stage_status": "the automated adversarial verification stage and the completeness critic did not run: the session hit a usage limit and six verifier agents errored. Every reported tension was therefore verified by hand against the cited file, as recorded below."
+  },
+  "invalidity_contract_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "phase": "PHASE_9D_V3F_I",
+  "phase9d_v3f_i_contract_compatibility_sha256": "04b96fe7d7a35ecf621c486af6491818be4f711e3673b53689241da5c4dc7b4a",
+  "schema_version": "rvt-phase9d-v3f-i-contract-compatibility/v1",
+  "tensions_examined_and_resolved": [
+    {
+      "claim": "mixed_outcomes.outcome_dependent_filtering_permitted = false, discarded = false and filtered = false forbid dropping a candidate or pair after observing a GENERATION_INVALID replica",
+      "id": "TN1",
+      "raised_against": "results/rvt_fd24/phase9d_v3f_probabilistic_target_contract_v1.json",
+      "raised_independently_by": 2,
+      "resolution": "the three flags are members of the mixed_outcomes object, whose patterns are 001, 010, 100, 011, 101 and 110 -- patterns of VALID binary outcomes -- and whose sibling field is_generation_invalid = false states that such a pattern is NOT generation-invalid. The prohibition is therefore on filtering by the VALUE of a valid observation, which is what results/rvt_fd24/phase9d_v3d_final_recommendation_v1.json D28 describes when it calls deleting the 59 boundary events 'outcome-dependent filtering'. A candidate with an invalid required replica has no valid observation to filter by.",
+      "survives": false
+    },
+    {
+      "claim": "'Invalid rollout rows are masked and counted, never relabelled' mandates in-dataset masking, which would forbid publishing zero rows",
+      "id": "TN2",
+      "raised_against": "docs/RVT_FD24_LOSS_CONTRACT.md",
+      "resolution": "'never relabelled' is the owner's non-imputation rule verbatim and 'counted' is the owner's no-hidden-denominator rule. 'Masked' states that such rows contribute nothing to the loss; publishing zero supervised rows achieves that a fortiori. The repository's own realization of masking for Recoverability is already 'no row committed' -- reconcile_candidate_pair returns rows = () -- while in-dataset masking in the same paragraph is scoped to the RESIDUAL term. The frozen V3 loss contract already records contradiction = false against this authority.",
+      "survives": false
+    },
+    {
+      "claim": "evaluate_candidate_recoverability computes label = int(not invalid and all(outcomes)), so an invalid candidate is assigned the integer 0 -- the owner-forbidden 'invalid counted as failure'",
+      "id": "TN3",
+      "raised_against": "rvt_swarm/phase8/targets.py lines 148-151",
+      "resolution": "that integer never reaches a published row. The official path is producer.py::_candidate_disposition, which returns CandidateAggregateDisposition(..., GENERATION_INVALID, None, ...), and CandidateAggregateDisposition.__post_init__ RAISES if a GENERATION_INVALID aggregate carries any label. producer_v2.py::_v2_rows emits rows containing only identity and graph payload -- no label field at all -- and is called only when labelable is True. counterfactual.py::CandidateResult.aggregate_label independently returns None for the same case.",
+      "survives": false
+    },
+    {
+      "claim": "'every exception becomes typed EXECUTOR_EXCEPTION' leaves no room for a separate infrastructure-failure category, since EXECUTOR_EXCEPTION is a GENERATION_INVALID cause",
+      "id": "TN4",
+      "implementation_consequence": "Phase 9G-V3I-Q must preserve this catch boundary exactly; collapsing it would convert infrastructure failure into scientific invalidity",
+      "raised_against": "results/rvt_fd24/target_v4_execution_contract_v1.json",
+      "resolution": "the two are separated by WHERE the exception is caught. An exception that escapes the scientific call is caught by producer.py::_execute_candidate_with_one_infrastructure_retry and classified INFRASTRUCTURE_FAILURE after one byte-identical replay; it never reaches evaluate_target_v4. EXECUTOR_EXCEPTION is a typed termination cause of an execution that did complete and report. This is exactly the owner's boundary: the decision applies only when the scientific rollout actually executes and independently returns GENERATION_INVALID.",
+      "survives": false
+    },
+    {
+      "claim": "censoring reduces retained validation pairs, threatening the >= 30 per primary family minimum, and a non-published aggregate could break exact replica accounting",
+      "id": "TN5",
+      "raised_against": "results/rvt_fd24/phase9d_v3f_gate_registry_v1.json S4, and V3-D3 in the V3D gate design",
+      "resolution": "S4 is a gate to be MEASURED after generation, not a rule for handling invalidity; making a gate harder to pass is not a contract conflict, and S8 is the predeclared bound on exactly that risk. Replica accounting is stated over AGGREGATES, not over PUBLISHED aggregates: a censored candidate still forms an aggregate with its declared R, and contract clause C7 forbids early abort so the identity stays exact. For calibration, V2 measured 0 actual GENERATION_INVALID rollouts across TRAIN and VALIDATION.",
+      "survives": false
+    },
+    {
+      "claim": "option C records 'coverage: 1.0 -- every event is supervised', which non-labelability would violate",
+      "id": "TN6",
+      "raised_against": "results/rvt_fd24/phase9d_v3d_target_option_matrix_v1.json",
+      "resolution": "that field compares TARGET TYPES: option A deletes boundary events by construction, option C retains them. It is a property of the design option matrix, a V3D design artifact, not a frozen contract, and it says nothing about scientifically invalid rollouts.",
+      "survives": false
+    }
+  ],
+  "the_only_reading_that_would_have_conflicted": {
+    "owner_rejected_it": true,
+    "reading": "C -- retain R and count the invalid replica in the (R-k) term",
+    "why_it_would_have_conflicted": "k would no longer be the 'sum over replicas r of Y_{e,tau,r}' that the frozen probabilistic target contract defines, so recoverability_probabilistic_target_v3_sha256 would have had to change -- and that hash is one of the sixteen row-identity fields, so every V3 row id would have changed too"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "additional_required_assertions": [
+    {
+      "assertion": "the implementation FAILS CLOSED if the invalidity contract hash is missing, empty or different from 66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+      "id": "T12"
+    },
+    {
+      "assertion": "no supervised V3 row, at any point, carries a disposition, an invalid flag, a null k or a null R",
+      "id": "T13"
+    },
+    {
+      "assertion": "V3 row identity remains exactly the sixteen frozen fields and its spec hash is still bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+      "id": "T14"
+    },
+    {
+      "assertion": "the loss and Brier interfaces cannot be called with a per-replica mask, and cannot be called for a non-labelable candidate",
+      "id": "T15"
+    }
+  ],
+  "binding": "these tests are MANDATORY for Phase 9G-V3I-Q; implementation may not be declared qualified until every one of them passes",
+  "count": 11,
+  "count_including_additional_assertions": 15,
+  "implemented_in_this_phase": 0,
+  "invalidity_contract_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "phase": "PHASE_9D_V3F_I",
+  "phase9d_v3f_i_required_tests_sha256": "ad82640c3f1376479cfb95cb595ee024d42e38210dbb4638fc02503887b2abca",
+  "schema_version": "rvt-phase9d-v3f-i-required-tests/v1",
+  "tests": [
+    {
+      "expected_pair_status": "SCIENTIFICALLY_RECONCILED_LABELABLE",
+      "expected_rows": "published, 2 * N for the pair",
+      "expected_supervision": "(k, R) = (3, 3)",
+      "family_R": 3,
+      "id": "T1",
+      "replica_outcomes": [
+        "Y=1",
+        "Y=1",
+        "Y=1"
+      ]
+    },
+    {
+      "expected_rows": "published, 2 * N for the pair",
+      "expected_supervision": "(k, R) = (2, 3)",
+      "family_R": 3,
+      "id": "T2",
+      "note": "mixed valid outcomes remain supervision, unchanged by this contract",
+      "replica_outcomes": [
+        "Y=1",
+        "Y=0",
+        "Y=1"
+      ]
+    },
+    {
+      "expected_rows": "published, 2 * N for the pair",
+      "expected_supervision": "(k, R) = (0, 3)",
+      "family_R": 3,
+      "id": "T3",
+      "note": "k = 0 is a valid observation, never non-labelability",
+      "replica_outcomes": [
+        "Y=0",
+        "Y=0",
+        "Y=0"
+      ]
+    },
+    {
+      "expected_candidate_labelable": false,
+      "expected_supervision": "NONE; (k, R) is UNDEFINED",
+      "family_R": 3,
+      "id": "T4",
+      "must_not_produce": [
+        "(k, R) = (1, 3)",
+        "(k, R) = (1, 2)",
+        "(k, R) = (2, 3)",
+        "any k or R at all"
+      ],
+      "note": "this is the exact case that triggered the Phase 9G-V3I-Q stop",
+      "replica_outcomes": [
+        "valid success Y=1",
+        "GENERATION_INVALID",
+        "valid failure Y=0"
+      ]
+    },
+    {
+      "expected_pair_rows": 0,
+      "expected_pair_status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "id": "T5",
+      "must_not_publish": "the COMPACT candidate alone",
+      "scenario": "COMPACT labelable, LINE non-labelable"
+    },
+    {
+      "expected_pair_rows": 0,
+      "expected_pair_status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "id": "T6",
+      "must_not_publish": "the LINE candidate alone",
+      "note": "symmetric with T5; candidate order must not matter",
+      "scenario": "COMPACT non-labelable, LINE labelable"
+    },
+    {
+      "expected_pair_rows": 0,
+      "expected_pair_status": "SCIENTIFICALLY_RECONCILED_GENERATION_INVALID",
+      "id": "T7",
+      "scenario": "both candidates non-labelable"
+    },
+    {
+      "expected_pair_status": "PENDING_INFRASTRUCTURE_RESOLUTION",
+      "expected_scientific_disposition": "NOT GENERATION_INVALID",
+      "expected_scientifically_reconciled": false,
+      "id": "T8",
+      "must_not_produce": [
+        "Y = 0 imputation",
+        "Y = 1 imputation",
+        "a GENERATION_INVALID disposition",
+        "candidate non-labelability"
+      ],
+      "required_behaviour": "the frozen infrastructure retry/resume contract runs the byte-identical scientific call again",
+      "scenario": "infrastructure timeout on one required replica"
+    },
+    {
+      "also_assert": "all R_required replicas of BOTH candidates still execute; no early abort",
+      "expected_replica_executions": "exactly R_required, never R_required + 1",
+      "id": "T9",
+      "must_not_produce": [
+        "a replacement replica at index r + R",
+        "a replacement disturbance seed",
+        "a reroll until a valid outcome appears"
+      ],
+      "scenario": "a required replica returns GENERATION_INVALID"
+    },
+    {
+      "audit_evidence_that_must_still_exist": [
+        "source event identity",
+        "both candidate-event identities",
+        "every replica-evaluation identity",
+        "every executed replica disposition",
+        "the valid Y_r values that did exist",
+        "which replica indices were GENERATION_INVALID",
+        "Target-V4 predicates and provenance",
+        "matched stream identities",
+        "the pair transaction disposition"
+      ],
+      "id": "T10",
+      "must_not_produce": [
+        "placeholder supervised rows",
+        "mutation of any pre-existing identity"
+      ],
+      "scenario": "a non-labelable pair",
+      "supervised_rows": 0
+    },
+    {
+      "assertions": [
+        "the denominator INCLUDES rollouts belonging to censored candidates and censored pairs",
+        "the denominator EXCLUDES infrastructure failures, which are not scientific outcomes",
+        "source termination before a scheduled event is denominator evidence, not an executed invalid rollout",
+        "the overall rate is compared against 0.02 and each family rate against 0.05, both strict",
+        "no code path may recompute the denominator over published rows only"
+      ],
+      "denominator": "executed required Target-V4 replica rollouts",
+      "id": "T11",
+      "numerator": "executed required Target-V4 replica rollouts whose disposition is GENERATION_INVALID",
+      "regression_shape": "a synthetic split with a known invalid count must reproduce the rate exactly as a fraction, not approximately",
+      "scenario": "gate S8 numerator and denominator are exact",
+      "unit": "replica rollout"
+    }
+  ]
+}

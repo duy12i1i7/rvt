@@ -1,0 +1,95 @@
+{
+  "amended_capabilities": [
+    {
+      "amendment": "k and R may be formed ONLY when every required replica is scientifically valid. R is still bound from the frozen replica protocol and never from the observed record count. A candidate with any GENERATION_INVALID required replica produces NO (k, R).",
+      "id": "I3",
+      "name": "(k, R) aggregation"
+    },
+    {
+      "amendment": "the record is emitted only for a labelable candidate and must additionally bind the invalidity contract hash",
+      "id": "I4",
+      "name": "V3 candidate supervision record"
+    },
+    {
+      "amendment": "must implement pair atomicity -- 2 * N rows or 0 rows -- and must refuse any placeholder row",
+      "id": "I6",
+      "name": "V3 dataset writer"
+    },
+    {
+      "amendment": "must refuse a group whose candidate count is not 2 or whose row count per candidate is not N; a censored event is simply absent, never partially present",
+      "id": "I7",
+      "name": "V3 dataset loader contract"
+    },
+    {
+      "amendment": "must be unable to express a per-replica mask, and must be unable to accept a non-labelable candidate",
+      "id": "I8",
+      "name": "loss interface"
+    },
+    {
+      "amendment": "must be unable to evaluate over a valid subset of an invalid candidate",
+      "id": "I9",
+      "name": "Brier evaluator"
+    }
+  ],
+  "authorized_next_phase": "PHASE_9G_V3I_Q may resume implementation and qualification; it may NOT generate official V3 data",
+  "fail_closed_requirement": {
+    "mechanism": "recompute the canonical hash of the contract body and compare; raise rather than warn",
+    "must_not_infer_the_rule_from_observed_data": true,
+    "must_not_silently_default_to_any_rule": true,
+    "rule": "the executable V3 implementation MUST refuse to begin official generation, and MUST refuse to emit any supervision record or pair transaction, if the invalidity contract hash is absent or differs from 66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75"
+  },
+  "frozen_inputs_for_implementation": {
+    "official_v3_train_manifest_dry_final_sha256": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+    "official_v3_validation_manifest_dry_final_sha256": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "v3_comprehensive_development_exclusion_union_v2_sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+  },
+  "implemented_in_this_phase": 0,
+  "new_capabilities": [
+    {
+      "id": "I10",
+      "name": "pair transaction with scientific invalidity",
+      "requirement": "reuse the frozen rvt_swarm/phase9g0r/contracts.py::reconcile_candidate_pair semantics: GENERATION_INVALID on either candidate yields SCIENTIFICALLY_RECONCILED_GENERATION_INVALID with zero rows and training_rows_committable = False, distinct from PENDING_INFRASTRUCTURE_RESOLUTION"
+    },
+    {
+      "id": "I11",
+      "name": "invalidity accounting",
+      "requirement": "emit the C13 counters per split and per family/candidate/N, with no hidden denominator changes"
+    },
+    {
+      "id": "I12",
+      "name": "no early abort",
+      "requirement": "execute all R_required replicas of both candidates even after an invalid replica is observed, so gates D5, S2, S3 and the S8 denominator stay exact"
+    }
+  ],
+  "new_mandatory_frozen_input": {
+    "artifact": "results/rvt_fd24/phase9d_v3f_i_invalidity_contract_v1.json",
+    "must_be_bound_by_phase_9g_v3i_q": true,
+    "name": "RECOVERABILITY_V3_REQUIRED_REPLICA_INVALIDITY_CONTRACT_V1",
+    "sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75"
+  },
+  "phase": "PHASE_9D_V3F_I",
+  "phase9d_v3f_i_implementation_handoff_sha256": "281b8102c55c6e781104bef1f457f99763724d7f642565e8c25ea82ba72c1321",
+  "required_tests": "results/rvt_fd24/phase9d_v3f_i_required_tests_v1.json",
+  "resumes": "PHASE_9G_V3I_Q",
+  "schema_version": "rvt-phase9d-v3f-i-implementation-handoff/v1",
+  "stop_token_cleared": "V3_REPLICA_INVALIDITY_SEMANTICS_OWNER_DECISION_REQUIRED",
+  "superseded_registry_that_must_still_be_refused": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+  "unchanged": {
+    "historical_gate_7": "UNCHANGED, FAILED_FOR_V2",
+    "probabilistic_target_semantics": "UNCHANGED",
+    "replica_counts": "UNCHANGED",
+    "row_binding_v3": "UNCHANGED, spec hash bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "source_acquisition": "UNCHANGED",
+    "target_v4": "UNCHANGED",
+    "v2": "UNCHANGED"
+  }
+}
