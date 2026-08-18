@@ -1,0 +1,106 @@
+{
+  "assumptions": [
+    "per-replica cost is taken from the VALIDATION run and assumed representative; the TRAIN figure is an extrapolation by replica count, not a measurement",
+    "the projection holds the source-episode budget and the acquisition protocol fixed at their frozen V2 values",
+    "no allowance is made for a change in event count if eligibility changes"
+  ],
+  "f8_f9_cost_share": {
+    "events": 1382,
+    "measured_f8_f9_event_seconds_train": 39351.0,
+    "measured_f8_f9_event_seconds_validation": 11485.1,
+    "note": "F8 and F9 are 22% of events but 53% of stage-B CPU, so any replica increase is concentrated in the expensive families",
+    "share_of_events": 0.2188,
+    "share_of_stage_b_cpu": 0.53
+  },
+  "generation_performed": 0,
+  "headline": "a complete fresh V3 generation at the current R = 3 costs roughly 27 CPU-hours and about 2.2 hours wall at 12 workers. Even R = 9 on F8/F9 is about 51 CPU-hours and 4.3 hours wall. Compute is NOT a constraint on this decision, and therefore must not be used as an argument for reusing V2.",
+  "measured_basis": {
+    "cpu_seconds_per_replica_execution": 5.2814,
+    "cpu_seconds_per_source_episode": 2.7423,
+    "replica_executions": 3710,
+    "source": "results/rvt_fd24/phase9g_v2a_v_official_validation_closure_v1.json operational_measurements, the fully instrumented V2 run",
+    "source_episodes": 300,
+    "stage_a_cpu_seconds": 822.7,
+    "stage_b_cpu_seconds": 19594.0,
+    "timeout_seconds": 243.0,
+    "workers": 12
+  },
+  "phase9d_v3d_compute_budget_sha256": "c0e2d967dd813e5a87de3c3103a103597a8b5958d3aaaa642da9529bfe1ac6ca",
+  "schema_version": "rvt-phase9d-v3d-compute-budget/v1",
+  "stage_a_cost": {
+    "estimated_cpu_hours": 1.143,
+    "source_episodes": 1500
+  },
+  "storage": {
+    "projected_v3_bytes_same_scale": 2119908483,
+    "rows_scale_with_R": false,
+    "v2_bytes": 2119908483,
+    "v2_rows": 113514,
+    "why": "a row is per (retained event, candidate, robot); replicas affect the target value, not the row count"
+  },
+  "v2_actual": {
+    "candidate_aggregates": 12634,
+    "estimated_combined_stage_b_cpu_hours": 26.64,
+    "replica_executions": 18162,
+    "row_bytes": 2119908483,
+    "rows": 113514,
+    "selected_events": 6317,
+    "source_episodes": 1500
+  },
+  "v3_projections_full_1500_episode_scale": {
+    "R_on_all_families": {
+      "1": {
+        "estimated_cpu_hours": 18.53,
+        "estimated_wall_hours_at_12_workers": 1.54,
+        "replica_executions": 12634
+      },
+      "3": {
+        "estimated_cpu_hours": 55.6,
+        "estimated_wall_hours_at_12_workers": 4.63,
+        "replica_executions": 37902
+      },
+      "5": {
+        "estimated_cpu_hours": 92.67,
+        "estimated_wall_hours_at_12_workers": 7.72,
+        "replica_executions": 63170
+      },
+      "9": {
+        "estimated_cpu_hours": 166.81,
+        "estimated_wall_hours_at_12_workers": 13.9,
+        "replica_executions": 113706
+      }
+    },
+    "R_on_f8_f9_only": {
+      "1": {
+        "estimated_cpu_hours": 18.53,
+        "estimated_wall_hours_at_12_workers": 1.54,
+        "replica_executions": 12634
+      },
+      "15": {
+        "estimated_cpu_hours": 75.3,
+        "estimated_wall_hours_at_12_workers": 6.28,
+        "replica_executions": 51330
+      },
+      "3": {
+        "estimated_cpu_hours": 26.64,
+        "estimated_wall_hours_at_12_workers": 2.22,
+        "replica_executions": 18162
+      },
+      "5": {
+        "estimated_cpu_hours": 34.75,
+        "estimated_wall_hours_at_12_workers": 2.9,
+        "replica_executions": 23690
+      },
+      "7": {
+        "estimated_cpu_hours": 42.86,
+        "estimated_wall_hours_at_12_workers": 3.57,
+        "replica_executions": 29218
+      },
+      "9": {
+        "estimated_cpu_hours": 50.97,
+        "estimated_wall_hours_at_12_workers": 4.25,
+        "replica_executions": 34746
+      }
+    }
+  }
+}

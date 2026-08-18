@@ -1,0 +1,488 @@
+{
+  "D10_adaptive_replication": {
+    "concept": "execute R_min replicas; stop if the observation is clearly away from the decision boundary; otherwise acquire further replicas up to R_max",
+    "conditions": [
+      "the stopping rule is frozen BEFORE official generation and hashed into the replica protocol",
+      "the rule depends only on the observed successes so far and on frozen constants, never on any model output, label frequency or downstream outcome",
+      "the realized R becomes part of the candidate aggregate identity, so a row cannot be reproduced without knowing how many replicas it received",
+      "the likelihood used in training accounts for the stopping rule, or the rule is chosen so that the resulting likelihood is unaffected"
+    ],
+    "consequences": {
+      "budget": "expected cost falls because most events stop at R_min, but worst-case cost is R_max everywhere and the budget must be declared against the worst case",
+      "event_weighting": "UNAFFECTED IF the 1/R normalization is applied, which is exactly why that normalization matters more under adaptive R than under fixed R",
+      "identity": "R is no longer a constant per family, so the aggregate identity must carry the realized R and the stopping-rule hash",
+      "matched_randomness": "PRESERVED, because replicas are indexed by a counter PRF: COMPACT and LINE must acquire the SAME replica indices, which means the stopping decision must be taken jointly for the pair, not per candidate. A per-candidate stopping rule would break pairing and must be prohibited.",
+      "reproducibility": "PRESERVED, because the stopping rule is deterministic given the frozen constants and the PRF-generated outcomes; a replay reaches the same stopping point",
+      "row_identity": "rows are per (event, candidate, robot) and do not multiply with R, so row identity is unchanged apart from citing the new target contract"
+    },
+    "implemented": false,
+    "recommendation": "NOT recommended for the first V3 freeze. A fixed R is simpler to justify, and the measured compute budget shows no cost pressure that would motivate the added complexity. Recorded here as a viable later refinement.",
+    "scientifically_valid": "CONDITIONALLY",
+    "statistical_caveat": "an optional-stopping rule can bias a naive point estimate of p. Under a binomial likelihood with a frozen, outcome-only stopping rule the likelihood is still proportional to p^k (1-p)^(R-k), so the estimator is unaffected; but this must be stated and justified prospectively rather than assumed"
+  },
+  "D26_calibration_bin_support": {
+    "half_width_at_p_0.5_by_events_in_bin": {
+      "100": 0.101679,
+      "200": 0.071342,
+      "30": 0.18703,
+      "50": 0.144727,
+      "500": 0.044714
+    },
+    "note": "precision that matters for a probabilistic target is not per-event but per calibration bin, where many events pool"
+  },
+  "D26_replicas_for_a_target_per_event_half_width_at_p_0.5": {
+    "0.1": 104,
+    "0.15": 47,
+    "0.2": 27,
+    "0.25": 17,
+    "0.3": 11
+  },
+  "D9_per_event_intervals": [
+    {
+      "R": 3,
+      "intervals": [
+        {
+          "clopper_pearson_95": [
+            0.0,
+            0.707598
+          ],
+          "k": 0,
+          "point_estimate": 0.0,
+          "width": 0.707598
+        },
+        {
+          "clopper_pearson_95": [
+            0.008404,
+            0.905701
+          ],
+          "k": 1,
+          "point_estimate": 0.333333,
+          "width": 0.897297
+        },
+        {
+          "clopper_pearson_95": [
+            0.094299,
+            0.991596
+          ],
+          "k": 2,
+          "point_estimate": 0.666667,
+          "width": 0.897297
+        },
+        {
+          "clopper_pearson_95": [
+            0.292402,
+            1.0
+          ],
+          "k": 3,
+          "point_estimate": 1.0,
+          "width": 0.707598
+        }
+      ]
+    },
+    {
+      "R": 5,
+      "intervals": [
+        {
+          "clopper_pearson_95": [
+            0.0,
+            0.521824
+          ],
+          "k": 0,
+          "point_estimate": 0.0,
+          "width": 0.521824
+        },
+        {
+          "clopper_pearson_95": [
+            0.005051,
+            0.716418
+          ],
+          "k": 1,
+          "point_estimate": 0.2,
+          "width": 0.711367
+        },
+        {
+          "clopper_pearson_95": [
+            0.052745,
+            0.853367
+          ],
+          "k": 2,
+          "point_estimate": 0.4,
+          "width": 0.800622
+        },
+        {
+          "clopper_pearson_95": [
+            0.146633,
+            0.947255
+          ],
+          "k": 3,
+          "point_estimate": 0.6,
+          "width": 0.800622
+        },
+        {
+          "clopper_pearson_95": [
+            0.283582,
+            0.994949
+          ],
+          "k": 4,
+          "point_estimate": 0.8,
+          "width": 0.711367
+        },
+        {
+          "clopper_pearson_95": [
+            0.478176,
+            1.0
+          ],
+          "k": 5,
+          "point_estimate": 1.0,
+          "width": 0.521824
+        }
+      ]
+    },
+    {
+      "R": 7,
+      "intervals": [
+        {
+          "clopper_pearson_95": [
+            0.0,
+            0.409616
+          ],
+          "k": 0,
+          "point_estimate": 0.0,
+          "width": 0.409616
+        },
+        {
+          "clopper_pearson_95": [
+            0.00361,
+            0.578723
+          ],
+          "k": 1,
+          "point_estimate": 0.142857,
+          "width": 0.575113
+        },
+        {
+          "clopper_pearson_95": [
+            0.036693,
+            0.709579
+          ],
+          "k": 2,
+          "point_estimate": 0.285714,
+          "width": 0.672886
+        },
+        {
+          "clopper_pearson_95": [
+            0.098988,
+            0.815948
+          ],
+          "k": 3,
+          "point_estimate": 0.428571,
+          "width": 0.71696
+        },
+        {
+          "clopper_pearson_95": [
+            0.184052,
+            0.901012
+          ],
+          "k": 4,
+          "point_estimate": 0.571429,
+          "width": 0.71696
+        },
+        {
+          "clopper_pearson_95": [
+            0.290421,
+            0.963307
+          ],
+          "k": 5,
+          "point_estimate": 0.714286,
+          "width": 0.672886
+        },
+        {
+          "clopper_pearson_95": [
+            0.421277,
+            0.99639
+          ],
+          "k": 6,
+          "point_estimate": 0.857143,
+          "width": 0.575113
+        },
+        {
+          "clopper_pearson_95": [
+            0.590384,
+            1.0
+          ],
+          "k": 7,
+          "point_estimate": 1.0,
+          "width": 0.409616
+        }
+      ]
+    },
+    {
+      "R": 9,
+      "intervals": [
+        {
+          "clopper_pearson_95": [
+            0.0,
+            0.336267
+          ],
+          "k": 0,
+          "point_estimate": 0.0,
+          "width": 0.336267
+        },
+        {
+          "clopper_pearson_95": [
+            0.002809,
+            0.482497
+          ],
+          "k": 1,
+          "point_estimate": 0.111111,
+          "width": 0.479688
+        },
+        {
+          "clopper_pearson_95": [
+            0.028145,
+            0.600094
+          ],
+          "k": 2,
+          "point_estimate": 0.222222,
+          "width": 0.571949
+        },
+        {
+          "clopper_pearson_95": [
+            0.074855,
+            0.700705
+          ],
+          "k": 3,
+          "point_estimate": 0.333333,
+          "width": 0.62585
+        },
+        {
+          "clopper_pearson_95": [
+            0.136996,
+            0.787991
+          ],
+          "k": 4,
+          "point_estimate": 0.444444,
+          "width": 0.650995
+        },
+        {
+          "clopper_pearson_95": [
+            0.212009,
+            0.863004
+          ],
+          "k": 5,
+          "point_estimate": 0.555556,
+          "width": 0.650995
+        },
+        {
+          "clopper_pearson_95": [
+            0.299295,
+            0.925145
+          ],
+          "k": 6,
+          "point_estimate": 0.666667,
+          "width": 0.62585
+        },
+        {
+          "clopper_pearson_95": [
+            0.399906,
+            0.971855
+          ],
+          "k": 7,
+          "point_estimate": 0.777778,
+          "width": 0.571949
+        },
+        {
+          "clopper_pearson_95": [
+            0.517503,
+            0.997191
+          ],
+          "k": 8,
+          "point_estimate": 0.888889,
+          "width": 0.479688
+        },
+        {
+          "clopper_pearson_95": [
+            0.663733,
+            1.0
+          ],
+          "k": 9,
+          "point_estimate": 1.0,
+          "width": 0.336267
+        }
+      ]
+    },
+    {
+      "R": 15,
+      "intervals": [
+        {
+          "clopper_pearson_95": [
+            0.0,
+            0.218019
+          ],
+          "k": 0,
+          "point_estimate": 0.0,
+          "width": 0.218019
+        },
+        {
+          "clopper_pearson_95": [
+            0.001686,
+            0.319485
+          ],
+          "k": 1,
+          "point_estimate": 0.066667,
+          "width": 0.317799
+        },
+        {
+          "clopper_pearson_95": [
+            0.016576,
+            0.404603
+          ],
+          "k": 2,
+          "point_estimate": 0.133333,
+          "width": 0.388027
+        },
+        {
+          "clopper_pearson_95": [
+            0.043312,
+            0.480891
+          ],
+          "k": 3,
+          "point_estimate": 0.2,
+          "width": 0.437579
+        },
+        {
+          "clopper_pearson_95": [
+            0.077872,
+            0.551003
+          ],
+          "k": 4,
+          "point_estimate": 0.266667,
+          "width": 0.473131
+        },
+        {
+          "clopper_pearson_95": [
+            0.118241,
+            0.616196
+          ],
+          "k": 5,
+          "point_estimate": 0.333333,
+          "width": 0.497955
+        },
+        {
+          "clopper_pearson_95": [
+            0.163364,
+            0.67713
+          ],
+          "k": 6,
+          "point_estimate": 0.4,
+          "width": 0.513766
+        },
+        {
+          "clopper_pearson_95": [
+            0.212667,
+            0.734139
+          ],
+          "k": 7,
+          "point_estimate": 0.466667,
+          "width": 0.521472
+        },
+        {
+          "clopper_pearson_95": [
+            0.265861,
+            0.787333
+          ],
+          "k": 8,
+          "point_estimate": 0.533333,
+          "width": 0.521472
+        },
+        {
+          "clopper_pearson_95": [
+            0.32287,
+            0.836636
+          ],
+          "k": 9,
+          "point_estimate": 0.6,
+          "width": 0.513766
+        },
+        {
+          "clopper_pearson_95": [
+            0.383804,
+            0.881759
+          ],
+          "k": 10,
+          "point_estimate": 0.666667,
+          "width": 0.497955
+        },
+        {
+          "clopper_pearson_95": [
+            0.448997,
+            0.922128
+          ],
+          "k": 11,
+          "point_estimate": 0.733333,
+          "width": 0.473131
+        },
+        {
+          "clopper_pearson_95": [
+            0.519109,
+            0.956688
+          ],
+          "k": 12,
+          "point_estimate": 0.8,
+          "width": 0.437579
+        },
+        {
+          "clopper_pearson_95": [
+            0.595397,
+            0.983424
+          ],
+          "k": 13,
+          "point_estimate": 0.866667,
+          "width": 0.388027
+        },
+        {
+          "clopper_pearson_95": [
+            0.680515,
+            0.998314
+          ],
+          "k": 14,
+          "point_estimate": 0.933333,
+          "width": 0.317799
+        },
+        {
+          "clopper_pearson_95": [
+            0.781981,
+            1.0
+          ],
+          "k": 15,
+          "point_estimate": 1.0,
+          "width": 0.218019
+        }
+      ]
+    }
+  ],
+  "D9_what_R3_can_establish": {
+    "0_of_3": "one-sided only: p could be anywhere in [0, 0.7076]",
+    "1_of_3": "CI95 [0.0084, 0.9057], width 0.8973 -- uninformative",
+    "2_of_3": "CI95 [0.0943, 0.9916], width 0.8973 -- uninformative",
+    "3_of_3": "one-sided only: p could be anywhere in [0.2924, 1]",
+    "conclusion": "R = 3 CANNOT estimate a per-event probability. 1/3 and 2/3 are compatible with almost the entire unit interval. Any V3 target that requires PER-EVENT certainty about p is infeasible at R = 3."
+  },
+  "R_not_chosen_from_compute_cost": true,
+  "R_not_chosen_from_the_observed_v2_failure": true,
+  "decisive_asymmetry": {
+    "cost_if_per_event_precision_is_required": "R >= 27 for a +/-0.20 half-width and R >= 104 for +/-0.10, at every F8/F9 event -- prohibitive and still coarse",
+    "targets_needing_per_event_precision": [
+      "D robust confidence bound",
+      "B statistically justified three-state"
+    ],
+    "targets_not_needing_per_event_precision": [
+      "C probabilistic with a binomial likelihood"
+    ],
+    "why": "a binomial NLL treats k out of R as a noisy but UNBIASED observation of p(x, tau). Consistency comes from the number of EVENTS, not from R within an event. Modest R is therefore statistically coherent for supervision even though it is useless for a single-event point estimate."
+  },
+  "existing_v2_replicas_are_a_valid_prefix": "because the stream is a counter PRF indexed by replica_index, replicas 0..2 of a larger set are exactly the existing three. Extending R re-uses them without recomputation ONLY if a prospective authorization says so and the identity contract records the new R.",
+  "method": "exact Clopper-Pearson intervals by bisection on the binomial CDF; no normal approximation",
+  "phase9d_v3d_replica_count_analysis_sha256": "c0901a604a3f77180a6426da119812aa48e168911f60a7a31611cd0568545fd3",
+  "recommended_R_rationale": "R should be chosen to (a) keep the paired COMPACT/LINE comparison, (b) give enough distinct k/R levels for calibration-bin support, and (c) stay within budget. R = 3 gives only four levels {0, 1/3, 2/3, 1}; R = 5 gives six and R = 9 gives ten. This is an OWNER parameter, recorded here with its trade-off rather than selected.",
+  "schema_version": "rvt-phase9d-v3d-replica-count/v1"
+}

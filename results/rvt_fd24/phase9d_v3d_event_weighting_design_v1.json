@@ -1,0 +1,50 @@
+{
+  "class_weighting": "NONE_UNWEIGHTED_BCE remains frozen unless an owner decision changes it; a probabilistic target uses the same unweighted principle",
+  "frozen_authority": "results/rvt_fd24/phase9d_recoverability_statistical_unit_v1.json",
+  "frozen_reduction": "average equally over COMPACT/LINE and robots within a decision, then over decision events",
+  "frozen_status": "FROZEN_EVENT_EQUAL_WEIGHT",
+  "numeric_demonstration": [
+    {
+      "R": 1,
+      "effective_event_weight": 1.0,
+      "per_robot_candidate_row_weight": 0.1,
+      "rows_per_event": 10,
+      "team_size": 5
+    },
+    {
+      "R": 9,
+      "effective_event_weight": 1.0,
+      "note": "R changes the observation k/R, not the weight",
+      "per_robot_candidate_row_weight": 0.1,
+      "rows_per_event": 10,
+      "team_size": 5
+    },
+    {
+      "R": 1,
+      "effective_event_weight": 1.0,
+      "per_robot_candidate_row_weight": 0.03125,
+      "rows_per_event": 32,
+      "team_size": 16
+    },
+    {
+      "R": 9,
+      "effective_event_weight": 1.0,
+      "per_robot_candidate_row_weight": 0.03125,
+      "rows_per_event": 32,
+      "team_size": 16
+    }
+  ],
+  "phase9d_v3d_event_weighting_design_sha256": "a07e8b1ac61b2b67e548e6af12312a5100fb3502728d85b8876e9e31fea997de",
+  "principle": "each (source event, candidate) remains ONE scientific unit regardless of R and regardless of team size",
+  "raw_row_mean_permitted": false,
+  "required_normalization_for_a_binomial_target": {
+    "dataset_term": "average over decision events",
+    "net_effect": "every retained decision event contributes weight 1.0",
+    "per_candidate_term": "-(1/R) * [ k*log(p_hat) + (R-k)*log(1-p_hat) ]",
+    "per_event_term": "average the two candidate terms (weight 0.5 each)",
+    "per_robot_term": "average over the N robot-local rows within one (event, candidate) before the candidate average, preserving the existing frozen reduction",
+    "why_divide_by_R": "this is the MEAN per-replica negative log likelihood, which is invariant to R. Without the 1/R factor an R = 9 event would contribute nine times the gradient of an R = 1 event."
+  },
+  "schema_version": "rvt-phase9d-v3d-event-weighting/v1",
+  "what_would_go_wrong_without_it": "F8 and F9 are the only multi-replica families. Weighting by replica count would silently up-weight exactly the two stochastic families and bias the model toward them, which is the opposite of the frozen uniform family budget"
+}

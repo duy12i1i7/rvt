@@ -1,0 +1,45 @@
+{
+  "consequence": "a fresh confirmatory validation domain is REQUIRED for V3",
+  "contamination_type": "OUTCOME_INFORMED_DESIGN",
+  "inspection_history": [
+    {
+      "inspected": "future validation split hygiene",
+      "phase": "9D-V2T carry-forward"
+    },
+    {
+      "inspected": "family adequacy gate, label distribution, generation integrity",
+      "phase": "9G-V2A-V"
+    },
+    {
+      "inspected": "combined adequacy, zero-positive families, gates 1-6, 8, 9, scenario semantics",
+      "phase": "9D-V2C"
+    },
+    {
+      "inspected": "gate 7 full census, gate 8 exact divergence, joint outcomes, feature schema, shard bytes",
+      "phase": "9D-V2C-R"
+    },
+    {
+      "inspected": "gate-7 forensic root cause, per-replica bit patterns, predicate decomposition",
+      "phase": "9D-V2G7"
+    },
+    {
+      "inspected": "used as development evidence for V3 target design",
+      "phase": "9D-V3D"
+    }
+  ],
+  "must_not_be_called_untouched_confirmatory_validation_for_v3": true,
+  "phase9d_v3d_v2_validation_contamination_sha256": "ed91a9e3db3feef8952ee79f8762a8c7a5e9a6b6a2766b64998d6149452ec64e",
+  "recorded_prospectively": true,
+  "schema_version": "rvt-phase9d-v3d-v2-validation-contamination/v1",
+  "status": "DEVELOPMENT_EVIDENCE",
+  "what_it_may_not_be_used_for": [
+    "confirmatory validation of a V3 protocol designed using these results",
+    "any claim described as held-out"
+  ],
+  "what_it_may_still_be_used_for": [
+    "development evidence",
+    "model selection under a declared provenance note",
+    "protocol design",
+    "sanity comparison"
+  ]
+}

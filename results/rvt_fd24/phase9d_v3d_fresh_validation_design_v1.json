@@ -1,0 +1,65 @@
+{
+  "D19_final_test_validity": {
+    "can_the_original_final_set_remain_valid_for_v3": "YES, CONDITIONALLY",
+    "caveat": "if fresh validation variants were pushed to index 3 or beyond, validation geometry would approach the final-test region and this conclusion would need re-examination",
+    "conclusion": "the original sealed final set REMAINS a valid final test for V3, because nothing about it has been observed or used. That validity is conditional on it staying unobserved until the frozen final evaluation.",
+    "conditions": [
+      "V3 science is designed only from development data, which is the case here",
+      "no final-test identity, hash, outcome or statistic is inspected before the final evaluation",
+      "the final-test layout pool is unchanged by the V3 redesign",
+      "split authority continues to treat final test as disjoint from both TRAIN and VALIDATION pools, which the offset structure preserves"
+    ],
+    "final_test_identities_inspected": 0,
+    "final_test_outcomes_inspected": 0,
+    "generator_seals_final_test": "generate_layouts raises PermissionError for final_test unless explicitly authorised, and derive_seed carries sealed_final_authorized"
+  },
+  "changes_frozen_scenario_code": true,
+  "current_variant_allocation": {
+    "final_test": [
+      0
+    ],
+    "source": "_SPLIT_VARIANTS in rvt_swarm/phase8/scenario.py",
+    "train": [
+      0,
+      1
+    ],
+    "validation": [
+      0
+    ]
+  },
+  "generated_in_this_phase": 0,
+  "generator_authority": "rvt_swarm/phase8/scenario.py",
+  "generator_sha256": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+  "geometry_offset_structure": {
+    "CONSTRAINT": "validation variant 3 lands at offset 0.76, only 0.03 from the final-test base offset 0.79, and variant 4 at 0.87 crosses it. Fresh validation variants 1 and 2 are the safely separated choices.",
+    "formula": "offset = _SPLIT_OFFSETS[split] + 0.11 * variant_index",
+    "per_family_range_check_required_before_freeze": true,
+    "split_offsets": {
+      "final_test": 0.79,
+      "train": 0.0,
+      "validation": 0.43
+    },
+    "validation_variant_offsets": {
+      "0": 0.43,
+      "1": 0.54,
+      "2": 0.65,
+      "3": 0.76,
+      "4": 0.87
+    },
+    "why": "offset directly parameterises geometry (for example F1 lateral = 3.0 + offset against a declared 3.0..3.9 range), so each family's declared parameter range must be re-checked for any new variant index"
+  },
+  "mechanism": "generate new VALIDATION layout identities from currently unused variant indices of the already-authoritative scenario generator",
+  "no_final_test_access_required": true,
+  "owner_authority_reason": "_SPLIT_VARIANTS is frozen scenario authority; extending the validation variant tuple is a change to it and must be authorised, not assumed",
+  "owner_authority_required": true,
+  "phase9d_v3d_fresh_validation_design_sha256": "3df87b6d0aba7ccc30c5b2ae8a9924b235c22799a005df047a6d4c0eaeb6ee67",
+  "required_properties": [
+    "generated and frozen BEFORE V3 model training",
+    "outcome-unseen at design time",
+    "layout-disjoint from V2 TRAIN",
+    "layout-disjoint from V2 VALIDATION",
+    "layout-disjoint from final test",
+    "identity-disjoint from all design and qualification data, via the existing comprehensive exclusion union mechanism"
+  ],
+  "schema_version": "rvt-phase9d-v3d-fresh-validation/v1"
+}

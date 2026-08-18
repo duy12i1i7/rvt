@@ -1,0 +1,51 @@
+{
+  "h1_authority": "docs/RVT_FD24_RESEARCH_QUESTIONS_AND_HYPOTHESES.md",
+  "h1_authority_sha256": "678ae987174e89254c2fef88d617cdca16db2122738decd10c522b937231ed0f",
+  "h1_exact_statement": "Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.",
+  "h1_rewritten_in_this_phase": false,
+  "historical_implementation_choice_vs_hypothesis_meaning": {
+    "hypothesis_meaning": "candidate-conditioned recoverability prediction improves closed-loop COMPACT/LINE selection",
+    "implementation_choice": "Target V4: three matched replicas for F8/F9 and one elsewhere, aggregated all-success into a binary label",
+    "separable": true
+  },
+  "how_much_can_change_without_a_new_hypothesis": {
+    "becomes_a_new_hypothesis_if": [
+      "the primary metric changes from episode task success",
+      "the comparator set changes",
+      "the 0.08 absolute threshold changes",
+      "the claim moves from selection quality to calibration quality"
+    ],
+    "conclusion": "a change of target type alone does NOT create a new hypothesis, provided the selection rule and the comparison remain as written",
+    "unchanged_if": [
+      "the runtime still selects between COMPACT and LINE from a robot-local prediction",
+      "the primary metric remains EPISODE_TASK_SUCCESS on paired episodes",
+      "the two named comparators remain the direct local learned classifier and the local geometric selector",
+      "the frozen collision gate still applies"
+    ]
+  },
+  "phase9d_v3d_h1_semantic_boundary_sha256": "5761d69775cc6f1b8aa1398225e1db88bc2f02309e96f50b6caad9056c8bcf61",
+  "primary_baseline_comparisons": [
+    "FULL_BASE_METHOD_VS_LOCAL_GEOMETRIC_SELECTOR",
+    "FULL_BASE_METHOD_VS_DIRECT_CLASSIFIER",
+    "FULL_BASE_METHOD_VS_STRONGEST_FIXED_DEPLOYABLE_BASELINE"
+  ],
+  "primary_evaluation_unit": "PAIRED_EPISODE",
+  "primary_metric": "EPISODE_TASK_SUCCESS",
+  "required_object_classification": {
+    "A_deterministic_binary": false,
+    "B_robust_binary": false,
+    "C_probabilistic": false,
+    "D_candidate_ranking": "IMPLIED_BUT_NOT_STATED",
+    "E_other": true,
+    "answer": "H1 requires only that a SELECTION between COMPACT and LINE be produced and that the selection improve episode task success. Any target that supports a per-candidate ordering satisfies it. The binary all-success label is an IMPLEMENTATION CHOICE, not a hypothesis commitment."
+  },
+  "schema_version": "rvt-phase9d-v3d-h1-semantic-boundary/v1",
+  "warning": "if a V3 target is adopted whose evaluation headline becomes calibration or NLL rather than episode task success, that IS hypothesis drift and must be declared, not absorbed silently",
+  "what_h1_actually_quantifies": "the improvement in EPISODE_TASK_SUCCESS achieved by a selection method, measured on PAIRED_EPISODE units against two named comparators, subject to the frozen collision gate",
+  "what_h1_does_not_specify": [
+    "the internal type of the recoverability target",
+    "the number of rollout replicas",
+    "the aggregation rule over replicas",
+    "whether the model emits a bit, a class or a probability"
+  ]
+}

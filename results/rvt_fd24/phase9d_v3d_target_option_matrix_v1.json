@@ -1,0 +1,156 @@
+{
+  "D14_runtime_use": {
+    "A": "binary plus an abstain signal; abstention must resolve to the conservative topology and must not stall agreement",
+    "B": "three-way; the boundary class must resolve to the conservative topology",
+    "C": "compare p_hat(x, COMPACT) against p_hat(x, LINE) and select the larger; ties and near-ties resolve to the conservative topology under a prospectively frozen margin",
+    "D": "binary; conservative by construction",
+    "h2_runtime_not_redesigned_here": true,
+    "requirement": "every option must emit something a robot can rank locally with one scalar per candidate; C does this most directly"
+  },
+  "D15_safety_semantics": {
+    "conservative_default": "when the prediction is uncertain or the two candidates are within a frozen margin, the selector must keep the currently committed topology rather than initiate a transition",
+    "invariant": "recoverability prediction NEVER overrides the frozen local safety projection",
+    "rationale": "an unnecessary transition is itself a risk; holding is the conservative action",
+    "safety_controller_modified": false,
+    "uncertainty_interface": "uncertainty may only influence WHICH candidate is proposed, never whether the safety constraint is enforced"
+  },
+  "D28_boundary_handling_decision": {
+    "answer": "C -- RETAINED_AS_PROBABILISTIC_SUPERVISION",
+    "deletion_policy_justification_required_and_not_met": true,
+    "question": "should stochastic-boundary states be discarded, abstained, explicitly classified, or modelled?",
+    "why_not_a_discrete_boundary_class": "under all-success aggregation the class would be defined by R rather than by the state",
+    "why_not_abstain_only": "abstention needs its own supervision, which requires keeping the boundary events anyway",
+    "why_not_deleted": "the 59 TRAIN F9/LINE events are physically real, carry valid labels, and sit exactly where a candidate-conditioned selector has the most to learn. Deleting them is outcome-dependent filtering and removes the most informative region of the input space."
+  },
+  "design_principle": "the question answered here is 'what is the scientifically correct meaning of recoverability for a candidate topology under a stochastic disturbance distribution', NOT 'what makes 59/530 pass'",
+  "options": [
+    {
+      "CRITICAL_FLAW_ADDRESSED": {
+        "answer": "it cannot. Deleting the mixed events removes exactly the supervision the abstention head would need. A workable version must RETAIN them with an explicit abstain label, at which point the design has become option B with a different name.",
+        "pure_deletion_is_insufficient": true,
+        "question": "if ABSTAIN samples are removed from binary training, how will runtime know when to abstain?"
+      },
+      "coverage": "less than 1 by construction",
+      "evaluation_metrics": [
+        "selective accuracy",
+        "coverage",
+        "risk-coverage curve",
+        "episode task success"
+      ],
+      "h1_compatibility": {
+        "comparator_definition_changes": false,
+        "evaluation_metric_changes": true,
+        "h1_literally_unchanged": true,
+        "h1_wording_revision_required": false,
+        "model_head_changes": true,
+        "paper_claim": "narrower -- the claim holds only on the covered subset",
+        "runtime_decision_rule_changes": true
+      },
+      "id": "A",
+      "loss": "BCE on the confident subset plus a second head for the abstention decision",
+      "name": "SELECTIVE_BINARY_WITH_EXPLICIT_ABSTENTION",
+      "required_fresh_data": true,
+      "required_replicas": "R must be large enough to declare confidence per event; see the replica-count analysis",
+      "runtime_meaning": "recoverable / not recoverable / decline to predict",
+      "safety_behaviour": "abstention must map to the conservative topology choice; it may never bypass local safety projection",
+      "scientific_object": "a binary robust label plus a separate abstention decision",
+      "training_target": "binary label on confident events; abstention must itself be supervised",
+      "verdict": "COLLAPSES_INTO_B_WHEN_MADE_WORKABLE"
+    },
+    {
+      "definition_variant_1": "all-success / mixed / all-fail",
+      "definition_variant_1_FATAL_FLAW": "the class boundary would be defined by R, not by physics. P(mixed) = 1 - p^R - (1-p)^R increases monotonically in R, so as R grows almost every event becomes 'boundary'. A class whose membership depends on the sampling budget is not a property of the state.",
+      "definition_variant_2": "statistically justified classification, e.g. class by whether a confidence interval excludes a declared band",
+      "definition_variant_2_cost": "requires per-event precision; R >= 27 for a +/-0.20 half-width",
+      "evaluation_metrics": [
+        "three-way accuracy",
+        "boundary recall",
+        "episode task success"
+      ],
+      "h1_compatibility": {
+        "comparator_definition_changes": false,
+        "evaluation_metric_changes": true,
+        "h1_literally_unchanged": true,
+        "h1_wording_revision_required": false,
+        "model_head_changes": true,
+        "paper_claim": "different -- introduces a class the hypothesis never mentions",
+        "runtime_decision_rule_changes": true
+      },
+      "id": "B",
+      "loss": "categorical cross-entropy, event-equal weighted",
+      "name": "THREE_STATE_ROBUST_BOUNDARY_FAIL",
+      "required_fresh_data": true,
+      "runtime_meaning": "robust recoverable / stochastic boundary / robust unrecoverable",
+      "safety_behaviour": "boundary class maps to the conservative choice",
+      "scientific_object": "a three-way class per (event, candidate)",
+      "training_target": "three-way class label",
+      "verdict": "VARIANT_1_SCIENTIFICALLY_UNSOUND, VARIANT_2_PROHIBITIVE"
+    },
+    {
+      "brier_already_in_frozen_authority": "docs/RVT_CHECKPOINT_SELECTION_CONTRACT.md already ranks checkpoints by 'minimize recoverability Brier score', which presupposes a probabilistic output. This option is closer to the existing frozen selection contract than the binary target it would replace.",
+      "coverage": "1.0 -- every event is supervised, including the boundary",
+      "evaluation_metrics": [
+        "binomial NLL",
+        "Brier score",
+        "expected calibration error",
+        "reliability diagram",
+        "candidate ranking accuracy on decisive events",
+        "episode task success"
+      ],
+      "h1_compatibility": {
+        "comparator_definition_changes": false,
+        "evaluation_metric_changes": false,
+        "h1_literally_unchanged": true,
+        "h1_wording_revision_required": false,
+        "model_head_changes": true,
+        "paper_claim": "stronger -- same claim, richer and better calibrated evidence",
+        "runtime_decision_rule_changes": true
+      },
+      "id": "C",
+      "loss": "event-equal grouped binomial negative log likelihood: -(1/R)[k log p + (R-k) log(1-p)], averaged over robots within a candidate, then over the two candidates, then over events",
+      "name": "PROBABILISTIC_RECOVERABILITY",
+      "required_fresh_data": true,
+      "required_replicas": "modest R is statistically coherent because consistency comes from the event count, not from per-event R; more R improves calibration bin support",
+      "runtime_meaning": "a scalar success probability per candidate; the robot selects the higher-probability candidate",
+      "safety_behaviour": "a probability never bypasses local safety projection; low confidence maps to the conservative choice at the decision layer only",
+      "scientific_object": "p(x, tau) = P(task success | robot-local state, candidate topology) under the frozen disturbance law",
+      "training_target": "the grouped observation k successes out of R matched replicas",
+      "verdict": "SCIENTIFICALLY_SOUND_AND_AFFORDABLE"
+    },
+    {
+      "evaluation_metrics": [
+        "binary accuracy",
+        "episode task success"
+      ],
+      "h1_compatibility": {
+        "comparator_definition_changes": false,
+        "evaluation_metric_changes": false,
+        "h1_literally_unchanged": true,
+        "h1_wording_revision_required": false,
+        "model_head_changes": false,
+        "paper_claim": "similar, but the target definition carries two unjustified constants",
+        "runtime_decision_rule_changes": true
+      },
+      "id": "D",
+      "independent_rationale_available": false,
+      "independent_rationale_note": "no repository authority supplies a scientific value for q or the confidence level. Choosing them now would necessarily be informed by the observed V2 outcome, which this phase forbids.",
+      "loss": "BCE on the derived label",
+      "name": "ROBUST_CONFIDENCE_BOUND_RECOVERABILITY",
+      "owner_sensitive_parameters": [
+        "q",
+        "confidence level",
+        "R"
+      ],
+      "required_fresh_data": true,
+      "required_replicas": "per-event precision is intrinsic to the definition: R >= 27 for +/-0.20, R >= 104 for +/-0.10",
+      "runtime_meaning": "declared-robust recoverable or not",
+      "safety_behaviour": "conservative by construction, which is its main attraction",
+      "scientific_object": "a binary decision from LCB(p) >= q",
+      "training_target": "binary label derived from a per-event bound",
+      "verdict": "DEFENSIBLE_IN_PRINCIPLE_BUT_PROHIBITIVE_AND_UNDER_SPECIFIED"
+    }
+  ],
+  "phase9d_v3d_target_option_matrix_sha256": "27e386314f079367f07c7e641c9241976f5755582c0e6d0ab61408ffad7335d6",
+  "schema_version": "rvt-phase9d-v3d-target-option-matrix/v1",
+  "thresholds_selected_from_v2_outcomes": 0
+}

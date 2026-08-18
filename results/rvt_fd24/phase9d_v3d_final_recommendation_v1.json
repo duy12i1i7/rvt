@@ -1,0 +1,62 @@
+{
+  "D28_answer": "C -- retained as probabilistic supervision",
+  "FINAL_RECOMMENDATION_CLASS": "C",
+  "FINAL_RECOMMENDATION_NAME": "PROBABILISTIC_RECOVERABILITY",
+  "do_not_implement_yet": true,
+  "gate7_modified": false,
+  "handoff_commit": "f269a651c6277cf1f10027f111aa2cebacc9183b",
+  "implementation_performed": 0,
+  "models_trained": 0,
+  "phase": "PHASE_9D_V3D",
+  "phase9d_v3d_final_recommendation_sha256": "4930d8e7a286554eaf44ac7fe670ad2d5cf2ec50f52083d6eb5bba64cd255657",
+  "recommendation": "OWNER_DECISION_AND_FREEZE_RECOVERABILITY_V3",
+  "recommended_target": {
+    "boundary_handling": "RETAINED_AS_PROBABILISTIC_SUPERVISION",
+    "loss": "event-equal grouped binomial negative log likelihood, normalized by 1/R so replica count buys no scientific weight",
+    "object": "p(x, tau) = P(task success | robot-local state x, candidate topology tau) under the prospectively frozen disturbance law",
+    "observation": "k successes out of R matched replicas",
+    "runtime": "one scalar per candidate; select the larger, hold the committed topology within a frozen near-tie margin"
+  },
+  "residual_risks": [
+    "p is defined relative to the frozen uniform-disk disturbance law, not to any real-world disturbance population, and every report must say so",
+    "if the evaluation headline drifts from episode task success to calibration, that is hypothesis drift and must be declared",
+    "the deterministic families would carry R = 1, so their observation is degenerate at 0 or 1; whether to raise R there is an owner parameter with a real cost",
+    "extending the validation variant space touches frozen scenario code"
+  ],
+  "schema_version": "rvt-phase9d-v3d-final-recommendation/v1",
+  "sealed_domains": {
+    "final_test_accesses": 0,
+    "gate7_modifications": 0,
+    "hyperparameter_trials": 0,
+    "study_a_n24_accesses": 0,
+    "study_b_accesses": 0,
+    "training_operations": 0,
+    "v2_regenerated": 0,
+    "v2_rows_relabelled_in_place": 0,
+    "v3_generation_operations": 0
+  },
+  "v2_gate7_historical_failure_preserved": "TRAIN F9/LINE 59/530 = 0.1113207547 against a permitted 0.10",
+  "v2_rescue_attempted": false,
+  "v2_status": "BLOCKED_FOR_TRAINING_UNDER_FROZEN_GATE7",
+  "v3_rows_generated": 0,
+  "verdict": "A",
+  "verdict_text": "The prospective V3 scientific target is sufficiently specified for an explicit owner decision and freeze phase. The disturbance semantics are resolved from repository authority, the replica-count mathematics is settled, H1 compatibility is established, the reuse and contamination positions are recorded, a complete prospective gate set is drafted with its owner parameters marked, and the compute budget is measured.",
+  "what_this_recommendation_is_not": [
+    "it is not a rescue of V2",
+    "it is not designed to make 59/530 pass",
+    "it does not modify gate 7",
+    "it was not chosen for compute savings; fresh generation is affordable at roughly 27 CPU-hours"
+  ],
+  "why_C": [
+    "the disturbance is an explicitly specified probability distribution and the replicas are iid draws from it, so p(x, tau) is the object the experiment actually measures -- this is a repository fact, not a modelling preference",
+    "it is the only option that supervises the stochastic boundary instead of deleting, capping or reclassifying it, and the boundary is where a candidate-conditioned selector has the most to learn",
+    "it needs no per-event precision, so modest R remains coherent; consistency comes from the event count",
+    "H1 survives verbatim: the primary metric stays EPISODE_TASK_SUCCESS on PAIRED_EPISODE units against the same two comparators with the same 0.08 threshold and the same collision gate",
+    "the frozen checkpoint selection contract ALREADY ranks by 'minimize recoverability Brier score', which presupposes a probabilistic output; option C moves the target toward the existing frozen selection authority rather than away from it",
+    "it emits exactly one scalar per candidate, which is what a decentralized runtime can rank locally",
+    "no threshold in its definition is taken from the observed V2 failure"
+  ],
+  "why_not_A": "a workable abstention needs the boundary events as supervision, so it collapses into B; and pure deletion cannot teach a runtime when to abstain",
+  "why_not_B": "defining the boundary class as 'mixed replicas' makes class membership a function of R rather than of the state, and the statistically justified variant needs R >= 27",
+  "why_not_D": "it requires per-event precision (R >= 27 for +/-0.20, R >= 104 for +/-0.10) and its two constants q and the confidence level have no independent repository rationale"
+}

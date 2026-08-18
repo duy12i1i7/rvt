@@ -1,0 +1,45 @@
+{
+  "anti_patterns_to_avoid": [
+    "presenting V3 results without mentioning that V2 failed a predeclared gate",
+    "describing V2 VALIDATION as held-out for any V3 claim",
+    "reporting a V3 threshold without its pre-data rationale",
+    "omitting the fact that the F9 boundary is a physical property rather than a data-quality problem"
+  ],
+  "development_versus_confirmatory": {
+    "confirmatory_evidence": [
+      "the fresh V3 validation domain",
+      "the sealed final test, if it remains unobserved"
+    ],
+    "development_evidence": [
+      "V2 TRAIN",
+      "V2 VALIDATION",
+      "all V2 audits and the gate-7 forensics"
+    ],
+    "must_be_labelled_distinctly_in_every_table": true
+  },
+  "phase9d_v3d_publication_implication_sha256": "8cb5c9d89a44d03298bdd05dacba3300322db668acfcb8d939e4a67356a00a4a",
+  "required_narrative_elements": [
+    {
+      "element": "the V2 gate-7 failure",
+      "how_to_report": "state the frozen gate, the prospective freeze date relative to data generation, and the measured value TRAIN F9/LINE 59/530 = 0.1113207547 against a permitted 0.10. Do not round it away and do not describe it as marginal without also giving the number.",
+      "why": "a predeclared gate catching a real property of the data is evidence that the protocol worked, not an embarrassment"
+    },
+    {
+      "element": "the forensic diagnosis",
+      "how_to_report": "report the full census, the zero-defect checks, the bit-pattern split, the universal target_metric_v3_dwell_complete flip, and the conclusion of an intrinsic stochastic boundary with valid labels",
+      "why": "it converts a failure into a scientific finding about F9"
+    },
+    {
+      "element": "the prospective V3 redesign",
+      "how_to_report": "state that the target type was chosen from the disturbance semantics, not from the failing statistic, and that the replacement gate set inverts the boundary requirement deliberately",
+      "why": "the reader must be able to see that V3 was not reverse-engineered to pass"
+    },
+    {
+      "element": "fresh confirmatory validation",
+      "how_to_report": "state explicitly that V2 TRAIN and V2 VALIDATION are development evidence and that confirmation comes from a validation domain generated after the V3 freeze",
+      "why": "this is the distinction that makes the V3 claim credible"
+    }
+  ],
+  "schema_version": "rvt-phase9d-v3d-publication-implication/v1",
+  "v2_hidden": false
+}

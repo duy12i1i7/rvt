@@ -1,0 +1,27 @@
+{
+  "historical_v2_artifacts_immutable": true,
+  "may_remain_unchanged": {
+    "safety_and_controller_contracts": "unchanged",
+    "scenario_family_contract": "unchanged",
+    "source_acquisition_protocol_v2_hash": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "split_policy": "unchanged in structure; the validation layout pool is extended, which is itself an authority change",
+    "why_unchanged": "acquisition is candidate-blind and target-independent; REALIZED_TRAJECTORY_UNIFORM_K with K = 5 is unaffected by what the target means"
+  },
+  "mixed_semantics_under_one_dataset_identity": "PROHIBITED",
+  "phase9d_v3d_provenance_versioning_sha256": "f0d46965451ae097f594dc582e8524f7a58b4dd8b2ec5243443fafe628efab53",
+  "principle": "V2 rows must never masquerade as V3",
+  "rebinding_rule": "if existing V2 per-replica outcomes are reused as V3 observations, the result is a NEW row under a NEW row identity that cites the V2 execution as its evidence source. The V2 row is neither edited nor reinterpreted in place.",
+  "required_new_identity_authority": {
+    "dataset_namespace": true,
+    "manifest_version": true,
+    "replica_protocol_hash": true,
+    "rollout_configuration_hash": true,
+    "row_binding_contract_version": true,
+    "row_identity_version": true,
+    "target_v3_contract_hash": true,
+    "train_seal": true,
+    "training_target_schema": true,
+    "validation_seal": true
+  },
+  "schema_version": "rvt-phase9d-v3d-provenance-versioning/v1"
+}

@@ -1,0 +1,138 @@
+{
+  "D29_owner_parameters": [
+    {
+      "agent_recommendation": "C",
+      "options": [
+        "A selective binary + abstain",
+        "B three-state",
+        "C probabilistic",
+        "D robust confidence bound"
+      ],
+      "owner_authority_required": true,
+      "parameter": "target semantic type"
+    },
+    {
+      "owner_authority_required": false,
+      "parameter": "replica interpretation",
+      "resolution": "iid samples from a frozen disturbance law, proved from the disturbance contract and the counter PRF",
+      "resolved_by_repository_authority": true
+    },
+    {
+      "agent_input": "R = 3 is statistically coherent for a binomial-likelihood target; it is NOT coherent for any per-event-precision target",
+      "owner_authority_required": true,
+      "parameter": "R_min"
+    },
+    {
+      "agent_input": "R = 5 or 9 buys calibration-bin resolution at 35 to 51 CPU-hours; the trade-off is recorded, the choice is not made",
+      "owner_authority_required": true,
+      "parameter": "R_max / whether R increases at all"
+    },
+    {
+      "agent_input": "see the adaptive-replication analysis; it is scientifically valid only if the stopping rule is frozen before generation and the realized R is part of row identity",
+      "owner_authority_required": true,
+      "parameter": "adaptive replication rule"
+    },
+    {
+      "applies_to": "option D only",
+      "note": "no repository authority supplies a value and none may be derived from V2 outcomes",
+      "owner_authority_required": true,
+      "parameter": "robust probability threshold q"
+    },
+    {
+      "applies_to": "option D only",
+      "owner_authority_required": true,
+      "parameter": "confidence level"
+    },
+    {
+      "applies_to": "all options",
+      "owner_authority_required": true,
+      "parameter": "abstention / conservative-default policy"
+    },
+    {
+      "applies_to": "option C",
+      "owner_authority_required": true,
+      "parameter": "candidate-selection margin for near-ties"
+    },
+    {
+      "agent_input": "validation variants 1 and 2 are the safely separated choices; variant 3 approaches the final-test offset",
+      "owner_authority_required": true,
+      "parameter": "fresh validation size and variant indices"
+    },
+    {
+      "note": "this is a change to frozen scenario authority",
+      "owner_authority_required": true,
+      "parameter": "extension of _SPLIT_VARIANTS in frozen scenario code"
+    },
+    {
+      "agent_input": "PATH 2 fresh generation is affordable; there is no compute argument for reuse",
+      "owner_authority_required": true,
+      "parameter": "V2 TRAIN reuse policy"
+    },
+    {
+      "owner_authority_required": true,
+      "parameter": "V3 scientific distribution gate thresholds (V3-S2, V3-S3)"
+    },
+    {
+      "owner_authority_required": true,
+      "parameter": "V3 model performance gate thresholds (V3-M1, V3-M2)"
+    },
+    {
+      "agent_input": "under option C no rewording is required, because the primary metric, unit and comparators are unchanged",
+      "owner_authority_required": true,
+      "parameter": "new H1 wording, if the evaluation headline moves away from episode task success"
+    }
+  ],
+  "D30_prospective_freeze_boundary": {
+    "freeze_precedes_generation": true,
+    "must_be_frozen_before_any_v3_official_generation": [
+      "the scientific target definition and its semantics",
+      "the Target V3 contract hash",
+      "the disturbance interpretation, restating that p is defined relative to the frozen uniform-disk law",
+      "the replica protocol including R per family and any adaptive rule",
+      "the source acquisition protocol (unchanged V2 hash is acceptable, but must be restated)",
+      "eligibility and retention rules",
+      "candidate aggregation and the observation schema",
+      "row identity version and row binding contract",
+      "the complete data-quality gate set with every threshold",
+      "the TRAIN and VALIDATION layout pools, including the new validation variant indices",
+      "source-episode and event budgets",
+      "training event weighting and the normalization by R",
+      "class or target weighting",
+      "evaluation metrics and the checkpoint selection rule"
+    ],
+    "nothing_may_be_selected_after_seeing_v3_outcomes": true
+  },
+  "D31_ordering": {
+    "correction_to_the_proposed_ordering": {
+      "change": "the fresh VALIDATION LAYOUT POOL must be generated and frozen BEFORE V3 TRAIN generation, not after",
+      "precedent": "Phase 9G-V2A-T froze the full 1500-episode identity space and proved TRAIN n VALIDATION = 0 before generating TRAIN",
+      "why": "the comprehensive exclusion union must know every validation identity before TRAIN runs, exactly as V2 did; otherwise TRAIN could consume an identity later needed for confirmation"
+    },
+    "no_step_executed_in_this_phase": true,
+    "proposed_sequence": [
+      "V3 scientific owner decision",
+      "V3 protocol freeze",
+      "V3 implementation",
+      "local qualification",
+      "Windows target qualification",
+      "fresh V3 VALIDATION layout pool generation and freeze",
+      "V3 TRAIN generation",
+      "V3 TRAIN audit",
+      "fresh V3 confirmatory VALIDATION generation",
+      "combined V3 audit",
+      "V3 training pipeline implementation and qualification",
+      "HP search and model selection on development evidence",
+      "freeze checkpoint",
+      "sealed final test",
+      "Study-A N24",
+      "Study B"
+    ],
+    "second_correction": {
+      "change": "the sealed final test runs BEFORE Study-A N24 and Study B only if split authority requires it; otherwise final test is the last scientific step",
+      "status": "flagged for owner confirmation, not resolved here"
+    }
+  },
+  "agent_selected_owner_parameters": false,
+  "phase9d_v3d_owner_decision_package_sha256": "d0ea8800ed6c0ae8203e2e1777eabdb7c7ed76a57ab8e44e659770f1f4fa1034",
+  "schema_version": "rvt-phase9d-v3d-owner-decision-package/v1"
+}

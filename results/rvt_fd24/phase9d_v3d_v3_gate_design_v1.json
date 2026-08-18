@@ -1,0 +1,134 @@
+{
+  "D23_gate7_disposition": {
+    "action": "RETIRE_FOR_V3_AND_REPLACE, never amend retroactively",
+    "additional_structural_reason": "the statistic is R-dependent: 1 - p^R - (1-p)^R increases in R, so the same physical dataset would fail harder simply for being sampled more thoroughly",
+    "what_must_still_be_guaranteed": "that the observations are honest and reproducible, which the replacement gates below cover",
+    "why_a_disagreement_rate_gate_is_inappropriate_under_a_probabilistic_target": "under Target V4 a mixed replica outcome was an anticipated nuisance to be bounded. Under a probabilistic target it is the SIGNAL: an event with k = 1 or 2 out of 3 is precisely an observation that p is interior. Capping how often that occurs would cap how much information the dataset carries about the decision boundary."
+  },
+  "D24_prospective_v3_gate_set": {
+    "DATA_INTEGRITY_GATES": [
+      {
+        "gate": "no scientific row identity collisions",
+        "id": "V3-D1",
+        "pre_data_justified": true,
+        "rationale": "identity is the basis of every seal; a collision is unrecoverable",
+        "threshold": "0"
+      },
+      {
+        "gate": "no non-finite values in any input tensor",
+        "id": "V3-D2",
+        "pre_data_justified": true,
+        "rationale": "a non-finite input is not a measurement",
+        "threshold": "0"
+      },
+      {
+        "gate": "exact replica accounting: replica executions equal the sum over aggregates of their declared R",
+        "id": "V3-D3",
+        "pre_data_justified": true,
+        "rationale": "arithmetic reconciliation, not a tolerance",
+        "threshold": "exact equality"
+      },
+      {
+        "gate": "no fake invalids: a source state that was never realized may not produce a candidate aggregate",
+        "id": "V3-D4",
+        "pre_data_justified": true,
+        "rationale": "carried forward from V2 where it was already enforced and measured at 0",
+        "threshold": "0"
+      },
+      {
+        "gate": "matched randomness -- COMPACT and LINE share the disturbance realization at every replica index",
+        "id": "V3-D5",
+        "pre_data_justified": true,
+        "rationale": "this is what makes the candidate comparison paired",
+        "threshold": "0 mismatches"
+      },
+      {
+        "gate": "replay determinism -- re-executing any sampled aggregate reproduces its per-replica outcomes",
+        "id": "V3-D6",
+        "pre_data_justified": true,
+        "rationale": "replaces the part of gate 7 that was genuinely about trustworthiness rather than about disagreement",
+        "threshold": "0 mismatches"
+      },
+      {
+        "gate": "split identity and layout disjointness across TRAIN, VALIDATION and final test",
+        "id": "V3-D7",
+        "pre_data_justified": true,
+        "rationale": "carried forward from frozen gate 9",
+        "threshold": "0 overlap on every identity axis"
+      }
+    ],
+    "MODEL_PERFORMANCE_GATES": [
+      {
+        "evaluated_when": "after training, never on the dataset",
+        "gate": "calibration -- expected calibration error on the fresh confirmatory validation",
+        "id": "V3-M1",
+        "rationale": "a probability that is not calibrated is not a probability",
+        "threshold": "OWNER PARAMETER"
+      },
+      {
+        "evaluated_when": "after training",
+        "gate": "binomial NLL and Brier score",
+        "id": "V3-M2",
+        "rationale": "proper scoring rules for a probabilistic output",
+        "threshold": "OWNER PARAMETER; Brier already appears in the frozen checkpoint selection contract"
+      },
+      {
+        "evaluated_when": "after training",
+        "gate": "decision quality -- episode task success against the two H1 comparators and the frozen collision gate",
+        "id": "V3-M3",
+        "rationale": "this remains the primary claim and its thresholds are already frozen",
+        "threshold": "the frozen H1 values, 0.08 absolute and the collision gate"
+      }
+    ],
+    "SCIENTIFIC_DISTRIBUTION_GATES": [
+      {
+        "gate": "every primary family is represented in VALIDATION by at least the frozen minimum retained events",
+        "id": "V3-S1",
+        "pre_data_justified": true,
+        "rationale": "the existing frozen gate 4 rationale is unchanged by a target-type change",
+        "threshold": "inherits the frozen 30 per primary family unless an owner decision changes it"
+      },
+      {
+        "gate": "target non-degeneracy -- the observed target must not be constant across the dataset",
+        "id": "V3-S2",
+        "pre_data_justified": "PARTIALLY -- the principle is pre-data, the number is an owner decision",
+        "rationale": "a target with no variation cannot support learning",
+        "threshold": "OWNER PARAMETER; must be stated as a minimum count of events at interior observation levels, not derived from V2"
+      },
+      {
+        "gate": "stochastic-boundary representation -- interior observations must be present rather than bounded",
+        "id": "V3-S3",
+        "pre_data_justified": true,
+        "rationale": "this is the deliberate inversion of gate 7: under a probabilistic target the boundary is required evidence, not a defect to be capped",
+        "threshold": "OWNER PARAMETER, expressed as a MINIMUM not a maximum"
+      },
+      {
+        "gate": "invalid rollout rate",
+        "id": "V3-S4",
+        "pre_data_justified": true,
+        "rationale": "unchanged by target type",
+        "threshold": "inherits the frozen gate 6 values, below 0.02 overall and below 0.05 per family"
+      },
+      {
+        "gate": "TRAIN/VALIDATION structural comparability",
+        "id": "V3-S5",
+        "pre_data_justified": true,
+        "rationale": "the purpose is unchanged; only the distribution being compared changes",
+        "threshold": "inherits the frozen gate 8 structure with a statistic appropriate to the new target"
+      }
+    ],
+    "categories_kept_separate": true,
+    "no_threshold_taken_from_v2_observed_values": true
+  },
+  "historical_gate7_modified": false,
+  "historical_gate7_status": "FAILED FOR V2 AND REMAINS SO",
+  "historical_gate7_value": "TRAIN F9/LINE 59/530 = 0.1113207547 against a permitted 0.10",
+  "owner_parameters_in_the_gate_set": [
+    "V3-S2 threshold",
+    "V3-S3 threshold",
+    "V3-M1 threshold",
+    "V3-M2 threshold"
+  ],
+  "phase9d_v3d_v3_gate_design_sha256": "17656e7eee4731f51b53824e3fda6475db38a8033cf1cf0103cfb294b62f1e4f",
+  "schema_version": "rvt-phase9d-v3d-v3-gate-design/v1"
+}

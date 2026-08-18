@@ -1,0 +1,50 @@
+{
+  "D2_random_variable": {
+    "Y": "task success under the frozen Target contract for one candidate rollout",
+    "conditioned_on": [
+      "robot-local state / ego graph x",
+      "candidate topology tau",
+      "the realized source decision state",
+      "frozen system dynamics, controller, safety projection, transition protocol and metrics",
+      "the disturbance realization D"
+    ],
+    "definition": "p(x, tau) = P(Y = 1 | x, tau) = E_D[ Y(x, tau, D) ] under the prospectively frozen disturbance distribution",
+    "this_is_the_intended_object": true,
+    "why": "the disturbance is an explicitly specified probability distribution, so the expectation over it is well defined and is exactly what 'recoverable under disturbance' means"
+  },
+  "D3_what_the_replica_streams_are": {
+    "caveat": "the probability is defined RELATIVE TO the frozen disturbance law (uniform disk, 0.05*a_max, additive before safety projection). It is not a claim about any real-world disturbance population, and every future report must say so",
+    "classification": "IID_SAMPLES_FROM_A_PROSPECTIVELY_FROZEN_DISTRIBUTION",
+    "consequence": "P(success) has a legitimate probabilistic interpretation with respect to this frozen distribution",
+    "evidence": [
+      "the contract specifies the counterfactual robot-acceleration process as 'uniform disk, max 0.05*a_max, before safety projection', i.e. a named continuous distribution with a bounded support, not an enumerated scenario list",
+      "the draw is refreshed 'every control step, counter-key independent' and keyed by (robot_id, control_step, radius|angle), so each robot and step receives an independent draw",
+      "uniform_disk uses r = r_max*sqrt(u_r), theta = 2*pi*u_theta, which is the standard inverse-CDF construction for the uniform measure on a disk",
+      "counter_uniform returns the first 64 SHA-256 bits of a canonical payload divided by 2^64, i.e. a counter-based PRF implementing uniform draws on [0,1)",
+      "the replica index enters through the stream process label 'robot_acceleration:replica-{i}' and through the matched seed, so replica i and replica j are independent realizations of the same distribution rather than two hand-chosen stress cases",
+      "the contract explicitly REJECTED alternatives that would have made this a stress bank or a candidate-specific stream"
+    ],
+    "not_a_fixed_stress_bank": true,
+    "not_deterministic_counterfactual_perturbations": true
+  },
+  "D8_fixed_bank_versus_population": {
+    "additional_replicas_are_new_samples_not_repeats": true,
+    "additional_replicas_are_scientifically_meaningful": true,
+    "answer": "POPULATION_PROBABILITY_UNDER_A_FROZEN_DISTURBANCE_LAW",
+    "question": "success fraction over a frozen stress bank, or a population probability?",
+    "reproducibility_note": "determinism comes from the counter PRF, not from a fixed sample list. Re-running replica i reproduces the same draw; drawing replica i+1 yields a fresh independent realization. Both properties hold at once.",
+    "the_frozen_object_is_the_law_not_the_sample": true
+  },
+  "authority": {
+    "contract": "docs/PHASE8E_INITIALIZATION_AND_DISTURBANCE_CONTRACT.md",
+    "contract_sha256": "43901ce5faa908b64819728d0fba452844635bf62f6e8062bda50fd447c454d8",
+    "prf_code": "rvt_swarm/phase8e/protocol.py::counter_uniform",
+    "rollout_protocol": "docs/RVT_COUNTERFACTUAL_ROLLOUT_PROTOCOL.md",
+    "rollout_protocol_sha256": "bfbfac4bf0d8e4b34666f29c57f0e0c3f07fce0ff26d706d66b8ddd05712f18e",
+    "stream_code": "rvt_swarm/phase9c_rb/streams.py",
+    "stream_code_sha256": "08cbbec160c8f00aef51296d7a89764eb60d7b77d45663872c23ea89d0af00bd"
+  },
+  "matched_randomness_preserved_requirement": "any V3 design must keep COMPACT and LINE sharing the same disturbance realization at the same replica index, which is what makes the candidate comparison paired",
+  "phase9d_v3d_disturbance_semantics_sha256": "49895c03e3fe585d98b936294ae211a11eb585cfeea080adf5474ac444a2191e",
+  "schema_version": "rvt-phase9d-v3d-disturbance-semantics/v1"
+}

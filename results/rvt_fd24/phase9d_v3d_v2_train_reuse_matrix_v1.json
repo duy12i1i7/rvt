@@ -1,0 +1,81 @@
+{
+  "D16_classification_by_option": {
+    "A": "DESIGN_ONLY unless relabelled under new provenance",
+    "B": "DESIGN_ONLY unless relabelled under new provenance",
+    "C": "V3_MODEL_TRAINING_DATA is possible via rebinding, because the existing per-replica outcomes already constitute k out of R = 3 observations of the same p(x, tau); this requires new labels, a new target hash and a new row identity, never an in-place edit",
+    "D": "NOT_SEMANTICALLY_COMPATIBLE at R = 3 -- the target needs per-event precision the existing replicas cannot supply"
+  },
+  "D20_path_comparison": {
+    "PATH_1_reuse_v2_train_with_new_v3_labels": {
+      "compute": "no new candidate rollouts needed for C at R = 3; relabelling and row rebinding only",
+      "design_overfitting_risk": "real but bounded, because the V3 target is being chosen from a mechanism argument rather than from V2 numbers",
+      "prospective_validity": "reduced -- the same episodes informed the diagnosis that motivated V3",
+      "publication_defensibility": "acceptable IF the training corpus is declared as development data and confirmation comes from a fresh validation domain",
+      "reproducibility": "high"
+    },
+    "PATH_2_generate_fresh_v3_train_and_validation": {
+      "compute": "measured V2 evidence puts a full regeneration at roughly 27 CPU-hours and about 2.2 hours wall at 12 workers for R = 3, rising to about 51 CPU-hours for R = 9 on F8/F9",
+      "design_overfitting_risk": "lowest",
+      "prospective_validity": "highest",
+      "publication_defensibility": "highest",
+      "reproducibility": "high"
+    },
+    "decisive_observation": "the measured compute cost of PATH 2 is small in absolute terms. There is therefore NO compute argument for preferring reuse, and the cheaper path should not be chosen for being cheaper.",
+    "recommended_shape": "generate fresh V3 TRAIN, and require a fresh confirmatory VALIDATION regardless of the TRAIN choice"
+  },
+  "D21_label_reuse_matrix": [
+    {
+      "A": "reusable",
+      "B": "reusable",
+      "C": "reusable",
+      "D": "reusable",
+      "asset": "source snapshot",
+      "note": "acquisition is candidate-blind and target-independent"
+    },
+    {
+      "A": "reusable",
+      "B": "reusable",
+      "C": "reusable",
+      "D": "reusable",
+      "asset": "ego graph inputs",
+      "note": "a function of source state and candidate topology only"
+    },
+    {
+      "A": "reusable as evidence",
+      "B": "reusable as evidence",
+      "C": "REUSABLE AS OBSERVATIONS (k out of R = 3)",
+      "D": "insufficient",
+      "asset": "three per-replica rollout outcomes",
+      "note": "this is the pivotal row"
+    },
+    {
+      "A": "not reusable",
+      "B": "not reusable",
+      "C": "not reusable",
+      "D": "not reusable",
+      "asset": "candidate aggregate label (all-success binary)",
+      "note": "it is a Target V4 object and does not survive a semantics change"
+    },
+    {
+      "A": "not reusable",
+      "B": "not reusable",
+      "C": "not reusable",
+      "D": "not reusable",
+      "asset": "robot-local rows as labelled training rows",
+      "note": "rows bind target_v4_contract_sha256 in their scientific identity"
+    },
+    {
+      "A": "reusable",
+      "B": "reusable",
+      "C": "reusable",
+      "D": "reusable",
+      "asset": "robot-local rows as INPUT payloads",
+      "note": "the graph payload is target-independent"
+    }
+  ],
+  "in_place_relabelling_prohibited": true,
+  "phase9d_v3d_v2_train_reuse_matrix_sha256": "fd412eb77fc3429f06bf3beb54fd70becf9aea8ad96a1edf0ab7c45b92aa4be7",
+  "schema_version": "rvt-phase9d-v3d-v2-train-reuse/v1",
+  "v2_train_status": "DEVELOPMENT_DATA",
+  "why": "V2 TRAIN has been used for dataset generation, dataset audit, Gate-7 diagnosis and V3 scientific design"
+}
