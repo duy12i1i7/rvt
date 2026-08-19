@@ -12,7 +12,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def _f8_records() -> list[dict]:
     directory = ROOT / "results/rvt_fd24/layout_execution_specifications/train"
-    return [json.loads(path.read_text(encoding="ascii")) for path in sorted(directory.glob("train-f8-*.json"))]
+    # V2-era F8 layouts only; Phase 9G-V3X-Q added train-f8-02 additively.
+    manifest = json.loads(
+        (ROOT / "results/rvt_fd24/splits/train_layouts.json").read_text(
+            encoding="ascii"))
+    v2_era = {str(record["layout_id"]) for record in manifest["layout_records"]}
+    return [json.loads(path.read_text(encoding="ascii"))
+            for path in sorted(directory.glob("train-f8-*.json"))
+            if path.stem in v2_era]
 
 
 def test_f8_profiles_are_explicit_and_classified_before_execution() -> None:

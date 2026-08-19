@@ -136,8 +136,16 @@ def test_the_model_output_frame_conflict_is_recorded_and_repaired() -> None:
 def test_the_mission_frame_is_never_the_world_frame_in_any_layout() -> None:
     angles = []
     for split in ("train", "validation"):
+        # RB16 examined the thirty V2-era layouts; Phase 9G-V3X-Q added thirty
+        # V3 specifications additively, so the set is narrowed to keep the
+        # recorded minimum/maximum angles comparable.
+        manifest = json.loads(
+            (ROOT / "splits" / f"{split}_layouts.json").read_text(encoding="ascii"))
+        v2_era = {str(record["layout_id"]) for record in manifest["layout_records"]}
         for path in sorted(
                 (ROOT / "layout_execution_specifications" / split).glob("*.json")):
+            if path.stem not in v2_era:
+                continue
             axis = json.loads(path.read_text())["mission_frame"]["longitudinal_axis"]
             angles.append(math.degrees(math.atan2(float(axis[1]), float(axis[0]))))
     assert len(angles) == RB16["frame_conflict"]["layouts_examined"] == 30

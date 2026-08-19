@@ -21,9 +21,20 @@ PROTOCOL = json.loads((ROOT / "executable_scientific_protocol_v1.json").read_tex
 TARGET = json.loads((ROOT / "target_v4_execution_contract_v1.json").read_text())
 POLICIES = json.loads((ROOT / "source_policy_contracts_v1.json").read_text())
 
+#: Phase 9G-V3X-Q added thirty ADDITIVE V3 execution specifications into
+#: the same directories. Narrowing to the V2-era layout set -- defined by
+#: the frozen split manifests -- keeps this assertion at its original
+#: force over the historical layouts instead of loosening it.
+def _v2_era_layout_ids(split):
+    manifest = json.loads(
+        (ROOT / "splits" / f"{split}_layouts.json").read_text(encoding="ascii"))
+    return {str(record["layout_id"]) for record in manifest["layout_records"]}
+
+
 LAYOUTS = [(split, path.stem)
            for split in ("train", "validation")
-           for path in sorted((ROOT / "layout_execution_specifications" / split).glob("*.json"))]
+           for path in sorted((ROOT / "layout_execution_specifications" / split).glob("*.json"))
+           if path.stem in _v2_era_layout_ids(split)]
 
 
 def _build(split, layout_id, team_size=6, policy=P.S1):

@@ -1,0 +1,16 @@
+{
+  "V3_ROW_BINDING_PROVENANCE_REFREEZE_REQUIRED": false,
+  "counterfactual_that_would_have_forced_a_change": "if any execution-critical field had been category D, the chosen value would have been new scientific authority not identified by layout_sha256, and row identity would have had to bind the execution-spec hash",
+  "phase9g_v3x_q_row_binding_impact_sha256": "bb1f3c9f441d6e2f1718bccd35fd6af6ce42f71b33afd82fbdd4949672f66474",
+  "reasoning": [
+    "row identity already binds layout_sha256, which equals the frozen geometry_sha256 of the layout",
+    "the execution specification is a deterministic compilation of that same geometry plus already-frozen scenario and protocol contracts, so it introduces no scientific variable that layout_sha256 and the frozen contracts do not already identify",
+    "the D count is 0: there is no free parameter whose value a row would need to record",
+    "recompiling from the same frozen inputs is bit-reproducible, which was demonstrated by compiling on the qualified target and independently recompiling on the orchestration host to the same registry root"
+  ],
+  "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+  "row_binding_v3_modified": false,
+  "row_binding_v3_must_change": false,
+  "row_identity_field_count_unchanged": 16,
+  "schema_version": "rvt-phase9g-v3x-q-row-binding-impact/v1"
+}

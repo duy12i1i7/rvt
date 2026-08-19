@@ -158,6 +158,7 @@ class V3SupervisedDatasetWriter:
 def build_v3_dataset_manifest(
     *, v3_split: str, dataset_id: str, source_manifest_root_sha256: str,
     layout_registry_sha256: str,
+    execution_spec_registry_sha256: str,
     accounting: S8InvalidRateAccounting,
     source_episodes_executed: int, selected_source_events: int,
     pair_events_retained: int, pair_events_dropped_scientific_invalidity: int,
@@ -179,6 +180,11 @@ def build_v3_dataset_manifest(
         "dataset_id": dataset_id,
         "source_manifest_root_sha256": source_manifest_root_sha256,
         "v3_layout_split_registry_v2_sha256": layout_registry_sha256,
+        # The layout registry pins geometry; the execution-spec registry pins
+        # the compiled runtime binding built from it. Neither alone identifies
+        # the complete runtime authority, so the manifest carries both.
+        "v3_layout_execution_spec_registry_v1_sha256":
+            execution_spec_registry_sha256,
         "recoverability_probabilistic_target_v3_sha256":
             PROBABILISTIC_TARGET_V3_SHA256,
         "recoverability_replica_protocol_v3_sha256": REPLICA_PROTOCOL_V3_SHA256,
@@ -227,6 +233,10 @@ def seal_v3_dataset(manifest: Mapping[str, Any]) -> Mapping[str, Any]:
         "v3_split": manifest["v3_split"],
         "v3_dataset_manifest_sha256": manifest["v3_dataset_manifest_sha256"],
         "row_dataset_root_sha256": manifest["row_dataset_root_sha256"],
+        "v3_layout_execution_spec_registry_v1_sha256":
+            manifest["v3_layout_execution_spec_registry_v1_sha256"],
+        "v3_layout_split_registry_v2_sha256":
+            manifest["v3_layout_split_registry_v2_sha256"],
         "recoverability_v3_required_replica_invalidity_contract_v1_sha256":
             manifest[
                 "recoverability_v3_required_replica_invalidity_contract_v1_sha256"],

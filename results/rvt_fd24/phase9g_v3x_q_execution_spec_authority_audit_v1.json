@@ -1,0 +1,105 @@
+{
+  "binder_refuses_nonzero_category_d": true,
+  "canonicalization": "rvt_swarm/phase8/common.py::attach_canonical_hash over sorted-key ASCII JSON",
+  "compiler_declares_category_d_count": 0,
+  "compiler_is_a_pure_function_of_its_three_inputs": true,
+  "compiler_reads_no_runtime_config": true,
+  "compiler_signature": [
+    "record",
+    "split",
+    "protocol"
+  ],
+  "execution_spec_fields": [
+    "audit_only_fields",
+    "bypass",
+    "canonical_parameters",
+    "category_d_count",
+    "centerline",
+    "communication",
+    "disturbance_contract",
+    "dynamic_obstacles",
+    "episode_horizon_seconds",
+    "executable_protocol_sha256",
+    "goal_contract",
+    "initial_topology_id",
+    "initialization_by_team_size",
+    "layout_execution_specification_sha256",
+    "mission_frame",
+    "nominal_initial_validity_by_team_size",
+    "nominal_passage_width_meters",
+    "passages",
+    "scenario_layout_schema_version",
+    "schema_version",
+    "source_layout",
+    "source_policy_ids",
+    "static_obstacles",
+    "target_v4_contract_sha256",
+    "validity",
+    "world_bounds_meters"
+  ],
+  "execution_spec_hash_field": "layout_execution_specification_sha256",
+  "execution_spec_schema_version": "rvt-layout-execution-specification/v1",
+  "geometry_fields_covered_by_canonical_geometry": [
+    "bypass_available",
+    "canonical_parameters",
+    "communication_profile",
+    "corridor_centerline_meters",
+    "dynamic_obstacle_paths",
+    "episode_horizon_seconds",
+    "family_id",
+    "generator_version",
+    "goal_center_meters",
+    "initial_topology_id",
+    "nominal_passage_width_meters",
+    "start_center_meters",
+    "static_obstacles"
+  ],
+  "helper_purity": {
+    "_communication_spec": [
+      "profile",
+      "parameters",
+      "start",
+      "passages"
+    ],
+    "_compile_dynamic": [
+      "raw_paths",
+      "parameters"
+    ],
+    "_compile_static_geometry": [
+      "family_id",
+      "points",
+      "raw_obstacles",
+      "parameters",
+      "nominal_width",
+      "bypass_available"
+    ],
+    "_initial_role_contracts": [
+      "start",
+      "direction"
+    ],
+    "_nominal_initial_validity": [
+      "initial_contracts",
+      "obstacles",
+      "passages"
+    ],
+    "every_argument_is_geometry_or_protocol_derived": true
+  },
+  "horizon_derivation": "geometry.episode_horizon_seconds, carried through unchanged into episode_horizon_seconds",
+  "name": "LAYOUT_EXECUTION_SPECIFICATION_AUTHORITY_AUDIT_V1",
+  "phase9g_v3x_q_execution_spec_authority_audit_sha256": "0f0952e4d9ddf29c91d0db1f169c9a883f05d595d1f0a81b891115342381b202",
+  "pipeline": {
+    "compiler": "rvt_swarm/phase8e/compiler.py::compile_layout_record",
+    "layout_record_builder": "rvt_swarm/phase8/splits.py::layout_record",
+    "runtime_binder": "rvt_swarm/phase9c_rb/binding.py::build_binding",
+    "runtime_loader": "rvt_swarm/phase9c_rb/binding.py::load_execution_specification",
+    "source_layout_object": "rvt_swarm/phase8/scenario.py::ScenarioLayout",
+    "split_enumerator_historical": "rvt_swarm/phase8e/compiler.py::compile_nonfinal_split, which reads results/rvt_fd24/splits/<split>_layouts.json -- NOT used by the V3 path",
+    "v3_enumerator": "rvt_swarm/phase9g0r/execution_spec_v3.py, whose input domain is the frozen V3 layout registry"
+  },
+  "runtime_values_resolved_at_bind_time_not_compile_time": [
+    "goal tolerance -- goal_contract carries the FORMULA runtime_config.derived.formation_tolerance_meters, not a value",
+    "dwell seconds -- runtime_config.physical.control_period_seconds",
+    "disturbance contract -- referenced as executable_protocol.disturbance_contract"
+  ],
+  "schema_version": "rvt-phase9g-v3x-q-execution-spec-authority-audit/v1"
+}

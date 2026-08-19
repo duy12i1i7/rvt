@@ -1,10 +1,16 @@
 """Phase 9G-V3A-T -- the prelaunch NO-GO.
 
 Official V3 TRAIN could not start: the twenty frozen official V3 TRAIN layouts
-have no compiled layout execution specification, in the repository or inside
-the qualified production image. These tests pin that finding against the live
-filesystem so it cannot quietly become stale, and pin the zeros that prove no
-official data were produced.
+had no compiled layout execution specification, in the repository or inside the
+qualified production image. These tests pin the historical finding and the zeros
+that prove no official data were produced.
+
+Phase 9G-V3X-Q subsequently compiled those specifications. The three tests that
+measured the *absence* against the live filesystem have been inverted to measure
+the *repair* instead, each one naming the phase that fixed it, so the record
+still shows both states rather than silently dropping the evidence. The
+artifact-backed assertions are untouched: the blocker record remains exactly as
+it was written.
 """
 from __future__ import annotations
 
@@ -55,32 +61,49 @@ def specification_ids():
     return ids
 
 
-def test_the_official_v3_train_layouts_really_have_no_specification():
-    """Re-measured against the filesystem, not read out of the artifact."""
+def test_the_blocker_recorded_every_official_v3_train_layout_as_missing():
+    """The historical finding, as written at the time of the stop."""
     registry = load_v3_layout_registry(ROOT)
     train = sorted(registry["assignment"]["TRAIN"]["layout_ids"])
     assert len(train) == 20
-    present = specification_ids()
-    missing = [layout for layout in train if layout not in present]
-    assert missing == train, "every official V3 TRAIN layout must be missing"
     assert load("execution_specification_blocker")["evidence"][
-        "official_v3_train_layouts_without_specification"] == missing
+        "official_v3_train_layouts_without_specification"] == train
 
 
-def test_the_v3_validation_layouts_are_missing_too():
+def test_phase_9g_v3x_q_supplied_the_missing_train_specifications():
+    """The repair, re-measured against the filesystem rather than asserted."""
+    registry = load_v3_layout_registry(ROOT)
+    train = sorted(registry["assignment"]["TRAIN"]["layout_ids"])
+    present = specification_ids()
+    assert [layout for layout in train if layout not in present] == []
+
+
+def test_the_v3_validation_layouts_were_missing_and_are_now_supplied():
     registry = load_v3_layout_registry(ROOT)
     validation = sorted(registry["assignment"]["VALIDATION"]["layout_ids"])
+    assert load("execution_specification_blocker")["evidence"][
+        "official_v3_validation_layouts_without_specification"] == validation
     present = specification_ids()
-    assert [layout for layout in validation if layout not in present] == validation
+    assert [layout for layout in validation if layout not in present] == []
 
 
-def test_only_the_v2_era_specifications_exist():
+def test_the_specification_set_grew_by_exactly_the_thirty_v3_layouts():
+    """At the stop there were 30 V2-era specifications; V3X-Q added 30 more."""
     present = specification_ids()
-    assert len(present) == 30
-    # train variants 00/01 and validation variant 00 -- nothing at a V3 offset
-    assert not any(layout.endswith("-02") for layout in present)
-    assert not any(layout.startswith("validation-") and layout.endswith("-01")
-                   for layout in present)
+    assert len(present) == 60
+    registry = load_v3_layout_registry(ROOT)
+    official = set(registry["assignment"]["TRAIN"]["layout_ids"]) | set(
+        registry["assignment"]["VALIDATION"]["layout_ids"])
+    assert len(official) == 30
+    assert official <= present
+    v2_era = present - official
+    assert len(v2_era) == 30
+    # the historical set is untouched: no V3 offset among the V2-era layouts
+    assert not any(layout.endswith("-02") for layout in v2_era)
+    # and the reserve layouts were never compiled
+    reserve = {str(record["layout_id"])
+               for record in registry["layout_records"]["RESERVE"]}
+    assert reserve & present == set()
 
 
 def test_the_generator_cannot_even_enumerate_the_v3_offsets():
@@ -94,7 +117,7 @@ def test_the_generator_cannot_even_enumerate_the_v3_offsets():
     assert 0.65 not in producible
 
 
-def test_the_split_manifests_do_not_carry_the_v3_layouts():
+def test_the_split_manifests_still_do_not_carry_the_v3_layouts():
     registry = load_v3_layout_registry(ROOT)
     official = set(registry["assignment"]["TRAIN"]["layout_ids"]) | set(
         registry["assignment"]["VALIDATION"]["layout_ids"])

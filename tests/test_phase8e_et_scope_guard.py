@@ -78,9 +78,22 @@ def test_mission_geometry_and_horizons_are_unchanged() -> None:
     assert seen == set(expected_horizons)
 
 
+#: Phase 9G-V3X-Q added thirty ADDITIVE V3 execution specifications into
+#: the same directories. Narrowing to the V2-era layout set -- defined by
+#: the frozen split manifests -- keeps this assertion at its original
+#: force over the historical layouts instead of loosening it.
+def _v2_era_layout_ids(split):
+    manifest = json.loads(
+        (ROOT / "splits" / f"{split}_layouts.json").read_text(encoding="ascii"))
+    return {str(record["layout_id"]) for record in manifest["layout_records"]}
+
+
 def test_train_validation_membership_is_unchanged() -> None:
-    counts = {split: len(list((ROOT / "layout_execution_specifications" / split).glob("*.json")))
-              for split in ("train", "validation")}
+    counts = {
+        split: len([path for path in
+                    (ROOT / "layout_execution_specifications" / split).glob("*.json")
+                    if path.stem in _v2_era_layout_ids(split)])
+        for split in ("train", "validation")}
     assert counts == {"train": 20, "validation": 10}
 
 

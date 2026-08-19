@@ -34,9 +34,16 @@ def test_persisted_layout_specs_are_exact_and_compiler_preserves_physics() -> No
     protocol = build_executable_protocol(ROOT)
     for split, expected_count in (("train", 20), ("validation", 10)):
         compiled = compile_nonfinal_split(ROOT, split, protocol)
-        paths = sorted((
+        # compile_nonfinal_split enumerates the frozen split manifest, so the
+        # persisted set is narrowed to the same V2-era layouts. Phase 9G-V3X-Q
+        # added thirty V3 specifications alongside them, additively.
+        manifest = json.loads((
+            ROOT / f"results/rvt_fd24/splits/{split}_layouts.json"
+        ).read_text(encoding="ascii"))
+        v2_era = {str(record["layout_id"]) for record in manifest["layout_records"]}
+        paths = [path for path in sorted((
             ROOT / f"results/rvt_fd24/layout_execution_specifications/{split}"
-        ).glob("*.json"))
+        ).glob("*.json")) if path.stem in v2_era]
         persisted = tuple(
             load_execution_specification(
                 ROOT / "results/rvt_fd24", split, path.stem

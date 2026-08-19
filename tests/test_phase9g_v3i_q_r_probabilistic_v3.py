@@ -976,6 +976,7 @@ def test_manifest_and_seal_bind_the_invalidity_contract():
     manifest = build_v3_dataset_manifest(
         v3_split=V3_TRAIN, dataset_id="qual", source_manifest_root_sha256="a" * 64,
         layout_registry_sha256=LAYOUT_SPLIT_REGISTRY_V2_SHA256,
+        execution_spec_registry_sha256="e" * 64,
         accounting=accounting, source_episodes_executed=1,
         selected_source_events=1, pair_events_retained=1,
         pair_events_dropped_scientific_invalidity=0,
@@ -1002,6 +1003,7 @@ def test_the_manifest_carries_the_c13_invalidity_accounting():
     manifest = build_v3_dataset_manifest(
         v3_split=V3_TRAIN, dataset_id="qual", source_manifest_root_sha256="a" * 64,
         layout_registry_sha256=LAYOUT_SPLIT_REGISTRY_V2_SHA256,
+        execution_spec_registry_sha256="e" * 64,
         accounting=accounting, source_episodes_executed=2,
         selected_source_events=2, pair_events_retained=1,
         pair_events_dropped_scientific_invalidity=1,

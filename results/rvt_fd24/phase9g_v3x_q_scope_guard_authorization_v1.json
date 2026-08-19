@@ -1,0 +1,24 @@
+{
+  "authorization": "V3_EXECUTION_SPECIFICATION_ADDITIVE_SCOPE_AUTHORIZED",
+  "authorized_modifications": [
+    "additive V3 execution-spec compiler and runtime support (rvt_swarm/phase9g0r/execution_spec_v3.py)",
+    "the thirty V3 execution-spec files",
+    "execution-spec provenance, guards and tests",
+    "V3 dataset manifest and seal binding the new registry root"
+  ],
+  "explicitly_not_done": {
+    "_SPLIT_OFFSETS_modified": false,
+    "_SPLIT_VARIANTS_modified": false,
+    "frozen_v3_layout_geometry_changed": 0,
+    "historical_execution_specifications_modified": 0,
+    "historical_v2_split_definitions_changed": 0,
+    "new_layouts_created": 0,
+    "results_rvt_fd24_splits_modified": 0,
+    "v2_layout_geometry_changed": 0
+  },
+  "guards_fired": 0,
+  "guards_weakened": 0,
+  "phase9g_v3x_q_scope_guard_authorization_sha256": "ab3d4e9ff808fe61fdcd0c7449df56e6befac8c1ad323240371bdfdcd4fa7e55",
+  "schema_version": "rvt-phase9g-v3x-q-scope-guard-authorization/v1",
+  "why_no_guard_fired": "the protected tuple is rvt_swarm/phase8, topology_registry.py, runtime_configuration.py, rvt_swarm/decentralized, rvt_swarm/fd24, three named result files and results/rvt_fd24/splits. Every change in this phase lands outside all of them: rvt_swarm/phase9g0r and results/rvt_fd24/layout_execution_specifications. git pathspec rvt_swarm/phase8 does not match rvt_swarm/phase8e either, and nothing in phase8e was touched."
+}

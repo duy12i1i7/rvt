@@ -1,0 +1,215 @@
+{
+  "D_count": 0,
+  "X2_requirement": "D count must be 0",
+  "X2_requirement_met": true,
+  "X3_geometry_hash_coverage": {
+    "communication_parameters": "the communication PROFILE is covered; the compiled communication spec is derived from that profile plus the frozen protocol and passages",
+    "conclusion": "geometry_sha256 does not cover the whole execution specification, and it is not claimed to. Every field it does not cover traces to an existing frozen scenario/protocol contract, which is why the D count is zero.",
+    "corridor_geometry": true,
+    "dynamic_obstacle_parameters": true,
+    "family_specific_parameters": true,
+    "geometry_sha256_covers": [
+      "bypass_available",
+      "canonical_parameters",
+      "communication_profile",
+      "corridor_centerline_meters",
+      "dynamic_obstacle_paths",
+      "episode_horizon_seconds",
+      "family_id",
+      "generator_version",
+      "goal_center_meters",
+      "initial_topology_id",
+      "nominal_passage_width_meters",
+      "start_center_meters",
+      "static_obstacles"
+    ],
+    "goal": true,
+    "horizon": true,
+    "initial_conditions": "NOT covered directly -- initialization_by_team_size is compiled from start and mission direction, both of which ARE covered",
+    "not_covered_by_geometry_sha256": [
+      "executable_protocol_sha256 -- frozen executable protocol",
+      "target_v4_contract_sha256 -- frozen Target V4 contract",
+      "world_bounds_meters -- frozen protocol constant",
+      "source_policy_ids -- frozen protocol constant",
+      "goal tolerance and dwell formulas -- resolved from the frozen runtime configuration at bind time, never baked in"
+    ],
+    "obstacle_geometry": true,
+    "start": true
+  },
+  "categories": {
+    "A": "DETERMINISTIC_FUNCTION_OF_FROZEN_LAYOUT_GEOMETRY",
+    "B": "DETERMINISTIC_FUNCTION_OF_EXISTING_FROZEN_SCENARIO_CONTRACT",
+    "C": "ALREADY_EXPLICITLY_FROZEN_IN_V3_LAYOUT_REGISTRY",
+    "D": "NEW_UNBOUND_SCIENTIFIC_DEGREE_OF_FREEDOM"
+  },
+  "counts": {
+    "A": 14,
+    "B": 11,
+    "C": 1,
+    "D": 0
+  },
+  "every_specification_field_classified": true,
+  "execution_critical_fields": 19,
+  "fields": [
+    {
+      "authority": "LAYOUT_EXECUTION_SPECIFICATION_SCHEMA_VERSION",
+      "category": "B",
+      "execution_critical": false,
+      "field": "schema_version"
+    },
+    {
+      "authority": "SCENARIO_LAYOUT_SCHEMA_VERSION",
+      "category": "B",
+      "execution_critical": false,
+      "field": "scenario_layout_schema_version"
+    },
+    {
+      "authority": "frozen executable protocol",
+      "category": "B",
+      "execution_critical": true,
+      "field": "executable_protocol_sha256"
+    },
+    {
+      "authority": "frozen V3 layout registry and generator",
+      "category": "C",
+      "execution_critical": false,
+      "field": "source_layout"
+    },
+    {
+      "authority": "start and goal from frozen geometry",
+      "category": "A",
+      "execution_critical": true,
+      "field": "mission_frame"
+    },
+    {
+      "authority": "phase8e/protocol.py::WORLD_BOUNDS_METERS",
+      "category": "B",
+      "execution_critical": true,
+      "field": "world_bounds_meters"
+    },
+    {
+      "authority": "geometry.initial_topology_id, COMPACT",
+      "category": "A",
+      "execution_critical": true,
+      "field": "initial_topology_id"
+    },
+    {
+      "authority": "start and mission direction",
+      "category": "A",
+      "execution_critical": true,
+      "field": "initialization_by_team_size"
+    },
+    {
+      "authority": "initialization, obstacles, passages",
+      "category": "A",
+      "execution_critical": true,
+      "field": "nominal_initial_validity_by_team_size"
+    },
+    {
+      "authority": "geometry.goal_center_meters plus runtime formulas",
+      "category": "A",
+      "execution_critical": true,
+      "field": "goal_contract"
+    },
+    {
+      "authority": "geometry.corridor_centerline_meters",
+      "category": "A",
+      "execution_critical": true,
+      "field": "centerline"
+    },
+    {
+      "authority": "geometry.nominal_passage_width_meters",
+      "category": "A",
+      "execution_critical": true,
+      "field": "nominal_passage_width_meters"
+    },
+    {
+      "authority": "geometry.static_obstacles",
+      "category": "A",
+      "execution_critical": true,
+      "field": "static_obstacles"
+    },
+    {
+      "authority": "geometry.static_obstacles and canonical parameters",
+      "category": "A",
+      "execution_critical": true,
+      "field": "passages"
+    },
+    {
+      "authority": "geometry.bypass_available and static geometry",
+      "category": "A",
+      "execution_critical": true,
+      "field": "bypass"
+    },
+    {
+      "authority": "geometry.dynamic_obstacle_paths",
+      "category": "A",
+      "execution_critical": true,
+      "field": "dynamic_obstacles"
+    },
+    {
+      "authority": "geometry.communication_profile and parameters",
+      "category": "A",
+      "execution_critical": true,
+      "field": "communication"
+    },
+    {
+      "authority": "executable_protocol.disturbance_contract",
+      "category": "B",
+      "execution_critical": true,
+      "field": "disturbance_contract"
+    },
+    {
+      "authority": "phase8e/protocol.py::SOURCE_POLICY_IDS",
+      "category": "B",
+      "execution_critical": true,
+      "field": "source_policy_ids"
+    },
+    {
+      "authority": "frozen Target V4 execution contract",
+      "category": "B",
+      "execution_critical": true,
+      "field": "target_v4_contract_sha256"
+    },
+    {
+      "authority": "geometry.episode_horizon_seconds",
+      "category": "A",
+      "execution_critical": true,
+      "field": "episode_horizon_seconds"
+    },
+    {
+      "authority": "geometry.canonical_parameters",
+      "category": "A",
+      "execution_critical": true,
+      "field": "canonical_parameters"
+    },
+    {
+      "authority": "compiler constant",
+      "category": "B",
+      "execution_critical": false,
+      "field": "audit_only_fields"
+    },
+    {
+      "authority": "compiler constant 0",
+      "category": "B",
+      "execution_critical": false,
+      "field": "category_d_count"
+    },
+    {
+      "authority": "compiler constant COMPILED_SPECIFICATION",
+      "category": "B",
+      "execution_critical": false,
+      "field": "validity"
+    },
+    {
+      "authority": "canonical hash of the document",
+      "category": "B",
+      "execution_critical": false,
+      "field": "layout_execution_specification_sha256"
+    }
+  ],
+  "fields_not_classified": [],
+  "phase9g_v3x_q_execution_critical_field_binding_sha256": "9d728c5b979ab868ab4b9a35e0182fbd0944090432c4b87e0fee6472f9dff054",
+  "schema_version": "rvt-phase9g-v3x-q-execution-critical-field-binding/v1",
+  "unexplained_values": 0
+}

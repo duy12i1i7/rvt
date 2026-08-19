@@ -1,0 +1,54 @@
+{
+  "X17_manifest_impact": {
+    "X18_superseding_manifest_versions_created": 0,
+    "X18_why_not": "no manifest was re-emitted, so there is nothing to supersede; the alternative was available and is recorded here as not taken",
+    "decision": "the frozen dry SOURCE manifests are left byte-identical. They answer 'which episodes', which the execution-spec registry does not touch. Re-emitting them would move roots that many prior artifacts already reference, for no scientific gain.",
+    "episode_identities_changed": 0,
+    "frozen_source_manifests_re_emitted": false,
+    "honesty_requirement": "the TRAIN manifest root 6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd does NOT by itself identify the complete runtime authority. It identifies the source-episode population only. The complete runtime authority is the pair (manifest root, execution-spec registry root), and the final generation authority artifact records both.",
+    "layout_assignments_changed": 0,
+    "seeds_changed": 0,
+    "silently_pretended_old_root_is_complete": false
+  },
+  "binding_rule": "an object binds the execution-spec registry root iff its meaning depends on WHICH compiled runtime binding produced or will produce it",
+  "name": "V3_EXECUTION_SPEC_PROVENANCE_BINDING_V1",
+  "objects": [
+    {
+      "binds": true,
+      "implementation": "rvt_swarm/phase9g0r/writer_v3.py::build_v3_dataset_manifest",
+      "object": "V3 produced dataset manifest",
+      "why": "the dataset is the output of executing these exact compiled bindings"
+    },
+    {
+      "binds": true,
+      "implementation": "rvt_swarm/phase9g0r/writer_v3.py::seal_v3_dataset",
+      "object": "V3 dataset seal",
+      "why": "the seal must cover the runtime authority, not only the geometry authority"
+    },
+    {
+      "binds": true,
+      "implementation": "results/rvt_fd24/phase9g_v3x_q_final_generation_authority_v1.json",
+      "object": "official generation prelaunch authority",
+      "why": "the next official TRAIN attempt must pin it"
+    },
+    {
+      "binds": true,
+      "implementation": "rvt_swarm/phase9c_rb/binding.py::ScenarioRuntimeBinding already carries layout_execution_spec_hash per layout",
+      "object": "runtime binding record",
+      "why": "already present in the frozen binder; no change needed"
+    },
+    {
+      "binds": false,
+      "object": "candidate execution provenance",
+      "why": "the official rollout configuration payload already binds the executable protocol, Target V4 and the runtime configuration; the execution-spec hash is per LAYOUT, and the layout is identified in the candidate identity by layout_sha256"
+    },
+    {
+      "binds": false,
+      "object": "V3 row identity",
+      "why": "see the row-binding impact audit -- no new scientific variable exists to record"
+    }
+  ],
+  "phase9g_v3x_q_execution_spec_provenance_binding_sha256": "0ca79e438c257dad17495689b64c8dcfbf08a073e902d5763349284b650e4d14",
+  "schema_version": "rvt-phase9g-v3x-q-execution-spec-provenance-binding/v1",
+  "v3_layout_execution_spec_registry_v1_sha256": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195"
+}

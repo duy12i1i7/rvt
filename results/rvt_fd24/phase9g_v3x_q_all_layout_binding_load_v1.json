@@ -1,0 +1,32 @@
+{
+  "X10_split_hazard": {
+    "geometry_namespace": "validation",
+    "layout_id": "validation-f1-01",
+    "naive_string_parse_would_say": "v3_validation",
+    "v3_split_from_registry_membership": "v3_train"
+  },
+  "X20_fail_closed": {
+    "missing_spec_rejected": true,
+    "reserve_layout_rejected": true,
+    "split_mismatch_rejected": true,
+    "tampered_spec_rejected": true,
+    "unknown_layout_rejected": true
+  },
+  "X23_original_blocker": {
+    "frozen_loader_resolves": true,
+    "layout_id": "train-f1-02",
+    "v3_split": "v3_train"
+  },
+  "executed_in": "the qualified linux/amd64 image on 100.71.102.9",
+  "layouts_expected": 30,
+  "layouts_loaded": 30,
+  "mismatches": 0,
+  "phase9g_v3x_q_all_layout_binding_load_sha256": "619f3d98e7a31d55a13b907010b1a0966e0db3a4a0c5a7f5ba1ffeadac0233cc",
+  "schema_version": "rvt-phase9g-v3x-q-all-layout-binding-load/v1",
+  "simulator_steps": 0,
+  "team_size_bindings": {
+    "combinations": 150,
+    "failed": 0,
+    "ok": 150
+  }
+}

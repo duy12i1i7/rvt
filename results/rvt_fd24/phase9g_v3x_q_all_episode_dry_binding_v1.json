@@ -1,0 +1,28 @@
+{
+  "executed_in": "the qualified linux/amd64 image on 100.71.102.9",
+  "official_outcomes_observed": 0,
+  "official_rows": 0,
+  "official_source_episodes_executed": 0,
+  "official_target_v4_evaluations": 0,
+  "phase9g_v3x_q_all_episode_dry_binding_sha256": "fb79c5dbf62ba0ceb0ac9a2f73ad557dee21afe2102d3735a632ee143e4f396f",
+  "schema_version": "rvt-phase9g-v3x-q-all-episode-dry-binding/v1",
+  "simulator_steps": 0,
+  "train": {
+    "distinct_layouts": 20,
+    "episodes": 1200,
+    "expected": 1200,
+    "failed": 0,
+    "outcomes_observed": 0,
+    "resolved": 1200,
+    "simulator_steps": 0
+  },
+  "validation": {
+    "distinct_layouts": 10,
+    "episodes": 300,
+    "expected": 300,
+    "failed": 0,
+    "outcomes_observed": 0,
+    "resolved": 300,
+    "simulator_steps": 0
+  }
+}

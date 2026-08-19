@@ -1,0 +1,18 @@
+{
+  "complete_runtime_authority": {
+    "execution_spec_registry_root": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195",
+    "recorded_together_in": "results/rvt_fd24/phase9g_v3x_q_final_generation_authority_v1.json",
+    "requires_both": true,
+    "source_manifest_root": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd"
+  },
+  "episode_membership_changed": 0,
+  "frozen_train_manifest_root": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+  "frozen_validation_manifest_root": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+  "identity_set_equality_old_vs_new": "100% -- the manifests are the same files, unmodified",
+  "layout_membership_changed": 0,
+  "phase9g_v3x_q_manifest_versioning_sha256": "8d7a8b9494df7f58722821a73ba3d5467978c2f318aba872c866fb339ad46942",
+  "re_emitted": false,
+  "schema_version": "rvt-phase9g-v3x-q-manifest-versioning/v1",
+  "seed_membership_changed": 0,
+  "superseded_versions": []
+}
