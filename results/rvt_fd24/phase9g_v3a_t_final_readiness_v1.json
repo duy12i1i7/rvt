@@ -1,0 +1,60 @@
+{
+  "artifacts_that_cannot_exist": {
+    "empty_placeholders_emitted": 0,
+    "names": [
+      "phase9g_v3a_t_stage_a_manifest_v1.json",
+      "phase9g_v3a_t_stage_a_accounting_v1.json",
+      "phase9g_v3a_t_replica_execution_v1.json",
+      "phase9g_v3a_t_probabilistic_supervision_v1.json",
+      "phase9g_v3a_t_scientific_invalidity_v1.json",
+      "phase9g_v3a_t_s8_gate_v1.json",
+      "phase9g_v3a_t_pair_transactions_v1.json",
+      "phase9g_v3a_t_family_n_matrix_v1.json",
+      "phase9g_v3a_t_stochastic_k_distribution_v1.json",
+      "phase9g_v3a_t_row_integrity_v1.json",
+      "phase9g_v3a_t_shard_manifest_v1.json",
+      "phase9g_v3a_t_resume_audit_v1.json",
+      "phase9g_v3a_t_operational_ledger_v1.json",
+      "phase9g_v3a_t_train_composite_seal_v1.json"
+    ],
+    "reason": "no official source episode ran, so a Stage-A manifest, replica ledger, supervision ledger, S8 gate, pair transactions, family x N matrix, k distribution, row integrity record, shard manifest, resume audit, operational ledger and composite seal would all be fabrications rather than measurements"
+  },
+  "blocked": [
+    "T8 official namespace",
+    "T9-T11 Stage A",
+    "T12-T18 Stage B",
+    "T19 invalidity audit",
+    "T25 S8 closure",
+    "T26-T28 supervision summaries",
+    "T30-T31 rows and shards",
+    "T32-T33 accounting and identity checks",
+    "T39 composite seal",
+    "T41 audit readiness"
+  ],
+  "blocker": "OFFICIAL_V3_LAYOUT_EXECUTION_SPECIFICATIONS_DO_NOT_EXIST",
+  "blocker_artifact": "results/rvt_fd24/phase9g_v3a_t_execution_specification_blocker_v1.json",
+  "completed_before_the_blocker": [
+    "T0 clean handoff and branch",
+    "T1 exact image, embedded source commit and every frozen contract verified inside the image on the target",
+    "T2 image immutability -- no rebuild, no package install",
+    "T3 prelaunch exclusion union rebuilt and extended",
+    "T4 all four required intersections measured at 0",
+    "T5 TRAIN/VALIDATION and canary axis disjointness measured at 0",
+    "T6 both frozen manifests resolved exactly and remain dry",
+    "T7 prelaunch artifact created and returned NO_GO"
+  ],
+  "executable_source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+  "next_phase_requires": "an authorized phase that compiles layout execution specifications for the thirty frozen V3 layouts, proves each reproduces the geometry hash already frozen in V3_LAYOUT_SPLIT_REGISTRY_V2, records the scope-guard authorization explicitly, and rebuilds the production image so the specifications live inside it",
+  "official_v3_train_rows": 0,
+  "phase": "PHASE_9G_V3A_T",
+  "phase9g_v3a_t_final_readiness_sha256": "117a9c6d333a6489b836c1a34cb9926af48f150f83ed8a44c5655dd36a09d02a",
+  "prelaunch_decision": "NO_GO",
+  "production_image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+  "provenance_closure_commit": "b1ba22f1ee3ac97d27279f66548aafad8080f2ab",
+  "recommendation": "DO_NOT_PROCEED",
+  "schema_version": "rvt-phase9g-v3a-t-final-readiness/v1",
+  "training_authorized": false,
+  "validation_generation_authorized": false,
+  "verdict": "A",
+  "verdict_text": "Official V3 TRAIN encountered a provenance/integrity failure at preflight: the twenty frozen official V3 TRAIN layouts have no compiled execution specification, inside the qualified production image or anywhere in the repository, so no official source episode can be bound to a runtime session. No official data were generated and no frozen artifact was modified."
+}

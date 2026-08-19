@@ -1,0 +1,41 @@
+{
+  "T35_official_v3_validation_rows": 0,
+  "T35_official_v3_validation_source_episodes_executed": 0,
+  "T35_official_v3_validation_target_v4_evaluations": 0,
+  "T36_checkpoints": 0,
+  "T36_hp_trials": 0,
+  "T36_models_trained": 0,
+  "T37_historical_gate_7": {
+    "modified": false,
+    "recomputed_as_a_v3_gate": false,
+    "status": "FAILED_FOR_V2",
+    "still_exceeds": true,
+    "threshold": 0.1,
+    "v3_applicability": "NOT_APPLICABLE_TO_V3_PROBABILISTIC_TARGET",
+    "value": 0.11132075471698114
+  },
+  "T37_v2_modified": 0,
+  "T38_final_test_access": 0,
+  "T38_study_a_n24_access": 0,
+  "T38_study_b_access": 0,
+  "executable_science_modified": 0,
+  "frozen_manifests_modified": 0,
+  "official_v3_train_candidate_rollouts": 0,
+  "official_v3_train_namespace_created": false,
+  "official_v3_train_scientific_rows": 0,
+  "official_v3_train_source_episodes_executed": 0,
+  "official_v3_train_stage_a_records": 0,
+  "official_v3_train_target_v4_evaluations": 0,
+  "phase9g_v3a_t_official_data_protection_sha256": "f083d36cfc7cc7ef303b1da016d8c8f1eddb703c3b5157dbd969009241cb393e",
+  "residual_started": 0,
+  "schema_version": "rvt-phase9g-v3a-t-official-data-protection/v1",
+  "smoke_run": {
+    "durable_records_written": 0,
+    "episodes_attempted": 3,
+    "failed_before_any_durable_write": true,
+    "namespace": "a scratch directory, never the official namespace",
+    "official_data_produced": 0,
+    "purpose": "validate the official runner before launch",
+    "removed_from_target": true
+  }
+}

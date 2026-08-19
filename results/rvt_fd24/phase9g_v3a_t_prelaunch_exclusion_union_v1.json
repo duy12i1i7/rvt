@@ -1,0 +1,133 @@
+{
+  "T4_intersections": {
+    "official_v3_train_x_official_v3_validation": 0,
+    "official_v3_train_x_union": 0,
+    "official_v3_validation_x_union": 0,
+    "qualification_canary_x_official_manifests": 0,
+    "requirement": "all four must be 0",
+    "requirement_met": true
+  },
+  "T5_axis_disjointness": {
+    "canary_versus_official": {
+      "episode_identity": 0,
+      "layout_id": 0,
+      "layout_sha256": 0,
+      "source_seed_identity": 0
+    },
+    "requirement_met": true,
+    "split_authority": "manifest v3_split field and final registry membership",
+    "split_inferred_from_layout_id_string": false,
+    "train_versus_validation": {
+      "episode_identity": 0,
+      "layout_id": 0,
+      "layout_sha256": 0,
+      "source_seed_identity": 0
+    }
+  },
+  "additive": true,
+  "excluded_identities_sorted_sha256": "8cadcbdf4dd808e8c62385bfcc113d174add15f2437dc23e5723ee038e959063",
+  "excluded_identity_count": 1884,
+  "frozen_train_identities_altered": 0,
+  "identity_key": [
+    "study",
+    "split",
+    "family",
+    "team_size",
+    "layout_id",
+    "source_policy",
+    "episode_id",
+    "seed_identity"
+  ],
+  "name": "V3_OFFICIAL_TRAIN_PRELAUNCH_EXCLUSION_UNION_V1",
+  "official_v3_train_identities": 1200,
+  "official_v3_validation_identities": 300,
+  "phase9g_v3a_t_prelaunch_exclusion_union_sha256": "99630737fc7bd63040ba99f383f79c6d981ec0f4e2683d2086b119482e34d6d6",
+  "predecessor_reconstructed_exactly": true,
+  "schema_version": "rvt-phase9g-v3a-t-prelaunch-exclusion-union/v1",
+  "sources": [
+    {
+      "artifact": "results/rvt_fd24/phase9g_v2a_v_comprehensive_exclusion_union_v1.json",
+      "artifact_sha256": "89a1839ce8087015040f44f903745e5e4b8f16a34ca9407879c7bdc1dfe67ab5",
+      "domain": "V2 comprehensive development exclusion union (design pilots, qualification and audit canaries)",
+      "identities": 380,
+      "reconstructed": false
+    },
+    {
+      "artifact": "recomputed from the frozen V2 source manifest",
+      "domain": "V2 official TRAIN",
+      "identities": 1200,
+      "reconstructed": true,
+      "v2_source_manifest_sha256": "c3f205381f8c1622102dc6a89e8254b4d0c6a6dc86491f9a5758be141f1b94e6"
+    },
+    {
+      "artifact": "recomputed from the frozen V2 source manifest",
+      "domain": "V2 official VALIDATION",
+      "identities": 300,
+      "reconstructed": true,
+      "v2_source_manifest_sha256": "80b133519112a06a7b735247fcf0a210047d3658a15cddc2c738d7bd864fa252"
+    },
+    {
+      "artifact": "rvt_swarm/phase9g0r/canary_v3.py::CANARY_IDENTITIES",
+      "domain": "V3 implementation and final-image qualification canary",
+      "identities": 4,
+      "note": "the same four identities carried the implementation canary, the final-image canary, the replica-order invariance run and the failure/resume qualification, so no further identity was executed",
+      "reconstructed": false
+    }
+  ],
+  "supersedes": {
+    "identities": 1880,
+    "membership_removed": 0,
+    "name": "V3_COMPREHENSIVE_DEVELOPMENT_EXCLUSION_UNION_V2",
+    "sha256": "68fc04e11ea5eeeb8d9b1ce099bacb38b0e737d9c00385f0321cb97037a1fb4d"
+  },
+  "v3_qualification_canary_entries": [
+    {
+      "design_pilot_identity_sha256": "ee7d3677c570ecd8bf126b96fb2b57fdcb89b9f5c6fb22ce41f1dbb367629d3a",
+      "episode_id": "v3-qual-canary/F1/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F1",
+      "layout_id": "train-f1-00",
+      "origin": "V3_QUALIFICATION_CANARY",
+      "seed_identity": "phase9g_v3i_q_r_qualification_canary",
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "v3_qualification_canary",
+      "study": "study_a_v3_qualification_canary",
+      "team_size": 5
+    },
+    {
+      "design_pilot_identity_sha256": "0bfe0b8790bf40ff1aac05c6bcd8fd160702fe1b7e5c400e7c6570dcf147a1b9",
+      "episode_id": "v3-qual-canary/F8/N5/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F8",
+      "layout_id": "train-f8-00",
+      "origin": "V3_QUALIFICATION_CANARY",
+      "seed_identity": "phase9g_v3i_q_r_qualification_canary",
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "v3_qualification_canary",
+      "study": "study_a_v3_qualification_canary",
+      "team_size": 5
+    },
+    {
+      "design_pilot_identity_sha256": "40f1e15b972740bde3d5f12147974fe7343bdccf3d1b80aef0c2c37222a6748c",
+      "episode_id": "v3-qual-canary/F9/N6/S1_ALWAYS_COMPACT/episode-0",
+      "family": "F9",
+      "layout_id": "train-f9-00",
+      "origin": "V3_QUALIFICATION_CANARY",
+      "seed_identity": "phase9g_v3i_q_r_qualification_canary",
+      "source_policy": "S1_ALWAYS_COMPACT",
+      "split": "v3_qualification_canary",
+      "study": "study_a_v3_qualification_canary",
+      "team_size": 6
+    },
+    {
+      "design_pilot_identity_sha256": "ae0da36e1a8121d9c5858ad50592082b60981bf153fccb4740547be222f4ad2e",
+      "episode_id": "v3-qual-canary/F9/N12/S2_ALWAYS_LINE/episode-0",
+      "family": "F9",
+      "layout_id": "train-f9-00",
+      "origin": "V3_QUALIFICATION_CANARY",
+      "seed_identity": "phase9g_v3i_q_r_qualification_canary",
+      "source_policy": "S2_ALWAYS_LINE",
+      "split": "v3_qualification_canary",
+      "study": "study_a_v3_qualification_canary",
+      "team_size": 12
+    }
+  ]
+}

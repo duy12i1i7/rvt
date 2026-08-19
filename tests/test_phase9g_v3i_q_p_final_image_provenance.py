@@ -230,22 +230,25 @@ def test_the_full_suite_in_the_final_image_is_clean_at_the_expected_count():
     assert suite["environment_exemptions"] == 0
 
 
-def test_the_closure_count_plus_this_phase_accounts_for_the_repository():
-    """4317 is what the image carries; the rest is this phase's own record tests.
+def test_the_image_carries_exactly_the_closure_commit_test_suite():
+    """4317 is what the image carries, measured against the closure commit.
 
-    The image was built at the closure commit, so it cannot contain the tests
-    written afterwards to describe it. The delta is asserted to be exactly this
-    file rather than merely "larger than 4317".
+    The image was built at FINAL_COMMIT, so it cannot contain any test file
+    written afterwards. Rather than assuming which later phases exist, the test
+    files present at that commit are read from git and only those are collected.
     """
-    def collected(target):
-        output = subprocess.run(
-            [".venv/bin/python", "-m", "pytest", target, "-q", "--co"],
-            cwd=ROOT, capture_output=True, text=True).stdout
-        return int(output.strip().rsplit("\n", 1)[-1].split()[0])
-
-    total = collected("tests/")
-    mine = collected(f"tests/{pathlib.Path(__file__).name}")
-    assert total - mine == 4317
+    at_closure = subprocess.run(
+        ["git", "ls-tree", "-r", "--name-only", FINAL_COMMIT, "tests/"],
+        cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
+    targets = [name for name in at_closure
+               if name.endswith(".py") and (ROOT / name).exists()]
+    assert len(targets) == len(at_closure), (
+        "a test file present at the closure commit has since been removed")
+    output = subprocess.run(
+        [".venv/bin/python", "-m", "pytest", *targets, "-q", "--co"],
+        cwd=ROOT, capture_output=True, text=True).stdout
+    collected = int(output.strip().rsplit("\n", 1)[-1].split()[0])
+    assert collected == 4317
 
 
 def test_the_invalidity_matrix_ran_inside_the_final_image():

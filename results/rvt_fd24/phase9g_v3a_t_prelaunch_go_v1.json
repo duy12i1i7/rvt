@@ -1,0 +1,129 @@
+{
+  "DECISION": "NO_GO",
+  "T1_execution_location_proof": {
+    "OFFICIAL_V3_EXECUTION_ON_UNAUTHORIZED_HOST": false,
+    "architecture": "linux/amd64",
+    "container_id": "not applicable -- no official scientific container was launched; the preflight container exited before any official episode ran",
+    "cpu_count": 24,
+    "docker_server": "29.6.1",
+    "official_scientific_execution_on_the_orchestration_host": 0,
+    "remote_hostname": "avis",
+    "whoami": "avis",
+    "worker_count_planned": 12,
+    "wsl_distro": "Ubuntu-24.04"
+  },
+  "T1_production_authority": {
+    "architecture": "amd64/linux",
+    "embedded_source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+    "final_v3_production_image_sha256": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+    "image_rebuilt": false,
+    "image_verified_on_target": true,
+    "packages_installed": false,
+    "previous_image_sha256": "sha256:eaf52f7495f7eea1c1ae0392a4b688ce9918ecaee53d9be56ce1bb5b9518f169",
+    "previous_image_status": "PRE_FINAL_QUALIFICATION_IMAGE",
+    "previous_image_used": false
+  },
+  "T20_production_profile": {
+    "changed": false,
+    "chunk": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "T2_frozen_contracts_verified_in_image": {
+    "all_exact": true,
+    "any_contract_changed": 0,
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+    "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+  },
+  "T3_T4_T5_exclusion": {
+    "axis_disjointness": {
+      "canary_versus_official": {
+        "episode_identity": 0,
+        "layout_id": 0,
+        "layout_sha256": 0,
+        "source_seed_identity": 0
+      },
+      "requirement_met": true,
+      "split_authority": "manifest v3_split field and final registry membership",
+      "split_inferred_from_layout_id_string": false,
+      "train_versus_validation": {
+        "episode_identity": 0,
+        "layout_id": 0,
+        "layout_sha256": 0,
+        "source_seed_identity": 0
+      }
+    },
+    "intersections": {
+      "official_v3_train_x_official_v3_validation": 0,
+      "official_v3_train_x_union": 0,
+      "official_v3_validation_x_union": 0,
+      "qualification_canary_x_official_manifests": 0,
+      "requirement": "all four must be 0",
+      "requirement_met": true
+    },
+    "predecessor_reconstructed_exactly": true,
+    "union_identity_count": 1884,
+    "union_name": "V3_OFFICIAL_TRAIN_PRELAUNCH_EXCLUSION_UNION_V1",
+    "union_root": "8cadcbdf4dd808e8c62385bfcc113d174add15f2437dc23e5723ee038e959063"
+  },
+  "T6_manifest_roots": {
+    "manifest_resolution_succeeded": true,
+    "official_v3_train_manifest_inner_root": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+    "official_v3_train_manifest_outer_artifact_sha256": "ffb1fe3363908369096f4fd8463fe3a8cd5434cb0a4d48d5a39382df7ced4898",
+    "official_v3_validation_manifest_inner_root": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+    "official_v3_validation_manifest_outer_artifact_sha256": "72f88a6269358063047bf43edfb304f23e3a26d62bacdb2be07a01cc9c836076",
+    "superseded_registry_that_fails_closed": "d84d0fb9699dad7d6fe4783d2bd55e1b644ed027948291aeb75148e88ea54dae",
+    "train": {
+      "dry": {
+        "executed": 0,
+        "generated": 0,
+        "rows": 0
+      },
+      "episodes_per_layout": [
+        60
+      ],
+      "layouts": 20,
+      "offsets": [
+        0.22,
+        0.54
+      ],
+      "source_episodes": 1200
+    },
+    "validation": {
+      "dry": {
+        "executed": 0,
+        "generated": 0,
+        "rows": 0
+      },
+      "episodes_per_layout": [
+        30
+      ],
+      "executed_in_this_phase": 0,
+      "layouts": 10,
+      "offsets": [
+        0.65
+      ],
+      "source_episodes": 300
+    }
+  },
+  "blocking_condition": "results/rvt_fd24/phase9g_v3a_t_execution_specification_blocker_v1.json",
+  "decision_reason": "OFFICIAL_V3_LAYOUT_EXECUTION_SPECIFICATIONS_DO_NOT_EXIST",
+  "handoff": {
+    "branch": "research/rvt-phase9g-v3a-t-official-probabilistic-train-v1",
+    "clean_tree_at_branch_creation": true,
+    "provenance_closure_abbreviation": "b1ba22f",
+    "provenance_closure_commit": "b1ba22f1ee3ac97d27279f66548aafad8080f2ab"
+  },
+  "official_train_launch_authorized_by_this_artifact": false,
+  "phase9g_v3a_t_prelaunch_go_sha256": "bfb8f7c14a243b1682f68ab2b4ab996fe246a1aad397f99b56c0e17db3a3b820",
+  "schema_version": "rvt-phase9g-v3a-t-prelaunch-go/v1",
+  "train_source_budget": 1200
+}
