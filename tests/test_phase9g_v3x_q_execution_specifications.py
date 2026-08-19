@@ -37,6 +37,13 @@ PREFIX = "phase9g_v3x_q_"
 EXECUTION_SPEC_REGISTRY_ROOT = (
     "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195")
 PHASE8 = "c17081fe1cf58cc2d3f929e35ff4bca811c75c58"
+#: The Phase 9G-V3A-T prelaunch stop, immediately before this phase.
+STOP_COMMIT = "096a136876549830d6f5a94ed0f0708a6518855a"
+
+def _git(*arguments):
+    """git, tolerant of the container's root-owned checkout (see above)."""
+    return ["git", "-c", "safe.directory=*", *arguments]
+
 
 
 def load(stem):
@@ -196,19 +203,29 @@ def test_the_v3_offsets_are_unreachable_by_historical_enumeration():
 
 def test_no_historical_execution_specification_was_modified():
     changed = subprocess.run(
-        ["git", "diff", "--name-only", f"--diff-filter=MRD", PHASE8, "--",
-         "results/rvt_fd24/layout_execution_specifications",
-         "results/rvt_fd24/splits", "rvt_swarm/phase8"],
+        _git("diff", "--name-only", "--diff-filter=MRD", PHASE8, "--",
+             "results/rvt_fd24/layout_execution_specifications",
+             "results/rvt_fd24/splits", "rvt_swarm/phase8"),
         cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
     assert changed == []
 
 
-def test_the_thirty_new_specifications_are_additions_only():
-    added = subprocess.run(
-        ["git", "diff", "--name-only", "--diff-filter=A", PHASE8, "--",
-         "results/rvt_fd24/layout_execution_specifications"],
-        cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
-    assert len(added) == 30
+def test_this_phase_added_thirty_specifications_and_modified_none():
+    """Measured against the STOP commit, which is this phase's own delta.
+
+    The V2-era specifications were themselves added after the Phase-8 commit,
+    so a Phase-8 baseline would count all sixty. The question this test asks is
+    narrower and is the one that matters here: what did Phase 9G-V3X-Q change?
+    """
+    def names(diff_filter):
+        return subprocess.run(
+            _git("diff", "--name-only", f"--diff-filter={diff_filter}",
+                 STOP_COMMIT, "--",
+                 "results/rvt_fd24/layout_execution_specifications"),
+            cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
+
+    assert len(names("A")) == 30
+    assert names("MRD") == []
 
 
 # ------------------------------------------------------------- X10 split

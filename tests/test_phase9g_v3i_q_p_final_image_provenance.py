@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 import pathlib
 import subprocess
+import sys
 
 import pytest
 
@@ -35,6 +36,17 @@ PREFINAL_IMAGE = ("sha256:eaf52f7495f7eea1c1ae0392a4b688ce9918ecaee53d9be56ce1b"
                   "b5b9518f169")
 CANARY_DIGEST = (
     "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340")
+
+def _git(*arguments):
+    """git, tolerant of the container's root-owned checkout.
+
+    Inside the production image /opt/rvt is root-owned and the suite runs as an
+    unprivileged user, so git refuses the repository as "dubious ownership"
+    unless the checkout is declared safe. This is an invocation detail, not a
+    relaxation: the command and its output are unchanged.
+    """
+    return ["git", "-c", "safe.directory=*", *arguments]
+
 
 
 def load(stem):
@@ -79,7 +91,7 @@ def test_the_diff_is_purely_additive_and_touches_no_executable_surface():
 def test_the_recorded_diff_still_matches_git():
     diff = load("commit_diff")
     actual = subprocess.run(
-        ["git", "diff", "--name-status", f"{OLD_COMMIT}..{FINAL_COMMIT}"],
+        _git("diff", "--name-status", f"{OLD_COMMIT}..{FINAL_COMMIT}"),
         cwd=ROOT, check=True, capture_output=True, text=True).stdout.splitlines()
     recorded = [f"{entry['change']}\t{entry['path']}" for entry in diff["files"]]
     assert sorted(actual) == sorted(recorded)
@@ -91,8 +103,8 @@ def test_the_recorded_diff_still_matches_git():
 ])
 def test_no_executable_or_build_surface_moved(surface):
     changed = subprocess.run(
-        ["git", "diff", "--name-only", f"{OLD_COMMIT}..{FINAL_COMMIT}", "--",
-         surface],
+        _git("diff", "--name-only", f"{OLD_COMMIT}..{FINAL_COMMIT}", "--",
+             surface),
         cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
     assert changed == []
 
@@ -238,14 +250,14 @@ def test_the_image_carries_exactly_the_closure_commit_test_suite():
     files present at that commit are read from git and only those are collected.
     """
     at_closure = subprocess.run(
-        ["git", "ls-tree", "-r", "--name-only", FINAL_COMMIT, "tests/"],
+        _git("ls-tree", "-r", "--name-only", FINAL_COMMIT, "tests/"),
         cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
     targets = [name for name in at_closure
                if name.endswith(".py") and (ROOT / name).exists()]
     assert len(targets) == len(at_closure), (
         "a test file present at the closure commit has since been removed")
     output = subprocess.run(
-        [".venv/bin/python", "-m", "pytest", *targets, "-q", "--co"],
+        [sys.executable, "-m", "pytest", *targets, "-q", "--co"],
         cwd=ROOT, capture_output=True, text=True).stdout
     collected = int(output.strip().rsplit("\n", 1)[-1].split()[0])
     assert collected == 4317

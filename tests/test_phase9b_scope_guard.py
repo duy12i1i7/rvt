@@ -41,8 +41,8 @@ def _protected_changes(root, phase8, protected):
     """Split the protected diff into additions and modifications."""
     def names(diff_filter):
         return set(subprocess.run(
-            ["git", "diff", "--name-only", f"--diff-filter={diff_filter}",
-             phase8, "--", *protected],
+            ["git", "-c", "safe.directory=*", "diff", "--name-only",
+             f"--diff-filter={diff_filter}", phase8, "--", *protected],
             cwd=root, check=True, capture_output=True, text=True,
         ).stdout.splitlines())
     return names("A"), names("MRD")
