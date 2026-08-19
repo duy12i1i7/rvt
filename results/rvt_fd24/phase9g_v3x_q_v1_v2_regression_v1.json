@@ -1,0 +1,41 @@
+{
+  "_SPLIT_OFFSETS_modified": false,
+  "_SPLIT_VARIANTS_modified": false,
+  "historical_execution_specifications_modified": 0,
+  "historical_gate_7": {
+    "modified": false,
+    "status": "FAILED_FOR_V2",
+    "still_exceeds": true,
+    "threshold": 0.1,
+    "v3_applicability": "NOT_APPLICABLE_TO_V3_PROBABILISTIC_TARGET",
+    "value": 0.11132075471698114
+  },
+  "image": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "in_image_full_suite": {
+    "environment_exemptions": 0,
+    "failed": 0,
+    "passed": 4440,
+    "seconds": 390.35,
+    "wall_seconds": 394
+  },
+  "in_image_v1_v2_and_scope_guard_subset": {
+    "failed": 0,
+    "passed": 314
+  },
+  "phase9g_v3x_q_v1_v2_regression_sha256": "d79dba09635e7832e6f3de717530b9adf2cdadd33b44fa64e210f559c4062c91",
+  "schema_version": "rvt-phase9g-v3x-q-v1-v2-regression/v1",
+  "split_manifests_modified": 0,
+  "v1_unchanged": true,
+  "v2_era_test_enumerations_narrowed_not_weakened": {
+    "assertions_relaxed": 0,
+    "method": "each globbed the specification directories and now filters to the V2-era layout set defined by the frozen split manifests, keeping its original force over the historical thirty",
+    "tests": [
+      "test_phase8e_et_scope_guard.py",
+      "test_phase8e_f8_communication_contract.py",
+      "test_phase8e_layout_compilation.py",
+      "test_phase9c_layout_execution_binding.py",
+      "test_phase9c_rb16_native_action_frame.py"
+    ]
+  },
+  "v2_unchanged": true
+}

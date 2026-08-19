@@ -1,0 +1,33 @@
+{
+  "X39": {
+    "official_labels_observed": 0,
+    "official_robot_rows": 0,
+    "official_target_v4_evaluations": 0,
+    "official_v3_train_source_episodes_executed": 0,
+    "official_v3_validation_source_episodes_executed": 0,
+    "simulator_steps_in_this_phase": 0
+  },
+  "X40_sealed_domains": {
+    "final_test_access": 0,
+    "hp_trials": 0,
+    "study_a_n24_access": 0,
+    "study_b_access": 0,
+    "training": 0
+  },
+  "dry_binding_performed": {
+    "allowed": true,
+    "layouts": 30,
+    "note": "binding resolves metadata; it constructs no session and steps no dynamics",
+    "train_episodes": 1200,
+    "validation_episodes": 300
+  },
+  "episode_manifests_changed": 0,
+  "frozen_v3_layout_geometry_changed": 0,
+  "historical_gate_7_modified": 0,
+  "layout_assignment_changed": 0,
+  "new_layouts_created": 0,
+  "phase9g_v3x_q_official_data_protection_sha256": "f1d374eb11c66f66522fa099f498edb40de82fa7819da1fc84e13a891232a0fb",
+  "scenario_family_definitions_changed": 0,
+  "schema_version": "rvt-phase9g-v3x-q-official-data-protection/v1",
+  "v2_modified": 0
+}

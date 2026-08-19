@@ -421,3 +421,184 @@ def test_historical_gate_7_is_untouched():
         (RESULTS / "phase9d_v2c_r_gate7_replica_instability_v1.json").read_text())
     assert record["result"] == "FAIL"
     assert 59 / 530 > 0.10
+
+
+# ------------------------------------------------------------- image / target
+FINAL_COMMIT = "2ab73cf4e9f29c9b626f3a39fceb47effd80960b"
+FINAL_IMAGE = ("sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d825"
+               "60b9378254947904782137")
+PRE_EXEC_IMAGE = ("sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf348"
+                  "3532eb53ab318")
+CANARY_DIGEST = (
+    "95dbdab76ce8066f6e535c09a86dca73bb4018e135c590a0ac72584b992df340")
+
+ARTIFACT_STEMS = (
+    "execution_spec_authority_audit", "execution_critical_field_binding",
+    "row_binding_impact", "execution_spec_registry",
+    "execution_spec_provenance_binding", "manifest_versioning",
+    "all_layout_hash_audit", "all_layout_binding_load",
+    "all_episode_dry_binding", "scope_guard_authorization",
+    "v1_v2_regression", "reference_canary", "numeric_regression",
+    "image_provenance", "remote_target_qualification",
+    "official_data_protection", "final_generation_authority",
+    "final_readiness",
+)
+
+
+@pytest.mark.parametrize("stem", ARTIFACT_STEMS)
+def test_artifact_exists_and_self_verifies(stem):
+    document = load(stem)
+    field = next(key for key in document
+                 if key.startswith(PREFIX) and key.endswith("sha256"))
+    assert verify_canonical_hash(document, field)
+
+
+def test_all_eighteen_required_artifacts_and_no_more():
+    found = sorted(path.name for path in RESULTS.glob(f"{PREFIX}*.json"))
+    assert found == sorted(f"{PREFIX}{stem}_v1.json" for stem in ARTIFACT_STEMS)
+
+
+def test_the_new_image_embeds_the_final_executable_commit():
+    provenance = load("image_provenance")
+    assert provenance["FINAL_V3_EXECUTABLE_SOURCE_COMMIT_V2"] == FINAL_COMMIT
+    assert provenance["FINAL_V3_PRODUCTION_IMAGE_V2_SHA256"] == FINAL_IMAGE
+    assert provenance["source_commit_read_inside_the_running_image"] == FINAL_COMMIT
+    assert provenance["self_identity_matches"] is True
+    assert provenance["execution_spec_registry_root_matches"] is True
+    assert provenance["build_context_proof"]["clean_tree"] == 0
+    assert provenance["build_context_proof"][
+        "execution_specification_files_in_tree"] == 60
+    assert provenance["build_context_proof"]["package_upgrades"] == 0
+
+
+def test_both_image_builds_are_recorded_and_one_is_authorized():
+    attempts = load("image_provenance")["build_attempts"]
+    assert len(attempts) == 2
+    authorized = [a for a in attempts if a["authorized_for_official_science"]]
+    assert len(authorized) == 1
+    assert authorized[0]["image"] == FINAL_IMAGE
+    superseded = [a for a in attempts if not a["authorized_for_official_science"]]
+    assert superseded[0]["status"] == "SUPERSEDED_FAILED_IN_IMAGE_SUITE"
+    assert "portability defects" in superseded[0]["reason"]
+
+
+def test_the_previous_image_is_retired_from_official_use():
+    retired = load("image_provenance")["X29_pre_execution_spec_image"]
+    assert retired["image"] == PRE_EXEC_IMAGE
+    assert retired["status"] == "PRE_EXECUTION_SPEC_PRODUCTION_IMAGE"
+    assert retired["authorized_for_official_v3_generation"] is False
+    assert retired["history_deleted"] is False
+
+
+def test_the_in_image_suite_passed_with_no_exemption():
+    regression = load("v1_v2_regression")
+    assert regression["in_image_full_suite"]["passed"] == 4440
+    assert regression["in_image_full_suite"]["failed"] == 0
+    assert regression["in_image_full_suite"]["environment_exemptions"] == 0
+    assert regression["in_image_v1_v2_and_scope_guard_subset"]["failed"] == 0
+
+
+def test_v1_v2_are_unchanged_and_gate_7_still_fails():
+    regression = load("v1_v2_regression")
+    assert regression["v1_unchanged"] is True
+    assert regression["v2_unchanged"] is True
+    assert regression["historical_execution_specifications_modified"] == 0
+    assert regression["split_manifests_modified"] == 0
+    assert regression["_SPLIT_VARIANTS_modified"] is False
+    assert regression["historical_gate_7"]["status"] == "FAILED_FOR_V2"
+    assert regression["historical_gate_7"]["still_exceeds"] is True
+    assert regression["v2_era_test_enumerations_narrowed_not_weakened"][
+        "assertions_relaxed"] == 0
+
+
+def test_the_canary_digest_is_reproduced_not_replaced():
+    canary = load("reference_canary")
+    assert canary["X32_historical_digest"] == CANARY_DIGEST
+    assert canary["recomputed_in_final_image_w1"] == CANARY_DIGEST
+    assert canary["recomputed_in_final_image_w12"] == CANARY_DIGEST
+    assert canary["identical_to_historical"] is True
+    assert canary["new_digest_blessed"] is False
+    assert canary["X35_worker_invariance"]["equal"] is True
+    resume = canary["X36_failure_resume"]
+    assert resume["duplicates"] == 0
+    assert resume["partial_supervised_rows"] == 0
+    assert resume["seed_substitution"] == 0
+    assert resume["identity_mismatch"] == 0
+    assert canary["X36_replica_order_invariance"]["identical"] is True
+
+
+def test_the_numeric_fixtures_are_unchanged():
+    numeric = load("numeric_regression")
+    assert numeric["mandatory_brier_is_exactly_quarter"] is True
+    assert float(numeric["mandatory_brier_p05_k1_R3"]) == 0.25
+    assert numeric["R1_equality_is_exact"] is True
+    assert numeric["event_weight_distinct_values"] == 1
+    assert numeric["event_weight_invariance_holds"] is True
+    assert numeric["changed_by_this_phase"] == 0
+
+
+def test_all_heavy_execution_ran_on_the_remote_target():
+    target = load("remote_target_qualification")
+    assert target["X37_all_heavy_execution_ran_on"] == "100.71.102.9"
+    assert target["scientific_simulation_on_the_orchestration_host"] == 0
+    assert target["docker_qualification_on_the_orchestration_host"] == 0
+    assert target["access"]["password_requested_or_used"] is False
+    assert target["environment"]["wsl_distribution"] == "Ubuntu-24.04"
+    assert target["environment"]["cpus"] == 24
+    assert len(target["work_performed_remotely"]) >= 7
+
+
+def test_the_segfault_did_not_reproduce():
+    anomaly = load("remote_target_qualification")["X38_runtime_anomaly"]
+    assert anomaly["reproduced_in_this_phase"] is False
+    assert anomaly["segmentation_faults_in_this_phase_logs"] == 0
+    assert anomaly["TARGET_RUNTIME_STABILITY_REQUALIFICATION_REQUIRED"] is False
+    assert anomaly["science_altered"] == 0
+
+
+def test_no_official_v3_data_was_touched():
+    protection = load("official_data_protection")
+    assert protection["X39"] == {
+        "official_v3_train_source_episodes_executed": 0,
+        "official_v3_validation_source_episodes_executed": 0,
+        "official_target_v4_evaluations": 0,
+        "official_robot_rows": 0,
+        "official_labels_observed": 0,
+        "simulator_steps_in_this_phase": 0}
+    assert protection["X40_sealed_domains"] == {
+        "study_a_n24_access": 0, "study_b_access": 0, "final_test_access": 0,
+        "training": 0, "hp_trials": 0}
+    assert protection["frozen_v3_layout_geometry_changed"] == 0
+    assert protection["new_layouts_created"] == 0
+    assert protection["episode_manifests_changed"] == 0
+
+
+def test_the_final_generation_authority_pins_both_registries():
+    authority = load("final_generation_authority")
+    assert authority["FINAL_V3_EXECUTABLE_SOURCE_COMMIT_V2"] == FINAL_COMMIT
+    assert authority["FINAL_V3_PRODUCTION_IMAGE_V2_SHA256"] == FINAL_IMAGE
+    assert authority["v3_layout_execution_spec_registry_v1_sha256"] == (
+        EXECUTION_SPEC_REGISTRY_ROOT)
+    assert authority["v3_layout_split_registry_v2_sha256"] == (
+        "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a")
+    assert authority[
+        "complete_runtime_authority_requires_both_manifest_and_spec_registry"] is True
+    assert authority["production_profile"] == {
+        "workers": 12, "numeric_threads_per_worker": 1, "chunk": 1,
+        "infrastructure_timeout_seconds": 243.0, "changed": False}
+    assert len(authority["superseded"]) == 2
+    assert all(item["authorized"] is False for item in authority["superseded"])
+
+
+def test_verdict_is_c_with_train_only_retry():
+    readiness = load("final_readiness")
+    assert readiness["verdict"] == "C"
+    assert readiness["recommendation"] == (
+        "AUTHORIZE_OFFICIAL_RECOVERABILITY_V3_TRAIN_GENERATION_RETRY")
+    assert readiness["recommendation_scope"] == "TRAIN ONLY"
+    assert readiness["validation_generation_authorized"] is False
+    assert readiness["training_authorized"] is False
+    assert readiness["criteria_total"] == 18
+    assert readiness["criteria_met"] == 18
+    assert readiness["criteria_unmet"] == []
+    assert len(readiness["declared_deviations"]) == 3

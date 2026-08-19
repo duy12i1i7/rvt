@@ -1,0 +1,129 @@
+{
+  "R1_equality_is_exact": true,
+  "R1_exact_bce_equivalence": {
+    "R1_bce_k=0": {
+      "bce_with_logits": "0.5770118531164724",
+      "candidate_loss": "0.5770118531164724"
+    },
+    "R1_bce_k=1": {
+      "bce_with_logits": "1.0270118531164725",
+      "candidate_loss": "1.0270118531164725"
+    }
+  },
+  "brier_closed_form_versus_literal": {
+    "p=0.1,k=0,R=1": {
+      "closed_form": "0.010000000000000002",
+      "literal": "0.010000000000000002"
+    },
+    "p=0.1,k=0,R=3": {
+      "closed_form": "0.010000000000000002",
+      "literal": "0.010000000000000002"
+    },
+    "p=0.1,k=1,R=1": {
+      "closed_form": "0.81",
+      "literal": "0.81"
+    },
+    "p=0.1,k=1,R=3": {
+      "closed_form": "0.27666666666666667",
+      "literal": "0.27666666666666667"
+    },
+    "p=0.1,k=2,R=3": {
+      "closed_form": "0.5433333333333333",
+      "literal": "0.5433333333333333"
+    },
+    "p=0.1,k=3,R=3": {
+      "closed_form": "0.81",
+      "literal": "0.81"
+    },
+    "p=0.5,k=0,R=1": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=0,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=1,R=1": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=1,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=2,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.5,k=3,R=3": {
+      "closed_form": "0.25",
+      "literal": "0.25"
+    },
+    "p=0.73,k=0,R=1": {
+      "closed_form": "0.5328999999999999",
+      "literal": "0.5328999999999999"
+    },
+    "p=0.73,k=0,R=3": {
+      "closed_form": "0.5328999999999999",
+      "literal": "0.5328999999999999"
+    },
+    "p=0.73,k=1,R=1": {
+      "closed_form": "0.07289999999999996",
+      "literal": "0.0729"
+    },
+    "p=0.73,k=1,R=3": {
+      "closed_form": "0.3795666666666666",
+      "literal": "0.3795666666666666"
+    },
+    "p=0.73,k=2,R=3": {
+      "closed_form": "0.2262333333333333",
+      "literal": "0.22623333333333331"
+    },
+    "p=0.73,k=3,R=3": {
+      "closed_form": "0.07289999999999996",
+      "literal": "0.0729"
+    }
+  },
+  "changed_by_this_phase": 0,
+  "event_weight_distinct_values": 1,
+  "event_weight_invariance_holds": true,
+  "event_weights": {
+    "W(N=16,R=1)": "0.525162949730635",
+    "W(N=16,R=3)": "0.525162949730635",
+    "W(N=5,R=1)": "0.525162949730635",
+    "W(N=5,R=3)": "0.525162949730635"
+  },
+  "forbidden_shortcut_value": 0.027777777777777783,
+  "grouped_bernoulli_loss_versus_frozen_formula": {
+    "k=0,R=1": {
+      "reference": "0.9130152523999526",
+      "stable": "0.9130152523999526"
+    },
+    "k=0,R=3": {
+      "reference": "0.9130152523999526",
+      "stable": "0.9130152523999526"
+    },
+    "k=1,R=1": {
+      "reference": "0.5130152523999526",
+      "stable": "0.5130152523999526"
+    },
+    "k=1,R=3": {
+      "reference": "0.7796819190666193",
+      "stable": "0.7796819190666193"
+    },
+    "k=2,R=3": {
+      "reference": "0.6463485857332859",
+      "stable": "0.646348585733286"
+    },
+    "k=3,R=3": {
+      "reference": "0.5130152523999526",
+      "stable": "0.5130152523999526"
+    }
+  },
+  "image": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "invalidity_matrix_and_s8": "re-run as part of the 4440-test in-image suite; 0 failures",
+  "mandatory_brier_is_exactly_quarter": true,
+  "mandatory_brier_p05_k1_R3": "0.25",
+  "phase9g_v3x_q_numeric_regression_sha256": "eee5a04e088464b902b57109be663b9f9eb7c8d7d1f78c46fad8626d519a5fa7",
+  "schema_version": "rvt-phase9g-v3x-q-numeric-regression/v1"
+}

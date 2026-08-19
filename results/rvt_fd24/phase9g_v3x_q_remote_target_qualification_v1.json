@@ -1,0 +1,52 @@
+{
+  "X37_all_heavy_execution_ran_on": "100.71.102.9",
+  "X38_runtime_anomaly": {
+    "TARGET_RUNTIME_STABILITY_REQUALIFICATION_REQUIRED": false,
+    "historical": "TRANSIENT_NONREPRODUCED_RUNTIME_ANOMALY",
+    "in_image_full_suite_runs": 2,
+    "reproduced_in_this_phase": false,
+    "science_altered": 0,
+    "segmentation_faults_in_this_phase_logs": 0
+  },
+  "access": {
+    "command": "ssh -o BatchMode=yes 'avis\\avis'@100.71.102.9",
+    "credential_material_recorded": "none",
+    "password_requested_or_used": false,
+    "passwordless": true
+  },
+  "docker_qualification_on_the_orchestration_host": 0,
+  "environment": {
+    "architecture": "x86_64 / linux/amd64",
+    "cpus": 24,
+    "docker_api": "1.55",
+    "docker_cpus": 24,
+    "docker_server": "29.6.1",
+    "hostname": "avis",
+    "memory_bytes": 33323405312,
+    "whoami": "avis",
+    "windows_version": "Microsoft Windows [Version 10.0.26200.9168]",
+    "wsl_distribution": "Ubuntu-24.04",
+    "wsl_kernel_reported_by_wsl": "6.18.33.2-2",
+    "wsl_kernel_uname": "6.18.33.2-microsoft-standard-WSL2",
+    "wsl_version": "2.7.10.0"
+  },
+  "phase9g_v3x_q_remote_target_qualification_sha256": "4b5165ea61f600d72ccd06b00d29226f6ab954923ba8dd82af5e7000678615e5",
+  "schema_version": "rvt-phase9g-v3x-q-remote-target-qualification/v1",
+  "scientific_simulation_on_the_orchestration_host": 0,
+  "work_performed_locally": [
+    "git inspection and commits",
+    "artifact and report authoring",
+    "SSH orchestration",
+    "an independent recomputation of the execution-spec registry root, which is pure metadata hashing and executes no simulation"
+  ],
+  "work_performed_remotely": [
+    "compilation of all thirty V3 execution specifications, inside the previously qualified image",
+    "all-thirty binding load and fail-closed matrix",
+    "TRAIN 1200 and VALIDATION 300 episode dry-binding",
+    "both production image builds",
+    "the full in-image suite",
+    "the V1/V2 regression subset",
+    "the semantic canary at W1 and W12",
+    "replica-order invariance and failure/resume"
+  ]
+}

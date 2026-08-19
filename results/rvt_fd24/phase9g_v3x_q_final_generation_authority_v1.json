@@ -1,0 +1,44 @@
+{
+  "FINAL_V3_EXECUTABLE_SOURCE_COMMIT_V2": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "FINAL_V3_PRODUCTION_IMAGE_V2_SHA256": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "complete_runtime_authority_requires_both_manifest_and_spec_registry": true,
+  "name": "OFFICIAL_V3_GENERATION_AUTHORITY_V2",
+  "official_v3_train_manifest_root": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+  "official_v3_train_manifest_version": "FROZEN_DRY_FINAL, unchanged by this phase",
+  "official_v3_validation_manifest_root": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+  "official_v3_validation_manifest_version": "FROZEN_DRY_FINAL, unchanged by this phase",
+  "phase9g_v3x_q_final_generation_authority_sha256": "671d62112c565440c5df5fb18fb2589e68df2c862ac9dd65bbfc01bae2b868db",
+  "production_profile": {
+    "changed": false,
+    "chunk": 1,
+    "infrastructure_timeout_seconds": 243.0,
+    "numeric_threads_per_worker": 1,
+    "workers": 12
+  },
+  "purpose": "the complete authority the next official TRAIN attempt must use; every earlier combination is superseded",
+  "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+  "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+  "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+  "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+  "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+  "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "schema_version": "rvt-phase9g-v3x-q-final-generation-authority/v1",
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "superseded": [
+    {
+      "authorized": false,
+      "image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+      "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+      "status": "PRE_EXECUTION_SPEC_PRODUCTION_IMAGE"
+    },
+    {
+      "authorized": false,
+      "image": "sha256:67f378d50b3b5b46a65dd18fbd307bc64596ad0df1b0383b9296adbeaf57f0a7",
+      "source_commit": "479c53c4a457c0d09142f6368aa0c0882b176418",
+      "status": "SUPERSEDED_FAILED_IN_IMAGE_SUITE"
+    }
+  ],
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "v3_layout_execution_spec_registry_v1_sha256": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195",
+  "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a"
+}

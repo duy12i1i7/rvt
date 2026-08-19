@@ -1,0 +1,97 @@
+{
+  "FINAL_V3_EXECUTABLE_SOURCE_COMMIT_V2": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "FINAL_V3_PRODUCTION_IMAGE_V2_SHA256": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "criteria": [
+    {
+      "criterion": "30/30 execution specifications compiled",
+      "met": true
+    },
+    {
+      "criterion": "D count is 0",
+      "met": true
+    },
+    {
+      "criterion": "geometry hashes reproduce 30/30",
+      "met": true
+    },
+    {
+      "criterion": "horizons reproduce 30/30",
+      "met": true
+    },
+    {
+      "criterion": "Row Binding V3 unchanged",
+      "met": true
+    },
+    {
+      "criterion": "_SPLIT_VARIANTS and V2 specs unchanged",
+      "met": true
+    },
+    {
+      "criterion": "all-30 binding load with 0 simulator steps",
+      "met": true
+    },
+    {
+      "criterion": "TRAIN 1200/1200 and VALIDATION 300/300 dry-bind",
+      "met": true
+    },
+    {
+      "criterion": "original blocker train-f1-02 resolves",
+      "met": true
+    },
+    {
+      "criterion": "fail-closed matrix complete",
+      "met": true
+    },
+    {
+      "criterion": "new image embeds the final source commit",
+      "met": true
+    },
+    {
+      "criterion": "in-image suite 0 failures",
+      "met": true
+    },
+    {
+      "criterion": "canary digest identical to historical",
+      "met": true
+    },
+    {
+      "criterion": "W1 == W12",
+      "met": true
+    },
+    {
+      "criterion": "failure/resume clean",
+      "met": true
+    },
+    {
+      "criterion": "V1/V2 unchanged and Gate 7 still failed",
+      "met": true
+    },
+    {
+      "criterion": "segfault not reproduced",
+      "met": true
+    },
+    {
+      "criterion": "official V3 data untouched",
+      "met": true
+    }
+  ],
+  "criteria_met": 18,
+  "criteria_total": 18,
+  "criteria_unmet": [],
+  "declared_deviations": [
+    "the thirty specifications live in the geometry namespace (train/, validation/) rather than a v3_train/ directory, because the frozen runtime loader hard-requires split in ('train','validation') and source_layout.split == split. A v3 directory would have meant editing frozen V1/V2 runtime, which this phase also forbids. The V3 LOOKUP resolves by registry membership and verifies the V3 split explicitly, so validation-f1-01 is correctly a v3_train layout while its geometry namespace stays validation.",
+    "two production images were built from two commits; the first failed the in-image suite on two portability defects in my own tests and was replaced rather than excused. Both are recorded.",
+    "the frozen dry source manifests were NOT re-emitted. Their roots identify the source-episode population, not the runtime authority; the complete authority is the pair (manifest root, execution-spec registry root), recorded together rather than the old root being presented as complete."
+  ],
+  "handoff_stop_commit": "096a136876549830d6f5a94ed0f0708a6518855a",
+  "phase": "PHASE_9G_V3X_Q",
+  "phase9g_v3x_q_final_readiness_sha256": "fd5a8c29f71869bbb3c648202115db2feaeec39e6b23bd06bcd0735d1de151ab",
+  "recommendation": "AUTHORIZE_OFFICIAL_RECOVERABILITY_V3_TRAIN_GENERATION_RETRY",
+  "recommendation_scope": "TRAIN ONLY",
+  "schema_version": "rvt-phase9g-v3x-q-final-readiness/v1",
+  "training_authorized": false,
+  "v3_layout_execution_spec_registry_v1_sha256": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195",
+  "validation_generation_authorized": false,
+  "verdict": "C",
+  "verdict_text": "All thirty V3 execution specifications are deterministic executable compilations of already-frozen scientific authority, every hash and execution-critical field reproduces exactly, V1 and V2 remain unchanged, a new exact qualified linux/amd64 image contains the specifications, all remote qualification passes, and official V3 data remain untouched."
+}

@@ -1,0 +1,83 @@
+{
+  "FINAL_V3_EXECUTABLE_SOURCE_COMMIT_V2": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "FINAL_V3_PRODUCTION_IMAGE_V2_SHA256": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "X29_pre_execution_spec_image": {
+    "authorized_for_official_v3_generation": false,
+    "history_deleted": false,
+    "image": "sha256:a602ec015ff3d4063908f17e4d99087ce4aa89edda5853cf3483532eb53ab318",
+    "source_commit": "d635f17c8ef7e336fd54ff95a60dd608b61f3d7b",
+    "status": "PRE_EXECUTION_SPEC_PRODUCTION_IMAGE",
+    "why": "it does not contain the thirty V3 layout execution specifications, so it cannot bind an official V3 episode"
+  },
+  "architecture": "amd64/linux",
+  "build_attempts": [
+    {
+      "attempt": 1,
+      "authorized_for_official_science": false,
+      "image": "sha256:67f378d50b3b5b46a65dd18fbd307bc64596ad0df1b0383b9296adbeaf57f0a7",
+      "reason": "the full suite inside it reported 2 failures: one test hard-coded .venv/bin/python, which exists only on the orchestration host, and the git-backed tests were refused by git's dubious-ownership guard because /opt/rvt is root-owned while the suite runs unprivileged. Both were portability defects in the tests, not environment exemptions, and X30 permits no exemption, so the image was replaced rather than excused.",
+      "size_bytes": 630286739,
+      "source_commit": "479c53c4a457c0d09142f6368aa0c0882b176418",
+      "status": "SUPERSEDED_FAILED_IN_IMAGE_SUITE"
+    },
+    {
+      "attempt": 2,
+      "authorized_for_official_science": true,
+      "image": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+      "reason": "full suite 4440/0 inside the image with no exemption",
+      "size_bytes": 630284244,
+      "source_commit": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+      "status": "FINAL_V3_PRODUCTION_IMAGE_V2"
+    }
+  ],
+  "build_context_proof": {
+    "base_image": "public.ecr.aws/docker/library/python:3.9.6-slim-bullseye@sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+    "built_on": "the qualified Windows/WSL2 target, linux/amd64 native",
+    "bundle_sha256": "6bb97c590c1c3c1fcdd05415b5497b2a7f67863bdb408154b34effb17afb22ef",
+    "clean_tree": 0,
+    "debian_snapshot": "20260220T214329Z",
+    "dockerfile_sha256": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
+    "execution_specification_files_in_tree": 60,
+    "git_dir_size": "140M",
+    "package_upgrades": 0,
+    "requirements_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+    "tracked_files": 1781,
+    "untracked_or_ignored_in_context": 0
+  },
+  "declared_revision_label": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "dependency_pins": {
+    "numpy": "2.0.2",
+    "python": "3.9.6",
+    "torch": "2.8.0+cpu"
+  },
+  "environment": {
+    "MKL_CBWR": "COMPATIBLE",
+    "OMP_NUM_THREADS": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONPATH": "/opt/rvt",
+    "RVT_FD24_NUMERICAL_EXECUTION_PROFILE": "FD24_NUMERICAL_EXECUTION_PROFILE_V1"
+  },
+  "execution_spec_registry_root_inside_image": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195",
+  "execution_spec_registry_root_matches": true,
+  "frozen_contracts_inside_image": {
+    "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+    "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+    "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+    "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+    "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+    "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+  },
+  "image_tag": "rvt-v3x:2ab73cf4",
+  "invalidity_contract": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "layout_registry_v2": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+  "phase9g_v3x_q_image_provenance_sha256": "565042780d0cf5f63a75d04637ddc15231c6a0517d4332e2b7d3342d856a729d",
+  "rebuilt_after_qualification": false,
+  "root_fs_layers": 14,
+  "schema_version": "rvt-phase9g-v3x-q-image-provenance/v1",
+  "scientific_contracts_modified": 0,
+  "self_identity_matches": true,
+  "size_bytes": 630284244,
+  "source_commit_read_inside_the_running_image": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b"
+}
