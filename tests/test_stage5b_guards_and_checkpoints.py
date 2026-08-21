@@ -69,7 +69,8 @@ def test_official_authority_metadata_classifies_official(tmp_path):
     classification = classify_dataset_root(tmp_path)
     assert classification.origin == "OFFICIAL"
     assert classification.v3_split == "v3_train"
-    assert classification.evidence == "ops/authority.json"
+    assert classification.evidence.startswith("ops/authority.json")
+    assert "explicit v3_split" in classification.evidence
 
 
 def test_a_seal_directory_alone_classifies_official(tmp_path):
