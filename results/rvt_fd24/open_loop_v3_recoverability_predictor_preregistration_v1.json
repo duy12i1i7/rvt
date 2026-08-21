@@ -1,0 +1,568 @@
+{
+ "R10_rehydration": {
+  "canonical_rows_altered": false,
+  "nature": "serialization reconstruction only",
+  "on_mismatch": "FAIL CLOSED on that row and abort the run",
+  "requirement": "a deterministic READ-ONLY rehydration adapter, before any training implementation",
+  "row_order": "prepare_fd24_model_batch reorders graphs canonically; the frozen loss takes an unordered mean over the N robots of a candidate, so no logit-to-row map is required",
+  "steps": [
+   "1. reinsert metadata.candidate_topology_id from the frozen row identity",
+   "2. recompute content_sha256 over the canonical payload",
+   "3. load_robot_local_ego_graph(payload, runtime_config)",
+   "4. round trip: recoverability_ego_payload(graph) -> recoverability_graph_fingerprint",
+   "5. REQUIRE the result to equal scientific_identity.graph_fingerprint"
+  ],
+  "why": "recoverability_ego_payload strips metadata.candidate_topology_id and content_sha256 at publication, and load_robot_local_ego_graph requires both"
+ },
+ "R11_weighting": {
+  "batching": "rvt_swarm/fd24/loader_v3.py::batch_event_groups -- by event, never by row",
+  "candidates_within_event": {
+   "COMPACT": 0.5,
+   "LINE": 0.5
+  },
+  "class_weighting": "NONE",
+  "events": "unweighted mean",
+  "focal_loss": "NONE",
+  "implementation": "rvt_swarm/fd24/loss_v3.py::{candidate_loss,event_loss,dataset_loss}",
+  "invariant": "W(N=5,R=1) = W(N=16,R=1) = W(N=5,R=3) = W(N=16,R=3) = 1",
+  "oversampling": "NONE",
+  "positive_class_weight": "NONE",
+  "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+  "replica_supervision": "divided by R through the frozen grouped Bernoulli NLL",
+  "robot_rows_within_candidate": "mean over N",
+  "short_final_batch": "averaged over its own event count, so every event stays equally weighted within its step",
+  "stochastic_family_weighting": "NONE"
+ },
+ "R12_hyperparameter_grid": {
+  "architecture_searched": false,
+  "batch": "16 decision-event groups",
+  "configurations_per_learned_family": 6,
+  "determinism": [
+   "torch.use_deterministic_algorithms(True)",
+   "torch.manual_seed(seed) plus a per-fit generator",
+   "loader_v3.deterministic_event_order(seed=...) -- counter-free, worker-order invariant"
+  ],
+  "device": "CPU",
+  "frozen_cap_on_searched_configurations": 12,
+  "gradient_norm_clip": 1.0,
+  "learning_rates": [
+   0.0001,
+   0.0003,
+   0.001
+  ],
+  "loss_weights": {
+   "lambda_consistency": 0.0,
+   "lambda_mag": 0.0,
+   "lambda_rec": 1.0,
+   "lambda_res": 0.0
+  },
+  "optimizer": "AdamW",
+  "precision": "float32",
+  "seed_0": "mechanical qualification only; never scientific selection",
+  "threads_per_worker": 1,
+  "training_seeds": [
+   11,
+   29,
+   47
+  ],
+  "weight_decays": [
+   0.0,
+   0.0001
+  ]
+ },
+ "R13_train_only_hp_selection": {
+  "checkpoint_selection_within_a_run": "strict lower held-out TRAIN NLL; on exact tie the EARLIER step",
+  "hp_choice": "the configuration with the lowest score",
+  "hp_score": "mean held-out TRAIN NLL across 3 seeds x 2 folds",
+  "hp_tie_order": [
+   "lower learning rate",
+   "then lower weight decay"
+  ],
+  "loop": "for f in {M1, M2}; for each of the 6 HP configurations; for each seed in {11,29,47}; for each fold in {A,B}: fit on the OPPOSITE fold, evaluate scheduled checkpoints on the held-out fold",
+  "refit_data": "ALL 20 TRAIN layouts; the FINAL state is the artifact",
+  "refit_step_rule": {
+   "clamp": "[1000, 50000]",
+   "formula": "S*(f, s) = 1000 * ceil( (s_A + s_B) / 2000 )",
+   "inputs": "s_A and s_B, the selected scheduled steps for (c*, seed) on folds A and B; each is a multiple of 1000",
+   "per_seed": true,
+   "step_count_is_not_rescaled_for_the_larger_refit_pool": true,
+   "why_ceil": "the mean of two multiples of 1000 can land on a half-multiple; ceiling to the next 1000 is unambiguous and needs no half-rounding convention",
+   "why_not_rescaled": "optimizer STEPS, not epochs, are the frozen budget unit; the refit therefore takes the same number of gradient updates while drawing from a 2x larger pool, which is the conservative choice"
+  },
+  "validation_contact": "NONE"
+ },
+ "R14_metrics": {
+  "calibration_diagnostics": {
+   "ECE_bin_convention": "p in [lower, upper); the last bin is closed on the right",
+   "ECE_bins": 10,
+   "ECE_boundaries": [
+    [
+     0.0,
+     0.1
+    ],
+    [
+     0.1,
+     0.2
+    ],
+    [
+     0.2,
+     0.3
+    ],
+    [
+     0.3,
+     0.4
+    ],
+    [
+     0.4,
+     0.5
+    ],
+    [
+     0.5,
+     0.6
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     0.9,
+     1.0
+    ]
+   ],
+   "calibration_intercept_and_slope": "minimize over (a, b) the SAME frozen grouped Bernoulli NLL with logit z replaced by a + b z; perfect calibration is (a, b) = (0, 1); it degenerates to standard Cox calibration at R = 1",
+   "empty_bins": "reported as empty; contribution 0",
+   "observation_pairs": "(q_{e,c,i}, t_{e,c} = k/R) at ROBOT level with weight 1/(2 N_e E), which reproduces the frozen loss weighting exactly",
+   "reliability_plot": true,
+   "role": "DIAGNOSTIC ONLY -- never a selector or a tie-breaker"
+  },
+  "excluded_from_the_primary_preregistration": [
+   "AUROC",
+   "AUPRC",
+   "accuracy",
+   "any thresholding of k/R",
+   "F1",
+   "any raw row mean over a split"
+  ],
+  "focus": "proper probabilistic scoring only",
+  "primary": {
+   "formula": "L_candidate = -[k log p + (R-k) log(1-p)] / R, then mean over N robots, then 0.5/0.5 over candidates, then mean over events",
+   "implementation": "rvt_swarm/fd24/loss_v3.py::dataset_loss",
+   "name": "V3_EVENT_EQUAL_GROUPED_BERNOULLI_NLL",
+   "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+   "units": "nats"
+  },
+  "second_key_probabilistic_metric": {
+   "anchor": "at p=0.5, k=1, R=3 the correct value is 0.25; the shortcut gives 0.02777...",
+   "forbidden_shortcut": "(p - k/R)^2 is a DIFFERENT quantity and is implemented nowhere",
+   "formula": "Brier_robot = p^2 - 2p(k/R) + k/R, then the same event-equal aggregation",
+   "implementation": "rvt_swarm/fd24/metrics_v3.py::brier_split",
+   "name": "V3_EXPECTED_BERNOULLI_BRIER",
+   "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04"
+  }
+ },
+ "R15_calibration_policy": {
+  "primary_models": "UNCALIBRATED",
+  "temperature_scaling": {
+   "fit_data": "TRAIN-only out-of-fold predictions, after the family HP configuration is fixed",
+   "fit_on_validation": false,
+   "participates_in_primary_family_selection": false,
+   "role": "SECONDARY DIAGNOSTIC ONLY"
+  },
+  "why": "intrinsic probabilistic calibration is part of the hypothesis under test"
+ },
+ "R16_inference_bootstrap": {
+  "clustering": "all selected events of a sampled episode are kept together",
+  "draw_order": "replicates 0..9999 in order; within a replicate, layouts consumed in ascending layout_id order; per layout one call to rng.integers(0, n_layout_episodes, size=n_layout_episodes)",
+  "independent_resampling_unit": "SOURCE EPISODE",
+  "interval": "95 percent percentile interval",
+  "metric_weighting": "decision-event-equal, unchanged",
+  "paired": "the SAME resample indices are used for every family within a replicate, so family differences are paired",
+  "replicates": 10000,
+  "rng": "numpy.random.default_rng(20260821)",
+  "scheme": "within each VALIDATION layout, resample that layout's source episodes with replacement preserving that layout's original episode count; then pool all layouts and compute the event-equal metric on the resampled event multiset",
+  "seed": 20260821,
+  "stratification": "VALIDATION LAYOUT",
+  "what_it_does_not_claim": "generalization to unseen layouts; that requires a later protected-domain evaluation",
+  "what_it_estimates": "uncertainty over SOURCE EPISODES conditional on the frozen VALIDATION layouts",
+  "why_not_the_decision_event": "up to K = 5 selected events come from ONE source trajectory and are strongly correlated; resampling events independently would understate uncertainty",
+  "zero_yield_episodes": "an episode with M = 0 contributes no events and that is correct; a replicate yielding zero events overall would FAIL CLOSED"
+ },
+ "R17_family_selection_rule": {
+  "open_loop_v3_family_selection_rule_v1_sha256": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+  "preconditions": [
+   "this preregistration is frozen and hashed",
+   "the fold manifest is frozen and hashed",
+   "the M1 input contract is frozen and hashed",
+   "the M2 model-config hash is fixed",
+   "every theta(f, s) checkpoint exists with its state-dict hash recorded",
+   "p_hat for M0 is computed and recorded",
+   "the metric and bootstrap code paths are fixed and hashed",
+   "both dataset seals re-verify"
+  ],
+  "reveals": 1,
+  "rule": "open_loop_v3_family_selection_rule_v1"
+ },
+ "R18_seed_and_downstream_checkpoint": {
+  "all_three_seeds_trained_and_reported": true,
+  "best_seed_selected_on_validation": false,
+  "downstream_checkpoint_per_family": "designated BEFORE the reveal as the seed with the MEDIAN TRAIN-only cross-validation NLL at the chosen configuration, where the per-seed CV NLL is the mean over folds A and B of the selected held-out NLL",
+  "later_use": "this checkpoint may be used for closed-loop integration if its family wins",
+  "tie": "lower numerical seed",
+  "uncertainty_reporting": "all three seeds remain reported for stability"
+ },
+ "R19_falsification": {
+  "conditions": [
+   {
+    "id": "H1_FAILURE",
+    "meaning": "the learnability claim is NOT SUPPORTED",
+    "statement": "neither M1 nor M2 qualifies against M0 under the eligibility test"
+   },
+   {
+    "id": "GRAPH_CONTRIBUTION_FAILURE",
+    "meaning": "local interaction structure adds nothing over local state",
+    "statement": "M2 does not beat M1 under the preregistered CI rule"
+   },
+   {
+    "id": "PROBABILISTIC_INTERPRETATION_WEAKNESS",
+    "meaning": "the outputs are not usable as probabilities even if ranking is good",
+    "statement": "strong systematic miscalibration under the frozen diagnostics"
+   },
+   {
+    "id": "SEED_INSTABILITY",
+    "meaning": "the advantage is not distinguishable from initialization noise",
+    "statement": "the effect size is not robust relative to across-seed variation"
+   },
+   {
+    "id": "TOPOLOGY_CONDITIONING_WEAKNESS",
+    "meaning": "q(o_i, tau) is really q(o_i)",
+    "statement": "a later preregistered topology-blind ablation matches full M2"
+   },
+   {
+    "id": "OBSERVATION_BOUNDARY_LIMITATION",
+    "meaning": "the claim must be narrowed to the observable regime",
+    "statement": "performance is weak in regimes whose hazard is not locally observable, including F9"
+   }
+  ],
+  "no_threshold_may_be_invented_after_the_reveal": true
+ },
+ "R1_f9_observability": {
+  "classification": "OBSERVABILITY LIMITATION, NOT LEAKAGE -- it cannot inflate a result",
+  "consequence": "the F9 (DYNAMIC_LOCAL_OBSTACLE) moving obstacle is not a node in the recoverability ego graph. q_i must infer it, if at all, from static geometry and from indirect traces of avoidance in peer motion.",
+  "contrast_f8": "F8 (COMMUNICATION_DEGRADED) degradation IS partly observable through peer_message_age_limit, peer_topology_conflict, stale-peer dropout and local degree",
+  "dynamic_obstacle_tokens_added": false,
+  "evidence": [
+   "rvt_swarm/phase9c_rb/session.py::_build_robot_view admits STATIC tokens only",
+   "rvt_swarm/phase9c_rb/world.py::StaticWorld.observable_tokens iterates circles and corridor support discs only",
+   "dynamic obstacles are built by build_dynamic_world into a separate DynamicWorld and injected only into controller_input.obstacle_states via _dynamic_obstacle_relative_states",
+   "rvt_swarm/decentralized/ego_graph_runtime_adapter.py::build reads only the RobotView"
+  ],
+  "frozen_full_state_quantity": "p(x, tau) = P(Y = 1 | x, tau, frozen noise law)",
+  "learned_decentralized_estimator": "q_i(o_i, tau) ~= P(Y = 1 | o_i, tau)",
+  "mandatory_paper_statement": "the model estimates a team-level recoverability outcome from PARTIAL robot-local observation; the estimator is q_i(o_i, tau), not the full-state p(x, tau), and for F9 the hazard itself lies outside o_i",
+  "o_i_definition": "robot i's frozen runtime-local ego observation: own state and lifecycle memory, non-stale one-hop neighbour records, range-gated STATIC local obstacle tokens, and the candidate query tau",
+  "role": "F9 is a preregistered stress and limitation case",
+  "ruling": "ACCEPT_AND_DISCLOSE",
+  "sealed_graph_payload_changed": false,
+  "target_contract_redefined": false,
+  "train_or_validation_regenerated": false
+ },
+ "R20_protected_domains": {
+  "forbidden_offsets": [
+   0.76,
+   0.87
+  ],
+  "model_freeze_condition": "FROZEN_MODEL is reached when a single checkpoint has been named by this rule, written through rvt_swarm/fd24/checkpoint.py with training_status 'scientifically-trained', and sealed by its canonical state-dict hash together with the model-config, ego-feature-schema and runtime-config hashes. Only then may any protected domain become eligible, and only under a separately authorized stage.",
+  "no_protected_domain_outcome_may_influence": [
+   "architecture",
+   "features",
+   "hyperparameters",
+   "seeds",
+   "checkpoint",
+   "calibration",
+   "thresholds",
+   "the winner rule"
+  ],
+  "protected": {
+   "final_test": true,
+   "n24": true,
+   "near_final": true,
+   "reserve": true,
+   "study_b": true
+  },
+  "reserve_offset": 0.33,
+  "validation_after_reveal": "SPENT",
+  "validation_described_as_final_unbiased_generalization_evidence": false,
+  "validation_is": "a MODEL-SELECTION set"
+ },
+ "R2_decentralization": {
+  "decentralized_training_claimed": false,
+  "forbidden_wording": [
+   "proven real-time deployable",
+   "real-time edge feasibility inferred from parameter count alone",
+   "decentralized training"
+  ],
+  "inference_inputs": "frozen runtime-local ego graphs and one-hop messages only",
+  "latency_and_hardware_evidence": "NOT ESTABLISHED; requires a later experiment",
+  "official_framing": "CENTRALIZED_TRAINING / DECENTRALIZED_EXECUTION",
+  "permitted_wording": "decentralized-execution-compatible interface",
+  "training_targets": "simulator / global-rollout derived; no robot could compute its own (k, R)"
+ },
+ "R3_consensus": {
+  "added_here": false,
+  "belongs_to": "a later CLOSED-LOOP controller study",
+  "consensus_in_open_loop_v3_loss": "NONE",
+  "supervision": "each robot's q_i is independently supervised by the frozen team-level (k, R) under the existing event-equal loss"
+ },
+ "R4_authority_scope": {
+  "does_not_retroactively_reinterpret_or_alter_them": true,
+  "relationship": "where a value is compatible it is REUSED verbatim (AdamW, the learning rate and weight decay sets, seeds {11,29,47}, clip 1.0, warmup 2000, 50000 max steps, evaluate every 1000, patience 8, batch 16 decision-event groups, <=12 searched configurations). Where the old contract keys on a closed-loop quantity that does not exist open-loop -- episode task success, the collision gate, >=120 closed-loop validation episodes -- this document supplies an open-loop rule for THIS study only.",
+  "their_status": "historical and VALID WITHIN THEIR OWN SCOPE. They are not wrong, they are not reinterpreted, and nothing here applies to them retroactively.",
+  "this_document_is": "a NEW prospective protocol for a DISTINCT study -- the open-loop probabilistic recoverability predictor",
+  "unchanged_documents": [
+   {
+    "modified": false,
+    "path": "docs/RVT_FD24_HYPERPARAMETER_BUDGET.md",
+    "scope": "CLOSED_LOOP_DEPLOYMENT_STUDY",
+    "sha256": "a8701aaa82ee0007aa56a4e2bcac8e18f8d6176af41f24ce466cfd6b97d1ba62"
+   },
+   {
+    "modified": false,
+    "path": "docs/RVT_CHECKPOINT_SELECTION_CONTRACT.md",
+    "scope": "CLOSED_LOOP_DEPLOYMENT_STUDY",
+    "sha256": "d45404deed2e771908ee2c85e924c5a1a18d6bfde0ba09935d61137f7f9f7ba1"
+   },
+   {
+    "modified": false,
+    "path": "docs/RVT_FD24_LOSS_CONTRACT.md",
+    "scope": "CLOSED_LOOP_DEPLOYMENT_STUDY",
+    "sha256": "07bfd5ee571019028d4c08fdf0ba0babad8d4cb3ed19184b069955aeeb75bb4e"
+   }
+  ]
+ },
+ "R5_split_roles": {
+  "train_internal_development_decides": [
+   "hyperparameter configuration",
+   "early stopping",
+   "checkpoint-step determination",
+   "downstream training-seed determination"
+  ],
+  "unbiased_evaluation_requires": "a later protected-domain stage after the model is frozen",
+  "validation_after_reveal": "SPENT_FOR_MODEL_DEVELOPMENT",
+  "validation_is_an_unbiased_final_generalization_set": false,
+  "validation_role": "exactly ONE preregistered family-evaluation and family-selection pass"
+ },
+ "R6_train_internal_folds": {
+  "constructed_without_outcomes": true,
+  "fold_A_registry_offset": 0.22,
+  "fold_B_registry_offset": 0.54,
+  "folds": 2,
+  "grouping_unit": "LAYOUT",
+  "manifest": "open_loop_v3_train_internal_fold_manifest_v1.json",
+  "membership_authority": "frozen registry TRAIN group membership; never the layout-id string",
+  "open_loop_v3_train_internal_fold_manifest_v1_sha256": "e648a4d42064929ded390fcbf06eb2da9ec6569809d58ae75a26fa3d0e0b6ba2"
+ },
+ "R7_early_stopping": {
+  "arbitrary_min_delta_removed": "the Stage-5A proposal's 1e-4 is withdrawn",
+  "evaluation_data": "the held-out TRAIN-internal fold only",
+  "evaluation_interval_steps": 1000,
+  "improvement_rule": "STRICT_IMPROVEMENT_ONLY (equivalent to min_delta = 0.0)",
+  "lr_schedule_after_warmup": "CONSTANT",
+  "maximum_optimizer_steps": 50000,
+  "min_delta": 0.0,
+  "patience_scheduled_evaluations": 8,
+  "tie_rule": "on machine-visible equality choose the EARLIER checkpoint",
+  "validation_used_for_early_stopping": false,
+  "warmup_steps": 2000
+ },
+ "R8_model_ladder": {
+  "M0": {
+   "closed_form": "p_hat = (1 / 2E) * SUM over TRAIN events e and candidates c of k_{e,c} / R_{e,c}; this is the exact minimizer of the frozen event-equal grouped Bernoulli NLL for a constant predictor",
+   "definition": "q(o_i, tau) = p_hat for every robot and every candidate",
+   "fitted_on": "TRAIN only",
+   "name": "CONSTANT",
+   "optimizer": "NONE",
+   "parameters": 1
+  },
+  "M1": {
+   "architecture": "one hidden layer, width 32, ReLU, single logit output",
+   "input_contract": "m1_local_non_graph_input_contract_v1",
+   "input_dimension": 56,
+   "m1_local_non_graph_input_contract_v1_sha256": "d017de30f1ce65d0c7bc84551124cebb5781b05c2ece6b8e82708a87fc4fb4fd",
+   "message_passing": "NONE",
+   "name": "LOCAL_NON_GRAPH_MLP"
+  },
+  "M2": {
+   "candidate_embedding_dimension": 16,
+   "dropout_probability": 0.0,
+   "fd24_model_config_sha256": "44cc7176a38e79d938952398ccb08d7fe2646643ddfe6dec08822a60de9fb1a3",
+   "fd24_model_config_source": {
+    "activation": "relu",
+    "attention_leaky_relu_slope": 0.2,
+    "candidate_embedding_dimension": 16,
+    "diagnostic_embedding_enabled": false,
+    "dropout_probability": 0.0,
+    "hidden_dimension": 96,
+    "message_passing_blocks": 3,
+    "normalization": "layer_norm",
+    "numerical_dtype": "float32",
+    "residual_limit_fractions_of_maximum_acceleration": [
+     0.25,
+     0.25
+    ],
+    "schema_version": "rvt-fd24-model-config/v1"
+   },
+   "hidden_dimension": 96,
+   "implementation": "rvt_swarm/fd24/model.py::RVTFD24LocalModel, recoverability path only",
+   "message_passing_blocks": 3,
+   "name": "LOCAL_GRAPH_MODEL",
+   "recoverability_path_parameters": 262529,
+   "residual_action_head": "present but EXCLUDED from the optimizer in this study"
+  },
+  "additional_primary_families": "NONE",
+  "architecture_searched": false,
+  "logistic_regression": "NOT a primary family and NOT part of model selection. It may appear later only as a non-selecting sanity diagnostic.",
+  "primary_families": 3
+ },
+ "R9_model_input_contract": {
+  "R_reason": "R is a deterministic function of family (F8/F9 -> 3, else 1) and family is not runtime-available, so admitting R would smuggle the family in",
+  "R_status": "LOSS METADATA ONLY",
+  "admitted_inputs": [
+   "node_x",
+   "node_feature_valid_mask",
+   "node_kind",
+   "edge_index",
+   "edge_attr",
+   "edge_feature_valid_mask",
+   "edge_type",
+   "root_index",
+   "candidate_topology_id"
+  ],
+  "edge_feature_dim": 19,
+  "ego_feature_schema_sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+  "ego_graph_schema_version": "rvt-ego-graph/v2",
+  "forbidden_predictor_inputs": [
+   "family",
+   "layout identity",
+   "episode identity",
+   "split",
+   "study",
+   "team size N",
+   "robot id",
+   "raw timestamp identity",
+   "lifecycle identity",
+   "seed",
+   "R",
+   "k",
+   "k/R",
+   "Target-V4 disposition",
+   "termination information",
+   "future rollout information",
+   "publication identity metadata"
+  ],
+  "mission_orientation_cos_sin": "NOT admitted to the open-loop recoverability predictor. It may be used only by a residual head in a later study.",
+  "name": "MODEL_INPUT_CONTRACT_V3",
+  "node_feature_dim": 35,
+  "row_identity_fields": [
+   "schema",
+   "study",
+   "split",
+   "family",
+   "layout_sha256",
+   "team_size",
+   "episode_id",
+   "realized_source_timestep",
+   "robot_id",
+   "candidate_topology_id",
+   "graph_fingerprint",
+   "source_acquisition_protocol_sha256",
+   "target_v4_contract_sha256",
+   "recoverability_probabilistic_target_v3_sha256",
+   "recoverability_replica_protocol_v3_sha256",
+   "recoverability_row_binding_v3_spec_sha256"
+  ],
+  "runtime_config_sha256": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+  "structural_enforcement": [
+   "the model's only entry point is prepare_fd24_model_batch(graphs: Sequence[RobotLocalEgoGraph]) -- a closed type",
+   "validate_recoverability_ego_payload rejects global_centroid / global_graph / full_swarm_state",
+   "RobotView is a closed container; NeighbourRecord is ego-relative only",
+   "rvt_swarm/decentralized/guards.py AST guard over rvt_swarm.decentralized and rvt_swarm.fd24",
+   "tests: information boundary, permutation invariance, no global pooling, batch isolation"
+  ],
+  "topology_registry_schema_version": "rvt-topology-registry/v1"
+ },
+ "authoritative_scope": "OPEN_LOOP_V3_RECOVERABILITY_PREDICTOR_STUDY",
+ "name": "OPEN_LOOP_V3_RECOVERABILITY_PREDICTOR_PREREGISTRATION_V1",
+ "open_loop_v3_recoverability_predictor_preregistration_v1_sha256": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+ "permissions": {
+  "model_driver_implementation_authorized": true,
+  "protected_domain_access_authorized": false,
+  "reason": "the V3 training driver and the deterministic rehydration path do not yet exist; training begins only after that implementation passes qualification",
+  "scientific_training_authorized": false,
+  "validation_unblinding_authorized": false
+ },
+ "post_freeze_rules": [
+  "do not train under this document until the Stage-5B driver passes qualification",
+  "do not unblind VALIDATION until every R17 precondition holds",
+  "do not modify TRAIN or VALIDATION",
+  "do not alter the V3 target, loss, Brier, replica, row-binding or acquisition contracts",
+  "do not alter the closed-loop authority documents named in R4",
+  "do not add a model family, a hyperparameter, a metric or a threshold after this freeze"
+ ],
+ "resolves": {
+  "draft_sha256": "957f928e570a6a66f9ab99bd2a642ece4e675b0f158f7fb52251e6f1a0e522ff",
+  "rulings_applied": [
+   "R1",
+   "R2",
+   "R3",
+   "R4",
+   "R5",
+   "R6",
+   "R7",
+   "R8",
+   "R9",
+   "R10",
+   "R11",
+   "R12",
+   "R13",
+   "R14",
+   "R15",
+   "R16",
+   "R17",
+   "R18",
+   "R19",
+   "R20"
+  ],
+  "stage": "STAGE_5A"
+ },
+ "schema_version": "rvt-open-loop-v3-recoverability-predictor-preregistration/v1",
+ "sealed_data_authority": {
+  "executable_source_commit": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "official_v3_train_manifest_root": "6390cd31570d3dc12040d3522ca77db915171b82a2724db02825a32e90bd6edd",
+  "official_v3_train_seal_root": "3a281b0ff8647302ec7aece2f4a061111aa8ef87c743d5d6626ebed741615c22",
+  "official_v3_validation_manifest_root": "431e42ee832c808a6bb9747ee23940d4bb7d18d9b7a5f55bc43fcaa7f4a648f2",
+  "official_v3_validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84",
+  "production_image_digest": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "recoverability_brier_metric_v3_sha256": "0bf6dee325825953d856fb4f6b5df190879424b0d5e8d29cbe55ac930f682f04",
+  "recoverability_probabilistic_target_v3_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+  "recoverability_replica_protocol_v3_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+  "recoverability_row_binding_v3_spec_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+  "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+  "recoverability_v3_required_replica_invalidity_contract_v1_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "target_v4_contract_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee",
+  "v3_layout_execution_spec_registry_v1_sha256": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195",
+  "v3_layout_split_registry_v2_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+  "validation_embargo_release": "only at the single preregistered reveal defined below",
+  "validation_outcome_embargo": "ACTIVE"
+ },
+ "status": "FROZEN",
+ "supersedes": null
+}

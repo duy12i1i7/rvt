@@ -1,0 +1,38 @@
+{
+ "banned_language": [
+  "best overall",
+  "looks better",
+  "better calibration"
+ ],
+ "brier_role": "reported as the second key probabilistic metric; it does not enter the rule",
+ "calibration_role": "diagnostic only; never a selector or tie-breaker",
+ "deltas": {
+  "d10": "NLL(M1) - NLL(M0)",
+  "d20": "NLL(M2) - NLL(M0)",
+  "d21": "NLL(M2) - NLL(M1)"
+ },
+ "eligibility": [
+  "M1 is learned-signal eligible iff upper95CI(d10) < 0",
+  "M2 is learned-signal eligible iff upper95CI(d20) < 0"
+ ],
+ "family_statistic": "mean over the three frozen training seeds {11,29,47} of the event-equal VALIDATION NLL; never the best seed",
+ "interval": "paired stratified cluster bootstrap over VALIDATION SOURCE EPISODES, stratified by VALIDATION layout, 10000 replicates, seed 20260821, 95 percent percentile interval",
+ "name": "OPEN_LOOP_V3_FAMILY_SELECTION_RULE_V1",
+ "open_loop_v3_family_selection_rule_v1_sha256": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+ "reveal_count": 1,
+ "schema_version": "rvt-open-loop-v3-family-selection-rule/v1",
+ "status": "FROZEN",
+ "validation_never_selects": [
+  "hyperparameter configuration",
+  "training seed",
+  "checkpoint",
+  "architecture",
+  "calibration method"
+ ],
+ "winner": [
+  "CASE 1 -- neither eligible -> M0 wins; the learnability claim is NOT SUPPORTED",
+  "CASE 2 -- only M1 eligible -> M1 wins",
+  "CASE 3 -- only M2 eligible -> M2 wins",
+  "CASE 4 -- both eligible: if upper95CI(d21) < 0 -> M2 wins, else M1 wins by parsimony"
+ ]
+}
