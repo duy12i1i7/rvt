@@ -296,3 +296,44 @@ def test_no_deployable_module_imports_the_offline_training_package():
                         if "openloop_v3" in alias.name:
                             offenders.append(str(path))
     assert offenders == []
+
+
+def test_the_official_train_record_without_a_v3_split_key_resolves_to_train(tmp_path):
+    """The real TRAIN record predates the key; it must still classify as TRAIN.
+
+    Stringifying the missing key would have yielded the split "None", which
+    matches no protected token and therefore silently passes every refusal.
+    """
+    ops = tmp_path / "ops"
+    ops.mkdir()
+    (ops / "authority.json").write_text(json.dumps({
+        "train_manifest_root": "6390cd31", "validation_selected": False,
+        "reserve_selected": False}))
+    classification = classify_dataset_root(tmp_path)
+    assert classification.origin == "OFFICIAL"
+    assert classification.v3_split == "v3_train"
+    assert "train_manifest_root" in classification.evidence
+
+
+def test_an_official_record_naming_no_split_is_refused(tmp_path):
+    ops = tmp_path / "ops"
+    ops.mkdir()
+    (ops / "authority.json").write_text(json.dumps({"run_id": "x"}))
+    with pytest.raises(OpenLoopV3AuthorizationError):
+        require_training_dataset(tmp_path)
+
+
+def test_a_record_that_contradicts_the_caller_is_a_hard_error(tmp_path):
+    ops = tmp_path / "ops"
+    ops.mkdir()
+    (ops / "authority.json").write_text(json.dumps({"v3_split": "v3_validation"}))
+    with pytest.raises(OpenLoopV3AuthorizationError):
+        classify_dataset_root(tmp_path, declared_split="v3_train")
+
+
+def test_a_validation_record_without_the_key_still_resolves_to_validation(tmp_path):
+    ops = tmp_path / "ops"
+    ops.mkdir()
+    (ops / "authority.json").write_text(json.dumps({"validation_selected": True}))
+    with pytest.raises(ValidationAccessRefused):
+        require_training_dataset(tmp_path)

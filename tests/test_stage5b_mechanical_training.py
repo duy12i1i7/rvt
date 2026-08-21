@@ -154,3 +154,19 @@ def test_batching_is_by_event_never_by_row(groups):
     batches = batch_event_groups(tuple(groups), events_per_batch=16)
     assert len(batches) == 1
     assert all(hasattr(item, "compact") for item in batches[0])
+
+
+def test_an_off_by_one_namespace_is_an_error_not_an_empty_dataset(tmp_path):
+    """A path one directory off must not look like an empty dataset."""
+    from rvt_swarm.openloop_v3.driver import load_transactions
+    (tmp_path / "transactions").mkdir()
+    with pytest.raises(DriverContractError):
+        load_transactions(tmp_path)
+
+
+def test_the_namespace_or_its_transactions_directory_both_work(tmp_path):
+    from rvt_swarm.openloop_v3.driver import load_transactions
+    from rvt_swarm.openloop_v3 import synthetic
+    namespace = synthetic.write_synthetic_namespace(tmp_path)
+    parent = namespace.parent
+    assert len(load_transactions(namespace)) == len(load_transactions(parent))

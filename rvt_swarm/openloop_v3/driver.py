@@ -63,11 +63,24 @@ def enable_determinism(seed: int) -> None:
 # dataset loading
 # ---------------------------------------------------------------------------
 def load_transactions(namespace: Path) -> Tuple[Mapping[str, Any], ...]:
+    """Read every published pair transaction under one V3 writer namespace.
+
+    Accepts either the writer namespace or its ``transactions`` subdirectory,
+    matching ``loader_v3.load_v3_event_groups_from_namespace``. Silently
+    returning zero events for a path that is off by one directory would look
+    exactly like an empty dataset, so an empty result is an error instead.
+    """
     directory = Path(namespace)
+    if (directory / "transactions").is_dir():
+        directory = directory / "transactions"
     if not directory.is_dir():
         raise DriverContractError(f"no transaction directory at {directory}")
-    return tuple(json.loads(path.read_text(encoding="ascii"))
-                 for path in sorted(directory.glob("event-*.json")))
+    documents = tuple(json.loads(path.read_text(encoding="ascii"))
+                      for path in sorted(directory.glob("event-*.json")))
+    if not documents:
+        raise DriverContractError(
+            f"no published pair transactions under {directory}")
+    return documents
 
 
 def load_events(namespace: Path, *, split: str) -> Tuple[V3EventGroup, ...]:

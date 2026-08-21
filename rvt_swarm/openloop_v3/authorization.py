@@ -24,7 +24,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping, Optional
+from typing import Any, Mapping, Optional, Tuple
 
 from .authority import (
     OFFICIAL_V3_TRAIN_SEAL_ROOT, PREREGISTRATION_V1_SHA256,
@@ -81,6 +81,43 @@ class DatasetClassification:
     sealed: bool
 
 
+def _split_from_authority(document: Mapping[str, Any],
+                          declared_split: Optional[str],
+                          ) -> Tuple[Optional[str], str]:
+    """Resolve the split from an official authority record.
+
+    The official TRAIN record predates the split-parameterized runner and
+    carries no ``v3_split`` key at all -- it records ``train_manifest_root`` and
+    ``validation_selected: false`` instead. Stringifying the missing key would
+    have produced the split "None", which is worse than useless: it is a value
+    that matches no protected token and therefore passes every refusal check.
+
+    Resolution order, strongest evidence first:
+      1. an explicit ``v3_split`` in the record;
+      2. the record's own selection flags and manifest-root keys;
+      3. the caller's declared split, which is the weakest and is only used
+         when the record says nothing.
+    A record that contradicts the caller is a hard error, never a merge.
+    """
+    declared = str(document.get("v3_split")) if document.get("v3_split") else None
+    if declared:
+        if declared_split and declared_split != declared:
+            raise OpenLoopV3AuthorizationError(
+                f"the dataset records split {declared!r} but the caller declared "
+                f"{declared_split!r}")
+        return declared, "explicit v3_split"
+    if document.get("validation_selected") is True or "validation_manifest_root" in document:
+        return SPLIT_VALIDATION, "validation_selected / validation_manifest_root"
+    if document.get("train_selected") is True or "train_manifest_root" in document:
+        if document.get("validation_selected") is True:
+            raise OpenLoopV3AuthorizationError(
+                "the dataset record claims both TRAIN and VALIDATION")
+        return SPLIT_TRAIN, "train_manifest_root / train_selected"
+    if declared_split:
+        return declared_split, "caller declaration; the record names no split"
+    return None, "the record names no split and the caller declared none"
+
+
 def classify_dataset_root(root: Path, *, declared_split: Optional[str] = None,
                           ) -> DatasetClassification:
     """Classify without opening a single scientific record."""
@@ -89,9 +126,10 @@ def classify_dataset_root(root: Path, *, declared_split: Optional[str] = None,
     sealed = (path / "seal").is_dir()
     if authority.is_file():
         document = json.loads(authority.read_text())
+        split, evidence = _split_from_authority(document, declared_split)
         return DatasetClassification(
-            origin=ORIGIN_OFFICIAL, v3_split=str(document.get("v3_split")),
-            evidence="ops/authority.json", sealed=sealed)
+            origin=ORIGIN_OFFICIAL, v3_split=split,
+            evidence=f"ops/authority.json ({evidence})", sealed=sealed)
     if sealed:
         return DatasetClassification(
             origin=ORIGIN_OFFICIAL, v3_split=declared_split,
@@ -108,6 +146,11 @@ def classify_dataset_root(root: Path, *, declared_split: Optional[str] = None,
 
 
 def _reject_protected(classification: DatasetClassification, root: Path) -> None:
+    """Refuse from metadata alone. An unknown official split is refused too."""
+    if classification.origin == ORIGIN_OFFICIAL and not classification.v3_split:
+        raise OpenLoopV3AuthorizationError(
+            "an official dataset whose split cannot be established from its own "
+            "metadata is refused; default-deny")
     haystack = " ".join(
         part for part in (str(root).lower(), str(classification.v3_split or "").lower())
     )
