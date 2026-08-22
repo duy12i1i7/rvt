@@ -1,0 +1,170 @@
+{
+ "authority": {
+  "family_selection_rule_sha256": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+  "fold_manifest_sha256": "e648a4d42064929ded390fcbf06eb2da9ec6569809d58ae75a26fa3d0e0b6ba2",
+  "m1_contract_sha256": "d017de30f1ce65d0c7bc84551124cebb5781b05c2ece6b8e82708a87fc4fb4fd",
+  "m2_model_config_sha256": "44cc7176a38e79d938952398ccb08d7fe2646643ddfe6dec08822a60de9fb1a3",
+  "permissions": {
+   "model_driver_implementation_authorized": true,
+   "protected_domain_access_authorized": false,
+   "reason": "the V3 training driver and the deterministic rehydration path do not yet exist; training begins only after that implementation passes qualification",
+   "scientific_training_authorized": false,
+   "validation_unblinding_authorized": false
+  },
+  "preregistration_sha256": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+  "status": "FROZEN",
+  "train_seal_root": "3a281b0ff8647302ec7aece2f4a061111aa8ef87c743d5d6626ebed741615c22",
+  "validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84"
+ },
+ "checkpoints": {
+  "M1": {
+   "deployment_classification": "shadow-disabled",
+   "envelope_root": "6f9d10cced6922a16981eb062b4688b368ff9fc07bdb6033f310c23f6885dd88",
+   "match": true,
+   "state_dict_sha256": "50807cfcb7e64d0feb5136ab7999c01b2076d7394269e9bf99eb6c818398aa3e",
+   "training_status": "synthetic-mechanical"
+  },
+  "M2": {
+   "deployment_classification": "shadow-disabled",
+   "envelope_root": "b911bffe1c4b131eeed01f0f9c49a7887fd9f64c7b27a0beedd1a1284d87b93f",
+   "match": true,
+   "state_dict_sha256": "dffa0281656a4b01e1d388f17fe48eb39c667050bb002e8c1401d75aded3ba94",
+   "training_status": "synthetic-mechanical"
+  },
+  "corruption": {
+   "exception": "StudyCheckpointEnvelopeError",
+   "message": "envelope state-dict hash does not recompute; the parameters on disk are not the parameters that were recorded",
+   "refused": true
+  }
+ },
+ "fail_closed": {
+  "frozen_scientific_seed_in_mechanical_mode": {
+   "exception": "OpenLoopV3AuthorizationError",
+   "message": "mechanical qualification uses seed 0 only; seed 11 is not permitted",
+   "refused": true
+  },
+  "official_train_in_mechanical_mode": {
+   "exception": "OfficialOptimizationRefused",
+   "message": "mechanical qualification runs on synthetic fixtures only; this root classifies as OFFICIAL via ops/authority.json (explicit v3_split)",
+   "refused": true
+  },
+  "protected_domain_as_training_data": {
+   "exception": "ProtectedDomainRefused",
+   "message": "protected domain 'reserve' may never be used as training data",
+   "refused": true
+  },
+  "scientific_training_without_authorization": {
+   "exception": "ScientificTrainingNotAuthorized",
+   "message": "official scientific training requires an authorization artifact binding the preregistration root, the TRAIN seal root, the qualified implementation commit, the qualified training i",
+   "refused": true
+  },
+  "validation_as_training_data": {
+   "exception": "ValidationAccessRefused",
+   "message": "the open-loop TRAIN development driver has no VALIDATION path; VALIDATION is unblinded only by a separately authorized evaluation stage (refused on 'v3_validation')",
+   "refused": true
+  }
+ },
+ "m1": {
+  "contract_verified": true,
+  "input_dimension": 56
+ },
+ "mechanical": {
+  "M1": {
+   "event_order_match": true,
+   "metric_trace": [
+    [
+     2,
+     0.710254812241
+    ],
+    [
+     4,
+     0.700074470043
+    ],
+    [
+     6,
+     0.695814061165
+    ],
+    [
+     8,
+     0.696933543682
+    ]
+   ],
+   "metric_trace_match": true,
+   "residual_state_sha256_after": null,
+   "residual_state_sha256_before": null,
+   "residual_unchanged": true,
+   "run_1_state_dict_sha256": "af91ba59ec7735ae87fd0f48277edb5cc16d30b64565bcf68b855b61954b0005",
+   "run_2_state_dict_sha256": "af91ba59ec7735ae87fd0f48277edb5cc16d30b64565bcf68b855b61954b0005",
+   "state_dict_match": true,
+   "steps": 8
+  },
+  "M2": {
+   "event_order_match": true,
+   "metric_trace": [
+    [
+     2,
+     0.70660815239
+    ],
+    [
+     4,
+     0.741639685631
+    ],
+    [
+     6,
+     0.793192958832
+    ],
+    [
+     8,
+     0.889164757729
+    ]
+   ],
+   "metric_trace_match": true,
+   "residual_state_sha256_after": "84e06e1c1d0ac211a8795b0c48a3f36f80c8cf57b15eb1b71b68068af2c9c9b9",
+   "residual_state_sha256_before": "84e06e1c1d0ac211a8795b0c48a3f36f80c8cf57b15eb1b71b68068af2c9c9b9",
+   "residual_unchanged": true,
+   "run_1_state_dict_sha256": "0d8fe08b15b33e22bed669ce2db582e7a5fbe93cc08d98b3cda6ffd21c1ce580",
+   "run_2_state_dict_sha256": "0d8fe08b15b33e22bed669ce2db582e7a5fbe93cc08d98b3cda6ffd21c1ce580",
+   "state_dict_match": true,
+   "steps": 8
+  }
+ },
+ "official_train_census": {
+  "backward_passes": 0,
+  "candidates_by_replica_count": {
+   "1": 8000,
+   "3": 2248
+  },
+  "dataset_origin": "OFFICIAL",
+  "dataset_split": "v3_train",
+  "events": 5124,
+  "events_by_fold": {
+   "A": 2561,
+   "B": 2563
+  },
+  "events_by_team_size": {
+   "5": 1099,
+   "6": 1112,
+   "8": 1063,
+   "12": 984,
+   "16": 866
+  },
+  "fold_assignment_failures": 0,
+  "m0_official_value_fitted": false,
+  "m1_feature_failures": 0,
+  "m2_batch_failures": 0,
+  "mode": "inspect",
+  "optimizer_steps": 0,
+  "optimizers_constructed": 0,
+  "rehydration_failures": 0,
+  "rows_rehydrated": 92670,
+  "untrained_forward_scores_reported": false
+ },
+ "scientific_state": {
+  "frozen_scientific_seeds_trained": [],
+  "official_m0_fitted": false,
+  "official_optimizer_steps": 0,
+  "protected_domain_records_opened": 0,
+  "scientifically_trained_checkpoints_created": 0,
+  "validation_records_opened": 0
+ }
+}

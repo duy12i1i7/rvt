@@ -1,0 +1,268 @@
+{
+ "authorizes_scientific_training": false,
+ "checkpoints": {
+  "M1": {
+   "deployment_classification": "shadow-disabled",
+   "envelope_root": "6f9d10cced6922a16981eb062b4688b368ff9fc07bdb6033f310c23f6885dd88",
+   "match": true,
+   "state_dict_sha256": "50807cfcb7e64d0feb5136ab7999c01b2076d7394269e9bf99eb6c818398aa3e",
+   "training_status": "synthetic-mechanical"
+  },
+  "M2": {
+   "deployment_classification": "shadow-disabled",
+   "envelope_root": "b911bffe1c4b131eeed01f0f9c49a7887fd9f64c7b27a0beedd1a1284d87b93f",
+   "match": true,
+   "state_dict_sha256": "dffa0281656a4b01e1d388f17fe48eb39c667050bb002e8c1401d75aded3ba94",
+   "training_status": "synthetic-mechanical"
+  },
+  "corruption": {
+   "exception": "StudyCheckpointEnvelopeError",
+   "message": "envelope state-dict hash does not recompute; the parameters on disk are not the parameters that were recorded",
+   "refused": true
+  }
+ },
+ "dataset_state": {
+  "train_bytes_after": 3448608102,
+  "train_bytes_before": 3448608102,
+  "train_unchanged": true,
+  "validation_accessed_only_for_seal_verification": true,
+  "validation_bytes": 867887413,
+  "validation_raw_records_mounted": false
+ },
+ "fail_closed_guards": {
+  "frozen_scientific_seed_in_mechanical_mode": {
+   "exception": "OpenLoopV3AuthorizationError",
+   "message": "mechanical qualification uses seed 0 only; seed 11 is not permitted",
+   "refused": true
+  },
+  "official_train_in_mechanical_mode": {
+   "exception": "OfficialOptimizationRefused",
+   "message": "mechanical qualification runs on synthetic fixtures only; this root classifies as OFFICIAL via ops/authority.json (explicit v3_split)",
+   "refused": true
+  },
+  "protected_domain_as_training_data": {
+   "exception": "ProtectedDomainRefused",
+   "message": "protected domain 'reserve' may never be used as training data",
+   "refused": true
+  },
+  "scientific_training_without_authorization": {
+   "exception": "ScientificTrainingNotAuthorized",
+   "message": "official scientific training requires an authorization artifact binding the preregistration root, the TRAIN seal root, the qualified implementation commit, the qualified training i",
+   "refused": true
+  },
+  "validation_as_training_data": {
+   "exception": "ValidationAccessRefused",
+   "message": "the open-loop TRAIN development driver has no VALIDATION path; VALIDATION is unblinded only by a separately authorized evaluation stage (refused on 'v3_validation')",
+   "refused": true
+  }
+ },
+ "frozen_authority": {
+  "family_selection_rule_sha256": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+  "fold_manifest_sha256": "e648a4d42064929ded390fcbf06eb2da9ec6569809d58ae75a26fa3d0e0b6ba2",
+  "m1_contract_sha256": "d017de30f1ce65d0c7bc84551124cebb5781b05c2ece6b8e82708a87fc4fb4fd",
+  "m2_model_config_sha256": "44cc7176a38e79d938952398ccb08d7fe2646643ddfe6dec08822a60de9fb1a3",
+  "permissions": {
+   "model_driver_implementation_authorized": true,
+   "protected_domain_access_authorized": false,
+   "reason": "the V3 training driver and the deterministic rehydration path do not yet exist; training begins only after that implementation passes qualification",
+   "scientific_training_authorized": false,
+   "validation_unblinding_authorized": false
+  },
+  "preregistration_sha256": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+  "status": "FROZEN",
+  "train_seal_root": "3a281b0ff8647302ec7aece2f4a061111aa8ef87c743d5d6626ebed741615c22",
+  "validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84"
+ },
+ "implementation": {
+  "authority_mirror_commit": "ddc0f3f4a74e6990492a131fc375202d401d77c5",
+  "base_note": "the changed-file inventory below is the Stage-5B delta measured against stage5b_base_commit. The training image is built from a clone that also carries the commits between the image base and that base, which are prior phases and are not Stage-5B changes.",
+  "branch": "research/rvt-stage5b-open-loop-v3-training-driver-v1",
+  "changed_file_count": 28,
+  "changed_file_inventory": {
+   "docker/training/Dockerfile": "e1500231864142ff967131068c6cdd2f96827d3955df702f123dffac55fbbf79",
+   "results/rvt_fd24/open_loop_v3_family_selection_rule_v1.json": "23e0b70f931531413d17c78ad34b1df7bfb7249005edbc8490307f8b499c8497",
+   "results/rvt_fd24/open_loop_v3_m1_input_contract_v1.json": "8ff5af0665053f46f291367e6624cbc301a1e136a765e599d636c5fd96eb94c7",
+   "results/rvt_fd24/open_loop_v3_recoverability_predictor_preregistration_v1.json": "18918eb2d340e319d256549ce7b1ad698f093f4de81e82e4c4f094c6a76b18ac",
+   "results/rvt_fd24/open_loop_v3_train_internal_fold_manifest_v1.json": "18f578d3eb5794cdb66367f22cd12b312aa9403782fcbc3b8e9d36aeca3b1b89",
+   "rvt_swarm/openloop_v3/__init__.py": "26febf0bb6da9ac1507d36fe1613b4d2f5cde59d09e0f739af3397911fbbfe54",
+   "rvt_swarm/openloop_v3/authority.py": "911a60f79e7349496185c1b92b36f04a24214d183fdd8b7fc6982e89c8e15337",
+   "rvt_swarm/openloop_v3/authorization.py": "7b1f8caa07992d19703dcbd960d2b597e6a92e27fb9b6e355810c29a6048b296",
+   "rvt_swarm/openloop_v3/bootstrap.py": "3ddd8b956becc69e8ed4f7eb02b3a557e39567efb6b0febff448b0174e5fb31e",
+   "rvt_swarm/openloop_v3/calibration.py": "4f197f4b28f0b119ef3a5cf89cc72de170bb74783b00505334d7c885b4d06dd5",
+   "rvt_swarm/openloop_v3/driver.py": "0f0508ab2418b1531c412f18b21fb5b75e26d0e5c82a8656462834f253f14106",
+   "rvt_swarm/openloop_v3/envelope.py": "08a99a27aa9892ee2c180e29db373042dc35788e42aea30be0633e4a2c6e96f2",
+   "rvt_swarm/openloop_v3/folds.py": "01e962b2fc898ba553df123bbe0fabb0ffc63b7fa333838a464ca8996038755d",
+   "rvt_swarm/openloop_v3/hp.py": "f5a8b1d393b6538a6e041fc241ada2d86222cc97ece242d73c1c412dcec78fad",
+   "rvt_swarm/openloop_v3/m0.py": "ec877063a3d882f93d8fe4eb77263876495d436c4d7b170bec7eeb5f8e699b79",
+   "rvt_swarm/openloop_v3/m1.py": "3df406407f2a284340c3444c362fb3cdb5971ea44c3d98e9616d94c112b605e8",
+   "rvt_swarm/openloop_v3/qualification.py": "16ff025db12c29d889c7528c20759c7f5355e9e227c0ee4425c52e6d52e33471",
+   "rvt_swarm/openloop_v3/rehydrate.py": "73622a3e621a91f933718908ee5a20100d8edf688f42d93ab82e1aea78d3c4e4",
+   "rvt_swarm/openloop_v3/schedule.py": "f7b6aa5b81f1e3b85d09b774ce45f6d86200ec97a0cfc33a04beb7895afbc938",
+   "rvt_swarm/openloop_v3/selection.py": "81dbe0d05d6b36e491551a6aad7d565a3013cfe199de6eaa6c019b8d9b57e2e0",
+   "rvt_swarm/openloop_v3/synthetic.py": "a9bbe36d6b466cd4c41d87a04e74827b042cb40c182368c8b77202db6776f7c0",
+   "tests/test_stage5b_bootstrap.py": "72bea96e1cd64e869828b065574bae822f4a366c26fcbe03827746ffd5a6b14c",
+   "tests/test_stage5b_engine.py": "80942e0f8a2d9e56f1389f9c9207b5f09908fc1da935415547fd3886e283f363",
+   "tests/test_stage5b_guards_and_checkpoints.py": "32f54d5fddf6a66ed278af3f2684b46c53b0508dfe0f59acbce75c26299f8bf8",
+   "tests/test_stage5b_m1_contract.py": "c4e816e3f624e41527e9163194350282ddd831459132e6d70e1f6964f31d16c5",
+   "tests/test_stage5b_mechanical_training.py": "eb84495d1b9dbaadc02ea6aac84253f14def50f7e01afe356343401be9cfdda2",
+   "tests/test_stage5b_rehydration.py": "0121e74787a16d76219e419471f95c1d97cf49793245b7858ff65ec76c9ef598",
+   "tests/test_stage5b_weighting_and_metrics.py": "12799501068d630219a09bac8d6b905eaf7e146ec499091cddccf1e7b355aac8"
+  },
+  "closed_loop_authority_documents_modified": [],
+  "frozen_authority_files_modified": [],
+  "source_commit": "128331938075621328e42168abb5d3517fa45c29",
+  "stage5b_base_commit": "48b302226d99e3fb7fc6e720a972644cc4493a23",
+  "tracked_files": 1818,
+  "training_image_source_base_commit": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "tree_sha256_git": "38ecff2eaf3ed8f7fae9746ccab687f1c9a87ab4",
+  "working_tree_clean": true
+ },
+ "m1": {
+  "contract_verified": true,
+  "input_dimension": 56
+ },
+ "mechanical_qualification": {
+  "M1": {
+   "event_order_match": true,
+   "metric_trace": [
+    [
+     2,
+     0.710254812241
+    ],
+    [
+     4,
+     0.700074470043
+    ],
+    [
+     6,
+     0.695814061165
+    ],
+    [
+     8,
+     0.696933543682
+    ]
+   ],
+   "metric_trace_match": true,
+   "residual_state_sha256_after": null,
+   "residual_state_sha256_before": null,
+   "residual_unchanged": true,
+   "run_1_state_dict_sha256": "af91ba59ec7735ae87fd0f48277edb5cc16d30b64565bcf68b855b61954b0005",
+   "run_2_state_dict_sha256": "af91ba59ec7735ae87fd0f48277edb5cc16d30b64565bcf68b855b61954b0005",
+   "state_dict_match": true,
+   "steps": 8
+  },
+  "M2": {
+   "event_order_match": true,
+   "metric_trace": [
+    [
+     2,
+     0.70660815239
+    ],
+    [
+     4,
+     0.741639685631
+    ],
+    [
+     6,
+     0.793192958832
+    ],
+    [
+     8,
+     0.889164757729
+    ]
+   ],
+   "metric_trace_match": true,
+   "residual_state_sha256_after": "84e06e1c1d0ac211a8795b0c48a3f36f80c8cf57b15eb1b71b68068af2c9c9b9",
+   "residual_state_sha256_before": "84e06e1c1d0ac211a8795b0c48a3f36f80c8cf57b15eb1b71b68068af2c9c9b9",
+   "residual_unchanged": true,
+   "run_1_state_dict_sha256": "0d8fe08b15b33e22bed669ce2db582e7a5fbe93cc08d98b3cda6ffd21c1ce580",
+   "run_2_state_dict_sha256": "0d8fe08b15b33e22bed669ce2db582e7a5fbe93cc08d98b3cda6ffd21c1ce580",
+   "state_dict_match": true,
+   "steps": 8
+  }
+ },
+ "name": "OPEN_LOOP_V3_TRAINING_DRIVER_QUALIFICATION",
+ "note": "this artifact records that the implementation is faithful and fail-closed. It is not a scientific-training authorization, and a future authorization artifact must bind it rather than replace it.",
+ "official_train_structural_census": {
+  "backward_passes": 0,
+  "candidates_by_replica_count": {
+   "1": 8000,
+   "3": 2248
+  },
+  "dataset_origin": "OFFICIAL",
+  "dataset_split": "v3_train",
+  "events": 5124,
+  "events_by_fold": {
+   "A": 2561,
+   "B": 2563
+  },
+  "events_by_team_size": {
+   "12": 984,
+   "16": 866,
+   "5": 1099,
+   "6": 1112,
+   "8": 1063
+  },
+  "fold_assignment_failures": 0,
+  "m0_official_value_fitted": false,
+  "m1_feature_failures": 0,
+  "m2_batch_failures": 0,
+  "mode": "inspect",
+  "optimizer_steps": 0,
+  "optimizers_constructed": 0,
+  "rehydration_failures": 0,
+  "rows_rehydrated": 92670,
+  "untrained_forward_scores_reported": false
+ },
+ "open_loop_v3_training_driver_qualification_root": "9bfb1f2ab7882f7d1ae19fe0fdfb7b6659de1c254422c842973fe50f9892e3e3",
+ "permissions_after_stage": {
+  "model_driver_implementation_authorized": "COMPLETE",
+  "protected_domain_access_authorized": false,
+  "scientific_training_authorized": false,
+  "validation_unblinding_authorized": false
+ },
+ "role": "ENGINEERING_EXECUTION_AUTHORITY",
+ "schema_version": "rvt-open-loop-v3-training-driver-qualification/v1",
+ "scientific_state": {
+  "frozen_preregistration_changed": false,
+  "frozen_scientific_seeds_trained": [],
+  "frozen_v3_science_changed": false,
+  "official_m0_fitted": false,
+  "official_m0_value_fitted": false,
+  "official_optimizer_steps": 0,
+  "protected_domain_records_opened": 0,
+  "scientifically_trained_checkpoint_created": false,
+  "scientifically_trained_checkpoints_created": 0,
+  "seeds_11_29_47_trained": false,
+  "validation_records_opened": 0
+ },
+ "tests": {
+  "existing_tests_modified_or_weakened": false,
+  "focused_stage5b_suite": {
+   "failed": 0,
+   "passed": 139,
+   "seconds": 6.03
+  },
+  "full_repository_suite": {
+   "failed": 0,
+   "passed": 4610,
+   "seconds": 391.47
+  }
+ },
+ "training_runtime": {
+  "dependency_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+  "generation_dockerfile_sha256": "59d35736321ab8095cf138712e4e5abdc7ec8397a1c550a5836cd6cb9c9620d4",
+  "generation_image_untouched": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "host_source_mounted_over_executable_code": false,
+  "image_digest": "sha256:b924b3ed9dbf330ec355da5651f30375b75a66f0898d6e6b6b5f10081212ea20",
+  "image_tag": "rvt-v3-training:12833193",
+  "numpy": "2.0.2",
+  "platform": "linux/amd64 on Windows 11 -> WSL2 Ubuntu-24.04 -> Docker",
+  "python": "3.9.6",
+  "revision_label": "128331938075621328e42168abb5d3517fa45c29",
+  "role_label": "OPEN_LOOP_V3_TRAINING_RUNTIME",
+  "scientific_training_authorized_label": "false",
+  "torch": "2.8.0+cpu",
+  "training_dockerfile_sha256": "e1500231864142ff967131068c6cdd2f96827d3955df702f123dffac55fbbf79"
+ }
+}
