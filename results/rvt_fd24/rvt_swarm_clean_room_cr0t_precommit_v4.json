@@ -1,0 +1,88 @@
+{
+ "branch": "research/rvt-cleanroom-cr0-global-contract-v1",
+ "clean_room_data_generated_before_this_precommit": false,
+ "clean_room_model_trained_before_this_precommit": false,
+ "closes": "DATASET_COMPOSITION_AUTHORITY",
+ "composition_fingerprint": "830f0578b3ee7296e8b0c1c5548cbdb899c58882bec64aa6bd0f686527cd32d4",
+ "contract_v4_file": "results/rvt_fd24/rvt_swarm_clean_room_global_contract_v4.json",
+ "contract_v4_file_sha256": "5ad325c8dd68937eb130316f2df9802aaa78d287c4b738e1066d98ea9e93cb52",
+ "cr0t_contract_carrying_commit": "316e2ad57916d10d6793764441b334b7d3720756",
+ "cr0t_contract_tree_commit": "662597e92a70b50011c56004d2ed88c01a6bbe91",
+ "cr0t_precommit_head_commit": "316e2ad57916d10d6793764441b334b7d3720756",
+ "cr1_generation_attempts_before_this_precommit": 0,
+ "every_prior_scientific_block_untouched": true,
+ "executable_contract_root": {
+  "__init__.py": "7b7c98fa88854d1ad24fd96d13d4e15c78fc4ec512490a4228e957726eac6a08",
+  "a3_control.py": "0983aadd0f78aaaa533e3bcc7c9cc2ff99f2e1a5aa1a193ec573ecb7b87c9ec0",
+  "benefit_contract.py": "2636d444d6b79f53c5ff2f60b3673cae604c41f0af69d07e2834de7e7e69510f",
+  "calibration_contract.py": "6b9fa5c724442a27ae7c4da6761995140c591703592cdfa8ebd270cfaa5227a7",
+  "closed_loop_engine.py": "afc2d321f83a8129181bd2e03cf727f8a6d0e91051e1bbed75d70611c2bbe755",
+  "composition.py": "52353bdfef915d8f8350e1d71de30221cdd891ecbc0e113b98d8b80872cc5d86",
+  "development_selection.py": "4f2456e08cf71665335c0d0c1ceeaf1596ce2f204b956c43c140dd26f21cdd4a",
+  "family_statistic.py": "a4baaa9d163cb040d9c2f77930e406f74607257f38c05fb4b012def502e5e64d",
+  "oracle_contract.py": "e2c9597c8e60f7f3ab699a6740b3df42e052dc90d7ff0d26830dc18193a872a1",
+  "safety_contract.py": "83c0c33048a3fa2efe20636580172e0dc6eb69cb8d2d69a9bd77c2a03e881fbc",
+  "selection.py": "cf164e14b6e98d521e99830820d972311c75d1f11717d6aa0ea76cd7c9d6589d",
+  "universe.py": "27de28807f9158c585b1c36f54eef7a7411d95a6cf6228db68a937bad4a6e397"
+ },
+ "generation_seeds": {
+  "CL-DEV-R": 3304876695,
+  "MAIN-R": 2439304766,
+  "MECH-R": 3420783843,
+  "PROTECTED-R": 1912935458,
+  "SELECT-R": 3751336945,
+  "TRAIN-R": 3650100380
+ },
+ "history_rewriting_after_this_point": "FORBIDDEN",
+ "lineage": [
+  {
+   "preserved": true,
+   "root": "16aa431b290eae42ad62b0f72fae22ed3a2e3b7be138db4cfdda4a636bd87c02",
+   "tag": "rvt-cleanroom-cr0-v1",
+   "tag_commit": "7e1d33cd1eaa71d31afe659bbcf65bb67b782496",
+   "version": "V1"
+  },
+  {
+   "preserved": true,
+   "root": "90e5d4d9ee6b4388596f3a48ce5e62e0a8f446f08c7f7020d6ceda800a082740",
+   "tag": "rvt-cleanroom-cr0r-v2",
+   "tag_commit": "4b81b799cec48870099f1bf24a5ccdacbfd7ecea",
+   "version": "V2"
+  },
+  {
+   "preserved": true,
+   "root": "90d374d52f47319949cfafd724e83996d9d9dd95a71eb26ab6fed0116252e905",
+   "tag": "rvt-cleanroom-cr0s-v3",
+   "tag_commit": "662597e92a70b50011c56004d2ed88c01a6bbe91",
+   "version": "V3"
+  }
+ ],
+ "name": "RVT_SWARM_CLEAN_ROOM_CR0T_PRECOMMIT_V4",
+ "out_of_scope_changes": [],
+ "qualification_suites": {
+  "cr0r": "b4b2839af99f77d511e0957e6c61b5676dc69ab413154575bb3d73b60389e394",
+  "cr0s": "83a238fd93fc59b1a7ed9249fc3c92ac4adae5f8e123b635be018aee3ddf82fd",
+  "cr0t": "2542042a66c2c683a35f99e3bb6564c8c02a78583d565b8bdf4b8da5eda64a64",
+  "engine": "c3eec6752916e299197519fc55ba4d17eacacb29c433b0a1d28397ec6eaebf4f"
+ },
+ "remote": "https://github.com/duy12i1i7/rvt.git",
+ "role_source_episode_counts": {
+  "CL-DEV-R": 300,
+  "MAIN-R": 900,
+  "MECH-R": 900,
+  "PROTECTED-R": 600,
+  "SELECT-R": 300,
+  "TRAIN-R": 1200
+ },
+ "rvt_swarm_clean_room_cr0t_precommit_root": "860147f80ebe43c3fdc35169a58badac682dfb5a3f98bd00507ccbc3c4f637f9",
+ "rvt_swarm_clean_room_global_contract_v4_root": "74e02ce55c0793dc7f9b81d0181ac5bded0e4cc4ff169564107629473fab330a",
+ "schema_version": "rvt-swarm-clean-room-precommit/v4",
+ "stage": "CR-0T",
+ "status": "IMMUTABLE_PRECOMMIT_BEFORE_ANY_CLEAN_ROOM_DATA",
+ "tag": "rvt-cleanroom-cr0t-v4",
+ "timestamp_utc": "2026-08-25T17:16:58Z",
+ "total_source_episodes": 4200,
+ "total_tests_passing": 102,
+ "v3_to_v4_diff_file_sha256": "e839c636de55a0c4a88611705982eef3e36a1d94363ead739d88a1fba289a2a9",
+ "v3_to_v4_diff_root": "90e84491f1ffaaf31e9bfb1a9e4c4f9b08b9be40fc64f28dc508efd05c462887"
+}
