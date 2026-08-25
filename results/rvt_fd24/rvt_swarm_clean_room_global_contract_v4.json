@@ -1,0 +1,1838 @@
+{
+ "a3_mechanism_control": {
+  "M1_vs_M2_alone_admissible_for_message_passing_causality": false,
+  "activation": "relu",
+  "architecture": "permutation-invariant pooled local MLP: input projection to width 184, then 3 residual blocks of LayerNorm -> Linear -> ReLU -> Linear, then LayerNorm and a single logit head",
+  "architecture_or_recipe_change_after_TRAIN_R_exists": "FORBIDDEN",
+  "blocks": 3,
+  "candidate_embedding_dimension": 16,
+  "candidate_table_size": 2,
+  "capacity_matching_criterion": "total trainable parameter count of the A3 model versus M2's recoverability-path parameter count",
+  "capacity_matching_tolerance_fraction": 0.02,
+  "does_not_support_claim": "it does not establish that any particular architectural detail of M2 is necessary, does not identify WHICH relational information matters, does not establish closed-loop or safety benefit on its own, and does not license a general claim that graph neural networks are required for recoverability",
+  "dropout_probability": 0.0,
+  "forbidden_inputs": [
+   "family",
+   "layout identity",
+   "episode identity",
+   "split",
+   "study",
+   "team size N",
+   "robot id",
+   "raw timestamp identity",
+   "lifecycle identity",
+   "seed",
+   "R",
+   "k",
+   "k/R",
+   "Target-V4 disposition",
+   "termination information",
+   "future rollout information",
+   "publication identity metadata"
+  ],
+  "hidden_dimension": 184,
+  "implementation": "rvt_swarm/cleanroom/a3_control.py",
+  "implementation_sha256": "0983aadd0f78aaaa533e3bcc7c9cc2ff99f2e1a5aa1a193ec573ecb7b87c9ec0",
+  "input_dimension": 302,
+  "inputs": "the SAME admitted set as M2 (node_x, node_feature_valid_mask, node_kind, edge_index, edge_attr, edge_feature_valid_mask, edge_type, root_index, candidate_topology_id), consumed as: root node features and mask, mean and max pooling over one-hop neighbor node features and masks, mean and max pooling over incident edge features and masks, and the candidate-topology embedding",
+  "m2_recoverability_path_parameters": 262529,
+  "message_passing_removal": "edge_index is used ONLY to identify one-hop incidence to the root. There is no propagation between non-root nodes, no iterated exchange, and no attention. A single unordered aggregation replaces the message-passing blocks.",
+  "neighbor_information_visible": true,
+  "neighbor_visibility_note": "neighbor information is retained through permutation-invariant pooling. Removing it would confound 'no message passing' with 'no neighbors' and would not isolate the mechanism.",
+  "normalization": "layer_norm",
+  "numerical_dtype": "float32",
+  "parameter_count": 261681,
+  "participates_in_SELECT_R_family_selection": false,
+  "planned_training_stage": "CR-2, from scratch on TRAIN-R",
+  "purpose": "isolate ITERATIVE MESSAGE PASSING over the ego graph, with capacity and available information held fixed",
+  "residual_mismatch_absolute": -848,
+  "residual_mismatch_predeclared_limitation": "exact integer capacity equality is not attainable at integer width. Width 184 is the closest achievable match and is 848 parameters BELOW M2, i.e. A3 is very slightly under-parameterised; this direction is conservative for a claim that message passing helps, since it cannot inflate A3.",
+  "residual_mismatch_relative": -0.0032301193391968126,
+  "runtime_and_checkpoint_binding_for_the_mechanism_study": "may be bound at CR-8; the scientific definition above is immutable from now",
+  "seeds": [
+   11,
+   29,
+   47
+  ],
+  "status": "SCIENTIFIC_DEFINITION_IMMUTABLE_FROM_CR0R",
+  "supports_claim": "if full RVT beats A3 under the frozen mechanism contrast, that supports iterative message passing over the ego graph contributing beyond a capacity-matched permutation-invariant pooled model with the same inputs",
+  "topology_identity_visible": true,
+  "topology_visibility_note": "A3 is conditioned on the candidate topology at M2's embedding width. It is NOT the topology-blinded ablation; that contrast is A2.",
+  "training_recipe": {
+   "batch": "16 decision-event groups",
+   "checkpoint_rule": "strict lower held-out TRAIN-R NLL; on exact tie the EARLIER step",
+   "determinism": [
+    "torch.use_deterministic_algorithms(True)",
+    "torch.manual_seed(seed) plus a per-fit generator",
+    "loader_v3.deterministic_event_order(seed=...) -- counter-free, worker-order invariant"
+   ],
+   "device": "CPU",
+   "evaluation_interval_steps": 1000,
+   "gradient_norm_clip": 1.0,
+   "improvement_rule": "STRICT_IMPROVEMENT_ONLY",
+   "initialization": "framework default under torch.manual_seed(seed) plus a per-fit generator; no custom initialization scheme",
+   "learning_rate": 0.001,
+   "loss": "the same event-equal grouped Bernoulli NLL as M1 and M2",
+   "lr_schedule_after_warmup": "CONSTANT",
+   "maximum_optimizer_steps": 50000,
+   "min_delta": 0.0,
+   "note": "identical to the frozen M2 recipe, so the contrast is not confounded by optimization settings",
+   "optimizer": "AdamW",
+   "patience_scheduled_evaluations": 8,
+   "precision": "float32",
+   "refit_step_rule": {
+    "clamp": "[1000, 50000]",
+    "formula": "S*(f, s) = 1000 * ceil( (s_A + s_B) / 2000 )",
+    "inputs": "s_A and s_B, the selected scheduled steps for (c*, seed) on folds A and B; each is a multiple of 1000",
+    "per_seed": true,
+    "step_count_is_not_rescaled_for_the_larger_refit_pool": true,
+    "why_ceil": "the mean of two multiples of 1000 can land on a half-multiple; ceiling to the next 1000 is unambiguous and needs no half-rounding convention",
+    "why_not_rescaled": "optimizer STEPS, not epochs, are the frozen budget unit; the refit therefore takes the same number of gradient updates while drawing from a 2x larger pool, which is the conservative choice"
+   },
+   "stopping_rule": "early stopping on the held-out TRAIN-R internal fold only",
+   "tie_rule": "on machine-visible equality choose the EARLIER checkpoint",
+   "warmup_steps": 2000,
+   "weight_decay": 0.0001,
+   "weighting": "identical to the frozen weighting contract"
+  }
+ },
+ "adversarial_qualification": {
+  "closed_loop_negative_fixtures": {
+   ">40 development configurations": "COVERED",
+   "CL-DEV final configuration selected outside frozen rule": "COVERED",
+   "changed benefit threshold": "COVERED",
+   "extra episode": "COVERED",
+   "omitted episode": "COVERED",
+   "oracle threshold changed": "COVERED",
+   "progress-pass/safety-fail incorrectly marked success": "COVERED",
+   "safety result ignored": "COVERED",
+   "subjective alternate metric path": "COVERED",
+   "swapped treatment/comparator": "COVERED",
+   "unlogged configuration used as final": "COVERED",
+   "wrong CI direction": "COVERED",
+   "wrong multiplicity rule": "COVERED",
+   "wrong primary benefit endpoint": "COVERED",
+   "wrong tie-breaker": "COVERED"
+  },
+  "composition_negative_fixtures": {
+   "attempt to resize MAIN-R after CL-DEV": "COVERED",
+   "attempt to resize MECH-R after MAIN-R": "COVERED",
+   "attempt to resize PROTECTED-R after reveal": "COVERED",
+   "changed N schedule": "COVERED",
+   "changed total count": "COVERED",
+   "clean-room role overlap": "COVERED",
+   "duplicate expected episode ID": "COVERED",
+   "duplicated family": "COVERED",
+   "extra expected episode ID": "COVERED",
+   "missing episodes-per-cell": "COVERED",
+   "missing expected episode ID": "COVERED",
+   "omitted family": "COVERED",
+   "pilot identity overlap": "COVERED",
+   "seed derivation mismatch": "COVERED",
+   "unbalanced allocation": "COVERED",
+   "wrong generation seed": "COVERED",
+   "wrong layout count": "COVERED",
+   "wrong offset": "COVERED"
+  },
+  "cr0r_suite": {
+   "covers": [
+    "four primary safety endpoints fully specified",
+    "frozen margin values",
+    "strictness at exactly the margin",
+    "absolute floor can fail a non-inferior result",
+    "direction of harm",
+    "secondary endpoint has no pass rule",
+    "intersection-union requires every endpoint",
+    "missing verdict fails closed",
+    "progress without safety fails the central claim",
+    "A3 capacity match within tolerance",
+    "A3 width is the closest achievable",
+    "A3 sees topology identity",
+    "A3 contains no message-passing primitive"
+   ],
+   "path": "tests/test_cleanroom_cr0r.py",
+   "result": "16 passed",
+   "sha256": "b4b2839af99f77d511e0957e6c61b5676dc69ab413154575bb3d73b60389e394",
+   "tests": 16
+  },
+  "cr0s_suite": {
+   "path": "tests/test_cleanroom_cr0s.py",
+   "result": "28 passed",
+   "sha256": "83a238fd93fc59b1a7ed9249fc3c92ac4adae5f8e123b635be018aee3ddf82fd",
+   "tests": 28
+  },
+  "cr0t_suite": {
+   "path": "tests/test_cleanroom_cr0t.py",
+   "result": "29 passed",
+   "sha256": "2542042a66c2c683a35f99e3bb6564c8c02a78583d565b8bdf4b8da5eda64a64",
+   "tests": 29
+  },
+  "engine_suite_at_CR0": {
+   "covers": [
+    "missing episode",
+    "extra episode",
+    "duplicate episode",
+    "zero-yield episode retained",
+    "wrong layout membership",
+    "missing seed",
+    "extra seed",
+    "wrong seed set",
+    "best-seed substitution",
+    "wrong family statistic",
+    "ragged event counts",
+    "frozen bootstrap constants",
+    "strict eligibility at zero",
+    "inverted interval",
+    "fixed downstream seed",
+    "calibration non-identifiability",
+    "calibration integrity violation hard-fails",
+    "temperature scaling not activated"
+   ],
+   "path": "tests/test_cleanroom_engine.py",
+   "result": "29 passed",
+   "sha256": "c3eec6752916e299197519fc55ba4d17eacacb29c433b0a1d28397ec6eaebf4f",
+   "tests": 29
+  },
+  "negative_fixtures_that_must_fail_closed": [
+   "missing episode",
+   "extra episode",
+   "duplicate episode",
+   "zero-yield episode omitted",
+   "wrong layout membership",
+   "wrong checkpoint",
+   "wrong seed",
+   "missing seed",
+   "extra seed",
+   "wrong family statistic",
+   "best-seed substitution",
+   "wrong bootstrap count",
+   "wrong bootstrap seed",
+   "wrong metric",
+   "wrong event weighting",
+   "calibration integrity violation",
+   "unauthorized optimizer path",
+   "unauthorized temperature scaling",
+   "unauthorized threshold tuning"
+  ],
+  "qualification_root_recorded_at": "each stage that runs the suite it depends on",
+  "required_before_any_clean_room_reveal": true,
+  "still_to_qualify_at_CR1_and_beyond": [
+   "wrong checkpoint",
+   "wrong bootstrap count",
+   "wrong bootstrap seed",
+   "wrong metric",
+   "wrong event weighting",
+   "unauthorized optimizer path",
+   "unauthorized threshold tuning"
+  ],
+  "total_tests_passing_at_CR0R": 45,
+  "total_tests_passing_at_CR0S": 73,
+  "total_tests_passing_at_CR0T": 102
+ },
+ "amendment": {
+  "all_other_v3_decisions": "PRESERVED",
+  "amends": "RVT_SWARM_CLEAN_ROOM_GLOBAL_CONTRACT_V3",
+  "lineage": [
+   "RVT_SWARM_CLEAN_ROOM_GLOBAL_CONTRACT_V1",
+   "RVT_SWARM_CLEAN_ROOM_GLOBAL_CONTRACT_V2",
+   "RVT_SWARM_CLEAN_ROOM_GLOBAL_CONTRACT_V3"
+  ],
+  "no_clean_room_data_existed": true,
+  "no_clean_room_empirical_outcome_informed_composition": true,
+  "no_clean_room_model_existed": true,
+  "no_cr1_generation_attempt_occurred": true,
+  "reason": "CR-1 returned D -- CLEAN_ROOM_TRAIN_R_GENERATION_CONTRACT_INCOMPLETE -- because V3 bound the generator, offsets and every scientific rule but never bound the dataset composition. This amendment supplies exactly that missing authority.",
+  "scope": [
+   "dataset composition for all six roles",
+   "sample-size authority",
+   "layout-instance allocation",
+   "generation-seed authority",
+   "source-episode enumeration authority",
+   "the qualification requirements those imply"
+  ],
+  "v1_preserved_unmodified": true,
+  "v1_root": "16aa431b290eae42ad62b0f72fae22ed3a2e3b7be138db4cfdda4a636bd87c02",
+  "v1_tag": "rvt-cleanroom-cr0-v1",
+  "v2_preserved_unmodified": true,
+  "v2_root": "90e5d4d9ee6b4388596f3a48ce5e62e0a8f446f08c7f7020d6ceda800a082740",
+  "v2_tag": "rvt-cleanroom-cr0r-v2",
+  "v3_preserved_unmodified": true,
+  "v3_root": "90d374d52f47319949cfafd724e83996d9d9dd95a71eb26ab6fed0116252e905",
+  "v3_tag": "rvt-cleanroom-cr0s-v3"
+ },
+ "baselines_and_ablations": {
+  "A1_recoverability_removed": "the identical selector with the recoverability score replaced by a constant, isolating the selector machinery from the estimate",
+  "A2_topology_blinded": "the predictor evaluated with candidate_topology_id held fixed, testing whether q(o_i, tau) is really q(o_i); maps to the TOPOLOGY_CONDITIONING_WEAKNESS falsification condition",
+  "A3_capacity_matched_non_message_passing": "FROZEN EXACTLY at CR-0R; see the a3_mechanism_control block",
+  "B0_fixed_topology": "fixed COMPACT and fixed LINE, no adaptation",
+  "B1_reactive_adaptation": "topology adaptation from instantaneous geometry and safety only, with no recoverability estimate",
+  "M1_vs_M2_alone_may_claim_message_passing_causality": false,
+  "O1_oracle": "development-only unless separately justified",
+  "R1_full_rvt": "the frozen winning family at the downstream representative seed, recoverability-aware counterfactual topology adaptation"
+ },
+ "calibration_contract": {
+  "all_other_calibration_contract_violations": "HARD_FAIL",
+  "broad_exception_catching_reinterpreted_as_non_identifiability": "FORBIDDEN",
+  "elevation_requires": "an explicit hypothesis frozen before the relevant data exists",
+  "fixes": "the pilot wrapper that caught CalibrationContractError as a bare type across all families and wrote a hard-coded, unverified explanation into a sealed record",
+  "identifiability_tested_first_and_explicitly": true,
+  "implementation": "rvt_swarm/cleanroom/calibration_contract.py::clean_room_calibration",
+  "implementation_sha256": "6b9fa5c724442a27ae7c4da6761995140c591703592cdfa8ebd270cfaa5227a7",
+  "participates_in_selection": false,
+  "role": "SECONDARY_DIAGNOSTIC",
+  "rule": "if the number of distinct logits < 2 then calibration_identifiable = false, intercept = null, slope = null",
+  "temperature_scaling": "NOT_ACTIVATED"
+ },
+ "central_claim_conjunction": {
+  "benefit_fail": "CENTRAL_CLAIM_FAILS_BENEFIT_NOT_DEMONSTRATED",
+  "benefit_pass_safety_fail": "CENTRAL_CLAIM_FAILS_SAFETY_NON_INFERIORITY_NOT_MET",
+  "implementation": "rvt_swarm/cleanroom/closed_loop_engine.py::evaluate_closed_loop",
+  "rule": "H-CL1 BENEFIT PASS *and* H-CL2 SAFETY PASS => CENTRAL CLOSED-LOOP CLAIM SUPPORTED. Any other combination => NOT SUPPORTED.",
+  "safety_contract_unchanged_from_v2": true
+ },
+ "central_thesis": {
+  "final_novelty_requires": "CLOSED_LOOP_EVIDENCE",
+  "predictor_role": "an enabling component, not the claim",
+  "statement": "RVT-Swarm is a decentralized swarm-control method in which each robot uses only locally available sensing and neighbor messages to estimate probabilistic future recoverability under candidate local interaction topologies, evaluates those topologies counterfactually, and adapts its local interaction topology to improve swarm recovery, task progress and liveness while preserving obstacle avoidance and safety.",
+  "this_is_a_predictor_benchmark_paper": false
+ },
+ "closed_loop_analysis_engine": {
+  "consumes": [
+   "the manifest-enumerated source episode universe",
+   "the frozen arm ids",
+   "the frozen endpoint definitions",
+   "the frozen treatment contrast",
+   "the frozen bootstrap and test parameters",
+   "the safety-contract result"
+  ],
+  "executable_completion": "the implementation exists and is qualified; the closed-loop data adapters that feed it are written at the stage that first needs them",
+  "fails_closed_on": [
+   "a swapped treatment and comparator",
+   "bootstrap parameters that differ from the frozen contract",
+   "an endpoint outside the frozen benefit sequence",
+   "an episode universe mismatch",
+   "a missing safety verdict",
+   "an invalid-episode fraction above the frozen maximum"
+  ],
+  "implementation_sha256": "afc2d321f83a8129181bd2e03cf727f8a6d0e91051e1bbed75d70611c2bbe755",
+  "mathematical_contract_immutable_from": "CR-0S",
+  "orchestration_may_reinterpret_these_values": false,
+  "returns": [
+   "h_cl1_pass",
+   "h_cl2_pass",
+   "central_claim: CENTRAL_CLAIM_SUPPORTED or CENTRAL_CLAIM_NOT_SUPPORTED"
+  ],
+  "single_qualified_entry_point": "rvt_swarm/cleanroom/closed_loop_engine.py::evaluate_closed_loop"
+ },
+ "closed_loop_architecture": {
+  "bound_components": {
+   "admissibility_scope": "rvt_swarm/decentralized/online_topology_scope.py",
+   "candidate_topologies": "rvt_swarm/topology_registry.py -- KEEP=0, LINE=2, COMPACT=5",
+   "consensus_and_messaging": "rvt_swarm/decentralized/consensus.py, comms.py, transition_protocol.py",
+   "counterfactual_chooser": "rvt_swarm/safety.py::choose_counterfactual_topology",
+   "ego_graph": "rvt_swarm/decentralized/ego_graph_v2.py",
+   "local_control": "rvt_swarm/decentralized/local_controller.py, robot_local_controller.py",
+   "local_safety_projection": "rvt_swarm/decentralized/local_safety_projection.py::RobotLocalSafetyProjection",
+   "selector": "rvt_swarm/safety.py::select_topology_from_score_signal",
+   "switch_readiness": "rvt_swarm/safety.py::topology_switch_readiness"
+  },
+  "centralized_computation_allowed_only_for": "offline training and explicitly declared development diagnostics",
+  "forbidden_final_runtime_dependency": "a centralized global-state controller",
+  "information_flow": [
+   "local sensing + neighbor messages",
+   "local graph / local observations",
+   "frozen predictor q_i(o_i, tau)",
+   "candidate-topology counterfactual evaluation",
+   "decentralized topology selector",
+   "nominal local swarm control",
+   "local obstacle/safety projection",
+   "actuation"
+  ],
+  "known_integration_gap": "select_topology_from_score_signal currently thresholds a score at >= 0.0 and carries no dwell or hysteresis parameter. Mapping a probability q in (0,1) onto that score, and any dwell or hysteresis, are integration decisions that must be developed on CL-DEV-R inside the declared design space and frozen at CR-8.",
+  "runtime_decentralization": "REQUIRED"
+ },
+ "closed_loop_development_space": {
+  "adaptivity_boundary": {
+   "every_configuration_must_be": "registered before execution and entered in the ledger",
+   "humans_and_agents_may": [
+    "inspect diagnostics",
+    "understand failure modes",
+    "propose the next configuration",
+    "tune only the parameters this contract already declares tunable"
+   ],
+   "the_final_configuration_must": "satisfy the frozen objective and selection rule",
+   "the_final_selection_criterion_may_not_be_adaptive": true,
+   "the_method_may_be_developed_adaptively": true
+  },
+  "development_budget": {
+   "ledger": "an append-only hash-chained CL-DEV-R ledger; every evaluated configuration is recorded with its parameters and its development endpoints before the next is run",
+   "maximum_evaluated_configurations": 40,
+   "stopping_procedure": "stop at 40 configurations, or after 3 consecutive configurations fail to improve the primary development endpoint, whichever comes first",
+   "unlogged_configuration": "counts as a protocol violation"
+  },
+  "final_configuration_selection": {
+   "eligibility": [
+    "registered in the append-only hash-chained ledger BEFORE execution",
+    "the run completed over the full CL-DEV-R episode universe",
+    "the invalid-episode fraction is within the frozen maximum"
+   ],
+   "failed_simulations": "a configuration whose run did not complete is inadmissible; it still consumes budget and remains in the ledger",
+   "forbidden": [
+    "visual inspection followed by subjective choice",
+    "choosing whichever metric looks best",
+    "changing the objective mid-development",
+    "hidden or unlogged runs"
+   ],
+   "implementation": "rvt_swarm/cleanroom/development_selection.py",
+   "implementation_sha256": "4f2456e08cf71665335c0d0c1ceeaf1596ce2f204b956c43c140dd26f21cdd4a",
+   "invalid_episodes": "worst-case imputation, identical to the H-CL1 rule",
+   "no_admissible_configuration_outcome": "CLOSED_LOOP_DEVELOPMENT_NO_ADMISSIBLE_CONFIGURATION",
+   "on_no_admissible_configuration": "DO NOT create MAIN-R",
+   "primary_objective": "maximise the point estimate of the primary-endpoint difference against B1 on CL-DEV-R, among admissible configurations",
+   "safety_feasibility_gate": "the configuration must satisfy the frozen H-CL2 safety non-inferiority rule against B1 on CL-DEV-R. A configuration that improves progress while failing this gate is INADMISSIBLE; it is removed from consideration entirely rather than weighed against its progress gain.",
+   "status": "EXACT -- no subjective final choice remains",
+   "stopping_rule": "stop at 40 configurations, or after 3 consecutive configurations fail to improve the primary objective, whichever comes first",
+   "tie_breakers_in_strict_order": [
+    "1. higher lower95 bound on the primary difference",
+    "2. lower deadlock rate",
+    "3. lower irreversible-collapse rate",
+    "4. higher minimum clearance",
+    "5. fewer topology switches per episode",
+    "6. lowest ledger index, i.e. the earliest registered configuration"
+   ],
+   "tie_strictness": "strict inequality at each level; only exact equality falls through to the next, and criterion 6 is total, so the outcome is always deterministic",
+   "unlogged_configuration": "a protocol violation; it may never be the final configuration and the selector fails closed if one is present"
+  },
+  "may_not_change": [
+   "the central recoverability target",
+   "the selected predictor family",
+   "the predictor trained weights",
+   "the predictor inputs (the frozen input contract)",
+   "the decentralization requirement",
+   "the central scientific thesis"
+  ],
+  "tunable_on_CL_DEV_R": [
+   "the probability-to-score mapping and its topology-selection threshold",
+   "hysteresis",
+   "switching dwell time",
+   "consensus parameters",
+   "recoverability aggregation across robots and candidates",
+   "nominal-controller gains",
+   "safety-projection integration parameters"
+  ]
+ },
+ "closed_loop_hypotheses": {
+  "H-CL1": "recoverability-aware decentralized topology adaptation improves recovery, task progress and liveness relative to the frozen no-recoverability reactive comparator",
+  "H-CL2": "the improvement is achieved without unacceptable degradation in obstacle avoidance and safety",
+  "H-CL3": "removing or blinding the recoverability-topology mechanism reduces the benefit, supporting the proposed mechanism",
+  "exact_endpoints_and_effect_definitions_resolved_before": "FULLY RESOLVED. Safety endpoints, margins and rule were frozen at CR-0R; the H-CL1 benefit endpoint, estimator, threshold, multiplicity and success rule are frozen at CR-0S. No closed-loop outcome definition remains open.",
+  "no_predictor_NLL_result_alone_can_satisfy_these": true
+ },
+ "cr0_source_commit": "662597e92a70b50011c56004d2ed88c01a6bbe91",
+ "cr0_state": {
+  "CL-DEV-R_exists": false,
+  "MAIN-R_exists": false,
+  "MECH-R_exists": false,
+  "PROTECTED-R_exists": false,
+  "SELECT-R_exists": false,
+  "TRAIN-R_exists": false,
+  "clean_room_dataset_generated": false,
+  "clean_room_model_trained": false,
+  "closed_loop_simulation_run": false,
+  "cr1_generation_attempts": 0,
+  "selection_run": false
+ },
+ "dataset_composition": {
+  "composition_fingerprint": "830f0578b3ee7296e8b0c1c5548cbdb899c58882bec64aa6bd0f686527cd32d4",
+  "declared_limitation": "TRAIN-R reaches the pilot TRAIN episode budget with ONE layout instance per family instead of the pilot's two, because V3 froze TRAIN-R to a single generator offset. The episode budget and per-cell allocation are preserved exactly; layout-instance diversity is halved relative to pilot TRAIN. This is recorded rather than silently absorbed.",
+  "generation_seed_authority": {
+   "algorithm": "seed(role) = int.from_bytes(SHA256(V3_root | role | 'GENERATION')[:8], 'big') mod 4294967296",
+   "canonical_byte_encoding": "ASCII, fields joined by a single '|'",
+   "computed": {
+    "CL-DEV-R": 3304876695,
+    "MAIN-R": 2439304766,
+    "MECH-R": 3420783843,
+    "PROTECTED-R": 1912935458,
+    "SELECT-R": 3751336945,
+    "TRAIN-R": 3650100380
+   },
+   "hand_picked": false,
+   "immutable_after": "V4",
+   "modulus": 4294967296,
+   "v3_root_used": "90d374d52f47319949cfafd724e83996d9d9dd95a71eb26ab6fed0116252e905"
+  },
+  "grid": {
+   "balanced": "every role fills every cell with an identical integer count",
+   "cells": 300,
+   "families": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8",
+    "F9",
+    "F10"
+   ],
+   "source_policies": [
+    "S0_SCRIPTED_DIAGNOSTIC",
+    "S1_ALWAYS_COMPACT",
+    "S2_ALWAYS_LINE",
+    "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+    "S4_FROZEN_TRANSITION_PROTOCOL",
+    "S5_BOUNDED_PERTURBATION"
+   ],
+   "team_sizes": [
+    5,
+    6,
+    8,
+    12,
+    16
+   ]
+  },
+  "implementation": "rvt_swarm/cleanroom/composition.py",
+  "implementation_sha256": "52353bdfef915d8f8350e1d71de30221cdd891ecbc0e113b98d8b80872cc5d86",
+  "main_r_planning": {
+   "achieved_power_at_chosen_size": 0.9599,
+   "alpha_one_sided": 0.05,
+   "endpoint": "episode_task_success_rate",
+   "pilot_information_used": "NONE in the arithmetic. The pilot's decisive-event discordance counts exist and show that topology choice is decisive for a nonzero share of decision events, which is what makes any closed-loop benefit possible, but they are DECISION-EVENT quantities, not paired closed-loop episode rates, and were deliberately kept out of the sizing.",
+   "planning_alternative": 0.16,
+   "planning_alternative_justification": "twice the frozen practical threshold. The rule requires the LOWER 95 percent bound to exceed 0.08, so the true effect must clear the threshold by roughly the width of the bound. Setting the minimum detectable effect at 2x the frozen threshold uses only frozen numbers and introduces nothing outcome-derived.",
+   "target_power": 0.9,
+   "threshold": 0.08,
+   "variance_model": "arms treated as INDEPENDENT with worst-case Bernoulli variance 0.25 each, so Var(delta) = 0.5/n. The real design is PAIRED by source episode, and pairing can only reduce variance, so this is strictly conservative."
+  },
+  "mech_r_sizing_rule": "fixed at MAIN-R's size, satisfying the conservative requirement of being at least as large as MAIN-R. No future MAIN-R effect size may resize it.",
+  "outcome_adaptive_allocation": "FORBIDDEN",
+  "pilot_reconstruction": {
+   "atomic_cell": "(scenario family) x (team size) x (source policy) = 10 x 5 x 6 = 300",
+   "correction_recorded": "the CR-1 report inferred an allocation of 300 source episodes per split. That is the pilot VALIDATION figure. Pilot TRAIN is 1200. TRAIN-R is sized to the TRAIN budget, not the VALIDATION budget.",
+   "pilot_TRAIN": {
+    "K": 5,
+    "episodes_per_family": 120,
+    "episodes_per_family_team_size_cell": 24,
+    "episodes_per_layout": 60,
+    "layout_offsets": [
+     0.22,
+     0.54
+    ],
+    "layouts": 20,
+    "layouts_per_family": 2,
+    "maximum_selected_source_events": 6000,
+    "source_episodes": 1200
+   },
+   "pilot_VALIDATION": {
+    "K": 5,
+    "episodes_per_family": 30,
+    "episodes_per_family_team_size_cell": 6,
+    "episodes_per_layout": 30,
+    "layout_offsets": [
+     0.65
+    ],
+    "layouts": 10,
+    "layouts_per_family": 1,
+    "maximum_selected_source_events": 1500,
+    "source_episodes": 300
+   },
+   "task_expansion_semantics": "the frozen acquisition rule REALIZED_TRAJECTORY_UNIFORM_K selects at most K = 5 decision events per source episode. 'Tasks' in the pilot manifests are SOURCE EPISODES; decision events are the K-bounded expansion of each, and actual yield is data-dependent, which is why zero-yield episodes exist and are retained."
+  },
+  "post_hoc_episode_addition": "FORBIDDEN",
+  "protected_r_sizing_rule": "precision-based for an estimation role that runs no hypothesis test; may not be resized after any protected result.",
+  "replica_law_reproduction": {
+   "R1_families": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F10"
+   ],
+   "R3_families": [
+    "F8",
+    "F9"
+   ],
+   "authority": "the frozen replica-protocol artifact; reproduced here only for manifest construction, never redefined"
+  },
+  "roles": {
+   "CL-DEV-R": {
+    "episodes_per_cell": 1,
+    "episodes_per_family_team_size_cell": 6,
+    "episodes_per_layout": 30,
+    "families": [
+     "F1",
+     "F2",
+     "F3",
+     "F4",
+     "F5",
+     "F6",
+     "F7",
+     "F8",
+     "F9",
+     "F10"
+    ],
+    "generation_seed": 3304876695,
+    "layout_count": 10,
+    "layout_instances_per_family": 1,
+    "maximum_selected_source_events": null,
+    "offset": 0.44,
+    "open_loop_event_acquisition": false,
+    "purpose": "closed-loop controller development and the oracle ceiling",
+    "role": "CL-DEV-R",
+    "sizing_basis": "precision-based: at 300 episodes a 95 percent interval on an episode rate has half-width 0.057 at the worst-case rate, adequate for development ranking, and the universe is reused across all logged configurations so comparisons stay paired. Kept to the smallest balanced multiple because up to 40 configurations are run over it.",
+    "source_episode_count": 300,
+    "source_policies": [
+     "S0_SCRIPTED_DIAGNOSTIC",
+     "S1_ALWAYS_COMPACT",
+     "S2_ALWAYS_LINE",
+     "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+     "S4_FROZEN_TRANSITION_PROTOCOL",
+     "S5_BOUNDED_PERTURBATION"
+    ],
+    "team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16
+    ]
+   },
+   "MAIN-R": {
+    "episodes_per_cell": 3,
+    "episodes_per_family_team_size_cell": 18,
+    "episodes_per_layout": 90,
+    "families": [
+     "F1",
+     "F2",
+     "F3",
+     "F4",
+     "F5",
+     "F6",
+     "F7",
+     "F8",
+     "F9",
+     "F10"
+    ],
+    "generation_seed": 2439304766,
+    "layout_count": 10,
+    "layout_instances_per_family": 1,
+    "maximum_selected_source_events": null,
+    "offset": 0.55,
+    "open_loop_event_acquisition": false,
+    "purpose": "one-shot main closed-loop confirmation",
+    "role": "MAIN-R",
+    "sizing_basis": "prospective power: 900 episodes gives 0.96 power against a planning alternative of twice the frozen 0.08 threshold, under a deliberately conservative variance model. 600 would give only 0.87.",
+    "source_episode_count": 900,
+    "source_policies": [
+     "S0_SCRIPTED_DIAGNOSTIC",
+     "S1_ALWAYS_COMPACT",
+     "S2_ALWAYS_LINE",
+     "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+     "S4_FROZEN_TRANSITION_PROTOCOL",
+     "S5_BOUNDED_PERTURBATION"
+    ],
+    "team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16
+    ]
+   },
+   "MECH-R": {
+    "episodes_per_cell": 3,
+    "episodes_per_family_team_size_cell": 18,
+    "episodes_per_layout": 90,
+    "families": [
+     "F1",
+     "F2",
+     "F3",
+     "F4",
+     "F5",
+     "F6",
+     "F7",
+     "F8",
+     "F9",
+     "F10"
+    ],
+    "generation_seed": 3420783843,
+    "layout_count": 10,
+    "layout_instances_per_family": 1,
+    "maximum_selected_source_events": null,
+    "offset": 0.66,
+    "open_loop_event_acquisition": false,
+    "purpose": "surgical mechanism confirmation",
+    "role": "MECH-R",
+    "sizing_basis": "fixed at MAIN-R's size, which satisfies the conservative rule of being at least as large as MAIN-R. Each mechanism contrast is its own paired comparison on the same universe, so each inherits MAIN-R's power.",
+    "source_episode_count": 900,
+    "source_policies": [
+     "S0_SCRIPTED_DIAGNOSTIC",
+     "S1_ALWAYS_COMPACT",
+     "S2_ALWAYS_LINE",
+     "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+     "S4_FROZEN_TRANSITION_PROTOCOL",
+     "S5_BOUNDED_PERTURBATION"
+    ],
+    "team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16
+    ]
+   },
+   "PROTECTED-R": {
+    "episodes_per_cell": 2,
+    "episodes_per_family_team_size_cell": 12,
+    "episodes_per_layout": 60,
+    "families": [
+     "F1",
+     "F2",
+     "F3",
+     "F4",
+     "F5",
+     "F6",
+     "F7",
+     "F8",
+     "F9",
+     "F10"
+    ],
+    "generation_seed": 1912935458,
+    "layout_count": 10,
+    "layout_instances_per_family": 1,
+    "maximum_selected_source_events": null,
+    "offset": 0.79,
+    "open_loop_event_acquisition": false,
+    "purpose": "final generalization to unseen layout instances within known families",
+    "role": "PROTECTED-R",
+    "sizing_basis": "precision-based: 600 episodes gives a 95 percent interval half-width of 0.040 at the worst-case rate, tighter than the 0.05 target, for an estimation role that runs no hypothesis test.",
+    "source_episode_count": 600,
+    "source_policies": [
+     "S0_SCRIPTED_DIAGNOSTIC",
+     "S1_ALWAYS_COMPACT",
+     "S2_ALWAYS_LINE",
+     "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+     "S4_FROZEN_TRANSITION_PROTOCOL",
+     "S5_BOUNDED_PERTURBATION"
+    ],
+    "team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16
+    ]
+   },
+   "SELECT-R": {
+    "episodes_per_cell": 1,
+    "episodes_per_family_team_size_cell": 6,
+    "episodes_per_layout": 30,
+    "families": [
+     "F1",
+     "F2",
+     "F3",
+     "F4",
+     "F5",
+     "F6",
+     "F7",
+     "F8",
+     "F9",
+     "F10"
+    ],
+    "generation_seed": 3751336945,
+    "layout_count": 10,
+    "layout_instances_per_family": 1,
+    "maximum_selected_source_events": 1500,
+    "offset": 0.11,
+    "open_loop_event_acquisition": true,
+    "purpose": "one-shot predictor-family selection",
+    "role": "SELECT-R",
+    "sizing_basis": "preserves the official pilot VALIDATION selection-evidence budget exactly: 300 source episodes, 6 per (family, team size) cell, one layout per family.",
+    "source_episode_count": 300,
+    "source_policies": [
+     "S0_SCRIPTED_DIAGNOSTIC",
+     "S1_ALWAYS_COMPACT",
+     "S2_ALWAYS_LINE",
+     "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+     "S4_FROZEN_TRANSITION_PROTOCOL",
+     "S5_BOUNDED_PERTURBATION"
+    ],
+    "team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16
+    ]
+   },
+   "TRAIN-R": {
+    "episodes_per_cell": 4,
+    "episodes_per_family_team_size_cell": 24,
+    "episodes_per_layout": 120,
+    "families": [
+     "F1",
+     "F2",
+     "F3",
+     "F4",
+     "F5",
+     "F6",
+     "F7",
+     "F8",
+     "F9",
+     "F10"
+    ],
+    "generation_seed": 3650100380,
+    "layout_count": 10,
+    "layout_instances_per_family": 1,
+    "maximum_selected_source_events": 6000,
+    "offset": 0.0,
+    "open_loop_event_acquisition": true,
+    "purpose": "train the final clean-room predictors from scratch",
+    "role": "TRAIN-R",
+    "sizing_basis": "preserves the official pilot TRAIN scientific budget exactly: 1200 source episodes and 24 episodes per (family, team size) cell. The pilot reached that with two layout variants per family; TRAIN-R reaches it with one, because V3 froze TRAIN-R to a single offset.",
+    "source_episode_count": 1200,
+    "source_policies": [
+     "S0_SCRIPTED_DIAGNOSTIC",
+     "S1_ALWAYS_COMPACT",
+     "S2_ALWAYS_LINE",
+     "S3_FROZEN_LOCAL_GEOMETRIC_SELECTOR",
+     "S4_FROZEN_TRANSITION_PROTOCOL",
+     "S5_BOUNDED_PERTURBATION"
+    ],
+    "team_sizes": [
+     5,
+     6,
+     8,
+     12,
+     16
+    ]
+   }
+  },
+  "source_episode_id_rule": {
+   "fields": [
+    "role",
+    "family",
+    "team_size",
+    "source_policy",
+    "cell episode index"
+   ],
+   "filesystem_derived": false,
+   "format": "rvt-clean-room-generation-identity/v4/source_episode/{role}/{family}/N{team_size}/{source_policy}/episode-{index}",
+   "independently_enumerable_before_generation": true,
+   "layout_hash_in_id": false,
+   "namespace": "rvt-clean-room-generation-identity/v4/source_episode",
+   "why_not": "the universe must be enumerable BEFORE the generator runs or any layout is compiled; the resolved layout hash is bound separately in the role manifest"
+  },
+  "status": "FROZEN_AT_CR0T -- every role's size and allocation is now authoritative",
+  "template": "the pilot's own balanced design, reconstructed from results/rvt_fd24/phase9d_v3f_l_train_manifest_dry_final_v1.json and phase9d_v3f_l_validation_manifest_dry_final_v1.json",
+  "total_source_episodes": 4200
+ },
+ "dataset_role_claim_language": {
+  "CL-DEV-R": "development evidence only; never confirmatory",
+  "MAIN-R": "closed-loop confirmatory evidence conditional on the frozen layout population F1-F10, at identity-disjoint instances",
+  "MECH-R": "mechanism evidence conditional on the frozen layout population F1-F10",
+  "PROTECTED-R": "generalization to unseen layout instances within the known families F1-F10 at a held-out generator offset",
+  "SELECT-R": "predictor-family evidence conditional on the frozen layout population F1-F10",
+  "TRAIN-R": "training evidence only; no scientific claim",
+  "rule": "no broader generalization claim may be inferred merely from identity disjointness"
+ },
+ "dataset_roles": {
+  "CL-DEV-R": {
+   "allowed": [
+    "inspect outcomes",
+    "oracle diagnostics",
+    "controller and selector tuning inside the frozen design space",
+    "failure analysis"
+   ],
+   "forbidden": [
+    "main confirmatory inference"
+   ],
+   "purpose": "closed-loop controller development and diagnostics"
+  },
+  "MAIN-R": {
+   "generated_only_after": "CR-8 complete-system freeze",
+   "must_not_exist_during_CR7": true,
+   "purpose": "one-shot main closed-loop confirmation",
+   "tuning_after_it_exists": "NONE"
+  },
+  "MECH-R": {
+   "forbidden": [
+    "controller development",
+    "any redesign after MAIN-R outcomes"
+   ],
+   "generated_only_after": "the mechanism contract is frozen at CR-8",
+   "purpose": "surgical mechanism confirmation only"
+  },
+  "PROTECTED-R": {
+   "forbidden_after_reveal": [
+    "model selection",
+    "controller tuning",
+    "threshold tuning",
+    "ablation redesign"
+   ],
+   "opened_only_after": "the clean novelty checkpoint, under the frozen protected protocol",
+   "purpose": "final untouched generalization evidence"
+  },
+  "SELECT-R": {
+   "forbidden": [
+    "model training",
+    "hyperparameter tuning",
+    "seed selection",
+    "controller development",
+    "final generalization"
+   ],
+   "purpose": "one-shot clean predictor-family selection",
+   "reveals": 1
+  },
+  "TRAIN-R": {
+   "forbidden": [
+    "predictor-family selection",
+    "controller tuning",
+    "confirmatory inference",
+    "final generalization"
+   ],
+   "internal_use_allowed": "internal folds for the frozen early-stopping and refit-step rules; this is training, not selection",
+   "purpose": "train the final clean-room predictive models from scratch"
+  }
+ },
+ "development_diagnostics": [
+  "topology ranking regret",
+  "switch frequency",
+  "unnecessary switching",
+  "delayed switching",
+  "recovery success",
+  "time-to-recovery",
+  "progress",
+  "deadlock duration",
+  "mission completion",
+  "collision",
+  "minimum clearance",
+  "TTC violations",
+  "safety-projection activation rate"
+ ],
+ "diagnostic_causal_chain": [
+  "predictor quality",
+  "candidate-topology ranking",
+  "selector decision",
+  "actual recoverability change",
+  "recovery",
+  "progress / liveness",
+  "safety"
+ ],
+ "diagnostics_guide_CR7_only": true,
+ "disjointness_contract": {
+  "identity_fields": [
+   "layout_id",
+   "layout_sha256",
+   "source_episode_id",
+   "scenario_task_id",
+   "generation_seed",
+   "team_size",
+   "environment_obstacle_identity",
+   "event_id",
+   "scientific_row_id",
+   "candidate_topology_id"
+  ],
+  "identity_universe_is_enumerated_not_globbed": true,
+  "layout_offset_assignment": {
+   "clean_room": {
+    "CL-DEV-R": 0.44,
+    "MAIN-R": 0.55,
+    "MECH-R": 0.66,
+    "PROTECTED-R": 0.79,
+    "SELECT-R": 0.11,
+    "TRAIN-R": 0.0
+   },
+   "consumed_by_pilot": {
+    "TRAIN": [
+     0.22,
+     0.54
+    ],
+    "VALIDATION": [
+     0.65
+    ]
+   },
+   "declared_limitation": "all six roles draw from the same ten layout families f1-f10 at different generator offsets. They are disjoint by identity, but they are not independent worlds: conclusions are conditional on the f1-f10 layout family population. PROTECTED-R additionally sits in the separate final-test namespace. Resolved at CR-0R as CASE_A: PROTECTED-R tests unseen layout INSTANCES within the known families F1-F10, never unseen families.",
+   "forbidden": [
+    0.76,
+    0.87,
+    0.77
+   ],
+   "forbidden_reason": "offsets within approximately 0.03 of, or crossing, the final-test base offset 0.79",
+   "formula": "offset = _SPLIT_OFFSETS[generator_split] + 0.11 * variant_index",
+   "generator_split_offsets": {
+    "final_test": 0.79,
+    "train": 0.0,
+    "validation": 0.43
+   },
+   "minimum_pairwise_offset_separation": 0.11,
+   "pilot_reserve_left_untouched": [
+    0.33
+   ]
+  },
+  "overlap_test": "for each ordered pair of roles and each identity field, the intersection of the manifest-enumerated identity sets must be empty; the check is deterministic, runs on enumerated IDs only, and fails closed",
+  "required_empty_intersections": [
+   "TRAIN-R & SELECT-R",
+   "TRAIN-R & CL-DEV-R",
+   "SELECT-R & CL-DEV-R",
+   "MAIN-R & every development role",
+   "MECH-R & every development role",
+   "PROTECTED-R & every previous role"
+  ],
+  "role_reuse": "NONE"
+ },
+ "downstream_representative": {
+  "all_three_seeds_participate_in_family_selection": true,
+  "fixed_before_clean_room_data_exists": true,
+  "implementation_sha256": "cf164e14b6e98d521e99830820d972311c75d1f11717d6aa0ea76cd7c9d6589d",
+  "role": "the predefined runtime representative AFTER family selection only",
+  "rule": "downstream representative seed = 47 for whichever learned family wins",
+  "selected_using_SELECT_R": false
+ },
+ "episode_universe_contract": {
+  "driver_must_assert_before_statistics": "observed source episode IDs are a subset of manifest source episode IDs, the manifest count matches its own enumeration, and every declared episode carries layout membership",
+  "every_manifest_must_enumerate": [
+   "expected source episode IDs",
+   "expected source episode count",
+   "expected layout membership"
+  ],
+  "fixes": "the pilot Stage-5D defect in which layout F4 resampled 24 draws where the frozen rule required its original 30",
+  "implementation": "rvt_swarm/cleanroom/universe.py::assert_episode_universe",
+  "implementation_sha256": "27de28807f9158c585b1c36f54eef7a7411d95a6cf6228db68a937bad4a6e397",
+  "universe_may_never_be_derived_from_event_producing_episodes_only": true,
+  "zero_yield_episodes_remain_in_the_resampling_universe": true
+ },
+ "family_selection_rule": {
+  "M0_prior": "its TRAIN-R-fitted constant prior",
+  "bootstrap": {
+   "ci_method": "95 percent percentile, paired",
+   "episode_universe": "the manifest-enumerated SELECT-R source episodes, zero-yield included",
+   "replicates": 10000,
+   "resampling_unit": "SOURCE_EPISODE",
+   "seed": 20260901,
+   "stratification": "SELECT-R LAYOUT"
+  },
+  "deltas": {
+   "d10": "FamilyNLL(M1) - NLL(M0)",
+   "d20": "FamilyNLL(M2) - NLL(M0)",
+   "d21": "FamilyNLL(M2) - FamilyNLL(M1)"
+  },
+  "duplicated_in_orchestration": false,
+  "eligibility": [
+   "M1 eligible iff upper95CI(d10) < 0",
+   "M2 eligible iff upper95CI(d20) < 0"
+  ],
+  "implementation_sha256": "cf164e14b6e98d521e99830820d972311c75d1f11717d6aa0ea76cd7c9d6589d",
+  "primary_metric": "event-equal grouped Bernoulli NLL",
+  "single_executable_implementation": "rvt_swarm/cleanroom/selection.py::select_family",
+  "winner": [
+   "neither eligible -> M0",
+   "only one eligible -> that family",
+   "both eligible -> M2 iff upper95CI(d21) < 0, else M1 by parsimony"
+  ]
+ },
+ "family_statistic": {
+  "bootstrap_replicate_order": [
+   "resample source episodes ONCE, paired across every seed and family",
+   "compute the event-equal NLL for each seed on that resample",
+   "average the three per-seed NLLs",
+   "that is the replicate's family statistic"
+  ],
+  "definition": "FamilyNLL(f) = ( NLL(f,11) + NLL(f,29) + NLL(f,47) ) / 3 on SELECT-R",
+  "implementation": "rvt_swarm/cleanroom/family_statistic.py::family_statistic_replicates",
+  "implementation_sha256": "a4baaa9d163cb040d9c2f77930e406f74607257f38c05fb4b012def502e5e64d",
+  "interpretation_left_to_orchestration": "NONE",
+  "is_a_mean_of_per_seed_selection_NLLs": true,
+  "is_not": [
+   "best seed",
+   "median seed",
+   "seed47 only",
+   "ensemble probabilities",
+   "averaged logits",
+   "checkpoint averaging"
+  ]
+ },
+ "generation_authority": {
+  "executable_source_commit": "2ab73cf4e9f29c9b626f3a39fceb47effd80960b",
+  "frozen_v2_scenario_code_modified": false,
+  "generator_authority": "rvt_swarm/phase8/scenario.py",
+  "generator_sha256": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+  "generator_unchanged": true,
+  "invalidity_semantics_sha256": "66bdd9ffce3f0b6417f20c4b41602b5ea4be266a728bcdb1dd306b0e27ef5c75",
+  "layout_execution_spec_registry_sha256": "e16928c999e80c2661861efac4924f0e6270ef864bfbc311fa04c47bc0117195",
+  "layout_split_registry_sha256": "5494914e687a306b0288ce416e80d7c8a25f0f79377580eba58edc538d53680a",
+  "operational_wrappers": "may be newly written; each must be hashed and qualified before use and bound into the stage manifest",
+  "probabilistic_target_sha256": "a127bf9fbe907c81f2cd8037e94164f738ee756d7480c7db6955d7405bc355b6",
+  "production_image_digest": "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",
+  "replica_law_sha256": "6c2143c4782f0d851205cb118a2ff1c3e33c8a6a3e3cdc2ce5a820106551fa9a",
+  "row_event_binding_sha256": "bdab65bdabbf503dc4d76d7d66d14c6504feb657b32d153a89643fab55058a8c",
+  "scientific_generator_change_required": false,
+  "source_acquisition_protocol_sha256": "19fa68a37d80f16ee1463b872f26402963daeb5a56f375423634a90dc1f3546d",
+  "stochastic_law": "the frozen iid disturbance law of the replica protocol; the clean-room roles differ only in generator offset and generation seed",
+  "target_semantics_sha256": "54a0e0baff79fbdc320800b772f47a40ac06ac4f0e70d4fab1bf676c54b918ee"
+ },
+ "generation_manifest_schema": {
+  "applies_to": "every clean-room role manifest, created and hashed BEFORE generation",
+  "filesystem_derived_universe": "FORBIDDEN",
+  "required_fields": [
+   "global_contract_root",
+   "role",
+   "role_offset",
+   "generation_seed",
+   "layout_ids",
+   "layout_sha256_by_family",
+   "family_ids",
+   "team_sizes",
+   "source_policies",
+   "episodes_per_cell",
+   "expected_source_episode_ids",
+   "expected_source_episode_count",
+   "replicas_per_candidate_by_family",
+   "acquisition_rule",
+   "k_max_selected_source_events_per_episode",
+   "target_semantics_sha256",
+   "replica_law_sha256",
+   "invalidity_semantics_sha256",
+   "row_event_binding_sha256",
+   "generator_sha256",
+   "production_image_digest",
+   "source_commit",
+   "layout_execution_spec_registry_sha256",
+   "layout_split_registry_sha256",
+   "composition_fingerprint"
+  ],
+  "scientific_universe_explicit_before_generation": true
+ },
+ "generation_timing": {
+  "CL-DEV-R": "development only",
+  "MAIN-R": "ONLY after CR-8",
+  "MECH-R": "only after the mechanism contract freeze",
+  "PROTECTED-R": "only after the required upstream freezes and checkpoints",
+  "SELECT-R": "after the model recipes are frozen and preferably after CR-2 training completes",
+  "TRAIN-R": "after CR-0",
+  "every_role_records": [
+   "generation timestamp",
+   "generation authority",
+   "generator offset",
+   "generation seed",
+   "enumerated identity sets"
+  ]
+ },
+ "h_cl1_benefit_contract": {
+  "additional_baselines": "descriptive or secondary only; they never replace B1",
+  "comparator_arm": "B1_reactive_topology_adaptation_no_recoverability",
+  "comparator_substitution_after_MAIN_R": "FORBIDDEN -- no substitution with a fixed-topology arm, an easier baseline, or the best-looking comparator",
+  "fixed_sequence": [
+   {
+    "aggregation_unit": "source episode",
+    "concept": "task progress",
+    "definition": "per-episode indicator that the goal was reached, the episode was collision free, and terminal formation error was inside tolerance; the frozen evaluator's `success`",
+    "direction_of_benefit": "increase",
+    "invalid_episode_imputation": 0.0,
+    "key": "episode_task_success_rate",
+    "metric_key": "success",
+    "pass_rule": "lower95 > 0.08",
+    "rank": 1,
+    "unit": "episode rate in [0, 1]"
+   },
+   {
+    "aggregation_unit": "source episode",
+    "concept": "liveness / deadlock",
+    "definition": "per-episode indicator that accumulated stalled distance reached max(goal_tolerance, nominal_spacing) without the goal being reached",
+    "direction_of_benefit": "decrease",
+    "invalid_episode_imputation": 1.0,
+    "key": "deadlock_rate",
+    "metric_key": "deadlock",
+    "pass_rule": "the 95 percent bound on the beneficial side is strictly beyond zero",
+    "rank": 2,
+    "unit": "episode rate in [0, 1]"
+   },
+   {
+    "aggregation_unit": "source episode",
+    "concept": "recovery",
+    "definition": "per-episode indicator that the team entered an irrecoverable condition, the frozen evaluator's `irreversible_collapse`",
+    "direction_of_benefit": "decrease",
+    "invalid_episode_imputation": 1.0,
+    "key": "irreversible_collapse_rate",
+    "metric_key": "irreversible_collapse",
+    "pass_rule": "the 95 percent bound on the beneficial side is strictly beyond zero",
+    "rank": 3,
+    "unit": "episode rate in [0, 1]"
+   },
+   {
+    "aggregation_unit": "source episode",
+    "concept": "task progress, decoupled from formation and safety",
+    "definition": "per-episode indicator that the goal region was reached and held, independent of collision-freeness and formation tolerance",
+    "direction_of_benefit": "increase",
+    "invalid_episode_imputation": 0.0,
+    "key": "goal_reached_rate",
+    "metric_key": "goal_reached",
+    "pass_rule": "the 95 percent bound on the beneficial side is strictly beyond zero",
+    "rank": 4,
+    "unit": "episode rate in [0, 1]"
+   }
+  ],
+  "h_cl1_pass_rule": "H-CL1 passes if and only if the PRIMARY endpoint passes. The secondary sequence supports the recovery/progress/liveness wording; it cannot rescue a failed primary.",
+  "implementation": "rvt_swarm/cleanroom/benefit_contract.py",
+  "implementation_sha256": "2636d444d6b79f53c5ff2f60b3673cae604c41f0af69d07e2834de7e7e69510f",
+  "invalid_episode_handling": {
+   "above_the_maximum": "the analysis refuses to report and fails closed",
+   "maximum_invalid_fraction": 0.02,
+   "rule": "an episode that fails to simulate is imputed WORST CASE for the arm in which it occurred (success 0, deadlock 1, irreversible collapse 1, goal reached 0); invalid episodes are never silently dropped and are always reported"
+  },
+  "manuscript_language": {
+   "forbidden_without_a_primary_pass": [
+    "improves",
+    "substantially improves",
+    "materially improves",
+    "large improvement",
+    "outperforms",
+    "is better than",
+    "advances the state of the art"
+   ],
+   "improves": "permitted only when the primary rule passes, i.e. lower95 > 0.08",
+   "permitted_description_when_positive_but_sub_threshold": "a positive but sub-threshold difference was observed; the preregistered benefit criterion was not met",
+   "rhetorical_upgrading_after_reveal": "FORBIDDEN",
+   "substantially_or_materially_improves": "permitted on the same condition, because the frozen margin 0.08 IS the practical-effect threshold"
+  },
+  "metric_source": "every endpoint is already emitted by the frozen evaluator rvt_swarm/metrics.py; no new metric was invented",
+  "multiplicity": {
+   "alpha_correction": "NONE_REQUIRED",
+   "procedure": "FIXED_SEQUENCE_GATEKEEPING",
+   "rule": "endpoints are tested in rank order; each is tested at the full level only if every preceding endpoint passed, and testing stops at the first failure",
+   "why": "a fixed-sequence procedure controls the family-wise error rate without correction, because no endpoint is ever tested unless its predecessors were rejected"
+  },
+  "primary_endpoint": {
+   "aggregation_unit": "source episode",
+   "concept": "task progress",
+   "definition": "per-episode indicator that the goal was reached, the episode was collision free, and terminal formation error was inside tolerance; the frozen evaluator's `success`",
+   "direction_of_benefit": "increase",
+   "estimator": "difference in per-episode rate between the two arms",
+   "interval": "paired stratified cluster bootstrap over source episodes, stratified by layout, 10000 replicates, seed 20260901, 95 percent percentile",
+   "key": "episode_task_success_rate",
+   "metric_key": "success",
+   "pass_rule": "lower95(treatment - comparator) > 0.08, strictly",
+   "practical_benefit_threshold": 0.08,
+   "unit": "episode rate in [0, 1]",
+   "why_success_includes_collision_free": "the frozen `success` predicate requires collision-freeness, so an unsafe episode cannot be credited as a benefit. The entanglement is conservative: it can only depress the benefit of an unsafe system, never inflate it, which makes the conjunction with H-CL2 doubly protective rather than circular."
+  },
+  "scientific_concepts_covered": {
+   "liveness / deadlock": "deadlock_rate (rank 2)",
+   "recovery": "irreversible_collapse_rate (rank 3)",
+   "task progress": "episode_task_success_rate (primary) and goal_reached_rate (rank 4)"
+  },
+  "status": "FULLY_SPECIFIED_AT_CR0S -- no future benefit-metric choice remains",
+  "threshold_source": "results/rvt_fd24/phase9d_h1_requirement_map_v1.json, whose frozen H1 reads: 'Recoverability selection improves episode task success by at least 0.08 absolute over both direct classification and local geometric selection, while meeting the frozen collision gate.' The 0.08 absolute margin is reused verbatim.",
+  "tie_strictness": "strict inequality everywhere; equality never passes",
+  "treatment_arm": "R1_full_recoverability_aware_rvt",
+  "treatment_contrast": "R1_full_recoverability_aware_rvt minus B1_reactive_topology_adaptation_no_recoverability"
+ },
+ "independent_verifier": {
+  "must_independently_reconstruct": [
+   "dataset universe",
+   "model hashes",
+   "metric values",
+   "bootstrap inputs",
+   "bootstrap results",
+   "the pass/fail decision",
+   "the artifact root"
+  ],
+  "required_for_every_confirmatory_stage": true,
+  "source_frozen_before": "outcome reveal",
+  "written_after_seeing_outcomes": "FORBIDDEN"
+ },
+ "interpretation_claim_mapping": [
+  {
+   "if": "SELECT-R supports M2 under the frozen rule",
+   "then": "the predictor-family premise survives"
+  },
+  {
+   "if": "M2 does not win clean SELECT-R",
+   "then": "stop the M2-centric clean-room programme"
+  },
+  {
+   "if": "the oracle does not help on CL-DEV-R",
+   "then": "the recoverability-as-decision-variable premise is at risk; do not proceed automatically to MAIN-R"
+  },
+  {
+   "if": "MAIN-R improves progress but safety fails",
+   "then": "THE CENTRAL CLAIM FAILS"
+  },
+  {
+   "if": "MAIN-R system benefit passes but the mechanism contrast fails",
+   "then": "the system benefit may be claimed; the mechanism-specific claim may NOT"
+  },
+  {
+   "if": "protected generalization fails",
+   "then": "do not claim broad generalization"
+  },
+  {
+   "rule": "no result may be rhetorically upgraded after reveal"
+  },
+  {
+   "if": "H-CL1 benefit passes but H-CL2 safety non-inferiority fails",
+   "then": "THE CENTRAL CLOSED-LOOP CLAIM FAILS; a progress gain paid for in safety is not a partial success"
+  },
+  {
+   "if": "full RVT benefit passes but the capacity-matched A3 contrast fails",
+   "then": "no message-passing-specific causal claim may be made; the system benefit may still stand"
+  },
+  {
+   "if": "protected instances pass within families F1-F10",
+   "then": "do not claim unseen-FAMILY generalization; claim only unseen layout INSTANCES within known families"
+  },
+  {
+   "if": "a genuine held-out family test is never run",
+   "then": "no broad family-level generalization claim may be made at all"
+  },
+  {
+   "if": "H-CL1 fails",
+   "then": "no claim that RVT improves closed-loop task behaviour; the words 'improves', 'outperforms' and their intensifiers are forbidden"
+  },
+  {
+   "if": "H-CL1 passes and H-CL2 passes",
+   "then": "a system-level closed-loop benefit is supported, subject to mechanism evidence"
+  },
+  {
+   "if": "MAIN-R passes but the MECH-R recoverability mechanism contrast fails",
+   "then": "the system benefit may remain; the recoverability-specific causal mechanism claim is weakened or removed"
+  },
+  {
+   "if": "the oracle fails the frozen headroom rule",
+   "then": "CORE_RECOVERABILITY_DECISION_PREMISE_AT_RISK; do not proceed automatically to MAIN-R"
+  },
+  {
+   "if": "no CL-DEV-R configuration is admissible",
+   "then": "CLOSED_LOOP_DEVELOPMENT_NO_ADMISSIBLE_CONFIGURATION; do not create MAIN-R"
+  },
+  {
+   "if": "the protected instance test fails",
+   "then": "no protected-instance generalization claim"
+  }
+ ],
+ "main_r_failure_rule": {
+  "MAIN_R_reused_for_development": false,
+  "a_future_improved_version_requires": [
+   "return to development",
+   "a new system version",
+   "a NEW future confirmatory set"
+  ],
+  "forbidden_after_failure": [
+   "threshold tuning",
+   "retraining",
+   "metric substitution",
+   "seed changes",
+   "inventing a new baseline from the results",
+   "outcome exclusion",
+   "any rescue run on MAIN-R"
+  ],
+  "on_failure": "the frozen clean-room system failed confirmation"
+ },
+ "main_r_firewall": {
+  "MAIN_R_generated_before_system_freeze": false,
+  "enforcement": "the CR-9 generation driver refuses to run unless the CR-8 freeze root verifies and the MAIN-R role manifest does not yet exist; role manifests are enumerated, so an existing MAIN-R identity set is detectable and fails closed",
+  "generation_permitted_only_at": "CR-9, after CR-8 complete-system freeze",
+  "immutable_at_CR8": [
+   "predictor",
+   "selector",
+   "controller",
+   "consensus and message logic",
+   "safety projection",
+   "thresholds",
+   "baselines",
+   "ablations",
+   "seeds",
+   "scenario-generation contract",
+   "metrics",
+   "bootstrap and statistics",
+   "interpretation rules",
+   "orchestration code",
+   "independent verifier"
+  ]
+ },
+ "mechanism_study": {
+  "if_MAIN_R_passes_but_mechanism_fails": "the system-level benefit may survive, but the recoverability-specific and graph-specific causal claims must be weakened",
+  "mechanism_contrasts_frozen_at": "CR-8, before MECH-R exists",
+  "redesign_after_MAIN_R_outcomes": "FORBIDDEN",
+  "uses_a_separately_generated_MECH_R": true
+ },
+ "model_families": {
+  "M0": {
+   "closed_form": "p_hat = (1 / 2E) * SUM over TRAIN events e and candidates c of k_{e,c} / R_{e,c}; this is the exact minimizer of the frozen event-equal grouped Bernoulli NLL for a constant predictor",
+   "definition": "q(o_i, tau) = p_hat for every robot and every candidate",
+   "fitted_on": "TRAIN only",
+   "name": "CONSTANT",
+   "optimizer": "NONE",
+   "parameters": 1
+  },
+  "M1": {
+   "architecture": "one hidden layer, width 32, ReLU, single logit output",
+   "input_contract": "m1_local_non_graph_input_contract_v1",
+   "input_dimension": 56,
+   "m1_local_non_graph_input_contract_v1_sha256": "d017de30f1ce65d0c7bc84551124cebb5781b05c2ece6b8e82708a87fc4fb4fd",
+   "message_passing": "NONE",
+   "name": "LOCAL_NON_GRAPH_MLP"
+  },
+  "M2": {
+   "candidate_embedding_dimension": 16,
+   "dropout_probability": 0.0,
+   "fd24_model_config_sha256": "44cc7176a38e79d938952398ccb08d7fe2646643ddfe6dec08822a60de9fb1a3",
+   "fd24_model_config_source": {
+    "activation": "relu",
+    "attention_leaky_relu_slope": 0.2,
+    "candidate_embedding_dimension": 16,
+    "diagnostic_embedding_enabled": false,
+    "dropout_probability": 0.0,
+    "hidden_dimension": 96,
+    "message_passing_blocks": 3,
+    "normalization": "layer_norm",
+    "numerical_dtype": "float32",
+    "residual_limit_fractions_of_maximum_acceleration": [
+     0.25,
+     0.25
+    ],
+    "schema_version": "rvt-fd24-model-config/v1"
+   },
+   "hidden_dimension": 96,
+   "implementation": "rvt_swarm/fd24/model.py::RVTFD24LocalModel, recoverability path only",
+   "message_passing_blocks": 3,
+   "name": "LOCAL_GRAPH_MODEL",
+   "recoverability_path_parameters": 262529,
+   "residual_action_head": "present but EXCLUDED from the optimizer in this study"
+  },
+  "additional_families_from_TRAIN_R_or_SELECT_R_outcomes": "FORBIDDEN",
+  "architecture_searched": false,
+  "clean_room_models_trained_from_scratch": true,
+  "input_contract": {
+   "R_reason": "R is a deterministic function of family (F8/F9 -> 3, else 1) and family is not runtime-available, so admitting R would smuggle the family in",
+   "R_status": "LOSS METADATA ONLY",
+   "admitted_inputs": [
+    "node_x",
+    "node_feature_valid_mask",
+    "node_kind",
+    "edge_index",
+    "edge_attr",
+    "edge_feature_valid_mask",
+    "edge_type",
+    "root_index",
+    "candidate_topology_id"
+   ],
+   "edge_feature_dim": 19,
+   "ego_feature_schema_sha256": "1ea52c6aebb23360641ce6a09ef41d2d21fd372f2744f196b91ff184a1a2cf5b",
+   "ego_graph_schema_version": "rvt-ego-graph/v2",
+   "forbidden_predictor_inputs": [
+    "family",
+    "layout identity",
+    "episode identity",
+    "split",
+    "study",
+    "team size N",
+    "robot id",
+    "raw timestamp identity",
+    "lifecycle identity",
+    "seed",
+    "R",
+    "k",
+    "k/R",
+    "Target-V4 disposition",
+    "termination information",
+    "future rollout information",
+    "publication identity metadata"
+   ],
+   "mission_orientation_cos_sin": "NOT admitted to the open-loop recoverability predictor. It may be used only by a residual head in a later study.",
+   "name": "MODEL_INPUT_CONTRACT_V3",
+   "node_feature_dim": 35,
+   "row_identity_fields": [
+    "schema",
+    "study",
+    "split",
+    "family",
+    "layout_sha256",
+    "team_size",
+    "episode_id",
+    "realized_source_timestep",
+    "robot_id",
+    "candidate_topology_id",
+    "graph_fingerprint",
+    "source_acquisition_protocol_sha256",
+    "target_v4_contract_sha256",
+    "recoverability_probabilistic_target_v3_sha256",
+    "recoverability_replica_protocol_v3_sha256",
+    "recoverability_row_binding_v3_spec_sha256"
+   ],
+   "runtime_config_sha256": "afb16e92acf7d0d800cedeaec29a0254bff81dcb02f93f47659ec417018cac10",
+   "structural_enforcement": [
+    "the model's only entry point is prepare_fd24_model_batch(graphs: Sequence[RobotLocalEgoGraph]) -- a closed type",
+    "validate_recoverability_ego_payload rejects global_centroid / global_graph / full_swarm_state",
+    "RobotView is a closed container; NeighbourRecord is ego-relative only",
+    "rvt_swarm/decentralized/guards.py AST guard over rvt_swarm.decentralized and rvt_swarm.fd24",
+    "tests: information boundary, permutation invariance, no global pooling, batch isolation"
+   ],
+   "topology_registry_schema_version": "rvt-topology-registry/v1"
+  },
+  "pilot_stage5c_checkpoints_are_clean_room_checkpoints": false,
+  "primary_families": 3
+ },
+ "name": "RVT_SWARM_CLEAN_ROOM_GLOBAL_CONTRACT_V4",
+ "oracle_ceiling": {
+  "arm_identity": "O1_oracle_recoverability",
+  "decision_rule": {
+   "comparator": "B1_reactive_topology_adaptation_no_recoverability",
+   "conjunction": "PASS requires ALL THREE: (a) point difference >= 0.08; (b) lower95 strictly above 0, establishing the sign even where the magnitude is not confirmatory; (c) the oracle arm itself satisfies the frozen H-CL2 safety non-inferiority rule against the same comparator, so headroom bought by degrading safety does not count",
+   "dataset": "CL-DEV-R",
+   "endpoint": "episode_task_success_rate",
+   "endpoint_note": "the SAME primary endpoint as H-CL1, so headroom is asked on the same scale as the confirmatory question",
+   "fail_label": "ORACLE_HEADROOM_FAIL",
+   "pass_label": "ORACLE_HEADROOM_PASS",
+   "practical_threshold": 0.08,
+   "required_effect_direction": "increase",
+   "status": "EXACT -- the word 'materially' is retired",
+   "uses_statistical_uncertainty": true
+  },
+  "definition": "the learned predictor q_i(o_i, tau) is replaced by the simulator-computed recoverability probability p(x, tau) = P(Target-V4 = 1 | x, tau) under the frozen iid disturbance law, estimated by the frozen replica protocol from the TRUE full state. Every downstream stage -- counterfactual evaluation, selector, nominal control, safety projection -- is byte-identical to the learned system.",
+  "deployable": false,
+  "development_only": true,
+  "frozen_before_CL_DEV_R_exists": true,
+  "implementation": "rvt_swarm/cleanroom/oracle_contract.py",
+  "implementation_sha256": "e2c9597c8e60f7f3ab699a6740b3df42e052dc90d7ff0d26830dc18193a872a1",
+  "interpretation_rule": {
+   "oracle_does_not_materially_improve_the_frozen_development_endpoints_over_the_reactive_baseline": "CORE_RECOVERABILITY_DECISION_PREMISE_AT_RISK; do not proceed automatically to MAIN-R",
+   "oracle_helps_but_learned_RVT_does_not": "the predictor, ranking, selector or integration remains a development problem, not a refutation of the premise"
+  },
+  "on_fail": {
+   "may_proceed_automatically_to_main_r": false,
+   "premise_status": "CORE_RECOVERABILITY_DECISION_PREMISE_AT_RISK"
+  },
+  "on_pass_but_learned_system_fails": "retain the core possibility claim as a DEVELOPMENT HYPOTHESIS and diagnose the predictor, candidate ranking, selector or controller integration; this is not a refutation of the premise",
+  "post_cl_dev_reinterpretation_of_oracle_success": "FORBIDDEN",
+  "privileged_information": "full state and forward rollouts, simulator-only",
+  "purpose": "test whether counterfactual recoverability information could in principle improve topology decisions",
+  "purpose_restated": "possibility and headroom diagnosis, never final evidence"
+ },
+ "orchestration_authority": {
+  "clean_room_engine": {
+   "__init__.py": "7b7c98fa88854d1ad24fd96d13d4e15c78fc4ec512490a4228e957726eac6a08",
+   "a3_control.py": "0983aadd0f78aaaa533e3bcc7c9cc2ff99f2e1a5aa1a193ec573ecb7b87c9ec0",
+   "benefit_contract.py": "2636d444d6b79f53c5ff2f60b3673cae604c41f0af69d07e2834de7e7e69510f",
+   "calibration_contract.py": "6b9fa5c724442a27ae7c4da6761995140c591703592cdfa8ebd270cfaa5227a7",
+   "closed_loop_engine.py": "afc2d321f83a8129181bd2e03cf727f8a6d0e91051e1bbed75d70611c2bbe755",
+   "composition.py": "52353bdfef915d8f8350e1d71de30221cdd891ecbc0e113b98d8b80872cc5d86",
+   "development_selection.py": "4f2456e08cf71665335c0d0c1ceeaf1596ce2f204b956c43c140dd26f21cdd4a",
+   "family_statistic.py": "a4baaa9d163cb040d9c2f77930e406f74607257f38c05fb4b012def502e5e64d",
+   "oracle_contract.py": "e2c9597c8e60f7f3ab699a6740b3df42e052dc90d7ff0d26830dc18193a872a1",
+   "safety_contract.py": "83c0c33048a3fa2efe20636580172e0dc6eb69cb8d2d69a9bd77c2a03e881fbc",
+   "selection.py": "cf164e14b6e98d521e99830820d972311c75d1f11717d6aa0ea76cd7c9d6589d",
+   "universe.py": "27de28807f9158c585b1c36f54eef7a7411d95a6cf6228db68a937bad4a6e397"
+  },
+  "every_scientific_stage_binds": [
+   "library hashes",
+   "orchestration-script hash",
+   "executable manifest hash",
+   "container image digest",
+   "source commit",
+   "dependency lock"
+  ],
+  "fixes": "the pilot gap in which the Stage-5D orchestration script was bound by no hash and chose a family statistic the frozen rule did not define",
+  "inherited_qualified_libraries": {
+   "decentralized/consensus.py": "3b98142f19bfcae6ec8deb7d14533cd7cb89f39a96c242e112902626fe8e1ef6",
+   "decentralized/local_controller.py": "4d209f2f103f2b5c5e32a3d1d7c9d7cfff175587bb0750356171f1527cbe62ef",
+   "decentralized/local_safety_projection.py": "16e06727f9052198070c74814fd1822d0450c25a4d5d456f48fc33362e46c26e",
+   "decentralized/online_topology_scope.py": "1f9fc647a1fd15dcd0d96db0df45a319095a4ac9a5d637ca9bbc3e15536346f0",
+   "decentralized/robot_local_controller.py": "1cfe364d706f06fe4602c5a3033e89051b3ca808443d4afd906c7e1319564a9f",
+   "fd24/configuration.py": "1529033aa81e9b02a046c57f39db15997c76f1b9cf7e4e7228db3a56603c1247",
+   "fd24/loader_v3.py": "3c093c9368ba45541fbb3d23dac2ded1e6a374ae5b53b20ae2f886f713d54d90",
+   "fd24/loss_v3.py": "65d6b5ebac93aa4ca1771eff0b695782284ea31a32ffad04cd098f8656032199",
+   "fd24/metrics_v3.py": "814200fbb5663fc011fd093f873019765f938851aee15c85fb8787da94a55d6e",
+   "fd24/model.py": "d2a92eea8984478e038d875775bd1dfb3e04db2745b60d1c82cc064d53ad2bef",
+   "openloop_v3/bootstrap.py": "3ddd8b956becc69e8ed4f7eb02b3a557e39567efb6b0febff448b0174e5fb31e",
+   "openloop_v3/calibration.py": "4f197f4b28f0b119ef3a5cf89cc72de170bb74783b00505334d7c885b4d06dd5",
+   "openloop_v3/m0.py": "ec877063a3d882f93d8fe4eb77263876495d436c4d7b170bec7eeb5f8e699b79",
+   "openloop_v3/m1.py": "3df406407f2a284340c3444c362fb3cdb5971ea44c3d98e9616d94c112b605e8",
+   "openloop_v3/rehydrate.py": "73622a3e621a91f933718908ee5a20100d8edf688f42d93ab82e1aea78d3c4e4",
+   "phase8/scenario.py": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+   "safety.py": "eb7f1ff468426399b442f6171f469b50620ed0963c5e320ffde573b0be86e5d4",
+   "topology_registry.py": "f8528d24561abea52e2cd50b236dc69cc6c25b402498fe13d0ace05e1317bfe5"
+  },
+  "on_any_mismatch": "FAIL_CLOSED",
+  "orchestration_may_reimplement_scientific_rules": false,
+  "orchestration_must": "consume the executable manifest and call the qualified engine"
+ },
+ "pilot_boundary": {
+  "PILOT_CONFIDENCE_INTERVALS_USED_FOR_FINAL_CLAIMS": "NO",
+  "PILOT_VALIDATION_USED_FOR_FINAL_INFERENCE": "NO",
+  "PILOT_WEIGHTS_ALLOWED_AS_FINAL": "NO",
+  "PROGRAM_BEFORE_CR0": "PILOT_DEVELOPMENT_ONLY",
+  "historical_terminal_finding": "POST_REVEAL_AUTHORITY_OR_PROVENANCE_FAILURE",
+  "history_rewritten_or_repaired": false,
+  "pilot_artifacts_retained_for_provenance": {
+   "novelty_checkpoint_1_root": "d36bc4e4c43cb0062dbdfcd73b471e6683a422d391dab75ab99b1236dc0330d1",
+   "pilot_preregistration_root": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+   "stage5d_validation_selection_root": "b1110cd1f5586a0daaf76762afef81d5feb867eee9b00a6ccf3d7776c6d18eec"
+  },
+  "pilot_may_inform": "method design, architecture definitions, training recipe constants, and code that is re-qualified here",
+  "reason_preserved": "Stage-5D executed a seed47-only family evaluation while the frozen family statistic required the mean over seeds {11,29,47} of the VALIDATION NLL"
+ },
+ "predictor_stop_rule": {
+  "any_redesign_becomes": "a NEW PILOT cycle requiring a future new clean-room programme",
+  "do_not_inspect_MAIN_R": true,
+  "do_not_redesign_using_SELECT_R": true,
+  "if_M2_wins": "carry the newly trained M2 seed-47 checkpoint forward",
+  "if_SELECT_R_does_not_support_M2": "STOP the M2-centric clean-room thesis programme"
+ },
+ "protected_generalization": {
+  "F9_local_observability": "preserved as a PREDECLARED analysis dimension. RobotView carries static obstacle tokens only and dynamic obstacles never enter the ego graph; this limitation is analysed, not repaired after results.",
+  "allowed_claim_language": "generalization to unseen layout instances within the known layout families F1-F10, at a held-out generator offset",
+  "broad_family_level_generalization": "OUTSIDE_THE_CURRENT_CONFIRMATORY_SCOPE",
+  "case": "CASE_A",
+  "case_determination": "rvt_swarm/phase8/scenario.py defines SCENARIO_FAMILIES as a frozen tuple of exactly 10 families F1..F10. No eleventh family exists. Creating a genuinely held-out layout FAMILY would require modifying the frozen scientific generator, which is forbidden, so no held-out family namespace is available.",
+  "distinction_that_must_not_be_conflated": {
+   "distribution_or_domain_generalization": "a shift to a genuinely different layout population. NOT tested anywhere in this programme.",
+   "identity_disjoint_confirmation": "IID-ish confirmation on identity-disjoint samples drawn from the SAME known layout population. TRAIN-R, SELECT-R, CL-DEV-R and MAIN-R are all of this kind."
+  },
+  "exact_terminology": "unseen layout instances within known layout families",
+  "forbidden_after_reveal": [
+   "model selection",
+   "controller tuning",
+   "threshold tuning",
+   "ablation redesign"
+  ],
+  "forbidden_claim_language": [
+   "unseen layout families",
+   "novel layout families",
+   "unseen layouts (unqualified)",
+   "new environments",
+   "a new domain",
+   "out-of-distribution generalization",
+   "domain generalization",
+   "generalizes to unseen scenario types"
+  ],
+  "inaccessible_until": "the clean novelty checkpoint",
+  "intended_stress_dimensions": [
+   "unseen layout instances within F1-F10",
+   "team-size shifts",
+   "environment and obstacle shifts",
+   "partial-observability stress"
+  ],
+  "known_layout_families": [
+   "F1",
+   "F2",
+   "F3",
+   "F4",
+   "F5",
+   "F6",
+   "F7",
+   "F8",
+   "F9",
+   "F10"
+  ],
+  "protected_identities": "new layout INSTANCES at the held-out generator offset 0.79, the reserved final-test base, within the known families F1..F10",
+  "why_not_extended": "introducing new layout families would require modifying the frozen scientific generator; this is reported rather than silently done"
+ },
+ "rvt_swarm_clean_room_global_contract_root": "74e02ce55c0793dc7f9b81d0181ac5bded0e4cc4ff169564107629473fab330a",
+ "safety_contract": {
+  "central_claim_conjunction": "the central closed-loop claim requires H-CL1 benefit PASS *and* H-CL2 safety non-inferiority PASS",
+  "endpoint_implementations": "rvt_swarm/safety.py::{time_to_collision,collision_risk}, rvt_swarm/metrics.py, rvt_swarm/decentralized/local_safety_projection.py",
+  "frozen_physical_constants": {
+   "inter_robot_safety_margin_m": 0.04,
+   "maximum_acceleration_mps2": 0.6,
+   "maximum_speed_mps": 0.9,
+   "min_ro_distance_m": 0.55,
+   "min_rr_distance_m": 0.4,
+   "obstacle_clearance_margin_m": 0.37,
+   "obstacle_radius_m": 0.35,
+   "ro_physical_contact_m": 0.53,
+   "robot_radius_m": 0.18,
+   "rr_physical_contact_m": 0.36,
+   "source": "rvt_swarm/config.py and rvt_swarm/runtime_configuration.py, unmodified",
+   "tightest_engineered_surface_margin_m": 0.020000000000000018
+  },
+  "implementation": "rvt_swarm/cleanroom/safety_contract.py",
+  "implementation_sha256": "83c0c33048a3fa2efe20636580172e0dc6eb69cb8d2d69a9bd77c2a03e881fbc",
+  "inherited_frozen_pilot_gate": {
+   "absolute_degradation_maximum": 0.01,
+   "collision_free_point_estimate_minimum": 0.95,
+   "note": "an engineering tolerance established in pilot development and reused verbatim; it was not re-derived and not chosen to be easy to pass",
+   "source": "results/rvt_fd24/phase9d_h1_requirement_map_v1.json::collision_gate"
+  },
+  "interpretation_rule": "progress or recovery improvement accompanied by unacceptable safety degradation DOES NOT support the central claim",
+  "margin_modification_after_this_amendment": "FORBIDDEN",
+  "margins_chosen_using_any_clean_room_outcome": false,
+  "multiplicity": {
+   "alpha_correction": "NONE_REQUIRED",
+   "procedure": "INTERSECTION_UNION_TEST",
+   "rule": "H-CL2 passes only if EVERY primary endpoint passes",
+   "why": "under an intersection-union test the composite holds the nominal level without correction, because rejecting the union null requires rejecting every component null"
+  },
+  "primary_endpoints": [
+   {
+    "absolute_floor": 0.95,
+    "aggregation_unit": "source episode",
+    "definition": "per-episode indicator that no robot-robot separation fell below 0.4 m and no robot-obstacle separation fell below 0.55 m at any control step; the frozen simulator predicate collision_free",
+    "direction_of_harm": "decrease",
+    "interval": "paired stratified cluster bootstrap over source episodes, stratified by layout, 10000 replicates, seed 20260901, one-sided 95 percent bound on the harmful side",
+    "key": "collision_free_rate",
+    "margin_justification": "the pilot's frozen collision gate already fixes absolute_degradation_maximum = 0.01; reused verbatim, not re-derived",
+    "non_inferiority_margin": 0.01,
+    "pass_rule": "lower95(treatment - comparator) > -margin; AND the treatment point estimate must be at least the absolute floor",
+    "treatment_contrast": "full recoverability-aware RVT minus the frozen no-recoverability reactive comparator B1",
+    "unit": "episode rate in [0, 1]"
+   },
+   {
+    "absolute_floor": null,
+    "aggregation_unit": "source episode",
+    "definition": "per-episode minimum over all control steps and all pairs of (separation minus the required clearance for that pair type), reported jointly for robot-robot and robot-obstacle",
+    "direction_of_harm": "decrease",
+    "interval": "paired stratified cluster bootstrap over source episodes, stratified by layout, 10000 replicates, seed 20260901, one-sided 95 percent bound on the harmful side",
+    "key": "minimum_clearance_m",
+    "margin_justification": "one half of the tightest engineered surface margin in the frozen configuration (0.020000000000000018 m = min_ro_distance 0.55 minus physical contact 0.53), so at worst-allowed degradation at least half of that engineered buffer survives",
+    "non_inferiority_margin": 0.01,
+    "pass_rule": "lower95(treatment - comparator) > -margin",
+    "treatment_contrast": "full recoverability-aware RVT minus the frozen no-recoverability reactive comparator B1",
+    "unit": "meters"
+   },
+   {
+    "absolute_floor": null,
+    "aggregation_unit": "source episode",
+    "definition": "per-episode fraction of control steps whose minimum pairwise time-to-collision is below 1.5 s, computed by the frozen rvt_swarm.safety.time_to_collision",
+    "direction_of_harm": "increase",
+    "interval": "paired stratified cluster bootstrap over source episodes, stratified by layout, 10000 replicates, seed 20260901, one-sided 95 percent bound on the harmful side",
+    "key": "ttc_violation_rate",
+    "margin_justification": "the same engineering tolerance class as the frozen collision gate's absolute_degradation_maximum, applied to a precursor endpoint; the threshold itself is the physical braking time max_speed / max_acceleration = 0.9 / 0.6",
+    "non_inferiority_margin": 0.01,
+    "pass_rule": "upper95(treatment - comparator) < +margin",
+    "treatment_contrast": "full recoverability-aware RVT minus the frozen no-recoverability reactive comparator B1",
+    "unit": "step fraction in [0, 1]"
+   },
+   {
+    "absolute_floor": null,
+    "aggregation_unit": "source episode",
+    "definition": "per-episode indicator of actual geometric body overlap: robot-robot separation below 0.36 m or robot-obstacle separation below 0.53 m",
+    "direction_of_harm": "increase",
+    "interval": "paired stratified cluster bootstrap over source episodes, stratified by layout, 10000 replicates, seed 20260901, one-sided 95 percent bound on the harmful side",
+    "key": "severe_near_collision_rate",
+    "margin_justification": "half the frozen collision-gate margin, because this endpoint is physical contact and is strictly more severe than a clearance-gate violation; the margin is monotone in severity",
+    "non_inferiority_margin": 0.005,
+    "pass_rule": "upper95(treatment - comparator) < +margin",
+    "treatment_contrast": "full recoverability-aware RVT minus the frozen no-recoverability reactive comparator B1",
+    "unit": "episode rate in [0, 1]"
+   }
+  ],
+  "progress_with_safety_failure": "CENTRAL_CLAIM_FAILS",
+  "safety_is_a_core_outcome": true,
+  "secondary_endpoints": [
+   {
+    "aggregation_unit": "source episode",
+    "definition": "per-episode fraction of control steps at which the local safety projection altered the nominal command",
+    "justification": "diagnostic only; it carries no pass/fail rule because a higher intervention rate is not itself a harm",
+    "key": "safety_projection_intervention_rate",
+    "pass_rule": "NONE -- diagnostic only",
+    "role": "SECONDARY_DIAGNOSTIC",
+    "unit": "step fraction in [0, 1]"
+   }
+  ],
+  "silent_safety_for_progress_trade": "FORBIDDEN",
+  "status": "FULLY_SPECIFIED_AT_CR0R -- no safety margin is deferred to CL-DEV-R or CR-8",
+  "ttc_threshold_justification": "the full braking time from top speed, max_speed / max_acceleration = 0.9 / 0.6 = 1.5 s; below it a collision cannot be avoided by braking alone",
+  "ttc_violation_threshold_s": 1.5
+ },
+ "sample_size_claim_boundary": {
+  "CL-DEV-R": "a development budget; never confirmatory",
+  "MAIN-R": "a confirmatory design sized by prospective power",
+  "MECH-R": "a mechanism-confirmatory design",
+  "PROTECTED-R": "a protected-instance evaluation budget",
+  "SELECT-R": "a model-selection evidence budget",
+  "TRAIN-R": "a training-budget choice; it licenses no scientific claim",
+  "identity_disjoint_is_not_independent_distributions": "identity-disjoint role universes are NOT independent distributions; all six draw from the same known layout families",
+  "protected_r_is_not_ood": "PROTECTED-R tests unseen layout INSTANCES within known families F1-F10. It is not unseen-family or out-of-distribution generalization."
+ },
+ "schema_version": "rvt-swarm-clean-room-global-contract/v4",
+ "stage": "CR-0T",
+ "status": "PROSPECTIVELY_FROZEN_BEFORE_ANY_CLEAN_ROOM_DATA_EXISTS",
+ "training_recipe": {
+  "M1": {
+   "learning_rate": 0.001,
+   "weight_decay": 0.0
+  },
+  "M2": {
+   "learning_rate": 0.001,
+   "weight_decay": 0.0001
+  },
+  "checkpoint_rule": "strict lower held-out TRAIN NLL; on exact tie the EARLIER step",
+  "fits_per_learned_family": "3 seeds x 2 folds for step determination, then 3 refits",
+  "hyperparameter_search_on_TRAIN_R": "NONE -- the configuration is frozen here as a constant, informed by pilot development. This removes the pilot's 72-fit search and every TRAIN-R-outcome-dependent hyperparameter decision.",
+  "post_SELECT_R_retraining": "FORBIDDEN",
+  "refit_step_rule": {
+   "clamp": "[1000, 50000]",
+   "formula": "S*(f, s) = 1000 * ceil( (s_A + s_B) / 2000 )",
+   "inputs": "s_A and s_B, the selected scheduled steps for (c*, seed) on folds A and B; each is a multiple of 1000",
+   "per_seed": true,
+   "step_count_is_not_rescaled_for_the_larger_refit_pool": true,
+   "why_ceil": "the mean of two multiples of 1000 can land on a half-multiple; ceiling to the next 1000 is unambiguous and needs no half-rounding convention",
+   "why_not_rescaled": "optimizer STEPS, not epochs, are the frozen budget unit; the refit therefore takes the same number of gradient updates while drawing from a 2x larger pool, which is the conservative choice"
+  },
+  "seed_addition_after_clean_room_data_exists": "FORBIDDEN",
+  "seeds": [
+   11,
+   29,
+   47
+  ],
+  "shared": {
+   "batch": "16 decision-event groups",
+   "determinism": [
+    "torch.use_deterministic_algorithms(True)",
+    "torch.manual_seed(seed) plus a per-fit generator",
+    "loader_v3.deterministic_event_order(seed=...) -- counter-free, worker-order invariant"
+   ],
+   "device": "CPU",
+   "evaluation_interval_steps": 1000,
+   "gradient_norm_clip": 1.0,
+   "improvement_rule": "STRICT_IMPROVEMENT_ONLY",
+   "initialization": "framework default under torch.manual_seed(seed) plus a per-fit generator; no custom initialization scheme",
+   "loss": "event-equal grouped Bernoulli NLL, rvt_swarm/fd24/loss_v3.py",
+   "loss_weights": {
+    "lambda_consistency": 0.0,
+    "lambda_mag": 0.0,
+    "lambda_rec": 1.0,
+    "lambda_res": 0.0
+   },
+   "lr_schedule_after_warmup": "CONSTANT",
+   "maximum_optimizer_steps": 50000,
+   "min_delta": 0.0,
+   "optimizer": "AdamW",
+   "patience_scheduled_evaluations": 8,
+   "precision": "float32",
+   "tie_rule": "on machine-visible equality choose the EARLIER checkpoint",
+   "warmup_steps": 2000,
+   "weighting": {
+    "batching": "rvt_swarm/fd24/loader_v3.py::batch_event_groups -- by event, never by row",
+    "candidates_within_event": {
+     "COMPACT": 0.5,
+     "LINE": 0.5
+    },
+    "class_weighting": "NONE",
+    "events": "unweighted mean",
+    "focal_loss": "NONE",
+    "implementation": "rvt_swarm/fd24/loss_v3.py::{candidate_loss,event_loss,dataset_loss}",
+    "invariant": "W(N=5,R=1) = W(N=16,R=1) = W(N=5,R=3) = W(N=16,R=3) = 1",
+    "oversampling": "NONE",
+    "positive_class_weight": "NONE",
+    "recoverability_training_loss_v3_sha256": "fc9c093327eaaa5ae95c038cf36a2a16ff2fee6d5fdc125dd1106bc3a99dfc11",
+    "replica_supervision": "divided by R through the frozen grouped Bernoulli NLL",
+    "robot_rows_within_candidate": "mean over N",
+    "short_final_batch": "averaged over its own event count, so every event stays equally weighted within its step",
+    "stochastic_family_weighting": "NONE"
+   }
+  },
+  "stopping_rule": "early stopping on the held-out TRAIN-R internal fold only; VALIDATION-class data is never used for stopping",
+  "train_internal_folds": {
+   "balance": "each fold contains exactly one layout per family f1-f10",
+   "folds": 2,
+   "grouping_unit": "LAYOUT",
+   "membership_authority": "the frozen clean-room TRAIN-R registry, never the layout-id string"
+  }
+ }
+}
