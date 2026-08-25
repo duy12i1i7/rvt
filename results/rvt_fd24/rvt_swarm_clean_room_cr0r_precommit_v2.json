@@ -1,0 +1,43 @@
+{
+ "amends_precommit": "RVT_SWARM_CLEAN_ROOM_CR0_PRECOMMIT_V1",
+ "branch": "research/rvt-cleanroom-cr0-global-contract-v1",
+ "clean_room_data_generated_before_this_precommit": false,
+ "clean_room_model_trained_before_this_precommit": false,
+ "contract_v2_file": "results/rvt_fd24/rvt_swarm_clean_room_global_contract_v2.json",
+ "contract_v2_file_sha256": "bc64dd5605ea60b1ce88ef5ba9f5e55adcefd3ff939f4fc0ad7dfcefbca9b8eb",
+ "cr0r_contract_carrying_commit": "4cde70faeb6f5fa8e2b56741ad1f6cc3381a208c",
+ "cr0r_contract_tree_commit": "7e1d33cd1eaa71d31afe659bbcf65bb67b782496",
+ "cr0r_precommit_head_commit": "4cde70faeb6f5fa8e2b56741ad1f6cc3381a208c",
+ "executable_contract_root": {
+  "__init__.py": "7b7c98fa88854d1ad24fd96d13d4e15c78fc4ec512490a4228e957726eac6a08",
+  "a3_control.py": "0983aadd0f78aaaa533e3bcc7c9cc2ff99f2e1a5aa1a193ec573ecb7b87c9ec0",
+  "calibration_contract.py": "6b9fa5c724442a27ae7c4da6761995140c591703592cdfa8ebd270cfaa5227a7",
+  "family_statistic.py": "a4baaa9d163cb040d9c2f77930e406f74607257f38c05fb4b012def502e5e64d",
+  "safety_contract.py": "83c0c33048a3fa2efe20636580172e0dc6eb69cb8d2d69a9bd77c2a03e881fbc",
+  "selection.py": "cf164e14b6e98d521e99830820d972311c75d1f11717d6aa0ea76cd7c9d6589d",
+  "universe.py": "27de28807f9158c585b1c36f54eef7a7411d95a6cf6228db68a937bad4a6e397"
+ },
+ "history_rewriting_after_this_point": "FORBIDDEN",
+ "name": "RVT_SWARM_CLEAN_ROOM_CR0R_PRECOMMIT_V2",
+ "out_of_scope_changes": [],
+ "qualification_suites": {
+  "cr0r": "b4b2839af99f77d511e0957e6c61b5676dc69ab413154575bb3d73b60389e394",
+  "engine": "c3eec6752916e299197519fc55ba4d17eacacb29c433b0a1d28397ec6eaebf4f"
+ },
+ "remote": "https://github.com/duy12i1i7/rvt.git",
+ "rvt_swarm_clean_room_cr0r_precommit_root": "d77a9b0883943fc76b904bbc7da4b726cbc1637d9a865d4376bbaa598d92bbc3",
+ "rvt_swarm_clean_room_global_contract_v2_root": "90e5d4d9ee6b4388596f3a48ce5e62e0a8f446f08c7f7020d6ceda800a082740",
+ "schema_version": "rvt-swarm-clean-room-precommit/v2",
+ "stage": "CR-0R",
+ "status": "IMMUTABLE_PRECOMMIT_BEFORE_ANY_CLEAN_ROOM_DATA",
+ "tag": "rvt-cleanroom-cr0r-v2",
+ "timestamp_utc": "2026-08-25T15:55:55Z",
+ "total_tests_passing": 45,
+ "v1_contract_root": "16aa431b290eae42ad62b0f72fae22ed3a2e3b7be138db4cfdda4a636bd87c02",
+ "v1_precommit_root": "a632d7c7cb51dcd3117cbaeeb0d8761bdfdccd45f4312298c4c832c0431b229e",
+ "v1_tag": "rvt-cleanroom-cr0-v1",
+ "v1_tag_commit": "7e1d33cd1eaa71d31afe659bbcf65bb67b782496",
+ "v1_tag_preserved": true,
+ "v1_to_v2_diff_file_sha256": "42a27cd1ec24f082255b72902d03df7022db4090b2988ae93bd265d724db013c",
+ "v1_to_v2_diff_root": "e7c055a099559c2ebed2ec53c9990f8e1d4a061c506422910b14eb87d03aff18"
+}
