@@ -1,0 +1,303 @@
+{
+ "advance_to_closed_loop_authorized": false,
+ "authoritative_300_pool_artifacts": {
+  "open_loop_v3_validation_selection_file_sha256": "c04cf48603cddd5f8984389cec56ae9895c39eca0c5799d6d88658484315baab",
+  "open_loop_v3_validation_selection_root": "b1110cd1f5586a0daaf76762afef81d5feb867eee9b00a6ccf3d7776c6d18eec",
+  "validation_evaluation_result_v1_file_sha256": "06f0fd3dc14582d38effbdabfe89abb56730dedb8e4f92f23eec13263183447f",
+  "validation_evaluation_result_v1_root": "7ebc4e439d0f2c07ea5cac2cf4d90fbcaabd027d6a43af963982204089095900"
+ },
+ "authoritative_bootstrap_as_executed": {
+  "delta_10": {
+   "ci_lower_95": -0.31757797711472546,
+   "ci_upper_95": -0.27887519094358276,
+   "comparison": "NLL(M1) - NLL(M0)",
+   "point_estimate": -0.2985187305218181
+  },
+  "delta_20": {
+   "ci_lower_95": -0.3766323718750887,
+   "ci_upper_95": -0.3265767284700101,
+   "comparison": "NLL(M2) - NLL(M0)",
+   "point_estimate": -0.35211809388765547
+  },
+  "delta_21": {
+   "ci_lower_95": -0.06641892067315934,
+   "ci_upper_95": -0.04033277245026432,
+   "comparison": "NLL(M2) - NLL(M1)",
+   "point_estimate": -0.05359936336583737
+  }
+ },
+ "authoritative_metrics_as_executed": {
+  "M0": {
+   "calibration_intercept": null,
+   "calibration_slope": null,
+   "expected_calibration_error": 0.02431824803352356,
+   "validation_brier": 0.2355674455309008,
+   "validation_nll": 0.6640726651967042
+  },
+  "M1": {
+   "calibration_intercept": 0.2399663760212612,
+   "calibration_slope": 1.2011256548430131,
+   "expected_calibration_error": 0.027997229618823585,
+   "validation_brier": 0.1200547839589991,
+   "validation_nll": 0.36555393467488606
+  },
+  "M2": {
+   "calibration_intercept": 0.25591843208612364,
+   "calibration_slope": 0.79436463626813,
+   "expected_calibration_error": 0.031536231394961554,
+   "validation_brier": 0.1016047177090346,
+   "validation_nll": 0.3119545713090487
+  }
+ },
+ "authority": {
+  "all_authority_items_exact": true,
+  "frozen_m2_checkpoint_sha256": "84ec5025a270f97e0a2aab2d5f4fb7a47d23897141c315b1802cf3860abf0a46",
+  "official_v3_validation_content_root": "fa12acba2e8fffc0ba85a992fca9d18654d9e14d0efef1bca366a760ca390283",
+  "official_v3_validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84",
+  "open_loop_v3_family_selection_rule_v1_sha256": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+  "open_loop_v3_recoverability_predictor_preregistration_v1_sha256": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+  "open_loop_v3_train_model_development_root": "1ed37294a787f6eb232e5fc0ccbba88ec2d36d3ba974bb17233d0d5a5ca76f33",
+  "open_loop_v3_validation_evaluation_manifest_v1_sha256": "f13645aa178ce45586ae7ad5a6f8d18a29404174654388d2fcb7652ad6cd6d1f",
+  "open_loop_v3_validation_selection_root": "b1110cd1f5586a0daaf76762afef81d5feb867eee9b00a6ccf3d7776c6d18eec"
+ },
+ "defective_294_pool_artifacts": {
+  "deleted_deliberately": false,
+  "deltas": {
+   "delta_10": {
+    "ci_lower_95": -0.3178322136677876,
+    "ci_upper_95": -0.2788109250656001
+   },
+   "delta_20": {
+    "ci_lower_95": -0.3769675099126452,
+    "ci_upper_95": -0.3267360605209061
+   },
+   "delta_21": {
+    "ci_lower_95": -0.06637992043994827,
+    "ci_upper_95": -0.040374116822821195
+   }
+  },
+  "note": "the defective result file was overwritten in place by the corrected pass before the preservation instruction existed; its roots and intervals survive in the execution record and are bound here. Byte-level reconstruction is pending compute-host availability and must never be treated as authoritative.",
+  "preservation_status": "HASHES_PRESERVED_FILE_NOT_RECOVERABLE_AT_THIS_TIME",
+  "validation_evaluation_result_v1_file_sha256": "6c8707d51a5c9ad4add685b0fed228d6431ecfb2f0c7e97aafbbd19e0b7cb4c4",
+  "validation_evaluation_result_v1_root": "08a595939d7259425f067cb028290df45cf4d662187ca149b42fc114a08c39f2"
+ },
+ "evidence_ledger": {
+  "H1_learned_recoverability_signal": {
+   "note": "the single-seed margins are very large (upper95 -0.279 and -0.327 against M0), so the learnability direction is unlikely to be seed-fragile, but the frozen statistic was not computed and the claim cannot be certified",
+   "status": "SUSPENDED_PENDING_FROZEN_STATISTIC"
+  },
+  "H2_graph_family_predictive_advantage": {
+   "note": "d21 upper95 is -0.0403 -- the narrowest margin and the branch most exposed to across-seed variation, which is exactly what the frozen three-seed mean and R19 SEED_INSTABILITY exist to test",
+   "status": "SUSPENDED_PENDING_FROZEN_STATISTIC"
+  },
+  "H3_causal_graph_structure_advantage": {
+   "note": "M1 and M2 differ in capacity and architecture as well as message passing; H2 must never be converted into H3",
+   "status": "NOT_YET_ESTABLISHED"
+  },
+  "H4_calibrated_probability_quality": {
+   "m2_ece": 0.031536231394961554,
+   "m2_intercept": 0.25591843208612364,
+   "m2_slope": 0.79436463626813,
+   "note": "slope below 1 indicates over-confidence under the frozen diagnostic; the predictor is NOT perfectly calibrated. Temperature scaling remains forbidden",
+   "status": "IMPERFECT_CALIBRATION_NOT_FATAL"
+  },
+  "H5_counterfactual_topology_decision_benefit": {
+   "note": "no direct evidence; requires closed-loop experiments",
+   "status": "NOT_YET_ESTABLISHED"
+  },
+  "H6_progress_recovery_liveness_benefit": {
+   "note": "requires closed-loop experiments",
+   "status": "NOT_YET_ESTABLISHED"
+  },
+  "H7_safety_preservation": {
+   "note": "requires closed-loop safety metrics and projection evaluation",
+   "status": "NOT_YET_ESTABLISHED"
+  },
+  "H8_protected_domain_generalization": {
+   "note": "protected domains remain untouched and must stay so",
+   "status": "NOT_YET_ESTABLISHED"
+  }
+ },
+ "finding_1_seed_family_statistic": {
+  "checkpoints_that_existed_at_reveal_time": [
+   "M1-seed11.pt",
+   "M1-seed29.pt",
+   "M1-seed47.pt",
+   "M2-seed11.pt",
+   "M2-seed29.pt",
+   "M2-seed47.pt"
+  ],
+  "classification": "FROZEN_SPECIFICATION_NOT_EXECUTED",
+  "collateral_effect": "R19 falsification condition SEED_INSTABILITY ('the effect size is not robust relative to across-seed variation') is structurally unevaluable from a single seed",
+  "frozen_requirement": "mean over the three frozen training seeds {11,29,47} of the event-equal VALIDATION NLL; never the best seed",
+  "independent_adjudication": {
+   "adversarial_refuters": 4,
+   "confidence": "high",
+   "refuted": 0,
+   "verdict": "VIOLATES_FROZEN_SPEC"
+  },
+  "no_amendment_exists": {
+   "deviation_declared_anywhere": false,
+   "manifest_declares_itself_bound_by_the_rule": true,
+   "preregistration_supersedes": null
+  },
+  "selection_record_assertion_rule_modified_false": "TEXTUALLY TRUE, CONFORMANCE FALSE: the rule document was not edited, but the executed statistic is not the one it defines",
+  "severity": "DISQUALIFYING_FOR_THIS_SELECTION",
+  "what_was_executed": "a single checkpoint per learned family, training_seed 47, evaluated once on VALIDATION",
+  "why_r18_does_not_authorise_it": [
+   "R18 designates a MEDIAN of a TRAIN-only cross-validation NLL; the rule requires a MEAN of the VALIDATION NLL -- different statistic, different split",
+   "R18's later_use is 'this checkpoint may be used for closed-loop integration if its family wins', which presupposes a winner already chosen by the rule",
+   "R18 imposes 'all three seeds remain reported for stability'; no per-seed VALIDATION number exists in any Stage-5D artifact"
+  ]
+ },
+ "finding_2_bootstrap_pool": {
+  "classification_294": "NONAUTHORITATIVE_EXECUTION_DEFECT",
+  "classification_300": "EXECUTION_CORRECTION_TO_FROZEN_SPECIFICATION",
+  "concrete_defect": "every layout has 30 original source episodes; the 294-pool made layout F4 draw 24 from 24 instead of the required 30 from 30. The other nine layouts were unaffected.",
+  "contributing_episodes": 294,
+  "frozen_requirement": "within each VALIDATION layout, resample that layout's source episodes with replacement preserving that layout's original episode count",
+  "frozen_zero_yield_clause": "an episode with M = 0 contributes no events and that is correct; a replicate yielding zero events overall would FAIL CLOSED",
+  "held_fixed_across_both_passes": [
+   "bootstrap seed",
+   "replicate count",
+   "cluster unit",
+   "layout stratification",
+   "metric",
+   "prediction artifacts",
+   "family candidates",
+   "winner rule"
+  ],
+  "independent_adjudication": {
+   "adversarial_refuters": 2,
+   "confidence": "high",
+   "refuted": 1,
+   "surviving_criticism": "the superset-pool code path was never exercised by the Stage-5B qualification suite and ran for the first time post-reveal; the reveal globs stage_a records without hash-checking them against stage_a_root and without asserting the pool size equals 300",
+   "verdict": "CONFORMS_TO_FROZEN_SPEC"
+  },
+  "original_source_episodes": 300,
+  "scientific_specification_changed_after_reveal": false,
+  "winner_changed_by_the_correction": false,
+  "zero_yield_episodes": 6,
+  "zero_yield_location": "all six sit in layout F4, cell F4/N16 (M_zero 6, selected_events 0)"
+ },
+ "finding_3_m0_calibration": {
+  "adjudication": "NOT_PURELY_DIAGNOSTIC_UNDEFINED_HANDLING -- the estimand handling is correct but the wrapper altered a frozen fail-closed contract and added post-freeze reported fields",
+  "calibration_definition_changed": false,
+  "calibration_implementation_changed": false,
+  "effect_on_primary_metric_or_winner": "none; calibration enters no selection",
+  "estimator_changed": false,
+  "independent_adjudication": {
+   "adversarial_refuters": 2,
+   "refuted": 2,
+   "survives": false,
+   "verdict_initial": "CONFORMS_TO_FROZEN_SPEC"
+  },
+  "mathematics": {
+   "distinct_logits": 1,
+   "identified_functional": "u* = a + b z0 = logit(mean target)",
+   "intercept_identifiable": false,
+   "reason": "the frozen objective depends on (a,b) only through a + b z0; with z constant the argmin is an entire line in R^2 and the 2x2 Hessian is exactly rank deficient. The minimum VALUE exists; the argmin PAIR does not.",
+   "slope_identifiable": false,
+   "verified_independently": true
+  },
+  "new_number_fabricated": false,
+  "realized_harm_in_this_run": "none: M1 and M2 both returned identifiable calibration, so no data-integrity abort was actually suppressed, and M0's recorded mechanism is independently confirmed true (distinct_logits == 1). The harm is a weakened guard and an unverified assertion, not a wrong reported number.",
+  "substitute_calibration_method_introduced": false,
+  "wrapper_defects_found": [
+   "the handler catches CalibrationContractError as a bare type inside the family loop; that type is raised at 11 sites in the frozen module, only one of which is non-identifiability. A data-integrity violation for any family would have been recorded as 'not identifiable' instead of failing closed, contrary to the frozen docstring 'A calibration-contract violation that must fail closed'",
+   "the captured exception text is assigned to a dead variable; the serialized calibration_not_identifiable_reason is a hard-coded literal asserting a mechanism the code never verified",
+   "the frozen composite entry point calibration_report() is imported but never called; it was replaced by an ad-hoc decomposition emitting a record shape the frozen CalibrationReport dataclass cannot represent (its intercept and slope are non-Optional)",
+   "three reported fields absent from R14 and from the manifest schema were added to the sealed result: calibration_identifiable, calibration_not_identifiable_reason, distinct_logits"
+  ]
+ },
+ "frozen_closed_loop_questions": {
+  "Q1": "Does using frozen recoverability estimates in topology selection improve task progress, recovery and liveness relative to a controller without recoverability reasoning?",
+  "Q2": "Does it preserve safety rather than trading collisions and near-collisions for progress?",
+  "Q3": "Is any benefit specifically due to counterfactual topology-conditioned recoverability rather than simply extra model capacity?",
+  "Q4": "Does probabilistic reasoning outperform a deterministic or binary recoverability variant where scientifically valid?",
+  "Q5": "Where does the F9 local-observability limitation cause failure?",
+  "outcomes_designed_before_protected_data": true
+ },
+ "immutable_facts_not_altered_by_this_stage": {
+  "family_winner_as_executed": "M2",
+  "frozen_model_as_executed": "M2-seed47",
+  "validation_can_be_reblinded": false,
+  "validation_reveal_occurred": true,
+  "validation_reveal_timestamp_utc": "2026-08-25T06:11:52Z",
+  "validation_status": "SPENT_MODEL_SELECTION_SET"
+ },
+ "name": "OPEN_LOOP_V3_NOVELTY_CHECKPOINT_1",
+ "novelty_thesis_status": {
+  "novelty_proven": false,
+  "predictor_premise": "DIRECTIONALLY_INDICATED_BUT_NOT_CERTIFIED",
+  "status": "HOLD_PENDING_SELECTION_STATISTIC_RESOLUTION",
+  "thesis": "probabilistic recoverability can serve as a predictive decision variable for counterfactual topology adaptation in decentralized swarm control",
+  "topology_control_premise": "NOT_YET_TESTED"
+ },
+ "open_loop_v3_novelty_checkpoint_1_root": "d36bc4e4c43cb0062dbdfcd73b471e6683a422d391dab75ab99b1236dc0330d1",
+ "paper_safe_claim_boundary": {
+  "allowed_now": [
+   "Under the preregistered open-loop protocol, a single preregistered VALIDATION reveal was executed and is spent.",
+   "All frozen dataset seals, authority roots and metric implementations verify exact."
+  ],
+  "not_allowed": [
+   "graph message passing causes the gain",
+   "RVT improves topology selection",
+   "RVT improves closed-loop recovery",
+   "RVT improves safety",
+   "RVT generalizes",
+   "RVT is state of the art",
+   "the predictor is well calibrated"
+  ],
+  "suspended_pending_resolution": [
+   "the graph-based predictor M2 achieved lower event-equal grouped Bernoulli NLL than the constant baseline and than M1 on the frozen model-selection set",
+   "the result supports a graph-family predictive advantage"
+  ]
+ },
+ "prediction_immutability": {
+  "M0_sha256": "c563d87b99f9af11e411353b6997fa82e530b27950ecb56e801775ff7fc3e20b",
+  "M1_sha256": "1a8d57be817fc0073ec03baf58ce419e0139ee4a14e2a29c90faad62adaad20e",
+  "M2_sha256": "54aa579188737d9667e68e6342946d7edaf246f535796011cf6ce1af2131e339",
+  "bit_identical_across_all_passes": true,
+  "checkpoint_changed": false,
+  "coverage": {
+   "M0": 1.0,
+   "M1": 1.0,
+   "M2": 1.0
+  },
+  "event_membership_changed": false,
+  "model_rerun_with_changed_parameters": false,
+  "prediction_filtering": false,
+  "seed_changed": false
+ },
+ "protected_domains": {
+  "closed_loop_final_test_reserve_accessed": false,
+  "final_generalization_reserve_accessed": false,
+  "n24_reserve_accessed": false,
+  "protected_domain_contact": "NONE",
+  "protected_outcomes_accessed": 0
+ },
+ "schema_version": "rvt-open-loop-v3-novelty-checkpoint/v1",
+ "stage": "STAGE_5E",
+ "status": "POST_REVEAL_AUTHORITY_FAILURE_ADJUDICATED",
+ "this_stage_performed": {
+  "artifacts_rewritten_to_repair_authority": false,
+  "checkpoint_change": false,
+  "closed_loop_experiments": false,
+  "new_validation_analysis": false,
+  "recalibration": false,
+  "refitting": false,
+  "seed_reselection": false,
+  "training": false
+ },
+ "verdict": "C_POST_REVEAL_AUTHORITY_OR_PROVENANCE_FAILURE",
+ "winner_re_derivation": {
+  "case": 4,
+  "caveat": "re-derivation confirms the recorded numbers follow from the recorded intervals; it does NOT cure finding_1, because the inputs are single-seed statistics rather than the frozen three-seed means",
+  "m1_eligible": true,
+  "m2_eligible": true,
+  "reproduced_with_frozen_select_family": true,
+  "rule_document_modified": false,
+  "winner": "M2"
+ }
+}
