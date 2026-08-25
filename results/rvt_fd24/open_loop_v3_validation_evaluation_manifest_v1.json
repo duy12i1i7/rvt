@@ -1,0 +1,169 @@
+{
+ "alternative_hp_evaluated_for_selection": false,
+ "authority": {
+  "official_v3_train_seal_root": "3a281b0ff8647302ec7aece2f4a061111aa8ef87c743d5d6626ebed741615c22",
+  "official_v3_validation_content_root": "fa12acba2e8fffc0ba85a992fca9d18654d9e14d0efef1bca366a760ca390283",
+  "official_v3_validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84",
+  "open_loop_v3_family_selection_rule_v1_sha256": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+  "open_loop_v3_recoverability_predictor_preregistration_v1_sha256": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+  "open_loop_v3_scientific_training_authorization_v1_sha256": "2c6da926bd45655888115fba4675ac35edb18f87927815bbf27220483d22db62",
+  "open_loop_v3_train_internal_fold_manifest_v1_sha256": "e648a4d42064929ded390fcbf06eb2da9ec6569809d58ae75a26fa3d0e0b6ba2",
+  "open_loop_v3_train_model_development_root": "1ed37294a787f6eb232e5fc0ccbba88ec2d36d3ba974bb17233d0d5a5ca76f33",
+  "qualified_implementation_commit": "128331938075621328e42168abb5d3517fa45c29",
+  "qualified_training_image_digest": "sha256:b924b3ed9dbf330ec355da5651f30375b75a66f0898d6e6b6b5f10081212ea20",
+  "stage5b_qualification_root": "9bfb1f2ab7882f7d1ae19fe0fdfb7b6659de1c254422c842973fe50f9892e3e3",
+  "train_hp_selection_v1_sha256": "9ed9a334248f4c01888202d3a9df323a95e6d21b20e40948eaaf49d9b962851e"
+ },
+ "bootstrap": {
+  "confidence_level": 0.95,
+  "implementation": "rvt_swarm/openloop_v3/bootstrap.py",
+  "implementation_sha256": "3ddd8b956becc69e8ed4f7eb02b3a557e39567efb6b0febff448b0174e5fb31e",
+  "interval": "95 percent percentile",
+  "paired": true,
+  "replicates": 10000,
+  "resampling_unit": "SOURCE_EPISODE",
+  "rng": "numpy.random.default_rng(20260821)",
+  "seed": 20260821,
+  "stratification": "VALIDATION_LAYOUT"
+ },
+ "checkpoint_averaging": false,
+ "ensembling": false,
+ "families": {
+  "M0": {
+   "artifact": "m0_fitted_train_artifact_v1.json",
+   "artifact_sha256": "1907f68ea989042c1da56fb9ec50b4f9aec935b9ebbb4311d945f31212c61154",
+   "kind": "constant",
+   "p_hat": 0.3531095498308615,
+   "refitting": "NONE"
+  },
+  "M1": {
+   "checkpoint_file": "M1-seed47.pt",
+   "deterministic_inference": true,
+   "envelope_root": "9f826e531679bf48a21ac68f399453310209cbecfec03c0df9bed18ed7533c62",
+   "file_sha256": "60273cf0a79f8c4b32b1c567f51e6ae6cffb8b51e8eba7878015dbb133d53b2f",
+   "hyperparameters": {
+    "learning_rate": 0.001,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0
+   },
+   "refit_step": 37000,
+   "residual_state_sha256": null,
+   "state_dict_sha256": "da0f9f9dc202cb151c96b03028ce6558790739024edc7a1f1fc231e42670293e",
+   "training_seed": 47
+  },
+  "M2": {
+   "checkpoint_file": "M2-seed47.pt",
+   "deterministic_inference": true,
+   "envelope_root": "4fe9bc0cd7aa132da3510ae066db25bb0165c2843a9f676841f826481ace5fcb",
+   "file_sha256": "84ec5025a270f97e0a2aab2d5f4fb7a47d23897141c315b1802cf3860abf0a46",
+   "hyperparameters": {
+    "learning_rate": 0.001,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001
+   },
+   "refit_step": 12000,
+   "residual_state_sha256": "995e92c60042c337f6bba2b97be2cc17fb24062d0286a81974ea6da5e68c4dcf",
+   "state_dict_sha256": "c7bf97e8f962d4ee46c47c93fd1581355d03514f37738f03f586505e3ca0da82",
+   "training_seed": 47
+  }
+ },
+ "family_selection_rule_root": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+ "fitting_on_validation": false,
+ "frozen_before_reveal": true,
+ "metric_implementations": {
+  "bootstrap": "3ddd8b956becc69e8ed4f7eb02b3a557e39567efb6b0febff448b0174e5fb31e",
+  "calibration": "4f197f4b28f0b119ef3a5cf89cc72de170bb74783b00505334d7c885b4d06dd5",
+  "driver": "0f0508ab2418b1531c412f18b21fb5b75e26d0e5c82a8656462834f253f14106",
+  "loader_v3": "3c093c9368ba45541fbb3d23dac2ded1e6a374ae5b53b20ae2f886f713d54d90",
+  "loss_v3": "65d6b5ebac93aa4ca1771eff0b695782284ea31a32ffad04cd098f8656032199",
+  "m0": "ec877063a3d882f93d8fe4eb77263876495d436c4d7b170bec7eeb5f8e699b79",
+  "m1": "3df406407f2a284340c3444c362fb3cdb5971ea44c3d98e9616d94c112b605e8",
+  "metrics_v3": "814200fbb5663fc011fd093f873019765f938851aee15c85fb8787da94a55d6e",
+  "rehydrate": "73622a3e621a91f933718908ee5a20100d8edf688f42d93ab82e1aea78d3c4e4",
+  "selection": "81dbe0d05d6b36e491551a6aad7d565a3013cfe199de6eaa6c019b8d9b57e2e0"
+ },
+ "name": "OPEN_LOOP_V3_VALIDATION_EVALUATION_MANIFEST_V1",
+ "open_loop_v3_validation_evaluation_manifest_v1_sha256": "f13645aa178ce45586ae7ad5a6f8d18a29404174654388d2fcb7652ad6cd6d1f",
+ "pre_reveal_container_had_validation_mount": false,
+ "primary_metric": {
+  "class_weighting": "NONE",
+  "forbidden_substitution": "(p - k/R)^2",
+  "formula": "-[k log p + (R-k) log(1-p)] / R, mean over N robots, 0.5/0.5 over candidates, mean over events",
+  "implementation": "rvt_swarm/fd24/loss_v3.py::event_loss and dataset_loss",
+  "name": "event_equal_grouped_bernoulli_nll",
+  "r3_reweighting": "NONE"
+ },
+ "protected_domain_access": 0,
+ "reveal_scheduled_utc": "2026-08-25T06:06:30Z",
+ "row_event_weighting_rule": {
+  "candidates_within_event": {
+   "COMPACT": 0.5,
+   "LINE": 0.5
+  },
+  "events": "unweighted mean",
+  "replica": "divide by R through the frozen grouped Bernoulli NLL",
+  "robot_rows_within_candidate": "mean over N"
+ },
+ "schema_version": "rvt-open-loop-v3-validation-evaluation-manifest/v1",
+ "secondary_metrics": {
+  "brier": {
+   "formula": "p^2 - 2p(k/R) + k/R",
+   "implementation": "rvt_swarm/fd24/metrics_v3.py::brier_event and brier_split"
+  },
+  "calibration": {
+   "bins": 10,
+   "boundaries": [
+    [
+     0.0,
+     0.1
+    ],
+    [
+     0.1,
+     0.2
+    ],
+    [
+     0.2,
+     0.3
+    ],
+    [
+     0.3,
+     0.4
+    ],
+    [
+     0.4,
+     0.5
+    ],
+    [
+     0.5,
+     0.6
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     0.9,
+     1.0
+    ]
+   ],
+   "final_bin_right_closed": true,
+   "observation_pairs": "robot level (q, k/R), weight 1/(2 N_e E)",
+   "role": "DIAGNOSTIC_ONLY"
+  },
+  "participates_in_selection": false
+ },
+ "seed_selection_after_reveal": false,
+ "status": "FROZEN_BEFORE_VALIDATION_OUTCOME_ACCESS",
+ "subgroup_driven_model_choice": false,
+ "temperature_scaling": false,
+ "threshold_tuning": false,
+ "validation_outcome_accessed_at_freeze_time": false
+}

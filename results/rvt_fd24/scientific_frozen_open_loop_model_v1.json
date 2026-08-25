@@ -1,0 +1,35 @@
+{
+ "artifact": "FROZEN_MODEL_M2-seed47.pt",
+ "artifact_sha256": "84ec5025a270f97e0a2aab2d5f4fb7a47d23897141c315b1802cf3860abf0a46",
+ "authority": {
+  "official_v3_train_seal_root": "3a281b0ff8647302ec7aece2f4a061111aa8ef87c743d5d6626ebed741615c22",
+  "official_v3_validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84",
+  "open_loop_v3_recoverability_predictor_preregistration_v1_sha256": "8619ac4c8a60740209d826910d9002d12d63f825886b4869e08c883024e7dbf6",
+  "open_loop_v3_train_model_development_root": "1ed37294a787f6eb232e5fc0ccbba88ec2d36d3ba974bb17233d0d5a5ca76f33",
+  "qualified_implementation_commit": "128331938075621328e42168abb5d3517fa45c29",
+  "qualified_training_image_digest": "sha256:b924b3ed9dbf330ec355da5651f30375b75a66f0898d6e6b6b5f10081212ea20"
+ },
+ "deployable": false,
+ "deployment_classification": "shadow-disabled",
+ "family_selection_rule_root": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+ "hyperparameters": {
+  "learning_rate": 0.001,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001
+ },
+ "model_family": "M2",
+ "name": "SCIENTIFIC_FROZEN_OPEN_LOOP_MODEL",
+ "production_qualified": false,
+ "refit_step": 12000,
+ "refit_using_validation": false,
+ "retrained_after_family_selection": false,
+ "safety_certified": false,
+ "schema_version": "rvt-open-loop-v3-scientific-frozen-model/v1",
+ "scientific_frozen_open_loop_model_v1_sha256": "67c6634a37781ab830894f3f8ee18d474efaaa47eef7dfa421b8ce71ffaf8de0",
+ "scientific_status": "SCIENTIFIC_FROZEN_OPEN_LOOP_MODEL",
+ "selected_by": "the frozen open-loop V3 family-selection rule, one-shot VALIDATION",
+ "source_artifact_sha256": "84ec5025a270f97e0a2aab2d5f4fb7a47d23897141c315b1802cf3860abf0a46",
+ "state_dict_sha256": "c7bf97e8f962d4ee46c47c93fd1581355d03514f37738f03f586505e3ca0da82",
+ "temperature_scaling_activated": false,
+ "training_seed": 47
+}

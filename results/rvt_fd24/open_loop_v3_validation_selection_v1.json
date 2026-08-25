@@ -1,0 +1,456 @@
+{
+ "aggregate_metrics": {
+  "M0": {
+   "calibration_identifiable": false,
+   "calibration_intercept": null,
+   "calibration_not_identifiable_reason": "a constant predictor has zero logit spread, so the calibration slope is not identifiable; the reliability diagram and ECE below are unaffected",
+   "calibration_slope": null,
+   "distinct_logits": 1,
+   "empty_bins": 9,
+   "expected_calibration_error": 0.02431824803352356,
+   "reliability_bins": [
+    {
+     "empty": true,
+     "index": 0,
+     "lower": 0.0,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.1,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 1,
+     "lower": 0.1,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.2,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 2,
+     "lower": 0.2,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.3,
+     "weight": 0.0
+    },
+    {
+     "empty": false,
+     "index": 3,
+     "lower": 0.3,
+     "mean_probability": 0.35310959815979004,
+     "mean_target": 0.3774278461933136,
+     "right_closed": false,
+     "upper": 0.4,
+     "weight": 0.9999999403953552
+    },
+    {
+     "empty": true,
+     "index": 4,
+     "lower": 0.4,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.5,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 5,
+     "lower": 0.5,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.6,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 6,
+     "lower": 0.6,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.7,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 7,
+     "lower": 0.7,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.8,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 8,
+     "lower": 0.8,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": false,
+     "upper": 0.9,
+     "weight": 0.0
+    },
+    {
+     "empty": true,
+     "index": 9,
+     "lower": 0.9,
+     "mean_probability": null,
+     "mean_target": null,
+     "right_closed": true,
+     "upper": 1.0,
+     "weight": 0.0
+    }
+   ],
+   "validation_brier": 0.2355674455309008,
+   "validation_nll": 0.6640726651967042
+  },
+  "M1": {
+   "calibration_identifiable": true,
+   "calibration_intercept": 0.2399663760212612,
+   "calibration_not_identifiable_reason": null,
+   "calibration_slope": 1.2011256548430131,
+   "distinct_logits": 23039,
+   "empty_bins": 0,
+   "expected_calibration_error": 0.027997229618823585,
+   "reliability_bins": [
+    {
+     "empty": false,
+     "index": 0,
+     "lower": 0.0,
+     "mean_probability": 0.026185717433691025,
+     "mean_target": 0.019368750974535942,
+     "right_closed": false,
+     "upper": 0.1,
+     "weight": 0.3180265426635742
+    },
+    {
+     "empty": false,
+     "index": 1,
+     "lower": 0.1,
+     "mean_probability": 0.14780238270759583,
+     "mean_target": 0.12424403429031372,
+     "right_closed": false,
+     "upper": 0.2,
+     "weight": 0.08028871566057205
+    },
+    {
+     "empty": false,
+     "index": 2,
+     "lower": 0.2,
+     "mean_probability": 0.2549969553947449,
+     "mean_target": 0.26639607548713684,
+     "right_closed": false,
+     "upper": 0.3,
+     "weight": 0.08526738733053207
+    },
+    {
+     "empty": false,
+     "index": 3,
+     "lower": 0.3,
+     "mean_probability": 0.35767319798469543,
+     "mean_target": 0.3957325220108032,
+     "right_closed": false,
+     "upper": 0.4,
+     "weight": 0.15493930876255035
+    },
+    {
+     "empty": false,
+     "index": 4,
+     "lower": 0.4,
+     "mean_probability": 0.448503702878952,
+     "mean_target": 0.4968727231025696,
+     "right_closed": false,
+     "upper": 0.5,
+     "weight": 0.06889107823371887
+    },
+    {
+     "empty": false,
+     "index": 5,
+     "lower": 0.5,
+     "mean_probability": 0.5473305583000183,
+     "mean_target": 0.6049132943153381,
+     "right_closed": false,
+     "upper": 0.6,
+     "weight": 0.06339074671268463
+    },
+    {
+     "empty": false,
+     "index": 6,
+     "lower": 0.6,
+     "mean_probability": 0.6474881172180176,
+     "mean_target": 0.6610111594200134,
+     "right_closed": false,
+     "upper": 0.7,
+     "weight": 0.04060859978199005
+    },
+    {
+     "empty": false,
+     "index": 7,
+     "lower": 0.7,
+     "mean_probability": 0.747231662273407,
+     "mean_target": 0.840918779373169,
+     "right_closed": false,
+     "upper": 0.8,
+     "weight": 0.038205381482839584
+    },
+    {
+     "empty": false,
+     "index": 8,
+     "lower": 0.8,
+     "mean_probability": 0.85279381275177,
+     "mean_target": 0.9439501166343689,
+     "right_closed": false,
+     "upper": 0.9,
+     "weight": 0.0490419939160347
+    },
+    {
+     "empty": false,
+     "index": 9,
+     "lower": 0.9,
+     "mean_probability": 0.96640944480896,
+     "mean_target": 0.9810879826545715,
+     "right_closed": true,
+     "upper": 1.0,
+     "weight": 0.10134021937847137
+    }
+   ],
+   "validation_brier": 0.1200547839589991,
+   "validation_nll": 0.36555393467488606
+  },
+  "M2": {
+   "calibration_identifiable": true,
+   "calibration_intercept": 0.25591843208612364,
+   "calibration_not_identifiable_reason": null,
+   "calibration_slope": 0.79436463626813,
+   "distinct_logits": 23014,
+   "empty_bins": 0,
+   "expected_calibration_error": 0.031536231394961554,
+   "reliability_bins": [
+    {
+     "empty": false,
+     "index": 0,
+     "lower": 0.0,
+     "mean_probability": 0.006381294224411249,
+     "mean_target": 0.014439468272030354,
+     "right_closed": false,
+     "upper": 0.1,
+     "weight": 0.42742618918418884
+    },
+    {
+     "empty": false,
+     "index": 1,
+     "lower": 0.1,
+     "mean_probability": 0.1579456329345703,
+     "mean_target": 0.26097342371940613,
+     "right_closed": false,
+     "upper": 0.2,
+     "weight": 0.05401574820280075
+    },
+    {
+     "empty": false,
+     "index": 2,
+     "lower": 0.2,
+     "mean_probability": 0.2356119155883789,
+     "mean_target": 0.42735615372657776,
+     "right_closed": false,
+     "upper": 0.3,
+     "weight": 0.059133853763341904
+    },
+    {
+     "empty": false,
+     "index": 3,
+     "lower": 0.3,
+     "mean_probability": 0.35862407088279724,
+     "mean_target": 0.381039559841156,
+     "right_closed": false,
+     "upper": 0.4,
+     "weight": 0.06095471978187561
+    },
+    {
+     "empty": false,
+     "index": 4,
+     "lower": 0.4,
+     "mean_probability": 0.45316123962402344,
+     "mean_target": 0.5057684183120728,
+     "right_closed": false,
+     "upper": 0.5,
+     "weight": 0.07327428460121155
+    },
+    {
+     "empty": false,
+     "index": 5,
+     "lower": 0.5,
+     "mean_probability": 0.5431652069091797,
+     "mean_target": 0.5429314374923706,
+     "right_closed": false,
+     "upper": 0.6,
+     "weight": 0.05463419109582901
+    },
+    {
+     "empty": false,
+     "index": 6,
+     "lower": 0.6,
+     "mean_probability": 0.6409803628921509,
+     "mean_target": 0.6113142371177673,
+     "right_closed": false,
+     "upper": 0.7,
+     "weight": 0.028262795880436897
+    },
+    {
+     "empty": false,
+     "index": 7,
+     "lower": 0.7,
+     "mean_probability": 0.7615360021591187,
+     "mean_target": 0.7292854189872742,
+     "right_closed": false,
+     "upper": 0.8,
+     "weight": 0.03136647120118141
+    },
+    {
+     "empty": false,
+     "index": 8,
+     "lower": 0.8,
+     "mean_probability": 0.8538432717323303,
+     "mean_target": 0.9103133678436279,
+     "right_closed": false,
+     "upper": 0.9,
+     "weight": 0.06790682673454285
+    },
+    {
+     "empty": false,
+     "index": 9,
+     "lower": 0.9,
+     "mean_probability": 0.9767583608627319,
+     "mean_target": 0.9786437749862671,
+     "right_closed": true,
+     "upper": 1.0,
+     "weight": 0.14302493631839752
+    }
+   ],
+   "validation_brier": 0.1016047177090346,
+   "validation_nll": 0.3119545713090487
+  }
+ },
+ "checkpoint_averaging": false,
+ "ensembling": false,
+ "evaluation_manifest_file_sha256": "064153c8250bcd77bd422c42d3cca0681a0e8ef070511e927cac87f52fd18d58",
+ "family_selection": {
+  "case": 4,
+  "learnability_supported": true,
+  "m1_eligible_vs_m0": true,
+  "m2_eligible_vs_m0": true,
+  "rationale": "both eligible and M2 excluded zero against M1",
+  "rule_modified": false,
+  "rule_root": "f65e60fee5b5c0e7249b3594a25d4cb54bf826c19be2cf3aad75df5f1b72f1f5",
+  "winner": "M2"
+ },
+ "frozen_model": {
+  "artifact": "FROZEN_MODEL_M2-seed47.pt",
+  "artifact_sha256": "84ec5025a270f97e0a2aab2d5f4fb7a47d23897141c315b1802cf3860abf0a46",
+  "deployment_classification": "shadow-disabled",
+  "model_family": "M2",
+  "scientific_frozen_open_loop_model_v1_sha256": "67c6634a37781ab830894f3f8ee18d474efaaa47eef7dfa421b8ce71ffaf8de0"
+ },
+ "gradient_updates": 0,
+ "name": "OPEN_LOOP_V3_VALIDATION_SELECTION",
+ "official_v3_validation_content_root": "fa12acba2e8fffc0ba85a992fca9d18654d9e14d0efef1bca366a760ca390283",
+ "official_v3_validation_seal_root": "770957243df01a4077ef331e55b1e6ee892b64f2c410112e656ed38832fd8d84",
+ "open_loop_v3_validation_evaluation_manifest_v1_sha256": "f13645aa178ce45586ae7ad5a6f8d18a29404174654388d2fcb7652ad6cd6d1f",
+ "open_loop_v3_validation_selection_root": "b1110cd1f5586a0daaf76762afef81d5feb867eee9b00a6ccf3d7776c6d18eec",
+ "optimizer_steps": 0,
+ "paired_bootstrap": {
+  "contributing_episodes": 294,
+  "deltas": {
+   "delta_10": {
+    "ci_lower_95": -0.31757797711472546,
+    "ci_upper_95": -0.27887519094358276,
+    "comparison": "NLL(M1) - NLL(M0)",
+    "point_estimate": -0.2985187305218181
+   },
+   "delta_20": {
+    "ci_lower_95": -0.3766323718750887,
+    "ci_upper_95": -0.3265767284700101,
+    "comparison": "NLL(M2) - NLL(M0)",
+    "point_estimate": -0.35211809388765547
+   },
+   "delta_21": {
+    "ci_lower_95": -0.06641892067315934,
+    "ci_upper_95": -0.04033277245026432,
+    "comparison": "NLL(M2) - NLL(M1)",
+    "point_estimate": -0.05359936336583737
+   }
+  },
+  "episode_pool": "all source episodes of the split, including zero-yield",
+  "episodes": 300,
+  "interval": "95 percent percentile",
+  "layouts": 10,
+  "paired": true,
+  "replicates": 10000,
+  "resampling_unit": "SOURCE_EPISODE",
+  "seed": 20260821,
+  "stratification": "VALIDATION_LAYOUT",
+  "zero_yield_episodes_in_pool": 6
+ },
+ "parameters_fitted_on_validation": 0,
+ "prediction_artifacts": {
+  "M0": {
+   "artifact_sha256": "c563d87b99f9af11e411353b6997fa82e530b27950ecb56e801775ff7fc3e20b",
+   "coverage": 1.0,
+   "file": "validation_predictions_M0.json",
+   "predictions_root": "11bdb8bf0a2e9657ae3f2306d427747201e64a43f49a418c1dc66323af581525",
+   "rows": 23040
+  },
+  "M1": {
+   "artifact_sha256": "1a8d57be817fc0073ec03baf58ce419e0139ee4a14e2a29c90faad62adaad20e",
+   "coverage": 1.0,
+   "file": "validation_predictions_M1.json",
+   "predictions_root": "549afb47380cf0e60c17ca4b0fadd855364b005ce53742b8884f52d411cb796b",
+   "rows": 23040
+  },
+  "M2": {
+   "artifact_sha256": "54aa579188737d9667e68e6342946d7edaf246f535796011cf6ce1af2131e339",
+   "coverage": 1.0,
+   "file": "validation_predictions_M2.json",
+   "predictions_root": "427ca23fe60c7ae84945b387c8a740ef7a1e83bedfc74c9e40e116e98eb2dc4c",
+   "rows": 23040
+  }
+ },
+ "protected_domain_access": 0,
+ "schema_version": "rvt-open-loop-v3-validation-selection/v1",
+ "scientific_scope": {
+  "does_not_establish": [
+   "closed-loop benefit",
+   "topology-selection benefit",
+   "causal graph advantage",
+   "safety improvement",
+   "generalization to protected domains",
+   "an unbiased generalization estimate -- VALIDATION is the selection set"
+  ],
+  "establishes": [
+   "under the frozen open-loop protocol, both learned families reduce the event-equal grouped Bernoulli NLL relative to the constant baseline on the frozen VALIDATION layouts",
+   "M2 reduces it further than M1 under the frozen paired interval"
+  ]
+ },
+ "seed_selection_after_reveal": false,
+ "status": "ONE_SHOT_VALIDATION_SELECTION_COMPLETE",
+ "temperature_scaling_activated": false,
+ "threshold_tuning": false,
+ "validation_blinded": false,
+ "validation_dataset_changed": false,
+ "validation_evaluation_result_file_sha256": "06f0fd3dc14582d38effbdabfe89abb56730dedb8e4f92f23eec13263183447f",
+ "validation_evaluation_result_v1_sha256": "7ebc4e439d0f2c07ea5cac2cf4d90fbcaabd027d6a43af963982204089095900",
+ "validation_is_unbiased_final_generalization_evidence": false,
+ "validation_reusable_for_model_selection": false,
+ "validation_reveal_occurred": true,
+ "validation_reveal_timestamp_utc": "2026-08-25T06:11:52Z",
+ "validation_status": "SPENT_MODEL_SELECTION_SET"
+}
