@@ -20,9 +20,11 @@ ck("contract root as reported",
    c["rvt_swarm_clean_room_global_contract_root"] == "16aa431b290eae42ad62b0f72fae22ed3a2e3b7be138db4cfdda4a636bd87c02")
 ck("status is prospectively frozen",
    c["status"] == "PROSPECTIVELY_FROZEN_BEFORE_ANY_CLEAN_ROOM_DATA_EXISTS")
-ck("CR-0 source commit matches the repository",
-   c["cr0_source_commit"] == subprocess.run(["git","-C",str(ROOT),"rev-parse","HEAD"],
-       capture_output=True, text=True).stdout.strip())
+# The contract records the tree it was derived from, which is necessarily the
+# parent of the commit that carries the contract itself. Ancestry, not equality.
+_anc = subprocess.run(["git","-C",str(ROOT),"merge-base","--is-ancestor",
+                       c["cr0_source_commit"], "HEAD"]).returncode == 0
+ck("CR-0 source commit is HEAD or an ancestor of it", _anc, c["cr0_source_commit"][:12])
 
 # --- pilot boundary ---
 pb = c["pilot_boundary"]
