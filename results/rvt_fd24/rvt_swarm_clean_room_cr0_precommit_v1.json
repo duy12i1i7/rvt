@@ -1,0 +1,27 @@
+{
+ "branch": "research/rvt-cleanroom-cr0-global-contract-v1",
+ "clean_room_data_generated_before_this_precommit": false,
+ "contract_file": "results/rvt_fd24/rvt_swarm_clean_room_global_contract_v1.json",
+ "contract_file_sha256": "e5f948f2e3b2a07b54009c2aad1f2191e00f67074bcc57b0c26b57bf217a93f7",
+ "cr0_contract_carrying_commit": "356585e9178245094c9e89288e92edde6ae1ed9e",
+ "cr0_contract_tree_commit": "90d9fed1882e8b6a01a7f5a5416ae3e80003c16d",
+ "cr0_precommit_head_commit": "32bc35bac80dcb2f0621a6fd822b6bf9e61ee4d6",
+ "executable_contract_root": {
+  "__init__.py": "7b7c98fa88854d1ad24fd96d13d4e15c78fc4ec512490a4228e957726eac6a08",
+  "calibration_contract.py": "6b9fa5c724442a27ae7c4da6761995140c591703592cdfa8ebd270cfaa5227a7",
+  "family_statistic.py": "a4baaa9d163cb040d9c2f77930e406f74607257f38c05fb4b012def502e5e64d",
+  "selection.py": "cf164e14b6e98d521e99830820d972311c75d1f11717d6aa0ea76cd7c9d6589d",
+  "universe.py": "27de28807f9158c585b1c36f54eef7a7411d95a6cf6228db68a937bad4a6e397"
+ },
+ "history_rewriting_after_this_point": "FORBIDDEN",
+ "name": "RVT_SWARM_CLEAN_ROOM_CR0_PRECOMMIT_V1",
+ "qualification_suite_sha256": "c3eec6752916e299197519fc55ba4d17eacacb29c433b0a1d28397ec6eaebf4f",
+ "remote": "https://github.com/duy12i1i7/rvt.git",
+ "rvt_swarm_clean_room_cr0_precommit_root": "a632d7c7cb51dcd3117cbaeeb0d8761bdfdccd45f4312298c4c832c0431b229e",
+ "rvt_swarm_clean_room_global_contract_root": "16aa431b290eae42ad62b0f72fae22ed3a2e3b7be138db4cfdda4a636bd87c02",
+ "schema_version": "rvt-swarm-clean-room-precommit/v1",
+ "stage": "CR-0",
+ "status": "IMMUTABLE_PRECOMMIT_BEFORE_ANY_CLEAN_ROOM_DATA",
+ "tag": "rvt-cleanroom-cr0-v1",
+ "timestamp_utc": "2026-08-25T15:37:24Z"
+}
