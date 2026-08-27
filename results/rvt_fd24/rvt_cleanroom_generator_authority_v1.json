@@ -1,0 +1,697 @@
+{
+ "HISTORICAL_PILOT_SEED_PROVENANCE": "NOT_FULLY_RECONSTRUCTIBLE_FROM_REPOSITORY",
+ "budget_authority": {
+  "per_role": {
+   "CL-DEV-R": {
+    "episodes_per_cell": 1,
+    "source_episode_count": 300
+   },
+   "MAIN-R": {
+    "episodes_per_cell": 3,
+    "source_episode_count": 900
+   },
+   "MECH-R": {
+    "episodes_per_cell": 3,
+    "source_episode_count": 900
+   },
+   "PROTECTED-R": {
+    "episodes_per_cell": 2,
+    "source_episode_count": 600
+   },
+   "SELECT-R": {
+    "episodes_per_cell": 1,
+    "source_episode_count": 300
+   },
+   "TRAIN-R": {
+    "episodes_per_cell": 4,
+    "source_episode_count": 1200
+   }
+  },
+  "source": "the frozen V4 composition, consumed not restated",
+  "total_source_episodes": 4200,
+  "v4_root": "74e02ce55c0793dc7f9b81d0181ac5bded0e4cc4ff169564107629473fab330a"
+ },
+ "clean_room_authority_layer": {
+  "__init__.py": "79ac71085ebf852f3b1e4368876985cf27c13ffc1601fbf27ed6a360c3f1e022",
+  "budget.py": "c71ddbf4cf3a9933f793812596b47ad37f8085172c5a324901bfe4fd1571d428",
+  "callplan.py": "95aee8f6930f887cf8c1bb6c5edcb222d89bfbd5c8402f77d88c29e15c0bcbe6",
+  "identity.py": "dae0f324331b41f97a10f2bcde0c8e544404c22091cd32208beb9448cd9513a5",
+  "layouts.py": "b0bc049e56195b0fed0905ef992c333c4fc49c19890fd3665ce32aac295ec84d",
+  "ledger.py": "e2134a3d89803ded8249641312e3389c407e042afd7644b12b39dc95b5c3cd48",
+  "roles.py": "0ade2e2d0178ec78b801832f698d8f49f4301e01140eaa3d20dcbcd896732aa8",
+  "seeds.py": "fbeb63a41765504b18a8e842daab0e57410f1beafc05ba55ec371f19a9c0bf4e"
+ },
+ "clean_room_generation_attempts_at_freeze": 0,
+ "clean_room_generation_image_digest": "sha256:43d354ca94c0178f46edee5ef390a11012f8238787eb26e3eff49b8a6c81139a",
+ "clean_room_study": "rvt_cleanroom_final_v1",
+ "consumer_callability": {
+  "callable": 23,
+  "total": 23,
+  "unresolved": 0,
+  "verified": 23
+ },
+ "dependency_lock_root": "bbcbec1014f16906b7877f34b73cdd173794e4c83e1aa2733f739559ffc8bb3b",
+ "dry_manifest_adjudication": {
+  "artifacts": {
+   "implementation_handoff_sha256": "c28ba78e9dee9c2213b8b5a66969e8aba358b3e6bf1d4c8bda87f8c1a2825fa8",
+   "train_manifest_sha256": "fa3a5609a7cbce91887e1704e9651964b3d4252232fc3f7b1b105bb2267ac2f9",
+   "validation_manifest_sha256": "1fc75b3f7811ed4543c7f9f1ee5c894ce3f0d86dcea87c0ac34dcd40f9404d41"
+  },
+  "classification": "DESIGN_METADATA_PLACEHOLDERS",
+  "cr0v_6000_mismatch_classification": "INVALID_COMPARATOR_MISMATCH",
+  "evidence": {
+   "executed": 0,
+   "generated": 0,
+   "implemented_in_this_phase": 0,
+   "rows": 0,
+   "status": "DRY_FROZEN_METADATA_ONLY_NO_GENERATION"
+  },
+  "not": "EXECUTED_GENERATION_OUTPUT"
+ },
+ "episode_universe_roots": {
+  "CL-DEV-R": "d20096fe4e4d7e52217fe3808cd3b3dcb8a748dcd21aa81c315030501df0d379",
+  "MAIN-R": "e8caecd2014b7818b585a1ba1a842b42385e90bc8f04b630ab5c42d12bac095c",
+  "MECH-R": "04b889170e2f9b789afb7d4bccc9c3ff2a9c19f1ecf3f88b76678e33f7ba0e86",
+  "PROTECTED-R": "b694950d0cbab8245a103d4f7779226391984502e3c3a1dc90fd0dd75d1f724f",
+  "SELECT-R": "a3a0d6f388917d1339b33b373e446ed25b0514c998937498948e85f3ff7a98af",
+  "TRAIN-R": "d78195d85d007f1f573748cb9f8ac87e8d13c64cba9032a0bf2c13dcf6c52030"
+ },
+ "equivalence_definition": {
+  "A_executable_core": "the layer invokes the frozen implementations for geometry, acquisition, topology, target, replica, disturbance, invalidity, row/event binding and seed derivation; it supplies only role authorization, budget and layout membership",
+  "B_geometry": "frozen phase8.scenario._layout and ScenarioLayout.geometry_sha256",
+  "C_seed_implementation": "bit-for-bit against frozen phase9c.manifest._source_seeds",
+  "D_distribution_semantics": "same frozen namespace roots and derive_generation_seed law; equality to non-executed pilot placeholder seeds is NOT required and is not claimed",
+  "E_historical_execution": "NOT_TESTABLE_FROM_REPOSITORY"
+ },
+ "f6_headroom": {
+  "conclusion": "role offsets do not change scientific semantics; preserved as a predeclared diagnostic limitation",
+  "declared_in_audit_only_fields": true,
+  "in_canonical_geometry": false,
+  "in_compiled_spec_body": false,
+  "status": "AUDIT_ONLY"
+ },
+ "frozen_scientific_core": {
+  "phase8/common.py": "7a44c021c26c8c29d9a9d38f9a2a4fa3333686b1c1c365e636e95e4c610e1a09",
+  "phase8/scenario.py": "a159cada3f86891c10d4cb6786b3509f58fdf2febfc20340544b837ea879256d",
+  "phase8/seeds.py": "0a0e863bc18ef331792bb2c3749f1eb5d7f4c6aac42eaa8624700682883a81c6",
+  "phase9b/budget.py": "9e3e8fa00e37ebb6b614d702fc588f67b0c2bfa56ba31bb48847a6ef0ae18611",
+  "phase9b/identity.py": "67027a84c9997cb2332960546de266170498f99a6934641a7285202941e8e660",
+  "phase9c/manifest.py": "a8681e3e4309178755f830f3c7a6afb4f09106843e880ed553f9e472459982e6",
+  "phase9g0r/compiler.py": "f8a73826655de529511266fc8a9c7597a9b98a9c01b54c51d425d8e9bc310c2f",
+  "topology_registry.py": "f8528d24561abea52e2cd50b236dc69cc6c25b402498fe13d0ace05e1317bfe5"
+ },
+ "generation_call_plan": {
+  "calls": 4200,
+  "consumer": "rvt_swarm.phase9g0r.compiler.OfficialSourceTask",
+  "missing_required_arguments": 0,
+  "unknown_arguments": 0
+ },
+ "generation_call_plan_root": "77b6e31c25e9678fae18314f9c915cab536bb6574f7051f2ecbe6ed0b5beb6db",
+ "geometry_equivalence": {
+  "compiled_specs": 60,
+  "manifest_identities": 30,
+  "manifest_mismatches": 0,
+  "spec_mismatches": 0
+ },
+ "global_episode_universe_root": "4b925d644c998d368707728a3d6acf018488c4484d540019142044414c9c424b",
+ "global_seed_ledger_root": "34e616d6db62bf4b91ed09041e827d0d2760573593f30838eae9e3c2e707b3fe",
+ "historical_authority_mutated": false,
+ "historical_provenance_affects_clean_room_inference": false,
+ "identity_schema": "rvt-clean-room-generation-identity/v4/source_episode/{role}/{family}/N{team_size}/{source_policy}/episode-{index}",
+ "layout_authority": {
+  "identities": {
+   "CL-DEV-R": [
+    {
+     "family": "F1",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f1-04",
+     "layout_sha256": "364275d5e92fc47825ac0ec96c52413fb5972b56b805195e580698f75b6d197f",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F2",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f2-04",
+     "layout_sha256": "1395fd002d93e1d0cddae3237dd3e7e900ff0e4e5d94851a5e61fa85d08924df",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F3",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f3-04",
+     "layout_sha256": "44271e9eaf1d406fef818220f2db59d5c549a008b4db6173044aa64e9e13bdba",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F4",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f4-04",
+     "layout_sha256": "bff4b9c3c0f4d21262805d10c336c4a90624320a1240f9977a8699fa085f198c",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F5",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f5-04",
+     "layout_sha256": "01da3e8152fb2b278a19fb42327a746dc2e04821c6b168f176e7f484d2bc4537",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F6",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f6-04",
+     "layout_sha256": "612c8a9a702ab7df75f36b110e50f4b4185a095f2abbffe077ada8c653c79a03",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F7",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f7-04",
+     "layout_sha256": "6b95b7604500d8555485c5c5548160a08846bc0bedb448eced11655d95da6a66",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F8",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f8-04",
+     "layout_sha256": "6187179984cee1c42399e554ff68d90a4b5dd6e3f9f1cd72c73d8bdbe2cf3b85",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F9",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f9-04",
+     "layout_sha256": "1cc6d777568629a837fe38595bb2829006591375eb5bdd1b227df3f43fbc71d4",
+     "offset": 0.44,
+     "variant_index": 4
+    },
+    {
+     "family": "F10",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f10-04",
+     "layout_sha256": "c6fa2f82ff0aa1cd14bce2f1a80130698fdb93d0ef7e61e6f407e9b248149ed1",
+     "offset": 0.44,
+     "variant_index": 4
+    }
+   ],
+   "MAIN-R": [
+    {
+     "family": "F1",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f1-05",
+     "layout_sha256": "caa78c7feb9ecd371fab5ef9a4119d8268779991374f0e126517ee244d374590",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F2",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f2-05",
+     "layout_sha256": "15e7bd0f0abf782475fae969c34a27991ce25fbd1a3cf418c1537e9820c54ef3",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F3",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f3-05",
+     "layout_sha256": "de190168ddcaf53dafcde91896ca1c98b9861d79faea81a66432d10e0679a837",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F4",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f4-05",
+     "layout_sha256": "49bdf03ed96f388082ccae67e763b4311066c765b0be2d33a00aae7ef099608e",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F5",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f5-05",
+     "layout_sha256": "c632730bd88134a9f4ab262788fa4f100e627435ebfc10a9fe12fdf4d5736f24",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F6",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f6-05",
+     "layout_sha256": "5ea32333cef53b012f03977051151f2d8f9798b965f713d72d4bd4bd7ef24ddb",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F7",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f7-05",
+     "layout_sha256": "372cc07b68809fa53f9610fcfc437c86e5ee759f11f6c0e6c9a4d0dc1ee6b4e9",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F8",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f8-05",
+     "layout_sha256": "bb40732cf34234cf0726efac6796be98958ba74d54abe6f382b54cf8eed857ce",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F9",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f9-05",
+     "layout_sha256": "bbe872afa7030c5144ed4d06189103781f2306b5d31635ece13e313a5e1a91e0",
+     "offset": 0.55,
+     "variant_index": 5
+    },
+    {
+     "family": "F10",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f10-05",
+     "layout_sha256": "468b144b6b035538111c3f55e374a03aa8533dc247512d4a8658eb4ee23f3baa",
+     "offset": 0.55,
+     "variant_index": 5
+    }
+   ],
+   "MECH-R": [
+    {
+     "family": "F1",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f1-06",
+     "layout_sha256": "8a2dd8bd60fa5443e1caf9a519672fc8f5f2e75dcb65d3cc1009cbf21a7162ab",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F2",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f2-06",
+     "layout_sha256": "befbac33820df2daf736beca9ca73b2b7198a696011b6c07738ae1937d35add1",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F3",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f3-06",
+     "layout_sha256": "a276fdaa1b787c3390782281006d0ff613a85a7405ff15020d7c85c49f6e7180",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F4",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f4-06",
+     "layout_sha256": "3430e8ecfbbe2f6c93d40daf7c2d2562294e0a8faa5cb2d2bc4a0e6ad84ff437",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F5",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f5-06",
+     "layout_sha256": "dd716acb2cb26613dad1c4af20de0ec3ab31f32527ef5499e65f1cd35593c069",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F6",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f6-06",
+     "layout_sha256": "faa236346d511ce56ec69dcc680b134c3094666a92389d879492b7b1b9f3bcfc",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F7",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f7-06",
+     "layout_sha256": "46f4908fcdafdd8a401fdf62b3e99940ada12bea50b09a16af49cb8fc801cfbb",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F8",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f8-06",
+     "layout_sha256": "7aef03ec2400b652ca5902ef4410785bbedec68cd0fe961bd1759dac4aeb9e97",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F9",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f9-06",
+     "layout_sha256": "2f0373ee7d1f208df686d34e5f305c56808bc88bbc32d93ba8a4fa5bdb8b87cc",
+     "offset": 0.66,
+     "variant_index": 6
+    },
+    {
+     "family": "F10",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f10-06",
+     "layout_sha256": "435af00a4fcb54e453f38a041e739f5a520feedddb08aeecfe393cd9387f9a15",
+     "offset": 0.66,
+     "variant_index": 6
+    }
+   ],
+   "PROTECTED-R": [
+    {
+     "family": "F1",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f1-00",
+     "layout_sha256": "6844203b7df0d4ce4413adec08dd7f1158db9678afb039e1c07c6f290fa0653f",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F2",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f2-00",
+     "layout_sha256": "c964dd9ef10501cae64074ff19b5714a49519c97c81171382e45cc0a7ea87fbf",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F3",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f3-00",
+     "layout_sha256": "e2ccf42efdf44795cee8a3b6dcf119e27bc28d2671a81b520a6c1bf8ce579d5c",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F4",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f4-00",
+     "layout_sha256": "d80720eeff8df7e2655e38aef34db7835633cf1b55fc18b2a9dc48c3a9308590",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F5",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f5-00",
+     "layout_sha256": "d04cbbbab01d9241bcb236bad1b5c48a800f71fdf4c5caba670acb9538d431f5",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F6",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f6-00",
+     "layout_sha256": "117dc2deaad20cf7218a24330624d6542af7182a269c5fc131e55cc363ae16e3",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F7",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f7-00",
+     "layout_sha256": "9d7e72746ea34d5c43567963c1190fa7bb04ddf17f11da7a56437a3a2c4cdc6c",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F8",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f8-00",
+     "layout_sha256": "21520bb2c17f6d965bb84154696e6a94b7886cbc59d727ec11a894e5afa45f6d",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F9",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f9-00",
+     "layout_sha256": "692f1b7510e48bb90f3ed54f239c6a149b4a5be5e8619c493e8aaa9240ace0e2",
+     "offset": 0.79,
+     "variant_index": 0
+    },
+    {
+     "family": "F10",
+     "generator_split_namespace": "final_test",
+     "layout_id": "final_test-f10-00",
+     "layout_sha256": "4a36ccfc53caf245c8205a83bd53a32b70926b8519d62fd74da0f51ea9b2c196",
+     "offset": 0.79,
+     "variant_index": 0
+    }
+   ],
+   "SELECT-R": [
+    {
+     "family": "F1",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f1-01",
+     "layout_sha256": "c7696c20f835c039f775fafe343c87917c8b13c7bab6bc9af3d382b5869bfdb2",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F2",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f2-01",
+     "layout_sha256": "b0883e9e58df9dbae2deb41dfa9d7455e985ac80794fd89bac035ad0a1bef847",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F3",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f3-01",
+     "layout_sha256": "59dd0a284ff8482c2831245429ba843d4439d9ec6f8735696ae84e651d714dd1",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F4",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f4-01",
+     "layout_sha256": "27953c70b159a455745ecbe9acbc053a94c895c46d40e33dff8f18f2248a73ab",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F5",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f5-01",
+     "layout_sha256": "ed4b14416786c12061608a4ad19d4fb23b120b40fb06617b1fe131088b27b926",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F6",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f6-01",
+     "layout_sha256": "728cdce3394b2564ccdc1641d8ff2f9e6ade8cbdb6090eafbe9c2145847a7826",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F7",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f7-01",
+     "layout_sha256": "ba759176d4e30f57da300e7dff7050dae5c357ffc611e1f3db06178c08b60679",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F8",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f8-01",
+     "layout_sha256": "f8b97f208cd4a37403811d38476adfb87c1f111fbff30456e68012c41ac17254",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F9",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f9-01",
+     "layout_sha256": "24f67d947d0b71a8e386b7e84d1160ce70194704730f001530ba901a7bedccf4",
+     "offset": 0.11,
+     "variant_index": 1
+    },
+    {
+     "family": "F10",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f10-01",
+     "layout_sha256": "ee525840f176f0b16eab190774afbe7dda7480ea59b119d8b6bb202d7fa6f9ff",
+     "offset": 0.11,
+     "variant_index": 1
+    }
+   ],
+   "TRAIN-R": [
+    {
+     "family": "F1",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f1-00",
+     "layout_sha256": "bf2cd03e56f3d923a199a287978962a988a0da5f684c578a1534414a0fee2b07",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F2",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f2-00",
+     "layout_sha256": "ce4f8e1c9dd658f67faad81e47966f7d068bb4292935e716d9eb622651fc8a2f",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F3",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f3-00",
+     "layout_sha256": "74ccfe4ffa6d49b7ef89e87ee53833f3d20d37e7fc40b05b3658523724996570",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F4",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f4-00",
+     "layout_sha256": "ae6d6f80bc708c332265aa24c009146b759eb4dc53a4184f550914141113a2f7",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F5",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f5-00",
+     "layout_sha256": "9a7cc9eed9e43489bcb5d743cb667713eddd43911c3d7ff036345502a78740f0",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F6",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f6-00",
+     "layout_sha256": "b63e08eeaacad624c27080a2468e751d06f2e2817a24242efab159864ce670c9",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F7",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f7-00",
+     "layout_sha256": "a3c2a92527613714902a53f0c1438bec7dcc9443875405a6879200b36f471f01",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F8",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f8-00",
+     "layout_sha256": "034e0fb4a7760b0e07d8b969179e4fdd8b33c0daf3e05e7937f21a11962f2e1f",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F9",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f9-00",
+     "layout_sha256": "afa11e288cb5f57f34f486bceebbbe45439c1e042bf5a4317f2aa64b30bc09e1",
+     "offset": 0.0,
+     "variant_index": 0
+    },
+    {
+     "family": "F10",
+     "generator_split_namespace": "train",
+     "layout_id": "train-f10-00",
+     "layout_sha256": "a04e1b4db01585b023ddcdec90d0892ee9242b223550a255434d4d0d2e31579e",
+     "offset": 0.0,
+     "variant_index": 0
+    }
+   ]
+  },
+  "layouts_per_role": 10,
+  "materialization_policy": "PATH_B -- authority binds exact layout ids and geometry hashes without requiring serialized execution specs. The 40 unmaterialized specs (train-f*-04/05/06, final_test-f*-00) may be materialized at CR-1 ONLY as a deterministic serialization of the already-frozen geometry. No geometry change.",
+  "resolution": "frozen phase8.scenario._layout at the role's (generator namespace, variant)",
+  "total_role_family_identities": 60
+ },
+ "name": "RVT_CLEANROOM_GENERATOR_AUTHORITY_V1",
+ "no_clean_room_data_existed_at_freeze": true,
+ "no_clean_room_model_existed_at_freeze": true,
+ "pilot_identities_actively_refused": true,
+ "protected_r_firewall": {
+  "namespace": "final_test, by prospective design; PROTECTED-R is the final protected role",
+  "operations_performed": "identity and hash commitment only",
+  "outcomes_inspected": false,
+  "performance_characteristics_exposed": false,
+  "simulation_performed": false
+ },
+ "role_registry": {
+  "CL-DEV-R": {
+   "dataset_id": "cleanroom_cl_dev_r",
+   "offset": 0.44,
+   "split": "cl_dev_r"
+  },
+  "MAIN-R": {
+   "dataset_id": "cleanroom_main_r",
+   "offset": 0.55,
+   "split": "main_r"
+  },
+  "MECH-R": {
+   "dataset_id": "cleanroom_mech_r",
+   "offset": 0.66,
+   "split": "mech_r"
+  },
+  "PROTECTED-R": {
+   "dataset_id": "cleanroom_protected_r",
+   "offset": 0.79,
+   "split": "protected_r"
+  },
+  "SELECT-R": {
+   "dataset_id": "cleanroom_select_r",
+   "offset": 0.11,
+   "split": "select_r"
+  },
+  "TRAIN-R": {
+   "dataset_id": "cleanroom_train_r",
+   "offset": 0.0,
+   "split": "train_r"
+  }
+ },
+ "rvt_cleanroom_generator_authority_v1_root": "4eef216e077cb353c0e1473e421d73d54876dd310f25aeb03a5543250ee30025",
+ "schema_version": "rvt-cleanroom-generator-authority/v1",
+ "scientific_core_duplicated": false,
+ "seed_authority": {
+  "law": "phase9b.identity.derive_generation_seed over phase8.seeds.SEED_NAMESPACES",
+  "master_seed": null,
+  "namespaces": {
+   "communication": 8104,
+   "data_sampling": 8107,
+   "dynamic_obstacle": 8105,
+   "initial_condition": 8103
+  },
+  "v4_role_level_seeds": "RETIRED -- historical_v4_inoperable_role_seed, not_consumed_by_generator, scientific_seed_authority superseded"
+ },
+ "seed_builder_equivalence": {
+  "comparisons": 16800,
+  "identities": 4200,
+  "mismatches": 0,
+  "root": "adc9fcbfae8c15367d61047e0ec7f694a0c6ac10fd676f8fc62f08ac4644f8ee",
+  "streams": 4
+ },
+ "seed_ledger_roots": {
+  "CL-DEV-R": "a3b991b5de26cd1d399add6e9e2f84237b59257376600891737094d4fd1184bc",
+  "MAIN-R": "c99889f88eda3772d482987dd62d945dddfed0c47352bf599af010be36bd38fa",
+  "MECH-R": "0e47024833a6d34b09fa295dad05268b00c942b60e1bf7c0787350ee375359c9",
+  "PROTECTED-R": "5e198e1f2b20cfc1521d068366b432608cd6f02ab5395661ee78161d8111d489",
+  "SELECT-R": "351650f97b99c0834b254a4a57a85893520ec7455dabd00ae110817cf5100e41",
+  "TRAIN-R": "9ca5838636c4e08a62bf1c40ea4c1234b6b11c670559fe8f06d067bf676ccfd7"
+ },
+ "source_commit": "3eca3f1a3a480c40b46b46edcdae82a5af3698a9",
+ "status": "FROZEN",
+ "supersedes_for_clean_room_generation": "the historical V3 pilot dataset authorization, which remains valid for pilot provenance only",
+ "total_source_episodes": 4200
+}

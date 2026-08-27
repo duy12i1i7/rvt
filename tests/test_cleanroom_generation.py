@@ -247,3 +247,53 @@ def test_no_duplicate_identity_within_or_across_roles():
         assert not (seen & set(ids))
         seen |= set(ids)
     assert len(seen) == 4200
+
+
+# --------------------------------------------- execution provenance (CR-0W-R2) ---
+
+from rvt_swarm.cleanroom.generation.provenance import (  # noqa: E402
+    CLEAN_ROOM_DEPENDENCY_LOCK_ROOT, CLEAN_ROOM_GENERATION_IMAGE_DIGEST,
+    CLEAN_ROOM_SOURCE_COMMIT, ProvenanceError, assert_execution_authority,
+)
+
+_OK = dict(image_reference=CLEAN_ROOM_GENERATION_IMAGE_DIGEST,
+           source_commit=CLEAN_ROOM_SOURCE_COMMIT,
+           dependency_lock_root=CLEAN_ROOM_DEPENDENCY_LOCK_ROOT)
+
+
+def test_correct_full_authoritative_provenance_passes():
+    assert_execution_authority(**_OK)
+
+
+def test_fixture_abbreviated_source_commit_fails_closed():
+    """The abbreviation that failed the first image build must fail here too."""
+    with pytest.raises(ProvenanceError):
+        assert_execution_authority(**{**_OK, "source_commit": "3eca3f1"})
+
+
+def test_fixture_wrong_full_source_commit_fails_closed():
+    with pytest.raises(ProvenanceError):
+        assert_execution_authority(**{**_OK, "source_commit": "0" * 40})
+
+
+def test_fixture_wrong_image_digest_fails_closed():
+    with pytest.raises(ProvenanceError):
+        assert_execution_authority(**{**_OK, "image_reference": "sha256:" + "0" * 64})
+
+
+def test_fixture_mutable_tag_substituted_for_digest_fails_closed():
+    for tag in ("rvt-cleanroom-gen:3eca3f1", "latest", "rvt-cleanroom-gen"):
+        with pytest.raises(ProvenanceError):
+            assert_execution_authority(**{**_OK, "image_reference": tag})
+
+
+def test_fixture_wrong_dependency_lock_fails_closed():
+    with pytest.raises(ProvenanceError):
+        assert_execution_authority(**{**_OK, "dependency_lock_root": "0" * 64})
+
+
+def test_fixture_image_source_mismatch_fails_closed():
+    """A historical pilot image paired with the clean-room commit is refused."""
+    with pytest.raises(ProvenanceError):
+        assert_execution_authority(**{**_OK, "image_reference":
+            "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137"})

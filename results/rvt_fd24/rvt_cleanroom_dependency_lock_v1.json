@@ -1,0 +1,169 @@
+{
+ "base_image_digest": "sha256:4115592fd02679fb3d9e8c513cae33ad3fdd64747b64d32b504419d7118bcd7c",
+ "capture_method": "read-only introspection of the frozen clean-room generation image",
+ "clean_room_generation_image_digest": "sha256:43d354ca94c0178f46edee5ef390a11012f8238787eb26e3eff49b8a6c81139a",
+ "debian_snapshot": "20260220T214329Z",
+ "environment_modified": false,
+ "in_image_environment_canonical_sha256": "896ae4c1c247ee24f51271c82b670f0b2d6a80e5e3bea481bacb9e4bedb1b2e5",
+ "name": "RVT_CLEANROOM_DEPENDENCY_LOCK_V1",
+ "numpy_version": "2.0.2",
+ "package_count": 35,
+ "packages": [
+  {
+   "name": "cmake",
+   "version": "4.3.2"
+  },
+  {
+   "name": "contourpy",
+   "version": "1.3.0"
+  },
+  {
+   "name": "cycler",
+   "version": "0.12.1"
+  },
+  {
+   "name": "cython",
+   "version": "3.2.5"
+  },
+  {
+   "name": "exceptiongroup",
+   "version": "1.3.1"
+  },
+  {
+   "name": "filelock",
+   "version": "3.19.1"
+  },
+  {
+   "name": "fonttools",
+   "version": "4.60.2"
+  },
+  {
+   "name": "fsspec",
+   "version": "2025.10.0"
+  },
+  {
+   "name": "importlib_resources",
+   "version": "6.5.2"
+  },
+  {
+   "name": "iniconfig",
+   "version": "2.1.0"
+  },
+  {
+   "name": "jinja2",
+   "version": "3.1.6"
+  },
+  {
+   "name": "kiwisolver",
+   "version": "1.4.7"
+  },
+  {
+   "name": "markupsafe",
+   "version": "3.0.3"
+  },
+  {
+   "name": "matplotlib",
+   "version": "3.9.4"
+  },
+  {
+   "name": "mpmath",
+   "version": "1.3.0"
+  },
+  {
+   "name": "networkx",
+   "version": "3.2.1"
+  },
+  {
+   "name": "numpy",
+   "version": "2.0.2"
+  },
+  {
+   "name": "packaging",
+   "version": "26.0"
+  },
+  {
+   "name": "pillow",
+   "version": "11.3.0"
+  },
+  {
+   "name": "pip",
+   "version": "26.0.1"
+  },
+  {
+   "name": "pluggy",
+   "version": "1.6.0"
+  },
+  {
+   "name": "pygments",
+   "version": "2.20.0"
+  },
+  {
+   "name": "pyparsing",
+   "version": "3.3.2"
+  },
+  {
+   "name": "pypdf",
+   "version": "6.14.2"
+  },
+  {
+   "name": "pyrvo2",
+   "version": "0.0.0"
+  },
+  {
+   "name": "pytest",
+   "version": "8.4.2"
+  },
+  {
+   "name": "python-dateutil",
+   "version": "2.9.0.post0"
+  },
+  {
+   "name": "setuptools",
+   "version": "58.0.4"
+  },
+  {
+   "name": "six",
+   "version": "1.17.0"
+  },
+  {
+   "name": "sympy",
+   "version": "1.14.0"
+  },
+  {
+   "name": "tomli",
+   "version": "2.4.1"
+  },
+  {
+   "name": "torch",
+   "version": "2.8.0+cpu"
+  },
+  {
+   "name": "typing_extensions",
+   "version": "4.15.0"
+  },
+  {
+   "name": "wheel",
+   "version": "0.47.0"
+  },
+  {
+   "name": "zipp",
+   "version": "3.23.0"
+  }
+ ],
+ "platform_machine": "x86_64",
+ "platform_system": "Linux",
+ "pre_build_runtime_snapshot_sha256": "c531054d258de17f8fb566e0cca8473a1561ab8258bbb5e96437886a4870a2a3",
+ "pre_build_snapshot_file_retained": false,
+ "pre_build_snapshot_note": "the scratchpad capture file was cleaned up; its canonical sha256 is carried forward as a recorded value and the authoritative package facts are those read from the frozen image itself",
+ "python_implementation": "CPython",
+ "python_version": "3.9.6",
+ "requirements_lock_file": "docker/generation/requirements.lock.txt",
+ "requirements_lock_sha256": "4b8ae11c181ac1067abe29f5df188beaf54b81a088406029e495a6f4d1d0a1ac",
+ "rvt_cleanroom_dependency_lock_v1_root": "bbcbec1014f16906b7877f34b73cdd173794e4c83e1aa2733f739559ffc8bb3b",
+ "schema_version": "rvt-cleanroom-dependency-lock/v1",
+ "source_commit": "3eca3f1a3a480c40b46b46edcdae82a5af3698a9",
+ "status": "FROZEN",
+ "torch_cuda_available": false,
+ "torch_cuda_version": null,
+ "torch_version": "2.8.0+cpu"
+}
