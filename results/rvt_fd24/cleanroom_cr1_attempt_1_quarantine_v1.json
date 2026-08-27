@@ -1,0 +1,228 @@
+{
+ "attempt_provenance": {
+  "attempt_1": {
+   "final_inference_eligible": false,
+   "id": "CR1_ATTEMPT_1",
+   "may_be_used_for": "forensic byte-comparison only, never as final dataset content",
+   "status": "QUARANTINED_EXECUTION_QUALIFICATION_FAILURE"
+  },
+  "attempt_2": {
+   "driver_commit": "6eb8634530aee376e5f0b4ede875c1f3eb3db772",
+   "driver_sha256": "4f24a6a071cb72e513a21602cc4544ddbf72cf773f15abf51cf434bf4c8dfdbf",
+   "final_inference_eligible": "only if complete, audited and sealed",
+   "id": "CR1_ATTEMPT_2",
+   "identities": "all 1200 SAME frozen identities, regenerated from scratch",
+   "output_path": "/home/avis/cr1-train-r-production-attempt-2",
+   "reuse_attempt_1_artifacts": false,
+   "skip_identities_already_produced": false,
+   "status_before_run": "PROSPECTIVE_PRODUCTION_ATTEMPT"
+  }
+ },
+ "cr1_attempt_1_quarantine_root": "b1977a5c7ac0419023ff0bacd65e64249f4c75c9023b3a4726b79d6240c435d3",
+ "decision_events": 1909,
+ "deleted_or_overwritten_empirical_output_during_cr1q": false,
+ "driver_diff": {
+  "categories_checked_and_unchanged": [
+   "universe/identities",
+   "layouts",
+   "seeds",
+   "source policies",
+   "K",
+   "candidate topologies",
+   "target",
+   "replica counts",
+   "stochastic law",
+   "invalidity",
+   "row binding",
+   "counts"
+  ],
+  "classification": "EXECUTION_COMPLETION_ONLY -- Stage-A-only orchestration completed to the already-frozen Stage-A + Stage-B path",
+  "lines_added": 5,
+  "lines_removed": 1,
+  "scientific_semantic_changes": "NONE",
+  "substance": [
+   "import the frozen produce_recoverability_event",
+   "a comment",
+   "call it once per decision event"
+  ]
+ },
+ "driver_versions": [
+  {
+   "commit": "b8d17f28fd43e2fde10d9451c9d38eedbee0e3f0",
+   "driver_sha256": "9d56df48cfbe7257d3dfa161418122ce06a4d0898efbbf92a843298008e79345",
+   "stage_b": false,
+   "version": 1
+  },
+  {
+   "commit": "d170ff925e5771b17f60f10ad838a8242a48d543",
+   "driver_sha256": "ca37af7a248926b9193387f2d16dd029ac462696ff370f465bb6a89fbabda1dd",
+   "produced": "the single Stage-A-only smoke episode",
+   "stage_b": false,
+   "version": 2
+  },
+  {
+   "commit": "6eb8634530aee376e5f0b4ede875c1f3eb3db772",
+   "driver_sha256": "4f24a6a071cb72e513a21602cc4544ddbf72cf773f15abf51cf434bf4c8dfdbf",
+   "produced": "all 467 quarantined episodes",
+   "stage_b": true,
+   "version": 3
+  }
+ ],
+ "empirical_inspection_forensics": {
+  "additional_label_inspection_during_forensics": false,
+  "category_A_execution_schema_inspected": [
+   "call success/failure",
+   "episode file created",
+   "runtime seconds",
+   "M (enumerated realized universe size)",
+   "selected event count (the K cap)",
+   "compiled decision-event count",
+   "presence/absence of a (k,R) field",
+   "serialization validity",
+   "container/process state",
+   "episode counts"
+  ],
+  "category_B_inspected_count": 0,
+  "category_B_scientific_outcomes_inspected": [],
+  "why_no_outcome_could_have_influenced_the_change": "the Stage-A-only payload contains no transaction, no target_v4 field, no aggregate_label, no disposition, no row and no k of any kind. Verified by token scan of the version-2 driver source. No label, rate, distribution or family performance was observable, so none could have informed the correction."
+ },
+ "empirical_output_deleted_earlier_during_cr1": {
+  "disclosed_rather_than_omitted": true,
+  "how": "the Stage-B smoke script began with `rm -rf /home/avis/cr1-train-r`, which cleared the directory before the Stage-A+B smoke run",
+  "occurred": true,
+  "provenance_impact": "the deleted artifact was Stage-A-only output of driver version 2 (commit d170ff92, sha256 ca37af7a...), which is fully identified in this record and reproducible from that commit. It contained no Target-V4 label, so nothing scientifically observable was lost.",
+  "what": "the single Stage-A-only smoke episode produced at T4",
+  "when": "during CR-1, before the CR-1Q preservation instruction existed"
+ },
+ "episodes": 467,
+ "events_with_stage_b_transaction": 1909,
+ "final_inference_eligible": false,
+ "ledger_lines": 467,
+ "log_files": 7,
+ "name": "CR1_ATTEMPT_1_QUARANTINED_EXECUTION_QUALIFICATION",
+ "partial_or_unreadable_files": 0,
+ "production_driver_completeness_contract": {
+  "module": "rvt_swarm/cleanroom/generation/driver_contract.py",
+  "regression_fixture": "tests/test_cleanroom_cr1_production_driver.py",
+  "sha256": "e351e1ba73f6044d305dae315501cefea3751141812fb815be7afc23cf3acb9b",
+  "stage_a_only_driver_fails_qualification": true
+ },
+ "qualification_tests_passing": 164,
+ "quarantine_log_root": "53acc89bc0843d1daabc2a3929368a95fd77785ec662dcaff42f6ed63002775a",
+ "quarantine_path": "/home/avis/CR1_ATTEMPT_1_QUARANTINED_EXECUTION_QUALIFICATION",
+ "quarantine_raw_root": "45a5310e36b450315d9b5fb9afcc847c3a45969ebf3004ede55e570405869f1f",
+ "quarantine_readonly": true,
+ "reason": "the execution driver was modified after the first simulator invocation, from Stage-A-only to the complete Stage-A + Stage-B label-producing path. That is an execution-contract defect: the production driver was not complete before the first empirical call.",
+ "recorded_at_utc": "2026-08-27T13:17:14Z",
+ "schema_version": "rvt-cleanroom-cr1-attempt-quarantine/v1",
+ "scientific_authority_unchanged": {
+  "all_unchanged": true,
+  "execution_image_digest": "sha256:43d354ca94c0178f46edee5ef390a11012f8238787eb26e3eff49b8a6c81139a",
+  "expected_universe_root": "d78195d85d007f1f573748cb9f8ac87e8d13c64cba9032a0bf2c13dcf6c52030",
+  "generator_authority_v1_root": "4eef216e077cb353c0e1473e421d73d54876dd310f25aeb03a5543250ee30025",
+  "global_contract_v5_root": "1d38cd511dd95e4dceb2c7c3fc8f908c31f228b2ebaae4db973c721bd3719fed",
+  "new_offset": false,
+  "replacement_identities": false,
+  "sample_size_changed": false,
+  "seed_ledger_root": "9ca5838636c4e08a62bf1c40ea4c1234b6b11c670559fe8f06d067bf676ccfd7",
+  "train_r_pregeneration_manifest_root": "797c27920d3273106c359113f837fc7c911746574a9bac66e7f47d1fa3ad1176",
+  "universe_redesigned_after_data": false
+ },
+ "status": "QUARANTINED_EXECUTION_QUALIFICATION_FAILURE",
+ "timeline": [
+  {
+   "commit": "bc7cbaabd6facfe70d496d266aadeab59fd5c6aa",
+   "event": "V5 / Generator Authority V1 finalized",
+   "id": "T0"
+  },
+  {
+   "event": "TRAIN-R pre-generation manifest frozen",
+   "frozen_at_utc": "2026-08-27T12:34:26Z",
+   "id": "T1",
+   "manifest_root": "797c27920d3273106c359113f837fc7c911746574a9bac66e7f47d1fa3ad1176"
+  },
+  {
+   "commit": "b8d17f28fd43e2fde10d9451c9d38eedbee0e3f0",
+   "driver_sha256": "9d56df48cfbe7257d3dfa161418122ce06a4d0898efbbf92a843298008e79345",
+   "event": "first driver version committed and qualified (Stage-A only)",
+   "id": "T2"
+  },
+  {
+   "commit": "d170ff925e5771b17f60f10ad838a8242a48d543",
+   "driver_sha256": "ca37af7a248926b9193387f2d16dd029ac462696ff370f465bb6a89fbabda1dd",
+   "event": "provenance moved to orchestrator; digest injected",
+   "id": "T3"
+  },
+  {
+   "driver_commit": "d170ff925e5771b17f60f10ad838a8242a48d543",
+   "event": "FIRST SIMULATOR INVOCATION -- single-episode smoke test, Stage-A only",
+   "id": "T4",
+   "observed": "completed=1, M=10, selected=5, events=5, seconds=0.288"
+  },
+  {
+   "basis": "the Stage-A-only payload contains no transaction/label field at all, which is determinable from the driver source without reading any outcome",
+   "event": "absence of Target-V4 (k,R) output detected",
+   "id": "T5"
+  },
+  {
+   "commit": "6eb8634530aee376e5f0b4ede875c1f3eb3db772",
+   "driver_sha256": "4f24a6a071cb72e513a21602cc4544ddbf72cf773f15abf51cf434bf4c8dfdbf",
+   "event": "driver modified to call the frozen produce_recoverability_event",
+   "id": "T6"
+  },
+  {
+   "event": "Stage-A+B smoke test, 2 episodes",
+   "id": "T7",
+   "observed": "seconds 5.985 / 5.851"
+  },
+  {
+   "event": "driver qualification re-run",
+   "id": "T8",
+   "tests_passed": 22
+  },
+  {
+   "containers": 6,
+   "event": "6-shard production launch",
+   "id": "T9"
+  },
+  {
+   "episodes_at_stop": 467,
+   "event": "shards stopped for quarantine",
+   "id": "T10"
+  }
+ ],
+ "unique_identities": 467,
+ "which_driver_produced_each_quarantined_artifact": "ALL 467 quarantined episodes were produced by driver version 3 (commit 6eb8634, sha256 4f24a6a0...), the complete Stage-A+B driver. Verified structurally: every one of the 1909 decision events carries a Stage-B transaction, which version 2 could not emit. No quarantined artifact came from a Stage-A-only driver.",
+ "workers": {
+  "active_writers_after_stop": 0,
+  "all_on_authorized_image_digest": true,
+  "container_ids": [
+   "7665e820a40e",
+   "579c341e3c70",
+   "12dafb03a62b",
+   "acf2c0a95406",
+   "1f6c078659c6",
+   "b6c8f7f6341e"
+  ],
+  "expected_shards": 6,
+  "nine_container_anomaly_resolved": "3 of the 9 were pre-existing lab containers (lab-student x2, lab-gpu-manager) running 7 weeks on unrelated images, none mounting the CR-1 output. Exactly 6 writers existed, all accounted for.",
+  "observed_generation_containers": 6,
+  "shard_limit": 200,
+  "shard_starts": [
+   0,
+   200,
+   400,
+   600,
+   800,
+   1000
+  ],
+  "wrapper_pids": [
+   1976,
+   1991,
+   2006,
+   2024,
+   2038,
+   2052
+  ]
+ }
+}
