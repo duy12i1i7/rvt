@@ -13,9 +13,11 @@ sys.path.insert(0, "/opt/rvt")
 sys.path.insert(0, "/Users/udy/rvt")
 
 from rvt_swarm.phase8.common import sha256_document, verify_canonical_hash
-from rvt_swarm.cleanroom.generation.provenance import (
-    ProvenanceError, assert_execution_authority,
-)
+
+# The provenance guard lives OUTSIDE the frozen image on purpose: it decides
+# which image may run, so it is not part of what runs. The orchestrator asserts
+# it and injects the digest it launched, which the driver confirms below.
+EXPECTED_IMAGE_ENV = "RVT_CLEANROOM_EXPECTED_IMAGE"
 
 MANIFEST_ROOT = "797c27920d3273106c359113f837fc7c911746574a9bac66e7f47d1fa3ad1176"
 V5_ROOT = "1d38cd511dd95e4dceb2c7c3fc8f908c31f228b2ebaae4db973c721bd3719fed"
@@ -43,10 +45,17 @@ def load_authority(root: pathlib.Path):
         raise DriverError("generator authority is not the frozen V1")
     if man["generator_authority_v1_root"] != AUTHORITY_ROOT:
         raise DriverError("manifest does not bind the frozen generator authority")
-    assert_execution_authority(
-        image_reference=man["execution_image_digest"],
-        source_commit=man["image_source_commit"],
-        dependency_lock_root=man["dependency_lock_v1_root"])
+    launched = os.environ.get(EXPECTED_IMAGE_ENV)
+    if launched is None:
+        raise DriverError(
+            f"{EXPECTED_IMAGE_ENV} was not injected; generation must be launched by the "
+            "orchestrator, which asserts execution provenance and pins the image digest")
+    if launched != man["execution_image_digest"]:
+        raise DriverError(
+            f"running under image {launched!r} but the frozen manifest authorizes "
+            f"{man['execution_image_digest']!r}")
+    if not launched.startswith("sha256:"):
+        raise DriverError("image authority must be an immutable digest, never a mutable tag")
     return man, v5, auth
 
 

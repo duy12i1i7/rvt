@@ -12,7 +12,12 @@ R = ROOT / "results/rvt_fd24"
 MAN = json.loads((R/"cleanroom_train_r_pregeneration_manifest_v1.json").read_text())
 
 
-def test_authority_chain_loads_under_the_frozen_roots():
+def _with_image(monkeypatch):
+    monkeypatch.setenv(D.EXPECTED_IMAGE_ENV, MAN["execution_image_digest"])
+
+
+def test_authority_chain_loads_under_the_frozen_roots(monkeypatch):
+    _with_image(monkeypatch)
     man, v5, auth = D.load_authority(ROOT)
     assert man["train_r_pregeneration_manifest_root"] == D.MANIFEST_ROOT
     assert v5["rvt_swarm_clean_room_global_contract_root"] == D.V5_ROOT
@@ -37,6 +42,7 @@ def test_manifest_binds_the_full_frozen_composition():
     ("MANIFEST_ROOT", "0"*64), ("V5_ROOT", "0"*64), ("AUTHORITY_ROOT", "0"*64),
 ])
 def test_fixture_wrong_root_fails_closed(monkeypatch, attr, bad):
+    _with_image(monkeypatch)
     monkeypatch.setattr(D, attr, bad)
     with pytest.raises(D.DriverError):
         D.load_authority(ROOT)
@@ -134,3 +140,21 @@ def test_driver_carries_no_alternative_scientific_constants():
     for banned in ("1200", "episodes_per_cell = 4", "F1\", \"F2", "[5, 6, 8, 12, 16]",
                    "S0_SCRIPTED_DIAGNOSTIC"):
         assert banned not in src, banned
+
+
+def test_fixture_missing_injected_image_fails_closed(monkeypatch):
+    """Generation must be launched by the orchestrator, which pins the digest."""
+    monkeypatch.delenv(D.EXPECTED_IMAGE_ENV, raising=False)
+    with pytest.raises(D.DriverError):
+        D.load_authority(ROOT)
+
+
+@pytest.mark.parametrize("bad", [
+    "sha256:" + "0"*64,                                    # wrong digest
+    "rvt-cleanroom-gen:3eca3f1",                           # mutable tag
+    "sha256:0b2d9a686d17ae9a67fbf8745535e56df9da88d82560b9378254947904782137",  # pilot image
+])
+def test_fixture_wrong_injected_image_fails_closed(monkeypatch, bad):
+    monkeypatch.setenv(D.EXPECTED_IMAGE_ENV, bad)
+    with pytest.raises(D.DriverError):
+        D.load_authority(ROOT)
