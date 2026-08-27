@@ -93,6 +93,7 @@ def generate(root: pathlib.Path, out_dir: pathlib.Path, limit=None, start=0):
     from rvt_swarm.phase9g0r.compiler_v2 import (
         compile_recoverability_v2_candidate_tasks, execute_v2_source_acquisition,
     )
+    from rvt_swarm.phase9g0r.producer import produce_recoverability_event
     man, _, _ = load_authority(root)
     out_dir.mkdir(parents=True, exist_ok=True)
     records = man["expected_episode_records"]
@@ -125,7 +126,10 @@ def generate(root: pathlib.Path, out_dir: pathlib.Path, limit=None, start=0):
                  "resolved_control_step": e.resolved_control_step,
                  "resolved_timestamp_seconds": e.resolved_timestamp_seconds,
                  "replicas_per_candidate": e.replicas_per_candidate,
-                 "candidate_replica_jobs": [dict(j) for j in e.candidate_replica_jobs]}
+                 "candidate_replica_jobs": [dict(j) for j in e.candidate_replica_jobs],
+                 # Stage B: execute both candidates with all replicas and reconcile
+                 # the frozen 2*N row set. This is where Target-V4 labels are produced.
+                 "transaction": produce_recoverability_event(root, e)}
                 for e in events],
             "manifest_root": man["train_r_pregeneration_manifest_root"],
             "execution_image_digest": man["execution_image_digest"],
