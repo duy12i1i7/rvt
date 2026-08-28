@@ -1,0 +1,138 @@
+{
+ "attempt_1_content_used": false,
+ "attempt_1_quarantine_seal_root": "b1977a5c7ac0419023ff0bacd65e64249f4c75c9023b3a4726b79d6240c435d3",
+ "attempt_id": 2,
+ "concurrency_invariance_audit": {
+  "ambient_nondeterministic_calls_in_seed_law": 0,
+  "concurrency_or_time_parameters": 0,
+  "nondeterministic_calls_in_driver": 0,
+  "output_path": "sha256 of the source_episode_id, not an ordinal or worker id",
+  "seed_law_inputs": [
+   "namespace",
+   "study",
+   "split",
+   "scenario_family",
+   "layout_sha256",
+   "team_size",
+   "source_class",
+   "episode_index",
+   "event_slot_index",
+   "candidate_topology",
+   "replica_index"
+  ],
+  "shard_range_effect": "selects WHICH frozen identities a worker processes; never WHAT is computed for them",
+  "time_used_only_for": "the ledger 'seconds' field, never a scientific quantity"
+ },
+ "concurrency_is_scientific_input": false,
+ "driver_commit": "6eb8634530aee376e5f0b4ede875c1f3eb3db772",
+ "driver_edited": false,
+ "driver_sha256": "4f24a6a071cb72e513a21602cc4544ddbf72cf773f15abf51cf434bf4c8dfdbf",
+ "execution_image_digest": "sha256:43d354ca94c0178f46edee5ef390a11012f8238787eb26e3eff49b8a6c81139a",
+ "identities_seeds_layouts_target_replica_K_changed": false,
+ "image_changed": false,
+ "initial_launch": {
+  "limit": 200,
+  "shards": 6,
+  "starts": [
+   0,
+   200,
+   400,
+   600,
+   800,
+   1000
+  ]
+ },
+ "manifest_changed": false,
+ "name": "TRAIN_R_ATTEMPT2_EXECUTION_AND_RETRY_LEDGER",
+ "operational_retries": [
+  {
+   "authority_changed": false,
+   "identity": "rvt-clean-room-generation-identity/v4/source_episode/TRAIN-R/F8/N8/S0_SCRIPTED_DIAGNOSTIC/episode-2",
+   "index": 890,
+   "kind": "ISOLATED_DIAGNOSTIC_PROBE",
+   "purpose": "determine whether the SIGSEGV was deterministic on this identity",
+   "result": "completed successfully in isolation -> crash was TRANSIENT, not a property of the episode or of the frozen science"
+  },
+  {
+   "authority_changed": false,
+   "exits": {
+    "891": 0,
+    "928": "still running",
+    "965": 0
+   },
+   "kind": "RANGE_RETRY",
+   "limit": 37,
+   "reason": "operational resume of the unfinished range under identical authority, with reduced concurrency (3 workers rather than 6) as the only mitigation",
+   "shards": [
+    891,
+    928,
+    965
+   ]
+  }
+ ],
+ "progress_at_record_time": {
+  "all_missing_owned_by_active_shard_928": true,
+  "expected": 1200,
+  "missing_indices": [
+   954,
+   955,
+   956,
+   957,
+   958,
+   959,
+   960,
+   961,
+   962,
+   963,
+   964
+  ],
+  "observed": 1189,
+  "overlapping_active_workers": 0
+ },
+ "recorded_at_utc": "2026-08-28T04:11:23Z",
+ "retry_changed_scientific_authority": false,
+ "retry_due_to_scientific_outcome": false,
+ "schema_version": "rvt-cleanroom-train-r-attempt2-execution-ledger/v1",
+ "shard_outcomes": [
+  {
+   "exit": 0,
+   "shard_start": 0,
+   "status": "COMPLETED"
+  },
+  {
+   "exit": 0,
+   "shard_start": 200,
+   "status": "COMPLETED"
+  },
+  {
+   "exit": 0,
+   "shard_start": 400,
+   "status": "COMPLETED"
+  },
+  {
+   "exit": 0,
+   "shard_start": 600,
+   "status": "COMPLETED"
+  },
+  {
+   "completed_before_crash": 90,
+   "exit": 139,
+   "host_memory_free_gb_at_diagnosis": 27,
+   "kernel_evidence": "python[21150]: segfault ... in libpython3.9.so.1.0",
+   "oom": false,
+   "owned_indices": "800..999",
+   "shard_start": 800,
+   "signal": "SIGSEGV (139 = 128+11)",
+   "status": "OPERATIONAL_FAILURE_SIGSEGV",
+   "unfinished_indices": "890..999"
+  },
+  {
+   "exit": 0,
+   "shard_start": 1000,
+   "status": "COMPLETED"
+  }
+ ],
+ "status": "OPEN -- attempt 2 still generating",
+ "train_r_attempt2_execution_ledger_root": "eea854716d494993d5759021b8093823257b6e760b1704f37c0f343e73b7a965",
+ "train_r_pregeneration_manifest_root": "797c27920d3273106c359113f837fc7c911746574a9bac66e7f47d1fa3ad1176"
+}
